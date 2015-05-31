@@ -1,0 +1,11 @@
+/.idea/
+/app/cache/
+/app/logs/
+/app/config/parameters.yml
+/app/SymfonyRequirements.php
+/app/bootstrap.php.cache
+/app/check.php
+/bin/
+/vendor/
+/web/bundles/
+/composer.phar
