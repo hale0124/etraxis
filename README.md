@@ -1,5 +1,7 @@
 [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](http://www.gnu.org/licenses/gpl.txt)
 [![Build Status](https://img.shields.io/travis/etraxis/etraxis.svg)](https://travis-ci.org/etraxis/etraxis)
+[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/etraxis/etraxis.svg)](https://scrutinizer-ci.com/g/etraxis/etraxis/?branch=master)
+[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/etraxis/etraxis.svg)](https://scrutinizer-ci.com/g/etraxis/etraxis/?branch=master)
 
 ### What is eTraxis
 
