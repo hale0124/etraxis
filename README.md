@@ -30,6 +30,12 @@ and more...
 composer.phar install
 ```
 
+### Development
+
+```bash
+./bin/php-cs-fixer fix
+```
+
 ### Documentation
 
 All the documentation can be found at the [project's wiki](../../wiki). Also there is a "[Support Forum](https://forum.etraxis.com/)" available.
