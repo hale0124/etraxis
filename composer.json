@@ -18,11 +18,12 @@
     },
     "require-dev": {
         "sensio/generator-bundle"              : "~2.3",
+        "phpunit/phpunit"                      : "~4.0",
         "fabpot/php-cs-fixer"                  : "~1.8"
     },
     "autoload": {
         "psr-4": {
-            "": "src/",
+            "": [ "src/", "tests/" ],
             "SymfonyStandard\\": "app/"
         }
     },

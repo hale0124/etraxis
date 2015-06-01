@@ -28,12 +28,15 @@ and more...
 
 ```bash
 composer.phar install
+app/console doctrine:database:create
+app/console doctrine:schema:create
 ```
 
 ### Development
 
 ```bash
 ./bin/php-cs-fixer fix
+./bin/phpunit --coverage-html=vendor/coverage
 ```
 
 ### Documentation
