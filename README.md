@@ -2,6 +2,7 @@
 [![Build Status](https://img.shields.io/travis/etraxis/etraxis.svg)](https://travis-ci.org/etraxis/etraxis)
 [![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/etraxis/etraxis.svg)](https://scrutinizer-ci.com/g/etraxis/etraxis/?branch=master)
 [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/etraxis/etraxis.svg)](https://scrutinizer-ci.com/g/etraxis/etraxis/?branch=master)
+[![SensioLabsInsight](https://img.shields.io/sensiolabs/i/0b93b04a-7ba8-49eb-b768-f1d4d1fa970c.svg)](https://insight.sensiolabs.com/projects/0b93b04a-7ba8-49eb-b768-f1d4d1fa970c)
 
 ### What is eTraxis
 
