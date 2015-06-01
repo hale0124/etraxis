@@ -1,4 +1,5 @@
 [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](http://www.gnu.org/licenses/gpl.txt)
+[![Build Status](https://img.shields.io/travis/etraxis/etraxis.svg)](https://travis-ci.org/etraxis/etraxis)
 
 ### What is eTraxis
 
