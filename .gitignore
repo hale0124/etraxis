@@ -6,6 +6,9 @@
 /app/bootstrap.php.cache
 /app/check.php
 /bin/
+/node_modules/
 /vendor/
 /web/bundles/
+/web/css/
+/web/js/
 /composer.phar

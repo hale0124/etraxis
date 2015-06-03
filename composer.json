@@ -39,7 +39,9 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget",
-            "bower install"
+            "bower install",
+            "npm install gulp gulp-concat gulp-minify-css gulp-rename gulp-strip-json-comments gulp-uglify gulp-watch",
+            "gulp"
         ],
         "post-update-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -48,7 +50,8 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::installRequirementsFile",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget",
-            "bower update"
+            "bower update",
+            "gulp"
         ],
         "post-root-package-install": [
             "SymfonyStandard\\Composer::hookRootPackageInstall"

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="{{ locale }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,13 +7,24 @@
 
     <title>{{ title | default('eTraxis') }}</title>
 
+    <link href="{{ asset('css/libs.min.css') }}" rel="stylesheet">
+
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png')         }}">
     <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon-72x72.png')   }}" sizes="72x72">
     <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon-114x114.png') }}" sizes="114x114">
+
+    <!--[if lt IE 9]>
+    <script src="{{ asset('js/html5shiv.min.js') }}"></script>
+    <![endif]-->
 </head>
 <body>
     {% block content %}{% endblock %}
+
+    <script src="{{ asset('js/libs.min.js') }}"></script>
+    <script src="{{ asset('js/etraxis-' ~ locale ~ '.min.js') }}"></script>
+    <script src="{{ asset('js/etraxis.min.js') }}"></script>
+
     {% block scripts %}{% endblock %}
 </body>
 </html>
