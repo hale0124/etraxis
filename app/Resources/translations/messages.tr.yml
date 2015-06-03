@@ -1,0 +1,18 @@
+lang: Türkçe
+button.ok: Tamam
+button.cancel: Vazgeç
+button.yes: Evet
+button.no: Hayır
+button.save: Kaydet
+button.close: Kapat
+button.back: Geri
+button.next: İleri
+button.create: Oluştur
+button.edit: Düzenle
+button.delete: Sil
+button.disable: 'Devre dışı bırak'
+button.enable: Etkinleştir
+button.lock: Kilitle
+button.unlock: 'Kilidi Aç'
+button.export: 'Dışa aktar'
+button.import: 'İçe Aktar'

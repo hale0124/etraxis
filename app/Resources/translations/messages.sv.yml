@@ -1,0 +1,18 @@
+lang: Svenska
+button.ok: OK
+button.cancel: Avbryt
+button.yes: Ja
+button.no: Nej
+button.save: Spara
+button.close: Stäng
+button.back: Tillbaka
+button.next: Nästa
+button.create: Skapa
+button.edit: Ändra
+button.delete: 'Ta bort'
+button.disable: Inaktivera
+button.enable: Aktivera
+button.lock: Lås
+button.unlock: 'Lås upp'
+button.export: Exportera
+button.import: Importera
