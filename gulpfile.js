@@ -14,12 +14,15 @@ var rename = require('gulp-rename');
 var strip  = require('gulp-strip-json-comments');
 var uglify = require('gulp-uglify');
 var watch  = require('gulp-watch');
+var fs     = require('fs');
+var merge  = require('merge-stream');
 
 /**
  * Performs all installation tasks in one.
  */
 gulp.task('default', [
     'stylesheets:libs',
+    'stylesheets:themes',
     'javascripts:libs',
     'javascripts:datatables',
     'javascripts:i18n',
@@ -51,6 +54,29 @@ gulp.task('stylesheets:libs', function() {
         .pipe(minify())
         .pipe(concat('libs.min.css'))
         .pipe(gulp.dest('web/css/'));
+});
+
+/**
+ * Installs jQuery UI themes.
+ */
+gulp.task('stylesheets:themes', function() {
+
+    gulp.src('app/Resources/public/css/*/images/*')
+        .pipe(gulp.dest('web/css/'));
+
+    var folders = fs.readdirSync('app/Resources/public/css')
+        .filter(function(file) {
+            return fs.statSync('app/Resources/public/css/' + file).isDirectory();
+        });
+
+    var tasks = folders.map(function(folder) {
+        return gulp.src('app/Resources/public/css/' + folder + '/jquery-ui.theme.css')
+            .pipe(minify())
+            .pipe(concat('etraxis.min.css'))
+            .pipe(gulp.dest('web/css/' + folder));
+    });
+
+    return merge(tasks);
 });
 
 /**

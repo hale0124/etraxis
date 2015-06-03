@@ -33,6 +33,7 @@ twig:
     strict_variables: "%kernel.debug%"
     globals:
         locale:       "%locale%"
+        theme:        "%theme%"
 
 # Assetic Configuration
 assetic:
