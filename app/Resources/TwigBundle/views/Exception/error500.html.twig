@@ -1,0 +1,8 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    <p><strong>{{ status_code }} {{ status_text }}</strong></p>
+    <p>{{ exception.message }} {{ exception.code ? '(%s)'|format(exception.code) }}</p>
+
+{% endblock %}
