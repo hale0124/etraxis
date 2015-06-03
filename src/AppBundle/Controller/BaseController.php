@@ -90,4 +90,14 @@ class BaseController extends Controller
     {
         return $this->container->get('twig');
     }
+
+    /**
+     * Shortcut to get the mailer service.
+     *
+     * @return  \eTraxis\Service\MailerService
+     */
+    protected function getMailer()
+    {
+        return $this->container->get('etraxis.mailer');
+    }
 }

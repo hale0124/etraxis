@@ -1,1 +1,8 @@
 services:
+
+    etraxis.mailer:
+        class: eTraxis\Service\MailerService
+        arguments:
+            - @logger
+            - @twig
+            - @mailer

@@ -11,5 +11,6 @@ parameters:
     mailer_host:            127.0.0.1
     mailer_user:            ~
     mailer_password:        ~
+    delivery_address:       ~
 
     secret:                 8fb375ea50e0f6230ad0cc722be8293a7177f9e4

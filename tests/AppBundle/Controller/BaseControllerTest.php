@@ -76,4 +76,9 @@ class BaseControllerTest extends KernelTestCase
     {
         $this->assertInstanceOf('\Twig_Environment', $this->object->getTwig());
     }
+
+    public function testGetMailer()
+    {
+        $this->assertInstanceOf('\eTraxis\Service\MailerService', $this->object->getMailer());
+    }
 }
