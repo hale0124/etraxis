@@ -1,0 +1,61 @@
+@import "etraxis.less";
+@import "nav.less";
+
+body {
+    background-color: #fbfbfb;
+    color: #212121;
+}
+
+input.ui-widget-content,
+textarea.ui-widget-content,
+select.ui-widget-content {
+    background: #fff !important;
+}
+
+nav {
+    a, span {
+        color: #e8e8e8;
+    }
+
+    a:hover {
+        color: #fbfbfb;
+    }
+}
+
+a {
+    color: #00638f;
+}
+
+/* DataTables */
+table.datatable {
+    border-left: 1px solid #3a8eb7;
+    border-right: 1px solid #3a8eb7;
+
+    tbody tr {
+        background-color: #fbfbfb;
+    }
+}
+
+.dataTables_wrapper {
+
+    .dataTables_length,
+    .dataTables_filter,
+    .dataTables_info,
+    .dataTables_processing,
+    .dataTables_paginate {
+        color: #fbfbfb;
+
+        input, select {
+            color: #404040;
+        }
+    }
+
+    .dataTables_paginate .fg-button {
+        border-color: #3a8eb7;
+        opacity: 0.85;
+
+        &.ui-state-disabled {
+            background-color: #fbfbfb;
+        }
+    }
+}

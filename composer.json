@@ -40,7 +40,7 @@
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::removeSymfonyStandardFiles",
             "Sensio\\Bundle\\DistributionBundle\\Composer\\ScriptHandler::prepareDeploymentTarget",
             "bower install",
-            "npm install gulp gulp-concat gulp-minify-css gulp-rename gulp-strip-json-comments gulp-uglify gulp-watch fs merge-stream",
+            "npm install gulp gulp-add-src gulp-concat gulp-less gulp-minify-css gulp-rename gulp-strip-json-comments gulp-uglify gulp-watch fs merge-stream",
             "gulp"
         ],
         "post-update-cmd": [

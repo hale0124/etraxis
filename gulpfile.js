@@ -8,7 +8,9 @@
  */
 
 var gulp   = require('gulp');
+var addsrc = require('gulp-add-src');
 var concat = require('gulp-concat');
+var less   = require('gulp-less');
 var minify = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var strip  = require('gulp-strip-json-comments');
@@ -33,7 +35,8 @@ gulp.task('default', [
  * Watchs for changes in eTraxis files and updates affected assets when necessary.
  */
 gulp.task('watch', function() {
-    watch('app/Resources/public/js/**', function() {
+    watch(['app/Resources/public/js/**', 'app/Resources/public/less/**'], function() {
+        gulp.start('stylesheets:themes');
         gulp.start('javascripts:i18n');
         gulp.start('javascripts:etraxis');
     });
@@ -70,7 +73,9 @@ gulp.task('stylesheets:themes', function() {
         });
 
     var tasks = folders.map(function(folder) {
-        return gulp.src('app/Resources/public/css/' + folder + '/jquery-ui.theme.css')
+        return gulp.src('app/Resources/public/less/theme-' + folder + '.less')
+            .pipe(less())
+            .pipe(addsrc.prepend('app/Resources/public/css/' + folder + '/jquery-ui.theme.css'))
             .pipe(minify())
             .pipe(concat('etraxis.min.css'))
             .pipe(gulp.dest('web/css/' + folder));

@@ -1,0 +1,92 @@
+@import "etraxis.less";
+@import "nav.less";
+
+body {
+    background-color: #000;
+    color: #e8e8e8;
+}
+
+input.ui-widget-content,
+textarea.ui-widget-content,
+select.ui-widget-content {
+    background: #fff !important;
+    color: #333;
+}
+
+nav {
+    a, span {
+        color: #e8e8e8;
+    }
+
+    a:hover {
+        color: #fbfbfb;
+    }
+}
+
+footer a {
+    color: #00638f;
+}
+
+a {
+    color: #26b3f7;
+}
+
+::-webkit-input-placeholder {
+    color: #ff6247;
+}
+
+::-moz-placeholder {
+    color: #ff6247;
+}
+
+:-moz-placeholder {
+    color: #ff6247;
+}
+
+:-ms-input-placeholder {
+    color: #ff6247;
+}
+
+/* DataTables */
+table.datatable {
+    border-left: 1px solid #333333;
+    border-right: 1px solid #333333;
+
+    tbody tr {
+        background-color: #000000;
+    }
+
+    &.display, &.row-border {
+        tbody th, tbody td {
+            border-top: 1px solid #333333;
+        }
+    }
+
+    &.display, &.hover {
+        tbody tr:hover,
+        tbody tr.odd:hover,
+        tbody tr.even:hover {
+            background-color: #222222;
+        }
+    }
+}
+
+.dataTables_wrapper {
+
+    .dataTables_length,
+    .dataTables_filter,
+    .dataTables_info,
+    .dataTables_processing,
+    .dataTables_paginate {
+        color: #fbfbfb;
+
+        input, select {
+            color: #404040;
+        }
+    }
+
+    .dataTables_paginate .fg-button {
+        border-color: #444444;
+        color: #eeeeee !important;
+    }
+}

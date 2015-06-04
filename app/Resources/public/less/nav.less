@@ -1,0 +1,15 @@
+nav {
+    background: url("images/mainmenu-bg.png") repeat;
+
+    .container {
+        background: url("images/mainmenu-splitter.png") repeat-y top left;
+
+        > a {
+            background: url("images/mainmenu-splitter.png") repeat-y top right;
+
+            &:hover {
+                background: url("images/mainmenu-splitter.png") no-repeat right, url("images/mainmenu-bg-hl.png") repeat-x;
+            }
+        }
+    }
+}
