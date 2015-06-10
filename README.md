@@ -45,4 +45,4 @@ app/console doctrine:schema:create
 
 ### Documentation
 
-All the documentation can be found at the [project's wiki](../../wiki). Also there is a "[Support Forum](https://forum.etraxis.com/)" available.
+All the documentation can be found [here](http://etraxis.github.io/). Also there is a "[Support Forum](https://forum.etraxis.com/)" available.
