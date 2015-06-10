@@ -1,0 +1,58 @@
+<?php
+
+//----------------------------------------------------------------------
+//
+//  Copyright (C) 2014 Artem Rodygin
+//
+//  This file is part of eTraxis.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with eTraxis.  If not, see <http://www.gnu.org/licenses/>.
+//
+//----------------------------------------------------------------------
+
+
+namespace eTraxis\Model;
+
+class GroupTest extends \PHPUnit_Framework_TestCase
+{
+    /** @var Group */
+    private $object = null;
+
+    protected function setUp()
+    {
+        $this->object = new Group();
+    }
+
+    public function testId()
+    {
+        $this->assertEquals(null, $this->object->getId());
+    }
+
+    public function testProjectId()
+    {
+        $expected = rand(1, PHP_INT_MAX);
+        $this->object->setProjectId($expected);
+        $this->assertEquals($expected, $this->object->getProjectId());
+    }
+
+    public function testName()
+    {
+        $expected = 'Name';
+        $this->object->setName($expected);
+        $this->assertEquals($expected, $this->object->getName());
+    }
+
+    public function testDescription()
+    {
+        $expected = 'Description';
+        $this->object->setDescription($expected);
+        $this->assertEquals($expected, $this->object->getDescription());
+    }
+
+    public function testProject()
+    {
+        $this->object->setProject($project = new Project());
+        $this->assertSame($project, $this->object->getProject());
+    }
+}
