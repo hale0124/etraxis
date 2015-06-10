@@ -24,23 +24,26 @@ class ScriptHandler
      */
     public static function installNpmModules()
     {
-        $modules = [
-            'bower',
-            'gulp',
-            'gulp-add-src',
-            'gulp-concat',
-            'gulp-less',
-            'gulp-minify-css',
-            'gulp-rename',
-            'gulp-strip-json-comments',
-            'gulp-uglify',
-            'gulp-watch',
-            'fs',
-            'merge-stream',
-        ];
+        if (!getenv('TRAVIS')) {
 
-        print("\nInstalling npm modules\n");
-        system('npm install ' . implode(' ', $modules));
+            $modules = [
+                'bower',
+                'gulp',
+                'gulp-add-src',
+                'gulp-concat',
+                'gulp-less',
+                'gulp-minify-css',
+                'gulp-rename',
+                'gulp-strip-json-comments',
+                'gulp-uglify',
+                'gulp-watch',
+                'fs',
+                'merge-stream',
+            ];
+
+            print("\nInstalling npm modules\n");
+            system('npm install ' . implode(' ', $modules));
+        }
     }
 
     /**
@@ -48,11 +51,14 @@ class ScriptHandler
      */
     public static function installAssets()
     {
-        print("\nInstalling assets\n");
-        system('bower install');
+        if (!getenv('TRAVIS')) {
 
-        print("\nProcessing assets\n");
-        system('gulp');
+            print("\nInstalling assets\n");
+            system('bower install');
+
+            print("\nProcessing assets\n");
+            system('gulp');
+        }
     }
 
     /**
@@ -60,10 +66,13 @@ class ScriptHandler
      */
     public static function updateAssets()
     {
-        print("\nUpdating assets\n");
-        system('bower update');
+        if (!getenv('TRAVIS')) {
 
-        print("\nProcessing assets\n");
-        system('gulp');
+            print("\nUpdating assets\n");
+            system('bower update');
+
+            print("\nProcessing assets\n");
+            system('gulp');
+        }
     }
 }
