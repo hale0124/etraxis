@@ -10,6 +10,29 @@
 var eTraxis = window.eTraxis || {};
 
 /**
+ * Blocks UI with specified message.
+ *
+ * @param message Blocking message.
+ */
+eTraxis.block = function(message) {
+    $.blockUI({
+        theme: true,
+        title: null,
+        message: message ? message : eTraxis.i18n.PleaseWait,
+        themedCSS: {
+            padding: '10px'
+        }
+    });
+};
+
+/**
+ * Unblocks UI.
+ */
+eTraxis.unblock = function() {
+    $.unblockUI();
+};
+
+/**
  * Simple message dialog (alternative to JavaScript "alert").
  *
  * @param title   Dialog title.

@@ -32,9 +32,13 @@
         </div>
     </nav>
 
-    {% block content %}{% endblock %}
+    <div class="container">
+        <div>
+            {% block content %}{% endblock %}
+        </div>
+    </div>
 
-    <footer class="container">
+    <footer>
         <a href="https://www.etraxis.com/" target="_blank">Copyright &copy; Artem Rodygin</a>
     </footer>
 
@@ -43,6 +47,12 @@
     <script src="{{ asset('js/libs.min.js') }}"></script>
     <script src="{{ asset('js/etraxis-' ~ locale ~ '.min.js') }}"></script>
     <script src="{{ asset('js/etraxis.min.js') }}"></script>
+
+    <script>
+        $(function() {
+            $('body').initUI();
+        });
+    </script>
 
     {% block scripts %}{% endblock %}
 </body>

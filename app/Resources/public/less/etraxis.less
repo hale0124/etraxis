@@ -1,3 +1,7 @@
+/* Variables */
+
+@min-width: 1200px;
+
 /* Base */
 
 * {
@@ -65,20 +69,24 @@ a {
     min-width: 320px;
     max-width: 1180px;
     width: 100%;
-    margin: 10px auto;
+    margin: 0 auto;
     .clearfix;
+
+    > div {
+        @media (min-width: @min-width) {
+            margin-left: -10px;
+            margin-right: -10px;
+        }
+    }
 }
 
 .columns {
-    margin-left: -10px;
-    margin-right: -10px;
     .clearfix;
 }
 
 .column {
     float: left;
-    padding-left: 10px;
-    padding-right: 10px;
+    padding: 10px;
 }
 
 .one-third {
@@ -124,9 +132,7 @@ a {
 /* Main menu */
 
 nav {
-    .container {
-        margin-top: 0;
-    }
+    margin-bottom: 10px;
 
     a, span {
         display: inline-block;
@@ -143,7 +149,10 @@ nav {
         display: inline-block;
         float: right;
         height: 40px;
-        padding-right: 0;
+
+        @media (min-width: @min-width) {
+            padding-right: 0;
+        }
 
         a {
             padding: 0;
@@ -152,6 +161,19 @@ nav {
         img {
             padding-top: 5px;
         }
+    }
+}
+
+/* Footer */
+
+footer {
+    .container;
+
+    margin: 5px auto;
+    padding: 0 10px;
+
+    @media (min-width: @min-width) {
+        padding: 0;
     }
 }
 
@@ -201,34 +223,14 @@ fieldset {
 }
 
 legend {
+    margin: 0 5px;
     padding: 0 5px;
 }
 
-table.form {
-
-    tr {
-        vertical-align: top;
-
-        td {
-            padding: 5px;
-
-            p {
-                margin: 5px 0;
-            }
-
-            &:first-child {
-                label {
-                    display: inline-block;
-                    margin-top: 5px;
-                }
-            }
-        }
-    }
-
-    .highlight,
-    .error {
-        width: 320px;
-    }
+.control label,
+.control p {
+    display: inline-block;
+    margin-top: 5px;
 }
 
 label.hint {
@@ -238,8 +240,7 @@ label.hint {
 
 input[type="text"],
 input[type="password"] {
-    padding: 5px 10px;
-    width: 320px;
+    padding: 5px 8px;
 }
 
 input[type="checkbox"],
@@ -248,31 +249,20 @@ input[type="radio"] {
 }
 
 textarea {
-    padding: 4px 10px;
-    width: 320px;
-    min-width: 320px;
-    max-width: 320px;
+    padding: 4px 8px;
+    resize: vertical;
 }
 
 select {
     padding: 4px;
-    width: 342px !important;
 }
 
-input[type="button"] {
-    margin: 10px 0;
-}
-
-div.dropdown {
+.dropdown {
     display: inline-block;
 
     .ui-menu {
         position: absolute;
     }
-}
-
-.blockUI.blockMsg {
-    padding: 10px;
 }
 
 /* DataTables */
