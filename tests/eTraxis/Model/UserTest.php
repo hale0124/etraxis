@@ -161,4 +161,15 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->object->setTheme($expected);
         $this->assertEquals($expected, $this->object->getTheme());
     }
+
+    public function testGroups()
+    {
+        $this->assertCount(0, $this->object->getGroups());
+
+        $this->object->addGroup($group = new Group());
+        $this->assertCount(1, $this->object->getGroups());
+
+        $this->object->removeGroup($group);
+        $this->assertCount(0, $this->object->getGroups());
+    }
 }

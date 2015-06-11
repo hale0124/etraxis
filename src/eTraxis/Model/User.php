@@ -14,6 +14,7 @@
 
 namespace eTraxis\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -197,11 +198,21 @@ class User
     private $theme;
 
     /**
+     * @var ArrayCollection List of groups the user is member of.
+     *
+     * @ORM\ManyToMany(targetEntity="Group", mappedBy="users")
+     * @ORM\OrderBy({"name" = "ASC"})
+     */
+    private $groups;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->passwordSetAt = 0;
+        $this->authToken     = null;
+        $this->tokenExpire   = 0;
 
         $this->isAdmin    = false;
         $this->isDisabled = false;
@@ -211,6 +222,16 @@ class User
         $this->lockedUntil  = 0;
 
         $this->timezone = 0;
+
+        $this->textRows    = 0;
+        $this->pageRows    = 0;
+        $this->pageBkms    = 0;
+        $this->autoRefresh = 0;
+        $this->csvDelim    = 0;
+        $this->csvEncoding = 0;
+        $this->csvLineEnds = 0;
+
+        $this->groups = new ArrayCollection();
     }
 
     /**
@@ -660,5 +681,45 @@ class User
     public function getTheme()
     {
         return strtolower($this->theme);
+    }
+
+    /**
+     * Add user to specified group.
+     *
+     * @param   Group $group
+     *
+     * @return  self
+     */
+    public function addGroup(Group $group)
+    {
+        $this->groups[] = $group;
+
+        return $this;
+    }
+
+    /**
+     * Remove user from specified group.
+     *
+     * @param   Group $group
+     *
+     * @return  self
+     */
+    public function removeGroup(Group $group)
+    {
+        $group->removeUser($this);
+
+        $this->groups->removeElement($group);
+
+        return $this;
+    }
+
+    /**
+     * Get list of groups the user is member of.
+     *
+     * @return  ArrayCollection|Group[]
+     */
+    public function getGroups()
+    {
+        return $this->groups;
     }
 }

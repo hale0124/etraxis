@@ -14,6 +14,7 @@
 
 namespace eTraxis\Model;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,7 +38,7 @@ class Group
     private $id;
 
     /**
-     * @var int|NULL Project ID of the group.
+     * @var int Project ID of the group.
      *
      * @ORM\Column(name="project_id", type="integer", nullable=true)
      */
@@ -58,12 +59,31 @@ class Group
     private $description;
 
     /**
-     * @var Project|NULL Project of the group (NULL if the group is global).
+     * @var Project Project of the group (NULL if the group is global).
      *
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="groups")
      * @ORM\JoinColumn(name="project_id", referencedColumnName="project_id")
      */
     private $project;
+
+    /**
+     * @var ArrayCollection List of members.
+     *
+     * @ORM\ManyToMany(targetEntity="User", inversedBy="groups")
+     * @ORM\JoinTable(name="tbl_membership",
+     *                joinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="group_id")},
+     *                inverseJoinColumns={@ORM\JoinColumn(name="account_id", referencedColumnName="account_id")})
+     * @ORM\OrderBy({"fullname" = "ASC"})
+     */
+    private $users;
+
+    /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->users = new ArrayCollection();
+    }
 
     /**
      * Standard getter.
@@ -150,11 +170,11 @@ class Group
     /**
      * Standard setter.
      *
-     * @param   Project|NULL $project
+     * @param   Project $project
      *
      * @return  self
      */
-    public function setProject(Project $project)
+    public function setProject(Project $project = null)
     {
         $this->project = $project;
 
@@ -169,5 +189,45 @@ class Group
     public function getProject()
     {
         return $this->project;
+    }
+
+    /**
+     * Add user to the group.
+     *
+     * @param   User $user
+     *
+     * @return  self
+     */
+    public function addUser(User $user)
+    {
+        $user->addGroup($this);
+
+        $this->users[] = $user;
+
+        return $this;
+    }
+
+    /**
+     * Remove user from the group.
+     *
+     * @param   User $user
+     *
+     * @return  self
+     */
+    public function removeUser(User $user)
+    {
+        $this->users->removeElement($user);
+
+        return $this;
+    }
+
+    /**
+     * Get list of group members.
+     *
+     * @return  ArrayCollection|User[]
+     */
+    public function getUsers()
+    {
+        return $this->users;
     }
 }

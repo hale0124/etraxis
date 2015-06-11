@@ -217,7 +217,7 @@ class Change
      *
      * @return  self
      */
-    public function setField(Field $field)
+    public function setField(Field $field = null)
     {
         $this->field = $field;
 

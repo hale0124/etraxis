@@ -239,6 +239,14 @@ class Field
     private $state;
 
     /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->addSeparator = 0;
+    }
+
+    /**
      * Standard getter.
      *
      * @return  int
@@ -735,7 +743,7 @@ class Field
      *
      * @return  self
      */
-    public function setState(State $state)
+    public function setState(State $state = null)
     {
         $this->state = $state;
 

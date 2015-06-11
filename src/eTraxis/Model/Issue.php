@@ -407,7 +407,7 @@ class Issue
      *
      * @return  self
      */
-    public function setResponsible(User $responsible)
+    public function setResponsible(User $responsible = null)
     {
         $this->responsible = $responsible;
 

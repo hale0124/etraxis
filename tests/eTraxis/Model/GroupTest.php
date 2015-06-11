@@ -54,5 +54,19 @@ class GroupTest extends \PHPUnit_Framework_TestCase
     {
         $this->object->setProject($project = new Project());
         $this->assertSame($project, $this->object->getProject());
+
+        $this->object->setProject();
+        $this->assertNull($this->object->getProject());
+    }
+
+    public function testUsers()
+    {
+        $this->assertCount(0, $this->object->getUsers());
+
+        $this->object->addUser($user = new User());
+        $this->assertCount(1, $this->object->getUsers());
+
+        $this->object->removeUser($user);
+        $this->assertCount(0, $this->object->getUsers());
     }
 }

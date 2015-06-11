@@ -311,7 +311,7 @@ class Reminder
      *
      * @return  self
      */
-    public function setGroup(Group $group)
+    public function setGroup(Group $group = null)
     {
         $this->group = $group;
 
