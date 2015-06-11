@@ -9,5 +9,6 @@ tools:
 filter:
     excluded_paths:
         - 'app/*'
+        - 'src/AppBundle/DataFixtures/*'
         - 'tests/*'
         - 'web/*'
