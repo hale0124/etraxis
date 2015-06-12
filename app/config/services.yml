@@ -1,5 +1,22 @@
 services:
 
+    ldap:
+        class: eTraxis\Service\LdapService
+        arguments:
+            - @logger
+            - %ldap_host%
+            - %ldap_port%
+            - %ldap_user%
+            - %ldap_password%
+            - %ldap_tls%
+
+    etraxis.mailer:
+        class: eTraxis\Service\MailerService
+        arguments:
+            - @logger
+            - @twig
+            - @mailer
+
     etraxis.provider:
         class: eTraxis\Security\InternalUserProvider
         public: false
@@ -10,10 +27,3 @@ services:
     etraxis.encoder:
         class: eTraxis\Security\InternalPasswordEncoder
         public: false
-
-    etraxis.mailer:
-        class: eTraxis\Service\MailerService
-        arguments:
-            - @logger
-            - @twig
-            - @mailer

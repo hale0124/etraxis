@@ -14,6 +14,13 @@ parameters:
     mailer_password:        ~
     delivery_address:       ~
 
+    ldap_host:              ~
+    ldap_port:              ~
+    ldap_user:              ~
+    ldap_password:          ~
+    ldap_tls:               false
+    ldap_basedn:            DC=example,DC=com
+
     locale:                 en
     theme:                  azure
 
