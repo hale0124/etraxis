@@ -16,3 +16,10 @@ button.lock: Uzamknout
 button.unlock: Odemknout
 button.export: Exportovat
 button.import: Importovat
+required: povinný
+security.log_in: 'Přihlásit se'
+security.log_out: Odhlásit
+security.confirm_exit: 'Jste si jisti, že se chcete odhlásit?'
+'Bad credentials.': 'Neznámé uživatelské jméno nebo chybné heslo.'
+user.email: E-mail
+user.password: Heslo

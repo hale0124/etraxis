@@ -1,0 +1,76 @@
+<?php
+
+//----------------------------------------------------------------------
+//
+//  Copyright (C) 2014 Artem Rodygin
+//
+//  This file is part of eTraxis.
+//
+//  You should have received a copy of the GNU General Public License
+//  along with eTraxis.  If not, see <http://www.gnu.org/licenses/>.
+//
+//----------------------------------------------------------------------
+
+
+namespace eTraxis\Security;
+
+use eTraxis\Model\User as eTraxisUser;
+use eTraxis\Tests\BaseTestCase;
+use Symfony\Component\Security\Core\User\User as SymfonyUser;
+
+class InternalUserProviderTest extends BaseTestCase
+{
+    /** @var InternalUserProvider */
+    private $object = null;
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $this->object = new InternalUserProvider($this->logger, $this->doctrine);
+    }
+
+    public function testLoadInternalUserByUsername()
+    {
+        $result = $this->object->loadUserByUsername('artem');
+
+        $this->assertInstanceOf('eTraxis\Model\User', $result);
+        $this->assertEquals('artem@example.com', $result->getEmail());
+        $this->assertFalse($result->isLdap());
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
+     */
+    public function testUsernameNotFoundException()
+    {
+        $this->object->loadUserByUsername('user404');
+    }
+
+    public function testRefreshUser()
+    {
+        $user = new eTraxisUser();
+
+        $user->setUsername('artem');
+
+        $result = $this->object->refreshUser($user);
+
+        $this->assertInstanceOf('eTraxis\Model\User', $result);
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Security\Core\Exception\UnsupportedUserException
+     */
+    public function testUnsupportedUserException()
+    {
+        $user = new SymfonyUser('artem', 'secret');
+
+        $this->object->refreshUser($user);
+    }
+
+    public function testSupportsClass()
+    {
+        $this->assertFalse($this->object->supportsClass('Symfony\Component\Security\Core\User\User'));
+        $this->assertTrue($this->object->supportsClass('eTraxis\Model\User'));
+    }
+}

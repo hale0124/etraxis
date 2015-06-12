@@ -16,3 +16,10 @@ button.lock: Travar
 button.unlock: Destravar
 button.export: Exportar
 button.import: Importar
+required: obrigatório
+security.log_in: Logar
+security.log_out: Deslogar
+security.confirm_exit: 'Tem certeza que quer sair?'
+'Bad credentials.': 'Usuário desconhecido ou senha incorreta.'
+user.email: E-mail
+user.password: Senha

@@ -16,3 +16,10 @@ button.lock: Kilitle
 button.unlock: 'Kilidi Aç'
 button.export: 'Dışa aktar'
 button.import: 'İçe Aktar'
+required: gerekli
+security.log_in: Giriş
+security.log_out: Çıkış
+security.confirm_exit: 'Çıkmak istediğinizden emin misiniz?'
+'Bad credentials.': 'Bilinmeyen kullanıcı adı ya da yanlış parola.'
+user.email: E-posta
+user.password: Parola

@@ -1,5 +1,16 @@
 services:
 
+    etraxis.provider:
+        class: eTraxis\Security\InternalUserProvider
+        public: false
+        arguments:
+            - @logger
+            - @doctrine
+
+    etraxis.encoder:
+        class: eTraxis\Security\InternalPasswordEncoder
+        public: false
+
     etraxis.mailer:
         class: eTraxis\Service\MailerService
         arguments:

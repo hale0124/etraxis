@@ -16,3 +16,10 @@ button.lock: Vergrendel
 button.unlock: Ontgrendel
 button.export: Exporteer
 button.import: Importeer
+required: vereist
+security.log_in: Inloggen
+security.log_out: Uitloggen
+security.confirm_exit: 'Ben je zeker dat je wilt uitloggen?'
+'Bad credentials.': 'Onbekende gebruikersnaam of verkeerd wachtwoord.'
+user.email: E-mail
+user.password: Wachtwoord

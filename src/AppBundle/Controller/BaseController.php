@@ -32,13 +32,13 @@ class BaseController extends Controller
     }
 
     /**
-     * Shortcut to get the Security service.
+     * Shortcut to get the authorization checker service.
      *
      * @return  \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface
      */
-    protected function getSecurityContext()
+    protected function getAuthorizationChecker()
     {
-        return $this->container->get('security.context');
+        return $this->container->get('security.authorization_checker');
     }
 
     /**

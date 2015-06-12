@@ -47,9 +47,9 @@ class BaseControllerTest extends KernelTestCase
         $this->assertInstanceOf('\Psr\Log\LoggerInterface', $this->object->getLogger());
     }
 
-    public function testGetSecurityContext()
+    public function testGetAuthorizationChecker()
     {
-        $this->assertInstanceOf('\Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface', $this->object->getSecurityContext());
+        $this->assertInstanceOf('\Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface', $this->object->getAuthorizationChecker());
     }
 
     public function testGetSession()

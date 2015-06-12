@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    <div class="columns">
+        <div class="column full-width">
+
+            {% if error %}
+                <div class="error">{{ error.message|trans }}</div>
+            {% endif %}
+
+            <form action="{{ path('login_check') }}" method="post">
+                <fieldset>
+
+                    <div class="columns control">
+                        <div class="column one-third text-right">
+                            <label for="username">{{ 'user.email'|trans }}:</label>
+                        </div>
+                        <div class="column one-third">
+                            <input class="full-width" type="text" id="username" name="_username" placeholder="{{ 'required'|trans }}" value="{{ last_username }}">
+                        </div>
+                    </div>
+
+                    <div class="columns control">
+                        <div class="column one-third text-right">
+                            <label for="password">{{ 'user.password'|trans }}:</label>
+                        </div>
+                        <div class="column one-third">
+                            <input class="full-width" type="password" id="password" name="_password" placeholder="{{ 'required'|trans }}">
+                        </div>
+                    </div>
+
+                    <div class="columns control">
+                        <div class="column one-third centered">
+                            <input type="submit" value="{{ 'security.log_in'|trans }}">
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+
+        </div>
+    </div>
+
+{% endblock %}

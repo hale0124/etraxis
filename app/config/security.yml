@@ -1,13 +1,20 @@
 security:
 
+    encoders:
+        eTraxis\Model\User:
+            id: etraxis.encoder
+
     providers:
-        in_memory:
-            memory: ~
+        etraxis_provider:
+            id: etraxis.provider
 
     firewalls:
         dev:
-            pattern: ^/(_(profiler|wdt|error)|css|images|js)/
+            pattern:  ^/(_(profiler|wdt|error)|css|images|js)/
             security: false
 
         default:
-            anonymous: ~
+            pattern:    ^/
+            form_login: ~
+            logout:     ~
+            anonymous:  ~

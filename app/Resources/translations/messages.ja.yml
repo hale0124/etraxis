@@ -16,3 +16,10 @@ button.lock: ロック(編集モード)
 button.unlock: ロック解除
 button.export: エクスポート
 button.import: インポート
+required: 必須
+security.log_in: ログイン
+security.log_out: 終了
+security.confirm_exit: 終了してログアウトしますか？
+'Bad credentials.': 不明なユーザー名または誤ったパスワードです。
+user.email: Eメール
+user.password: パスワード

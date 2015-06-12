@@ -16,3 +16,10 @@ button.lock: Lock
 button.unlock: Unlock
 button.export: Export
 button.import: Import
+required: required
+security.log_in: 'Log in'
+security.log_out: 'Log out'
+security.confirm_exit: 'Are you sure you want exit?'
+'Bad credentials.': 'Unknown username or bad password.'
+user.email: Email
+user.password: Password

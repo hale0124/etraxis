@@ -16,6 +16,7 @@ namespace eTraxis\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * User.
@@ -26,7 +27,7 @@ use Doctrine\ORM\Mapping as ORM;
  *            })
  * @ORM\Entity
  */
-class User
+class User implements UserInterface
 {
     /**
      * @var int Unique ID.
@@ -721,5 +722,34 @@ class User
     public function getGroups()
     {
         return $this->groups;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getRoles()
+    {
+        $roles = ['ROLE_USER'];
+
+        if ($this->isAdmin) {
+            $roles[] = 'ROLE_ADMIN';
+        }
+
+        return $roles;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function getSalt()
+    {
+        return;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function eraseCredentials()
+    {
     }
 }

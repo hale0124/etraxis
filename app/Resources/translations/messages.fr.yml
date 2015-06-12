@@ -16,3 +16,10 @@ button.lock: Verrouller
 button.unlock: Déverrouiller
 button.export: Exporter
 button.import: Importer
+required: requis
+security.log_in: 'Se connecter'
+security.log_out: 'Se déconnecter'
+security.confirm_exit: 'Etes-vous sur de vouloir quitter?'
+'Bad credentials.': 'Utilisateur inconnu ou mauvais mot de passe.'
+user.email: Email
+user.password: 'Mot de passe'

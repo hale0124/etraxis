@@ -16,3 +16,10 @@ button.lock: Blocca
 button.unlock: Sblocca
 button.export: Esporta
 button.import: Importa
+required: obbligatorio
+security.log_in: Entra
+security.log_out: Esci
+security.confirm_exit: 'Vuoi davvero uscire?'
+'Bad credentials.': 'Nome utente non riconosciuto o password errata.'
+user.email: Email
+user.password: Password

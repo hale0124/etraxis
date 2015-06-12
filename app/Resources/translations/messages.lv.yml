@@ -16,3 +16,10 @@ button.lock: Bloķēt
 button.unlock: Atbloķēt
 button.export: Eksportēšana
 button.import: Imports
+required: obligāts
+security.log_in: Ieiet
+security.log_out: Iziet
+security.confirm_exit: 'Vai tiešām vēlaties iziet?'
+'Bad credentials.': 'Nezināms lietotāja vārds vai parole.'
+user.email: E-pasts
+user.password: Parole

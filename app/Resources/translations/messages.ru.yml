@@ -16,3 +16,10 @@ button.lock: Заблокировать
 button.unlock: Разблокировать
 button.export: Экспорт
 button.import: Импорт
+required: обязательное
+security.log_in: Вход
+security.log_out: Выход
+security.confirm_exit: 'Вы уверены, что хотите выйти?'
+'Bad credentials.': 'Неизвестный пользователь или неверный пароль.'
+user.email: Эл.почта
+user.password: Пароль

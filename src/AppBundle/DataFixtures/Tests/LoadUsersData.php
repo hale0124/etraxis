@@ -18,6 +18,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use eTraxis\Model\User;
+use eTraxis\Security\InternalPasswordEncoder;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -47,6 +48,8 @@ class LoadUsersData extends AbstractFixture implements ContainerAwareInterface, 
      */
     public function load(ObjectManager $manager)
     {
+        $encoder = new InternalPasswordEncoder();
+
         $data = [
 
             'artem' => [
@@ -155,7 +158,7 @@ class LoadUsersData extends AbstractFixture implements ContainerAwareInterface, 
                 ->setUsername($username)
                 ->setFullname($row['fullname'])
                 ->setEmail($row['email'])
-                ->setPassword($row['is_ldap'] ? null : '5en6G6MezRroT3XKqkdPOmY/BfQ=')
+                ->setPassword($row['is_ldap'] ? null : $encoder->encodePassword($row['password']))
                 ->setAdmin($row['is_admin'])
                 ->setDisabled($row['is_disabled'])
                 ->setLdap($row['is_ldap'])

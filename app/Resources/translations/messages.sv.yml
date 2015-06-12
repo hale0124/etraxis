@@ -16,3 +16,10 @@ button.lock: Lås
 button.unlock: 'Lås upp'
 button.export: Exportera
 button.import: Importera
+required: obligatorisk
+security.log_in: 'Logga in'
+security.log_out: 'Logga ut'
+security.confirm_exit: 'Är du säker på att du vill avsluta?'
+'Bad credentials.': 'Okänt användarnamn eller felaktigt lösenord.'
+user.email: Email
+user.password: Lösenord

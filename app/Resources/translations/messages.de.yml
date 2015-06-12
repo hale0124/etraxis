@@ -16,3 +16,10 @@ button.lock: Sperren
 button.unlock: Freischalten
 button.export: Exportieren
 button.import: Importieren
+required: erforderlich
+security.log_in: Anmelden
+security.log_out: Abmelden
+security.confirm_exit: 'Möchten Sie wirklich beenden?'
+'Bad credentials.': 'Unbekannter Benutzername oder falsches Passwort.'
+user.email: Email-Adresse
+user.password: Passwort

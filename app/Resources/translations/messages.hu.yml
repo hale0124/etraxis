@@ -16,3 +16,10 @@ button.lock: Zárol
 button.unlock: Felnyit
 button.export: Export
 button.import: Importálás
+required: kötelező
+security.log_in: Bejelentkezés
+security.log_out: Kijelentkezés
+security.confirm_exit: 'Biztos ki szeretne lépni?'
+'Bad credentials.': 'Ismeretlen felhasználónév vagy rossz jelszó.'
+user.email: E-mail
+user.password: Jelszó

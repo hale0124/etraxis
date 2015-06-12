@@ -16,3 +16,10 @@ button.lock: Incuie
 button.unlock: Descuie
 button.export: Exporta
 button.import: Importa
+required: obligatoriu
+security.log_in: Autentificare
+security.log_out: Iesire
+security.confirm_exit: 'Sunteti sigur ca doriti sa iesiti?'
+'Bad credentials.': 'Cont inexistent sau parola incorecta.'
+user.email: Email
+user.password: Parola
