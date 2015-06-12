@@ -8,3 +8,8 @@ web:
     resource: "@AppBundle/Controller/Web/"
     type:     annotation
     prefix:   /
+
+admin:
+    resource: "@AppBundle/Controller/Admin/"
+    type:     annotation
+    prefix:   /admin

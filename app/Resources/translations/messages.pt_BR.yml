@@ -22,5 +22,6 @@ security.log_out: Deslogar
 security.remember_me: 'Permanecer logado'
 security.confirm_exit: 'Tem certeza que quer sair?'
 'Bad credentials.': 'Usuário desconhecido ou senha incorreta.'
+administration: Administração
 user.email: E-mail
 user.password: Senha

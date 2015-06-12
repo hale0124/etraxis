@@ -22,5 +22,6 @@ security.log_out: 'Log out'
 security.remember_me: 'Remember me'
 security.confirm_exit: 'Are you sure you want exit?'
 'Bad credentials.': 'Unknown username or bad password.'
+administration: Administration
 user.email: Email
 user.password: Password

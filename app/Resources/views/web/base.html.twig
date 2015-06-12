@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block menu %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('admin') }}">{{ 'administration'|trans }}</a>
+    {% endif %}
+
+{% endblock %}

@@ -22,5 +22,6 @@ security.log_out: 'Logga ut'
 security.remember_me: 'Förbli inloggad'
 security.confirm_exit: 'Är du säker på att du vill avsluta?'
 'Bad credentials.': 'Okänt användarnamn eller felaktigt lösenord.'
+administration: Administration
 user.email: Email
 user.password: Lösenord

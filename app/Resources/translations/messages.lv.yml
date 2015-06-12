@@ -22,5 +22,6 @@ security.log_out: Iziet
 security.remember_me: 'Atcerēties mani'
 security.confirm_exit: 'Vai tiešām vēlaties iziet?'
 'Bad credentials.': 'Nezināms lietotāja vārds vai parole.'
+administration: Administrācija
 user.email: E-pasts
 user.password: Parole

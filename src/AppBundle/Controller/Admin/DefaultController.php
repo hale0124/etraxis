@@ -12,23 +12,23 @@
 //----------------------------------------------------------------------
 
 
-namespace AppBundle\Controller\Web;
+namespace AppBundle\Controller\Admin;
 
 use AppBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 
 /**
- * Default controller for public area.
+ * Default controller for admin area.
  */
 class DefaultController extends BaseController
 {
     /**
-     * @Route("/", name="homepage")
+     * @Route("/", name="admin")
      * @Method("GET")
      */
     public function indexAction()
     {
-        return $this->render('web/base.html.twig');
+        return $this->render('admin/base.html.twig');
     }
 }

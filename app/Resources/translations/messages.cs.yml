@@ -22,5 +22,6 @@ security.log_out: Odhlásit
 security.remember_me: 'Zůstat přihlášený'
 security.confirm_exit: 'Jste si jisti, že se chcete odhlásit?'
 'Bad credentials.': 'Neznámé uživatelské jméno nebo chybné heslo.'
+administration: Administrace
 user.email: E-mail
 user.password: Heslo

@@ -22,5 +22,6 @@ security.log_out: Iesire
 security.remember_me: 'Păstrează autentificarea'
 security.confirm_exit: 'Sunteti sigur ca doriti sa iesiti?'
 'Bad credentials.': 'Cont inexistent sau parola incorecta.'
+administration: Administrare
 user.email: Email
 user.password: Parola

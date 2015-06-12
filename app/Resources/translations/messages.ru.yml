@@ -22,5 +22,6 @@ security.log_out: Выход
 security.remember_me: 'Запомнить меня'
 security.confirm_exit: 'Вы уверены, что хотите выйти?'
 'Bad credentials.': 'Неизвестный пользователь или неверный пароль.'
+administration: Администрирование
 user.email: Эл.почта
 user.password: Пароль

@@ -22,5 +22,6 @@ security.log_out: Esci
 security.remember_me: Ricordami
 security.confirm_exit: 'Vuoi davvero uscire?'
 'Bad credentials.': 'Nome utente non riconosciuto o password errata.'
+administration: Amministrazione
 user.email: Email
 user.password: Password

@@ -22,5 +22,6 @@ security.log_out: 終了
 security.remember_me: ログインを維持
 security.confirm_exit: 終了してログアウトしますか？
 'Bad credentials.': 不明なユーザー名または誤ったパスワードです。
+administration: 管理
 user.email: Eメール
 user.password: パスワード
