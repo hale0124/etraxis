@@ -18,3 +18,8 @@ security:
             form_login: ~
             logout:     ~
             anonymous:  ~
+            remember_me:
+                key:      "%secret%"
+                lifetime: 2592000
+                path:     /
+                domain:   ~

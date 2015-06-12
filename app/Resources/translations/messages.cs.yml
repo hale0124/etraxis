@@ -19,6 +19,7 @@ button.import: Importovat
 required: povinný
 security.log_in: 'Přihlásit se'
 security.log_out: Odhlásit
+security.remember_me: 'Zůstat přihlášený'
 security.confirm_exit: 'Jste si jisti, že se chcete odhlásit?'
 'Bad credentials.': 'Neznámé uživatelské jméno nebo chybné heslo.'
 user.email: E-mail

@@ -26,13 +26,13 @@
 
                 <span class="fern"><a href="{{ path('homepage') }}"><img src="{{ asset('images/fern.png') }}"></a></span>
 
-                {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
+                {% if app.user and is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                     <span class="fern">{{ app.user.fullname }}</span>
                 {% endif %}
 
                 {% block menu %}{% endblock %}
 
-                {% if app.user and is_granted('IS_AUTHENTICATED_FULLY') %}
+                {% if app.user and is_granted('IS_AUTHENTICATED_REMEMBERED') %}
                     <a href="#" id="menu_logout">{{ 'security.log_out'|trans }}</a>
                 {% else %}
                     <a href="{{ path('login') }}">{{ 'security.log_in'|trans }}</a>

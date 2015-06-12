@@ -19,6 +19,7 @@ button.import: Imports
 required: obligāts
 security.log_in: Ieiet
 security.log_out: Iziet
+security.remember_me: 'Atcerēties mani'
 security.confirm_exit: 'Vai tiešām vēlaties iziet?'
 'Bad credentials.': 'Nezināms lietotāja vārds vai parole.'
 user.email: E-pasts

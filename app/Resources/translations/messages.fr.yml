@@ -19,6 +19,7 @@ button.import: Importer
 required: requis
 security.log_in: 'Se connecter'
 security.log_out: 'Se déconnecter'
+security.remember_me: 'Se souvenir de moi'
 security.confirm_exit: 'Etes-vous sur de vouloir quitter?'
 'Bad credentials.': 'Utilisateur inconnu ou mauvais mot de passe.'
 user.email: Email

@@ -19,6 +19,7 @@ button.import: Importeer
 required: vereist
 security.log_in: Inloggen
 security.log_out: Uitloggen
+security.remember_me: 'Blijf ingelogd'
 security.confirm_exit: 'Ben je zeker dat je wilt uitloggen?'
 'Bad credentials.': 'Onbekende gebruikersnaam of verkeerd wachtwoord.'
 user.email: E-mail

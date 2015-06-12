@@ -19,6 +19,7 @@ button.import: Importálás
 required: kötelező
 security.log_in: Bejelentkezés
 security.log_out: Kijelentkezés
+security.remember_me: 'Emlékezzen rám'
 security.confirm_exit: 'Biztos ki szeretne lépni?'
 'Bad credentials.': 'Ismeretlen felhasználónév vagy rossz jelszó.'
 user.email: E-mail

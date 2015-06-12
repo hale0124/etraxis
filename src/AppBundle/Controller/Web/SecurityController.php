@@ -40,7 +40,7 @@ class SecurityController extends Controller
         /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker $security */
         $security = $this->container->get('security.authorization_checker');
 
-        if ($security->isGranted('IS_AUTHENTICATED_FULLY')) {
+        if ($security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirect($this->generateUrl('homepage'));
         }
 

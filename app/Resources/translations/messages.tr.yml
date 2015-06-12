@@ -19,6 +19,7 @@ button.import: 'İçe Aktar'
 required: gerekli
 security.log_in: Giriş
 security.log_out: Çıkış
+security.remember_me: 'Sürekli bağlı kal'
 security.confirm_exit: 'Çıkmak istediğinizden emin misiniz?'
 'Bad credentials.': 'Bilinmeyen kullanıcı adı ya da yanlış parola.'
 user.email: E-posta

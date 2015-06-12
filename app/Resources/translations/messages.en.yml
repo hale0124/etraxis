@@ -19,6 +19,7 @@ button.import: Import
 required: required
 security.log_in: 'Log in'
 security.log_out: 'Log out'
+security.remember_me: 'Remember me'
 security.confirm_exit: 'Are you sure you want exit?'
 'Bad credentials.': 'Unknown username or bad password.'
 user.email: Email

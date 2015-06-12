@@ -19,6 +19,7 @@ button.import: Importa
 required: obligatoriu
 security.log_in: Autentificare
 security.log_out: Iesire
+security.remember_me: 'Păstrează autentificarea'
 security.confirm_exit: 'Sunteti sigur ca doriti sa iesiti?'
 'Bad credentials.': 'Cont inexistent sau parola incorecta.'
 user.email: Email
