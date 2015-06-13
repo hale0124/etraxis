@@ -16,7 +16,7 @@ namespace eTraxis\Model;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
  * User.
@@ -27,7 +27,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  *            })
  * @ORM\Entity
  */
-class User implements UserInterface
+class User implements AdvancedUserInterface
 {
     /**
      * @var int Unique ID.
@@ -751,5 +751,37 @@ class User implements UserInterface
      */
     public function eraseCredentials()
     {
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isAccountNonExpired()
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isAccountNonLocked()
+    {
+        return $this->lockedUntil < time();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isCredentialsNonExpired()
+    {
+        return true;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    public function isEnabled()
+    {
+        return !$this->isDisabled;
     }
 }

@@ -36,8 +36,11 @@ class BaseTestCase extends KernelTestCase
     /** @var \Symfony\Component\Translation\TranslatorInterface */
     protected $translator;
 
-    /** @var \Doctrine\Common\Persistence\ManagerRegistry */
+    /** @var \Symfony\Bridge\Doctrine\RegistryInterface */
     protected $doctrine;
+
+    /** @var \SimpleBus\Message\Bus\MessageBus */
+    protected $command_bus;
 
     /**
      * Begins new transaction.
@@ -46,12 +49,13 @@ class BaseTestCase extends KernelTestCase
     {
         self::bootKernel();
 
-        $this->logger     = static::$kernel->getContainer()->get('logger');
-        $this->router     = static::$kernel->getContainer()->get('router');
-        $this->session    = static::$kernel->getContainer()->get('session');
-        $this->validator  = static::$kernel->getContainer()->get('validator');
-        $this->translator = static::$kernel->getContainer()->get('translator');
-        $this->doctrine   = static::$kernel->getContainer()->get('doctrine');
+        $this->logger      = static::$kernel->getContainer()->get('logger');
+        $this->router      = static::$kernel->getContainer()->get('router');
+        $this->session     = static::$kernel->getContainer()->get('session');
+        $this->validator   = static::$kernel->getContainer()->get('validator');
+        $this->translator  = static::$kernel->getContainer()->get('translator');
+        $this->doctrine    = static::$kernel->getContainer()->get('doctrine');
+        $this->command_bus = static::$kernel->getContainer()->get('command_bus');
 
         /** @var \Doctrine\ORM\EntityManager $manager */
         $manager = $this->doctrine->getManager();

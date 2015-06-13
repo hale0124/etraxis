@@ -200,4 +200,34 @@ class UserTest extends \PHPUnit_Framework_TestCase
     {
         $this->object->eraseCredentials();
     }
+
+    public function testIsAccountNonExpired()
+    {
+        $this->assertTrue($this->object->isAccountNonExpired());
+    }
+
+    public function testIsAccountNonLocked()
+    {
+        $this->assertTrue($this->object->isAccountNonLocked());
+
+        $this->object->setLockedUntil(time() + 5);
+        $this->assertFalse($this->object->isAccountNonLocked());
+
+        $this->object->setLockedUntil(time() - 1);
+        $this->assertTrue($this->object->isAccountNonLocked());
+    }
+
+    public function testIsCredentialsNonExpired()
+    {
+        $this->assertTrue($this->object->isCredentialsNonExpired());
+    }
+
+    public function testIsEnabled()
+    {
+        $this->object->setDisabled(false);
+        $this->assertTrue($this->object->isEnabled());
+
+        $this->object->setDisabled(true);
+        $this->assertFalse($this->object->isEnabled());
+    }
 }

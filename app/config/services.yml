@@ -33,6 +33,12 @@ services:
         class: eTraxis\Security\InternalPasswordEncoder
         public: false
 
+    etraxis.listener.authentication:
+        class: AppBundle\EventListener\AuthenticationListener
+        tags: [{ name: kernel.event_subscriber }]
+        arguments:
+            - @command_bus
+
     etraxis.listener.kernel:
         class: AppBundle\EventListener\KernelListener
         tags: [{ name: kernel.event_subscriber }]

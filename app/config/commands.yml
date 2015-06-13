@@ -1,0 +1,11 @@
+services:
+
+    command.user.lock:
+        class: eTraxis\SimpleBus\CommandHandler\User\LockUserCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Command\User\LockUserCommand }]
+        arguments: [ @logger, @doctrine, %security_auth_attempts%, %security_lock_time% ]
+
+    command.user.unlock:
+        class: eTraxis\SimpleBus\CommandHandler\User\UnlockUserCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Command\User\UnlockUserCommand }]
+        arguments: [ @logger, @doctrine ]
