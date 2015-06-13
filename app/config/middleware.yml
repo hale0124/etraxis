@@ -1,0 +1,7 @@
+services:
+
+    middleware.validation:
+        class: eTraxis\SimpleBus\Middleware\ValidationMiddleware
+        public: false
+        tags: [{ name: command_bus_middleware }]
+        arguments: [ @logger, @validator ]

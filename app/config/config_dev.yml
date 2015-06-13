@@ -46,3 +46,6 @@ assetic:
 
 swiftmailer:
     delivery_address: "%delivery_address%"
+
+command_bus:
+    logging: ~

@@ -1,3 +1,8 @@
+imports:
+    - { resource: middleware.yml }
+    - { resource: commands.yml }
+    - { resource: events.yml }
+
 services:
 
     ldap:

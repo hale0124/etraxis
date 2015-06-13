@@ -92,6 +92,26 @@ class BaseController extends Controller
     }
 
     /**
+     * Shortcut to get the Command Bus service.
+     *
+     * @return  \SimpleBus\Message\Bus\MessageBus
+     */
+    protected function getCommandBus()
+    {
+        return $this->container->get('command_bus');
+    }
+
+    /**
+     * Shortcut to get the Event Bus service.
+     *
+     * @return  \SimpleBus\Message\Bus\MessageBus
+     */
+    protected function getEventBus()
+    {
+        return $this->container->get('event_bus');
+    }
+
+    /**
      * Shortcut to get the mailer service.
      *
      * @return  \eTraxis\Service\MailerService
