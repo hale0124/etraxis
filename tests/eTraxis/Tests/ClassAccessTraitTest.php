@@ -18,8 +18,8 @@ class ClassAccessTraitTest extends \PHPUnit_Framework_TestCase
 {
     public function testSetPropertySuccess()
     {
-        $object = new MyTestClassStub();
-        $expected = mt_rand();
+        $object           = new MyTestClassStub();
+        $expected         = mt_rand();
         $object->property = $expected;
 
         $this->assertEquals($expected, $object->getProperty());
@@ -30,14 +30,14 @@ class ClassAccessTraitTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetPropertyFailure()
     {
-        $object = new MyTestClassStub();
-        $expected = mt_rand();
+        $object          = new MyTestClassStub();
+        $expected        = mt_rand();
         $object->unknown = $expected;
     }
 
     public function testGetPropertySuccess()
     {
-        $object = new MyTestClassStub();
+        $object   = new MyTestClassStub();
         $expected = mt_rand();
         $object->setProperty($expected);
 
@@ -55,7 +55,7 @@ class ClassAccessTraitTest extends \PHPUnit_Framework_TestCase
 
     public function testCallMethodSuccess()
     {
-        $object = new MyTestClassStub();
+        $object   = new MyTestClassStub();
         $expected = '<' . PHP_VERSION . '>';
 
         $this->assertEquals($expected, $object->getVersion('<', '>'));

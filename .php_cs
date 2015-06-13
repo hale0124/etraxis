@@ -2,6 +2,7 @@
 
 $finder = Symfony\CS\Finder\DefaultFinder::create()
     ->in(realpath(__DIR__ . '/src'))
+    ->in(realpath(__DIR__ . '/tests'))
 ;
 
 return Symfony\CS\Config\Config::create()

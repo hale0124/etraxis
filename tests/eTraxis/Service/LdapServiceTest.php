@@ -17,7 +17,7 @@ namespace eTraxis\Service;
 use eTraxis\Tests\BaseTestCase;
 
 /**
- * http://www.forumsys.com/tutorials/integration-how-to/ldap/online-ldap-test-server/
+ * "http://www.forumsys.com/tutorials/integration-how-to/ldap/online-ldap-test-server".
  */
 class LdapServiceTest extends BaseTestCase
 {
