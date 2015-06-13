@@ -27,3 +27,17 @@ services:
     etraxis.encoder:
         class: eTraxis\Security\InternalPasswordEncoder
         public: false
+
+    etraxis.listener.kernel:
+        class: AppBundle\EventListener\KernelListener
+        tags: [{ name: kernel.event_subscriber }]
+        arguments:
+            - @router
+            - @translator
+            - %locale%
+
+    etraxis.listener.security:
+        class: AppBundle\EventListener\SecurityListener
+        tags: [{ name: kernel.event_subscriber }]
+        arguments:
+            - @session
