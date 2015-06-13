@@ -20,6 +20,7 @@ required: обязательное
 security.log_in: Вход
 security.log_out: Выход
 security.remember_me: 'Запомнить меня'
+security.session_expired: 'Срок вашей сессии истек. Пожалуйста авторизуйтесь еще раз.'
 security.confirm_exit: 'Вы уверены, что хотите выйти?'
 'Bad credentials.': 'Неизвестный пользователь или неверный пароль.'
 administration: Администрирование

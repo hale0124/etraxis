@@ -20,6 +20,7 @@ required: wymagany
 security.log_in: Logowanie
 security.log_out: Wyloguj
 security.remember_me: 'Pozostań zalogowany'
+security.session_expired: 'Twoja sesja wygasła. Zaloguj się ponownie.'
 security.confirm_exit: 'Czy jesteś pewien, że chesz wyjść?'
 'Bad credentials.': 'Nieprawidłowa nazwa użytkownika lub hasła.'
 administration: Administracja

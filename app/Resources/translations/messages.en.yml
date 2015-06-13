@@ -20,6 +20,7 @@ required: required
 security.log_in: 'Log in'
 security.log_out: 'Log out'
 security.remember_me: 'Remember me'
+security.session_expired: 'Your session has expired. Please log in again.'
 security.confirm_exit: 'Are you sure you want exit?'
 'Bad credentials.': 'Unknown username or bad password.'
 administration: Administration

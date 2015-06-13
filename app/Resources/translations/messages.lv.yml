@@ -20,6 +20,7 @@ required: obligāts
 security.log_in: Ieiet
 security.log_out: Iziet
 security.remember_me: 'Atcerēties mani'
+security.session_expired: 'Your session has expired. Please login again.'
 security.confirm_exit: 'Vai tiešām vēlaties iziet?'
 'Bad credentials.': 'Nezināms lietotāja vārds vai parole.'
 administration: Administrācija

@@ -20,6 +20,7 @@ required: gerekli
 security.log_in: Giriş
 security.log_out: Çıkış
 security.remember_me: 'Sürekli bağlı kal'
+security.session_expired: 'Oturum zaman aşımına uğradı. Lütfen tekrar giriş yapın.'
 security.confirm_exit: 'Çıkmak istediğinizden emin misiniz?'
 'Bad credentials.': 'Bilinmeyen kullanıcı adı ya da yanlış parola.'
 administration: Yönetim

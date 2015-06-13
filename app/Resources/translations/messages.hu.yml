@@ -20,6 +20,7 @@ required: kötelező
 security.log_in: Bejelentkezés
 security.log_out: Kijelentkezés
 security.remember_me: 'Emlékezzen rám'
+security.session_expired: 'Your session has expired. Please login again.'
 security.confirm_exit: 'Biztos ki szeretne lépni?'
 'Bad credentials.': 'Ismeretlen felhasználónév vagy rossz jelszó.'
 administration: Adminisztráció

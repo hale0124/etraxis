@@ -16,6 +16,8 @@ namespace AppBundle\EventListener;
 
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -54,7 +56,8 @@ class KernelListener implements EventSubscriberInterface
     public static function getSubscribedEvents()
     {
         return [
-            KernelEvents::REQUEST => ['onKernelRequest', 10],
+            KernelEvents::REQUEST  => ['onKernelRequest', 10],
+            KernelEvents::RESPONSE => 'onKernelResponse',
         ];
     }
 
@@ -78,6 +81,22 @@ class KernelListener implements EventSubscriberInterface
                 // If no explicit locale has been set on this request, use one from the session.
                 $request->setLocale($request->getSession()->get('_locale', $this->locale));
             }
+        }
+    }
+
+    /**
+     * The RESPONSE event occurs once a response was created for replying to a request.
+     *
+     * @param   FilterResponseEvent $event
+     */
+    public function onKernelResponse(FilterResponseEvent $event)
+    {
+        $request  = $event->getRequest();
+        $response = $event->getResponse();
+
+        // If user is redirected to login page and it was an AJAX request - override the response.
+        if ($request->isXmlHttpRequest() && $response->isRedirect($this->router->generate('login', [], Router::ABSOLUTE_URL))) {
+            $event->setResponse(new Response($this->translator->trans('security.session_expired'), Response::HTTP_UNAUTHORIZED));
         }
     }
 }

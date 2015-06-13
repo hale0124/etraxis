@@ -20,6 +20,7 @@ required: obligatoriu
 security.log_in: Autentificare
 security.log_out: Iesire
 security.remember_me: 'Păstrează autentificarea'
+security.session_expired: 'Your session has expired. Please login again.'
 security.confirm_exit: 'Sunteti sigur ca doriti sa iesiti?'
 'Bad credentials.': 'Cont inexistent sau parola incorecta.'
 administration: Administrare

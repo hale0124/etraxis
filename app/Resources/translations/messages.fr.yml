@@ -20,6 +20,7 @@ required: requis
 security.log_in: 'Se connecter'
 security.log_out: 'Se déconnecter'
 security.remember_me: 'Se souvenir de moi'
+security.session_expired: 'Votre session a expiré. Veuillez vous reconnecter.'
 security.confirm_exit: 'Etes-vous sur de vouloir quitter?'
 'Bad credentials.': 'Utilisateur inconnu ou mauvais mot de passe.'
 administration: Administration

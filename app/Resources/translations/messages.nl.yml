@@ -20,6 +20,7 @@ required: vereist
 security.log_in: Inloggen
 security.log_out: Uitloggen
 security.remember_me: 'Blijf ingelogd'
+security.session_expired: 'Uw sessie is verlopen. U dient opnieuw in te loggen.'
 security.confirm_exit: 'Ben je zeker dat je wilt uitloggen?'
 'Bad credentials.': 'Onbekende gebruikersnaam of verkeerd wachtwoord.'
 administration: Administratie

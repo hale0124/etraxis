@@ -20,6 +20,7 @@ required: изискван
 security.log_in: Вход
 security.log_out: Изход
 security.remember_me: 'Запомни ме'
+security.session_expired: 'Вашата сесия е изтекла. Моля влезете отново.'
 security.confirm_exit: 'Сигурен ли сте че искате да излезнете?'
 'Bad credentials.': 'Неизвестно потребителско име или сгрешена парола.'
 administration: Администрация

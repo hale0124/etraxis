@@ -20,6 +20,7 @@ required: povinný
 security.log_in: 'Přihlásit se'
 security.log_out: Odhlásit
 security.remember_me: 'Zůstat přihlášený'
+security.session_expired: 'Vaše sezení vypršelo. Znovu se přihlaste, prosím.'
 security.confirm_exit: 'Jste si jisti, že se chcete odhlásit?'
 'Bad credentials.': 'Neznámé uživatelské jméno nebo chybné heslo.'
 administration: Administrace
