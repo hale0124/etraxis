@@ -6,7 +6,8 @@
 
 ### What is eTraxis
 
-eTraxis is an issues tracking system with ability to set up unlimited number of fully customizable workflows. eTraxis can be used for tracking almost anything, but the most popular cases are *bugs tracker* and *helpdesk system*.
+eTraxis is an issues tracking system with ability to set up unlimited number of fully customizable workflows.
+eTraxis can be used for tracking almost anything, but the most popular cases are *bugs tracker* and *helpdesk system*.
 
 ### Key features
 
@@ -28,6 +29,11 @@ eTraxis is an issues tracking system with ability to set up unlimited number of 
 * Binary attachments
 and more...
 
+### Documentation
+
+All the documentation can be found at **[etraxis.github.io](http://etraxis.github.io/)**.
+Also there is a "[Support Forum](https://forum.etraxis.com/)" available.
+
 ### Install
 
 ```bash
@@ -42,7 +48,3 @@ app/console doctrine:schema:create
 ./bin/php-cs-fixer fix
 ./bin/phpunit --coverage-html=vendor/coverage
 ```
-
-### Documentation
-
-All the documentation can be found [here](http://etraxis.github.io/). Also there is a "[Support Forum](https://forum.etraxis.com/)" available.
