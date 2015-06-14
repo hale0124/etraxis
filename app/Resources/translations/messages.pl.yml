@@ -24,5 +24,12 @@ security.session_expired: 'Twoja sesja wygasła. Zaloguj się ponownie.'
 security.confirm_exit: 'Czy jesteś pewien, że chesz wyjść?'
 'Bad credentials.': 'Nieprawidłowa nazwa użytkownika lub hasła.'
 administration: Administracja
+users: Użytkownicy
+user.username: 'Nazwa użytkownika'
+user.fullname: 'Pełna nazwa'
 user.email: E-mail
 user.password: Hasło
+permissions: Uprawnienia
+role.administrator: Administrator
+role.user: Użytkownik
+description: Opis

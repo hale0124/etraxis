@@ -24,5 +24,12 @@ security.session_expired: 'Su sesión ha expirado. Por favor, vuelva a identific
 security.confirm_exit: '¿Está seguro de salir?'
 'Bad credentials.': 'Nombre de usuario desconocido o contraseña incorrecta.'
 administration: Administración
+users: Usuarios
+user.username: 'Nombre de usuario'
+user.fullname: 'Nombre completo'
 user.email: Email
 user.password: Contraseña
+permissions: Permisos
+role.administrator: Administrador
+role.user: Usuario
+description: Descripción

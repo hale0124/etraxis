@@ -24,5 +24,12 @@ security.session_expired: 'Ihre Sitzung ist abgelaufen. Bitte melden Sie sich er
 security.confirm_exit: 'Möchten Sie wirklich beenden?'
 'Bad credentials.': 'Unbekannter Benutzername oder falsches Passwort.'
 administration: Administration
+users: Benutzer
+user.username: Benutzername
+user.fullname: 'Vollständiger Name'
 user.email: Email-Adresse
 user.password: Passwort
+permissions: Berechtigungen
+role.administrator: Administrator
+role.user: Benutzer
+description: Beschreibung

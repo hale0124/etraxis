@@ -1,0 +1,21 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+
+    <div class="columns">
+        <div class="column full-width">
+            <table class="datatable row-border" data-src="{{ path('admin_users_ajax') }}">
+                <thead>
+                    <tr>
+                        <th>{{ 'user.username'|trans }}</th>
+                        <th>{{ 'user.fullname'|trans }}</th>
+                        <th>{{ 'user.email'|trans }}</th>
+                        <th>{{ 'permissions'|trans }}</th>
+                        <th>{{ 'description'|trans }}</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

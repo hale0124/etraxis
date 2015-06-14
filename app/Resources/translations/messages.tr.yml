@@ -24,5 +24,12 @@ security.session_expired: 'Oturum zaman aşımına uğradı. Lütfen tekrar giri
 security.confirm_exit: 'Çıkmak istediğinizden emin misiniz?'
 'Bad credentials.': 'Bilinmeyen kullanıcı adı ya da yanlış parola.'
 administration: Yönetim
+users: Kullanıcılar
+user.username: 'Kullanıcı adı'
+user.fullname: 'Tam adı'
 user.email: E-posta
 user.password: Parola
+permissions: İzinler
+role.administrator: Yönetici
+role.user: Kullanıcı
+description: Yorum

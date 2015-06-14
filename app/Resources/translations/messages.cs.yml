@@ -24,5 +24,12 @@ security.session_expired: 'Vaše sezení vypršelo. Znovu se přihlaste, prosím
 security.confirm_exit: 'Jste si jisti, že se chcete odhlásit?'
 'Bad credentials.': 'Neznámé uživatelské jméno nebo chybné heslo.'
 administration: Administrace
+users: Uživatelé
+user.username: 'Uživatelské jméno'
+user.fullname: 'Celé jméno'
 user.email: E-mail
 user.password: Heslo
+permissions: Práva
+role.administrator: Administrátor
+role.user: Uživatel
+description: Popis

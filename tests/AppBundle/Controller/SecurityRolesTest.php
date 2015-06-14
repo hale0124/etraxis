@@ -23,8 +23,10 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 class SecurityRolesTest extends WebTestCase
 {
     private $urls = [
-        '/'       => ['ROLE_GUEST' => true,  'ROLE_USER' => true,  'ROLE_ADMIN' => true],
-        '/admin/' => ['ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
+        '/'                 => ['ROLE_GUEST' => true,  'ROLE_USER' => true,  'ROLE_ADMIN' => true],
+        '/admin/'           => ['ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
+        '/admin/users/'     => ['ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
+        '/admin/users/ajax' => ['ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
     ];
 
     public function testGuest()

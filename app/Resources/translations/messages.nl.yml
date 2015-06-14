@@ -24,5 +24,12 @@ security.session_expired: 'Uw sessie is verlopen. U dient opnieuw in te loggen.'
 security.confirm_exit: 'Ben je zeker dat je wilt uitloggen?'
 'Bad credentials.': 'Onbekende gebruikersnaam of verkeerd wachtwoord.'
 administration: Administratie
+users: Gebruikers
+user.username: Gebruikersnaam
+user.fullname: 'Volledige naam'
 user.email: E-mail
 user.password: Wachtwoord
+permissions: Permissies
+role.administrator: Beheerder
+role.user: Gebruiker
+description: Beschrijving

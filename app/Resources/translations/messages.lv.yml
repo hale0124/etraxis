@@ -24,5 +24,12 @@ security.session_expired: 'Your session has expired. Please login again.'
 security.confirm_exit: 'Vai tiešām vēlaties iziet?'
 'Bad credentials.': 'Nezināms lietotāja vārds vai parole.'
 administration: Administrācija
+users: Lietotāji
+user.username: 'Lietotāja vārds'
+user.fullname: 'Pilns vārds'
 user.email: E-pasts
 user.password: Parole
+permissions: Atļaujas
+role.administrator: Administrators
+role.user: Lietotājs
+description: Apraksts

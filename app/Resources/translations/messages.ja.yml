@@ -24,5 +24,12 @@ security.session_expired: セッションが失効しました。ログインし
 security.confirm_exit: 終了してログアウトしますか？
 'Bad credentials.': 不明なユーザー名または誤ったパスワードです。
 administration: 管理
+users: ユーザー
+user.username: ユーザー名
+user.fullname: フルネーム
 user.email: Eメール
 user.password: パスワード
+permissions: 権限
+role.administrator: システム管理者
+role.user: ユーザー
+description: 説明

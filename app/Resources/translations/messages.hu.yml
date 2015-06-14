@@ -24,5 +24,12 @@ security.session_expired: 'Your session has expired. Please login again.'
 security.confirm_exit: 'Biztos ki szeretne lépni?'
 'Bad credentials.': 'Ismeretlen felhasználónév vagy rossz jelszó.'
 administration: Adminisztráció
+users: Felhasználók
+user.username: Felhasználónév
+user.fullname: 'Teljes név'
 user.email: E-mail
 user.password: Jelszó
+permissions: Jogosultságok
+role.administrator: Adminisztrátor
+role.user: Felhasználó
+description: Leírás

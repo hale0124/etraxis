@@ -24,5 +24,12 @@ security.session_expired: 'Din session har gått ut. Vänligen logga in på nytt
 security.confirm_exit: 'Är du säker på att du vill avsluta?'
 'Bad credentials.': 'Okänt användarnamn eller felaktigt lösenord.'
 administration: Administration
+users: Användare
+user.username: Användarnamn
+user.fullname: 'Fullständigt namn'
 user.email: Email
 user.password: Lösenord
+permissions: Behörigheter
+role.administrator: Administratör
+role.user: Användare
+description: Beskrivning

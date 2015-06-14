@@ -24,5 +24,12 @@ security.session_expired: 'A sua sessão expirou. Por favor, faça login novamen
 security.confirm_exit: 'Tem certeza que quer sair?'
 'Bad credentials.': 'Usuário desconhecido ou senha incorreta.'
 administration: Administração
+users: Usuários
+user.username: Usuário
+user.fullname: 'Nome completo'
 user.email: E-mail
 user.password: Senha
+permissions: Permissões
+role.administrator: Administrador
+role.user: Usuário
+description: Descrição

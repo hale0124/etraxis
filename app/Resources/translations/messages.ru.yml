@@ -24,5 +24,12 @@ security.session_expired: 'Срок вашей сессии истек. Пожа
 security.confirm_exit: 'Вы уверены, что хотите выйти?'
 'Bad credentials.': 'Неизвестный пользователь или неверный пароль.'
 administration: Администрирование
+users: Пользователи
+user.username: 'Имя пользователя'
+user.fullname: 'Полное имя'
 user.email: Эл.почта
 user.password: Пароль
+permissions: 'Права доступа'
+role.administrator: Администратор
+role.user: Пользователь
+description: Описание

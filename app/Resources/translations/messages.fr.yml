@@ -24,5 +24,12 @@ security.session_expired: 'Votre session a expiré. Veuillez vous reconnecter.'
 security.confirm_exit: 'Etes-vous sur de vouloir quitter?'
 'Bad credentials.': 'Utilisateur inconnu ou mauvais mot de passe.'
 administration: Administration
+users: Utilisateurs
+user.username: Utilisateur
+user.fullname: 'Nom complet'
 user.email: Email
 user.password: 'Mot de passe'
+permissions: Permissions
+role.administrator: Administrateur
+role.user: Utilisateur
+description: Description
