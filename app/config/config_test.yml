@@ -1,6 +1,10 @@
 imports:
     - { resource: config_dev.yml }
 
+parameters:
+    security_auth_attempts: 2
+    security_lock_time:     1800
+
 framework:
     test: ~
     session:

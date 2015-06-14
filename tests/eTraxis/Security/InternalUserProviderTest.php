@@ -39,6 +39,15 @@ class InternalUserProviderTest extends BaseTestCase
         $this->assertFalse($result->isLdap());
     }
 
+    public function testLoadLdapUserByUsername()
+    {
+        $result = $this->object->loadUserByUsername('einstein');
+
+        $this->assertInstanceOf('eTraxis\Model\User', $result);
+        $this->assertEquals('einstein@ldap.forumsys.com', $result->getEmail());
+        $this->assertTrue($result->isLdap());
+    }
+
     /**
      * @expectedException \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
      */

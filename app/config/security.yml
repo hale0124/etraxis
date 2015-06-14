@@ -18,6 +18,8 @@ security:
             form_login: ~
             logout:     ~
             anonymous:  ~
+            simple_form:
+                authenticator: ldap.authenticator
             remember_me:
                 key:      "%secret%"
                 lifetime: 2592000

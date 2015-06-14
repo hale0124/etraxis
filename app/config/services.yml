@@ -33,6 +33,17 @@ services:
         class: eTraxis\Security\InternalPasswordEncoder
         public: false
 
+    ldap.authenticator:
+        class: eTraxis\Security\LdapAuthenticator
+        public: false
+        arguments:
+            - @logger
+            - @command_bus
+            - @ldap
+            - %ldap_basedn%
+            - %locale%
+            - %theme%
+
     etraxis.listener.authentication:
         class: AppBundle\EventListener\AuthenticationListener
         tags: [{ name: kernel.event_subscriber }]

@@ -59,11 +59,24 @@ class InternalUserProvider implements UserProviderInterface
             'isLdap'   => false,
         ]);
 
+        if ($user) {
+            $this->logger->info('eTraxis account is found.', [$username]);
+
+            return $user;
+        }
+
+        $user = $repository->findOneBy([
+            'username' => $username,
+            'isLdap'   => true,
+        ]);
+
         if (!$user) {
             throw new UsernameNotFoundException();
         }
 
-        $this->logger->info('eTraxis account is found.', [$username]);
+        $this->logger->info('LDAP account is found.', [$username]);
+
+        $user->setPassword(null);
 
         return $user;
     }

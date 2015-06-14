@@ -658,16 +658,7 @@ class User implements AdvancedUserInterface
      */
     public function setTheme($theme)
     {
-        $themes = [
-            'allblacks',
-            'azure',
-            'emerald',
-            'humanity',
-            'mars',
-            'nexada',
-        ];
-
-        if (in_array($theme, $themes)) {
+        if (in_array($theme, self::getAvailableThemes())) {
             $this->theme = $theme;
         }
 
@@ -783,5 +774,22 @@ class User implements AdvancedUserInterface
     public function isEnabled()
     {
         return !$this->isDisabled;
+    }
+
+    /**
+     * Returns list of available themes.
+     *
+     * @return  string[]
+     */
+    public static function getAvailableThemes()
+    {
+        return [
+            'allblacks',
+            'azure',
+            'emerald',
+            'humanity',
+            'mars',
+            'nexada',
+        ];
     }
 }
