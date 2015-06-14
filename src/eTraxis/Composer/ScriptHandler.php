@@ -31,6 +31,7 @@ class ScriptHandler
                 'gulp',
                 'gulp-add-src',
                 'gulp-concat',
+                'gulp-insert',
                 'gulp-less',
                 'gulp-minify-css',
                 'gulp-rename',

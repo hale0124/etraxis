@@ -7,6 +7,8 @@
  *  along with eTraxis.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+var datatables_language = window.datatables_language || {};
+
 (function($) {
 
     /**
@@ -126,9 +128,7 @@
                     targets: 0
                 }],
 
-                language: {
-                    url: '/js/datatables/datatables-' + $('html').prop('lang') + '.json'
-                },
+                language: datatables_language,
 
                 createdRow: function(row, data) {
                     if (hasCheckboxes) {

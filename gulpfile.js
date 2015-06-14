@@ -11,6 +11,7 @@ var gulp   = require('gulp');
 var addsrc = require('gulp-add-src');
 var concat = require('gulp-concat');
 var less   = require('gulp-less');
+var insert = require('gulp-insert');
 var minify = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var strip  = require('gulp-strip-json-comments');
@@ -147,7 +148,7 @@ gulp.task('javascripts:datatables', function() {
                 'Japanese': 'ja',
                 'Latvian': 'lv',
                 'Polish': 'pl',
-                'Portuguese-Brasil': 'pt_BR',
+                'Portuguese-Brasil': 'pt-BR',
                 'Romanian': 'ro',
                 'Russian': 'ru',
                 'Spanish': 'es',
@@ -156,10 +157,12 @@ gulp.task('javascripts:datatables', function() {
             };
 
             path.basename = 'datatables-' + i18n[path.basename];
-            path.extname = '.json';
+            path.extname = '.js';
         }))
         .pipe(strip())
-        .pipe(gulp.dest('web/js/datatables/'));
+        .pipe(insert.prepend('var datatables_language = window.datatables_language ||'))
+        .pipe(insert.append(';'))
+        .pipe(gulp.dest('vendor/bower/datatables-plugins/i18n/'));
 });
 
 /**
@@ -191,6 +194,7 @@ gulp.task('javascripts:i18n', function() {
 
         var files = [
             'vendor/bower/jquery.ui/ui/i18n/datepicker-' + (locale == 'en' ? 'en-GB' : locale) + '.js',
+            'vendor/bower/datatables-plugins/i18n/datatables-' + locale + '.js',
             'app/Resources/public/js/i18n/etraxis-' + locale + '.js'
         ];
 
