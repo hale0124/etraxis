@@ -14,9 +14,9 @@
 
 namespace eTraxis\Security;
 
-use Doctrine\Common\Persistence\ManagerRegistry;
 use eTraxis\Model\User;
 use Psr\Log\LoggerInterface;
+use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -30,16 +30,16 @@ class InternalUserProvider implements UserProviderInterface
     /** @var LoggerInterface */
     protected $logger;
 
-    /** @var ManagerRegistry */
+    /** @var RegistryInterface */
     protected $doctrine;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface $logger
-     * @param   ManagerRegistry $doctrine
+     * @param   LoggerInterface   $logger
+     * @param   RegistryInterface $doctrine
      */
-    public function __construct(LoggerInterface $logger, ManagerRegistry $doctrine)
+    public function __construct(LoggerInterface $logger, RegistryInterface $doctrine)
     {
         $this->logger   = $logger;
         $this->doctrine = $doctrine;

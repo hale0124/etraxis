@@ -37,10 +37,8 @@ class LockUserCommandHandlerTest extends BaseTestCase
 
         $command->username = $username;
 
-        $handler = new LockUserCommandHandler($this->logger, $this->doctrine, 2, 1800);
-
         // first time
-        $handler->handle($command);
+        $this->command_bus->handle($command);
 
         $user = $this->doctrine->getRepository('eTraxis:User')->findOneBy([
             'username' => $username . '@eTraxis',
@@ -50,7 +48,7 @@ class LockUserCommandHandlerTest extends BaseTestCase
         $this->assertEquals($expected, $user->getAuthAttempts());
 
         // second time
-        $handler->handle($command);
+        $this->command_bus->handle($command);
 
         $user = $this->doctrine->getRepository('eTraxis:User')->findOneBy([
             'username' => $username . '@eTraxis',

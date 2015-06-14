@@ -40,8 +40,7 @@ class UnlockUserCommandHandlerTest extends BaseTestCase
 
         $command->username = $username;
 
-        $handler = new UnlockUserCommandHandler($this->logger, $this->doctrine);
-        $handler->handle($command);
+        $this->command_bus->handle($command);
 
         $user = $this->doctrine->getRepository('eTraxis:User')->findOneBy([
             'username' => $username . '@eTraxis',
