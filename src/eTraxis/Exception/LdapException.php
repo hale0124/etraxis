@@ -17,6 +17,6 @@ namespace eTraxis\Exception;
 /**
  * Exception related to LDAP API.
  */
-class LdapException extends \BadFunctionCallException
+class LdapException extends \Exception
 {
 }
