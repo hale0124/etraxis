@@ -3,7 +3,7 @@ services:
     command.user.register:
         class: eTraxis\SimpleBus\CommandHandler\User\RegisterUserCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Command\User\RegisterUserCommand }]
-        arguments: [ @logger, @doctrine ]
+        arguments: [ @logger, @doctrine, %locale%, %theme% ]
 
     command.user.lock:
         class: eTraxis\SimpleBus\CommandHandler\User\LockUserCommandHandler

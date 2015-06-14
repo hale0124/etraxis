@@ -25,8 +25,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @property    string $username Username to register/find.
  * @property    string $fullname Display name to store/update.
  * @property    string $email    Email address to store/update.
- * @property    string $locale   Default locale.
- * @property    string $theme    Default theme.
  *
  * Output properties:
  *
@@ -54,19 +52,6 @@ class RegisterUserCommand
      * @Assert\Email()
      */
     protected $email;
-
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Length(min="2", max="5")
-     */
-    protected $locale;
-
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Length(max="50")
-     * @Assert\Choice(callback = {"\eTraxis\Model\User", "getAvailableThemes"})
-     */
-    protected $theme;
 
     protected $id;
 }

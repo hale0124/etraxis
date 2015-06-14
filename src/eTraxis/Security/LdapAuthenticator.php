@@ -44,12 +44,6 @@ class LdapAuthenticator implements SimpleFormAuthenticatorInterface
     /** @var string */
     protected $basedn;
 
-    /** @var string */
-    protected $locale;
-
-    /** @var string */
-    protected $theme;
-
     /**
      * Dependency Injection constructor.
      *
@@ -57,23 +51,17 @@ class LdapAuthenticator implements SimpleFormAuthenticatorInterface
      * @param   MessageBus      $command_bus Command bus.
      * @param   LdapService     $ldap        LDAP service.
      * @param   string          $basedn      Base DN to search in.
-     * @param   string          $locale      Default locale.
-     * @param   string          $theme       Default theme.
      */
     public function __construct(
         LoggerInterface $logger,
         MessageBus      $command_bus,
         LdapService     $ldap,
-        $basedn,
-        $locale,
-        $theme)
+        $basedn)
     {
         $this->logger      = $logger;
         $this->command_bus = $command_bus;
         $this->ldap        = $ldap;
         $this->basedn      = $basedn;
-        $this->locale      = $locale;
-        $this->theme       = $theme;
     }
 
     /**
@@ -103,8 +91,6 @@ class LdapAuthenticator implements SimpleFormAuthenticatorInterface
             $command->username = $token->getUsername();
             $command->fullname = $entry['cn'];
             $command->email    = $entry['mail'];
-            $command->locale   = $this->locale;
-            $command->theme    = $this->theme;
 
             $this->command_bus->handle($command);
         }

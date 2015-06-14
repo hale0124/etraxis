@@ -31,9 +31,7 @@ class LdapAuthenticatorTest extends BaseTestCase
             $this->logger,
             $command_bus,
             new LdapService($this->logger, null),
-            'DC=example,DC=com',
-            self::$kernel->getContainer()->getParameter('locale'),
-            self::$kernel->getContainer()->getParameter('theme')
+            'DC=example,DC=com'
         );
 
         $token = $object->createToken(new Request(), 'einstein', 'password', 'etraxis_provider');
@@ -50,9 +48,7 @@ class LdapAuthenticatorTest extends BaseTestCase
             $this->logger,
             $command_bus,
             new LdapService($this->logger, null),
-            'DC=example,DC=com',
-            self::$kernel->getContainer()->getParameter('locale'),
-            self::$kernel->getContainer()->getParameter('theme')
+            'DC=example,DC=com'
         );
 
         $token = new UsernamePasswordToken('einstein', 'password', 'etraxis_provider');
@@ -69,9 +65,7 @@ class LdapAuthenticatorTest extends BaseTestCase
             $this->logger,
             $command_bus,
             new LdapService($this->logger, null),
-            'DC=example,DC=com',
-            self::$kernel->getContainer()->getParameter('locale'),
-            self::$kernel->getContainer()->getParameter('theme')
+            'DC=example,DC=com'
         );
 
         $token = new PreAuthenticatedToken('einstein', 'password', 'etraxis_provider');
@@ -88,9 +82,7 @@ class LdapAuthenticatorTest extends BaseTestCase
             $this->logger,
             $command_bus,
             new LdapService($this->logger, null),
-            'DC=example,DC=com',
-            self::$kernel->getContainer()->getParameter('locale'),
-            self::$kernel->getContainer()->getParameter('theme')
+            'DC=example,DC=com'
         );
 
         $token = new UsernamePasswordToken('einstein', 'password', 'etraxis_provider');
@@ -117,9 +109,7 @@ class LdapAuthenticatorTest extends BaseTestCase
             $this->logger,
             $command_bus,
             $ldap,
-            'DC=example,DC=com',
-            self::$kernel->getContainer()->getParameter('locale'),
-            self::$kernel->getContainer()->getParameter('theme')
+            'DC=example,DC=com'
         );
 
         $provider = new InternalUserProvider($this->logger, $this->doctrine);
@@ -146,9 +136,7 @@ class LdapAuthenticatorTest extends BaseTestCase
             $this->logger,
             $command_bus,
             $ldap,
-            'DC=example,DC=com',
-            self::$kernel->getContainer()->getParameter('locale'),
-            self::$kernel->getContainer()->getParameter('theme')
+            'DC=example,DC=com'
         );
 
         $provider = new InternalUserProvider($this->logger, $this->doctrine);
@@ -180,9 +168,7 @@ class LdapAuthenticatorTest extends BaseTestCase
             $this->logger,
             $command_bus,
             $ldap,
-            'DC=example,DC=com',
-            self::$kernel->getContainer()->getParameter('locale'),
-            self::$kernel->getContainer()->getParameter('theme')
+            'DC=example,DC=com'
         );
 
         $provider = new InternalUserProvider($this->logger, $this->doctrine);

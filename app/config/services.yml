@@ -41,8 +41,6 @@ services:
             - @command_bus
             - @ldap
             - %ldap_basedn%
-            - %locale%
-            - %theme%
 
     etraxis.listener.authentication:
         class: AppBundle\EventListener\AuthenticationListener

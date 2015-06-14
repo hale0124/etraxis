@@ -27,17 +27,27 @@ class RegisterUserCommandHandler
 {
     protected $logger;
     protected $doctrine;
+    protected $locale;
+    protected $theme;
 
     /**
      * Dependency Injection constructor.
      *
      * @param   LoggerInterface   $logger   Debug logger.
      * @param   RegistryInterface $doctrine Doctrine entity managers registry.
+     * @param   string            $locale   Default locale.
+     * @param   string            $theme    Default theme.
      */
-    public function __construct(LoggerInterface $logger, RegistryInterface $doctrine)
+    public function __construct(
+        LoggerInterface $logger,
+        RegistryInterface $doctrine,
+        $locale,
+        $theme)
     {
         $this->logger   = $logger;
         $this->doctrine = $doctrine;
+        $this->locale   = $locale;
+        $this->theme    = $theme;
     }
 
     /**
@@ -78,8 +88,8 @@ class RegisterUserCommandHandler
                 ->setAdmin(false)
                 ->setDisabled(false)
                 ->setLdap(true)
-                ->setLocale($command->locale)
-                ->setTheme($command->theme)
+                ->setLocale($this->locale)
+                ->setTheme($this->theme)
             ;
         }
 

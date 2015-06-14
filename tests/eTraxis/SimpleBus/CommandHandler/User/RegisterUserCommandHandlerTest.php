@@ -24,8 +24,8 @@ class RegisterUserCommandHandlerTest extends BaseTestCase
         $username = 'anna';
         $fullname = 'Anna Rodygina';
         $email    = 'anna@example.com';
-        $locale   = 'ru';
-        $theme    = 'allblacks';
+        $locale   = static::$kernel->getContainer()->getParameter('locale');
+        $theme    = static::$kernel->getContainer()->getParameter('theme');
 
         $user = $this->doctrine->getRepository('eTraxis:User')->findOneBy([
             'username' => $username,
@@ -40,8 +40,6 @@ class RegisterUserCommandHandlerTest extends BaseTestCase
         $command->username = $username;
         $command->fullname = $fullname;
         $command->email    = $email;
-        $command->locale   = $locale;
-        $command->theme    = $theme;
 
         $this->command_bus->handle($command);
 
@@ -68,8 +66,6 @@ class RegisterUserCommandHandlerTest extends BaseTestCase
         $command->username = $username;
         $command->fullname = $fullname;
         $command->email    = $email;
-        $command->locale   = $locale;
-        $command->theme    = $theme;
 
         $this->command_bus->handle($command);
 
