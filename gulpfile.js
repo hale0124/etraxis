@@ -213,7 +213,8 @@ gulp.task('javascripts:etraxis', function() {
     var files = [
         'app/Resources/public/js/etraxis.js',
         'app/Resources/public/js/init-ui.js',
-        'app/Resources/public/js/modal.js'
+        'app/Resources/public/js/modal.js',
+        'app/Resources/public/js/table.js'
     ];
 
     gulp.src(files)

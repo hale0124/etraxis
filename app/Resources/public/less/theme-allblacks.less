@@ -48,25 +48,40 @@ a {
 }
 
 /* DataTables */
-table.datatable {
-    border-left: 1px solid #333333;
-    border-right: 1px solid #333333;
+
+table.dataTable {
 
     tbody tr {
-        background-color: #000000;
+        background-color: #000;
     }
 
-    &.display, &.row-border {
-        tbody th, tbody td {
-            border-top: 1px solid #333333;
+    &.row-border {
+        tbody tr td {
+            border-top: 1px solid #333;
         }
     }
 
-    &.display, &.hover {
+    &.cell-border {
+        tbody tr td {
+            border-top: 1px solid #333;
+            border-left: 1px solid #333;
+            border-right: none;
+        }
+
+        tbody tr td:first-child {
+            border-left: 1px solid #333;
+        }
+
+        tbody tr td:last-child {
+            border-right: 1px solid #333;
+        }
+    }
+
+    &.hover {
         tbody tr:hover,
         tbody tr.odd:hover,
         tbody tr.even:hover {
-            background-color: #222222;
+            background-color: #222;
         }
     }
 }
@@ -86,7 +101,7 @@ table.datatable {
     }
 
     .dataTables_paginate .fg-button {
-        border-color: #444444;
+        border-color: #444;
         color: #eeeeee !important;
     }
 }

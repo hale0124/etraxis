@@ -7,8 +7,6 @@
  *  along with eTraxis.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var datatables_language = window.datatables_language || {};
-
 (function($) {
 
     /**
@@ -94,67 +92,6 @@ var datatables_language = window.datatables_language || {};
                     $(ui.panel).initUI();
                 }
             });
-        });
-
-        // Data tables.
-        $('.datatable', this).each(function() {
-
-            var $table = $(this);
-            var hasCheckboxes = ($('input[type="checkbox"]', this).length != 0);
-            var checkboxName = $('input[type="checkbox"]', this).prop('name');
-
-            $table.dataTable({
-
-                jQueryUI: true,
-                stateSave: true,
-                processing: true,
-                serverSide: true,
-
-                ajax: {
-                    url: $(this).data('src'),
-                    error: function(xhr) {
-                        eTraxis.alert(eTraxis.i18n.Error, xhr.statusText);
-                    }
-                },
-
-                order: [
-                    hasCheckboxes ? 1 : 0,
-                    'asc'
-                ],
-
-                columnDefs: [{
-                    searchable: !hasCheckboxes,
-                    orderable: !hasCheckboxes,
-                    targets: 0
-                }],
-
-                language: datatables_language,
-
-                createdRow: function(row, data) {
-                    if (hasCheckboxes) {
-                        $('td', row).first().html('<input type="checkbox" name="' + checkboxName + '[]" value="' + data[0] + '">');
-                    }
-                }
-            });
-
-            $('thead input[type="checkbox"]', this).click(function() {
-                $('tbody input[type="checkbox"]', $table).prop('checked', $(this).prop('checked'));
-            });
-
-            if ($table.hasClass('hover')) {
-
-                $table.on('draw.dt', function() {
-
-                    $('tbody tr', this).click(function() {
-                        $table.trigger('row.click', { id: $(this).data('id') });
-                    });
-
-                    $('tbody tr input[type="checkbox"]', this).click(function(e) {
-                        e.stopPropagation();
-                        return true;
-                    });
-                });
-            }
         });
 
         return this;

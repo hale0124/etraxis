@@ -4,7 +4,7 @@
 
     <div class="columns">
         <div class="column full-width">
-            <table class="datatable row-border" data-src="{{ path('admin_users_ajax') }}">
+            <table id="users" class="cell-border" data-src="{{ path('admin_users_ajax') }}">
                 <thead>
                     <tr>
                         <th>{{ 'user.username'|trans }}</th>
@@ -17,5 +17,15 @@
             </table>
         </div>
     </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script>
+        $(function() {
+            $('#users').table();
+        });
+    </script>
 
 {% endblock %}
