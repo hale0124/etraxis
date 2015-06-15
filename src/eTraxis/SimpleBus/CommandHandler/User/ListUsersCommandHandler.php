@@ -106,6 +106,7 @@ class ListUsersCommandHandler
             $entity = $entities[$index];
 
             $users[] = [
+                $entity->getId(),
                 $entity->getUsername(),
                 $entity->getFullname(),
                 $entity->getEmail(),
