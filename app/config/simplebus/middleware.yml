@@ -1,7 +1,19 @@
 services:
 
+    middleware.timer.start:
+        class: eTraxis\SimpleBus\Middleware\StartTimerMiddleware
+        public: false
+        tags: [{ name: command_bus_middleware, priority: 100 }]
+        arguments: [ @session ]
+
     middleware.validation:
         class: eTraxis\SimpleBus\Middleware\ValidationMiddleware
         public: false
-        tags: [{ name: command_bus_middleware }]
+        tags: [{ name: command_bus_middleware, priority: 90 }]
         arguments: [ @logger, @validator ]
+
+    middleware.timer.stop:
+        class: eTraxis\SimpleBus\Middleware\StopTimerMiddleware
+        public: false
+        tags: [{ name: command_bus_middleware, priority: 0 }]
+        arguments: [ @logger, @session ]
