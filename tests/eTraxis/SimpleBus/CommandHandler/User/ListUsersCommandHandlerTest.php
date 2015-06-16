@@ -134,7 +134,7 @@ class ListUsersCommandHandlerTest extends BaseTestCase
         $this->assertEquals(count($expected), count($command->users));
 
         foreach ($expected as $index => $username) {
-            $this->assertEquals($username, $command->users[$index][0]);
+            $this->assertEquals($username, $command->users[$index][1]);
         }
     }
 }
