@@ -5,12 +5,16 @@ php:
     - 5.5
     - 5.6
 
+env:
+    - DB=mysql
+    - DB=pgsql
+
 before_install:
     - sudo apt-get update -qq
     - sudo apt-get install -y php5-ldap
 
 install:
-    - cp app/config/parameters.yml.dist app/config/parameters.yml
+    - cp app/config/travis.$DB.yml app/config/parameters.yml
     - composer install -n
 
 before_script:
