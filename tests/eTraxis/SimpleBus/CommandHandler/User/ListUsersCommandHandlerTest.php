@@ -111,8 +111,8 @@ class ListUsersCommandHandlerTest extends BaseTestCase
             'amy',
             'fry',
             'leela',
-            'einstein',
-            'artem',
+            'einstein', // this one has NULL in the "description" field
+            'artem',    // this one has NULL in the "description" field
         ];
 
         static::$kernel->getContainer()->set('security.authorization_checker', new AuthorizationCheckerAdminStub());
@@ -126,6 +126,12 @@ class ListUsersCommandHandlerTest extends BaseTestCase
             ['column' => 4, 'dir' => 'DESC'],
             ['column' => 1, 'dir' => 'ASC'],
         ];
+
+        // PostgreSQL treats NULLs as greatest values.
+        if (static::$kernel->getContainer()->getParameter('database_driver') == 'pdo_pgsql') {
+            array_unshift($expected, array_pop($expected));
+            array_unshift($expected, array_pop($expected));
+        }
 
         $this->assertEmpty($command->users);
 
