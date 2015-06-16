@@ -40,6 +40,8 @@ var datatables_language = window.datatables_language || {};
 
         var settings = $.extend(defaults, options);
 
+        $(this).prop('width', '100%');
+
         if (settings.checkboxes) {
 
             settings.order = [1, 'asc'];
