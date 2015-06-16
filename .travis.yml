@@ -21,7 +21,7 @@ before_install:
     - if [[ "$(phpenv version-name)" != "hhvm" ]]; then echo "extension = ldap.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi
 
 install:
-    - cp app/config/travis.$DB.yml app/config/parameters.yml
+    - cp app/config/travis/parameters.$DB.yml app/config/parameters.yml
     - composer install -n
 
 before_script:
