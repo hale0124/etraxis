@@ -65,7 +65,7 @@ class UsersController extends BaseController
             $this->getCommandBus()->handle($command);
         }
         catch (ResponseException $e) {
-            $this->getLogger()->error($e->getMessage(), $e->getCode());
+            $this->getLogger()->error($e->getMessage(), [$e->getCode()]);
 
             return new Response($e->getMessage(), $e->getCode());
         }

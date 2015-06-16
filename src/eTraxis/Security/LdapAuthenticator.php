@@ -95,7 +95,7 @@ class LdapAuthenticator implements SimpleFormAuthenticatorInterface
             $this->command_bus->handle($command);
         }
         catch (ResponseException $e) {
-            $this->logger->error($e->getMessage(), $e->getCode());
+            $this->logger->error($e->getMessage(), [$e->getCode()]);
             throw new AuthenticationException('Bad credentials');
         }
 
