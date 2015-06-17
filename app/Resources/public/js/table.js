@@ -25,6 +25,7 @@ var datatables_language = window.datatables_language || {};
             processing: false,
             serverSide: true,
             checkboxes: false,
+            tableOnly: false,
 
             columnDefs: [],
 
@@ -39,6 +40,11 @@ var datatables_language = window.datatables_language || {};
         };
 
         var settings = $.extend(defaults, options);
+
+        // Disable header and footer.
+        if (settings.tableOnly) {
+            settings.dom = 't';
+        }
 
         // Timer to block the table while AJAX request is being processed.
         var blockTimer = null;
