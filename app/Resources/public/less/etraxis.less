@@ -270,6 +270,34 @@ select {
 table.dataTable {
     text-align: left;
 
+    tbody tr {
+        background-color: #fbfbfb;
+    }
+
+    &.row-border {
+        tbody tr td {
+            border-top: none;
+            border-bottom: 1px solid #ddd;
+        }
+    }
+
+    &.cell-border {
+        tbody tr td {
+            border-top: none;
+            border-bottom: 1px solid #ddd;
+            border-left: 1px solid #ddd;
+            border-right: none;
+        }
+
+        tbody tr td:first-child {
+            border-left: 1px solid #ddd;
+        }
+
+        tbody tr td:last-child {
+            border-right: 1px solid #ddd;
+        }
+    }
+
     &.hover {
         tbody tr {
             cursor: pointer;
