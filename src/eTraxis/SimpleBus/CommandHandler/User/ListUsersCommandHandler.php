@@ -63,14 +63,14 @@ class ListUsersCommandHandler
         $query = $repository->createQueryBuilder('u');
 
         // Search.
-        if (array_key_exists('value', $command->search)) {
+        if ($command->search) {
 
             $query
                 ->where('u.username LIKE :search')
                 ->orWhere('u.fullname LIKE :search')
                 ->orWhere('u.email LIKE :search')
                 ->orWhere('u.description LIKE :search')
-                ->setParameter('search', "%{$command->search['value']}%")
+                ->setParameter('search', "%{$command->search}%")
             ;
         }
 

@@ -36,19 +36,19 @@ class RegisterUserCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max="112")
+     * @Assert\Length(max = "112")
      */
     protected $username;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max="64")
+     * @Assert\Length(max = "64")
      */
     protected $fullname;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max="50")
+     * @Assert\Length(max = "50")
      * @Assert\Email()
      */
     protected $email;

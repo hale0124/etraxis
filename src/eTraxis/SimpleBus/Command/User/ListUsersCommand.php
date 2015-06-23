@@ -22,10 +22,10 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * Input properties:
  *
- * @property    int   $start  First row to return, zero-based.
- * @property    int   $length Total number of rows to return.
- * @property    array $search Current search value.
- * @property    array $order  Current columns ordering.
+ * @property    int    $start  First row to return, zero-based.
+ * @property    int    $length Total number of rows to return (-1 to return all rows).
+ * @property    string $search Current search value.
+ * @property    array  $order  Current columns ordering (zero-based column index and direction).
  *
  * Output properties:
  *
@@ -38,39 +38,34 @@ class ListUsersCommand
 
     /**
      * @Assert\NotNull()
-     * @Assert\GreaterThanOrEqual(value="0")
+     * @Assert\GreaterThanOrEqual(value = "0")
      */
     protected $start = 0;
 
     /**
      * @Assert\NotNull()
-     * @Assert\GreaterThanOrEqual(value="-1")
+     * @Assert\GreaterThanOrEqual(value = "-1")
      */
     protected $length = -1;
 
     /**
-     * @Assert\NotNull()
-     * @Assert\Collection(
-     *     fields = {
-     *         "value" = @Assert\Type(type="string")
-     *     },
-     *     allowExtraFields   = true,
-     *     allowMissingFields = true
-     * )
+     * @Assert\Length(max = "100")
      */
-    protected $search = [];
+    protected $search = null;
 
     /**
      * @Assert\NotNull()
-     * @Assert\Type(type="array")
+     * @Assert\Type(type = "array")
      * @Assert\All({
      *     @Assert\Collection(
      *         fields = {
      *             "column" = {
-     *                 @Assert\GreaterThanOrEqual(value="0"),
-     *                 @Assert\LessThan(value="5")
+     *                 @Assert\GreaterThanOrEqual(value = "0"),
+     *                 @Assert\LessThan(value = "5")
      *             },
-     *             "dir" = @Assert\Type(type="string")
+     *             "dir" = {
+     *                 @Assert\Choice(choices = {"asc", "desc"})
+     *             }
      *         },
      *         allowExtraFields   = false,
      *         allowMissingFields = false

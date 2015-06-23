@@ -56,9 +56,11 @@ class UsersController extends BaseController
     {
         $command = new ListUsersCommand();
 
+        $search = $request->get('search', ['value' => null]);
+
         $command->start  = $request->get('start', 0);
         $command->length = $request->get('length', -1);
-        $command->search = $request->get('search', []);
+        $command->search = $search['value'];
         $command->order  = $request->get('order', []);
 
         try {

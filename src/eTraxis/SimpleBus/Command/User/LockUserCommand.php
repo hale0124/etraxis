@@ -34,7 +34,7 @@ class LockUserCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max="112")
+     * @Assert\Length(max = "112")
      */
     protected $username;
 }

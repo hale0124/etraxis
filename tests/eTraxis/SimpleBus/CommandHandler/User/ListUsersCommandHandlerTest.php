@@ -29,7 +29,7 @@ class ListUsersCommandHandlerTest extends BaseTestCase
 
         $command->start  = 0;
         $command->length = -1;
-        $command->search = ['value' => null];
+        $command->search = null;
         $command->order  = [];
 
         $this->assertEmpty($command->users);
@@ -52,7 +52,7 @@ class ListUsersCommandHandlerTest extends BaseTestCase
 
         $command->start  = '';
         $command->length = -1;
-        $command->search = [];
+        $command->search = null;
         $command->order  = [];
 
         $this->assertEmpty($command->users);
@@ -72,7 +72,7 @@ class ListUsersCommandHandlerTest extends BaseTestCase
 
         $command->start  = 0;
         $command->length = -1;
-        $command->search = [];
+        $command->search = null;
         $command->order  = [];
 
         $this->assertEmpty($command->users);
@@ -90,7 +90,7 @@ class ListUsersCommandHandlerTest extends BaseTestCase
 
         $command->start  = 0;
         $command->length = -1;
-        $command->search = ['value' => 'planetexpress'];
+        $command->search = 'planetexpress';
         $command->order  = [];
 
         $this->assertEmpty($command->users);
@@ -121,10 +121,10 @@ class ListUsersCommandHandlerTest extends BaseTestCase
 
         $command->start  = 0;
         $command->length = -1;
-        $command->search = ['value' => null];
+        $command->search = null;
         $command->order  = [
-            ['column' => 4, 'dir' => 'DESC'],
-            ['column' => 1, 'dir' => 'ASC'],
+            ['column' => 4, 'dir' => 'desc'],
+            ['column' => 1, 'dir' => 'asc'],
         ];
 
         // PostgreSQL treats NULLs as greatest values.
