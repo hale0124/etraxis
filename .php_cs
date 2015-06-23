@@ -17,6 +17,7 @@ return Symfony\CS\Config\Config::create()
         '-phpdoc_params',
         '-phpdoc_separation',
         '-phpdoc_to_comment',
+        '-pre_increment',
         '-unalign_double_arrow',
         '-unalign_equals',
 

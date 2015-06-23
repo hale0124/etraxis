@@ -46,6 +46,7 @@ class StopTimerMiddleware implements MessageBusMiddleware
         $next($message);
 
         list($msec, $sec) = explode(' ', microtime());
+
         $timer = (float) $msec + (float) $sec;
         $timer -= $this->session->get('eTraxis.timer');
 

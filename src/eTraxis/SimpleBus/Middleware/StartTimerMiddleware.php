@@ -40,6 +40,7 @@ class StartTimerMiddleware implements MessageBusMiddleware
     public function handle($message, callable $next)
     {
         list($msec, $sec) = explode(' ', microtime());
+
         $timer = (float) $msec + (float) $sec;
         $this->session->set('eTraxis.timer', $timer);
 
