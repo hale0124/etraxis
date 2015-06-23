@@ -92,11 +92,8 @@ var datatables_language = window.datatables_language || {};
         // In case of "checkboxes" feature...
         if (settings.checkboxes) {
 
-            // ...prepend the header with one more column...
+            // ...prepend the header with one more column.
             $('thead tr', this).prepend('<th><input type="checkbox"></th>');
-
-            // ... and disable ordering by this column.
-            settings.order = [1, 'asc'];
 
             // Custom rendering of the first column to convert data into value of a checkbox.
             settings.columnDefs.push({
