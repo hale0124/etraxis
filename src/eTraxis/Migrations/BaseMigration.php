@@ -66,9 +66,9 @@ abstract class BaseMigration extends AbstractMigration
     /**
      * Checks whether current database platform is supported.
      *
-     * @return  string Current database platform.
-     *
      * @throws  \Doctrine\DBAL\Migrations\AbortMigrationException
+     *
+     * @return  string Current database platform.
      */
     protected function checkDatabasePlatform()
     {

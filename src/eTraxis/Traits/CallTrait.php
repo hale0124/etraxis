@@ -25,8 +25,9 @@ trait CallTrait
      * @param   string $name      Method name.
      * @param   array  $arguments List of arguments to be passed in the call.
      *
-     * @return  mixed Value returned from the method, if any.
      * @throws  \Exception Unknown method.
+     *
+     * @return  mixed Value returned from the method, if any.
      */
     public function __call($name, array $arguments)
     {

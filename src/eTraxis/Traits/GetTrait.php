@@ -36,9 +36,9 @@ trait GetTrait
      *
      * @param   string $name Name of the property.
      *
-     * @return  mixed Current value of the property.
-     *
      * @throws  \Exception If the property doesn't exist.
+     *
+     * @return  mixed Current value of the property.
      */
     public function __get($name)
     {

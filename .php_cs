@@ -6,7 +6,7 @@ $finder = Symfony\CS\Finder\DefaultFinder::create()
 ;
 
 return Symfony\CS\Config\Config::create()
-    ->level(Symfony\CS\FixerInterface::SYMFONY_LEVEL)
+    ->level(Symfony\CS\FixerInterface::CONTRIB_LEVEL)
     ->fixers([
 
         // PSR2_LEVEL
@@ -22,11 +22,14 @@ return Symfony\CS\Config\Config::create()
         '-unalign_equals',
 
         // CONTRIB_LEVEL
-        'align_double_arrow',
-        'align_equals',
-        'concat_with_spaces',
-        'ordered_use',
-        'short_array_syntax',
+        '-ereg_to_preg',
+        '-header_comment',
+        '-long_array_syntax',
+        '-multiline_spaces_before_semicolon',
+        '-no_blank_lines_before_namespace',
+        '-phpdoc_var_to_type',
+        '-strict',
+        '-strict_param',
     ])
     ->finder($finder)
 ;
