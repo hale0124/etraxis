@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace eTraxis\Model;
 
 class StateAssigneeTest extends \PHPUnit_Framework_TestCase

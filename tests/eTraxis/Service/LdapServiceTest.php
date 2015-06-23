@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace eTraxis\Service;
 
 use eTraxis\Tests\BaseTestCase;

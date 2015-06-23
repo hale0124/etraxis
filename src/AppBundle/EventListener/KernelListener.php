@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace AppBundle\EventListener;
 
 use Symfony\Bundle\FrameworkBundle\Routing\Router;

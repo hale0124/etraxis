@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace AppBundle\Controller;
 
 use eTraxis\Traits;

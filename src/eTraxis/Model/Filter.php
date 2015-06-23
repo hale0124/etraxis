@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace eTraxis\Model;
 
 use Doctrine\ORM\Mapping as ORM;

@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace AppBundle\Controller\Admin;
 
 use eTraxis\Exception\ResponseException;

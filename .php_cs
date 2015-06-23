@@ -26,7 +26,6 @@ return Symfony\CS\Config\Config::create()
         '-header_comment',
         '-long_array_syntax',
         '-multiline_spaces_before_semicolon',
-        '-no_blank_lines_before_namespace',
         '-phpdoc_var_to_type',
         '-strict',
         '-strict_param',

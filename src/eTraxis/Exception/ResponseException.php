@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace eTraxis\Exception;
 
 use Symfony\Component\HttpFoundation\Response;

@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace eTraxis\Model;
 
 class ViewTest extends \PHPUnit_Framework_TestCase

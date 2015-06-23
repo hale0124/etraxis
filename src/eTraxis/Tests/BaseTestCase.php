@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace eTraxis\Tests;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;

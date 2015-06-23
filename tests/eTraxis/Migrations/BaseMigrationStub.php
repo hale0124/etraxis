@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace eTraxis\Migrations;
 
 class BaseMigrationStub extends BaseMigration

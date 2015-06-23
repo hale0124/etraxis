@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace AppBundle\EventListener;
 
 use eTraxis\SimpleBus\Command\User\LockUserCommand;

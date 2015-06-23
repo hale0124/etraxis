@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace eTraxis\Model;
 
 class LastReadTest extends \PHPUnit_Framework_TestCase

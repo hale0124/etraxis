@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace eTraxis\SimpleBus\CommandHandler\User;
 
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;

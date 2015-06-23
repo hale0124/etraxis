@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace eTraxis\Security;
 
 class InternalPasswordEncoderTest extends \PHPUnit_Framework_TestCase

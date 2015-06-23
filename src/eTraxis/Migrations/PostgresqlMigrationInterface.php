@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace eTraxis\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;

@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace eTraxis\Model;
 
 class FieldValueTest extends \PHPUnit_Framework_TestCase

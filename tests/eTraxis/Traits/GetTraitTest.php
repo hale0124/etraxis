@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace eTraxis\Traits;
 
 class GetTraitTest extends \PHPUnit_Framework_TestCase

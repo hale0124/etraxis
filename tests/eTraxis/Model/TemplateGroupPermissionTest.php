@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace eTraxis\Model;
 
 class TemplateGroupPermissionTest extends \PHPUnit_Framework_TestCase

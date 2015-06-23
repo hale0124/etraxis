@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace eTraxis\Security;
 
 use Symfony\Component\Security\Core\Encoder\BasePasswordEncoder;

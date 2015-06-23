@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace eTraxis\Model;
 
 class ChangeTest extends \PHPUnit_Framework_TestCase

@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace eTraxis\Model;
 
 class FilterStatusTest extends \PHPUnit_Framework_TestCase

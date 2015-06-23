@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace eTraxis\Model;
 
 class FieldGroupAccessTest extends \PHPUnit_Framework_TestCase

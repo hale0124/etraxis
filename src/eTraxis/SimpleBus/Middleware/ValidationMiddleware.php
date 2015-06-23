@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace eTraxis\SimpleBus\Middleware;
 
 use eTraxis\Exception\ResponseException;

@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace AppBundle\Controller\Web;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;

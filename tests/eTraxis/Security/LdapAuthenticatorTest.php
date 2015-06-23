@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace eTraxis\Security;
 
 use eTraxis\Service\LdapService;

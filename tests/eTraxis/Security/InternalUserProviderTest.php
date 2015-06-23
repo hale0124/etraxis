@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace eTraxis\Security;
 
 use eTraxis\Model\User as eTraxisUser;

@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace AppBundle\DataFixtures\Tests;
 
 use Doctrine\Common\DataFixtures\AbstractFixture;

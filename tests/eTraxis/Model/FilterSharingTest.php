@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace eTraxis\Model;
 
 class FilterSharingTest extends \PHPUnit_Framework_TestCase

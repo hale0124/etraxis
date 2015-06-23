@@ -11,7 +11,6 @@
 //
 //----------------------------------------------------------------------
 
-
 namespace eTraxis\Model;
 
 class StateGroupTransitionTest extends \PHPUnit_Framework_TestCase
