@@ -12,24 +12,11 @@
 //----------------------------------------------------------------------
 
 
-namespace eTraxis\Tests;
+namespace eTraxis\Traits;
 
-class MyTestClass
+class MyTestClassStub extends MyTestClass
 {
-    protected $property;
-
-    public function setProperty($value)
-    {
-        $this->property = $value;
-    }
-
-    public function getProperty()
-    {
-        return $this->property;
-    }
-
-    private function getVersion($a, $b)
-    {
-        return $a . PHP_VERSION . $b;
-    }
+    use GetTrait;
+    use SetTrait;
+    use CallTrait;
 }

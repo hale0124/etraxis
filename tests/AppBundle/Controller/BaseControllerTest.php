@@ -14,12 +14,14 @@
 
 namespace AppBundle\Controller;
 
-use eTraxis\Tests\ClassAccessTrait;
+use eTraxis\Traits;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class BaseControllerStub extends BaseController
 {
-    use ClassAccessTrait;
+    use Traits\GetTrait;
+    use Traits\SetTrait;
+    use Traits\CallTrait;
 }
 
 class BaseControllerTest extends KernelTestCase

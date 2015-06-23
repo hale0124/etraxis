@@ -12,47 +12,13 @@
 //----------------------------------------------------------------------
 
 
-namespace eTraxis\Tests;
+namespace eTraxis\Traits;
 
 /**
- * A simple trait to access protected methods and properties in unit tests.
+ * A trait to call protected methods.
  */
-trait ClassAccessTrait
+trait CallTrait
 {
-    /**
-     * Sets value of specified property.
-     *
-     * @param   string $name  Property name.
-     * @param   mixed  $value Property value.
-     *
-     * @throws  \Exception Unknown property.
-     */
-    public function __set($name, $value)
-    {
-        if (!property_exists($this, $name)) {
-            throw new \Exception(sprintf('Unknown property "%s" in class "%s".', $name, get_class($this)));
-        }
-
-        $this->$name = $value;
-    }
-
-    /**
-     * Returns current value of specified property.
-     *
-     * @param   string $name Property name.
-     *
-     * @return  mixed Property value.
-     * @throws  \Exception Unknown property.
-     */
-    public function __get($name)
-    {
-        if (!property_exists($this, $name)) {
-            throw new \Exception(sprintf('Unknown property "%s" in class "%s".', $name, get_class($this)));
-        }
-
-        return $this->$name;
-    }
-
     /**
      * Calls specified method.
      *

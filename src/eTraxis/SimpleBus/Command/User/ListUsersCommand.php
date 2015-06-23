@@ -14,7 +14,7 @@
 
 namespace eTraxis\SimpleBus\Command\User;
 
-use eTraxis\SimpleBus\CommandTrait;
+use eTraxis\Traits;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -34,7 +34,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ListUsersCommand
 {
-    use CommandTrait;
+    use Traits\GetTrait;
+    use Traits\SetTrait;
 
     /**
      * @Assert\NotNull()

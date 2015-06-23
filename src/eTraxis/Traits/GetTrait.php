@@ -12,12 +12,12 @@
 //----------------------------------------------------------------------
 
 
-namespace eTraxis\SimpleBus;
+namespace eTraxis\Traits;
 
 /**
- * Command trait to access command properties.
+ * A trait to read protected properties.
  */
-trait CommandTrait
+trait GetTrait
 {
     /**
      * Checks whether specified property exists.
@@ -32,23 +32,6 @@ trait CommandTrait
     }
 
     /**
-     * Sets value of specified property.
-     *
-     * @param   string $name  Name of the property.
-     * @param   mixed  $value New value of the property.
-     *
-     * @throws  \Exception If the property doesn't exist.
-     */
-    public function __set($name, $value)
-    {
-        if (!property_exists($this, $name)) {
-            throw new \Exception(sprintf('Class "%s" doesn\'t contain property "%s".', get_class($this), $name));
-        }
-
-        $this->$name = $value;
-    }
-
-    /**
      * Returns current value of specified property.
      *
      * @param   string $name Name of the property.
@@ -60,7 +43,7 @@ trait CommandTrait
     public function __get($name)
     {
         if (!property_exists($this, $name)) {
-            throw new \Exception(sprintf('Class "%s" doesn\'t contain property "%s".', get_class($this), $name));
+            throw new \Exception(sprintf('Unknown property "%s" in class "%s".', $name, get_class($this)));
         }
 
         return $this->$name;
