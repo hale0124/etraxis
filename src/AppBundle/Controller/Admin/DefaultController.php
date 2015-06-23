@@ -14,14 +14,14 @@
 
 namespace AppBundle\Controller\Admin;
 
-use AppBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * Default controller for admin area.
  */
-class DefaultController extends BaseController
+class DefaultController extends Controller
 {
     /**
      * @Route("/", name="admin")

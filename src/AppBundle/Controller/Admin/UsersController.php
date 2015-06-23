@@ -14,11 +14,12 @@
 
 namespace AppBundle\Controller\Admin;
 
-use AppBundle\Controller\BaseController;
 use eTraxis\Exception\ResponseException;
 use eTraxis\SimpleBus\Command\User\ListUsersCommand;
+use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -28,8 +29,10 @@ use Symfony\Component\HttpFoundation\Response;
  *
  * @Route("/users")
  */
-class UsersController extends BaseController
+class UsersController extends Controller
 {
+    use ContainerTrait;
+
     /**
      * Page with list of users.
      *

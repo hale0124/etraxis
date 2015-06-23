@@ -14,14 +14,14 @@
 
 namespace AppBundle\Controller\Web;
 
-use AppBundle\Controller\BaseController;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
  * Default controller for public area.
  */
-class DefaultController extends BaseController
+class DefaultController extends Controller
 {
     /**
      * @Route("/", name="homepage")
