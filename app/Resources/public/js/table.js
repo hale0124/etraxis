@@ -39,7 +39,7 @@ var datatables_language = window.datatables_language || {};
             language: datatables_language
         };
 
-        var settings = $.extend(defaults, options);
+        var settings = $.extend(true, defaults, options);
 
         // Disable header and footer.
         if (settings.tableOnly) {
