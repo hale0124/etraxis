@@ -29,6 +29,8 @@ class CallTraitTest extends \PHPUnit_Framework_TestCase
     public function testCallMethodFailure()
     {
         $object = new MyTestClassStub();
+
+        /** @noinspection PhpUndefinedMethodInspection */
         $object->getUnknown();
     }
 }

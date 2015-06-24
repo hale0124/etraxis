@@ -17,7 +17,7 @@ class GetTraitTest extends \PHPUnit_Framework_TestCase
 {
     public function testIsSet()
     {
-        $object   = new MyTestClassStub();
+        $object = new MyTestClassStub();
 
         $this->assertTrue(isset($object->property));
         $this->assertFalse(isset($object->unknown));
@@ -38,6 +38,8 @@ class GetTraitTest extends \PHPUnit_Framework_TestCase
     public function testGetPropertyFailure()
     {
         $object = new MyTestClassStub();
+
+        /** @noinspection PhpUndefinedFieldInspection */
         echo($object->unknown);
     }
 }

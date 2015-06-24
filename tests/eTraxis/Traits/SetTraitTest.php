@@ -17,8 +17,9 @@ class SetTraitTest extends \PHPUnit_Framework_TestCase
 {
     public function testSetPropertySuccess()
     {
-        $object           = new MyTestClassStub();
-        $expected         = mt_rand();
+        $object   = new MyTestClassStub();
+        $expected = mt_rand();
+
         $object->property = $expected;
 
         $this->assertEquals($expected, $object->getProperty());
@@ -29,8 +30,10 @@ class SetTraitTest extends \PHPUnit_Framework_TestCase
      */
     public function testSetPropertyFailure()
     {
-        $object          = new MyTestClassStub();
-        $expected        = mt_rand();
+        $object   = new MyTestClassStub();
+        $expected = mt_rand();
+
+        /** @noinspection PhpUndefinedFieldInspection */
         $object->unknown = $expected;
     }
 }

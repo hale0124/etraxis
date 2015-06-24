@@ -33,6 +33,7 @@ class MailerServiceTest extends KernelTestCase
         $twig   = static::$kernel->getContainer()->get('twig');
         $mailer = static::$kernel->getContainer()->get('mailer');
 
+        /** @noinspection PhpParamsInspection */
         $service = new MailerService($logger, $twig, $mailer);
 
         $sent = $service->send(

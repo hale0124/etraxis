@@ -47,7 +47,6 @@ class AuthenticationListenerTest extends BaseTestCase
     {
         $token = new UsernamePasswordToken('artem', 'secret', 'etraxis_provider');
 
-        $success = new AuthenticationEvent($token);
         $failure = new AuthenticationFailureEvent($token, new AuthenticationException());
 
         $object = new AuthenticationListener($this->command_bus);
