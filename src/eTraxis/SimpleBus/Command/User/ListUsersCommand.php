@@ -20,14 +20,12 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Enumerates all accounts existing in eTraxis database.
  *
  * Input properties:
- *
  * @property    int    $start  First row to return, zero-based.
  * @property    int    $length Total number of rows to return (-1 to return all rows).
  * @property    string $search Current search value.
  * @property    array  $order  Current columns ordering (zero-based column index and direction).
  *
  * Output properties:
- *
  * @property    int   $total Total number of rows in the list.
  * @property    array $users List of users.
  */

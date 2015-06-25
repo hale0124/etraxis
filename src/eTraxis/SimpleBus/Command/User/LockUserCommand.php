@@ -20,12 +20,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Increases locks count for specified eTraxis account.
  *
  * Input properties:
- *
  * @property    string $username Username to lock.
  *
- * Output properties:
- *
- * None.
+ * Output properties: none.
  */
 class LockUserCommand
 {
