@@ -2,7 +2,11 @@
 
 {% block content %}
 
-    <p><strong>{{ status_code }} {{ status_text }}</strong></p>
-    <p>{{ exception.message }} {{ exception.code ? '(%s)'|format(exception.code) }}</p>
+    <div class="columns">
+        <div class="column">
+            <p><strong>{{ status_code }} {{ status_text }}</strong></p>
+            <p>{{ exception.message }} {{ exception.code ? '(%s)'|format(exception.code) }}</p>
+        </div>
+    </div>
 
 {% endblock %}
