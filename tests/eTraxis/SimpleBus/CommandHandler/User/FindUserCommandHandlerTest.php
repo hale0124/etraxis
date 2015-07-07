@@ -36,7 +36,7 @@ class FindUserCommandHandlerTest extends BaseTestCase
     public function testNotFound()
     {
         $command     = new FindUserCommand();
-        $command->id = PHP_INT_MAX;
+        $command->id = (1 << 31) - 1;
         $this->command_bus->handle($command);
 
         $this->assertNull($command->user);
