@@ -28,44 +28,16 @@
         $('input[type=button]', this).button();     // regular buttons
         $('input[type=submit]', this).button();     // submit buttons
         $('input[type=reset]', this).button();      // reset buttons
+        $('.dropdown', this).dropdown();            // buttons with dropdown menu
         $('.buttonset', this).buttonset();          // buttonsets
         $('.date', this).datepicker();              // datepickers
         $('.hint', this).tooltip();                 // tooltips binded with labels
 
         // Highlight inline messages.
-        $('.highlight:not(.ui-state-highlight)').addClass('ui-state-highlight ui-widget-content ui-corner-all');
+        $('.highlight:not(.ui-state-highlight)', this).addClass('ui-state-highlight ui-widget-content ui-corner-all');
 
         // Error inline messages.
-        $('.error:not(.ui-state-error)').addClass('ui-state-error ui-widget-content ui-corner-all');
-
-        // Buttons with dropdown menu.
-        $('.dropdown').each(function() {
-
-            var $button = $('button', this);
-            var $menu   = $('ul', this);
-
-            $button
-                .button({
-                    icons: {
-                        secondary: 'ui-icon-triangle-1-s'
-                    }
-                })
-                .click(function() {
-                    $menu.toggle();
-                });
-
-            $menu
-                .hide()
-                .menu()
-                .addClass('ui-front')
-                .css('min-width', $button.css('width'))
-                .mouseleave(function() {
-                    $menu.hide();
-                })
-                .click(function() {
-                    $menu.hide();
-                });
-        });
+        $('.error:not(.ui-state-error)', this).addClass('ui-state-error ui-widget-content ui-corner-all');
 
         // Tabs.
         $('.tabs', this).each(function() {
