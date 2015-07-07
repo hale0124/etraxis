@@ -11,14 +11,14 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\SimpleBus\CommandHandler\User;
+namespace eTraxis\SimpleBus\Users;
 
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
-class AuthorizationCheckerUserStub implements AuthorizationCheckerInterface
+class AuthorizationCheckerAdminStub implements AuthorizationCheckerInterface
 {
     public function isGranted($attributes, $object = null)
     {
-        return $attributes == 'ROLE_USER';
+        return $attributes == 'ROLE_ADMIN';
     }
 }

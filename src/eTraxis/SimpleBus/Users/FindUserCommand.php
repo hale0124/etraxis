@@ -11,20 +11,21 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\SimpleBus\Command\User;
+namespace eTraxis\SimpleBus\Users;
 
 use eTraxis\Traits;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Increases locks count for specified eTraxis account.
+ * Finds specified account.
  *
  * Input properties:
- * @property    string $username Username to lock.
+ * @property    int $id User ID.
  *
- * Output properties: none.
+ * Output properties:
+ * @property    \eTraxis\Model\User $user User.
  */
-class LockUserCommand
+class FindUserCommand
 {
     use Traits\InitializationTrait;
     use Traits\GetTrait;
@@ -32,7 +33,9 @@ class LockUserCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max = "112")
+     * @Assert\GreaterThan(value = "0")
      */
-    protected $username;
+    protected $id;
+
+    protected $user;
 }

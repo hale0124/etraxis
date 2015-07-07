@@ -11,9 +11,9 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\SimpleBus\CommandHandler\User;
+namespace eTraxis\SimpleBus\Users\Handler;
 
-use eTraxis\SimpleBus\Command\User\FindUserCommand;
+use eTraxis\SimpleBus\Users\FindUserCommand;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**

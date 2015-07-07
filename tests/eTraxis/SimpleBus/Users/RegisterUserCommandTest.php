@@ -11,12 +11,11 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\SimpleBus\CommandHandler\User;
+namespace eTraxis\SimpleBus\Users;
 
-use eTraxis\SimpleBus\Command\User\RegisterUserCommand;
 use eTraxis\Tests\BaseTestCase;
 
-class RegisterUserCommandHandlerTest extends BaseTestCase
+class RegisterUserCommandTest extends BaseTestCase
 {
     public function testRegisterUser()
     {

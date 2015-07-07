@@ -1,7 +1,6 @@
 imports:
     - { resource: simplebus/middleware.yml }
-    - { resource: simplebus/commands.yml }
-    - { resource: simplebus/events.yml }
+    - { resource: simplebus/users.yml }
 
 services:
 

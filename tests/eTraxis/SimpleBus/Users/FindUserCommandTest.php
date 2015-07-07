@@ -11,12 +11,11 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\SimpleBus\CommandHandler\User;
+namespace eTraxis\SimpleBus\Users;
 
-use eTraxis\SimpleBus\Command\User\FindUserCommand;
 use eTraxis\Tests\BaseTestCase;
 
-class FindUserCommandHandlerTest extends BaseTestCase
+class FindUserCommandTest extends BaseTestCase
 {
     public function testFound()
     {

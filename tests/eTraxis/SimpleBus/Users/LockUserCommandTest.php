@@ -11,14 +11,13 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\SimpleBus\CommandHandler\User;
+namespace eTraxis\SimpleBus\Users;
 
-use eTraxis\SimpleBus\Command\User\UnlockUserCommand;
 use eTraxis\Tests\BaseTestCase;
 
-class UnlockUserCommandHandlerTest extends BaseTestCase
+class LockUserCommandTest extends BaseTestCase
 {
-    public function testUnlockUser()
+    public function testLockUser()
     {
         $username = 'artem';
 
@@ -30,15 +29,13 @@ class UnlockUserCommandHandlerTest extends BaseTestCase
 
         $this->assertNotNull($user);
 
-        $user->setAuthAttempts(1);
+        $expected = $user->getAuthAttempts() + 1;
 
-        $this->doctrine->getManager()->persist($user);
-        $this->doctrine->getManager()->flush();
-
-        $command = new UnlockUserCommand([
+        $command = new LockUserCommand([
             'username' => $username,
         ]);
 
+        // first time
         $this->command_bus->handle($command);
 
         $user = $this->doctrine->getRepository('eTraxis:User')->findOneBy([
@@ -46,6 +43,16 @@ class UnlockUserCommandHandlerTest extends BaseTestCase
             'isLdap'   => false,
         ]);
 
-        $this->assertEquals(0, $user->getAuthAttempts());
+        $this->assertEquals($expected, $user->getAuthAttempts());
+
+        // second time
+        $this->command_bus->handle($command);
+
+        $user = $this->doctrine->getRepository('eTraxis:User')->findOneBy([
+            'username' => $username . '@eTraxis',
+            'isLdap'   => false,
+        ]);
+
+        $this->assertFalse($user->isAccountNonLocked());
     }
 }

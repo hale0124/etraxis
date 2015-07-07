@@ -13,8 +13,8 @@
 
 namespace AppBundle\EventListener;
 
-use eTraxis\SimpleBus\Command\User\LockUserCommand;
-use eTraxis\SimpleBus\Command\User\UnlockUserCommand;
+use eTraxis\SimpleBus\Users\LockUserCommand;
+use eTraxis\SimpleBus\Users\UnlockUserCommand;
 use SimpleBus\Message\Bus\MessageBus;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\AuthenticationEvents;

@@ -11,10 +11,10 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\SimpleBus\CommandHandler\User;
+namespace eTraxis\SimpleBus\Users\Handler;
 
 use eTraxis\Model\User;
-use eTraxis\SimpleBus\Command\User\RegisterUserCommand;
+use eTraxis\SimpleBus\Users\RegisterUserCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 

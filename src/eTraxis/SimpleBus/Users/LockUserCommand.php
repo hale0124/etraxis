@@ -11,23 +11,20 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\SimpleBus\Command\User;
+namespace eTraxis\SimpleBus\Users;
 
 use eTraxis\Traits;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Registers LDAP account in eTraxis database.
+ * Increases locks count for specified eTraxis account.
  *
  * Input properties:
- * @property    string $username Username to register/find.
- * @property    string $fullname Display name to store/update.
- * @property    string $email    Email address to store/update.
+ * @property    string $username Username to lock.
  *
- * Output properties:
- * @property    int $id ID of the registered user.
+ * Output properties: none.
  */
-class RegisterUserCommand
+class LockUserCommand
 {
     use Traits\InitializationTrait;
     use Traits\GetTrait;
@@ -38,19 +35,4 @@ class RegisterUserCommand
      * @Assert\Length(max = "112")
      */
     protected $username;
-
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Length(max = "64")
-     */
-    protected $fullname;
-
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Length(max = "50")
-     * @Assert\Email()
-     */
-    protected $email;
-
-    protected $id;
 }

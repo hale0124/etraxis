@@ -15,7 +15,7 @@ namespace eTraxis\Security;
 
 use eTraxis\Exception\ResponseException;
 use eTraxis\Service\LdapService;
-use eTraxis\SimpleBus\Command\User\RegisterUserCommand;
+use eTraxis\SimpleBus\Users\RegisterUserCommand;
 use Psr\Log\LoggerInterface;
 use SimpleBus\Message\Bus\MessageBus;
 use Symfony\Component\HttpFoundation\Request;

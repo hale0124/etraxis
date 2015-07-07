@@ -1,0 +1,26 @@
+services:
+
+    command.user.register:
+        class: eTraxis\SimpleBus\Users\Handler\RegisterUserCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\RegisterUserCommand }]
+        arguments: [ @logger, @doctrine, %locale%, %theme% ]
+
+    command.user.lock:
+        class: eTraxis\SimpleBus\Users\Handler\LockUserCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\LockUserCommand }]
+        arguments: [ @logger, @doctrine, %security_auth_attempts%, %security_lock_time% ]
+
+    command.user.unlock:
+        class: eTraxis\SimpleBus\Users\Handler\UnlockUserCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\UnlockUserCommand }]
+        arguments: [ @logger, @doctrine ]
+
+    command.user.index:
+        class: eTraxis\SimpleBus\Users\Handler\ListUsersCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\ListUsersCommand }]
+        arguments: [ @security.authorization_checker, @translator, @doctrine ]
+
+    command.user.find:
+        class: eTraxis\SimpleBus\Users\Handler\FindUserCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\FindUserCommand }]
+        arguments: [ @doctrine ]

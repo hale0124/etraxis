@@ -11,9 +11,9 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\SimpleBus\CommandHandler\User;
+namespace eTraxis\SimpleBus\Users\Handler;
 
-use eTraxis\SimpleBus\Command\User\ListUsersCommand;
+use eTraxis\SimpleBus\Users\ListUsersCommand;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Translation\TranslatorInterface;

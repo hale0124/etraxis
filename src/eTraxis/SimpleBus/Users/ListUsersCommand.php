@@ -11,7 +11,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\SimpleBus\Command\User;
+namespace eTraxis\SimpleBus\Users;
 
 use eTraxis\Traits;
 use Symfony\Component\Validator\Constraints as Assert;

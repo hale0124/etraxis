@@ -14,8 +14,8 @@
 namespace AppBundle\Controller\Admin;
 
 use eTraxis\Exception\ResponseException;
-use eTraxis\SimpleBus\Command\User\FindUserCommand;
-use eTraxis\SimpleBus\Command\User\ListUsersCommand;
+use eTraxis\SimpleBus\Users\FindUserCommand;
+use eTraxis\SimpleBus\Users\ListUsersCommand;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;

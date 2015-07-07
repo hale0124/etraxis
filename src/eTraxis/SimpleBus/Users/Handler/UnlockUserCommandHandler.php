@@ -11,9 +11,9 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\SimpleBus\CommandHandler\User;
+namespace eTraxis\SimpleBus\Users\Handler;
 
-use eTraxis\SimpleBus\Command\User\UnlockUserCommand;
+use eTraxis\SimpleBus\Users\UnlockUserCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
