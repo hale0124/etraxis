@@ -26,6 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class UnlockUserCommand
 {
+    use Traits\InitializationTrait;
     use Traits\GetTrait;
     use Traits\SetTrait;
 

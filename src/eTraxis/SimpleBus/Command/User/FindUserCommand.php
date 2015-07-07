@@ -27,6 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class FindUserCommand
 {
+    use Traits\InitializationTrait;
     use Traits\GetTrait;
     use Traits\SetTrait;
 

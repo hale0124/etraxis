@@ -35,9 +35,9 @@ class UnlockUserCommandHandlerTest extends BaseTestCase
         $this->doctrine->getManager()->persist($user);
         $this->doctrine->getManager()->flush();
 
-        $command = new UnlockUserCommand();
-
-        $command->username = $username;
+        $command = new UnlockUserCommand([
+            'username' => $username,
+        ]);
 
         $this->command_bus->handle($command);
 

@@ -32,9 +32,9 @@ class LockUserCommandHandlerTest extends BaseTestCase
 
         $expected = $user->getAuthAttempts() + 1;
 
-        $command = new LockUserCommand();
-
-        $command->username = $username;
+        $command = new LockUserCommand([
+            'username' => $username,
+        ]);
 
         // first time
         $this->command_bus->handle($command);

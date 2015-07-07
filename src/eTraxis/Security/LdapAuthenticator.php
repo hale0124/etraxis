@@ -85,11 +85,11 @@ class LdapAuthenticator implements SimpleFormAuthenticatorInterface
         }
 
         try {
-            $command = new RegisterUserCommand();
-
-            $command->username = $token->getUsername();
-            $command->fullname = $entry['cn'];
-            $command->email    = $entry['mail'];
+            $command = new RegisterUserCommand([
+                'username' => $token->getUsername(),
+                'fullname' => $entry['cn'],
+                'email'    => $entry['mail'],
+            ]);
 
             $this->command_bus->handle($command);
         }

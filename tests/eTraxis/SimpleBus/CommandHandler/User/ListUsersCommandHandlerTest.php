@@ -24,12 +24,12 @@ class ListUsersCommandHandlerTest extends BaseTestCase
 
         $users = $this->doctrine->getRepository('eTraxis:User')->findAll();
 
-        $command = new ListUsersCommand();
-
-        $command->start  = 0;
-        $command->length = -1;
-        $command->search = null;
-        $command->order  = [];
+        $command = new ListUsersCommand([
+            'start'  => 0,
+            'length' => -1,
+            'search' => null,
+            'order'  => [],
+        ]);
 
         $this->assertEmpty($command->users);
 
@@ -47,12 +47,12 @@ class ListUsersCommandHandlerTest extends BaseTestCase
     {
         static::$kernel->getContainer()->set('security.authorization_checker', new AuthorizationCheckerAdminStub());
 
-        $command = new ListUsersCommand();
-
-        $command->start  = '';
-        $command->length = -1;
-        $command->search = null;
-        $command->order  = [];
+        $command = new ListUsersCommand([
+            'start'  => '',
+            'length' => -1,
+            'search' => null,
+            'order'  => [],
+        ]);
 
         $this->assertEmpty($command->users);
 
@@ -65,12 +65,12 @@ class ListUsersCommandHandlerTest extends BaseTestCase
 
         static::$kernel->getContainer()->set('security.authorization_checker', new AuthorizationCheckerAdminStub());
 
-        $command = new ListUsersCommand();
-
-        $command->start  = 0;
-        $command->length = -1;
-        $command->search = 'planetexpress';
-        $command->order  = [];
+        $command = new ListUsersCommand([
+            'start'  => 0,
+            'length' => -1,
+            'search' => 'planetexpress',
+            'order'  => [],
+        ]);
 
         $this->assertEmpty($command->users);
 
@@ -96,15 +96,15 @@ class ListUsersCommandHandlerTest extends BaseTestCase
 
         static::$kernel->getContainer()->set('security.authorization_checker', new AuthorizationCheckerAdminStub());
 
-        $command = new ListUsersCommand();
-
-        $command->start  = 0;
-        $command->length = -1;
-        $command->search = null;
-        $command->order  = [
-            ['column' => 4, 'dir' => 'desc'],
-            ['column' => 1, 'dir' => 'asc'],
-        ];
+        $command = new ListUsersCommand([
+            'start'  => 0,
+            'length' => -1,
+            'search' => null,
+            'order'  => [
+                ['column' => 4, 'dir' => 'desc'],
+                ['column' => 1, 'dir' => 'asc'],
+            ],
+        ]);
 
         // PostgreSQL treats NULLs as greatest values.
         if (static::$kernel->getContainer()->getParameter('database_driver') == 'pdo_pgsql') {

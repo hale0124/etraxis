@@ -58,9 +58,9 @@ class AuthenticationListener implements EventSubscriberInterface
     {
         $token = $event->getAuthenticationToken();
 
-        $command = new UnlockUserCommand();
-
-        $command->username = $token->getUsername();
+        $command = new UnlockUserCommand([
+            'username' => $token->getUsername(),
+        ]);
 
         $this->command_bus->handle($command);
     }
@@ -74,9 +74,9 @@ class AuthenticationListener implements EventSubscriberInterface
     {
         $token = $event->getAuthenticationToken();
 
-        $command = new LockUserCommand();
-
-        $command->username = $token->getUsername();
+        $command = new LockUserCommand([
+            'username' => $token->getUsername(),
+        ]);
 
         $this->command_bus->handle($command);
     }

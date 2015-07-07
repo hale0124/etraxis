@@ -31,6 +31,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ListUsersCommand
 {
+    use Traits\InitializationTrait;
     use Traits\GetTrait;
     use Traits\SetTrait;
 

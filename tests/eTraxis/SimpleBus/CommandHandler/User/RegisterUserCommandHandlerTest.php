@@ -34,11 +34,11 @@ class RegisterUserCommandHandlerTest extends BaseTestCase
         $this->assertNull($user);
 
         // first time
-        $command = new RegisterUserCommand();
-
-        $command->username = $username;
-        $command->fullname = $fullname;
-        $command->email    = $email;
+        $command = new RegisterUserCommand([
+            'username' => $username,
+            'fullname' => $fullname,
+            'email'    => $email,
+        ]);
 
         $this->command_bus->handle($command);
 
@@ -60,11 +60,11 @@ class RegisterUserCommandHandlerTest extends BaseTestCase
         $this->assertEquals($id, $command->id);
 
         // second time
-        $command = new RegisterUserCommand();
-
-        $command->username = $username;
-        $command->fullname = $fullname;
-        $command->email    = $email;
+        $command = new RegisterUserCommand([
+            'username' => $username,
+            'fullname' => $fullname,
+            'email'    => $email,
+        ]);
 
         $this->command_bus->handle($command);
 

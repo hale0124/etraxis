@@ -57,14 +57,14 @@ class UsersController extends Controller
      */
     public function ajaxAction(Request $request)
     {
-        $command = new ListUsersCommand();
-
         $search = $request->get('search', ['value' => null]);
 
-        $command->start  = $request->get('start', 0);
-        $command->length = $request->get('length', -1);
-        $command->search = $search['value'];
-        $command->order  = $request->get('order', []);
+        $command = new ListUsersCommand([
+            'start'  => $request->get('start', 0),
+            'length' => $request->get('length', -1),
+            'search' => $search['value'],
+            'order'  => $request->get('order', []),
+        ]);
 
         try {
             $this->getCommandBus()->handle($command);
@@ -94,9 +94,7 @@ class UsersController extends Controller
      */
     public function viewAction(Request $request, $id)
     {
-        $command = new FindUserCommand();
-
-        $command->id = $id;
+        $command = new FindUserCommand(['id' => $id]);
 
         try {
             $this->getCommandBus()->handle($command);
@@ -127,9 +125,7 @@ class UsersController extends Controller
      */
     public function tabDetailsAction($id)
     {
-        $command = new FindUserCommand();
-
-        $command->id = $id;
+        $command = new FindUserCommand(['id' => $id]);
 
         try {
             $this->getCommandBus()->handle($command);
