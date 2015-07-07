@@ -22,20 +22,33 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 class SecurityRolesTest extends WebTestCase
 {
     private $urls = [
-        '/'                 => ['ROLE_GUEST' => true,  'ROLE_USER' => true,  'ROLE_ADMIN' => true],
-        '/admin/'           => ['ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
-        '/admin/users/'     => ['ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
-        '/admin/users/ajax' => ['ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
+        '/'                               => ['ROLE_GUEST' => true,  'ROLE_USER' => true,  'ROLE_ADMIN' => true],
+        '/admin/'                         => ['ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
+        '/admin/users/'                   => ['ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
+        '/admin/users/ajax'               => ['ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
+        '/admin/users/{user}'             => ['ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
+        '/admin/users/{user}/tab/details' => ['ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
     ];
 
     public function testGuest()
     {
         $client = static::createClient();
 
+        /** @var \Symfony\Bridge\Doctrine\RegistryInterface $doctrine */
+        $doctrine = $client->getContainer()->get('doctrine');
+
+        /** @var \eTraxis\Model\User $user */
+        $user = $doctrine->getRepository('eTraxis:User')->findOneBy([
+            'username' => 'artem@eTraxis',
+            'isLdap'   => false,
+        ]);
+
         $client->request('GET', '/login');
         $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
 
         foreach ($this->urls as $url => $isAllowed) {
+
+            $url = str_replace('{user}', $user->getId(), $url);
 
             $client->request(Request::METHOD_GET, $url);
 
@@ -55,6 +68,15 @@ class SecurityRolesTest extends WebTestCase
     {
         $client = static::createClient();
 
+        /** @var \Symfony\Bridge\Doctrine\RegistryInterface $doctrine */
+        $doctrine = $client->getContainer()->get('doctrine');
+
+        /** @var \eTraxis\Model\User $user */
+        $user = $doctrine->getRepository('eTraxis:User')->findOneBy([
+            'username' => 'artem@eTraxis',
+            'isLdap'   => false,
+        ]);
+
         $token = new UsernamePasswordToken('artem', 'secret', 'default', ['ROLE_USER']);
 
         $session = $client->getContainer()->get('session');
@@ -65,6 +87,8 @@ class SecurityRolesTest extends WebTestCase
         $client->getCookieJar()->set($cookie);
 
         foreach ($this->urls as $url => $isAllowed) {
+
+            $url = str_replace('{user}', $user->getId(), $url);
 
             $client->request(Request::METHOD_GET, $url);
 
@@ -81,6 +105,15 @@ class SecurityRolesTest extends WebTestCase
     {
         $client = static::createClient();
 
+        /** @var \Symfony\Bridge\Doctrine\RegistryInterface $doctrine */
+        $doctrine = $client->getContainer()->get('doctrine');
+
+        /** @var \eTraxis\Model\User $user */
+        $user = $doctrine->getRepository('eTraxis:User')->findOneBy([
+            'username' => 'artem@eTraxis',
+            'isLdap'   => false,
+        ]);
+
         $token = new UsernamePasswordToken('artem', 'secret', 'default', ['ROLE_ADMIN']);
 
         $session = $client->getContainer()->get('session');
@@ -91,6 +124,8 @@ class SecurityRolesTest extends WebTestCase
         $client->getCookieJar()->set($cookie);
 
         foreach ($this->urls as $url => $isAllowed) {
+
+            $url = str_replace('{user}', $user->getId(), $url);
 
             $client->request(Request::METHOD_GET, $url);
 
