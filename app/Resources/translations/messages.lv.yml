@@ -29,6 +29,9 @@ user.username: 'Lietotāja vārds'
 user.fullname: 'Pilns vārds'
 user.email: E-pasts
 user.password: Parole
+user.status: Statuss
+user.enabled: Ieslēgts
+user.disabled: Izslēgts
 permissions: Atļaujas
 role.administrator: Administrators
 role.user: Lietotājs

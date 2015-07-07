@@ -29,6 +29,9 @@ user.username: Användarnamn
 user.fullname: 'Fullständigt namn'
 user.email: Email
 user.password: Lösenord
+user.status: Status
+user.enabled: Aktiverad
+user.disabled: Inaktiverad
 permissions: Behörigheter
 role.administrator: Administratör
 role.user: Användare

@@ -13,10 +13,8 @@
 
 namespace eTraxis\SimpleBus\CommandHandler\User;
 
-use eTraxis\Exception\ResponseException;
 use eTraxis\SimpleBus\Command\User\ListUsersCommand;
 use Symfony\Bridge\Doctrine\RegistryInterface;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -52,10 +50,6 @@ class ListUsersCommandHandler
      */
     public function handle(ListUsersCommand $command)
     {
-        if (!$this->security->isGranted('ROLE_ADMIN')) {
-            throw new ResponseException('You don\'t have sufficient permissions to access this resource.', Response::HTTP_FORBIDDEN);
-        }
-
         /** @var \Doctrine\ORM\EntityRepository $repository */
         $repository = $this->doctrine->getRepository('eTraxis:User');
 
@@ -111,6 +105,7 @@ class ListUsersCommandHandler
                 $entity->getEmail(),
                 $this->translator->trans($entity->isAdmin() ? 'role.administrator' : 'role.user'),
                 $entity->getDescription(),
+                'DT_RowAttr' => ['data-id' => $entity->getId()],
             ];
         }
 

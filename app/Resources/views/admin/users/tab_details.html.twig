@@ -1,0 +1,46 @@
+<div class="columns">
+    <div class="column full-width">
+        <button type="button" id="btn-back">{{ 'button.back'|trans }}</button>
+    </div>
+</div>
+
+<div class="columns">
+    <div class="column full-width">
+        <fieldset>
+            <div class="columns">
+                <div class="column one-fourth">{{ 'user.username'|trans }}:</div>
+                <div class="column three-fourths">{{ user.username }}</div>
+            </div>
+            <div class="columns">
+                <div class="column one-fourth">{{ 'user.fullname'|trans }}:</div>
+                <div class="column three-fourths">{{ user.fullname }}</div>
+            </div>
+            <div class="columns">
+                <div class="column one-fourth">{{ 'user.email'|trans }}:</div>
+                <div class="column three-fourths">{{ user.email }}</div>
+            </div>
+            <div class="columns">
+                <div class="column one-fourth">{{ 'description'|trans }}:</div>
+                <div class="column three-fourths">{{ user.description }}</div>
+            </div>
+            <div class="columns">
+                <div class="column one-fourth">{{ 'permissions'|trans }}:</div>
+                <div class="column three-fourths">{{ user.admin ? 'role.administrator'|trans|lower : 'role.user'|trans|lower }}</div>
+            </div>
+            <div class="columns">
+                <div class="column one-fourth">{{ 'user.status'|trans }}:</div>
+                <div class="column three-fourths">{{ user.disabled ? 'user.disabled'|trans|lower : 'user.enabled'|trans|lower }}</div>
+            </div>
+        </fieldset>
+    </div>
+</div>
+
+<script>
+    $(function() {
+
+        // "Back" button.
+        $('#btn-back').click(function() {
+            window.location.assign('{{ path('admin_users') }}');
+        });
+    });
+</script>

@@ -29,6 +29,9 @@ user.username: 'Nome utente'
 user.fullname: 'Nome completo'
 user.email: Email
 user.password: Password
+user.status: Stato
+user.enabled: Abilitato
+user.disabled: Disabilitato
 permissions: Permessi
 role.administrator: Amministratore
 role.user: Utente

@@ -14,6 +14,7 @@
 namespace AppBundle\Controller\Admin;
 
 use eTraxis\Exception\ResponseException;
+use eTraxis\SimpleBus\Command\User\FindUserCommand;
 use eTraxis\SimpleBus\Command\User\ListUsersCommand;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -69,8 +70,6 @@ class UsersController extends Controller
             $this->getCommandBus()->handle($command);
         }
         catch (ResponseException $e) {
-            $this->getLogger()->error($e->getMessage(), [$e->getCode()]);
-
             return new Response($e->getMessage(), $e->getCode());
         }
 
@@ -79,6 +78,72 @@ class UsersController extends Controller
             'recordsTotal'    => $command->total,
             'recordsFiltered' => $command->total,
             'data'            => $command->users,
+        ]);
+    }
+
+    /**
+     * Shows specified user.
+     *
+     * @Route("/{id}", name="admin_view_user", requirements={"id"="\d+"})
+     * @Method("GET")
+     *
+     * @param   Request $request
+     * @param   int     $id User ID.
+     *
+     * @return  Response
+     */
+    public function viewAction(Request $request, $id)
+    {
+        $command = new FindUserCommand();
+
+        $command->id = $id;
+
+        try {
+            $this->getCommandBus()->handle($command);
+        }
+        catch (ResponseException $e) {
+            return new Response($e->getMessage(), $e->getCode());
+        }
+
+        if (!$command->user) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render('admin/users/view.html.twig', [
+            'user' => $command->user,
+            'tab'  => $request->get('tab', 0),
+        ]);
+    }
+
+    /**
+     * Tab with user's details.
+     *
+     * @Route("/{id}/tab/details", name="admin_tab_user_details", requirements={"id"="\d+"})
+     * @Method("GET")
+     *
+     * @param   int $id User ID.
+     *
+     * @return  Response
+     */
+    public function tabDetailsAction($id)
+    {
+        $command = new FindUserCommand();
+
+        $command->id = $id;
+
+        try {
+            $this->getCommandBus()->handle($command);
+        }
+        catch (ResponseException $e) {
+            return new Response($e->getMessage(), $e->getCode());
+        }
+
+        if (!$command->user) {
+            throw $this->createNotFoundException();
+        }
+
+        return $this->render('admin/users/tab_details.html.twig', [
+            'user' => $command->user,
         ]);
     }
 }

@@ -1,0 +1,15 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+
+    <div class="columns">
+        <div class="column full-width">
+            <div class="tabs" data-tab="{{ tab }}">
+                <ul>
+                    <li><a href="{{ path('admin_tab_user_details', {'id': user.id}) }}">{{ user.fullname }}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

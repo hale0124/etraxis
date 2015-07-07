@@ -29,6 +29,9 @@ user.username: 'Имя пользователя'
 user.fullname: 'Полное имя'
 user.email: Эл.почта
 user.password: Пароль
+user.status: Статус
+user.enabled: Включен
+user.disabled: Отключен
 permissions: 'Права доступа'
 role.administrator: Администратор
 role.user: Пользователь

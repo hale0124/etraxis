@@ -18,7 +18,7 @@ use eTraxis\Tests\BaseTestCase;
 
 class ListUsersCommandHandlerTest extends BaseTestCase
 {
-    public function testAdminRole()
+    public function testBasic()
     {
         static::$kernel->getContainer()->set('security.authorization_checker', new AuthorizationCheckerAdminStub());
 
@@ -50,26 +50,6 @@ class ListUsersCommandHandlerTest extends BaseTestCase
         $command = new ListUsersCommand();
 
         $command->start  = '';
-        $command->length = -1;
-        $command->search = null;
-        $command->order  = [];
-
-        $this->assertEmpty($command->users);
-
-        $this->command_bus->handle($command);
-    }
-
-    /**
-     * @expectedException     \eTraxis\Exception\ResponseException
-     * @expectedExceptionCode 403
-     */
-    public function testUserRole()
-    {
-        static::$kernel->getContainer()->set('security.authorization_checker', new AuthorizationCheckerUserStub());
-
-        $command = new ListUsersCommand();
-
-        $command->start  = 0;
         $command->length = -1;
         $command->search = null;
         $command->order  = [];

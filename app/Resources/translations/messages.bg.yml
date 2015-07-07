@@ -29,6 +29,9 @@ user.username: 'Потребителско име'
 user.fullname: 'Пълно име'
 user.email: Имеил
 user.password: Парола
+user.status: Статус
+user.enabled: Разреши
+user.disabled: Изключи
 permissions: Права
 role.administrator: Администратор
 role.user: Потребител

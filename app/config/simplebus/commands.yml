@@ -19,3 +19,8 @@ services:
         class: eTraxis\SimpleBus\CommandHandler\User\ListUsersCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Command\User\ListUsersCommand }]
         arguments: [ @security.authorization_checker, @translator, @doctrine ]
+
+    command.user.find:
+        class: eTraxis\SimpleBus\CommandHandler\User\FindUserCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Command\User\FindUserCommand }]
+        arguments: [ @doctrine ]

@@ -29,6 +29,9 @@ user.username: Felhasználónév
 user.fullname: 'Teljes név'
 user.email: E-mail
 user.password: Jelszó
+user.status: Állapot
+user.enabled: Engedélyezett
+user.disabled: Letiltott
 permissions: Jogosultságok
 role.administrator: Adminisztrátor
 role.user: Felhasználó

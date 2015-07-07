@@ -29,6 +29,9 @@ user.username: 'Kullanıcı adı'
 user.fullname: 'Tam adı'
 user.email: E-posta
 user.password: Parola
+user.status: Durum
+user.enabled: Etkinleştirildi
+user.disabled: Etkisizleştirildi
 permissions: İzinler
 role.administrator: Yönetici
 role.user: Kullanıcı

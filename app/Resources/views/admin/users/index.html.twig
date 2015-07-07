@@ -4,7 +4,7 @@
 
     <div class="columns">
         <div class="column full-width">
-            <table id="users" class="cell-border" data-src="{{ path('admin_users_ajax') }}">
+            <table id="users" class="cell-border hover" data-src="{{ path('admin_users_ajax') }}">
                 <thead>
                     <tr>
                         <th>{{ 'user.username'|trans }}</th>
@@ -24,8 +24,15 @@
 
     <script>
         $(function() {
-            $('#users').table({
+
+            // Users list.
+            var $table = $('#users').table({
                 checkboxes: 'users'
+            });
+
+            // Click on a user in the list.
+            $table.on('click', 'tbody tr', function() {
+                window.location.assign('{{ path('admin_users') }}' + $(this).data('id'));
             });
         });
     </script>

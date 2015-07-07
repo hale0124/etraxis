@@ -29,6 +29,9 @@ user.username: 'Uživatelské jméno'
 user.fullname: 'Celé jméno'
 user.email: E-mail
 user.password: Heslo
+user.status: Status
+user.enabled: Povoleno
+user.disabled: Zakázáno
 permissions: Práva
 role.administrator: Administrátor
 role.user: Uživatel

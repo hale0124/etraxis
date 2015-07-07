@@ -29,6 +29,9 @@ user.username: 'Nume utilizator'
 user.fullname: 'Nume si prenume'
 user.email: Email
 user.password: Parola
+user.status: Stare
+user.enabled: Activate
+user.disabled: Dezactivate
 permissions: Permisiuni
 role.administrator: Administrator
 role.user: Utilizator
