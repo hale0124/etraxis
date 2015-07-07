@@ -71,11 +71,12 @@ class ListUsersCommandHandler
         foreach ($command->order as $order) {
 
             $map = [
-                0 => 'u.username',
-                1 => 'u.fullname',
-                2 => 'u.email',
-                3 => 'u.isAdmin',
-                4 => 'u.description',
+                0 => 'u.id',
+                1 => 'u.username',
+                2 => 'u.fullname',
+                3 => 'u.email',
+                4 => 'u.isAdmin',
+                5 => 'u.description',
             ];
 
             $query->addOrderBy($map[$order['column']], $order['dir']);

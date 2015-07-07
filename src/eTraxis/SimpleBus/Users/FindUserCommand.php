@@ -37,5 +37,5 @@ class FindUserCommand
      */
     protected $id;
 
-    protected $user;
+    protected $user = null;
 }

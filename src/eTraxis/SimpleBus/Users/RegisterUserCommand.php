@@ -52,5 +52,5 @@ class RegisterUserCommand
      */
     protected $email;
 
-    protected $id;
+    protected $id = null;
 }
