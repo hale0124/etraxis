@@ -93,7 +93,6 @@ gulp.task('javascripts:libs', function() {
     var files = [
         'vendor/bower/jquery/dist/jquery.js',
         'app/Resources/public/js/jquery-ui.js',
-        'vendor/bower/jquery-cookie/jquery.cookie.js',
         'vendor/bower/blockui/jquery.blockUI.js',
         'vendor/bower/jquery-form/jquery.form.js',
         'vendor/bower/datatables/media/js/jquery.dataTables.js'
