@@ -13,10 +13,20 @@
 
 namespace eTraxis\Traits;
 
-class MyTestClassStub extends MyTestClass
+/**
+ * A trait to initialize protected properties on construction.
+ */
+trait InitializationTrait
 {
-    use InitializationTrait;
-    use GetTrait;
-    use SetTrait;
-    use CallTrait;
+    /**
+     * Initializes protected properties with values from provided array.
+     *
+     * @param   array $values Initial values.
+     */
+    public function __construct($values = [])
+    {
+        foreach ($values as $property => $value) {
+            $this->$property = $value;
+        }
+    }
 }

@@ -13,10 +13,16 @@
 
 namespace eTraxis\Traits;
 
-class MyTestClassStub extends MyTestClass
+class InitializationTraitTest extends \PHPUnit_Framework_TestCase
 {
-    use InitializationTrait;
-    use GetTrait;
-    use SetTrait;
-    use CallTrait;
+    public function testInitialization()
+    {
+        $expected = time();
+
+        $object = new MyTestClassStub([
+            'property' => $expected,
+        ]);
+
+        $this->assertEquals($expected, $object->property);
+    }
 }
