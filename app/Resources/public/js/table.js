@@ -26,6 +26,8 @@ var datatables_language = window.datatables_language || {};
             serverSide: true,
             checkboxes: false,
             tableOnly: false,
+            contextMenu: false,
+            contextMenuCallback: null,
 
             columnDefs: [],
 
@@ -121,6 +123,54 @@ var datatables_language = window.datatables_language || {};
             // Avoid "click" event on the first column.
             $table.on('click', 'tbody tr td:first-child', function(e) {
                 e.stopPropagation();
+            });
+        }
+
+        // Prepare context menu.
+        if (settings.contextMenu) {
+
+            // Create new and unique context menu.
+            var menuId = 'menu-' + Date.now();
+            $('body').append('<ul id="' + menuId + '" class="ui-front context-menu"></ul>');
+            var $menu = $('#' + menuId);
+
+            // Append menu items.
+            for (var id in settings.contextMenu) {
+                if (settings.contextMenu.hasOwnProperty(id)) {
+                    $menu.append('<li data-id="' + id + '">' + settings.contextMenu[id] + '</li>');
+                }
+            }
+
+            // Initialize menu.
+            $menu.menu().hide();
+
+            // Right click on a row in the table.
+            $table.on('contextmenu', 'tbody tr', function(e) {
+                $menu.data('id', $(this).data('id'));
+
+                if (typeof settings.contextMenuCallback === 'function') {
+                    settings.contextMenuCallback($menu);
+                }
+
+                $menu.css('left', e.pageX);
+                $menu.css('top', e.pageY);
+                $menu.show();
+
+                $(document).one('click', function() {
+                    $menu.hide();
+                });
+
+                return false;
+            });
+
+            // Click on an item in the context menu.
+            $('li', $menu).click(function() {
+                if (!$(this).hasClass('ui-state-disabled')) {
+                    $table.trigger('contextmenuitem', {
+                        row: $(this).parent().data('id'),
+                        action: $(this).data('id')
+                    });
+                }
             });
         }
 
