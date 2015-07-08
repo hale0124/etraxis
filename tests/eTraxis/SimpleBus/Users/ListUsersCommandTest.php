@@ -100,8 +100,8 @@ class ListUsersCommandTest extends BaseTestCase
             'length' => -1,
             'search' => null,
             'order'  => [
-                ['column' => 4, 'dir' => 'desc'],
-                ['column' => 1, 'dir' => 'asc'],
+                ['column' => 5, 'dir' => 'desc'],
+                ['column' => 2, 'dir' => 'asc'],
             ],
         ]);
 

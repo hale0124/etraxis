@@ -60,7 +60,7 @@ class ListUsersCommand
      *         fields = {
      *             "column" = {
      *                 @Assert\GreaterThanOrEqual(value = "0"),
-     *                 @Assert\LessThan(value = "5")
+     *                 @Assert\LessThan(value = "6")
      *             },
      *             "dir" = {
      *                 @Assert\Choice(choices = {"asc", "desc"})
