@@ -14,9 +14,7 @@
 namespace AppBundle\Controller\Admin;
 
 use eTraxis\Exception\ResponseException;
-use eTraxis\SimpleBus\Users\FindUserCommand;
-use eTraxis\SimpleBus\Users\ListUsersCommand;
-use eTraxis\SimpleBus\Users\UnlockUserCommand;
+use eTraxis\SimpleBus\Users;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -60,7 +58,7 @@ class UsersController extends Controller
     {
         $search = $request->get('search', ['value' => null]);
 
-        $command = new ListUsersCommand([
+        $command = new Users\ListUsersCommand([
             'start'  => $request->get('start', 0),
             'length' => $request->get('length', -1),
             'search' => $search['value'],
@@ -95,7 +93,7 @@ class UsersController extends Controller
      */
     public function viewAction(Request $request, $id)
     {
-        $command = new FindUserCommand(['id' => $id]);
+        $command = new Users\FindUserCommand(['id' => $id]);
 
         try {
             $this->getCommandBus()->handle($command);
@@ -126,7 +124,7 @@ class UsersController extends Controller
      */
     public function tabDetailsAction($id)
     {
-        $command = new FindUserCommand(['id' => $id]);
+        $command = new Users\FindUserCommand(['id' => $id]);
 
         try {
             $this->getCommandBus()->handle($command);
@@ -156,7 +154,7 @@ class UsersController extends Controller
      */
     public function unlockAction($id)
     {
-        $command = new FindUserCommand(['id' => $id]);
+        $command = new Users\FindUserCommand(['id' => $id]);
 
         try {
             $this->getCommandBus()->handle($command);
@@ -169,7 +167,7 @@ class UsersController extends Controller
             throw $this->createNotFoundException();
         }
 
-        $command = new UnlockUserCommand(['username' => $command->user->getUsername()]);
+        $command = new Users\UnlockUserCommand(['username' => $command->user->getUsername()]);
 
         try {
             $this->getCommandBus()->handle($command);
