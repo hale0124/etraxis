@@ -1,0 +1,7 @@
+exclude_patterns:
+    - app/Resources/public/js/jquery-ui.js
+    - web/app*.php
+
+rules:
+    symfony.controller.missing_redirect_after_post:
+        enabled: false
