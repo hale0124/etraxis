@@ -82,13 +82,17 @@ class ListUsersCommandTest extends BaseTestCase
     {
         $expected = [
             'zoidberg',
+            'francine',
             'scruffy',
             'hermes',
+            'kif',
             'hubert',
+            'veins',
             'bender',
             'amy',
             'fry',
             'leela',
+            'zapp',
             'einstein', // this one has NULL in the "description" field
             'artem',    // this one has NULL in the "description" field
         ];

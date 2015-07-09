@@ -147,6 +147,46 @@ class LoadUsersData extends AbstractFixture implements ContainerAwareInterface, 
                 'is_disabled' => false,
                 'is_ldap'     => false,
             ],
+
+            'zapp' => [
+                'fullname'    => 'Zapp Brannigan',
+                'email'       => 'captain@nimbus.com',
+                'password'    => 'secret',
+                'description' => 'Captain',
+                'is_admin'    => false,
+                'is_disabled' => false,
+                'is_ldap'     => false,
+            ],
+
+            'kif' => [
+                'fullname'    => 'Kif Kroker',
+                'email'       => 'kif@nimbus.com',
+                'password'    => 'secret',
+                'description' => 'Fourth Lieutenant ',
+                'is_admin'    => false,
+                'is_disabled' => false,
+                'is_ldap'     => false,
+            ],
+
+            'veins' => [
+                'fullname'    => 'Dr. Veins McGee',
+                'email'       => 'veins@nimbus.com',
+                'password'    => 'secret',
+                'description' => 'Doctor',
+                'is_admin'    => false,
+                'is_disabled' => true,
+                'is_ldap'     => false,
+            ],
+
+            'francine' => [
+                'fullname'    => 'Francine',
+                'email'       => 'francine@nimbus.com',
+                'password'    => 'secret',
+                'description' => 'Officer',
+                'is_admin'    => false,
+                'is_disabled' => true,
+                'is_ldap'     => false,
+            ],
         ];
 
         foreach ($data as $username => $row) {
@@ -167,6 +207,12 @@ class LoadUsersData extends AbstractFixture implements ContainerAwareInterface, 
 
             if (array_key_exists('description', $row)) {
                 $user->setDescription($row['description']);
+            }
+
+            // Make Zapp locked out.
+            if ($username == 'zapp') {
+                $forever = (1 << 31) - 1;
+                $user->setLockedUntil($forever);
             }
 
             $this->addReference('user:' . $username, $user);

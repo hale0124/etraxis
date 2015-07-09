@@ -46,32 +46,50 @@ class LoadGroupsData extends AbstractFixture implements ContainerAwareInterface,
      */
     public function load(ObjectManager $manager)
     {
-        $members = [
-            'amy',
-            'bender',
-            'fry',
-            'hermes',
-            'hubert',
-            'leela',
-            'scruffy',
-            'zoidberg',
+        $data = [
+
+            'Planet Express, Inc.' => [
+                'description' => 'Intergalactic delivery company',
+                'members'     => [
+                    'amy',
+                    'bender',
+                    'fry',
+                    'hermes',
+                    'hubert',
+                    'leela',
+                    'scruffy',
+                    'zoidberg',
+                ],
+            ],
+
+            'Nimbus' => [
+                'description' => 'Flagship of the DOOP fleet',
+                'members'     => [
+                    'francine',
+                    'kif',
+                    'veins',
+                    'zapp',
+                ],
+            ],
         ];
 
-        $group = new Group();
+        foreach ($data as $groupname => $row) {
 
-        $group
-            ->setName('Futurama')
-            ->setDescription('Futurama characters')
-        ;
+            $group = new Group();
 
-        foreach ($members as $member) {
-            /** @noinspection PhpParamsInspection */
-            $group->addUser($this->getReference('user:' . $member));
+            $group
+                ->setName($groupname)
+                ->setDescription($row['description'])
+            ;
+
+            foreach ($row['members'] as $member) {
+                /** @noinspection PhpParamsInspection */
+                $group->addUser($this->getReference('user:' . $member));
+            }
+
+            $manager->persist($group);
         }
 
-        $this->addReference('group:futurama', $group);
-
-        $manager->persist($group);
         $manager->flush();
     }
 }
