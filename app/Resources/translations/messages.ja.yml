@@ -32,6 +32,7 @@ user.password: パスワード
 user.status: 状態
 user.enabled: 有効
 user.disabled: 無効
+user.locked: ロック
 permissions: 権限
 role.administrator: システム管理者
 role.user: ユーザー

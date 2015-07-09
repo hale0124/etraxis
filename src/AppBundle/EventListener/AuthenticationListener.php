@@ -15,6 +15,7 @@ namespace AppBundle\EventListener;
 
 use eTraxis\SimpleBus\Users\LockUserCommand;
 use eTraxis\SimpleBus\Users\UnlockUserCommand;
+use Psr\Log\LoggerInterface;
 use SimpleBus\Message\Bus\MessageBus;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\AuthenticationEvents;
@@ -26,15 +27,18 @@ use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
  */
 class AuthenticationListener implements EventSubscriberInterface
 {
+    protected $logger;
     protected $command_bus;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   MessageBus $command_bus
+     * @param   LoggerInterface $logger
+     * @param   MessageBus      $command_bus
      */
-    public function __construct(MessageBus $command_bus)
+    public function __construct(LoggerInterface $logger, MessageBus $command_bus)
     {
+        $this->logger      = $logger;
         $this->command_bus = $command_bus;
     }
 
@@ -58,6 +62,8 @@ class AuthenticationListener implements EventSubscriberInterface
     {
         $token = $event->getAuthenticationToken();
 
+        $this->logger->info('Authentication success', [$token->getUsername()]);
+
         $command = new UnlockUserCommand([
             'username' => $token->getUsername(),
         ]);
@@ -73,6 +79,8 @@ class AuthenticationListener implements EventSubscriberInterface
     public function onAuthenticationFailure(AuthenticationFailureEvent $event)
     {
         $token = $event->getAuthenticationToken();
+
+        $this->logger->info('Authentication failure', [$token->getUsername()]);
 
         $command = new LockUserCommand([
             'username' => $token->getUsername(),

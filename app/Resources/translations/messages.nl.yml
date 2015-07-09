@@ -32,6 +32,7 @@ user.password: Wachtwoord
 user.status: Status
 user.enabled: Ingeschakeld
 user.disabled: Uitgeschakeld
+user.locked: Vergrendeld
 permissions: Permissies
 role.administrator: Beheerder
 role.user: Gebruiker

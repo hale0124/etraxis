@@ -99,6 +99,16 @@ class ListUsersCommandHandler
 
             $entity = $entities[$index];
 
+            if (!$entity->isAccountNonLocked()) {
+                $color = 'red';
+            }
+            elseif ($entity->isDisabled()) {
+                $color = 'gray';
+            }
+            else {
+                $color = null;
+            }
+
             $users[] = [
                 $entity->getId(),
                 $entity->getUsername(),
@@ -106,7 +116,8 @@ class ListUsersCommandHandler
                 $entity->getEmail(),
                 $this->translator->trans($entity->isAdmin() ? 'role.administrator' : 'role.user'),
                 $entity->getDescription(),
-                'DT_RowAttr' => ['data-id' => $entity->getId()],
+                'DT_RowAttr'  => ['data-id' => $entity->getId()],
+                'DT_RowClass' => $color,
             ];
         }
 

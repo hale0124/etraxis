@@ -32,6 +32,7 @@ user.password: Lösenord
 user.status: Status
 user.enabled: Aktiverad
 user.disabled: Inaktiverad
+user.locked: Låst
 permissions: Behörigheter
 role.administrator: Administratör
 role.user: Användare

@@ -13,7 +13,7 @@ services:
     command.user.unlock:
         class: eTraxis\SimpleBus\Users\Handler\UnlockUserCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\UnlockUserCommand }]
-        arguments: [ @logger, @doctrine ]
+        arguments: [ @doctrine ]
 
     command.user.index:
         class: eTraxis\SimpleBus\Users\Handler\ListUsersCommandHandler

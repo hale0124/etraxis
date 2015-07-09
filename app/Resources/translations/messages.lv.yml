@@ -32,6 +32,7 @@ user.password: Parole
 user.status: Statuss
 user.enabled: Ieslēgts
 user.disabled: Izslēgts
+user.locked: Slēgts
 permissions: Atļaujas
 role.administrator: Administrators
 role.user: Lietotājs

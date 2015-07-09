@@ -37,7 +37,7 @@ class AuthenticationListenerTest extends BaseTestCase
 
         $success = new AuthenticationEvent($token);
 
-        $object = new AuthenticationListener($this->command_bus);
+        $object = new AuthenticationListener($this->logger, $this->command_bus);
 
         $object->onAuthenticationSuccess($success);
         $this->assertTrue($this->findUser()->isAccountNonLocked());
@@ -49,7 +49,7 @@ class AuthenticationListenerTest extends BaseTestCase
 
         $failure = new AuthenticationFailureEvent($token, new AuthenticationException());
 
-        $object = new AuthenticationListener($this->command_bus);
+        $object = new AuthenticationListener($this->logger, $this->command_bus);
 
         $object->onAuthenticationFailure($failure);
         $this->assertTrue($this->findUser()->isAccountNonLocked());

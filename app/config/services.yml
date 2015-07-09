@@ -45,6 +45,7 @@ services:
         class: AppBundle\EventListener\AuthenticationListener
         tags: [{ name: kernel.event_subscriber }]
         arguments:
+            - @logger
             - @command_bus
 
     etraxis.listener.kernel:

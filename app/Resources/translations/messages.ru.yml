@@ -32,6 +32,7 @@ user.password: Пароль
 user.status: Статус
 user.enabled: Включен
 user.disabled: Отключен
+user.locked: Заблокирован
 permissions: 'Права доступа'
 role.administrator: Администратор
 role.user: Пользователь

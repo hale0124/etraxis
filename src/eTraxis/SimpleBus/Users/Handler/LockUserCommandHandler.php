@@ -63,8 +63,6 @@ class LockUserCommandHandler
 
                 $user->setAuthAttempts($user->getAuthAttempts() + 1);
 
-                $this->logger->info('Authentication failure', [$command->username, $user->getAuthAttempts(), $this->security_auth_attempts]);
-
                 if ($user->getAuthAttempts() == $this->security_auth_attempts) {
 
                     $this->logger->info('Lock the account', [$this->security_lock_time]);

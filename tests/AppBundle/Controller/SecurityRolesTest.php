@@ -22,12 +22,13 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 class SecurityRolesTest extends WebTestCase
 {
     private $urls = [
-        '/'                               => ['ROLE_GUEST' => true,  'ROLE_USER' => true,  'ROLE_ADMIN' => true],
-        '/admin/'                         => ['ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
-        '/admin/users/'                   => ['ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
-        '/admin/users/ajax'               => ['ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
-        '/admin/users/{user}'             => ['ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
-        '/admin/users/{user}/tab/details' => ['ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
+        '/'                               => ['METHOD' => Request::METHOD_GET,  'ROLE_GUEST' => true,  'ROLE_USER' => true,  'ROLE_ADMIN' => true],
+        '/admin/'                         => ['METHOD' => Request::METHOD_GET,  'ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
+        '/admin/users/'                   => ['METHOD' => Request::METHOD_GET,  'ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
+        '/admin/users/ajax'               => ['METHOD' => Request::METHOD_GET,  'ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
+        '/admin/users/{user}'             => ['METHOD' => Request::METHOD_GET,  'ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
+        '/admin/users/{user}/tab/details' => ['METHOD' => Request::METHOD_GET,  'ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
+        '/admin/users/{user}/unlock'      => ['METHOD' => Request::METHOD_POST, 'ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
     ];
 
     public function testGuest()
@@ -50,7 +51,7 @@ class SecurityRolesTest extends WebTestCase
 
             $url = str_replace('{user}', $user->getId(), $url);
 
-            $client->request(Request::METHOD_GET, $url);
+            $client->request($isAllowed['METHOD'], $url);
 
             if ($isAllowed['ROLE_GUEST']) {
                 $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
@@ -90,7 +91,7 @@ class SecurityRolesTest extends WebTestCase
 
             $url = str_replace('{user}', $user->getId(), $url);
 
-            $client->request(Request::METHOD_GET, $url);
+            $client->request($isAllowed['METHOD'], $url);
 
             if ($isAllowed['ROLE_USER']) {
                 $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
@@ -127,7 +128,7 @@ class SecurityRolesTest extends WebTestCase
 
             $url = str_replace('{user}', $user->getId(), $url);
 
-            $client->request(Request::METHOD_GET, $url);
+            $client->request($isAllowed['METHOD'], $url);
 
             if ($isAllowed['ROLE_ADMIN']) {
                 $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());

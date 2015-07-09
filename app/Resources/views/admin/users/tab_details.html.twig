@@ -1,6 +1,9 @@
 <div class="columns">
     <div class="column full-width">
         <button type="button" id="btn-back">{{ 'button.back'|trans }}</button>
+        {% if not user.accountNonLocked %}
+        <button type="button" id="btn-unlock">{{ 'button.unlock'|trans }}</button>
+        {% endif %}
     </div>
 </div>
 
@@ -29,7 +32,11 @@
             </div>
             <div class="columns">
                 <div class="column one-fourth">{{ 'user.status'|trans }}:</div>
+                {% if user.accountNonLocked %}
                 <div class="column three-fourths">{{ user.disabled ? 'user.disabled'|trans|lower : 'user.enabled'|trans|lower }}</div>
+                {% else %}
+                <div class="column three-fourths">{{ 'user.locked'|trans|lower }}</div>
+                {% endif %}
             </div>
         </fieldset>
     </div>
@@ -41,6 +48,13 @@
         // "Back" button.
         $('#btn-back').click(function() {
             window.location.assign('{{ path('admin_users') }}');
+        });
+
+        // "Unlock" button.
+        $('#btn-unlock').click(function() {
+            $.post('{{ path('admin_unlock_user', { 'id': user.id }) }}', function() {
+                window.location.assign('{{ path('admin_view_user', { 'id': user.id }) }}');
+            });
         });
     });
 </script>

@@ -16,6 +16,7 @@ namespace AppBundle\Controller\Admin;
 use eTraxis\Exception\ResponseException;
 use eTraxis\SimpleBus\Users\FindUserCommand;
 use eTraxis\SimpleBus\Users\ListUsersCommand;
+use eTraxis\SimpleBus\Users\UnlockUserCommand;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -141,5 +142,42 @@ class UsersController extends Controller
         return $this->render('admin/users/tab_details.html.twig', [
             'user' => $command->user,
         ]);
+    }
+
+    /**
+     * Unlocks specified user.
+     *
+     * @Route("/{id}/unlock", name="admin_unlock_user", requirements={"id"="\d+"})
+     * @Method("POST")
+     *
+     * @param   int $id User ID.
+     *
+     * @return  Response
+     */
+    public function unlockAction($id)
+    {
+        $command = new FindUserCommand(['id' => $id]);
+
+        try {
+            $this->getCommandBus()->handle($command);
+        }
+        catch (ResponseException $e) {
+            return new Response($e->getMessage(), $e->getCode());
+        }
+
+        if (!$command->user) {
+            throw $this->createNotFoundException();
+        }
+
+        $command = new UnlockUserCommand(['username' => $command->user->getUsername()]);
+
+        try {
+            $this->getCommandBus()->handle($command);
+        }
+        catch (ResponseException $e) {
+            return new Response($e->getMessage(), $e->getCode());
+        }
+
+        return new Response();
     }
 }

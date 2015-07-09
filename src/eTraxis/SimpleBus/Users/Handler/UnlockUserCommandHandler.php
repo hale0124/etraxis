@@ -14,7 +14,6 @@
 namespace eTraxis\SimpleBus\Users\Handler;
 
 use eTraxis\SimpleBus\Users\UnlockUserCommand;
-use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -28,12 +27,10 @@ class UnlockUserCommandHandler
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface   $logger
      * @param   RegistryInterface $doctrine
      */
-    public function __construct(LoggerInterface $logger, RegistryInterface $doctrine)
+    public function __construct(RegistryInterface $doctrine)
     {
-        $this->logger   = $logger;
         $this->doctrine = $doctrine;
     }
 
@@ -46,8 +43,6 @@ class UnlockUserCommandHandler
 
         /** @var \eTraxis\Model\User $user */
         if ($user = $repository->findOneBy(['username' => $command->username . '@eTraxis'])) {
-
-            $this->logger->info('Authentication success', [$command->username]);
 
             $user->setAuthAttempts(0);
             $user->setLockedUntil(0);

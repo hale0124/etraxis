@@ -32,6 +32,7 @@ user.password: Parola
 user.status: Durum
 user.enabled: Etkinleştirildi
 user.disabled: Etkisizleştirildi
+user.locked: Kilitli
 permissions: İzinler
 role.administrator: Yönetici
 role.user: Kullanıcı

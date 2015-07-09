@@ -32,6 +32,7 @@ user.password: Jelszó
 user.status: Állapot
 user.enabled: Engedélyezett
 user.disabled: Letiltott
+user.locked: Zárolt
 permissions: Jogosultságok
 role.administrator: Adminisztrátor
 role.user: Felhasználó

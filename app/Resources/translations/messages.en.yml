@@ -32,6 +32,7 @@ user.password: Password
 user.status: Status
 user.enabled: Enabled
 user.disabled: Disabled
+user.locked: Locked
 permissions: Permissions
 role.administrator: Administrator
 role.user: User
