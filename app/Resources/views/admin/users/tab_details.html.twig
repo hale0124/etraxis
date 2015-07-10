@@ -1,9 +1,14 @@
 <div class="columns">
     <div class="column full-width">
         <button type="button" id="btn-back">{{ 'button.back'|trans }}</button>
-        {% if not user.accountNonLocked %}
-        <button type="button" id="btn-unlock">{{ 'button.unlock'|trans }}</button>
-        {% endif %}
+        <span class="buttonset">
+            {% if user.id != app.user.id %}
+            <button type="button" id="btn-disable">{{ user.disabled ? 'button.enable'|trans : 'button.disable'|trans }}</button>
+            {% endif %}
+            {% if not user.accountNonLocked %}
+            <button type="button" id="btn-unlock">{{ 'button.unlock'|trans }}</button>
+            {% endif %}
+        </span>
     </div>
 </div>
 
@@ -48,6 +53,13 @@
         // "Back" button.
         $('#btn-back').click(function() {
             window.location.assign('{{ path('admin_users') }}');
+        });
+
+        // "Disable"/"Enable" button.
+        $('#btn-disable').click(function() {
+            $.post('{{ path(user.disabled ? 'admin_enable_user' : 'admin_disable_user', { 'id': user.id }) }}', function() {
+                window.location.assign('{{ path('admin_view_user', { 'id': user.id }) }}');
+            });
         });
 
         // "Unlock" button.

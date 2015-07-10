@@ -143,6 +143,59 @@ class UsersController extends Controller
     }
 
     /**
+     * Disables specified user.
+     *
+     * @Route("/{id}/disable", name="admin_disable_user", requirements={"id"="\d+"})
+     * @Method("POST")
+     *
+     * @param   int $id User ID.
+     *
+     * @return  Response
+     */
+    public function disableAction($id)
+    {
+        // Don't disable yourself.
+        if ($this->getUser()->getId() == $id) {
+            return new Response();
+        }
+
+        $command = new Users\DisableUserCommand(['id' => $id]);
+
+        try {
+            $this->getCommandBus()->handle($command);
+        }
+        catch (ResponseException $e) {
+            return new Response($e->getMessage(), $e->getCode());
+        }
+
+        return new Response();
+    }
+
+    /**
+     * Enables specified user.
+     *
+     * @Route("/{id}/enable", name="admin_enable_user", requirements={"id"="\d+"})
+     * @Method("POST")
+     *
+     * @param   int $id User ID.
+     *
+     * @return  Response
+     */
+    public function enableAction($id)
+    {
+        $command = new Users\EnableUserCommand(['id' => $id]);
+
+        try {
+            $this->getCommandBus()->handle($command);
+        }
+        catch (ResponseException $e) {
+            return new Response($e->getMessage(), $e->getCode());
+        }
+
+        return new Response();
+    }
+
+    /**
      * Unlocks specified user.
      *
      * @Route("/{id}/unlock", name="admin_unlock_user", requirements={"id"="\d+"})

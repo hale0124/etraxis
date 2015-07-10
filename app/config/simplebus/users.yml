@@ -24,3 +24,13 @@ services:
         class: eTraxis\SimpleBus\Users\Handler\FindUserCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\FindUserCommand }]
         arguments: [ @doctrine ]
+
+    command.user.disable:
+        class: eTraxis\SimpleBus\Users\Handler\DisableUserCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\DisableUserCommand }]
+        arguments: [ @doctrine ]
+
+    command.user.enable:
+        class: eTraxis\SimpleBus\Users\Handler\EnableUserCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\EnableUserCommand }]
+        arguments: [ @doctrine ]

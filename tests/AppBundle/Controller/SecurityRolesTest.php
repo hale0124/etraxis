@@ -28,6 +28,8 @@ class SecurityRolesTest extends WebTestCase
         '/admin/users/ajax'               => ['METHOD' => Request::METHOD_GET,  'ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
         '/admin/users/{user}'             => ['METHOD' => Request::METHOD_GET,  'ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
         '/admin/users/{user}/tab/details' => ['METHOD' => Request::METHOD_GET,  'ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
+        '/admin/users/{user}/disable'     => ['METHOD' => Request::METHOD_POST, 'ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
+        '/admin/users/{user}/enable'      => ['METHOD' => Request::METHOD_POST, 'ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
         '/admin/users/{user}/unlock'      => ['METHOD' => Request::METHOD_POST, 'ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
     ];
 
