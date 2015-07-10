@@ -33,35 +33,60 @@ class SecurityRolesTest extends WebTestCase
         '/admin/users/{user}/unlock'      => ['METHOD' => Request::METHOD_POST, 'ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
     ];
 
-    public function testGuest()
+    /** @var \Symfony\Bundle\FrameworkBundle\Client */
+    private $client = null;
+
+    /** @var \eTraxis\Model\User */
+    private $user = null;
+
+    private function prepareUrl($url)
     {
-        $client = static::createClient();
+        $url = str_replace('{user}', $this->user->getId(), $url);
+
+        return $url;
+    }
+
+    private function login($role)
+    {
+        $token = new UsernamePasswordToken($this->user, 'secret', 'default', [$role]);
+
+        $session = $this->client->getContainer()->get('session');
+        $session->set('_security_default', serialize($token));
+        $session->save();
+
+        $cookie = new Cookie($session->getName(), $session->getId());
+        $this->client->getCookieJar()->set($cookie);
+    }
+
+    protected function setUp()
+    {
+        $this->client = static::createClient();
 
         /** @var \Symfony\Bridge\Doctrine\RegistryInterface $doctrine */
-        $doctrine = $client->getContainer()->get('doctrine');
+        $doctrine = $this->client->getContainer()->get('doctrine');
 
-        /** @var \eTraxis\Model\User $user */
-        $user = $doctrine->getRepository('eTraxis:User')->findOneBy([
+        $this->user = $doctrine->getRepository('eTraxis:User')->findOneBy([
             'username' => 'artem@eTraxis',
             'isLdap'   => false,
         ]);
+    }
 
-        $client->request('GET', '/login');
-        $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
+    public function testGuest()
+    {
+        $this->client->request('GET', '/login');
+        $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
 
         foreach ($this->urls as $url => $isAllowed) {
 
-            $url = str_replace('{user}', $user->getId(), $url);
-
-            $client->request($isAllowed['METHOD'], $url);
+            $this->client->request($isAllowed['METHOD'], $this->prepareUrl($url));
 
             if ($isAllowed['ROLE_GUEST']) {
-                $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
+                $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
             }
             else {
-                $this->assertEquals(Response::HTTP_FOUND, $client->getResponse()->getStatusCode());
-                $this->assertTrue($client->getResponse()->headers->has('location'));
-                $location = $client->getResponse()->headers->get('location');
+                $this->assertEquals(Response::HTTP_FOUND, $this->client->getResponse()->getStatusCode());
+                $this->assertTrue($this->client->getResponse()->headers->has('location'));
+                $location = $this->client->getResponse()->headers->get('location');
                 $this->assertEquals('/login', substr($location, -6));
             }
         }
@@ -69,74 +94,34 @@ class SecurityRolesTest extends WebTestCase
 
     public function testUser()
     {
-        $client = static::createClient();
-
-        /** @var \Symfony\Bridge\Doctrine\RegistryInterface $doctrine */
-        $doctrine = $client->getContainer()->get('doctrine');
-
-        /** @var \eTraxis\Model\User $user */
-        $user = $doctrine->getRepository('eTraxis:User')->findOneBy([
-            'username' => 'artem@eTraxis',
-            'isLdap'   => false,
-        ]);
-
-        $token = new UsernamePasswordToken('artem', 'secret', 'default', ['ROLE_USER']);
-
-        $session = $client->getContainer()->get('session');
-        $session->set('_security_default', serialize($token));
-        $session->save();
-
-        $cookie = new Cookie($session->getName(), $session->getId());
-        $client->getCookieJar()->set($cookie);
+        $this->login('ROLE_USER');
 
         foreach ($this->urls as $url => $isAllowed) {
 
-            $url = str_replace('{user}', $user->getId(), $url);
-
-            $client->request($isAllowed['METHOD'], $url);
+            $this->client->request($isAllowed['METHOD'], $this->prepareUrl($url));
 
             if ($isAllowed['ROLE_USER']) {
-                $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
+                $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
             }
             else {
-                $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode());
+                $this->assertEquals(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
             }
         }
     }
 
     public function testAdmin()
     {
-        $client = static::createClient();
-
-        /** @var \Symfony\Bridge\Doctrine\RegistryInterface $doctrine */
-        $doctrine = $client->getContainer()->get('doctrine');
-
-        /** @var \eTraxis\Model\User $user */
-        $user = $doctrine->getRepository('eTraxis:User')->findOneBy([
-            'username' => 'artem@eTraxis',
-            'isLdap'   => false,
-        ]);
-
-        $token = new UsernamePasswordToken('artem', 'secret', 'default', ['ROLE_ADMIN']);
-
-        $session = $client->getContainer()->get('session');
-        $session->set('_security_default', serialize($token));
-        $session->save();
-
-        $cookie = new Cookie($session->getName(), $session->getId());
-        $client->getCookieJar()->set($cookie);
+        $this->login('ROLE_ADMIN');
 
         foreach ($this->urls as $url => $isAllowed) {
 
-            $url = str_replace('{user}', $user->getId(), $url);
-
-            $client->request($isAllowed['METHOD'], $url);
+            $this->client->request($isAllowed['METHOD'], $this->prepareUrl($url));
 
             if ($isAllowed['ROLE_ADMIN']) {
-                $this->assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
+                $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
             }
             else {
-                $this->assertEquals(Response::HTTP_FORBIDDEN, $client->getResponse()->getStatusCode());
+                $this->assertEquals(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
             }
         }
     }
