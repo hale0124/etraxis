@@ -21,7 +21,6 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class UnlockUserCommandHandler
 {
-    protected $logger;
     protected $doctrine;
 
     /**

@@ -15,7 +15,6 @@ namespace eTraxis\SimpleBus\Users\Handler;
 
 use eTraxis\SimpleBus\Users\ListUsersCommand;
 use Symfony\Bridge\Doctrine\RegistryInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -24,23 +23,17 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class ListUsersCommandHandler
 {
-    protected $security;
     protected $translator;
     protected $doctrine;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   AuthorizationCheckerInterface $security   Authorization checker.
-     * @param   TranslatorInterface           $translator Translation service.
-     * @param   RegistryInterface             $doctrine   Doctrine entity managers registry.
+     * @param   TranslatorInterface $translator Translation service.
+     * @param   RegistryInterface   $doctrine   Doctrine entity managers registry.
      */
-    public function __construct(
-        AuthorizationCheckerInterface $security,
-        TranslatorInterface           $translator,
-        RegistryInterface             $doctrine)
+    public function __construct(TranslatorInterface $translator, RegistryInterface $doctrine)
     {
-        $this->security   = $security;
         $this->translator = $translator;
         $this->doctrine   = $doctrine;
     }
