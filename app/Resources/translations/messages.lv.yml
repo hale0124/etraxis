@@ -22,7 +22,9 @@ security.log_out: Iziet
 security.remember_me: 'Atcerēties mani'
 security.session_expired: 'Your session has expired. Please login again.'
 security.confirm_exit: 'Vai tiešām vēlaties iziet?'
-'Bad credentials.': 'Nezināms lietotāja vārds vai parole.'
+'Bad credentials': 'Nezināms lietotāja vārds vai parole.'
+'User account is disabled.': 'Lietotāja konts ir atslēgts.'
+'User account is locked.': 'Lietotāja konts ir bloķēts.'
 administration: Administrācija
 users: Lietotāji
 user.username: 'Lietotāja vārds'

@@ -22,7 +22,9 @@ security.log_out: Iesire
 security.remember_me: 'Păstrează autentificarea'
 security.session_expired: 'Your session has expired. Please login again.'
 security.confirm_exit: 'Sunteti sigur ca doriti sa iesiti?'
-'Bad credentials.': 'Cont inexistent sau parola incorecta.'
+'Bad credentials': 'Cont inexistent sau parola incorecta.'
+'User account is disabled.': 'Contul este dezactivat.'
+'User account is locked.': 'Contuleste blocat.'
 administration: Administrare
 users: Utilizatori
 user.username: 'Nume utilizator'

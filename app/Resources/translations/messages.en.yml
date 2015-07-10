@@ -22,7 +22,9 @@ security.log_out: 'Log out'
 security.remember_me: 'Remember me'
 security.session_expired: 'Your session has expired. Please log in again.'
 security.confirm_exit: 'Are you sure you want exit?'
-'Bad credentials.': 'Unknown username or bad password.'
+'Bad credentials': 'Unknown username or bad password.'
+'User account is disabled.': 'Account is disabled.'
+'User account is locked.': 'Account is locked.'
 administration: Administration
 users: Users
 user.username: 'User name'

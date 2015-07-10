@@ -22,7 +22,9 @@ security.log_out: Çıkış
 security.remember_me: 'Sürekli bağlı kal'
 security.session_expired: 'Oturum zaman aşımına uğradı. Lütfen tekrar giriş yapın.'
 security.confirm_exit: 'Çıkmak istediğinizden emin misiniz?'
-'Bad credentials.': 'Bilinmeyen kullanıcı adı ya da yanlış parola.'
+'Bad credentials': 'Bilinmeyen kullanıcı adı ya da yanlış parola.'
+'User account is disabled.': 'Hesap kapalı.'
+'User account is locked.': 'Hesap kilitli.'
 administration: Yönetim
 users: Kullanıcılar
 user.username: 'Kullanıcı adı'

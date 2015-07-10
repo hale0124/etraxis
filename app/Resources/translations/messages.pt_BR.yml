@@ -22,7 +22,9 @@ security.log_out: Deslogar
 security.remember_me: 'Permanecer logado'
 security.session_expired: 'A sua sessão expirou. Por favor, faça login novamente.'
 security.confirm_exit: 'Tem certeza que quer sair?'
-'Bad credentials.': 'Usuário desconhecido ou senha incorreta.'
+'Bad credentials': 'Usuário desconhecido ou senha incorreta.'
+'User account is disabled.': 'A conta está desabilitada.'
+'User account is locked.': 'A conta está travada.'
 administration: Administração
 users: Usuários
 user.username: Usuário

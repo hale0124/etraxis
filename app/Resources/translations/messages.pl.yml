@@ -22,7 +22,9 @@ security.log_out: Wyloguj
 security.remember_me: 'Pozostań zalogowany'
 security.session_expired: 'Twoja sesja wygasła. Zaloguj się ponownie.'
 security.confirm_exit: 'Czy jesteś pewien, że chesz wyjść?'
-'Bad credentials.': 'Nieprawidłowa nazwa użytkownika lub hasła.'
+'Bad credentials': 'Nieprawidłowa nazwa użytkownika lub hasła.'
+'User account is disabled.': 'Konto jest wyłączone.'
+'User account is locked.': 'Konto jest zablokowane.'
 administration: Administracja
 users: Użytkownicy
 user.username: 'Nazwa użytkownika'

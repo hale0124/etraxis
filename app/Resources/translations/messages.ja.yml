@@ -22,7 +22,9 @@ security.log_out: 終了
 security.remember_me: ログインを維持
 security.session_expired: セッションが失効しました。ログインし直してください。
 security.confirm_exit: 終了してログアウトしますか？
-'Bad credentials.': 不明なユーザー名または誤ったパスワードです。
+'Bad credentials': 不明なユーザー名または誤ったパスワードです。
+'User account is disabled.': アカウントは無効化されています。
+'User account is locked.': アカウントはロックアウトされています。
 administration: 管理
 users: ユーザー
 user.username: ユーザー名
