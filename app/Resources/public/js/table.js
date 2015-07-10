@@ -104,7 +104,7 @@ var datatables_language = window.datatables_language || {};
                 orderable: false,
                 searchable: false,
                 render: function(data) {
-                    return '<input type="checkbox" name="' + settings.checkboxes + '[]" value="' + data + '">';
+                    return '<input type="checkbox" name="' + settings.checkboxes + '" value="' + data + '">';
                 }
             });
         }

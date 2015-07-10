@@ -28,8 +28,8 @@ class SecurityRolesTest extends WebTestCase
         '/admin/users/ajax'               => ['METHOD' => Request::METHOD_GET,  'ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
         '/admin/users/{user}'             => ['METHOD' => Request::METHOD_GET,  'ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
         '/admin/users/{user}/tab/details' => ['METHOD' => Request::METHOD_GET,  'ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
-        '/admin/users/{user}/disable'     => ['METHOD' => Request::METHOD_POST, 'ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
-        '/admin/users/{user}/enable'      => ['METHOD' => Request::METHOD_POST, 'ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
+        '/admin/users/disable'            => ['METHOD' => Request::METHOD_POST, 'ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
+        '/admin/users/enable'             => ['METHOD' => Request::METHOD_POST, 'ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
         '/admin/users/{user}/unlock'      => ['METHOD' => Request::METHOD_POST, 'ROLE_GUEST' => false, 'ROLE_USER' => false, 'ROLE_ADMIN' => true],
     ];
 
@@ -101,7 +101,7 @@ class SecurityRolesTest extends WebTestCase
             $this->client->request($isAllowed['METHOD'], $this->prepareUrl($url));
 
             if ($isAllowed['ROLE_USER']) {
-                $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+                $this->assertNotEquals(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
             }
             else {
                 $this->assertEquals(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
@@ -118,7 +118,7 @@ class SecurityRolesTest extends WebTestCase
             $this->client->request($isAllowed['METHOD'], $this->prepareUrl($url));
 
             if ($isAllowed['ROLE_ADMIN']) {
-                $this->assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
+                $this->assertNotEquals(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());
             }
             else {
                 $this->assertEquals(Response::HTTP_FORBIDDEN, $this->client->getResponse()->getStatusCode());

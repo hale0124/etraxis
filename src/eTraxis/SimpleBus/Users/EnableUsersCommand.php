@@ -17,14 +17,14 @@ use eTraxis\Traits;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Disables specified account.
+ * Enables specified accounts.
  *
  * Input properties:
- * @property    int $id User ID.
+ * @property    int[] $ids User IDs.
  *
  * Output properties: none.
  */
-class DisableUserCommand
+class EnableUsersCommand
 {
     use Traits\InitializationTrait;
     use Traits\GetTrait;
@@ -32,7 +32,12 @@ class DisableUserCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\GreaterThan(value = "0")
+     * @Assert\Type(type = "array")
+     * @Assert\Count(min = "1", max = "100")
+     * @Assert\All({
+     *     @Assert\Type(type = "numeric"),
+     *     @Assert\GreaterThan(value = "0")
+     * })
      */
-    protected $id;
+    protected $ids;
 }

@@ -4,6 +4,15 @@
 
     <div class="columns">
         <div class="column full-width">
+            <span class="buttonset">
+                <button type="button" id="btn-disable">{{ 'button.disable'|trans }}</button>
+                <button type="button" id="btn-enable">{{ 'button.enable'|trans }}</button>
+            </span>
+        </div>
+    </div>
+
+    <div class="columns">
+        <div class="column full-width">
             <table id="users" class="cell-border hover" data-src="{{ path('admin_users_ajax') }}">
                 <thead>
                     <tr>
@@ -30,9 +39,69 @@
                 checkboxes: 'users'
             });
 
+            // Resets state of dependent controls.
+            var resetState = function() {
+
+                var checked = $('input[name="users"]:checked', $table).length;
+
+                // Some buttons are disabled if no checkbox is ticked.
+                $('#btn-disable').disable(checked == 0);
+                $('#btn-enable').disable(checked == 0);
+
+                // If no checkbox is ticked, untick "Select all" checkbox.
+                if (checked == 0) {
+                    $('thead input[type="checkbox"]', $table).prop('checked', false);
+                }
+
+                // If all checkboxes are ticked, tick "Select all" checkbox.
+                if (checked == $table.api().page.len()) {
+                    $('thead input[type="checkbox"]', $table).prop('checked', true);
+                }
+            };
+
+            // Table has been redrawn.
+            $table.on('draw.dt', resetState);
+
+            // Click on a checkbox in the list.
+            $table.on('click', 'input[type="checkbox"]', resetState);
+
             // Click on a user in the list.
             $table.on('click', 'tbody tr', function() {
                 window.location.assign('{{ path('admin_users') }}' + $(this).data('id'));
+            });
+
+            // "Disable" button.
+            $('#btn-disable').click(function() {
+
+                var ids = [];
+
+                $('input[name="users"]:checked', $table).each(function() {
+                    if ($(this).val() != {{ app.user.id }}) {
+                        ids.push($(this).val());
+                    }
+                });
+
+                if (ids.length) {
+                    $.post('{{ path('admin_disable_user') }}', { ids: ids }, function() {
+                        $table.api().draw(false);
+                    });
+                }
+            });
+
+            // "Enable" button.
+            $('#btn-enable').click(function() {
+
+                var ids = [];
+
+                $('input[name="users"]:checked', $table).each(function() {
+                    ids.push($(this).val());
+                });
+
+                if (ids.length) {
+                    $.post('{{ path('admin_enable_user') }}', { ids: ids }, function() {
+                        $table.api().draw(false);
+                    });
+                }
             });
         });
     </script>

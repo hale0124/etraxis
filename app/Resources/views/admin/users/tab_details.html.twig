@@ -57,7 +57,7 @@
 
         // "Disable"/"Enable" button.
         $('#btn-disable').click(function() {
-            $.post('{{ path(user.disabled ? 'admin_enable_user' : 'admin_disable_user', { 'id': user.id }) }}', function() {
+            $.post('{{ path(user.disabled ? 'admin_enable_user' : 'admin_disable_user', { 'ids': [user.id] }) }}', function() {
                 window.location.assign('{{ path('admin_view_user', { 'id': user.id }) }}');
             });
         });

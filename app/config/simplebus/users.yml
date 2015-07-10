@@ -26,11 +26,11 @@ services:
         arguments: [ @doctrine ]
 
     command.user.disable:
-        class: eTraxis\SimpleBus\Users\Handler\DisableUserCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\DisableUserCommand }]
+        class: eTraxis\SimpleBus\Users\Handler\DisableUsersCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\DisableUsersCommand }]
         arguments: [ @doctrine ]
 
     command.user.enable:
-        class: eTraxis\SimpleBus\Users\Handler\EnableUserCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\EnableUserCommand }]
+        class: eTraxis\SimpleBus\Users\Handler\EnableUsersCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\EnableUsersCommand }]
         arguments: [ @doctrine ]

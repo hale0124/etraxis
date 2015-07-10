@@ -143,47 +143,52 @@ class UsersController extends Controller
     }
 
     /**
-     * Disables specified user.
+     * Disables specified users.
      *
-     * @Route("/{id}/disable", name="admin_disable_user", requirements={"id"="\d+"})
+     * @Route("/disable", name="admin_disable_user")
      * @Method("POST")
      *
-     * @param   int $id User ID.
+     * @param   Request $request
      *
      * @return  Response
      */
-    public function disableAction($id)
+    public function disableAction(Request $request)
     {
         // Don't disable yourself.
-        if ($this->getUser()->getId() == $id) {
-            return new Response();
-        }
+        $ids = array_filter($request->get('ids', []), function ($id) {
+            return $id != $this->getUser()->getId();
+        });
 
-        $command = new Users\DisableUserCommand(['id' => $id]);
+        if (count($ids)) {
 
-        try {
-            $this->getCommandBus()->handle($command);
-        }
-        catch (ResponseException $e) {
-            return new Response($e->getMessage(), $e->getCode());
+            $command = new Users\DisableUsersCommand(['ids' => $ids]);
+
+            try {
+                $this->getCommandBus()->handle($command);
+            }
+            catch (ResponseException $e) {
+                return new Response($e->getMessage(), $e->getCode());
+            }
         }
 
         return new Response();
     }
 
     /**
-     * Enables specified user.
+     * Enables specified users.
      *
-     * @Route("/{id}/enable", name="admin_enable_user", requirements={"id"="\d+"})
+     * @Route("/enable", name="admin_enable_user")
      * @Method("POST")
      *
-     * @param   int $id User ID.
+     * @param   Request $request
      *
      * @return  Response
      */
-    public function enableAction($id)
+    public function enableAction(Request $request)
     {
-        $command = new Users\EnableUserCommand(['id' => $id]);
+        $command = new Users\EnableUsersCommand([
+            'ids' => $request->get('ids', []),
+        ]);
 
         try {
             $this->getCommandBus()->handle($command);

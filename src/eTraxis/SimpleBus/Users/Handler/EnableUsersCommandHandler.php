@@ -13,13 +13,13 @@
 
 namespace eTraxis\SimpleBus\Users\Handler;
 
-use eTraxis\SimpleBus\Users\DisableUserCommand;
+use eTraxis\SimpleBus\Users\EnableUsersCommand;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
- * Disables specified account.
+ * Enables specified accounts.
  */
-class DisableUserCommandHandler
+class EnableUsersCommandHandler
 {
     protected $doctrine;
 
@@ -36,17 +36,19 @@ class DisableUserCommandHandler
     /**
      * {@inheritDoc}
      */
-    public function handle(DisableUserCommand $command)
+    public function handle(EnableUsersCommand $command)
     {
-        $repository = $this->doctrine->getRepository('eTraxis:User');
+        $em = $this->doctrine->getEntityManager();
 
-        /** @var \eTraxis\Model\User $user */
-        if ($user = $repository->find($command->id)) {
+        $query = $em->createQuery('
+            UPDATE eTraxis:User u
+            SET u.isDisabled = :state
+            WHERE u.id IN (:ids)
+        ');
 
-            $user->setDisabled(true);
-
-            $this->doctrine->getManager()->persist($user);
-            $this->doctrine->getManager()->flush();
-        }
+        $query->execute([
+            'ids'   => $command->ids,
+            'state' => false,
+        ]);
     }
 }

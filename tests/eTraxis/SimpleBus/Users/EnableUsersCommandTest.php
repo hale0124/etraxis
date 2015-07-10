@@ -15,7 +15,7 @@ namespace eTraxis\SimpleBus\Users;
 
 use eTraxis\Tests\BaseTestCase;
 
-class EnableUserCommandTest extends BaseTestCase
+class EnableUsersCommandTest extends BaseTestCase
 {
     public function testEnableUser()
     {
@@ -30,11 +30,13 @@ class EnableUserCommandTest extends BaseTestCase
         $this->assertNotNull($user);
         $this->assertTrue($user->isDisabled());
 
-        $command = new EnableUserCommand([
-            'id' => $user->getId(),
+        $command = new EnableUsersCommand([
+            'ids' => [$user->getId()],
         ]);
 
         $this->command_bus->handle($command);
+
+        $this->doctrine->getManager()->clear();
 
         $user = $this->doctrine->getRepository('eTraxis:User')->findOneBy([
             'username' => $username . '@eTraxis',
