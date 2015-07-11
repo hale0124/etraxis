@@ -48,7 +48,7 @@ class EnableUsersCommandHandler
 
         $query->execute([
             'ids'   => $command->ids,
-            'state' => false,
+            'state' => 0,
         ]);
     }
 }

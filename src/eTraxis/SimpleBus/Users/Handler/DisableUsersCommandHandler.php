@@ -48,7 +48,7 @@ class DisableUsersCommandHandler
 
         $query->execute([
             'ids'   => $command->ids,
-            'state' => true,
+            'state' => 1,
         ]);
     }
 }
