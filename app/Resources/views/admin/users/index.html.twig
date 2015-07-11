@@ -2,28 +2,32 @@
 
 {% block content %}
 
-    <div class="columns">
-        <div class="column full-width">
-            <span class="buttonset">
-                <button type="button" id="btn-disable">{{ 'button.disable'|trans }}</button>
-                <button type="button" id="btn-enable">{{ 'button.enable'|trans }}</button>
-            </span>
+    <div class="container">
+        <div class="columns">
+            <div class="column full-width">
+                <span class="buttonset">
+                    <button type="button" id="btn-disable">{{ 'button.disable'|trans }}</button>
+                    <button type="button" id="btn-enable">{{ 'button.enable'|trans }}</button>
+                </span>
+            </div>
         </div>
     </div>
 
-    <div class="columns">
-        <div class="column full-width">
-            <table id="users" class="cell-border hover" data-src="{{ path('admin_users_ajax') }}">
-                <thead>
-                    <tr>
-                        <th>{{ 'user.username'|trans }}</th>
-                        <th>{{ 'user.fullname'|trans }}</th>
-                        <th>{{ 'user.email'|trans }}</th>
-                        <th>{{ 'permissions'|trans }}</th>
-                        <th>{{ 'description'|trans }}</th>
-                    </tr>
-                </thead>
-            </table>
+    <div class="container">
+        <div class="columns">
+            <div class="column full-width">
+                <table id="users" class="cell-border hover" data-src="{{ path('admin_users_ajax') }}">
+                    <thead>
+                        <tr>
+                            <th>{{ 'user.username'|trans }}</th>
+                            <th>{{ 'user.fullname'|trans }}</th>
+                            <th>{{ 'user.email'|trans }}</th>
+                            <th>{{ 'permissions'|trans }}</th>
+                            <th>{{ 'description'|trans }}</th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
         </div>
     </div>
 
