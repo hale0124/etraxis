@@ -48,7 +48,7 @@ class ContainerTraitTest extends KernelTestCase
     {
         $form = $this->object->createFormBuilder()->getForm();
 
-        $this->assertNull($this->object->getFormError($form));
+        $this->assertEmpty($this->object->getFormError($form));
     }
 
     public function testGetFormErrorExisting()
