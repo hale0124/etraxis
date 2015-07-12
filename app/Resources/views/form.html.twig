@@ -1,0 +1,33 @@
+{% block form_start %}
+    <form name="{{ name }}" method="{{ method }}" action="{{ action }}" {{ multipart ? 'enctype="multipart/form-data"' }}>
+        <input type="submit" class="hidden">
+{% endblock form_start %}
+
+{% block form_row %}
+    <div class="columns control">
+        {# Checkboxes have a different layout to render #}
+        {% if checked is defined %}
+            <div class="column one-third">&nbsp;</div>
+            <div class="column two-thirds">
+                {{ form_widget(form) }}
+                <label for="{{ form.vars.id }}">{{ label|trans }}</label>
+            </div>
+        {% else %}
+            <div class="column one-third">
+                <label for="{{ form.vars.id }}">{{ label|trans }}:</label>
+            </div>
+            <div class="column two-thirds">
+                {% if form.vars.required %}
+                    {{ form_widget(form, {'attr': {'class': 'full-width', 'placeholder': 'required'|trans}}) }}
+                {% else %}
+                    {{ form_widget(form, {'attr': {'class': 'full-width'}}) }}
+                {% endif %}
+            </div>
+        {% endif %}
+    </div>
+{% endblock form_row %}
+
+{% block form_end %}
+        {{ form_widget(form) }}
+    </form>
+{% endblock form_end %}

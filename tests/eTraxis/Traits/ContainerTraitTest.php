@@ -16,6 +16,7 @@ namespace AppBundle\Controller;
 use eTraxis\Traits;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\Form\FormError;
 
 class ControllerStub extends Controller
 {
@@ -41,6 +42,29 @@ class ContainerTraitTest extends KernelTestCase
         unset($this->object);
 
         parent::tearDown();
+    }
+
+    public function testGetFormErrorEmpty()
+    {
+        $form = $this->object->createFormBuilder()->getForm();
+
+        $this->assertNull($this->object->getFormError($form));
+    }
+
+    public function testGetFormErrorExisting()
+    {
+        $form = $this->object->createFormBuilder(null, ['label' => 'Caption'])
+            ->add('test', 'text')
+            ->getForm();
+
+        $error = new FormError('Error message');
+        $error->setOrigin($form);
+
+        $form->addError($error);
+
+        $expected = sprintf('<p class="field-error">%s</p>%s', 'Caption', 'Error message');
+
+        $this->assertEquals($expected, $this->object->getFormError($form));
     }
 
     public function testGetLogger()

@@ -1,6 +1,7 @@
 /* Variables */
 
-@min-width: 1200px;
+@min-width: 560px;  // any width below will be considered as mobile
+@max-width: 1200px; // maximum width of the content - extra space will be left blank
 
 /* Base */
 
@@ -12,6 +13,10 @@ body {
     font-family: Verdana, Geneva, sans-serif;
     font-size: 75%;
     line-height: 1.5;
+}
+
+p {
+    margin: 5px 0;
     text-align: justify;
 }
 
@@ -73,7 +78,7 @@ a {
     .clearfix;
 
     > div {
-        @media (min-width: @min-width) {
+        @media (min-width: @max-width) {
             margin-left: -10px;
             margin-right: -10px;
         }
@@ -85,45 +90,48 @@ a {
     margin: 10px 0;
 }
 
-.column {
-    float: left;
-    padding: 0 10px;
-}
+@media (min-width: @min-width) {
 
-.one-third {
-    width: 33.333333%;
-}
+    .column {
+        float: left;
+        padding: 0 10px;
+    }
 
-.two-thirds {
-    width: 66.666667%;
-}
+    .one-third {
+        width: 33.333333%;
+    }
 
-.one-fourth {
-    width: 25%;
-}
+    .two-thirds {
+        width: 66.666667%;
+    }
 
-.one-half {
-    width: 50%;
-}
+    .one-fourth {
+        width: 25%;
+    }
 
-.three-fourths {
-    width: 75%;
-}
+    .one-half {
+        width: 50%;
+    }
 
-.one-fifth {
-    width: 20%;
-}
+    .three-fourths {
+        width: 75%;
+    }
 
-.two-fifths {
-    width: 40%;
-}
+    .one-fifth {
+        width: 20%;
+    }
 
-.three-fifths {
-    width: 60%;
-}
+    .two-fifths {
+        width: 40%;
+    }
 
-.four-fifths {
-    width: 80%;
+    .three-fifths {
+        width: 60%;
+    }
+
+    .four-fifths {
+        width: 80%;
+    }
 }
 
 .full-width {
@@ -151,7 +159,7 @@ nav {
         float: right;
         height: 40px;
 
-        @media (min-width: @min-width) {
+        @media (min-width: @max-width) {
             padding-right: 0;
         }
 
@@ -179,7 +187,7 @@ footer {
     margin: 5px auto;
     padding: 0 10px;
 
-    @media (min-width: @min-width) {
+    @media (min-width: @max-width) {
         padding: 0;
     }
 }
@@ -234,10 +242,29 @@ legend {
     padding: 0 5px;
 }
 
-.control label,
-.control p {
+@media (min-width: @min-width) {
+    .control {
+        min-width: 500px;
+    }
+}
+
+@media (max-width: @min-width) {
+    .control {
+        min-width: 250px;
+    }
+
+    p.caption {
+        font-weight: bold;
+    }
+}
+
+.control label {
     display: inline-block;
-    margin-top: 5px;
+    margin: 5px 0;
+}
+
+p.field-error {
+    font-weight: bold;
 }
 
 label.hint {
@@ -246,6 +273,7 @@ label.hint {
 }
 
 input[type="text"],
+input[type="email"],
 input[type="password"] {
     padding: 5px 8px;
 }
