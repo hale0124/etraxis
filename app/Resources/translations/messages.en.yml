@@ -27,10 +27,14 @@ security.confirm_exit: 'Are you sure you want exit?'
 'User account is locked.': 'Account is locked.'
 administration: Administration
 users: Users
+user.new: 'New user'
 user.username: 'User name'
 user.fullname: 'Full name'
 user.email: Email
 user.password: Password
+user.new_password: 'New password'
+user.password_confirmation: Confirmation
+user.change_password: 'Change password'
 user.status: Status
 user.enabled: Enabled
 user.disabled: Disabled
@@ -39,3 +43,5 @@ permissions: Permissions
 role.administrator: Administrator
 role.user: User
 description: Description
+user.conflict.username: 'Account with entered user name already exists.'
+passwords.dont.match: 'Passwords do not match.'

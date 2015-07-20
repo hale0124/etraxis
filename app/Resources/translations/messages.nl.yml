@@ -27,10 +27,14 @@ security.confirm_exit: 'Ben je zeker dat je wilt uitloggen?'
 'User account is locked.': 'Account is vergrendeld.'
 administration: Administratie
 users: Gebruikers
+user.new: 'Nieuwe gebruiker'
 user.username: Gebruikersnaam
 user.fullname: 'Volledige naam'
 user.email: E-mail
 user.password: Wachtwoord
+user.new_password: 'Nieuw wachtwoord'
+user.password_confirmation: 'Bevestig wachtwoord'
+user.change_password: 'Wijzig wachtwoord'
 user.status: Status
 user.enabled: Ingeschakeld
 user.disabled: Uitgeschakeld
@@ -39,3 +43,5 @@ permissions: Permissies
 role.administrator: Beheerder
 role.user: Gebruiker
 description: Beschrijving
+user.conflict.username: 'Account met ingevoerde naam bestaat reeds.'
+passwords.dont.match: 'Wachtwoorden stemmen niet overeen.'

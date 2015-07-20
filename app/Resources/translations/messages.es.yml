@@ -27,10 +27,14 @@ security.confirm_exit: '¿Está seguro de salir?'
 'User account is locked.': 'Cuenta bloqueada.'
 administration: Administración
 users: Usuarios
+user.new: 'Nuevo usuario'
 user.username: 'Nombre de usuario'
 user.fullname: 'Nombre completo'
 user.email: Email
 user.password: Contraseña
+user.new_password: 'Nueva contraseña'
+user.password_confirmation: Confirmación
+user.change_password: 'Cambiar contraseña'
 user.status: Estado
 user.enabled: Habilitado
 user.disabled: Deshabilitado
@@ -39,3 +43,5 @@ permissions: Permisos
 role.administrator: Administrador
 role.user: Usuario
 description: Descripción
+user.conflict.username: 'Ya existe una cuenta con ese nombre de usuario.'
+passwords.dont.match: 'Las contraseñas no coinciden.'

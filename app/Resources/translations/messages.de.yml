@@ -27,10 +27,14 @@ security.confirm_exit: 'Möchten Sie wirklich beenden?'
 'User account is locked.': 'Konto ist gesperrt.'
 administration: Administration
 users: Benutzer
+user.new: 'Neuer Benutzer'
 user.username: Benutzername
 user.fullname: 'Vollständiger Name'
 user.email: Email-Adresse
-user.password: Passwort
+user.password: Kennwort
+user.new_password: 'Neues Kennwort'
+user.password_confirmation: Bestätigung
+user.change_password: 'Kennwort ändern'
 user.status: Status
 user.enabled: Aktiviert
 user.disabled: Deaktiviert
@@ -39,3 +43,5 @@ permissions: Berechtigungen
 role.administrator: Administrator
 role.user: Benutzer
 description: Beschreibung
+user.conflict.username: 'Ein Konto mit diesem Benutzernamen existiert bereits.'
+passwords.dont.match: 'Die Passwörter stimmen nicht überein.'

@@ -27,10 +27,14 @@ security.confirm_exit: 'Jste si jisti, že se chcete odhlásit?'
 'User account is locked.': 'Účet je uzamčen.'
 administration: Administrace
 users: Uživatelé
+user.new: 'Nový uživatel'
 user.username: 'Uživatelské jméno'
 user.fullname: 'Celé jméno'
 user.email: E-mail
 user.password: Heslo
+user.new_password: 'Nové heslo'
+user.password_confirmation: Potvrzení
+user.change_password: 'Změnit heslo'
 user.status: Status
 user.enabled: Povoleno
 user.disabled: Zakázáno
@@ -39,3 +43,5 @@ permissions: Práva
 role.administrator: Administrátor
 role.user: Uživatel
 description: Popis
+user.conflict.username: 'Účet se zadaným uživatelským jménem již existuje.'
+passwords.dont.match: 'Hesla se neshodují.'

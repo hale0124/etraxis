@@ -27,10 +27,14 @@ security.confirm_exit: 'Etes-vous sur de vouloir quitter?'
 'User account is locked.': 'Le compte est verrouillé.'
 administration: Administration
 users: Utilisateurs
+user.new: 'Nouvel utilisateur'
 user.username: Utilisateur
 user.fullname: 'Nom complet'
 user.email: Email
 user.password: 'Mot de passe'
+user.new_password: 'Nouveau mot de passe'
+user.password_confirmation: Confirmation
+user.change_password: 'Changer de mot de passe'
 user.status: Statut
 user.enabled: Activés
 user.disabled: Désactivés
@@ -39,3 +43,5 @@ permissions: Permissions
 role.administrator: Administrateur
 role.user: Utilisateur
 description: Description
+user.conflict.username: 'Il existe déjà un compte portant ce nom.'
+passwords.dont.match: 'Les mots de passe ne correspondent pas.'

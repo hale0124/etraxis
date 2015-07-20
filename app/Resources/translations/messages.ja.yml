@@ -27,10 +27,14 @@ security.confirm_exit: 終了してログアウトしますか？
 'User account is locked.': アカウントはロックアウトされています。
 administration: 管理
 users: ユーザー
+user.new: 新しいユーザー
 user.username: ユーザー名
 user.fullname: フルネーム
 user.email: Eメール
 user.password: パスワード
+user.new_password: 新しいパスワード
+user.password_confirmation: パスワードの確認
+user.change_password: パスワード変更
 user.status: 状態
 user.enabled: 有効
 user.disabled: 無効
@@ -39,3 +43,5 @@ permissions: 権限
 role.administrator: システム管理者
 role.user: ユーザー
 description: 説明
+user.conflict.username: 入力されたユーザーの名前は既に存在しています。
+passwords.dont.match: パスワードが一致しません。

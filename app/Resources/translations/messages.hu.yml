@@ -27,10 +27,14 @@ security.confirm_exit: 'Biztos ki szeretne lépni?'
 'User account is locked.': 'A felhasználó ki lett zárva a rendszerből.'
 administration: Adminisztráció
 users: Felhasználók
+user.new: 'Új felhasználó'
 user.username: Felhasználónév
 user.fullname: 'Teljes név'
 user.email: E-mail
 user.password: Jelszó
+user.new_password: 'Új jelszó'
+user.password_confirmation: Megerősítés
+user.change_password: 'Jelszó megváltoztatása'
 user.status: Állapot
 user.enabled: Engedélyezett
 user.disabled: Letiltott
@@ -39,3 +43,5 @@ permissions: Jogosultságok
 role.administrator: Adminisztrátor
 role.user: Felhasználó
 description: Leírás
+user.conflict.username: 'Már létezik ilyen névvel ellátott felhasználó.'
+passwords.dont.match: 'A jelszavak nem egyeznek.'

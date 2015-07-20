@@ -27,10 +27,14 @@ security.confirm_exit: 'Vai tiešām vēlaties iziet?'
 'User account is locked.': 'Lietotāja konts ir bloķēts.'
 administration: Administrācija
 users: Lietotāji
+user.new: 'Jauns lietotājs'
 user.username: 'Lietotāja vārds'
 user.fullname: 'Pilns vārds'
 user.email: E-pasts
 user.password: Parole
+user.new_password: 'Janā parole'
+user.password_confirmation: 'Paroles apstiprinājums'
+user.change_password: 'Mainīt paroli'
 user.status: Statuss
 user.enabled: Ieslēgts
 user.disabled: Izslēgts
@@ -39,3 +43,5 @@ permissions: Atļaujas
 role.administrator: Administrators
 role.user: Lietotājs
 description: Apraksts
+user.conflict.username: 'Lietotāja konts ar tādu lietotāja vārdu jau eksistē.'
+passwords.dont.match: 'Paroles nesakrīt.'

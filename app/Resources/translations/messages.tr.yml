@@ -27,10 +27,14 @@ security.confirm_exit: 'Çıkmak istediğinizden emin misiniz?'
 'User account is locked.': 'Hesap kilitli.'
 administration: Yönetim
 users: Kullanıcılar
+user.new: 'Yeni Kullanıcı'
 user.username: 'Kullanıcı adı'
 user.fullname: 'Tam adı'
 user.email: E-posta
 user.password: Parola
+user.new_password: 'Yeni Parola'
+user.password_confirmation: 'Parola Doğrulama'
+user.change_password: 'Parolayı değiştir'
 user.status: Durum
 user.enabled: Etkinleştirildi
 user.disabled: Etkisizleştirildi
@@ -39,3 +43,5 @@ permissions: İzinler
 role.administrator: Yönetici
 role.user: Kullanıcı
 description: Yorum
+user.conflict.username: 'Girilen kullanıcı adıyla bir hesap zaten var.'
+passwords.dont.match: 'Parolalar uyuşmuyor.'

@@ -27,10 +27,14 @@ security.confirm_exit: 'Är du säker på att du vill avsluta?'
 'User account is locked.': 'Kontot är låst.'
 administration: Administration
 users: Användare
+user.user_new: 'Ny användare'
 user.username: Användarnamn
 user.fullname: 'Fullständigt namn'
 user.email: Email
 user.password: Lösenord
+user.new_password: 'Nytt lösenord'
+user.password_confirmation: 'Bekräfta lösenord'
+user.change_password: 'Ändra lösenord'
 user.status: Status
 user.enabled: Aktiverad
 user.disabled: Inaktiverad
@@ -39,3 +43,5 @@ permissions: Behörigheter
 role.administrator: Administratör
 role.user: Användare
 description: Beskrivning
+user.conflict.username: 'Kontot med detta användarnamn finns redan.'
+passwords.dont.match: 'Lösenorden matchar inte.'

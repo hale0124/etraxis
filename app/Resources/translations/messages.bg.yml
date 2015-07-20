@@ -27,10 +27,14 @@ security.confirm_exit: 'Сигурен ли сте че искате да изл
 'User account is locked.': 'Акаунтът е заключен.'
 administration: Администрация
 users: Потребители
+user.new: 'Нов потребител'
 user.username: 'Потребителско име'
 user.fullname: 'Пълно име'
 user.email: Имеил
 user.password: Парола
+user.new_password: 'Нова парола'
+user.password_confirmation: Потвърждение
+user.change_password: 'Промяна на парола'
 user.status: Статус
 user.enabled: Разреши
 user.disabled: Изключи
@@ -39,3 +43,5 @@ permissions: Права
 role.administrator: Администратор
 role.user: Потребител
 description: Описание
+user.conflict.username: 'Акаунт с въведенето потребителско име вече съществува.'
+passwords.dont.match: 'Паролите не са еднакви.'

@@ -27,10 +27,14 @@ security.confirm_exit: 'Вы уверены, что хотите выйти?'
 'User account is locked.': 'Учетная запись заблокирована.'
 administration: Администрирование
 users: Пользователи
+user.new: 'Новый пользователь'
 user.username: 'Имя пользователя'
 user.fullname: 'Полное имя'
 user.email: Эл.почта
 user.password: Пароль
+user.new_password: 'Новый пароль'
+user.password_confirmation: Подтверждение
+user.change_password: 'Изменить пароль'
 user.status: Статус
 user.enabled: Включен
 user.disabled: Отключен
@@ -39,3 +43,5 @@ permissions: 'Права доступа'
 role.administrator: Администратор
 role.user: Пользователь
 description: Описание
+user.conflict.username: 'Учетная запись с таким именем пользователя уже существует.'
+passwords.dont.match: 'Пароли не совпадают.'
