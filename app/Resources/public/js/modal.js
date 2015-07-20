@@ -49,11 +49,11 @@
             success: function(data) {
                 if (typeof settings.success === 'function') {
                     if (settings.success(data)) {
-                        $modal.dialog('close');
+                        $modal.dialog('destroy');
                     }
                 }
                 else {
-                    $modal.dialog('close');
+                    $modal.dialog('destroy');
                 }
             },
 
@@ -61,11 +61,11 @@
             error: function(xhr) {
                 if (typeof settings.error === 'function') {
                     if (settings.error(xhr)) {
-                        $modal.dialog('close');
+                        $modal.dialog('destroy');
                     }
                 }
                 else {
-                    $modal.dialog('close');
+                    $modal.dialog('destroy');
                 }
             }
         });
@@ -77,7 +77,7 @@
         };
 
         buttons[settings.btnCancel] = function() {
-            $(this).dialog('close');
+            $(this).dialog('destroy');
         };
 
         // Show the dialog.
