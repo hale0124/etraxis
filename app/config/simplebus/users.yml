@@ -15,7 +15,7 @@ services:
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\UnlockUserCommand }]
         arguments: [ @doctrine ]
 
-    command.user.index:
+    command.users.list:
         class: eTraxis\SimpleBus\Users\Handler\ListUsersCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\ListUsersCommand }]
         arguments: [ @translator, @doctrine ]
@@ -25,12 +25,12 @@ services:
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\FindUserCommand }]
         arguments: [ @doctrine ]
 
-    command.user.disable:
+    command.users.disable:
         class: eTraxis\SimpleBus\Users\Handler\DisableUsersCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\DisableUsersCommand }]
         arguments: [ @doctrine ]
 
-    command.user.enable:
+    command.users.enable:
         class: eTraxis\SimpleBus\Users\Handler\EnableUsersCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\EnableUsersCommand }]
         arguments: [ @doctrine ]

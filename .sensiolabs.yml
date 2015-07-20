@@ -3,5 +3,7 @@ exclude_patterns:
     - web/app*.php
 
 rules:
+
+    # We have a lot of POST actions which respond with JSON and should not redirect anywhere.
     symfony.controller.missing_redirect_after_post:
         enabled: false
