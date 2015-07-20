@@ -15,9 +15,14 @@ matrix:
         - php: hhvm
           env: DB=pgsql  # PDO driver for pgsql is unsupported by HHVM
 
+sudo: false
+
+addons:
+    apt:
+        packages:
+        - php5-ldap
+
 before_install:
-    - sudo apt-get update -qq
-    - sudo apt-get install -y php5-ldap
     - if [[ "$(phpenv version-name)" != "hhvm" ]]; then echo "extension = ldap.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini; fi
 
 install:
