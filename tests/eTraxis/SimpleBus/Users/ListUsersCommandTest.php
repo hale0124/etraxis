@@ -28,14 +28,14 @@ class ListUsersCommandTest extends BaseTestCase
             'order'  => [],
         ]);
 
-        $this->assertEmpty($command->users);
+        $this->assertEmpty($command->result['users']);
 
         $this->command_bus->handle($command);
 
-        $this->assertNotEmpty($command->users);
+        $this->assertNotEmpty($command->result['users']);
 
-        $this->assertEquals(count($users), $command->total);
-        $this->assertEquals(count($users), count($command->users));
+        $this->assertEquals(count($users), $command->result['total']);
+        $this->assertEquals(count($users), count($command->result['users']));
     }
 
     /**
@@ -51,7 +51,7 @@ class ListUsersCommandTest extends BaseTestCase
             'order'  => [],
         ]);
 
-        $this->assertEmpty($command->users);
+        $this->assertEmpty($command->result['users']);
 
         $this->command_bus->handle($command);
     }
@@ -67,12 +67,12 @@ class ListUsersCommandTest extends BaseTestCase
             'order'  => [],
         ]);
 
-        $this->assertEmpty($command->users);
+        $this->assertEmpty($command->result['users']);
 
         $this->command_bus->handle($command);
 
-        $this->assertEquals($expected, $command->total);
-        $this->assertEquals($expected, count($command->users));
+        $this->assertEquals($expected, $command->result['total']);
+        $this->assertEquals($expected, count($command->result['users']));
     }
 
     public function testOrder()
@@ -110,14 +110,14 @@ class ListUsersCommandTest extends BaseTestCase
             array_unshift($expected, array_pop($expected));
         }
 
-        $this->assertEmpty($command->users);
+        $this->assertEmpty($command->result['users']);
 
         $this->command_bus->handle($command);
 
-        $this->assertEquals(count($expected), count($command->users));
+        $this->assertEquals(count($expected), count($command->result['users']));
 
         foreach ($expected as $index => $username) {
-            $this->assertEquals($username, $command->users[$index][1]);
+            $this->assertEquals($username, $command->result['users'][$index][1]);
         }
     }
 }

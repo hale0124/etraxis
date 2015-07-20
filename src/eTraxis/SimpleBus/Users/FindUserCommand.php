@@ -13,24 +13,21 @@
 
 namespace eTraxis\SimpleBus\Users;
 
-use eTraxis\Traits\InitializationTrait;
+use eTraxis\SimpleBus\BaseCommand;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Finds specified account.
  *
+ * Returns found user object.
+ *
  * @property    int $id User ID.
  */
-class FindUserCommand
+class FindUserCommand extends BaseCommand
 {
-    use InitializationTrait;
-
     /**
      * @Assert\NotBlank()
      * @Assert\GreaterThan(value = "0")
      */
     public $id;
-
-    /** @var \eTraxis\Entity\User Found user. */
-    public $user = null;
 }

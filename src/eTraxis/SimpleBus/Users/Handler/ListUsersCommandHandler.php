@@ -78,14 +78,14 @@ class ListUsersCommandHandler
         /** @var \eTraxis\Entity\User[] $entities */
         $entities = $query->getQuery()->getResult();
 
-        $command->total = count($entities);
-        $command->users = [];
+        $command->result['total'] = count($entities);
+        $command->result['users'] = [];
 
         for ($i = 0; $i < $command->length || $command->length == -1; $i++) {
 
             $index = $i + $command->start;
 
-            if ($index >= $command->total) {
+            if ($index >= $command->result['total']) {
                 break;
             }
 
@@ -101,7 +101,7 @@ class ListUsersCommandHandler
                 $color = null;
             }
 
-            $command->users[] = [
+            $command->result['users'][] = [
                 $entity->getId(),
                 $entity->getUsername(),
                 $entity->getFullname(),

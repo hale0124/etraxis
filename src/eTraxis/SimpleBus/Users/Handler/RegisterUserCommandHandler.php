@@ -91,6 +91,6 @@ class RegisterUserCommandHandler
         $this->doctrine->getManager()->persist($user);
         $this->doctrine->getManager()->flush();
 
-        $command->id = $user->getId();
+        $command->result = $user->getId();
     }
 }

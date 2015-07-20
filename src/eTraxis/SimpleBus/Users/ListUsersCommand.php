@@ -13,21 +13,24 @@
 
 namespace eTraxis\SimpleBus\Users;
 
-use eTraxis\Traits\InitializationTrait;
+use eTraxis\SimpleBus\BaseCommand;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Enumerates all accounts existing in eTraxis database.
+ *
+ * Returns hash map as following:
+ *   users (array) - list of "User" entities.
+ *   total (int)   - total number of rows in the list.
+ *
  *
  * @property    int    $start  First row to return, zero-based.
  * @property    int    $length Total number of rows to return (-1 to return all rows).
  * @property    string $search Current search value.
  * @property    array  $order  Current columns ordering (zero-based column index and direction).
  */
-class ListUsersCommand
+class ListUsersCommand extends BaseCommand
 {
-    use InitializationTrait;
-
     /**
      * @Assert\NotNull()
      * @Assert\GreaterThanOrEqual(value = "0")
@@ -65,10 +68,4 @@ class ListUsersCommand
      * })
      */
     public $order = [];
-
-    /** @var int Total number of rows in the list. */
-    public $total = 0;
-
-    /** @var array List of users. */
-    public $users = [];
 }

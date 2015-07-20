@@ -41,14 +41,21 @@ class ValidationMiddleware implements MessageBusMiddleware
 
     /**
      * {@inheritDoc}
+     *
+     * @param   \eTraxis\SimpleBus\BaseCommand $message
      */
     public function handle($message, callable $next)
     {
         $errors = $this->validator->validate($message);
 
         if (count($errors)) {
-            $errmsg = (string) $errors;
-            $this->logger->error($errmsg);
+
+            foreach ($errors as $error) {
+                $message->errors[$error->getPropertyPath()] = $error->getMessage();
+            }
+
+            $errmsg = implode("\n", $message->errors);
+            $this->logger->error($errmsg, $message->errors);
             throw new ResponseException($errmsg, Response::HTTP_BAD_REQUEST);
         }
 

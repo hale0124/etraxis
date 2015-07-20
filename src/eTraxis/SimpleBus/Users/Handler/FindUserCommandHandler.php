@@ -40,6 +40,6 @@ class FindUserCommandHandler
     {
         $repository = $this->doctrine->getRepository('eTraxis:User');
 
-        $command->user = $repository->find($command->id);
+        $command->result = $repository->find($command->id);
     }
 }

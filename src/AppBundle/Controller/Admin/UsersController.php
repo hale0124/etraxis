@@ -70,9 +70,9 @@ class UsersController extends Controller
 
             return new JsonResponse([
                 'draw'            => $request->get('draw'),
-                'recordsTotal'    => $command->total,
-                'recordsFiltered' => $command->total,
-                'data'            => $command->users,
+                'recordsTotal'    => $command->result['total'],
+                'recordsFiltered' => $command->result['total'],
+                'data'            => $command->result['users'],
             ]);
         }
         catch (ResponseException $e) {
@@ -95,15 +95,14 @@ class UsersController extends Controller
     {
         try {
             $command = new Users\FindUserCommand(['id' => $id]);
-
             $this->getCommandBus()->handle($command);
 
-            if (!$command->user) {
+            if (!$command->result) {
                 throw $this->createNotFoundException();
             }
 
             return $this->render('admin/users/view.html.twig', [
-                'user' => $command->user,
+                'user' => $command->result,
                 'tab'  => $request->get('tab', 0),
             ]);
         }
@@ -126,15 +125,14 @@ class UsersController extends Controller
     {
         try {
             $command = new Users\FindUserCommand(['id' => $id]);
-
             $this->getCommandBus()->handle($command);
 
-            if (!$command->user) {
+            if (!$command->result) {
                 throw $this->createNotFoundException();
             }
 
             return $this->render('admin/users/tab_details.html.twig', [
-                'user' => $command->user,
+                'user' => $command->result,
             ]);
         }
         catch (ResponseException $e) {
@@ -154,14 +152,15 @@ class UsersController extends Controller
      */
     public function disableAction(Request $request)
     {
+        $command = new Users\DisableUsersCommand($request->request->all());
+
         try {
-            $command = new Users\DisableUsersCommand($request->request->all());
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();
         }
         catch (ResponseException $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
+            return new JsonResponse($command->errors, $e->getCode());
         }
     }
 
@@ -177,14 +176,15 @@ class UsersController extends Controller
      */
     public function enableAction(Request $request)
     {
+        $command = new Users\EnableUsersCommand($request->request->all());
+
         try {
-            $command = new Users\EnableUsersCommand($request->request->all());
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();
         }
         catch (ResponseException $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
+            return new JsonResponse($command->errors, $e->getCode());
         }
     }
 
@@ -200,14 +200,15 @@ class UsersController extends Controller
      */
     public function unlockAction($id)
     {
+        $command = new Users\UnlockUserCommand(['id' => $id]);
+
         try {
-            $command = new Users\UnlockUserCommand(['id' => $id]);
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();
         }
         catch (ResponseException $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
+            return new JsonResponse($command->errors, $e->getCode());
         }
     }
 }

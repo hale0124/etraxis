@@ -49,7 +49,7 @@ class RegisterUserCommandTest extends BaseTestCase
         $this->assertEquals($locale, $user->getLocale());
         $this->assertEquals($theme, $user->getTheme());
         $this->assertTrue($user->isLdap());
-        $this->assertEquals($id, $command->id);
+        $this->assertEquals($id, $command->result);
 
         // second time
         $command = new RegisterUserCommand([
@@ -70,7 +70,7 @@ class RegisterUserCommandTest extends BaseTestCase
         $this->assertEquals($locale, $user->getLocale());
         $this->assertEquals($theme, $user->getTheme());
         $this->assertTrue($user->isLdap());
-        $this->assertEquals($id, $command->id);
+        $this->assertEquals($id, $command->result);
     }
 
     /**

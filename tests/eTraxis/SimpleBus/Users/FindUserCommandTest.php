@@ -27,7 +27,7 @@ class FindUserCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $this->assertEquals($user->getId(), $command->user->getId());
+        $this->assertEquals($user->getId(), $command->result->getId());
     }
 
     public function testNotFound()
@@ -38,6 +38,6 @@ class FindUserCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $this->assertNull($command->user);
+        $this->assertNull($command->result);
     }
 }

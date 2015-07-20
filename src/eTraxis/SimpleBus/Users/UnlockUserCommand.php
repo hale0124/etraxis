@@ -13,7 +13,7 @@
 
 namespace eTraxis\SimpleBus\Users;
 
-use eTraxis\Traits\InitializationTrait;
+use eTraxis\SimpleBus\BaseCommand;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -21,10 +21,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @property    int $id User ID.
  */
-class UnlockUserCommand
+class UnlockUserCommand extends BaseCommand
 {
-    use InitializationTrait;
-
     /**
      * @Assert\NotBlank()
      * @Assert\GreaterThan(value = "0")
