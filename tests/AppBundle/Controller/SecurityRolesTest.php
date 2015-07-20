@@ -36,7 +36,7 @@ class SecurityRolesTest extends WebTestCase
     /** @var \Symfony\Bundle\FrameworkBundle\Client */
     private $client = null;
 
-    /** @var \eTraxis\Model\User */
+    /** @var \eTraxis\Entity\User */
     private $user = null;
 
     private function prepareUrl($url)

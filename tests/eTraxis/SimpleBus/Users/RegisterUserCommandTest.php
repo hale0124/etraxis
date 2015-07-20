@@ -41,7 +41,7 @@ class RegisterUserCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        /** @var \eTraxis\Model\User $user */
+        /** @var \eTraxis\Entity\User $user */
         $user = $this->doctrine->getRepository('eTraxis:User')->findOneBy([
             'username' => $username,
             'isLdap'   => true,
@@ -49,7 +49,7 @@ class RegisterUserCommandTest extends BaseTestCase
 
         $id = $user->getId();
 
-        $this->assertInstanceOf('eTraxis\Model\User', $user);
+        $this->assertInstanceOf('eTraxis\Entity\User', $user);
         $this->assertEquals($username, $user->getUsername());
         $this->assertEquals($fullname, $user->getFullname());
         $this->assertEquals($email, $user->getEmail());
@@ -67,13 +67,13 @@ class RegisterUserCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        /** @var \eTraxis\Model\User $user */
+        /** @var \eTraxis\Entity\User $user */
         $user = $this->doctrine->getRepository('eTraxis:User')->findOneBy([
             'username' => $username,
             'isLdap'   => true,
         ]);
 
-        $this->assertInstanceOf('eTraxis\Model\User', $user);
+        $this->assertInstanceOf('eTraxis\Entity\User', $user);
         $this->assertEquals($id, $user->getId());
         $this->assertEquals($username, $user->getUsername());
         $this->assertEquals($fullname, $user->getFullname());

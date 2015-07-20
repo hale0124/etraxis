@@ -13,7 +13,7 @@
 
 namespace eTraxis\Security;
 
-use eTraxis\Model\User;
+use eTraxis\Entity\User;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -97,6 +97,6 @@ class InternalUserProvider implements UserProviderInterface
      */
     public function supportsClass($class)
     {
-        return $class === 'eTraxis\Model\User';
+        return $class === 'eTraxis\Entity\User';
     }
 }

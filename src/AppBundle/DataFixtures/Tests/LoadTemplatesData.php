@@ -16,8 +16,8 @@ namespace AppBundle\DataFixtures\Tests;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use eTraxis\Model\Template;
-use eTraxis\Model\TemplateGroupPermission;
+use eTraxis\Entity\Template;
+use eTraxis\Entity\TemplateGroupPermission;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

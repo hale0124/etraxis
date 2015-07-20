@@ -19,7 +19,7 @@ class FindUserCommandTest extends BaseTestCase
 {
     public function testFound()
     {
-        /** @var \eTraxis\Model\User $user */
+        /** @var \eTraxis\Entity\User $user */
         $user = $this->doctrine->getRepository('eTraxis:User')->findOneBy([
             'username' => 'artem@eTraxis',
             'isLdap'   => false,

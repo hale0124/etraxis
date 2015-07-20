@@ -21,7 +21,7 @@ class EnableUsersCommandTest extends BaseTestCase
     {
         $username = 'veins';
 
-        /** @var \eTraxis\Model\User $user */
+        /** @var \eTraxis\Entity\User $user */
         $user = $this->doctrine->getRepository('eTraxis:User')->findOneBy([
             'username' => $username . '@eTraxis',
             'isLdap'   => false,

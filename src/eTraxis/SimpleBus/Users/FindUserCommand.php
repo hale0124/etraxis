@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @property    int $id User ID.
  *
  * Output properties:
- * @property    \eTraxis\Model\User $user User.
+ * @property    \eTraxis\Entity\User $user User.
  */
 class FindUserCommand
 {

@@ -21,7 +21,7 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 class SecurityListenerTest extends BaseTestCase
 {
     /**
-     * @return  \eTraxis\Model\User
+     * @return  \eTraxis\Entity\User
      */
     protected function findUser()
     {

@@ -75,7 +75,7 @@ class ListUsersCommandHandler
             $query->addOrderBy($map[$order['column']], $order['dir']);
         }
 
-        /** @var \eTraxis\Model\User[] $entities */
+        /** @var \eTraxis\Entity\User[] $entities */
         $entities = $query->getQuery()->getResult();
 
         $command->total = count($entities);

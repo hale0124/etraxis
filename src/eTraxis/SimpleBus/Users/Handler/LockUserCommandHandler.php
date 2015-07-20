@@ -56,7 +56,7 @@ class LockUserCommandHandler
     {
         $repository = $this->doctrine->getRepository('eTraxis:User');
 
-        /** @var \eTraxis\Model\User $user */
+        /** @var \eTraxis\Entity\User $user */
         if ($user = $repository->findOneBy(['username' => $command->username . '@eTraxis'])) {
 
             if ($this->security_auth_attempts && $this->security_lock_time) {

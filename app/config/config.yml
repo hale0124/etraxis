@@ -71,8 +71,8 @@ doctrine:
         mappings:
             model:
                 type: annotation
-                dir: "%kernel.root_dir%/../src/eTraxis/Model"
-                prefix: eTraxis\Model
+                dir: "%kernel.root_dir%/../src/eTraxis/Entity"
+                prefix: eTraxis\Entity
                 alias: eTraxis
                 is_bundle: false
 

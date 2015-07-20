@@ -22,7 +22,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 class AuthenticationListenerTest extends BaseTestCase
 {
     /**
-     * @return  \eTraxis\Model\User
+     * @return  \eTraxis\Entity\User
      */
     protected function findUser()
     {

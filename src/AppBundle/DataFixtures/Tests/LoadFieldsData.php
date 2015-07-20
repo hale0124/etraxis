@@ -16,8 +16,8 @@ namespace AppBundle\DataFixtures\Tests;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
-use eTraxis\Model\Field;
-use eTraxis\Model\FieldGroupAccess;
+use eTraxis\Entity\Field;
+use eTraxis\Entity\FieldGroupAccess;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
