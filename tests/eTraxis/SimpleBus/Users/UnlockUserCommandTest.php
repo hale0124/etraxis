@@ -21,12 +21,7 @@ class UnlockUserCommandTest extends BaseTestCase
     {
         $username = 'artem';
 
-        /** @var \eTraxis\Entity\User $user */
-        $user = $this->doctrine->getRepository('eTraxis:User')->findOneBy([
-            'username' => $username . '@eTraxis',
-            'isLdap'   => false,
-        ]);
-
+        $user = $this->findUser($username);
         $this->assertNotNull($user);
 
         $user->setAuthAttempts(1);
@@ -40,11 +35,7 @@ class UnlockUserCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $user = $this->doctrine->getRepository('eTraxis:User')->findOneBy([
-            'username' => $username . '@eTraxis',
-            'isLdap'   => false,
-        ]);
-
+        $user = $this->findUser($username);
         $this->assertEquals(0, $user->getAuthAttempts());
     }
 }

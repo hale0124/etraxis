@@ -23,12 +23,9 @@ class LdapAuthenticatorTest extends BaseTestCase
 {
     public function testCreateToken()
     {
-        /** @var \SimpleBus\Message\Bus\MessageBus $command_bus */
-        $command_bus = self::$kernel->getContainer()->get('command_bus');
-
         $object = new LdapAuthenticator(
             $this->logger,
-            $command_bus,
+            $this->command_bus,
             new LdapService($this->logger, null),
             'DC=example,DC=com'
         );
@@ -40,12 +37,9 @@ class LdapAuthenticatorTest extends BaseTestCase
 
     public function testSupportsTokenSuccess()
     {
-        /** @var \SimpleBus\Message\Bus\MessageBus $command_bus */
-        $command_bus = self::$kernel->getContainer()->get('command_bus');
-
         $object = new LdapAuthenticator(
             $this->logger,
-            $command_bus,
+            $this->command_bus,
             new LdapService($this->logger, null),
             'DC=example,DC=com'
         );
@@ -57,12 +51,9 @@ class LdapAuthenticatorTest extends BaseTestCase
 
     public function testSupportsTokenBadToken()
     {
-        /** @var \SimpleBus\Message\Bus\MessageBus $command_bus */
-        $command_bus = self::$kernel->getContainer()->get('command_bus');
-
         $object = new LdapAuthenticator(
             $this->logger,
-            $command_bus,
+            $this->command_bus,
             new LdapService($this->logger, null),
             'DC=example,DC=com'
         );
@@ -74,12 +65,9 @@ class LdapAuthenticatorTest extends BaseTestCase
 
     public function testSupportsTokenBadProvider()
     {
-        /** @var \SimpleBus\Message\Bus\MessageBus $command_bus */
-        $command_bus = self::$kernel->getContainer()->get('command_bus');
-
         $object = new LdapAuthenticator(
             $this->logger,
-            $command_bus,
+            $this->command_bus,
             new LdapService($this->logger, null),
             'DC=example,DC=com'
         );
@@ -91,9 +79,6 @@ class LdapAuthenticatorTest extends BaseTestCase
 
     public function testAuthenticateTokenSuccess()
     {
-        /** @var \SimpleBus\Message\Bus\MessageBus $command_bus */
-        $command_bus = self::$kernel->getContainer()->get('command_bus');
-
         $ldap = new LdapService(
             $this->logger,
             'ldap.forumsys.com',
@@ -106,7 +91,7 @@ class LdapAuthenticatorTest extends BaseTestCase
 
         $object = new LdapAuthenticator(
             $this->logger,
-            $command_bus,
+            $this->command_bus,
             $ldap,
             'DC=example,DC=com'
         );
@@ -124,16 +109,13 @@ class LdapAuthenticatorTest extends BaseTestCase
      */
     public function testAuthenticateTokenNoConnection()
     {
-        /** @var \SimpleBus\Message\Bus\MessageBus $command_bus */
-        $command_bus = self::$kernel->getContainer()->get('command_bus');
-
         $ldap = new LdapService($this->logger, null);
 
         $this->assertFalse($ldap->isConnected());
 
         $object = new LdapAuthenticator(
             $this->logger,
-            $command_bus,
+            $this->command_bus,
             $ldap,
             'DC=example,DC=com'
         );
@@ -150,9 +132,6 @@ class LdapAuthenticatorTest extends BaseTestCase
      */
     public function testAuthenticateTokenWrongPassword()
     {
-        /** @var \SimpleBus\Message\Bus\MessageBus $command_bus */
-        $command_bus = self::$kernel->getContainer()->get('command_bus');
-
         $ldap = new LdapService(
             $this->logger,
             'ldap.forumsys.com',
@@ -165,7 +144,7 @@ class LdapAuthenticatorTest extends BaseTestCase
 
         $object = new LdapAuthenticator(
             $this->logger,
-            $command_bus,
+            $this->command_bus,
             $ldap,
             'DC=example,DC=com'
         );

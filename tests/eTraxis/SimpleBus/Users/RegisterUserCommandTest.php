@@ -25,10 +25,7 @@ class RegisterUserCommandTest extends BaseTestCase
         $locale   = static::$kernel->getContainer()->getParameter('locale');
         $theme    = static::$kernel->getContainer()->getParameter('theme');
 
-        $user = $this->doctrine->getRepository('eTraxis:User')->findOneBy([
-            'username' => $username,
-            'isLdap'   => true,
-        ]);
+        $user = $this->findUser($username, true);
 
         $this->assertNull($user);
 
@@ -41,11 +38,7 @@ class RegisterUserCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        /** @var \eTraxis\Entity\User $user */
-        $user = $this->doctrine->getRepository('eTraxis:User')->findOneBy([
-            'username' => $username,
-            'isLdap'   => true,
-        ]);
+        $user = $this->findUser($username, true);
 
         $id = $user->getId();
 
@@ -67,11 +60,7 @@ class RegisterUserCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        /** @var \eTraxis\Entity\User $user */
-        $user = $this->doctrine->getRepository('eTraxis:User')->findOneBy([
-            'username' => $username,
-            'isLdap'   => true,
-        ]);
+        $user = $this->findUser($username, true);
 
         $this->assertInstanceOf('eTraxis\Entity\User', $user);
         $this->assertEquals($id, $user->getId());

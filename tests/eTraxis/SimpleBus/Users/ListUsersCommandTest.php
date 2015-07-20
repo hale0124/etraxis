@@ -19,8 +19,6 @@ class ListUsersCommandTest extends BaseTestCase
 {
     public function testBasic()
     {
-        static::$kernel->getContainer()->set('security.authorization_checker', new AuthorizationCheckerAdminStub());
-
         $users = $this->doctrine->getRepository('eTraxis:User')->findAll();
 
         $command = new ListUsersCommand([
@@ -44,8 +42,6 @@ class ListUsersCommandTest extends BaseTestCase
      */
     public function testBadRequest()
     {
-        static::$kernel->getContainer()->set('security.authorization_checker', new AuthorizationCheckerAdminStub());
-
         $command = new ListUsersCommand([
             'start'  => '',
             'length' => -1,
@@ -61,8 +57,6 @@ class ListUsersCommandTest extends BaseTestCase
     public function testSearch()
     {
         $expected = 8;
-
-        static::$kernel->getContainer()->set('security.authorization_checker', new AuthorizationCheckerAdminStub());
 
         $command = new ListUsersCommand([
             'start'  => 0,
@@ -97,8 +91,6 @@ class ListUsersCommandTest extends BaseTestCase
             'artem',    // this one has NULL in the "description" field
         ];
 
-        static::$kernel->getContainer()->set('security.authorization_checker', new AuthorizationCheckerAdminStub());
-
         $command = new ListUsersCommand([
             'start'  => 0,
             'length' => -1,
@@ -110,7 +102,7 @@ class ListUsersCommandTest extends BaseTestCase
         ]);
 
         // PostgreSQL treats NULLs as greatest values.
-        if (static::$kernel->getContainer()->getParameter('database_driver') == 'pdo_pgsql') {
+        if ($this->client->getContainer()->getParameter('database_driver') == 'pdo_pgsql') {
             array_unshift($expected, array_pop($expected));
             array_unshift($expected, array_pop($expected));
         }

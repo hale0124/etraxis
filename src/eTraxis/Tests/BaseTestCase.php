@@ -13,13 +13,18 @@
 
 namespace eTraxis\Tests;
 
-use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\BrowserKit\Cookie;
+use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
- * Basic test case with access to kernel and database transactions.
+ * Basic test case with database transactions, users authentication, and access to kernel.
  */
-class BaseTestCase extends KernelTestCase
+class BaseTestCase extends WebTestCase
 {
+    /** @var \Symfony\Bundle\FrameworkBundle\Client */
+    protected $client;
+
     /** @var \Psr\Log\LoggerInterface */
     protected $logger;
 
@@ -46,15 +51,15 @@ class BaseTestCase extends KernelTestCase
      */
     protected function setUp()
     {
-        self::bootKernel();
+        $this->client = static::createClient();
 
-        $this->logger      = static::$kernel->getContainer()->get('logger');
-        $this->router      = static::$kernel->getContainer()->get('router');
-        $this->session     = static::$kernel->getContainer()->get('session');
-        $this->validator   = static::$kernel->getContainer()->get('validator');
-        $this->translator  = static::$kernel->getContainer()->get('translator');
-        $this->doctrine    = static::$kernel->getContainer()->get('doctrine');
-        $this->command_bus = static::$kernel->getContainer()->get('command_bus');
+        $this->logger      = $this->client->getContainer()->get('logger');
+        $this->router      = $this->client->getContainer()->get('router');
+        $this->session     = $this->client->getContainer()->get('session');
+        $this->validator   = $this->client->getContainer()->get('validator');
+        $this->translator  = $this->client->getContainer()->get('translator');
+        $this->doctrine    = $this->client->getContainer()->get('doctrine');
+        $this->command_bus = $this->client->getContainer()->get('command_bus');
 
         /** @var \Doctrine\ORM\EntityManager $manager */
         $manager = $this->doctrine->getManager();
@@ -71,5 +76,48 @@ class BaseTestCase extends KernelTestCase
         $manager->rollback();
 
         parent::tearDown();
+    }
+
+    /**
+     * Finds specified user.
+     *
+     * @param   string $username Login.
+     * @param   bool   $ldap     Whether it's a LDAP user.
+     *
+     * @return  \eTraxis\Entity\User|null Found user.
+     */
+    protected function findUser($username, $ldap = false)
+    {
+        return $this->doctrine->getRepository('eTraxis:User')->findOneBy([
+            'username' => $ldap ? $username : $username . '@eTraxis',
+            'isLdap'   => $ldap,
+        ]);
+    }
+
+    /**
+     * Emulates authentication of specified user.
+     *
+     * @param   string $username Login.
+     * @param   bool   $ldap     Whether it's a LDAP user.
+     *
+     * @return  bool Whether user was authenticated.
+     */
+    protected function loginAs($username, $ldap = false)
+    {
+        if ($user = $this->findUser($username, $ldap)) {
+
+            $token = new UsernamePasswordToken($user, null, 'etraxis_provider', $user->getRoles());
+            $this->client->getContainer()->get('security.token_storage')->setToken($token);
+
+            $this->session->set('_security_default', serialize($token));
+            $this->session->save();
+
+            $cookie = new Cookie($this->session->getName(), $this->session->getId());
+            $this->client->getCookieJar()->set($cookie);
+
+            return true;
+        }
+
+        return false;
     }
 }

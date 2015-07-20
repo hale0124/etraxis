@@ -19,13 +19,7 @@ class DisableUsersCommandTest extends BaseTestCase
 {
     public function testDisableUser()
     {
-        $username = 'artem';
-
-        /** @var \eTraxis\Entity\User $user */
-        $user = $this->doctrine->getRepository('eTraxis:User')->findOneBy([
-            'username' => $username . '@eTraxis',
-            'isLdap'   => false,
-        ]);
+        $user = $this->findUser('artem');
 
         $this->assertNotNull($user);
         $this->assertFalse($user->isDisabled());
@@ -38,10 +32,7 @@ class DisableUsersCommandTest extends BaseTestCase
 
         $this->doctrine->getManager()->clear();
 
-        $user = $this->doctrine->getRepository('eTraxis:User')->findOneBy([
-            'username' => $username . '@eTraxis',
-            'isLdap'   => false,
-        ]);
+        $user = $this->findUser('artem');
 
         $this->assertTrue($user->isDisabled());
     }

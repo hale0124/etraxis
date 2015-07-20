@@ -21,16 +21,6 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class AuthenticationListenerTest extends BaseTestCase
 {
-    /**
-     * @return  \eTraxis\Entity\User
-     */
-    protected function findUser()
-    {
-        $repository = $this->doctrine->getManager()->getRepository('eTraxis:User');
-
-        return $repository->findOneBy(['username' => 'artem@eTraxis']);
-    }
-
     public function testAuthenticationSuccess()
     {
         $token = new UsernamePasswordToken('artem', 'secret', 'etraxis_provider');
@@ -40,7 +30,7 @@ class AuthenticationListenerTest extends BaseTestCase
         $object = new AuthenticationListener($this->logger, $this->command_bus);
 
         $object->onAuthenticationSuccess($success);
-        $this->assertTrue($this->findUser()->isAccountNonLocked());
+        $this->assertTrue($this->findUser('artem')->isAccountNonLocked());
     }
 
     public function testAuthenticationFailure()
@@ -52,6 +42,6 @@ class AuthenticationListenerTest extends BaseTestCase
         $object = new AuthenticationListener($this->logger, $this->command_bus);
 
         $object->onAuthenticationFailure($failure);
-        $this->assertTrue($this->findUser()->isAccountNonLocked());
+        $this->assertTrue($this->findUser('artem')->isAccountNonLocked());
     }
 }

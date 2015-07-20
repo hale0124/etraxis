@@ -21,12 +21,7 @@ class LockUserCommandTest extends BaseTestCase
     {
         $username = 'artem';
 
-        /** @var \eTraxis\Entity\User $user */
-        $user = $this->doctrine->getRepository('eTraxis:User')->findOneBy([
-            'username' => $username . '@eTraxis',
-            'isLdap'   => false,
-        ]);
-
+        $user = $this->findUser($username);
         $this->assertNotNull($user);
 
         $expected = $user->getAuthAttempts() + 1;
@@ -38,21 +33,13 @@ class LockUserCommandTest extends BaseTestCase
         // first time
         $this->command_bus->handle($command);
 
-        $user = $this->doctrine->getRepository('eTraxis:User')->findOneBy([
-            'username' => $username . '@eTraxis',
-            'isLdap'   => false,
-        ]);
-
+        $user = $this->findUser($username);
         $this->assertEquals($expected, $user->getAuthAttempts());
 
         // second time
         $this->command_bus->handle($command);
 
-        $user = $this->doctrine->getRepository('eTraxis:User')->findOneBy([
-            'username' => $username . '@eTraxis',
-            'isLdap'   => false,
-        ]);
-
+        $user = $this->findUser($username);
         $this->assertFalse($user->isAccountNonLocked());
     }
 }

@@ -20,23 +20,13 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class SecurityListenerTest extends BaseTestCase
 {
-    /**
-     * @return  \eTraxis\Entity\User
-     */
-    protected function findUser()
-    {
-        $repository = $this->doctrine->getManager()->getRepository('eTraxis:User');
-        $user       = $repository->findOneBy(['username' => 'artem@eTraxis']);
-
-        $user->setLocale('ru');
-
-        return $user;
-    }
-
     public function testAuthenticationSuccess()
     {
+        $user = $this->findUser('artem');
+        $user->setLocale('ru');
+
         $request = new Request();
-        $token   = new UsernamePasswordToken($this->findUser(), 'secret', 'etraxis_provider');
+        $token   = new UsernamePasswordToken($user, null, 'etraxis_provider');
 
         $event = new InteractiveLoginEvent($request, $token);
 
