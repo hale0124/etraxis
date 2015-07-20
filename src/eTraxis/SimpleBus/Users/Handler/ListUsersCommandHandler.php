@@ -79,8 +79,7 @@ class ListUsersCommandHandler
         $entities = $query->getQuery()->getResult();
 
         $command->total = count($entities);
-
-        $users = [];
+        $command->users = [];
 
         for ($i = 0; $i < $command->length || $command->length == -1; $i++) {
 
@@ -102,7 +101,7 @@ class ListUsersCommandHandler
                 $color = null;
             }
 
-            $users[] = [
+            $command->users[] = [
                 $entity->getId(),
                 $entity->getUsername(),
                 $entity->getFullname(),
@@ -113,7 +112,5 @@ class ListUsersCommandHandler
                 'DT_RowClass' => $color,
             ];
         }
-
-        $command->users = $users;
     }
 }

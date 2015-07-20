@@ -33,6 +33,8 @@ class ListUsersCommandTest extends BaseTestCase
         $this->command_bus->handle($command);
 
         $this->assertNotEmpty($command->users);
+
+        $this->assertEquals(count($users), $command->total);
         $this->assertEquals(count($users), count($command->users));
     }
 
@@ -69,6 +71,7 @@ class ListUsersCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
+        $this->assertEquals($expected, $command->total);
         $this->assertEquals($expected, count($command->users));
     }
 
