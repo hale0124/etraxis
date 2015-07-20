@@ -26,13 +26,8 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class KernelListener implements EventSubscriberInterface
 {
-    /** @var Router */
     protected $router;
-
-    /** @var TranslatorInterface */
     protected $translator;
-
-    /** @var string Default locale */
     protected $locale;
 
     /**

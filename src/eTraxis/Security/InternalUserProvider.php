@@ -26,10 +26,7 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
  */
 class InternalUserProvider implements UserProviderInterface
 {
-    /** @var LoggerInterface */
     protected $logger;
-
-    /** @var RegistryInterface */
     protected $doctrine;
 
     /**

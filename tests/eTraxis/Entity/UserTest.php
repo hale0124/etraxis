@@ -192,6 +192,7 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     public function testGetSalt()
     {
+        /** @noinspection PhpVoidFunctionResultUsedInspection */
         $this->assertNull($this->object->getSalt());
     }
 

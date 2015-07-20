@@ -31,16 +31,9 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
  */
 class LdapAuthenticator implements SimpleFormAuthenticatorInterface
 {
-    /** @var LoggerInterface */
     protected $logger;
-
-    /** @var MessageBus */
     protected $command_bus;
-
-    /** @var LdapService */
     protected $ldap;
-
-    /** @var string */
     protected $basedn;
 
     /**

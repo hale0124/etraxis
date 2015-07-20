@@ -21,10 +21,9 @@ use Psr\Log\LoggerInterface;
  */
 class LdapService
 {
-    /** @var LoggerInterface */
     protected $logger;
 
-    /** @var resource */
+    /** @var bool|resource */
     protected $link = false;
 
     /**

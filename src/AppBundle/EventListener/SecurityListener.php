@@ -23,7 +23,6 @@ use Symfony\Component\Security\Http\SecurityEvents;
  */
 class SecurityListener implements EventSubscriberInterface
 {
-    /** @var SessionInterface */
     protected $session;
 
     /**

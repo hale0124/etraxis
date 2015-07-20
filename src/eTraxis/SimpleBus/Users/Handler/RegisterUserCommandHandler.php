@@ -37,11 +37,7 @@ class RegisterUserCommandHandler
      * @param   string            $locale   Default locale.
      * @param   string            $theme    Default theme.
      */
-    public function __construct(
-        LoggerInterface $logger,
-        RegistryInterface $doctrine,
-        $locale,
-        $theme)
+    public function __construct(LoggerInterface $logger, RegistryInterface $doctrine, $locale, $theme)
     {
         $this->logger   = $logger;
         $this->doctrine = $doctrine;
