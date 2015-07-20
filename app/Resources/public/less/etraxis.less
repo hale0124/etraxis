@@ -70,11 +70,15 @@ a {
 
 /* Layout */
 
-.container {
+.content {
     min-width: 320px;
     max-width: 1180px;
     width: 100%;
     margin: 0 auto;
+}
+
+.container {
+    width: 100%;
     .clearfix;
 
     > div {
@@ -182,7 +186,7 @@ nav {
 /* Footer */
 
 footer {
-    .container;
+    .content;
 
     margin: 5px auto;
     padding: 0 10px;
@@ -245,6 +249,10 @@ legend {
 @media (min-width: @min-width) {
     .control {
         min-width: 500px;
+
+        .label {
+            text-align: right;
+        }
     }
 }
 

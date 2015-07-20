@@ -21,7 +21,7 @@
 </head>
 <body>
     <nav>
-        <div class="container">
+        <div class="content">
             {% spaceless %}
 
                 <span class="fern"><a href="{{ path('homepage') }}"><img src="{{ asset('images/fern.png') }}"></a></span>
@@ -42,7 +42,9 @@
         </div>
     </nav>
 
-    {% block content %}{% endblock %}
+    <div class="content">
+        {% block content %}{% endblock %}
+    </div>
 
     <footer>
         <a href="https://www.etraxis.com/" target="_blank">Copyright &copy; Artem Rodygin</a>
