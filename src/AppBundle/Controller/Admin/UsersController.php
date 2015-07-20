@@ -213,16 +213,7 @@ class UsersController extends Controller
     public function unlockAction($id)
     {
         try {
-            $command = new Users\FindUserCommand(['id' => $id]);
-
-            $this->getCommandBus()->handle($command);
-
-            if (!$command->user) {
-                throw $this->createNotFoundException();
-            }
-
-            $command = new Users\UnlockUserCommand(['username' => $command->user->getUsername()]);
-
+            $command = new Users\UnlockUserCommand(['id' => $id]);
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();

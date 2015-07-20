@@ -13,6 +13,7 @@
 
 namespace AppBundle\EventListener;
 
+use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Users\LockUserCommand;
 use eTraxis\SimpleBus\Users\UnlockUserCommand;
 use Psr\Log\LoggerInterface;
@@ -62,13 +63,18 @@ class AuthenticationListener implements EventSubscriberInterface
     {
         $token = $event->getAuthenticationToken();
 
-        $this->logger->info('Authentication success', [$token->getUsername()]);
+        $user = $token->getUser();
 
-        $command = new UnlockUserCommand([
-            'username' => $token->getUsername(),
-        ]);
+        if ($user instanceof User) {
 
-        $this->command_bus->handle($command);
+            $this->logger->info('Authentication success', [$token->getUsername()]);
+
+            $command = new UnlockUserCommand([
+                'id' => $user->getId(),
+            ]);
+
+            $this->command_bus->handle($command);
+        }
     }
 
     /**

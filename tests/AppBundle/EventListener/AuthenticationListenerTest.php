@@ -23,7 +23,11 @@ class AuthenticationListenerTest extends BaseTestCase
 {
     public function testAuthenticationSuccess()
     {
-        $token = new UsernamePasswordToken('artem', 'secret', 'etraxis_provider');
+        $user = $this->findUser('artem');
+
+        $this->assertNotNull($user);
+
+        $token = new UsernamePasswordToken($user, 'secret', 'etraxis_provider');
 
         $success = new AuthenticationEvent($token);
 

@@ -41,7 +41,7 @@ class UnlockUserCommandHandler
         $repository = $this->doctrine->getRepository('eTraxis:User');
 
         /** @var \eTraxis\Entity\User $user */
-        if ($user = $repository->findOneBy(['username' => $command->username . '@eTraxis'])) {
+        if ($user = $repository->find($command->id)) {
 
             $user->setAuthAttempts(0);
             $user->setLockedUntil(0);

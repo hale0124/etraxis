@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Clears locks count for specified eTraxis account.
  *
- * @property    string $username Username to unlock.
+ * @property    int $id User ID.
  */
 class UnlockUserCommand
 {
@@ -27,7 +27,7 @@ class UnlockUserCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max = "112")
+     * @Assert\GreaterThan(value = "0")
      */
-    public $username;
+    public $id;
 }

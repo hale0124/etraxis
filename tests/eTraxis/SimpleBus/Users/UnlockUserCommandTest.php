@@ -19,23 +19,23 @@ class UnlockUserCommandTest extends BaseTestCase
 {
     public function testUnlockUser()
     {
-        $username = 'artem';
-
-        $user = $this->findUser($username);
+        $user = $this->findUser('artem');
         $this->assertNotNull($user);
+
+        $id = $user->getId();
 
         $user->setAuthAttempts(1);
 
         $this->doctrine->getManager()->persist($user);
         $this->doctrine->getManager()->flush();
 
-        $command = new UnlockUserCommand([
-            'username' => $username,
-        ]);
+        $user = $this->doctrine->getRepository('eTraxis:User')->find($id);
+        $this->assertEquals(1, $user->getAuthAttempts());
 
+        $command = new UnlockUserCommand(['id' => $id]);
         $this->command_bus->handle($command);
 
-        $user = $this->findUser($username);
+        $user = $this->doctrine->getRepository('eTraxis:User')->find($id);
         $this->assertEquals(0, $user->getAuthAttempts());
     }
 }
