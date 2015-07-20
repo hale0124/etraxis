@@ -155,17 +155,8 @@ class UsersController extends Controller
     public function disableAction(Request $request)
     {
         try {
-            // Don't disable yourself.
-            $ids = array_filter($request->get('ids', []), function ($id) {
-                return $id != $this->getUser()->getId();
-            });
-
-            if (count($ids)) {
-
-                $command = new Users\DisableUsersCommand(['ids' => $ids]);
-
-                $this->getCommandBus()->handle($command);
-            }
+            $command = new Users\DisableUsersCommand($request->request->all());
+            $this->getCommandBus()->handle($command);
 
             return new JsonResponse();
         }
@@ -187,10 +178,7 @@ class UsersController extends Controller
     public function enableAction(Request $request)
     {
         try {
-            $command = new Users\EnableUsersCommand([
-                'ids' => $request->get('ids', []),
-            ]);
-
+            $command = new Users\EnableUsersCommand($request->request->all());
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();

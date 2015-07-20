@@ -19,21 +19,36 @@ class DisableUsersCommandTest extends BaseTestCase
 {
     public function testDisableUser()
     {
-        $user = $this->findUser('artem');
+        $this->loginAs('artem');
 
-        $this->assertNotNull($user);
-        $this->assertFalse($user->isDisabled());
+        $usernames = ['artem', 'zapp', 'kif'];
 
-        $command = new DisableUsersCommand([
-            'ids' => [$user->getId()],
-        ]);
+        $ids = [];
+
+        foreach ($usernames as $username) {
+            $user = $this->findUser($username);
+
+            $this->assertNotNull($user);
+            $this->assertFalse($user->isDisabled());
+
+            $ids[] = $user->getId();
+        }
+
+        $command = new DisableUsersCommand(['ids' => $ids]);
 
         $this->command_bus->handle($command);
 
         $this->doctrine->getManager()->clear();
 
-        $user = $this->findUser('artem');
+        foreach ($usernames as $username) {
+            $user = $this->findUser($username);
 
-        $this->assertTrue($user->isDisabled());
+            if ($user->getUsername() == 'artem') {
+                $this->assertFalse($user->isDisabled());
+            }
+            else {
+                $this->assertTrue($user->isDisabled());
+            }
+        }
     }
 }

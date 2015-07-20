@@ -28,7 +28,7 @@ services:
     command.users.disable:
         class: eTraxis\SimpleBus\Users\Handler\DisableUsersCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\DisableUsersCommand }]
-        arguments: [ @doctrine ]
+        arguments: [ @doctrine, @security.token_storage ]
 
     command.users.enable:
         class: eTraxis\SimpleBus\Users\Handler\EnableUsersCommandHandler
