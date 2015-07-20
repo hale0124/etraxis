@@ -207,7 +207,7 @@ class Notification
      */
     public function setActivated($isActivated)
     {
-        $this->isActivated = $isActivated;
+        $this->isActivated = (bool) $isActivated;
 
         return $this;
     }
@@ -219,7 +219,7 @@ class Notification
      */
     public function isActivated()
     {
-        return (boolean) $this->isActivated;
+        return (bool) $this->isActivated;
     }
 
     /**

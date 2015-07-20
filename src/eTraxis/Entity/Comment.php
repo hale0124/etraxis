@@ -107,7 +107,7 @@ class Comment
      */
     public function setConfidential($isConfidential)
     {
-        $this->isConfidential = $isConfidential;
+        $this->isConfidential = (bool) $isConfidential;
 
         return $this;
     }
@@ -119,7 +119,7 @@ class Comment
      */
     public function isConfidential()
     {
-        return (boolean) $this->isConfidential;
+        return (bool) $this->isConfidential;
     }
 
     /**

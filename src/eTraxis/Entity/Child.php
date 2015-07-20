@@ -119,7 +119,7 @@ class Child
      */
     public function setDependency($isDependency)
     {
-        $this->isDependency = $isDependency;
+        $this->isDependency = (bool) $isDependency;
 
         return $this;
     }
@@ -131,7 +131,7 @@ class Child
      */
     public function isDependency()
     {
-        return (boolean) $this->isDependency;
+        return (bool) $this->isDependency;
     }
 
     /**

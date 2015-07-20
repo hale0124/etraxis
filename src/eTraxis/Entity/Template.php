@@ -330,7 +330,7 @@ class Template
      */
     public function setLocked($isLocked)
     {
-        $this->isLocked = $isLocked;
+        $this->isLocked = (bool) $isLocked;
 
         return $this;
     }
@@ -342,7 +342,7 @@ class Template
      */
     public function isLocked()
     {
-        return (boolean) $this->isLocked;
+        return (bool) $this->isLocked;
     }
 
     /**
@@ -354,7 +354,7 @@ class Template
      */
     public function setGuestAccess($hasGuestAccess)
     {
-        $this->hasGuestAccess = $hasGuestAccess;
+        $this->hasGuestAccess = (bool) $hasGuestAccess;
 
         return $this;
     }
@@ -366,7 +366,7 @@ class Template
      */
     public function hasGuestAccess()
     {
-        return $this->hasGuestAccess;
+        return (bool) $this->hasGuestAccess;
     }
 
     /**

@@ -181,7 +181,7 @@ class Project
      */
     public function setSuspended($isSuspended)
     {
-        $this->isSuspended = $isSuspended;
+        $this->isSuspended = (bool) $isSuspended;
 
         return $this;
     }
@@ -193,7 +193,7 @@ class Project
      */
     public function isSuspended()
     {
-        return (boolean) $this->isSuspended;
+        return (bool) $this->isSuspended;
     }
 
     /**

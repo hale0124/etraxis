@@ -401,7 +401,7 @@ class User implements AdvancedUserInterface
      */
     public function setAdmin($isAdmin)
     {
-        $this->isAdmin = $isAdmin;
+        $this->isAdmin = (bool) $isAdmin;
 
         return $this;
     }
@@ -413,7 +413,7 @@ class User implements AdvancedUserInterface
      */
     public function isAdmin()
     {
-        return (boolean) $this->isAdmin;
+        return (bool) $this->isAdmin;
     }
 
     /**
@@ -425,7 +425,7 @@ class User implements AdvancedUserInterface
      */
     public function setDisabled($isDisabled)
     {
-        $this->isDisabled = $isDisabled;
+        $this->isDisabled = (bool) $isDisabled;
 
         return $this;
     }
@@ -437,7 +437,7 @@ class User implements AdvancedUserInterface
      */
     public function isDisabled()
     {
-        return (boolean) $this->isDisabled;
+        return (bool) $this->isDisabled;
     }
 
     /**
@@ -449,7 +449,7 @@ class User implements AdvancedUserInterface
      */
     public function setLdap($isLdap)
     {
-        $this->isLdap = $isLdap;
+        $this->isLdap = (bool) $isLdap;
 
         $this->username = str_replace('@eTraxis', null, $this->username);
 
@@ -467,7 +467,7 @@ class User implements AdvancedUserInterface
      */
     public function isLdap()
     {
-        return (boolean) $this->isLdap;
+        return (bool) $this->isLdap;
     }
 
     /**

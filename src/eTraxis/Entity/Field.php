@@ -432,7 +432,7 @@ class Field
      */
     public function setRequired($isRequired)
     {
-        $this->isRequired = $isRequired;
+        $this->isRequired = (bool) $isRequired;
 
         return $this;
     }
@@ -444,7 +444,7 @@ class Field
      */
     public function isRequired()
     {
-        return (boolean) $this->isRequired;
+        return (bool) $this->isRequired;
     }
 
     /**
@@ -456,7 +456,7 @@ class Field
      */
     public function setGuestAccess($hasGuestAccess)
     {
-        $this->hasGuestAccess = $hasGuestAccess;
+        $this->hasGuestAccess = (bool) $hasGuestAccess;
 
         return $this;
     }
@@ -468,7 +468,7 @@ class Field
      */
     public function hasGuestAccess()
     {
-        return $this->hasGuestAccess;
+        return (bool) $this->hasGuestAccess;
     }
 
     /**
@@ -552,7 +552,7 @@ class Field
      */
     public function setShowInEmails($showInEmails)
     {
-        $this->showInEmails = $showInEmails;
+        $this->showInEmails = (bool) $showInEmails;
 
         return $this;
     }
@@ -564,7 +564,7 @@ class Field
      */
     public function getShowInEmails()
     {
-        return $this->showInEmails;
+        return (bool) $this->showInEmails;
     }
 
     /**
