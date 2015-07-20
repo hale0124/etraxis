@@ -52,32 +52,32 @@ class UsersController extends Controller
      *
      * @param   Request $request
      *
-     * @return  JsonResponse
+     * @return  Response|JsonResponse
      */
     public function ajaxAction(Request $request)
     {
-        $search = $request->get('search', ['value' => null]);
-
-        $command = new Users\ListUsersCommand([
-            'start'  => $request->get('start', 0),
-            'length' => $request->get('length', -1),
-            'search' => $search['value'],
-            'order'  => $request->get('order', []),
-        ]);
-
         try {
+            $search = $request->get('search', ['value' => null]);
+
+            $command = new Users\ListUsersCommand([
+                'start'  => $request->get('start', 0),
+                'length' => $request->get('length', -1),
+                'search' => $search['value'],
+                'order'  => $request->get('order', []),
+            ]);
+
             $this->getCommandBus()->handle($command);
+
+            return new JsonResponse([
+                'draw'            => $request->get('draw'),
+                'recordsTotal'    => $command->total,
+                'recordsFiltered' => $command->total,
+                'data'            => $command->users,
+            ]);
         }
         catch (ResponseException $e) {
             return new Response($e->getMessage(), $e->getCode());
         }
-
-        return new JsonResponse([
-            'draw'            => $request->get('draw'),
-            'recordsTotal'    => $command->total,
-            'recordsFiltered' => $command->total,
-            'data'            => $command->users,
-        ]);
     }
 
     /**
@@ -93,23 +93,23 @@ class UsersController extends Controller
      */
     public function viewAction(Request $request, $id)
     {
-        $command = new Users\FindUserCommand(['id' => $id]);
-
         try {
+            $command = new Users\FindUserCommand(['id' => $id]);
+
             $this->getCommandBus()->handle($command);
+
+            if (!$command->user) {
+                throw $this->createNotFoundException();
+            }
+
+            return $this->render('admin/users/view.html.twig', [
+                'user' => $command->user,
+                'tab'  => $request->get('tab', 0),
+            ]);
         }
         catch (ResponseException $e) {
             return new Response($e->getMessage(), $e->getCode());
         }
-
-        if (!$command->user) {
-            throw $this->createNotFoundException();
-        }
-
-        return $this->render('admin/users/view.html.twig', [
-            'user' => $command->user,
-            'tab'  => $request->get('tab', 0),
-        ]);
     }
 
     /**
@@ -124,22 +124,22 @@ class UsersController extends Controller
      */
     public function tabDetailsAction($id)
     {
-        $command = new Users\FindUserCommand(['id' => $id]);
-
         try {
+            $command = new Users\FindUserCommand(['id' => $id]);
+
             $this->getCommandBus()->handle($command);
+
+            if (!$command->user) {
+                throw $this->createNotFoundException();
+            }
+
+            return $this->render('admin/users/tab_details.html.twig', [
+                'user' => $command->user,
+            ]);
         }
         catch (ResponseException $e) {
             return new Response($e->getMessage(), $e->getCode());
         }
-
-        if (!$command->user) {
-            throw $this->createNotFoundException();
-        }
-
-        return $this->render('admin/users/tab_details.html.twig', [
-            'user' => $command->user,
-        ]);
     }
 
     /**
@@ -150,28 +150,28 @@ class UsersController extends Controller
      *
      * @param   Request $request
      *
-     * @return  Response
+     * @return  JsonResponse
      */
     public function disableAction(Request $request)
     {
-        // Don't disable yourself.
-        $ids = array_filter($request->get('ids', []), function ($id) {
-            return $id != $this->getUser()->getId();
-        });
+        try {
+            // Don't disable yourself.
+            $ids = array_filter($request->get('ids', []), function ($id) {
+                return $id != $this->getUser()->getId();
+            });
 
-        if (count($ids)) {
+            if (count($ids)) {
 
-            $command = new Users\DisableUsersCommand(['ids' => $ids]);
+                $command = new Users\DisableUsersCommand(['ids' => $ids]);
 
-            try {
                 $this->getCommandBus()->handle($command);
             }
-            catch (ResponseException $e) {
-                return new Response($e->getMessage(), $e->getCode());
-            }
-        }
 
-        return new Response();
+            return new JsonResponse();
+        }
+        catch (ResponseException $e) {
+            return new JsonResponse($e->getMessage(), $e->getCode());
+        }
     }
 
     /**
@@ -182,22 +182,22 @@ class UsersController extends Controller
      *
      * @param   Request $request
      *
-     * @return  Response
+     * @return  JsonResponse
      */
     public function enableAction(Request $request)
     {
-        $command = new Users\EnableUsersCommand([
-            'ids' => $request->get('ids', []),
-        ]);
-
         try {
+            $command = new Users\EnableUsersCommand([
+                'ids' => $request->get('ids', []),
+            ]);
+
             $this->getCommandBus()->handle($command);
+
+            return new JsonResponse();
         }
         catch (ResponseException $e) {
-            return new Response($e->getMessage(), $e->getCode());
+            return new JsonResponse($e->getMessage(), $e->getCode());
         }
-
-        return new Response();
     }
 
     /**
@@ -208,32 +208,27 @@ class UsersController extends Controller
      *
      * @param   int $id User ID.
      *
-     * @return  Response
+     * @return  JsonResponse
      */
     public function unlockAction($id)
     {
-        $command = new Users\FindUserCommand(['id' => $id]);
-
         try {
+            $command = new Users\FindUserCommand(['id' => $id]);
+
             $this->getCommandBus()->handle($command);
+
+            if (!$command->user) {
+                throw $this->createNotFoundException();
+            }
+
+            $command = new Users\UnlockUserCommand(['username' => $command->user->getUsername()]);
+
+            $this->getCommandBus()->handle($command);
+
+            return new JsonResponse();
         }
         catch (ResponseException $e) {
-            return new Response($e->getMessage(), $e->getCode());
+            return new JsonResponse($e->getMessage(), $e->getCode());
         }
-
-        if (!$command->user) {
-            throw $this->createNotFoundException();
-        }
-
-        $command = new Users\UnlockUserCommand(['username' => $command->user->getUsername()]);
-
-        try {
-            $this->getCommandBus()->handle($command);
-        }
-        catch (ResponseException $e) {
-            return new Response($e->getMessage(), $e->getCode());
-        }
-
-        return new Response();
     }
 }
