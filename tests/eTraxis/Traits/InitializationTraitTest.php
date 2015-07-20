@@ -13,16 +13,28 @@
 
 namespace eTraxis\Traits;
 
+class MyTestClass
+{
+    use InitializationTrait;
+
+    protected $property;
+
+    public function getProperty()
+    {
+        return $this->property;
+    }
+}
+
 class InitializationTraitTest extends \PHPUnit_Framework_TestCase
 {
     public function testInitialization()
     {
         $expected = time();
 
-        $object = new MyTestClassStub([
+        $object = new MyTestClass([
             'property' => $expected,
         ]);
 
-        $this->assertEquals($expected, $object->property);
+        $this->assertEquals($expected, $object->getProperty());
     }
 }

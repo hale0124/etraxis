@@ -13,44 +13,37 @@
 
 namespace eTraxis\SimpleBus\Users;
 
-use eTraxis\Traits;
+use eTraxis\Traits\InitializationTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Enumerates all accounts existing in eTraxis database.
  *
- * Input properties:
  * @property    int    $start  First row to return, zero-based.
  * @property    int    $length Total number of rows to return (-1 to return all rows).
  * @property    string $search Current search value.
  * @property    array  $order  Current columns ordering (zero-based column index and direction).
- *
- * Output properties:
- * @property    int   $total Total number of rows in the list.
- * @property    array $users List of users.
  */
 class ListUsersCommand
 {
-    use Traits\InitializationTrait;
-    use Traits\GetTrait;
-    use Traits\SetTrait;
+    use InitializationTrait;
 
     /**
      * @Assert\NotNull()
      * @Assert\GreaterThanOrEqual(value = "0")
      */
-    protected $start = 0;
+    public $start = 0;
 
     /**
      * @Assert\NotNull()
      * @Assert\GreaterThanOrEqual(value = "-1")
      */
-    protected $length = -1;
+    public $length = -1;
 
     /**
      * @Assert\Length(max = "100")
      */
-    protected $search = null;
+    public $search = null;
 
     /**
      * @Assert\NotNull()
@@ -71,9 +64,11 @@ class ListUsersCommand
      *     )
      * })
      */
-    protected $order = [];
+    public $order = [];
 
-    protected $total = 0;
+    /** @var int Total number of rows in the list. */
+    public $total = 0;
 
-    protected $users = [];
+    /** @var array List of users. */
+    public $users = [];
 }

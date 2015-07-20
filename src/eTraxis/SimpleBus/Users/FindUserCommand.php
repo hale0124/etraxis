@@ -13,29 +13,24 @@
 
 namespace eTraxis\SimpleBus\Users;
 
-use eTraxis\Traits;
+use eTraxis\Traits\InitializationTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Finds specified account.
  *
- * Input properties:
  * @property    int $id User ID.
- *
- * Output properties:
- * @property    \eTraxis\Entity\User $user User.
  */
 class FindUserCommand
 {
-    use Traits\InitializationTrait;
-    use Traits\GetTrait;
-    use Traits\SetTrait;
+    use InitializationTrait;
 
     /**
      * @Assert\NotBlank()
      * @Assert\GreaterThan(value = "0")
      */
-    protected $id;
+    public $id;
 
-    protected $user = null;
+    /** @var \eTraxis\Entity\User Found user. */
+    public $user = null;
 }

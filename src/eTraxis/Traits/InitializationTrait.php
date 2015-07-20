@@ -14,19 +14,21 @@
 namespace eTraxis\Traits;
 
 /**
- * A trait to initialize protected properties on construction.
+ * A trait to initialize object properties on construction.
  */
 trait InitializationTrait
 {
     /**
-     * Initializes protected properties with values from provided array.
+     * Initializes object properties with values from provided array.
      *
      * @param   array $values Initial values.
      */
     public function __construct($values = [])
     {
         foreach ($values as $property => $value) {
-            $this->$property = $value;
+            if (property_exists($this, $property)) {
+                $this->$property = $value;
+            }
         }
     }
 }

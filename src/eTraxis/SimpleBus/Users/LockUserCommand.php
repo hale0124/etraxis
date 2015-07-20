@@ -13,26 +13,21 @@
 
 namespace eTraxis\SimpleBus\Users;
 
-use eTraxis\Traits;
+use eTraxis\Traits\InitializationTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Increases locks count for specified eTraxis account.
  *
- * Input properties:
  * @property    string $username Username to lock.
- *
- * Output properties: none.
  */
 class LockUserCommand
 {
-    use Traits\InitializationTrait;
-    use Traits\GetTrait;
-    use Traits\SetTrait;
+    use InitializationTrait;
 
     /**
      * @Assert\NotBlank()
      * @Assert\Length(max = "112")
      */
-    protected $username;
+    public $username;
 }

@@ -13,22 +13,17 @@
 
 namespace eTraxis\SimpleBus\Users;
 
-use eTraxis\Traits;
+use eTraxis\Traits\InitializationTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Disables specified accounts.
  *
- * Input properties:
  * @property    int[] $ids User IDs.
- *
- * Output properties: none.
  */
 class DisableUsersCommand
 {
-    use Traits\InitializationTrait;
-    use Traits\GetTrait;
-    use Traits\SetTrait;
+    use InitializationTrait;
 
     /**
      * @Assert\NotBlank()
@@ -39,5 +34,5 @@ class DisableUsersCommand
      *     @Assert\GreaterThan(value = "0")
      * })
      */
-    protected $ids;
+    public $ids;
 }

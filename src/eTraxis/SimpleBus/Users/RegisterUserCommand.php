@@ -13,44 +13,39 @@
 
 namespace eTraxis\SimpleBus\Users;
 
-use eTraxis\Traits;
+use eTraxis\Traits\InitializationTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Registers LDAP account in eTraxis database.
  *
- * Input properties:
  * @property    string $username Username to register/find.
  * @property    string $fullname Display name to store/update.
  * @property    string $email    Email address to store/update.
- *
- * Output properties:
- * @property    int $id ID of the registered user.
  */
 class RegisterUserCommand
 {
-    use Traits\InitializationTrait;
-    use Traits\GetTrait;
-    use Traits\SetTrait;
+    use InitializationTrait;
 
     /**
      * @Assert\NotBlank()
      * @Assert\Length(max = "112")
      */
-    protected $username;
+    public $username;
 
     /**
      * @Assert\NotBlank()
      * @Assert\Length(max = "64")
      */
-    protected $fullname;
+    public $fullname;
 
     /**
      * @Assert\NotBlank()
      * @Assert\Length(max = "50")
      * @Assert\Email()
      */
-    protected $email;
+    public $email;
 
-    protected $id = null;
+    /** @var int ID of the registered user. */
+    public $id = null;
 }
