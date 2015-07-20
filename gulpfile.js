@@ -7,30 +7,31 @@
  *  along with eTraxis.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-var gulp   = require('gulp');
-var addsrc = require('gulp-add-src');
-var concat = require('gulp-concat');
-var less   = require('gulp-less');
-var insert = require('gulp-insert');
-var minify = require('gulp-minify-css');
-var rename = require('gulp-rename');
-var strip  = require('gulp-strip-json-comments');
-var uglify = require('gulp-uglify');
-var watch  = require('gulp-watch');
-var fs     = require('fs');
-var merge  = require('merge-stream');
+var gulp     = require('gulp');
+var addsrc   = require('gulp-add-src');
+var concat   = require('gulp-concat');
+var less     = require('gulp-less');
+var insert   = require('gulp-insert');
+var minify   = require('gulp-minify-css');
+var rename   = require('gulp-rename');
+var strip    = require('gulp-strip-json-comments');
+var uglify   = require('gulp-uglify');
+var watch    = require('gulp-watch');
+var fs       = require('fs');
+var merge    = require('merge-stream');
+var sequence = require('run-sequence');
 
 /**
  * Performs all installation tasks in one.
  */
-gulp.task('default', [
-    'stylesheets:libs',
-    'stylesheets:themes',
-    'javascripts:libs',
-    'javascripts:datatables',
-    'javascripts:i18n',
-    'javascripts:etraxis'
-]);
+gulp.task('default', function(callback) {
+    sequence(
+        ['stylesheets:libs', 'stylesheets:themes'],
+        ['javascripts:libs', 'javascripts:etraxis'],
+        ['javascripts:datatables', 'javascripts:i18n'],
+        callback
+    );
+});
 
 /**
  * Watchs for changes in eTraxis files and updates affected assets when necessary.

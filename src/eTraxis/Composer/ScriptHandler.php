@@ -39,6 +39,7 @@ class ScriptHandler
                 'gulp-watch',
                 'fs',
                 'merge-stream',
+                'run-sequence',
             ];
 
             print("\nInstalling npm modules\n");
