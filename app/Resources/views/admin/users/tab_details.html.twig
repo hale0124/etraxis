@@ -3,6 +3,7 @@
 <div class="columns">
     <div class="column full-width">
         <button type="button" id="btn-back">{{ 'button.back'|trans }}</button>
+        <button type="button" id="btn-edit">{{ 'button.edit'|trans }}</button>
         <span class="buttonset">
             {% if user.id != app.user.id %}
             <button type="button" id="btn-disable">{{ user.disabled ? 'button.enable'|trans : 'button.disable'|trans }}</button>
@@ -31,6 +32,8 @@
     </div>
 </div>
 
+{% include 'admin/users/dlg_user.html.twig' %}
+
 <script>
 
     $(function() {
@@ -44,6 +47,22 @@
         // "Back" button.
         $('#btn-back').click(function() {
             window.location.assign('{{ path('admin_users') }}');
+        });
+
+        // "Edit" button.
+        $('#btn-edit').click(function() {
+            {% if user.id == app.user.id %}
+            $('#form_admin').disable(true);
+            $('#form_disabled').disable(true);
+            {% endif %}
+
+            $('#dlg-user').modal({
+                title: '{{ 'Edit account'|trans }}',
+                success: function() {
+                    reloadTab();
+                    return true;
+                }
+            });
         });
 
         // "Disable"/"Enable" button.

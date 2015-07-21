@@ -15,6 +15,7 @@ namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
@@ -25,9 +26,15 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  *                @ORM\UniqueConstraint(name="ix_accounts", columns={"username"})
  *            })
  * @ORM\Entity
+ * @UniqueEntity(fields={"username"}, message="user.conflict.username")
  */
 class User implements AdvancedUserInterface
 {
+    const MAX_USERNAME    = 100;
+    const MAX_FULLNAME    = 64;
+    const MAX_EMAIL       = 50;
+    const MAX_DESCRIPTION = 100;
+
     /**
      * @var int Unique ID.
      *

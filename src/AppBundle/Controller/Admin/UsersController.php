@@ -14,6 +14,8 @@
 namespace AppBundle\Controller\Admin;
 
 use eTraxis\Exception\CommandException;
+use eTraxis\Exception\ResponseException;
+use eTraxis\Form\UserForm;
 use eTraxis\SimpleBus\Users;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -131,12 +133,47 @@ class UsersController extends Controller
                 throw $this->createNotFoundException();
             }
 
+            $form = $this->createForm(new UserForm(), $command->result, [
+                'action' => $this->generateUrl('admin_edit_user', ['id' => $id]),
+            ]);
+
             return $this->render('admin/users/tab_details.html.twig', [
                 'user' => $command->result,
+                'form' => $form->createView(),
             ]);
         }
         catch (CommandException $e) {
             return new Response($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
+     * Processes submitted form when specified user is edited.
+     *
+     * @Route("/{id}/edit", name="admin_edit_user", requirements={"id"="\d+"})
+     * @Method("POST")
+     *
+     * @param   Request $request
+     * @param   int     $id User ID.
+     *
+     * @return  JsonResponse
+     */
+    public function editAction(Request $request, $id)
+    {
+        try {
+            $data       = $this->getFormData($request, 'user');
+            $data['id'] = $id;
+
+            $command = new Users\UpdateUserCommand($data);
+            $this->getCommandBus()->handle($command);
+
+            return new JsonResponse();
+        }
+        catch (CommandException $e) {
+            return new JsonResponse($command->errors, $e->getCode());
+        }
+        catch (ResponseException $e) {
+            return new JsonResponse($e->getMessage(), $e->getCode());
         }
     }
 
