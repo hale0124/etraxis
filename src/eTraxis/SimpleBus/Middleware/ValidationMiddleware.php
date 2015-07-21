@@ -13,10 +13,9 @@
 
 namespace eTraxis\SimpleBus\Middleware;
 
-use eTraxis\Exception\ResponseException;
+use eTraxis\Exception\CommandException;
 use Psr\Log\LoggerInterface;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
@@ -43,6 +42,8 @@ class ValidationMiddleware implements MessageBusMiddleware
      * {@inheritDoc}
      *
      * @param   \eTraxis\SimpleBus\BaseCommand $message
+     *
+     * @throws  CommandException
      */
     public function handle($message, callable $next)
     {
@@ -56,7 +57,7 @@ class ValidationMiddleware implements MessageBusMiddleware
 
             $errmsg = implode("\n", $message->errors);
             $this->logger->error($errmsg, $message->errors);
-            throw new ResponseException($errmsg, Response::HTTP_BAD_REQUEST);
+            throw new CommandException($errmsg);
         }
 
         $next($message);

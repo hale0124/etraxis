@@ -13,7 +13,7 @@
 
 namespace AppBundle\Controller\Admin;
 
-use eTraxis\Exception\ResponseException;
+use eTraxis\Exception\CommandException;
 use eTraxis\SimpleBus\Users;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
@@ -75,7 +75,7 @@ class UsersController extends Controller
                 'data'            => $command->result['users'],
             ]);
         }
-        catch (ResponseException $e) {
+        catch (CommandException $e) {
             return new Response($e->getMessage(), $e->getCode());
         }
     }
@@ -106,7 +106,7 @@ class UsersController extends Controller
                 'tab'  => $request->get('tab', 0),
             ]);
         }
-        catch (ResponseException $e) {
+        catch (CommandException $e) {
             return new Response($e->getMessage(), $e->getCode());
         }
     }
@@ -135,7 +135,7 @@ class UsersController extends Controller
                 'user' => $command->result,
             ]);
         }
-        catch (ResponseException $e) {
+        catch (CommandException $e) {
             return new Response($e->getMessage(), $e->getCode());
         }
     }
@@ -159,7 +159,7 @@ class UsersController extends Controller
 
             return new JsonResponse();
         }
-        catch (ResponseException $e) {
+        catch (CommandException $e) {
             return new JsonResponse($command->errors, $e->getCode());
         }
     }
@@ -183,7 +183,7 @@ class UsersController extends Controller
 
             return new JsonResponse();
         }
-        catch (ResponseException $e) {
+        catch (CommandException $e) {
             return new JsonResponse($command->errors, $e->getCode());
         }
     }
@@ -207,7 +207,7 @@ class UsersController extends Controller
 
             return new JsonResponse();
         }
-        catch (ResponseException $e) {
+        catch (CommandException $e) {
             return new JsonResponse($command->errors, $e->getCode());
         }
     }
