@@ -73,7 +73,7 @@ class UpdateUserCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\Exception\CommandException
+     * @expectedException \eTraxis\SimpleBus\CommandException
      */
     public function testUsernameConflict()
     {

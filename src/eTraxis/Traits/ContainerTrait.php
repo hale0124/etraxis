@@ -13,7 +13,7 @@
 
 namespace eTraxis\Traits;
 
-use eTraxis\Exception\CommandException;
+use eTraxis\SimpleBus\CommandException;
 use Symfony\Component\HttpFoundation\Request;
 
 /**

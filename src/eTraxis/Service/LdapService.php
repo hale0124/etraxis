@@ -13,7 +13,6 @@
 
 namespace eTraxis\Service;
 
-use eTraxis\Exception\LdapException;
 use Psr\Log\LoggerInterface;
 
 /**

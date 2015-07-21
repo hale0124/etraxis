@@ -36,7 +36,7 @@ class LdapServiceTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\Exception\LdapException
+     * @expectedException \eTraxis\Service\LdapException
      */
     public function testConnectionHost()
     {
@@ -49,7 +49,7 @@ class LdapServiceTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\Exception\LdapException
+     * @expectedException \eTraxis\Service\LdapException
      */
     public function testConnectionTls()
     {

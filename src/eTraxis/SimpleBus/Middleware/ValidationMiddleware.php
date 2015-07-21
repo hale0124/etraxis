@@ -13,7 +13,6 @@
 
 namespace eTraxis\SimpleBus\Middleware;
 
-use eTraxis\Exception\ValidationException;
 use Psr\Log\LoggerInterface;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 use Symfony\Component\Validator\Validator\ValidatorInterface;

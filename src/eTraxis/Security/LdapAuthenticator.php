@@ -13,8 +13,8 @@
 
 namespace eTraxis\Security;
 
-use eTraxis\Exception\ValidationException;
 use eTraxis\Service\LdapService;
+use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\SimpleBus\Users\RegisterUserCommand;
 use Psr\Log\LoggerInterface;
 use SimpleBus\Message\Bus\MessageBus;

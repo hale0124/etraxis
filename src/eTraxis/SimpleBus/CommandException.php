@@ -11,7 +11,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Exception;
+namespace eTraxis\SimpleBus;
 
 use Symfony\Component\HttpFoundation\Response;
 

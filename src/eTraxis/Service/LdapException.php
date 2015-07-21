@@ -11,7 +11,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Exception;
+namespace eTraxis\Service;
 
 /**
  * Exception related to LDAP API.

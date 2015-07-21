@@ -13,7 +13,7 @@
 
 namespace eTraxis\SimpleBus\Users\Handler;
 
-use eTraxis\Exception\CommandException;
+use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Users\UpdateUserCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
