@@ -7,3 +7,13 @@ rules:
     # We have a lot of POST actions which respond with JSON and should not redirect anywhere.
     symfony.controller.missing_redirect_after_post:
         enabled: false
+
+    # The violation is false positive:
+    # 1. There is no point to require all forms to be in "Form/Type" instead of just "Form".
+    # 2. The "Official Symfony Best Practices" uses just "Form" folder, too:
+    #    http://symfony.com/doc/current/best_practices/forms.html
+    # 3. It seems to be a misunderstanding by the person who implemented the rule - while rule says
+    #    "Form/Type" with meaning "Form or Type", the developer had interpreted it literally.
+    # See ticket https://support.sensiolabs.com/requests/3278.
+    symfony.form.form_type_not_in_type_form_folder:
+        enabled: false
