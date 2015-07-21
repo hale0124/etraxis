@@ -38,6 +38,7 @@
             // Block the UI until AJAX query is completed.
             beforeSend: function() {
                 eTraxis.block();
+                $('.ui-state-error', $modal).remove();
             },
 
             // When the AJAX query is done (no matter the result) - unblock the UI.
@@ -65,7 +66,17 @@
                     }
                 }
                 else {
-                    $modal.dialog('destroy');
+                    var response = xhr.responseJSON;
+                    if (typeof response === 'object') {
+                        $.each(response, function(id, message) {
+                            var name = $('form', $modal).prop('name');
+                            var $control = $('#' + name + '_' + id);
+                            $control.after('<p class="ui-corner-all ui-state-error">' + message + '</p>');
+                        });
+                    }
+                    else {
+                        eTraxis.alert(eTraxis.i18n.Error, response);
+                    }
                 }
             }
         });

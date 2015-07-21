@@ -9,6 +9,7 @@
         {% if checked is defined %}
             <div class="column one-third">&nbsp;</div>
             <div class="column two-thirds">
+                <input type="hidden" name="{{ form.vars.full_name }}" value="0">
                 {{ form_widget(form) }}
                 <label for="{{ form.vars.id }}">{{ label|trans }}</label>
             </div>

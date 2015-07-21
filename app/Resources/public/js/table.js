@@ -35,7 +35,7 @@ var datatables_language = window.datatables_language || {};
                 url: $(this).data('src'),
                 error: function(xhr) {
                     tableUnblock($table);
-                    eTraxis.alert(eTraxis.i18n.Error, xhr.statusText);
+                    eTraxis.alert(eTraxis.i18n.Error, xhr.responseText);
                 }
             },
 
