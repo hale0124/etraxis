@@ -13,7 +13,7 @@
 
 namespace eTraxis\Security;
 
-use eTraxis\Exception\ResponseException;
+use eTraxis\Exception\ValidationException;
 use eTraxis\Service\LdapService;
 use eTraxis\SimpleBus\Users\RegisterUserCommand;
 use Psr\Log\LoggerInterface;
@@ -86,8 +86,7 @@ class LdapAuthenticator implements SimpleFormAuthenticatorInterface
 
             $this->command_bus->handle($command);
         }
-        catch (ResponseException $e) {
-            $this->logger->error($e->getMessage(), [$e->getCode()]);
+        catch (ValidationException $exception) {
             throw new AuthenticationException('Bad credentials');
         }
 

@@ -13,7 +13,7 @@
 
 namespace eTraxis\SimpleBus\Middleware;
 
-use eTraxis\Exception\CommandException;
+use eTraxis\Exception\ValidationException;
 use Psr\Log\LoggerInterface;
 use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -43,21 +43,22 @@ class ValidationMiddleware implements MessageBusMiddleware
      *
      * @param   \eTraxis\SimpleBus\BaseCommand $message
      *
-     * @throws  CommandException
+     * @throws  ValidationException
      */
     public function handle($message, callable $next)
     {
-        $errors = $this->validator->validate($message);
+        $violations = $this->validator->validate($message);
 
-        if (count($errors)) {
+        if (count($violations)) {
 
-            foreach ($errors as $error) {
-                $message->errors[$error->getPropertyPath()] = $error->getMessage();
+            $errors = [];
+
+            foreach ($violations as $violation) {
+                $errors[$violation->getPropertyPath()] = $violation->getMessage();
             }
 
-            $errmsg = implode("\n", $message->errors);
-            $this->logger->error($errmsg, $message->errors);
-            throw new CommandException($errmsg);
+            $this->logger->error('Validation exception', $errors);
+            throw new ValidationException($errors);
         }
 
         $next($message);

@@ -13,7 +13,7 @@
 
 namespace eTraxis\Traits;
 
-use eTraxis\Exception\ResponseException;
+use eTraxis\Exception\CommandException;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -33,7 +33,7 @@ trait ContainerTrait
      *
      * @return  array Submitted data.
      *
-     * @throws  ResponseException
+     * @throws  CommandException
      */
     public function getFormData(Request $request, $name = 'form')
     {
@@ -46,12 +46,12 @@ trait ContainerTrait
 
         if (!array_key_exists($name, $data)) {
             $logger->error('No data submitted.', [$name]);
-            throw new ResponseException('No data submitted.');
+            throw new CommandException('No data submitted.');
         }
 
         if (!array_key_exists('_token', $data[$name])) {
             $logger->error('CSRF token is missing.');
-            throw new ResponseException('CSRF token is missing.');
+            throw new CommandException('CSRF token is missing.');
         }
 
         /** @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $csrf */
@@ -60,7 +60,7 @@ trait ContainerTrait
 
         if ($data[$name]['_token'] !== $token->getValue()) {
             $logger->error('Invalid CSRF token.');
-            throw new ResponseException('Invalid CSRF token.');
+            throw new CommandException('Invalid CSRF token.');
         }
 
         return $data[$name];

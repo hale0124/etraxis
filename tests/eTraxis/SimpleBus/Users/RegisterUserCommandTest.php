@@ -74,7 +74,7 @@ class RegisterUserCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException     \eTraxis\Exception\CommandException
+     * @expectedException     \eTraxis\Exception\ValidationException
      * @expectedExceptionCode 400
      */
     public function testBadRequest()

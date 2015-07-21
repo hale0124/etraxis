@@ -16,7 +16,8 @@ namespace eTraxis\Exception;
 use Symfony\Component\HttpFoundation\Response;
 
 /**
- * The exception means that last command contains list of errors which should be converted to HTTP JsonResponse object.
+ * Exception in last command handling (after validation).
+ * Contains HTTP status code and can be used in HTTP Response object.
  */
 class CommandException extends \Exception
 {

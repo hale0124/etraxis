@@ -21,9 +21,6 @@ class BaseCommand
     /** @var mixed Command result. */
     public $result = null;
 
-    /** @var string[] Command errors. */
-    public $errors = [];
-
     /**
      * Initializes object properties with values from provided array.
      *

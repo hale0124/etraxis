@@ -14,7 +14,7 @@
 namespace AppBundle\Controller\Admin;
 
 use eTraxis\Exception\CommandException;
-use eTraxis\Exception\ResponseException;
+use eTraxis\Exception\ValidationException;
 use eTraxis\Form\UserForm;
 use eTraxis\SimpleBus\Users;
 use eTraxis\Traits\ContainerTrait;
@@ -77,7 +77,7 @@ class UsersController extends Controller
                 'data'            => $command->result['users'],
             ]);
         }
-        catch (CommandException $e) {
+        catch (ValidationException $e) {
             return new Response($e->getMessage(), $e->getCode());
         }
     }
@@ -108,7 +108,7 @@ class UsersController extends Controller
                 'tab'  => $request->get('tab', 0),
             ]);
         }
-        catch (CommandException $e) {
+        catch (ValidationException $e) {
             return new Response($e->getMessage(), $e->getCode());
         }
     }
@@ -142,7 +142,7 @@ class UsersController extends Controller
                 'form' => $form->createView(),
             ]);
         }
-        catch (CommandException $e) {
+        catch (ValidationException $e) {
             return new Response($e->getMessage(), $e->getCode());
         }
     }
@@ -169,10 +169,10 @@ class UsersController extends Controller
 
             return new JsonResponse();
         }
-        catch (CommandException $e) {
-            return new JsonResponse($command->errors, $e->getCode());
+        catch (ValidationException $e) {
+            return new JsonResponse($e->getMessages(), $e->getCode());
         }
-        catch (ResponseException $e) {
+        catch (CommandException $e) {
             return new JsonResponse($e->getMessage(), $e->getCode());
         }
     }
@@ -189,15 +189,14 @@ class UsersController extends Controller
      */
     public function disableAction(Request $request)
     {
-        $command = new Users\DisableUsersCommand($request->request->all());
-
         try {
+            $command = new Users\DisableUsersCommand($request->request->all());
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();
         }
-        catch (CommandException $e) {
-            return new JsonResponse($command->errors, $e->getCode());
+        catch (ValidationException $e) {
+            return new JsonResponse($e->getMessages(), $e->getCode());
         }
     }
 
@@ -213,15 +212,14 @@ class UsersController extends Controller
      */
     public function enableAction(Request $request)
     {
-        $command = new Users\EnableUsersCommand($request->request->all());
-
         try {
+            $command = new Users\EnableUsersCommand($request->request->all());
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();
         }
-        catch (CommandException $e) {
-            return new JsonResponse($command->errors, $e->getCode());
+        catch (ValidationException $e) {
+            return new JsonResponse($e->getMessages(), $e->getCode());
         }
     }
 
@@ -237,15 +235,14 @@ class UsersController extends Controller
      */
     public function unlockAction($id)
     {
-        $command = new Users\UnlockUserCommand(['id' => $id]);
-
         try {
+            $command = new Users\UnlockUserCommand(['id' => $id]);
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();
         }
-        catch (CommandException $e) {
-            return new JsonResponse($command->errors, $e->getCode());
+        catch (ValidationException $e) {
+            return new JsonResponse($e->getMessages(), $e->getCode());
         }
     }
 }

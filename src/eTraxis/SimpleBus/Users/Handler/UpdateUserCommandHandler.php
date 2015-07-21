@@ -13,7 +13,7 @@
 
 namespace eTraxis\SimpleBus\Users\Handler;
 
-use eTraxis\Exception\ResponseException;
+use eTraxis\Exception\CommandException;
 use eTraxis\SimpleBus\Users\UpdateUserCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -93,7 +93,7 @@ class UpdateUserCommandHandler
         if (count($errors)) {
             $message = $this->translator->trans($errors->get(0)->getMessage());
             $this->logger->error($message);
-            throw new ResponseException($message);
+            throw new CommandException($message);
         }
 
         $this->doctrine->getManager()->persist($entity);
