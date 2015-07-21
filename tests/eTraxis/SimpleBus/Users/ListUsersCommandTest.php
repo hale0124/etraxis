@@ -35,6 +35,7 @@ class ListUsersCommandTest extends BaseTestCase
         $this->assertNotEmpty($command->result['users']);
 
         $this->assertEquals(count($users), $command->result['total']);
+        $this->assertEquals(count($users), $command->result['filtered']);
         $this->assertEquals(count($users), count($command->result['users']));
     }
 
@@ -58,6 +59,7 @@ class ListUsersCommandTest extends BaseTestCase
 
     public function testSearch()
     {
+        $total    = 14;
         $expected = 8;
 
         $command = new ListUsersCommand([
@@ -71,7 +73,8 @@ class ListUsersCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $this->assertEquals($expected, $command->result['total']);
+        $this->assertEquals($total, $command->result['total']);
+        $this->assertEquals($expected, $command->result['filtered']);
         $this->assertEquals($expected, count($command->result['users']));
     }
 

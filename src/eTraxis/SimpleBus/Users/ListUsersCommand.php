@@ -20,9 +20,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Enumerates all accounts existing in eTraxis database.
  *
  * Returns hash map as following:
- *   users (array) - list of "User" entities.
- *   total (int)   - total number of rows in the list.
- *
+ *   users    (array) - list of "User" entities.
+ *   filtered (int)   - total number of rows in the list.
+ *   total    (int)   - total number of rows in the database.
  *
  * @property    int    $start  First row to return, zero-based.
  * @property    int    $length Total number of rows to return (-1 to return all rows).

@@ -73,7 +73,7 @@ class UsersController extends Controller
             return new JsonResponse([
                 'draw'            => $request->get('draw'),
                 'recordsTotal'    => $command->result['total'],
-                'recordsFiltered' => $command->result['total'],
+                'recordsFiltered' => $command->result['filtered'],
                 'data'            => $command->result['users'],
             ]);
         }

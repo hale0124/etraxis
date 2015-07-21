@@ -46,6 +46,10 @@ class ListUsersCommandHandler
         /** @var \Doctrine\ORM\EntityRepository $repository */
         $repository = $this->doctrine->getRepository('eTraxis:User');
 
+        $query = $repository->createQueryBuilder('u')->select('COUNT(u.id)');
+
+        $command->result['total'] = $query->getQuery()->getSingleScalarResult();
+
         $query = $repository->createQueryBuilder('u');
 
         // Search.
@@ -78,14 +82,14 @@ class ListUsersCommandHandler
         /** @var \eTraxis\Entity\User[] $entities */
         $entities = $query->getQuery()->getResult();
 
-        $command->result['total'] = count($entities);
-        $command->result['users'] = [];
+        $command->result['filtered'] = count($entities);
+        $command->result['users']    = [];
 
         for ($i = 0; $i < $command->length || $command->length == -1; $i++) {
 
             $index = $i + $command->start;
 
-            if ($index >= $command->result['total']) {
+            if ($index >= $command->result['filtered']) {
                 break;
             }
 
