@@ -47,7 +47,10 @@ class LoadUsersData extends AbstractFixture implements ContainerAwareInterface, 
      */
     public function load(ObjectManager $manager)
     {
-        $encoder = new InternalPasswordEncoder();
+        $encoder = new InternalPasswordEncoder(
+            $this->container->get('translator'),
+            $this->container->getParameter('password_min_length')
+        );
 
         $data = [
 
