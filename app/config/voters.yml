@@ -1,0 +1,6 @@
+services:
+
+    etraxis.voter.user:
+        class: eTraxis\Voter\UserVoter
+        public: false
+        tags: [{ name: security.voter }]

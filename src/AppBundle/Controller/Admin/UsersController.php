@@ -18,6 +18,7 @@ use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\SimpleBus\Users;
 use eTraxis\Traits\ContainerTrait;
+use eTraxis\Voter\UserVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -143,9 +144,16 @@ class UsersController extends Controller
                 'action' => $this->generateUrl('admin_edit_user', ['id' => $id]),
             ]);
 
+            $authChecker = $this->getAuthorizationChecker();
+
             return $this->render('admin/users/tab_details.html.twig', [
                 'user' => $command->result,
                 'form' => $form->createView(),
+                'can'  => [
+                    'disable' => $authChecker->isGranted(UserVoter::DISABLE, $command->result),
+                    'enable'  => $authChecker->isGranted(UserVoter::ENABLE, $command->result),
+                    'unlock'  => $authChecker->isGranted(UserVoter::UNLOCK, $command->result),
+                ],
             ]);
         }
         catch (ValidationException $e) {

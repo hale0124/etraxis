@@ -137,6 +137,11 @@ class ContainerTraitTest extends KernelTestCase
         $this->object->getFormData($request);
     }
 
+    public function testGetAuthorizationChecker()
+    {
+        $this->assertInstanceOf('\Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface', $this->object->getAuthorizationChecker());
+    }
+
     public function testGetCommandBus()
     {
         $this->assertInstanceOf('\SimpleBus\Message\Bus\MessageBus', $this->object->getCommandBus());

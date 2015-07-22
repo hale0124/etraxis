@@ -67,6 +67,16 @@ trait ContainerTrait
     }
 
     /**
+     * Shortcut to get the Authorization Checker service.
+     *
+     * @return  \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface
+     */
+    public function getAuthorizationChecker()
+    {
+        return $this->container->get('security.authorization_checker');
+    }
+
+    /**
      * Shortcut to get the Command Bus service.
      *
      * @return  \SimpleBus\Message\Bus\MessageBus

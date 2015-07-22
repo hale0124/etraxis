@@ -1,4 +1,5 @@
 imports:
+    - { resource: voters.yml }
     - { resource: simplebus/middleware.yml }
     - { resource: simplebus/users.yml }
 

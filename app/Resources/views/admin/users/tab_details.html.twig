@@ -5,11 +5,14 @@
         <button type="button" id="btn-back">{{ 'button.back'|trans }}</button>
         <button type="button" id="btn-edit">{{ 'button.edit'|trans }}</button>
         <span class="buttonset">
-            {% if user.id != app.user.id %}
-            <button type="button" id="btn-disable">{{ user.disabled ? 'button.enable'|trans : 'button.disable'|trans }}</button>
+            {% if can.disable %}
+                <button type="button" id="btn-disable">{{ 'button.disable'|trans }}</button>
             {% endif %}
-            {% if not user.accountNonLocked %}
-            <button type="button" id="btn-unlock">{{ 'button.unlock'|trans }}</button>
+            {% if can.enable %}
+                <button type="button" id="btn-enable">{{ 'button.enable'|trans }}</button>
+            {% endif %}
+            {% if can.unlock %}
+                <button type="button" id="btn-unlock">{{ 'button.unlock'|trans }}</button>
             {% endif %}
         </span>
     </div>
@@ -65,9 +68,16 @@
             });
         });
 
-        // "Disable"/"Enable" button.
+        // "Disable" button.
         $('#btn-disable').click(function() {
-            $.post('{{ path(user.disabled ? 'admin_enable_user' : 'admin_disable_user') }}', { ids: [{{ user.id }}] }, function() {
+            $.post('{{ path('admin_disable_user') }}', { ids: [{{ user.id }}] }, function() {
+                reloadTab();
+            });
+        });
+
+        // "Enable" button.
+        $('#btn-enable').click(function() {
+            $.post('{{ path('admin_enable_user') }}', { ids: [{{ user.id }}] }, function() {
                 reloadTab();
             });
         });
