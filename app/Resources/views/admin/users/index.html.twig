@@ -1,10 +1,13 @@
 {% extends 'admin/base.html.twig' %}
 
+{% import "macro.html.twig" as macro %}
+
 {% block content %}
 
     <div class="container">
         <div class="columns">
             <div class="column full-width">
+                <button type="button" id="btn-create">{{ 'button.create'|trans }}</button>
                 <span class="buttonset">
                     <button type="button" id="btn-disable">{{ 'button.disable'|trans }}</button>
                     <button type="button" id="btn-enable">{{ 'button.enable'|trans }}</button>
@@ -30,6 +33,8 @@
             </div>
         </div>
     </div>
+
+    {% include 'admin/users/dlg_user.html.twig' %}
 
 {% endblock %}
 
@@ -73,6 +78,17 @@
             // Click on a user in the list.
             $table.on('click', 'tbody tr', function() {
                 window.location.assign('{{ path('admin_users') }}' + $(this).data('id'));
+            });
+
+            // "Create" button.
+            $('#btn-create').click(function() {
+                $('#dlg-user').modal({
+                    title: '{{ 'user.new'|trans }}',
+                    success: function() {
+                        $table.api().draw(false);
+                        return true;
+                    }
+                });
             });
 
             // "Disable" button.

@@ -17,24 +17,20 @@ use eTraxis\SimpleBus\BaseCommand;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Updates specified account.
+ * Creates new account.
  *
- * @property    int    $id          User ID.
- * @property    string $username    New login.
- * @property    string $fullname    New full name.
- * @property    string $email       New email address.
- * @property    string $description New description.
- * @property    bool   $admin       New role (whether has administrator permissions).
- * @property    bool   $disabled    New status.
+ * Returns ID of the created user.
+ *
+ * @property    string $username    Login.
+ * @property    string $fullname    Full name.
+ * @property    string $email       Email address.
+ * @property    string $description Description.
+ * @property    string $password    Password.
+ * @property    bool   $admin       Role (whether has administrator permissions).
+ * @property    bool   $disabled    Status.
  */
-class UpdateUserCommand extends BaseCommand
+class CreateUserCommand extends BaseCommand
 {
-    /**
-     * @Assert\NotBlank()
-     * @Assert\GreaterThan(value = "0")
-     */
-    public $id;
-
     /**
      * @Assert\NotBlank()
      * @Assert\Length(max = "112")
@@ -58,6 +54,11 @@ class UpdateUserCommand extends BaseCommand
      * @Assert\Length(max = "100")
      */
     public $description = null;
+
+    /**
+     * @Assert\NotBlank()
+     */
+    public $password = null;
 
     /**
      * @Assert\NotNull()

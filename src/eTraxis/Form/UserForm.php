@@ -56,7 +56,7 @@ class UserForm extends AbstractType
         // Password.
         $builder->add('password', 'password', [
             'label'    => 'user.password',
-            'required' => false,
+            'required' => !($builder->getData() && $builder->getData()->getId()),
             'mapped'   => false,
             'attr'     => ['maxlength' => BasePasswordEncoder::MAX_PASSWORD_LENGTH],
         ]);
@@ -64,7 +64,7 @@ class UserForm extends AbstractType
         // Confirmation.
         $builder->add('confirmation', 'password', [
             'label'    => 'user.password_confirmation',
-            'required' => false,
+            'required' => !($builder->getData() && $builder->getData()->getId()),
             'mapped'   => false,
             'attr'     => ['maxlength' => BasePasswordEncoder::MAX_PASSWORD_LENGTH],
         ]);

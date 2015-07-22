@@ -42,7 +42,13 @@ class UsersController extends Controller
      */
     public function indexAction()
     {
-        return $this->render('admin/users/index.html.twig');
+        $form = $this->createForm(new UserForm(), null, [
+            'action' => $this->generateUrl('admin_new_user'),
+        ]);
+
+        return $this->render('admin/users/index.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     /**
@@ -148,7 +154,39 @@ class UsersController extends Controller
     }
 
     /**
-     * Processes submitted form when specified user is edited.
+     * Processes submitted form when new user is being created.
+     *
+     * @Route("/new", name="admin_new_user")
+     * @Method("POST")
+     *
+     * @param   Request $request
+     *
+     * @return  JsonResponse
+     */
+    public function newAction(Request $request)
+    {
+        try {
+            $data = $this->getFormData($request, 'user');
+
+            if ($data['password'] != $data['confirmation']) {
+                throw new CommandException($this->get('translator')->trans('passwords.dont.match'));
+            }
+
+            $command = new Users\CreateUserCommand($data);
+            $this->getCommandBus()->handle($command);
+
+            return new JsonResponse();
+        }
+        catch (ValidationException $e) {
+            return new JsonResponse($e->getMessages(), $e->getCode());
+        }
+        catch (CommandException $e) {
+            return new JsonResponse($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
+     * Processes submitted form when specified user is being edited.
      *
      * @Route("/{id}/edit", name="admin_edit_user", requirements={"id"="\d+"})
      * @Method("POST")
