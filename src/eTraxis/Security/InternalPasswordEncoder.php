@@ -15,6 +15,7 @@ namespace eTraxis\Security;
 
 use Symfony\Component\Security\Core\Encoder\BasePasswordEncoder;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * eTraxis legacy password encoder.
@@ -25,6 +26,21 @@ use Symfony\Component\Security\Core\Exception\BadCredentialsException;
  */
 class InternalPasswordEncoder extends BasePasswordEncoder
 {
+    protected $translator;
+    protected $min_length;
+
+    /**
+     * Dependency Injection constructor.
+     *
+     * @param   TranslatorInterface $translator
+     * @param   int                 $min_length
+     */
+    public function __construct(TranslatorInterface $translator, $min_length)
+    {
+        $this->translator = $translator;
+        $this->min_length = $min_length;
+    }
+
     /**
      * {@inheritDoc}
      */
@@ -32,6 +48,10 @@ class InternalPasswordEncoder extends BasePasswordEncoder
     {
         if ($this->isPasswordTooLong($raw)) {
             throw new BadCredentialsException('Invalid password.');
+        }
+
+        if (strlen($raw) < $this->min_length) {
+            throw new BadCredentialsException($this->translator->trans('password.too.short', ['%length%' => $this->min_length]));
         }
 
         return base64_encode(sha1($raw, true));

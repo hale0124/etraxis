@@ -44,4 +44,5 @@ role.administrator: Administrador
 role.user: Usuario
 description: Descripción
 user.conflict.username: 'Ya existe una cuenta con ese nombre de usuario.'
+password.too.short: 'La contraseña debe tener una logintud mínima de %length% caracteres.'
 passwords.dont.match: 'Las contraseñas no coinciden.'

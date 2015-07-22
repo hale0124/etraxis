@@ -44,4 +44,5 @@ role.administrator: Administrators
 role.user: Lietotājs
 description: Apraksts
 user.conflict.username: 'Lietotāja konts ar tādu lietotāja vārdu jau eksistē.'
+password.too.short: 'Parolei jāsatur vismaz %length% simbolu.'
 passwords.dont.match: 'Paroles nesakrīt.'

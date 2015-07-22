@@ -13,19 +13,35 @@
 
 namespace eTraxis\Security;
 
-class InternalPasswordEncoderTest extends \PHPUnit_Framework_TestCase
+use eTraxis\Tests\BaseTestCase;
+
+class InternalPasswordEncoderTest extends BaseTestCase
 {
     /** @var InternalPasswordEncoder */
     private $object = null;
 
     protected function setUp()
     {
-        $this->object = new InternalPasswordEncoder();
+        parent::setUp();
+
+        $this->object = new InternalPasswordEncoder($this->translator, 6);
     }
 
     public function testMaxLength()
     {
         $raw = str_pad(null, InternalPasswordEncoder::MAX_PASSWORD_LENGTH, '*');
+
+        try {
+            $this->object->encodePassword($raw);
+        }
+        catch (\Exception $exception) {
+            $this->fail();
+        }
+    }
+
+    public function testMinLength()
+    {
+        $raw = str_pad(null, 6, '*');
 
         try {
             $this->object->encodePassword($raw);
@@ -45,6 +61,16 @@ class InternalPasswordEncoderTest extends \PHPUnit_Framework_TestCase
         $this->object->encodePassword($raw);
     }
 
+    /**
+     * @expectedException \Symfony\Component\Security\Core\Exception\BadCredentialsException
+     */
+    public function testTooShort()
+    {
+        $raw = str_pad(null, 5, '*');
+
+        $this->object->encodePassword($raw);
+    }
+
     public function testEncoder()
     {
         $encoded = 'mzMEbtOdGC462vqQRa1nh9S7wyE=';
@@ -57,7 +83,7 @@ class InternalPasswordEncoderTest extends \PHPUnit_Framework_TestCase
     {
         $encoded = 'mzMEbtOdGC462vqQRa1nh9S7wyE=';
         $valid   = 'legacy';
-        $invalid = 'wrong';
+        $invalid = 'invalid';
 
         $this->assertTrue($this->object->isPasswordValid($encoded, $valid));
         $this->assertFalse($this->object->isPasswordValid($encoded, $invalid));
@@ -67,7 +93,7 @@ class InternalPasswordEncoderTest extends \PHPUnit_Framework_TestCase
     {
         $encoded = '8dbdda48fb8748d6746f1965824e966a';
         $valid   = 'simple';
-        $invalid = 'bad';
+        $invalid = 'invalid';
 
         $this->assertTrue($this->object->isPasswordValid($encoded, $valid));
         $this->assertFalse($this->object->isPasswordValid($encoded, $invalid));

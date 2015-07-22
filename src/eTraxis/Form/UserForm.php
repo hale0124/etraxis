@@ -16,6 +16,7 @@ namespace eTraxis\Form;
 use eTraxis\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Security\Core\Encoder\BasePasswordEncoder;
 
 /**
  * User form.
@@ -50,6 +51,22 @@ class UserForm extends AbstractType
             'label'    => 'description',
             'required' => false,
             'attr'     => ['maxlength' => User::MAX_DESCRIPTION],
+        ]);
+
+        // Password.
+        $builder->add('password', 'password', [
+            'label'    => 'user.password',
+            'required' => false,
+            'mapped'   => false,
+            'attr'     => ['maxlength' => BasePasswordEncoder::MAX_PASSWORD_LENGTH],
+        ]);
+
+        // Confirmation.
+        $builder->add('confirmation', 'password', [
+            'label'    => 'user.password_confirmation',
+            'required' => false,
+            'mapped'   => false,
+            'attr'     => ['maxlength' => BasePasswordEncoder::MAX_PASSWORD_LENGTH],
         ]);
 
         // Administrator.

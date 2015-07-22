@@ -160,12 +160,33 @@ class UsersController extends Controller
      */
     public function editAction(Request $request, $id)
     {
+        /** @var \Doctrine\ORM\EntityManager $em */
+        $em = $this->getDoctrine()->getManager();
+
         try {
+            $em->beginTransaction();
+
             $data       = $this->getFormData($request, 'user');
             $data['id'] = $id;
 
             $command = new Users\UpdateUserCommand($data);
             $this->getCommandBus()->handle($command);
+
+            if ($data['password']) {
+
+                if ($data['password'] != $data['confirmation']) {
+                    throw new CommandException($this->get('translator')->trans('passwords.dont.match'));
+                }
+
+                $command = new Users\SetPasswordCommand([
+                    'id'       => $id,
+                    'password' => $data['password'],
+                ]);
+
+                $this->getCommandBus()->handle($command);
+            }
+
+            $em->commit();
 
             return new JsonResponse();
         }

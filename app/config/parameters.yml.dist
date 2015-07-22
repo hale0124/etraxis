@@ -26,5 +26,7 @@ parameters:
 
     secret:                 8fb375ea50e0f6230ad0cc722be8293a7177f9e4
 
+    password_min_length:    6
+
     security_auth_attempts: ~
     security_lock_time:     ~

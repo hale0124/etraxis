@@ -44,4 +44,5 @@ role.administrator: Administrator
 role.user: User
 description: Description
 user.conflict.username: 'Account with entered user name already exists.'
+password.too.short: 'Password should be at least %length% characters length.'
 passwords.dont.match: 'Passwords do not match.'

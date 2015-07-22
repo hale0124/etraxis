@@ -44,4 +44,5 @@ role.administrator: Administratör
 role.user: Användare
 description: Beskrivning
 user.conflict.username: 'Kontot med detta användarnamn finns redan.'
+password.too.short: 'Lösenord ska vara minst %length% tecken långt.'
 passwords.dont.match: 'Lösenorden matchar inte.'

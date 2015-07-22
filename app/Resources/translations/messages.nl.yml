@@ -44,4 +44,5 @@ role.administrator: Beheerder
 role.user: Gebruiker
 description: Beschrijving
 user.conflict.username: 'Account met ingevoerde naam bestaat reeds.'
+password.too.short: 'Wachtwoord moet tenminste %length% tekens bevatten.'
 passwords.dont.match: 'Wachtwoorden stemmen niet overeen.'

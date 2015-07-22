@@ -39,3 +39,8 @@ services:
         class: eTraxis\SimpleBus\Users\Handler\EnableUsersCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\EnableUsersCommand }]
         arguments: [ @doctrine ]
+
+    command.password.set:
+        class: eTraxis\SimpleBus\Users\Handler\SetPasswordCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\SetPasswordCommand }]
+        arguments: [ @logger, @doctrine, @etraxis.encoder ]

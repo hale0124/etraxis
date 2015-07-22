@@ -31,6 +31,9 @@ services:
     etraxis.encoder:
         class: eTraxis\Security\InternalPasswordEncoder
         public: false
+        arguments:
+            - @translator
+            - %password_min_length%
 
     ldap.authenticator:
         class: eTraxis\Security\LdapAuthenticator

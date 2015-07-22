@@ -44,4 +44,5 @@ role.administrator: Administrátor
 role.user: Uživatel
 description: Popis
 user.conflict.username: 'Účet se zadaným uživatelským jménem již existuje.'
+password.too.short: 'Heslo musí být dlouhé alespoň %length% znaků.'
 passwords.dont.match: 'Hesla se neshodují.'

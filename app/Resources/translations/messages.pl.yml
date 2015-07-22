@@ -44,4 +44,5 @@ role.administrator: Administrator
 role.user: Użytkownik
 description: Opis
 user.conflict.username: 'Wprowadzona nazwa konta już istnieje.'
+password.too.short: 'Hasło powinno mieć co najmniej %length% znaków.'
 passwords.dont.match: 'Hasła nie są identyczne.'

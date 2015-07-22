@@ -44,4 +44,5 @@ role.administrator: Администратор
 role.user: Потребител
 description: Описание
 user.conflict.username: 'Акаунт с въведенето потребителско име вече съществува.'
+password.too.short: 'Паролата трябва да е най-малко с %length% символ дължина.'
 passwords.dont.match: 'Паролите не са еднакви.'

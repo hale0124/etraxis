@@ -44,4 +44,5 @@ role.administrator: Amministratore
 role.user: Utente
 description: Descrizione
 user.conflict.username: 'Nome utente già utilizzato.'
+password.too.short: 'La password deve essere almeno lunga %length% caratteri.'
 passwords.dont.match: 'Le password non coincidono.'

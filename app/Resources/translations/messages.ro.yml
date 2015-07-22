@@ -44,4 +44,5 @@ role.administrator: Administrator
 role.user: Utilizator
 description: Descriere
 user.conflict.username: 'Numele de utilizator este deja folosit.'
+password.too.short: 'Parola trebuie sa aiba cel putin %length% caractere.'
 passwords.dont.match: 'Parola nu este identica.'
