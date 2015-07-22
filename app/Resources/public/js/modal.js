@@ -27,6 +27,8 @@
 
         var $modal = this;
 
+        $('.ui-state-error', $modal).remove();
+
         // Let the form be submitted via "ajaxForm" plugin.
         $('form', this).ajaxForm({
 
