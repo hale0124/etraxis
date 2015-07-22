@@ -19,7 +19,7 @@ class UpdateUserCommandTest extends BaseTestCase
 {
     public function testSuccess()
     {
-        $this->loginAs('artem');
+        $this->loginAs('hubert');
 
         $user = $this->findUser('bender');
 
@@ -54,9 +54,9 @@ class UpdateUserCommandTest extends BaseTestCase
      */
     public function testUnknownUser()
     {
-        $this->loginAs('artem');
+        $this->loginAs('hubert');
 
-        $user = $this->findUser('unexisting');
+        $user = $this->findUser('flexo');
 
         $this->assertNull($user);
 
@@ -77,19 +77,19 @@ class UpdateUserCommandTest extends BaseTestCase
      */
     public function testUsernameConflict()
     {
-        $this->loginAs('artem');
+        $this->loginAs('hubert');
 
-        $user = $this->findUser('bender');
+        $user = $this->findUser('fry');
 
         $this->assertNotNull($user);
 
         $command = new UpdateUserCommand([
             'id'       => $user->getId(),
-            'username' => 'artem',
-            'fullname' => 'Flexo',
-            'email'    => 'flexo@example.com',
-            'admin'    => true,
-            'disabled' => true,
+            'username' => 'bender',
+            'fullname' => $user->getFullname(),
+            'email'    => $user->getEmail(),
+            'admin'    => $user->isAdmin(),
+            'disabled' => $user->isDisabled(),
         ]);
 
         $this->command_bus->handle($command);

@@ -22,23 +22,23 @@ class UserVoterTest extends BaseTestCase
         /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
         $authChecker = $this->client->getContainer()->get('security.authorization_checker');
 
-        $artem    = $this->findUser('artem');
+        $hubert   = $this->findUser('hubert');
         $bender   = $this->findUser('bender');
         $francine = $this->findUser('francine');
 
-        $this->assertInstanceOf('eTraxis\Entity\User', $artem);
+        $this->assertInstanceOf('eTraxis\Entity\User', $hubert);
         $this->assertInstanceOf('eTraxis\Entity\User', $bender);
         $this->assertInstanceOf('eTraxis\Entity\User', $francine);
 
-        $this->loginAs('artem');
+        $this->loginAs('hubert');
 
-        $this->assertFalse($authChecker->isGranted(UserVoter::DISABLE, $artem));
+        $this->assertFalse($authChecker->isGranted(UserVoter::DISABLE, $hubert));
         $this->assertTrue($authChecker->isGranted(UserVoter::DISABLE, $bender));
         $this->assertFalse($authChecker->isGranted(UserVoter::DISABLE, $francine));
 
-        $this->loginAs('bender');
+        $this->loginAs('fry');
 
-        $this->assertFalse($authChecker->isGranted(UserVoter::DISABLE, $artem));
+        $this->assertFalse($authChecker->isGranted(UserVoter::DISABLE, $bender));
     }
 
     public function testEnable()
@@ -52,12 +52,12 @@ class UserVoterTest extends BaseTestCase
         $this->assertInstanceOf('eTraxis\Entity\User', $bender);
         $this->assertInstanceOf('eTraxis\Entity\User', $francine);
 
-        $this->loginAs('artem');
+        $this->loginAs('hubert');
 
         $this->assertFalse($authChecker->isGranted(UserVoter::ENABLE, $bender));
         $this->assertTrue($authChecker->isGranted(UserVoter::ENABLE, $francine));
 
-        $this->loginAs('bender');
+        $this->loginAs('fry');
 
         $this->assertFalse($authChecker->isGranted(UserVoter::ENABLE, $francine));
     }
@@ -67,25 +67,24 @@ class UserVoterTest extends BaseTestCase
         /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
         $authChecker = $this->client->getContainer()->get('security.authorization_checker');
 
-        $artem  = $this->findUser('artem');
+        $hubert = $this->findUser('hubert');
         $bender = $this->findUser('bender');
         $fry    = $this->findUser('fry');
 
-        $this->assertInstanceOf('eTraxis\Entity\User', $artem);
-        $this->assertInstanceOf('eTraxis\Entity\User', $bender);
+        $this->assertInstanceOf('eTraxis\Entity\User', $hubert);
         $this->assertInstanceOf('eTraxis\Entity\User', $fry);
+        $this->assertInstanceOf('eTraxis\Entity\User', $bender);
 
-        $fry->setAuthAttempts(3);
-        $fry->setLockedUntil(time() + 60);
+        $bender->setAuthAttempts(3);
+        $bender->setLockedUntil(time() + 60);
 
-        $this->loginAs('artem');
+        $this->loginAs('hubert');
+
+        $this->assertFalse($authChecker->isGranted(UserVoter::UNLOCK, $fry));
+        $this->assertTrue($authChecker->isGranted(UserVoter::UNLOCK, $bender));
+
+        $this->loginAs('fry');
 
         $this->assertFalse($authChecker->isGranted(UserVoter::UNLOCK, $bender));
-        $this->assertTrue($authChecker->isGranted(UserVoter::UNLOCK, $fry));
-
-        $this->loginAs('bender');
-
-        $this->assertFalse($authChecker->isGranted(UserVoter::UNLOCK, $artem));
-        $this->assertFalse($authChecker->isGranted(UserVoter::UNLOCK, $fry));
     }
 }
