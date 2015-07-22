@@ -35,7 +35,7 @@ class UserFormTest extends BaseTestCase
         $this->assertEquals($children['description']->vars['data'], $user->getDescription());
         $this->assertEmpty($children['password']->vars['data']);
         $this->assertEmpty($children['confirmation']->vars['data']);
-        $this->assertEquals(boolval($children['admin']->vars['data']), $user->isAdmin());
-        $this->assertEquals(boolval($children['disabled']->vars['data']), $user->isDisabled());
+        $this->assertEquals((bool) $children['admin']->vars['data'], $user->isAdmin());
+        $this->assertEquals((bool) $children['disabled']->vars['data'], $user->isDisabled());
     }
 }
