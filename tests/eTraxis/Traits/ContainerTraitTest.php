@@ -16,6 +16,7 @@ namespace AppBundle\Controller;
 use eTraxis\Traits\ContainerTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\HttpFoundation\Request;
 
 class ControllerStub extends Controller
 {
@@ -40,6 +41,100 @@ class ContainerTraitTest extends KernelTestCase
         unset($this->object);
 
         parent::tearDown();
+    }
+
+    public function testGetFormDataSuccessGet()
+    {
+        /** @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $csrf */
+        $csrf = static::$kernel->getContainer()->get('security.csrf.token_manager');
+        $csrf->refreshToken('form');
+
+        $formdata = [
+            '_token' => $csrf->getToken('form')->getValue(),
+            'fname'  => 'Artem',
+            'lname'  => 'Rodygin',
+        ];
+
+        $request = new Request(['form' => $formdata]);
+
+        $this->assertEquals($formdata, $this->object->getFormData($request));
+    }
+
+    public function testGetFormDataSuccessPost()
+    {
+        /** @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $csrf */
+        $csrf = static::$kernel->getContainer()->get('security.csrf.token_manager');
+        $csrf->refreshToken('user');
+
+        $formdata = [
+            '_token' => $csrf->getToken('user')->getValue(),
+            'fname'  => 'Artem',
+            'lname'  => 'Rodygin',
+        ];
+
+        $request = new Request([], ['user' => $formdata]);
+        $request->setMethod(Request::METHOD_POST);
+
+        $this->assertEquals($formdata, $this->object->getFormData($request, 'user'));
+    }
+
+    /**
+     * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedExceptionMessage No data submitted.
+     */
+    public function testGetFormDataNoData()
+    {
+        /** @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $csrf */
+        $csrf = static::$kernel->getContainer()->get('security.csrf.token_manager');
+        $csrf->refreshToken('user');
+
+        $formdata = [
+            '_token' => $csrf->getToken('user')->getValue(),
+            'fname'  => 'Artem',
+            'lname'  => 'Rodygin',
+        ];
+
+        $request = new Request(['user' => $formdata]);
+
+        $this->object->getFormData($request);
+    }
+
+    /**
+     * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedExceptionMessage Invalid CSRF token.
+     */
+    public function testGetFormDataInvalidCsrf()
+    {
+        /** @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $csrf */
+        $csrf = static::$kernel->getContainer()->get('security.csrf.token_manager');
+        $csrf->refreshToken('user');
+        $csrf->refreshToken('form');
+
+        $formdata = [
+            '_token' => $csrf->getToken('user')->getValue(),
+            'fname'  => 'Artem',
+            'lname'  => 'Rodygin',
+        ];
+
+        $request = new Request(['form' => $formdata]);
+
+        $this->object->getFormData($request);
+    }
+
+    /**
+     * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedExceptionMessage CSRF token is missing.
+     */
+    public function testGetFormDataNoCsrf()
+    {
+        $formdata = [
+            'fname'  => 'Artem',
+            'lname'  => 'Rodygin',
+        ];
+
+        $request = new Request(['form' => $formdata]);
+
+        $this->object->getFormData($request);
     }
 
     public function testGetCommandBus()
