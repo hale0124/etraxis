@@ -28,22 +28,28 @@ class UserForm extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        /** @var User $user */
+        $user = $builder->getData();
+
         // User name.
         $builder->add('username', 'text', [
-            'label' => 'user.username',
-            'attr'  => ['maxlength' => User::MAX_USERNAME],
+            'label'    => 'user.username',
+            'disabled' => $user && $user->isLdap(),
+            'attr'     => ['maxlength' => User::MAX_USERNAME],
         ]);
 
         // Full name.
         $builder->add('fullname', 'text', [
-            'label' => 'user.fullname',
-            'attr'  => ['maxlength' => User::MAX_FULLNAME],
+            'label'    => 'user.fullname',
+            'disabled' => $user && $user->isLdap(),
+            'attr'     => ['maxlength' => User::MAX_FULLNAME],
         ]);
 
         // Email.
         $builder->add('email', 'email', [
-            'label' => 'user.email',
-            'attr'  => ['maxlength' => User::MAX_EMAIL],
+            'label'    => 'user.email',
+            'disabled' => $user && $user->isLdap(),
+            'attr'     => ['maxlength' => User::MAX_EMAIL],
         ]);
 
         // Description.
@@ -56,7 +62,7 @@ class UserForm extends AbstractType
         // Password.
         $builder->add('password', 'password', [
             'label'    => 'user.password',
-            'required' => !($builder->getData() && $builder->getData()->getId()),
+            'required' => !($user && $user->getId()),
             'mapped'   => false,
             'attr'     => ['maxlength' => BasePasswordEncoder::MAX_PASSWORD_LENGTH],
         ]);
@@ -64,7 +70,7 @@ class UserForm extends AbstractType
         // Confirmation.
         $builder->add('confirmation', 'password', [
             'label'    => 'user.password_confirmation',
-            'required' => !($builder->getData() && $builder->getData()->getId()),
+            'required' => !($user && $user->getId()),
             'mapped'   => false,
             'attr'     => ['maxlength' => BasePasswordEncoder::MAX_PASSWORD_LENGTH],
         ]);

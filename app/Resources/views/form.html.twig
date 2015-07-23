@@ -11,17 +11,22 @@
             <div class="column two-thirds">
                 <input type="hidden" name="{{ form.vars.full_name }}" value="0">
                 {{ form_widget(form) }}
-                <label for="{{ form.vars.id }}">{{ label|trans }}</label>
+                {% if form.vars.disabled %}
+                    <label for="{{ form.vars.id }}" class="ui-state-disabled">{{ label|trans }}</label>
+                {% else %}
+                    <label for="{{ form.vars.id }}">{{ label|trans }}</label>
+                {% endif %}
             </div>
         {% else %}
             <div class="column one-third">
                 <label for="{{ form.vars.id }}">{{ label|trans }}:</label>
             </div>
             <div class="column two-thirds">
+                {% set class = form.vars.disabled ? 'full-width ui-state-disabled' : 'full-width' %}
                 {% if form.vars.required %}
-                    {{ form_widget(form, {'attr': {'class': 'full-width', 'placeholder': 'required'}}) }}
+                    {{ form_widget(form, {'attr': {'class': class, 'placeholder': 'required'}}) }}
                 {% else %}
-                    {{ form_widget(form, {'attr': {'class': 'full-width'}}) }}
+                    {{ form_widget(form, {'attr': {'class': class}}) }}
                 {% endif %}
             </div>
         {% endif %}

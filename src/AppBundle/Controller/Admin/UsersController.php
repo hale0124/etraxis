@@ -211,10 +211,23 @@ class UsersController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         try {
+            $command = new Users\FindUserCommand(['id' => $id]);
+            $this->getCommandBus()->handle($command);
+
+            if (!$command->result) {
+                throw $this->createNotFoundException();
+            }
+
             $em->beginTransaction();
 
             $data       = $this->getFormData($request, 'user');
             $data['id'] = $id;
+
+            if ($command->result->isLdap()) {
+                $data['username'] = $command->result->getUsername();
+                $data['fullname'] = $command->result->getFullname();
+                $data['email']    = $command->result->getEmail();
+            }
 
             $command = new Users\UpdateUserCommand($data);
             $this->getCommandBus()->handle($command);

@@ -34,6 +34,7 @@
             {% else %}
                 {{ macro.row('user.status'|trans, 'user.locked'|trans|lower) }}
             {% endif %}
+            {{ macro.row('security.authentication'|trans, user.authenticationSource) }}
         </fieldset>
     </div>
 </div>
@@ -45,10 +46,14 @@
     $(function() {
 
         function reloadTab() {
-            var $tabs = $('#btn-back').closest('.tabs');
+            var $tabs = $('#tabs-user');
             var current = $tabs.tabs('option', 'active');
             $tabs.tabs('load', current);
         }
+
+        // Update tab title - user name could be changed.
+        var $tabs = $('#tabs-user');
+        $('ul.ui-tabs-nav li[tabindex=0] a', $tabs).text('{{ user.fullname }}');
 
         // "Back" button.
         $('#btn-back').click(function() {
