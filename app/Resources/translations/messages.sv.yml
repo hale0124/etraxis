@@ -22,6 +22,7 @@ security.log_out: 'Logga ut'
 security.remember_me: 'Förbli inloggad'
 security.session_expired: 'Din session har gått ut. Vänligen logga in på nytt.'
 security.confirm_exit: 'Är du säker på att du vill avsluta?'
+security.authentication: Autentisering
 'Bad credentials': 'Okänt användarnamn eller felaktigt lösenord.'
 'User account is disabled.': 'Kontot är inaktiverat.'
 'User account is locked.': 'Kontot är låst.'

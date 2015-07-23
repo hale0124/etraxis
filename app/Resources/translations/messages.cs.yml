@@ -22,6 +22,7 @@ security.log_out: Odhlásit
 security.remember_me: 'Zůstat přihlášený'
 security.session_expired: 'Vaše sezení vypršelo. Znovu se přihlaste, prosím.'
 security.confirm_exit: 'Jste si jisti, že se chcete odhlásit?'
+security.authentication: Autentifikace
 'Bad credentials': 'Neznámé uživatelské jméno nebo chybné heslo.'
 'User account is disabled.': 'Účet je zablokován.'
 'User account is locked.': 'Účet je uzamčen.'

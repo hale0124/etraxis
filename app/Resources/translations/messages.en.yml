@@ -22,6 +22,7 @@ security.log_out: 'Log out'
 security.remember_me: 'Remember me'
 security.session_expired: 'Your session has expired. Please log in again.'
 security.confirm_exit: 'Are you sure you want exit?'
+security.authentication: Authentication
 'Bad credentials': 'Unknown username or bad password.'
 'User account is disabled.': 'Account is disabled.'
 'User account is locked.': 'Account is locked.'

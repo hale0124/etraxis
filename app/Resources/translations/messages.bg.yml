@@ -22,6 +22,7 @@ security.log_out: Изход
 security.remember_me: 'Запомни ме'
 security.session_expired: 'Вашата сесия е изтекла. Моля влезете отново.'
 security.confirm_exit: 'Сигурен ли сте че искате да излезнете?'
+security.authentication: Оторизация
 'Bad credentials': 'Неизвестно потребителско име или сгрешена парола.'
 'User account is disabled.': 'Акаунтът е изключен.'
 'User account is locked.': 'Акаунтът е заключен.'

@@ -22,6 +22,7 @@ security.log_out: Esci
 security.remember_me: Ricordami
 security.session_expired: 'La tua sessione è scaduta. Effettua nuovamente il login.'
 security.confirm_exit: 'Vuoi davvero uscire?'
+security.authentication: Autenticazione
 'Bad credentials': 'Nome utente non riconosciuto o password errata.'
 'User account is disabled.': 'L''account è disabilitato.'
 'User account is locked.': 'L''account è stato bloccato.'

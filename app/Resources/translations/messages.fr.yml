@@ -22,6 +22,7 @@ security.log_out: 'Se déconnecter'
 security.remember_me: 'Se souvenir de moi'
 security.session_expired: 'Votre session a expiré. Veuillez vous reconnecter.'
 security.confirm_exit: 'Etes-vous sur de vouloir quitter?'
+security.authentication: Authentification
 'Bad credentials': 'Utilisateur inconnu ou mauvais mot de passe.'
 'User account is disabled.': 'Le compte est desactivé.'
 'User account is locked.': 'Le compte est verrouillé.'

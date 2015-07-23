@@ -111,6 +111,7 @@ class ListUsersCommandHandler
                 $entity->getFullname(),
                 $entity->getEmail(),
                 $this->translator->trans($entity->isAdmin() ? 'role.administrator' : 'role.user'),
+                $entity->getAuthenticationSource(),
                 $entity->getDescription(),
                 'DT_RowAttr'  => ['data-id' => $entity->getId()],
                 'DT_RowClass' => $color,

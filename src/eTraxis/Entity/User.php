@@ -783,6 +783,16 @@ class User implements AdvancedUserInterface
     }
 
     /**
+     * Returns authentication source of the user.
+     *
+     * @return  string
+     */
+    public function getAuthenticationSource()
+    {
+        return $this->isLdap ? 'LDAP' : 'eTraxis';
+    }
+
+    /**
      * Returns list of available themes.
      *
      * @return  string[]

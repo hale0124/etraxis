@@ -22,6 +22,7 @@ security.log_out: Выход
 security.remember_me: 'Запомнить меня'
 security.session_expired: 'Срок вашей сессии истек. Пожалуйста авторизуйтесь еще раз.'
 security.confirm_exit: 'Вы уверены, что хотите выйти?'
+security.authentication: Аутентификация
 'Bad credentials': 'Неизвестный пользователь или неверный пароль.'
 'User account is disabled.': 'Учетная запись отключена.'
 'User account is locked.': 'Учетная запись заблокирована.'
