@@ -17,3 +17,8 @@ rules:
     # See ticket https://support.sensiolabs.com/requests/3278.
     symfony.form.form_type_not_in_type_form_folder:
         enabled: false
+
+    # Increase "max_depth" from default 5.
+    twig.template_too_complex:
+        enabled: true
+        max_depth: 6
