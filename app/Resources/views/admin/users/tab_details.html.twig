@@ -4,6 +4,9 @@
     <div class="column full-width">
         <button type="button" id="btn-back">{{ 'button.back'|trans }}</button>
         <button type="button" id="btn-edit">{{ 'button.edit'|trans }}</button>
+        {% if can.delete %}
+            <button type="button" id="btn-delete">{{ 'button.delete'|trans }}</button>
+        {% endif %}
         <span class="buttonset">
             {% if can.disable %}
                 <button type="button" id="btn-disable">{{ 'button.disable'|trans }}</button>
@@ -65,6 +68,15 @@
                     reloadTab();
                     return true;
                 }
+            });
+        });
+
+        // "Delete" button.
+        $('#btn-delete').click(function() {
+            eTraxis.confirm('{{ 'button.delete'|trans }}', '{{ 'user.confirm.delete'|trans }}', function() {
+                $.post('{{ path('admin_delete_user', {'id': user.id}) }}', function() {
+                    window.location.assign('{{ path('admin_users') }}');
+                });
             });
         });
 

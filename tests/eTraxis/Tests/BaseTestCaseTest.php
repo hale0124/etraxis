@@ -25,6 +25,11 @@ class BaseTestCaseTest extends BaseTestCase
         $this->assertEquals('artem', $user->getUsername());
     }
 
+    public function testGetMaxId()
+    {
+        $this->assertEquals(2147483647, $this->getMaxId());
+    }
+
     public function testLoginAs()
     {
         $this->assertFalse($this->loginAs('unknown'));

@@ -79,6 +79,16 @@ class BaseTestCase extends WebTestCase
     }
 
     /**
+     * Returns maximum value of signed 32-bits integer which can be used as Id of non-existing entity.
+     *
+     * @return  int
+     */
+    protected function getMaxId()
+    {
+        return (1 << 31) - 1;
+    }
+
+    /**
      * Finds specified user.
      *
      * @param   string $username Login.

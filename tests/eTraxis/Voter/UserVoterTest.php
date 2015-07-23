@@ -17,6 +17,30 @@ use eTraxis\Tests\BaseTestCase;
 
 class UserVoterTest extends BaseTestCase
 {
+    public function testDelete()
+    {
+        /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
+        $authChecker = $this->client->getContainer()->get('security.authorization_checker');
+
+        $hubert  = $this->findUser('hubert');
+        $leela   = $this->findUser('leela');
+        $scruffy = $this->findUser('scruffy');
+
+        $this->assertInstanceOf('eTraxis\Entity\User', $hubert);
+        $this->assertInstanceOf('eTraxis\Entity\User', $leela);
+        $this->assertInstanceOf('eTraxis\Entity\User', $scruffy);
+
+        $this->loginAs('hubert');
+
+        $this->assertFalse($authChecker->isGranted(UserVoter::DELETE, $hubert));
+        $this->assertFalse($authChecker->isGranted(UserVoter::DELETE, $leela));
+        $this->assertTrue($authChecker->isGranted(UserVoter::DELETE, $scruffy));
+
+        $this->loginAs('fry');
+
+        $this->assertFalse($authChecker->isGranted(UserVoter::DELETE, $scruffy));
+    }
+
     public function testDisable()
     {
         /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */

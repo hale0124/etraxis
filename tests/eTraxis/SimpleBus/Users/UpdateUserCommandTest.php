@@ -61,7 +61,7 @@ class UpdateUserCommandTest extends BaseTestCase
         $this->assertNull($user);
 
         $command = new UpdateUserCommand([
-            'id'       => (1 << 31) - 1,
+            'id'       => $this->getMaxId(),
             'username' => 'flexo',
             'fullname' => 'Flexo',
             'email'    => 'flexo@example.com',

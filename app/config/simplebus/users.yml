@@ -35,6 +35,11 @@ services:
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\UpdateUserCommand }]
         arguments: [ @logger, @validator, @translator, @doctrine, @security.token_storage ]
 
+    command.user.delete:
+        class: eTraxis\SimpleBus\Users\Handler\DeleteUserCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\DeleteUserCommand }]
+        arguments: [ @doctrine, @security.authorization_checker ]
+
     command.users.disable:
         class: eTraxis\SimpleBus\Users\Handler\DisableUsersCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\DisableUsersCommand }]

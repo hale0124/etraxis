@@ -33,7 +33,7 @@ class FindUserCommandTest extends BaseTestCase
     public function testNotFound()
     {
         $command = new FindUserCommand([
-            'id' => (1 << 31) - 1,
+            'id' => $this->getMaxId(),
         ]);
 
         $this->command_bus->handle($command);

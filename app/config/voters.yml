@@ -4,3 +4,4 @@ services:
         class: eTraxis\Voter\UserVoter
         public: false
         tags: [{ name: security.voter }]
+        arguments: [ @doctrine ]

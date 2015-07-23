@@ -150,6 +150,7 @@ class UsersController extends Controller
                 'user' => $command->result,
                 'form' => $form->createView(),
                 'can'  => [
+                    'delete'  => $authChecker->isGranted(UserVoter::DELETE, $command->result),
                     'disable' => $authChecker->isGranted(UserVoter::DISABLE, $command->result),
                     'enable'  => $authChecker->isGranted(UserVoter::ENABLE, $command->result),
                     'unlock'  => $authChecker->isGranted(UserVoter::UNLOCK, $command->result),
@@ -241,6 +242,29 @@ class UsersController extends Controller
         }
         catch (CommandException $e) {
             return new JsonResponse($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
+     * Deletes specified user.
+     *
+     * @Route("/{id}/delete", name="admin_delete_user", requirements={"id"="\d+"})
+     * @Method("POST")
+     *
+     * @param   int $id User ID.
+     *
+     * @return  JsonResponse
+     */
+    public function deleteAction($id)
+    {
+        try {
+            $command = new Users\DeleteUserCommand(['id' => $id]);
+            $this->getCommandBus()->handle($command);
+
+            return new JsonResponse();
+        }
+        catch (ValidationException $e) {
+            return new JsonResponse($e->getMessages(), $e->getCode());
         }
     }
 

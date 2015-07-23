@@ -43,6 +43,7 @@ permissions: Jogosultságok
 role.administrator: Adminisztrátor
 role.user: Felhasználó
 description: Leírás
+user.confirm.delete: 'Biztos törölni szeretné a felhasználót?'
 user.conflict.username: 'Már létezik ilyen névvel ellátott felhasználó.'
 password.too.short: 'A jelszónak legalább %length% hosszúságúnak kell lennie.'
 passwords.dont.match: 'A jelszavak nem egyeznek.'
