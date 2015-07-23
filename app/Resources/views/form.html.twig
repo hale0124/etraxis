@@ -19,7 +19,7 @@
             </div>
             <div class="column two-thirds">
                 {% if form.vars.required %}
-                    {{ form_widget(form, {'attr': {'class': 'full-width', 'placeholder': 'required'|trans}}) }}
+                    {{ form_widget(form, {'attr': {'class': 'full-width', 'placeholder': 'required'}}) }}
                 {% else %}
                     {{ form_widget(form, {'attr': {'class': 'full-width'}}) }}
                 {% endif %}

@@ -27,7 +27,7 @@ security.confirm_exit: 'Sunteti sigur ca doriti sa iesiti?'
 'User account is locked.': 'Contuleste blocat.'
 administration: Administrare
 users: Utilizatori
-user.user_new: 'Utilizator nou'
+user.new: 'Utilizator nou'
 user.username: 'Nume utilizator'
 user.fullname: 'Nume si prenume'
 user.email: Email

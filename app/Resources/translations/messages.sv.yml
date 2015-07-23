@@ -27,7 +27,7 @@ security.confirm_exit: 'Är du säker på att du vill avsluta?'
 'User account is locked.': 'Kontot är låst.'
 administration: Administration
 users: Användare
-user.user_new: 'Ny användare'
+user.new: 'Ny användare'
 user.username: Användarnamn
 user.fullname: 'Fullständigt namn'
 user.email: Email
