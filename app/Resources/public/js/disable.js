@@ -23,10 +23,18 @@
         if (state) {
             $('label[for="' + $(this).prop('id') + '"]').addClass('ui-state-disabled');
             $(this).addClass('ui-state-disabled');
+
+            if ($(this).hasClass('ui-button')) {
+                $(this).button('disable');
+            }
         }
         else {
             $('label[for="' + $(this).prop('id') + '"]').removeClass('ui-state-disabled');
             $(this).removeClass('ui-state-disabled');
+
+            if ($(this).hasClass('ui-button')) {
+                $(this).button('enable');
+            }
         }
 
         return this;
