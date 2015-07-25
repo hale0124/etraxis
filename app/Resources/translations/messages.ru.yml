@@ -46,6 +46,7 @@ role.user: Пользователь
 description: Описание
 language: Язык
 theme: Дизайн
+timezone: 'Часовой пояс'
 user.confirm.delete: 'Вы уверены, что хотите удалить эту учетную запись?'
 user.conflict.username: 'Учетная запись с таким именем пользователя уже существует.'
 password.too.short: 'Пароль должен содержать как минимум %length% символов.'

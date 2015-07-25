@@ -46,6 +46,7 @@ role.user: Gebruiker
 description: Beschrijving
 language: Taal
 theme: Thema
+timezone: UL
 user.confirm.delete: 'Ben je zeker dat je deze account wilt verwijderen?'
 user.conflict.username: 'Account met ingevoerde naam bestaat reeds.'
 password.too.short: 'Wachtwoord moet tenminste %length% tekens bevatten.'

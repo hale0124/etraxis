@@ -42,6 +42,7 @@ class CreateUserCommandTest extends BaseTestCase
             'disabled'    => $disabled,
             'locale'      => static::$kernel->getContainer()->getParameter('locale'),
             'theme'       => static::$kernel->getContainer()->getParameter('theme'),
+            'timezone'    => 377,
         ]);
 
         $this->command_bus->handle($command);
@@ -62,6 +63,7 @@ class CreateUserCommandTest extends BaseTestCase
         $this->assertFalse($user->isLdap());
         $this->assertEquals(static::$kernel->getContainer()->getParameter('locale'), $user->getLocale());
         $this->assertEquals(static::$kernel->getContainer()->getParameter('theme'), $user->getTheme());
+        $this->assertEquals(377, $user->getTimezone());
     }
 
     /**
@@ -78,6 +80,7 @@ class CreateUserCommandTest extends BaseTestCase
             'disabled' => false,
             'locale'   => static::$kernel->getContainer()->getParameter('locale'),
             'theme'    => static::$kernel->getContainer()->getParameter('theme'),
+            'timezone' => 0,
         ]);
 
         $this->command_bus->handle($command);
@@ -97,6 +100,7 @@ class CreateUserCommandTest extends BaseTestCase
             'disabled' => false,
             'locale'   => static::$kernel->getContainer()->getParameter('locale'),
             'theme'    => static::$kernel->getContainer()->getParameter('theme'),
+            'timezone' => 0,
         ]);
 
         $this->command_bus->handle($command);

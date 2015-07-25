@@ -46,6 +46,7 @@ role.user: Utente
 description: Descrizione
 language: Lingua
 theme: Tema
+timezone: 'Fuso Orario'
 user.confirm.delete: 'Eliminare questo account?'
 user.conflict.username: 'Nome utente già utilizzato.'
 password.too.short: 'La password deve essere almeno lunga %length% caratteri.'

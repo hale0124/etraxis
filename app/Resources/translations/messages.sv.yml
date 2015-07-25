@@ -46,6 +46,7 @@ role.user: Användare
 description: Beskrivning
 language: Språk
 theme: Tema
+timezone: Tidszon
 user.confirm.delete: 'Är du säker på att du vill ta bort detta kontot?'
 user.conflict.username: 'Kontot med detta användarnamn finns redan.'
 password.too.short: 'Lösenord ska vara minst %length% tecken långt.'

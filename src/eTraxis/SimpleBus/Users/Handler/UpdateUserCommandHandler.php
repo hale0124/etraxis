@@ -80,6 +80,7 @@ class UpdateUserCommandHandler
             ->setDescription($command->description)
             ->setLocale($command->locale)
             ->setTheme($command->theme)
+            ->setTimezone($command->timezone)
         ;
 
         // Don't disable yourself.

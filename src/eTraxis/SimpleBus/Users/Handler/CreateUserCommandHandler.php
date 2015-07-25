@@ -84,7 +84,7 @@ class CreateUserCommandHandler
             ->setLdap(false)
             ->setLocale($command->locale)
             ->setTheme($command->theme)
-            ->setTimezone(0)
+            ->setTimezone($command->timezone)
         ;
 
         $errors = $this->validator->validate($entity);

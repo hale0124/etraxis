@@ -46,6 +46,7 @@ role.user: Utilizator
 description: Descriere
 language: Limba
 theme: Tema
+timezone: 'Fus orar'
 user.confirm.delete: 'Sunteti sigur ca doriti sa stergeti acest cont?'
 user.conflict.username: 'Numele de utilizator este deja folosit.'
 password.too.short: 'Parola trebuie sa aiba cel putin %length% caractere.'

@@ -44,8 +44,9 @@ class UsersController extends Controller
     public function indexAction()
     {
         $default = [
-            'locale' => $this->getParameter('locale'),
-            'theme'  => $this->getParameter('theme'),
+            'locale'   => $this->getParameter('locale'),
+            'theme'    => $this->getParameter('theme'),
+            'timezone' => 0,
         ];
 
         $form = $this->createForm(new UserForm(), $default, [

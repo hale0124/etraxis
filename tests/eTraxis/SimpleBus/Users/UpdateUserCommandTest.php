@@ -29,6 +29,7 @@ class UpdateUserCommandTest extends BaseTestCase
         $this->assertFalse($user->isDisabled());
         $this->assertEquals('en', $user->getLocale());
         $this->assertEquals('azure', $user->getTheme());
+        $this->assertEquals(0, $user->getTimezone());
 
         $command = new UpdateUserCommand([
             'id'       => $user->getId(),
@@ -39,6 +40,7 @@ class UpdateUserCommandTest extends BaseTestCase
             'disabled' => true,
             'locale'   => 'es',
             'theme'    => 'humanity',
+            'timezone' => 377,
         ]);
 
         $this->command_bus->handle($command);
@@ -53,6 +55,7 @@ class UpdateUserCommandTest extends BaseTestCase
         $this->assertTrue($user->isDisabled());
         $this->assertEquals('es', $user->getLocale());
         $this->assertEquals('humanity', $user->getTheme());
+        $this->assertEquals(377, $user->getTimezone());
     }
 
     /**
@@ -75,6 +78,7 @@ class UpdateUserCommandTest extends BaseTestCase
             'disabled' => true,
             'locale'   => static::$kernel->getContainer()->getParameter('locale'),
             'theme'    => static::$kernel->getContainer()->getParameter('theme'),
+            'timezone' => 0,
         ]);
 
         $this->command_bus->handle($command);
@@ -100,6 +104,7 @@ class UpdateUserCommandTest extends BaseTestCase
             'disabled' => $user->isDisabled(),
             'locale'   => static::$kernel->getContainer()->getParameter('locale'),
             'theme'    => static::$kernel->getContainer()->getParameter('theme'),
+            'timezone' => 0,
         ]);
 
         $this->command_bus->handle($command);

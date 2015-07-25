@@ -16,6 +16,7 @@ namespace eTraxis\Form;
 use eTraxis\Entity\User;
 use eTraxis\Model\LocaleStaticCollection;
 use eTraxis\Model\ThemeStaticCollection;
+use eTraxis\Model\TimezoneStaticCollection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Security\Core\Encoder\BasePasswordEncoder;
@@ -89,6 +90,13 @@ class UserForm extends AbstractType
             'label'    => 'theme',
             'required' => true,
             'choices'  => ThemeStaticCollection::getCollection(),
+        ]);
+
+        // Timezone.
+        $builder->add('timezone', 'choice', [
+            'label'    => 'timezone',
+            'required' => true,
+            'choices'  => TimezoneStaticCollection::getCollection(),
         ]);
 
         // Administrator.
