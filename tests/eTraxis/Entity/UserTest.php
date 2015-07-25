@@ -161,6 +161,13 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->object->getTheme());
     }
 
+    public function testThemeUnsupported()
+    {
+        $expected = 'azure';
+        $this->object->setTheme('unsupported');
+        $this->assertEquals($expected, $this->object->getTheme());
+    }
+
     public function testGroups()
     {
         $this->assertCount(0, $this->object->getGroups());
@@ -229,5 +236,14 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
         $this->object->setDisabled(true);
         $this->assertFalse($this->object->isEnabled());
+    }
+
+    public function testGetAuthenticationSource()
+    {
+        $this->object->setLdap(false);
+        $this->assertEquals('eTraxis', $this->object->getAuthenticationSource());
+
+        $this->object->setLdap(true);
+        $this->assertEquals('LDAP', $this->object->getAuthenticationSource());
     }
 }
