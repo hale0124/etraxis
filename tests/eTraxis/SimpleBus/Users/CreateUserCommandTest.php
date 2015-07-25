@@ -40,6 +40,8 @@ class CreateUserCommandTest extends BaseTestCase
             'password'    => $password,
             'admin'       => $admin,
             'disabled'    => $disabled,
+            'locale'      => static::$kernel->getContainer()->getParameter('locale'),
+            'theme'       => static::$kernel->getContainer()->getParameter('theme'),
         ]);
 
         $this->command_bus->handle($command);
@@ -68,12 +70,14 @@ class CreateUserCommandTest extends BaseTestCase
     public function testPasswordTooShort()
     {
         $command = new CreateUserCommand([
-            'username'    => 'anna',
-            'fullname'    => 'Anna Rodygina',
-            'email'       => 'anna@example.com',
-            'password'    => 'short',
-            'admin'       => true,
-            'disabled'    => false,
+            'username' => 'anna',
+            'fullname' => 'Anna Rodygina',
+            'email'    => 'anna@example.com',
+            'password' => 'short',
+            'admin'    => true,
+            'disabled' => false,
+            'locale'   => static::$kernel->getContainer()->getParameter('locale'),
+            'theme'    => static::$kernel->getContainer()->getParameter('theme'),
         ]);
 
         $this->command_bus->handle($command);
@@ -85,12 +89,14 @@ class CreateUserCommandTest extends BaseTestCase
     public function testUsernameConflict()
     {
         $command = new CreateUserCommand([
-            'username'    => 'artem',
-            'fullname'    => 'Artem Rodygin',
-            'email'       => 'artem@example.com',
-            'password'    => 'secret',
-            'admin'       => true,
-            'disabled'    => false,
+            'username' => 'artem',
+            'fullname' => 'Artem Rodygin',
+            'email'    => 'artem@example.com',
+            'password' => 'secret',
+            'admin'    => true,
+            'disabled' => false,
+            'locale'   => static::$kernel->getContainer()->getParameter('locale'),
+            'theme'    => static::$kernel->getContainer()->getParameter('theme'),
         ]);
 
         $this->command_bus->handle($command);

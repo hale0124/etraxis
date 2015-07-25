@@ -27,6 +27,8 @@ class UpdateUserCommandTest extends BaseTestCase
         $this->assertNotEmpty($user->getDescription());
         $this->assertFalse($user->isAdmin());
         $this->assertFalse($user->isDisabled());
+        $this->assertEquals('en', $user->getLocale());
+        $this->assertEquals('azure', $user->getTheme());
 
         $command = new UpdateUserCommand([
             'id'       => $user->getId(),
@@ -35,6 +37,8 @@ class UpdateUserCommandTest extends BaseTestCase
             'email'    => 'flexo@example.com',
             'admin'    => true,
             'disabled' => true,
+            'locale'   => 'es',
+            'theme'    => 'humanity',
         ]);
 
         $this->command_bus->handle($command);
@@ -47,6 +51,8 @@ class UpdateUserCommandTest extends BaseTestCase
         $this->assertEmpty($user->getDescription());
         $this->assertTrue($user->isAdmin());
         $this->assertTrue($user->isDisabled());
+        $this->assertEquals('es', $user->getLocale());
+        $this->assertEquals('humanity', $user->getTheme());
     }
 
     /**
@@ -67,6 +73,8 @@ class UpdateUserCommandTest extends BaseTestCase
             'email'    => 'flexo@example.com',
             'admin'    => true,
             'disabled' => true,
+            'locale'   => static::$kernel->getContainer()->getParameter('locale'),
+            'theme'    => static::$kernel->getContainer()->getParameter('theme'),
         ]);
 
         $this->command_bus->handle($command);
@@ -90,6 +98,8 @@ class UpdateUserCommandTest extends BaseTestCase
             'email'    => $user->getEmail(),
             'admin'    => $user->isAdmin(),
             'disabled' => $user->isDisabled(),
+            'locale'   => static::$kernel->getContainer()->getParameter('locale'),
+            'theme'    => static::$kernel->getContainer()->getParameter('theme'),
         ]);
 
         $this->command_bus->handle($command);
