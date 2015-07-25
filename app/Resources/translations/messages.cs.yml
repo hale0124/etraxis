@@ -45,6 +45,7 @@ role.administrator: Administrátor
 role.user: Uživatel
 description: Popis
 language: Jazyk
+theme: Vzhled
 user.confirm.delete: 'Jste si jisti, že chcete smazat tento účet?'
 user.conflict.username: 'Účet se zadaným uživatelským jménem již existuje.'
 password.too.short: 'Heslo musí být dlouhé alespoň %length% znaků.'

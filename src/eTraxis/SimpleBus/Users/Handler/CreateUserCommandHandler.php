@@ -33,7 +33,6 @@ class CreateUserCommandHandler
     protected $translator;
     protected $doctrine;
     protected $password_encoder;
-    protected $theme;
 
     /**
      * Dependency Injection constructor.
@@ -43,22 +42,19 @@ class CreateUserCommandHandler
      * @param   TranslatorInterface      $translator
      * @param   RegistryInterface        $doctrine
      * @param   PasswordEncoderInterface $password_encoder
-     * @param   string                   $theme
      */
     public function __construct(
         LoggerInterface          $logger,
         ValidatorInterface       $validator,
         TranslatorInterface      $translator,
         RegistryInterface        $doctrine,
-        PasswordEncoderInterface $password_encoder,
-        $theme)
+        PasswordEncoderInterface $password_encoder)
     {
         $this->logger           = $logger;
         $this->validator        = $validator;
         $this->translator       = $translator;
         $this->doctrine         = $doctrine;
         $this->password_encoder = $password_encoder;
-        $this->theme            = $theme;
     }
 
     /**
@@ -87,7 +83,7 @@ class CreateUserCommandHandler
             ->setDisabled($command->disabled)
             ->setLdap(false)
             ->setLocale($command->locale)
-            ->setTheme($this->theme)
+            ->setTheme($command->theme)
             ->setTimezone(0)
         ;
 

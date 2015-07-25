@@ -45,6 +45,7 @@ role.administrator: Administrator
 role.user: User
 description: Description
 language: Language
+theme: Theme
 user.confirm.delete: 'Are you sure you want delete this account?'
 user.conflict.username: 'Account with entered user name already exists.'
 password.too.short: 'Password should be at least %length% characters length.'

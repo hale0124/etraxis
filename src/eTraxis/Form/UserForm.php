@@ -15,6 +15,7 @@ namespace eTraxis\Form;
 
 use eTraxis\Entity\User;
 use eTraxis\Model\LocaleStaticCollection;
+use eTraxis\Model\ThemeStaticCollection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Security\Core\Encoder\BasePasswordEncoder;
@@ -81,6 +82,13 @@ class UserForm extends AbstractType
             'label'    => 'language',
             'required' => true,
             'choices'  => LocaleStaticCollection::getCollection(),
+        ]);
+
+        // Theme.
+        $builder->add('theme', 'choice', [
+            'label'    => 'theme',
+            'required' => true,
+            'choices'  => ThemeStaticCollection::getCollection(),
         ]);
 
         // Administrator.

@@ -79,6 +79,7 @@ class UpdateUserCommandHandler
             ->setEmail($command->email)
             ->setDescription($command->description)
             ->setLocale($command->locale)
+            ->setTheme($command->theme)
         ;
 
         // Don't disable yourself.

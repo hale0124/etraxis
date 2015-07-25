@@ -45,6 +45,7 @@ role.administrator: Administrators
 role.user: Lietotājs
 description: Apraksts
 language: Valoda
+theme: Motīvs
 user.confirm.delete: 'Vai tiešām vēlaties dzēst šo kontu?'
 user.conflict.username: 'Lietotāja konts ar tādu lietotāja vārdu jau eksistē.'
 password.too.short: 'Parolei jāsatur vismaz %length% simbolu.'

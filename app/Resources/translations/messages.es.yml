@@ -45,6 +45,7 @@ role.administrator: Administrador
 role.user: Usuario
 description: Descripción
 language: Idioma
+theme: Tema
 user.confirm.delete: '¿Está seguro de eliminar esta cuenta?'
 user.conflict.username: 'Ya existe una cuenta con ese nombre de usuario.'
 password.too.short: 'La contraseña debe tener una logintud mínima de %length% caracteres.'

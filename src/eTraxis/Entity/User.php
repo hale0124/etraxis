@@ -15,6 +15,7 @@ namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use eTraxis\Model\ThemeStaticCollection;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
@@ -664,7 +665,7 @@ class User implements AdvancedUserInterface
      */
     public function setTheme($theme)
     {
-        if (in_array($theme, self::getAvailableThemes())) {
+        if (in_array($theme, ThemeStaticCollection::getAllKeys())) {
             $this->theme = $theme;
         }
 
@@ -678,7 +679,13 @@ class User implements AdvancedUserInterface
      */
     public function getTheme()
     {
-        return strtolower($this->theme);
+        $theme = strtolower($this->theme);
+
+        if (!in_array($theme, ThemeStaticCollection::getAllKeys())) {
+            $theme = 'azure';
+        }
+
+        return $theme;
     }
 
     /**
@@ -790,22 +797,5 @@ class User implements AdvancedUserInterface
     public function getAuthenticationSource()
     {
         return $this->isLdap ? 'LDAP' : 'eTraxis';
-    }
-
-    /**
-     * Returns list of available themes.
-     *
-     * @return  string[]
-     */
-    public static function getAvailableThemes()
-    {
-        return [
-            'allblacks',
-            'azure',
-            'emerald',
-            'humanity',
-            'mars',
-            'nexada',
-        ];
     }
 }

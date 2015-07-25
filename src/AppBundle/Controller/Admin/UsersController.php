@@ -45,6 +45,7 @@ class UsersController extends Controller
     {
         $default = [
             'locale' => $this->getParameter('locale'),
+            'theme'  => $this->getParameter('theme'),
         ];
 
         $form = $this->createForm(new UserForm(), $default, [

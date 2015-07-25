@@ -45,6 +45,7 @@ role.administrator: システム管理者
 role.user: ユーザー
 description: 説明
 language: 言語
+theme: テーマ
 user.confirm.delete: アカウントを削除してよろしいですか？
 user.conflict.username: 入力されたユーザーの名前は既に存在しています。
 password.too.short: 'パスワードは最低 %length% 文字以上である必要があります。'
