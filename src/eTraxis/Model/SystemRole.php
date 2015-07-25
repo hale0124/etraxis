@@ -11,7 +11,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Entity;
+namespace eTraxis\Model;
 
 /**
  * System role.

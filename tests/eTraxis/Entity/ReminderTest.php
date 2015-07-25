@@ -13,6 +13,8 @@
 
 namespace eTraxis\Entity;
 
+use eTraxis\Model\SystemRole;
+
 class ReminderTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Reminder */

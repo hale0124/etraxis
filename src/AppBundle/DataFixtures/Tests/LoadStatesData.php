@@ -19,7 +19,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use eTraxis\Entity\State;
 use eTraxis\Entity\StateAssignee;
 use eTraxis\Entity\StateRoleTransition;
-use eTraxis\Entity\SystemRole;
+use eTraxis\Model\SystemRole;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
