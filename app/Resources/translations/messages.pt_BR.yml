@@ -44,6 +44,7 @@ permissions: Permissões
 role.administrator: Administrador
 role.user: Usuário
 description: Descrição
+language: Língua
 user.confirm.delete: 'Tem certeza que quer apagar esta conta?'
 user.conflict.username: 'A conta escolhida já existe..'
 password.too.short: 'A senha deve conter pelo menos %length% caracteres.'

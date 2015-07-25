@@ -43,7 +43,11 @@ class UsersController extends Controller
      */
     public function indexAction()
     {
-        $form = $this->createForm(new UserForm(), null, [
+        $default = [
+            'locale' => $this->getParameter('locale'),
+        ];
+
+        $form = $this->createForm(new UserForm(), $default, [
             'action' => $this->generateUrl('admin_new_user'),
         ]);
 

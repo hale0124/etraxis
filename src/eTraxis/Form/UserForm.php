@@ -14,6 +14,7 @@
 namespace eTraxis\Form;
 
 use eTraxis\Entity\User;
+use eTraxis\Model\LocaleStaticCollection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Security\Core\Encoder\BasePasswordEncoder;
@@ -34,21 +35,21 @@ class UserForm extends AbstractType
         // User name.
         $builder->add('username', 'text', [
             'label'    => 'user.username',
-            'disabled' => $user && $user->isLdap(),
+            'disabled' => is_object($user) && $user->isLdap(),
             'attr'     => ['maxlength' => User::MAX_USERNAME],
         ]);
 
         // Full name.
         $builder->add('fullname', 'text', [
             'label'    => 'user.fullname',
-            'disabled' => $user && $user->isLdap(),
+            'disabled' => is_object($user) && $user->isLdap(),
             'attr'     => ['maxlength' => User::MAX_FULLNAME],
         ]);
 
         // Email.
         $builder->add('email', 'email', [
             'label'    => 'user.email',
-            'disabled' => $user && $user->isLdap(),
+            'disabled' => is_object($user) && $user->isLdap(),
             'attr'     => ['maxlength' => User::MAX_EMAIL],
         ]);
 
@@ -62,7 +63,7 @@ class UserForm extends AbstractType
         // Password.
         $builder->add('password', 'password', [
             'label'    => 'user.password',
-            'required' => !($user && $user->getId()),
+            'required' => !(is_object($user) && $user->getId()),
             'mapped'   => false,
             'attr'     => ['maxlength' => BasePasswordEncoder::MAX_PASSWORD_LENGTH],
         ]);
@@ -70,9 +71,16 @@ class UserForm extends AbstractType
         // Confirmation.
         $builder->add('confirmation', 'password', [
             'label'    => 'user.password_confirmation',
-            'required' => !($user && $user->getId()),
+            'required' => !(is_object($user) && $user->getId()),
             'mapped'   => false,
             'attr'     => ['maxlength' => BasePasswordEncoder::MAX_PASSWORD_LENGTH],
+        ]);
+
+        // Locale.
+        $builder->add('locale', 'choice', [
+            'label'    => 'language',
+            'required' => true,
+            'choices'  => LocaleStaticCollection::getCollection(),
         ]);
 
         // Administrator.

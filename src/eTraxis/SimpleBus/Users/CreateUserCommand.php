@@ -26,6 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @property    string $email       Email address.
  * @property    string $description Description.
  * @property    string $password    Password.
+ * @property    string $locale      Locale.
  * @property    bool   $admin       Role (whether has administrator permissions).
  * @property    bool   $disabled    Status.
  */
@@ -59,6 +60,12 @@ class CreateUserCommand extends BaseCommand
      * @Assert\NotBlank()
      */
     public $password = null;
+
+    /**
+     * @Assert\NotNull()
+     * @Assert\Choice(callback = {"eTraxis\Model\LocaleStaticCollection", "getAllKeys"})
+     */
+    public $locale = null;
 
     /**
      * @Assert\NotNull()

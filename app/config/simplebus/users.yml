@@ -28,7 +28,7 @@ services:
     command.user.create:
         class: eTraxis\SimpleBus\Users\Handler\CreateUserCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\CreateUserCommand }]
-        arguments: [ @logger, @validator, @translator, @doctrine, @etraxis.encoder, %locale%, %theme% ]
+        arguments: [ @logger, @validator, @translator, @doctrine, @etraxis.encoder, %theme% ]
 
     command.user.update:
         class: eTraxis\SimpleBus\Users\Handler\UpdateUserCommandHandler

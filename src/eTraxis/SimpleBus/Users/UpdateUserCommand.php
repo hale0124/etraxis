@@ -24,6 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @property    string $fullname    New full name.
  * @property    string $email       New email address.
  * @property    string $description New description.
+ * @property    string $locale      New locale.
  * @property    bool   $admin       New role (whether has administrator permissions).
  * @property    bool   $disabled    New status.
  */
@@ -58,6 +59,12 @@ class UpdateUserCommand extends BaseCommand
      * @Assert\Length(max = "100")
      */
     public $description = null;
+
+    /**
+     * @Assert\NotNull()
+     * @Assert\Choice(callback = {"eTraxis\Model\LocaleStaticCollection", "getAllKeys"})
+     */
+    public $locale = null;
 
     /**
      * @Assert\NotNull()

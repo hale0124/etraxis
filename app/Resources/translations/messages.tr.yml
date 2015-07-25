@@ -44,6 +44,7 @@ permissions: İzinler
 role.administrator: Yönetici
 role.user: Kullanıcı
 description: Yorum
+language: Dil
 user.confirm.delete: 'Bu hesabı silmek istediğinizden emin misiniz?'
 user.conflict.username: 'Girilen kullanıcı adıyla bir hesap zaten var.'
 password.too.short: 'Parola en az %length% karakter uzunluğunda olmalıdır.'

@@ -33,7 +33,6 @@ class CreateUserCommandHandler
     protected $translator;
     protected $doctrine;
     protected $password_encoder;
-    protected $locale;
     protected $theme;
 
     /**
@@ -44,7 +43,6 @@ class CreateUserCommandHandler
      * @param   TranslatorInterface      $translator
      * @param   RegistryInterface        $doctrine
      * @param   PasswordEncoderInterface $password_encoder
-     * @param   string                   $locale
      * @param   string                   $theme
      */
     public function __construct(
@@ -53,7 +51,6 @@ class CreateUserCommandHandler
         TranslatorInterface      $translator,
         RegistryInterface        $doctrine,
         PasswordEncoderInterface $password_encoder,
-        $locale,
         $theme)
     {
         $this->logger           = $logger;
@@ -61,7 +58,6 @@ class CreateUserCommandHandler
         $this->translator       = $translator;
         $this->doctrine         = $doctrine;
         $this->password_encoder = $password_encoder;
-        $this->locale           = $locale;
         $this->theme            = $theme;
     }
 
@@ -90,7 +86,7 @@ class CreateUserCommandHandler
             ->setAdmin($command->admin)
             ->setDisabled($command->disabled)
             ->setLdap(false)
-            ->setLocale($this->locale)
+            ->setLocale($command->locale)
             ->setTheme($this->theme)
             ->setTimezone(0)
         ;

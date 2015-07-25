@@ -78,6 +78,7 @@ class UpdateUserCommandHandler
             ->setFullname($command->fullname)
             ->setEmail($command->email)
             ->setDescription($command->description)
+            ->setLocale($command->locale)
         ;
 
         // Don't disable yourself.

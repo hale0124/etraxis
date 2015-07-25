@@ -44,6 +44,7 @@ permissions: Permessi
 role.administrator: Amministratore
 role.user: Utente
 description: Descrizione
+language: Lingua
 user.confirm.delete: 'Eliminare questo account?'
 user.conflict.username: 'Nome utente già utilizzato.'
 password.too.short: 'La password deve essere almeno lunga %length% caratteri.'

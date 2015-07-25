@@ -44,6 +44,7 @@ permissions: Berechtigungen
 role.administrator: Administrator
 role.user: Benutzer
 description: Beschreibung
+language: Sprache
 user.confirm.delete: 'Möchten Sie dieses Konto wirklich löschen?'
 user.conflict.username: 'Ein Konto mit diesem Benutzernamen existiert bereits.'
 password.too.short: 'Das Passwort muss mindestens %length% Zeichen lang sein.'
