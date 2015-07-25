@@ -19,13 +19,17 @@ namespace eTraxis\Model;
 abstract class AbstractStaticCollection implements StaticCollectionInterface
 {
     /** @var array Cached collection. */
-    protected static $values = null;
+    protected static $values = [];
 
     protected static function initCache()
     {
-        if (static::$values === null) {
-            static::$values = static::getCollection();
+        $key = get_called_class();
+
+        if (!array_key_exists($key, static::$values)) {
+            static::$values[$key] = static::getCollection();
         }
+
+        return static::$values[$key];
     }
 
     /**
@@ -33,9 +37,9 @@ abstract class AbstractStaticCollection implements StaticCollectionInterface
      */
     public static function getAllKeys()
     {
-        static::initCache();
+        $collection = static::initCache();
 
-        return array_keys(static::$values);
+        return array_keys($collection);
     }
 
     /**
@@ -43,9 +47,9 @@ abstract class AbstractStaticCollection implements StaticCollectionInterface
      */
     public static function getAllValues()
     {
-        static::initCache();
+        $collection = static::initCache();
 
-        return array_values(static::$values);
+        return array_values($collection);
     }
 
     /**
@@ -53,8 +57,8 @@ abstract class AbstractStaticCollection implements StaticCollectionInterface
      */
     public static function getValue($key)
     {
-        static::initCache();
+        $collection = static::initCache();
 
-        return array_key_exists($key, static::$values) ? static::$values[$key] : null;
+        return array_key_exists($key, $collection) ? $collection[$key] : null;
     }
 }
