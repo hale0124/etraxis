@@ -8,6 +8,12 @@ rules:
     symfony.controller.missing_redirect_after_post:
         enabled: false
 
+    # Increase "max_count" from default 10.
+    symfony.controller.too_many_actions_per_controller:
+        enabled: true
+        max_count: 20
+        threshold: 5
+
     # The violation is false positive:
     # 1. There is no point to require all forms to be in "Form/Type" instead of just "Form".
     # 2. The "Official Symfony Best Practices" uses just "Form" folder, too:
