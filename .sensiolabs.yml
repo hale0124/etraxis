@@ -21,4 +21,4 @@ rules:
     # Increase "max_depth" from default 5.
     twig.template_too_complex:
         enabled: true
-        max_depth: 6
+        max_depth: 7
