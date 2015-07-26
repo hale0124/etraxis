@@ -62,14 +62,14 @@ class UsersController extends Controller
      * Returns JSON list of users for DataTables
      * (see http://datatables.net/manual/server-side for details).
      *
-     * @Route("/ajax", name="admin_users_ajax")
+     * @Route("/list", name="admin_users_list")
      * @Method("GET")
      *
      * @param   Request $request
      *
      * @return  Response|JsonResponse
      */
-    public function ajaxAction(Request $request)
+    public function listAction(Request $request)
     {
         try {
             $search = $request->get('search', ['value' => null]);
@@ -129,7 +129,7 @@ class UsersController extends Controller
     /**
      * Tab with user's details.
      *
-     * @Route("/{id}/tab/details", name="admin_tab_user_details", requirements={"id"="\d+"})
+     * @Route("/tab/details/{id}", name="admin_tab_user_details", requirements={"id"="\d+"})
      * @Method("GET")
      *
      * @param   int $id User ID.
@@ -203,7 +203,7 @@ class UsersController extends Controller
     /**
      * Processes submitted form when specified user is being edited.
      *
-     * @Route("/{id}/edit", name="admin_edit_user", requirements={"id"="\d+"})
+     * @Route("/edit/{id}", name="admin_edit_user", requirements={"id"="\d+"})
      * @Method("POST")
      *
      * @param   Request $request
@@ -271,7 +271,7 @@ class UsersController extends Controller
     /**
      * Deletes specified user.
      *
-     * @Route("/{id}/delete", name="admin_delete_user", requirements={"id"="\d+"})
+     * @Route("/delete/{id}", name="admin_delete_user", requirements={"id"="\d+"})
      * @Method("POST")
      *
      * @param   int $id User ID.
@@ -340,7 +340,7 @@ class UsersController extends Controller
     /**
      * Unlocks specified user.
      *
-     * @Route("/{id}/unlock", name="admin_unlock_user", requirements={"id"="\d+"})
+     * @Route("/unlock/{id}", name="admin_unlock_user", requirements={"id"="\d+"})
      * @Method("POST")
      *
      * @param   int $id User ID.
