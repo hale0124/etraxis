@@ -39,8 +39,6 @@
     </div>
 </div>
 
-{% include 'admin/users/dlg_user.html.twig' %}
-
 <script>
 
     $(function() {
@@ -67,7 +65,8 @@
             $('#form_disabled').disable(true);
             {% endif %}
 
-            $('#dlg-user').modal({
+            eTraxis.modal({
+                url: '{{ path('admin_dlg_edit_user', {'id': user.id}) }}',
                 title: '{{ user.fullname }}',
                 success: function() {
                     {% if user.id == app.user.id %}

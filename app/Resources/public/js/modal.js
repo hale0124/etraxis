@@ -7,30 +7,31 @@
  *  along with eTraxis.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-(function($) {
+var eTraxis = window.eTraxis || {};
 
-    /**
-     * Full-featured modal dialog.
-     *
-     * @returns {$.fn}
-     */
-    $.fn.modal = function(options) {
+/**
+ * Full-featured modal dialog.
+ */
+eTraxis.modal = function(options) {
 
-        var settings = $.extend({
-            title: null,
-            btnOk: eTraxis.i18n.Ok,
-            btnCancel: eTraxis.i18n.Cancel,
-            data: {},
-            success: null,
-            error: null
-        }, options);
+    var settings = $.extend({
+        url: null,
+        title: null,
+        btnOk: eTraxis.i18n.Ok,
+        btnCancel: eTraxis.i18n.Cancel,
+        data: {},
+        success: null,
+        error: null
+    }, options);
 
-        var $modal = this;
+    $.get(settings.url, function(data) {
 
-        $('.ui-state-error', $modal).remove();
+        var $modal = $(data).insertAfter('#__etraxis_modal');
+
+        $modal.initUI();
 
         // Let the form be submitted via "ajaxForm" plugin.
-        $('form', this).ajaxForm({
+        $('form', $modal).ajaxForm({
 
             cache: false,
 
@@ -53,10 +54,12 @@
                 if (typeof settings.success === 'function') {
                     if (settings.success(data)) {
                         $modal.dialog('destroy');
+                        $modal.remove();
                     }
                 }
                 else {
                     $modal.dialog('destroy');
+                    $modal.remove();
                 }
             },
 
@@ -65,6 +68,7 @@
                 if (typeof settings.error === 'function') {
                     if (settings.error(xhr)) {
                         $modal.dialog('destroy');
+                        $modal.remove();
                     }
                 }
                 else {
@@ -86,15 +90,16 @@
         var buttons = {};
 
         buttons[settings.btnOk] = function() {
-            $('form', this).submit();
+            $('form', $modal).submit();
         };
 
         buttons[settings.btnCancel] = function() {
-            $(this).dialog('destroy');
+            $modal.dialog('destroy');
+            $modal.remove();
         };
 
         // Show the dialog.
-        $(this).dialog({
+        $modal.dialog({
             title: settings.title,
             autoOpen: true,
             modal: true,
@@ -103,13 +108,8 @@
             height: 'auto',
             buttons: buttons,
             close: function() {
-                $('form', this).each(function() {
-                    $(this)[0].reset();
-                });
+                $modal.remove();
             }
         });
-
-        return this;
-    };
-
-}(jQuery));
+    });
+};

@@ -40,22 +40,12 @@ class UsersController extends Controller
      *
      * @Route("/", name="admin_users")
      * @Method("GET")
+     *
+     * @return  Response
      */
     public function indexAction()
     {
-        $default = [
-            'locale'   => $this->getParameter('locale'),
-            'theme'    => $this->getParameter('theme'),
-            'timezone' => 0,
-        ];
-
-        $form = $this->createForm(new UserForm(), $default, [
-            'action' => $this->generateUrl('admin_new_user'),
-        ]);
-
-        return $this->render('admin/users/index.html.twig', [
-            'form' => $form->createView(),
-        ]);
+        return $this->render('admin/users/index.html.twig');
     }
 
     /**
@@ -146,21 +136,74 @@ class UsersController extends Controller
                 throw $this->createNotFoundException();
             }
 
-            $form = $this->createForm(new UserForm(), $command->result, [
-                'action' => $this->generateUrl('admin_edit_user', ['id' => $id]),
-            ]);
-
             $authChecker = $this->getAuthorizationChecker();
 
             return $this->render('admin/users/tab_details.html.twig', [
                 'user' => $command->result,
-                'form' => $form->createView(),
                 'can'  => [
                     'delete'  => $authChecker->isGranted(UserVoter::DELETE, $command->result),
                     'disable' => $authChecker->isGranted(UserVoter::DISABLE, $command->result),
                     'enable'  => $authChecker->isGranted(UserVoter::ENABLE, $command->result),
                     'unlock'  => $authChecker->isGranted(UserVoter::UNLOCK, $command->result),
                 ],
+            ]);
+        }
+        catch (ValidationException $e) {
+            return new Response($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
+     * Renders dialog to create new user.
+     *
+     * @Route("/dlg/new", name="admin_dlg_new_user")
+     * @Method("GET")
+     *
+     * @return  Response
+     */
+    public function dlgNewAction()
+    {
+        $default = [
+            'locale'   => $this->getParameter('locale'),
+            'theme'    => $this->getParameter('theme'),
+            'timezone' => 0,
+        ];
+
+        $form = $this->createForm(new UserForm(), $default, [
+            'action' => $this->generateUrl('admin_new_user'),
+        ]);
+
+        return $this->render('admin/users/dlg_user.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * Renders dialog to edit specified user.
+     *
+     * @Route("/dlg/edit/{id}", name="admin_dlg_edit_user", requirements={"id"="\d+"})
+     * @Method("GET")
+     *
+     * @param   int     $id User ID.
+     *
+     * @return  Response
+     */
+    public function dlgEditAction($id)
+    {
+        try {
+            $command = new Users\FindUserCommand(['id' => $id]);
+            $this->getCommandBus()->handle($command);
+
+            if (!$command->result) {
+                throw $this->createNotFoundException();
+            }
+
+            $form = $this->createForm(new UserForm(), $command->result, [
+                'action' => $this->generateUrl('admin_edit_user', ['id' => $id]),
+            ]);
+
+            return $this->render('admin/users/dlg_user.html.twig', [
+                'form' => $form->createView(),
             ]);
         }
         catch (ValidationException $e) {

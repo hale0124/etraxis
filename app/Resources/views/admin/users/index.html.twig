@@ -35,8 +35,6 @@
         </div>
     </div>
 
-    {% include 'admin/users/dlg_user.html.twig' %}
-
 {% endblock %}
 
 {% block scripts %}
@@ -83,7 +81,8 @@
 
             // "Create" button.
             $('#btn-create').click(function() {
-                $('#dlg-user').modal({
+                eTraxis.modal({
+                    url: '{{ path('admin_dlg_new_user') }}',
                     title: '{{ 'user.new'|trans }}',
                     success: function() {
                         $table.api().draw(false);
