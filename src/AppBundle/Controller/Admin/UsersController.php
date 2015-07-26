@@ -238,6 +238,10 @@ class UsersController extends Controller
             $command = new Users\UpdateUserCommand($data);
             $this->getCommandBus()->handle($command);
 
+            if ($this->getUser()->getId() == $id) {
+                $this->get('session')->set('_locale', $command->locale);
+            }
+
             if ($data['password']) {
 
                 if ($data['password'] != $data['confirmation']) {

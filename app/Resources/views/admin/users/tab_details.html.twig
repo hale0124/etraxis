@@ -70,7 +70,11 @@
             $('#dlg-user').modal({
                 title: '{{ user.fullname }}',
                 success: function() {
+                    {% if user.id == app.user.id %}
+                    window.location.assign('{{ path('admin_view_user', {'id': user.id}) }}');
+                    {% else %}
                     reloadTab();
+                    {% endif %}
                     return true;
                 }
             });
