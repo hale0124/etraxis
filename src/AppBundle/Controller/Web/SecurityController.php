@@ -16,8 +16,6 @@ namespace AppBundle\Controller\Web;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Security;
 
 /**
  * Security controller.
@@ -30,11 +28,9 @@ class SecurityController extends Controller
      * @Route("/login", name="login")
      * @Method({"GET", "POST"})
      *
-     * @param   Request $request
-     *
      * @return  \Symfony\Component\HttpFoundation\Response
      */
-    public function loginAction(Request $request)
+    public function loginAction()
     {
         /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker $security */
         $security = $this->container->get('security.authorization_checker');
@@ -43,22 +39,12 @@ class SecurityController extends Controller
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-        $session = $request->getSession();
-
-        if ($request->attributes->has(Security::AUTHENTICATION_ERROR)) {
-            $error = $request->attributes->get(Security::AUTHENTICATION_ERROR);
-        }
-        elseif ($session && $session->has(Security::AUTHENTICATION_ERROR)) {
-            $error = $session->get(Security::AUTHENTICATION_ERROR);
-            $session->remove(Security::AUTHENTICATION_ERROR);
-        }
-        else {
-            $error = null;
-        }
+        /** @var \Symfony\Component\Security\Http\Authentication\AuthenticationUtils $utils */
+        $utils = $this->get('security.authentication_utils');
 
         return $this->render('web/security/login.html.twig', [
-            'last_username' => $session ? $session->get(Security::LAST_USERNAME) : null,
-            'error'         => $error,
+            'last_username' => $utils->getLastUsername(),
+            'error'         => $utils->getLastAuthenticationError(),
         ]);
     }
 }
