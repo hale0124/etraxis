@@ -34,7 +34,7 @@ class EnableUsersCommandHandler
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function handle(EnableUsersCommand $command)
     {

@@ -50,7 +50,7 @@ class LockUserCommandHandler
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function handle(LockUserCommand $command)
     {

@@ -57,7 +57,7 @@ class UpdateUserCommandHandler
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function handle(UpdateUserCommand $command)
     {

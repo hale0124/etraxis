@@ -729,7 +729,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getRoles()
     {
@@ -743,7 +743,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getSalt()
     {
@@ -751,14 +751,14 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function eraseCredentials()
     {
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function isAccountNonExpired()
     {
@@ -766,7 +766,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function isAccountNonLocked()
     {
@@ -774,7 +774,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function isCredentialsNonExpired()
     {
@@ -782,7 +782,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function isEnabled()
     {

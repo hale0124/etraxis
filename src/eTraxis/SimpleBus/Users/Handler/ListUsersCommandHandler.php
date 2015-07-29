@@ -39,7 +39,7 @@ class ListUsersCommandHandler
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function handle(ListUsersCommand $command)
     {

@@ -25,7 +25,7 @@ class ValidationException extends \Exception
     protected $messages;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function __construct(array $messages, $code = Response::HTTP_BAD_REQUEST, \Exception $previous = null)
     {

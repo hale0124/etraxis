@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 class CommandException extends \Exception
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function __construct($message, $code = Response::HTTP_BAD_REQUEST, \Exception $previous = null)
     {

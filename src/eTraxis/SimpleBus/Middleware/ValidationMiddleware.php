@@ -38,7 +38,7 @@ class ValidationMiddleware implements MessageBusMiddleware
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      *
      * @param   \eTraxis\SimpleBus\BaseCommand $message
      *

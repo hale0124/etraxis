@@ -41,7 +41,7 @@ class DeleteUserCommandHandler
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function handle(DeleteUserCommand $command)
     {

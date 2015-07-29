@@ -34,7 +34,7 @@ class StartTimerMiddleware implements MessageBusMiddleware
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function handle($message, callable $next)
     {

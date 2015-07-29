@@ -19,7 +19,7 @@ namespace eTraxis\Model;
 class ThemeStaticCollection extends AbstractStaticCollection
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public static function getCollection()
     {

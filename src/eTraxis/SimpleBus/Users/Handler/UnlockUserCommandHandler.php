@@ -34,7 +34,7 @@ class UnlockUserCommandHandler
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function handle(UnlockUserCommand $command)
     {

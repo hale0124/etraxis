@@ -29,7 +29,7 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
     private $container;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setContainer(ContainerInterface $container = null)
     {
@@ -37,7 +37,7 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getOrder()
     {
@@ -45,7 +45,7 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function load(ObjectManager $manager)
     {

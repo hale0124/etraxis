@@ -58,7 +58,7 @@ class CreateUserCommandHandler
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function handle(CreateUserCommand $command)
     {

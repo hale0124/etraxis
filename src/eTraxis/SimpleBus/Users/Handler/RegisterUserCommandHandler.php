@@ -46,7 +46,7 @@ class RegisterUserCommandHandler
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function handle(RegisterUserCommand $command)
     {

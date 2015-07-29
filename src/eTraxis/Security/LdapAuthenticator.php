@@ -57,7 +57,7 @@ class LdapAuthenticator implements SimpleFormAuthenticatorInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)
     {
@@ -106,7 +106,7 @@ class LdapAuthenticator implements SimpleFormAuthenticatorInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function supportsToken(TokenInterface $token, $providerKey)
     {
@@ -114,7 +114,7 @@ class LdapAuthenticator implements SimpleFormAuthenticatorInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function createToken(Request $request, $username, $password, $providerKey)
     {

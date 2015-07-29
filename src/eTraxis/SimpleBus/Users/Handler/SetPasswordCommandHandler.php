@@ -47,7 +47,7 @@ class SetPasswordCommandHandler
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function handle(SetPasswordCommand $command)
     {

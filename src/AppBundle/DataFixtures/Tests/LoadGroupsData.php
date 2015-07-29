@@ -26,7 +26,7 @@ class LoadGroupsData extends AbstractFixture implements ContainerAwareInterface,
     private $container;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function setContainer(ContainerInterface $container = null)
     {
@@ -34,7 +34,7 @@ class LoadGroupsData extends AbstractFixture implements ContainerAwareInterface,
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getOrder()
     {
@@ -42,7 +42,7 @@ class LoadGroupsData extends AbstractFixture implements ContainerAwareInterface,
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function load(ObjectManager $manager)
     {

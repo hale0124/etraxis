@@ -33,7 +33,7 @@ abstract class AbstractStaticCollection implements StaticCollectionInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public static function getAllKeys()
     {
@@ -43,7 +43,7 @@ abstract class AbstractStaticCollection implements StaticCollectionInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public static function getAllValues()
     {
@@ -53,7 +53,7 @@ abstract class AbstractStaticCollection implements StaticCollectionInterface
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public static function getValue($key)
     {

@@ -19,7 +19,7 @@ namespace eTraxis\Model;
 class LocaleStaticCollection extends AbstractStaticCollection
 {
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public static function getCollection()
     {

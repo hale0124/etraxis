@@ -34,7 +34,7 @@ class FindUserCommandHandler
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function handle(FindUserCommand $command)
     {
