@@ -2,7 +2,7 @@
 
 //----------------------------------------------------------------------
 //
-//  Copyright (C) 2014-2015 Artem Rodygin
+//  Copyright (C) 2015 Artem Rodygin
 //
 //  This file is part of eTraxis.
 //
@@ -11,15 +11,15 @@
 //
 //----------------------------------------------------------------------
 
-namespace AppBundle\Controller;
+namespace eTraxis\Traits;
 
-use eTraxis\Traits\ContainerTrait;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
 class ControllerStub extends Controller
 {
+    use ClassAccessTrait;
     use ContainerTrait;
 }
 

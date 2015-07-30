@@ -35,7 +35,7 @@ trait ContainerTrait
      *
      * @throws  CommandException
      */
-    public function getFormData(Request $request, $name = 'form')
+    protected function getFormData(Request $request, $name = 'form')
     {
         /** @var \Psr\Log\LoggerInterface $logger */
         $logger = $this->container->get('logger');
@@ -71,7 +71,7 @@ trait ContainerTrait
      *
      * @return  \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface
      */
-    public function getAuthorizationChecker()
+    protected function getAuthorizationChecker()
     {
         return $this->container->get('security.authorization_checker');
     }
@@ -81,7 +81,7 @@ trait ContainerTrait
      *
      * @return  \SimpleBus\Message\Bus\MessageBus
      */
-    public function getCommandBus()
+    protected function getCommandBus()
     {
         return $this->container->get('command_bus');
     }
