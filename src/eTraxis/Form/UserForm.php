@@ -20,12 +20,25 @@ use eTraxis\Model\TimezoneStaticCollection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Security\Core\Encoder\BasePasswordEncoder;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * User form.
  */
 class UserForm extends AbstractType
 {
+    protected $translator;
+
+    /**
+     * Dependency Injection constructor.
+     *
+     * @param   TranslatorInterface $translator
+     */
+    public function __construct($translator)
+    {
+        $this->translator = $translator;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -82,7 +95,7 @@ class UserForm extends AbstractType
         $builder->add('locale', 'choice', [
             'label'    => 'language',
             'required' => true,
-            'choices'  => LocaleStaticCollection::getCollection(),
+            'choices'  => LocaleStaticCollection::getTranslatedCollection($this->translator),
         ]);
 
         // Theme.

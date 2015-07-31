@@ -13,6 +13,8 @@
 
 namespace eTraxis\Model;
 
+use Symfony\Component\Translation\TranslatorInterface;
+
 /**
  * Abstract static collection of key/value pairs.
  */
@@ -60,5 +62,19 @@ abstract class AbstractStaticCollection implements StaticCollectionInterface
         $collection = static::initCache();
 
         return array_key_exists($key, $collection) ? $collection[$key] : null;
+    }
+
+    /**
+     * Returns whole collection as array with keys, where values are translated.
+     *
+     * @param   TranslatorInterface $translator
+     *
+     * @return  array
+     */
+    public static function getTranslatedCollection(TranslatorInterface $translator)
+    {
+        return array_map(function ($value) use ($translator) {
+            return $translator->trans($value);
+        }, static::getCollection());
     }
 }

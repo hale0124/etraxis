@@ -169,7 +169,7 @@ class UsersController extends Controller
             'timezone' => 0,
         ];
 
-        $form = $this->createForm(new UserForm(), $default, [
+        $form = $this->createForm(new UserForm($this->getTranslator()), $default, [
             'action' => $this->generateUrl('admin_new_user'),
         ]);
 
@@ -198,7 +198,7 @@ class UsersController extends Controller
                 throw $this->createNotFoundException();
             }
 
-            $form = $this->createForm(new UserForm(), $command->result, [
+            $form = $this->createForm(new UserForm($this->getTranslator()), $command->result, [
                 'action' => $this->generateUrl('admin_edit_user', ['id' => $id]),
             ]);
 

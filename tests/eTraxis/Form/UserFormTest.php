@@ -24,7 +24,7 @@ class UserFormTest extends BaseTestCase
         /** @var \Symfony\Component\Form\FormFactoryInterface $factory */
         $factory = $this->client->getContainer()->get('form.factory');
 
-        $form = $factory->create(new UserForm(), $user);
+        $form = $factory->create(new UserForm($this->translator), $user);
         $view = $form->createView();
 
         $children = $view->children;

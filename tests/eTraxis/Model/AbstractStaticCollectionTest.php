@@ -13,34 +13,30 @@
 
 namespace eTraxis\Model;
 
+use eTraxis\Tests\BaseTestCase;
+
 class TestStaticCollection extends AbstractStaticCollection
 {
     public static function getCollection()
     {
         return [
-            'mon' => 'Monday',
-            'tue' => 'Tuesday',
-            'wed' => 'Wednesday',
-            'thu' => 'Thursday',
-            'fri' => 'Friday',
-            'sat' => 'Saturday',
-            'sun' => 'Sunday',
+            'b_ok'     => 'button.ok',
+            'b_cancel' => 'button.cancel',
+            'b_yes'    => 'button.yes',
+            'b_no'     => 'button.no',
         ];
     }
 }
 
-class AbstractStaticCollectionTest extends \PHPUnit_Framework_TestCase
+class AbstractStaticCollectionTest extends BaseTestCase
 {
     public function testGetAllKeys()
     {
         $expected = [
-            'mon',
-            'tue',
-            'wed',
-            'thu',
-            'fri',
-            'sat',
-            'sun',
+            'b_ok',
+            'b_cancel',
+            'b_yes',
+            'b_no',
         ];
 
         $this->assertEquals($expected, TestStaticCollection::getAllKeys());
@@ -49,21 +45,30 @@ class AbstractStaticCollectionTest extends \PHPUnit_Framework_TestCase
     public function testGetAllValues()
     {
         $expected = [
-            'Monday',
-            'Tuesday',
-            'Wednesday',
-            'Thursday',
-            'Friday',
-            'Saturday',
-            'Sunday',
+            'button.ok',
+            'button.cancel',
+            'button.yes',
+            'button.no',
         ];
 
         $this->assertEquals($expected, TestStaticCollection::getAllValues());
     }
 
+    public function testGetTranslatedCollection()
+    {
+        $expected = [
+            'b_ok'     => 'OK',
+            'b_cancel' => 'Cancel',
+            'b_yes'    => 'Yes',
+            'b_no'     => 'No',
+        ];
+
+        $this->assertEquals($expected, TestStaticCollection::getTranslatedCollection($this->translator));
+    }
+
     public function testGetValue()
     {
-        $this->assertEquals('Friday', TestStaticCollection::getValue('fri'));
-        $this->assertNull(TestStaticCollection::getValue('day'));
+        $this->assertEquals('button.ok', TestStaticCollection::getValue('b_ok'));
+        $this->assertNull(TestStaticCollection::getValue('button.ok'));
     }
 }
