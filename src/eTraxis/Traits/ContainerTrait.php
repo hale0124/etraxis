@@ -87,6 +87,16 @@ trait ContainerTrait
     }
 
     /**
+     * Shortcut to get the Validator service.
+     *
+     * @return  \Symfony\Component\Validator\Validator\ValidatorInterface
+     */
+    protected function getValidator()
+    {
+        return $this->container->get('validator');
+    }
+
+    /**
      * Shortcut to get the Command Bus service.
      *
      * @return  \SimpleBus\Message\Bus\MessageBus

@@ -12,6 +12,7 @@
                     <button type="button" id="btn-disable" disabled="disabled">{{ 'button.disable'|trans }}</button>
                     <button type="button" id="btn-enable" disabled="disabled">{{ 'button.enable'|trans }}</button>
                 </span>
+                <button type="button" id="btn-export">{{ 'button.export'|trans }}</button>
             </div>
         </div>
     </div>
@@ -123,6 +124,20 @@
                         $table.api().draw(false);
                     });
                 }
+            });
+
+            // "Export" button.
+            $('#btn-export').click(function() {
+                eTraxis.modal({
+                    url: '{{ path('admin_dlg_export') }}',
+                    title: '{{ 'button.export'|trans }}',
+                    success: function() {
+                        var params = $('form').serialize();
+                        params += '&search=' + $table.api().search();
+                        window.location.assign('{{ path('admin_users_csv') }}?' + params);
+                        return true;
+                    }
+                });
             });
         });
 

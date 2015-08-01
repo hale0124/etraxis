@@ -13,9 +13,13 @@
 
 namespace AppBundle\Controller\Admin;
 
+use eTraxis\Form\ExportCsvForm;
 use eTraxis\Form\UserForm;
+use eTraxis\Model\CsvDelimiterStaticCollection;
+use eTraxis\Model\LineEndingStaticCollection;
 use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Middleware\ValidationException;
+use eTraxis\SimpleBus\Shared\ExportToCsvCommand;
 use eTraxis\SimpleBus\Users;
 use eTraxis\Traits\ContainerTrait;
 use eTraxis\Voter\UserVoter;
@@ -25,6 +29,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * Users controller.
@@ -82,6 +87,51 @@ class UsersController extends Controller
         }
         catch (ValidationException $e) {
             return new Response($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
+     * Exports list of users as CSV file.
+     *
+     * @Route("/csv", name="admin_users_csv")
+     * @Method("GET")
+     *
+     * @param   Request $request
+     *
+     * @return  StreamedResponse|JsonResponse
+     */
+    public function csvAction(Request $request)
+    {
+        try {
+            $command = new Users\ListUsersCommand([
+                'search' => $request->get('search'),
+            ]);
+
+            $this->getCommandBus()->handle($command);
+
+            $users = array_map(function ($user) {
+                return array_slice($user, 1, 6);
+            }, $command->result['users']);
+
+            array_unshift($users, [
+                $this->getTranslator()->trans('user.username'),
+                $this->getTranslator()->trans('user.fullname'),
+                $this->getTranslator()->trans('user.email'),
+                $this->getTranslator()->trans('permissions'),
+                $this->getTranslator()->trans('security.authentication'),
+                $this->getTranslator()->trans('description'),
+            ]);
+
+            $command = new ExportToCsvCommand($this->getFormData($request, 'export'));
+
+            $command->data = $users;
+
+            $this->getCommandBus()->handle($command);
+
+            return $command->result;
+        }
+        catch (ValidationException $e) {
+            return new JsonResponse($e->getMessages(), $e->getCode());
         }
     }
 
@@ -154,6 +204,32 @@ class UsersController extends Controller
     }
 
     /**
+     * Renders dialog to export users to CSV.
+     *
+     * @Route("/dlg/export", name="admin_dlg_export")
+     * @Method("GET")
+     *
+     * @return  Response
+     */
+    public function dlgExportAction()
+    {
+        $default = [
+            'filename'  => '.csv',
+            'delimiter' => CsvDelimiterStaticCollection::COMMA,
+            'encoding'  => 'UTF-8',
+            'tail'      => LineEndingStaticCollection::WINDOWS,
+        ];
+
+        $form = $this->createForm(new ExportCsvForm($this->getTranslator()), $default, [
+            'action' => $this->generateUrl('admin_users_export'),
+        ]);
+
+        return $this->render('shared/dlg_export.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
      * Renders dialog to create new user.
      *
      * @Route("/dlg/new", name="admin_dlg_new_user")
@@ -209,6 +285,29 @@ class UsersController extends Controller
         catch (ValidationException $e) {
             return new Response($e->getMessage(), $e->getCode());
         }
+    }
+
+    /**
+     * Verifies submitted form of "Export to CSV" parameters.
+     *
+     * @Route("/export", name="admin_users_export")
+     * @Method("POST")
+     *
+     * @param   Request $request
+     *
+     * @return  JsonResponse
+     */
+    public function exportAction(Request $request)
+    {
+        $command = new ExportToCsvCommand($this->getFormData($request, 'export'));
+
+        $violations = $this->getValidator()->validate($command);
+
+        if (count($violations)) {
+            return new JsonResponse($violations->get(0)->getMessage(), Response::HTTP_BAD_REQUEST);
+        }
+
+        return new JsonResponse();
     }
 
     /**

@@ -147,6 +147,11 @@ class ContainerTraitTest extends KernelTestCase
         $this->assertInstanceOf('\Symfony\Component\Translation\TranslatorInterface', $this->object->getTranslator());
     }
 
+    public function testValidator()
+    {
+        $this->assertInstanceOf('\Symfony\Component\Validator\Validator\ValidatorInterface', $this->object->getValidator());
+    }
+
     public function testGetCommandBus()
     {
         $this->assertInstanceOf('\SimpleBus\Message\Bus\MessageBus', $this->object->getCommandBus());
