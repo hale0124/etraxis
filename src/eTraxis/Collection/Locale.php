@@ -11,14 +11,14 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Model;
+namespace eTraxis\Collection;
 
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Static collection of locales.
  */
-class LocaleStaticCollection extends AbstractStaticCollection
+class Locale extends AbstractStaticCollection
 {
     /**
      * {@inheritdoc}

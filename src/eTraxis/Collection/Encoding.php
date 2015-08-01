@@ -11,12 +11,12 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Model;
+namespace eTraxis\Collection;
 
 /**
  * Static collection of encodings.
  */
-class EncodingStaticCollection extends AbstractStaticCollection
+class Encoding extends AbstractStaticCollection
 {
     /**
      * {@inheritdoc}

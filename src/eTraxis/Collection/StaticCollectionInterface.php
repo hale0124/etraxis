@@ -11,7 +11,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Model;
+namespace eTraxis\Collection;
 
 /**
  * Interface of static collection of key/value pairs.

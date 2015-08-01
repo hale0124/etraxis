@@ -11,12 +11,12 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Model;
+namespace eTraxis\Collection;
 
 /**
  * Static collection of timezones.
  */
-class TimezoneStaticCollection extends AbstractStaticCollection
+class Timezone extends AbstractStaticCollection
 {
     /**
      * {@inheritdoc}

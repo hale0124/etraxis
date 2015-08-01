@@ -13,10 +13,10 @@
 
 namespace eTraxis\Form;
 
+use eTraxis\Collection\Locale;
+use eTraxis\Collection\Theme;
+use eTraxis\Collection\Timezone;
 use eTraxis\Entity\User;
-use eTraxis\Model\LocaleStaticCollection;
-use eTraxis\Model\ThemeStaticCollection;
-use eTraxis\Model\TimezoneStaticCollection;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Security\Core\Encoder\BasePasswordEncoder;
@@ -95,21 +95,21 @@ class UserForm extends AbstractType
         $builder->add('locale', 'choice', [
             'label'    => 'language',
             'required' => true,
-            'choices'  => LocaleStaticCollection::getTranslatedCollection($this->translator),
+            'choices'  => Locale::getTranslatedCollection($this->translator),
         ]);
 
         // Theme.
         $builder->add('theme', 'choice', [
             'label'    => 'theme',
             'required' => true,
-            'choices'  => ThemeStaticCollection::getCollection(),
+            'choices'  => Theme::getCollection(),
         ]);
 
         // Timezone.
         $builder->add('timezone', 'choice', [
             'label'    => 'timezone',
             'required' => true,
-            'choices'  => TimezoneStaticCollection::getCollection(),
+            'choices'  => Timezone::getCollection(),
         ]);
 
         // Administrator.

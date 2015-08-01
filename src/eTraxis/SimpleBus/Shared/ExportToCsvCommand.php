@@ -36,19 +36,19 @@ class ExportToCsvCommand extends BaseCommand
 
     /**
      * @Assert\NotNull()
-     * @Assert\Choice(callback = {"eTraxis\Model\CsvDelimiterStaticCollection", "getAllKeys"})
+     * @Assert\Choice(callback = {"eTraxis\Collection\CsvDelimiter", "getAllKeys"})
      */
     public $delimiter = null;
 
     /**
      * @Assert\NotNull()
-     * @Assert\Choice(callback = {"eTraxis\Model\EncodingStaticCollection", "getAllKeys"})
+     * @Assert\Choice(callback = {"eTraxis\Collection\Encoding", "getAllKeys"})
      */
     public $encoding = null;
 
     /**
      * @Assert\NotNull()
-     * @Assert\Choice(callback = {"eTraxis\Model\LineEndingStaticCollection", "getAllKeys"})
+     * @Assert\Choice(callback = {"eTraxis\Collection\LineEnding", "getAllKeys"})
      */
     public $tail = null;
 

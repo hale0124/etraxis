@@ -15,7 +15,7 @@ namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use eTraxis\Model\ThemeStaticCollection;
+use eTraxis\Collection\Theme;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
@@ -665,7 +665,7 @@ class User implements AdvancedUserInterface
      */
     public function setTheme($theme)
     {
-        if (in_array($theme, ThemeStaticCollection::getAllKeys())) {
+        if (in_array($theme, Theme::getAllKeys())) {
             $this->theme = $theme;
         }
 
@@ -681,7 +681,7 @@ class User implements AdvancedUserInterface
     {
         $theme = strtolower($this->theme);
 
-        if (!in_array($theme, ThemeStaticCollection::getAllKeys())) {
+        if (!in_array($theme, Theme::getAllKeys())) {
             $theme = 'azure';
         }
 

@@ -64,19 +64,19 @@ class UpdateUserCommand extends BaseCommand
 
     /**
      * @Assert\NotNull()
-     * @Assert\Choice(callback = {"eTraxis\Model\LocaleStaticCollection", "getAllKeys"})
+     * @Assert\Choice(callback = {"eTraxis\Collection\Locale", "getAllKeys"})
      */
     public $locale = null;
 
     /**
      * @Assert\NotNull()
-     * @Assert\Choice(callback = {"eTraxis\Model\ThemeStaticCollection", "getAllKeys"})
+     * @Assert\Choice(callback = {"eTraxis\Collection\Theme", "getAllKeys"})
      */
     public $theme = null;
 
     /**
      * @Assert\NotNull()
-     * @Assert\Choice(callback = {"eTraxis\Model\TimezoneStaticCollection", "getAllKeys"})
+     * @Assert\Choice(callback = {"eTraxis\Collection\Timezone", "getAllKeys"})
      */
     public $timezone = null;
 

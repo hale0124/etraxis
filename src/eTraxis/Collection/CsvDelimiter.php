@@ -11,12 +11,12 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Model;
+namespace eTraxis\Collection;
 
 /**
  * Static collection of CSV delimiters.
  */
-class CsvDelimiterStaticCollection extends AbstractStaticCollection
+class CsvDelimiter extends AbstractStaticCollection
 {
     const TAB           = 1;
     const SPACE         = 2;

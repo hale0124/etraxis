@@ -13,8 +13,8 @@
 
 namespace eTraxis\SimpleBus\Shared;
 
-use eTraxis\Model\CsvDelimiterStaticCollection;
-use eTraxis\Model\LineEndingStaticCollection;
+use eTraxis\Collection\CsvDelimiter;
+use eTraxis\Collection\LineEnding;
 use eTraxis\Tests\BaseTestCase;
 
 class ExportToCsvCommandTest extends BaseTestCase
@@ -40,9 +40,9 @@ class ExportToCsvCommandTest extends BaseTestCase
 
         $command = new ExportToCsvCommand([
             'filename'  => 'test',
-            'delimiter' => CsvDelimiterStaticCollection::COMMA,
+            'delimiter' => CsvDelimiter::COMMA,
             'encoding'  => 'UTF-8',
-            'tail'      => LineEndingStaticCollection::UNIX,
+            'tail'      => LineEnding::UNIX,
             'data'      => $data,
         ]);
 
@@ -79,9 +79,9 @@ class ExportToCsvCommandTest extends BaseTestCase
 
         $command = new ExportToCsvCommand([
             'filename'  => '.csv',
-            'delimiter' => CsvDelimiterStaticCollection::SPACE,
+            'delimiter' => CsvDelimiter::SPACE,
             'encoding'  => 'Windows-1251',
-            'tail'      => LineEndingStaticCollection::WINDOWS,
+            'tail'      => LineEnding::WINDOWS,
             'data'      => $data,
         ]);
 

@@ -13,8 +13,8 @@
 
 namespace eTraxis\SimpleBus\Shared\Handler;
 
-use eTraxis\Model\CsvDelimiterStaticCollection;
-use eTraxis\Model\LineEndingStaticCollection;
+use eTraxis\Collection\CsvDelimiter;
+use eTraxis\Collection\LineEnding;
 use eTraxis\SimpleBus\Shared\ExportToCsvCommand;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\StreamedResponse;
@@ -31,8 +31,8 @@ class ExportToCsvCommandHandler
     {
         $response = new StreamedResponse(function () use ($command) {
 
-            $delimiter = CsvDelimiterStaticCollection::getDelimiter($command->delimiter);
-            $tail      = LineEndingStaticCollection::getLineEnding($command->tail);
+            $delimiter = CsvDelimiter::getDelimiter($command->delimiter);
+            $tail      = LineEnding::getLineEnding($command->tail);
 
             $callback = function ($item) use ($delimiter) {
                 $count = 0;

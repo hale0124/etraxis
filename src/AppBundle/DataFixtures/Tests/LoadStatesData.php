@@ -16,10 +16,10 @@ namespace AppBundle\DataFixtures\Tests;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use eTraxis\Collection\SystemRole;
 use eTraxis\Entity\State;
 use eTraxis\Entity\StateAssignee;
 use eTraxis\Entity\StateRoleTransition;
-use eTraxis\Model\SystemRole;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 

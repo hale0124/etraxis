@@ -11,12 +11,12 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Model;
+namespace eTraxis\Collection;
 
 /**
  * Static collection of line ending.
  */
-class LineEndingStaticCollection extends AbstractStaticCollection
+class LineEnding extends AbstractStaticCollection
 {
     const WINDOWS   = 1;
     const UNIX      = 2;

@@ -11,12 +11,12 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Model;
+namespace eTraxis\Collection;
 
 /**
  * Static collection of themes.
  */
-class ThemeStaticCollection extends AbstractStaticCollection
+class Theme extends AbstractStaticCollection
 {
     /**
      * {@inheritdoc}

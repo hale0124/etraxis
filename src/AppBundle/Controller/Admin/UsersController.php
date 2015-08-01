@@ -13,10 +13,10 @@
 
 namespace AppBundle\Controller\Admin;
 
+use eTraxis\Collection\CsvDelimiter;
+use eTraxis\Collection\LineEnding;
 use eTraxis\Form\ExportCsvForm;
 use eTraxis\Form\UserForm;
-use eTraxis\Model\CsvDelimiterStaticCollection;
-use eTraxis\Model\LineEndingStaticCollection;
 use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\SimpleBus\Shared\ExportToCsvCommand;
@@ -215,9 +215,9 @@ class UsersController extends Controller
     {
         $default = [
             'filename'  => '.csv',
-            'delimiter' => CsvDelimiterStaticCollection::COMMA,
+            'delimiter' => CsvDelimiter::COMMA,
             'encoding'  => 'UTF-8',
-            'tail'      => LineEndingStaticCollection::WINDOWS,
+            'tail'      => LineEnding::WINDOWS,
         ];
 
         $form = $this->createForm(new ExportCsvForm($this->getTranslator()), $default, [

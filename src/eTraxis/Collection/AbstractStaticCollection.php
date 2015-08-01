@@ -11,7 +11,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Model;
+namespace eTraxis\Collection;
 
 use Symfony\Component\Translation\TranslatorInterface;
 
