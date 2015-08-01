@@ -51,3 +51,14 @@ user.confirm.delete: 'Jste si jisti, že chcete smazat tento účet?'
 user.conflict.username: 'Účet se zadaným uživatelským jménem již existuje.'
 password.too.short: 'Heslo musí být dlouhé alespoň %length% znaků.'
 passwords.dont.match: 'Hesla se neshodují.'
+key.tab: Tab
+key.space: Space
+comma: Comma
+colon: Colon
+semicolon: Semicolon
+vertical_line: 'Vertical line'
+file: Soubor
+size: Velikost
+delimiter: Oddělovač
+encoding: Kódování
+line_endings: 'Konce řádků'

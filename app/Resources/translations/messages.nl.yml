@@ -51,3 +51,14 @@ user.confirm.delete: 'Ben je zeker dat je deze account wilt verwijderen?'
 user.conflict.username: 'Account met ingevoerde naam bestaat reeds.'
 password.too.short: 'Wachtwoord moet tenminste %length% tekens bevatten.'
 passwords.dont.match: 'Wachtwoorden stemmen niet overeen.'
+key.tab: Tab
+key.space: Space
+comma: Comma
+colon: Colon
+semicolon: Semicolon
+vertical_line: 'Vertical line'
+file: Bestand
+size: Grootte
+delimiter: Begrenzer
+encoding: Encodering
+line_endings: Lijneindes

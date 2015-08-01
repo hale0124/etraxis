@@ -51,3 +51,14 @@ user.confirm.delete: 'Är du säker på att du vill ta bort detta kontot?'
 user.conflict.username: 'Kontot med detta användarnamn finns redan.'
 password.too.short: 'Lösenord ska vara minst %length% tecken långt.'
 passwords.dont.match: 'Lösenorden matchar inte.'
+key.tab: Tab
+key.space: Space
+comma: Comma
+colon: Colon
+semicolon: Semicolon
+vertical_line: 'Vertical line'
+file: Fil
+size: Storlek
+delimiter: Avgränsare
+encoding: Kodning
+line_endings: Radslut

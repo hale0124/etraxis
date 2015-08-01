@@ -1,8 +1,8 @@
 lang: English
 button.ok: OK
 button.cancel: Cancel
-button.yes: 'Yes'
-button.no: 'No'
+button.yes: Yes
+button.no: No
 button.save: Save
 button.close: Close
 button.back: Back
@@ -51,3 +51,14 @@ user.confirm.delete: 'Are you sure you want delete this account?'
 user.conflict.username: 'Account with entered user name already exists.'
 password.too.short: 'Password should be at least %length% characters length.'
 passwords.dont.match: 'Passwords do not match.'
+key.tab: Tab
+key.space: Space
+comma: Comma
+colon: Colon
+semicolon: Semicolon
+vertical_line: 'Vertical line'
+file: File
+size: Size
+delimiter: Delimiter
+encoding: Encoding
+line_endings: 'Line endings'

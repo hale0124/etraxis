@@ -51,3 +51,14 @@ user.confirm.delete: 'Tem certeza que quer apagar esta conta?'
 user.conflict.username: 'A conta escolhida já existe..'
 password.too.short: 'A senha deve conter pelo menos %length% caracteres.'
 passwords.dont.match: 'As senhas não conferem.'
+key.tab: Tab
+key.space: Space
+comma: Comma
+colon: Colon
+semicolon: Semicolon
+vertical_line: 'Vertical line'
+file: Arquivo
+size: Tamanho
+delimiter: Delimitador
+encoding: Codificação
+line_endings: Finalização

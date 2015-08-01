@@ -51,3 +51,14 @@ user.confirm.delete: 'Bu hesabı silmek istediğinizden emin misiniz?'
 user.conflict.username: 'Girilen kullanıcı adıyla bir hesap zaten var.'
 password.too.short: 'Parola en az %length% karakter uzunluğunda olmalıdır.'
 passwords.dont.match: 'Parolalar uyuşmuyor.'
+key.tab: Tab
+key.space: Space
+comma: Comma
+colon: Colon
+semicolon: Semicolon
+vertical_line: 'Vertical line'
+file: Dosya
+size: Boyut
+delimiter: Sınırlayıcı
+encoding: Kodlama
+line_endings: 'Satır sonları'

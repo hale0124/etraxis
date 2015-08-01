@@ -1,0 +1,5 @@
+services:
+
+    command.export.csv:
+        class: eTraxis\SimpleBus\Shared\Handler\ExportToCsvCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Shared\ExportToCsvCommand }]

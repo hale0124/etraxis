@@ -51,3 +51,14 @@ user.confirm.delete: 'Vai tiešām vēlaties dzēst šo kontu?'
 user.conflict.username: 'Lietotāja konts ar tādu lietotāja vārdu jau eksistē.'
 password.too.short: 'Parolei jāsatur vismaz %length% simbolu.'
 passwords.dont.match: 'Paroles nesakrīt.'
+key.tab: Tab
+key.space: Space
+comma: Comma
+colon: Colon
+semicolon: Semicolon
+vertical_line: 'Vertical line'
+file: Datne
+size: Izmērs
+delimiter: Norobežotājs
+encoding: Kodēšana
+line_endings: 'Rindu nobeigumi'

@@ -51,3 +51,14 @@ user.confirm.delete: 'Möchten Sie dieses Konto wirklich löschen?'
 user.conflict.username: 'Ein Konto mit diesem Benutzernamen existiert bereits.'
 password.too.short: 'Das Passwort muss mindestens %length% Zeichen lang sein.'
 passwords.dont.match: 'Die Passwörter stimmen nicht überein.'
+key.tab: Tab
+key.space: Space
+comma: Comma
+colon: Colon
+semicolon: Semicolon
+vertical_line: 'Vertical line'
+file: Datei
+size: Größe
+delimiter: Trennzeichen
+encoding: Kodierung
+line_endings: Zeilenumbruch

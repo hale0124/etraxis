@@ -51,3 +51,14 @@ user.confirm.delete: 'Сигурен ли сте че искате да изтр
 user.conflict.username: 'Акаунт с въведенето потребителско име вече съществува.'
 password.too.short: 'Паролата трябва да е най-малко с %length% символ дължина.'
 passwords.dont.match: 'Паролите не са еднакви.'
+key.tab: Tab
+key.space: Space
+comma: Comma
+colon: Colon
+semicolon: Semicolon
+vertical_line: 'Vertical line'
+file: Файл
+size: Големина
+delimiter: Delimiter
+encoding: Шифриране
+line_endings: 'Завършване на ред'

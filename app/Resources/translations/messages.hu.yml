@@ -51,3 +51,14 @@ user.confirm.delete: 'Biztos törölni szeretné a felhasználót?'
 user.conflict.username: 'Már létezik ilyen névvel ellátott felhasználó.'
 password.too.short: 'A jelszónak legalább %length% hosszúságúnak kell lennie.'
 passwords.dont.match: 'A jelszavak nem egyeznek.'
+key.tab: Tab
+key.space: Space
+comma: Comma
+colon: Colon
+semicolon: Semicolon
+vertical_line: 'Vertical line'
+file: Fájl
+size: Méret
+delimiter: Mezőelválasztó
+encoding: Karakterkódolás
+line_endings: Sorvégződések

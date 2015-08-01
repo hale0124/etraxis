@@ -51,3 +51,14 @@ user.confirm.delete: 'Eliminare questo account?'
 user.conflict.username: 'Nome utente già utilizzato.'
 password.too.short: 'La password deve essere almeno lunga %length% caratteri.'
 passwords.dont.match: 'Le password non coincidono.'
+key.tab: Tab
+key.space: Space
+comma: Comma
+colon: Colon
+semicolon: Semicolon
+vertical_line: 'Vertical line'
+file: File
+size: Dimensione
+delimiter: Delimitatore
+encoding: Codifica
+line_endings: 'Terminatori di linea'

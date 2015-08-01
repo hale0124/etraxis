@@ -51,3 +51,14 @@ user.confirm.delete: '¿Está seguro de eliminar esta cuenta?'
 user.conflict.username: 'Ya existe una cuenta con ese nombre de usuario.'
 password.too.short: 'La contraseña debe tener una logintud mínima de %length% caracteres.'
 passwords.dont.match: 'Las contraseñas no coinciden.'
+key.tab: Tab
+key.space: Space
+comma: Comma
+colon: Colon
+semicolon: Semicolon
+vertical_line: 'Vertical line'
+file: Fichero
+size: Tamaño
+delimiter: Delimitador
+encoding: Codificación
+line_endings: 'Final de línea'

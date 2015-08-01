@@ -51,3 +51,14 @@ user.confirm.delete: 'Sunteti sigur ca doriti sa stergeti acest cont?'
 user.conflict.username: 'Numele de utilizator este deja folosit.'
 password.too.short: 'Parola trebuie sa aiba cel putin %length% caractere.'
 passwords.dont.match: 'Parola nu este identica.'
+key.tab: Tab
+key.space: Space
+comma: Comma
+colon: Colon
+semicolon: Semicolon
+vertical_line: 'Vertical line'
+file: Fișier
+size: Mărime
+delimiter: Delimitator
+encoding: Codare
+line_endings: 'Delimitator de linie'

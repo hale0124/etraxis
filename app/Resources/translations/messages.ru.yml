@@ -51,3 +51,14 @@ user.confirm.delete: 'Вы уверены, что хотите удалить э
 user.conflict.username: 'Учетная запись с таким именем пользователя уже существует.'
 password.too.short: 'Пароль должен содержать как минимум %length% символов.'
 passwords.dont.match: 'Пароли не совпадают.'
+key.tab: Табуляция
+key.space: Пробел
+comma: Запятая
+colon: Двоеточие
+semicolon: 'Точка с запятой'
+vertical_line: 'Вертикальная линия'
+file: Файл
+size: Размер
+delimiter: Разделитель
+encoding: Кодировка
+line_endings: 'Концы строк'
