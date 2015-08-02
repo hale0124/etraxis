@@ -13,6 +13,7 @@
 
 namespace eTraxis\SimpleBus\Users;
 
+use eTraxis\Entity\User;
 use eTraxis\SimpleBus\BaseCommand;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -21,7 +22,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * Returns found user object.
  *
- * @property    int $id User ID.
+ * @property    int  $id     User ID.
+ * @property    User $result Found user.
  */
 class FindUserCommand extends BaseCommand
 {

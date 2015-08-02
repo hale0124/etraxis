@@ -24,6 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @property    string $username Username to register/find.
  * @property    string $fullname Display name to store/update.
  * @property    string $email    Email address to store/update.
+ * @property    int    $result   ID of the registered user.
  */
 class RegisterUserCommand extends BaseCommand
 {

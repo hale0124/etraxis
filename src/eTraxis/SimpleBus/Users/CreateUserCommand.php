@@ -31,6 +31,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @property    int    $timezone    Timezone.
  * @property    bool   $admin       Role (whether has administrator permissions).
  * @property    bool   $disabled    Status.
+ * @property    int    $result      ID of the created user.
  */
 class CreateUserCommand extends BaseCommand
 {
