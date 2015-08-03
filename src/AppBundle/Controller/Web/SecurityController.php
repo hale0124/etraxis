@@ -13,8 +13,7 @@
 
 namespace AppBundle\Controller\Web;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
@@ -25,8 +24,8 @@ class SecurityController extends Controller
     /**
      * Login page.
      *
-     * @Route("/login", name="login")
-     * @Method({"GET", "POST"})
+     * @Action\Route("/login", name="login")
+     * @Action\Method({"GET", "POST"})
      *
      * @return  \Symfony\Component\HttpFoundation\Response
      */

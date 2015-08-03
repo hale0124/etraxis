@@ -13,8 +13,7 @@
 
 namespace AppBundle\Controller\Admin;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
@@ -23,8 +22,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="admin")
-     * @Method("GET")
+     * @Action\Route("/", name="admin")
+     * @Action\Method("GET")
      */
     public function indexAction()
     {

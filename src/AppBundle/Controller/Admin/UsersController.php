@@ -23,8 +23,7 @@ use eTraxis\SimpleBus\Shared\ExportToCsvCommand;
 use eTraxis\SimpleBus\Users;
 use eTraxis\Traits\ContainerTrait;
 use eTraxis\Voter\UserVoter;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -34,7 +33,7 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
 /**
  * Users controller.
  *
- * @Route("/users")
+ * @Action\Route("/users")
  */
 class UsersController extends Controller
 {
@@ -43,8 +42,8 @@ class UsersController extends Controller
     /**
      * Page with list of users.
      *
-     * @Route("/", name="admin_users")
-     * @Method("GET")
+     * @Action\Route("/", name="admin_users")
+     * @Action\Method("GET")
      *
      * @return  Response
      */
@@ -57,8 +56,8 @@ class UsersController extends Controller
      * Returns JSON list of users for DataTables
      * (see http://datatables.net/manual/server-side for details).
      *
-     * @Route("/list", name="admin_users_list")
-     * @Method("GET")
+     * @Action\Route("/list", name="admin_users_list")
+     * @Action\Method("GET")
      *
      * @param   Request $request
      *
@@ -93,8 +92,8 @@ class UsersController extends Controller
     /**
      * Exports list of users as CSV file.
      *
-     * @Route("/csv", name="admin_users_csv")
-     * @Method("GET")
+     * @Action\Route("/csv", name="admin_users_csv")
+     * @Action\Method("GET")
      *
      * @param   Request $request
      *
@@ -138,8 +137,8 @@ class UsersController extends Controller
     /**
      * Shows specified user.
      *
-     * @Route("/{id}", name="admin_view_user", requirements={"id"="\d+"})
-     * @Method("GET")
+     * @Action\Route("/{id}", name="admin_view_user", requirements={"id"="\d+"})
+     * @Action\Method("GET")
      *
      * @param   Request $request
      * @param   int     $id User ID.
@@ -169,8 +168,8 @@ class UsersController extends Controller
     /**
      * Tab with user's details.
      *
-     * @Route("/tab/details/{id}", name="admin_tab_user_details", requirements={"id"="\d+"})
-     * @Method("GET")
+     * @Action\Route("/tab/details/{id}", name="admin_tab_user_details", requirements={"id"="\d+"})
+     * @Action\Method("GET")
      *
      * @param   int $id User ID.
      *
@@ -206,8 +205,8 @@ class UsersController extends Controller
     /**
      * Renders dialog to export users to CSV.
      *
-     * @Route("/dlg/export", name="admin_dlg_export")
-     * @Method("GET")
+     * @Action\Route("/dlg/export", name="admin_dlg_export")
+     * @Action\Method("GET")
      *
      * @return  Response
      */
@@ -232,8 +231,8 @@ class UsersController extends Controller
     /**
      * Renders dialog to create new user.
      *
-     * @Route("/dlg/new", name="admin_dlg_new_user")
-     * @Method("GET")
+     * @Action\Route("/dlg/new", name="admin_dlg_new_user")
+     * @Action\Method("GET")
      *
      * @return  Response
      */
@@ -257,8 +256,8 @@ class UsersController extends Controller
     /**
      * Renders dialog to edit specified user.
      *
-     * @Route("/dlg/edit/{id}", name="admin_dlg_edit_user", requirements={"id"="\d+"})
-     * @Method("GET")
+     * @Action\Route("/dlg/edit/{id}", name="admin_dlg_edit_user", requirements={"id"="\d+"})
+     * @Action\Method("GET")
      *
      * @param   int     $id User ID.
      *
@@ -290,8 +289,8 @@ class UsersController extends Controller
     /**
      * Verifies submitted form of "Export to CSV" parameters.
      *
-     * @Route("/export", name="admin_users_export")
-     * @Method("POST")
+     * @Action\Route("/export", name="admin_users_export")
+     * @Action\Method("POST")
      *
      * @param   Request $request
      *
@@ -313,8 +312,8 @@ class UsersController extends Controller
     /**
      * Processes submitted form when new user is being created.
      *
-     * @Route("/new", name="admin_new_user")
-     * @Method("POST")
+     * @Action\Route("/new", name="admin_new_user")
+     * @Action\Method("POST")
      *
      * @param   Request $request
      *
@@ -345,8 +344,8 @@ class UsersController extends Controller
     /**
      * Processes submitted form when specified user is being edited.
      *
-     * @Route("/edit/{id}", name="admin_edit_user", requirements={"id"="\d+"})
-     * @Method("POST")
+     * @Action\Route("/edit/{id}", name="admin_edit_user", requirements={"id"="\d+"})
+     * @Action\Method("POST")
      *
      * @param   Request $request
      * @param   int     $id User ID.
@@ -413,8 +412,8 @@ class UsersController extends Controller
     /**
      * Deletes specified user.
      *
-     * @Route("/delete/{id}", name="admin_delete_user", requirements={"id"="\d+"})
-     * @Method("POST")
+     * @Action\Route("/delete/{id}", name="admin_delete_user", requirements={"id"="\d+"})
+     * @Action\Method("POST")
      *
      * @param   int $id User ID.
      *
@@ -436,8 +435,8 @@ class UsersController extends Controller
     /**
      * Disables specified users.
      *
-     * @Route("/disable", name="admin_disable_user")
-     * @Method("POST")
+     * @Action\Route("/disable", name="admin_disable_user")
+     * @Action\Method("POST")
      *
      * @param   Request $request
      *
@@ -459,8 +458,8 @@ class UsersController extends Controller
     /**
      * Enables specified users.
      *
-     * @Route("/enable", name="admin_enable_user")
-     * @Method("POST")
+     * @Action\Route("/enable", name="admin_enable_user")
+     * @Action\Method("POST")
      *
      * @param   Request $request
      *
@@ -482,8 +481,8 @@ class UsersController extends Controller
     /**
      * Unlocks specified user.
      *
-     * @Route("/unlock/{id}", name="admin_unlock_user", requirements={"id"="\d+"})
-     * @Method("POST")
+     * @Action\Route("/unlock/{id}", name="admin_unlock_user", requirements={"id"="\d+"})
+     * @Action\Method("POST")
      *
      * @param   int $id User ID.
      *

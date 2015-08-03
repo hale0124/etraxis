@@ -13,8 +13,7 @@
 
 namespace AppBundle\Controller\Web;
 
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 /**
@@ -23,8 +22,8 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 class DefaultController extends Controller
 {
     /**
-     * @Route("/", name="homepage")
-     * @Method("GET")
+     * @Action\Route("/", name="homepage")
+     * @Action\Method("GET")
      */
     public function indexAction()
     {
