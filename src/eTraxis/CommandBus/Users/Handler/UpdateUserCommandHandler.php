@@ -62,6 +62,7 @@ class UpdateUserCommandHandler
      * @param   UpdateUserCommand $command
      *
      * @throws  CommandException
+     * @throws  NotFoundHttpException
      */
     public function handle(UpdateUserCommand $command)
     {

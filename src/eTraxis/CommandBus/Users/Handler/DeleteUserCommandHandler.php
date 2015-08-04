@@ -44,6 +44,9 @@ class DeleteUserCommandHandler
      * Deletes specified account.
      *
      * @param   DeleteUserCommand $command
+     *
+     * @throws  AccessDeniedException
+     * @throws  NotFoundHttpException
      */
     public function handle(DeleteUserCommand $command)
     {
