@@ -14,11 +14,32 @@
 namespace AppBundle;
 
 use AppBundle\DependencyInjection\CommandBusCompilerPass;
+use Doctrine\ORM\Query;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class AppBundle extends Bundle
 {
+    /**
+     * {@inheritdoc}
+     */
+    public function boot()
+    {
+        parent::boot();
+
+        /** @var \Doctrine\ORM\EntityManager $em */
+        $em = $this->container->get('doctrine.orm.entity_manager');
+
+        // PostgreSQL and Oracle treat NULLs as greatest values.
+        if (in_array($this->container->getParameter('database_driver'), ['pdo_pgsql', 'oci8'])) {
+
+            $em->getConfiguration()->setDefaultQueryHint(
+                Query::HINT_CUSTOM_OUTPUT_WALKER,
+                '\eTraxis\Doctrine\SortableNullsWalker'
+            );
+        }
+    }
+
     /**
      * {@inheritdoc}
      */

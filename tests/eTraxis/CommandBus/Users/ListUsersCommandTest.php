@@ -87,8 +87,8 @@ class ListUsersCommandTest extends BaseTestCase
             'fry',
             'leela',
             'zapp',
-            'einstein', // this one has NULL in the "description" field
-            'artem',    // this one has NULL in the "description" field
+            'einstein',
+            'artem',
         ];
 
         $command = new ListUsersCommand([
@@ -100,12 +100,6 @@ class ListUsersCommandTest extends BaseTestCase
                 ['column' => 2, 'dir' => 'asc'],
             ],
         ]);
-
-        // PostgreSQL treats NULLs as greatest values.
-        if ($this->client->getContainer()->getParameter('database_driver') == 'pdo_pgsql') {
-            array_unshift($expected, array_pop($expected));
-            array_unshift($expected, array_pop($expected));
-        }
 
         $result = $this->command_bus->handle($command);
 
