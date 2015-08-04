@@ -11,16 +11,13 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\SimpleBus;
+namespace eTraxis\Traits;
 
 /**
- * Base command.
+ * A trait to extend DTO for Command Bus.
  */
-class BaseCommand
+trait CommandBusTrait
 {
-    /** @var mixed Command result. */
-    public $result = null;
-
     /**
      * Initializes object properties with values from provided array.
      *

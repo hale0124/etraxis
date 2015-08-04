@@ -43,7 +43,7 @@ class BaseTestCase extends WebTestCase
     /** @var \Symfony\Bridge\Doctrine\RegistryInterface */
     protected $doctrine;
 
-    /** @var \SimpleBus\Message\Bus\MessageBus */
+    /** @var \eTraxis\CommandBus\CommandBusInterface */
     protected $command_bus;
 
     /**

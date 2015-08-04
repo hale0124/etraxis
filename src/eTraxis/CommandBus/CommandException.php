@@ -11,7 +11,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\SimpleBus;
+namespace eTraxis\CommandBus;
 
 use Symfony\Component\HttpFoundation\Response;
 

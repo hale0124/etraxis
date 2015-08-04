@@ -11,7 +11,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\SimpleBus\Middleware;
+namespace eTraxis\CommandBus;
 
 class ValidationExceptionTest extends \PHPUnit_Framework_TestCase
 {

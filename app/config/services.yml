@@ -6,6 +6,13 @@ imports:
 
 services:
 
+    command_bus:
+        class: eTraxis\CommandBus\CommandBus
+        arguments:
+            - @service_container
+            - @logger
+            - @validator
+
     ldap:
         class: eTraxis\Service\LdapService
         arguments:
