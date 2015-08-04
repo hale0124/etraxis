@@ -62,3 +62,5 @@ size: Größe
 delimiter: Trennzeichen
 encoding: Kodierung
 line_endings: Zeilenumbruch
+groups: Gruppen
+others: Andere

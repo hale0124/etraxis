@@ -62,3 +62,5 @@ size: Dimensione
 delimiter: Delimitatore
 encoding: Codifica
 line_endings: 'Terminatori di linea'
+groups: Gruppi
+others: Altri

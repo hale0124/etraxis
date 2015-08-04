@@ -1,0 +1,77 @@
+{% import "macro.html.twig" as macro %}
+
+<div class="columns">
+    <div class="column full-width">
+        <table>
+            <tr>
+                <td width="50%">
+                    <fieldset>
+                        <legend>{{ 'groups'|trans }}</legend>
+                        <select id="groups" size="20" multiple class="full-width">
+                            {% for group in groups %}
+                                {% if group.project %}
+                                    <option value="{{ group.id }}">{{ group.name }} ({{ group.project.name }})</option>
+                                {% else %}
+                                    <option value="{{ group.id }}">{{ group.name }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </fieldset>
+                </td>
+                <td class="columns">
+                    <div class="column">
+                        <p><button type="button" id="btn-remove">&gt;&gt;</button></p>
+                        <p><button type="button" id="btn-add">&lt;&lt;</button></p>
+                    </div>
+                </td>
+                <td width="50%">
+                    <fieldset>
+                        <legend>{{ 'others'|trans }}</legend>
+                        <select id="others" size="20" multiple class="full-width">
+                            {% for group in others %}
+                                {% if group.project %}
+                                    <option value="{{ group.id }}">{{ group.name }} ({{ group.project.name }})</option>
+                                {% else %}
+                                    <option value="{{ group.id }}">{{ group.name }}</option>
+                                {% endif %}
+                            {% endfor %}
+                        </select>
+                    </fieldset>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script>
+
+    $(function() {
+
+        function reloadTab() {
+            var $tabs = $('#tabs-user');
+            var current = $tabs.tabs('option', 'active');
+            $tabs.tabs('load', current);
+        }
+
+        // "<<" button (add to group).
+        $('#btn-add').click(function() {
+            var groups = $('#others').val();
+            if (groups) {
+                $.post('{{ path('admin_users_add_groups', {'id': user.id}) }}', { groups: groups }, function() {
+                    reloadTab();
+                });
+            }
+        });
+
+        // ">>" button (remove from group).
+        $('#btn-remove').click(function() {
+            var groups = $('#groups').val();
+            if (groups) {
+                $.post('{{ path('admin_users_remove_groups', {'id': user.id}) }}', { groups: groups }, function() {
+                    reloadTab();
+                });
+            }
+        });
+    });
+
+</script>

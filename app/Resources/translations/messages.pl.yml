@@ -62,3 +62,5 @@ size: Rozmiar
 delimiter: 'Znak rozdzielenia'
 encoding: Kodowanie
 line_endings: 'Zakończenie lini'
+groups: Grupy
+others: Inni

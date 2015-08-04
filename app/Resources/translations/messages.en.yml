@@ -1,8 +1,8 @@
 lang: English
 button.ok: OK
 button.cancel: Cancel
-button.yes: Yes
-button.no: No
+button.yes: 'Yes'
+button.no: 'No'
 button.save: Save
 button.close: Close
 button.back: Back
@@ -62,3 +62,5 @@ size: Size
 delimiter: Delimiter
 encoding: Encoding
 line_endings: 'Line endings'
+groups: Groups
+others: Others

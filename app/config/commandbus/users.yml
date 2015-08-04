@@ -54,3 +54,23 @@ services:
         class: eTraxis\CommandBus\Users\Handler\SetPasswordCommandHandler
         tags: [{ name: command_handler, command: eTraxis\CommandBus\Users\SetPasswordCommand }]
         arguments: [ @logger, @doctrine, @etraxis.encoder ]
+
+    command.users.user_groups:
+        class: eTraxis\CommandBus\Users\Handler\GetUserGroupsCommandHandler
+        tags: [{ name: command_handler, command: eTraxis\CommandBus\Users\GetUserGroupsCommand }]
+        arguments: [ @doctrine ]
+
+    command.users.other_groups:
+        class: eTraxis\CommandBus\Users\Handler\GetOtherGroupsCommandHandler
+        tags: [{ name: command_handler, command: eTraxis\CommandBus\Users\GetOtherGroupsCommand }]
+        arguments: [ @doctrine ]
+
+    command.users.add_groups:
+        class: eTraxis\CommandBus\Users\Handler\AddGroupsCommandHandler
+        tags: [{ name: command_handler, command: eTraxis\CommandBus\Users\AddGroupsCommand }]
+        arguments: [ @doctrine ]
+
+    command.users.remove_groups:
+        class: eTraxis\CommandBus\Users\Handler\RemoveGroupsCommandHandler
+        tags: [{ name: command_handler, command: eTraxis\CommandBus\Users\RemoveGroupsCommand }]
+        arguments: [ @doctrine ]

@@ -203,6 +203,46 @@ class UsersController extends Controller
     }
 
     /**
+     * Tab with user's groups.
+     *
+     * @Action\Route("/tab/groups/{id}", name="admin_tab_user_groups", requirements={"id"="\d+"})
+     * @Action\Method("GET")
+     *
+     * @param   int $id User ID.
+     *
+     * @return  Response
+     */
+    public function tabGroupsAction($id)
+    {
+        try {
+            $user = $this->getCommandBus()->handle(
+                new Users\FindUserCommand(['id' => $id])
+            );
+
+            if (!$user) {
+                throw $this->createNotFoundException();
+            }
+
+            $groups = $this->getCommandBus()->handle(
+                new Users\GetUserGroupsCommand(['id' => $id])
+            );
+
+            $others = $this->getCommandBus()->handle(
+                new Users\GetOtherGroupsCommand(['id' => $id])
+            );
+
+            return $this->render('admin/users/tab_groups.html.twig', [
+                'user'   => $user,
+                'groups' => $groups,
+                'others' => $others,
+            ]);
+        }
+        catch (ValidationException $e) {
+            return new Response($e->getMessage(), $e->getCode());
+        }
+    }
+
+    /**
      * Renders dialog to export users to CSV.
      *
      * @Action\Route("/dlg/export", name="admin_dlg_export")
@@ -494,6 +534,60 @@ class UsersController extends Controller
     {
         try {
             $command = new Users\UnlockUserCommand(['id' => $id]);
+            $this->getCommandBus()->handle($command);
+
+            return new JsonResponse();
+        }
+        catch (ValidationException $e) {
+            return new JsonResponse($e->getMessages(), $e->getCode());
+        }
+    }
+
+    /**
+     * Adds user to specified groups.
+     *
+     * @Action\Route("/groups/add/{id}", name="admin_users_add_groups", requirements={"id"="\d+"})
+     * @Action\Method("POST")
+     *
+     * @param   Request $request
+     * @param   int     $id User ID.
+     *
+     * @return  JsonResponse
+     */
+    public function addGroupAction(Request $request, $id)
+    {
+        try {
+            $command = new Users\AddGroupsCommand(
+                array_merge(['id' => $id], $request->request->all())
+            );
+
+            $this->getCommandBus()->handle($command);
+
+            return new JsonResponse();
+        }
+        catch (ValidationException $e) {
+            return new JsonResponse($e->getMessages(), $e->getCode());
+        }
+    }
+
+    /**
+     * Removes user from specified groups.
+     *
+     * @Action\Route("/groups/remove/{id}", name="admin_users_remove_groups", requirements={"id"="\d+"})
+     * @Action\Method("POST")
+     *
+     * @param   Request $request
+     * @param   int     $id User ID.
+     *
+     * @return  JsonResponse
+     */
+    public function removeGroupAction(Request $request, $id)
+    {
+        try {
+            $command = new Users\RemoveGroupsCommand(
+                array_merge(['id' => $id], $request->request->all())
+            );
+
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();

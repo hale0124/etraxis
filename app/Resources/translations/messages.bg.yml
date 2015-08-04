@@ -62,3 +62,5 @@ size: Големина
 delimiter: Delimiter
 encoding: Шифриране
 line_endings: 'Завършване на ред'
+groups: Групи
+others: Други

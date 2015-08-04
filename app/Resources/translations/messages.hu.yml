@@ -62,3 +62,5 @@ size: Méret
 delimiter: Mezőelválasztó
 encoding: Karakterkódolás
 line_endings: Sorvégződések
+groups: Csoportok
+others: 'További személyek'

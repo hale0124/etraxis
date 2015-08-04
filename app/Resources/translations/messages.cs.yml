@@ -62,3 +62,5 @@ size: Velikost
 delimiter: Oddělovač
 encoding: Kódování
 line_endings: 'Konce řádků'
+groups: Skupiny
+others: Ostatní
