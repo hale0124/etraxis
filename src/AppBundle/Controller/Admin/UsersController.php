@@ -15,12 +15,12 @@ namespace AppBundle\Controller\Admin;
 
 use eTraxis\Collection\CsvDelimiter;
 use eTraxis\Collection\LineEnding;
+use eTraxis\CommandBus\CommandException;
+use eTraxis\CommandBus\Shared\ExportToCsvCommand;
+use eTraxis\CommandBus\Users;
+use eTraxis\CommandBus\ValidationException;
 use eTraxis\Form\ExportCsvForm;
 use eTraxis\Form\UserForm;
-use eTraxis\SimpleBus\CommandException;
-use eTraxis\SimpleBus\Middleware\ValidationException;
-use eTraxis\SimpleBus\Shared\ExportToCsvCommand;
-use eTraxis\SimpleBus\Users;
 use eTraxis\Traits\ContainerTrait;
 use eTraxis\Voter\UserVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
@@ -75,13 +75,13 @@ class UsersController extends Controller
                 'order'  => $request->get('order', []),
             ]);
 
-            $this->getCommandBus()->handle($command);
+            $result = $this->getCommandBus()->handle($command);
 
             return new JsonResponse([
                 'draw'            => $request->get('draw'),
-                'recordsTotal'    => $command->result['total'],
-                'recordsFiltered' => $command->result['filtered'],
-                'data'            => $command->result['users'],
+                'recordsTotal'    => $result['total'],
+                'recordsFiltered' => $result['filtered'],
+                'data'            => $result['users'],
             ]);
         }
         catch (ValidationException $e) {
@@ -106,11 +106,11 @@ class UsersController extends Controller
                 'search' => $request->get('search'),
             ]);
 
-            $this->getCommandBus()->handle($command);
+            $result = $this->getCommandBus()->handle($command);
 
             $users = array_map(function ($user) {
                 return array_slice($user, 1, 6);
-            }, $command->result['users']);
+            }, $result['users']);
 
             array_unshift($users, [
                 $this->getTranslator()->trans('user.username'),
@@ -125,9 +125,7 @@ class UsersController extends Controller
 
             $command->data = $users;
 
-            $this->getCommandBus()->handle($command);
-
-            return $command->result;
+            return $this->getCommandBus()->handle($command);
         }
         catch (ValidationException $e) {
             return new JsonResponse($e->getMessages(), $e->getCode());
@@ -149,14 +147,15 @@ class UsersController extends Controller
     {
         try {
             $command = new Users\FindUserCommand(['id' => $id]);
-            $this->getCommandBus()->handle($command);
 
-            if (!$command->result) {
+            $user = $this->getCommandBus()->handle($command);
+
+            if (!$user) {
                 throw $this->createNotFoundException();
             }
 
             return $this->render('admin/users/view.html.twig', [
-                'user' => $command->result,
+                'user' => $user,
                 'tab'  => $request->get('tab', 0),
             ]);
         }
@@ -179,21 +178,22 @@ class UsersController extends Controller
     {
         try {
             $command = new Users\FindUserCommand(['id' => $id]);
-            $this->getCommandBus()->handle($command);
 
-            if (!$command->result) {
+            $user = $this->getCommandBus()->handle($command);
+
+            if (!$user) {
                 throw $this->createNotFoundException();
             }
 
             $authChecker = $this->getAuthorizationChecker();
 
             return $this->render('admin/users/tab_details.html.twig', [
-                'user' => $command->result,
+                'user' => $user,
                 'can'  => [
-                    'delete'  => $authChecker->isGranted(UserVoter::DELETE, $command->result),
-                    'disable' => $authChecker->isGranted(UserVoter::DISABLE, $command->result),
-                    'enable'  => $authChecker->isGranted(UserVoter::ENABLE, $command->result),
-                    'unlock'  => $authChecker->isGranted(UserVoter::UNLOCK, $command->result),
+                    'delete'  => $authChecker->isGranted(UserVoter::DELETE, $user),
+                    'disable' => $authChecker->isGranted(UserVoter::DISABLE, $user),
+                    'enable'  => $authChecker->isGranted(UserVoter::ENABLE, $user),
+                    'unlock'  => $authChecker->isGranted(UserVoter::UNLOCK, $user),
                 ],
             ]);
         }
@@ -267,13 +267,14 @@ class UsersController extends Controller
     {
         try {
             $command = new Users\FindUserCommand(['id' => $id]);
-            $this->getCommandBus()->handle($command);
 
-            if (!$command->result) {
+            $user = $this->getCommandBus()->handle($command);
+
+            if (!$user) {
                 throw $this->createNotFoundException();
             }
 
-            $form = $this->createForm(new UserForm($this->getTranslator()), $command->result, [
+            $form = $this->createForm(new UserForm($this->getTranslator()), $user, [
                 'action' => $this->generateUrl('admin_edit_user', ['id' => $id]),
             ]);
 
@@ -359,9 +360,10 @@ class UsersController extends Controller
 
         try {
             $command = new Users\FindUserCommand(['id' => $id]);
-            $this->getCommandBus()->handle($command);
 
-            if (!$command->result) {
+            $user = $this->getCommandBus()->handle($command);
+
+            if (!$user) {
                 throw $this->createNotFoundException();
             }
 
@@ -370,10 +372,10 @@ class UsersController extends Controller
             $data       = $this->getFormData($request, 'user');
             $data['id'] = $id;
 
-            if ($command->result->isLdap()) {
-                $data['username'] = $command->result->getUsername();
-                $data['fullname'] = $command->result->getFullname();
-                $data['email']    = $command->result->getEmail();
+            if ($user->isLdap()) {
+                $data['username'] = $user->getUsername();
+                $data['fullname'] = $user->getFullname();
+                $data['email']    = $user->getEmail();
             }
 
             $command = new Users\UpdateUserCommand($data);

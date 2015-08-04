@@ -13,7 +13,7 @@
 
 namespace eTraxis\Traits;
 
-use eTraxis\SimpleBus\CommandException;
+use eTraxis\CommandBus\CommandException;
 use Symfony\Component\HttpFoundation\Request;
 
 /**
@@ -99,7 +99,7 @@ trait ContainerTrait
     /**
      * Shortcut to get the Command Bus service.
      *
-     * @return  \SimpleBus\Message\Bus\MessageBus
+     * @return  \eTraxis\CommandBus\CommandBusInterface
      */
     protected function getCommandBus()
     {

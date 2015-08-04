@@ -13,11 +13,11 @@
 
 namespace AppBundle\EventListener;
 
+use eTraxis\CommandBus\CommandBusInterface;
+use eTraxis\CommandBus\Users\LockUserCommand;
+use eTraxis\CommandBus\Users\UnlockUserCommand;
 use eTraxis\Entity\User;
-use eTraxis\SimpleBus\Users\LockUserCommand;
-use eTraxis\SimpleBus\Users\UnlockUserCommand;
 use Psr\Log\LoggerInterface;
-use SimpleBus\Message\Bus\MessageBus;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\Security\Core\AuthenticationEvents;
 use Symfony\Component\Security\Core\Event\AuthenticationEvent;
@@ -34,10 +34,10 @@ class AuthenticationListener implements EventSubscriberInterface
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface $logger
-     * @param   MessageBus      $command_bus
+     * @param   LoggerInterface     $logger
+     * @param   CommandBusInterface $command_bus
      */
-    public function __construct(LoggerInterface $logger, MessageBus $command_bus)
+    public function __construct(LoggerInterface $logger, CommandBusInterface $command_bus)
     {
         $this->logger      = $logger;
         $this->command_bus = $command_bus;

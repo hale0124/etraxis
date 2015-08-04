@@ -30,14 +30,9 @@ class TestCommand
     public $denominator;
 }
 
-class TestCommandHandler implements CommandHandlerInterface
+class TestCommandHandler
 {
-    /**
-     * @param   TestCommand $command
-     *
-     * @return  int
-     */
-    public function handle($command)
+    public function handle(TestCommand $command)
     {
         return intval($command->numerator / $command->denominator);
     }

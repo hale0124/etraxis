@@ -40,7 +40,7 @@ class CommandBusCompilerPass implements CompilerPassInterface
 
                 $definition->addMethodCall('addHandler', [
                     $id,
-                    $tags[0]['command']
+                    $tags[0]['command'],
                 ]);
             }
         }

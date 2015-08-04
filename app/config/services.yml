@@ -1,8 +1,7 @@
 imports:
     - { resource: voters.yml }
-    - { resource: simplebus/middleware.yml }
-    - { resource: simplebus/shared.yml }
-    - { resource: simplebus/users.yml }
+    - { resource: commandbus/shared.yml }
+    - { resource: commandbus/users.yml }
 
 services:
 
