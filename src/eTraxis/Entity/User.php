@@ -16,7 +16,7 @@ namespace eTraxis\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use eTraxis\Collection\Theme;
-use Symfony\Bridge\Doctrine\Validator\Constraints;
+use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
@@ -27,7 +27,7 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  *                @ORM\UniqueConstraint(name="ix_accounts", columns={"username"})
  *            })
  * @ORM\Entity
- * @Constraints\UniqueEntity(fields={"username"}, message="user.conflict.username")
+ * @Assert\UniqueEntity(fields={"username"}, message="user.conflict.username")
  */
 class User implements AdvancedUserInterface
 {
