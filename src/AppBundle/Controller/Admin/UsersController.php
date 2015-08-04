@@ -146,9 +146,9 @@ class UsersController extends Controller
     public function viewAction(Request $request, $id)
     {
         try {
-            $command = new Users\FindUserCommand(['id' => $id]);
-
-            $user = $this->getCommandBus()->handle($command);
+            $user = $this->getCommandBus()->handle(
+                new Users\FindUserCommand(['id' => $id])
+            );
 
             if (!$user) {
                 throw $this->createNotFoundException();
@@ -177,9 +177,9 @@ class UsersController extends Controller
     public function tabDetailsAction($id)
     {
         try {
-            $command = new Users\FindUserCommand(['id' => $id]);
-
-            $user = $this->getCommandBus()->handle($command);
+            $user = $this->getCommandBus()->handle(
+                new Users\FindUserCommand(['id' => $id])
+            );
 
             if (!$user) {
                 throw $this->createNotFoundException();
@@ -266,9 +266,9 @@ class UsersController extends Controller
     public function dlgEditAction($id)
     {
         try {
-            $command = new Users\FindUserCommand(['id' => $id]);
-
-            $user = $this->getCommandBus()->handle($command);
+            $user = $this->getCommandBus()->handle(
+                new Users\FindUserCommand(['id' => $id])
+            );
 
             if (!$user) {
                 throw $this->createNotFoundException();
@@ -359,9 +359,9 @@ class UsersController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         try {
-            $command = new Users\FindUserCommand(['id' => $id]);
-
-            $user = $this->getCommandBus()->handle($command);
+            $user = $this->getCommandBus()->handle(
+                new Users\FindUserCommand(['id' => $id])
+            );
 
             if (!$user) {
                 throw $this->createNotFoundException();
