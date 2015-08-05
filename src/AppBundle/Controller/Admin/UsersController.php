@@ -13,13 +13,10 @@
 
 namespace AppBundle\Controller\Admin;
 
-use eTraxis\Collection\CsvDelimiter;
-use eTraxis\Collection\LineEnding;
 use eTraxis\CommandBus\CommandException;
 use eTraxis\CommandBus\Shared\ExportToCsvCommand;
 use eTraxis\CommandBus\Users;
 use eTraxis\CommandBus\ValidationException;
-use eTraxis\Form\ExportCsvForm;
 use eTraxis\Form\UserForm;
 use eTraxis\Traits\ContainerTrait;
 use eTraxis\Voter\UserVoter;
@@ -243,32 +240,6 @@ class UsersController extends Controller
     }
 
     /**
-     * Renders dialog to export users to CSV.
-     *
-     * @Action\Route("/dlg/export", name="admin_dlg_export")
-     * @Action\Method("GET")
-     *
-     * @return  Response
-     */
-    public function dlgExportAction()
-    {
-        $default = [
-            'filename'  => '.csv',
-            'delimiter' => CsvDelimiter::COMMA,
-            'encoding'  => 'UTF-8',
-            'tail'      => LineEnding::WINDOWS,
-        ];
-
-        $form = $this->createForm(new ExportCsvForm($this->getTranslator()), $default, [
-            'action' => $this->generateUrl('admin_users_export'),
-        ]);
-
-        return $this->render('shared/dlg_export.html.twig', [
-            'form' => $form->createView(),
-        ]);
-    }
-
-    /**
      * Renders dialog to create new user.
      *
      * @Action\Route("/dlg/new", name="admin_dlg_new_user")
@@ -325,29 +296,6 @@ class UsersController extends Controller
         catch (ValidationException $e) {
             return new Response($e->getMessage(), $e->getCode());
         }
-    }
-
-    /**
-     * Verifies submitted form of "Export to CSV" parameters.
-     *
-     * @Action\Route("/export", name="admin_users_export")
-     * @Action\Method("POST")
-     *
-     * @param   Request $request
-     *
-     * @return  JsonResponse
-     */
-    public function exportAction(Request $request)
-    {
-        $command = new ExportToCsvCommand($this->getFormData($request, 'export'));
-
-        $violations = $this->getValidator()->validate($command);
-
-        if (count($violations)) {
-            return new JsonResponse($violations->get(0)->getMessage(), Response::HTTP_BAD_REQUEST);
-        }
-
-        return new JsonResponse();
     }
 
     /**

@@ -129,7 +129,7 @@
             // "Export" button.
             $('#btn-export').click(function() {
                 eTraxis.modal({
-                    url: '{{ path('admin_dlg_export') }}',
+                    url: '{{ path('dlg_export') }}',
                     title: '{{ 'button.export'|trans }}',
                     success: function() {
                         var params = $('form').serialize();
