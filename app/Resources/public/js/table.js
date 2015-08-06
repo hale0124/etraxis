@@ -52,6 +52,17 @@ var datatables_language = window.datatables_language || {};
         // Timer to block the table while AJAX request is being processed.
         var blockTimer = null;
 
+        // Timers to make a delay between requests when searching by columns.
+        var searchTimers = [];
+
+        // Current values of searching by columns.
+        var searchValues = [];
+
+        for (var i = $('thead:first th', this).length; i >= 0; i--) {
+            searchTimers.push(null);
+            searchValues.push('');
+        }
+
         // ID of the last AJAX request.
         // First AJAX request doesn't produce "preXhr.dr" event, but does produce the "xhr.dt" with "1" as draw number.
         var drawNumber = 1;
@@ -80,7 +91,7 @@ var datatables_language = window.datatables_language || {};
                         padding: '10px'
                     }
                 });
-            }, 500);
+            }, 400);
         }
 
         // Unblock the table when server response is received.
@@ -95,8 +106,9 @@ var datatables_language = window.datatables_language || {};
         // In case of "checkboxes" feature...
         if (settings.checkboxes) {
 
-            // ...prepend the header with one more column.
-            $('thead tr', this).prepend('<th><input type="checkbox"></th>');
+            // ... prepend the header with one more column.
+            $('thead tr', this).prepend('<th></th>');
+            $('thead:last th:first', this).prepend('<input type="checkbox">');
 
             // Custom rendering of the first column to convert data into value of a checkbox.
             settings.columnDefs.push({
@@ -107,6 +119,13 @@ var datatables_language = window.datatables_language || {};
                     return '<input type="checkbox" name="' + settings.checkboxes + '" value="' + data + '">';
                 }
             });
+        }
+
+        // If filtering row is present.
+        if ($('thead', this).length > 1) {
+            $('thead:last').addClass('filter');
+            $('thead.filter th').addClass('ui-state-default');
+            $('thead.filter select').prepend('<option></option>').val(null);
         }
 
         // Call DataTables plugin.
@@ -125,6 +144,45 @@ var datatables_language = window.datatables_language || {};
                 e.stopPropagation();
             });
         }
+
+        // Filter controls.
+        $('.filter input[type="text"], .filter select')
+            // Restore saved search values.
+            .each(function() {
+
+                var index = $(this).closest('th').index();
+                var value = $table.api().column(index).search();
+
+                $(this).val(value);
+
+                searchValues[index] = value;
+            })
+            // Re-draw the table when a filter value is changed.
+            .on('keyup change', function() {
+
+                var index = $(this).closest('th').index();
+                var value = $(this).val();
+
+                if (searchValues[index] == value) {
+                    return;
+                }
+
+                if (searchTimers[index]) {
+                    clearTimeout(searchTimers[index]);
+                }
+
+                searchTimers[index] = null;
+                searchValues[index] = value;
+
+                searchTimers[index] = setTimeout(function() {
+                    searchTimers[index] = null;
+                    $table
+                        .api()
+                        .column(index)
+                        .search(searchValues[index])
+                        .draw();
+                }, 400);
+            });
 
         // Prepare context menu.
         if (settings.contextMenu) {

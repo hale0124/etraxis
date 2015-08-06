@@ -376,9 +376,10 @@ table.dataTable {
 
 .dataTables_wrapper {
 
-    select {
-        padding: inherit !important;
-        width: inherit !important;
+    .dataTables_length {
+        select {
+            padding: 1px !important;
+        }
     }
 
     th.sorting_disabled {
@@ -418,6 +419,30 @@ table.dataTable {
 
         &.ui-state-disabled {
             opacity: 1;
+        }
+    }
+
+    thead.filter {
+
+        th {
+            background-color: inherit;
+            background-image: none;
+            padding: 2px 3px;
+        }
+
+        input,
+        select {
+            border-radius: 1px;
+            font-weight: normal;
+            width: 100%;
+        }
+
+        input {
+            padding: 2px 6px;
+        }
+
+        select {
+            padding: 1px 2px;
         }
     }
 }
