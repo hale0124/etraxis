@@ -61,7 +61,7 @@ class ListUsersCommandTest extends BaseTestCase
         $command = new ListUsersCommand([
             'start'  => 0,
             'length' => -1,
-            'search' => 'planetexpress',
+            'search' => 'plANeTexprESS',
             'order'  => [],
         ]);
 
@@ -179,7 +179,7 @@ class ListUsersCommandTest extends BaseTestCase
             'length'  => -1,
             'search'  => null,
             'columns' => [
-                ['data' => Handler\ListUsersCommandHandler::COLUMN_PERMISSIONS, 'search' => ['value' => 'admin']],
+                ['data' => Handler\ListUsersCommandHandler::COLUMN_PERMISSIONS, 'search' => ['value' => 'Admin']],
             ],
             'order'   => [
                 ['column' => Handler\ListUsersCommandHandler::COLUMN_USERNAME, 'dir' => 'asc'],
@@ -206,7 +206,7 @@ class ListUsersCommandTest extends BaseTestCase
             'length'  => -1,
             'search'  => null,
             'columns' => [
-                ['data' => Handler\ListUsersCommandHandler::COLUMN_PERMISSIONS, 'search' => ['value' => 'user']],
+                ['data' => Handler\ListUsersCommandHandler::COLUMN_PERMISSIONS, 'search' => ['value' => 'User']],
             ],
             'order'   => [
                 ['column' => Handler\ListUsersCommandHandler::COLUMN_USERNAME, 'dir' => 'asc'],
@@ -229,7 +229,7 @@ class ListUsersCommandTest extends BaseTestCase
             'length'  => -1,
             'search'  => null,
             'columns' => [
-                ['data' => Handler\ListUsersCommandHandler::COLUMN_AUTHENTICATION, 'search' => ['value' => 'ldap']],
+                ['data' => Handler\ListUsersCommandHandler::COLUMN_AUTHENTICATION, 'search' => ['value' => 'LDAP']],
             ],
             'order'   => [
                 ['column' => Handler\ListUsersCommandHandler::COLUMN_USERNAME, 'dir' => 'asc'],
@@ -256,7 +256,7 @@ class ListUsersCommandTest extends BaseTestCase
             'length'  => -1,
             'search'  => null,
             'columns' => [
-                ['data' => Handler\ListUsersCommandHandler::COLUMN_AUTHENTICATION, 'search' => ['value' => 'etraxis']],
+                ['data' => Handler\ListUsersCommandHandler::COLUMN_AUTHENTICATION, 'search' => ['value' => 'eTraxis']],
             ],
             'order'   => [
                 ['column' => Handler\ListUsersCommandHandler::COLUMN_USERNAME, 'dir' => 'asc'],

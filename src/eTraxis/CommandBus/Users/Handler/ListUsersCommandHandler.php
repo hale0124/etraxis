@@ -73,15 +73,15 @@ class ListUsersCommandHandler
         if ($command->search) {
 
             $conditions = [
-                'u.username LIKE :search',
-                'u.fullname LIKE :search',
-                'u.email LIKE :search',
-                'u.description LIKE :search',
+                'LOWER(u.username) LIKE :search',
+                'LOWER(u.fullname) LIKE :search',
+                'LOWER(u.email) LIKE :search',
+                'LOWER(u.description) LIKE :search',
             ];
 
             $query
                 ->where('(' . implode(' OR ', $conditions) . ')')
-                ->setParameter('search', "%{$command->search}%")
+                ->setParameter('search', mb_strtolower("%{$command->search}%"))
             ;
         }
 
@@ -92,13 +92,15 @@ class ListUsersCommandHandler
                 continue;
             }
 
+            $value = mb_strtolower($column['search']['value']);
+
             switch ($column['data']) {
 
                 case self::COLUMN_USERNAME:
 
                     $query
-                        ->andWhere('u.username LIKE :username')
-                        ->setParameter('username', "%{$column['search']['value']}%")
+                        ->andWhere('LOWER(u.username) LIKE :username')
+                        ->setParameter('username', "%{$value}%")
                     ;
 
                     break;
@@ -106,8 +108,8 @@ class ListUsersCommandHandler
                 case self::COLUMN_FULLNAME:
 
                     $query
-                        ->andWhere('u.fullname LIKE :fullname')
-                        ->setParameter('fullname', "%{$column['search']['value']}%")
+                        ->andWhere('LOWER(u.fullname) LIKE :fullname')
+                        ->setParameter('fullname', "%{$value}%")
                     ;
 
                     break;
@@ -115,18 +117,18 @@ class ListUsersCommandHandler
                 case self::COLUMN_EMAIL:
 
                     $query
-                        ->andWhere('u.email LIKE :email')
-                        ->setParameter('email', "%{$column['search']['value']}%")
+                        ->andWhere('LOWER(u.email) LIKE :email')
+                        ->setParameter('email', "%{$value}%")
                     ;
 
                     break;
 
                 case self::COLUMN_PERMISSIONS:
 
-                    if ($column['search']['value'] == 'admin') {
+                    if ($value == 'admin') {
                         $query->andWhere('u.isAdmin <> 0');
                     }
-                    elseif ($column['search']['value'] == 'user') {
+                    elseif ($value == 'user') {
                         $query->andWhere('u.isAdmin = 0');
                     }
 
@@ -134,10 +136,10 @@ class ListUsersCommandHandler
 
                 case self::COLUMN_AUTHENTICATION:
 
-                    if ($column['search']['value'] == 'etraxis') {
+                    if ($value == 'etraxis') {
                         $query->andWhere('u.isLdap = 0');
                     }
-                    elseif ($column['search']['value'] == 'ldap') {
+                    elseif ($value == 'ldap') {
                         $query->andWhere('u.isLdap <> 0');
                     }
 
@@ -146,8 +148,8 @@ class ListUsersCommandHandler
                 case self::COLUMN_DESCRIPTION:
 
                     $query
-                        ->andWhere('u.description LIKE :description')
-                        ->setParameter('description', "%{$column['search']['value']}%")
+                        ->andWhere('LOWER(u.description) LIKE :description')
+                        ->setParameter('description', "%{$value}%")
                     ;
 
                     break;
