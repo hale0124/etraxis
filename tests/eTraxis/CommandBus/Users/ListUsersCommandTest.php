@@ -72,6 +72,267 @@ class ListUsersCommandTest extends BaseTestCase
         $this->assertEquals($expected, count($result['users']));
     }
 
+    public function testFilterByUsername()
+    {
+        $expected = [
+            'bender',
+            'hermes',
+            'hubert',
+            'zoidberg',
+        ];
+
+        $command = new ListUsersCommand([
+            'start'   => 0,
+            'length'  => -1,
+            'search'  => null,
+            'columns' => [
+                ['data' => Handler\ListUsersCommandHandler::COLUMN_USERNAME, 'search' => ['value' => 'eR']],
+            ],
+            'order'   => [
+                ['column' => Handler\ListUsersCommandHandler::COLUMN_USERNAME, 'dir' => 'asc'],
+            ],
+        ]);
+
+        $result = $this->command_bus->handle($command);
+
+        $actual = [];
+
+        foreach ($result['users'] as $user) {
+            $actual[] = $user[Handler\ListUsersCommandHandler::COLUMN_USERNAME];
+        }
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testFilterByFullname()
+    {
+        $expected = [
+            'amy',
+            'veins',
+            'zoidberg',
+        ];
+
+        $command = new ListUsersCommand([
+            'start'   => 0,
+            'length'  => -1,
+            'search'  => null,
+            'columns' => [
+                ['data' => Handler\ListUsersCommandHandler::COLUMN_FULLNAME, 'search' => ['value' => 'dr.']],
+            ],
+            'order'   => [
+                ['column' => Handler\ListUsersCommandHandler::COLUMN_USERNAME, 'dir' => 'asc'],
+            ],
+        ]);
+
+        $result = $this->command_bus->handle($command);
+
+        $actual = [];
+
+        foreach ($result['users'] as $user) {
+            $actual[] = $user[Handler\ListUsersCommandHandler::COLUMN_USERNAME];
+        }
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testFilterByEmail()
+    {
+        $expected = [
+            'francine',
+            'kif',
+            'veins',
+            'zapp',
+        ];
+
+        $command = new ListUsersCommand([
+            'start'   => 0,
+            'length'  => -1,
+            'search'  => null,
+            'columns' => [
+                ['data' => Handler\ListUsersCommandHandler::COLUMN_EMAIL, 'search' => ['value' => 'NimBUs']],
+            ],
+            'order'   => [
+                ['column' => Handler\ListUsersCommandHandler::COLUMN_USERNAME, 'dir' => 'asc'],
+            ],
+        ]);
+
+        $result = $this->command_bus->handle($command);
+
+        $actual = [];
+
+        foreach ($result['users'] as $user) {
+            $actual[] = $user[Handler\ListUsersCommandHandler::COLUMN_USERNAME];
+        }
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testFilterByPermissionsAdmin()
+    {
+        $expected = [
+            'artem',
+            'hubert',
+        ];
+
+        $command = new ListUsersCommand([
+            'start'   => 0,
+            'length'  => -1,
+            'search'  => null,
+            'columns' => [
+                ['data' => Handler\ListUsersCommandHandler::COLUMN_PERMISSIONS, 'search' => ['value' => 'admin']],
+            ],
+            'order'   => [
+                ['column' => Handler\ListUsersCommandHandler::COLUMN_USERNAME, 'dir' => 'asc'],
+            ],
+        ]);
+
+        $result = $this->command_bus->handle($command);
+
+        $actual = [];
+
+        foreach ($result['users'] as $user) {
+            $actual[] = $user[Handler\ListUsersCommandHandler::COLUMN_USERNAME];
+        }
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testFilterByPermissionsUser()
+    {
+        $expected = 12;
+
+        $command = new ListUsersCommand([
+            'start'   => 0,
+            'length'  => -1,
+            'search'  => null,
+            'columns' => [
+                ['data' => Handler\ListUsersCommandHandler::COLUMN_PERMISSIONS, 'search' => ['value' => 'user']],
+            ],
+            'order'   => [
+                ['column' => Handler\ListUsersCommandHandler::COLUMN_USERNAME, 'dir' => 'asc'],
+            ],
+        ]);
+
+        $result = $this->command_bus->handle($command);
+
+        $this->assertCount($expected, $result['users']);
+    }
+
+    public function testFilterByAuthenticationLdap()
+    {
+        $expected = [
+            'einstein',
+        ];
+
+        $command = new ListUsersCommand([
+            'start'   => 0,
+            'length'  => -1,
+            'search'  => null,
+            'columns' => [
+                ['data' => Handler\ListUsersCommandHandler::COLUMN_AUTHENTICATION, 'search' => ['value' => 'ldap']],
+            ],
+            'order'   => [
+                ['column' => Handler\ListUsersCommandHandler::COLUMN_USERNAME, 'dir' => 'asc'],
+            ],
+        ]);
+
+        $result = $this->command_bus->handle($command);
+
+        $actual = [];
+
+        foreach ($result['users'] as $user) {
+            $actual[] = $user[Handler\ListUsersCommandHandler::COLUMN_USERNAME];
+        }
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testFilterByAuthenticationEtraxis()
+    {
+        $expected = 13;
+
+        $command = new ListUsersCommand([
+            'start'   => 0,
+            'length'  => -1,
+            'search'  => null,
+            'columns' => [
+                ['data' => Handler\ListUsersCommandHandler::COLUMN_AUTHENTICATION, 'search' => ['value' => 'etraxis']],
+            ],
+            'order'   => [
+                ['column' => Handler\ListUsersCommandHandler::COLUMN_USERNAME, 'dir' => 'asc'],
+            ],
+        ]);
+
+        $result = $this->command_bus->handle($command);
+
+        $this->assertCount($expected, $result['users']);
+    }
+
+    public function testFilterByDescription()
+    {
+        $expected = [
+            'scruffy',
+            'veins',
+            'zoidberg',
+        ];
+
+        $command = new ListUsersCommand([
+            'start'   => 0,
+            'length'  => -1,
+            'search'  => null,
+            'columns' => [
+                ['data' => Handler\ListUsersCommandHandler::COLUMN_DESCRIPTION, 'search' => ['value' => 'tOR']],
+            ],
+            'order'   => [
+                ['column' => Handler\ListUsersCommandHandler::COLUMN_USERNAME, 'dir' => 'asc'],
+            ],
+        ]);
+
+        $result = $this->command_bus->handle($command);
+
+        $actual = [];
+
+        foreach ($result['users'] as $user) {
+            $actual[] = $user[Handler\ListUsersCommandHandler::COLUMN_USERNAME];
+        }
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testCombinedFilter()
+    {
+        $expected = [
+            'bender',
+            'hermes',
+            'hubert',
+            'zoidberg',
+        ];
+
+        $command = new ListUsersCommand([
+            'start'   => 0,
+            'length'  => -1,
+            'search'  => null,
+            'columns' => [
+                ['data' => Handler\ListUsersCommandHandler::COLUMN_USERNAME, 'search' => ['value' => '']],
+                ['data' => Handler\ListUsersCommandHandler::COLUMN_FULLNAME, 'search' => ['value' => 'eR']],
+                ['data' => Handler\ListUsersCommandHandler::COLUMN_EMAIL,    'search' => ['value' => 'plANeTexprESS']],
+            ],
+            'order'   => [
+                ['column' => Handler\ListUsersCommandHandler::COLUMN_USERNAME, 'dir' => 'asc'],
+            ],
+        ]);
+
+        $result = $this->command_bus->handle($command);
+
+        $actual = [];
+
+        foreach ($result['users'] as $user) {
+            $actual[] = $user[Handler\ListUsersCommandHandler::COLUMN_USERNAME];
+        }
+
+        $this->assertEquals($expected, $actual);
+    }
+
     public function testOrder()
     {
         $expected = [
@@ -96,17 +357,19 @@ class ListUsersCommandTest extends BaseTestCase
             'length' => -1,
             'search' => null,
             'order'  => [
-                ['column' => 5, 'dir' => 'desc'],
-                ['column' => 2, 'dir' => 'asc'],
+                ['column' => Handler\ListUsersCommandHandler::COLUMN_DESCRIPTION, 'dir' => 'desc'],
+                ['column' => Handler\ListUsersCommandHandler::COLUMN_FULLNAME,    'dir' => 'asc'],
             ],
         ]);
 
         $result = $this->command_bus->handle($command);
 
-        $this->assertEquals(count($expected), count($result['users']));
+        $actual = [];
 
-        foreach ($expected as $index => $username) {
-            $this->assertEquals($username, $result['users'][$index][1]);
+        foreach ($result['users'] as $user) {
+            $actual[] = $user[Handler\ListUsersCommandHandler::COLUMN_USERNAME];
         }
+
+        $this->assertEquals($expected, $actual);
     }
 }

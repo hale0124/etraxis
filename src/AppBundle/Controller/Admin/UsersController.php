@@ -66,10 +66,11 @@ class UsersController extends Controller
             $search = $request->get('search', ['value' => null]);
 
             $command = new Users\ListUsersCommand([
-                'start'  => $request->get('start', 0),
-                'length' => $request->get('length', -1),
-                'search' => $search['value'],
-                'order'  => $request->get('order', []),
+                'start'   => $request->get('start', 0),
+                'length'  => $request->get('length', -1),
+                'search'  => $search['value'],
+                'columns' => $request->get('columns', []),
+                'order'   => $request->get('order', []),
             ]);
 
             $result = $this->getCommandBus()->handle($command);

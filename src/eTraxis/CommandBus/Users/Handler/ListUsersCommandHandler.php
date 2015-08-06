@@ -22,6 +22,14 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class ListUsersCommandHandler
 {
+    const COLUMN_ID             = 0;
+    const COLUMN_USERNAME       = 1;
+    const COLUMN_FULLNAME       = 2;
+    const COLUMN_EMAIL          = 3;
+    const COLUMN_PERMISSIONS    = 4;
+    const COLUMN_AUTHENTICATION = 5;
+    const COLUMN_DESCRIPTION    = 6;
+
     protected $translator;
     protected $doctrine;
 
@@ -64,25 +72,99 @@ class ListUsersCommandHandler
         // Search.
         if ($command->search) {
 
+            $conditions = [
+                'u.username LIKE :search',
+                'u.fullname LIKE :search',
+                'u.email LIKE :search',
+                'u.description LIKE :search',
+            ];
+
             $query
-                ->where('u.username LIKE :search')
-                ->orWhere('u.fullname LIKE :search')
-                ->orWhere('u.email LIKE :search')
-                ->orWhere('u.description LIKE :search')
+                ->where('(' . implode(' OR ', $conditions) . ')')
                 ->setParameter('search', "%{$command->search}%")
             ;
+        }
+
+        // Filter by columns.
+        foreach ($command->columns as $column) {
+
+            if (!$column['search']['value']) {
+                continue;
+            }
+
+            switch ($column['data']) {
+
+                case self::COLUMN_USERNAME:
+
+                    $query
+                        ->andWhere('u.username LIKE :username')
+                        ->setParameter('username', "%{$column['search']['value']}%")
+                    ;
+
+                    break;
+
+                case self::COLUMN_FULLNAME:
+
+                    $query
+                        ->andWhere('u.fullname LIKE :fullname')
+                        ->setParameter('fullname', "%{$column['search']['value']}%")
+                    ;
+
+                    break;
+
+                case self::COLUMN_EMAIL:
+
+                    $query
+                        ->andWhere('u.email LIKE :email')
+                        ->setParameter('email', "%{$column['search']['value']}%")
+                    ;
+
+                    break;
+
+                case self::COLUMN_PERMISSIONS:
+
+                    if ($column['search']['value'] == 'admin') {
+                        $query->andWhere('u.isAdmin <> 0');
+                    }
+                    elseif ($column['search']['value'] == 'user') {
+                        $query->andWhere('u.isAdmin = 0');
+                    }
+
+                    break;
+
+                case self::COLUMN_AUTHENTICATION:
+
+                    if ($column['search']['value'] == 'etraxis') {
+                        $query->andWhere('u.isLdap = 0');
+                    }
+                    elseif ($column['search']['value'] == 'ldap') {
+                        $query->andWhere('u.isLdap <> 0');
+                    }
+
+                    break;
+
+                case self::COLUMN_DESCRIPTION:
+
+                    $query
+                        ->andWhere('u.description LIKE :description')
+                        ->setParameter('description', "%{$column['search']['value']}%")
+                    ;
+
+                    break;
+            }
         }
 
         // Order.
         foreach ($command->order as $order) {
 
             $map = [
-                0 => 'u.id',
-                1 => 'u.username',
-                2 => 'u.fullname',
-                3 => 'u.email',
-                4 => 'u.isAdmin',
-                5 => 'u.description',
+                self::COLUMN_ID             => 'u.id',
+                self::COLUMN_USERNAME       => 'u.username',
+                self::COLUMN_FULLNAME       => 'u.fullname',
+                self::COLUMN_EMAIL          => 'u.email',
+                self::COLUMN_PERMISSIONS    => 'u.isAdmin',
+                self::COLUMN_AUTHENTICATION => 'u.isLdap',
+                self::COLUMN_DESCRIPTION    => 'u.description',
             ];
 
             $query->addOrderBy($map[$order['column']], $order['dir']);
