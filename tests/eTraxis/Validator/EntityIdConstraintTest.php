@@ -15,60 +15,50 @@ namespace eTraxis\Validator;
 
 use eTraxis\Tests\BaseTestCase;
 
-class RequiredKeyStub
+class RequiredIdStub
 {
     /**
-     * @eTraxis\Validator\ForeignKeyConstraint(entity = "eTraxis:User")
+     * @eTraxis\Validator\EntityIdConstraint()
      */
     public $id = null;
 }
 
-class OptionalKeyStub
+class OptionalIdStub
 {
     /**
-     * @eTraxis\Validator\ForeignKeyConstraint(entity = "eTraxis:User", required = false)
+     * @eTraxis\Validator\EntityIdConstraint(required = false)
      */
     public $id = null;
 }
 
-class ForeignKeyConstraintTest extends BaseTestCase
+class EntityIdConstraintTest extends BaseTestCase
 {
     public function testOptionalEmpty()
     {
-        $object = new OptionalKeyStub();
+        $object = new OptionalIdStub();
 
         $this->assertCount(0, $this->validator->validate($object));
     }
 
     public function testRequiredEmpty()
     {
-        $object = new RequiredKeyStub();
+        $object = new RequiredIdStub();
 
         $this->assertNotCount(0, $this->validator->validate($object));
     }
 
     public function testInvalid()
     {
-        $object = new RequiredKeyStub();
+        $object = new RequiredIdStub();
         $object->id = 'test';
-
-        $this->assertNotCount(0, $this->validator->validate($object));
-    }
-
-    public function testUnknown()
-    {
-        $object = new RequiredKeyStub();
-        $object->id = PHP_INT_MAX;
 
         $this->assertNotCount(0, $this->validator->validate($object));
     }
 
     public function testSuccess()
     {
-        $user = $this->findUser('artem');
-
-        $object = new RequiredKeyStub();
-        $object->id = $user->getId();
+        $object = new RequiredIdStub();
+        $object->id = rand(1, PHP_INT_MAX);
 
         $this->assertCount(0, $this->validator->validate($object));
     }
