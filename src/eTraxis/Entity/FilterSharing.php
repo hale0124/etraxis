@@ -58,6 +58,20 @@ class FilterSharing
     private $group;
 
     /**
+     * Standard setter.
+     *
+     * @param   int $filterId
+     *
+     * @return  self
+     */
+    public function setFilterId($filterId)
+    {
+        $this->filterId = $filterId;
+
+        return $this;
+    }
+
+    /**
      * Standard getter.
      *
      * @return  int
@@ -65,6 +79,20 @@ class FilterSharing
     public function getFilterId()
     {
         return $this->filterId;
+    }
+
+    /**
+     * Standard setter.
+     *
+     * @param   int $groupId
+     *
+     * @return  self
+     */
+    public function setGroupId($groupId)
+    {
+        $this->groupId = $groupId;
+
+        return $this;
     }
 
     /**

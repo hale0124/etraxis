@@ -30,12 +30,16 @@ class EventTest extends \PHPUnit_Framework_TestCase
 
     public function testIssueId()
     {
-        $this->assertNull($this->object->getIssueId());
+        $expected = rand(1, PHP_INT_MAX);
+        $this->object->setIssueId($expected);
+        $this->assertEquals($expected, $this->object->getIssueId());
     }
 
     public function testUserId()
     {
-        $this->assertNull($this->object->getUserId());
+        $expected = rand(1, PHP_INT_MAX);
+        $this->object->setUserId($expected);
+        $this->assertEquals($expected, $this->object->getUserId());
     }
 
     public function testType()

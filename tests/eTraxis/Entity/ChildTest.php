@@ -25,12 +25,16 @@ class ChildTest extends \PHPUnit_Framework_TestCase
 
     public function testParentId()
     {
-        $this->assertNull($this->object->getParentId());
+        $expected = rand(1, PHP_INT_MAX);
+        $this->object->setParentId($expected);
+        $this->assertEquals($expected, $this->object->getParentId());
     }
 
     public function testChildId()
     {
-        $this->assertNull($this->object->getChildId());
+        $expected = rand(1, PHP_INT_MAX);
+        $this->object->setChildId($expected);
+        $this->assertEquals($expected, $this->object->getChildId());
     }
 
     public function testIsDependency()

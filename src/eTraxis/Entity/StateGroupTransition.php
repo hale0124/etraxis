@@ -72,6 +72,20 @@ class StateGroupTransition
     private $group;
 
     /**
+     * Standard setter.
+     *
+     * @param   int $fromStateId
+     *
+     * @return  self
+     */
+    public function setFromStateId($fromStateId)
+    {
+        $this->fromStateId = $fromStateId;
+
+        return $this;
+    }
+
+    /**
      * Standard getter.
      *
      * @return  int
@@ -82,6 +96,20 @@ class StateGroupTransition
     }
 
     /**
+     * Standard setter.
+     *
+     * @param   int $toStateId
+     *
+     * @return  self
+     */
+    public function setToStateId($toStateId)
+    {
+        $this->toStateId = $toStateId;
+
+        return $this;
+    }
+
+    /**
      * Standard getter.
      *
      * @return  int
@@ -89,6 +117,20 @@ class StateGroupTransition
     public function getToStateId()
     {
         return $this->toStateId;
+    }
+
+    /**
+     * Standard setter.
+     *
+     * @param   int $groupId
+     *
+     * @return  self
+     */
+    public function setGroupId($groupId)
+    {
+        $this->groupId = $groupId;
+
+        return $this;
     }
 
     /**

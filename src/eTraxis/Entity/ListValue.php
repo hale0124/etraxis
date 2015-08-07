@@ -61,6 +61,20 @@ class ListValue
     private $field;
 
     /**
+     * Standard setter.
+     *
+     * @param   int $fieldId
+     *
+     * @return  self
+     */
+    public function setFieldId($fieldId)
+    {
+        $this->fieldId = $fieldId;
+
+        return $this;
+    }
+
+    /**
      * Standard getter.
      *
      * @return  int

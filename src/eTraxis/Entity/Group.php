@@ -95,6 +95,20 @@ class Group
     }
 
     /**
+     * Standard setter.
+     *
+     * @param   int $projectId
+     *
+     * @return  self
+     */
+    public function setProjectId($projectId)
+    {
+        $this->projectId = $projectId;
+
+        return $this;
+    }
+
+    /**
      * Standard getter.
      *
      * @return  int

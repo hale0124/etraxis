@@ -74,6 +74,20 @@ class FilterRole
     private $user;
 
     /**
+     * Standard setter.
+     *
+     * @param   int $filterId
+     *
+     * @return  self
+     */
+    public function setFilterId($filterId)
+    {
+        $this->filterId = $filterId;
+
+        return $this;
+    }
+
+    /**
      * Standard getter.
      *
      * @return  int
@@ -105,6 +119,20 @@ class FilterRole
     public function getFlag()
     {
         return $this->flag;
+    }
+
+    /**
+     * Standard setter.
+     *
+     * @param   int $userId
+     *
+     * @return  self
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+
+        return $this;
     }
 
     /**

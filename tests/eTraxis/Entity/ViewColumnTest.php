@@ -30,7 +30,9 @@ class ViewColumnTest extends \PHPUnit_Framework_TestCase
 
     public function testViewId()
     {
-        $this->assertNull($this->object->getViewId());
+        $expected = rand(1, PHP_INT_MAX);
+        $this->object->setViewId($expected);
+        $this->assertEquals($expected, $this->object->getViewId());
     }
 
     public function testStateName()

@@ -25,12 +25,16 @@ class FieldGroupAccessTest extends \PHPUnit_Framework_TestCase
 
     public function testFieldId()
     {
-        $this->assertNull($this->object->getFieldId());
+        $expected = rand(1, PHP_INT_MAX);
+        $this->object->setFieldId($expected);
+        $this->assertEquals($expected, $this->object->getFieldId());
     }
 
     public function testGroupId()
     {
-        $this->assertNull($this->object->getGroupId());
+        $expected = rand(1, PHP_INT_MAX);
+        $this->object->setGroupId($expected);
+        $this->assertEquals($expected, $this->object->getGroupId());
     }
 
     public function testAccess()

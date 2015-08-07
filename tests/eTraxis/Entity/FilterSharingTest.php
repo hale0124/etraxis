@@ -25,12 +25,16 @@ class FilterSharingTest extends \PHPUnit_Framework_TestCase
 
     public function testFilterId()
     {
-        $this->assertNull($this->object->getFilterId());
+        $expected = rand(1, PHP_INT_MAX);
+        $this->object->setFilterId($expected);
+        $this->assertEquals($expected, $this->object->getFilterId());
     }
 
     public function testGroupId()
     {
-        $this->assertNull($this->object->getGroupId());
+        $expected = rand(1, PHP_INT_MAX);
+        $this->object->setGroupId($expected);
+        $this->assertEquals($expected, $this->object->getGroupId());
     }
 
     public function testFilter()

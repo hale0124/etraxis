@@ -27,12 +27,16 @@ class StateRoleTransitionTest extends \PHPUnit_Framework_TestCase
 
     public function testFromStateId()
     {
-        $this->assertNull($this->object->getFromStateId());
+        $expected = rand(1, PHP_INT_MAX);
+        $this->object->setFromStateId($expected);
+        $this->assertEquals($expected, $this->object->getFromStateId());
     }
 
     public function testToStateId()
     {
-        $this->assertNull($this->object->getToStateId());
+        $expected = rand(1, PHP_INT_MAX);
+        $this->object->setToStateId($expected);
+        $this->assertEquals($expected, $this->object->getToStateId());
     }
 
     public function testRole()

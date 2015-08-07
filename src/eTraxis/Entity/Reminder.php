@@ -112,6 +112,20 @@ class Reminder
     }
 
     /**
+     * Standard setter.
+     *
+     * @param   int $userId
+     *
+     * @return  self
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+
+        return $this;
+    }
+
+    /**
      * Standard getter.
      *
      * @return  int
@@ -170,6 +184,20 @@ class Reminder
     }
 
     /**
+     * Standard setter.
+     *
+     * @param   int $stateId
+     *
+     * @return  self
+     */
+    public function setStateId($stateId)
+    {
+        $this->stateId = $stateId;
+
+        return $this;
+    }
+
+    /**
      * Standard getter.
      *
      * @return  int
@@ -177,6 +205,20 @@ class Reminder
     public function getStateId()
     {
         return $this->stateId;
+    }
+
+    /**
+     * Standard setter.
+     *
+     * @param   int $groupId
+     *
+     * @return  self
+     */
+    public function setGroupId($groupId)
+    {
+        $this->groupId = $groupId;
+
+        return $this;
     }
 
     /**

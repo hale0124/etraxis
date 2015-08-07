@@ -30,12 +30,16 @@ class FieldTest extends \PHPUnit_Framework_TestCase
 
     public function testTemplateId()
     {
-        $this->assertNull($this->object->getTemplateId());
+        $expected = rand(1, PHP_INT_MAX);
+        $this->object->setTemplateId($expected);
+        $this->assertEquals($expected, $this->object->getTemplateId());
     }
 
     public function testStateId()
     {
-        $this->assertNull($this->object->getStateId());
+        $expected = rand(1, PHP_INT_MAX);
+        $this->object->setStateId($expected);
+        $this->assertEquals($expected, $this->object->getStateId());
     }
 
     public function testName()

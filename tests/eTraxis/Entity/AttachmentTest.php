@@ -30,7 +30,9 @@ class AttachmentTest extends \PHPUnit_Framework_TestCase
 
     public function testEventId()
     {
-        $this->assertNull($this->object->getEventId());
+        $expected = rand(1, PHP_INT_MAX);
+        $this->object->setEventId($expected);
+        $this->assertEquals($expected, $this->object->getEventId());
     }
 
     public function testName()

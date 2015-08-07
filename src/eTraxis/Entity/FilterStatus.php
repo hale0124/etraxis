@@ -58,6 +58,20 @@ class FilterStatus
     private $user;
 
     /**
+     * Standard setter.
+     *
+     * @param   int $filterId
+     *
+     * @return  self
+     */
+    public function setFilterId($filterId)
+    {
+        $this->filterId = $filterId;
+
+        return $this;
+    }
+
+    /**
      * Standard getter.
      *
      * @return  int
@@ -65,6 +79,20 @@ class FilterStatus
     public function getFilterId()
     {
         return $this->filterId;
+    }
+
+    /**
+     * Standard setter.
+     *
+     * @param   int $userId
+     *
+     * @return  self
+     */
+    public function setUserId($userId)
+    {
+        $this->userId = $userId;
+
+        return $this;
     }
 
     /**

@@ -92,6 +92,20 @@ class FilterField
     private $field;
 
     /**
+     * Standard setter.
+     *
+     * @param   int $filterId
+     *
+     * @return  self
+     */
+    public function setFilterId($filterId)
+    {
+        $this->filterId = $filterId;
+
+        return $this;
+    }
+
+    /**
      * Standard getter.
      *
      * @return  int
@@ -99,6 +113,20 @@ class FilterField
     public function getFilterId()
     {
         return $this->filterId;
+    }
+
+    /**
+     * Standard setter.
+     *
+     * @param   int $fieldId
+     *
+     * @return  self
+     */
+    public function setFieldId($fieldId)
+    {
+        $this->fieldId = $fieldId;
+
+        return $this;
     }
 
     /**

@@ -37,17 +37,23 @@ class IssueTest extends \PHPUnit_Framework_TestCase
 
     public function testStateId()
     {
-        $this->assertNull($this->object->getStateId());
+        $expected = rand(1, PHP_INT_MAX);
+        $this->object->setStateId($expected);
+        $this->assertEquals($expected, $this->object->getStateId());
     }
 
     public function testAuthorId()
     {
-        $this->assertNull($this->object->getAuthorId());
+        $expected = rand(1, PHP_INT_MAX);
+        $this->object->setAuthorId($expected);
+        $this->assertEquals($expected, $this->object->getAuthorId());
     }
 
     public function testResponsibleId()
     {
-        $this->assertNull($this->object->getResponsibleId());
+        $expected = rand(1, PHP_INT_MAX);
+        $this->object->setResponsibleId($expected);
+        $this->assertEquals($expected, $this->object->getResponsibleId());
     }
 
     public function testCreatedAt()

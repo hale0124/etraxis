@@ -25,12 +25,16 @@ class FilterTransitionTest extends \PHPUnit_Framework_TestCase
 
     public function testFilterId()
     {
-        $this->assertNull($this->object->getFilterId());
+        $expected = rand(1, PHP_INT_MAX);
+        $this->object->setFilterId($expected);
+        $this->assertEquals($expected, $this->object->getFilterId());
     }
 
     public function testStateId()
     {
-        $this->assertNull($this->object->getStateId());
+        $expected = rand(1, PHP_INT_MAX);
+        $this->object->setStateId($expected);
+        $this->assertEquals($expected, $this->object->getStateId());
     }
 
     public function testDate1()
