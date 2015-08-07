@@ -28,7 +28,7 @@ class SetPasswordCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\GreaterThan(value = "0")
+     * @eTraxis\Validator\EntityIdConstraint()
      */
     public $id;
 

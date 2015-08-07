@@ -30,8 +30,8 @@ class EnableUsersCommand
      * @Assert\Type(type = "array")
      * @Assert\Count(min = "1", max = "100")
      * @Assert\All({
-     *     @Assert\Type(type = "numeric"),
-     *     @Assert\GreaterThan(value = "0")
+     *     @Assert\NotBlank(),
+     *     @eTraxis\Validator\EntityIdConstraint()
      * })
      */
     public $ids;

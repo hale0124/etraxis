@@ -28,7 +28,7 @@ class RemoveGroupsCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\GreaterThan(value = "0")
+     * @eTraxis\Validator\EntityIdConstraint()
      */
     public $id;
 
@@ -37,8 +37,8 @@ class RemoveGroupsCommand
      * @Assert\Type(type = "array")
      * @Assert\Count(min = "1", max = "100")
      * @Assert\All({
-     *     @Assert\Type(type = "numeric"),
-     *     @Assert\GreaterThan(value = "0")
+     *     @Assert\NotBlank(),
+     *     @eTraxis\Validator\EntityIdConstraint()
      * })
      */
     public $groups;
