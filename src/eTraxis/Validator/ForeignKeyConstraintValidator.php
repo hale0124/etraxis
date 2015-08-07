@@ -43,8 +43,6 @@ class ForeignKeyConstraintValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint)
     {
-        /** @var ForeignKeyConstraint $constraint */
-
         // Empty value is valid if not required.
         if (strlen($value) == 0) {
             if ($constraint->required) {

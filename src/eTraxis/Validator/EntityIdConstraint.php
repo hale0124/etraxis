@@ -24,7 +24,4 @@ class EntityIdConstraint extends Constraint
 {
     /** @var string Error message. */
     public $message = 'Invalid ID.';
-
-    /** @var bool Whether to accept NULL as ID (FALSE to accept). */
-    public $required = true;
 }

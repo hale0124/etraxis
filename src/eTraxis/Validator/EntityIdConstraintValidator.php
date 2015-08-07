@@ -26,16 +26,8 @@ class EntityIdConstraintValidator extends ConstraintValidator
      */
     public function validate($value, Constraint $constraint)
     {
-        /** @var EntityIdConstraint $constraint */
-
-        // Empty value is valid if not required.
-        if (strlen($value) == 0) {
-            if ($constraint->required) {
-                $this->context->addViolation($constraint->message);
-            }
-        }
-        // Non-empty value may contain digits only.
-        elseif (!ctype_digit($value)) {
+        // Empty value is valid. Non-empty value may contain digits only.
+        if (strlen($value) != 0 && !ctype_digit("{$value}")) {
             $this->context->addViolation($constraint->message);
         }
     }

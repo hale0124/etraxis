@@ -49,7 +49,7 @@ class ForeignKeyConstraintTest extends BaseTestCase
 
     public function testInvalid()
     {
-        $object = new RequiredKeyStub();
+        $object     = new RequiredKeyStub();
         $object->id = 'test';
 
         $this->assertNotCount(0, $this->validator->validate($object));
@@ -57,7 +57,7 @@ class ForeignKeyConstraintTest extends BaseTestCase
 
     public function testUnknown()
     {
-        $object = new RequiredKeyStub();
+        $object     = new RequiredKeyStub();
         $object->id = PHP_INT_MAX;
 
         $this->assertNotCount(0, $this->validator->validate($object));
@@ -67,7 +67,7 @@ class ForeignKeyConstraintTest extends BaseTestCase
     {
         $user = $this->findUser('artem');
 
-        $object = new RequiredKeyStub();
+        $object     = new RequiredKeyStub();
         $object->id = $user->getId();
 
         $this->assertCount(0, $this->validator->validate($object));

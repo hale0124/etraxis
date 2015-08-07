@@ -15,7 +15,7 @@ namespace eTraxis\Validator;
 
 use eTraxis\Tests\BaseTestCase;
 
-class RequiredIdStub
+class EntityIdStub
 {
     /**
      * @eTraxis\Validator\EntityIdConstraint()
@@ -23,33 +23,18 @@ class RequiredIdStub
     public $id = null;
 }
 
-class OptionalIdStub
-{
-    /**
-     * @eTraxis\Validator\EntityIdConstraint(required = false)
-     */
-    public $id = null;
-}
-
 class EntityIdConstraintTest extends BaseTestCase
 {
-    public function testOptionalEmpty()
+    public function testEmpty()
     {
-        $object = new OptionalIdStub();
+        $object = new EntityIdStub();
 
         $this->assertCount(0, $this->validator->validate($object));
     }
 
-    public function testRequiredEmpty()
-    {
-        $object = new RequiredIdStub();
-
-        $this->assertNotCount(0, $this->validator->validate($object));
-    }
-
     public function testInvalid()
     {
-        $object = new RequiredIdStub();
+        $object     = new EntityIdStub();
         $object->id = 'test';
 
         $this->assertNotCount(0, $this->validator->validate($object));
@@ -57,7 +42,7 @@ class EntityIdConstraintTest extends BaseTestCase
 
     public function testSuccess()
     {
-        $object = new RequiredIdStub();
+        $object     = new EntityIdStub();
         $object->id = rand(1, PHP_INT_MAX);
 
         $this->assertCount(0, $this->validator->validate($object));
