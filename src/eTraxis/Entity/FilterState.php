@@ -45,7 +45,7 @@ class FilterState
      * @var Filter Filter.
      *
      * @ORM\ManyToOne(targetEntity="Filter")
-     * @ORM\JoinColumn(name="filter_id", referencedColumnName="filter_id")
+     * @ORM\JoinColumn(name="filter_id", referencedColumnName="filter_id", onDelete="CASCADE")
      */
     private $filter;
 
@@ -53,7 +53,7 @@ class FilterState
      * @var State State.
      *
      * @ORM\ManyToOne(targetEntity="State")
-     * @ORM\JoinColumn(name="state_id", referencedColumnName="state_id")
+     * @ORM\JoinColumn(name="state_id", referencedColumnName="state_id", onDelete="CASCADE")
      */
     private $state;
 

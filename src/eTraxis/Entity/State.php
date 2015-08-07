@@ -93,7 +93,7 @@ class State
      * @var Template Template of the state.
      *
      * @ORM\ManyToOne(targetEntity="Template", inversedBy="states")
-     * @ORM\JoinColumn(name="template_id", referencedColumnName="template_id")
+     * @ORM\JoinColumn(name="template_id", referencedColumnName="template_id", onDelete="CASCADE")
      */
     private $template;
 
@@ -101,7 +101,7 @@ class State
      * @var State Next state by default.
      *
      * @ORM\ManyToOne(targetEntity="State")
-     * @ORM\JoinColumn(name="next_state_id", referencedColumnName="state_id")
+     * @ORM\JoinColumn(name="next_state_id", referencedColumnName="state_id", onDelete="CASCADE")
      */
     private $next_state;
 

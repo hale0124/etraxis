@@ -105,7 +105,7 @@ class Filter
      * @var User Owner of the filter.
      *
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="account_id", referencedColumnName="account_id")
+     * @ORM\JoinColumn(name="account_id", referencedColumnName="account_id", onDelete="CASCADE")
      */
     private $user;
 

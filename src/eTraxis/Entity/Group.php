@@ -61,7 +61,7 @@ class Group
      * @var Project Project of the group (NULL if the group is global).
      *
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="groups")
-     * @ORM\JoinColumn(name="project_id", referencedColumnName="project_id")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="project_id", onDelete="CASCADE")
      */
     private $project;
 

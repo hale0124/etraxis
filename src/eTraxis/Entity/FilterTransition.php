@@ -59,7 +59,7 @@ class FilterTransition
      * @var Filter Filter.
      *
      * @ORM\ManyToOne(targetEntity="Filter")
-     * @ORM\JoinColumn(name="filter_id", referencedColumnName="filter_id")
+     * @ORM\JoinColumn(name="filter_id", referencedColumnName="filter_id", onDelete="CASCADE")
      */
     private $filter;
 
@@ -67,7 +67,7 @@ class FilterTransition
      * @var State State that an issue was moved to.
      *
      * @ORM\ManyToOne(targetEntity="State")
-     * @ORM\JoinColumn(name="state_id", referencedColumnName="state_id")
+     * @ORM\JoinColumn(name="state_id", referencedColumnName="state_id", onDelete="CASCADE")
      */
     private $state;
 

@@ -45,7 +45,7 @@ class ViewFilter
      * @var View View.
      *
      * @ORM\ManyToOne(targetEntity="View")
-     * @ORM\JoinColumn(name="view_id", referencedColumnName="view_id")
+     * @ORM\JoinColumn(name="view_id", referencedColumnName="view_id", onDelete="CASCADE")
      */
     private $view;
 
@@ -53,7 +53,7 @@ class ViewFilter
      * @var Filter Filter which is included in the view.
      *
      * @ORM\ManyToOne(targetEntity="Filter")
-     * @ORM\JoinColumn(name="filter_id", referencedColumnName="filter_id")
+     * @ORM\JoinColumn(name="filter_id", referencedColumnName="filter_id", onDelete="CASCADE")
      */
     private $filter;
 

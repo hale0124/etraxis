@@ -43,7 +43,7 @@ class StateAssignee
      * @var State State where issue can be moved to.
      *
      * @ORM\ManyToOne(targetEntity="State")
-     * @ORM\JoinColumn(name="state_id", referencedColumnName="state_id")
+     * @ORM\JoinColumn(name="state_id", referencedColumnName="state_id", onDelete="CASCADE")
      */
     private $state;
 
@@ -51,7 +51,7 @@ class StateAssignee
      * @var Group Group which members can be assigned on this transition.
      *
      * @ORM\ManyToOne(targetEntity="Group")
-     * @ORM\JoinColumn(name="group_id", referencedColumnName="group_id")
+     * @ORM\JoinColumn(name="group_id", referencedColumnName="group_id", onDelete="CASCADE")
      */
     private $group;
 

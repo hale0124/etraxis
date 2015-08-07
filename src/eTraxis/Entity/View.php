@@ -53,7 +53,7 @@ class View
      * @var User Owner of the view.
      *
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="account_id", referencedColumnName="account_id")
+     * @ORM\JoinColumn(name="account_id", referencedColumnName="account_id", onDelete="CASCADE")
      */
     private $user;
 

@@ -51,7 +51,7 @@ class StateGroupTransition
      * @var State State where issue can be moved from.
      *
      * @ORM\ManyToOne(targetEntity="State")
-     * @ORM\JoinColumn(name="state_id_from", referencedColumnName="state_id")
+     * @ORM\JoinColumn(name="state_id_from", referencedColumnName="state_id", onDelete="CASCADE")
      */
     private $fromState;
 
@@ -59,7 +59,7 @@ class StateGroupTransition
      * @var State State where issue can be moved to.
      *
      * @ORM\ManyToOne(targetEntity="State")
-     * @ORM\JoinColumn(name="state_id_to", referencedColumnName="state_id")
+     * @ORM\JoinColumn(name="state_id_to", referencedColumnName="state_id", onDelete="CASCADE")
      */
     private $toState;
 
@@ -67,7 +67,7 @@ class StateGroupTransition
      * @var Group Group which is allowed to make this transition.
      *
      * @ORM\ManyToOne(targetEntity="Group")
-     * @ORM\JoinColumn(name="group_id", referencedColumnName="group_id")
+     * @ORM\JoinColumn(name="group_id", referencedColumnName="group_id", onDelete="CASCADE")
      */
     private $group;
 

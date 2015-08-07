@@ -138,7 +138,7 @@ class Template
      * @var Project Project of the template.
      *
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="templates")
-     * @ORM\JoinColumn(name="project_id", referencedColumnName="project_id")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="project_id", onDelete="CASCADE")
      */
     private $project;
 

@@ -103,7 +103,7 @@ class ViewColumn
      * @var View View.
      *
      * @ORM\ManyToOne(targetEntity="View")
-     * @ORM\JoinColumn(name="view_id", referencedColumnName="view_id")
+     * @ORM\JoinColumn(name="view_id", referencedColumnName="view_id", onDelete="CASCADE")
      */
     private $view;
 

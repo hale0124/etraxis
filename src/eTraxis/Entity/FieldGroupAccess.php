@@ -51,7 +51,7 @@ class FieldGroupAccess
      * @var Field Field.
      *
      * @ORM\ManyToOne(targetEntity="Field")
-     * @ORM\JoinColumn(name="field_id", referencedColumnName="field_id")
+     * @ORM\JoinColumn(name="field_id", referencedColumnName="field_id", onDelete="CASCADE")
      */
     private $field;
 
@@ -59,7 +59,7 @@ class FieldGroupAccess
      * @var Group Group.
      *
      * @ORM\ManyToOne(targetEntity="Group")
-     * @ORM\JoinColumn(name="group_id", referencedColumnName="group_id")
+     * @ORM\JoinColumn(name="group_id", referencedColumnName="group_id", onDelete="CASCADE")
      */
     private $group;
 

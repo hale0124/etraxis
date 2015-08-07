@@ -79,7 +79,7 @@ class FilterField
      * @var Filter Filter.
      *
      * @ORM\ManyToOne(targetEntity="Filter")
-     * @ORM\JoinColumn(name="filter_id", referencedColumnName="filter_id")
+     * @ORM\JoinColumn(name="filter_id", referencedColumnName="filter_id", onDelete="CASCADE")
      */
     private $filter;
 
@@ -87,7 +87,7 @@ class FilterField
      * @var Field Field which values should be examined.
      *
      * @ORM\ManyToOne(targetEntity="Field")
-     * @ORM\JoinColumn(name="field_id", referencedColumnName="field_id")
+     * @ORM\JoinColumn(name="field_id", referencedColumnName="field_id", onDelete="CASCADE")
      */
     private $field;
 

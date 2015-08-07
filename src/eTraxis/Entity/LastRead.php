@@ -53,7 +53,7 @@ class LastRead
      * @var Issue Issue.
      *
      * @ORM\ManyToOne(targetEntity="Issue")
-     * @ORM\JoinColumn(name="record_id", referencedColumnName="record_id")
+     * @ORM\JoinColumn(name="record_id", referencedColumnName="record_id", onDelete="CASCADE")
      */
     private $issue;
 
@@ -61,7 +61,7 @@ class LastRead
      * @var User User.
      *
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="account_id", referencedColumnName="account_id")
+     * @ORM\JoinColumn(name="account_id", referencedColumnName="account_id", onDelete="CASCADE")
      */
     private $user;
 

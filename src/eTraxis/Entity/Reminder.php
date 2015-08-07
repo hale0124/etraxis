@@ -81,7 +81,7 @@ class Reminder
      * @var User Owner of the reminder.
      *
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="account_id", referencedColumnName="account_id")
+     * @ORM\JoinColumn(name="account_id", referencedColumnName="account_id", onDelete="CASCADE")
      */
     private $user;
 
@@ -89,7 +89,7 @@ class Reminder
      * @var State State of issues to be reminded about.
      *
      * @ORM\ManyToOne(targetEntity="State")
-     * @ORM\JoinColumn(name="state_id", referencedColumnName="state_id")
+     * @ORM\JoinColumn(name="state_id", referencedColumnName="state_id", onDelete="CASCADE")
      */
     private $state;
 
@@ -97,7 +97,7 @@ class Reminder
      * @var Group Group, which should be reminded (ignored if "role" is specified).
      *
      * @ORM\ManyToOne(targetEntity="Group")
-     * @ORM\JoinColumn(name="group_id", referencedColumnName="group_id")
+     * @ORM\JoinColumn(name="group_id", referencedColumnName="group_id", onDelete="CASCADE")
      */
     private $group;
 

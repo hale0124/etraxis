@@ -225,7 +225,7 @@ class Field
      * @var Template Template of the field.
      *
      * @ORM\ManyToOne(targetEntity="Template", inversedBy="fields")
-     * @ORM\JoinColumn(name="template_id", referencedColumnName="template_id")
+     * @ORM\JoinColumn(name="template_id", referencedColumnName="template_id", onDelete="CASCADE")
      */
     private $template;
 
@@ -233,7 +233,7 @@ class Field
      * @var State State of the field (NULL in case of global field).
      *
      * @ORM\ManyToOne(targetEntity="State", inversedBy="fields")
-     * @ORM\JoinColumn(name="state_id", referencedColumnName="state_id")
+     * @ORM\JoinColumn(name="state_id", referencedColumnName="state_id", onDelete="CASCADE")
      */
     private $state;
 

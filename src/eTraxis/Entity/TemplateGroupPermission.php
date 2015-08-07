@@ -50,7 +50,7 @@ class TemplateGroupPermission
      * @var Group Group.
      *
      * @ORM\ManyToOne(targetEntity="Group")
-     * @ORM\JoinColumn(name="group_id", referencedColumnName="group_id")
+     * @ORM\JoinColumn(name="group_id", referencedColumnName="group_id", onDelete="CASCADE")
      */
     private $group;
 
@@ -58,7 +58,7 @@ class TemplateGroupPermission
      * @var Template Template.
      *
      * @ORM\ManyToOne(targetEntity="Template")
-     * @ORM\JoinColumn(name="template_id", referencedColumnName="template_id")
+     * @ORM\JoinColumn(name="template_id", referencedColumnName="template_id", onDelete="CASCADE")
      */
     private $template;
 

@@ -51,7 +51,7 @@ class StateRoleTransition
      * @var State State where issue can be moved from.
      *
      * @ORM\ManyToOne(targetEntity="State")
-     * @ORM\JoinColumn(name="state_id_from", referencedColumnName="state_id")
+     * @ORM\JoinColumn(name="state_id_from", referencedColumnName="state_id", onDelete="CASCADE")
      */
     private $fromState;
 
@@ -59,7 +59,7 @@ class StateRoleTransition
      * @var State State where issue can be moved to.
      *
      * @ORM\ManyToOne(targetEntity="State")
-     * @ORM\JoinColumn(name="state_id_to", referencedColumnName="state_id")
+     * @ORM\JoinColumn(name="state_id_to", referencedColumnName="state_id", onDelete="CASCADE")
      */
     private $toState;
 

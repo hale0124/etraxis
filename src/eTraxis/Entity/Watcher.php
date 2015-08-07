@@ -51,7 +51,7 @@ class Watcher
      * @var Issue Watched issue.
      *
      * @ORM\ManyToOne(targetEntity="Issue", inversedBy="watchers")
-     * @ORM\JoinColumn(name="record_id", referencedColumnName="record_id")
+     * @ORM\JoinColumn(name="record_id", referencedColumnName="record_id", onDelete="CASCADE")
      */
     private $issue;
 
@@ -59,7 +59,7 @@ class Watcher
      * @var User Watcher.
      *
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="account_id", referencedColumnName="account_id")
+     * @ORM\JoinColumn(name="account_id", referencedColumnName="account_id", onDelete="CASCADE")
      */
     private $watcher;
 
@@ -67,7 +67,7 @@ class Watcher
      * @var User Initiator who set this user watch the issue.
      *
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="subscribed_by", referencedColumnName="account_id")
+     * @ORM\JoinColumn(name="subscribed_by", referencedColumnName="account_id", onDelete="CASCADE")
      */
     private $initiator;
 
