@@ -64,20 +64,6 @@ class StateRoleTransition
     private $toState;
 
     /**
-     * Standard setter.
-     *
-     * @param   int $fromStateId
-     *
-     * @return  self
-     */
-    public function setFromStateId($fromStateId)
-    {
-        $this->fromStateId = $fromStateId;
-
-        return $this;
-    }
-
-    /**
      * Standard getter.
      *
      * @return  int
@@ -85,20 +71,6 @@ class StateRoleTransition
     public function getFromStateId()
     {
         return $this->fromStateId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $toStateId
-     *
-     * @return  self
-     */
-    public function setToStateId($toStateId)
-    {
-        $this->toStateId = $toStateId;
-
-        return $this;
     }
 
     /**

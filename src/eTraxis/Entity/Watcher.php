@@ -72,20 +72,6 @@ class Watcher
     private $initiator;
 
     /**
-     * Standard setter.
-     *
-     * @param   int $issueId
-     *
-     * @return  self
-     */
-    public function setIssueId($issueId)
-    {
-        $this->issueId = $issueId;
-
-        return $this;
-    }
-
-    /**
      * Standard getter.
      *
      * @return  int
@@ -96,20 +82,6 @@ class Watcher
     }
 
     /**
-     * Standard setter.
-     *
-     * @param   int $watcherId
-     *
-     * @return  self
-     */
-    public function setWatcherId($watcherId)
-    {
-        $this->watcherId = $watcherId;
-
-        return $this;
-    }
-
-    /**
      * Standard getter.
      *
      * @return  int
@@ -117,20 +89,6 @@ class Watcher
     public function getWatcherId()
     {
         return $this->watcherId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $initiatorId
-     *
-     * @return  self
-     */
-    public function setInitiatorId($initiatorId)
-    {
-        $this->initiatorId = $initiatorId;
-
-        return $this;
     }
 
     /**

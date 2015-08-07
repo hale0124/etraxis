@@ -118,20 +118,6 @@ class ViewColumn
     }
 
     /**
-     * Standard setter.
-     *
-     * @param   int $viewId
-     *
-     * @return  self
-     */
-    public function setViewId($viewId)
-    {
-        $this->viewId = $viewId;
-
-        return $this;
-    }
-
-    /**
      * Standard getter.
      *
      * @return  int

@@ -132,20 +132,6 @@ class Event
     }
 
     /**
-     * Standard setter.
-     *
-     * @param   int $issueId
-     *
-     * @return  self
-     */
-    public function setIssueId($issueId)
-    {
-        $this->issueId = $issueId;
-
-        return $this;
-    }
-
-    /**
      * Standard getter.
      *
      * @return  int
@@ -153,20 +139,6 @@ class Event
     public function getIssueId()
     {
         return $this->issueId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $userId
-     *
-     * @return  self
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
     }
 
     /**

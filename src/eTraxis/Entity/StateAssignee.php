@@ -56,20 +56,6 @@ class StateAssignee
     private $group;
 
     /**
-     * Standard setter.
-     *
-     * @param   int $stateId
-     *
-     * @return  self
-     */
-    public function setStateId($stateId)
-    {
-        $this->stateId = $stateId;
-
-        return $this;
-    }
-
-    /**
      * Standard getter.
      *
      * @return  int
@@ -77,20 +63,6 @@ class StateAssignee
     public function getStateId()
     {
         return $this->stateId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $groupId
-     *
-     * @return  self
-     */
-    public function setGroupId($groupId)
-    {
-        $this->groupId = $groupId;
-
-        return $this;
     }
 
     /**

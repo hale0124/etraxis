@@ -64,20 +64,6 @@ class FieldGroupAccess
     private $group;
 
     /**
-     * Standard setter.
-     *
-     * @param   int $fieldId
-     *
-     * @return  self
-     */
-    public function setFieldId($fieldId)
-    {
-        $this->fieldId = $fieldId;
-
-        return $this;
-    }
-
-    /**
      * Standard getter.
      *
      * @return  int
@@ -85,20 +71,6 @@ class FieldGroupAccess
     public function getFieldId()
     {
         return $this->fieldId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $groupId
-     *
-     * @return  self
-     */
-    public function setGroupId($groupId)
-    {
-        $this->groupId = $groupId;
-
-        return $this;
     }
 
     /**

@@ -25,16 +25,12 @@ class TemplateGroupPermissionTest extends \PHPUnit_Framework_TestCase
 
     public function testGroupId()
     {
-        $expected = rand(1, PHP_INT_MAX);
-        $this->object->setGroupId($expected);
-        $this->assertEquals($expected, $this->object->getGroupId());
+        $this->assertNull($this->object->getGroupId());
     }
 
     public function testTemplateId()
     {
-        $expected = rand(1, PHP_INT_MAX);
-        $this->object->setTemplateId($expected);
-        $this->assertEquals($expected, $this->object->getTemplateId());
+        $this->assertNull($this->object->getTemplateId());
     }
 
     public function testPermission()

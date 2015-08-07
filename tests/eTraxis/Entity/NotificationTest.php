@@ -30,9 +30,7 @@ class NotificationTest extends \PHPUnit_Framework_TestCase
 
     public function testUserId()
     {
-        $expected = rand(1, PHP_INT_MAX);
-        $this->object->setUserId($expected);
-        $this->assertEquals($expected, $this->object->getUserId());
+        $this->assertNull($this->object->getUserId());
     }
 
     public function testName()

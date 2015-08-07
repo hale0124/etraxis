@@ -689,36 +689,6 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Add user to specified group.
-     *
-     * @param   Group $group
-     *
-     * @return  self
-     */
-    public function addGroup(Group $group)
-    {
-        $this->groups[] = $group;
-
-        return $this;
-    }
-
-    /**
-     * Remove user from specified group.
-     *
-     * @param   Group $group
-     *
-     * @return  self
-     */
-    public function removeGroup(Group $group)
-    {
-        $group->removeUser($this);
-
-        $this->groups->removeElement($group);
-
-        return $this;
-    }
-
-    /**
      * Get list of groups the user is member of.
      *
      * @return  ArrayCollection|Group[]

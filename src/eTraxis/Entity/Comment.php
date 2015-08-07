@@ -75,20 +75,6 @@ class Comment
     }
 
     /**
-     * Standard setter.
-     *
-     * @param   int $eventId
-     *
-     * @return  self
-     */
-    public function setEventId($eventId)
-    {
-        $this->eventId = $eventId;
-
-        return $this;
-    }
-
-    /**
      * Standard getter.
      *
      * @return  int

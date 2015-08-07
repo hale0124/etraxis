@@ -90,20 +90,6 @@ class Change
     }
 
     /**
-     * Standard setter.
-     *
-     * @param   int $eventId
-     *
-     * @return  self
-     */
-    public function setEventId($eventId)
-    {
-        $this->eventId = $eventId;
-
-        return $this;
-    }
-
-    /**
      * Standard getter.
      *
      * @return  int
@@ -111,20 +97,6 @@ class Change
     public function getEventId()
     {
         return $this->eventId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $fieldId
-     *
-     * @return  self
-     */
-    public function setFieldId($fieldId)
-    {
-        $this->fieldId = $fieldId;
-
-        return $this;
     }
 
     /**

@@ -171,12 +171,6 @@ class UserTest extends \PHPUnit_Framework_TestCase
     public function testGroups()
     {
         $this->assertCount(0, $this->object->getGroups());
-
-        $this->object->addGroup($group = new Group());
-        $this->assertCount(1, $this->object->getGroups());
-
-        $this->object->removeGroup($group);
-        $this->assertCount(0, $this->object->getGroups());
     }
 
     public function testGetRolesAsAdmin()

@@ -58,20 +58,6 @@ class ViewFilter
     private $filter;
 
     /**
-     * Standard setter.
-     *
-     * @param   int $viewId
-     *
-     * @return  self
-     */
-    public function setViewId($viewId)
-    {
-        $this->viewId = $viewId;
-
-        return $this;
-    }
-
-    /**
      * Standard getter.
      *
      * @return  int
@@ -79,20 +65,6 @@ class ViewFilter
     public function getViewId()
     {
         return $this->viewId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $filterId
-     *
-     * @return  self
-     */
-    public function setFilterId($filterId)
-    {
-        $this->filterId = $filterId;
-
-        return $this;
     }
 
     /**

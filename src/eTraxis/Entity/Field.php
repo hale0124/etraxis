@@ -256,20 +256,6 @@ class Field
     }
 
     /**
-     * Standard setter.
-     *
-     * @param   int $templateId
-     *
-     * @return  self
-     */
-    public function setTemplateId($templateId)
-    {
-        $this->templateId = $templateId;
-
-        return $this;
-    }
-
-    /**
      * Standard getter.
      *
      * @return  int
@@ -277,20 +263,6 @@ class Field
     public function getTemplateId()
     {
         return $this->templateId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $stateId
-     *
-     * @return  self
-     */
-    public function setStateId($stateId)
-    {
-        $this->stateId = $stateId;
-
-        return $this;
     }
 
     /**

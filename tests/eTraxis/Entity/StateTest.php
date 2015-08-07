@@ -30,9 +30,7 @@ class StateTest extends \PHPUnit_Framework_TestCase
 
     public function testTemplateId()
     {
-        $expected = rand(1, PHP_INT_MAX);
-        $this->object->setTemplateId($expected);
-        $this->assertEquals($expected, $this->object->getTemplateId());
+        $this->assertNull($this->object->getTemplateId());
     }
 
     public function testName()
@@ -65,9 +63,7 @@ class StateTest extends \PHPUnit_Framework_TestCase
 
     public function testNextStateId()
     {
-        $expected = rand(1, PHP_INT_MAX);
-        $this->object->setNextStateId($expected);
-        $this->assertEquals($expected, $this->object->getNextStateId());
+        $this->assertNull($this->object->getNextStateId());
     }
 
     public function testTemplate()

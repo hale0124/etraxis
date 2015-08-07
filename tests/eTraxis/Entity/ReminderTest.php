@@ -32,9 +32,7 @@ class ReminderTest extends \PHPUnit_Framework_TestCase
 
     public function testUserId()
     {
-        $expected = rand(1, PHP_INT_MAX);
-        $this->object->setUserId($expected);
-        $this->assertEquals($expected, $this->object->getUserId());
+        $this->assertNull($this->object->getUserId());
     }
 
     public function testName()
@@ -53,16 +51,12 @@ class ReminderTest extends \PHPUnit_Framework_TestCase
 
     public function testStateId()
     {
-        $expected = rand(1, PHP_INT_MAX);
-        $this->object->setStateId($expected);
-        $this->assertEquals($expected, $this->object->getStateId());
+        $this->assertNull($this->object->getStateId());
     }
 
     public function testGroupId()
     {
-        $expected = rand(1, PHP_INT_MAX);
-        $this->object->setGroupId($expected);
-        $this->assertEquals($expected, $this->object->getGroupId());
+        $this->assertNull($this->object->getGroupId());
     }
 
     public function testRole()

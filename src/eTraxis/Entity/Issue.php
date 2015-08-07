@@ -184,20 +184,6 @@ class Issue
     }
 
     /**
-     * Standard setter.
-     *
-     * @param   int $stateId
-     *
-     * @return  self
-     */
-    public function setStateId($stateId)
-    {
-        $this->stateId = $stateId;
-
-        return $this;
-    }
-
-    /**
      * Standard getter.
      *
      * @return  int
@@ -208,20 +194,6 @@ class Issue
     }
 
     /**
-     * Standard setter.
-     *
-     * @param   int $authorId
-     *
-     * @return  self
-     */
-    public function setAuthorId($authorId)
-    {
-        $this->authorId = $authorId;
-
-        return $this;
-    }
-
-    /**
      * Standard getter.
      *
      * @return  int
@@ -229,20 +201,6 @@ class Issue
     public function getAuthorId()
     {
         return $this->authorId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $responsibleId
-     *
-     * @return  self
-     */
-    public function setResponsibleId($responsibleId)
-    {
-        $this->responsibleId = $responsibleId;
-
-        return $this;
     }
 
     /**

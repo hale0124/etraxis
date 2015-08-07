@@ -25,16 +25,12 @@ class FilterStateTest extends \PHPUnit_Framework_TestCase
 
     public function testFilterId()
     {
-        $expected = rand(1, PHP_INT_MAX);
-        $this->object->setFilterId($expected);
-        $this->assertEquals($expected, $this->object->getFilterId());
+        $this->assertNull($this->object->getFilterId());
     }
 
     public function testStateId()
     {
-        $expected = rand(1, PHP_INT_MAX);
-        $this->object->setStateId($expected);
-        $this->assertEquals($expected, $this->object->getStateId());
+        $this->assertNull($this->object->getStateId());
     }
 
     public function testFilter()

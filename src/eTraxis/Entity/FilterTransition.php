@@ -72,20 +72,6 @@ class FilterTransition
     private $state;
 
     /**
-     * Standard setter.
-     *
-     * @param   int $filterId
-     *
-     * @return  self
-     */
-    public function setFilterId($filterId)
-    {
-        $this->filterId = $filterId;
-
-        return $this;
-    }
-
-    /**
      * Standard getter.
      *
      * @return  int
@@ -93,20 +79,6 @@ class FilterTransition
     public function getFilterId()
     {
         return $this->filterId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $stateId
-     *
-     * @return  self
-     */
-    public function setStateId($stateId)
-    {
-        $this->stateId = $stateId;
-
-        return $this;
     }
 
     /**

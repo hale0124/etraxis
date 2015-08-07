@@ -63,20 +63,6 @@ class Child
     private $child;
 
     /**
-     * Standard setter.
-     *
-     * @param   int $parentId
-     *
-     * @return  self
-     */
-    public function setParentId($parentId)
-    {
-        $this->parentId = $parentId;
-
-        return $this;
-    }
-
-    /**
      * Standard getter.
      *
      * @return  int
@@ -84,20 +70,6 @@ class Child
     public function getParentId()
     {
         return $this->parentId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $childId
-     *
-     * @return  self
-     */
-    public function setChildId($childId)
-    {
-        $this->childId = $childId;
-
-        return $this;
     }
 
     /**

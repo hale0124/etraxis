@@ -68,20 +68,6 @@ class View
     }
 
     /**
-     * Standard setter.
-     *
-     * @param   int $userId
-     *
-     * @return  self
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
      * Standard getter.
      *
      * @return  int

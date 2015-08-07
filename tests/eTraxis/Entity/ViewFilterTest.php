@@ -25,16 +25,12 @@ class ViewFilterTest extends \PHPUnit_Framework_TestCase
 
     public function testViewId()
     {
-        $expected = rand(1, PHP_INT_MAX);
-        $this->object->setViewId($expected);
-        $this->assertEquals($expected, $this->object->getViewId());
+        $this->assertNull($this->object->getViewId());
     }
 
     public function testFilterId()
     {
-        $expected = rand(1, PHP_INT_MAX);
-        $this->object->setFilterId($expected);
-        $this->assertEquals($expected, $this->object->getFilterId());
+        $this->assertNull($this->object->getFilterId());
     }
 
     public function testView()

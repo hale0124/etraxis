@@ -95,20 +95,6 @@ class Group
     }
 
     /**
-     * Standard setter.
-     *
-     * @param   int $projectId
-     *
-     * @return  self
-     */
-    public function setProjectId($projectId)
-    {
-        $this->projectId = $projectId;
-
-        return $this;
-    }
-
-    /**
      * Standard getter.
      *
      * @return  int
@@ -199,8 +185,6 @@ class Group
      */
     public function addUser(User $user)
     {
-        $user->addGroup($this);
-
         $this->users[] = $user;
 
         return $this;

@@ -63,20 +63,6 @@ class TemplateGroupPermission
     private $template;
 
     /**
-     * Standard setter.
-     *
-     * @param   int $groupId
-     *
-     * @return  self
-     */
-    public function setGroupId($groupId)
-    {
-        $this->groupId = $groupId;
-
-        return $this;
-    }
-
-    /**
      * Standard getter.
      *
      * @return  int
@@ -84,20 +70,6 @@ class TemplateGroupPermission
     public function getGroupId()
     {
         return $this->groupId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $templateId
-     *
-     * @return  self
-     */
-    public function setTemplateId($templateId)
-    {
-        $this->templateId = $templateId;
-
-        return $this;
     }
 
     /**

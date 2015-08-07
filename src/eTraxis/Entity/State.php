@@ -132,20 +132,6 @@ class State
     }
 
     /**
-     * Standard setter.
-     *
-     * @param   int $templateId
-     *
-     * @return  self
-     */
-    public function setTemplateId($templateId)
-    {
-        $this->templateId = $templateId;
-
-        return $this;
-    }
-
-    /**
      * Standard getter.
      *
      * @return  int
@@ -249,20 +235,6 @@ class State
     public function getResponsible()
     {
         return $this->responsible;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $nextStateId
-     *
-     * @return  self
-     */
-    public function setNextStateId($nextStateId)
-    {
-        $this->nextStateId = $nextStateId;
-
-        return $this;
     }
 
     /**
