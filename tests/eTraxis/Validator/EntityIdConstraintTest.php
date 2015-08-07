@@ -43,7 +43,7 @@ class EntityIdConstraintTest extends BaseTestCase
     public function testSuccess()
     {
         $object     = new EntityIdStub();
-        $object->id = rand(1, PHP_INT_MAX);
+        $object->id = rand(1, $this->getMaxId());
 
         $this->assertCount(0, $this->validator->validate($object));
     }

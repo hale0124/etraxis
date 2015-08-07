@@ -58,7 +58,7 @@ class ForeignKeyConstraintTest extends BaseTestCase
     public function testUnknown()
     {
         $object     = new RequiredKeyStub();
-        $object->id = PHP_INT_MAX;
+        $object->id = $this->getMaxId();
 
         $this->assertNotCount(0, $this->validator->validate($object));
     }
