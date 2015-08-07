@@ -503,7 +503,7 @@ class UsersController extends Controller
      *
      * @return  JsonResponse
      */
-    public function addGroupAction(Request $request, $id)
+    public function addGroupsAction(Request $request, $id)
     {
         try {
             $command = new Users\AddGroupsCommand(
@@ -530,7 +530,7 @@ class UsersController extends Controller
      *
      * @return  JsonResponse
      */
-    public function removeGroupAction(Request $request, $id)
+    public function removeGroupsAction(Request $request, $id)
     {
         try {
             $command = new Users\RemoveGroupsCommand(

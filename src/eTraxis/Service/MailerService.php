@@ -57,8 +57,8 @@ class MailerService
      */
     public function send($from_address, $from_name, $recipients, $subject, $template, $args = [])
     {
-        $this->logger->info('Send email.', [$from_address, $from_name, $subject]);
-        $this->logger->info('Recipients.', is_array($recipients) ? $recipients : [$recipients]);
+        $this->logger->info('Send email', [$from_address, $from_name, $subject]);
+        $this->logger->info('Recipients', is_array($recipients) ? $recipients : [$recipients]);
 
         $body = $this->twig->render($template, $args);
 
