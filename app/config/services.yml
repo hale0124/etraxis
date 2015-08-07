@@ -72,3 +72,10 @@ services:
         tags: [{ name: kernel.event_subscriber }]
         arguments:
             - @session
+
+    etraxis.validator.foreign_key:
+        class: eTraxis\Validator\ForeignKeyConstraintValidator
+        tags: [{ name: validator.constraint_validator, alias: foreign_key_validator }]
+        arguments:
+            - @logger
+            - @doctrine
