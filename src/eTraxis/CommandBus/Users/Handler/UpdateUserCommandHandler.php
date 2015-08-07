@@ -75,7 +75,8 @@ class UpdateUserCommandHandler
         $entity = $repository->find($command->id);
 
         if (!$entity) {
-            throw new NotFoundHttpException();
+            $this->logger->error('Unknown user.', [$command->id]);
+            throw new NotFoundHttpException('Unknown user.');
         }
 
         $entity

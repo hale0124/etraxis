@@ -14,6 +14,7 @@
 namespace eTraxis\CommandBus\Users\Handler;
 
 use eTraxis\CommandBus\Users\RemoveGroupsCommand;
+use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -22,15 +23,18 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class RemoveGroupsCommandHandler
 {
+    protected $logger;
     protected $doctrine;
 
     /**
      * Dependency Injection constructor.
      *
+     * @param   LoggerInterface   $logger
      * @param   RegistryInterface $doctrine
      */
-    public function __construct(RegistryInterface $doctrine)
+    public function __construct(LoggerInterface $logger, RegistryInterface $doctrine)
     {
+        $this->logger   = $logger;
         $this->doctrine = $doctrine;
     }
 
@@ -50,7 +54,8 @@ class RemoveGroupsCommandHandler
         $user = $repository->find($command->id);
 
         if (!$user) {
-            throw new NotFoundHttpException();
+            $this->logger->error('Unknown user.', [$command->id]);
+            throw new NotFoundHttpException('Unknown user.');
         }
 
         $repository = $this->doctrine->getRepository('eTraxis:Group');

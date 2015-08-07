@@ -38,7 +38,7 @@ services:
     command.user.delete:
         class: eTraxis\CommandBus\Users\Handler\DeleteUserCommandHandler
         tags: [{ name: command_handler, command: eTraxis\CommandBus\Users\DeleteUserCommand }]
-        arguments: [ @doctrine, @security.authorization_checker ]
+        arguments: [ @logger, @doctrine, @security.authorization_checker ]
 
     command.users.disable:
         class: eTraxis\CommandBus\Users\Handler\DisableUsersCommandHandler
@@ -68,9 +68,9 @@ services:
     command.users.add_groups:
         class: eTraxis\CommandBus\Users\Handler\AddGroupsCommandHandler
         tags: [{ name: command_handler, command: eTraxis\CommandBus\Users\AddGroupsCommand }]
-        arguments: [ @doctrine ]
+        arguments: [ @logger, @doctrine ]
 
     command.users.remove_groups:
         class: eTraxis\CommandBus\Users\Handler\RemoveGroupsCommandHandler
         tags: [{ name: command_handler, command: eTraxis\CommandBus\Users\RemoveGroupsCommand }]
-        arguments: [ @doctrine ]
+        arguments: [ @logger, @doctrine ]

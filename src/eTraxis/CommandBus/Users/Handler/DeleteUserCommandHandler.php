@@ -15,6 +15,7 @@ namespace eTraxis\CommandBus\Users\Handler;
 
 use eTraxis\CommandBus\Users\DeleteUserCommand;
 use eTraxis\Voter\UserVoter;
+use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -25,17 +26,23 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 class DeleteUserCommandHandler
 {
+    protected $logger;
     protected $doctrine;
     protected $security;
 
     /**
      * Dependency Injection constructor.
      *
+     * @param   LoggerInterface               $logger
      * @param   RegistryInterface             $doctrine
      * @param   AuthorizationCheckerInterface $security
      */
-    public function __construct(RegistryInterface $doctrine, AuthorizationCheckerInterface $security)
+    public function __construct(
+        LoggerInterface $logger,
+        RegistryInterface $doctrine,
+        AuthorizationCheckerInterface $security)
     {
+        $this->logger   = $logger;
         $this->doctrine = $doctrine;
         $this->security = $security;
     }
@@ -56,7 +63,8 @@ class DeleteUserCommandHandler
         $entity = $repository->find($command->id);
 
         if (!$entity) {
-            throw new NotFoundHttpException();
+            $this->logger->error('Unknown user.', [$command->id]);
+            throw new NotFoundHttpException('Unknown user.');
         }
 
         if (!$this->security->isGranted(UserVoter::DELETE, $entity)) {

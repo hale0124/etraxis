@@ -62,6 +62,8 @@ class CommandBus implements CommandBusInterface
      */
     public function handle($command)
     {
+        $this->logger->debug('Handle message', [get_class($command)]);
+
         // Validate command before handle it.
         $violations = $this->validator->validate($command);
 
