@@ -64,3 +64,13 @@ encoding: Codifica
 line_endings: 'Terminatori di linea'
 groups: Gruppi
 others: Altri
+members: Membri
+membership: Membri
+group.new: 'Nuovo gruppo'
+group.name: 'Nome del gruppo'
+group.type: 'Tipo di gruppo'
+group.global: Globale
+group.local: Locale
+group.confirm.delete: 'Eliminare questo gruppo?'
+group.conflict.name: 'Nome gruppo già utilizzato.'
+project: Progetto

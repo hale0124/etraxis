@@ -64,3 +64,13 @@ encoding: Codificação
 line_endings: Finalização
 groups: Grupos
 others: Outros
+members: Membros
+membership: Membros
+group.new: 'Novo grupo'
+group.name: 'Nome do grupo'
+group.type: 'Tipo do grupo'
+group.global: Global
+group.local: Local
+group.confirm.delete: 'Tem certeza que quer apagar este grupo?'
+group.conflict.name: 'O grupo escolhido já existe.'
+project: Projeto

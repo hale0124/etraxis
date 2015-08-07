@@ -15,6 +15,7 @@ namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 
 /**
  * Group.
@@ -24,9 +25,13 @@ use Doctrine\ORM\Mapping as ORM;
  *                @ORM\UniqueConstraint(name="ix_groups", columns={"project_id", "group_name"})
  *            })
  * @ORM\Entity
+ * @Assert\UniqueEntity(fields={"project", "name"}, message="group.conflict.name")
  */
 class Group
 {
+    const MAX_NAME        = 25;
+    const MAX_DESCRIPTION = 100;
+
     /**
      * @var int Unique ID.
      *
@@ -226,5 +231,15 @@ class Group
     public function getUsers()
     {
         return $this->users;
+    }
+
+    /**
+     * Returns whether group is global.
+     *
+     * @return  bool
+     */
+    public function isGlobal()
+    {
+        return !$this->projectId;
     }
 }

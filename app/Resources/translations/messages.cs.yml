@@ -64,3 +64,13 @@ encoding: Kódování
 line_endings: 'Konce řádků'
 groups: Skupiny
 others: Ostatní
+members: Členové
+membership: Členství
+group.new: 'Nová skupina'
+group.name: 'Název skupiny'
+group.type: 'Typ skupiny'
+group.global: Globální
+group.local: Místní
+group.confirm.delete: 'Jste si jisti, že chcete vymazat tuto skupinu?'
+group.conflict.name: 'Skupina se zadaným jménem již existuje.'
+project: Projekt

@@ -64,3 +64,13 @@ encoding: Kodlama
 line_endings: 'Satır sonları'
 groups: Gruplar
 others: Diğerleri
+members: Üyeler
+membership: Üyelik
+group.new: 'Yeni grup'
+group.name: 'Grup adı'
+group.type: 'Grup tipi'
+group.global: Global
+group.local: Yerel
+group.confirm.delete: 'Bu grubu silek istediğinizden emin misiniz?'
+group.conflict.name: 'Girilen adda bir grup zaten var.'
+project: Proje

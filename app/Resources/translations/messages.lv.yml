@@ -64,3 +64,13 @@ encoding: Kodēšana
 line_endings: 'Rindu nobeigumi'
 groups: Grupas
 others: Pārējie
+members: Dalībnieki
+membership: Dalība
+group.new: 'Jauna grupa'
+group.name: 'Grupas nosaukums'
+group.type: 'Grupas tips'
+group.global: Globālā
+group.local: Lokālā
+group.confirm.delete: 'Vai tiešām vēlaties dzēst šo grupu?'
+group.conflict.name: 'Grupa ar tādu nosaukumu jau eksistē.'
+project: Projekts

@@ -64,3 +64,13 @@ encoding: Шифриране
 line_endings: 'Завършване на ред'
 groups: Групи
 others: Други
+members: Потребители
+membership: Членство
+group.new: 'Нова група'
+group.name: 'Име на група'
+group.type: 'Тип на група'
+group.global: Глобално
+group.local: Локално
+group.confirm.delete: 'Сигурен ли сте че искате да изтриете тази група?'
+group.conflict.name: 'Вече съществува група с въведеното име.'
+project: Проект

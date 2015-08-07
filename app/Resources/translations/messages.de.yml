@@ -64,3 +64,13 @@ encoding: Kodierung
 line_endings: Zeilenumbruch
 groups: Gruppen
 others: Andere
+members: Mitglieder
+membership: Mitgliedschaft
+group.new: 'Neue Gruppe'
+group.name: Gruppenname
+group.type: Gruppenart
+group.global: Global
+group.local: Lokal
+group.confirm.delete: 'Möchten Sie diese Gruppe wirklich löschen?'
+group.conflict.name: 'Eine Gruppe mit diesem Namen existiert bereits.'
+project: Projekt

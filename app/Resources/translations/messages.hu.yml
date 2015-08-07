@@ -64,3 +64,13 @@ encoding: Karakterkódolás
 line_endings: Sorvégződések
 groups: Csoportok
 others: 'További személyek'
+members: Tagok
+membership: Tagság
+group.new: 'Új csoport'
+group.name: 'Csoport neve'
+group.type: 'Csoport típusa'
+group.global: Globális
+group.local: Helyi
+group.confirm.delete: 'Biztos törölni szeretné a csoportot?'
+group.conflict.name: 'Már létezik ilyen névvel ellátott csoport.'
+project: Projekt

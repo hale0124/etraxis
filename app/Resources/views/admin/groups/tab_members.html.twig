@@ -1,0 +1,69 @@
+{% import "macro.html.twig" as macro %}
+
+<div class="columns">
+    <div class="column full-width">
+        <table>
+            <tr>
+                <td width="50%">
+                    <fieldset>
+                        <legend>{{ 'members'|trans }}</legend>
+                        <select id="users" size="20" multiple class="full-width">
+                            {% for user in members %}
+                                <option value="{{ user.id }}">{{ user.fullname }} ({{ user.username }})</option>
+                            {% endfor %}
+                        </select>
+                    </fieldset>
+                </td>
+                <td class="columns">
+                    <div class="column">
+                        <p><button type="button" id="btn-remove">&gt;&gt;</button></p>
+                        <p><button type="button" id="btn-add">&lt;&lt;</button></p>
+                    </div>
+                </td>
+                <td width="50%">
+                    <fieldset>
+                        <legend>{{ 'others'|trans }}</legend>
+                        <select id="others" size="20" multiple class="full-width">
+                            {% for user in others %}
+                                <option value="{{ user.id }}">{{ user.fullname }} ({{ user.username }})</option>
+                            {% endfor %}
+                        </select>
+                    </fieldset>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>
+
+<script>
+
+    $(function() {
+
+        function reloadTab() {
+            var $tabs = $('#tabs-group');
+            var current = $tabs.tabs('option', 'active');
+            $tabs.tabs('load', current);
+        }
+
+        // "<<" button (add users).
+        $('#btn-add').click(function() {
+            var users = $('#others').val();
+            if (users) {
+                $.post('{{ path('admin_groups_add_users', {'id': group.id}) }}', { users: users }, function() {
+                    reloadTab();
+                });
+            }
+        });
+
+        // ">>" button (remove users).
+        $('#btn-remove').click(function() {
+            var users = $('#users').val();
+            if (users) {
+                $.post('{{ path('admin_groups_remove_users', {'id': group.id}) }}', { users: users }, function() {
+                    reloadTab();
+                });
+            }
+        });
+    });
+
+</script>

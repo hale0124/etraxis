@@ -64,3 +64,13 @@ encoding: Encoding
 line_endings: 'Line endings'
 groups: Groups
 others: Others
+members: Members
+membership: Membership
+group.new: 'New group'
+group.name: 'Group name'
+group.type: 'Group type'
+group.global: Global
+group.local: Local
+group.confirm.delete: 'Are you sure you want delete this group?'
+group.conflict.name: 'Group with entered name already exists.'
+project: Project

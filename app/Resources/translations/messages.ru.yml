@@ -64,3 +64,13 @@ encoding: Кодировка
 line_endings: 'Концы строк'
 groups: Группы
 others: Прочие
+members: Члены
+membership: Членство
+group.new: 'Новая группа'
+group.name: 'Название группы'
+group.type: 'Тип группы'
+group.global: Глобальная
+group.local: Локальная
+group.confirm.delete: 'Вы уверены, что хотите удалить эту группу?'
+group.conflict.name: 'Группа с таким названием уже существует.'
+project: Проект

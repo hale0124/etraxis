@@ -64,3 +64,13 @@ encoding: 出力時のエンコード
 line_endings: 改行コード
 groups: グループ
 others: その他
+members: メンバー
+membership: メンバー
+group.new: 新規グループ
+group.name: グループ名
+group.type: グループ形式
+group.global: グローバル
+group.local: ローカル
+group.confirm.delete: グループを削除してよろしいですか？
+group.conflict.name: 入力されたグループの名前は既に存在しています。
+project: プロジェクト

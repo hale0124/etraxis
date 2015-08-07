@@ -64,3 +64,13 @@ encoding: Codare
 line_endings: 'Delimitator de linie'
 groups: Grupuri
 others: Altele
+members: Membrii
+membership: Apartenenta
+group.new: 'Grup nou'
+group.name: 'Numele grupului'
+group.type: 'Tipul grupului'
+group.global: Global
+group.local: Local
+group.confirm.delete: 'Sunteti sigur ca doriti sa stergeti acest grup?'
+group.conflict.name: 'Numele grupului exista deja.'
+project: Proiect

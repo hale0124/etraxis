@@ -64,3 +64,13 @@ encoding: Encodering
 line_endings: Lijneindes
 groups: Groepen
 others: Anderen
+members: Leden
+membership: Lidmaatschap
+group.new: 'Nieuwe groep'
+group.name: Groepsnaam
+group.type: Groepstype
+group.global: Globaal
+group.local: Lokaal
+group.confirm.delete: 'Ben je zeker dat je deze groep wilt verwijderen?'
+group.conflict.name: 'Groep met ingevoerde naam bestaat reeds.'
+project: Project

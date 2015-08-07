@@ -68,4 +68,9 @@ class GroupTest extends \PHPUnit_Framework_TestCase
         $this->object->removeUser($user);
         $this->assertCount(0, $this->object->getUsers());
     }
+
+    public function testIsGlobal()
+    {
+        $this->assertTrue($this->object->isGlobal());
+    }
 }

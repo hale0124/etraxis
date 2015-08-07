@@ -1,0 +1,123 @@
+{% extends 'admin/base.html.twig' %}
+
+{% import "macro.html.twig" as macro %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="columns">
+            <div class="column full-width">
+                <button type="button" id="btn-create">{{ 'button.create'|trans }}</button>
+                <button type="button" id="btn-export">{{ 'button.export'|trans }}</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="columns">
+            <div class="column full-width">
+                <table id="groups" class="cell-border hover" data-src="{{ path('admin_groups_list') }}">
+                    <thead>
+                        <tr>
+                            <th>{{ 'group.name'|trans }}</th>
+                            <th>{{ 'group.type'|trans }}</th>
+                            <th>{{ 'project'|trans }}</th>
+                            <th>{{ 'description'|trans }}</th>
+                        </tr>
+                    </thead>
+                    <thead>
+                        <tr>
+                            <th><input type="text"></th>
+                            <th>
+                                <select>
+                                    <option value="global">{{ 'group.global'|trans }}</option>
+                                    <option value="local">{{ 'group.local'|trans }}</option>
+                                </select>
+                            </th>
+                            <th>
+                                <select>
+                                    {% for project in projects %}
+                                        <option value="{{ project.id }}">{{ project.name }}</option>
+                                    {% endfor %}
+                                </select>
+                            </th>
+                            <th><input type="text"></th>
+                        </tr>
+                    </thead>
+                </table>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script>
+
+        $(function() {
+
+            // Groups list.
+            var $table = $('#groups').table();
+
+            // Resets state of dependent controls.
+            var resetState = function() {
+
+                var checked = $('input[name="groups"]:checked', $table).length;
+
+                // Some buttons are disabled if no checkbox is ticked.
+                $('#btn-disable').disable(checked == 0);
+                $('#btn-enable').disable(checked == 0);
+
+                // If no checkbox is ticked, untick "Select all" checkbox.
+                if (checked == 0) {
+                    $('thead input[type="checkbox"]', $table).prop('checked', false);
+                }
+
+                // If all checkboxes are ticked, tick "Select all" checkbox.
+                if (checked == $table.api().page.len()) {
+                    $('thead input[type="checkbox"]', $table).prop('checked', true);
+                }
+            };
+
+            // Table has been redrawn.
+            $table.on('draw.dt', resetState);
+
+            // Click on a checkbox in the list.
+            $table.on('click', 'input[type="checkbox"]', resetState);
+
+            // Click on a group in the list.
+            $table.on('click', 'tbody tr', function() {
+                window.location.assign('{{ path('admin_groups') }}' + $(this).data('id'));
+            });
+
+            // "Create" button.
+            $('#btn-create').click(function() {
+                eTraxis.modal({
+                    url: '{{ path('admin_dlg_new_group') }}',
+                    title: '{{ 'group.new'|trans }}',
+                    success: function() {
+                        $table.api().draw(false);
+                        return true;
+                    }
+                });
+            });
+
+            // "Export" button.
+            $('#btn-export').click(function() {
+                eTraxis.modal({
+                    url: '{{ path('dlg_export') }}',
+                    title: '{{ 'button.export'|trans }}',
+                    success: function() {
+                        var params = $('form').serialize();
+                        params += '&search=' + $table.api().search();
+                        window.location.assign('{{ path('admin_groups_csv') }}?' + params);
+                        return true;
+                    }
+                });
+            });
+        });
+
+    </script>
+
+{% endblock %}

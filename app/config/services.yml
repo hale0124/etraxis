@@ -2,6 +2,7 @@ imports:
     - { resource: voters.yml }
     - { resource: commandbus/shared.yml }
     - { resource: commandbus/users.yml }
+    - { resource: commandbus/groups.yml }
 
 services:
 
@@ -72,10 +73,3 @@ services:
         tags: [{ name: kernel.event_subscriber }]
         arguments:
             - @session
-
-    etraxis.validator.foreign_key:
-        class: eTraxis\Validator\ForeignKeyConstraintValidator
-        tags: [{ name: validator.constraint_validator, alias: foreign_key_validator }]
-        arguments:
-            - @logger
-            - @doctrine

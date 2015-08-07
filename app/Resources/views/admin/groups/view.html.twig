@@ -1,0 +1,18 @@
+{% extends 'admin/base.html.twig' %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="columns">
+            <div class="column full-width">
+                <div class="tabs" id="tabs-group" data-tab="{{ tab }}">
+                    <ul>
+                        <li><a href="{{ path('admin_tab_group_details', {'id': group.id}) }}">{{ group.name }}</a></li>
+                        <li><a href="{{ path('admin_tab_group_members', {'id': group.id}) }}">{{ 'membership'|trans }}</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}

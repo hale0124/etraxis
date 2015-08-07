@@ -64,3 +64,13 @@ encoding: Kodning
 line_endings: Radslut
 groups: Grupper
 others: Andra
+members: Medlemmar
+membership: Medlemskap
+group.new: 'Ny Grupp'
+group.name: 'Grupp namn'
+group.type: 'Grupp typ'
+group.global: Global
+group.local: Lokal
+group.confirm.delete: 'Är du säker på att du vill ta bort denna gruppen?'
+group.conflict.name: 'Grupp med detta namnet finns redan.'
+project: Projekt
