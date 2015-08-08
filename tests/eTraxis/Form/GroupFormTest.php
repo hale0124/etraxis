@@ -20,7 +20,7 @@ class GroupFormTest extends BaseTestCase
     public function testForm()
     {
         /** @var \eTraxis\Entity\Group $group */
-        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'staff']);
+        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Staff']);
 
         /** @var \Symfony\Component\Form\FormFactoryInterface $factory */
         $factory = $this->client->getContainer()->get('form.factory');
