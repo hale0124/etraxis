@@ -64,7 +64,7 @@ class CreateGroupCommandTest extends BaseTestCase
     public function testGlobalGroupConflict()
     {
         $command = new CreateGroupCommand([
-            'name' => 'nimbus',
+            'name' => 'Nimbus',
         ]);
 
         $this->command_bus->handle($command);
@@ -76,10 +76,10 @@ class CreateGroupCommandTest extends BaseTestCase
     public function testLocalGroupConflict()
     {
         /** @var \eTraxis\Entity\Project $project */
-        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'planet express']);
+        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
 
         $command = new CreateGroupCommand([
-            'name'    => 'staff',
+            'name'    => 'Staff',
             'project' => $project->getId(),
         ]);
 

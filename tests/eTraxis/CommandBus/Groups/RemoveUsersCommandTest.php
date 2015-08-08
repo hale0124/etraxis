@@ -20,7 +20,7 @@ class RemoveUsersCommandTest extends BaseTestCase
     public function testSuccess()
     {
         /** @var \eTraxis\Entity\Group $group */
-        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'staff']);
+        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Staff']);
 
         $members = $this->command_bus->handle(
             new GetGroupMembersCommand([
@@ -84,7 +84,7 @@ class RemoveUsersCommandTest extends BaseTestCase
     public function testEmptyGroups()
     {
         /** @var \eTraxis\Entity\Group $group */
-        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'staff']);
+        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Staff']);
 
         $command = new RemoveUsersCommand([
             'id'    => $group->getId(),

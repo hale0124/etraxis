@@ -20,7 +20,7 @@ class FindGroupCommandTest extends BaseTestCase
     public function testFound()
     {
         /** @var \eTraxis\Entity\Group $group */
-        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'staff']);
+        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Staff']);
 
         $command = new FindGroupCommand([
             'id' => $group->getId(),

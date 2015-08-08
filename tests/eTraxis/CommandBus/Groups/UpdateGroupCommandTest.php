@@ -20,7 +20,7 @@ class UpdateGroupCommandTest extends BaseTestCase
     public function testSuccess()
     {
         /** @var \eTraxis\Entity\Group $group */
-        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'staff']);
+        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Staff']);
 
         $this->assertNotNull($group);
         $this->assertNotEmpty($group->getDescription());
@@ -60,13 +60,13 @@ class UpdateGroupCommandTest extends BaseTestCase
     public function testNameConflict()
     {
         /** @var \eTraxis\Entity\Group $group */
-        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'staff']);
+        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Staff']);
 
         $this->assertNotNull($group);
 
         $command = new UpdateGroupCommand([
             'id'   => $group->getId(),
-            'name' => 'crew',
+            'name' => 'Crew',
         ]);
 
         $this->command_bus->handle($command);
