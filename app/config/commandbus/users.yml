@@ -66,11 +66,11 @@ services:
         arguments: [ @doctrine ]
 
     command.users.add_groups:
-        class: eTraxis\CommandBus\Users\Handler\AddGroupsCommandHandler
+        class: eTraxis\CommandBus\Users\Handler\AddRemoveGroupsCommandHandler
         tags: [{ name: command_handler, command: eTraxis\CommandBus\Users\AddGroupsCommand }]
         arguments: [ @logger, @doctrine ]
 
     command.users.remove_groups:
-        class: eTraxis\CommandBus\Users\Handler\RemoveGroupsCommandHandler
+        class: eTraxis\CommandBus\Users\Handler\AddRemoveGroupsCommandHandler
         tags: [{ name: command_handler, command: eTraxis\CommandBus\Users\RemoveGroupsCommand }]
         arguments: [ @logger, @doctrine ]

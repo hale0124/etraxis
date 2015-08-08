@@ -14,6 +14,7 @@
 namespace eTraxis\CommandBus\Users\Handler;
 
 use eTraxis\CommandBus\Users\AddGroupsCommand;
+use eTraxis\CommandBus\Users\RemoveGroupsCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -21,7 +22,7 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 /**
  * Command handler.
  */
-class AddGroupsCommandHandler
+class AddRemoveGroupsCommandHandler
 {
     protected $logger;
     protected $doctrine;
@@ -41,11 +42,11 @@ class AddGroupsCommandHandler
     /**
      * Adds account to specified groups.
      *
-     * @param   AddGroupsCommand $command
+     * @param   AddGroupsCommand|RemoveGroupsCommand $command
      *
      * @throws  NotFoundHttpException
      */
-    public function handle(AddGroupsCommand $command)
+    public function handle($command)
     {
         /** @var \Doctrine\ORM\EntityRepository $repository */
         $repository = $this->doctrine->getRepository('eTraxis:User');
@@ -72,7 +73,14 @@ class AddGroupsCommandHandler
         $groups = $query->getQuery()->getResult();
 
         foreach ($groups as $group) {
-            $group->addUser($user);
+
+            if ($command instanceof AddGroupsCommand) {
+                $group->addUser($user);
+            }
+            elseif ($command instanceof RemoveGroupsCommand) {
+                $group->removeUser($user);
+            }
+
             $this->doctrine->getManager()->persist($group);
         }
 
