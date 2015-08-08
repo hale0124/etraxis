@@ -85,15 +85,6 @@ class CreateGroupCommandHandler
 
             $entity->setProject($project);
         }
-        else {
-
-            $repository = $this->doctrine->getRepository('eTraxis:Group');
-
-            if ($repository->findBy(['name' => $command->name])) {
-                $this->logger->error('Duplicate global group.', [$command->project]);
-                throw new CommandException($this->translator->trans('group.conflict.name'));
-            }
-        }
 
         $errors = $this->validator->validate($entity);
 
