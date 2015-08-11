@@ -60,32 +60,6 @@
             // Groups list.
             var $table = $('#groups').table();
 
-            // Resets state of dependent controls.
-            var resetState = function() {
-
-                var checked = $('input[name="groups"]:checked', $table).length;
-
-                // Some buttons are disabled if no checkbox is ticked.
-                $('#btn-disable').disable(checked == 0);
-                $('#btn-enable').disable(checked == 0);
-
-                // If no checkbox is ticked, untick "Select all" checkbox.
-                if (checked == 0) {
-                    $('thead input[type="checkbox"]', $table).prop('checked', false);
-                }
-
-                // If all checkboxes are ticked, tick "Select all" checkbox.
-                if (checked == $table.api().page.len()) {
-                    $('thead input[type="checkbox"]', $table).prop('checked', true);
-                }
-            };
-
-            // Table has been redrawn.
-            $table.on('draw.dt', resetState);
-
-            // Click on a checkbox in the list.
-            $table.on('click', 'input[type="checkbox"]', resetState);
-
             // Click on a group in the list.
             $table.on('click', 'tbody tr', function() {
                 window.location.assign('{{ path('admin_groups') }}' + $(this).data('id'));

@@ -17,7 +17,6 @@ use eTraxis\CommandBus\Groups\DeleteGroupCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Command handler.
@@ -44,7 +43,6 @@ class DeleteGroupCommandHandler
      *
      * @param   DeleteGroupCommand $command
      *
-     * @throws  AccessDeniedException
      * @throws  NotFoundHttpException
      */
     public function handle(DeleteGroupCommand $command)

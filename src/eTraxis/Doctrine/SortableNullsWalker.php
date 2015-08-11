@@ -28,10 +28,12 @@ class SortableNullsWalker extends SqlWalker
     {
         $sql = parent::walkOrderByItem($orderByItem);
 
+        /** @noinspection PhpUndefinedMethodInspection */
         if ($orderByItem->isAsc()) {
             $sql .= ' NULLS FIRST';
         }
 
+        /** @noinspection PhpUndefinedMethodInspection */
         if ($orderByItem->isDesc()) {
             $sql .= ' NULLS LAST';
         }

@@ -33,7 +33,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Sample of valid request (JSON notation):
  *
  * {
- *     "start": 0,                          // return 10 groups starting from first account
+ *     "start": 0,                          // return 10 groups starting from first one
  *     "length": 10,
  *     "search": "test",                    // filter groups by those which contain "test" in any property
  *     "columns": [
