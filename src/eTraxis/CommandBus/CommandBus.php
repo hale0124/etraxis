@@ -83,18 +83,21 @@ class CommandBus implements CommandBusInterface
         $service = $this->handlers[get_class($command)];
         $handler = $this->container->get($service);
 
-        // Start timer.
-        list($msec, $sec) = explode(' ', microtime());
-        $timer_started    = (float) $msec + (float) $sec;
+        try {
+            // Start timer.
+            list($msec, $sec) = explode(' ', microtime());
+            $timer_started    = (float) $msec + (float) $sec;
 
-        // Handle command.
-        $result = $handler->handle($command);
+            // Handle command.
+            $result = $handler->handle($command);
+        }
+        finally {
+            // Stop timer.
+            list($msec, $sec) = explode(' ', microtime());
+            $timer_stopped    = (float) $msec + (float) $sec;
 
-        // Stop timer.
-        list($msec, $sec) = explode(' ', microtime());
-        $timer_stopped    = (float) $msec + (float) $sec;
-
-        $this->logger->debug('Message processing time', [$timer_stopped - $timer_started]);
+            $this->logger->debug('Message processing time', [$timer_stopped - $timer_started]);
+        }
 
         return $result;
     }
