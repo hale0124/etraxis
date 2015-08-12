@@ -85,7 +85,7 @@ class BaseTestCase extends WebTestCase
      */
     protected function getMaxId()
     {
-        return (1 << 31) - 1;
+        return 0x7FFFFFFF;
     }
 
     /**
