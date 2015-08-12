@@ -9,6 +9,11 @@ env:
     - DB=mysql
     - DB=pgsql
 
+matrix:
+    exclude:
+    - php: 7.0
+        script: php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+
 sudo: false
 
 addons:
