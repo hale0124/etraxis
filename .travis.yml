@@ -9,11 +9,6 @@ env:
     - DB=mysql
     - DB=pgsql
 
-matrix:
-    exclude:
-    - php: 7.0
-        script: php ocular.phar code-coverage:upload --format=php-clover coverage.clover
-
 sudo: false
 
 addons:
@@ -36,4 +31,4 @@ before_script:
 script:
     - phpunit --coverage-clover=coverage.clover
     - wget https://scrutinizer-ci.com/ocular.phar
-    - php ocular.phar code-coverage:upload --format=php-clover coverage.clover
+    - if [[ "$(phpenv version-name)" != "7.0" ]]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi
