@@ -59,7 +59,7 @@ class RegisterUserCommandHandler
         /** @var User $user */
         $user = $repository->findOneBy([
             'username' => $command->username,
-            'isLdap'   => true,
+            'isLdap'   => 1,
         ]);
 
         // The account already exists - update display name and email.

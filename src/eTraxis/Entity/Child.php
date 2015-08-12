@@ -119,7 +119,7 @@ class Child
      */
     public function setDependency($isDependency)
     {
-        $this->isDependency = (bool) $isDependency;
+        $this->isDependency = $isDependency ? 1 : 0;
 
         return $this;
     }

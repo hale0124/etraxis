@@ -107,7 +107,7 @@ class Comment
      */
     public function setConfidential($isConfidential)
     {
-        $this->isConfidential = (bool) $isConfidential;
+        $this->isConfidential = $isConfidential ? 1 : 0;
 
         return $this;
     }

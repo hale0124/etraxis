@@ -181,7 +181,7 @@ class Project
      */
     public function setSuspended($isSuspended)
     {
-        $this->isSuspended = (bool) $isSuspended;
+        $this->isSuspended = $isSuspended ? 1 : 0;
 
         return $this;
     }

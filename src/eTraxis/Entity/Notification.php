@@ -207,7 +207,7 @@ class Notification
      */
     public function setActivated($isActivated)
     {
-        $this->isActivated = (bool) $isActivated;
+        $this->isActivated = $isActivated ? 1 : 0;
 
         return $this;
     }

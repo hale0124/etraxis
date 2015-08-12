@@ -409,7 +409,7 @@ class User implements AdvancedUserInterface
      */
     public function setAdmin($isAdmin)
     {
-        $this->isAdmin = (bool) $isAdmin;
+        $this->isAdmin = $isAdmin ? 1 : 0;
 
         return $this;
     }
@@ -433,7 +433,7 @@ class User implements AdvancedUserInterface
      */
     public function setDisabled($isDisabled)
     {
-        $this->isDisabled = (bool) $isDisabled;
+        $this->isDisabled = $isDisabled ? 1 : 0;
 
         return $this;
     }
@@ -457,11 +457,11 @@ class User implements AdvancedUserInterface
      */
     public function setLdap($isLdap)
     {
-        $this->isLdap = (bool) $isLdap;
+        $this->isLdap = $isLdap ? 1 : 0;
 
         $this->username = str_replace('@eTraxis', null, $this->username);
 
-        if (!$this->isLdap) {
+        if (!$isLdap) {
             $this->username .= '@eTraxis';
         }
 

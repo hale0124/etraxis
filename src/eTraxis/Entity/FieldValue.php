@@ -196,7 +196,7 @@ class FieldValue
      */
     public function setCurrent($isCurrent)
     {
-        $this->isCurrent = (bool) $isCurrent;
+        $this->isCurrent = $isCurrent ? 1 : 0;
 
         return $this;
     }

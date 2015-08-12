@@ -193,7 +193,7 @@ class Attachment
      */
     public function setRemoved($isRemoved)
     {
-        $this->isRemoved = (bool) $isRemoved;
+        $this->isRemoved = $isRemoved ? 1 : 0;
 
         return $this;
     }

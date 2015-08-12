@@ -100,7 +100,7 @@ class BaseTestCase extends WebTestCase
     {
         return $this->doctrine->getRepository('eTraxis:User')->findOneBy([
             'username' => $ldap ? $username : $username . '@eTraxis',
-            'isLdap'   => $ldap,
+            'isLdap'   => $ldap ? 1 : 0,
         ]);
     }
 

@@ -52,7 +52,7 @@ class InternalUserProvider implements UserProviderInterface
         /** @var User $user */
         $user = $repository->findOneBy([
             'username' => $username . '@eTraxis',
-            'isLdap'   => false,
+            'isLdap'   => 0,
         ]);
 
         if ($user) {
@@ -63,7 +63,7 @@ class InternalUserProvider implements UserProviderInterface
 
         $user = $repository->findOneBy([
             'username' => $username,
-            'isLdap'   => true,
+            'isLdap'   => 1,
         ]);
 
         if (!$user) {

@@ -432,7 +432,7 @@ class Field
      */
     public function setRequired($isRequired)
     {
-        $this->isRequired = (bool) $isRequired;
+        $this->isRequired = $isRequired ? 1 : 0;
 
         return $this;
     }
@@ -456,7 +456,7 @@ class Field
      */
     public function setGuestAccess($hasGuestAccess)
     {
-        $this->hasGuestAccess = (bool) $hasGuestAccess;
+        $this->hasGuestAccess = $hasGuestAccess ? 1 : 0;
 
         return $this;
     }
@@ -552,7 +552,7 @@ class Field
      */
     public function setShowInEmails($showInEmails)
     {
-        $this->showInEmails = (bool) $showInEmails;
+        $this->showInEmails = $showInEmails ? 1 : 0;
 
         return $this;
     }
