@@ -1,0 +1,9 @@
+parameters:
+
+    database_driver:        oci8
+    database_host:          127.0.0.1
+    database_port:          ~
+    database_name:          XE
+    database_user:          etraxis
+    database_password:      oracle
+    database_charset:       AL32UTF8
