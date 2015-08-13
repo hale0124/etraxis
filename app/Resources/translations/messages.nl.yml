@@ -74,3 +74,12 @@ group.local: Lokaal
 group.confirm.delete: 'Ben je zeker dat je deze groep wilt verwijderen?'
 group.conflict.name: 'Groep met ingevoerde naam bestaat reeds.'
 project: Project
+projects: Projecten
+project.new: 'Nieuw project'
+project.name: 'Project naam'
+project.start_time: Starttijd
+project.status: Status
+project.active: Actief
+project.suspended: Geschorst
+project.confirm.delete: 'Ben je zeker dat je dit project wilt verwijderen?'
+project.conflict.name: 'Project met ingevoerde naam bestaat reeds.'

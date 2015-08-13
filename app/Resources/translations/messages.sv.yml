@@ -74,3 +74,12 @@ group.local: Lokal
 group.confirm.delete: 'Är du säker på att du vill ta bort denna gruppen?'
 group.conflict.name: 'Grupp med detta namnet finns redan.'
 project: Projekt
+projects: Projekt
+project.new: 'Nytt projekt'
+project.name: 'Projekt namn'
+project.start_time: 'Start tid'
+project.status: Status
+project.active: Aktiv
+project.suspended: Inaktiv
+project.confirm.delete: 'Är du säker på att du vill ta bort detta projektet?'
+project.conflict.name: 'Projekt med detta namnet finns redan.'

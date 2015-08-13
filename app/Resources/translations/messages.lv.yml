@@ -74,3 +74,12 @@ group.local: Lokālā
 group.confirm.delete: 'Vai tiešām vēlaties dzēst šo grupu?'
 group.conflict.name: 'Grupa ar tādu nosaukumu jau eksistē.'
 project: Projekts
+projects: Projekti
+project.new: 'Jauns projekts'
+project.name: 'Projekta nosaukums'
+project.start_time: 'Sākuma laiks'
+project.status: Statuss
+project.active: Aktīvs
+project.suspended: Atlikts
+project.confirm.delete: 'Vai tiešām vēlaties dzēst šo projektu?'
+project.conflict.name: 'Projekts ar tādu nosaukumu jau eksistē.'

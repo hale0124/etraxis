@@ -74,3 +74,12 @@ group.local: Helyi
 group.confirm.delete: 'Biztos törölni szeretné a csoportot?'
 group.conflict.name: 'Már létezik ilyen névvel ellátott csoport.'
 project: Projekt
+projects: Projektek
+project.new: 'Új csoport'
+project.name: 'Projekt neve'
+project.start_time: 'Kezdés ideje'
+project.status: Állapot
+project.active: Aktív
+project.suspended: Felfüggesztve
+project.confirm.delete: 'Biztos törölni szeretné a projektet?'
+project.conflict.name: 'Már létezik ilyen névvel ellátott projekt.'

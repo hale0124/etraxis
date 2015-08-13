@@ -1,0 +1,65 @@
+{% import "macro.html.twig" as macro %}
+
+<div class="columns">
+    <div class="column full-width">
+        <button type="button" id="btn-back">{{ 'button.back'|trans }}</button>
+        <button type="button" id="btn-edit">{{ 'button.edit'|trans }}</button>
+        {% if can.delete %}
+            <button type="button" id="btn-delete">{{ 'button.delete'|trans }}</button>
+        {% endif %}
+    </div>
+</div>
+
+<div class="columns">
+    <div class="column full-width">
+        <fieldset>
+            {{ macro.row('project.name'|trans, project.name) }}
+            {{ macro.row('project.start_time'|trans, project.createdAt|date('Y-m-d')) }}
+            {{ macro.row('project.status'|trans, project.suspended ? 'project.suspended'|trans : 'project.active'|trans) }}
+            {{ macro.row('description'|trans, project.description) }}
+        </fieldset>
+    </div>
+</div>
+
+<script>
+
+    $(function() {
+
+        function reloadTab() {
+            var $tabs = $('#tabs-project');
+            var current = $tabs.tabs('option', 'active');
+            $tabs.tabs('load', current);
+        }
+
+        // Update tab title - project name could be changed.
+        var $tabs = $('#tabs-project');
+        $('ul.ui-tabs-nav li[tabindex=0] a', $tabs).text('{{ project.name }}');
+
+        // "Back" button.
+        $('#btn-back').click(function() {
+            window.location.assign('{{ path('admin_projects') }}');
+        });
+
+        // "Edit" button.
+        $('#btn-edit').click(function() {
+            eTraxis.modal({
+                url: '{{ path('admin_dlg_edit_project', {'id': project.id}) }}',
+                title: '{{ project.name }}',
+                success: function() {
+                    reloadTab();
+                    return true;
+                }
+            });
+        });
+
+        // "Delete" button.
+        $('#btn-delete').click(function() {
+            eTraxis.confirm('{{ 'button.delete'|trans }}', '{{ 'project.confirm.delete'|trans }}', function() {
+                $.post('{{ path('admin_delete_project', {'id': project.id}) }}', function() {
+                    window.location.assign('{{ path('admin_projects') }}');
+                });
+            });
+        });
+    });
+
+</script>

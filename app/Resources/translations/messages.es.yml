@@ -74,3 +74,12 @@ group.local: Local
 group.confirm.delete: '¿Está seguro de eliminar este grupo?'
 group.conflict.name: 'Ya existe un Grupo con ese nombre.'
 project: Proyecto
+projects: Proyectos
+project.new: 'Nuevo proyecto'
+project.name: 'Nombre del proyecto'
+project.start_time: 'Fecha de inicio'
+project.status: Estado
+project.active: Activo
+project.suspended: Suspendido
+project.confirm.delete: '¿Está seguro de eliminar este proyecto?'
+project.conflict.name: 'Ya existe un Proyecto con ese nombre.'

@@ -74,3 +74,12 @@ group.local: Místní
 group.confirm.delete: 'Jste si jisti, že chcete vymazat tuto skupinu?'
 group.conflict.name: 'Skupina se zadaným jménem již existuje.'
 project: Projekt
+projects: Projekty
+project.new: 'Nový projekt'
+project.name: 'Název projektu'
+project.start_time: 'Datum a čas zahájení'
+project.status: Status
+project.active: Aktivní
+project.suspended: Pozastaven
+project.confirm.delete: 'Jste si jisti, že chcete smazat tento projekt?'
+project.conflict.name: 'Projekt se zadaným názvem již existuje.'

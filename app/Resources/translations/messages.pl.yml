@@ -74,3 +74,12 @@ group.local: Lokalna
 group.confirm.delete: 'Czy jesteś pewien, że chesz usunąć wybraną grupę?'
 group.conflict.name: 'Grupa o podanej nazwie już istnieje.'
 project: Projekt
+projects: Projekty
+project.new: 'Nowy projekt'
+project.name: 'Nazwa projektu'
+project.start_time: 'Data utworzenia'
+project.status: Status
+project.active: Aktywny
+project.suspended: Zawieszony
+project.confirm.delete: 'Czy jesteś pewien, że chesz usunąć wybrany projekt?'
+project.conflict.name: 'Projekt o podanej nazwie już istnieje.'

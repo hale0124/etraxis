@@ -1,5 +1,11 @@
 services:
 
+    etraxis.voter.project:
+        class: eTraxis\Voter\ProjectVoter
+        public: false
+        tags: [{ name: security.voter }]
+        arguments: [ @doctrine ]
+
     etraxis.voter.user:
         class: eTraxis\Voter\UserVoter
         public: false

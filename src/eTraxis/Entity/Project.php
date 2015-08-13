@@ -15,6 +15,7 @@ namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 
 /**
  * Project.
@@ -24,9 +25,13 @@ use Doctrine\ORM\Mapping as ORM;
  *                @ORM\UniqueConstraint(name="ix_projects", columns={"project_name"})
  *            })
  * @ORM\Entity
+ * @Assert\UniqueEntity(fields={"name"}, message="project.conflict.name")
  */
 class Project
 {
+    const MAX_NAME        = 25;
+    const MAX_DESCRIPTION = 100;
+
     /**
      * @var int Unique ID.
      *

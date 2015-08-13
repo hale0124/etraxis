@@ -74,3 +74,12 @@ group.local: Locale
 group.confirm.delete: 'Eliminare questo gruppo?'
 group.conflict.name: 'Nome gruppo già utilizzato.'
 project: Progetto
+projects: Progetti
+project.new: 'Nuovo progetto'
+project.name: 'Nome del progetto'
+project.start_time: 'Data di inizio'
+project.status: Stato
+project.active: Attivo
+project.suspended: Sospeso
+project.confirm.delete: 'Eliminare questo progetto?'
+project.conflict.name: 'Nome progetto già utilizzato.'

@@ -74,3 +74,12 @@ group.local: Локално
 group.confirm.delete: 'Сигурен ли сте че искате да изтриете тази група?'
 group.conflict.name: 'Вече съществува група с въведеното име.'
 project: Проект
+projects: Проекти
+project.new: 'Нов проект'
+project.name: 'Име на проекта'
+project.start_time: 'Начално време'
+project.status: Статус
+project.active: Активен
+project.suspended: Преустановен
+project.confirm.delete: 'Сигурен ли сте че искате да изтриете този проект?'
+project.conflict.name: 'Вече същестува проект с въведеното име.'

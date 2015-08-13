@@ -47,6 +47,25 @@ class LoadProjectsData extends AbstractFixture implements ContainerAwareInterfac
      */
     public function load(ObjectManager $manager)
     {
+        $projects = [
+            'eTraxis 1.0' => '2006-12-22',
+            'eTraxis 2.0' => '2009-12-04',
+            'eTraxis 3.0' => '2010-10-24',
+        ];
+
+        foreach ($projects as $name => $date) {
+
+            $project = new Project();
+
+            $project
+                ->setName($name)
+                ->setCreatedAt(strtotime($date))
+                ->setSuspended(true)
+            ;
+
+            $manager->persist($project);
+        }
+
         $groups = [
             'managers' => 'Company management',
             'staff'    => 'Company employees',

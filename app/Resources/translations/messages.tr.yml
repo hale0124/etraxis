@@ -74,3 +74,12 @@ group.local: Yerel
 group.confirm.delete: 'Bu grubu silek istediğinizden emin misiniz?'
 group.conflict.name: 'Girilen adda bir grup zaten var.'
 project: Proje
+projects: Projeler
+project.new: 'Yeni proje'
+project.name: 'Proje adı'
+project.start_time: 'Başlama zamanı'
+project.status: Durum
+project.active: Aktif
+project.suspended: Askıda
+project.confirm.delete: 'Bu projeyi silmek istediğinizden emin misiniz?'
+project.conflict.name: 'Girilen adda bir proje zaten var.'

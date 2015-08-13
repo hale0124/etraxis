@@ -74,3 +74,12 @@ group.local: Local
 group.confirm.delete: 'Tem certeza que quer apagar este grupo?'
 group.conflict.name: 'O grupo escolhido já existe.'
 project: Projeto
+projects: Projetos
+project.new: 'Novo projeto'
+project.name: 'Nome do projeto'
+project.start_time: 'Tempo de início'
+project.status: Status
+project.active: Ativo
+project.suspended: Suspenso
+project.confirm.delete: 'Tem certeza que quer apagar este projeto?'
+project.conflict.name: 'O projeto escolhido já existe.'

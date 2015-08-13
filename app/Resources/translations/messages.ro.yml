@@ -74,3 +74,12 @@ group.local: Local
 group.confirm.delete: 'Sunteti sigur ca doriti sa stergeti acest grup?'
 group.conflict.name: 'Numele grupului exista deja.'
 project: Proiect
+projects: Proiecte
+project.new: 'Proiect nou'
+project.name: 'Numele proiectului'
+project.start_time: 'Data de start'
+project.status: Stare
+project.active: Activ
+project.suspended: Suspendat
+project.confirm.delete: 'Sunteti sigur ca doriti sa stergeti acest proiect?'
+project.conflict.name: 'Numele de proiect exista deja.'

@@ -3,6 +3,7 @@ imports:
     - { resource: commandbus/shared.yml }
     - { resource: commandbus/users.yml }
     - { resource: commandbus/groups.yml }
+    - { resource: commandbus/projects.yml }
 
 services:
 
