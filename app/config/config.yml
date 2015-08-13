@@ -75,6 +75,9 @@ doctrine:
                 prefix: eTraxis\Entity
                 alias: eTraxis
                 is_bundle: false
+        dql:
+            string_functions:
+                EPOCH_DATE: eTraxis\Doctrine\EpochDateFunction
 
 # Swiftmailer Configuration
 swiftmailer:
