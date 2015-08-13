@@ -15,6 +15,7 @@ namespace eTraxis\Migrations;
 
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
+use eTraxis\Collection\DatabasePlatform;
 
 /**
  * Base eTraxis migration.
@@ -75,7 +76,7 @@ abstract class BaseMigration extends AbstractMigration
 
         switch ($platform) {
 
-            case 'mysql':
+            case DatabasePlatform::MYSQL:
 
                 $this->abortIf(
                     !is_subclass_of($this, '\eTraxis\Migrations\MysqlMigrationInterface'),
@@ -84,7 +85,7 @@ abstract class BaseMigration extends AbstractMigration
 
                 break;
 
-            case 'postgresql':
+            case DatabasePlatform::POSTGRESQL:
 
                 $this->abortIf(
                     !is_subclass_of($this, '\eTraxis\Migrations\PostgresqlMigrationInterface'),
@@ -93,7 +94,7 @@ abstract class BaseMigration extends AbstractMigration
 
                 break;
 
-            case 'mssql':
+            case DatabasePlatform::MSSQL:
 
                 $this->abortIf(
                     !is_subclass_of($this, '\eTraxis\Migrations\MssqlMigrationInterface'),
@@ -102,7 +103,7 @@ abstract class BaseMigration extends AbstractMigration
 
                 break;
 
-            case 'oracle':
+            case DatabasePlatform::ORACLE:
 
                 $this->abortIf(
                     !is_subclass_of($this, '\eTraxis\Migrations\OracleMigrationInterface'),
