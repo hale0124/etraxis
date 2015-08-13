@@ -31,7 +31,7 @@ class EpochDateFunction extends FunctionNode
     protected $parameter = null;
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function getSql(SqlWalker $sqlWalker)
     {
@@ -48,7 +48,7 @@ class EpochDateFunction extends FunctionNode
     }
 
     /**
-     * {@inheritDoc}
+     * {@inheritdoc}
      */
     public function parse(Parser $parser)
     {
