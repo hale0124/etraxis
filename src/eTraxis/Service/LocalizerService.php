@@ -14,6 +14,7 @@
 namespace eTraxis\Service;
 
 use eTraxis\Collection\Locale;
+use eTraxis\Collection\Timezone;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -57,6 +58,27 @@ class LocalizerService implements LocalizerInterface
         }
 
         return in_array($locale, Locale::getAllKeys()) ? $locale : 'en_US';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getLocalTimestamp($timestamp)
+    {
+        $offset = 0;
+
+        if ($token = $this->token_storage->getToken()) {
+
+            /** @var \eTraxis\Entity\User $user */
+            $user = $token->getUser();
+
+            if ($user instanceof UserInterface) {
+                $timezone = Timezone::getValue($user->getTimezone());
+                $offset   = timezone_offset_get(timezone_open($timezone), date_create()) - intval(date('Z'));
+            }
+        }
+
+        return $timestamp + $offset;
     }
 
     /**

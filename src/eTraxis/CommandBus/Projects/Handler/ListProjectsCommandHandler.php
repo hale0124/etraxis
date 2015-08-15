@@ -157,7 +157,7 @@ class ListProjectsCommandHandler
 
             $result['projects'][] = [
                 $entity->getName(),
-                $this->localizer->formatDate($entity->getCreatedAt()),
+                $this->localizer->formatDate($this->localizer->getLocalTimestamp($entity->getCreatedAt())),
                 $entity->getDescription(),
                 'DT_RowAttr'  => ['data-id' => $entity->getId()],
                 'DT_RowClass' => $entity->isSuspended() ? 'gray' : null,

@@ -19,6 +19,15 @@ namespace eTraxis\Service;
 interface LocalizerInterface
 {
     /**
+     * Returns specified timestamp with offset in seconds between user's timezone and server's one.
+     *
+     * @param   int $timestamp Epoch timestamp.
+     *
+     * @return  int Updated timestamp.
+     */
+    public function getLocalTimestamp($timestamp);
+
+    /**
      * Returns specified date formatted for current locale.
      *
      * @param   int $timestamp Epoch timestamp.
