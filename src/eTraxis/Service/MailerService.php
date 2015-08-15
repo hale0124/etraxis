@@ -20,7 +20,7 @@ use Twig_Environment;
 /**
  * Shortcut service for standard mailer.
  */
-class MailerService
+class MailerService implements MailerInterface
 {
     protected $logger;
     protected $twig;
@@ -41,19 +41,7 @@ class MailerService
     }
 
     /**
-     * Sends email as specified.
-     *
-     * If multiple recipients need to receive the message an array should be used.
-     * Example: array('receiver@domain.org', 'other@domain.org' => 'A name')
-     *
-     * @param   string       $from_address Sender address.
-     * @param   string       $from_name    Sender name.
-     * @param   string|array $recipients   Recipient address(es).
-     * @param   string       $subject      Email subject.
-     * @param   string       $template     Path to Twig template of the email body.
-     * @param   array        $args         Twig template parameters.
-     *
-     * @return  int The number of recipients who were accepted for delivery.
+     * {@inheritdoc}
      */
     public function send($from_address, $from_name, $recipients, $subject, $template, $args = [])
     {
