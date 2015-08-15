@@ -18,7 +18,7 @@ use Psr\Log\LoggerInterface;
 /**
  * Interaction with LDAP servers.
  */
-class LdapService
+class LdapService implements LdapInterface
 {
     protected $logger;
 
@@ -101,23 +101,7 @@ class LdapService
     }
 
     /**
-     * Tells whether the service is connected to the LDAP server.
-     *
-     * @return  bool Connection status.
-     */
-    public function isConnected()
-    {
-        return $this->link !== false;
-    }
-
-    /**
-     * Searches for specified username on LDAP server.
-     *
-     * @param   string   $basedn     Base DN to search in.
-     * @param   string   $username   Login of user to be found.
-     * @param   string[] $attributes List of LDAP attributes to return.
-     *
-     * @return  array|false If user is found then the requested attributes are returned, otherwise FALSE.
+     * {@inheritdoc}
      */
     public function find($basedn, $username, $attributes = [])
     {
@@ -182,13 +166,7 @@ class LdapService
     }
 
     /**
-     * Authenticates specified credentials against LDAP server.
-     *
-     * @param   string $basedn   Base DN to use in binding.
-     * @param   string $username Login.
-     * @param   string $password Password.
-     *
-     * @return  bool Whether authenticated successfully.
+     * {@inheritdoc}
      */
     public function authenticate($basedn, $username, $password)
     {

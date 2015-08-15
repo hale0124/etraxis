@@ -87,8 +87,6 @@ class LdapAuthenticatorTest extends BaseTestCase
             'password'
         );
 
-        $this->assertTrue($ldap->isConnected());
-
         $object = new LdapAuthenticator(
             $this->logger,
             $this->command_bus,
@@ -110,8 +108,6 @@ class LdapAuthenticatorTest extends BaseTestCase
     public function testAuthenticateTokenNoConnection()
     {
         $ldap = new LdapService($this->logger, null);
-
-        $this->assertFalse($ldap->isConnected());
 
         $object = new LdapAuthenticator(
             $this->logger,
@@ -139,8 +135,6 @@ class LdapAuthenticatorTest extends BaseTestCase
             'CN=read-only-admin,DC=example,DC=com',
             'password'
         );
-
-        $this->assertTrue($ldap->isConnected());
 
         $object = new LdapAuthenticator(
             $this->logger,

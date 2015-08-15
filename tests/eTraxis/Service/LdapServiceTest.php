@@ -62,23 +62,6 @@ class LdapServiceTest extends BaseTestCase
         );
     }
 
-    public function testIsConnectedFalse()
-    {
-        $ldap = new LdapService($this->logger,
-            null,
-            389,
-            'CN=read-only-admin,DC=example,DC=com',
-            'password'
-        );
-
-        $this->assertFalse($ldap->isConnected());
-    }
-
-    public function testIsConnectedTrue()
-    {
-        $this->assertTrue($this->object->isConnected());
-    }
-
     public function testFindSuccess()
     {
         $entry = $this->object->find('DC=example,DC=com', 'einstein', ['cn', 'mail']);

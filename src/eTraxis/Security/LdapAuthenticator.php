@@ -16,7 +16,7 @@ namespace eTraxis\Security;
 use eTraxis\CommandBus\CommandBusInterface;
 use eTraxis\CommandBus\Users\RegisterUserCommand;
 use eTraxis\CommandBus\ValidationException;
-use eTraxis\Service\LdapService;
+use eTraxis\Service\LdapInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\SimpleFormAuthenticatorInterface;
@@ -41,13 +41,13 @@ class LdapAuthenticator implements SimpleFormAuthenticatorInterface
      *
      * @param   LoggerInterface     $logger      Debug logger.
      * @param   CommandBusInterface $command_bus Command bus.
-     * @param   LdapService         $ldap        LDAP service.
+     * @param   LdapInterface       $ldap        LDAP service.
      * @param   string              $basedn      Base DN to search in.
      */
     public function __construct(
         LoggerInterface     $logger,
         CommandBusInterface $command_bus,
-        LdapService         $ldap,
+        LdapInterface       $ldap,
         $basedn)
     {
         $this->logger      = $logger;
@@ -61,11 +61,6 @@ class LdapAuthenticator implements SimpleFormAuthenticatorInterface
      */
     public function authenticateToken(TokenInterface $token, UserProviderInterface $userProvider, $providerKey)
     {
-        if (!$this->ldap->isConnected()) {
-            $this->logger->info('LDAP is not connected.');
-            throw new AuthenticationException('Bad credentials');
-        }
-
         if (!$this->ldap->authenticate($this->basedn, $token->getUsername(), $token->getCredentials())) {
             $this->logger->info('LDAP authentication is failed.');
             throw new AuthenticationException('Bad credentials');
