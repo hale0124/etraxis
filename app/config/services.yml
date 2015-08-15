@@ -24,6 +24,12 @@ services:
             - %ldap_password%
             - %ldap_tls%
 
+    localizer:
+        class: eTraxis\Service\LocalizerService
+        arguments:
+            - @security.token_storage
+            - %locale%
+
     etraxis.mailer:
         class: eTraxis\Service\MailerService
         arguments:

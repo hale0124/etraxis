@@ -128,14 +128,14 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     public function testGetLocaleFallback()
     {
-        $expected             = 'en';
+        $expected             = 'en_US';
         $this->object->locale = 0;
         $this->assertEquals($expected, $this->object->getLocale());
     }
 
     public function testSetLocaleFallback()
     {
-        $expected = 'en';
+        $expected = 'en_US';
         $this->object->setLocale('xx-XX');
         $this->assertEquals($expected, $this->object->getLocale());
     }

@@ -539,7 +539,11 @@ class User implements AdvancedUserInterface
          * @deprecated 4.1.0 A stub for compatibility btw 3.6 and 4.0.
          */
         $locales = [
-            'en'    => 1000,
+            'en_US' => 1000,
+            'en_GB' => 1001,
+            'en_CA' => 1002,
+            'en_AU' => 1003,
+            'en_NZ' => 1004,
             'fr'    => 1010,
             'de'    => 1020,
             'it'    => 1030,
@@ -559,7 +563,7 @@ class User implements AdvancedUserInterface
         ];
 
         if (!array_key_exists($locale, $locales)) {
-            $locale = 'en';
+            $locale = 'en_US';
         }
 
         $this->locale = $locales[$locale];
@@ -578,11 +582,11 @@ class User implements AdvancedUserInterface
          * @deprecated 4.1.0 A stub for compatibility btw 3.6 and 4.0.
          */
         $locales = [
-            1000 => 'en',
-            1001 => 'en',
-            1002 => 'en',
-            1003 => 'en',
-            1004 => 'en',
+            1000 => 'en_US',
+            1001 => 'en_GB',
+            1002 => 'en_CA',
+            1003 => 'en_AU',
+            1004 => 'en_NZ',
             1010 => 'fr',
             1020 => 'de',
             1030 => 'it',

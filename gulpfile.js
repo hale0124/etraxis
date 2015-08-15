@@ -174,7 +174,11 @@ gulp.task('javascripts:i18n', function() {
         'bg',
         'cs',
         'de',
-        'en',
+        'en-AU',
+        'en-CA',
+        'en-GB',
+        'en-NZ',
+        'en-US',
         'es',
         'fr',
         'hu',
@@ -193,9 +197,9 @@ gulp.task('javascripts:i18n', function() {
     i18n.forEach(function(locale) {
 
         var files = [
-            'vendor/bower/jquery.ui/ui/i18n/datepicker-' + (locale == 'en' ? 'en-GB' : locale) + '.js',
-            'vendor/bower/datatables-plugins/i18n/datatables-' + locale + '.js',
-            'app/Resources/public/js/i18n/etraxis-' + locale + '.js'
+            'vendor/bower/jquery.ui/ui/i18n/datepicker-' + (locale.substr(0, 2) == 'en' ? 'en-GB' : locale) + '.js',
+            'vendor/bower/datatables-plugins/i18n/datatables-' + (locale.substr(0, 2) == 'en' ? 'en' : locale) + '.js',
+            'app/Resources/public/js/i18n/etraxis-' + (locale.substr(0, 2) == 'en' ? 'en' : locale) + '.js'
         ];
 
         gulp.src(files)

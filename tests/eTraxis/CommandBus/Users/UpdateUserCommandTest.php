@@ -27,7 +27,7 @@ class UpdateUserCommandTest extends BaseTestCase
         $this->assertNotEmpty($user->getDescription());
         $this->assertFalse($user->isAdmin());
         $this->assertFalse($user->isDisabled());
-        $this->assertEquals('en', $user->getLocale());
+        $this->assertEquals('en_US', $user->getLocale());
         $this->assertEquals('azure', $user->getTheme());
         $this->assertEquals(0, $user->getTimezone());
 

@@ -3,7 +3,7 @@ services:
     command.projects.list:
         class: eTraxis\CommandBus\Projects\Handler\ListProjectsCommandHandler
         tags: [{ name: command_handler, command: eTraxis\CommandBus\Projects\ListProjectsCommand }]
-        arguments: [ @translator, @doctrine ]
+        arguments: [ @translator, @localizer, @doctrine ]
 
     command.project.find:
         class: eTraxis\CommandBus\Projects\Handler\FindProjectCommandHandler

@@ -14,6 +14,7 @@
 namespace eTraxis\CommandBus\Projects\Handler;
 
 use eTraxis\CommandBus\Projects\ListProjectsCommand;
+use eTraxis\Service\LocalizerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -27,17 +28,23 @@ class ListProjectsCommandHandler
     const COLUMN_DESCRIPTION = 2;
 
     protected $translator;
+    protected $localizer;
     protected $doctrine;
 
     /**
      * Dependency Injection constructor.
      *
      * @param   TranslatorInterface $translator Translation service.
+     * @param   LocalizerInterface  $localizer  Localization service.
      * @param   RegistryInterface   $doctrine   Doctrine entity managers registry.
      */
-    public function __construct(TranslatorInterface $translator, RegistryInterface $doctrine)
+    public function __construct(
+        TranslatorInterface $translator,
+        LocalizerInterface  $localizer,
+        RegistryInterface   $doctrine)
     {
         $this->translator = $translator;
+        $this->localizer  = $localizer;
         $this->doctrine   = $doctrine;
     }
 
@@ -150,7 +157,7 @@ class ListProjectsCommandHandler
 
             $result['projects'][] = [
                 $entity->getName(),
-                date('Y-m-d', $entity->getCreatedAt()),
+                $this->localizer->formatDate($entity->getCreatedAt()),
                 $entity->getDescription(),
                 'DT_RowAttr'  => ['data-id' => $entity->getId()],
                 'DT_RowClass' => $entity->isSuspended() ? 'gray' : null,
