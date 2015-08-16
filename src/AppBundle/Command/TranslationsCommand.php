@@ -44,6 +44,10 @@ class TranslationsCommand extends Command
                 continue;
             }
 
+            if (strpos($entry, 'en_') !== false) {
+                continue;
+            }
+
             if (is_file("app/Resources/translations/{$entry}")) {
 
                 $output->writeln("Updating {$entry}");
