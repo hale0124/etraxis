@@ -49,6 +49,7 @@ theme: Дизайн
 timezone: 'Часовой пояс'
 user.confirm.delete: 'Вы уверены, что хотите удалить эту учетную запись?'
 user.conflict.username: 'Учетная запись с таким именем пользователя уже существует.'
+user.invalid.username: 'Неверное имя пользователя.'
 password.too.short: 'Пароль должен содержать как минимум %length% символов.'
 passwords.dont.match: 'Пароли не совпадают.'
 key.tab: Табуляция

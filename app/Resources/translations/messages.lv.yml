@@ -49,6 +49,7 @@ theme: Motīvs
 timezone: 'Laika zona'
 user.confirm.delete: 'Vai tiešām vēlaties dzēst šo kontu?'
 user.conflict.username: 'Lietotāja konts ar tādu lietotāja vārdu jau eksistē.'
+user.invalid.username: 'Nezināms lietotāja vārds.'
 password.too.short: 'Parolei jāsatur vismaz %length% simbolu.'
 passwords.dont.match: 'Paroles nesakrīt.'
 key.tab: Tab

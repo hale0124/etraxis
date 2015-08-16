@@ -49,6 +49,7 @@ theme: Motyw
 timezone: 'Strefa czasowa'
 user.confirm.delete: 'Czy jesteś pewien, że chesz usunąć wybrane konto?'
 user.conflict.username: 'Wprowadzona nazwa konta już istnieje.'
+user.invalid.username: 'Nieprawidłowa nazwa użytkownika.'
 password.too.short: 'Hasło powinno mieć co najmniej %length% znaków.'
 passwords.dont.match: 'Hasła nie są identyczne.'
 key.tab: Tab

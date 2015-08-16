@@ -49,6 +49,7 @@ theme: Tema
 timezone: 'Saat dilimi'
 user.confirm.delete: 'Bu hesabı silmek istediğinizden emin misiniz?'
 user.conflict.username: 'Girilen kullanıcı adıyla bir hesap zaten var.'
+user.invalid.username: 'Geçersiz kullanıcı adı.'
 password.too.short: 'Parola en az %length% karakter uzunluğunda olmalıdır.'
 passwords.dont.match: 'Parolalar uyuşmuyor.'
 key.tab: Tab

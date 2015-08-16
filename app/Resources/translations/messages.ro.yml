@@ -49,6 +49,7 @@ theme: Tema
 timezone: 'Fus orar'
 user.confirm.delete: 'Sunteti sigur ca doriti sa stergeti acest cont?'
 user.conflict.username: 'Numele de utilizator este deja folosit.'
+user.invalid.username: 'Nume utilizator invalid.'
 password.too.short: 'Parola trebuie sa aiba cel putin %length% caractere.'
 passwords.dont.match: 'Parola nu este identica.'
 key.tab: Tab

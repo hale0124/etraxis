@@ -49,6 +49,7 @@ theme: Tema
 timezone: 'Fuso horário'
 user.confirm.delete: 'Tem certeza que quer apagar esta conta?'
 user.conflict.username: 'A conta escolhida já existe..'
+user.invalid.username: 'Usuário Inválido.'
 password.too.short: 'A senha deve conter pelo menos %length% caracteres.'
 passwords.dont.match: 'As senhas não conferem.'
 key.tab: Tab

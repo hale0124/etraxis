@@ -49,6 +49,7 @@ theme: Aussehen
 timezone: Zeitzone
 user.confirm.delete: 'Möchten Sie dieses Konto wirklich löschen?'
 user.conflict.username: 'Ein Konto mit diesem Benutzernamen existiert bereits.'
+user.invalid.username: 'Ungültiger Benutzername.'
 password.too.short: 'Das Passwort muss mindestens %length% Zeichen lang sein.'
 passwords.dont.match: 'Die Passwörter stimmen nicht überein.'
 key.tab: Tab

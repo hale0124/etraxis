@@ -49,6 +49,7 @@ theme: Thema
 timezone: UL
 user.confirm.delete: 'Ben je zeker dat je deze account wilt verwijderen?'
 user.conflict.username: 'Account met ingevoerde naam bestaat reeds.'
+user.invalid.username: 'Ongeldige gebruikersnaam.'
 password.too.short: 'Wachtwoord moet tenminste %length% tekens bevatten.'
 passwords.dont.match: 'Wachtwoorden stemmen niet overeen.'
 key.tab: Tab
