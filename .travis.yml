@@ -31,4 +31,4 @@ before_script:
 script:
     - phpunit --coverage-clover=coverage.clover
     - wget https://scrutinizer-ci.com/ocular.phar
-    - if [[ "$(phpenv version-name)" != "7.0" ]]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi
+    - if [[ "$(phpenv version-name)" != "7.0" && "$DB" == "pgsql" ]]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi
