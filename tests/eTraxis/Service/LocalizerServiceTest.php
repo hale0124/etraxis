@@ -21,32 +21,37 @@ class LocalizerServiceTest extends BaseTestCase
 {
     private function getTimestamp()
     {
-        $timestamp = 1089291600;
-        $offset    = timezone_offset_get(timezone_open('UTC'), date_create()) - intval(date('Z'));
+        ini_set('date.timezone', 'UTC');
 
-        return $timestamp + $offset;
+        return 1089291600;  // 08 Jul 2004 13:00:00 GMT
     }
 
     public function testDate()
     {
         $expected = '7/8/2004'; // en_US
 
+        $token = new UsernamePasswordToken($this->findUser('artem'), null, 'etraxis.provider');
+
         $token_storage = new TokenStorage();
+        $token_storage->setToken($token);
 
         $service = new LocalizerService($token_storage, 'xx_XX');
 
-        $this->assertEquals($expected, $service->formatDate($this->getTimestamp()));
+        $this->assertEquals($expected, $service->formatDate($service->getLocalTimestamp($this->getTimestamp())));
     }
 
     public function testTime()
     {
         $expected = '1:00 PM'; // en_US
 
+        $token = new UsernamePasswordToken($this->findUser('artem'), null, 'etraxis.provider');
+
         $token_storage = new TokenStorage();
+        $token_storage->setToken($token);
 
         $service = new LocalizerService($token_storage, 'xx_XX');
 
-        $this->assertEquals($expected, $service->formatTime($this->getTimestamp()));
+        $this->assertEquals($expected, $service->formatTime($service->getLocalTimestamp($this->getTimestamp())));
     }
 
     public function testEmptyToken()
@@ -57,7 +62,7 @@ class LocalizerServiceTest extends BaseTestCase
 
         $service = new LocalizerService($token_storage, 'en_GB');
 
-        $this->assertEquals($expected, $service->formatDate($this->getTimestamp()));
+        $this->assertEquals($expected, $service->formatDate($service->getLocalTimestamp($this->getTimestamp())));
     }
 
     public function testGuest()
@@ -71,20 +76,6 @@ class LocalizerServiceTest extends BaseTestCase
 
         $service = new LocalizerService($token_storage, 'en_GB');
 
-        $this->assertEquals($expected, $service->formatDate($this->getTimestamp()));
-    }
-
-    public function testAuthenticated()
-    {
-        $expected = '7/8/2004'; // en_US
-
-        $token = new UsernamePasswordToken($this->findUser('artem'), null, 'etraxis.provider');
-
-        $token_storage = new TokenStorage();
-        $token_storage->setToken($token);
-
-        $service = new LocalizerService($token_storage, 'en_GB');
-
-        $this->assertEquals($expected, $service->formatDate($this->getTimestamp()));
+        $this->assertEquals($expected, $service->formatDate($service->getLocalTimestamp($this->getTimestamp())));
     }
 }
