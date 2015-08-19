@@ -5,6 +5,9 @@
     "license": "GPL-3.0",
     "require": {
         "php"                                  : ">=5.5.0",
+        "ext-ctype"                            : "*",
+        "ext-iconv"                            : "*",
+        "ext-mbstring"                         : "*",
         "symfony/symfony"                      : "~2.7",
         "doctrine/orm"                         : "~2.5",
         "doctrine/dbal"                        : "~2.5",
