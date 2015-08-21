@@ -74,30 +74,6 @@ class CheckRequirementsCommand extends ContainerAwareCommand
 
         $report = [];
 
-        // safe_mode
-        if (ini_get('safe_mode')) {
-            $report['safe_mode'] = '<error>FAIL</error> (safe mode is turned on, eTraxis behaviour is unpredictable)';
-        }
-        else {
-            $report['safe_mode'] = 'OK';
-        }
-
-        // magic_quotes_gpc
-        if (get_magic_quotes_gpc() == 0) {
-            $report['magic_quotes_gpc'] = 'OK';
-        }
-        else {
-            $report['magic_quotes_gpc'] = '<error>FAIL</error> (magic quotes for GET/POST/Cookie are turned on, should be disabled)';
-        }
-
-        // magic_quotes_runtime
-        if (get_magic_quotes_runtime() == 0) {
-            $report['magic_quotes_runtime'] = 'OK';
-        }
-        else {
-            $report['magic_quotes_runtime'] = '<error>FAIL</error> (magic quotes for runtime data are turned on, should be disabled)';
-        }
-
         // default_charset
         $default_charset = ini_get('default_charset');
 
