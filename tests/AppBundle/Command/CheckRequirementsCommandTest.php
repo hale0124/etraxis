@@ -13,6 +13,7 @@
 
 namespace AppBundle\Command;
 
+use eTraxis\Collection\DatabasePlatform;
 use eTraxis\Tests\BaseTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
@@ -21,6 +22,40 @@ class CheckRequirementsCommandTest extends BaseTestCase
 {
     public function testOK()
     {
+        $extensions = [
+            'ctype      OK',
+            'iconv      OK',
+            'json       OK',
+            'mbstring   OK',
+            'pcre       OK',
+            'SimpleXML  OK',
+        ];
+
+        $platform = $this->doctrine->getConnection()->getDatabasePlatform()->getName();
+
+        switch ($platform) {
+
+            case DatabasePlatform::MYSQL:
+                $extensions[] = 'mysqli     OK';
+                break;
+
+            case DatabasePlatform::POSTGRESQL:
+                $extensions[] = 'pgsql      OK';
+                break;
+
+            case DatabasePlatform::MSSQL:
+                $extensions[] = 'sqlsrv     OK';
+                break;
+
+            case DatabasePlatform::ORACLE:
+                $extensions[] = 'oci8       OK';
+                break;
+        }
+
+        sort($extensions, SORT_STRING | SORT_FLAG_CASE);
+
+        $extensions = implode("\n", $extensions);
+
         $expected = <<<OUT
 Check PHP configuration
 
@@ -29,13 +64,7 @@ date.timezone    OK (Pacific/Auckland)
 
 Check PHP extensions
 
-ctype      OK
-iconv      OK
-json       OK
-mbstring   OK
-mysqli     OK
-pcre       OK
-SimpleXML  OK
+{$extensions}
 
 
 OUT;
