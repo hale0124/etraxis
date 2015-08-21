@@ -91,7 +91,7 @@ class CheckRequirementsCommand extends ContainerAwareCommand
             $report['date.timezone'] = '<error>FAIL</error> (undefined, should be set to one of supported timezones enumerated at <http://www.php.net/manual/timezones.php>)';
         }
         else {
-            $report['date.timezone'] = 'OK ("' . $timezone . '")';
+            $report['date.timezone'] = 'OK (' . $timezone . ')';
         }
 
         $this->outputReport($output, $report);

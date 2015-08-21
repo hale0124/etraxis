@@ -17,7 +17,8 @@ addons:
         - php5-ldap
 
 before_install:
-    - echo "extension = ldap.so" >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - echo 'extension = ldap.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - echo 'date.timezone = "Pacific/Auckland"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
 install:
     - cp app/config/travis/parameters.$DB.yml app/config/parameters.yml
