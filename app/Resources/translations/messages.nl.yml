@@ -52,8 +52,12 @@ timezone: UL
 user.confirm.delete: 'Ben je zeker dat je deze account wilt verwijderen?'
 user.conflict.username: 'Account met ingevoerde naam bestaat reeds.'
 user.invalid.username: 'Ongeldige gebruikersnaam.'
-password.too.short: 'Wachtwoord moet tenminste %length% tekens bevatten.'
-passwords.dont.match: 'Wachtwoorden stemmen niet overeen.'
+password.too_short: 'Wachtwoord moet tenminste %length% tekens bevatten.'
+passwords.dont_match: 'Wachtwoorden stemmen niet overeen.'
+password.changed: 'Wachtwoord is met succes gewijzigd'
+password.cant_change: 'Dit account gebruikt een externe bron voor authenticatie. Het is niet mogelijk om het wachtwoord te veranderen.'
+security.forgot_password: 'Wachtwoord verloren'
+security.forgot_password.email_sent: 'Er is een e-mail naar u verstuurd met instructies over het kiezen van een nieuw wachtwoord.'
 key.tab: Tab
 key.space: Space
 comma: Comma

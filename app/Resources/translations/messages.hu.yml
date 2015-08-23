@@ -52,8 +52,12 @@ timezone: Időzóna
 user.confirm.delete: 'Biztos törölni szeretné a felhasználót?'
 user.conflict.username: 'Már létezik ilyen névvel ellátott felhasználó.'
 user.invalid.username: 'Érvénytelen felhasználónév.'
-password.too.short: 'A jelszónak legalább %length% hosszúságúnak kell lennie.'
-passwords.dont.match: 'A jelszavak nem egyeznek.'
+password.too_short: 'A jelszónak legalább %length% hosszúságúnak kell lennie.'
+passwords.dont_match: 'A jelszavak nem egyeznek.'
+password.changed: 'A jelszó módosítása megtörtént.'
+password.cant_change: 'A fiók külső azonosítási forrást használ. A jelszó megváltoztatása nem lehetséges.'
+security.forgot_password: 'Elfelejtett jelszó'
+security.forgot_password.email_sent: 'Egy e-mail üzenetben postáztunk Önnek egy leírást az új jelszó beállításáról.'
 key.tab: Tab
 key.space: Space
 comma: Comma

@@ -1,0 +1,51 @@
+{% extends 'base.html.twig' %}
+
+{% block content %}
+
+    <div class="container">
+
+        {% if message %}
+
+            <div class="columns">
+                <div class="column full-width">
+                    <div class="highlight">{{ message|trans }}</div>
+                </div>
+            </div>
+
+        {% else %}
+
+            <div class="columns">
+                <div class="column full-width">
+
+                    {{ form_start(form) }}
+                    <fieldset>
+                        <div class="container">
+
+                            <div class="columns control">
+                                <div class="column one-third label">
+                                    {{ form_label(form.username) }}:
+                                </div>
+                                <div class="column one-third">
+                                    {{ form_widget(form.username, { attr: { class: 'full-width', placeholder: 'required'|trans } }) }}
+                                </div>
+                            </div>
+
+                            <div class="columns control">
+                                <div class="column one-third centered">
+                                    <input type="submit" value="{{ 'button.ok'|trans }}">
+                                    <a href="{{ path('login') }}" class="button">{{ 'button.cancel'|trans }}</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </fieldset>
+                    {{ form_end(form) }}
+
+                </div>
+            </div>
+
+        {% endif %}
+
+    </div>
+
+{% endblock %}

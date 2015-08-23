@@ -52,8 +52,12 @@ timezone: 'Saat dilimi'
 user.confirm.delete: 'Bu hesabı silmek istediğinizden emin misiniz?'
 user.conflict.username: 'Girilen kullanıcı adıyla bir hesap zaten var.'
 user.invalid.username: 'Geçersiz kullanıcı adı.'
-password.too.short: 'Parola en az %length% karakter uzunluğunda olmalıdır.'
-passwords.dont.match: 'Parolalar uyuşmuyor.'
+password.too_short: 'Parola en az %length% karakter uzunluğunda olmalıdır.'
+passwords.dont_match: 'Parolalar uyuşmuyor.'
+password.changed: 'Parola başarıyla güncellendi.'
+password.cant_change: 'Bu hesap harici bir denetim kaynağı kullanıyor. Parolayı değiştirmek mümkün değil.'
+security.forgot_password: 'Parolamı unuttum'
+security.forgot_password.email_sent: 'Yeni parola seçme talimatlarını içeren e-postanız gönderildi.'
 key.tab: Tab
 key.space: Space
 comma: Comma

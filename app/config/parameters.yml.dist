@@ -14,6 +14,9 @@ parameters:
     mailer_password:        ~
     delivery_address:       ~
 
+    mailfrom_address:       noreply@example.com
+    mailfrom_name:          "eTraxis Support"
+
     ldap_host:              ~
     ldap_port:              ~
     ldap_user:              ~

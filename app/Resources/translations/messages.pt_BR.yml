@@ -52,8 +52,12 @@ timezone: 'Fuso horário'
 user.confirm.delete: 'Tem certeza que quer apagar esta conta?'
 user.conflict.username: 'A conta escolhida já existe..'
 user.invalid.username: 'Usuário Inválido.'
-password.too.short: 'A senha deve conter pelo menos %length% caracteres.'
-passwords.dont.match: 'As senhas não conferem.'
+password.too_short: 'A senha deve conter pelo menos %length% caracteres.'
+passwords.dont_match: 'As senhas não conferem.'
+password.changed: 'Senha alterada com sucesso.'
+password.cant_change: 'Esta conta utiliza autenticação externa. Não é possível alterar a senha.'
+security.forgot_password: 'Perdi minha senha'
+security.forgot_password.email_sent: 'Um e-mail com instruções para escolher uma nova senha foi enviado para você.'
 key.tab: Tab
 key.space: Space
 comma: Comma

@@ -52,8 +52,12 @@ timezone: 'Laika zona'
 user.confirm.delete: 'Vai tiešām vēlaties dzēst šo kontu?'
 user.conflict.username: 'Lietotāja konts ar tādu lietotāja vārdu jau eksistē.'
 user.invalid.username: 'Nezināms lietotāja vārds.'
-password.too.short: 'Parolei jāsatur vismaz %length% simbolu.'
-passwords.dont.match: 'Paroles nesakrīt.'
+password.too_short: 'Parolei jāsatur vismaz %length% simbolu.'
+passwords.dont_match: 'Paroles nesakrīt.'
+password.changed: 'Parole tika veiksmīgi atjaunota.'
+password.cant_change: 'Šis konts izmanto ārēju pilnvarošanas avotu. Nav iespējams nomainīt paroli.'
+security.forgot_password: 'Nozaudēta parole'
+security.forgot_password.email_sent: 'Jums tika nosūtīts e-pasts ar instrukcijām, kā izveidot jaunu paroli.'
 key.tab: Tab
 key.space: Space
 comma: Comma

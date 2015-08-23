@@ -52,8 +52,12 @@ timezone: 'Fuseau horaire'
 user.confirm.delete: 'Etes-vous sur de vouloir effacer ce compte?'
 user.conflict.username: 'Il existe déjà un compte portant ce nom.'
 user.invalid.username: 'Nom utilisateur invalide.'
-password.too.short: 'Le mot de passe doit comporter au moins %length% caracteres.'
-passwords.dont.match: 'Les mots de passe ne correspondent pas.'
+password.too_short: 'Le mot de passe doit comporter au moins %length% caracteres.'
+passwords.dont_match: 'Les mots de passe ne correspondent pas.'
+password.changed: 'Mot de passe mis à jour avec succès.'
+password.cant_change: 'Ce compte utilise une authentification externe. Impossible de changer le mot de passe.'
+security.forgot_password: 'Mot de passe perdu'
+security.forgot_password.email_sent: 'Un message contenant les instructions pour choisir un nouveau mot de passe vous a été envoyé.'
 key.tab: Tab
 key.space: Space
 comma: Comma

@@ -2,7 +2,7 @@
 
 //----------------------------------------------------------------------
 //
-//  Copyright (C) 2014 Artem Rodygin
+//  Copyright (C) 2014-2015 Artem Rodygin
 //
 //  This file is part of eTraxis.
 //
@@ -88,16 +88,18 @@ class User implements AdvancedUserInterface
     private $passwordSetAt;
 
     /**
-     * @deprecated 4.1.0 Authorization token of last user log on.
+     * @var string Hash for password reset.
+     *
      * @ORM\Column(name="auth_token", type="string", length=32, nullable=true)
      */
-    private $authToken;
+    private $resetToken;
 
     /**
-     * @deprecated 4.1.0 Unix Epoch timestamp when authorization token will be expired.
+     * @var int Unix Epoch timestamp when the password reset token expires.
+     *
      * @ORM\Column(name="token_expire", type="integer")
      */
-    private $tokenExpire;
+    private $resetTokenExpiresAt;
 
     /**
      * @var bool Whether user has administration privileges.
@@ -218,9 +220,9 @@ class User implements AdvancedUserInterface
      */
     public function __construct()
     {
-        $this->passwordSetAt = 0;
-        $this->authToken     = null;
-        $this->tokenExpire   = 0;
+        $this->passwordSetAt       = 0;
+        $this->resetToken          = null;
+        $this->resetTokenExpiresAt = 0;
 
         $this->isAdmin    = false;
         $this->isDisabled = false;
@@ -398,6 +400,54 @@ class User implements AdvancedUserInterface
     public function getPasswordSetAt()
     {
         return $this->passwordSetAt;
+    }
+
+    /**
+     * Standard setter.
+     *
+     * @param   string $resetToken
+     *
+     * @return  self
+     */
+    public function setResetToken($resetToken)
+    {
+        $this->resetToken = $resetToken;
+
+        return $this;
+    }
+
+    /**
+     * Standard getter.
+     *
+     * @return  string
+     */
+    public function getResetToken()
+    {
+        return $this->resetToken;
+    }
+
+    /**
+     * Standard setter.
+     *
+     * @param   int $resetTokenExpiresAt
+     *
+     * @return  self
+     */
+    public function setResetTokenExpiresAt($resetTokenExpiresAt)
+    {
+        $this->resetTokenExpiresAt = $resetTokenExpiresAt;
+
+        return $this;
+    }
+
+    /**
+     * Standard getter.
+     *
+     * @return  int
+     */
+    public function getResetTokenExpiresAt()
+    {
+        return $this->resetTokenExpiresAt;
     }
 
     /**

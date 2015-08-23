@@ -2,7 +2,7 @@
 
 //----------------------------------------------------------------------
 //
-//  Copyright (C) 2014 Artem Rodygin
+//  Copyright (C) 2014-2015 Artem Rodygin
 //
 //  This file is part of eTraxis.
 //
@@ -12,6 +12,8 @@
 //----------------------------------------------------------------------
 
 namespace eTraxis\Entity;
+
+use Rhumsaa\Uuid\Uuid;
 
 /**
  * @todo Remove in 4.1
@@ -76,6 +78,20 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $expected = time();
         $this->object->setPasswordSetAt($expected);
         $this->assertEquals($expected, $this->object->getPasswordSetAt());
+    }
+
+    public function testResetToken()
+    {
+        $expected = Uuid::uuid4()->getHex();
+        $this->object->setResetToken($expected);
+        $this->assertEquals($expected, $this->object->getResetToken());
+    }
+
+    public function testResetTokenExpiresAt()
+    {
+        $expected = time();
+        $this->object->setResetTokenExpiresAt($expected);
+        $this->assertEquals($expected, $this->object->getResetTokenExpiresAt());
     }
 
     public function testIsAdmin()

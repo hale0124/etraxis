@@ -51,7 +51,7 @@ class InternalPasswordEncoder extends BasePasswordEncoder
         }
 
         if (strlen($raw) < $this->min_length) {
-            throw new BadCredentialsException($this->translator->trans('password.too.short', ['%length%' => $this->min_length]));
+            throw new BadCredentialsException($this->translator->trans('password.too_short', ['%length%' => $this->min_length]));
         }
 
         return base64_encode(sha1($raw, true));

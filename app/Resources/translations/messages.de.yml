@@ -52,8 +52,12 @@ timezone: Zeitzone
 user.confirm.delete: 'Möchten Sie dieses Konto wirklich löschen?'
 user.conflict.username: 'Ein Konto mit diesem Benutzernamen existiert bereits.'
 user.invalid.username: 'Ungültiger Benutzername.'
-password.too.short: 'Das Passwort muss mindestens %length% Zeichen lang sein.'
-passwords.dont.match: 'Die Passwörter stimmen nicht überein.'
+password.too_short: 'Das Passwort muss mindestens %length% Zeichen lang sein.'
+passwords.dont_match: 'Die Passwörter stimmen nicht überein.'
+password.changed: 'Kennwort wurde erfolgreich aktualisiert.'
+password.cant_change: 'Dieses Konto verwendet eine externe Authentifizierungs-Quelle. Unmöglich, das Kennwort zu ändern.'
+security.forgot_password: 'Kennwort vergessen'
+security.forgot_password.email_sent: 'Eine E-Mail mit Anweisungen, ein neues Kennwort zu wählen, wurde Ihnen geschickt.'
 key.tab: Tab
 key.space: Space
 comma: Comma

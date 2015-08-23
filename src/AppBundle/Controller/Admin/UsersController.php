@@ -315,7 +315,7 @@ class UsersController extends Controller
             $data = $this->getFormData($request, 'user');
 
             if ($data['password'] != $data['confirmation']) {
-                throw new CommandException($this->get('translator')->trans('passwords.dont.match'));
+                throw new CommandException($this->get('translator')->trans('passwords.dont_match'));
             }
 
             $command = new Users\CreateUserCommand($data);
@@ -377,7 +377,7 @@ class UsersController extends Controller
             if ($data['password']) {
 
                 if ($data['password'] != $data['confirmation']) {
-                    throw new CommandException($this->get('translator')->trans('passwords.dont.match'));
+                    throw new CommandException($this->get('translator')->trans('passwords.dont_match'));
                 }
 
                 $command = new Users\SetPasswordCommand([

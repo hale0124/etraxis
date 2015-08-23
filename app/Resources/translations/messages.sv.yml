@@ -52,8 +52,12 @@ timezone: Tidszon
 user.confirm.delete: 'Är du säker på att du vill ta bort detta kontot?'
 user.conflict.username: 'Kontot med detta användarnamn finns redan.'
 user.invalid.username: 'Ogiltigt användarnamn.'
-password.too.short: 'Lösenord ska vara minst %length% tecken långt.'
-passwords.dont.match: 'Lösenorden matchar inte.'
+password.too_short: 'Lösenord ska vara minst %length% tecken långt.'
+passwords.dont_match: 'Lösenorden matchar inte.'
+password.changed: 'Lösenordet har uppdaterats'
+password.cant_change: 'Detta konto använder en extern autentiseringskälla. Det går inte att byta lösenord.'
+security.forgot_password: 'Glömt lösenord'
+security.forgot_password.email_sent: 'Ett mail med instruktioner om hur man väljer ett nytt lösenord har skickats till dig.'
 key.tab: Tab
 key.space: Space
 comma: Comma

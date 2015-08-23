@@ -52,8 +52,12 @@ timezone: 'Časová zóna'
 user.confirm.delete: 'Jste si jisti, že chcete smazat tento účet?'
 user.conflict.username: 'Účet se zadaným uživatelským jménem již existuje.'
 user.invalid.username: 'Neplatné uživatelské jméno.'
-password.too.short: 'Heslo musí být dlouhé alespoň %length% znaků.'
-passwords.dont.match: 'Hesla se neshodují.'
+password.too_short: 'Heslo musí být dlouhé alespoň %length% znaků.'
+passwords.dont_match: 'Hesla se neshodují.'
+password.changed: 'Heslo bylo úspěšně změněno.'
+password.cant_change: 'Tento účet používá externí autentifikaci. Zde heslo změnit nemůžete.'
+security.forgot_password: 'Zapomenuté heslo'
+security.forgot_password.email_sent: 'Byl vám zaslán email s intrukcemi jak si nastavíte nové heslo.'
 key.tab: Tab
 key.space: Space
 comma: Comma

@@ -52,8 +52,12 @@ timezone: 'Fus orar'
 user.confirm.delete: 'Sunteti sigur ca doriti sa stergeti acest cont?'
 user.conflict.username: 'Numele de utilizator este deja folosit.'
 user.invalid.username: 'Nume utilizator invalid.'
-password.too.short: 'Parola trebuie sa aiba cel putin %length% caractere.'
-passwords.dont.match: 'Parola nu este identica.'
+password.too_short: 'Parola trebuie sa aiba cel putin %length% caractere.'
+passwords.dont_match: 'Parola nu este identica.'
+password.changed: 'Parolă actualizată.'
+password.cant_change: 'Acest cont folosește o sursă externă de autentificare. Nu se poate schimba parola.'
+security.forgot_password: 'Parolă uitată'
+security.forgot_password.email_sent: 'S-a trimis un email cu instrucțiuni de schimbare a parolei.'
 key.tab: Tab
 key.space: Space
 comma: Comma

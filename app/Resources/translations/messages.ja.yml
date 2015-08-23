@@ -52,8 +52,12 @@ timezone: タイムゾーン
 user.confirm.delete: アカウントを削除してよろしいですか？
 user.conflict.username: 入力されたユーザーの名前は既に存在しています。
 user.invalid.username: 無効なユーザー名です。
-password.too.short: 'パスワードは最低 %length% 文字以上である必要があります。'
-passwords.dont.match: パスワードが一致しません。
+password.too_short: 'パスワードは最低 %length% 文字以上である必要があります。'
+passwords.dont_match: パスワードが一致しません。
+password.changed: パスワードが更新されました。
+password.cant_change: このアカウントでは外部認証を使っています。パスワードは変更できません。
+security.forgot_password: パスワードの再発行
+security.forgot_password.email_sent: 新しいパスワードのメールを送信しました。
 key.tab: Tab
 key.space: Space
 comma: Comma
