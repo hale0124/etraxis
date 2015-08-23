@@ -3,12 +3,17 @@
 {% block content %}
 
     <div class="container">
+
+        {% if error %}
         <div class="columns">
             <div class="column full-width">
+                <div class="error">{{ error.message|trans }}</div>
+            </div>
+        </div>
+        {% endif %}
 
-                {% if error %}
-                    <div class="error">{{ error.message|trans }}</div>
-                {% endif %}
+        <div class="columns">
+            <div class="column full-width">
 
                 <form action="{{ path('login_check') }}" method="post">
                     <fieldset>
@@ -51,6 +56,7 @@
 
             </div>
         </div>
+
     </div>
 
 {% endblock %}

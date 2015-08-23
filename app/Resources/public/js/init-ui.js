@@ -17,7 +17,7 @@
     $.fn.initUI = function() {
 
         // Add default classes.
-        $('fieldset', this).addClass('ui-widget-content ui-corner-all');
+        $('fieldset', this).addClass('ui-corner-all');
         $('input[type=text]', this).addClass('ui-widget-content ui-corner-all');
         $('input[type=email]', this).addClass('ui-widget-content ui-corner-all');
         $('input[type=password]', this).addClass('ui-widget-content ui-corner-all');
@@ -29,6 +29,7 @@
         $('input[type=button]', this).button();     // regular buttons
         $('input[type=submit]', this).button();     // submit buttons
         $('input[type=reset]', this).button();      // reset buttons
+        $('.button', this).button();                // regular buttons
         $('.dropdown', this).dropdown();            // buttons with dropdown menu
         $('.buttonset', this).buttonset();          // buttonsets
         $('.date', this).datepicker();              // datepickers
