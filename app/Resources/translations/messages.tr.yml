@@ -18,6 +18,7 @@ button.export: 'Dışa aktar'
 button.import: 'İçe Aktar'
 required: gerekli
 error.not_found: 'Erişmek istediğiniz sayfa mevcut değil ya da kaldırılmış.'
+error.not_authorized: 'Bu sayfaya erişme yetkiniz yok.'
 security.log_in: Giriş
 security.log_out: Çıkış
 security.remember_me: 'Sürekli bağlı kal'

@@ -18,6 +18,7 @@ button.export: Exportovat
 button.import: Importovat
 required: povinný
 error.not_found: 'Stránka, kterou se snažíte zobrazit, neexistuje nebo byla smazána.'
+error.not_authorized: 'Nemáte dostatečná práva pro zobrazení této stránky.'
 security.log_in: 'Přihlásit se'
 security.log_out: Odhlásit
 security.remember_me: 'Zůstat přihlášený'

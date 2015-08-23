@@ -18,6 +18,7 @@ button.export: Eksportēšana
 button.import: Imports
 required: obligāts
 error.not_found: 'Lapa, ko Jūs mēģināt atvērt, neeksistē vai ir pārvietota.'
+error.not_authorized: 'Jums nav tiesību piekļūt šai lapai.'
 security.log_in: Ieiet
 security.log_out: Iziet
 security.remember_me: 'Atcerēties mani'

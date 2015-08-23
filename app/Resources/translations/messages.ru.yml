@@ -18,6 +18,7 @@ button.export: Экспорт
 button.import: Импорт
 required: обязательное
 error.not_found: 'Страница, на которую Вы пытаетесь зайти, не существует или удалена.'
+error.not_authorized: 'У Вас нет прав для посещения данной страницы.'
 security.log_in: Вход
 security.log_out: Выход
 security.remember_me: 'Запомнить меня'

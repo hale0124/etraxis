@@ -18,6 +18,7 @@ button.export: Exportera
 button.import: Importera
 required: obligatorisk
 error.not_found: 'Sidan du försökte komma åt existerar inte eller är borttagen.'
+error.not_authorized: 'Du saknar behörighet att komma åt den här sidan.'
 security.log_in: 'Logga in'
 security.log_out: 'Logga ut'
 security.remember_me: 'Förbli inloggad'

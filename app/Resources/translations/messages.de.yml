@@ -18,6 +18,7 @@ button.export: Exportieren
 button.import: Importieren
 required: erforderlich
 error.not_found: 'Anhang existiert nicht oder ist gelöscht worden.'
+error.not_authorized: 'Sie sind nicht berechtigt, auf diese Seite zuzugreifen.'
 security.log_in: Anmelden
 security.log_out: Abmelden
 security.remember_me: 'Angemeldet bleiben'

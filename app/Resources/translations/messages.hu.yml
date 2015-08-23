@@ -18,6 +18,7 @@ button.export: Export
 button.import: Importálás
 required: kötelező
 error.not_found: 'Az oldal, amit meg szeretne nézni nem található, vagy átkerült egy másik helyre.'
+error.not_authorized: 'Nincs hozzáférési engedélye ehhez az oldalhoz.'
 security.log_in: Bejelentkezés
 security.log_out: Kijelentkezés
 security.remember_me: 'Emlékezzen rám'

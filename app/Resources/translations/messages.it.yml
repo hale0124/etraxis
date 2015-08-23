@@ -18,6 +18,7 @@ button.export: Esporta
 button.import: Importa
 required: obbligatorio
 error.not_found: 'La pagina desiderata non esiste o è stata rimossa.'
+error.not_authorized: 'Non sei autorizzato ad accedere a questa pagina.'
 security.log_in: Entra
 security.log_out: Esci
 security.remember_me: Ricordami

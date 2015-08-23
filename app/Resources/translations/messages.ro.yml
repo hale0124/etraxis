@@ -18,6 +18,7 @@ button.export: Exporta
 button.import: Importa
 required: obligatoriu
 error.not_found: 'Pagina pe care doriți să o accesați nu există sau a fost ștearsă.'
+error.not_authorized: 'Nu sunteți autorizat sa accesați această pagină.'
 security.log_in: Autentificare
 security.log_out: Iesire
 security.remember_me: 'Păstrează autentificarea'

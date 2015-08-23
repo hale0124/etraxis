@@ -18,6 +18,7 @@ button.export: Изнеси
 button.import: Внасям
 required: изискван
 error.not_found: 'Несъществуваща или преместена страница.'
+error.not_authorized: 'Нямате право на достъп до тази страница.'
 security.log_in: Вход
 security.log_out: Изход
 security.remember_me: 'Запомни ме'

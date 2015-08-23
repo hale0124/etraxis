@@ -18,6 +18,7 @@ button.export: エクスポート
 button.import: インポート
 required: 必須
 error.not_found: アクセスしようとしたページは存在しないか削除されています。
+error.not_authorized: このページのアクセスは許可されていません。
 security.log_in: ログイン
 security.log_out: 終了
 security.remember_me: ログインを維持

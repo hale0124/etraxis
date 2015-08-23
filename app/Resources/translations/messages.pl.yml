@@ -18,6 +18,7 @@ button.export: Eksportuj
 button.import: Import
 required: wymagany
 error.not_found: 'Strona do której próbujesz się dostać nie istnieje lub została usunięta.'
+error.not_authorized: 'Nie posiadasz autoryzacji do oglądania tej strony.'
 security.log_in: Logowanie
 security.log_out: Wyloguj
 security.remember_me: 'Pozostań zalogowany'
