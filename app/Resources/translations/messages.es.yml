@@ -17,6 +17,7 @@ button.unlock: Desbloquear
 button.export: Exportar
 button.import: Importar
 required: obligatorio
+error.not_found: 'La página a la que intenta acceder no existe.'
 security.log_in: Ingresar
 security.log_out: Salir
 security.remember_me: 'Mantener la sesión abierta'

@@ -17,6 +17,7 @@ button.unlock: Разблокировать
 button.export: Экспорт
 button.import: Импорт
 required: обязательное
+error.not_found: 'Страница, на которую Вы пытаетесь зайти, не существует или удалена.'
 security.log_in: Вход
 security.log_out: Выход
 security.remember_me: 'Запомнить меня'

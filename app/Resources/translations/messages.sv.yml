@@ -17,6 +17,7 @@ button.unlock: 'Lås upp'
 button.export: Exportera
 button.import: Importera
 required: obligatorisk
+error.not_found: 'Sidan du försökte komma åt existerar inte eller är borttagen.'
 security.log_in: 'Logga in'
 security.log_out: 'Logga ut'
 security.remember_me: 'Förbli inloggad'

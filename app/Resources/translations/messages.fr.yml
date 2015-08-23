@@ -17,6 +17,7 @@ button.unlock: Déverrouiller
 button.export: Exporter
 button.import: Importer
 required: requis
+error.not_found: 'La page à laquelle vous souhaitez accéder n''existe pas ou a été supprimée.'
 security.log_in: 'Se connecter'
 security.log_out: 'Se déconnecter'
 security.remember_me: 'Se souvenir de moi'

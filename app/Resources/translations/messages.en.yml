@@ -17,6 +17,7 @@ button.unlock: Unlock
 button.export: Export
 button.import: Import
 required: required
+error.not_found: 'The page you were trying to access doesn''t exist or has been removed.'
 security.log_in: 'Log in'
 security.log_out: 'Log out'
 security.remember_me: 'Remember me'

@@ -17,6 +17,7 @@ button.unlock: Atbloķēt
 button.export: Eksportēšana
 button.import: Imports
 required: obligāts
+error.not_found: 'Lapa, ko Jūs mēģināt atvērt, neeksistē vai ir pārvietota.'
 security.log_in: Ieiet
 security.log_out: Iziet
 security.remember_me: 'Atcerēties mani'

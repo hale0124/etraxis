@@ -17,6 +17,7 @@ button.unlock: Felnyit
 button.export: Export
 button.import: Importálás
 required: kötelező
+error.not_found: 'Az oldal, amit meg szeretne nézni nem található, vagy átkerült egy másik helyre.'
 security.log_in: Bejelentkezés
 security.log_out: Kijelentkezés
 security.remember_me: 'Emlékezzen rám'

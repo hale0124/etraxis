@@ -17,6 +17,7 @@ button.unlock: Sblocca
 button.export: Esporta
 button.import: Importa
 required: obbligatorio
+error.not_found: 'La pagina desiderata non esiste o è stata rimossa.'
 security.log_in: Entra
 security.log_out: Esci
 security.remember_me: Ricordami

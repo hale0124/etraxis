@@ -17,6 +17,7 @@ button.unlock: Ontgrendel
 button.export: Exporteer
 button.import: Importeer
 required: vereist
+error.not_found: 'De pagina die u probeerde te benaderen bestaat niet of is verwijderd.'
 security.log_in: Inloggen
 security.log_out: Uitloggen
 security.remember_me: 'Blijf ingelogd'
