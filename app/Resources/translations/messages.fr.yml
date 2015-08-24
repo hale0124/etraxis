@@ -58,12 +58,12 @@ password.changed: 'Mot de passe mis à jour avec succès.'
 password.cant_change: 'Ce compte utilise une authentification externe. Impossible de changer le mot de passe.'
 security.forgot_password: 'Mot de passe perdu'
 security.forgot_password.email_sent: 'Un message contenant les instructions pour choisir un nouveau mot de passe vous a été envoyé.'
-key.tab: Tab
-key.space: Space
-comma: Comma
-colon: Colon
-semicolon: Semicolon
-vertical_line: 'Vertical line'
+key.tab: ~
+key.space: ~
+comma: ~
+colon: ~
+semicolon: ~
+vertical_line: ~
 file: Fichier
 size: Taille
 delimiter: Délimiteur

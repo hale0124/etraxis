@@ -58,12 +58,12 @@ password.changed: 'Heslo bylo úspěšně změněno.'
 password.cant_change: 'Tento účet používá externí autentifikaci. Zde heslo změnit nemůžete.'
 security.forgot_password: 'Zapomenuté heslo'
 security.forgot_password.email_sent: 'Byl vám zaslán email s intrukcemi jak si nastavíte nové heslo.'
-key.tab: Tab
-key.space: Space
-comma: Comma
-colon: Colon
-semicolon: Semicolon
-vertical_line: 'Vertical line'
+key.tab: ~
+key.space: ~
+comma: ~
+colon: ~
+semicolon: ~
+vertical_line: ~
 file: Soubor
 size: Velikost
 delimiter: Oddělovač

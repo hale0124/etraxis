@@ -58,12 +58,12 @@ password.changed: 'Kennwort wurde erfolgreich aktualisiert.'
 password.cant_change: 'Dieses Konto verwendet eine externe Authentifizierungs-Quelle. Unmöglich, das Kennwort zu ändern.'
 security.forgot_password: 'Kennwort vergessen'
 security.forgot_password.email_sent: 'Eine E-Mail mit Anweisungen, ein neues Kennwort zu wählen, wurde Ihnen geschickt.'
-key.tab: Tab
-key.space: Space
-comma: Comma
-colon: Colon
-semicolon: Semicolon
-vertical_line: 'Vertical line'
+key.tab: ~
+key.space: ~
+comma: ~
+colon: ~
+semicolon: ~
+vertical_line: ~
 file: Datei
 size: Größe
 delimiter: Trennzeichen

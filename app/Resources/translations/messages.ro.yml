@@ -58,12 +58,12 @@ password.changed: 'Parolă actualizată.'
 password.cant_change: 'Acest cont folosește o sursă externă de autentificare. Nu se poate schimba parola.'
 security.forgot_password: 'Parolă uitată'
 security.forgot_password.email_sent: 'S-a trimis un email cu instrucțiuni de schimbare a parolei.'
-key.tab: Tab
-key.space: Space
-comma: Comma
-colon: Colon
-semicolon: Semicolon
-vertical_line: 'Vertical line'
+key.tab: ~
+key.space: ~
+comma: ~
+colon: ~
+semicolon: ~
+vertical_line: ~
 file: Fișier
 size: Mărime
 delimiter: Delimitator

@@ -58,12 +58,12 @@ password.changed: 'Senha alterada com sucesso.'
 password.cant_change: 'Esta conta utiliza autenticação externa. Não é possível alterar a senha.'
 security.forgot_password: 'Perdi minha senha'
 security.forgot_password.email_sent: 'Um e-mail com instruções para escolher uma nova senha foi enviado para você.'
-key.tab: Tab
-key.space: Space
-comma: Comma
-colon: Colon
-semicolon: Semicolon
-vertical_line: 'Vertical line'
+key.tab: ~
+key.space: ~
+comma: ~
+colon: ~
+semicolon: ~
+vertical_line: ~
 file: Arquivo
 size: Tamanho
 delimiter: Delimitador

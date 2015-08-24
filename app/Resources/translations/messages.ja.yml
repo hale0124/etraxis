@@ -58,12 +58,12 @@ password.changed: パスワードが更新されました。
 password.cant_change: このアカウントでは外部認証を使っています。パスワードは変更できません。
 security.forgot_password: パスワードの再発行
 security.forgot_password.email_sent: 新しいパスワードのメールを送信しました。
-key.tab: Tab
-key.space: Space
-comma: Comma
-colon: Colon
-semicolon: Semicolon
-vertical_line: 'Vertical line'
+key.tab: ~
+key.space: ~
+comma: ~
+colon: ~
+semicolon: ~
+vertical_line: ~
 file: ファイル
 size: サイズ
 delimiter: 区切り文字

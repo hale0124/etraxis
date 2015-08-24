@@ -58,12 +58,12 @@ password.changed: 'Parole tika veiksmīgi atjaunota.'
 password.cant_change: 'Šis konts izmanto ārēju pilnvarošanas avotu. Nav iespējams nomainīt paroli.'
 security.forgot_password: 'Nozaudēta parole'
 security.forgot_password.email_sent: 'Jums tika nosūtīts e-pasts ar instrukcijām, kā izveidot jaunu paroli.'
-key.tab: Tab
-key.space: Space
-comma: Comma
-colon: Colon
-semicolon: Semicolon
-vertical_line: 'Vertical line'
+key.tab: ~
+key.space: ~
+comma: ~
+colon: ~
+semicolon: ~
+vertical_line: ~
 file: Datne
 size: Izmērs
 delimiter: Norobežotājs

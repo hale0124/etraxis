@@ -58,12 +58,12 @@ password.changed: 'La password è stata aggiornata.'
 password.cant_change: 'Questo utente utilizza un metodo di autenticazione esterno. Impossibile cambiare la password.'
 security.forgot_password: 'Password dimenticata'
 security.forgot_password.email_sent: 'Ti è stata spedita una email con le istruzioni per cambiare la password.'
-key.tab: Tab
-key.space: Space
-comma: Comma
-colon: Colon
-semicolon: Semicolon
-vertical_line: 'Vertical line'
+key.tab: ~
+key.space: ~
+comma: ~
+colon: ~
+semicolon: ~
+vertical_line: ~
 file: File
 size: Dimensione
 delimiter: Delimitatore

@@ -58,12 +58,12 @@ password.changed: 'Lösenordet har uppdaterats'
 password.cant_change: 'Detta konto använder en extern autentiseringskälla. Det går inte att byta lösenord.'
 security.forgot_password: 'Glömt lösenord'
 security.forgot_password.email_sent: 'Ett mail med instruktioner om hur man väljer ett nytt lösenord har skickats till dig.'
-key.tab: Tab
-key.space: Space
-comma: Comma
-colon: Colon
-semicolon: Semicolon
-vertical_line: 'Vertical line'
+key.tab: ~
+key.space: ~
+comma: ~
+colon: ~
+semicolon: ~
+vertical_line: ~
 file: Fil
 size: Storlek
 delimiter: Avgränsare

@@ -58,12 +58,12 @@ password.changed: 'Паролата е успешно променена.'
 password.cant_change: 'Този профил е с външен метод за оторизация. Невъзможна смяна на паролата.'
 security.forgot_password: 'Забравена парола'
 security.forgot_password.email_sent: 'Изпратен ви е e-mail с инструкции за избор на нова парола.'
-key.tab: Tab
-key.space: Space
-comma: Comma
-colon: Colon
-semicolon: Semicolon
-vertical_line: 'Vertical line'
+key.tab: ~
+key.space: ~
+comma: ~
+colon: ~
+semicolon: ~
+vertical_line: ~
 file: Файл
 size: Големина
 delimiter: Delimiter

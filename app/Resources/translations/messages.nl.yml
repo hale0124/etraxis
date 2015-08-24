@@ -58,12 +58,12 @@ password.changed: 'Wachtwoord is met succes gewijzigd'
 password.cant_change: 'Dit account gebruikt een externe bron voor authenticatie. Het is niet mogelijk om het wachtwoord te veranderen.'
 security.forgot_password: 'Wachtwoord verloren'
 security.forgot_password.email_sent: 'Er is een e-mail naar u verstuurd met instructies over het kiezen van een nieuw wachtwoord.'
-key.tab: Tab
-key.space: Space
-comma: Comma
-colon: Colon
-semicolon: Semicolon
-vertical_line: 'Vertical line'
+key.tab: ~
+key.space: ~
+comma: ~
+colon: ~
+semicolon: ~
+vertical_line: ~
 file: Bestand
 size: Grootte
 delimiter: Begrenzer

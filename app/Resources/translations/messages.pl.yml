@@ -58,12 +58,12 @@ password.changed: 'Hasło prawidłowo zmienione.'
 password.cant_change: 'To konto ma zewnętrzne źródło uwierzytelniania. Nie możesz zmienić hasła.'
 security.forgot_password: 'Zapomniane hasło'
 security.forgot_password.email_sent: 'E-mail z instrukcjami zmiany hasła został wysłany do Ciebie.'
-key.tab: Tab
-key.space: Space
-comma: Comma
-colon: Colon
-semicolon: Semicolon
-vertical_line: 'Vertical line'
+key.tab: ~
+key.space: ~
+comma: ~
+colon: ~
+semicolon: ~
+vertical_line: ~
 file: Plik
 size: Rozmiar
 delimiter: 'Znak rozdzielenia'

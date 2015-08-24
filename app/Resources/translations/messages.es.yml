@@ -58,12 +58,12 @@ password.changed: 'Contraseña modificada correctamente.'
 password.cant_change: 'Esta cuenta utiliza una fuente de autenticación externa. No es posible cambiar la contraseña.'
 security.forgot_password: '¿Olvidaste la contraseña?'
 security.forgot_password.email_sent: 'Se le ha enviado un correo con instrucciones para elegir una nueva contraseña.'
-key.tab: Tab
-key.space: Space
-comma: Comma
-colon: Colon
-semicolon: Semicolon
-vertical_line: 'Vertical line'
+key.tab: ~
+key.space: ~
+comma: ~
+colon: ~
+semicolon: ~
+vertical_line: ~
 file: Fichero
 size: Tamaño
 delimiter: Delimitador
