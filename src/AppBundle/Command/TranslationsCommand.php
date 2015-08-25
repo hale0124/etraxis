@@ -55,6 +55,11 @@ class TranslationsCommand extends Command
                 $locale = substr($entry, 9, -4);
 
                 exec("php ./app/console translation:update --force --no-backup --quiet --no-interaction {$locale}");
+
+                $contents = file_get_contents("app/Resources/translations/{$entry}");
+                $contents = str_replace(': null', ': ~', $contents);
+
+                file_put_contents("app/Resources/translations/{$entry}", $contents);
             }
         }
     }
