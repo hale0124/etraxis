@@ -3,15 +3,6 @@
 {% block content %}
 
     <div class="container">
-
-        {% if error %}
-        <div class="columns">
-            <div class="column full-width">
-                <div class="error">{{ error.message|trans }}</div>
-            </div>
-        </div>
-        {% endif %}
-
         <div class="columns">
             <div class="column full-width">
 
@@ -47,7 +38,7 @@
                             <div class="columns control">
                                 <div class="column one-third centered">
                                     <input type="submit" value="{{ 'security.log_in'|trans }}">
-                                    <a class="right" href="{{ path('forgot') }}">{{ 'security.forgot_password'|trans }}</a>
+                                    <a class="right" href="{{ path('forgot_password') }}">{{ 'security.forgot_password'|trans }}</a>
                                 </div>
                             </div>
 
@@ -57,7 +48,6 @@
 
             </div>
         </div>
-
     </div>
 
 {% endblock %}

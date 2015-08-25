@@ -43,6 +43,27 @@
     </nav>
 
     <div class="content">
+
+        <div class="container">
+            {% for flash in app.session.flashbag.get('notice') %}
+                <div class="columns">
+                    <div class="column full-width">
+                        <div class="highlight">{{ flash|trans }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
+        <div class="container">
+            {% for flash in app.session.flashbag.get('error') %}
+                <div class="columns">
+                    <div class="column full-width">
+                        <div class="error">{{ flash|trans }}</div>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+
         {% block content %}{% endblock %}
     </div>
 
