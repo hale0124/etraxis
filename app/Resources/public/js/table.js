@@ -127,9 +127,9 @@ var datatables_language = window.datatables_language || {};
 
             // If filtering row is present.
             if ($('thead', this).length > 1) {
-                $('thead:last').addClass('filter');
-                $('thead.filter th').addClass('ui-state-default');
-                $('thead.filter select').prepend('<option></option>').val(null);
+                $('thead:last', this).addClass('filter');
+                $('thead.filter th', this).addClass('ui-state-default');
+                $('thead.filter select', this).prepend('<option></option>').val(null);
             }
 
             // Call DataTables plugin.
@@ -150,7 +150,7 @@ var datatables_language = window.datatables_language || {};
             }
 
             // Filter controls.
-            $('.filter input[type="text"], .filter select')
+            $('.filter input[type="text"], .filter select', $table)
                 // Restore saved search values.
                 .each(function() {
 
@@ -192,8 +192,8 @@ var datatables_language = window.datatables_language || {};
             if (settings.contextMenu) {
 
                 // Create new and unique context menu.
-                var menuId = 'menu-' + Date.now();
-                $('body').append('<ul id="' + menuId + '" class="ui-front context-menu"></ul>');
+                var menuId = 'menu-' + Date.now() + '-' + $table.prop('id');
+                $('body', $table).append('<ul id="' + menuId + '" class="ui-front context-menu"></ul>');
                 var $menu = $('#' + menuId);
 
                 // Append menu items.
