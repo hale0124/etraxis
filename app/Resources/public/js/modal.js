@@ -24,7 +24,11 @@ eTraxis.modal = function(options) {
         error: null
     }, options);
 
+    eTraxis.block();
+
     $.get(settings.url, function(data) {
+
+        eTraxis.unblock();
 
         var $modal = $(data).insertAfter('#__etraxis_modal');
 
