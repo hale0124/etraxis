@@ -18,26 +18,27 @@
      */
     $.fn.disable = function(state) {
 
-        $(this).prop('disabled', state);
+        this.each(function() {
 
-        if (state) {
-            $('label[for="' + $(this).prop('id') + '"]').addClass('ui-state-disabled');
-            $(this).addClass('ui-state-disabled');
+            $(this).prop('disabled', state);
 
-            if ($(this).hasClass('ui-button')) {
-                $(this).button('disable');
+            if (state) {
+                $('label[for="' + $(this).prop('id') + '"]').addClass('ui-state-disabled');
+                $(this).addClass('ui-state-disabled');
+
+                if ($(this).hasClass('ui-button')) {
+                    $(this).button('disable');
+                }
             }
-        }
-        else {
-            $('label[for="' + $(this).prop('id') + '"]').removeClass('ui-state-disabled');
-            $(this).removeClass('ui-state-disabled');
+            else {
+                $('label[for="' + $(this).prop('id') + '"]').removeClass('ui-state-disabled');
+                $(this).removeClass('ui-state-disabled');
 
-            if ($(this).hasClass('ui-button')) {
-                $(this).button('enable');
+                if ($(this).hasClass('ui-button')) {
+                    $(this).button('enable');
+                }
             }
-        }
-
-        return this;
+        });
     };
 
 }(jQuery));

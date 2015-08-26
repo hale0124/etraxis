@@ -16,31 +16,32 @@
      */
     $.fn.dropdown = function() {
 
-        var $button = $('button', this);
-        var $menu   = $('ul', this);
+        this.each(function() {
 
-        $button.button({
-            icons: {
-                secondary: 'ui-icon-triangle-1-s'
-            }
-        });
+            var $button = $('button', this);
+            var $menu   = $('ul', this);
 
-        $button.click(function() {
-            $menu.toggle();
-
-            $(document).one('click', function() {
-                $menu.hide();
+            $button.button({
+                icons: {
+                    secondary: 'ui-icon-triangle-1-s'
+                }
             });
 
-            return false;
+            $button.click(function() {
+                $menu.toggle();
+
+                $(document).one('click', function() {
+                    $menu.hide();
+                });
+
+                return false;
+            });
+
+            $menu.hide();
+            $menu.menu();
+            $menu.addClass('ui-front');
+            $menu.css('min-width', $button.css('width'));
         });
-
-        $menu.hide();
-        $menu.menu();
-        $menu.addClass('ui-front');
-        $menu.css('min-width', $button.css('width'));
-
-        return this;
     };
 
 }(jQuery));
