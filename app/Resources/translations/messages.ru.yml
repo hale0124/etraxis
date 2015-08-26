@@ -58,6 +58,7 @@ password.changed: 'Пароль успешно обновлён.'
 password.cant_change: 'Для данной учётной записи используется источник внешней аутентификации. Невозможно изменить пароль.'
 security.forgot_password: 'Восстановление пароля'
 security.forgot_password.email_sent: 'Вам отправлено письмо с инструкциями по выбору нового пароля.'
+security.password_expired: 'Срок действия Вашего пароля истек.'
 key.tab: Табуляция
 key.space: Пробел
 comma: Запятая

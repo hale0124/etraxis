@@ -58,6 +58,7 @@ password.changed: 'Wachtwoord is met succes gewijzigd'
 password.cant_change: 'Dit account gebruikt een externe bron voor authenticatie. Het is niet mogelijk om het wachtwoord te veranderen.'
 security.forgot_password: 'Wachtwoord verloren'
 security.forgot_password.email_sent: 'Er is een e-mail naar u verstuurd met instructies over het kiezen van een nieuw wachtwoord.'
+security.password_expired: ~
 key.tab: ~
 key.space: ~
 comma: ~

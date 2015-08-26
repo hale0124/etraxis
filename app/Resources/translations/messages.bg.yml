@@ -58,6 +58,7 @@ password.changed: 'Паролата е успешно променена.'
 password.cant_change: 'Този профил е с външен метод за оторизация. Невъзможна смяна на паролата.'
 security.forgot_password: 'Забравена парола'
 security.forgot_password.email_sent: 'Изпратен ви е e-mail с инструкции за избор на нова парола.'
+security.password_expired: ~
 key.tab: ~
 key.space: ~
 comma: ~

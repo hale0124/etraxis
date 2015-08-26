@@ -15,9 +15,11 @@ namespace AppBundle\Controller\Web;
 
 use eTraxis\CommandBus\Users\ForgotPasswordCommand;
 use eTraxis\CommandBus\Users\ResetPasswordCommand;
+use eTraxis\CommandBus\Users\SetPasswordCommand;
 use eTraxis\Form\ForgotPasswordForm;
 use eTraxis\Form\ResetPasswordForm;
 use eTraxis\Traits\ContainerTrait;
+use eTraxis\Voter\UserVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -147,6 +149,69 @@ class SecurityController extends Controller
                     $this->setError($e->getMessage());
                 }
             }
+        }
+
+        return $this->render('web/security/reset.html.twig', [
+            'form' => $form->createView(),
+        ]);
+    }
+
+    /**
+     * Set expired password form.
+     *
+     * @Action\Route("/expired", name="set_expired_password")
+     * @Action\Method({"GET", "POST"})
+     *
+     * @param   Request $request
+     *
+     * @return  \Symfony\Component\HttpFoundation\Response
+     */
+    public function setExpiredPasswordAction(Request $request)
+    {
+        /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker $security */
+        $security = $this->container->get('security.authorization_checker');
+
+        if (!$security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+            return $this->redirect($this->generateUrl('login'));
+        }
+
+        $authChecker = $this->getAuthorizationChecker();
+
+        if (!$authChecker->isGranted(UserVoter::SET_EXPIRED_PASSWORD, $this->getUser())) {
+            return $this->redirect($this->generateUrl('homepage'));
+        }
+
+        $form = $this->createForm(new ResetPasswordForm());
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+
+            $data = $this->getFormData($request, 'reset_password');
+
+            if ($data['password'] != $data['confirmation']) {
+                $this->setError($this->get('translator')->trans('passwords.dont_match'));
+            }
+            else {
+
+                try {
+                    $command = new SetPasswordCommand([
+                        'id'       => $this->getUser()->getId(),
+                        'password' => $data['password'],
+                    ]);
+
+                    $this->getCommandBus()->handle($command);
+
+                    $this->setNotice($this->getTranslator()->trans('password.changed'));
+
+                    return $this->redirect($this->generateUrl('homepage'));
+                }
+                catch (\Exception $e) {
+                    $this->setError($e->getMessage());
+                }
+            }
+        }
+        else {
+            $this->setNotice('security.password_expired');
         }
 
         return $this->render('web/security/reset.html.twig', [

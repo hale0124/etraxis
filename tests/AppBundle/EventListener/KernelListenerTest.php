@@ -23,6 +23,20 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 class KernelListenerTest extends BaseTestCase
 {
+    /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface */
+    protected $authorization_checker;
+
+    /** @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface */
+    protected $token_storage;
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $this->authorization_checker = $this->client->getContainer()->get('security.authorization_checker');
+        $this->token_storage         = $this->client->getContainer()->get('security.token_storage');
+    }
+
     public function testSetDefaultLocale()
     {
         $request = new Request();
@@ -32,7 +46,13 @@ class KernelListenerTest extends BaseTestCase
 
         $event = new GetResponseEvent(static::$kernel, $request, HttpKernelInterface::MASTER_REQUEST);
 
-        $object = new KernelListener($this->router, $this->translator, 'ru');
+        $object = new KernelListener(
+            $this->router,
+            $this->translator,
+            $this->authorization_checker,
+            $this->token_storage,
+            'ru');
+
         $object->onKernelRequest($event);
 
         $this->assertEquals('ru', $event->getRequest()->getLocale());
@@ -48,7 +68,13 @@ class KernelListenerTest extends BaseTestCase
 
         $event = new GetResponseEvent(static::$kernel, $request, HttpKernelInterface::MASTER_REQUEST);
 
-        $object = new KernelListener($this->router, $this->translator, 'ru');
+        $object = new KernelListener(
+            $this->router,
+            $this->translator,
+            $this->authorization_checker,
+            $this->token_storage,
+            'ru');
+
         $object->onKernelRequest($event);
 
         $request->attributes->remove('_locale');
@@ -64,7 +90,12 @@ class KernelListenerTest extends BaseTestCase
 
         $event = new FilterResponseEvent(static::$kernel, $request, HttpKernelInterface::MASTER_REQUEST, $response);
 
-        $object = new KernelListener($this->router, $this->translator, 'en');
+        $object = new KernelListener(
+            $this->router,
+            $this->translator,
+            $this->authorization_checker,
+            $this->token_storage,
+            'en');
 
         $object->onKernelResponse($event);
         $this->assertEquals(Response::HTTP_OK, $event->getResponse()->getStatusCode());
@@ -79,7 +110,12 @@ class KernelListenerTest extends BaseTestCase
 
         $event = new FilterResponseEvent(static::$kernel, $request, HttpKernelInterface::MASTER_REQUEST, $response);
 
-        $object = new KernelListener($this->router, $this->translator, 'en');
+        $object = new KernelListener(
+            $this->router,
+            $this->translator,
+            $this->authorization_checker,
+            $this->token_storage,
+            'en');
 
         $object->onKernelResponse($event);
         $this->assertEquals(Response::HTTP_FOUND, $event->getResponse()->getStatusCode());
@@ -94,7 +130,12 @@ class KernelListenerTest extends BaseTestCase
 
         $event = new FilterResponseEvent(static::$kernel, $request, HttpKernelInterface::MASTER_REQUEST, $response);
 
-        $object = new KernelListener($this->router, $this->translator, 'en');
+        $object = new KernelListener(
+            $this->router,
+            $this->translator,
+            $this->authorization_checker,
+            $this->token_storage,
+            'en');
 
         $object->onKernelResponse($event);
         $this->assertEquals(Response::HTTP_OK, $event->getResponse()->getStatusCode());
@@ -110,7 +151,12 @@ class KernelListenerTest extends BaseTestCase
 
         $event = new FilterResponseEvent(static::$kernel, $request, HttpKernelInterface::MASTER_REQUEST, $response);
 
-        $object = new KernelListener($this->router, $this->translator, 'en');
+        $object = new KernelListener(
+            $this->router,
+            $this->translator,
+            $this->authorization_checker,
+            $this->token_storage,
+            'en');
 
         $object->onKernelResponse($event);
         $this->assertEquals(Response::HTTP_UNAUTHORIZED, $event->getResponse()->getStatusCode());

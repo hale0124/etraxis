@@ -52,6 +52,7 @@ class UserVoterTest extends BaseTestCase
     public function testGetSupportedAttributes()
     {
         $expected = [
+            UserVoter::SET_EXPIRED_PASSWORD,
             UserVoter::DELETE,
             UserVoter::DISABLE,
             UserVoter::ENABLE,
@@ -67,6 +68,21 @@ class UserVoterTest extends BaseTestCase
         $scruffy = $this->findUser('scruffy');
 
         $this->assertFalse($this->object->isGranted('UNKNOWN', $scruffy, $hubert));
+    }
+
+    public function testSetExpiredPassword()
+    {
+        $hubert = $this->findUser('hubert');
+
+        $this->assertFalse($this->object->isGranted(UserVoter::SET_EXPIRED_PASSWORD, $hubert, $hubert));
+
+        $hubert->setPasswordSetAt(time() - 86400 * 2);
+
+        $this->object = new UserVoterStub($this->doctrine, 3);
+        $this->assertFalse($this->object->isGranted(UserVoter::SET_EXPIRED_PASSWORD, $hubert, $hubert));
+
+        $this->object = new UserVoterStub($this->doctrine, 1);
+        $this->assertTrue($this->object->isGranted(UserVoter::SET_EXPIRED_PASSWORD, $hubert, $hubert));
     }
 
     public function testDelete()

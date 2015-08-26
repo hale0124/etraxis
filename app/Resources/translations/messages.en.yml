@@ -58,6 +58,7 @@ password.changed: 'Password was successfully updated.'
 password.cant_change: 'This account uses an external authentication source. Impossible to change the password.'
 security.forgot_password: 'Forgot password'
 security.forgot_password.email_sent: 'An email with instructions to choose a new password has been sent to you.'
+security.password_expired: 'Your password is expired.'
 key.tab: Tab
 key.space: Space
 comma: Comma

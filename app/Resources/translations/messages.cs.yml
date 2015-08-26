@@ -58,6 +58,7 @@ password.changed: 'Heslo bylo úspěšně změněno.'
 password.cant_change: 'Tento účet používá externí autentifikaci. Zde heslo změnit nemůžete.'
 security.forgot_password: 'Zapomenuté heslo'
 security.forgot_password.email_sent: 'Byl vám zaslán email s intrukcemi jak si nastavíte nové heslo.'
+security.password_expired: ~
 key.tab: ~
 key.space: ~
 comma: ~

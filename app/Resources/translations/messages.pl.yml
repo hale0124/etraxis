@@ -58,6 +58,7 @@ password.changed: 'Hasło prawidłowo zmienione.'
 password.cant_change: 'To konto ma zewnętrzne źródło uwierzytelniania. Nie możesz zmienić hasła.'
 security.forgot_password: 'Zapomniane hasło'
 security.forgot_password.email_sent: 'E-mail z instrukcjami zmiany hasła został wysłany do Ciebie.'
+security.password_expired: ~
 key.tab: ~
 key.space: ~
 comma: ~

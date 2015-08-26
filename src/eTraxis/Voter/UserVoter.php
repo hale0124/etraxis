@@ -24,21 +24,25 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class UserVoter extends AbstractVoter
 {
-    const DELETE  = 'user.delete';
-    const DISABLE = 'user.disable';
-    const ENABLE  = 'user.enable';
-    const UNLOCK  = 'user.unlock';
+    const SET_EXPIRED_PASSWORD = 'user.set_expired_password';
+    const DELETE               = 'user.delete';
+    const DISABLE              = 'user.disable';
+    const ENABLE               = 'user.enable';
+    const UNLOCK               = 'user.unlock';
 
     protected $doctrine;
+    protected $password_expiration;
 
     /**
      * Dependency Injection constructor.
      *
      * @param   RegistryInterface $doctrine
+     * @param   int               $password_expiration
      */
-    public function __construct(RegistryInterface $doctrine)
+    public function __construct(RegistryInterface $doctrine, $password_expiration = null)
     {
-        $this->doctrine = $doctrine;
+        $this->doctrine            = $doctrine;
+        $this->password_expiration = $password_expiration;
     }
 
     /**
@@ -55,6 +59,7 @@ class UserVoter extends AbstractVoter
     protected function getSupportedAttributes()
     {
         return [
+            self::SET_EXPIRED_PASSWORD,
             self::DELETE,
             self::DISABLE,
             self::ENABLE,
@@ -69,6 +74,9 @@ class UserVoter extends AbstractVoter
     {
         /** @var User $object */
         switch ($attribute) {
+
+            case self::SET_EXPIRED_PASSWORD:
+                return $this->isSetExpiredPasswordGranted($object);
 
             case self::DELETE:
                 return $this->isDeleteGranted($object, $user);
@@ -85,6 +93,25 @@ class UserVoter extends AbstractVoter
             default:
                 return false;
         }
+    }
+
+    /**
+     * Checks whether user's password is expired.
+     *
+     * @param   User $object Subject user.
+     *
+     * @return  bool
+     */
+    protected function isSetExpiredPasswordGranted($object = null)
+    {
+        // Deny if passwords do not expire at all.
+        if ($this->password_expiration === null) {
+            return false;
+        }
+
+        $expires = $object->getPasswordSetAt() + $this->password_expiration * 86400;
+
+        return $expires < time();
     }
 
     /**

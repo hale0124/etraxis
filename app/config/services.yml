@@ -73,6 +73,8 @@ services:
         arguments:
             - @router
             - @translator
+            - @security.authorization_checker
+            - @security.token_storage
             - %locale%
 
     etraxis.listener.security:

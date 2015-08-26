@@ -58,6 +58,7 @@ password.changed: 'A jelszó módosítása megtörtént.'
 password.cant_change: 'A fiók külső azonosítási forrást használ. A jelszó megváltoztatása nem lehetséges.'
 security.forgot_password: 'Elfelejtett jelszó'
 security.forgot_password.email_sent: 'Egy e-mail üzenetben postáztunk Önnek egy leírást az új jelszó beállításáról.'
+security.password_expired: ~
 key.tab: ~
 key.space: ~
 comma: ~

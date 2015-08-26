@@ -58,6 +58,7 @@ password.changed: パスワードが更新されました。
 password.cant_change: このアカウントでは外部認証を使っています。パスワードは変更できません。
 security.forgot_password: パスワードの再発行
 security.forgot_password.email_sent: 新しいパスワードのメールを送信しました。
+security.password_expired: ~
 key.tab: ~
 key.space: ~
 comma: ~

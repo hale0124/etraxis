@@ -58,6 +58,7 @@ password.changed: 'Kennwort wurde erfolgreich aktualisiert.'
 password.cant_change: 'Dieses Konto verwendet eine externe Authentifizierungs-Quelle. Unmöglich, das Kennwort zu ändern.'
 security.forgot_password: 'Kennwort vergessen'
 security.forgot_password.email_sent: 'Eine E-Mail mit Anweisungen, ein neues Kennwort zu wählen, wurde Ihnen geschickt.'
+security.password_expired: ~
 key.tab: ~
 key.space: ~
 comma: ~

@@ -58,6 +58,7 @@ password.changed: 'Parola başarıyla güncellendi.'
 password.cant_change: 'Bu hesap harici bir denetim kaynağı kullanıyor. Parolayı değiştirmek mümkün değil.'
 security.forgot_password: 'Parolamı unuttum'
 security.forgot_password.email_sent: 'Yeni parola seçme talimatlarını içeren e-postanız gönderildi.'
+security.password_expired: ~
 key.tab: ~
 key.space: ~
 comma: ~

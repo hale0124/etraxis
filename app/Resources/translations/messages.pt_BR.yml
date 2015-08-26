@@ -58,6 +58,7 @@ password.changed: 'Senha alterada com sucesso.'
 password.cant_change: 'Esta conta utiliza autenticação externa. Não é possível alterar a senha.'
 security.forgot_password: 'Perdi minha senha'
 security.forgot_password.email_sent: 'Um e-mail com instruções para escolher uma nova senha foi enviado para você.'
+security.password_expired: ~
 key.tab: ~
 key.space: ~
 comma: ~
