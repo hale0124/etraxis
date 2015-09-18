@@ -26,7 +26,6 @@ class ScriptHandler
         if (!getenv('TRAVIS')) {
 
             $modules = [
-                'bower',
                 'gulp',
                 'gulp-add-src',
                 'gulp-concat',
@@ -55,10 +54,10 @@ class ScriptHandler
         if (!getenv('TRAVIS')) {
 
             print("\nInstalling assets\n");
-            self::bower('install');
+            system('bower install');
 
             print("\nProcessing assets\n");
-            self::gulp();
+            system('gulp');
         }
     }
 
@@ -70,32 +69,10 @@ class ScriptHandler
         if (!getenv('TRAVIS')) {
 
             print("\nUpdating assets\n");
-            self::bower('update');
+            system('bower update');
 
             print("\nProcessing assets\n");
-            self::gulp();
+            system('gulp');
         }
-    }
-
-    /**
-     * Executes Bower with specified parameters.
-     *
-     * @param   string $params Optional parameters.
-     */
-    protected static function bower($params = null)
-    {
-        $bin = strtoupper(substr(PHP_OS, 0, 3)) == 'WIN' ? '.\node_modules\.bin\bower.cmd' : 'bower';
-        system($bin . ' ' . $params);
-    }
-
-    /**
-     * Executes Gulp with specified parameters.
-     *
-     * @param   string $params Optional parameters.
-     */
-    protected static function gulp($params = null)
-    {
-        $bin = strtoupper(substr(PHP_OS, 0, 3)) == 'WIN' ? '.\node_modules\.bin\gulp.cmd' : 'gulp';
-        system($bin . ' ' . $params);
     }
 }
