@@ -34,7 +34,7 @@ class MyTestClass
 }
 
 /**
- * @method getVersion()
+ * @method getVersion($prefix, $suffix)
  * @property mixed $property
  */
 class MyTestClassStub extends MyTestClass
