@@ -19,6 +19,7 @@ button.import: Importar
 required: obligatorio
 error.not_found: 'La página a la que intenta acceder no existe.'
 error.not_authorized: 'No tiene autorización para acceder a esta página.'
+changes.saved: 'Cambios guardados correctamente.'
 security.log_in: Ingresar
 security.log_out: Salir
 security.remember_me: 'Mantener la sesión abierta'
@@ -28,6 +29,8 @@ security.authentication: Autenticación
 'Bad credentials': 'Nombre de usuario desconocido o contraseña incorrecta.'
 'User account is disabled.': 'Cuenta deshabilitada.'
 'User account is locked.': 'Cuenta bloqueada.'
+settings: Ajustes
+appearance: Apariencia
 administration: Administración
 users: Usuarios
 user.new: 'Nuevo usuario'
@@ -35,6 +38,7 @@ user.username: 'Nombre de usuario'
 user.fullname: 'Nombre completo'
 user.email: Email
 user.password: Contraseña
+user.current_password: Contraseña
 user.new_password: 'Nueva contraseña'
 user.password_confirmation: Confirmación
 user.change_password: 'Cambiar contraseña'

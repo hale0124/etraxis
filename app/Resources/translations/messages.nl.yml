@@ -19,6 +19,7 @@ button.import: Importeer
 required: vereist
 error.not_found: 'De pagina die u probeerde te benaderen bestaat niet of is verwijderd.'
 error.not_authorized: 'Het is u niet toegestaan deze pagina te raadplegen.'
+changes.saved: ~
 security.log_in: Inloggen
 security.log_out: Uitloggen
 security.remember_me: 'Blijf ingelogd'
@@ -28,6 +29,8 @@ security.authentication: Authenticatie
 'Bad credentials': 'Onbekende gebruikersnaam of verkeerd wachtwoord.'
 'User account is disabled.': 'Account is uitgeschakeld.'
 'User account is locked.': 'Account is vergrendeld.'
+settings: Instellingen
+appearance: Uiterlijk
 administration: Administratie
 users: Gebruikers
 user.new: 'Nieuwe gebruiker'
@@ -35,6 +38,7 @@ user.username: Gebruikersnaam
 user.fullname: 'Volledige naam'
 user.email: E-mail
 user.password: Wachtwoord
+user.current_password: Wachtwoord
 user.new_password: 'Nieuw wachtwoord'
 user.password_confirmation: 'Bevestig wachtwoord'
 user.change_password: 'Wijzig wachtwoord'

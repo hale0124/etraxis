@@ -19,6 +19,7 @@ button.import: 'İçe Aktar'
 required: gerekli
 error.not_found: 'Erişmek istediğiniz sayfa mevcut değil ya da kaldırılmış.'
 error.not_authorized: 'Bu sayfaya erişme yetkiniz yok.'
+changes.saved: ~
 security.log_in: Giriş
 security.log_out: Çıkış
 security.remember_me: 'Sürekli bağlı kal'
@@ -28,6 +29,8 @@ security.authentication: 'Kimlik Denetimi'
 'Bad credentials': 'Bilinmeyen kullanıcı adı ya da yanlış parola.'
 'User account is disabled.': 'Hesap kapalı.'
 'User account is locked.': 'Hesap kilitli.'
+settings: Ayarlar
+appearance: Görünüm
 administration: Yönetim
 users: Kullanıcılar
 user.new: 'Yeni Kullanıcı'
@@ -35,6 +38,7 @@ user.username: 'Kullanıcı adı'
 user.fullname: 'Tam adı'
 user.email: E-posta
 user.password: Parola
+user.current_password: Parola
 user.new_password: 'Yeni Parola'
 user.password_confirmation: 'Parola Doğrulama'
 user.change_password: 'Parolayı değiştir'

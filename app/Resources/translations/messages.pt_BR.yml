@@ -19,6 +19,7 @@ button.import: Importar
 required: obrigatório
 error.not_found: 'A página que você está tentando acessar não existe ou foi excluída.'
 error.not_authorized: 'Você não está autorizado a acessar esta página.'
+changes.saved: ~
 security.log_in: Logar
 security.log_out: Deslogar
 security.remember_me: 'Permanecer logado'
@@ -28,6 +29,8 @@ security.authentication: Autenticação
 'Bad credentials': 'Usuário desconhecido ou senha incorreta.'
 'User account is disabled.': 'A conta está desabilitada.'
 'User account is locked.': 'A conta está travada.'
+settings: Ajustes
+appearance: Aparência
 administration: Administração
 users: Usuários
 user.new: 'Novo usuário'
@@ -35,6 +38,7 @@ user.username: Usuário
 user.fullname: 'Nome completo'
 user.email: E-mail
 user.password: Senha
+user.current_password: Senha
 user.new_password: 'Nova senha'
 user.password_confirmation: Confirmação
 user.change_password: 'Alterar senha'

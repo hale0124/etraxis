@@ -19,6 +19,7 @@ button.import: Import
 required: required
 error.not_found: 'The page you were trying to access doesn''t exist or has been removed.'
 error.not_authorized: 'You are not authorized to access this page.'
+changes.saved: 'Your changes were successfully saved.'
 security.log_in: 'Log in'
 security.log_out: 'Log out'
 security.remember_me: 'Remember me'
@@ -28,6 +29,8 @@ security.authentication: Authentication
 'Bad credentials': 'Unknown username or bad password.'
 'User account is disabled.': 'Account is disabled.'
 'User account is locked.': 'Account is locked.'
+settings: Settings
+appearance: Appearance
 administration: Administration
 users: Users
 user.new: 'New user'
@@ -35,6 +38,7 @@ user.username: 'User name'
 user.fullname: 'Full name'
 user.email: Email
 user.password: Password
+user.current_password: 'Current password'
 user.new_password: 'New password'
 user.password_confirmation: Confirmation
 user.change_password: 'Change password'

@@ -19,6 +19,7 @@ button.import: Импорт
 required: обязательное
 error.not_found: 'Страница, на которую Вы пытаетесь зайти, не существует или удалена.'
 error.not_authorized: 'У Вас нет прав для посещения данной страницы.'
+changes.saved: 'Ваши изменения успешно сохранены.'
 security.log_in: Вход
 security.log_out: Выход
 security.remember_me: 'Запомнить меня'
@@ -28,6 +29,8 @@ security.authentication: Аутентификация
 'Bad credentials': 'Неизвестный пользователь или неверный пароль.'
 'User account is disabled.': 'Учетная запись отключена.'
 'User account is locked.': 'Учетная запись заблокирована.'
+settings: Настройки
+appearance: 'Внешний вид'
 administration: Администрирование
 users: Пользователи
 user.new: 'Новый пользователь'
@@ -35,6 +38,7 @@ user.username: 'Имя пользователя'
 user.fullname: 'Полное имя'
 user.email: Эл.почта
 user.password: Пароль
+user.current_password: 'Текущий пароль'
 user.new_password: 'Новый пароль'
 user.password_confirmation: Подтверждение
 user.change_password: 'Изменить пароль'

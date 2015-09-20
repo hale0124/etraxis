@@ -19,6 +19,7 @@ button.import: Importera
 required: obligatorisk
 error.not_found: 'Sidan du försökte komma åt existerar inte eller är borttagen.'
 error.not_authorized: 'Du saknar behörighet att komma åt den här sidan.'
+changes.saved: ~
 security.log_in: 'Logga in'
 security.log_out: 'Logga ut'
 security.remember_me: 'Förbli inloggad'
@@ -28,6 +29,8 @@ security.authentication: Autentisering
 'Bad credentials': 'Okänt användarnamn eller felaktigt lösenord.'
 'User account is disabled.': 'Kontot är inaktiverat.'
 'User account is locked.': 'Kontot är låst.'
+settings: Inställningar
+appearance: Utseende
 administration: Administration
 users: Användare
 user.new: 'Ny användare'
@@ -35,6 +38,7 @@ user.username: Användarnamn
 user.fullname: 'Fullständigt namn'
 user.email: Email
 user.password: Lösenord
+user.current_password: Lösenord
 user.new_password: 'Nytt lösenord'
 user.password_confirmation: 'Bekräfta lösenord'
 user.change_password: 'Ändra lösenord'

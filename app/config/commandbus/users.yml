@@ -50,6 +50,11 @@ services:
         tags: [{ name: command_handler, command: eTraxis\CommandBus\Users\EnableUsersCommand }]
         arguments: [ @doctrine ]
 
+    command.settings.appearance:
+        class: eTraxis\CommandBus\Users\Handler\SaveAppearanceCommandHandler
+        tags: [{ name: command_handler, command: eTraxis\CommandBus\Users\SaveAppearanceCommand }]
+        arguments: [ @logger, @validator, @translator, @doctrine ]
+
     command.password.set:
         class: eTraxis\CommandBus\Users\Handler\SetPasswordCommandHandler
         tags: [{ name: command_handler, command: eTraxis\CommandBus\Users\SetPasswordCommand }]

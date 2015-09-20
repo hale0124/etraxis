@@ -19,6 +19,7 @@ button.import: Внасям
 required: изискван
 error.not_found: 'Несъществуваща или преместена страница.'
 error.not_authorized: 'Нямате право на достъп до тази страница.'
+changes.saved: ~
 security.log_in: Вход
 security.log_out: Изход
 security.remember_me: 'Запомни ме'
@@ -28,6 +29,8 @@ security.authentication: Оторизация
 'Bad credentials': 'Неизвестно потребителско име или сгрешена парола.'
 'User account is disabled.': 'Акаунтът е изключен.'
 'User account is locked.': 'Акаунтът е заключен.'
+settings: Настройки
+appearance: Вид
 administration: Администрация
 users: Потребители
 user.new: 'Нов потребител'
@@ -35,6 +38,7 @@ user.username: 'Потребителско име'
 user.fullname: 'Пълно име'
 user.email: Имеил
 user.password: Парола
+user.current_password: Парола
 user.new_password: 'Нова парола'
 user.password_confirmation: Потвърждение
 user.change_password: 'Промяна на парола'

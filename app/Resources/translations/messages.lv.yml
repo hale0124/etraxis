@@ -19,6 +19,7 @@ button.import: Imports
 required: obligāts
 error.not_found: 'Lapa, ko Jūs mēģināt atvērt, neeksistē vai ir pārvietota.'
 error.not_authorized: 'Jums nav tiesību piekļūt šai lapai.'
+changes.saved: ~
 security.log_in: Ieiet
 security.log_out: Iziet
 security.remember_me: 'Atcerēties mani'
@@ -28,6 +29,8 @@ security.authentication: Pilnvarošana
 'Bad credentials': 'Nezināms lietotāja vārds vai parole.'
 'User account is disabled.': 'Lietotāja konts ir atslēgts.'
 'User account is locked.': 'Lietotāja konts ir bloķēts.'
+settings: Iestatījumi
+appearance: Izskats
 administration: Administrācija
 users: Lietotāji
 user.new: 'Jauns lietotājs'
@@ -35,6 +38,7 @@ user.username: 'Lietotāja vārds'
 user.fullname: 'Pilns vārds'
 user.email: E-pasts
 user.password: Parole
+user.current_password: Parole
 user.new_password: 'Janā parole'
 user.password_confirmation: 'Paroles apstiprinājums'
 user.change_password: 'Mainīt paroli'

@@ -19,6 +19,7 @@ button.import: Importálás
 required: kötelező
 error.not_found: 'Az oldal, amit meg szeretne nézni nem található, vagy átkerült egy másik helyre.'
 error.not_authorized: 'Nincs hozzáférési engedélye ehhez az oldalhoz.'
+changes.saved: 'A módosítások sikeresen elmentve.'
 security.log_in: Bejelentkezés
 security.log_out: Kijelentkezés
 security.remember_me: 'Emlékezzen rám'
@@ -28,6 +29,8 @@ security.authentication: Azonosítás
 'Bad credentials': 'Ismeretlen felhasználónév vagy rossz jelszó.'
 'User account is disabled.': 'A felhasználót letiltották.'
 'User account is locked.': 'A felhasználó ki lett zárva a rendszerből.'
+settings: Beállítások
+appearance: Megjelenés
 administration: Adminisztráció
 users: Felhasználók
 user.new: 'Új felhasználó'
@@ -35,6 +38,7 @@ user.username: Felhasználónév
 user.fullname: 'Teljes név'
 user.email: E-mail
 user.password: Jelszó
+user.current_password: Jelszó
 user.new_password: 'Új jelszó'
 user.password_confirmation: Megerősítés
 user.change_password: 'Jelszó megváltoztatása'

@@ -19,6 +19,7 @@ button.import: インポート
 required: 必須
 error.not_found: アクセスしようとしたページは存在しないか削除されています。
 error.not_authorized: このページのアクセスは許可されていません。
+changes.saved: ~
 security.log_in: ログイン
 security.log_out: 終了
 security.remember_me: ログインを維持
@@ -28,6 +29,8 @@ security.authentication: 認証
 'Bad credentials': 不明なユーザー名または誤ったパスワードです。
 'User account is disabled.': アカウントは無効化されています。
 'User account is locked.': アカウントはロックアウトされています。
+settings: 設定
+appearance: 外観
 administration: 管理
 users: ユーザー
 user.new: 新しいユーザー
@@ -35,6 +38,7 @@ user.username: ユーザー名
 user.fullname: フルネーム
 user.email: Eメール
 user.password: パスワード
+user.current_password: パスワード
 user.new_password: 新しいパスワード
 user.password_confirmation: パスワードの確認
 user.change_password: パスワード変更

@@ -19,6 +19,7 @@ button.import: Importa
 required: obligatoriu
 error.not_found: 'Pagina pe care doriți să o accesați nu există sau a fost ștearsă.'
 error.not_authorized: 'Nu sunteți autorizat sa accesați această pagină.'
+changes.saved: ~
 security.log_in: Autentificare
 security.log_out: Iesire
 security.remember_me: 'Păstrează autentificarea'
@@ -28,6 +29,8 @@ security.authentication: Autentificare
 'Bad credentials': 'Cont inexistent sau parola incorecta.'
 'User account is disabled.': 'Contul este dezactivat.'
 'User account is locked.': 'Contuleste blocat.'
+settings: Setari
+appearance: 'Mod de prezentare'
 administration: Administrare
 users: Utilizatori
 user.new: 'Utilizator nou'
@@ -35,6 +38,7 @@ user.username: 'Nume utilizator'
 user.fullname: 'Nume si prenume'
 user.email: Email
 user.password: Parola
+user.current_password: Parola
 user.new_password: 'Parola nouă'
 user.password_confirmation: Confirmare
 user.change_password: 'Schimbare parolă'

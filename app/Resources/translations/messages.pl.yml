@@ -19,6 +19,7 @@ button.import: Import
 required: wymagany
 error.not_found: 'Strona do której próbujesz się dostać nie istnieje lub została usunięta.'
 error.not_authorized: 'Nie posiadasz autoryzacji do oglądania tej strony.'
+changes.saved: 'Zmiany zostały zapisane.'
 security.log_in: Logowanie
 security.log_out: Wyloguj
 security.remember_me: 'Pozostań zalogowany'
@@ -28,6 +29,8 @@ security.authentication: Uwierzytelnianie
 'Bad credentials': 'Nieprawidłowa nazwa użytkownika lub hasła.'
 'User account is disabled.': 'Konto jest wyłączone.'
 'User account is locked.': 'Konto jest zablokowane.'
+settings: Ustawienia
+appearance: Wygląd
 administration: Administracja
 users: Użytkownicy
 user.new: 'Nowy użytkownik'
@@ -35,6 +38,7 @@ user.username: 'Nazwa użytkownika'
 user.fullname: 'Pełna nazwa'
 user.email: E-mail
 user.password: Hasło
+user.current_password: Hasło
 user.new_password: 'Nowe hasło'
 user.password_confirmation: Potwierdzenie
 user.change_password: 'Zmień hasło'

@@ -19,6 +19,7 @@ button.import: Importieren
 required: erforderlich
 error.not_found: 'Anhang existiert nicht oder ist gelöscht worden.'
 error.not_authorized: 'Sie sind nicht berechtigt, auf diese Seite zuzugreifen.'
+changes.saved: 'Ihre Änderungen wurden erfolgreich gespeichert.'
 security.log_in: Anmelden
 security.log_out: Abmelden
 security.remember_me: 'Angemeldet bleiben'
@@ -28,6 +29,8 @@ security.authentication: Authentifizierung
 'Bad credentials': 'Unbekannter Benutzername oder falsches Passwort.'
 'User account is disabled.': 'Konto ist deaktiviert.'
 'User account is locked.': 'Konto ist gesperrt.'
+settings: Einstellungen
+appearance: Erscheinungsbild
 administration: Administration
 users: Benutzer
 user.new: 'Neuer Benutzer'
@@ -35,6 +38,7 @@ user.username: Benutzername
 user.fullname: 'Vollständiger Name'
 user.email: Email-Adresse
 user.password: Kennwort
+user.current_password: Kennwort
 user.new_password: 'Neues Kennwort'
 user.password_confirmation: Bestätigung
 user.change_password: 'Kennwort ändern'

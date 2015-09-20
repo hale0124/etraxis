@@ -19,6 +19,7 @@ button.import: Importer
 required: requis
 error.not_found: 'La page à laquelle vous souhaitez accéder n''existe pas ou a été supprimée.'
 error.not_authorized: 'Vous n''êtes pas autorisé à accéder à cette page.'
+changes.saved: ~
 security.log_in: 'Se connecter'
 security.log_out: 'Se déconnecter'
 security.remember_me: 'Se souvenir de moi'
@@ -28,6 +29,8 @@ security.authentication: Authentification
 'Bad credentials': 'Utilisateur inconnu ou mauvais mot de passe.'
 'User account is disabled.': 'Le compte est desactivé.'
 'User account is locked.': 'Le compte est verrouillé.'
+settings: Paramètres
+appearance: Apparence
 administration: Administration
 users: Utilisateurs
 user.new: 'Nouvel utilisateur'
@@ -35,6 +38,7 @@ user.username: Utilisateur
 user.fullname: 'Nom complet'
 user.email: Email
 user.password: 'Mot de passe'
+user.current_password: 'Mot de passe'
 user.new_password: 'Nouveau mot de passe'
 user.password_confirmation: Confirmation
 user.change_password: 'Changer de mot de passe'

@@ -19,6 +19,7 @@ button.import: Importovat
 required: povinný
 error.not_found: 'Stránka, kterou se snažíte zobrazit, neexistuje nebo byla smazána.'
 error.not_authorized: 'Nemáte dostatečná práva pro zobrazení této stránky.'
+changes.saved: ~
 security.log_in: 'Přihlásit se'
 security.log_out: Odhlásit
 security.remember_me: 'Zůstat přihlášený'
@@ -28,6 +29,8 @@ security.authentication: Autentifikace
 'Bad credentials': 'Neznámé uživatelské jméno nebo chybné heslo.'
 'User account is disabled.': 'Účet je zablokován.'
 'User account is locked.': 'Účet je uzamčen.'
+settings: Nastavení
+appearance: Vzhled
 administration: Administrace
 users: Uživatelé
 user.new: 'Nový uživatel'
@@ -35,6 +38,7 @@ user.username: 'Uživatelské jméno'
 user.fullname: 'Celé jméno'
 user.email: E-mail
 user.password: Heslo
+user.current_password: Heslo
 user.new_password: 'Nové heslo'
 user.password_confirmation: Potvrzení
 user.change_password: 'Změnit heslo'
