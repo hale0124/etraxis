@@ -291,6 +291,7 @@ class UsersController extends Controller
             ]);
 
             return $this->render('admin/users/dlg_user.html.twig', [
+                'user' => $user,
                 'form' => $form->createView(),
             ]);
         }
@@ -348,6 +349,7 @@ class UsersController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         try {
+            /** @var \eTraxis\Entity\User $user */
             $user = $this->getCommandBus()->handle(
                 new Users\FindUserCommand(['id' => $id])
             );
@@ -374,7 +376,7 @@ class UsersController extends Controller
                 $this->get('session')->set('_locale', $command->locale);
             }
 
-            if ($data['password']) {
+            if (!$user->isLdap() && $data['password']) {
 
                 if ($data['password'] != $data['confirmation']) {
                     throw new CommandException($this->get('translator')->trans('passwords.dont_match'));

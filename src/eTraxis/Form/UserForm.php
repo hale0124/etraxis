@@ -75,21 +75,25 @@ class UserForm extends AbstractType
             'attr'     => ['maxlength' => User::MAX_DESCRIPTION],
         ]);
 
-        // Password.
-        $builder->add('password', 'password', [
-            'label'    => 'user.password',
-            'required' => !(is_object($user) && $user->getId()),
-            'mapped'   => false,
-            'attr'     => ['maxlength' => BasePasswordEncoder::MAX_PASSWORD_LENGTH],
-        ]);
+        // Cannot manage passwords of LDAP accounts.
+        if (!$user->isLdap()) {
 
-        // Confirmation.
-        $builder->add('confirmation', 'password', [
-            'label'    => 'user.password_confirmation',
-            'required' => !(is_object($user) && $user->getId()),
-            'mapped'   => false,
-            'attr'     => ['maxlength' => BasePasswordEncoder::MAX_PASSWORD_LENGTH],
-        ]);
+            // Password.
+            $builder->add('password', 'password', [
+                'label'    => 'user.password',
+                'required' => !(is_object($user) && $user->getId()),
+                'mapped'   => false,
+                'attr'     => ['maxlength' => BasePasswordEncoder::MAX_PASSWORD_LENGTH],
+            ]);
+
+            // Confirmation.
+            $builder->add('confirmation', 'password', [
+                'label'    => 'user.password_confirmation',
+                'required' => !(is_object($user) && $user->getId()),
+                'mapped'   => false,
+                'attr'     => ['maxlength' => BasePasswordEncoder::MAX_PASSWORD_LENGTH],
+            ]);
+        }
 
         // Locale.
         $builder->add('locale', 'choice', [
