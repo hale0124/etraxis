@@ -4,7 +4,9 @@ checks:
         duplication: false
 
 tools:
-    external_code_coverage: true
+    external_code_coverage:
+        timeout: 600
+        runs: 4
 
 filter:
     excluded_paths:
