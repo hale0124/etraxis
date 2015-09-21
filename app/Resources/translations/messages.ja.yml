@@ -59,6 +59,7 @@ user.invalid.username: 無効なユーザー名です。
 password.too_short: 'パスワードは最低 %length% 文字以上である必要があります。'
 passwords.dont_match: パスワードが一致しません。
 password.changed: パスワードが更新されました。
+password.wrong: パスワードが違います。
 password.cant_change: このアカウントでは外部認証を使っています。パスワードは変更できません。
 security.forgot_password: パスワードの再発行
 security.forgot_password.email_sent: 新しいパスワードのメールを送信しました。

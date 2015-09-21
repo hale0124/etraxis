@@ -13,14 +13,17 @@
 
 namespace AppBundle\Controller\Web;
 
+use eTraxis\CommandBus\CommandException;
 use eTraxis\CommandBus\Users;
 use eTraxis\CommandBus\ValidationException;
 use eTraxis\Form\AppearanceForm;
+use eTraxis\Form\ChangePasswordForm;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 
 /**
  * Settings controller.
@@ -41,12 +44,17 @@ class SettingsController extends Controller
      */
     public function indexAction()
     {
-        $form = $this->createForm(new AppearanceForm($this->getTranslator()), $this->getUser(), [
+        $appearance_form = $this->createForm(new AppearanceForm($this->getTranslator()), $this->getUser(), [
             'action' => $this->generateUrl('settings_appearance'),
         ]);
 
+        $password_form = $this->createForm(new ChangePasswordForm($this->getTranslator()), $this->getUser(), [
+            'action' => $this->generateUrl('settings_password'),
+        ]);
+
         return $this->render('web/settings/index.html.twig', [
-            'form' => $form->createView(),
+            'appearance_form' => $appearance_form->createView(),
+            'password_form'   => $password_form->createView(),
         ]);
     }
 
@@ -77,6 +85,64 @@ class SettingsController extends Controller
             foreach ($e->getMessages() as $message) {
                 $this->setError($message);
             }
+        }
+
+        return $this->redirectToRoute('settings');
+    }
+
+    /**
+     * Processes submitted form when user changes his password.
+     *
+     * @Action\Route("/password", name="settings_password")
+     * @Action\Method("POST")
+     *
+     * @param   Request $request
+     *
+     * @return  Response
+     */
+    public function passwordAction(Request $request)
+    {
+        /** @var \eTraxis\Entity\User $user */
+        $user = $this->getUser();
+
+        try {
+
+            if ($user->isLdap()) {
+                throw new CommandException($this->get('translator')->trans('password.cant_change'));
+            }
+
+            $data = $this->getFormData($request, 'change_password');
+
+            /** @var \Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface $encoder */
+            $encoder = $this->get('etraxis.encoder');
+
+            if (!$encoder->isPasswordValid($user->getPassword(), $data['current_password'], null)) {
+                throw new CommandException($this->get('translator')->trans('password.wrong'));
+            }
+
+            if ($data['new_password'] != $data['confirmation']) {
+                throw new CommandException($this->get('translator')->trans('passwords.dont_match'));
+            }
+
+            $command = new Users\SetPasswordCommand([
+                'id'       => $user->getId(),
+                'password' => $data['new_password'],
+            ]);
+
+            $this->getCommandBus()->handle($command);
+
+            $this->setNotice($this->get('translator')->trans('password.changed'));
+        }
+        catch (BadCredentialsException $e) {
+            $this->setError($this->get('translator')->trans('password.wrong'));
+        }
+        catch (ValidationException $e) {
+            foreach ($e->getMessages() as $message) {
+                $this->setError($message);
+            }
+        }
+        catch (CommandException $e) {
+            $this->setError($e->getMessage());
         }
 
         return $this->redirectToRoute('settings');
