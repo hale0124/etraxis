@@ -74,7 +74,9 @@ class SettingsController extends Controller
             $this->setNotice($this->getTranslator()->trans('changes.saved'));
         }
         catch (ValidationException $e) {
-            $this->setError($e->getMessages());
+            foreach ($e->getMessages() as $message) {
+                $this->setError($message);
+            }
         }
 
         return $this->redirectToRoute('settings');
