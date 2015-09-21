@@ -48,7 +48,7 @@ class SettingsController extends Controller
             'action' => $this->generateUrl('settings_appearance'),
         ]);
 
-        $password_form = $this->createForm(new ChangePasswordForm($this->getTranslator()), $this->getUser(), [
+        $password_form = $this->createForm(new ChangePasswordForm(), $this->getUser(), [
             'action' => $this->generateUrl('settings_password'),
         ]);
 
