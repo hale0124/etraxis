@@ -19,6 +19,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Command handler.
@@ -26,6 +27,7 @@ use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 class ResetPasswordCommandHandler
 {
     protected $logger;
+    protected $translator;
     protected $doctrine;
     protected $password_encoder;
 
@@ -33,15 +35,18 @@ class ResetPasswordCommandHandler
      * Dependency Injection constructor.
      *
      * @param   LoggerInterface          $logger
+     * @param   TranslatorInterface      $translator
      * @param   RegistryInterface        $doctrine
      * @param   PasswordEncoderInterface $password_encoder
      */
     public function __construct(
         LoggerInterface          $logger,
+        TranslatorInterface      $translator,
         RegistryInterface        $doctrine,
         PasswordEncoderInterface $password_encoder)
     {
         $this->logger           = $logger;
+        $this->translator       = $translator;
         $this->doctrine         = $doctrine;
         $this->password_encoder = $password_encoder;
     }
@@ -59,6 +64,12 @@ class ResetPasswordCommandHandler
 
         /** @var \eTraxis\Entity\User $user */
         if ($user = $repository->findOneBy(['resetToken' => $command->token])) {
+
+            if ($user->isLdap()) {
+                $message = $this->translator->trans('password.cant_change');
+                $this->logger->error($message);
+                throw new CommandException($message);
+            }
 
             if ($user->getResetTokenExpiresAt() > time()) {
 

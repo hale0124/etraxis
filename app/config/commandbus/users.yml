@@ -58,7 +58,7 @@ services:
     command.password.set:
         class: eTraxis\CommandBus\Users\Handler\SetPasswordCommandHandler
         tags: [{ name: command_handler, command: eTraxis\CommandBus\Users\SetPasswordCommand }]
-        arguments: [ @logger, @doctrine, @etraxis.encoder ]
+        arguments: [ @logger, @translator, @doctrine, @etraxis.encoder ]
 
     command.password.forgot:
         class: eTraxis\CommandBus\Users\Handler\ForgotPasswordCommandHandler
@@ -68,7 +68,7 @@ services:
     command.password.reset:
         class: eTraxis\CommandBus\Users\Handler\ResetPasswordCommandHandler
         tags: [{ name: command_handler, command: eTraxis\CommandBus\Users\ResetPasswordCommand }]
-        arguments: [ @logger, @doctrine, @etraxis.encoder ]
+        arguments: [ @logger, @translator, @doctrine, @etraxis.encoder ]
 
     command.users.user_groups:
         class: eTraxis\CommandBus\Users\Handler\GetUserGroupsCommandHandler

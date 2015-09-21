@@ -39,6 +39,23 @@ class SetPasswordCommandTest extends BaseTestCase
 
     /**
      * @expectedException \eTraxis\CommandBus\CommandException
+     * @expectedExceptionMessage This account uses an external authentication source. Impossible to change the password.
+     */
+    public function testLdap()
+    {
+        $user = $this->findUser('einstein', true);
+        $this->assertNotNull($user);
+
+        $command = new SetPasswordCommand([
+            'id'       => $user->getId(),
+            'password' => 'legacy',
+        ]);
+
+        $this->command_bus->handle($command);
+    }
+
+    /**
+     * @expectedException \eTraxis\CommandBus\CommandException
      * @expectedExceptionMessage Password should be at least 6 characters length.
      */
     public function testTooShort()

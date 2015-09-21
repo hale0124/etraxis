@@ -19,6 +19,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
+use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Command handler.
@@ -26,6 +27,7 @@ use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 class SetPasswordCommandHandler
 {
     protected $logger;
+    protected $translator;
     protected $doctrine;
     protected $password_encoder;
 
@@ -33,15 +35,18 @@ class SetPasswordCommandHandler
      * Dependency Injection constructor.
      *
      * @param   LoggerInterface          $logger
+     * @param   TranslatorInterface      $translator
      * @param   RegistryInterface        $doctrine
      * @param   PasswordEncoderInterface $password_encoder
      */
     public function __construct(
         LoggerInterface          $logger,
+        TranslatorInterface      $translator,
         RegistryInterface        $doctrine,
         PasswordEncoderInterface $password_encoder)
     {
         $this->logger           = $logger;
+        $this->translator       = $translator;
         $this->doctrine         = $doctrine;
         $this->password_encoder = $password_encoder;
     }
@@ -61,6 +66,12 @@ class SetPasswordCommandHandler
         $entity = $repository->find($command->id);
 
         if ($entity) {
+
+            if ($entity->isLdap()) {
+                $message = $this->translator->trans('password.cant_change');
+                $this->logger->error($message);
+                throw new CommandException($message);
+            }
 
             try {
                 $encoded = $this->password_encoder->encodePassword($command->password, null);

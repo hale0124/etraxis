@@ -14,6 +14,7 @@
 namespace eTraxis\CommandBus\Users;
 
 use eTraxis\Tests\BaseTestCase;
+use Rhumsaa\Uuid\Uuid;
 
 class ResetPasswordCommandTest extends BaseTestCase
 {
@@ -53,6 +54,34 @@ class ResetPasswordCommandTest extends BaseTestCase
 
         $this->assertEquals($expected, $user->getPassword());
         $this->assertNull($user->getResetToken());
+    }
+
+    /**
+     * @expectedException \eTraxis\CommandBus\CommandException
+     * @expectedExceptionMessage This account uses an external authentication source. Impossible to change the password.
+     */
+    public function testLdap()
+    {
+        $username = 'einstein';
+        $token    = Uuid::uuid4()->getHex();
+
+        $user = $this->findUser($username, true);
+        $this->assertNotNull($user);
+
+        $user->setResetToken($token);
+
+        $this->doctrine->getManager()->persist($user);
+        $this->doctrine->getManager()->flush();
+
+        $user = $this->findUser($username, true);
+        $this->assertNotNull($user);
+
+        $command = new ResetPasswordCommand([
+            'token'    => $user->getResetToken(),
+            'password' => 'legacy',
+        ]);
+
+        $this->command_bus->handle($command);
     }
 
     /**
