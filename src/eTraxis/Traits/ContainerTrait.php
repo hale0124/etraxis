@@ -91,16 +91,6 @@ trait ContainerTrait
     }
 
     /**
-     * Shortcut to get the Authorization Checker service.
-     *
-     * @return  \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface
-     */
-    protected function getAuthorizationChecker()
-    {
-        return $this->container->get('security.authorization_checker');
-    }
-
-    /**
      * Shortcut to get the Translator service.
      *
      * @return  \Symfony\Component\Translation\TranslatorInterface
@@ -108,16 +98,6 @@ trait ContainerTrait
     protected function getTranslator()
     {
         return $this->container->get('translator');
-    }
-
-    /**
-     * Shortcut to get the Validator service.
-     *
-     * @return  \Symfony\Component\Validator\Validator\ValidatorInterface
-     */
-    protected function getValidator()
-    {
-        return $this->container->get('validator');
     }
 
     /**

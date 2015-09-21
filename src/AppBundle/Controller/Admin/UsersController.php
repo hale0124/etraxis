@@ -183,7 +183,8 @@ class UsersController extends Controller
                 throw $this->createNotFoundException();
             }
 
-            $authChecker = $this->getAuthorizationChecker();
+            /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
+            $authChecker = $this->get('security.authorization_checker');
 
             return $this->render('admin/users/tab_details.html.twig', [
                 'user' => $user,
@@ -316,7 +317,7 @@ class UsersController extends Controller
             $data = $this->getFormData($request, 'user');
 
             if ($data['password'] != $data['confirmation']) {
-                throw new CommandException($this->get('translator')->trans('passwords.dont_match'));
+                throw new CommandException($this->getTranslator()->trans('passwords.dont_match'));
             }
 
             $command = new Users\CreateUserCommand($data);
@@ -379,7 +380,7 @@ class UsersController extends Controller
             if (!$user->isLdap() && $data['password']) {
 
                 if ($data['password'] != $data['confirmation']) {
-                    throw new CommandException($this->get('translator')->trans('passwords.dont_match'));
+                    throw new CommandException($this->getTranslator()->trans('passwords.dont_match'));
                 }
 
                 $command = new Users\SetPasswordCommand([

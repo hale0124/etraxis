@@ -180,7 +180,8 @@ class ProjectsController extends Controller
                 throw $this->createNotFoundException();
             }
 
-            $authChecker = $this->getAuthorizationChecker();
+            /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
+            $authChecker = $this->get('security.authorization_checker');
 
             return $this->render('admin/projects/tab_details.html.twig', [
                 'project' => $project,

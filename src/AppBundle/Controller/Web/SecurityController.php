@@ -129,7 +129,7 @@ class SecurityController extends Controller
             $data = $this->getFormData($request, 'reset_password');
 
             if ($data['password'] != $data['confirmation']) {
-                $this->setError($this->get('translator')->trans('passwords.dont_match'));
+                $this->setError($this->getTranslator()->trans('passwords.dont_match'));
             }
             else {
 
@@ -175,7 +175,8 @@ class SecurityController extends Controller
             return $this->redirect($this->generateUrl('login'));
         }
 
-        $authChecker = $this->getAuthorizationChecker();
+        /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
+        $authChecker = $this->get('security.authorization_checker');
 
         if (!$authChecker->isGranted(UserVoter::SET_EXPIRED_PASSWORD, $this->getUser())) {
             return $this->redirect($this->generateUrl('homepage'));
@@ -189,7 +190,7 @@ class SecurityController extends Controller
             $data = $this->getFormData($request, 'reset_password');
 
             if ($data['password'] != $data['confirmation']) {
-                $this->setError($this->get('translator')->trans('passwords.dont_match'));
+                $this->setError($this->getTranslator()->trans('passwords.dont_match'));
             }
             else {
 

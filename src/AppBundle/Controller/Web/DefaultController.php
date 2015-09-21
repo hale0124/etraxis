@@ -80,7 +80,8 @@ class DefaultController extends Controller
     {
         $command = new ExportToCsvCommand($this->getFormData($request, 'export'));
 
-        $violations = $this->getValidator()->validate($command);
+        /** @var \Symfony\Component\Validator\ConstraintViolationListInterface $violations */
+        $violations = $this->get('validator')->validate($command);
 
         if (count($violations)) {
             return new JsonResponse($violations->get(0)->getMessage(), Response::HTTP_BAD_REQUEST);

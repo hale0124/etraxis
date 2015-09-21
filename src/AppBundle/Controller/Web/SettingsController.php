@@ -108,7 +108,7 @@ class SettingsController extends Controller
         try {
 
             if ($user->isLdap()) {
-                throw new CommandException($this->get('translator')->trans('password.cant_change'));
+                throw new CommandException($this->getTranslator()->trans('password.cant_change'));
             }
 
             $data = $this->getFormData($request, 'change_password');
@@ -117,11 +117,11 @@ class SettingsController extends Controller
             $encoder = $this->get('etraxis.encoder');
 
             if (!$encoder->isPasswordValid($user->getPassword(), $data['current_password'], null)) {
-                throw new CommandException($this->get('translator')->trans('password.wrong'));
+                throw new CommandException($this->getTranslator()->trans('password.wrong'));
             }
 
             if ($data['new_password'] != $data['confirmation']) {
-                throw new CommandException($this->get('translator')->trans('passwords.dont_match'));
+                throw new CommandException($this->getTranslator()->trans('passwords.dont_match'));
             }
 
             $command = new Users\SetPasswordCommand([
@@ -131,10 +131,10 @@ class SettingsController extends Controller
 
             $this->getCommandBus()->handle($command);
 
-            $this->setNotice($this->get('translator')->trans('password.changed'));
+            $this->setNotice($this->getTranslator()->trans('password.changed'));
         }
         catch (BadCredentialsException $e) {
-            $this->setError($this->get('translator')->trans('password.wrong'));
+            $this->setError($this->getTranslator()->trans('password.wrong'));
         }
         catch (ValidationException $e) {
             foreach ($e->getMessages() as $message) {
