@@ -7,7 +7,7 @@
         {{ form_row(form.fullname) }}
         {{ form_row(form.email) }}
         {{ form_row(form.description) }}
-        {% if not user.ldap %}
+        {% if user is not defined or not user.ldap %}
         {{ form_row(form.password) }}
         {{ form_row(form.confirmation) }}
         {% endif %}

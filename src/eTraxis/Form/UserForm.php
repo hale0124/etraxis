@@ -76,7 +76,7 @@ class UserForm extends AbstractType
         ]);
 
         // Cannot manage passwords of LDAP accounts.
-        if (!$user->isLdap()) {
+        if (!is_object($user) || !$user->isLdap()) {
 
             // Password.
             $builder->add('password', 'password', [
