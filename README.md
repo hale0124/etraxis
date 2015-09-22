@@ -1,7 +1,7 @@
 [![License](https://img.shields.io/badge/license-GPLv3-blue.svg)](http://www.gnu.org/licenses/gpl.txt)
-[![Build Status](https://img.shields.io/travis/etraxis/etraxis.svg)](https://travis-ci.org/etraxis/etraxis)
-[![Code Coverage](https://img.shields.io/scrutinizer/coverage/g/etraxis/etraxis.svg)](https://scrutinizer-ci.com/g/etraxis/etraxis/?branch=master)
-[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/etraxis/etraxis.svg)](https://scrutinizer-ci.com/g/etraxis/etraxis/?branch=master)
+[![Build Status](https://travis-ci.org/etraxis/etraxis.svg?branch=master)](https://travis-ci.org/etraxis/etraxis)
+[![Code Coverage](https://scrutinizer-ci.com/g/etraxis/etraxis/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/etraxis/etraxis/?branch=master)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/etraxis/etraxis/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/etraxis/etraxis/?branch=master)
 [![SensioLabsInsight](https://img.shields.io/sensiolabs/i/0b93b04a-7ba8-49eb-b768-f1d4d1fa970c.svg)](https://insight.sensiolabs.com/projects/0b93b04a-7ba8-49eb-b768-f1d4d1fa970c)
 
 ### What is eTraxis
