@@ -12,7 +12,7 @@ var datatables_language = window.datatables_language || {};
     /**
      * Extended DataTable.
      *
-     * @returns {$.fn}
+     * @returns {jQuery}
      */
     $.fn.table = function(options) {
 

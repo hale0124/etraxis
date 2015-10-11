@@ -10,11 +10,11 @@
     /**
      * Initializes jQuery UI widgets.
      *
-     * @returns {$.fn}
+     * @returns {*}
      */
     $.fn.initUI = function() {
 
-        this.each(function() {
+        return this.each(function() {
 
             // Add default classes.
             $('fieldset', this).addClass('ui-corner-all');

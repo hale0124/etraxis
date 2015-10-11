@@ -12,11 +12,11 @@
      *
      * @param {bool} state New state of target widgets.
      *
-     * @returns {$.fn}
+     * @returns {*}
      */
     $.fn.disable = function(state) {
 
-        this.each(function() {
+        return this.each(function() {
 
             $(this).prop('disabled', state);
 

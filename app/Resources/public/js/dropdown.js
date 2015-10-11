@@ -10,11 +10,11 @@
     /**
      * Button with dropdown menu.
      *
-     * @returns {$.fn}
+     * @returns {*}
      */
     $.fn.dropdown = function() {
 
-        this.each(function() {
+        return this.each(function() {
 
             var $button = $('button', this);
             var $menu   = $('ul', this);
