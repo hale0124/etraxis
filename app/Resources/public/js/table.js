@@ -226,9 +226,9 @@ var datatables_language = window.datatables_language || {};
                 // Click on an item in the context menu.
                 $('li', $menu).click(function() {
                     if (!$(this).hasClass('ui-state-disabled')) {
-                        $table.trigger('contextmenuitem', {
-                            row: $(this).parent().data('id'),
-                            action: $(this).data('id')
+                        $table.trigger('contextmenu.click', {
+                            id: $(this).parent().data('id'),
+                            item: $(this).data('id')
                         });
                     }
                 });
