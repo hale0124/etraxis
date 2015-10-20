@@ -45,6 +45,17 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
      */
     public function load(ObjectManager $manager)
     {
+        $this->loadDeliveryTemplate($manager);
+        $this->loadFuturamaTemplate($manager);
+    }
+
+    /**
+     * Loads "Delivery" template for "Planet Express" project.
+     *
+     * @param   ObjectManager $manager
+     */
+    protected function loadDeliveryTemplate(ObjectManager $manager)
+    {
         $author      = Template::PERMIT_MODIFY_ISSUE | Template::PERMIT_ADD_COMMENT | Template::PERMIT_ADD_FILE | Template::PERMIT_REMOVE_FILE;
         $responsible = Template::PERMIT_ADD_COMMENT | Template::PERMIT_ADD_FILE;
 
@@ -80,7 +91,7 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
             ->setPrefix('PE')
             ->setDescription('Delivery task')
             ->setLocked(false)
-            ->setGuestAccess(true)
+            ->setGuestAccess(false)
             ->setRegisteredPermissions(0)
             ->setAuthorPermissions($author)
             ->setResponsiblePermissions($responsible)
@@ -116,6 +127,37 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
             $manager->persist($permission);
         }
 
+        $manager->flush();
+    }
+
+    /**
+     * Loads "Futurama" template for "Planet Express" project.
+     *
+     * @param   ObjectManager $manager
+     */
+    protected function loadFuturamaTemplate(ObjectManager $manager)
+    {
+        $registered = Template::PERMIT_VIEW_ISSUE;
+        $author     = Template::PERMIT_MODIFY_ISSUE | Template::PERMIT_ADD_COMMENT | Template::PERMIT_ADD_FILE | Template::PERMIT_REMOVE_FILE;
+
+        $template = new Template();
+
+        /** @noinspection PhpParamsInspection */
+        $template
+            ->setName('Futurama')
+            ->setPrefix('F')
+            ->setDescription('Futurama episode')
+            ->setLocked(false)
+            ->setGuestAccess(true)
+            ->setRegisteredPermissions($registered)
+            ->setAuthorPermissions($author)
+            ->setResponsiblePermissions(0)
+            ->setProject($this->getReference('project:planetexpress'))
+        ;
+
+        $this->addReference('template:futurama', $template);
+
+        $manager->persist($template);
         $manager->flush();
     }
 }

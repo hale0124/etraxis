@@ -47,6 +47,17 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
      */
     public function load(ObjectManager $manager)
     {
+        $this->loadDeliveryStates($manager);
+        $this->loadFuturamaStates($manager);
+    }
+
+    /**
+     * Loads states of "Delivery" template.
+     *
+     * @param   ObjectManager $manager
+     */
+    protected function loadDeliveryStates(ObjectManager $manager)
+    {
         $state_new       = new State();
         $state_delivered = new State();
 
@@ -97,6 +108,56 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
         ;
 
         $manager->persist($assignee);
+        $manager->persist($transition);
+        $manager->flush();
+    }
+
+    /**
+     * Loads states of "Futurama" template.
+     *
+     * @param   ObjectManager $manager
+     */
+    protected function loadFuturamaStates(ObjectManager $manager)
+    {
+        $state_produced = new State();
+        $state_released = new State();
+
+        /** @noinspection PhpParamsInspection */
+        $state_produced
+            ->setName('Produced')
+            ->setAbbreviation('P')
+            ->setType(State::TYPE_INITIAL)
+            ->setResponsible(State::RESPONSIBLE_KEEP)
+            ->setTemplate($this->getReference('template:futurama'))
+            ->setNextState($state_released)
+        ;
+
+        /** @noinspection PhpParamsInspection */
+        $state_released
+            ->setName('Released')
+            ->setAbbreviation('R')
+            ->setType(State::TYPE_FINAL)
+            ->setResponsible(State::RESPONSIBLE_REMOVE)
+            ->setTemplate($this->getReference('template:futurama'))
+        ;
+
+        $this->addReference('state:produced', $state_produced);
+        $this->addReference('state:released', $state_released);
+
+        $manager->persist($state_produced);
+        $manager->persist($state_released);
+        $manager->flush();
+
+        $transition = new StateRoleTransition();
+
+        $transition
+            ->setFromStateId($state_produced->getId())
+            ->setToStateId($state_released->getId())
+            ->setRole(SystemRole::AUTHOR)
+            ->setFromState($state_produced)
+            ->setToState($state_released)
+        ;
+
         $manager->persist($transition);
         $manager->flush();
     }
