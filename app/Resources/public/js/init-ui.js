@@ -34,6 +34,7 @@
             $('.buttonset', this).buttonset();          // buttonsets
             $('.date', this).datepicker();              // datepickers
             $('.hint', this).tooltip();                 // tooltips binded with labels
+            $('.panel', this).panel();                  // panels
 
             // Highlight inline messages.
             $('.highlight:not(.ui-state-highlight)', this).addClass('ui-state-highlight ui-widget-content ui-corner-all');
