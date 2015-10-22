@@ -36,8 +36,8 @@ class DeleteProjectCommandHandler
      * @param   AuthorizationCheckerInterface $security
      */
     public function __construct(
-        LoggerInterface $logger,
-        RegistryInterface $doctrine,
+        LoggerInterface               $logger,
+        RegistryInterface             $doctrine,
         AuthorizationCheckerInterface $security)
     {
         $this->logger   = $logger;
@@ -46,7 +46,7 @@ class DeleteProjectCommandHandler
     }
 
     /**
-     * Deletes specified account.
+     * Deletes specified project.
      *
      * @param   DeleteProjectCommand $command
      *

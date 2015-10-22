@@ -31,8 +31,8 @@ class ListGroupsCommandHandler
     /**
      * Dependency Injection constructor.
      *
-     * @param   TranslatorInterface $translator Translation service.
-     * @param   RegistryInterface   $doctrine   Doctrine entity managers registry.
+     * @param   TranslatorInterface $translator
+     * @param   RegistryInterface   $doctrine
      */
     public function __construct(TranslatorInterface $translator, RegistryInterface $doctrine)
     {

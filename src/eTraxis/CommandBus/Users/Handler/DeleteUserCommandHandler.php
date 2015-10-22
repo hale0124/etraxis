@@ -36,8 +36,8 @@ class DeleteUserCommandHandler
      * @param   AuthorizationCheckerInterface $security
      */
     public function __construct(
-        LoggerInterface $logger,
-        RegistryInterface $doctrine,
+        LoggerInterface               $logger,
+        RegistryInterface             $doctrine,
         AuthorizationCheckerInterface $security)
     {
         $this->logger   = $logger;

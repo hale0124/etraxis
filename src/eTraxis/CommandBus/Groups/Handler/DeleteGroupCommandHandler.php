@@ -37,7 +37,7 @@ class DeleteGroupCommandHandler
     }
 
     /**
-     * Deletes specified account.
+     * Deletes specified group.
      *
      * @param   DeleteGroupCommand $command
      *

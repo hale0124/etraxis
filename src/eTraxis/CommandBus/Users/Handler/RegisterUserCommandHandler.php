@@ -29,10 +29,10 @@ class RegisterUserCommandHandler
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface   $logger   Debug logger.
-     * @param   RegistryInterface $doctrine Doctrine entity managers registry.
-     * @param   string            $locale   Default locale.
-     * @param   string            $theme    Default theme.
+     * @param   LoggerInterface   $logger
+     * @param   RegistryInterface $doctrine
+     * @param   string            $locale
+     * @param   string            $theme
      */
     public function __construct(LoggerInterface $logger, RegistryInterface $doctrine, $locale, $theme)
     {
