@@ -139,9 +139,7 @@ class ProjectsController extends Controller
     public function viewAction(Request $request, $id)
     {
         try {
-            $project = $this->getCommandBus()->handle(
-                new Projects\FindProjectCommand(['id' => $id])
-            );
+            $project = $this->getDoctrine()->getRepository('eTraxis:Project')->find($id);
 
             if (!$project) {
                 throw $this->createNotFoundException();
@@ -170,9 +168,7 @@ class ProjectsController extends Controller
     public function tabDetailsAction($id)
     {
         try {
-            $project = $this->getCommandBus()->handle(
-                new Projects\FindProjectCommand(['id' => $id])
-            );
+            $project = $this->getDoctrine()->getRepository('eTraxis:Project')->find($id);
 
             if (!$project) {
                 throw $this->createNotFoundException();
@@ -229,9 +225,7 @@ class ProjectsController extends Controller
     public function dlgEditAction($id)
     {
         try {
-            $project = $this->getCommandBus()->handle(
-                new Projects\FindProjectCommand(['id' => $id])
-            );
+            $project = $this->getDoctrine()->getRepository('eTraxis:Project')->find($id);
 
             if (!$project) {
                 throw $this->createNotFoundException();
@@ -292,9 +286,7 @@ class ProjectsController extends Controller
     public function editAction(Request $request, $id)
     {
         try {
-            $project = $this->getCommandBus()->handle(
-                new Projects\FindProjectCommand(['id' => $id])
-            );
+            $project = $this->getDoctrine()->getRepository('eTraxis:Project')->find($id);
 
             if (!$project) {
                 throw $this->createNotFoundException();

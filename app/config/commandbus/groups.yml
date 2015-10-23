@@ -5,11 +5,6 @@ services:
         tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Groups\ListGroupsCommand }]
         arguments: [ @translator, @doctrine ]
 
-    command.group.find:
-        class: eTraxis\CommandBus\Groups\Handler\FindGroupCommandHandler
-        tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Groups\FindGroupCommand }]
-        arguments: [ @doctrine ]
-
     command.group.create:
         class: eTraxis\CommandBus\Groups\Handler\CreateGroupCommandHandler
         tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Groups\CreateGroupCommand }]

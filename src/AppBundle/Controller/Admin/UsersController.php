@@ -142,9 +142,7 @@ class UsersController extends Controller
     public function viewAction(Request $request, $id)
     {
         try {
-            $user = $this->getCommandBus()->handle(
-                new Users\FindUserCommand(['id' => $id])
-            );
+            $user = $this->getDoctrine()->getRepository('eTraxis:User')->find($id);
 
             if (!$user) {
                 throw $this->createNotFoundException();
@@ -173,9 +171,7 @@ class UsersController extends Controller
     public function tabDetailsAction($id)
     {
         try {
-            $user = $this->getCommandBus()->handle(
-                new Users\FindUserCommand(['id' => $id])
-            );
+            $user = $this->getDoctrine()->getRepository('eTraxis:User')->find($id);
 
             if (!$user) {
                 throw $this->createNotFoundException();
@@ -212,9 +208,7 @@ class UsersController extends Controller
     public function tabGroupsAction($id)
     {
         try {
-            $user = $this->getCommandBus()->handle(
-                new Users\FindUserCommand(['id' => $id])
-            );
+            $user = $this->getDoctrine()->getRepository('eTraxis:User')->find($id);
 
             if (!$user) {
                 throw $this->createNotFoundException();
@@ -277,9 +271,7 @@ class UsersController extends Controller
     public function dlgEditAction($id)
     {
         try {
-            $user = $this->getCommandBus()->handle(
-                new Users\FindUserCommand(['id' => $id])
-            );
+            $user = $this->getDoctrine()->getRepository('eTraxis:User')->find($id);
 
             if (!$user) {
                 throw $this->createNotFoundException();
@@ -349,9 +341,7 @@ class UsersController extends Controller
 
         try {
             /** @var \eTraxis\Entity\User $user */
-            $user = $this->getCommandBus()->handle(
-                new Users\FindUserCommand(['id' => $id])
-            );
+            $user = $this->getDoctrine()->getRepository('eTraxis:User')->find($id);
 
             if (!$user) {
                 throw $this->createNotFoundException();

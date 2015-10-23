@@ -5,11 +5,6 @@ services:
         tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Projects\ListProjectsCommand }]
         arguments: [ @translator, @localizer, @doctrine ]
 
-    command.project.find:
-        class: eTraxis\CommandBus\Projects\Handler\FindProjectCommandHandler
-        tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Projects\FindProjectCommand }]
-        arguments: [ @doctrine ]
-
     command.project.create:
         class: eTraxis\CommandBus\Projects\Handler\CreateProjectCommandHandler
         tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Projects\CreateProjectCommand }]

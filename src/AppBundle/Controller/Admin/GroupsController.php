@@ -142,9 +142,7 @@ class GroupsController extends Controller
     public function viewAction(Request $request, $id)
     {
         try {
-            $group = $this->getCommandBus()->handle(
-                new Groups\FindGroupCommand(['id' => $id])
-            );
+            $group = $this->getDoctrine()->getRepository('eTraxis:Group')->find($id);
 
             if (!$group) {
                 throw $this->createNotFoundException();
@@ -173,9 +171,7 @@ class GroupsController extends Controller
     public function tabDetailsAction($id)
     {
         try {
-            $group = $this->getCommandBus()->handle(
-                new Groups\FindGroupCommand(['id' => $id])
-            );
+            $group = $this->getDoctrine()->getRepository('eTraxis:Group')->find($id);
 
             if (!$group) {
                 throw $this->createNotFoundException();
@@ -203,9 +199,7 @@ class GroupsController extends Controller
     public function tabMembersAction($id)
     {
         try {
-            $group = $this->getCommandBus()->handle(
-                new Groups\FindGroupCommand(['id' => $id])
-            );
+            $group = $this->getDoctrine()->getRepository('eTraxis:Group')->find($id);
 
             if (!$group) {
                 throw $this->createNotFoundException();
@@ -262,9 +256,7 @@ class GroupsController extends Controller
     public function dlgEditAction($id)
     {
         try {
-            $group = $this->getCommandBus()->handle(
-                new Groups\FindGroupCommand(['id' => $id])
-            );
+            $group = $this->getDoctrine()->getRepository('eTraxis:Group')->find($id);
 
             if (!$group) {
                 throw $this->createNotFoundException();
@@ -325,9 +317,7 @@ class GroupsController extends Controller
     public function editAction(Request $request, $id)
     {
         try {
-            $group = $this->getCommandBus()->handle(
-                new Groups\FindGroupCommand(['id' => $id])
-            );
+            $group = $this->getDoctrine()->getRepository('eTraxis:Group')->find($id);
 
             if (!$group) {
                 throw $this->createNotFoundException();

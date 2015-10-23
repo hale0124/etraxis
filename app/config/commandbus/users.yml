@@ -20,11 +20,6 @@ services:
         tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Users\ListUsersCommand }]
         arguments: [ @translator, @doctrine ]
 
-    command.user.find:
-        class: eTraxis\CommandBus\Users\Handler\FindUserCommandHandler
-        tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Users\FindUserCommand }]
-        arguments: [ @doctrine ]
-
     command.user.create:
         class: eTraxis\CommandBus\Users\Handler\CreateUserCommandHandler
         tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Users\CreateUserCommand }]
