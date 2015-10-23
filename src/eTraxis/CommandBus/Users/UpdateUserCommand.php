@@ -11,7 +11,7 @@
 
 namespace eTraxis\CommandBus\Users;
 
-use eTraxis\Traits\CommandBusTrait;
+use eTraxis\Traits\ObjectInitiationTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -30,7 +30,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class UpdateUserCommand
 {
-    use CommandBusTrait;
+    use ObjectInitiationTrait;
 
     /**
      * @Assert\NotBlank()

@@ -11,7 +11,7 @@
 
 namespace eTraxis\CommandBus\Groups;
 
-use eTraxis\Traits\CommandBusTrait;
+use eTraxis\Traits\ObjectInitiationTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class CreateGroupCommand
 {
-    use CommandBusTrait;
+    use ObjectInitiationTrait;
 
     /**
      * @eTraxis\Validator\EntityIdConstraint()

@@ -11,7 +11,7 @@
 
 namespace eTraxis\CommandBus\Users;
 
-use eTraxis\Traits\CommandBusTrait;
+use eTraxis\Traits\ObjectInitiationTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class FindUserCommand
 {
-    use CommandBusTrait;
+    use ObjectInitiationTrait;
 
     /**
      * @Assert\NotBlank()

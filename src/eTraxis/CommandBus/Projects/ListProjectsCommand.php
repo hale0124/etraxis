@@ -11,7 +11,7 @@
 
 namespace eTraxis\CommandBus\Projects;
 
-use eTraxis\Traits\CommandBusTrait;
+use eTraxis\Traits\ObjectInitiationTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -56,7 +56,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ListProjectsCommand
 {
-    use CommandBusTrait;
+    use ObjectInitiationTrait;
 
     /**
      * @Assert\NotNull()

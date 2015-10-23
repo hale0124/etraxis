@@ -11,7 +11,7 @@
 
 namespace eTraxis\CommandBus\Shared;
 
-use eTraxis\Traits\CommandBusTrait;
+use eTraxis\Traits\ObjectInitiationTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -27,7 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class ExportToCsvCommand
 {
-    use CommandBusTrait;
+    use ObjectInitiationTrait;
 
     /**
      * @Assert\NotBlank()

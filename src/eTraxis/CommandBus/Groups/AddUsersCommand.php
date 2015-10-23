@@ -11,7 +11,7 @@
 
 namespace eTraxis\CommandBus\Groups;
 
-use eTraxis\Traits\CommandBusTrait;
+use eTraxis\Traits\ObjectInitiationTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -22,7 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class AddUsersCommand
 {
-    use CommandBusTrait;
+    use ObjectInitiationTrait;
 
     /**
      * @Assert\NotBlank()

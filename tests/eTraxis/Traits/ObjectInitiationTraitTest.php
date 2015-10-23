@@ -11,28 +11,28 @@
 
 namespace eTraxis\Traits;
 
-class CommandStub
+class ObjectStub
 {
-    use CommandBusTrait;
+    use ObjectInitiationTrait;
 
     public $property = 1;
 }
 
-class CommandBusTraitTest extends \PHPUnit_Framework_TestCase
+class ObjectInitiationTraitTest extends \PHPUnit_Framework_TestCase
 {
     public function testDefault()
     {
-        $command = new CommandStub();
+        $object = new ObjectStub();
 
-        $this->assertEquals(1, $command->property);
+        $this->assertEquals(1, $object->property);
     }
 
     public function testInitialization()
     {
-        $command = new CommandStub([
+        $object = new ObjectStub([
             'property' => 2,
         ]);
 
-        $this->assertEquals(2, $command->property);
+        $this->assertEquals(2, $object->property);
     }
 }

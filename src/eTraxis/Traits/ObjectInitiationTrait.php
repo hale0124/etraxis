@@ -12,9 +12,9 @@
 namespace eTraxis\Traits;
 
 /**
- * A trait to extend DTO for Command Bus.
+ * A trait for DTO initialization.
  */
-trait CommandBusTrait
+trait ObjectInitiationTrait
 {
     /**
      * Initializes object properties with values from provided array.
