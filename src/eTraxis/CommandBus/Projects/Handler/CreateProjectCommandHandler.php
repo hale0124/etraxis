@@ -55,8 +55,6 @@ class CreateProjectCommandHandler
      *
      * @param   CreateProjectCommand $command
      *
-     * @return  int ID of the created project.
-     *
      * @throws  CommandException
      * @throws  NotFoundHttpException
      */
@@ -81,7 +79,5 @@ class CreateProjectCommandHandler
 
         $this->doctrine->getManager()->persist($entity);
         $this->doctrine->getManager()->flush();
-
-        return $entity->getId();
     }
 }

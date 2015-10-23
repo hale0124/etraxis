@@ -17,8 +17,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Creates new project.
  *
- * Returns ID of the created project.
- *
  * @property    string $name        Project name.
  * @property    string $description Description.
  * @property    bool   $suspended   Status.

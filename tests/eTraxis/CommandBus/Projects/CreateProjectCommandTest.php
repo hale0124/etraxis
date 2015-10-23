@@ -31,15 +31,12 @@ class CreateProjectCommandTest extends BaseTestCase
             'suspended'   => true,
         ]);
 
-        $result = $this->command_bus->handle($command);
+        $this->command_bus->handle($command);
 
         /** @var \eTraxis\Entity\Project $project */
         $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => $name]);
 
-        $id = $project->getId();
-
         $this->assertInstanceOf('eTraxis\Entity\Project', $project);
-        $this->assertEquals($id, $result);
         $this->assertEquals($name, $project->getName());
         $this->assertEquals($description, $project->getDescription());
         $this->assertTrue($project->isSuspended());

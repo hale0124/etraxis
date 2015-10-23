@@ -60,8 +60,6 @@ class CreateUserCommandHandler
      *
      * @param   CreateUserCommand $command
      *
-     * @return  int ID of the created user.
-     *
      * @throws  CommandException
      */
     public function handle(CreateUserCommand $command)
@@ -101,7 +99,5 @@ class CreateUserCommandHandler
 
         $this->doctrine->getManager()->persist($entity);
         $this->doctrine->getManager()->flush();
-
-        return $entity->getId();
     }
 }

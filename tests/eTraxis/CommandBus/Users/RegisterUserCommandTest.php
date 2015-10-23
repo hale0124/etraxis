@@ -34,7 +34,7 @@ class RegisterUserCommandTest extends BaseTestCase
             'email'    => $email,
         ]);
 
-        $result = $this->command_bus->handle($command);
+        $this->command_bus->handle($command);
 
         $user = $this->findUser($username, true);
 
@@ -47,7 +47,6 @@ class RegisterUserCommandTest extends BaseTestCase
         $this->assertEquals($locale, $user->getLocale());
         $this->assertEquals($theme, $user->getTheme());
         $this->assertTrue($user->isLdap());
-        $this->assertEquals($id, $result);
 
         // second time
         $command = new RegisterUserCommand([
@@ -56,7 +55,7 @@ class RegisterUserCommandTest extends BaseTestCase
             'email'    => $email,
         ]);
 
-        $result = $this->command_bus->handle($command);
+        $this->command_bus->handle($command);
 
         $user = $this->findUser($username, true);
 
@@ -68,7 +67,6 @@ class RegisterUserCommandTest extends BaseTestCase
         $this->assertEquals($locale, $user->getLocale());
         $this->assertEquals($theme, $user->getTheme());
         $this->assertTrue($user->isLdap());
-        $this->assertEquals($id, $result);
     }
 
     /**

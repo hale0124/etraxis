@@ -55,8 +55,6 @@ class CreateGroupCommandHandler
      *
      * @param   CreateGroupCommand $command
      *
-     * @return  int ID of the created group.
-     *
      * @throws  CommandException
      * @throws  NotFoundHttpException
      */
@@ -94,7 +92,5 @@ class CreateGroupCommandHandler
 
         $this->doctrine->getManager()->persist($entity);
         $this->doctrine->getManager()->flush();
-
-        return $entity->getId();
     }
 }

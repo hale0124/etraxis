@@ -17,8 +17,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Creates new account.
  *
- * Returns ID of the created user.
- *
  * @property    string $username    Login.
  * @property    string $fullname    Full name.
  * @property    string $email       Email address.

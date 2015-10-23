@@ -30,15 +30,12 @@ class CreateGroupCommandTest extends BaseTestCase
             'description' => $description,
         ]);
 
-        $result = $this->command_bus->handle($command);
+        $this->command_bus->handle($command);
 
         /** @var \eTraxis\Entity\Group $group */
         $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => $name]);
 
-        $id = $group->getId();
-
         $this->assertInstanceOf('eTraxis\Entity\Group', $group);
-        $this->assertEquals($id, $result);
         $this->assertEquals($name, $group->getName());
         $this->assertEquals($description, $group->getDescription());
     }

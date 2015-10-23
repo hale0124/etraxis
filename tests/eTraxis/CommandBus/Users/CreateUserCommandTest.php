@@ -43,14 +43,11 @@ class CreateUserCommandTest extends BaseTestCase
             'timezone'    => 377,
         ]);
 
-        $result = $this->command_bus->handle($command);
+        $this->command_bus->handle($command);
 
         $user = $this->findUser($username);
 
-        $id = $user->getId();
-
         $this->assertInstanceOf('eTraxis\Entity\User', $user);
-        $this->assertEquals($id, $result);
         $this->assertEquals($username, $user->getUsername());
         $this->assertEquals($fullname, $user->getFullname());
         $this->assertEquals($email, $user->getEmail());

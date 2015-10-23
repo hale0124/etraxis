@@ -17,8 +17,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Creates new group.
  *
- * Returns ID of the created group.
- *
  * @property    int    $project     ID of the group's project (empty for global group).
  * @property    string $name        Group name.
  * @property    string $description Description.

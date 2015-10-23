@@ -47,8 +47,6 @@ class RegisterUserCommandHandler
      * If specified account is already registered - its cached display name and email address are being refreshed.
      *
      * @param   RegisterUserCommand $command
-     *
-     * @return  int ID of the registered user.
      */
     public function handle(RegisterUserCommand $command)
     {
@@ -92,7 +90,5 @@ class RegisterUserCommandHandler
 
         $this->doctrine->getManager()->persist($user);
         $this->doctrine->getManager()->flush();
-
-        return $user->getId();
     }
 }
