@@ -13,10 +13,10 @@ namespace AppBundle\Controller\Admin;
 
 use eTraxis\CommandBus\CommandException;
 use eTraxis\CommandBus\Groups;
-use eTraxis\CommandBus\Shared\ExportToCsvCommand;
 use eTraxis\CommandBus\ValidationException;
 use eTraxis\Form\GroupExForm;
 use eTraxis\Form\GroupForm;
+use eTraxis\Query\ExportCsvQuery;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -117,11 +117,19 @@ class GroupsController extends Controller
                 $this->getTranslator()->trans('description'),
             ]);
 
-            $command = new ExportToCsvCommand($this->getFormData($request, 'export'));
+            $query = new ExportCsvQuery($this->getFormData($request, 'export'));
 
-            $command->data = $groups;
+            /** @var \Symfony\Component\Validator\ConstraintViolationInterface[] $violations */
+            $violations = $this->get('validator')->validate($query);
 
-            return $this->getCommandBus()->handle($command);
+            if (count($violations)) {
+                throw new ValidationException($violations);
+            }
+
+            /** @var \eTraxis\Service\ExportInterface $export */
+            $export = $this->get('etraxis.export');
+
+            return $export->exportCsv($query, $groups);
         }
         catch (ValidationException $e) {
             return new JsonResponse($e->getMessages(), $e->getCode());

@@ -9,32 +9,28 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\CommandBus\Shared\Handler;
+namespace eTraxis\Service;
 
 use eTraxis\Collection\CsvDelimiter;
 use eTraxis\Collection\LineEnding;
-use eTraxis\CommandBus\Shared\ExportToCsvCommand;
+use eTraxis\Query\ExportCsvQuery;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
- * Command handler.
+ * Export service.
  */
-class ExportToCsvCommandHandler
+class ExportService implements ExportInterface
 {
     /**
-     * Exports specified data to CSV file.
-     *
-     * @param   ExportToCsvCommand $command
-     *
-     * @return  StreamedResponse Resulted stream response to send back to user.
+     * {@inheritdoc}
      */
-    public function handle(ExportToCsvCommand $command)
+    public function exportCsv(ExportCsvQuery $query, $data = [])
     {
-        $response = new StreamedResponse(function () use ($command) {
+        $response = new StreamedResponse(function () use ($query, $data) {
 
-            $delimiter = CsvDelimiter::getDelimiter($command->delimiter);
-            $tail      = LineEnding::getLineEnding($command->tail);
+            $delimiter = CsvDelimiter::getDelimiter($query->delimiter);
+            $tail      = LineEnding::getLineEnding($query->tail);
 
             $callback = function ($item) use ($delimiter) {
                 $count = 0;
@@ -44,32 +40,32 @@ class ExportToCsvCommandHandler
                 return ($count || $pos !== false) ? '"' . $item . '"' : $item;
             };
 
-            foreach ($command->data as $row) {
+            foreach ($data as $row) {
 
                 $result = implode($delimiter, array_map($callback, $row)) . $tail;
 
-                if ($command->encoding != 'UTF-8') {
-                    $result = iconv('UTF-8', $command->encoding . '//TRANSLIT', $result);
+                if ($query->encoding != 'UTF-8') {
+                    $result = iconv('UTF-8', $query->encoding . '//TRANSLIT', $result);
                 }
 
                 print($result);
             }
         });
 
-        if (substr($command->filename, -4) != '.csv') {
-            $command->filename .= '.csv';
+        if (substr($query->filename, -4) != '.csv') {
+            $query->filename .= '.csv';
         }
 
-        if ($command->filename == '.csv') {
-            $command->filename = 'eTraxis.csv';
+        if ($query->filename == '.csv') {
+            $query->filename = 'eTraxis.csv';
         }
 
-        $disposition = $response->headers->makeDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $command->filename, 'eTraxis.csv');
+        $disposition = $response->headers->makeDisposition(ResponseHeaderBag::DISPOSITION_ATTACHMENT, $query->filename, 'eTraxis.csv');
 
         $response->headers->set('Content-Disposition', $disposition);
         $response->headers->set('Content-Type', 'text/csv');
 
-        $response->setCharset($command->encoding);
+        $response->setCharset($query->encoding);
 
         return $response;
     }

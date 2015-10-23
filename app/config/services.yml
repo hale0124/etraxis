@@ -1,6 +1,5 @@
 imports:
     - { resource: voters.yml }
-    - { resource: commandbus/shared.yml }
     - { resource: commandbus/users.yml }
     - { resource: commandbus/groups.yml }
     - { resource: commandbus/projects.yml }
@@ -36,6 +35,9 @@ services:
             - @logger
             - @twig
             - @mailer
+
+    etraxis.export:
+        class: eTraxis\Service\ExportService
 
     etraxis.provider:
         class: eTraxis\Security\InternalUserProvider

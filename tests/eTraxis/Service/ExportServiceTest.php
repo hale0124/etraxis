@@ -9,13 +9,14 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\CommandBus\Shared;
+namespace eTraxis\Service;
 
 use eTraxis\Collection\CsvDelimiter;
 use eTraxis\Collection\LineEnding;
+use eTraxis\Query\ExportCsvQuery;
 use eTraxis\Tests\BaseTestCase;
 
-class ExportToCsvCommandTest extends BaseTestCase
+class ExportServiceTest extends BaseTestCase
 {
     public function test1()
     {
@@ -36,16 +37,17 @@ class ExportToCsvCommandTest extends BaseTestCase
 
         $this->expectOutputString(implode("\n", $expected));
 
-        $command = new ExportToCsvCommand([
+        $query = new ExportCsvQuery([
             'filename'  => 'test',
             'delimiter' => CsvDelimiter::COMMA,
             'encoding'  => 'UTF-8',
             'tail'      => LineEnding::UNIX,
-            'data'      => $data,
         ]);
 
+        $service = new ExportService();
+
         /** @var \Symfony\Component\HttpFoundation\StreamedResponse $request */
-        $request = $this->command_bus->handle($command);
+        $request = $service->exportCsv($query, $data);
 
         $this->assertEquals('UTF-8', $request->getCharset());
 
@@ -73,16 +75,17 @@ class ExportToCsvCommandTest extends BaseTestCase
 
         $this->expectOutputString(implode("\r\n", $expected));
 
-        $command = new ExportToCsvCommand([
+        $query = new ExportCsvQuery([
             'filename'  => '.csv',
             'delimiter' => CsvDelimiter::SPACE,
             'encoding'  => 'Windows-1251',
             'tail'      => LineEnding::WINDOWS,
-            'data'      => $data,
         ]);
 
+        $service = new ExportService();
+
         /** @var \Symfony\Component\HttpFoundation\StreamedResponse $request */
-        $request = $this->command_bus->handle($command);
+        $request = $service->exportCsv($query, $data);
 
         $this->assertEquals('Windows-1251', $request->getCharset());
 

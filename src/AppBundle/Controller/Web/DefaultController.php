@@ -13,8 +13,8 @@ namespace AppBundle\Controller\Web;
 
 use eTraxis\Collection\CsvDelimiter;
 use eTraxis\Collection\LineEnding;
-use eTraxis\CommandBus\Shared\ExportToCsvCommand;
 use eTraxis\Form\ExportCsvForm;
+use eTraxis\Query\ExportCsvQuery;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -76,10 +76,10 @@ class DefaultController extends Controller
      */
     public function exportAction(Request $request)
     {
-        $command = new ExportToCsvCommand($this->getFormData($request, 'export'));
+        $query = new ExportCsvQuery($this->getFormData($request, 'export'));
 
         /** @var \Symfony\Component\Validator\ConstraintViolationListInterface $violations */
-        $violations = $this->get('validator')->validate($command);
+        $violations = $this->get('validator')->validate($query);
 
         if (count($violations)) {
             return new JsonResponse($violations->get(0)->getMessage(), Response::HTTP_BAD_REQUEST);

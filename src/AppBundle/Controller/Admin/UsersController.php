@@ -12,10 +12,10 @@
 namespace AppBundle\Controller\Admin;
 
 use eTraxis\CommandBus\CommandException;
-use eTraxis\CommandBus\Shared\ExportToCsvCommand;
 use eTraxis\CommandBus\Users;
 use eTraxis\CommandBus\ValidationException;
 use eTraxis\Form\UserForm;
+use eTraxis\Query\ExportCsvQuery;
 use eTraxis\Traits\ContainerTrait;
 use eTraxis\Voter\UserVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
@@ -117,11 +117,19 @@ class UsersController extends Controller
                 $this->getTranslator()->trans('description'),
             ]);
 
-            $command = new ExportToCsvCommand($this->getFormData($request, 'export'));
+            $query = new ExportCsvQuery($this->getFormData($request, 'export'));
 
-            $command->data = $users;
+            /** @var \Symfony\Component\Validator\ConstraintViolationInterface[] $violations */
+            $violations = $this->get('validator')->validate($query);
 
-            return $this->getCommandBus()->handle($command);
+            if (count($violations)) {
+                throw new ValidationException($violations);
+            }
+
+            /** @var \eTraxis\Service\ExportInterface $export */
+            $export = $this->get('etraxis.export');
+
+            return $export->exportCsv($query, $users);
         }
         catch (ValidationException $e) {
             return new JsonResponse($e->getMessages(), $e->getCode());
