@@ -105,6 +105,6 @@ trait ContainerTrait
      */
     protected function getCommandBus()
     {
-        return $this->container->get('command_bus');
+        return $this->container->get('nih_command_bus');
     }
 }

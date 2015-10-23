@@ -2,25 +2,25 @@ services:
 
     command.projects.list:
         class: eTraxis\CommandBus\Projects\Handler\ListProjectsCommandHandler
-        tags: [{ name: command_handler, command: eTraxis\CommandBus\Projects\ListProjectsCommand }]
+        tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Projects\ListProjectsCommand }]
         arguments: [ @translator, @localizer, @doctrine ]
 
     command.project.find:
         class: eTraxis\CommandBus\Projects\Handler\FindProjectCommandHandler
-        tags: [{ name: command_handler, command: eTraxis\CommandBus\Projects\FindProjectCommand }]
+        tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Projects\FindProjectCommand }]
         arguments: [ @doctrine ]
 
     command.project.create:
         class: eTraxis\CommandBus\Projects\Handler\CreateProjectCommandHandler
-        tags: [{ name: command_handler, command: eTraxis\CommandBus\Projects\CreateProjectCommand }]
+        tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Projects\CreateProjectCommand }]
         arguments: [ @logger, @validator, @translator, @doctrine ]
 
     command.project.update:
         class: eTraxis\CommandBus\Projects\Handler\UpdateProjectCommandHandler
-        tags: [{ name: command_handler, command: eTraxis\CommandBus\Projects\UpdateProjectCommand }]
+        tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Projects\UpdateProjectCommand }]
         arguments: [ @logger, @validator, @translator, @doctrine ]
 
     command.project.delete:
         class: eTraxis\CommandBus\Projects\Handler\DeleteProjectCommandHandler
-        tags: [{ name: command_handler, command: eTraxis\CommandBus\Projects\DeleteProjectCommand }]
+        tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Projects\DeleteProjectCommand }]
         arguments: [ @logger, @doctrine, @security.authorization_checker ]

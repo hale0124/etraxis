@@ -2,45 +2,45 @@ services:
 
     command.groups.list:
         class: eTraxis\CommandBus\Groups\Handler\ListGroupsCommandHandler
-        tags: [{ name: command_handler, command: eTraxis\CommandBus\Groups\ListGroupsCommand }]
+        tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Groups\ListGroupsCommand }]
         arguments: [ @translator, @doctrine ]
 
     command.group.find:
         class: eTraxis\CommandBus\Groups\Handler\FindGroupCommandHandler
-        tags: [{ name: command_handler, command: eTraxis\CommandBus\Groups\FindGroupCommand }]
+        tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Groups\FindGroupCommand }]
         arguments: [ @doctrine ]
 
     command.group.create:
         class: eTraxis\CommandBus\Groups\Handler\CreateGroupCommandHandler
-        tags: [{ name: command_handler, command: eTraxis\CommandBus\Groups\CreateGroupCommand }]
+        tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Groups\CreateGroupCommand }]
         arguments: [ @logger, @validator, @translator, @doctrine ]
 
     command.group.update:
         class: eTraxis\CommandBus\Groups\Handler\UpdateGroupCommandHandler
-        tags: [{ name: command_handler, command: eTraxis\CommandBus\Groups\UpdateGroupCommand }]
+        tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Groups\UpdateGroupCommand }]
         arguments: [ @logger, @validator, @translator, @doctrine ]
 
     command.group.delete:
         class: eTraxis\CommandBus\Groups\Handler\DeleteGroupCommandHandler
-        tags: [{ name: command_handler, command: eTraxis\CommandBus\Groups\DeleteGroupCommand }]
+        tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Groups\DeleteGroupCommand }]
         arguments: [ @logger, @doctrine ]
 
     command.groups.group_members:
         class: eTraxis\CommandBus\Groups\Handler\GetGroupMembersCommandHandler
-        tags: [{ name: command_handler, command: eTraxis\CommandBus\Groups\GetGroupMembersCommand }]
+        tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Groups\GetGroupMembersCommand }]
         arguments: [ @doctrine ]
 
     command.groups.group_non_members:
         class: eTraxis\CommandBus\Groups\Handler\GetGroupNonMembersCommandHandler
-        tags: [{ name: command_handler, command: eTraxis\CommandBus\Groups\GetGroupNonMembersCommand }]
+        tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Groups\GetGroupNonMembersCommand }]
         arguments: [ @doctrine ]
 
     command.groups.add_users:
         class: eTraxis\CommandBus\Groups\Handler\AddRemoveUsersCommandHandler
-        tags: [{ name: command_handler, command: eTraxis\CommandBus\Groups\AddUsersCommand }]
+        tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Groups\AddUsersCommand }]
         arguments: [ @logger, @doctrine ]
 
     command.groups.remove_users:
         class: eTraxis\CommandBus\Groups\Handler\AddRemoveUsersCommandHandler
-        tags: [{ name: command_handler, command: eTraxis\CommandBus\Groups\RemoveUsersCommand }]
+        tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Groups\RemoveUsersCommand }]
         arguments: [ @logger, @doctrine ]

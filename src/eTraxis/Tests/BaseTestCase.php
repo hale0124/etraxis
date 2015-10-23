@@ -57,7 +57,7 @@ class BaseTestCase extends WebTestCase
         $this->validator   = $this->client->getContainer()->get('validator');
         $this->translator  = $this->client->getContainer()->get('translator');
         $this->doctrine    = $this->client->getContainer()->get('doctrine');
-        $this->command_bus = $this->client->getContainer()->get('command_bus');
+        $this->command_bus = $this->client->getContainer()->get('nih_command_bus');
 
         /** @var \Doctrine\ORM\EntityManager $manager */
         $manager = $this->doctrine->getManager();

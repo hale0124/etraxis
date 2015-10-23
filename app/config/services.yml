@@ -7,7 +7,7 @@ imports:
 
 services:
 
-    command_bus:
+    nih_command_bus:
         class: eTraxis\CommandBus\CommandBus
         arguments:
             - @service_container
@@ -56,7 +56,7 @@ services:
         public: false
         arguments:
             - @logger
-            - @command_bus
+            - @nih_command_bus
             - @ldap
             - %ldap_basedn%
 
@@ -65,7 +65,7 @@ services:
         tags: [{ name: kernel.event_subscriber }]
         arguments:
             - @logger
-            - @command_bus
+            - @nih_command_bus
 
     etraxis.listener.kernel:
         class: AppBundle\EventListener\KernelListener

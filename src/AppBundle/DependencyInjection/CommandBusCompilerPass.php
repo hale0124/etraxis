@@ -24,13 +24,13 @@ class CommandBusCompilerPass implements CompilerPassInterface
      */
     public function process(ContainerBuilder $container)
     {
-        if (!$container->has('command_bus')) {
+        if (!$container->has('nih_command_bus')) {
             return;
         }
 
-        $definition = $container->findDefinition('command_bus');
+        $definition = $container->findDefinition('nih_command_bus');
 
-        $services = $container->findTaggedServiceIds('command_handler');
+        $services = $container->findTaggedServiceIds('nih_command_handler');
 
         foreach ($services as $id => $tags) {
 

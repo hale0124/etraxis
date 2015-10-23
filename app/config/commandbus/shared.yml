@@ -2,4 +2,4 @@ services:
 
     command.export.csv:
         class: eTraxis\CommandBus\Shared\Handler\ExportToCsvCommandHandler
-        tags: [{ name: command_handler, command: eTraxis\CommandBus\Shared\ExportToCsvCommand }]
+        tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Shared\ExportToCsvCommand }]
