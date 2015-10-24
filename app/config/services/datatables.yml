@@ -1,1 +1,16 @@
 services:
+
+    etraxis.datatable.groups:
+        class: eTraxis\DataTables\ORM\GroupsDataTable
+        tags: [{ name: datatable, entity: eTraxis:Group }]
+        arguments: [ @translator, @doctrine ]
+
+    etraxis.datatable.projects:
+        class: eTraxis\DataTables\ORM\ProjectsDataTable
+        tags: [{ name: datatable, entity: eTraxis:Project }]
+        arguments: [ @translator, @localizer, @doctrine ]
+
+    etraxis.datatable.users:
+        class: eTraxis\DataTables\ORM\UsersDataTable
+        tags: [{ name: datatable, entity: eTraxis:User }]
+        arguments: [ @translator, @doctrine ]

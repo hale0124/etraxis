@@ -14,6 +14,7 @@ namespace AppBundle\Controller\Admin;
 use eTraxis\CommandBus\CommandException;
 use eTraxis\CommandBus\Projects;
 use eTraxis\CommandBus\ValidationException;
+use eTraxis\DataTables\DataTableException;
 use eTraxis\Form\ProjectForm;
 use eTraxis\Service\ExportCsvQuery;
 use eTraxis\Traits\ContainerTrait;
@@ -61,26 +62,12 @@ class ProjectsController extends Controller
     public function listAction(Request $request)
     {
         try {
-            $search = $request->get('search', ['value' => null]);
+            $datatables = $this->getDataTables();
+            $results    = $datatables->handle($request, 'eTraxis:Project');
 
-            $command = new Projects\ListProjectsCommand([
-                'start'   => $request->get('start', 0),
-                'length'  => $request->get('length', -1),
-                'search'  => $search['value'],
-                'columns' => $request->get('columns', []),
-                'order'   => $request->get('order', []),
-            ]);
-
-            $result = $this->getCommandBus()->handle($command);
-
-            return new JsonResponse([
-                'draw'            => $request->get('draw'),
-                'recordsTotal'    => $result['total'],
-                'recordsFiltered' => $result['filtered'],
-                'data'            => $result['projects'],
-            ]);
+            return new JsonResponse($results);
         }
-        catch (ValidationException $e) {
+        catch (DataTableException $e) {
             return new Response($e->getMessage(), $e->getCode());
         }
     }
@@ -98,15 +85,15 @@ class ProjectsController extends Controller
     public function csvAction(Request $request)
     {
         try {
-            $command = new Projects\ListProjectsCommand([
-                'search' => $request->get('search'),
-            ]);
+            $request->query->set('start', 0);
+            $request->query->set('length', -1);
 
-            $result = $this->getCommandBus()->handle($command);
+            $datatables = $this->getDataTables();
+            $results    = $datatables->handle($request, 'eTraxis:Project');
 
             $projects = array_map(function ($project) {
                 return array_slice($project, 0, 3);
-            }, $result['projects']);
+            }, $results['data']);
 
             array_unshift($projects, [
                 $this->getTranslator()->trans('project.name'),
@@ -127,6 +114,9 @@ class ProjectsController extends Controller
             $export = $this->get('etraxis.export');
 
             return $export->exportCsv($query, $projects);
+        }
+        catch (DataTableException $e) {
+            return new JsonResponse($e->getMessage(), $e->getCode());
         }
         catch (ValidationException $e) {
             return new JsonResponse($e->getMessages(), $e->getCode());

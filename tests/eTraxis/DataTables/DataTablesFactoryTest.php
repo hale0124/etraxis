@@ -16,7 +16,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 class SuccessfulTestDataTable implements DataTableInterface
 {
-    public function handle(DataTableQuery $query)
+    public function handle(DataTableQuery $request)
     {
         $results = new DataTableResults();
 
@@ -30,7 +30,7 @@ class SuccessfulTestDataTable implements DataTableInterface
 
 class ExceptionTestDataTable implements DataTableInterface
 {
-    public function handle(DataTableQuery $query)
+    public function handle(DataTableQuery $request)
     {
         throw new DataTableException('Something gone wrong.');
     }
@@ -52,7 +52,7 @@ class NoInterfaceTestDataTable
 
 class InvalidResultsTestDataTable implements DataTableInterface
 {
-    public function handle(DataTableQuery $query)
+    public function handle(DataTableQuery $request)
     {
         $results = new DataTableResults();
 

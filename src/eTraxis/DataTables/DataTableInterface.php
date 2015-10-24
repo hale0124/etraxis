@@ -19,9 +19,9 @@ interface DataTableInterface
     /**
      * Handles specified DataTable request.
      *
-     * @param   DataTableQuery $query
+     * @param   DataTableQuery $request
      *
      * @return  DataTableResults
      */
-    public function handle(DataTableQuery $query);
+    public function handle(DataTableQuery $request);
 }

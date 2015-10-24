@@ -14,6 +14,7 @@ namespace AppBundle\Controller\Admin;
 use eTraxis\CommandBus\CommandException;
 use eTraxis\CommandBus\Groups;
 use eTraxis\CommandBus\ValidationException;
+use eTraxis\DataTables\DataTableException;
 use eTraxis\Form\GroupExForm;
 use eTraxis\Form\GroupForm;
 use eTraxis\Service\ExportCsvQuery;
@@ -63,26 +64,12 @@ class GroupsController extends Controller
     public function listAction(Request $request)
     {
         try {
-            $search = $request->get('search', ['value' => null]);
+            $datatables = $this->getDataTables();
+            $results    = $datatables->handle($request, 'eTraxis:Group');
 
-            $command = new Groups\ListGroupsCommand([
-                'start'   => $request->get('start', 0),
-                'length'  => $request->get('length', -1),
-                'search'  => $search['value'],
-                'columns' => $request->get('columns', []),
-                'order'   => $request->get('order', []),
-            ]);
-
-            $result = $this->getCommandBus()->handle($command);
-
-            return new JsonResponse([
-                'draw'            => $request->get('draw'),
-                'recordsTotal'    => $result['total'],
-                'recordsFiltered' => $result['filtered'],
-                'data'            => $result['groups'],
-            ]);
+            return new JsonResponse($results);
         }
-        catch (ValidationException $e) {
+        catch (DataTableException $e) {
             return new Response($e->getMessage(), $e->getCode());
         }
     }
@@ -100,15 +87,15 @@ class GroupsController extends Controller
     public function csvAction(Request $request)
     {
         try {
-            $command = new Groups\ListGroupsCommand([
-                'search' => $request->get('search'),
-            ]);
+            $request->query->set('start', 0);
+            $request->query->set('length', -1);
 
-            $result = $this->getCommandBus()->handle($command);
+            $datatables = $this->getDataTables();
+            $results    = $datatables->handle($request, 'eTraxis:Group');
 
             $groups = array_map(function ($group) {
                 return array_slice($group, 0, 4);
-            }, $result['groups']);
+            }, $results['data']);
 
             array_unshift($groups, [
                 $this->getTranslator()->trans('group.name'),
@@ -130,6 +117,9 @@ class GroupsController extends Controller
             $export = $this->get('etraxis.export');
 
             return $export->exportCsv($query, $groups);
+        }
+        catch (DataTableException $e) {
+            return new JsonResponse($e->getMessage(), $e->getCode());
         }
         catch (ValidationException $e) {
             return new JsonResponse($e->getMessages(), $e->getCode());

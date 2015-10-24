@@ -9,16 +9,18 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\CommandBus\Users\Handler;
+namespace eTraxis\DataTables\ORM;
 
-use eTraxis\CommandBus\Users\ListUsersCommand;
+use eTraxis\DataTables\DataTableInterface;
+use eTraxis\DataTables\DataTableQuery;
+use eTraxis\DataTables\DataTableResults;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
- * Command handler.
+ * Enumerates all accounts existing in eTraxis database.
  */
-class ListUsersCommandHandler
+class UsersDataTable implements DataTableInterface
 {
     const COLUMN_ID             = 0;
     const COLUMN_USERNAME       = 1;
@@ -44,31 +46,23 @@ class ListUsersCommandHandler
     }
 
     /**
-     * Enumerates all accounts existing in eTraxis database.
-     *
-     * @param   ListUsersCommand $command
-     *
-     * @return  array
+     * {@inheritdoc}
      */
-    public function handle(ListUsersCommand $command)
+    public function handle(DataTableQuery $request)
     {
-        $result = [
-            'users'    => [],
-            'filtered' => 0,
-            'total'    => 0,
-        ];
+        $results = new DataTableResults();
 
         /** @var \Doctrine\ORM\EntityRepository $repository */
         $repository = $this->doctrine->getRepository('eTraxis:User');
 
         $query = $repository->createQueryBuilder('u')->select('COUNT(u.id)');
 
-        $result['total'] = $query->getQuery()->getSingleScalarResult();
+        $results->recordsTotal = $query->getQuery()->getSingleScalarResult();
 
         $query = $repository->createQueryBuilder('u');
 
         // Search.
-        if ($command->search) {
+        if ($request->search['value']) {
 
             $conditions = [
                 'LOWER(u.username) LIKE :search',
@@ -79,12 +73,12 @@ class ListUsersCommandHandler
 
             $query
                 ->where('(' . implode(' OR ', $conditions) . ')')
-                ->setParameter('search', mb_strtolower("%{$command->search}%"))
+                ->setParameter('search', mb_strtolower("%{$request->search['value']}%"))
             ;
         }
 
         // Filter by columns.
-        foreach ($command->columns as $column) {
+        foreach ($request->columns as $column) {
 
             if (!$column['search']['value']) {
                 continue;
@@ -155,7 +149,7 @@ class ListUsersCommandHandler
         }
 
         // Order.
-        foreach ($command->order as $order) {
+        foreach ($request->order as $order) {
 
             $map = [
                 self::COLUMN_ID             => 'u.id',
@@ -173,13 +167,13 @@ class ListUsersCommandHandler
         /** @var \eTraxis\Entity\User[] $entities */
         $entities = $query->getQuery()->getResult();
 
-        $result['filtered'] = count($entities);
+        $results->recordsFiltered = count($entities);
 
-        for ($i = 0; $i < $command->length || $command->length == -1; $i++) {
+        for ($i = 0; $i < $request->length || $request->length == -1; $i++) {
 
-            $index = $i + $command->start;
+            $index = $i + $request->start;
 
-            if ($index >= $result['filtered']) {
+            if ($index >= $results->recordsFiltered) {
                 break;
             }
 
@@ -195,7 +189,7 @@ class ListUsersCommandHandler
                 $color = null;
             }
 
-            $result['users'][] = [
+            $results->data[] = [
                 $entity->getId(),
                 $entity->getUsername(),
                 $entity->getFullname(),
@@ -208,6 +202,6 @@ class ListUsersCommandHandler
             ];
         }
 
-        return $result;
+        return $results;
     }
 }

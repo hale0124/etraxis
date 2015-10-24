@@ -9,17 +9,19 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\CommandBus\Projects\Handler;
+namespace eTraxis\DataTables\ORM;
 
-use eTraxis\CommandBus\Projects\ListProjectsCommand;
+use eTraxis\DataTables\DataTableInterface;
+use eTraxis\DataTables\DataTableQuery;
+use eTraxis\DataTables\DataTableResults;
 use eTraxis\Service\LocalizerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
- * Command handler.
+ * Enumerates all projects existing in eTraxis database.
  */
-class ListProjectsCommandHandler
+class ProjectsDataTable implements DataTableInterface
 {
     const COLUMN_NAME        = 0;
     const COLUMN_START_TIME  = 1;
@@ -47,33 +49,25 @@ class ListProjectsCommandHandler
     }
 
     /**
-     * Enumerates all projects existing in eTraxis database.
-     *
-     * @param   ListProjectsCommand $command
-     *
-     * @return  array
+     * {@inheritdoc}
      */
-    public function handle(ListProjectsCommand $command)
+    public function handle(DataTableQuery $request)
     {
-        $result = [
-            'projects' => [],
-            'filtered' => 0,
-            'total'    => 0,
-        ];
+        $results = new DataTableResults();
 
         /** @var \Doctrine\ORM\EntityRepository $repository */
         $repository = $this->doctrine->getRepository('eTraxis:Project');
 
         $query = $repository->createQueryBuilder('p')->select('COUNT(p.id)');
 
-        $result['total'] = $query->getQuery()->getSingleScalarResult();
+        $results->recordsTotal = $query->getQuery()->getSingleScalarResult();
 
         $query = $repository->createQueryBuilder('p');
 
         $query->select('p');
 
         // Search.
-        if ($command->search) {
+        if ($request->search['value']) {
 
             $conditions = [
                 'LOWER(p.name) LIKE :search',
@@ -82,12 +76,12 @@ class ListProjectsCommandHandler
 
             $query
                 ->where('(' . implode(' OR ', $conditions) . ')')
-                ->setParameter('search', mb_strtolower("%{$command->search}%"))
+                ->setParameter('search', mb_strtolower("%{$request->search['value']}%"))
             ;
         }
 
         // Filter by columns.
-        foreach ($command->columns as $column) {
+        foreach ($request->columns as $column) {
 
             if (!$column['search']['value']) {
                 continue;
@@ -127,7 +121,7 @@ class ListProjectsCommandHandler
         }
 
         // Order.
-        foreach ($command->order as $order) {
+        foreach ($request->order as $order) {
 
             $map = [
                 self::COLUMN_NAME        => 'p.name',
@@ -141,19 +135,19 @@ class ListProjectsCommandHandler
         /** @var \eTraxis\Entity\Project[] $entities */
         $entities = $query->getQuery()->getResult();
 
-        $result['filtered'] = count($entities);
+        $results->recordsFiltered = count($entities);
 
-        for ($i = 0; $i < $command->length || $command->length == -1; $i++) {
+        for ($i = 0; $i < $request->length || $request->length == -1; $i++) {
 
-            $index = $i + $command->start;
+            $index = $i + $request->start;
 
-            if ($index >= $result['filtered']) {
+            if ($index >= $results->recordsFiltered) {
                 break;
             }
 
             $entity = $entities[$index];
 
-            $result['projects'][] = [
+            $results->data[] = [
                 $entity->getName(),
                 $this->localizer->formatDate($this->localizer->getLocalTimestamp($entity->getCreatedAt())),
                 $entity->getDescription(),
@@ -162,6 +156,6 @@ class ListProjectsCommandHandler
             ];
         }
 
-        return $result;
+        return $results;
     }
 }

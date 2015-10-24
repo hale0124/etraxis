@@ -83,8 +83,7 @@
                     url: '{{ path('dlg_export') }}',
                     title: '{{ 'button.export'|trans }}',
                     success: function() {
-                        var params = $('form').serialize();
-                        params += '&search=' + $table.api().search();
+                        var params = $('form').serialize() + '&' + $.param($table.api().ajax.params());
                         window.location.assign('{{ path('admin_groups_csv') }}?' + params);
                         return true;
                     }

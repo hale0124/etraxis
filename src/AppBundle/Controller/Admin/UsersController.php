@@ -14,6 +14,7 @@ namespace AppBundle\Controller\Admin;
 use eTraxis\CommandBus\CommandException;
 use eTraxis\CommandBus\Users;
 use eTraxis\CommandBus\ValidationException;
+use eTraxis\DataTables\DataTableException;
 use eTraxis\Form\UserForm;
 use eTraxis\Service\ExportCsvQuery;
 use eTraxis\Traits\ContainerTrait;
@@ -61,26 +62,12 @@ class UsersController extends Controller
     public function listAction(Request $request)
     {
         try {
-            $search = $request->get('search', ['value' => null]);
+            $datatables = $this->getDataTables();
+            $results    = $datatables->handle($request, 'eTraxis:User');
 
-            $command = new Users\ListUsersCommand([
-                'start'   => $request->get('start', 0),
-                'length'  => $request->get('length', -1),
-                'search'  => $search['value'],
-                'columns' => $request->get('columns', []),
-                'order'   => $request->get('order', []),
-            ]);
-
-            $result = $this->getCommandBus()->handle($command);
-
-            return new JsonResponse([
-                'draw'            => $request->get('draw'),
-                'recordsTotal'    => $result['total'],
-                'recordsFiltered' => $result['filtered'],
-                'data'            => $result['users'],
-            ]);
+            return new JsonResponse($results);
         }
-        catch (ValidationException $e) {
+        catch (DataTableException $e) {
             return new Response($e->getMessage(), $e->getCode());
         }
     }
@@ -98,15 +85,15 @@ class UsersController extends Controller
     public function csvAction(Request $request)
     {
         try {
-            $command = new Users\ListUsersCommand([
-                'search' => $request->get('search'),
-            ]);
+            $request->query->set('start', 0);
+            $request->query->set('length', -1);
 
-            $result = $this->getCommandBus()->handle($command);
+            $datatables = $this->getDataTables();
+            $results    = $datatables->handle($request, 'eTraxis:User');
 
             $users = array_map(function ($user) {
                 return array_slice($user, 1, 6);
-            }, $result['users']);
+            }, $results['data']);
 
             array_unshift($users, [
                 $this->getTranslator()->trans('user.username'),
@@ -130,6 +117,9 @@ class UsersController extends Controller
             $export = $this->get('etraxis.export');
 
             return $export->exportCsv($query, $users);
+        }
+        catch (DataTableException $e) {
+            return new JsonResponse($e->getMessage(), $e->getCode());
         }
         catch (ValidationException $e) {
             return new JsonResponse($e->getMessages(), $e->getCode());
