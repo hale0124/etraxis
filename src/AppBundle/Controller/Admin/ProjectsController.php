@@ -105,7 +105,7 @@ class ProjectsController extends Controller
             $result = $this->getCommandBus()->handle($command);
 
             $projects = array_map(function ($project) {
-                return array_slice($project, 0, 4);
+                return array_slice($project, 0, 3);
             }, $result['projects']);
 
             array_unshift($projects, [
