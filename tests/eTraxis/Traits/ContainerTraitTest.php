@@ -170,4 +170,9 @@ class ContainerTraitTest extends KernelTestCase
     {
         $this->assertInstanceOf('\eTraxis\CommandBus\CommandBusInterface', $this->object->getCommandBus());
     }
+
+    public function testGetDataTables()
+    {
+        $this->assertInstanceOf('\eTraxis\DataTables\DataTablesFactoryInterface', $this->object->getDataTables());
+    }
 }

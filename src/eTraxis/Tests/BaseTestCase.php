@@ -44,6 +44,9 @@ class BaseTestCase extends WebTestCase
     /** @var \eTraxis\CommandBus\CommandBusInterface */
     protected $command_bus;
 
+    /** @var \eTraxis\DataTables\DataTablesFactoryInterface */
+    protected $datatables;
+
     /**
      * Begins new transaction.
      */
@@ -58,6 +61,7 @@ class BaseTestCase extends WebTestCase
         $this->translator  = $this->client->getContainer()->get('translator');
         $this->doctrine    = $this->client->getContainer()->get('doctrine');
         $this->command_bus = $this->client->getContainer()->get('nih_command_bus');
+        $this->datatables  = $this->client->getContainer()->get('datatables');
 
         /** @var \Doctrine\ORM\EntityManager $manager */
         $manager = $this->doctrine->getManager();

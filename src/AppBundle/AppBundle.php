@@ -12,6 +12,7 @@
 namespace AppBundle;
 
 use AppBundle\DependencyInjection\CommandBusCompilerPass;
+use AppBundle\DependencyInjection\DataTablesCompilerPass;
 use Doctrine\ORM\Query;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
@@ -46,5 +47,6 @@ class AppBundle extends Bundle
         parent::build($container);
 
         $container->addCompilerPass(new CommandBusCompilerPass());
+        $container->addCompilerPass(new DataTablesCompilerPass());
     }
 }

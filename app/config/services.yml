@@ -1,4 +1,5 @@
 imports:
+    - { resource: services/datatables.yml }
     - { resource: services/listeners.yml }
     - { resource: services/voters.yml }
     - { resource: commandbus/users.yml }
@@ -6,6 +7,13 @@ imports:
     - { resource: commandbus/projects.yml }
 
 services:
+
+    datatables:
+        class: eTraxis\DataTables\DataTablesFactory
+        arguments:
+            - @service_container
+            - @logger
+            - @validator
 
     nih_command_bus:
         class: eTraxis\CommandBus\CommandBus

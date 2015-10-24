@@ -107,4 +107,14 @@ trait ContainerTrait
     {
         return $this->container->get('nih_command_bus');
     }
+
+    /**
+     * Shortcut to get the DataTables factory.
+     *
+     * @return  \eTraxis\DataTables\DataTablesFactoryInterface
+     */
+    protected function getDataTables()
+    {
+        return $this->container->get('datatables');
+    }
 }
