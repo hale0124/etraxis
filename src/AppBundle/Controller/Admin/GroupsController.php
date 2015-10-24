@@ -196,30 +196,20 @@ class GroupsController extends Controller
      */
     public function tabMembersAction($id)
     {
-        try {
-            $group = $this->getDoctrine()->getRepository('eTraxis:Group')->find($id);
+        /** @var \eTraxis\Repository\GroupsRepository $repository */
+        $repository = $this->getDoctrine()->getRepository('eTraxis:Group');
 
-            if (!$group) {
-                throw $this->createNotFoundException();
-            }
+        $group = $repository->find($id);
 
-            $members = $this->getCommandBus()->handle(
-                new Groups\GetGroupMembersCommand(['id' => $id])
-            );
-
-            $others = $this->getCommandBus()->handle(
-                new Groups\GetGroupNonMembersCommand(['id' => $id])
-            );
-
-            return $this->render('admin/groups/tab_members.html.twig', [
-                'group'   => $group,
-                'members' => $members,
-                'others'  => $others,
-            ]);
+        if (!$group) {
+            throw $this->createNotFoundException();
         }
-        catch (ValidationException $e) {
-            return new Response($e->getMessage(), $e->getCode());
-        }
+
+        return $this->render('admin/groups/tab_members.html.twig', [
+            'group'   => $group,
+            'members' => $repository->getGroupMembers($id),
+            'others'  => $repository->getGroupNonMembers($id),
+        ]);
     }
 
     /**

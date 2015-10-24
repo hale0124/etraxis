@@ -24,7 +24,7 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  *            uniqueConstraints={
  *                @ORM\UniqueConstraint(name="ix_accounts", columns={"username"})
  *            })
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="eTraxis\Repository\UsersRepository")
  * @Assert\UniqueEntity(fields={"username"}, message="user.conflict.username")
  */
 class User implements AdvancedUserInterface

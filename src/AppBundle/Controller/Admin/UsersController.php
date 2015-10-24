@@ -205,30 +205,20 @@ class UsersController extends Controller
      */
     public function tabGroupsAction($id)
     {
-        try {
-            $user = $this->getDoctrine()->getRepository('eTraxis:User')->find($id);
+        /** @var \eTraxis\Repository\UsersRepository $repository */
+        $repository = $this->getDoctrine()->getRepository('eTraxis:User');
 
-            if (!$user) {
-                throw $this->createNotFoundException();
-            }
+        $user = $repository->find($id);
 
-            $groups = $this->getCommandBus()->handle(
-                new Users\GetUserGroupsCommand(['id' => $id])
-            );
-
-            $others = $this->getCommandBus()->handle(
-                new Users\GetOtherGroupsCommand(['id' => $id])
-            );
-
-            return $this->render('admin/users/tab_groups.html.twig', [
-                'user'   => $user,
-                'groups' => $groups,
-                'others' => $others,
-            ]);
+        if (!$user) {
+            throw $this->createNotFoundException();
         }
-        catch (ValidationException $e) {
-            return new Response($e->getMessage(), $e->getCode());
-        }
+
+        return $this->render('admin/users/tab_groups.html.twig', [
+            'user'   => $user,
+            'groups' => $repository->getUserGroups($id),
+            'others' => $repository->getOtherGroups($id),
+        ]);
     }
 
     /**

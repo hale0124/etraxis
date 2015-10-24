@@ -60,16 +60,6 @@ services:
         tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Users\ResetPasswordCommand }]
         arguments: [ @logger, @translator, @doctrine, @etraxis.encoder ]
 
-    command.users.user_groups:
-        class: eTraxis\CommandBus\Users\Handler\GetUserGroupsCommandHandler
-        tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Users\GetUserGroupsCommand }]
-        arguments: [ @doctrine ]
-
-    command.users.other_groups:
-        class: eTraxis\CommandBus\Users\Handler\GetOtherGroupsCommandHandler
-        tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Users\GetOtherGroupsCommand }]
-        arguments: [ @doctrine ]
-
     command.users.add_groups:
         class: eTraxis\CommandBus\Users\Handler\AddRemoveGroupsCommandHandler
         tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Users\AddGroupsCommand }]

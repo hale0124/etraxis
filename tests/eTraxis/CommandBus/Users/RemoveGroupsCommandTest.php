@@ -11,25 +11,20 @@
 
 namespace eTraxis\CommandBus\Users;
 
+use eTraxis\Entity\Group;
 use eTraxis\Tests\BaseTestCase;
 
 class RemoveGroupsCommandTest extends BaseTestCase
 {
     public function testSuccess()
     {
+        /** @var \eTraxis\Repository\UsersRepository $repository */
+        $repository = $this->doctrine->getEntityManager()->getRepository('eTraxis:User');
+
         $user = $this->findUser('hubert');
 
-        $groups = $this->command_bus->handle(
-            new GetUserGroupsCommand([
-                'id' => $user->getId(),
-            ])
-        );
-
-        $others = $this->command_bus->handle(
-            new GetOtherGroupsCommand([
-                'id' => $user->getId(),
-            ])
-        );
+        $groups = $repository->getUserGroups($user->getId());
+        $others = $repository->getOtherGroups($user->getId());
 
         $this->assertNotCount(0, $groups);
         $this->assertNotCount(0, $others);
@@ -38,25 +33,15 @@ class RemoveGroupsCommandTest extends BaseTestCase
 
         $command = new RemoveGroupsCommand([
             'id'     => $user->getId(),
-            'groups' => array_map(function ($group) {
-                /** @var \eTraxis\Entity\Group $group */
+            'groups' => array_map(function (Group $group) {
                 return $group->getId();
             }, $groups),
         ]);
 
         $this->command_bus->handle($command);
 
-        $groups = $this->command_bus->handle(
-            new GetUserGroupsCommand([
-                'id' => $user->getId(),
-            ])
-        );
-
-        $others = $this->command_bus->handle(
-            new GetOtherGroupsCommand([
-                'id' => $user->getId(),
-            ])
-        );
+        $groups = $repository->getUserGroups($user->getId());
+        $others = $repository->getOtherGroups($user->getId());
 
         $this->assertCount(0, $groups);
         $this->assertCount($expected, $others);

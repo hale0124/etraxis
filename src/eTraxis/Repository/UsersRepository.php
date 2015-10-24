@@ -9,45 +9,58 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\CommandBus\Users\Handler;
+namespace eTraxis\Repository;
 
-use eTraxis\CommandBus\Users\GetOtherGroupsCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use Doctrine\ORM\EntityRepository;
 
 /**
- * Command handler.
+ * Users repository.
  */
-class GetOtherGroupsCommandHandler
+class UsersRepository extends EntityRepository
 {
-    protected $doctrine;
-
     /**
-     * Dependency Injection constructor.
+     * Finds all groups the specified account belongs to.
      *
-     * @param   RegistryInterface $doctrine
+     * @param   int $id User ID.
+     *
+     * @return  \eTraxis\Entity\Group[]
      */
-    public function __construct(RegistryInterface $doctrine)
+    public function getUserGroups($id)
     {
-        $this->doctrine = $doctrine;
+        $repository = $this->getEntityManager()->getRepository('eTraxis:Group');
+
+        $query = $repository->createQueryBuilder('g');
+
+        $query
+            ->select('g')
+            ->addSelect('p')
+            ->join('g.users', 'u')
+            ->leftJoin('g.project', 'p')
+            ->where('u.id = :id')
+            ->setParameter('id', $id)
+            ->orderBy('p.name')
+            ->addOrderBy('g.name')
+        ;
+
+        return $query->getQuery()->getResult();
     }
 
     /**
      * Finds all groups the specified account doesn't belong to.
      *
-     * @param   GetOtherGroupsCommand $command
+     * @param   int $id User ID.
      *
      * @return  \eTraxis\Entity\Group[]
      */
-    public function handle(GetOtherGroupsCommand $command)
+    public function getOtherGroups($id)
     {
-        /** @var \Doctrine\ORM\EntityRepository $repository */
-        $repository = $this->doctrine->getRepository('eTraxis:User');
+        $repository = $this->getEntityManager()->getRepository('eTraxis:User');
 
-        if (!$repository->find($command->id)) {
+        if (!$repository->find($id)) {
             return [];
         }
 
-        $repository = $this->doctrine->getRepository('eTraxis:Group');
+        $repository = $this->getEntityManager()->getRepository('eTraxis:Group');
 
         // Find all groups the account belong to.
         $subquery = $repository->createQueryBuilder('g');
@@ -56,7 +69,7 @@ class GetOtherGroupsCommandHandler
             ->select('g.id')
             ->join('g.users', 'u')
             ->where('u.id = :id')
-            ->setParameter('id', $command->id)
+            ->setParameter('id', $id)
         ;
 
         $groups = $subquery->getQuery()->getArrayResult();

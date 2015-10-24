@@ -15,16 +15,6 @@ services:
         tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Groups\DeleteGroupCommand }]
         arguments: [ @logger, @doctrine ]
 
-    command.groups.group_members:
-        class: eTraxis\CommandBus\Groups\Handler\GetGroupMembersCommandHandler
-        tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Groups\GetGroupMembersCommand }]
-        arguments: [ @doctrine ]
-
-    command.groups.group_non_members:
-        class: eTraxis\CommandBus\Groups\Handler\GetGroupNonMembersCommandHandler
-        tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Groups\GetGroupNonMembersCommand }]
-        arguments: [ @doctrine ]
-
     command.groups.add_users:
         class: eTraxis\CommandBus\Groups\Handler\AddRemoveUsersCommandHandler
         tags: [{ name: nih_command_handler, command: eTraxis\CommandBus\Groups\AddUsersCommand }]

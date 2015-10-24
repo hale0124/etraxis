@@ -11,26 +11,21 @@
 
 namespace eTraxis\CommandBus\Groups;
 
+use eTraxis\Entity\User;
 use eTraxis\Tests\BaseTestCase;
 
 class RemoveUsersCommandTest extends BaseTestCase
 {
     public function testSuccess()
     {
+        /** @var \eTraxis\Repository\GroupsRepository $repository */
+        $repository = $this->doctrine->getEntityManager()->getRepository('eTraxis:Group');
+
         /** @var \eTraxis\Entity\Group $group */
-        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Staff']);
+        $group = $repository->findOneBy(['name' => 'Staff']);
 
-        $members = $this->command_bus->handle(
-            new GetGroupMembersCommand([
-                'id' => $group->getId(),
-            ])
-        );
-
-        $others = $this->command_bus->handle(
-            new GetGroupNonMembersCommand([
-                'id' => $group->getId(),
-            ])
-        );
+        $members = $repository->getGroupMembers($group->getId());
+        $others  = $repository->getGroupNonMembers($group->getId());
 
         $this->assertNotCount(0, $members);
         $this->assertNotCount(0, $others);
@@ -39,25 +34,15 @@ class RemoveUsersCommandTest extends BaseTestCase
 
         $command = new RemoveUsersCommand([
             'id'    => $group->getId(),
-            'users' => array_map(function ($user) {
-                /** @var \eTraxis\Entity\User $user */
+            'users' => array_map(function (User $user) {
                 return $user->getId();
             }, $members),
         ]);
 
         $this->command_bus->handle($command);
 
-        $members = $this->command_bus->handle(
-            new GetGroupMembersCommand([
-                'id' => $group->getId(),
-            ])
-        );
-
-        $others = $this->command_bus->handle(
-            new GetGroupNonMembersCommand([
-                'id' => $group->getId(),
-            ])
-        );
+        $members = $repository->getGroupMembers($group->getId());
+        $others  = $repository->getGroupNonMembers($group->getId());
 
         $this->assertCount(0, $members);
         $this->assertCount($expected, $others);
