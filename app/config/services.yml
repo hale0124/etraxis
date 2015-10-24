@@ -1,5 +1,6 @@
 imports:
-    - { resource: voters.yml }
+    - { resource: services/listeners.yml }
+    - { resource: services/voters.yml }
     - { resource: commandbus/users.yml }
     - { resource: commandbus/groups.yml }
     - { resource: commandbus/projects.yml }
@@ -61,26 +62,3 @@ services:
             - @nih_command_bus
             - @ldap
             - %ldap_basedn%
-
-    etraxis.listener.authentication:
-        class: AppBundle\EventListener\AuthenticationListener
-        tags: [{ name: kernel.event_subscriber }]
-        arguments:
-            - @logger
-            - @nih_command_bus
-
-    etraxis.listener.kernel:
-        class: AppBundle\EventListener\KernelListener
-        tags: [{ name: kernel.event_subscriber }]
-        arguments:
-            - @router
-            - @translator
-            - @security.authorization_checker
-            - @security.token_storage
-            - %locale%
-
-    etraxis.listener.security:
-        class: AppBundle\EventListener\SecurityListener
-        tags: [{ name: kernel.event_subscriber }]
-        arguments:
-            - @session
