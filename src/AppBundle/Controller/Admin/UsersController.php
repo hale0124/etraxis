@@ -15,7 +15,7 @@ use eTraxis\CommandBus\CommandException;
 use eTraxis\CommandBus\Users;
 use eTraxis\CommandBus\ValidationException;
 use eTraxis\Form\UserForm;
-use eTraxis\Query\ExportCsvQuery;
+use eTraxis\Service\ExportCsvQuery;
 use eTraxis\Traits\ContainerTrait;
 use eTraxis\Voter\UserVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;

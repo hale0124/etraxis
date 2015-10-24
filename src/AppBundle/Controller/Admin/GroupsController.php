@@ -16,7 +16,7 @@ use eTraxis\CommandBus\Groups;
 use eTraxis\CommandBus\ValidationException;
 use eTraxis\Form\GroupExForm;
 use eTraxis\Form\GroupForm;
-use eTraxis\Query\ExportCsvQuery;
+use eTraxis\Service\ExportCsvQuery;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

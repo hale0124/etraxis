@@ -11,7 +11,6 @@
 
 namespace eTraxis\Service;
 
-use eTraxis\Query\ExportCsvQuery;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
