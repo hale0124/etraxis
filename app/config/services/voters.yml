@@ -1,3 +1,4 @@
+# Keep voters sorted alphabetically.
 services:
 
     etraxis.voter.project:

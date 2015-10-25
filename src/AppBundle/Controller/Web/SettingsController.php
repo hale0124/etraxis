@@ -11,11 +11,11 @@
 
 namespace AppBundle\Controller\Web;
 
-use eTraxis\CommandBus\CommandException;
-use eTraxis\CommandBus\Users;
-use eTraxis\CommandBus\ValidationException;
 use eTraxis\Form\AppearanceForm;
 use eTraxis\Form\ChangePasswordForm;
+use eTraxis\SimpleBus\CommandException;
+use eTraxis\SimpleBus\Users;
+use eTraxis\SimpleBus\ValidationException;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

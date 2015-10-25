@@ -1,0 +1,26 @@
+services:
+
+    command.group.create:
+        class: eTraxis\SimpleBus\Groups\Handler\CreateGroupCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Groups\CreateGroupCommand }]
+        arguments: [ @logger, @validator, @translator, @doctrine ]
+
+    command.group.update:
+        class: eTraxis\SimpleBus\Groups\Handler\UpdateGroupCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Groups\UpdateGroupCommand }]
+        arguments: [ @logger, @validator, @translator, @doctrine ]
+
+    command.group.delete:
+        class: eTraxis\SimpleBus\Groups\Handler\DeleteGroupCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Groups\DeleteGroupCommand }]
+        arguments: [ @logger, @doctrine ]
+
+    command.groups.add_users:
+        class: eTraxis\SimpleBus\Groups\Handler\AddRemoveUsersCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Groups\AddUsersCommand }]
+        arguments: [ @logger, @doctrine ]
+
+    command.groups.remove_users:
+        class: eTraxis\SimpleBus\Groups\Handler\AddRemoveUsersCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Groups\RemoveUsersCommand }]
+        arguments: [ @logger, @doctrine ]

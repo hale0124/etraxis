@@ -1,3 +1,4 @@
+# Keep listeners sorted alphabetically.
 services:
 
     etraxis.listener.authentication:
@@ -5,7 +6,7 @@ services:
         tags: [{ name: kernel.event_subscriber }]
         arguments:
             - @logger
-            - @nih_command_bus
+            - @command_bus
 
     etraxis.listener.kernel:
         class: AppBundle\EventListener\KernelListener

@@ -1,0 +1,16 @@
+services:
+
+    command.project.create:
+        class: eTraxis\SimpleBus\Projects\Handler\CreateProjectCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Projects\CreateProjectCommand }]
+        arguments: [ @logger, @validator, @translator, @doctrine ]
+
+    command.project.update:
+        class: eTraxis\SimpleBus\Projects\Handler\UpdateProjectCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Projects\UpdateProjectCommand }]
+        arguments: [ @logger, @validator, @translator, @doctrine ]
+
+    command.project.delete:
+        class: eTraxis\SimpleBus\Projects\Handler\DeleteProjectCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Projects\DeleteProjectCommand }]
+        arguments: [ @logger, @doctrine, @security.authorization_checker ]

@@ -77,7 +77,7 @@ class ContainerTraitTest extends KernelTestCase
     }
 
     /**
-     * @expectedException \eTraxis\CommandBus\CommandException
+     * @expectedException \eTraxis\SimpleBus\CommandException
      * @expectedExceptionMessage No data submitted.
      */
     public function testGetFormDataNoData()
@@ -98,7 +98,7 @@ class ContainerTraitTest extends KernelTestCase
     }
 
     /**
-     * @expectedException \eTraxis\CommandBus\CommandException
+     * @expectedException \eTraxis\SimpleBus\CommandException
      * @expectedExceptionMessage Invalid CSRF token.
      */
     public function testGetFormDataInvalidCsrf()
@@ -120,7 +120,7 @@ class ContainerTraitTest extends KernelTestCase
     }
 
     /**
-     * @expectedException \eTraxis\CommandBus\CommandException
+     * @expectedException \eTraxis\SimpleBus\CommandException
      * @expectedExceptionMessage CSRF token is missing.
      */
     public function testGetFormDataNoCsrf()
@@ -168,7 +168,12 @@ class ContainerTraitTest extends KernelTestCase
 
     public function testGetCommandBus()
     {
-        $this->assertInstanceOf('\eTraxis\CommandBus\CommandBusInterface', $this->object->getCommandBus());
+        $this->assertInstanceOf('\SimpleBus\Message\Bus\MessageBus', $this->object->getCommandBus());
+    }
+
+    public function testGetEventBus()
+    {
+        $this->assertInstanceOf('\SimpleBus\Message\Bus\MessageBus', $this->object->getEventBus());
     }
 
     public function testGetDataTables()

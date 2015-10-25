@@ -41,8 +41,11 @@ class BaseTestCase extends WebTestCase
     /** @var \Symfony\Bridge\Doctrine\RegistryInterface */
     protected $doctrine;
 
-    /** @var \eTraxis\CommandBus\CommandBusInterface */
+    /** @var \SimpleBus\Message\Bus\MessageBus */
     protected $command_bus;
+
+    /** @var \SimpleBus\Message\Bus\MessageBus */
+    protected $event_bus;
 
     /** @var \eTraxis\DataTables\DataTablesFactoryInterface */
     protected $datatables;
@@ -60,7 +63,8 @@ class BaseTestCase extends WebTestCase
         $this->validator   = $this->client->getContainer()->get('validator');
         $this->translator  = $this->client->getContainer()->get('translator');
         $this->doctrine    = $this->client->getContainer()->get('doctrine');
-        $this->command_bus = $this->client->getContainer()->get('nih_command_bus');
+        $this->command_bus = $this->client->getContainer()->get('command_bus');
+        $this->event_bus   = $this->client->getContainer()->get('event_bus');
         $this->datatables  = $this->client->getContainer()->get('datatables');
 
         /** @var \Doctrine\ORM\EntityManager $manager */

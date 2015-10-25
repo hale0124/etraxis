@@ -11,11 +11,11 @@
 
 namespace eTraxis\Security;
 
-use eTraxis\CommandBus\CommandBusInterface;
-use eTraxis\CommandBus\Users\RegisterUserCommand;
-use eTraxis\CommandBus\ValidationException;
 use eTraxis\Service\LdapInterface;
+use eTraxis\SimpleBus\Users\RegisterUserCommand;
+use eTraxis\SimpleBus\ValidationException;
 use Psr\Log\LoggerInterface;
+use SimpleBus\Message\Bus\MessageBus;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Authentication\SimpleFormAuthenticatorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -37,15 +37,15 @@ class LdapAuthenticator implements SimpleFormAuthenticatorInterface
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface     $logger      Debug logger.
-     * @param   CommandBusInterface $command_bus Command bus.
-     * @param   LdapInterface       $ldap        LDAP service.
-     * @param   string              $basedn      Base DN to search in.
+     * @param   LoggerInterface $logger      Debug logger.
+     * @param   MessageBus      $command_bus Command bus.
+     * @param   LdapInterface   $ldap        LDAP service.
+     * @param   string          $basedn      Base DN to search in.
      */
     public function __construct(
-        LoggerInterface     $logger,
-        CommandBusInterface $command_bus,
-        LdapInterface       $ldap,
+        LoggerInterface $logger,
+        MessageBus      $command_bus,
+        LdapInterface   $ldap,
         $basedn)
     {
         $this->logger      = $logger;

@@ -1,22 +1,17 @@
+# Keep imports sorted alphabetically.
 imports:
     - { resource: services/datatables.yml }
     - { resource: services/listeners.yml }
     - { resource: services/voters.yml }
-    - { resource: commandbus/users.yml }
-    - { resource: commandbus/groups.yml }
-    - { resource: commandbus/projects.yml }
+    - { resource: simplebus/command.group.yml }
+    - { resource: simplebus/command.project.yml }
+    - { resource: simplebus/command.user.yml }
+    - { resource: simplebus/middleware.yml }
 
 services:
 
     datatables:
         class: eTraxis\DataTables\DataTablesFactory
-        arguments:
-            - @service_container
-            - @logger
-            - @validator
-
-    nih_command_bus:
-        class: eTraxis\CommandBus\CommandBus
         arguments:
             - @service_container
             - @logger
@@ -67,6 +62,6 @@ services:
         public: false
         arguments:
             - @logger
-            - @nih_command_bus
+            - @command_bus
             - @ldap
             - %ldap_basedn%

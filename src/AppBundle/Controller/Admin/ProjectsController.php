@@ -11,12 +11,12 @@
 
 namespace AppBundle\Controller\Admin;
 
-use eTraxis\CommandBus\CommandException;
-use eTraxis\CommandBus\Projects;
-use eTraxis\CommandBus\ValidationException;
 use eTraxis\DataTables\DataTableException;
 use eTraxis\Form\ProjectForm;
 use eTraxis\Service\ExportCsvQuery;
+use eTraxis\SimpleBus\CommandException;
+use eTraxis\SimpleBus\Projects;
+use eTraxis\SimpleBus\ValidationException;
 use eTraxis\Traits\ContainerTrait;
 use eTraxis\Voter\ProjectVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;

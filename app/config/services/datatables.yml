@@ -1,3 +1,4 @@
+# Keep datatables sorted alphabetically.
 services:
 
     etraxis.datatable.groups:

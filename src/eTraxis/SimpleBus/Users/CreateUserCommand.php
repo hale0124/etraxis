@@ -1,0 +1,92 @@
+<?php
+
+//----------------------------------------------------------------------
+//
+//  Copyright (C) 2015 Artem Rodygin
+//
+//  You should have received a copy of the GNU General Public License
+//  along with the file. If not, see <http://www.gnu.org/licenses/>.
+//
+//----------------------------------------------------------------------
+
+namespace eTraxis\SimpleBus\Users;
+
+use eTraxis\Traits\ObjectInitiationTrait;
+use Symfony\Component\Validator\Constraints as Assert;
+
+/**
+ * Creates new account.
+ *
+ * @property    string $username    Login.
+ * @property    string $fullname    Full name.
+ * @property    string $email       Email address.
+ * @property    string $description Description.
+ * @property    string $password    Password.
+ * @property    string $locale      Locale.
+ * @property    string $theme       Theme.
+ * @property    int    $timezone    Timezone.
+ * @property    bool   $admin       Role (whether has administrator permissions).
+ * @property    bool   $disabled    Status.
+ */
+class CreateUserCommand
+{
+    use ObjectInitiationTrait;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max = "112")
+     * @Assert\Regex(pattern="/^[a-z0-9_\.\-]+$/i", message="user.invalid.username");
+     */
+    public $username = null;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max = "64")
+     */
+    public $fullname = null;
+
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max = "50")
+     * @Assert\Email()
+     */
+    public $email = null;
+
+    /**
+     * @Assert\Length(max = "100")
+     */
+    public $description = null;
+
+    /**
+     * @Assert\NotBlank()
+     */
+    public $password = null;
+
+    /**
+     * @Assert\NotNull()
+     * @Assert\Choice(callback = {"eTraxis\Collection\Locale", "getAllKeys"})
+     */
+    public $locale = null;
+
+    /**
+     * @Assert\NotNull()
+     * @Assert\Choice(callback = {"eTraxis\Collection\Theme", "getAllKeys"})
+     */
+    public $theme = null;
+
+    /**
+     * @Assert\NotNull()
+     * @Assert\Choice(callback = {"eTraxis\Collection\Timezone", "getAllKeys"})
+     */
+    public $timezone = null;
+
+    /**
+     * @Assert\NotNull()
+     */
+    public $admin = null;
+
+    /**
+     * @Assert\NotNull()
+     */
+    public $disabled = null;
+}
