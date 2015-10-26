@@ -62,7 +62,7 @@ class RemoveUsersCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\ValidationException
+     * @expectedException \eTraxis\SimpleBus\Middleware\ValidationException
      */
     public function testEmptyGroups()
     {

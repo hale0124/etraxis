@@ -9,7 +9,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\SimpleBus;
+namespace eTraxis\SimpleBus\Middleware;
 
 use Symfony\Component\HttpFoundation\Response;
 
@@ -20,7 +20,7 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class ValidationException extends \Exception
 {
-    protected $messages;
+    protected $messages = [];
 
     /**
      * {@inheritdoc}
@@ -29,7 +29,7 @@ class ValidationException extends \Exception
     {
         $this->messages = $messages;
 
-        parent::__construct(implode("\n", $messages), $code, $previous);
+        parent::__construct(count($messages) ? reset($this->messages) : '', $code, $previous);
     }
 
     /**

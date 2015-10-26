@@ -12,8 +12,8 @@
 namespace eTraxis\Security;
 
 use eTraxis\Service\LdapInterface;
+use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\SimpleBus\Users\RegisterUserCommand;
-use eTraxis\SimpleBus\ValidationException;
 use Psr\Log\LoggerInterface;
 use SimpleBus\Message\Bus\MessageBus;
 use Symfony\Component\HttpFoundation\Request;

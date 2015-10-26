@@ -17,7 +17,7 @@ use eTraxis\Form\GroupForm;
 use eTraxis\Service\ExportCsvQuery;
 use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Groups;
-use eTraxis\SimpleBus\ValidationException;
+use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
