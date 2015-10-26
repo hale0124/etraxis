@@ -11,10 +11,8 @@
 
 namespace AppBundle\Controller\Admin;
 
-use eTraxis\DataTables\DataTableException;
 use eTraxis\Form\ProjectForm;
 use eTraxis\Service\ExportCsvQuery;
-use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\SimpleBus\Projects;
 use eTraxis\Traits\ContainerTrait;
@@ -67,7 +65,7 @@ class ProjectsController extends Controller
 
             return new JsonResponse($results);
         }
-        catch (DataTableException $e) {
+        catch (\Exception $e) {
             return new Response($e->getMessage(), $e->getCode());
         }
     }
@@ -115,11 +113,11 @@ class ProjectsController extends Controller
 
             return $export->exportCsv($query, $projects);
         }
-        catch (DataTableException $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
-        }
         catch (ValidationException $e) {
             return new JsonResponse($e->getMessages(), $e->getCode());
+        }
+        catch (\Exception $e) {
+            return new JsonResponse($e->getMessage(), $e->getCode());
         }
     }
 
@@ -148,7 +146,7 @@ class ProjectsController extends Controller
                 'tab'     => $request->get('tab', 0),
             ]);
         }
-        catch (ValidationException $e) {
+        catch (\Exception $e) {
             return new Response($e->getMessage(), $e->getCode());
         }
     }
@@ -182,7 +180,7 @@ class ProjectsController extends Controller
                 ],
             ]);
         }
-        catch (ValidationException $e) {
+        catch (\Exception $e) {
             return new Response($e->getMessage(), $e->getCode());
         }
     }
@@ -237,7 +235,7 @@ class ProjectsController extends Controller
                 'form' => $form->createView(),
             ]);
         }
-        catch (ValidationException $e) {
+        catch (\Exception $e) {
             return new Response($e->getMessage(), $e->getCode());
         }
     }
@@ -265,7 +263,7 @@ class ProjectsController extends Controller
         catch (ValidationException $e) {
             return new JsonResponse($e->getMessages(), $e->getCode());
         }
-        catch (CommandException $e) {
+        catch (\Exception $e) {
             return new JsonResponse($e->getMessage(), $e->getCode());
         }
     }
@@ -301,7 +299,7 @@ class ProjectsController extends Controller
         catch (ValidationException $e) {
             return new JsonResponse($e->getMessages(), $e->getCode());
         }
-        catch (CommandException $e) {
+        catch (\Exception $e) {
             return new JsonResponse($e->getMessage(), $e->getCode());
         }
     }
@@ -326,6 +324,9 @@ class ProjectsController extends Controller
         }
         catch (ValidationException $e) {
             return new JsonResponse($e->getMessages(), $e->getCode());
+        }
+        catch (\Exception $e) {
+            return new JsonResponse($e->getMessage(), $e->getCode());
         }
     }
 }

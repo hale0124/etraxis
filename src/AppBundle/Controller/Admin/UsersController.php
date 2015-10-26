@@ -11,7 +11,6 @@
 
 namespace AppBundle\Controller\Admin;
 
-use eTraxis\DataTables\DataTableException;
 use eTraxis\Form\UserForm;
 use eTraxis\Service\ExportCsvQuery;
 use eTraxis\SimpleBus\CommandException;
@@ -67,7 +66,7 @@ class UsersController extends Controller
 
             return new JsonResponse($results);
         }
-        catch (DataTableException $e) {
+        catch (\Exception $e) {
             return new Response($e->getMessage(), $e->getCode());
         }
     }
@@ -118,11 +117,11 @@ class UsersController extends Controller
 
             return $export->exportCsv($query, $users);
         }
-        catch (DataTableException $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
-        }
         catch (ValidationException $e) {
             return new JsonResponse($e->getMessages(), $e->getCode());
+        }
+        catch (\Exception $e) {
+            return new JsonResponse($e->getMessage(), $e->getCode());
         }
     }
 
@@ -151,7 +150,7 @@ class UsersController extends Controller
                 'tab'  => $request->get('tab', 0),
             ]);
         }
-        catch (ValidationException $e) {
+        catch (\Exception $e) {
             return new Response($e->getMessage(), $e->getCode());
         }
     }
@@ -188,7 +187,7 @@ class UsersController extends Controller
                 ],
             ]);
         }
-        catch (ValidationException $e) {
+        catch (\Exception $e) {
             return new Response($e->getMessage(), $e->getCode());
         }
     }
@@ -274,7 +273,7 @@ class UsersController extends Controller
                 'form' => $form->createView(),
             ]);
         }
-        catch (ValidationException $e) {
+        catch (\Exception $e) {
             return new Response($e->getMessage(), $e->getCode());
         }
     }
@@ -306,7 +305,7 @@ class UsersController extends Controller
         catch (ValidationException $e) {
             return new JsonResponse($e->getMessages(), $e->getCode());
         }
-        catch (CommandException $e) {
+        catch (\Exception $e) {
             return new JsonResponse($e->getMessage(), $e->getCode());
         }
     }
@@ -374,7 +373,7 @@ class UsersController extends Controller
         catch (ValidationException $e) {
             return new JsonResponse($e->getMessages(), $e->getCode());
         }
-        catch (CommandException $e) {
+        catch (\Exception $e) {
             return new JsonResponse($e->getMessage(), $e->getCode());
         }
     }
@@ -400,6 +399,9 @@ class UsersController extends Controller
         catch (ValidationException $e) {
             return new JsonResponse($e->getMessages(), $e->getCode());
         }
+        catch (\Exception $e) {
+            return new JsonResponse($e->getMessage(), $e->getCode());
+        }
     }
 
     /**
@@ -422,6 +424,9 @@ class UsersController extends Controller
         }
         catch (ValidationException $e) {
             return new JsonResponse($e->getMessages(), $e->getCode());
+        }
+        catch (\Exception $e) {
+            return new JsonResponse($e->getMessage(), $e->getCode());
         }
     }
 
@@ -446,6 +451,9 @@ class UsersController extends Controller
         catch (ValidationException $e) {
             return new JsonResponse($e->getMessages(), $e->getCode());
         }
+        catch (\Exception $e) {
+            return new JsonResponse($e->getMessage(), $e->getCode());
+        }
     }
 
     /**
@@ -468,6 +476,9 @@ class UsersController extends Controller
         }
         catch (ValidationException $e) {
             return new JsonResponse($e->getMessages(), $e->getCode());
+        }
+        catch (\Exception $e) {
+            return new JsonResponse($e->getMessage(), $e->getCode());
         }
     }
 
@@ -496,6 +507,9 @@ class UsersController extends Controller
         catch (ValidationException $e) {
             return new JsonResponse($e->getMessages(), $e->getCode());
         }
+        catch (\Exception $e) {
+            return new JsonResponse($e->getMessage(), $e->getCode());
+        }
     }
 
     /**
@@ -522,6 +536,9 @@ class UsersController extends Controller
         }
         catch (ValidationException $e) {
             return new JsonResponse($e->getMessages(), $e->getCode());
+        }
+        catch (\Exception $e) {
+            return new JsonResponse($e->getMessage(), $e->getCode());
         }
     }
 }

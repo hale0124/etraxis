@@ -84,6 +84,9 @@ class SettingsController extends Controller
                 $this->setError($message);
             }
         }
+        catch (\Exception $e) {
+            $this->setError($e->getMessage());
+        }
 
         return $this->redirectToRoute('settings');
     }
@@ -139,7 +142,7 @@ class SettingsController extends Controller
                 $this->setError($message);
             }
         }
-        catch (CommandException $e) {
+        catch (\Exception $e) {
             $this->setError($e->getMessage());
         }
 
