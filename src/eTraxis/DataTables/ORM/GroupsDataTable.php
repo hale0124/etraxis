@@ -14,7 +14,7 @@ namespace eTraxis\DataTables\ORM;
 use eTraxis\DataTables\DataTableInterface;
 use eTraxis\DataTables\DataTableQuery;
 use eTraxis\DataTables\DataTableResults;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use eTraxis\Repository\GroupsRepository;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -28,18 +28,18 @@ class GroupsDataTable implements DataTableInterface
     const COLUMN_DESCRIPTION = 3;
 
     protected $translator;
-    protected $doctrine;
+    protected $repository;
 
     /**
      * Dependency Injection constructor.
      *
      * @param   TranslatorInterface $translator
-     * @param   RegistryInterface   $doctrine
+     * @param   GroupsRepository    $repository
      */
-    public function __construct(TranslatorInterface $translator, RegistryInterface $doctrine)
+    public function __construct(TranslatorInterface $translator, GroupsRepository $repository)
     {
         $this->translator = $translator;
-        $this->doctrine   = $doctrine;
+        $this->repository = $repository;
     }
 
     /**
@@ -49,14 +49,11 @@ class GroupsDataTable implements DataTableInterface
     {
         $results = new DataTableResults();
 
-        /** @var \Doctrine\ORM\EntityRepository $repository */
-        $repository = $this->doctrine->getRepository('eTraxis:Group');
-
-        $query = $repository->createQueryBuilder('g')->select('COUNT(g.id)');
+        $query = $this->repository->createQueryBuilder('g')->select('COUNT(g.id)');
 
         $results->recordsTotal = $query->getQuery()->getSingleScalarResult();
 
-        $query = $repository->createQueryBuilder('g');
+        $query = $this->repository->createQueryBuilder('g');
 
         $query
             ->select('g')

@@ -14,7 +14,7 @@ namespace eTraxis\DataTables\ORM;
 use eTraxis\DataTables\DataTableInterface;
 use eTraxis\DataTables\DataTableQuery;
 use eTraxis\DataTables\DataTableResults;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use eTraxis\Repository\UsersRepository;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -31,18 +31,18 @@ class UsersDataTable implements DataTableInterface
     const COLUMN_DESCRIPTION    = 6;
 
     protected $translator;
-    protected $doctrine;
+    protected $repository;
 
     /**
      * Dependency Injection constructor.
      *
      * @param   TranslatorInterface $translator
-     * @param   RegistryInterface   $doctrine
+     * @param   UsersRepository     $repository
      */
-    public function __construct(TranslatorInterface $translator, RegistryInterface $doctrine)
+    public function __construct(TranslatorInterface $translator, UsersRepository $repository)
     {
         $this->translator = $translator;
-        $this->doctrine   = $doctrine;
+        $this->repository = $repository;
     }
 
     /**
@@ -52,14 +52,11 @@ class UsersDataTable implements DataTableInterface
     {
         $results = new DataTableResults();
 
-        /** @var \Doctrine\ORM\EntityRepository $repository */
-        $repository = $this->doctrine->getRepository('eTraxis:User');
-
-        $query = $repository->createQueryBuilder('u')->select('COUNT(u.id)');
+        $query = $this->repository->createQueryBuilder('u')->select('COUNT(u.id)');
 
         $results->recordsTotal = $query->getQuery()->getSingleScalarResult();
 
-        $query = $repository->createQueryBuilder('u');
+        $query = $this->repository->createQueryBuilder('u');
 
         // Search.
         if ($request->search['value']) {

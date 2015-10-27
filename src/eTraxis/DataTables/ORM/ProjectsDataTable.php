@@ -14,8 +14,8 @@ namespace eTraxis\DataTables\ORM;
 use eTraxis\DataTables\DataTableInterface;
 use eTraxis\DataTables\DataTableQuery;
 use eTraxis\DataTables\DataTableResults;
+use eTraxis\Repository\ProjectsRepository;
 use eTraxis\Service\LocalizerInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -29,23 +29,23 @@ class ProjectsDataTable implements DataTableInterface
 
     protected $translator;
     protected $localizer;
-    protected $doctrine;
+    protected $repository;
 
     /**
      * Dependency Injection constructor.
      *
      * @param   TranslatorInterface $translator
      * @param   LocalizerInterface  $localizer
-     * @param   RegistryInterface   $doctrine
+     * @param   ProjectsRepository  $repository
      */
     public function __construct(
         TranslatorInterface $translator,
         LocalizerInterface  $localizer,
-        RegistryInterface   $doctrine)
+        ProjectsRepository  $repository)
     {
         $this->translator = $translator;
         $this->localizer  = $localizer;
-        $this->doctrine   = $doctrine;
+        $this->repository = $repository;
     }
 
     /**
@@ -55,14 +55,11 @@ class ProjectsDataTable implements DataTableInterface
     {
         $results = new DataTableResults();
 
-        /** @var \Doctrine\ORM\EntityRepository $repository */
-        $repository = $this->doctrine->getRepository('eTraxis:Project');
-
-        $query = $repository->createQueryBuilder('p')->select('COUNT(p.id)');
+        $query = $this->repository->createQueryBuilder('p')->select('COUNT(p.id)');
 
         $results->recordsTotal = $query->getQuery()->getSingleScalarResult();
 
-        $query = $repository->createQueryBuilder('p');
+        $query = $this->repository->createQueryBuilder('p');
 
         $query->select('p');
 

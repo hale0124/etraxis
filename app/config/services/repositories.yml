@@ -1,0 +1,32 @@
+# Keep repositories sorted alphabetically.
+services:
+
+    etraxis.repository.events:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: [ eTraxis\Entity\Event ]
+
+    etraxis.repository.groups:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: [ eTraxis\Entity\Group ]
+
+    etraxis.repository.issues:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: [ eTraxis\Entity\Issue ]
+
+    etraxis.repository.projects:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: [ eTraxis\Entity\Project ]
+
+    etraxis.repository.users:
+        class: Doctrine\ORM\EntityRepository
+        factory_service: doctrine.orm.default_entity_manager
+        factory_method: getRepository
+        arguments: [ eTraxis\Entity\User ]

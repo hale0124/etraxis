@@ -92,7 +92,10 @@ class LdapAuthenticatorTest extends BaseTestCase
             'DC=example,DC=com'
         );
 
-        $provider = new InternalUserProvider($this->logger, $this->doctrine);
+        /** @var \eTraxis\Repository\UsersRepository $repository */
+        $repository = $this->doctrine->getRepository('eTraxis:User');
+
+        $provider = new InternalUserProvider($this->logger, $repository);
         $token    = new UsernamePasswordToken('einstein', 'password', 'etraxis_provider');
 
         $user = $object->authenticateToken($token, $provider, 'etraxis_provider');
@@ -114,7 +117,10 @@ class LdapAuthenticatorTest extends BaseTestCase
             'DC=example,DC=com'
         );
 
-        $provider = new InternalUserProvider($this->logger, $this->doctrine);
+        /** @var \eTraxis\Repository\UsersRepository $repository */
+        $repository = $this->doctrine->getRepository('eTraxis:User');
+
+        $provider = new InternalUserProvider($this->logger, $repository);
 
         $token = new UsernamePasswordToken('einstein', 'password', 'etraxis_provider');
 
@@ -141,7 +147,10 @@ class LdapAuthenticatorTest extends BaseTestCase
             'DC=example,DC=com'
         );
 
-        $provider = new InternalUserProvider($this->logger, $this->doctrine);
+        /** @var \eTraxis\Repository\UsersRepository $repository */
+        $repository = $this->doctrine->getRepository('eTraxis:User');
+
+        $provider = new InternalUserProvider($this->logger, $repository);
 
         $token = new UsernamePasswordToken('einstein', 'wrong', 'etraxis_provider');
 

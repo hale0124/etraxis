@@ -24,7 +24,10 @@ class InternalUserProviderTest extends BaseTestCase
     {
         parent::setUp();
 
-        $this->object = new InternalUserProvider($this->logger, $this->doctrine);
+        /** @var \eTraxis\Repository\UsersRepository $repository */
+        $repository = $this->doctrine->getRepository('eTraxis:User');
+
+        $this->object = new InternalUserProvider($this->logger, $repository);
     }
 
     public function testLoadInternalUserByUsername()

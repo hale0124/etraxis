@@ -33,7 +33,10 @@ class ProjectVoterTest extends BaseTestCase
     {
         parent::setUp();
 
-        $this->object = new ProjectVoterStub($this->doctrine);
+        /** @var \eTraxis\Repository\IssuesRepository $repository */
+        $repository = $this->doctrine->getRepository('eTraxis:Issue');
+
+        $this->object = new ProjectVoterStub($repository);
     }
 
     public function testGetSupportedClasses()

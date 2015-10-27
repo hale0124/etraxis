@@ -2,6 +2,7 @@
 imports:
     - { resource: services/datatables.yml }
     - { resource: services/listeners.yml }
+    - { resource: services/repositories.yml }
     - { resource: services/voters.yml }
     - { resource: simplebus/command.group.yml }
     - { resource: simplebus/command.project.yml }
@@ -48,7 +49,7 @@ services:
         public: false
         arguments:
             - @logger
-            - @doctrine
+            - @etraxis.repository.users
 
     etraxis.encoder:
         class: eTraxis\Security\InternalPasswordEncoder

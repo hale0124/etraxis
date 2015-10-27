@@ -13,7 +13,7 @@ namespace eTraxis\Voter;
 
 use eTraxis\Entity\Project;
 use eTraxis\Entity\User;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use eTraxis\Repository\IssuesRepository;
 use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -24,16 +24,16 @@ class ProjectVoter extends AbstractVoter
 {
     const DELETE = 'project.delete';
 
-    protected $doctrine;
+    protected $repository;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   RegistryInterface $doctrine
+     * @param   IssuesRepository $repository
      */
-    public function __construct(RegistryInterface $doctrine)
+    public function __construct(IssuesRepository $repository)
     {
-        $this->doctrine = $doctrine;
+        $this->repository = $repository;
     }
 
     /**
@@ -89,11 +89,8 @@ class ProjectVoter extends AbstractVoter
             return false;
         }
 
-        /** @var \Doctrine\ORM\EntityRepository $repository */
-        $repository = $this->doctrine->getRepository('eTraxis:Issue');
-
         // Number of issues belong to the project.
-        $query = $repository->createQueryBuilder('i')
+        $query = $this->repository->createQueryBuilder('i')
             ->select('COUNT(i.id)')
             ->leftJoin('i.state', 's')
             ->leftJoin('s.template', 't')

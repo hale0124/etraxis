@@ -21,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
  *            uniqueConstraints={
  *                @ORM\UniqueConstraint(name="ix_records", columns={"creator_id", "creation_time"})
  *            })
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="eTraxis\Repository\IssuesRepository")
  */
 class Issue
 {

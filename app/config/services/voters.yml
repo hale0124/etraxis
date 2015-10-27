@@ -5,10 +5,10 @@ services:
         class: eTraxis\Voter\ProjectVoter
         public: false
         tags: [{ name: security.voter }]
-        arguments: [ @doctrine ]
+        arguments: [ @etraxis.repository.issues ]
 
     etraxis.voter.user:
         class: eTraxis\Voter\UserVoter
         public: false
         tags: [{ name: security.voter }]
-        arguments: [ @doctrine, %password_expiration% ]
+        arguments: [ @etraxis.repository.events, %password_expiration% ]

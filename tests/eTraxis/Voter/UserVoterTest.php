@@ -33,7 +33,10 @@ class UserVoterTest extends BaseTestCase
     {
         parent::setUp();
 
-        $this->object = new UserVoterStub($this->doctrine);
+        /** @var \eTraxis\Repository\EventsRepository $repository */
+        $repository = $this->doctrine->getRepository('eTraxis:Event');
+
+        $this->object = new UserVoterStub($repository);
     }
 
     public function testGetSupportedClasses()
@@ -76,10 +79,13 @@ class UserVoterTest extends BaseTestCase
 
         $hubert->setPasswordSetAt(time() - 86400 * 2);
 
-        $this->object = new UserVoterStub($this->doctrine, 3);
+        /** @var \eTraxis\Repository\EventsRepository $repository */
+        $repository = $this->doctrine->getRepository('eTraxis:Event');
+
+        $this->object = new UserVoterStub($repository, 3);
         $this->assertFalse($this->object->isGranted(UserVoter::SET_EXPIRED_PASSWORD, $hubert, $hubert));
 
-        $this->object = new UserVoterStub($this->doctrine, 1);
+        $this->object = new UserVoterStub($repository, 1);
         $this->assertTrue($this->object->isGranted(UserVoter::SET_EXPIRED_PASSWORD, $hubert, $hubert));
     }
 

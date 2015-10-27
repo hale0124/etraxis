@@ -13,7 +13,7 @@ namespace eTraxis\Voter;
 
 use eTraxis\Entity\Event;
 use eTraxis\Entity\User;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+use eTraxis\Repository\EventsRepository;
 use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
@@ -28,18 +28,18 @@ class UserVoter extends AbstractVoter
     const ENABLE               = 'user.enable';
     const UNLOCK               = 'user.unlock';
 
-    protected $doctrine;
+    protected $repository;
     protected $password_expiration;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   RegistryInterface $doctrine
-     * @param   int               $password_expiration
+     * @param   EventsRepository $repository
+     * @param   int              $password_expiration
      */
-    public function __construct(RegistryInterface $doctrine, $password_expiration = null)
+    public function __construct(EventsRepository $repository, $password_expiration = null)
     {
-        $this->doctrine            = $doctrine;
+        $this->repository          = $repository;
         $this->password_expiration = $password_expiration;
     }
 
@@ -136,11 +136,8 @@ class UserVoter extends AbstractVoter
             return false;
         }
 
-        /** @var \Doctrine\ORM\EntityRepository $repository */
-        $repository = $this->doctrine->getRepository('eTraxis:Event');
-
         // Number of events originated by subject.
-        $query = $repository->createQueryBuilder('e')
+        $query = $this->repository->createQueryBuilder('e')
             ->select('COUNT(e.id)')
             ->where('e.userId = :id')
             ->setParameter('id', $object->getId())
@@ -149,7 +146,7 @@ class UserVoter extends AbstractVoter
         $countAsOriginator = $query->getQuery()->getSingleScalarResult();
 
         // Number of issues had been assigned on subject.
-        $query = $repository->createQueryBuilder('e')
+        $query = $this->repository->createQueryBuilder('e')
             ->select('COUNT(e.id)')
             ->where('e.type = :type')
             ->andWhere('e.parameter = :id')

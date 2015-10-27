@@ -12,8 +12,8 @@
 namespace eTraxis\Security;
 
 use eTraxis\Entity\User;
+use eTraxis\Repository\UsersRepository;
 use Psr\Log\LoggerInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -25,18 +25,18 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 class InternalUserProvider implements UserProviderInterface
 {
     protected $logger;
-    protected $doctrine;
+    protected $users;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface   $logger
-     * @param   RegistryInterface $doctrine
+     * @param   LoggerInterface  $logger
+     * @param   UsersRepository  $users
      */
-    public function __construct(LoggerInterface $logger, RegistryInterface $doctrine)
+    public function __construct(LoggerInterface $logger, UsersRepository $users)
     {
-        $this->logger   = $logger;
-        $this->doctrine = $doctrine;
+        $this->logger = $logger;
+        $this->users  = $users;
     }
 
     /**
@@ -44,11 +44,8 @@ class InternalUserProvider implements UserProviderInterface
      */
     public function loadUserByUsername($username)
     {
-        /** @var \Doctrine\ORM\EntityRepository $repository */
-        $repository = $this->doctrine->getRepository('eTraxis:User');
-
         /** @var User $user */
-        $user = $repository->findOneBy([
+        $user = $this->users->findOneBy([
             'username' => $username . '@eTraxis',
             'isLdap'   => 0,
         ]);
@@ -59,7 +56,7 @@ class InternalUserProvider implements UserProviderInterface
             return $user;
         }
 
-        $user = $repository->findOneBy([
+        $user = $this->users->findOneBy([
             'username' => $username,
             'isLdap'   => 1,
         ]);
