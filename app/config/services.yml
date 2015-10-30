@@ -11,13 +11,6 @@ imports:
 
 services:
 
-    datatables:
-        class: eTraxis\DataTables\DataTablesFactory
-        arguments:
-            - @service_container
-            - @logger
-            - @validator
-
     ldap:
         class: eTraxis\Service\LdapService
         arguments:

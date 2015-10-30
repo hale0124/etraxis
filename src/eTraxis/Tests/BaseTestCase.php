@@ -47,7 +47,7 @@ class BaseTestCase extends WebTestCase
     /** @var \SimpleBus\Message\Bus\MessageBus */
     protected $event_bus;
 
-    /** @var \eTraxis\DataTables\DataTablesFactoryInterface */
+    /** @var \DataTables\DataTablesInterface */
     protected $datatables;
 
     /**

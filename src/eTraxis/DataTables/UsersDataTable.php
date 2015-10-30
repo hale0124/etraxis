@@ -9,18 +9,18 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\DataTables\ORM;
+namespace eTraxis\DataTables;
 
-use eTraxis\DataTables\DataTableInterface;
-use eTraxis\DataTables\DataTableQuery;
-use eTraxis\DataTables\DataTableResults;
+use DataTables\DataTableHandlerInterface;
+use DataTables\DataTableQuery;
+use DataTables\DataTableResults;
 use eTraxis\Repository\UsersRepository;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Enumerates all accounts existing in eTraxis database.
  */
-class UsersDataTable implements DataTableInterface
+class UsersDataTable implements DataTableHandlerInterface
 {
     const COLUMN_ID             = 0;
     const COLUMN_USERNAME       = 1;

@@ -119,9 +119,9 @@ trait ContainerTrait
     }
 
     /**
-     * Shortcut to get the DataTables factory.
+     * Shortcut to get the DataTables service.
      *
-     * @return  \eTraxis\DataTables\DataTablesFactoryInterface
+     * @return  \DataTables\DataTablesInterface
      */
     protected function getDataTables()
     {

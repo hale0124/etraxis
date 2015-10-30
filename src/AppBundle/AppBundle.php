@@ -11,9 +11,7 @@
 
 namespace AppBundle;
 
-use AppBundle\DependencyInjection\DataTablesCompilerPass;
 use Doctrine\ORM\Query;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class AppBundle extends Bundle
@@ -36,15 +34,5 @@ class AppBundle extends Bundle
                 '\eTraxis\Doctrine\SortableNullsWalker'
             );
         }
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function build(ContainerBuilder $container)
-    {
-        parent::build($container);
-
-        $container->addCompilerPass(new DataTablesCompilerPass());
     }
 }

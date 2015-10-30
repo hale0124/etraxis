@@ -9,36 +9,42 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\DataTables\ORM;
+namespace eTraxis\DataTables;
 
-use eTraxis\DataTables\DataTableInterface;
-use eTraxis\DataTables\DataTableQuery;
-use eTraxis\DataTables\DataTableResults;
-use eTraxis\Repository\GroupsRepository;
+use DataTables\DataTableHandlerInterface;
+use DataTables\DataTableQuery;
+use DataTables\DataTableResults;
+use eTraxis\Repository\ProjectsRepository;
+use eTraxis\Service\LocalizerInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
- * Enumerates all groups existing in eTraxis database.
+ * Enumerates all projects existing in eTraxis database.
  */
-class GroupsDataTable implements DataTableInterface
+class ProjectsDataTable implements DataTableHandlerInterface
 {
     const COLUMN_NAME        = 0;
-    const COLUMN_TYPE        = 1;
-    const COLUMN_PROJECT     = 2;
-    const COLUMN_DESCRIPTION = 3;
+    const COLUMN_START_TIME  = 1;
+    const COLUMN_DESCRIPTION = 2;
 
     protected $translator;
+    protected $localizer;
     protected $repository;
 
     /**
      * Dependency Injection constructor.
      *
      * @param   TranslatorInterface $translator
-     * @param   GroupsRepository    $repository
+     * @param   LocalizerInterface  $localizer
+     * @param   ProjectsRepository  $repository
      */
-    public function __construct(TranslatorInterface $translator, GroupsRepository $repository)
+    public function __construct(
+        TranslatorInterface $translator,
+        LocalizerInterface  $localizer,
+        ProjectsRepository  $repository)
     {
         $this->translator = $translator;
+        $this->localizer  = $localizer;
         $this->repository = $repository;
     }
 
@@ -49,25 +55,20 @@ class GroupsDataTable implements DataTableInterface
     {
         $results = new DataTableResults();
 
-        $query = $this->repository->createQueryBuilder('g')->select('COUNT(g.id)');
+        $query = $this->repository->createQueryBuilder('p')->select('COUNT(p.id)');
 
         $results->recordsTotal = $query->getQuery()->getSingleScalarResult();
 
-        $query = $this->repository->createQueryBuilder('g');
+        $query = $this->repository->createQueryBuilder('p');
 
-        $query
-            ->select('g')
-            ->addSelect('p')
-            ->leftJoin('g.project', 'p')
-        ;
+        $query->select('p');
 
         // Search.
         if ($request->search['value']) {
 
             $conditions = [
-                'LOWER(g.name) LIKE :search',
                 'LOWER(p.name) LIKE :search',
-                'LOWER(g.description) LIKE :search',
+                'LOWER(p.description) LIKE :search',
             ];
 
             $query
@@ -90,28 +91,17 @@ class GroupsDataTable implements DataTableInterface
                 case self::COLUMN_NAME:
 
                     $query
-                        ->andWhere('LOWER(g.name) LIKE :name')
+                        ->andWhere('LOWER(p.name) LIKE :name')
                         ->setParameter('name', "%{$value}%")
                     ;
 
                     break;
 
-                case self::COLUMN_TYPE:
-
-                    if ($value == 'global') {
-                        $query->andWhere('g.projectId IS NULL');
-                    }
-                    elseif ($value == 'local') {
-                        $query->andWhere('g.projectId IS NOT NULL');
-                    }
-
-                    break;
-
-                case self::COLUMN_PROJECT:
+                case self::COLUMN_START_TIME:
 
                     $query
-                        ->andWhere('g.projectId = :project')
-                        ->setParameter('project', $value)
+                        ->andWhere('EPOCH_DATE(p.createdAt) LIKE :created')
+                        ->setParameter('created', "%{$value}%")
                     ;
 
                     break;
@@ -119,7 +109,7 @@ class GroupsDataTable implements DataTableInterface
                 case self::COLUMN_DESCRIPTION:
 
                     $query
-                        ->andWhere('LOWER(g.description) LIKE :description')
+                        ->andWhere('LOWER(p.description) LIKE :description')
                         ->setParameter('description', "%{$value}%")
                     ;
 
@@ -131,16 +121,15 @@ class GroupsDataTable implements DataTableInterface
         foreach ($request->order as $order) {
 
             $map = [
-                self::COLUMN_NAME        => 'g.name',
-                self::COLUMN_TYPE        => 'g.projectId',
-                self::COLUMN_PROJECT     => 'p.name',
-                self::COLUMN_DESCRIPTION => 'g.description',
+                self::COLUMN_NAME        => 'p.name',
+                self::COLUMN_START_TIME  => 'p.createdAt',
+                self::COLUMN_DESCRIPTION => 'p.description',
             ];
 
             $query->addOrderBy($map[$order['column']], $order['dir']);
         }
 
-        /** @var \eTraxis\Entity\Group[] $entities */
+        /** @var \eTraxis\Entity\Project[] $entities */
         $entities = $query->getQuery()->getResult();
 
         $results->recordsFiltered = count($entities);
@@ -157,10 +146,10 @@ class GroupsDataTable implements DataTableInterface
 
             $results->data[] = [
                 $entity->getName(),
-                $this->translator->trans($entity->isGlobal() ? 'group.global' : 'group.local'),
-                $entity->isGlobal() ? null : $entity->getProject()->getName(),
+                $this->localizer->formatDate($this->localizer->getLocalTimestamp($entity->getCreatedAt())),
                 $entity->getDescription(),
-                'DT_RowAttr' => ['data-id' => $entity->getId()],
+                'DT_RowAttr'  => ['data-id' => $entity->getId()],
+                'DT_RowClass' => $entity->isSuspended() ? 'gray' : null,
             ];
         }
 

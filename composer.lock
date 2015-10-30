@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "27f93e076ebac9ebed771ed2c394c197",
-    "content-hash": "91f21c9dc667af94b4143fdb57be41a6",
+    "hash": "7e5e492f4a640249357acb0b8aae7ccc",
+    "content-hash": "913bcf83c94f4fe263b398eb0f393ff7",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1060,6 +1060,46 @@
                 "orm"
             ],
             "time": "2015-08-31 12:59:39"
+        },
+        {
+            "name": "etraxis/datatables-bundle",
+            "version": "0.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/etraxis/datatables-bundle.git",
+                "reference": "20b3dd93745f3f0625dd1afec375b1148672adb7"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/etraxis/datatables-bundle/zipball/20b3dd93745f3f0625dd1afec375b1148672adb7",
+                "reference": "20b3dd93745f3f0625dd1afec375b1148672adb7",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0",
+                "psr/log": "~1.0",
+                "symfony/config": "~2.3|~3.0",
+                "symfony/dependency-injection": "~2.3|~3.0",
+                "symfony/http-foundation": "~2.3|~3.0",
+                "symfony/http-kernel": "~2.3|~3.0",
+                "symfony/validator": "~2.3|~3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DataTables\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "DataTables Symfony bundle",
+            "keywords": [
+                "datatable",
+                "datatables"
+            ],
+            "time": "2015-10-30 04:25:20"
         },
         {
             "name": "incenteev/composer-parameter-handler",

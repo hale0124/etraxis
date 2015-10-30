@@ -2,16 +2,16 @@
 services:
 
     etraxis.datatable.groups:
-        class: eTraxis\DataTables\ORM\GroupsDataTable
-        tags: [{ name: datatable, entity: eTraxis:Group }]
+        class: eTraxis\DataTables\GroupsDataTable
+        tags: [{ name: datatable, id: eTraxis:Group }]
         arguments: [ @translator, @etraxis.repository.groups ]
 
     etraxis.datatable.projects:
-        class: eTraxis\DataTables\ORM\ProjectsDataTable
-        tags: [{ name: datatable, entity: eTraxis:Project }]
+        class: eTraxis\DataTables\ProjectsDataTable
+        tags: [{ name: datatable, id: eTraxis:Project }]
         arguments: [ @translator, @localizer, @etraxis.repository.projects ]
 
     etraxis.datatable.users:
-        class: eTraxis\DataTables\ORM\UsersDataTable
-        tags: [{ name: datatable, entity: eTraxis:User }]
+        class: eTraxis\DataTables\UsersDataTable
+        tags: [{ name: datatable, id: eTraxis:User }]
         arguments: [ @translator, @etraxis.repository.users ]

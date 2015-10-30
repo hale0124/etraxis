@@ -22,7 +22,8 @@
         "sensio/framework-extra-bundle"        : "^3.0.2",
         "incenteev/composer-parameter-handler" : "~2.0",
         "simple-bus/symfony-bridge"            : "~4.0",
-        "ramsey/uuid"                          : "~2.8"
+        "ramsey/uuid"                          : "~2.8",
+        "etraxis/datatables-bundle"            : "0.0.1"
     },
     "require-dev": {
         "sensio/generator-bundle"              : "~2.3",

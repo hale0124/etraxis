@@ -9,7 +9,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\DataTables\ORM;
+namespace eTraxis\DataTables;
 
 use eTraxis\Tests\BaseTestCase;
 use Symfony\Component\HttpFoundation\Request;
