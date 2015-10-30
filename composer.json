@@ -27,7 +27,7 @@
     },
     "require-dev": {
         "sensio/generator-bundle"              : "~2.3",
-        "phpunit/phpunit"                      : "~4.0",
+        "phpunit/phpunit"                      : "~4.1|~5.0",
         "fabpot/php-cs-fixer"                  : "~1.9"
     },
     "autoload": {
