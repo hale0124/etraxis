@@ -11,7 +11,7 @@
 
 namespace eTraxis\Entity;
 
-use Rhumsaa\Uuid\Uuid;
+use Ramsey\Uuid\Uuid;
 
 /**
  * @todo Remove in 4.1

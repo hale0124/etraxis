@@ -12,7 +12,7 @@
 namespace eTraxis\SimpleBus\Users;
 
 use eTraxis\Tests\BaseTestCase;
-use Rhumsaa\Uuid\Uuid;
+use Ramsey\Uuid\Uuid;
 
 class ResetPasswordCommandTest extends BaseTestCase
 {
