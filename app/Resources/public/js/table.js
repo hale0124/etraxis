@@ -54,6 +54,9 @@ var datatables_language = window.datatables_language || {};
             // Timer to block the table while AJAX request is being processed.
             var blockTimer = null;
 
+            // Whether the table is currently blocked.
+            var isBlocked = false;
+
             // Timers to make a delay between requests when searching by columns.
             var searchTimers = [];
 
@@ -71,6 +74,12 @@ var datatables_language = window.datatables_language || {};
 
             // Block the table before AJAX request is sent.
             function tableBlock($table) {
+
+                if (isBlocked) {
+                    return;
+                }
+
+                isBlocked = true;
 
                 // Most requests are supposed to be processed within few milliseconds.
                 // To avoid visual flickering we initially block with invisible overlay.
@@ -98,8 +107,15 @@ var datatables_language = window.datatables_language || {};
 
             // Unblock the table when server response is received.
             function tableUnblock($table) {
+
+                if (!isBlocked) {
+                    return;
+                }
+
                 clearTimeout(blockTimer);
+                blockTimer = null;
                 $table.closest('.dataTables_wrapper').unblock();
+                isBlocked = false;
             }
 
             // Make table width autoadjustable.
