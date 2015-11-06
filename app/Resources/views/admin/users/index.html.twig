@@ -31,26 +31,26 @@
                             <th>{{ 'description'|trans }}</th>
                         </tr>
                     </thead>
-                    <thead>
+                    <tfoot>
                         <tr>
-                            <th><input type="text"></th>
-                            <th><input type="text"></th>
-                            <th><input type="text"></th>
-                            <th>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td><input type="text"></td>
+                            <td>
                                 <select>
                                     <option value="admin">{{ 'role.administrator'|trans }}</option>
                                     <option value="user">{{ 'role.user'|trans }}</option>
                                 </select>
-                            </th>
-                            <th>
+                            </td>
+                            <td>
                                 <select>
                                     <option value="etraxis">eTraxis</option>
                                     <option value="ldap">LDAP</option>
                                 </select>
-                            </th>
-                            <th><input type="text"></th>
+                            </td>
+                            <td><input type="text"></td>
                         </tr>
-                    </thead>
+                    </tfoot>
                 </table>
             </div>
         </div>
@@ -80,12 +80,12 @@
 
                 // If no checkbox is ticked, untick "Select all" checkbox.
                 if (checked == 0) {
-                    $('thead input[type="checkbox"]', $table).prop('checked', false);
+                    $('input[type="checkbox"].checkall', $table).prop('checked', false);
                 }
 
                 // If all checkboxes are ticked, tick "Select all" checkbox.
                 if (checked == $table.api().page.len()) {
-                    $('thead input[type="checkbox"]', $table).prop('checked', true);
+                    $('input[type="checkbox"].checkall', $table).prop('checked', true);
                 }
             };
 

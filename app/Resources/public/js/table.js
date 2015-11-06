@@ -63,7 +63,7 @@ var datatables_language = window.datatables_language || {};
             // Current values of searching by columns.
             var searchValues = [];
 
-            for (var i = $('thead:first th', this).length; i >= 0; i--) {
+            for (var i = $('thead th', this).length; i >= 0; i--) {
                 searchTimers.push(null);
                 searchValues.push('');
             }
@@ -124,9 +124,17 @@ var datatables_language = window.datatables_language || {};
             // In case of "checkboxes" feature...
             if (settings.checkboxes) {
 
-                // ... prepend the header with one more column.
+                // ... prepend header and footer with one more column.
                 $('thead tr', this).prepend('<th></th>');
-                $('thead:last th:first', this).prepend('<input type="checkbox">');
+                $('tfoot tr', this).prepend('<td></td>');
+
+                // If filtering row is absent.
+                if ($('tfoot', this).length == 0) {
+                    $('thead th:first', this).prepend('<input type="checkbox" class="checkall">');
+                }
+                else {
+                    $('tfoot td:first', this).prepend('<input type="checkbox" class="checkall">');
+                }
 
                 // Custom rendering of the first column to convert data into value of a checkbox.
                 settings.columnDefs.push({
@@ -140,10 +148,9 @@ var datatables_language = window.datatables_language || {};
             }
 
             // If filtering row is present.
-            if ($('thead', this).length > 1) {
-                $('thead:last', this).addClass('filter');
-                $('thead.filter th', this).addClass('ui-state-default');
-                $('thead.filter select', this).prepend('<option></option>').val(null);
+            if ($('tfoot', this).length != 0) {
+                $('tfoot  td', this).addClass('ui-state-default');
+                $('tfoot select', this).prepend('<option></option>').val(null);
             }
 
             // Call DataTables plugin.
@@ -153,7 +160,7 @@ var datatables_language = window.datatables_language || {};
             if (settings.checkboxes) {
 
                 // ... implement "check all"/"uncheck all" ability for the checkbox in the header.
-                $table.on('click', 'thead input[type="checkbox"]', function() {
+                $table.on('click', 'input[type="checkbox"].checkall', function() {
                     $('tbody input[type="checkbox"]', $table).prop('checked', $(this).prop('checked'));
                 });
 
@@ -164,11 +171,11 @@ var datatables_language = window.datatables_language || {};
             }
 
             // Filter controls.
-            $('.filter input[type="text"], .filter select', $table)
+            $('tfoot input[type="text"], tfoot select', $table)
                 // Restore saved search values.
                 .each(function() {
 
-                    var index = $(this).closest('th').index();
+                    var index = $(this).closest('td').index();
                     var value = $table.api().column(index).search();
 
                     $(this).val(value);
@@ -178,7 +185,7 @@ var datatables_language = window.datatables_language || {};
                 // Re-draw the table when a filter value is changed.
                 .on('keyup change', function() {
 
-                    var index = $(this).closest('th').index();
+                    var index = $(this).closest('td').index();
                     var value = $(this).val();
 
                     if (searchValues[index] == value) {

@@ -25,25 +25,25 @@
                             <th>{{ 'description'|trans }}</th>
                         </tr>
                     </thead>
-                    <thead>
+                    <tfoot>
                         <tr>
-                            <th><input type="text"></th>
-                            <th>
+                            <td><input type="text"></td>
+                            <td>
                                 <select>
                                     <option value="global">{{ 'group.global'|trans }}</option>
                                     <option value="local">{{ 'group.local'|trans }}</option>
                                 </select>
-                            </th>
-                            <th>
+                            </td>
+                            <td>
                                 <select>
                                     {% for project in projects %}
                                         <option value="{{ project.id }}">{{ project.name }}</option>
                                     {% endfor %}
                                 </select>
-                            </th>
-                            <th><input type="text"></th>
+                            </td>
+                            <td><input type="text"></td>
                         </tr>
-                    </thead>
+                    </tfoot>
                 </table>
             </div>
         </div>
