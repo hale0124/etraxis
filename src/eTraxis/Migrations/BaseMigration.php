@@ -77,7 +77,7 @@ abstract class BaseMigration extends AbstractMigration
             case DatabasePlatform::MYSQL:
 
                 $this->abortIf(
-                    !is_subclass_of($this, '\eTraxis\Migrations\MysqlMigrationInterface'),
+                    !($this instanceof MysqlMigrationInterface),
                     'MySQL platform is not supported yet.'
                 );
 
@@ -86,7 +86,7 @@ abstract class BaseMigration extends AbstractMigration
             case DatabasePlatform::POSTGRESQL:
 
                 $this->abortIf(
-                    !is_subclass_of($this, '\eTraxis\Migrations\PostgresqlMigrationInterface'),
+                    !($this instanceof PostgresqlMigrationInterface),
                     'PostgreSQL platform is not supported yet.'
                 );
 
@@ -95,7 +95,7 @@ abstract class BaseMigration extends AbstractMigration
             case DatabasePlatform::MSSQL:
 
                 $this->abortIf(
-                    !is_subclass_of($this, '\eTraxis\Migrations\MssqlMigrationInterface'),
+                    !($this instanceof MssqlMigrationInterface),
                     'Microsoft SQL Server platform is not supported yet.'
                 );
 
@@ -104,7 +104,7 @@ abstract class BaseMigration extends AbstractMigration
             case DatabasePlatform::ORACLE:
 
                 $this->abortIf(
-                    !is_subclass_of($this, '\eTraxis\Migrations\OracleMigrationInterface'),
+                    !($this instanceof OracleMigrationInterface),
                     'Oracle platform is not supported yet.'
                 );
 
