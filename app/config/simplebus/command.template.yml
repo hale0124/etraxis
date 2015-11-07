@@ -1,1 +1,6 @@
 services:
+
+    command.template.delete:
+        class: eTraxis\SimpleBus\Templates\Handler\DeleteTemplateCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Templates\DeleteTemplateCommand }]
+        arguments: [ @logger, @doctrine, @security.authorization_checker ]

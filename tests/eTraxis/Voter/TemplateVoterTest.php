@@ -11,6 +11,7 @@
 
 namespace eTraxis\Voter;
 
+use eTraxis\Entity\Template;
 use eTraxis\Tests\BaseTestCase;
 use eTraxis\Traits\ClassAccessTrait;
 
@@ -33,7 +34,10 @@ class TemplateVoterTest extends BaseTestCase
     {
         parent::setUp();
 
-        $this->object = new TemplateVoterStub();
+        /** @var \eTraxis\Repository\IssuesRepository $repository */
+        $repository = $this->doctrine->getRepository('eTraxis:Issue');
+
+        $this->object = new TemplateVoterStub($repository);
     }
 
     public function testGetSupportedClasses()
@@ -50,7 +54,9 @@ class TemplateVoterTest extends BaseTestCase
 
     public function testGetSupportedAttributes()
     {
-        $expected = [];
+        $expected = [
+            TemplateVoter::DELETE,
+        ];
 
         $this->assertEquals($expected, $this->object->getSupportedAttributes());
     }
@@ -63,5 +69,44 @@ class TemplateVoterTest extends BaseTestCase
         $hubert = $this->findUser('hubert');
 
         $this->assertFalse($this->object->isGranted('UNKNOWN', $template, $hubert));
+    }
+
+    public function testDelete()
+    {
+        /** @var \eTraxis\Entity\Project $project */
+        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
+
+        $template = new Template();
+
+        $template
+            ->setName('Issue')
+            ->setPrefix('bug')
+            ->setLocked(true)
+            ->setGuestAccess(false)
+            ->setRegisteredPermissions(0)
+            ->setAuthorPermissions(0)
+            ->setResponsiblePermissions(0)
+            ->setProject($project)
+        ;
+
+        $this->doctrine->getManager()->persist($template);
+        $this->doctrine->getManager()->flush();
+
+        /** @var Template $template */
+        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+
+        /** @var Template $empty */
+        $empty = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Issue']);
+
+        $this->assertInstanceOf('eTraxis\Entity\Template', $template);
+        $this->assertInstanceOf('eTraxis\Entity\Template', $empty);
+
+        $fry    = $this->findUser('fry');
+        $hubert = $this->findUser('hubert');
+
+        $this->assertFalse($this->object->isGranted(TemplateVoter::DELETE, $template));
+        $this->assertFalse($this->object->isGranted(TemplateVoter::DELETE, $template, $hubert));
+        $this->assertTrue($this->object->isGranted(TemplateVoter::DELETE, $empty, $hubert));
+        $this->assertFalse($this->object->isGranted(TemplateVoter::DELETE, $empty, $fry));
     }
 }
