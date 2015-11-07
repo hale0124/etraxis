@@ -13,6 +13,7 @@ var concat   = require('gulp-concat');
 var less     = require('gulp-less');
 var insert   = require('gulp-insert');
 var minify   = require('gulp-minify-css');
+var plumber  = require('gulp-plumber');
 var rename   = require('gulp-rename');
 var strip    = require('gulp-strip-json-comments');
 var uglify   = require('gulp-uglify');
@@ -76,6 +77,12 @@ gulp.task('stylesheets:themes', function() {
 
     var tasks = folders.map(function(folder) {
         return gulp.src('app/Resources/public/less/theme-' + folder + '.less')
+            .pipe(plumber({
+                errorHandler: function(error) {
+                    console.log(error);
+                    this.emit('end');
+                }
+            }))
             .pipe(less())
             .pipe(addsrc.prepend('app/Resources/public/css/' + folder + '/jquery-ui.theme.css'))
             .pipe(minify())
