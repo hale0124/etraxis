@@ -23,7 +23,7 @@
         "incenteev/composer-parameter-handler" : "~2.0",
         "simple-bus/symfony-bridge"            : "~4.0",
         "ramsey/uuid"                          : "~3.0",
-        "etraxis/datatables-bundle"            : "0.0.1"
+        "etraxis/datatables-bundle"            : "~1.0"
     },
     "require-dev": {
         "sensio/generator-bundle"              : "~2.3",

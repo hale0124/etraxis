@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "6f7798c998edcc43eec45255be4e25f0",
-    "content-hash": "6bc54ca293cae8a67e0c11133d6d94b1",
+    "hash": "7a4ba0df83bebb2950a57ccdaf4f65a6",
+    "content-hash": "eb35ced242ef9d00734b0c3acfc53622",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1063,16 +1063,16 @@
         },
         {
             "name": "etraxis/datatables-bundle",
-            "version": "0.0.1",
+            "version": "1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/etraxis/datatables-bundle.git",
-                "reference": "20b3dd93745f3f0625dd1afec375b1148672adb7"
+                "reference": "481ec2635ce2f0e868585f975aa0588763b384fc"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/etraxis/datatables-bundle/zipball/20b3dd93745f3f0625dd1afec375b1148672adb7",
-                "reference": "20b3dd93745f3f0625dd1afec375b1148672adb7",
+                "url": "https://api.github.com/repos/etraxis/datatables-bundle/zipball/481ec2635ce2f0e868585f975aa0588763b384fc",
+                "reference": "481ec2635ce2f0e868585f975aa0588763b384fc",
                 "shasum": ""
             },
             "require": {
@@ -1084,10 +1084,19 @@
                 "symfony/http-kernel": "~2.3|~3.0",
                 "symfony/validator": "~2.3|~3.0"
             },
+            "require-dev": {
+                "doctrine/annotations": "~1.2",
+                "doctrine/cache": "~1.5",
+                "fabpot/php-cs-fixer": "~1.10",
+                "phpunit/phpunit": "~4.1"
+            },
             "type": "library",
             "autoload": {
                 "psr-4": {
-                    "DataTables\\": "src/"
+                    "DataTables\\": [
+                        "src/",
+                        "tests/"
+                    ]
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1099,7 +1108,7 @@
                 "datatable",
                 "datatables"
             ],
-            "time": "2015-10-30 04:25:20"
+            "time": "2015-11-07 01:30:03"
         },
         {
             "name": "incenteev/composer-parameter-handler",
