@@ -4,3 +4,13 @@ services:
         class: eTraxis\SimpleBus\Templates\Handler\DeleteTemplateCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Templates\DeleteTemplateCommand }]
         arguments: [ @logger, @doctrine, @security.authorization_checker ]
+
+    command.template.lock:
+        class: eTraxis\SimpleBus\Templates\Handler\LockUnlockTemplateCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Templates\LockTemplateCommand }]
+        arguments: [ @logger, @doctrine ]
+
+    command.template.unlock:
+        class: eTraxis\SimpleBus\Templates\Handler\LockUnlockTemplateCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Templates\UnlockTemplateCommand }]
+        arguments: [ @logger, @doctrine ]
