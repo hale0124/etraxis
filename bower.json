@@ -8,7 +8,7 @@
         "jquery.ui": "1.11.4",
         "blockui": "2.70",
         "jquery-form": "3.51",
-        "datatables": "1.10.9",
-        "datatables-plugins": "1.10.9"
+        "datatables": "1.10.10",
+        "datatables-plugins": "1.10.10"
     }
 }
