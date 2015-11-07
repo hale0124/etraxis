@@ -38,8 +38,8 @@
 
         /**
          * Appends new item.
-         * @param id
-         * @param text
+         * @param {string} id
+         * @param {string} text
          */
         append: function(id, text) {
             $('.panel-body', this.element).append(
@@ -52,7 +52,7 @@
 
         /**
          * Removes specified item.
-         * @param id
+         * @param {string} id
          */
         remove: function(id) {
             $('.panel-body a[data-id="' + id + '"]', this.element).remove();
@@ -67,7 +67,7 @@
 
         /**
          * Selects specified item.
-         * @param id
+         * @param {string} id
          */
         select: function(id) {
             $('.panel-body span.ui-icon-check', this.element)

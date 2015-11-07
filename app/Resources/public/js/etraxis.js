@@ -10,7 +10,7 @@ var eTraxis = window.eTraxis || {};
 /**
  * Blocks UI with specified message.
  *
- * @param message Blocking message.
+ * @param {string} message Blocking message.
  */
 eTraxis.block = function(message) {
     $.blockUI({
@@ -33,9 +33,9 @@ eTraxis.unblock = function() {
 /**
  * Simple message dialog (alternative to JavaScript "alert").
  *
- * @param title   Dialog title.
- * @param message Dialog message.
- * @param onClose Optional handler to call when dialog is closed.
+ * @param {string}   title   Dialog title.
+ * @param {string}   message Dialog message.
+ * @param {function} onClose Optional handler to call when dialog is closed.
  */
 eTraxis.alert = function(title, message, onClose) {
 
@@ -60,9 +60,9 @@ eTraxis.alert = function(title, message, onClose) {
 /**
  * Confirmation dialog (alternative to JavaScript "confirm").
  *
- * @param title     Dialog title.
- * @param message   Dialog message.
- * @param onConfirm Optional handler to call when dialog is closed with confirmation (via "Yes" button).
+ * @param {string}   title     Dialog title.
+ * @param {string}   message   Dialog message.
+ * @param {function} onConfirm Optional handler to call when dialog is closed with confirmation (via "Yes" button).
  */
 eTraxis.confirm = function(title, message, onConfirm) {
 

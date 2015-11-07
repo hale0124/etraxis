@@ -10,7 +10,7 @@
     /**
      * Shortcut to disable UI widgets.
      *
-     * @param {bool} state New state of target widgets.
+     * @param {boolean} state New state of target widgets.
      *
      * @returns {*}
      */
