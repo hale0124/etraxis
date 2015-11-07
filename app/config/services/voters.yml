@@ -7,6 +7,11 @@ services:
         tags: [{ name: security.voter }]
         arguments: [ @etraxis.repository.issues ]
 
+    etraxis.voter.template:
+        class: eTraxis\Voter\TemplateVoter
+        public: false
+        tags: [{ name: security.voter }]
+
     etraxis.voter.user:
         class: eTraxis\Voter\UserVoter
         public: false
