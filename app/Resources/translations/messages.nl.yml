@@ -96,3 +96,8 @@ project.active: Actief
 project.suspended: Geschorst
 project.confirm.delete: 'Ben je zeker dat je dit project wilt verwijderen?'
 project.conflict.name: 'Project met ingevoerde naam bestaat reeds.'
+template.conflict.name: 'Sjabloon met ingevoerde naam bestaat reeds.'
+template.conflict.prefix: 'Sjabloon met ingevoerde voorvoegsel bestaat reeds.'
+state.conflict.name: 'Status met ingevoerde naam bestaat reeds.'
+state.conflict.abbreviation: 'Status met ingevoerde afkorting bestaat reeds.'
+field.conflict.name: 'Veld met ingevoerde naam bestaat reeds.'

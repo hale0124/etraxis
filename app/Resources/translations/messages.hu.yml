@@ -96,3 +96,8 @@ project.active: Aktív
 project.suspended: Felfüggesztve
 project.confirm.delete: 'Biztos törölni szeretné a projektet?'
 project.conflict.name: 'Már létezik ilyen névvel ellátott projekt.'
+template.conflict.name: 'Már létezik ilyen névvel ellátott sablon.'
+template.conflict.prefix: ~
+state.conflict.name: ~
+state.conflict.abbreviation: ~
+field.conflict.name: 'Már létezik ilyen névvel ellátott mező.'

@@ -96,3 +96,8 @@ project.active: Активен
 project.suspended: Преустановен
 project.confirm.delete: 'Сигурен ли сте че искате да изтриете този проект?'
 project.conflict.name: 'Вече същестува проект с въведеното име.'
+template.conflict.name: 'Вече същестува темплейт с въведеното име.'
+template.conflict.prefix: 'Вече същестува темплейт с въведеното представка.'
+state.conflict.name: 'Вече съществува услови с въведеното име.'
+state.conflict.abbreviation: 'Вече съществува услови с въведеното съкращение.'
+field.conflict.name: 'Вече съществува поле с въведеното име.'

@@ -96,3 +96,8 @@ project.active: Actif
 project.suspended: Suspendu
 project.confirm.delete: 'Etes-vous sur de vouloir effacer ce projet?'
 project.conflict.name: 'Il existe déjà un projet portant ce nom.'
+template.conflict.name: 'Il existe déjà un modèle portant ce nom.'
+template.conflict.prefix: 'Il existe déjà un modèle portant ce un préfixe.'
+state.conflict.name: 'Il existe déjà un état portant ce nom.'
+state.conflict.abbreviation: 'Il existe déjà un état portant ce abréviation.'
+field.conflict.name: 'Il existe déjà un champ portant ce nom.'

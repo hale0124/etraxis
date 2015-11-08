@@ -96,3 +96,8 @@ project.active: Aktif
 project.suspended: Askıda
 project.confirm.delete: 'Bu projeyi silmek istediğinizden emin misiniz?'
 project.conflict.name: 'Girilen adda bir proje zaten var.'
+template.conflict.name: ~
+template.conflict.prefix: ~
+state.conflict.name: ~
+state.conflict.abbreviation: ~
+field.conflict.name: 'Girilen adda bir alan zaten var.'

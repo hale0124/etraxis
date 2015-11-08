@@ -96,3 +96,8 @@ project.active: アクティブ
 project.suspended: 保留中
 project.confirm.delete: プロジェクトを削除してよろしいですか？
 project.conflict.name: 入力されたプロジェクトの名前は既に存在しています。
+template.conflict.name: ~
+template.conflict.prefix: ~
+state.conflict.name: ~
+state.conflict.abbreviation: ~
+field.conflict.name: 入力されたフィールドの名前は既に存在しています。

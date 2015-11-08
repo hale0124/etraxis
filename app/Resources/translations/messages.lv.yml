@@ -96,3 +96,8 @@ project.active: Aktīvs
 project.suspended: Atlikts
 project.confirm.delete: 'Vai tiešām vēlaties dzēst šo projektu?'
 project.conflict.name: 'Projekts ar tādu nosaukumu jau eksistē.'
+template.conflict.name: 'Lekāls ar tādu nosaukumu jau eksistē.'
+template.conflict.prefix: 'Lekāls ar tādu priedēkli jau eksistē.'
+state.conflict.name: 'Stāvoklis ar tādu nosaukumu jau eksistē.'
+state.conflict.abbreviation: 'Stāvoklis ar tādu saīsinājumu jau eksistē.'
+field.conflict.name: 'Atribūts ar tādu nosaukumu jau eksistē.'

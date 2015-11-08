@@ -96,3 +96,8 @@ project.active: Aktivní
 project.suspended: Pozastaven
 project.confirm.delete: 'Jste si jisti, že chcete smazat tento projekt?'
 project.conflict.name: 'Projekt se zadaným názvem již existuje.'
+template.conflict.name: 'Šablona se zadaným jménem již existuje.'
+template.conflict.prefix: 'Šablona se zadaným předponou již existuje.'
+state.conflict.name: 'Stav se zadaným jménem již existuje.'
+state.conflict.abbreviation: 'Stav se zadaným zkratkou již existuje.'
+field.conflict.name: 'Pole se zadaným jménem již existuje.'

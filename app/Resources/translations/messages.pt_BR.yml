@@ -96,3 +96,8 @@ project.active: Ativo
 project.suspended: Suspenso
 project.confirm.delete: 'Tem certeza que quer apagar este projeto?'
 project.conflict.name: 'O projeto escolhido já existe.'
+template.conflict.name: 'O template escolhido já existe.'
+template.conflict.prefix: 'O prefixo escolhido já existe.'
+state.conflict.name: 'O estado escolhido já existe.'
+state.conflict.abbreviation: 'O abreviação já existe.'
+field.conflict.name: 'O Campo escolhido já existe.'

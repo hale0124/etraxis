@@ -96,3 +96,8 @@ project.active: Активный
 project.suspended: Заморожен
 project.confirm.delete: 'Вы уверены, что хотите удалить этот проект?'
 project.conflict.name: 'Проект с таким названием уже существует.'
+template.conflict.name: 'Шаблон с таким названием уже существует.'
+template.conflict.prefix: 'Шаблон с таким префиксом уже существует.'
+state.conflict.name: 'Состояние с таким названием уже существует.'
+state.conflict.abbreviation: 'Состояние с таким сокращением уже существует.'
+field.conflict.name: 'Атрибут с таким названием уже существует.'

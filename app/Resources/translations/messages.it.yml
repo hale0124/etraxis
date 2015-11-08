@@ -96,3 +96,8 @@ project.active: Attivo
 project.suspended: Sospeso
 project.confirm.delete: 'Eliminare questo progetto?'
 project.conflict.name: 'Nome progetto già utilizzato.'
+template.conflict.name: 'Un modello con lo stesso nome è già utilizzato.'
+template.conflict.prefix: 'Un modello con lo stesso prefisso è già utilizzato.'
+state.conflict.name: 'Uno stato con lo stesso nome è già utilizzato.'
+state.conflict.abbreviation: 'Uno stato con lo stesso abbreviazione è già utilizzato.'
+field.conflict.name: 'Nome campo già utilizzato.'
