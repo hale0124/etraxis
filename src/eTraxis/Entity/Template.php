@@ -13,6 +13,7 @@ namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 
 /**
  * Template.
@@ -23,6 +24,8 @@ use Doctrine\ORM\Mapping as ORM;
  *                @ORM\UniqueConstraint(name="ix_templates_prefix", columns={"project_id", "template_prefix"})
  *            })
  * @ORM\Entity
+ * @Assert\UniqueEntity(fields={"project", "name"}, message="template.conflict.name")
+ * @Assert\UniqueEntity(fields={"project", "prefix"}, message="template.conflict.prefix")
  */
 class Template
 {
