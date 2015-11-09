@@ -9,19 +9,19 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Validator;
+namespace Symfony\Component\Validator\Constraints;
 
 use eTraxis\Tests\BaseTestCase;
 
 class EntityIdStub
 {
     /**
-     * @eTraxis\Validator\EntityIdConstraint()
+     * @EntityId()
      */
     public $id = null;
 }
 
-class EntityIdConstraintTest extends BaseTestCase
+class EntityIdTest extends BaseTestCase
 {
     public function testEmpty()
     {

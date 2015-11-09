@@ -25,7 +25,7 @@ class UnlockTemplateCommand
 
     /**
      * @Assert\NotBlank()
-     * @eTraxis\Validator\EntityIdConstraint()
+     * @Assert\EntityId()
      */
     public $id;
 }

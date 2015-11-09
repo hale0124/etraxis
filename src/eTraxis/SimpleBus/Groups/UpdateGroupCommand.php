@@ -27,7 +27,7 @@ class UpdateGroupCommand
 
     /**
      * @Assert\NotBlank()
-     * @eTraxis\Validator\EntityIdConstraint()
+     * @Assert\EntityId()
      */
     public $id;
 

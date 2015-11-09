@@ -9,18 +9,17 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Validator;
+namespace Symfony\Component\Validator\Constraints;
 
 use eTraxis\Tests\BaseTestCase;
-use Symfony\Component\Validator\Constraints as Assert;
 
 class AnyStub
 {
     /**
-     * @Assert\NotNull()
-     * @eTraxis\Validator\Any({
-     *     @Assert\LessThanOrEqual(value = "-100"),
-     *     @Assert\GreaterThanOrEqual(value = "100")
+     * @NotNull()
+     * @Any({
+     *     @LessThanOrEqual(value = "-100"),
+     *     @GreaterThanOrEqual(value = "100")
      * })
      */
     public $id = null;

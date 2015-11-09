@@ -30,7 +30,7 @@ class CreateTemplateCommand
     use ObjectInitiationTrait;
 
     /**
-     * @eTraxis\Validator\EntityIdConstraint()
+     * @Assert\EntityId()
      */
     public $project = null;
 

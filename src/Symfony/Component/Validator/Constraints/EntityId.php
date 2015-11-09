@@ -9,16 +9,16 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Validator;
+namespace Symfony\Component\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 
 /**
- * A contraint to check that specified entity ID is valid.
+ * A constraint to check that specified entity ID is valid.
  *
  * @Annotation
  */
-class EntityIdConstraint extends Constraint
+class EntityId extends Constraint
 {
     /** @var string Error message. */
     public $message = 'Invalid ID.';

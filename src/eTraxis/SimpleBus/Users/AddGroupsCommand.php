@@ -26,7 +26,7 @@ class AddGroupsCommand
 
     /**
      * @Assert\NotBlank()
-     * @eTraxis\Validator\EntityIdConstraint()
+     * @Assert\EntityId()
      */
     public $id;
 
@@ -36,7 +36,7 @@ class AddGroupsCommand
      * @Assert\Count(min = "1", max = "100")
      * @Assert\All({
      *     @Assert\NotBlank(),
-     *     @eTraxis\Validator\EntityIdConstraint()
+     *     @Assert\EntityId()
      * })
      */
     public $groups;

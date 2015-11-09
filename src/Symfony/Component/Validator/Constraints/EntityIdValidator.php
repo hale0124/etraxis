@@ -9,15 +9,15 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Validator;
+namespace Symfony\Component\Validator\Constraints;
 
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 /**
- * A validator for entity ID contraint.
+ * A validator for entity ID constraint.
  */
-class EntityIdConstraintValidator extends ConstraintValidator
+class EntityIdValidator extends ConstraintValidator
 {
     /**
      * {@inheritdoc}

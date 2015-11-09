@@ -9,9 +9,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Validator;
-
-use Symfony\Component\Validator\Constraints\Composite;
+namespace Symfony\Component\Validator\Constraints;
 
 /**
  * A constraint to check that specified collection of constraints has at least one valid.
@@ -21,22 +19,6 @@ use Symfony\Component\Validator\Constraints\Composite;
 class Any extends Composite
 {
     public $constraints = [];
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getDefaultOption()
-    {
-        return 'constraints';
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getRequiredOptions()
-    {
-        return ['constraints'];
-    }
 
     /**
      * {@inheritdoc}
