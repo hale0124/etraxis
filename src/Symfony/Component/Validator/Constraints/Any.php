@@ -23,6 +23,22 @@ class Any extends Composite
     /**
      * {@inheritdoc}
      */
+    public function getDefaultOption()
+    {
+        return 'constraints';
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getRequiredOptions()
+    {
+        return ['constraints'];
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     protected function getCompositeOption()
     {
         return 'constraints';
