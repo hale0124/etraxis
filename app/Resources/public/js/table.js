@@ -216,7 +216,8 @@ var datatables_language = window.datatables_language || {};
 
                 // Create new and unique context menu.
                 var menuId = 'menu-' + Date.now() + '-' + $table.prop('id');
-                $('body', $table).append('<ul id="' + menuId + '" class="ui-front context-menu"></ul>');
+                $('body > ul.context-menu').remove();
+                $('body').append('<ul id="' + menuId + '" class="ui-front context-menu"></ul>');
                 var $menu = $('#' + menuId);
 
                 // Append menu items.
