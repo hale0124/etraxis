@@ -24,3 +24,13 @@ services:
         class: eTraxis\SimpleBus\Templates\Handler\LockUnlockTemplateCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Templates\UnlockTemplateCommand }]
         arguments: [ @logger, @doctrine ]
+
+    command.template.add_permissions:
+        class: eTraxis\SimpleBus\Templates\Handler\AddRemoveTemplatePermissionsCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Templates\AddTemplatePermissionsCommand }]
+        arguments: [ @logger, @doctrine ]
+
+    command.template.remove_permissions:
+        class: eTraxis\SimpleBus\Templates\Handler\AddRemoveTemplatePermissionsCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Templates\RemoveTemplatePermissionsCommand }]
+        arguments: [ @logger, @doctrine ]
