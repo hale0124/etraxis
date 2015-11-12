@@ -15,7 +15,6 @@
         "doctrine/doctrine-fixtures-bundle"    : "~2.2",
         "doctrine/doctrine-migrations-bundle"  : "~1.0",
         "doctrine/migrations"                  : "~1.0",
-        "symfony/assetic-bundle"               : "~2.3",
         "symfony/swiftmailer-bundle"           : "~2.3",
         "symfony/monolog-bundle"               : "~2.4",
         "sensio/distribution-bundle"           : "~4.0",
