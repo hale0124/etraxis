@@ -19,16 +19,16 @@
         "symfony/swiftmailer-bundle"           : "~2.3",
         "symfony/monolog-bundle"               : "~2.4",
         "sensio/distribution-bundle"           : "~4.0",
-        "sensio/framework-extra-bundle"        : "^3.0.2",
+        "sensio/framework-extra-bundle"        : "~3.0",
         "incenteev/composer-parameter-handler" : "~2.0",
         "simple-bus/symfony-bridge"            : "~4.0",
         "ramsey/uuid"                          : "~3.0",
         "etraxis/datatables-bundle"            : "~1.0"
     },
     "require-dev": {
-        "sensio/generator-bundle"              : "~2.3",
+        "sensio/generator-bundle"              : "~2.3|~3.0",
         "phpunit/phpunit"                      : "~5.0",
-        "fabpot/php-cs-fixer"                  : "~1.9"
+        "fabpot/php-cs-fixer"                  : "~1.10"
     },
     "autoload": {
         "psr-4": {
