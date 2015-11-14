@@ -11,27 +11,28 @@
 
 namespace eTraxis\Voter;
 
-use eTraxis\Entity\Template;
+use eTraxis\Entity\Event;
+use eTraxis\Entity\State;
 use eTraxis\Entity\User;
-use eTraxis\Repository\IssuesRepository;
+use eTraxis\Repository\EventsRepository;
 use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
- * Voter for "Template" objects.
+ * Voter for "State" objects.
  */
-class TemplateVoter extends AbstractVoter
+class StateVoter extends AbstractVoter
 {
-    const DELETE = 'template.delete';
+    const DELETE = 'state.delete';
 
     protected $repository;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   IssuesRepository $repository
+     * @param   EventsRepository $repository
      */
-    public function __construct(IssuesRepository $repository)
+    public function __construct(EventsRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -41,7 +42,7 @@ class TemplateVoter extends AbstractVoter
      */
     protected function getSupportedClasses()
     {
-        return ['eTraxis\Entity\Template'];
+        return ['eTraxis\Entity\State'];
     }
 
     /**
@@ -59,7 +60,7 @@ class TemplateVoter extends AbstractVoter
      */
     protected function isGranted($attribute, $object, $user = null)
     {
-        /** @var Template $object */
+        /** @var State $object */
         switch ($attribute) {
 
             case self::DELETE:
@@ -71,10 +72,10 @@ class TemplateVoter extends AbstractVoter
     }
 
     /**
-     * Checks whether current user can delete specified template.
+     * Checks whether current user can delete specified state.
      *
-     * @param   Template $object Template.
-     * @param   User     $user   Current user.
+     * @param   State $object State.
+     * @param   User  $user   Current user.
      *
      * @return  bool
      */
@@ -89,17 +90,18 @@ class TemplateVoter extends AbstractVoter
             return false;
         }
 
-        // Number of issues created by the template.
-        $query = $this->repository->createQueryBuilder('i')
-            ->select('COUNT(i.id)')
-            ->leftJoin('i.state', 's')
-            ->where('s.templateId = :id')
+        // Number of issues appeared in the state.
+        $query = $this->repository->createQueryBuilder('e')
+            ->select('COUNT(e.id)')
+            ->where('e.parameter = :id')
+            ->andWhere('e.type IN (:types)')
             ->setParameter('id', $object->getId())
+            ->setParameter('types', [Event::ISSUE_CREATED, Event::ISSUE_REOPENED, Event::STATE_CHANGED])
         ;
 
         $count = $query->getQuery()->getSingleScalarResult();
 
-        // Can't delete if at least one issue has been created by this template.
+        // Can't delete if at least one issue has been appeared in this state.
         return $count == 0;
     }
 }

@@ -6,6 +6,7 @@ imports:
     - { resource: services/voters.yml }
     - { resource: simplebus/command.group.yml }
     - { resource: simplebus/command.project.yml }
+    - { resource: simplebus/command.state.yml }
     - { resource: simplebus/command.template.yml }
     - { resource: simplebus/command.user.yml }
     - { resource: simplebus/middleware.yml }
