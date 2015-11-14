@@ -36,15 +36,15 @@ class UpdateProjectCommand
      * @Assert\NotBlank()
      * @Assert\Length(max = "25")
      */
-    public $name = null;
+    public $name;
 
     /**
      * @Assert\Length(max = "100")
      */
-    public $description = null;
+    public $description;
 
     /**
      * @Assert\NotNull()
      */
-    public $suspended = null;
+    public $suspended;
 }

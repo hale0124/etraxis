@@ -33,5 +33,5 @@ class ResetPasswordCommand
     /**
      * @Assert\NotBlank()
      */
-    public $password = null;
+    public $password;
 }

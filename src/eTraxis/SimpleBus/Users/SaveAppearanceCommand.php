@@ -36,17 +36,17 @@ class SaveAppearanceCommand
      * @Assert\NotNull()
      * @Assert\Choice(callback = {"eTraxis\Collection\Locale", "getAllKeys"})
      */
-    public $locale = null;
+    public $locale;
 
     /**
      * @Assert\NotNull()
      * @Assert\Choice(callback = {"eTraxis\Collection\Theme", "getAllKeys"})
      */
-    public $theme = null;
+    public $theme;
 
     /**
      * @Assert\NotNull()
      * @Assert\Choice(callback = {"eTraxis\Collection\Timezone", "getAllKeys"})
      */
-    public $timezone = null;
+    public $timezone;
 }

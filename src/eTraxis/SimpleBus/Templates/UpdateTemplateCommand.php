@@ -39,31 +39,31 @@ class UpdateTemplateCommand
      * @Assert\NotBlank()
      * @Assert\Length(max = "50")
      */
-    public $name = null;
+    public $name;
 
     /**
      * @Assert\NotBlank()
      * @Assert\Length(max = "3")
      */
-    public $prefix = null;
+    public $prefix;
 
     /**
      * @Assert\Length(max = "100")
      */
-    public $description = null;
+    public $description;
 
     /**
      * @Assert\Range(min = "1", max = "100")
      */
-    public $criticalAge = null;
+    public $criticalAge;
 
     /**
      * @Assert\Range(min = "1", max = "100")
      */
-    public $frozenTime = null;
+    public $frozenTime;
 
     /**
      * @Assert\NotNull()
      */
-    public $guestAccess = null;
+    public $guestAccess;
 }

@@ -43,51 +43,51 @@ class UpdateUserCommand
      * @Assert\Length(max = "112")
      * @Assert\Regex(pattern="/^[a-z0-9_\.\-]+$/i", message="user.invalid.username");
      */
-    public $username = null;
+    public $username;
 
     /**
      * @Assert\NotBlank()
      * @Assert\Length(max = "64")
      */
-    public $fullname = null;
+    public $fullname;
 
     /**
      * @Assert\NotBlank()
      * @Assert\Length(max = "50")
      * @Assert\Email()
      */
-    public $email = null;
+    public $email;
 
     /**
      * @Assert\Length(max = "100")
      */
-    public $description = null;
+    public $description;
 
     /**
      * @Assert\NotNull()
      * @Assert\Choice(callback = {"eTraxis\Collection\Locale", "getAllKeys"})
      */
-    public $locale = null;
+    public $locale;
 
     /**
      * @Assert\NotNull()
      * @Assert\Choice(callback = {"eTraxis\Collection\Theme", "getAllKeys"})
      */
-    public $theme = null;
+    public $theme;
 
     /**
      * @Assert\NotNull()
      * @Assert\Choice(callback = {"eTraxis\Collection\Timezone", "getAllKeys"})
      */
-    public $timezone = null;
+    public $timezone;
 
     /**
      * @Assert\NotNull()
      */
-    public $admin = null;
+    public $admin;
 
     /**
      * @Assert\NotNull()
      */
-    public $disabled = null;
+    public $disabled;
 }
