@@ -4,3 +4,8 @@ services:
         class: eTraxis\SimpleBus\States\Handler\DeleteStateCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\DeleteStateCommand }]
         arguments: [ @logger, @doctrine, @security.authorization_checker ]
+
+    command.state.set_initial:
+        class: eTraxis\SimpleBus\States\Handler\SetInitialStateCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\SetInitialStateCommand }]
+        arguments: [ @logger, @doctrine ]
