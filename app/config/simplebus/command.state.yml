@@ -19,3 +19,13 @@ services:
         class: eTraxis\SimpleBus\States\Handler\SetInitialStateCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\SetInitialStateCommand }]
         arguments: [ @logger, @doctrine ]
+
+    command.state.add_transitions:
+        class: eTraxis\SimpleBus\States\Handler\AddRemoveStateTransitionsCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\AddStateTransitionsCommand }]
+        arguments: [ @logger, @doctrine ]
+
+    command.state.remove_transitions:
+        class: eTraxis\SimpleBus\States\Handler\AddRemoveStateTransitionsCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\RemoveStateTransitionsCommand }]
+        arguments: [ @logger, @doctrine ]

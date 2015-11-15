@@ -17,6 +17,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use eTraxis\Collection\SystemRole;
 use eTraxis\Entity\State;
 use eTraxis\Entity\StateAssignee;
+use eTraxis\Entity\StateGroupTransition;
 use eTraxis\Entity\StateRoleTransition;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -97,9 +98,20 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
             ->setGroup($this->getReference('group:crew'))
         ;
 
-        $transition = new StateRoleTransition();
+        $group_transition = new StateGroupTransition();
 
-        $transition
+        $group_transition
+            ->setFromStateId($state_new->getId())
+            ->setToStateId($state_delivered->getId())
+            ->setGroupId($this->getReference('group:managers')->getId())
+            ->setFromState($state_new)
+            ->setToState($state_delivered)
+            ->setGroup($this->getReference('group:managers'))
+        ;
+
+        $role_transition = new StateRoleTransition();
+
+        $role_transition
             ->setFromStateId($state_new->getId())
             ->setToStateId($state_delivered->getId())
             ->setRole(SystemRole::RESPONSIBLE)
@@ -108,7 +120,8 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
         ;
 
         $manager->persist($assignee);
-        $manager->persist($transition);
+        $manager->persist($group_transition);
+        $manager->persist($role_transition);
         $manager->flush();
     }
 
