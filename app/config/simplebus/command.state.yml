@@ -1,5 +1,15 @@
 services:
 
+    command.state.create:
+        class: eTraxis\SimpleBus\States\Handler\CreateStateCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\CreateStateCommand }]
+        arguments: [ @logger, @validator, @translator, @doctrine ]
+
+    command.state.update:
+        class: eTraxis\SimpleBus\States\Handler\UpdateStateCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\UpdateStateCommand }]
+        arguments: [ @logger, @validator, @translator, @doctrine ]
+
     command.state.delete:
         class: eTraxis\SimpleBus\States\Handler\DeleteStateCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\DeleteStateCommand }]

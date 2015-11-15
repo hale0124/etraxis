@@ -13,6 +13,7 @@ namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 
 /**
  * State.
@@ -23,6 +24,8 @@ use Doctrine\ORM\Mapping as ORM;
  *                @ORM\UniqueConstraint(name="ix_states_abbr", columns={"template_id", "state_abbr"})
  *            })
  * @ORM\Entity
+ * @Assert\UniqueEntity(fields={"template", "name"}, message="state.conflict.name")
+ * @Assert\UniqueEntity(fields={"template", "abbreviation"}, message="state.conflict.abbreviation")
  */
 class State
 {

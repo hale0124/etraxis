@@ -25,6 +25,7 @@ class CreateTemplateCommandTest extends BaseTestCase
 
     public function testSuccess()
     {
+        $project     = $this->getProject();
         $name        = 'Maintenance';
         $prefix      = 'M';
         $description = 'Nimbus technical maintenance';
@@ -36,7 +37,7 @@ class CreateTemplateCommandTest extends BaseTestCase
         $this->assertNull($template);
 
         $command = new CreateTemplateCommand([
-            'project'     => $this->getProject()->getId(),
+            'project'     => $project->getId(),
             'name'        => $name,
             'prefix'      => $prefix,
             'description' => $description,
@@ -48,6 +49,7 @@ class CreateTemplateCommandTest extends BaseTestCase
         $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => $name]);
 
         $this->assertInstanceOf('eTraxis\Entity\Template', $template);
+        $this->assertEquals($project->getId(), $template->getProject()->getId());
         $this->assertEquals($name, $template->getName());
         $this->assertEquals($prefix, $template->getPrefix());
         $this->assertEquals($description, $template->getDescription());
