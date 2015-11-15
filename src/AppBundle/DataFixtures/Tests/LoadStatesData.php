@@ -100,6 +100,7 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
 
         $group_transition = new StateGroupTransition();
 
+        /** @noinspection PhpParamsInspection */
         $group_transition
             ->setFromStateId($state_new->getId())
             ->setToStateId($state_delivered->getId())
