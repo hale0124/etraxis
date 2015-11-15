@@ -29,3 +29,13 @@ services:
         class: eTraxis\SimpleBus\States\Handler\AddRemoveStateTransitionsCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\RemoveStateTransitionsCommand }]
         arguments: [ @logger, @doctrine ]
+
+    command.state.add_assignees:
+        class: eTraxis\SimpleBus\States\Handler\AddRemoveStateAssigneesCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\AddStateAssigneesCommand }]
+        arguments: [ @logger, @doctrine ]
+
+    command.state.remove_assignees:
+        class: eTraxis\SimpleBus\States\Handler\AddRemoveStateAssigneesCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\RemoveStateAssigneesCommand }]
+        arguments: [ @logger, @doctrine ]
