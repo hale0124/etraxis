@@ -1,1 +1,6 @@
 services:
+
+    command.state.delete:
+        class: eTraxis\SimpleBus\States\Handler\DeleteStateCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\DeleteStateCommand }]
+        arguments: [ @logger, @doctrine, @security.authorization_checker ]
