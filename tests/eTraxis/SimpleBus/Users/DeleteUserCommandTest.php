@@ -34,7 +34,7 @@ class DeleteUserCommandTest extends BaseTestCase
      */
     public function testForbidden()
     {
-        $this->loginAs('fry');
+        $this->loginAs('scruffy');
 
         $user = $this->findUser('scruffy');
         $this->assertNotNull($user);
