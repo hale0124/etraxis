@@ -13,10 +13,8 @@ namespace eTraxis\Voter;
 
 use eTraxis\Entity\Event;
 use eTraxis\Entity\State;
-use eTraxis\Entity\User;
 use eTraxis\Repository\EventsRepository;
 use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Voter for "State" objects.
@@ -64,7 +62,7 @@ class StateVoter extends AbstractVoter
         switch ($attribute) {
 
             case self::DELETE:
-                return $this->isDeleteGranted($object, $user);
+                return $this->isDeleteGranted($object);
 
             default:
                 return false;
@@ -72,24 +70,14 @@ class StateVoter extends AbstractVoter
     }
 
     /**
-     * Checks whether current user can delete specified state.
+     * Checks whether specified state can be deleted.
      *
      * @param   State $object State.
-     * @param   User  $user   Current user.
      *
      * @return  bool
      */
-    protected function isDeleteGranted($object, $user = null)
+    protected function isDeleteGranted($object)
     {
-        /** @var User $user */
-        if (!$user instanceof UserInterface) {
-            return false;
-        }
-
-        if (!$user->isAdmin()) {
-            return false;
-        }
-
         // Number of issues appeared in the state.
         $query = $this->repository->createQueryBuilder('e')
             ->select('COUNT(e.id)')

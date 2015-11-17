@@ -12,10 +12,8 @@
 namespace eTraxis\Voter;
 
 use eTraxis\Entity\Template;
-use eTraxis\Entity\User;
 use eTraxis\Repository\IssuesRepository;
 use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
-use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
  * Voter for "Template" objects.
@@ -63,7 +61,7 @@ class TemplateVoter extends AbstractVoter
         switch ($attribute) {
 
             case self::DELETE:
-                return $this->isDeleteGranted($object, $user);
+                return $this->isDeleteGranted($object);
 
             default:
                 return false;
@@ -71,24 +69,14 @@ class TemplateVoter extends AbstractVoter
     }
 
     /**
-     * Checks whether current user can delete specified template.
+     * Checks whether specified template can be deleted.
      *
      * @param   Template $object Template.
-     * @param   User     $user   Current user.
      *
      * @return  bool
      */
-    protected function isDeleteGranted($object, $user = null)
+    protected function isDeleteGranted($object)
     {
-        /** @var User $user */
-        if (!$user instanceof UserInterface) {
-            return false;
-        }
-
-        if (!$user->isAdmin()) {
-            return false;
-        }
-
         // Number of issues created by the template.
         $query = $this->repository->createQueryBuilder('i')
             ->select('COUNT(i.id)')

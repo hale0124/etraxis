@@ -65,9 +65,7 @@ class ProjectVoterTest extends BaseTestCase
         /** @var \eTraxis\Entity\Project $project */
         $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
 
-        $hubert = $this->findUser('hubert');
-
-        $this->assertFalse($this->object->isGranted('UNKNOWN', $project, $hubert));
+        $this->assertFalse($this->object->isGranted('UNKNOWN', $project));
     }
 
     public function testDelete()
@@ -81,12 +79,7 @@ class ProjectVoterTest extends BaseTestCase
         $this->assertInstanceOf('eTraxis\Entity\Project', $project);
         $this->assertInstanceOf('eTraxis\Entity\Project', $empty);
 
-        $fry    = $this->findUser('fry');
-        $hubert = $this->findUser('hubert');
-
         $this->assertFalse($this->object->isGranted(ProjectVoter::DELETE, $project));
-        $this->assertFalse($this->object->isGranted(ProjectVoter::DELETE, $project, $hubert));
-        $this->assertTrue($this->object->isGranted(ProjectVoter::DELETE, $empty, $hubert));
-        $this->assertFalse($this->object->isGranted(ProjectVoter::DELETE, $empty, $fry));
+        $this->assertTrue($this->object->isGranted(ProjectVoter::DELETE, $empty));
     }
 }

@@ -66,9 +66,7 @@ class StateVoterTest extends BaseTestCase
         /** @var \eTraxis\Entity\State $state */
         $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
 
-        $hubert = $this->findUser('hubert');
-
-        $this->assertFalse($this->object->isGranted('UNKNOWN', $state, $hubert));
+        $this->assertFalse($this->object->isGranted('UNKNOWN', $state));
     }
 
     public function testDelete()
@@ -98,12 +96,7 @@ class StateVoterTest extends BaseTestCase
         $this->assertInstanceOf('eTraxis\Entity\State', $state);
         $this->assertInstanceOf('eTraxis\Entity\State', $empty);
 
-        $fry    = $this->findUser('fry');
-        $hubert = $this->findUser('hubert');
-
         $this->assertFalse($this->object->isGranted(StateVoter::DELETE, $state));
-        $this->assertFalse($this->object->isGranted(StateVoter::DELETE, $state, $hubert));
-        $this->assertTrue($this->object->isGranted(StateVoter::DELETE, $empty, $hubert));
-        $this->assertFalse($this->object->isGranted(StateVoter::DELETE, $empty, $fry));
+        $this->assertTrue($this->object->isGranted(StateVoter::DELETE, $empty));
     }
 }

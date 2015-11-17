@@ -66,9 +66,7 @@ class TemplateVoterTest extends BaseTestCase
         /** @var \eTraxis\Entity\Template $template */
         $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
 
-        $hubert = $this->findUser('hubert');
-
-        $this->assertFalse($this->object->isGranted('UNKNOWN', $template, $hubert));
+        $this->assertFalse($this->object->isGranted('UNKNOWN', $template));
     }
 
     public function testDelete()
@@ -101,12 +99,7 @@ class TemplateVoterTest extends BaseTestCase
         $this->assertInstanceOf('eTraxis\Entity\Template', $template);
         $this->assertInstanceOf('eTraxis\Entity\Template', $empty);
 
-        $fry    = $this->findUser('fry');
-        $hubert = $this->findUser('hubert');
-
         $this->assertFalse($this->object->isGranted(TemplateVoter::DELETE, $template));
-        $this->assertFalse($this->object->isGranted(TemplateVoter::DELETE, $template, $hubert));
-        $this->assertTrue($this->object->isGranted(TemplateVoter::DELETE, $empty, $hubert));
-        $this->assertFalse($this->object->isGranted(TemplateVoter::DELETE, $empty, $fry));
+        $this->assertTrue($this->object->isGranted(TemplateVoter::DELETE, $empty));
     }
 }

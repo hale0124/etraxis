@@ -83,10 +83,10 @@ class UserVoter extends AbstractVoter
                 return $this->isDisableGranted($object, $user);
 
             case self::ENABLE:
-                return $this->isEnableGranted($object, $user);
+                return $this->isEnableGranted($object);
 
             case self::UNLOCK:
-                return $this->isUnlockGranted($object, $user);
+                return $this->isUnlockGranted($object);
 
             default:
                 return false;
@@ -113,7 +113,7 @@ class UserVoter extends AbstractVoter
     }
 
     /**
-     * Checks whether current user can delete specified user.
+     * Checks whether specified user can be deleted.
      *
      * @param   User $object Subject user.
      * @param   User $user   Current user.
@@ -124,10 +124,6 @@ class UserVoter extends AbstractVoter
     {
         /** @var User $user */
         if (!$user instanceof UserInterface) {
-            return false;
-        }
-
-        if (!$user->isAdmin()) {
             return false;
         }
 
@@ -161,7 +157,7 @@ class UserVoter extends AbstractVoter
     }
 
     /**
-     * Checks whether current user can disable specified user.
+     * Checks whether specified user can be disabled.
      *
      * @param   User $object Subject user.
      * @param   User $user   Current user.
@@ -175,10 +171,6 @@ class UserVoter extends AbstractVoter
             return false;
         }
 
-        if (!$user->isAdmin()) {
-            return false;
-        }
-
         // Can't disable himself.
         if ($object->getId() == $user->getId()) {
             return false;
@@ -188,46 +180,26 @@ class UserVoter extends AbstractVoter
     }
 
     /**
-     * Checks whether current user can enable specified user.
+     * Checks whether specified user can be enabled.
      *
      * @param   User $object Subject user.
-     * @param   User $user   Current user.
      *
      * @return  bool
      */
-    protected function isEnableGranted($object, $user = null)
+    protected function isEnableGranted($object)
     {
-        /** @var User $user */
-        if (!$user instanceof UserInterface) {
-            return false;
-        }
-
-        if (!$user->isAdmin()) {
-            return false;
-        }
-
         return $object->isDisabled();
     }
 
     /**
-     * Checks whether current user can unlock specified user.
+     * Checks whether specified user can be unlocked.
      *
      * @param   User $object Subject user.
-     * @param   User $user   Current user.
      *
      * @return  bool
      */
-    protected function isUnlockGranted($object, $user = null)
+    protected function isUnlockGranted($object)
     {
-        /** @var User $user */
-        if (!$user instanceof UserInterface) {
-            return false;
-        }
-
-        if (!$user->isAdmin()) {
-            return false;
-        }
-
         return !$object->isAccountNonLocked();
     }
 }
