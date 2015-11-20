@@ -24,6 +24,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Filter
 {
+    // Constraints.
+    const MAX_NAME = 50;
+
     // Filter type.
     const TYPE_ALL_PROJECTS  = 1;
     const TYPE_ALL_TEMPLATES = 2;

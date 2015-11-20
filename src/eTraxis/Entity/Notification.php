@@ -24,6 +24,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Notification
 {
+    // Constraints.
+    const MAX_NAME        = 25;
+    const MAX_CARBON_COPY = 50;
+
     // Notification types.
     const TYPE_ALL      = 1;
     const TYPE_PROJECT  = 2;

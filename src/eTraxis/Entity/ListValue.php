@@ -27,6 +27,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ListValue
 {
+    // Constraints.
+    const MAX_VALUE = 50;
+
     /**
      * @var int Field ID.
      *

@@ -29,6 +29,7 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  */
 class User implements AdvancedUserInterface
 {
+    // Constraints.
     const MAX_USERNAME    = 100;
     const MAX_FULLNAME    = 64;
     const MAX_EMAIL       = 50;

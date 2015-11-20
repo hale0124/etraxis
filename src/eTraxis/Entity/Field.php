@@ -25,6 +25,11 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Field
 {
+    // Constraints.
+    const MAX_NAME        = 50;
+    const MAX_DESCRIPTION = 1000;
+    const MAX_REGEX       = 500;
+
     // Field type.
     const TYPE_NUMBER   = 1;
     const TYPE_STRING   = 2;

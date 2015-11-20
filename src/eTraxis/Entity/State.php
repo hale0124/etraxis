@@ -29,6 +29,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  */
 class State
 {
+    // Constraints.
+    const MAX_NAME         = 50;
+    const MAX_ABBREVIATION = 50;
+
     // State types.
     const TYPE_INITIAL   = 1;
     const TYPE_TRANSIENT = 2;

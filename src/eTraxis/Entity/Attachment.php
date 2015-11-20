@@ -24,6 +24,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Attachment
 {
+    // Constraints.
+    const MAX_NAME = 100;
+    const MAX_TYPE = 100;
+
     /**
      * @var int Unique ID.
      *

@@ -29,6 +29,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  */
 class Template
 {
+    // Constraints.
+    const MAX_NAME        = 50;
+    const MAX_PREFIX      = 3;
+    const MAX_DESCRIPTION = 100;
+
     // Template access permissions.
     const PERMIT_CREATE_ISSUE         = 0x0001;
     const PERMIT_MODIFY_ISSUE         = 0x0002;

@@ -27,6 +27,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class StringValue
 {
+    // Constraints.
+    const MAX_VALUE = 250;
+
     /**
      * @var int Unique ID.
      *

@@ -24,6 +24,10 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Reminder
 {
+    // Constraints.
+    const MAX_NAME    = 25;
+    const MAX_SUBJECT = 100;
+
     /**
      * @var int Unique ID.
      *

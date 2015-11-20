@@ -25,6 +25,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Issue
 {
+    // Constraints.
+    const MAX_SUBJECT = 250;
+
     /**
      * @var int Unique ID.
      *

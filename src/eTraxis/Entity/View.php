@@ -24,6 +24,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class View
 {
+    // Constraints.
+    const MAX_NAME = 50;
+
     /**
      * @var int Unique ID.
      *

@@ -27,6 +27,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  */
 class Project
 {
+    // Constraints.
     const MAX_NAME        = 25;
     const MAX_DESCRIPTION = 100;
 

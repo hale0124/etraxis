@@ -27,6 +27,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  */
 class Group
 {
+    // Constraints.
     const MAX_NAME        = 25;
     const MAX_DESCRIPTION = 100;
 
