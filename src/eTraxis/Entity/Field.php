@@ -98,7 +98,7 @@ class Field
     private $indexNumber;
 
     /**
-     * @var int Unix Epoch timestamp when the field has been removed from its template (NULL while field is present).
+     * @var int Unix Epoch timestamp when the field has been removed from its template ("0" while field is present).
      *
      * @ORM\Column(name="removal_time", type="integer")
      */

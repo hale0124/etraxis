@@ -1,0 +1,6 @@
+services:
+
+    command.field.delete:
+        class: eTraxis\SimpleBus\Fields\Handler\DeleteFieldCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\DeleteFieldCommand }]
+        arguments: [ @logger, @doctrine ]

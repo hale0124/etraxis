@@ -4,6 +4,7 @@ imports:
     - { resource: services/listeners.yml }
     - { resource: services/repositories.yml }
     - { resource: services/voters.yml }
+    - { resource: simplebus/command.field.yml }
     - { resource: simplebus/command.group.yml }
     - { resource: simplebus/command.project.yml }
     - { resource: simplebus/command.state.yml }

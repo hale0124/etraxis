@@ -36,7 +36,7 @@ class DeleteStateCommandTest extends BaseTestCase
 
         $this->loginAs('hubert');
 
-        /** @var \eTraxis\Entity\Template $template */
+        /** @var \eTraxis\Entity\State $state */
         $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Cancelled']);
         $this->assertNotNull($state);
 
