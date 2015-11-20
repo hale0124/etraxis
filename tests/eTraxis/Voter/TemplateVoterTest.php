@@ -42,7 +42,7 @@ class TemplateVoterTest extends BaseTestCase
 
     public function testGetSupportedClasses()
     {
-        /** @var \eTraxis\Entity\Template $template */
+        /** @var Template $template */
         $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
 
         $expected = [
@@ -55,7 +55,7 @@ class TemplateVoterTest extends BaseTestCase
     public function testGetSupportedAttributes()
     {
         $expected = [
-            TemplateVoter::DELETE,
+            Template::DELETE,
         ];
 
         $this->assertEquals($expected, $this->object->getSupportedAttributes());
@@ -63,7 +63,7 @@ class TemplateVoterTest extends BaseTestCase
 
     public function testUnsupportedAttribute()
     {
-        /** @var \eTraxis\Entity\Template $template */
+        /** @var Template $template */
         $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
 
         $this->assertFalse($this->object->isGranted('UNKNOWN', $template));
@@ -99,7 +99,7 @@ class TemplateVoterTest extends BaseTestCase
         $this->assertInstanceOf('eTraxis\Entity\Template', $template);
         $this->assertInstanceOf('eTraxis\Entity\Template', $empty);
 
-        $this->assertFalse($this->object->isGranted(TemplateVoter::DELETE, $template));
-        $this->assertTrue($this->object->isGranted(TemplateVoter::DELETE, $empty));
+        $this->assertFalse($this->object->isGranted(Template::DELETE, $template));
+        $this->assertTrue($this->object->isGranted(Template::DELETE, $empty));
     }
 }

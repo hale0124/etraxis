@@ -11,6 +11,7 @@
 
 namespace eTraxis\Voter;
 
+use eTraxis\Entity\Project;
 use eTraxis\Tests\BaseTestCase;
 use eTraxis\Traits\ClassAccessTrait;
 
@@ -41,7 +42,7 @@ class ProjectVoterTest extends BaseTestCase
 
     public function testGetSupportedClasses()
     {
-        /** @var \eTraxis\Entity\Project $project */
+        /** @var Project $project */
         $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
 
         $expected = [
@@ -54,7 +55,7 @@ class ProjectVoterTest extends BaseTestCase
     public function testGetSupportedAttributes()
     {
         $expected = [
-            ProjectVoter::DELETE,
+            Project::DELETE,
         ];
 
         $this->assertEquals($expected, $this->object->getSupportedAttributes());
@@ -62,7 +63,7 @@ class ProjectVoterTest extends BaseTestCase
 
     public function testUnsupportedAttribute()
     {
-        /** @var \eTraxis\Entity\Project $project */
+        /** @var Project $project */
         $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
 
         $this->assertFalse($this->object->isGranted('UNKNOWN', $project));
@@ -70,16 +71,16 @@ class ProjectVoterTest extends BaseTestCase
 
     public function testDelete()
     {
-        /** @var \eTraxis\Entity\Project $project */
+        /** @var Project $project */
         $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
 
-        /** @var \eTraxis\Entity\Project $project */
+        /** @var Project $project */
         $empty = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'eTraxis 1.0']);
 
         $this->assertInstanceOf('eTraxis\Entity\Project', $project);
         $this->assertInstanceOf('eTraxis\Entity\Project', $empty);
 
-        $this->assertFalse($this->object->isGranted(ProjectVoter::DELETE, $project));
-        $this->assertTrue($this->object->isGranted(ProjectVoter::DELETE, $empty));
+        $this->assertFalse($this->object->isGranted(Project::DELETE, $project));
+        $this->assertTrue($this->object->isGranted(Project::DELETE, $empty));
     }
 }

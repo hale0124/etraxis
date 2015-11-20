@@ -11,6 +11,7 @@
 
 namespace eTraxis\Voter;
 
+use eTraxis\Entity\User;
 use eTraxis\Tests\BaseTestCase;
 use eTraxis\Traits\ClassAccessTrait;
 
@@ -53,11 +54,11 @@ class UserVoterTest extends BaseTestCase
     public function testGetSupportedAttributes()
     {
         $expected = [
-            UserVoter::SET_EXPIRED_PASSWORD,
-            UserVoter::DELETE,
-            UserVoter::DISABLE,
-            UserVoter::ENABLE,
-            UserVoter::UNLOCK,
+            User::SET_EXPIRED_PASSWORD,
+            User::DELETE,
+            User::DISABLE,
+            User::ENABLE,
+            User::UNLOCK,
         ];
 
         $this->assertEquals($expected, $this->object->getSupportedAttributes());
@@ -74,7 +75,7 @@ class UserVoterTest extends BaseTestCase
     {
         $hubert = $this->findUser('hubert');
 
-        $this->assertFalse($this->object->isGranted(UserVoter::SET_EXPIRED_PASSWORD, $hubert));
+        $this->assertFalse($this->object->isGranted(User::SET_EXPIRED_PASSWORD, $hubert));
 
         $hubert->setPasswordSetAt(time() - 86400 * 2);
 
@@ -82,10 +83,10 @@ class UserVoterTest extends BaseTestCase
         $repository = $this->doctrine->getRepository('eTraxis:Event');
 
         $this->object = new UserVoterStub($repository, 3);
-        $this->assertFalse($this->object->isGranted(UserVoter::SET_EXPIRED_PASSWORD, $hubert));
+        $this->assertFalse($this->object->isGranted(User::SET_EXPIRED_PASSWORD, $hubert));
 
         $this->object = new UserVoterStub($repository, 1);
-        $this->assertTrue($this->object->isGranted(UserVoter::SET_EXPIRED_PASSWORD, $hubert));
+        $this->assertTrue($this->object->isGranted(User::SET_EXPIRED_PASSWORD, $hubert));
     }
 
     public function testDelete()
@@ -98,10 +99,10 @@ class UserVoterTest extends BaseTestCase
         $this->assertInstanceOf('eTraxis\Entity\User', $leela);
         $this->assertInstanceOf('eTraxis\Entity\User', $scruffy);
 
-        $this->assertFalse($this->object->isGranted(UserVoter::DELETE, $leela, $hubert));
-        $this->assertTrue($this->object->isGranted(UserVoter::DELETE, $scruffy, $hubert));
-        $this->assertFalse($this->object->isGranted(UserVoter::DELETE, $scruffy, $scruffy));
-        $this->assertFalse($this->object->isGranted(UserVoter::DELETE, $scruffy));
+        $this->assertFalse($this->object->isGranted(User::DELETE, $leela, $hubert));
+        $this->assertTrue($this->object->isGranted(User::DELETE, $scruffy, $hubert));
+        $this->assertFalse($this->object->isGranted(User::DELETE, $scruffy, $scruffy));
+        $this->assertFalse($this->object->isGranted(User::DELETE, $scruffy));
     }
 
     public function testDisable()
@@ -114,10 +115,10 @@ class UserVoterTest extends BaseTestCase
         $this->assertInstanceOf('eTraxis\Entity\User', $bender);
         $this->assertInstanceOf('eTraxis\Entity\User', $francine);
 
-        $this->assertFalse($this->object->isGranted(UserVoter::DISABLE, $francine, $hubert));
-        $this->assertTrue($this->object->isGranted(UserVoter::DISABLE, $bender, $hubert));
-        $this->assertFalse($this->object->isGranted(UserVoter::DISABLE, $bender, $bender));
-        $this->assertFalse($this->object->isGranted(UserVoter::DISABLE, $bender));
+        $this->assertFalse($this->object->isGranted(User::DISABLE, $francine, $hubert));
+        $this->assertTrue($this->object->isGranted(User::DISABLE, $bender, $hubert));
+        $this->assertFalse($this->object->isGranted(User::DISABLE, $bender, $bender));
+        $this->assertFalse($this->object->isGranted(User::DISABLE, $bender));
     }
 
     public function testEnable()
@@ -128,8 +129,8 @@ class UserVoterTest extends BaseTestCase
         $this->assertInstanceOf('eTraxis\Entity\User', $hubert);
         $this->assertInstanceOf('eTraxis\Entity\User', $francine);
 
-        $this->assertFalse($this->object->isGranted(UserVoter::ENABLE, $hubert));
-        $this->assertTrue($this->object->isGranted(UserVoter::ENABLE, $francine));
+        $this->assertFalse($this->object->isGranted(User::ENABLE, $hubert));
+        $this->assertTrue($this->object->isGranted(User::ENABLE, $francine));
     }
 
     public function testUnlock()
@@ -143,7 +144,7 @@ class UserVoterTest extends BaseTestCase
         $bender->setAuthAttempts(3);
         $bender->setLockedUntil(time() + 60);
 
-        $this->assertTrue($this->object->isGranted(UserVoter::UNLOCK, $bender));
-        $this->assertFalse($this->object->isGranted(UserVoter::UNLOCK, $hubert));
+        $this->assertTrue($this->object->isGranted(User::UNLOCK, $bender));
+        $this->assertFalse($this->object->isGranted(User::UNLOCK, $hubert));
     }
 }

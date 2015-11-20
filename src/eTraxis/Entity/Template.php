@@ -34,6 +34,9 @@ class Template
     const MAX_PREFIX      = 3;
     const MAX_DESCRIPTION = 100;
 
+    // Actions.
+    const DELETE = 'template.delete';
+
     // Template access permissions.
     const PERMIT_CREATE_ISSUE         = 0x0001;
     const PERMIT_MODIFY_ISSUE         = 0x0002;

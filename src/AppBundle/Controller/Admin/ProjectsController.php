@@ -11,12 +11,12 @@
 
 namespace AppBundle\Controller\Admin;
 
+use eTraxis\Entity\Project;
 use eTraxis\Form\ProjectForm;
 use eTraxis\Service\ExportCsvQuery;
 use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\SimpleBus\Projects;
 use eTraxis\Traits\ContainerTrait;
-use eTraxis\Voter\ProjectVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -176,7 +176,7 @@ class ProjectsController extends Controller
             return $this->render('admin/projects/tab_details.html.twig', [
                 'project' => $project,
                 'can'     => [
-                    'delete' => $authChecker->isGranted(ProjectVoter::DELETE, $project),
+                    'delete' => $authChecker->isGranted(Project::DELETE, $project),
                 ],
             ]);
         }

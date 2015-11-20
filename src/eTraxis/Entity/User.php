@@ -35,6 +35,13 @@ class User implements AdvancedUserInterface
     const MAX_EMAIL       = 50;
     const MAX_DESCRIPTION = 100;
 
+    // Actions.
+    const SET_EXPIRED_PASSWORD = 'user.set_expired_password';
+    const DELETE               = 'user.delete';
+    const DISABLE              = 'user.disable';
+    const ENABLE               = 'user.enable';
+    const UNLOCK               = 'user.unlock';
+
     /**
      * @var int Unique ID.
      *

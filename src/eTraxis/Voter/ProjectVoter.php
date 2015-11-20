@@ -20,8 +20,6 @@ use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
  */
 class ProjectVoter extends AbstractVoter
 {
-    const DELETE = 'project.delete';
-
     protected $repository;
 
     /**
@@ -48,7 +46,7 @@ class ProjectVoter extends AbstractVoter
     protected function getSupportedAttributes()
     {
         return [
-            self::DELETE,
+            Project::DELETE,
         ];
     }
 
@@ -60,7 +58,7 @@ class ProjectVoter extends AbstractVoter
         /** @var Project $object */
         switch ($attribute) {
 
-            case self::DELETE:
+            case Project::DELETE:
                 return $this->isDeleteGranted($object);
 
             default:

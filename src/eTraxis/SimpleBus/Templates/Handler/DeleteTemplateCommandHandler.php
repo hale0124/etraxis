@@ -11,8 +11,8 @@
 
 namespace eTraxis\SimpleBus\Templates\Handler;
 
+use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\Templates\DeleteTemplateCommand;
-use eTraxis\Voter\TemplateVoter;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -64,7 +64,7 @@ class DeleteTemplateCommandHandler
             throw new NotFoundHttpException('Unknown template.');
         }
 
-        if (!$this->security->isGranted(TemplateVoter::DELETE, $entity)) {
+        if (!$this->security->isGranted(Template::DELETE, $entity)) {
             throw new AccessDeniedException();
         }
 

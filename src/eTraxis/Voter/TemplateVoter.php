@@ -20,8 +20,6 @@ use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
  */
 class TemplateVoter extends AbstractVoter
 {
-    const DELETE = 'template.delete';
-
     protected $repository;
 
     /**
@@ -48,7 +46,7 @@ class TemplateVoter extends AbstractVoter
     protected function getSupportedAttributes()
     {
         return [
-            self::DELETE,
+            Template::DELETE,
         ];
     }
 
@@ -60,7 +58,7 @@ class TemplateVoter extends AbstractVoter
         /** @var Template $object */
         switch ($attribute) {
 
-            case self::DELETE:
+            case Template::DELETE:
                 return $this->isDeleteGranted($object);
 
             default:

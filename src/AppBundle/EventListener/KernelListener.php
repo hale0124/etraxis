@@ -11,7 +11,7 @@
 
 namespace AppBundle\EventListener;
 
-use eTraxis\Voter\UserVoter;
+use eTraxis\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -150,7 +150,7 @@ class KernelListener implements EventSubscriberInterface
         }
 
         // Redirect to "Set expired password" page.
-        if ($this->authorization_checker->isGranted(UserVoter::SET_EXPIRED_PASSWORD, $this->token_storage->getToken()->getUser())) {
+        if ($this->authorization_checker->isGranted(User::SET_EXPIRED_PASSWORD, $this->token_storage->getToken()->getUser())) {
 
             $url = $this->router->generate('set_expired_password');
 

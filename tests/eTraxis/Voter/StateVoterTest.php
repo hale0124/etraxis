@@ -42,7 +42,7 @@ class StateVoterTest extends BaseTestCase
 
     public function testGetSupportedClasses()
     {
-        /** @var \eTraxis\Entity\State $state */
+        /** @var State $state */
         $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
 
         $expected = [
@@ -55,7 +55,7 @@ class StateVoterTest extends BaseTestCase
     public function testGetSupportedAttributes()
     {
         $expected = [
-            StateVoter::DELETE,
+            State::DELETE,
         ];
 
         $this->assertEquals($expected, $this->object->getSupportedAttributes());
@@ -63,7 +63,7 @@ class StateVoterTest extends BaseTestCase
 
     public function testUnsupportedAttribute()
     {
-        /** @var \eTraxis\Entity\State $state */
+        /** @var State $state */
         $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
 
         $this->assertFalse($this->object->isGranted('UNKNOWN', $state));
@@ -96,7 +96,7 @@ class StateVoterTest extends BaseTestCase
         $this->assertInstanceOf('eTraxis\Entity\State', $state);
         $this->assertInstanceOf('eTraxis\Entity\State', $empty);
 
-        $this->assertFalse($this->object->isGranted(StateVoter::DELETE, $state));
-        $this->assertTrue($this->object->isGranted(StateVoter::DELETE, $empty));
+        $this->assertFalse($this->object->isGranted(State::DELETE, $state));
+        $this->assertTrue($this->object->isGranted(State::DELETE, $empty));
     }
 }

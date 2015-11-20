@@ -11,13 +11,13 @@
 
 namespace AppBundle\Controller\Admin;
 
+use eTraxis\Entity\User;
 use eTraxis\Form\UserForm;
 use eTraxis\Service\ExportCsvQuery;
 use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\SimpleBus\Users;
 use eTraxis\Traits\ContainerTrait;
-use eTraxis\Voter\UserVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -180,10 +180,10 @@ class UsersController extends Controller
             return $this->render('admin/users/tab_details.html.twig', [
                 'user' => $user,
                 'can'  => [
-                    'delete'  => $authChecker->isGranted(UserVoter::DELETE, $user),
-                    'disable' => $authChecker->isGranted(UserVoter::DISABLE, $user),
-                    'enable'  => $authChecker->isGranted(UserVoter::ENABLE, $user),
-                    'unlock'  => $authChecker->isGranted(UserVoter::UNLOCK, $user),
+                    'delete'  => $authChecker->isGranted(User::DELETE, $user),
+                    'disable' => $authChecker->isGranted(User::DISABLE, $user),
+                    'enable'  => $authChecker->isGranted(User::ENABLE, $user),
+                    'unlock'  => $authChecker->isGranted(User::UNLOCK, $user),
                 ],
             ]);
         }

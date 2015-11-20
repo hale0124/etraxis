@@ -11,8 +11,8 @@
 
 namespace eTraxis\SimpleBus\Projects\Handler;
 
+use eTraxis\Entity\Project;
 use eTraxis\SimpleBus\Projects\DeleteProjectCommand;
-use eTraxis\Voter\ProjectVoter;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -64,7 +64,7 @@ class DeleteProjectCommandHandler
             throw new NotFoundHttpException('Unknown project.');
         }
 
-        if (!$this->security->isGranted(ProjectVoter::DELETE, $entity)) {
+        if (!$this->security->isGranted(Project::DELETE, $entity)) {
             throw new AccessDeniedException();
         }
 

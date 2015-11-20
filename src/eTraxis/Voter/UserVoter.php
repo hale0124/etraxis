@@ -22,12 +22,6 @@ use Symfony\Component\Security\Core\User\UserInterface;
  */
 class UserVoter extends AbstractVoter
 {
-    const SET_EXPIRED_PASSWORD = 'user.set_expired_password';
-    const DELETE               = 'user.delete';
-    const DISABLE              = 'user.disable';
-    const ENABLE               = 'user.enable';
-    const UNLOCK               = 'user.unlock';
-
     protected $repository;
     protected $password_expiration;
 
@@ -57,11 +51,11 @@ class UserVoter extends AbstractVoter
     protected function getSupportedAttributes()
     {
         return [
-            self::SET_EXPIRED_PASSWORD,
-            self::DELETE,
-            self::DISABLE,
-            self::ENABLE,
-            self::UNLOCK,
+            User::SET_EXPIRED_PASSWORD,
+            User::DELETE,
+            User::DISABLE,
+            User::ENABLE,
+            User::UNLOCK,
         ];
     }
 
@@ -73,19 +67,19 @@ class UserVoter extends AbstractVoter
         /** @var User $object */
         switch ($attribute) {
 
-            case self::SET_EXPIRED_PASSWORD:
+            case User::SET_EXPIRED_PASSWORD:
                 return $this->isSetExpiredPasswordGranted($object);
 
-            case self::DELETE:
+            case User::DELETE:
                 return $this->isDeleteGranted($object, $user);
 
-            case self::DISABLE:
+            case User::DISABLE:
                 return $this->isDisableGranted($object, $user);
 
-            case self::ENABLE:
+            case User::ENABLE:
                 return $this->isEnableGranted($object);
 
-            case self::UNLOCK:
+            case User::UNLOCK:
                 return $this->isUnlockGranted($object);
 
             default:
