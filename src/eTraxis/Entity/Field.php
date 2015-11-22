@@ -12,6 +12,7 @@
 namespace eTraxis\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 
 /**
  * Field.
@@ -22,6 +23,7 @@ use Doctrine\ORM\Mapping as ORM;
  *                @ORM\UniqueConstraint(name="ix_fields_order", columns={"state_id", "field_order", "removal_time"})
  *            })
  * @ORM\Entity
+ * @Assert\UniqueEntity(fields={"template", "state", "name", "removedAt"}, message="field.conflict.name", ignoreNull=false)
  */
 class Field
 {
