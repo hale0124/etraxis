@@ -11,8 +11,6 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
 /**
  * Updates specified "issue" field.
  */
