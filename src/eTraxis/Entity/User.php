@@ -230,9 +230,9 @@ class User implements AdvancedUserInterface
         $this->resetToken          = null;
         $this->resetTokenExpiresAt = 0;
 
-        $this->isAdmin    = false;
-        $this->isDisabled = false;
-        $this->isLdap     = false;
+        $this->isAdmin    = 0;
+        $this->isDisabled = 0;
+        $this->isLdap     = 0;
 
         $this->authAttempts = 0;
         $this->lockedUntil  = 0;
