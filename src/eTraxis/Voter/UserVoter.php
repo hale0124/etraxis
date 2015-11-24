@@ -94,7 +94,7 @@ class UserVoter extends AbstractVoter
      *
      * @return  bool
      */
-    protected function isSetExpiredPasswordGranted($object = null)
+    protected function isSetExpiredPasswordGranted($object)
     {
         // Deny if passwords do not expire at all.
         if ($this->password_expiration === null) {
