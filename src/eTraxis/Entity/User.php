@@ -108,21 +108,21 @@ class User implements AdvancedUserInterface
     private $resetTokenExpiresAt;
 
     /**
-     * @var bool Whether user has administration privileges.
+     * @var int Whether user has administration privileges.
      *
      * @ORM\Column(name="is_admin", type="integer")
      */
     private $isAdmin;
 
     /**
-     * @var bool Whether user is disabled by administrator.
+     * @var int Whether user is disabled by administrator.
      *
      * @ORM\Column(name="is_disabled", type="integer")
      */
     private $isDisabled;
 
     /**
-     * @var bool Whether account is internal (FALSE), or from LDAP server (TRUE).
+     * @var int Whether account is internal (FALSE), or from LDAP server (TRUE).
      *
      * @ORM\Column(name="is_ldapuser", type="integer")
      */

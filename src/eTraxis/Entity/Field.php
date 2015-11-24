@@ -107,14 +107,14 @@ class Field
     private $removedAt;
 
     /**
-     * @var bool Whether the field is required.
+     * @var int Whether the field is required.
      *
      * @ORM\Column(name="is_required", type="integer")
      */
     private $isRequired;
 
     /**
-     * @var bool Whether the field is accessible for non-authenticated user.
+     * @var int Whether the field is accessible for non-authenticated user.
      *
      * @ORM\Column(name="guest_access", type="integer")
      */
@@ -148,7 +148,7 @@ class Field
     private $addSeparator;
 
     /**
-     * @var bool Whether to add this field in email notifications.
+     * @var int Whether to add this field in email notifications.
      *
      * @ORM\Column(name="show_in_emails", type="integer")
      */

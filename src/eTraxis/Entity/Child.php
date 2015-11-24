@@ -38,7 +38,7 @@ class Child
     private $childId;
 
     /**
-     * @var bool Whether the child is a dependency for the parent.
+     * @var int Whether the child is a dependency for the parent.
      *
      * @ORM\Column(name="is_dependency", type="integer")
      */

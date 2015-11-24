@@ -109,14 +109,14 @@ class Template
     private $description;
 
     /**
-     * @var bool Whether the template is locked for edition.
+     * @var int Whether the template is locked for edition.
      *
      * @ORM\Column(name="is_locked", type="integer")
      */
     private $isLocked;
 
     /**
-     * @var bool Whether an issue, created using this template, is accessible for non-authenticated user.
+     * @var int Whether an issue, created using this template, is accessible for non-authenticated user.
      *
      * @ORM\Column(name="guest_access", type="integer")
      */

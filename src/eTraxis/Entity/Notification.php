@@ -79,7 +79,7 @@ class Notification
     private $carbonCopy;
 
     /**
-     * @var bool Whether the notification is enabled or disabled.
+     * @var int Whether the notification is enabled or disabled.
      *
      * @ORM\Column(name="is_activated", type="integer")
      */

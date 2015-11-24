@@ -65,8 +65,8 @@ class Project
     private $createdAt;
 
     /**
-     * @var bool Whether the project is suspended.
-     *           When project is suspended, its issues are read-only, and new issues cannot be created.
+     * @var int Whether the project is suspended.
+     *          When project is suspended, its issues are read-only, and new issues cannot be created.
      *
      * @ORM\Column(name="is_suspended", type="integer")
      */

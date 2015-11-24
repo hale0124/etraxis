@@ -67,7 +67,7 @@ class FieldValue
     private $valueId;
 
     /**
-     * @var bool Whether this value is current one for this field of the issue.
+     * @var int Whether this value is current one for this field of the issue.
      *
      * @ORM\Column(name="is_latest", type="integer")
      */

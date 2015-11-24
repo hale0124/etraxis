@@ -66,7 +66,7 @@ class Attachment
     private $size;
 
     /**
-     * @var bool Whether attachment is removed.
+     * @var int Whether attachment is removed.
      *
      * @ORM\Column(name="is_removed", type="integer")
      */

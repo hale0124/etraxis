@@ -41,7 +41,7 @@ class Comment
     private $eventId;
 
     /**
-     * @var bool Whether comment is confidential.
+     * @var int Whether comment is confidential.
      *
      * @ORM\Column(name="is_confidential", type="integer")
      */
