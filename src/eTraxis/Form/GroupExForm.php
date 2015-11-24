@@ -40,11 +40,11 @@ class GroupExForm extends GroupForm
 
         // Project.
         $builder->add('project', 'entity', [
-            'label'       => 'project',
-            'required'    => false,
-            'class'       => 'eTraxis:Project',
-            'property'    => 'name',
-            'placeholder' => $this->translator->trans('group.global'),
+            'label'        => 'project',
+            'required'     => false,
+            'class'        => 'eTraxis:Project',
+            'choice_label' => 'name',
+            'placeholder'  => $this->translator->trans('group.global'),
         ]);
     }
 }
