@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9c7a46f38c8739ba1f6b22a7938d78f1",
-    "content-hash": "619fee8e85307507456dee11b3aa78ac",
+    "hash": "4b3854cad20f263f27eb923002a1825e",
+    "content-hash": "742b83e5f51c1a6cee8dc42136dca3f4",
     "packages": [
         {
             "name": "beberlei/assert",
@@ -1838,23 +1838,23 @@
         },
         {
             "name": "symfony/symfony",
-            "version": "v2.7.6",
+            "version": "v2.7.7",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/symfony.git",
-                "reference": "66b2e9662c44d478b69e48278aa54079a006eb42"
+                "reference": "cc69dbd24b4b2e6de60b2414ef95da2794f459a2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/symfony/zipball/66b2e9662c44d478b69e48278aa54079a006eb42",
-                "reference": "66b2e9662c44d478b69e48278aa54079a006eb42",
+                "url": "https://api.github.com/repos/symfony/symfony/zipball/cc69dbd24b4b2e6de60b2414ef95da2794f459a2",
+                "reference": "cc69dbd24b4b2e6de60b2414ef95da2794f459a2",
                 "shasum": ""
             },
             "require": {
                 "doctrine/common": "~2.4",
                 "php": ">=5.3.9",
                 "psr/log": "~1.0",
-                "twig/twig": "~1.20|~2.0"
+                "twig/twig": "~1.23|~2.0"
             },
             "replace": {
                 "symfony/asset": "self.version",
@@ -1934,6 +1934,9 @@
                 ],
                 "files": [
                     "src/Symfony/Component/Intl/Resources/stubs/functions.php"
+                ],
+                "exclude-from-classmap": [
+                    "**/Tests/"
                 ]
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -1955,7 +1958,7 @@
             "keywords": [
                 "framework"
             ],
-            "time": "2015-10-27 19:07:24"
+            "time": "2015-11-23 11:58:08"
         },
         {
             "name": "twig/twig",
@@ -3059,6 +3062,61 @@
             ],
             "description": "This bundle generates code for you",
             "time": "2015-11-10 13:25:32"
+        },
+        {
+            "name": "symfony/phpunit-bridge",
+            "version": "v2.7.7",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/symfony/phpunit-bridge.git",
+                "reference": "e960e64acbed50e49818eb78840486c8d7fe1bed"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/symfony/phpunit-bridge/zipball/e960e64acbed50e49818eb78840486c8d7fe1bed",
+                "reference": "e960e64acbed50e49818eb78840486c8d7fe1bed",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.9"
+            },
+            "suggest": {
+                "symfony/debug": "For tracking deprecated interfaces usages at runtime with DebugClassLoader"
+            },
+            "type": "symfony-bridge",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "2.7-dev"
+                }
+            },
+            "autoload": {
+                "files": [
+                    "bootstrap.php"
+                ],
+                "psr-4": {
+                    "Symfony\\Bridge\\PhpUnit\\": ""
+                },
+                "exclude-from-classmap": [
+                    "/Tests/"
+                ]
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Nicolas Grekas",
+                    "email": "p@tchwork.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
+                }
+            ],
+            "description": "Symfony PHPUnit Bridge",
+            "homepage": "https://symfony.com",
+            "time": "2015-11-06 10:15:01"
         }
     ],
     "aliases": [],
