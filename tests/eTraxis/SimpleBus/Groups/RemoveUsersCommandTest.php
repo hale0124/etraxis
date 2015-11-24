@@ -19,7 +19,7 @@ class RemoveUsersCommandTest extends BaseTestCase
     public function testSuccess()
     {
         /** @var \eTraxis\Repository\GroupsRepository $repository */
-        $repository = $this->doctrine->getEntityManager()->getRepository('eTraxis:Group');
+        $repository = $this->doctrine->getManager()->getRepository('eTraxis:Group');
 
         /** @var \eTraxis\Entity\Group $group */
         $group = $repository->findOneBy(['name' => 'Staff']);

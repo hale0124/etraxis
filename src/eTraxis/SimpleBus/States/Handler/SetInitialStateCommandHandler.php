@@ -56,7 +56,8 @@ class SetInitialStateCommandHandler
             throw new NotFoundHttpException('Unknown state.');
         }
 
-        $em = $this->doctrine->getEntityManager();
+        /** @var \Doctrine\ORM\EntityManager $em */
+        $em = $this->doctrine->getManager();
         $em->beginTransaction();
 
         $query = $em->createQuery('

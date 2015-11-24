@@ -19,7 +19,7 @@ class AddGroupsCommandTest extends BaseTestCase
     public function testSuccess()
     {
         /** @var \eTraxis\Repository\UsersRepository $repository */
-        $repository = $this->doctrine->getEntityManager()->getRepository('eTraxis:User');
+        $repository = $this->doctrine->getManager()->getRepository('eTraxis:User');
 
         $user = $this->findUser('hubert');
 

@@ -38,7 +38,8 @@ class EnableUsersCommandHandler
      */
     public function handle(EnableUsersCommand $command)
     {
-        $em = $this->doctrine->getEntityManager();
+        /** @var \Doctrine\ORM\EntityManager $em */
+        $em = $this->doctrine->getManager();
 
         $query = $em->createQuery('
             UPDATE eTraxis:User u

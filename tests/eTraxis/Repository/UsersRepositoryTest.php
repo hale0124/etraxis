@@ -18,7 +18,7 @@ class UsersRepositoryTest extends BaseTestCase
     public function testGetUserGroupsFound()
     {
         /** @var UsersRepository $repository */
-        $repository = $this->doctrine->getEntityManager()->getRepository('eTraxis:User');
+        $repository = $this->doctrine->getManager()->getRepository('eTraxis:User');
 
         $user = $this->findUser('hubert');
 
@@ -41,7 +41,7 @@ class UsersRepositoryTest extends BaseTestCase
     public function testGetUserGroupsNotFound()
     {
         /** @var UsersRepository $repository */
-        $repository = $this->doctrine->getEntityManager()->getRepository('eTraxis:User');
+        $repository = $this->doctrine->getManager()->getRepository('eTraxis:User');
 
         $result = $repository->getUserGroups($this->getMaxId());
 
@@ -53,7 +53,7 @@ class UsersRepositoryTest extends BaseTestCase
     public function testGetOtherGroupsFound()
     {
         /** @var UsersRepository $repository */
-        $repository = $this->doctrine->getEntityManager()->getRepository('eTraxis:User');
+        $repository = $this->doctrine->getManager()->getRepository('eTraxis:User');
 
         $user = $this->findUser('hubert');
 
@@ -75,7 +75,7 @@ class UsersRepositoryTest extends BaseTestCase
     public function testGetOtherGroupsNotFound()
     {
         /** @var UsersRepository $repository */
-        $repository = $this->doctrine->getEntityManager()->getRepository('eTraxis:User');
+        $repository = $this->doctrine->getManager()->getRepository('eTraxis:User');
 
         $result = $repository->getOtherGroups($this->getMaxId());
 

@@ -50,7 +50,8 @@ class DisableUsersCommandHandler
             return $id != $user->getId();
         });
 
-        $em = $this->doctrine->getEntityManager();
+        /** @var \Doctrine\ORM\EntityManager $em */
+        $em = $this->doctrine->getManager();
 
         $query = $em->createQuery('
             UPDATE eTraxis:User u

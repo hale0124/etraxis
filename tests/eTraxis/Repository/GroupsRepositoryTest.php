@@ -18,7 +18,7 @@ class GroupsRepositoryTest extends BaseTestCase
     public function testGetGroupMembersFound()
     {
         /** @var GroupsRepository $repository */
-        $repository = $this->doctrine->getEntityManager()->getRepository('eTraxis:Group');
+        $repository = $this->doctrine->getManager()->getRepository('eTraxis:Group');
 
         /** @var \eTraxis\Entity\Group $group */
         $group = $repository->findOneBy(['name' => 'Staff']);
@@ -45,7 +45,7 @@ class GroupsRepositoryTest extends BaseTestCase
     public function testGetGroupMembersNotFound()
     {
         /** @var GroupsRepository $repository */
-        $repository = $this->doctrine->getEntityManager()->getRepository('eTraxis:Group');
+        $repository = $this->doctrine->getManager()->getRepository('eTraxis:Group');
 
         $result = $repository->getGroupMembers($this->getMaxId());
 
@@ -57,7 +57,7 @@ class GroupsRepositoryTest extends BaseTestCase
     public function testGetGroupNonMembersFound()
     {
         /** @var GroupsRepository $repository */
-        $repository = $this->doctrine->getEntityManager()->getRepository('eTraxis:Group');
+        $repository = $this->doctrine->getManager()->getRepository('eTraxis:Group');
 
         /** @var \eTraxis\Entity\Group $group */
         $group = $repository->findOneBy(['name' => 'Staff']);
@@ -86,7 +86,7 @@ class GroupsRepositoryTest extends BaseTestCase
     public function testGetGroupNonMembersNotFound()
     {
         /** @var GroupsRepository $repository */
-        $repository = $this->doctrine->getEntityManager()->getRepository('eTraxis:Group');
+        $repository = $this->doctrine->getManager()->getRepository('eTraxis:Group');
 
         $result = $repository->getGroupNonMembers($this->getMaxId());
 

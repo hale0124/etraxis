@@ -73,7 +73,8 @@ class AddRemoveStateTransitionsCommandHandler
             return;
         }
 
-        $em = $this->doctrine->getEntityManager();
+        /** @var \Doctrine\ORM\EntityManager $em */
+        $em = $this->doctrine->getManager();
         $em->beginTransaction();
 
         if (array_key_exists($command->group, SystemRole::getCollection())) {
