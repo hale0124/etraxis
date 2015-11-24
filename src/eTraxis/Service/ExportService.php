@@ -36,7 +36,7 @@ class ExportService implements ExportInterface
                 $item  = str_replace('"', '""', $item, $count);
                 $pos   = mb_strpos($item, $delimiter);
 
-                return ($count != 0 || $pos !== false) ? '"' . $item . '"' : $item;
+                return ($count !== 0 || $pos !== false) ? '"' . $item . '"' : $item;
             };
 
             foreach ($data as $row) {
