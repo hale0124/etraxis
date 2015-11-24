@@ -14,6 +14,7 @@ return Symfony\CS\Config\Config::create()
 
         // SYMFONY_LEVEL
         '-concat_without_spaces',
+        '-empty_return',
         '-phpdoc_params',
         '-phpdoc_separation',
         '-phpdoc_to_comment',
