@@ -547,8 +547,8 @@ class Template
      */
     public function getFields()
     {
-        return $this->fields->filter(function(Field $field) {
-            return $field->getStateId() == null;
+        return $this->fields->filter(function (Field $field) {
+            return $field->getStateId() === null;
         });
     }
 }
