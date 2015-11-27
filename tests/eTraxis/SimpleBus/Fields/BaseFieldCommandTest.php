@@ -1,0 +1,266 @@
+<?php
+
+//----------------------------------------------------------------------
+//
+//  Copyright (C) 2015 Artem Rodygin
+//
+//  You should have received a copy of the GNU General Public License
+//  along with the file. If not, see <http://www.gnu.org/licenses/>.
+//
+//----------------------------------------------------------------------
+
+namespace eTraxis\SimpleBus\Fields;
+
+use eTraxis\Entity\Field;
+use eTraxis\SimpleBus\Fields\Handler\BaseFieldCommandHandler;
+use eTraxis\Tests\BaseTestCase;
+use eTraxis\Traits\ClassAccessTrait;
+
+/**
+ * @method  Field create($command)
+ * @method  Field update($command)
+ */
+class FieldCommandStubHandler extends BaseFieldCommandHandler
+{
+    use ClassAccessTrait;
+}
+
+class BaseFieldCommandTest extends BaseTestCase
+{
+    public function testCreateByTemplateSuccess()
+    {
+        /** @var \eTraxis\Entity\Template $state */
+        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+
+        $this->assertNotNull($template);
+
+        $command = new CreateFieldBaseCommand([
+            'template'     => $template->getId(),
+            'name'         => 'Priority',
+            'description'  => 'Urgency level',
+            'required'     => true,
+            'guestAccess'  => false,
+            'showInEmails' => false,
+        ]);
+
+        $handler = new FieldCommandStubHandler(
+            $this->logger,
+            $this->validator,
+            $this->translator,
+            $this->doctrine
+        );
+
+        $field = $handler->create($command);
+
+        $this->assertInstanceOf('\eTraxis\Entity\Field', $field);
+        $this->assertEquals($template->getId(), $field->getTemplate()->getId());
+        $this->assertNull($field->getState());
+        $this->assertEquals('Priority', $field->getName());
+        $this->assertEquals('Urgency level', $field->getDescription());
+        $this->assertTrue($field->isRequired());
+        $this->assertFalse($field->hasGuestAccess());
+        $this->assertFalse($field->getShowInEmails());
+        $this->assertEquals(1, $field->getIndexNumber());
+    }
+
+    public function testCreateByStateSuccess()
+    {
+        /** @var \eTraxis\Entity\State $state */
+        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'New']);
+
+        $this->assertNotNull($state);
+
+        $command = new CreateFieldBaseCommand([
+            'state'        => $state->getId(),
+            'name'         => 'Priority',
+            'description'  => 'Urgency level',
+            'required'     => true,
+            'guestAccess'  => false,
+            'showInEmails' => false,
+        ]);
+
+        $handler = new FieldCommandStubHandler(
+            $this->logger,
+            $this->validator,
+            $this->translator,
+            $this->doctrine
+        );
+
+        $field = $handler->create($command);
+
+        $this->assertInstanceOf('\eTraxis\Entity\Field', $field);
+        $this->assertEquals($state->getTemplateId(), $field->getTemplate()->getId());
+        $this->assertEquals($state->getId(), $field->getState()->getId());
+        $this->assertEquals('Priority', $field->getName());
+        $this->assertEquals('Urgency level', $field->getDescription());
+        $this->assertTrue($field->isRequired());
+        $this->assertFalse($field->hasGuestAccess());
+        $this->assertFalse($field->getShowInEmails());
+        $this->assertEquals(5, $field->getIndexNumber());
+    }
+
+    /**
+     * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Unknown template.
+     */
+    public function testCreateByTemplateNotFound()
+    {
+        $command = new CreateFieldBaseCommand([
+            'template'     => $this->getMaxId(),
+            'name'         => 'Priority',
+            'description'  => 'Urgency level',
+            'required'     => true,
+            'guestAccess'  => false,
+            'showInEmails' => false,
+        ]);
+
+        $handler = new FieldCommandStubHandler(
+            $this->logger,
+            $this->validator,
+            $this->translator,
+            $this->doctrine
+        );
+
+        $handler->create($command);
+    }
+
+    /**
+     * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Unknown state.
+     */
+    public function testCreateByStateNotFound()
+    {
+        $command = new CreateFieldBaseCommand([
+            'state'        => $this->getMaxId(),
+            'name'         => 'Priority',
+            'description'  => 'Urgency level',
+            'required'     => true,
+            'guestAccess'  => false,
+            'showInEmails' => false,
+        ]);
+
+        $handler = new FieldCommandStubHandler(
+            $this->logger,
+            $this->validator,
+            $this->translator,
+            $this->doctrine
+        );
+
+        $handler->create($command);
+    }
+
+    /**
+     * @expectedException \eTraxis\SimpleBus\CommandException
+     */
+    public function testCreateConflict()
+    {
+        /** @var \eTraxis\Entity\State $state */
+        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'New']);
+
+        $this->assertNotNull($state);
+
+        $command = new CreateFieldBaseCommand([
+            'state'        => $state->getId(),
+            'name'         => 'Crew',
+            'required'     => true,
+            'guestAccess'  => false,
+            'showInEmails' => false,
+        ]);
+
+        $handler = new FieldCommandStubHandler(
+            $this->logger,
+            $this->validator,
+            $this->translator,
+            $this->doctrine
+        );
+
+        $handler->create($command);
+    }
+
+    public function testUpdateSuccess()
+    {
+        /** @var Field $field */
+        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Crew']);
+
+        $this->assertNotNull($field);
+
+        $command = new UpdateFieldBaseCommand([
+            'id'           => $field->getId(),
+            'name'         => 'Team',
+            'description'  => 'New description',
+            'required'     => false,
+            'guestAccess'  => true,
+            'showInEmails' => true,
+        ]);
+
+        $handler = new FieldCommandStubHandler(
+            $this->logger,
+            $this->validator,
+            $this->translator,
+            $this->doctrine
+        );
+
+        $entity = $handler->update($command);
+
+        $this->assertInstanceOf('\eTraxis\Entity\Field', $entity);
+        $this->assertEquals('Team', $entity->getName());
+        $this->assertEquals('New description', $entity->getDescription());
+        $this->assertFalse($entity->isRequired());
+        $this->assertTrue($entity->hasGuestAccess());
+        $this->assertTrue($entity->getShowInEmails());
+    }
+
+    /**
+     * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Unknown field.
+     */
+    public function testUpdateNotFound()
+    {
+        $command = new UpdateFieldBaseCommand([
+            'id'           => $this->getMaxId(),
+            'name'         => 'Team',
+            'description'  => 'New description',
+            'required'     => false,
+            'guestAccess'  => true,
+            'showInEmails' => true,
+        ]);
+
+        $handler = new FieldCommandStubHandler(
+            $this->logger,
+            $this->validator,
+            $this->translator,
+            $this->doctrine
+        );
+
+        $handler->update($command);
+    }
+
+    /**
+     * @expectedException \eTraxis\SimpleBus\CommandException
+     */
+    public function testUpdateConflict()
+    {
+        /** @var Field $field */
+        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Crew']);
+
+        $this->assertNotNull($field);
+
+        $command = new UpdateFieldBaseCommand([
+            'id'           => $field->getId(),
+            'name'         => 'Notes',
+            'description'  => 'New description',
+            'required'     => false,
+            'guestAccess'  => true,
+            'showInEmails' => true,
+        ]);
+
+        $handler = new FieldCommandStubHandler(
+            $this->logger,
+            $this->validator,
+            $this->translator,
+            $this->doctrine
+        );
+
+        $handler->update($command);
+    }
+}

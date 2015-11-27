@@ -247,6 +247,7 @@ class Field
      */
     public function __construct()
     {
+        $this->removedAt    = 0;
         $this->addSeparator = 0;
     }
 
