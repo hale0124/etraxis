@@ -101,3 +101,6 @@ template.conflict.prefix: ~
 state.conflict.name: ~
 state.conflict.abbreviation: ~
 field.conflict.name: 入力されたフィールドの名前は既に存在しています。
+field.min_max_values: 最大値は最小値よりも大きい必要があります。
+field.default_value: 'デフォルトの値は %min% から %max% の範囲で指定できます。'
+field.value_range: '値 %name% は、 %min% から %max% の範囲で指定できます。'

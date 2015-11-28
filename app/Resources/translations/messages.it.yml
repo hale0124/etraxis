@@ -101,3 +101,6 @@ template.conflict.prefix: 'Un modello con lo stesso prefisso è già utilizzato.
 state.conflict.name: 'Uno stato con lo stesso nome è già utilizzato.'
 state.conflict.abbreviation: 'Uno stato con lo stesso abbreviazione è già utilizzato.'
 field.conflict.name: 'Nome campo già utilizzato.'
+field.min_max_values: 'Il valore massimo deve essere maggiore del valore minimo.'
+field.default_value: 'Il valore predefinito deve essere compreso tra %min% e %max%.'
+field.value_range: 'Il valore "%name%" deve essere compreso tra %min% e %max%.'
