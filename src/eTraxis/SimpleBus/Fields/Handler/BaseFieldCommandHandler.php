@@ -52,6 +52,29 @@ class BaseFieldCommandHandler
     }
 
     /**
+     * Returns a field entity for create or update operation.
+     *
+     * @param   CreateFieldBaseCommand|UpdateFieldBaseCommand $command
+     *
+     * @return  Field
+     *
+     * @throws  CommandException
+     * @throws  NotFoundHttpException
+     */
+    protected function getEntity($command)
+    {
+        if ($command instanceof CreateFieldBaseCommand) {
+            return $this->create($command);
+        }
+
+        if ($command instanceof UpdateFieldBaseCommand) {
+            return $this->update($command);
+        }
+
+        return null;
+    }
+
+    /**
      * Creates new field.
      *
      * @param   CreateFieldBaseCommand $command
@@ -61,7 +84,7 @@ class BaseFieldCommandHandler
      * @throws  CommandException
      * @throws  NotFoundHttpException
      */
-    protected function create(CreateFieldBaseCommand $command)
+    private function create(CreateFieldBaseCommand $command)
     {
         $entity = new Field();
 
@@ -123,7 +146,7 @@ class BaseFieldCommandHandler
      * @throws  CommandException
      * @throws  NotFoundHttpException
      */
-    protected function update(UpdateFieldBaseCommand $command)
+    private function update(UpdateFieldBaseCommand $command)
     {
         $repository = $this->doctrine->getRepository('eTraxis:Field');
 

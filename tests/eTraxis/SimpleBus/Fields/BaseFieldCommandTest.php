@@ -17,8 +17,7 @@ use eTraxis\Tests\BaseTestCase;
 use eTraxis\Traits\ClassAccessTrait;
 
 /**
- * @method  Field create($command)
- * @method  Field update($command)
+ * @method  Field getEntity($command)
  */
 class FieldCommandStubHandler extends BaseFieldCommandHandler
 {
@@ -50,7 +49,7 @@ class BaseFieldCommandTest extends BaseTestCase
             $this->doctrine
         );
 
-        $field = $handler->create($command);
+        $field = $handler->getEntity($command);
 
         $this->assertInstanceOf('\eTraxis\Entity\Field', $field);
         $this->assertEquals($template->getId(), $field->getTemplate()->getId());
@@ -86,7 +85,7 @@ class BaseFieldCommandTest extends BaseTestCase
             $this->doctrine
         );
 
-        $field = $handler->create($command);
+        $field = $handler->getEntity($command);
 
         $this->assertInstanceOf('\eTraxis\Entity\Field', $field);
         $this->assertEquals($state->getTemplateId(), $field->getTemplate()->getId());
@@ -121,7 +120,7 @@ class BaseFieldCommandTest extends BaseTestCase
             $this->doctrine
         );
 
-        $handler->create($command);
+        $handler->getEntity($command);
     }
 
     /**
@@ -146,7 +145,7 @@ class BaseFieldCommandTest extends BaseTestCase
             $this->doctrine
         );
 
-        $handler->create($command);
+        $handler->getEntity($command);
     }
 
     /**
@@ -175,7 +174,7 @@ class BaseFieldCommandTest extends BaseTestCase
             $this->doctrine
         );
 
-        $handler->create($command);
+        $handler->getEntity($command);
     }
 
     public function testUpdateSuccess()
@@ -201,7 +200,7 @@ class BaseFieldCommandTest extends BaseTestCase
             $this->doctrine
         );
 
-        $entity = $handler->update($command);
+        $entity = $handler->getEntity($command);
 
         $this->assertInstanceOf('\eTraxis\Entity\Field', $entity);
         $this->assertEquals('Team', $entity->getName());
@@ -233,7 +232,7 @@ class BaseFieldCommandTest extends BaseTestCase
             $this->doctrine
         );
 
-        $handler->update($command);
+        $handler->getEntity($command);
     }
 
     /**
@@ -263,6 +262,20 @@ class BaseFieldCommandTest extends BaseTestCase
             $this->doctrine
         );
 
-        $handler->update($command);
+        $handler->getEntity($command);
+    }
+
+    public function testUnsupportedCommand()
+    {
+        $command = null;
+
+        $handler = new FieldCommandStubHandler(
+            $this->logger,
+            $this->validator,
+            $this->translator,
+            $this->doctrine
+        );
+
+        $this->assertNull($handler->getEntity($command));
     }
 }

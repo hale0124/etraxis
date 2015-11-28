@@ -14,26 +14,27 @@ namespace eTraxis\SimpleBus\Fields\Handler;
 use eTraxis\Entity\Field;
 use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Fields\CreateNumberFieldCommand;
+use eTraxis\SimpleBus\Fields\UpdateNumberFieldCommand;
 use eTraxis\SimpleBus\Middleware\ValidationException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Command handler.
  */
-class CreateNumberFieldCommandHandler extends BaseFieldCommandHandler
+class NumberFieldCommandHandler extends BaseFieldCommandHandler
 {
     /**
-     * Creates new "number" field.
+     * Creates or updates "number" field.
      *
-     * @param   CreateNumberFieldCommand $command
+     * @param   CreateNumberFieldCommand|UpdateNumberFieldCommand $command
      *
      * @throws  CommandException
      * @throws  NotFoundHttpException
      * @throws  ValidationException
      */
-    public function handle(CreateNumberFieldCommand $command)
+    public function handle($command)
     {
-        $entity = $this->create($command);
+        $entity = $this->getEntity($command);
 
         if ($command->minValue > $command->maxValue) {
             $this->logger->error('Minimum valus is greater than maximum one.', [$command->minValue, $command->maxValue]);

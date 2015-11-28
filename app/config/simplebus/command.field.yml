@@ -1,18 +1,33 @@
 services:
 
-    command.state.create.number:
-        class: eTraxis\SimpleBus\Fields\Handler\CreateNumberFieldCommandHandler
+    command.field.create.number:
+        class: eTraxis\SimpleBus\Fields\Handler\NumberFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateNumberFieldCommand }]
         arguments: [ @logger, @validator, @translator, @doctrine ]
 
-    command.state.create.checkbox:
-        class: eTraxis\SimpleBus\Fields\Handler\CreateCheckboxFieldCommandHandler
+    command.field.create.checkbox:
+        class: eTraxis\SimpleBus\Fields\Handler\CheckboxFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateCheckboxFieldCommand }]
         arguments: [ @logger, @validator, @translator, @doctrine ]
 
-    command.state.create.issue:
-        class: eTraxis\SimpleBus\Fields\Handler\CreateIssueFieldCommandHandler
+    command.field.create.issue:
+        class: eTraxis\SimpleBus\Fields\Handler\IssueFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateIssueFieldCommand }]
+        arguments: [ @logger, @validator, @translator, @doctrine ]
+
+    command.field.update.number:
+        class: eTraxis\SimpleBus\Fields\Handler\NumberFieldCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateNumberFieldCommand }]
+        arguments: [ @logger, @validator, @translator, @doctrine ]
+
+    command.field.update.checkbox:
+        class: eTraxis\SimpleBus\Fields\Handler\CheckboxFieldCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateCheckboxFieldCommand }]
+        arguments: [ @logger, @validator, @translator, @doctrine ]
+
+    command.field.update.issue:
+        class: eTraxis\SimpleBus\Fields\Handler\IssueFieldCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateIssueFieldCommand }]
         arguments: [ @logger, @validator, @translator, @doctrine ]
 
     command.field.delete:

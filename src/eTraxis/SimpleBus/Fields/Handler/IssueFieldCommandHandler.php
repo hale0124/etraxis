@@ -14,24 +14,25 @@ namespace eTraxis\SimpleBus\Fields\Handler;
 use eTraxis\Entity\Field;
 use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Fields\CreateIssueFieldCommand;
+use eTraxis\SimpleBus\Fields\UpdateIssueFieldCommand;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Command handler.
  */
-class CreateIssueFieldCommandHandler extends BaseFieldCommandHandler
+class IssueFieldCommandHandler extends BaseFieldCommandHandler
 {
     /**
-     * Creates new "issue" field.
+     * Creates or updates "issue" field.
      *
-     * @param   CreateIssueFieldCommand $command
+     * @param   CreateIssueFieldCommand|UpdateIssueFieldCommand $command
      *
      * @throws  CommandException
      * @throws  NotFoundHttpException
      */
-    public function handle(CreateIssueFieldCommand $command)
+    public function handle($command)
     {
-        $entity = $this->create($command);
+        $entity = $this->getEntity($command);
 
         $entity
             ->setType(Field::TYPE_ISSUE)
