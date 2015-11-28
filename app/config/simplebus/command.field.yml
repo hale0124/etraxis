@@ -10,6 +10,11 @@ services:
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateCheckboxFieldCommand }]
         arguments: [ @logger, @validator, @translator, @doctrine ]
 
+    command.state.create.issue:
+        class: eTraxis\SimpleBus\Fields\Handler\CreateIssueFieldCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateIssueFieldCommand }]
+        arguments: [ @logger, @validator, @translator, @doctrine ]
+
     command.field.delete:
         class: eTraxis\SimpleBus\Fields\Handler\DeleteFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\DeleteFieldCommand }]
