@@ -70,8 +70,8 @@ class RegisterUserCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException     \eTraxis\SimpleBus\Middleware\ValidationException
-     * @expectedExceptionCode 400
+     * @expectedException \eTraxis\SimpleBus\Middleware\ValidationException
+     * @expectedExceptionMessage This value should not be blank.
      */
     public function testBadRequest()
     {

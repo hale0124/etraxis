@@ -42,6 +42,7 @@ class UpdateProjectCommandTest extends BaseTestCase
 
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Unknown project.
      */
     public function testUnknownProject()
     {
@@ -57,6 +58,7 @@ class UpdateProjectCommandTest extends BaseTestCase
 
     /**
      * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedExceptionMessage Project with entered name already exists.
      */
     public function testNameConflict()
     {

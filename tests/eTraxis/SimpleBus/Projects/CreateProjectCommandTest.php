@@ -44,6 +44,7 @@ class CreateProjectCommandTest extends BaseTestCase
 
     /**
      * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedExceptionMessage Project with entered name already exists.
      */
     public function testProjectConflict()
     {

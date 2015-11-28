@@ -38,6 +38,7 @@ class DeleteFieldCommandTest extends BaseTestCase
 
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Unknown field.
      */
     public function testNotFound()
     {

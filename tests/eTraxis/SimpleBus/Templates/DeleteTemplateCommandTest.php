@@ -67,6 +67,7 @@ class DeleteTemplateCommandTest extends BaseTestCase
 
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Unknown template.
      */
     public function testNotFound()
     {

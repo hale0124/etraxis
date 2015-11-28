@@ -42,6 +42,7 @@ class SaveAppearanceCommandTest extends BaseTestCase
 
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Unknown user.
      */
     public function testUnknownUser()
     {
@@ -61,6 +62,7 @@ class SaveAppearanceCommandTest extends BaseTestCase
 
     /**
      * @expectedException \eTraxis\SimpleBus\Middleware\ValidationException
+     * @expectedExceptionMessage This value should not be blank.
      */
     public function testEmptyCommand()
     {

@@ -58,6 +58,7 @@ class CreateTemplateCommandTest extends BaseTestCase
 
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Unknown project.
      */
     public function testUnknownProject()
     {
@@ -74,8 +75,9 @@ class CreateTemplateCommandTest extends BaseTestCase
 
     /**
      * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedExceptionMessage Template with entered name already exists.
      */
-    public function testTemplateNameConflict()
+    public function testNameConflict()
     {
         $command = new CreateTemplateCommand([
             'project'     => $this->getProject()->getId(),
@@ -90,8 +92,9 @@ class CreateTemplateCommandTest extends BaseTestCase
 
     /**
      * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedExceptionMessage Template with entered prefix already exists.
      */
-    public function testTemplatePrefixConflict()
+    public function testPrefixConflict()
     {
         $command = new CreateTemplateCommand([
             'project'     => $this->getProject()->getId(),

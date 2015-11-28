@@ -58,8 +58,9 @@ class UpdateTemplateCommandTest extends BaseTestCase
 
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Unknown template.
      */
-    public function testUnknownProject()
+    public function testUnknownTemplate()
     {
         $command = new UpdateTemplateCommand([
             'id'          => $this->getMaxId(),
@@ -74,6 +75,7 @@ class UpdateTemplateCommandTest extends BaseTestCase
 
     /**
      * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedExceptionMessage Template with entered name already exists.
      */
     public function testNameConflict()
     {
@@ -116,6 +118,7 @@ class UpdateTemplateCommandTest extends BaseTestCase
 
     /**
      * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedExceptionMessage Template with entered prefix already exists.
      */
     public function testPrefixConflict()
     {

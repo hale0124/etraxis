@@ -49,6 +49,7 @@ class AddGroupsCommandTest extends BaseTestCase
 
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Unknown user.
      */
     public function testNotFound()
     {
@@ -62,6 +63,7 @@ class AddGroupsCommandTest extends BaseTestCase
 
     /**
      * @expectedException \eTraxis\SimpleBus\Middleware\ValidationException
+     * @expectedExceptionMessage This collection should contain 1 element or more.
      */
     public function testEmptyGroups()
     {

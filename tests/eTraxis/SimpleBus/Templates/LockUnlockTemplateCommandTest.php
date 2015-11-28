@@ -46,6 +46,7 @@ class LockUnlockTemplateCommandTest extends BaseTestCase
 
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Unknown template.
      */
     public function testNotFoundLock()
     {
@@ -57,6 +58,7 @@ class LockUnlockTemplateCommandTest extends BaseTestCase
 
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Unknown template.
      */
     public function testNotFoundUnlock()
     {

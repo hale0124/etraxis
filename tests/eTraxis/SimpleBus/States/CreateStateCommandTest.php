@@ -63,6 +63,7 @@ class CreateStateCommandTest extends BaseTestCase
 
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Unknown template.
      */
     public function testUnknownTemplate()
     {
@@ -79,6 +80,7 @@ class CreateStateCommandTest extends BaseTestCase
 
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Unknown next state.
      */
     public function testUnknownNextState()
     {
@@ -96,8 +98,9 @@ class CreateStateCommandTest extends BaseTestCase
 
     /**
      * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedExceptionMessage State with entered name already exists.
      */
-    public function testTemplateNameConflict()
+    public function testNameConflict()
     {
         $command = new CreateStateCommand([
             'template'     => $this->getTemplate()->getId(),
@@ -112,8 +115,9 @@ class CreateStateCommandTest extends BaseTestCase
 
     /**
      * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedExceptionMessage State with entered abbreviation already exists.
      */
-    public function testTemplateAbbreviationConflict()
+    public function testAbbreviationConflict()
     {
         $command = new CreateStateCommand([
             'template'     => $this->getTemplate()->getId(),

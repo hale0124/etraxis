@@ -63,6 +63,7 @@ class CreateUserCommandTest extends BaseTestCase
 
     /**
      * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedExceptionMessage Password should be at least 6 characters length.
      */
     public function testPasswordTooShort()
     {
@@ -83,6 +84,7 @@ class CreateUserCommandTest extends BaseTestCase
 
     /**
      * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedExceptionMessage Account with entered user name already exists.
      */
     public function testUsernameConflict()
     {

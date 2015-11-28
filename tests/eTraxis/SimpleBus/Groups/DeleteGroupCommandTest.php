@@ -30,6 +30,7 @@ class DeleteGroupCommandTest extends BaseTestCase
 
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Unknown group.
      */
     public function testNotFound()
     {

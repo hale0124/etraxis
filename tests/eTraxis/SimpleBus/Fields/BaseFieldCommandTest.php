@@ -151,6 +151,7 @@ class BaseFieldCommandTest extends BaseTestCase
 
     /**
      * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedExceptionMessage Field with entered name already exists.
      */
     public function testCreateConflict()
     {
@@ -237,6 +238,7 @@ class BaseFieldCommandTest extends BaseTestCase
 
     /**
      * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedExceptionMessage Field with entered name already exists.
      */
     public function testUpdateConflict()
     {

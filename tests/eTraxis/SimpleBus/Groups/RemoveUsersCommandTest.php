@@ -50,6 +50,7 @@ class RemoveUsersCommandTest extends BaseTestCase
 
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Unknown group.
      */
     public function testNotFound()
     {
@@ -63,6 +64,7 @@ class RemoveUsersCommandTest extends BaseTestCase
 
     /**
      * @expectedException \eTraxis\SimpleBus\Middleware\ValidationException
+     * @expectedExceptionMessage This collection should contain 1 element or more.
      */
     public function testEmptyGroups()
     {

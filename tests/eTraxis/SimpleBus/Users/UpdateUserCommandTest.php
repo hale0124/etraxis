@@ -58,6 +58,7 @@ class UpdateUserCommandTest extends BaseTestCase
 
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Unknown user.
      */
     public function testUnknownUser()
     {
@@ -84,6 +85,7 @@ class UpdateUserCommandTest extends BaseTestCase
 
     /**
      * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedExceptionMessage Account with entered user name already exists.
      */
     public function testUsernameConflict()
     {

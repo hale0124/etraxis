@@ -100,7 +100,7 @@ template.conflict.name: 'Шаблон с таким названием уже с
 template.conflict.prefix: 'Шаблон с таким префиксом уже существует.'
 state.conflict.name: 'Состояние с таким названием уже существует.'
 state.conflict.abbreviation: 'Состояние с таким сокращением уже существует.'
-field.conflict.name: 'Атрибут с таким названием уже существует.'
+field.conflict.name: 'Поле с таким названием уже существует.'
 field.min_max_values: 'Максимальное значение должно быть больше минимального.'
 field.default_value: 'Значение по умолчанию должно лежать в диапазоне от %min% до %max%.'
 field.value_range: 'Значение поля "%name%" должно лежать в диапазоне от %min% до %max%.'

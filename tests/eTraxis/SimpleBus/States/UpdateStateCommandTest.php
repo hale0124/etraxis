@@ -55,6 +55,7 @@ class UpdateStateCommandTest extends BaseTestCase
 
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Unknown state.
      */
     public function testUnknownState()
     {
@@ -70,6 +71,7 @@ class UpdateStateCommandTest extends BaseTestCase
 
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Unknown next state.
      */
     public function testUnknownNextState()
     {
@@ -89,6 +91,7 @@ class UpdateStateCommandTest extends BaseTestCase
 
     /**
      * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedExceptionMessage State with entered name already exists.
      */
     public function testNameConflict()
     {
@@ -107,6 +110,7 @@ class UpdateStateCommandTest extends BaseTestCase
 
     /**
      * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedExceptionMessage State with entered abbreviation already exists.
      */
     public function testAbbreviationConflict()
     {

@@ -40,6 +40,7 @@ class UpdateGroupCommandTest extends BaseTestCase
 
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Unknown group.
      */
     public function testUnknownGroup()
     {
@@ -54,6 +55,7 @@ class UpdateGroupCommandTest extends BaseTestCase
 
     /**
      * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedExceptionMessage Group with entered name already exists.
      */
     public function testNameConflict()
     {

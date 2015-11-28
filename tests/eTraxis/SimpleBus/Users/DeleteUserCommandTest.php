@@ -45,6 +45,7 @@ class DeleteUserCommandTest extends BaseTestCase
 
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Unknown user.
      */
     public function testNotFound()
     {
