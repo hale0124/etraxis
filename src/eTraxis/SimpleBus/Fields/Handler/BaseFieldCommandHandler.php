@@ -71,7 +71,7 @@ class BaseFieldCommandHandler
             return $this->update($command);
         }
 
-        return null;
+        throw new CommandException('Unsupported command.');
     }
 
     /**

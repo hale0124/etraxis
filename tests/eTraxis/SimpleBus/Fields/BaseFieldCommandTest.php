@@ -265,6 +265,10 @@ class BaseFieldCommandTest extends BaseTestCase
         $handler->getEntity($command);
     }
 
+    /**
+     * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedExceptionMessage Unsupported command.
+     */
     public function testUnsupportedCommand()
     {
         $command = null;
@@ -276,6 +280,6 @@ class BaseFieldCommandTest extends BaseTestCase
             $this->doctrine
         );
 
-        $this->assertNull($handler->getEntity($command));
+        $handler->getEntity($command);
     }
 }
