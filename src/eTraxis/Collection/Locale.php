@@ -55,9 +55,9 @@ class Locale extends AbstractStaticCollection
     {
         $collection = static::getCollection();
 
-        array_walk($collection, function (&$value, $key) use ($translator) {
+        foreach ($collection as $key => &$value) {
             $value = $translator->trans('lang', [], null, $key);
-        });
+        }
 
         return $collection;
     }
