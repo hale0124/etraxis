@@ -16,6 +16,11 @@ use eTraxis\Collection\Theme;
 use eTraxis\Collection\Timezone;
 use eTraxis\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\EmailType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Security\Core\Encoder\BasePasswordEncoder;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -46,28 +51,28 @@ class UserForm extends AbstractType
         $user = $builder->getData();
 
         // User name.
-        $builder->add('username', 'text', [
+        $builder->add('username', TextType::class, [
             'label'    => 'user.username',
             'disabled' => is_object($user) && $user->isLdap(),
             'attr'     => ['maxlength' => User::MAX_USERNAME],
         ]);
 
         // Full name.
-        $builder->add('fullname', 'text', [
+        $builder->add('fullname', TextType::class, [
             'label'    => 'user.fullname',
             'disabled' => is_object($user) && $user->isLdap(),
             'attr'     => ['maxlength' => User::MAX_FULLNAME],
         ]);
 
         // Email.
-        $builder->add('email', 'email', [
+        $builder->add('email', EmailType::class, [
             'label'    => 'user.email',
             'disabled' => is_object($user) && $user->isLdap(),
             'attr'     => ['maxlength' => User::MAX_EMAIL],
         ]);
 
         // Description.
-        $builder->add('description', 'text', [
+        $builder->add('description', TextType::class, [
             'label'    => 'description',
             'required' => false,
             'attr'     => ['maxlength' => User::MAX_DESCRIPTION],
@@ -77,7 +82,7 @@ class UserForm extends AbstractType
         if (!is_object($user) || !$user->isLdap()) {
 
             // Password.
-            $builder->add('password', 'password', [
+            $builder->add('password', PasswordType::class, [
                 'label'    => 'user.password',
                 'required' => !(is_object($user) && $user->getId()),
                 'mapped'   => false,
@@ -85,7 +90,7 @@ class UserForm extends AbstractType
             ]);
 
             // Confirmation.
-            $builder->add('confirmation', 'password', [
+            $builder->add('confirmation', PasswordType::class, [
                 'label'    => 'user.password_confirmation',
                 'required' => !(is_object($user) && $user->getId()),
                 'mapped'   => false,
@@ -94,34 +99,34 @@ class UserForm extends AbstractType
         }
 
         // Locale.
-        $builder->add('locale', 'choice', [
+        $builder->add('locale', ChoiceType::class, [
             'label'    => 'language',
             'required' => true,
             'choices'  => Locale::getTranslatedCollection($this->translator),
         ]);
 
         // Theme.
-        $builder->add('theme', 'choice', [
+        $builder->add('theme', ChoiceType::class, [
             'label'    => 'theme',
             'required' => true,
             'choices'  => Theme::getCollection(),
         ]);
 
         // Timezone.
-        $builder->add('timezone', 'choice', [
+        $builder->add('timezone', ChoiceType::class, [
             'label'    => 'timezone',
             'required' => true,
             'choices'  => Timezone::getCollection(),
         ]);
 
         // Administrator.
-        $builder->add('admin', 'checkbox', [
+        $builder->add('admin', CheckboxType::class, [
             'label'    => 'role.administrator',
             'required' => false,
         ]);
 
         // Disabled.
-        $builder->add('disabled', 'checkbox', [
+        $builder->add('disabled', CheckboxType::class, [
             'label'    => 'user.disabled',
             'required' => false,
         ]);

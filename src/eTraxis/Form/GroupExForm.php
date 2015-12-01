@@ -11,6 +11,7 @@
 
 namespace eTraxis\Form;
 
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -39,7 +40,7 @@ class GroupExForm extends GroupForm
         parent::buildForm($builder, $options);
 
         // Project.
-        $builder->add('project', 'entity', [
+        $builder->add('project', EntityType::class, [
             'label'        => 'project',
             'required'     => false,
             'class'        => 'eTraxis:Project',

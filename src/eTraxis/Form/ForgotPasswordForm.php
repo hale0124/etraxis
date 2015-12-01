@@ -13,6 +13,7 @@ namespace eTraxis\Form;
 
 use eTraxis\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -26,7 +27,7 @@ class ForgotPasswordForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // User name.
-        $builder->add('username', 'text', [
+        $builder->add('username', TextType::class, [
             'label' => 'user.username',
             'attr'  => ['maxlength' => User::MAX_USERNAME],
         ]);

@@ -12,6 +12,7 @@
 namespace eTraxis\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Security\Core\Encoder\BasePasswordEncoder;
 
@@ -26,13 +27,13 @@ class ResetPasswordForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // Password.
-        $builder->add('password', 'password', [
+        $builder->add('password', PasswordType::class, [
             'label' => 'user.new_password',
             'attr'  => ['maxlength' => BasePasswordEncoder::MAX_PASSWORD_LENGTH],
         ]);
 
         // Confirmation.
-        $builder->add('confirmation', 'password', [
+        $builder->add('confirmation', PasswordType::class, [
             'label' => 'user.password_confirmation',
             'attr'  => ['maxlength' => BasePasswordEncoder::MAX_PASSWORD_LENGTH],
         ]);

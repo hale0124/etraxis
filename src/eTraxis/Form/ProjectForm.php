@@ -13,6 +13,8 @@ namespace eTraxis\Form;
 
 use eTraxis\Entity\Project;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -26,20 +28,20 @@ class ProjectForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // Project name.
-        $builder->add('name', 'text', [
+        $builder->add('name', TextType::class, [
             'label'    => 'project.name',
             'attr'     => ['maxlength' => Project::MAX_NAME],
         ]);
 
         // Description.
-        $builder->add('description', 'text', [
+        $builder->add('description', TextType::class, [
             'label'    => 'description',
             'required' => false,
             'attr'     => ['maxlength' => Project::MAX_DESCRIPTION],
         ]);
 
         // Suspended.
-        $builder->add('suspended', 'checkbox', [
+        $builder->add('suspended', CheckboxType::class, [
             'label'    => 'project.suspended',
             'required' => false,
         ]);

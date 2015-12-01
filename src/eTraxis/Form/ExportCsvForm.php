@@ -15,6 +15,8 @@ use eTraxis\Collection\CsvDelimiter;
 use eTraxis\Collection\Encoding;
 use eTraxis\Collection\LineEnding;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -41,26 +43,26 @@ class ExportCsvForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // File name.
-        $builder->add('filename', 'text', [
+        $builder->add('filename', TextType::class, [
             'label' => 'file',
         ]);
 
         // Delimiter.
-        $builder->add('delimiter', 'choice', [
+        $builder->add('delimiter', ChoiceType::class, [
             'label'    => 'delimiter',
             'required' => true,
             'choices'  => CsvDelimiter::getTranslatedCollection($this->translator),
         ]);
 
         // Encoding.
-        $builder->add('encoding', 'choice', [
+        $builder->add('encoding', ChoiceType::class, [
             'label'    => 'encoding',
             'required' => true,
             'choices'  => Encoding::getCollection(),
         ]);
 
         // Line endings.
-        $builder->add('tail', 'choice', [
+        $builder->add('tail', ChoiceType::class, [
             'label'    => 'line_endings',
             'required' => true,
             'choices'  => LineEnding::getCollection(),

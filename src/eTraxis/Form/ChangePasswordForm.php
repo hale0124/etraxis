@@ -12,6 +12,7 @@
 namespace eTraxis\Form;
 
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Security\Core\Encoder\BasePasswordEncoder;
 
@@ -26,7 +27,7 @@ class ChangePasswordForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // Current password.
-        $builder->add('current_password', 'password', [
+        $builder->add('current_password', PasswordType::class, [
             'label'    => 'user.current_password',
             'required' => false,
             'mapped'   => false,
@@ -34,7 +35,7 @@ class ChangePasswordForm extends AbstractType
         ]);
 
         // New password.
-        $builder->add('new_password', 'password', [
+        $builder->add('new_password', PasswordType::class, [
             'label'    => 'user.new_password',
             'required' => false,
             'mapped'   => false,
@@ -42,7 +43,7 @@ class ChangePasswordForm extends AbstractType
         ]);
 
         // Confirmation.
-        $builder->add('confirmation', 'password', [
+        $builder->add('confirmation', PasswordType::class, [
             'label'    => 'user.password_confirmation',
             'required' => false,
             'mapped'   => false,

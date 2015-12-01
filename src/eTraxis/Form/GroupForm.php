@@ -13,6 +13,7 @@ namespace eTraxis\Form;
 
 use eTraxis\Entity\Group;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
 /**
@@ -26,13 +27,13 @@ class GroupForm extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // Group name.
-        $builder->add('name', 'text', [
+        $builder->add('name', TextType::class, [
             'label'    => 'group.name',
             'attr'     => ['maxlength' => Group::MAX_NAME],
         ]);
 
         // Description.
-        $builder->add('description', 'text', [
+        $builder->add('description', TextType::class, [
             'label'    => 'description',
             'required' => false,
             'attr'     => ['maxlength' => Group::MAX_DESCRIPTION],
