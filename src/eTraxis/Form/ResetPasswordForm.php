@@ -41,7 +41,7 @@ class ResetPasswordForm extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'reset_password';
     }

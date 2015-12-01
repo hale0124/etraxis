@@ -35,7 +35,7 @@ class ForgotPasswordForm extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'forgot_password';
     }

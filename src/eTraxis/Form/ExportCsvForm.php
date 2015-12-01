@@ -70,7 +70,7 @@ class ExportCsvForm extends AbstractType
     /**
      * {@inheritdoc}
      */
-    public function getName()
+    public function getBlockPrefix()
     {
         return 'export';
     }
