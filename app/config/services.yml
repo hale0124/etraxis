@@ -17,25 +17,25 @@ services:
     ldap:
         class: eTraxis\Service\LdapService
         arguments:
-            - @logger
-            - %ldap_host%
-            - %ldap_port%
-            - %ldap_user%
-            - %ldap_password%
-            - %ldap_tls%
+            - "@logger"
+            - "%ldap_host%"
+            - "%ldap_port%"
+            - "%ldap_user%"
+            - "%ldap_password%"
+            - "%ldap_tls%"
 
     localizer:
         class: eTraxis\Service\LocalizerService
         arguments:
-            - @security.token_storage
-            - %locale%
+            - "@security.token_storage"
+            - "%locale%"
 
     etraxis.mailer:
         class: eTraxis\Service\MailerService
         arguments:
-            - @logger
-            - @twig
-            - @mailer
+            - "@logger"
+            - "@twig"
+            - "@mailer"
 
     etraxis.export:
         class: eTraxis\Service\ExportService
@@ -44,21 +44,21 @@ services:
         class: eTraxis\Security\InternalUserProvider
         public: false
         arguments:
-            - @logger
-            - @etraxis.repository.users
+            - "@logger"
+            - "@etraxis.repository.users"
 
     etraxis.encoder:
         class: eTraxis\Security\InternalPasswordEncoder
         public: false
         arguments:
-            - @translator
-            - %password_min_length%
+            - "@translator"
+            - "%password_min_length%"
 
     ldap.authenticator:
         class: eTraxis\Security\LdapAuthenticator
         public: false
         arguments:
-            - @logger
-            - @command_bus
-            - @ldap
-            - %ldap_basedn%
+            - "@logger"
+            - "@command_bus"
+            - "@ldap"
+            - "%ldap_basedn%"

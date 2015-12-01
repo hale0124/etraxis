@@ -3,34 +3,34 @@ services:
     command.template.create:
         class: eTraxis\SimpleBus\Templates\Handler\CreateTemplateCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Templates\CreateTemplateCommand }]
-        arguments: [ @logger, @validator, @translator, @doctrine ]
+        arguments: [ "@logger", "@validator", "@translator", "@doctrine" ]
 
     command.template.update:
         class: eTraxis\SimpleBus\Templates\Handler\UpdateTemplateCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Templates\UpdateTemplateCommand }]
-        arguments: [ @logger, @validator, @translator, @doctrine ]
+        arguments: [ "@logger", "@validator", "@translator", "@doctrine" ]
 
     command.template.delete:
         class: eTraxis\SimpleBus\Templates\Handler\DeleteTemplateCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Templates\DeleteTemplateCommand }]
-        arguments: [ @logger, @doctrine, @security.authorization_checker ]
+        arguments: [ "@logger", "@doctrine", "@security.authorization_checker" ]
 
     command.template.lock:
         class: eTraxis\SimpleBus\Templates\Handler\LockUnlockTemplateCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Templates\LockTemplateCommand }]
-        arguments: [ @logger, @doctrine ]
+        arguments: [ "@logger", "@doctrine" ]
 
     command.template.unlock:
         class: eTraxis\SimpleBus\Templates\Handler\LockUnlockTemplateCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Templates\UnlockTemplateCommand }]
-        arguments: [ @logger, @doctrine ]
+        arguments: [ "@logger", "@doctrine" ]
 
     command.template.add_permissions:
         class: eTraxis\SimpleBus\Templates\Handler\AddRemoveTemplatePermissionsCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Templates\AddTemplatePermissionsCommand }]
-        arguments: [ @logger, @doctrine ]
+        arguments: [ "@logger", "@doctrine" ]
 
     command.template.remove_permissions:
         class: eTraxis\SimpleBus\Templates\Handler\AddRemoveTemplatePermissionsCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Templates\RemoveTemplatePermissionsCommand }]
-        arguments: [ @logger, @doctrine ]
+        arguments: [ "@logger", "@doctrine" ]

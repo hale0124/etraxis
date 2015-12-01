@@ -5,21 +5,21 @@ services:
         class: AppBundle\EventListener\AuthenticationListener
         tags: [{ name: kernel.event_subscriber }]
         arguments:
-            - @logger
-            - @command_bus
+            - "@logger"
+            - "@command_bus"
 
     etraxis.listener.kernel:
         class: AppBundle\EventListener\KernelListener
         tags: [{ name: kernel.event_subscriber }]
         arguments:
-            - @router
-            - @translator
-            - @security.authorization_checker
-            - @security.token_storage
-            - %locale%
+            - "@router"
+            - "@translator"
+            - "@security.authorization_checker"
+            - "@security.token_storage"
+            - "%locale%"
 
     etraxis.listener.security:
         class: AppBundle\EventListener\SecurityListener
         tags: [{ name: kernel.event_subscriber }]
         arguments:
-            - @session
+            - "@session"

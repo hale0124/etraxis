@@ -4,14 +4,14 @@ services:
     etraxis.datatable.groups:
         class: eTraxis\DataTables\GroupsDataTable
         tags: [{ name: datatable, id: eTraxis:Group }]
-        arguments: [ @translator, @etraxis.repository.groups ]
+        arguments: [ "@translator", "@etraxis.repository.groups" ]
 
     etraxis.datatable.projects:
         class: eTraxis\DataTables\ProjectsDataTable
         tags: [{ name: datatable, id: eTraxis:Project }]
-        arguments: [ @translator, @localizer, @etraxis.repository.projects ]
+        arguments: [ "@translator", "@localizer", "@etraxis.repository.projects" ]
 
     etraxis.datatable.users:
         class: eTraxis\DataTables\UsersDataTable
         tags: [{ name: datatable, id: eTraxis:User }]
-        arguments: [ @translator, @etraxis.repository.users ]
+        arguments: [ "@translator", "@etraxis.repository.users" ]

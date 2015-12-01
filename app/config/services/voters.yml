@@ -5,22 +5,22 @@ services:
         class: eTraxis\Voter\ProjectVoter
         public: false
         tags: [{ name: security.voter }]
-        arguments: [ @etraxis.repository.issues ]
+        arguments: [ "@etraxis.repository.issues" ]
 
     etraxis.voter.state:
         class: eTraxis\Voter\StateVoter
         public: false
         tags: [{ name: security.voter }]
-        arguments: [ @etraxis.repository.events ]
+        arguments: [ "@etraxis.repository.events" ]
 
     etraxis.voter.template:
         class: eTraxis\Voter\TemplateVoter
         public: false
         tags: [{ name: security.voter }]
-        arguments: [ @etraxis.repository.issues ]
+        arguments: [ "@etraxis.repository.issues" ]
 
     etraxis.voter.user:
         class: eTraxis\Voter\UserVoter
         public: false
         tags: [{ name: security.voter }]
-        arguments: [ @etraxis.repository.events, %password_expiration% ]
+        arguments: [ "@etraxis.repository.events", "%password_expiration%" ]
