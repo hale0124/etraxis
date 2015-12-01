@@ -220,7 +220,7 @@ class GroupsController extends Controller
      */
     public function dlgNewAction()
     {
-        $form = $this->createForm(new GroupExForm($this->getTranslator()), null, [
+        $form = $this->createForm(GroupExForm::class, null, [
             'action' => $this->generateUrl('admin_new_group'),
         ]);
 
@@ -248,7 +248,7 @@ class GroupsController extends Controller
                 throw $this->createNotFoundException();
             }
 
-            $form = $this->createForm(new GroupForm(), $group, [
+            $form = $this->createForm(GroupForm::class, $group, [
                 'action' => $this->generateUrl('admin_edit_group', ['id' => $id]),
             ]);
 

@@ -20,7 +20,7 @@ class ChangePasswordFormTest extends BaseTestCase
         /** @var \Symfony\Component\Form\FormFactoryInterface $factory */
         $factory = $this->client->getContainer()->get('form.factory');
 
-        $form = $factory->create(new ChangePasswordForm());
+        $form = $factory->create(ChangePasswordForm::class);
         $view = $form->createView();
 
         $children = $view->children;

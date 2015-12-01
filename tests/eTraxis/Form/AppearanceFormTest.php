@@ -22,7 +22,7 @@ class AppearanceFormTest extends BaseTestCase
         /** @var \Symfony\Component\Form\FormFactoryInterface $factory */
         $factory = $this->client->getContainer()->get('form.factory');
 
-        $form = $factory->create(new AppearanceForm($this->translator), $user);
+        $form = $factory->create(AppearanceForm::class, $user);
         $view = $form->createView();
 
         $children = $view->children;

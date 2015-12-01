@@ -23,7 +23,7 @@ class GroupFormTest extends BaseTestCase
         /** @var \Symfony\Component\Form\FormFactoryInterface $factory */
         $factory = $this->client->getContainer()->get('form.factory');
 
-        $form = $factory->create(new GroupForm(), $group);
+        $form = $factory->create(GroupForm::class, $group);
         $view = $form->createView();
 
         $children = $view->children;

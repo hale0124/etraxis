@@ -20,7 +20,7 @@ class ForgotPasswordFormTest extends BaseTestCase
         /** @var \Symfony\Component\Form\FormFactoryInterface $factory */
         $factory = $this->client->getContainer()->get('form.factory');
 
-        $form = $factory->create(new ForgotPasswordForm());
+        $form = $factory->create(ForgotPasswordForm::class);
         $view = $form->createView();
 
         $children = $view->children;

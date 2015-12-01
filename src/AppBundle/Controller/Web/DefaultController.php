@@ -55,7 +55,7 @@ class DefaultController extends Controller
             'tail'      => LineEnding::WINDOWS,
         ];
 
-        $form = $this->createForm(new ExportCsvForm($this->getTranslator()), $default, [
+        $form = $this->createForm(ExportCsvForm::class, $default, [
             'action' => $this->generateUrl('export'),
         ]);
 

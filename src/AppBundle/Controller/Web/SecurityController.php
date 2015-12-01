@@ -77,7 +77,7 @@ class SecurityController extends Controller
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-        $form = $this->createForm(new ForgotPasswordForm());
+        $form = $this->createForm(ForgotPasswordForm::class);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -119,7 +119,7 @@ class SecurityController extends Controller
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-        $form = $this->createForm(new ResetPasswordForm());
+        $form = $this->createForm(ResetPasswordForm::class);
         $form->handleRequest($request);
 
         if ($form->isValid()) {
@@ -180,7 +180,7 @@ class SecurityController extends Controller
             return $this->redirect($this->generateUrl('homepage'));
         }
 
-        $form = $this->createForm(new ResetPasswordForm());
+        $form = $this->createForm(ResetPasswordForm::class);
         $form->handleRequest($request);
 
         if ($form->isValid()) {

@@ -23,7 +23,7 @@ class ProjectFormTest extends BaseTestCase
         /** @var \Symfony\Component\Form\FormFactoryInterface $factory */
         $factory = $this->client->getContainer()->get('form.factory');
 
-        $form = $factory->create(new ProjectForm(), $project);
+        $form = $factory->create(ProjectForm::class, $project);
         $view = $form->createView();
 
         $children = $view->children;

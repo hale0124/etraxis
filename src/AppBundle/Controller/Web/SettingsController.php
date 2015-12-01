@@ -42,11 +42,11 @@ class SettingsController extends Controller
      */
     public function indexAction()
     {
-        $appearance_form = $this->createForm(new AppearanceForm($this->getTranslator()), $this->getUser(), [
+        $appearance_form = $this->createForm(AppearanceForm::class, $this->getUser(), [
             'action' => $this->generateUrl('settings_appearance'),
         ]);
 
-        $password_form = $this->createForm(new ChangePasswordForm(), $this->getUser(), [
+        $password_form = $this->createForm(ChangePasswordForm::class, $this->getUser(), [
             'action' => $this->generateUrl('settings_password'),
         ]);
 

@@ -199,7 +199,7 @@ class ProjectsController extends Controller
             'suspended' => true,
         ];
 
-        $form = $this->createForm(new ProjectForm(), $default, [
+        $form = $this->createForm(ProjectForm::class, $default, [
             'action' => $this->generateUrl('admin_new_project'),
         ]);
 
@@ -227,7 +227,7 @@ class ProjectsController extends Controller
                 throw $this->createNotFoundException();
             }
 
-            $form = $this->createForm(new ProjectForm(), $project, [
+            $form = $this->createForm(ProjectForm::class, $project, [
                 'action' => $this->generateUrl('admin_edit_project', ['id' => $id]),
             ]);
 

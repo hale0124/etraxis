@@ -1,6 +1,7 @@
 # Keep imports sorted alphabetically.
 imports:
     - { resource: services/datatables.yml }
+    - { resource: services/forms.yml }
     - { resource: services/listeners.yml }
     - { resource: services/repositories.yml }
     - { resource: services/voters.yml }

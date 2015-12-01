@@ -20,7 +20,7 @@ class ResetPasswordFormTest extends BaseTestCase
         /** @var \Symfony\Component\Form\FormFactoryInterface $factory */
         $factory = $this->client->getContainer()->get('form.factory');
 
-        $form = $factory->create(new ResetPasswordForm());
+        $form = $factory->create(ResetPasswordForm::class);
         $view = $form->createView();
 
         $children = $view->children;
