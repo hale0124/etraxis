@@ -49,23 +49,26 @@ class ExportCsvForm extends AbstractType
 
         // Delimiter.
         $builder->add('delimiter', ChoiceType::class, [
-            'label'    => 'delimiter',
-            'required' => true,
-            'choices'  => CsvDelimiter::getTranslatedCollection($this->translator),
+            'label'             => 'delimiter',
+            'required'          => true,
+            'choices'           => array_flip(CsvDelimiter::getTranslatedCollection($this->translator)),
+            'choices_as_values' => true,
         ]);
 
         // Encoding.
         $builder->add('encoding', ChoiceType::class, [
-            'label'    => 'encoding',
-            'required' => true,
-            'choices'  => Encoding::getCollection(),
+            'label'             => 'encoding',
+            'required'          => true,
+            'choices'           => array_flip(Encoding::getCollection()),
+            'choices_as_values' => true,
         ]);
 
         // Line endings.
         $builder->add('tail', ChoiceType::class, [
-            'label'    => 'line_endings',
-            'required' => true,
-            'choices'  => LineEnding::getCollection(),
+            'label'             => 'line_endings',
+            'required'          => true,
+            'choices'           => array_flip(LineEnding::getCollection()),
+            'choices_as_values' => true,
         ]);
     }
 

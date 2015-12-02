@@ -100,23 +100,26 @@ class UserForm extends AbstractType
 
         // Locale.
         $builder->add('locale', ChoiceType::class, [
-            'label'    => 'language',
-            'required' => true,
-            'choices'  => Locale::getTranslatedCollection($this->translator),
+            'label'             => 'language',
+            'required'          => true,
+            'choices'           => array_flip(Locale::getTranslatedCollection($this->translator)),
+            'choices_as_values' => true,
         ]);
 
         // Theme.
         $builder->add('theme', ChoiceType::class, [
-            'label'    => 'theme',
-            'required' => true,
-            'choices'  => Theme::getCollection(),
+            'label'             => 'theme',
+            'required'          => true,
+            'choices'           => array_flip(Theme::getCollection()),
+            'choices_as_values' => true,
         ]);
 
         // Timezone.
         $builder->add('timezone', ChoiceType::class, [
-            'label'    => 'timezone',
-            'required' => true,
-            'choices'  => Timezone::getCollection(),
+            'label'             => 'timezone',
+            'required'          => true,
+            'choices'           => array_flip(Timezone::getCollection()),
+            'choices_as_values' => true,
         ]);
 
         // Administrator.
