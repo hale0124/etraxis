@@ -20,9 +20,6 @@ class ExportCsvFormTest extends BaseTestCase
         /** @var \Symfony\Component\Form\FormFactoryInterface $factory */
         $factory = $this->client->getContainer()->get('form.factory');
 
-        /** @var \Symfony\Component\Translation\TranslatorInterface $translator */
-        $translator = $this->client->getContainer()->get('translator');
-
         $form = $factory->create(ExportCsvForm::class);
         $view = $form->createView();
 
