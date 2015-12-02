@@ -13,12 +13,13 @@ namespace eTraxis\Voter;
 
 use eTraxis\Entity\Project;
 use eTraxis\Repository\IssuesRepository;
-use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 /**
  * Voter for "Project" objects.
  */
-class ProjectVoter extends AbstractVoter
+class ProjectVoter extends Voter
 {
     protected $repository;
 
@@ -35,31 +36,30 @@ class ProjectVoter extends AbstractVoter
     /**
      * {@inheritdoc}
      */
-    protected function getSupportedClasses()
+    protected function supports($attribute, $subject)
     {
-        return ['eTraxis\Entity\Project'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getSupportedAttributes()
-    {
-        return [
+        $attributes = [
             Project::DELETE,
         ];
+
+        if (in_array($attribute, $attributes)) {
+           return ($subject instanceof Project);
+        }
+
+        return false;
     }
 
     /**
      * {@inheritdoc}
+     * @codeCoverageIgnoreStart
      */
-    protected function isGranted($attribute, $object, $user = null)
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
-        /** @var Project $object */
+        /** @var Project $subject */
         switch ($attribute) {
 
             case Project::DELETE:
-                return $this->isDeleteGranted($object);
+                return $this->isDeleteGranted($subject);
 
             default:
                 return false;
@@ -69,11 +69,11 @@ class ProjectVoter extends AbstractVoter
     /**
      * Checks whether specified project can be deleted.
      *
-     * @param   Project $object Project.
+     * @param   Project $subject Project.
      *
      * @return  bool
      */
-    protected function isDeleteGranted($object)
+    protected function isDeleteGranted($subject)
     {
         // Number of issues belong to the project.
         $query = $this->repository->createQueryBuilder('i')
@@ -81,7 +81,7 @@ class ProjectVoter extends AbstractVoter
             ->leftJoin('i.state', 's')
             ->leftJoin('s.template', 't')
             ->where('t.projectId = :id')
-            ->setParameter('id', $object->getId())
+            ->setParameter('id', $subject->getId())
         ;
 
         $count = $query->getQuery()->getSingleScalarResult();

@@ -13,64 +13,33 @@ namespace eTraxis\Voter;
 
 use eTraxis\Entity\State;
 use eTraxis\Tests\BaseTestCase;
-use eTraxis\Traits\ClassAccessTrait;
-
-/**
- * @method getSupportedClasses()
- * @method getSupportedAttributes()
- * @method isGranted($attribute, $object, $user = null);
- */
-class StateVoterStub extends StateVoter
-{
-    use ClassAccessTrait;
-}
 
 class StateVoterTest extends BaseTestCase
 {
-    /** @var StateVoterStub */
-    private $object = null;
+    /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker */
+    private $security = null;
 
     protected function setUp()
     {
         parent::setUp();
 
-        /** @var \eTraxis\Repository\EventsRepository $repository */
-        $repository = $this->doctrine->getRepository('eTraxis:Event');
-
-        $this->object = new StateVoterStub($repository);
-    }
-
-    public function testGetSupportedClasses()
-    {
-        /** @var State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
-
-        $expected = [
-            get_class($state),
-        ];
-
-        $this->assertEquals($expected, $this->object->getSupportedClasses());
-    }
-
-    public function testGetSupportedAttributes()
-    {
-        $expected = [
-            State::DELETE,
-        ];
-
-        $this->assertEquals($expected, $this->object->getSupportedAttributes());
+        $this->security = $this->client->getContainer()->get('security.authorization_checker');
     }
 
     public function testUnsupportedAttribute()
     {
+        $this->loginAs('hubert');
+
         /** @var State $state */
         $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
 
-        $this->assertFalse($this->object->isGranted('UNKNOWN', $state));
+        $this->assertFalse($this->security->isGranted('UNKNOWN', $state));
     }
 
     public function testDelete()
     {
+        $this->loginAs('hubert');
+
         /** @var \eTraxis\Entity\Template $template */
         $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
 
@@ -96,7 +65,7 @@ class StateVoterTest extends BaseTestCase
         $this->assertInstanceOf('eTraxis\Entity\State', $state);
         $this->assertInstanceOf('eTraxis\Entity\State', $empty);
 
-        $this->assertFalse($this->object->isGranted(State::DELETE, $state));
-        $this->assertTrue($this->object->isGranted(State::DELETE, $empty));
+        $this->assertFalse($this->security->isGranted(State::DELETE, $state));
+        $this->assertTrue($this->security->isGranted(State::DELETE, $empty));
     }
 }

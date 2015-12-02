@@ -13,64 +13,33 @@ namespace eTraxis\Voter;
 
 use eTraxis\Entity\Template;
 use eTraxis\Tests\BaseTestCase;
-use eTraxis\Traits\ClassAccessTrait;
-
-/**
- * @method getSupportedClasses()
- * @method getSupportedAttributes()
- * @method isGranted($attribute, $object, $user = null);
- */
-class TemplateVoterStub extends TemplateVoter
-{
-    use ClassAccessTrait;
-}
 
 class TemplateVoterTest extends BaseTestCase
 {
-    /** @var TemplateVoterStub */
-    private $object = null;
+    /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker */
+    private $security = null;
 
     protected function setUp()
     {
         parent::setUp();
 
-        /** @var \eTraxis\Repository\IssuesRepository $repository */
-        $repository = $this->doctrine->getRepository('eTraxis:Issue');
-
-        $this->object = new TemplateVoterStub($repository);
-    }
-
-    public function testGetSupportedClasses()
-    {
-        /** @var Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
-
-        $expected = [
-            get_class($template),
-        ];
-
-        $this->assertEquals($expected, $this->object->getSupportedClasses());
-    }
-
-    public function testGetSupportedAttributes()
-    {
-        $expected = [
-            Template::DELETE,
-        ];
-
-        $this->assertEquals($expected, $this->object->getSupportedAttributes());
+        $this->security = $this->client->getContainer()->get('security.authorization_checker');
     }
 
     public function testUnsupportedAttribute()
     {
+        $this->loginAs('hubert');
+
         /** @var Template $template */
         $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
 
-        $this->assertFalse($this->object->isGranted('UNKNOWN', $template));
+        $this->assertFalse($this->security->isGranted('UNKNOWN', $template));
     }
 
     public function testDelete()
     {
+        $this->loginAs('hubert');
+
         /** @var \eTraxis\Entity\Project $project */
         $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
 
@@ -99,7 +68,7 @@ class TemplateVoterTest extends BaseTestCase
         $this->assertInstanceOf('eTraxis\Entity\Template', $template);
         $this->assertInstanceOf('eTraxis\Entity\Template', $empty);
 
-        $this->assertFalse($this->object->isGranted(Template::DELETE, $template));
-        $this->assertTrue($this->object->isGranted(Template::DELETE, $empty));
+        $this->assertFalse($this->security->isGranted(Template::DELETE, $template));
+        $this->assertTrue($this->security->isGranted(Template::DELETE, $empty));
     }
 }

@@ -13,84 +13,70 @@ namespace eTraxis\Voter;
 
 use eTraxis\Entity\User;
 use eTraxis\Tests\BaseTestCase;
-use eTraxis\Traits\ClassAccessTrait;
-
-/**
- * @method getSupportedClasses()
- * @method getSupportedAttributes()
- * @method isGranted($attribute, $object, $user = null);
- */
-class UserVoterStub extends UserVoter
-{
-    use ClassAccessTrait;
-}
+use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 
 class UserVoterTest extends BaseTestCase
 {
-    /** @var UserVoterStub */
-    private $object = null;
+    /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker */
+    private $security = null;
 
     protected function setUp()
     {
         parent::setUp();
 
-        /** @var \eTraxis\Repository\EventsRepository $repository */
-        $repository = $this->doctrine->getRepository('eTraxis:Event');
-
-        $this->object = new UserVoterStub($repository);
-    }
-
-    public function testGetSupportedClasses()
-    {
-        $user = $this->findUser('artem');
-
-        $expected = [
-            get_class($user),
-        ];
-
-        $this->assertEquals($expected, $this->object->getSupportedClasses());
-    }
-
-    public function testGetSupportedAttributes()
-    {
-        $expected = [
-            User::SET_EXPIRED_PASSWORD,
-            User::DELETE,
-            User::DISABLE,
-            User::ENABLE,
-            User::UNLOCK,
-        ];
-
-        $this->assertEquals($expected, $this->object->getSupportedAttributes());
+        $this->security = $this->client->getContainer()->get('security.authorization_checker');
     }
 
     public function testUnsupportedAttribute()
     {
+        $this->loginAs('hubert');
+
         $hubert = $this->findUser('hubert');
 
-        $this->assertFalse($this->object->isGranted('UNKNOWN', $hubert));
+        $this->assertFalse($this->security->isGranted('UNKNOWN', $hubert));
+    }
+
+    public function testAnonymous()
+    {
+        $scruffy = $this->findUser('scruffy');
+
+        /** @var \eTraxis\Repository\EventsRepository $repository */
+        $repository = $this->doctrine->getRepository('eTraxis:Event');
+
+        $voter = new UserVoter($repository);
+        $token = new AnonymousToken('', 'anon.');
+
+        $this->assertEquals(UserVoter::ACCESS_DENIED, $voter->vote($token, $scruffy, [User::DELETE, User::DISABLE]));
     }
 
     public function testSetExpiredPassword()
     {
+        $this->loginAs('hubert');
+
+        /** @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage $storage */
+        $storage = $this->client->getContainer()->get('security.token_storage');
+        $token = $storage->getToken();
+
         $hubert = $this->findUser('hubert');
 
-        $this->assertFalse($this->object->isGranted(User::SET_EXPIRED_PASSWORD, $hubert));
+        $this->assertFalse($this->security->isGranted(User::SET_EXPIRED_PASSWORD, $hubert));
 
         $hubert->setPasswordSetAt(time() - 86400 * 2);
 
         /** @var \eTraxis\Repository\EventsRepository $repository */
         $repository = $this->doctrine->getRepository('eTraxis:Event');
 
-        $this->object = new UserVoterStub($repository, 3);
-        $this->assertFalse($this->object->isGranted(User::SET_EXPIRED_PASSWORD, $hubert));
+        $voter = new UserVoter($repository, 3);
+        $this->assertEquals(UserVoter::ACCESS_DENIED, $voter->vote($token, $hubert, [User::SET_EXPIRED_PASSWORD]));
 
-        $this->object = new UserVoterStub($repository, 1);
-        $this->assertTrue($this->object->isGranted(User::SET_EXPIRED_PASSWORD, $hubert));
+        $voter = new UserVoter($repository, 1);
+        $this->assertEquals(UserVoter::ACCESS_GRANTED, $voter->vote($token, $hubert, [User::SET_EXPIRED_PASSWORD]));
     }
 
     public function testDelete()
     {
+        $this->loginAs('hubert');
+
         $hubert  = $this->findUser('hubert');
         $leela   = $this->findUser('leela');
         $scruffy = $this->findUser('scruffy');
@@ -99,42 +85,46 @@ class UserVoterTest extends BaseTestCase
         $this->assertInstanceOf('eTraxis\Entity\User', $leela);
         $this->assertInstanceOf('eTraxis\Entity\User', $scruffy);
 
-        $this->assertFalse($this->object->isGranted(User::DELETE, $leela, $hubert));
-        $this->assertTrue($this->object->isGranted(User::DELETE, $scruffy, $hubert));
-        $this->assertFalse($this->object->isGranted(User::DELETE, $scruffy, $scruffy));
-        $this->assertFalse($this->object->isGranted(User::DELETE, $scruffy));
+        $this->assertFalse($this->security->isGranted(User::DELETE, $hubert));
+        $this->assertFalse($this->security->isGranted(User::DELETE, $leela));
+        $this->assertTrue($this->security->isGranted(User::DELETE, $scruffy));
     }
 
     public function testDisable()
     {
+        $this->loginAs('hubert');
+
         $hubert   = $this->findUser('hubert');
-        $bender   = $this->findUser('bender');
         $francine = $this->findUser('francine');
+        $scruffy  = $this->findUser('scruffy');
 
         $this->assertInstanceOf('eTraxis\Entity\User', $hubert);
-        $this->assertInstanceOf('eTraxis\Entity\User', $bender);
         $this->assertInstanceOf('eTraxis\Entity\User', $francine);
+        $this->assertInstanceOf('eTraxis\Entity\User', $scruffy);
 
-        $this->assertFalse($this->object->isGranted(User::DISABLE, $francine, $hubert));
-        $this->assertTrue($this->object->isGranted(User::DISABLE, $bender, $hubert));
-        $this->assertFalse($this->object->isGranted(User::DISABLE, $bender, $bender));
-        $this->assertFalse($this->object->isGranted(User::DISABLE, $bender));
+        $this->assertFalse($this->security->isGranted(User::DISABLE, $hubert));
+        $this->assertFalse($this->security->isGranted(User::DISABLE, $francine));
+        $this->assertTrue($this->security->isGranted(User::DISABLE, $scruffy));
     }
 
     public function testEnable()
     {
+        $this->loginAs('hubert');
+
         $hubert   = $this->findUser('hubert');
         $francine = $this->findUser('francine');
 
         $this->assertInstanceOf('eTraxis\Entity\User', $hubert);
         $this->assertInstanceOf('eTraxis\Entity\User', $francine);
 
-        $this->assertFalse($this->object->isGranted(User::ENABLE, $hubert));
-        $this->assertTrue($this->object->isGranted(User::ENABLE, $francine));
+        $this->assertFalse($this->security->isGranted(User::ENABLE, $hubert));
+        $this->assertTrue($this->security->isGranted(User::ENABLE, $francine));
     }
 
     public function testUnlock()
     {
+        $this->loginAs('hubert');
+
         $hubert = $this->findUser('hubert');
         $bender = $this->findUser('bender');
 
@@ -144,7 +134,7 @@ class UserVoterTest extends BaseTestCase
         $bender->setAuthAttempts(3);
         $bender->setLockedUntil(time() + 60);
 
-        $this->assertTrue($this->object->isGranted(User::UNLOCK, $bender));
-        $this->assertFalse($this->object->isGranted(User::UNLOCK, $hubert));
+        $this->assertTrue($this->security->isGranted(User::UNLOCK, $bender));
+        $this->assertFalse($this->security->isGranted(User::UNLOCK, $hubert));
     }
 }

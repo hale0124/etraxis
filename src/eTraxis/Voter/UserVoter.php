@@ -14,13 +14,13 @@ namespace eTraxis\Voter;
 use eTraxis\Entity\Event;
 use eTraxis\Entity\User;
 use eTraxis\Repository\EventsRepository;
-use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
-use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 /**
  * Voter for "User" objects.
  */
-class UserVoter extends AbstractVoter
+class UserVoter extends Voter
 {
     protected $repository;
     protected $password_expiration;
@@ -40,47 +40,46 @@ class UserVoter extends AbstractVoter
     /**
      * {@inheritdoc}
      */
-    protected function getSupportedClasses()
+    protected function supports($attribute, $subject)
     {
-        return ['eTraxis\Entity\User'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getSupportedAttributes()
-    {
-        return [
+        $attributes = [
             User::SET_EXPIRED_PASSWORD,
             User::DELETE,
             User::DISABLE,
             User::ENABLE,
             User::UNLOCK,
         ];
+
+        if (in_array($attribute, $attributes)) {
+            return ($subject instanceof User);
+        }
+
+        return false;
     }
 
     /**
      * {@inheritdoc}
+     * @codeCoverageIgnoreStart
      */
-    protected function isGranted($attribute, $object, $user = null)
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
-        /** @var User $object */
+        /** @var User $subject */
         switch ($attribute) {
 
             case User::SET_EXPIRED_PASSWORD:
-                return $this->isSetExpiredPasswordGranted($object);
+                return $this->isSetExpiredPasswordGranted($subject);
 
             case User::DELETE:
-                return $this->isDeleteGranted($object, $user);
+                return $this->isDeleteGranted($subject, $token->getUser());
 
             case User::DISABLE:
-                return $this->isDisableGranted($object, $user);
+                return $this->isDisableGranted($subject, $token->getUser());
 
             case User::ENABLE:
-                return $this->isEnableGranted($object);
+                return $this->isEnableGranted($subject);
 
             case User::UNLOCK:
-                return $this->isUnlockGranted($object);
+                return $this->isUnlockGranted($subject);
 
             default:
                 return false;
@@ -90,18 +89,18 @@ class UserVoter extends AbstractVoter
     /**
      * Checks whether user's password is expired.
      *
-     * @param   User $object Subject user.
+     * @param   User $subject Subject user.
      *
      * @return  bool
      */
-    protected function isSetExpiredPasswordGranted($object)
+    protected function isSetExpiredPasswordGranted($subject)
     {
         // Deny if passwords do not expire at all.
         if ($this->password_expiration === null) {
             return false;
         }
 
-        $expires = $object->getPasswordSetAt() + $this->password_expiration * 86400;
+        $expires = $subject->getPasswordSetAt() + $this->password_expiration * 86400;
 
         return $expires < time();
     }
@@ -109,20 +108,20 @@ class UserVoter extends AbstractVoter
     /**
      * Checks whether specified user can be deleted.
      *
-     * @param   User $object Subject user.
-     * @param   User $user   Current user.
+     * @param   User $subject Subject user.
+     * @param   User $user    Current user.
      *
      * @return  bool
      */
-    protected function isDeleteGranted($object, $user = null)
+    protected function isDeleteGranted($subject, $user)
     {
-        /** @var User $user */
-        if (!$user instanceof UserInterface) {
+        // User must be logged in.
+        if (!$user instanceof User) {
             return false;
         }
 
         // Can't delete himself.
-        if ($object->getId() == $user->getId()) {
+        if ($subject->getId() == $user->getId()) {
             return false;
         }
 
@@ -130,7 +129,7 @@ class UserVoter extends AbstractVoter
         $query = $this->repository->createQueryBuilder('e')
             ->select('COUNT(e.id)')
             ->where('e.userId = :id')
-            ->setParameter('id', $object->getId())
+            ->setParameter('id', $subject->getId())
         ;
 
         $countAsOriginator = $query->getQuery()->getSingleScalarResult();
@@ -141,7 +140,7 @@ class UserVoter extends AbstractVoter
             ->where('e.type = :type')
             ->andWhere('e.parameter = :id')
             ->setParameter('type', Event::ISSUE_ASSIGNED)
-            ->setParameter('id', $object->getId())
+            ->setParameter('id', $subject->getId())
         ;
 
         $countAsAssignee = $query->getQuery()->getSingleScalarResult();
@@ -153,47 +152,47 @@ class UserVoter extends AbstractVoter
     /**
      * Checks whether specified user can be disabled.
      *
-     * @param   User $object Subject user.
-     * @param   User $user   Current user.
+     * @param   User $subject Subject user.
+     * @param   User $user    Current user.
      *
      * @return  bool
      */
-    protected function isDisableGranted($object, $user = null)
+    protected function isDisableGranted($subject, $user)
     {
-        /** @var User $user */
-        if (!$user instanceof UserInterface) {
+        // User must be logged in.
+        if (!$user instanceof User) {
             return false;
         }
 
         // Can't disable himself.
-        if ($object->getId() == $user->getId()) {
+        if ($subject->getId() == $user->getId()) {
             return false;
         }
 
-        return !$object->isDisabled();
+        return !$subject->isDisabled();
     }
 
     /**
      * Checks whether specified user can be enabled.
      *
-     * @param   User $object Subject user.
+     * @param   User $subject Subject user.
      *
      * @return  bool
      */
-    protected function isEnableGranted($object)
+    protected function isEnableGranted($subject)
     {
-        return $object->isDisabled();
+        return $subject->isDisabled();
     }
 
     /**
      * Checks whether specified user can be unlocked.
      *
-     * @param   User $object Subject user.
+     * @param   User $subject Subject user.
      *
      * @return  bool
      */
-    protected function isUnlockGranted($object)
+    protected function isUnlockGranted($subject)
     {
-        return !$object->isAccountNonLocked();
+        return !$subject->isAccountNonLocked();
     }
 }

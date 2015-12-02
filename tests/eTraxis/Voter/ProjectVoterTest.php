@@ -13,64 +13,33 @@ namespace eTraxis\Voter;
 
 use eTraxis\Entity\Project;
 use eTraxis\Tests\BaseTestCase;
-use eTraxis\Traits\ClassAccessTrait;
-
-/**
- * @method getSupportedClasses()
- * @method getSupportedAttributes()
- * @method isGranted($attribute, $object, $user = null);
- */
-class ProjectVoterStub extends ProjectVoter
-{
-    use ClassAccessTrait;
-}
 
 class ProjectVoterTest extends BaseTestCase
 {
-    /** @var ProjectVoterStub */
-    private $object = null;
+    /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker */
+    private $security = null;
 
     protected function setUp()
     {
         parent::setUp();
 
-        /** @var \eTraxis\Repository\IssuesRepository $repository */
-        $repository = $this->doctrine->getRepository('eTraxis:Issue');
-
-        $this->object = new ProjectVoterStub($repository);
-    }
-
-    public function testGetSupportedClasses()
-    {
-        /** @var Project $project */
-        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
-
-        $expected = [
-            get_class($project),
-        ];
-
-        $this->assertEquals($expected, $this->object->getSupportedClasses());
-    }
-
-    public function testGetSupportedAttributes()
-    {
-        $expected = [
-            Project::DELETE,
-        ];
-
-        $this->assertEquals($expected, $this->object->getSupportedAttributes());
+        $this->security = $this->client->getContainer()->get('security.authorization_checker');
     }
 
     public function testUnsupportedAttribute()
     {
+        $this->loginAs('hubert');
+
         /** @var Project $project */
         $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
 
-        $this->assertFalse($this->object->isGranted('UNKNOWN', $project));
+        $this->assertFalse($this->security->isGranted('UNKNOWN', $project));
     }
 
     public function testDelete()
     {
+        $this->loginAs('hubert');
+
         /** @var Project $project */
         $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
 
@@ -80,7 +49,7 @@ class ProjectVoterTest extends BaseTestCase
         $this->assertInstanceOf('eTraxis\Entity\Project', $project);
         $this->assertInstanceOf('eTraxis\Entity\Project', $empty);
 
-        $this->assertFalse($this->object->isGranted(Project::DELETE, $project));
-        $this->assertTrue($this->object->isGranted(Project::DELETE, $empty));
+        $this->assertFalse($this->security->isGranted(Project::DELETE, $project));
+        $this->assertTrue($this->security->isGranted(Project::DELETE, $empty));
     }
 }

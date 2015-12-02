@@ -14,12 +14,13 @@ namespace eTraxis\Voter;
 use eTraxis\Entity\Event;
 use eTraxis\Entity\State;
 use eTraxis\Repository\EventsRepository;
-use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 /**
  * Voter for "State" objects.
  */
-class StateVoter extends AbstractVoter
+class StateVoter extends Voter
 {
     protected $repository;
 
@@ -36,31 +37,30 @@ class StateVoter extends AbstractVoter
     /**
      * {@inheritdoc}
      */
-    protected function getSupportedClasses()
+    protected function supports($attribute, $subject)
     {
-        return ['eTraxis\Entity\State'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getSupportedAttributes()
-    {
-        return [
+        $attributes = [
             State::DELETE,
         ];
+
+        if (in_array($attribute, $attributes)) {
+            return ($subject instanceof State);
+        }
+
+        return false;
     }
 
     /**
      * {@inheritdoc}
+     * @codeCoverageIgnoreStart
      */
-    protected function isGranted($attribute, $object, $user = null)
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
-        /** @var State $object */
+        /** @var State $subject */
         switch ($attribute) {
 
             case State::DELETE:
-                return $this->isDeleteGranted($object);
+                return $this->isDeleteGranted($subject);
 
             default:
                 return false;
@@ -70,18 +70,18 @@ class StateVoter extends AbstractVoter
     /**
      * Checks whether specified state can be deleted.
      *
-     * @param   State $object State.
+     * @param   State $subject State.
      *
      * @return  bool
      */
-    protected function isDeleteGranted($object)
+    protected function isDeleteGranted($subject)
     {
         // Number of issues appeared in the state.
         $query = $this->repository->createQueryBuilder('e')
             ->select('COUNT(e.id)')
             ->where('e.parameter = :id')
             ->andWhere('e.type IN (:types)')
-            ->setParameter('id', $object->getId())
+            ->setParameter('id', $subject->getId())
             ->setParameter('types', [Event::ISSUE_CREATED, Event::ISSUE_REOPENED, Event::STATE_CHANGED])
         ;
 

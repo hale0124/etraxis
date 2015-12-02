@@ -13,12 +13,13 @@ namespace eTraxis\Voter;
 
 use eTraxis\Entity\Template;
 use eTraxis\Repository\IssuesRepository;
-use Symfony\Component\Security\Core\Authorization\Voter\AbstractVoter;
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 /**
  * Voter for "Template" objects.
  */
-class TemplateVoter extends AbstractVoter
+class TemplateVoter extends Voter
 {
     protected $repository;
 
@@ -35,31 +36,30 @@ class TemplateVoter extends AbstractVoter
     /**
      * {@inheritdoc}
      */
-    protected function getSupportedClasses()
+    protected function supports($attribute, $subject)
     {
-        return ['eTraxis\Entity\Template'];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    protected function getSupportedAttributes()
-    {
-        return [
+        $attributes = [
             Template::DELETE,
         ];
+
+        if (in_array($attribute, $attributes)) {
+            return ($subject instanceof Template);
+        }
+
+        return false;
     }
 
     /**
      * {@inheritdoc}
+     * @codeCoverageIgnoreStart
      */
-    protected function isGranted($attribute, $object, $user = null)
+    protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
-        /** @var Template $object */
+        /** @var Template $subject */
         switch ($attribute) {
 
             case Template::DELETE:
-                return $this->isDeleteGranted($object);
+                return $this->isDeleteGranted($subject);
 
             default:
                 return false;
@@ -69,18 +69,18 @@ class TemplateVoter extends AbstractVoter
     /**
      * Checks whether specified template can be deleted.
      *
-     * @param   Template $object Template.
+     * @param   Template $subject Template.
      *
      * @return  bool
      */
-    protected function isDeleteGranted($object)
+    protected function isDeleteGranted($subject)
     {
         // Number of issues created by the template.
         $query = $this->repository->createQueryBuilder('i')
             ->select('COUNT(i.id)')
             ->leftJoin('i.state', 's')
             ->where('s.templateId = :id')
-            ->setParameter('id', $object->getId())
+            ->setParameter('id', $subject->getId())
         ;
 
         $count = $query->getQuery()->getSingleScalarResult();
