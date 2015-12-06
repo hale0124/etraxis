@@ -26,12 +26,12 @@ class UpdateTextFieldCommand extends UpdateFieldBaseCommand
 {
     /**
      * @Assert\NotBlank()
-     * @Assert\Range(min = "1", max = "250")
+     * @Assert\Range(min = "1", max = "4000")
      */
     public $maxLength;
 
     /**
-     * @Assert\Length(max = "250")
+     * @Assert\Length(max = "4000")
      */
     public $default;
 

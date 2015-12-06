@@ -24,6 +24,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class TextValue
 {
+    // Constraints.
+    const MAX_VALUE = 4000;
+
     /**
      * @var int Unique ID.
      *

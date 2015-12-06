@@ -10,6 +10,11 @@ services:
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateStringFieldCommand }]
         arguments: [ "@logger", "@validator", "@translator", "@doctrine", "@etraxis.repository.string_values" ]
 
+    command.field.create.text:
+        class: eTraxis\SimpleBus\Fields\Handler\TextFieldCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateTextFieldCommand }]
+        arguments: [ "@logger", "@validator", "@translator", "@doctrine", "@etraxis.repository.text_values" ]
+
     command.field.create.checkbox:
         class: eTraxis\SimpleBus\Fields\Handler\CheckboxFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateCheckboxFieldCommand }]
@@ -34,6 +39,11 @@ services:
         class: eTraxis\SimpleBus\Fields\Handler\StringFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateStringFieldCommand }]
         arguments: [ "@logger", "@validator", "@translator", "@doctrine", "@etraxis.repository.string_values" ]
+
+    command.field.update.text:
+        class: eTraxis\SimpleBus\Fields\Handler\TextFieldCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateTextFieldCommand }]
+        arguments: [ "@logger", "@validator", "@translator", "@doctrine", "@etraxis.repository.text_values" ]
 
     command.field.update.checkbox:
         class: eTraxis\SimpleBus\Fields\Handler\CheckboxFieldCommandHandler
