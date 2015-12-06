@@ -15,6 +15,11 @@ services:
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateIssueFieldCommand }]
         arguments: [ "@logger", "@validator", "@translator", "@doctrine" ]
 
+    command.field.create.decimal:
+        class: eTraxis\SimpleBus\Fields\Handler\DecimalFieldCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateDecimalFieldCommand }]
+        arguments: [ "@logger", "@validator", "@translator", "@doctrine", "@etraxis.repository.decimal_values" ]
+
     command.field.update.number:
         class: eTraxis\SimpleBus\Fields\Handler\NumberFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateNumberFieldCommand }]
@@ -29,6 +34,11 @@ services:
         class: eTraxis\SimpleBus\Fields\Handler\IssueFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateIssueFieldCommand }]
         arguments: [ "@logger", "@validator", "@translator", "@doctrine" ]
+
+    command.field.update.decimal:
+        class: eTraxis\SimpleBus\Fields\Handler\DecimalFieldCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateDecimalFieldCommand }]
+        arguments: [ "@logger", "@validator", "@translator", "@doctrine", "@etraxis.repository.decimal_values" ]
 
     command.field.delete:
         class: eTraxis\SimpleBus\Fields\Handler\DeleteFieldCommandHandler

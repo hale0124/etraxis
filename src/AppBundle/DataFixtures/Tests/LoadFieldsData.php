@@ -222,6 +222,8 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
         $manager->persist($min_value);
         $manager->persist($max_value);
 
+        $manager->flush();
+
         $fields = [
             'state:produced' => [
                 1 => [
