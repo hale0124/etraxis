@@ -21,6 +21,11 @@ services:
         factory: [ "@doctrine.orm.default_entity_manager", "getRepository" ]
         arguments: [ eTraxis\Entity\Project ]
 
+    etraxis.repository.string_values:
+        class: Doctrine\ORM\EntityRepository
+        factory: [ "@doctrine.orm.default_entity_manager", "getRepository" ]
+        arguments: [ eTraxis\Entity\StringValue ]
+
     etraxis.repository.users:
         class: Doctrine\ORM\EntityRepository
         factory: [ "@doctrine.orm.default_entity_manager", "getRepository" ]

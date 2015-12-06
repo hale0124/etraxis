@@ -23,7 +23,7 @@ use Doctrine\ORM\Mapping as ORM;
  *            indexes={
  *                @ORM\Index(name="ix_svl_id_val", columns={"value_id", "string_value"})
  *            })
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="eTraxis\Repository\StringValuesRepository")
  */
 class StringValue
 {
