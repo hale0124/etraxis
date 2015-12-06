@@ -20,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
  *            uniqueConstraints={
  *                @ORM\UniqueConstraint(name="ix_text_values", columns={"value_token"})
  *            })
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="eTraxis\Repository\TextValuesRepository")
  */
 class TextValue
 {
