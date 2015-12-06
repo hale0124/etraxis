@@ -25,6 +25,11 @@ services:
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateIssueFieldCommand }]
         arguments: [ "@logger", "@validator", "@translator", "@doctrine" ]
 
+    command.field.create.date:
+        class: eTraxis\SimpleBus\Fields\Handler\DateFieldCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateDateFieldCommand }]
+        arguments: [ "@logger", "@validator", "@translator", "@doctrine" ]
+
     command.field.create.decimal:
         class: eTraxis\SimpleBus\Fields\Handler\DecimalFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateDecimalFieldCommand }]
@@ -53,6 +58,11 @@ services:
     command.field.update.issue:
         class: eTraxis\SimpleBus\Fields\Handler\IssueFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateIssueFieldCommand }]
+        arguments: [ "@logger", "@validator", "@translator", "@doctrine" ]
+
+    command.field.update.date:
+        class: eTraxis\SimpleBus\Fields\Handler\DateFieldCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateDateFieldCommand }]
         arguments: [ "@logger", "@validator", "@translator", "@doctrine" ]
 
     command.field.update.decimal:
