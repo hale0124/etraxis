@@ -11,8 +11,8 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
-use eTraxis\Entity\StringValue;
 use eTraxis\Entity\Field;
+use eTraxis\Entity\StringValue;
 use eTraxis\Tests\BaseTestCase;
 
 class CreateStringFieldCommandTest extends BaseTestCase

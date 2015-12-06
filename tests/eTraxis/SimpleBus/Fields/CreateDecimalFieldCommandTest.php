@@ -50,9 +50,9 @@ class CreateDecimalFieldCommandTest extends BaseTestCase
 
         $this->assertInstanceOf('\eTraxis\Entity\Field', $field);
         $this->assertEquals(Field::TYPE_DECIMAL, $field->getType());
-        $this->assertEquals($minValue->getId(), $field->getParameter1());
-        $this->assertEquals($maxValue->getId(), $field->getParameter2());
-        $this->assertEquals($default->getId(), $field->getDefaultValue());
+        $this->assertEquals('0.00', $minValue->getValue());
+        $this->assertEquals('100000.0', $maxValue->getValue());
+        $this->assertEquals('499.95', $default->getValue());
     }
 
     /**

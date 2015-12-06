@@ -64,9 +64,9 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
         $this->assertTrue($field->isRequired());
         $this->assertTrue($field->hasGuestAccess());
         $this->assertTrue($field->getShowInEmails());
-        $this->assertEquals($minValue->getId(), $field->getParameter1());
-        $this->assertEquals($maxValue->getId(), $field->getParameter2());
-        $this->assertEquals($default->getId(), $field->getDefaultValue());
+        $this->assertEquals('0.1', $minValue->getValue());
+        $this->assertEquals('50.0', $maxValue->getValue());
+        $this->assertEquals('10.0', $default->getValue());
     }
 
     /**
