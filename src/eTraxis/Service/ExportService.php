@@ -47,7 +47,7 @@ class ExportService implements ExportInterface
                     $result = iconv('UTF-8', $query->encoding . '//TRANSLIT', $result);
                 }
 
-                print($result);
+                echo $result;
             }
         });
 

@@ -40,7 +40,7 @@ class ScriptHandler
                 'run-sequence',
             ];
 
-            print("\nInstalling npm modules\n");
+            echo "\nInstalling npm modules\n";
             system('npm install ' . implode(' ', $modules));
         }
     }
@@ -52,10 +52,10 @@ class ScriptHandler
     {
         if (!getenv('TRAVIS')) {
 
-            print("\nInstalling assets\n");
+            echo "\nInstalling assets\n";
             system('bower install');
 
-            print("\nProcessing assets\n");
+            echo "\nProcessing assets\n";
             system('gulp');
         }
     }
@@ -67,10 +67,10 @@ class ScriptHandler
     {
         if (!getenv('TRAVIS')) {
 
-            print("\nUpdating assets\n");
+            echo "\nUpdating assets\n";
             system('bower update');
 
-            print("\nProcessing assets\n");
+            echo "\nProcessing assets\n";
             system('gulp');
         }
     }

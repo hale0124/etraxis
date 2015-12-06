@@ -22,11 +22,11 @@ class PostgresqlMigrationStub extends BaseMigrationStub implements PostgresqlMig
 
     public function postgresqlUp(Schema $schema)
     {
-        print('postgresql up');
+        echo 'postgresql up';
     }
 
     public function postgresqlDown(Schema $schema)
     {
-        print('postgresql down');
+        echo 'postgresql down';
     }
 }

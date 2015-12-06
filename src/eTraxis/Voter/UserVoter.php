@@ -51,7 +51,7 @@ class UserVoter extends Voter
         ];
 
         if (in_array($attribute, $attributes)) {
-            return ($subject instanceof User);
+            return $subject instanceof User;
         }
 
         return false;

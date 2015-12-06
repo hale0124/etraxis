@@ -22,11 +22,11 @@ class MssqlMigrationStub extends BaseMigrationStub implements MssqlMigrationInte
 
     public function mssqlUp(Schema $schema)
     {
-        print('mssql up');
+        echo 'mssql up';
     }
 
     public function mssqlDown(Schema $schema)
     {
-        print('mssql down');
+        echo 'mssql down';
     }
 }

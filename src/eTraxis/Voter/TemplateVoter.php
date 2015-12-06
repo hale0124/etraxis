@@ -43,7 +43,7 @@ class TemplateVoter extends Voter
         ];
 
         if (in_array($attribute, $attributes)) {
-            return ($subject instanceof Template);
+            return $subject instanceof Template;
         }
 
         return false;

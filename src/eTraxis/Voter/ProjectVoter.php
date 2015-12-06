@@ -43,7 +43,7 @@ class ProjectVoter extends Voter
         ];
 
         if (in_array($attribute, $attributes)) {
-           return ($subject instanceof Project);
+           return $subject instanceof Project;
         }
 
         return false;

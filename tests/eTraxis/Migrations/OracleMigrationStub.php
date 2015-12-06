@@ -22,11 +22,11 @@ class OracleMigrationStub extends BaseMigrationStub implements OracleMigrationIn
 
     public function oracleUp(Schema $schema)
     {
-        print('oracle up');
+        echo 'oracle up';
     }
 
     public function oracleDown(Schema $schema)
     {
-        print('oracle down');
+        echo 'oracle down';
     }
 }

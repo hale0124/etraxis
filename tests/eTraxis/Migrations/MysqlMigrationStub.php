@@ -22,11 +22,11 @@ class MysqlMigrationStub extends BaseMigrationStub implements MysqlMigrationInte
 
     public function mysqlUp(Schema $schema)
     {
-        print('mysql up');
+        echo 'mysql up';
     }
 
     public function mysqlDown(Schema $schema)
     {
-        print('mysql down');
+        echo 'mysql down';
     }
 }

@@ -44,7 +44,7 @@ class StateVoter extends Voter
         ];
 
         if (in_array($attribute, $attributes)) {
-            return ($subject instanceof State);
+            return $subject instanceof State;
         }
 
         return false;

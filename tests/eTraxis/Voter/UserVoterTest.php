@@ -55,7 +55,7 @@ class UserVoterTest extends BaseTestCase
 
         /** @var \Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage $storage */
         $storage = $this->client->getContainer()->get('security.token_storage');
-        $token = $storage->getToken();
+        $token   = $storage->getToken();
 
         $hubert = $this->findUser('hubert');
 

@@ -68,7 +68,7 @@ class ClassAccessTraitTest extends \PHPUnit_Framework_TestCase
         $object = new MyTestClassStub();
 
         /** @noinspection PhpUndefinedFieldInspection */
-        echo($object->unknown);
+        echo $object->unknown;
     }
 
     public function testSetPropertySuccess()
