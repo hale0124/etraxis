@@ -54,9 +54,7 @@ class UsersRepository extends EntityRepository
      */
     public function getOtherGroups($id)
     {
-        $repository = $this->getEntityManager()->getRepository('eTraxis:User');
-
-        if (!$repository->find($id)) {
+        if (!$this->find($id)) {
             return [];
         }
 

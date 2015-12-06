@@ -52,9 +52,7 @@ class GroupsRepository extends EntityRepository
      */
     public function getGroupNonMembers($id)
     {
-        $repository = $this->getEntityManager()->getRepository('eTraxis:Group');
-
-        if (!$repository->find($id)) {
+        if (!$this->find($id)) {
             return [];
         }
 
