@@ -1,6 +1,11 @@
 # Keep repositories sorted alphabetically.
 services:
 
+    etraxis.repository.decimal_values:
+        class: Doctrine\ORM\EntityRepository
+        factory: [ "@doctrine.orm.default_entity_manager", "getRepository" ]
+        arguments: [ eTraxis\Entity\DecimalValue ]
+
     etraxis.repository.events:
         class: Doctrine\ORM\EntityRepository
         factory: [ "@doctrine.orm.default_entity_manager", "getRepository" ]

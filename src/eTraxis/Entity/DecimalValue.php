@@ -20,10 +20,13 @@ use Doctrine\ORM\Mapping as ORM;
  *            uniqueConstraints={
  *                @ORM\UniqueConstraint(name="ix_float_values", columns={"float_value"})
  *            })
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="eTraxis\Repository\DecimalValuesRepository")
  */
 class DecimalValue
 {
+    // Constraints.
+    const SCALE = 10;
+
     /**
      * @var int Unique ID.
      *
