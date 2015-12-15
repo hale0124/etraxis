@@ -20,6 +20,11 @@ services:
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateCheckboxFieldCommand }]
         arguments: [ "@logger", "@validator", "@translator", "@doctrine" ]
 
+    command.field.create.list:
+        class: eTraxis\SimpleBus\Fields\Handler\ListFieldCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateListFieldCommand }]
+        arguments: [ "@logger", "@validator", "@translator", "@doctrine" ]
+
     command.field.create.issue:
         class: eTraxis\SimpleBus\Fields\Handler\IssueFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateIssueFieldCommand }]
@@ -63,6 +68,11 @@ services:
     command.field.update.issue:
         class: eTraxis\SimpleBus\Fields\Handler\IssueFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateIssueFieldCommand }]
+        arguments: [ "@logger", "@validator", "@translator", "@doctrine" ]
+
+    command.field.update.list:
+        class: eTraxis\SimpleBus\Fields\Handler\ListFieldCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateListFieldCommand }]
         arguments: [ "@logger", "@validator", "@translator", "@doctrine" ]
 
     command.field.update.date:
