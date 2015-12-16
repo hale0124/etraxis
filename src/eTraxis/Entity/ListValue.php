@@ -23,7 +23,7 @@ use Doctrine\ORM\Mapping as ORM;
  *            indexes={
  *                @ORM\Index(name="ix_lvl_id_val", columns={"field_id", "int_value", "str_value"})
  *            })
- * @ORM\Entity(repositoryClass="eTraxis\Repository\ListValuesRepository")
+ * @ORM\Entity
  */
 class ListValue
 {
