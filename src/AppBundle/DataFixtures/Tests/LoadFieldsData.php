@@ -17,7 +17,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use eTraxis\Entity\DecimalValue;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\FieldGroupAccess;
-use eTraxis\Entity\ListValue;
+use eTraxis\Entity\ListItem;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -370,7 +370,7 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
 
         for ($i = 1; $i <= 7; $i++) {
 
-            $value = new ListValue();
+            $value = new ListItem();
 
             $value
                 ->setFieldId($field->getId())

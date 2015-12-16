@@ -11,14 +11,14 @@
 
 namespace eTraxis\Entity;
 
-class ListValueTest extends \PHPUnit_Framework_TestCase
+class ListItemTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var ListValue */
+    /** @var ListItem */
     private $object = null;
 
     protected function setUp()
     {
-        $this->object = new ListValue();
+        $this->object = new ListItem();
     }
 
     public function testFieldId()

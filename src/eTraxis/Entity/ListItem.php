@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * List value.
+ * List item.
  *
  * @ORM\Table(name="tbl_list_values",
  *            uniqueConstraints={
@@ -25,7 +25,7 @@ use Doctrine\ORM\Mapping as ORM;
  *            })
  * @ORM\Entity
  */
-class ListValue
+class ListItem
 {
     // Constraints.
     const MAX_VALUE = 50;
@@ -39,7 +39,7 @@ class ListValue
     private $fieldId;
 
     /**
-     * @var int Value key.
+     * @var int Key of the item.
      *
      * @ORM\Column(name="int_value", type="integer")
      * @ORM\Id
@@ -47,7 +47,7 @@ class ListValue
     private $key;
 
     /**
-     * @var string String value.
+     * @var string String value of the item.
      *
      * @ORM\Column(name="str_value", type="string", length=50)
      */

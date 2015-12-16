@@ -42,9 +42,9 @@ class ListFieldCommandHandler extends BaseFieldCommandHandler
 
         if ($command instanceof UpdateListFieldCommand) {
 
-            $repository = $this->doctrine->getRepository('eTraxis:ListValue');
+            $repository = $this->doctrine->getRepository('eTraxis:ListItem');
 
-            /** @var \eTraxis\Entity\ListValue $item */
+            /** @var \eTraxis\Entity\ListItem $item */
             $item = $repository->findOneBy([
                 'fieldId' => $command->id,
                 'key'     => $command->default,
