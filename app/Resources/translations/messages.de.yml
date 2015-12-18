@@ -104,3 +104,5 @@ field.conflict.name: 'Ein Zusatz mit diesem Namen existiert bereits.'
 field.min_max_values: 'Das Maximum muss größer als das Minimum sein.'
 field.default_value: 'Der vorgegebene Wert muss im Bereich von %min% bis %max% liegen.'
 field.value_range: 'Der Wert von "%name%" muss im Bereich von %min% bis %max% liegen.'
+list.conflict.key: ~
+list.conflict.value: ~

@@ -104,3 +104,5 @@ field.conflict.name: 'Már létezik ilyen névvel ellátott mező.'
 field.min_max_values: 'A maximum értéknek nagyobbnak kell lennie, mint 1.'
 field.default_value: 'Az alapértelmezett érték %min% és %max% közé kell, hogy essen.'
 field.value_range: 'A(z) "%name%" értéke %min% és %max% közé kell, hogy essen.'
+list.conflict.key: ~
+list.conflict.value: ~

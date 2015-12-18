@@ -104,3 +104,5 @@ field.conflict.name: 'Pole se zadaným jménem již existuje.'
 field.min_max_values: 'Maximální hodnota musí být větší než minimální.'
 field.default_value: 'Výchozí hodnota musí být v rozmezí %min% až %max%.'
 field.value_range: 'Hodnota "%name%" musí být v rozmezí %min% až %max%.'
+list.conflict.key: ~
+list.conflict.value: ~

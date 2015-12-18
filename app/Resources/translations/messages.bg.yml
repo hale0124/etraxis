@@ -104,3 +104,5 @@ field.conflict.name: 'Вече съществува поле с въведено
 field.min_max_values: 'Mаксималната стойност трябва да е по-голяма от минималната.'
 field.default_value: 'Стойностите по подразбиране трябва да са в порядъка на %min% до %max%.'
 field.value_range: 'Стойност от "%name%" трябва да бъде в подръдъка от %min% до %max%.'
+list.conflict.key: ~
+list.conflict.value: ~

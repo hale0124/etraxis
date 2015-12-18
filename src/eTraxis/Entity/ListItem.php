@@ -12,6 +12,7 @@
 namespace eTraxis\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 
 /**
  * List item.
@@ -24,11 +25,16 @@ use Doctrine\ORM\Mapping as ORM;
  *                @ORM\Index(name="ix_lvl_id_val", columns={"field_id", "int_value", "str_value"})
  *            })
  * @ORM\Entity
+ * @Assert\UniqueEntity(fields={"field", "key"}, message="list.conflict.key")
+ * @Assert\UniqueEntity(fields={"field", "value"}, message="list.conflict.value")
  */
 class ListItem
 {
     // Constraints.
     const MAX_VALUE = 50;
+
+    // Actions.
+    const DELETE = 'list_item.delete';
 
     /**
      * @var int Field ID.

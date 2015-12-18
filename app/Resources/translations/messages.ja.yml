@@ -104,3 +104,5 @@ field.conflict.name: 入力されたフィールドの名前は既に存在し�
 field.min_max_values: 最大値は最小値よりも大きい必要があります。
 field.default_value: 'デフォルトの値は %min% から %max% の範囲で指定できます。'
 field.value_range: '値 %name% は、 %min% から %max% の範囲で指定できます。'
+list.conflict.key: ~
+list.conflict.value: ~

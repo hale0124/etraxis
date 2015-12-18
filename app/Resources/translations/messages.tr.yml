@@ -104,3 +104,5 @@ field.conflict.name: 'Girilen adda bir alan zaten var.'
 field.min_max_values: 'En yüksek değer, en düşük değerden daha büyük olmalıdır.'
 field.default_value: 'Varsayılan değer, %min% ile %max% arasında olmalıdır.'
 field.value_range: '"%name%" değeri %min% ile %max% arasında olmalıdır.'
+list.conflict.key: ~
+list.conflict.value: ~

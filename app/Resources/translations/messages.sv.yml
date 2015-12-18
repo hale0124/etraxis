@@ -104,3 +104,5 @@ field.conflict.name: 'Fält med detta namnet finns redan.'
 field.min_max_values: 'Högsta värdet bör vara större än minimum en.'
 field.default_value: 'Standardvärdet bör vara i intervallet från %min% till %max%.'
 field.value_range: 'Värdet av "%name%" ska vara i intervallet från %min% till %max%.'
+list.conflict.key: ~
+list.conflict.value: ~

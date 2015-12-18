@@ -104,3 +104,5 @@ field.conflict.name: 'Atribūts ar tādu nosaukumu jau eksistē.'
 field.min_max_values: 'Maksimālajam lielumam jābūt lielākam par minimālo.'
 field.default_value: 'Noklusējuma nozīmei jąbūt no %min% līdz %max% apgabalā.'
 field.value_range: '"%name%" lauciņa lielumam jābūt no %min% līdz %max% apgabalā.'
+list.conflict.key: ~
+list.conflict.value: ~

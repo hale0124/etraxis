@@ -104,3 +104,5 @@ field.conflict.name: 'Pole o podanej nazwie już istnieje.'
 field.min_max_values: 'Wartość maksymalna powinna być większa od wartości minimalnej.'
 field.default_value: 'Wartość domyślna powinna być z przedziału od %min% do %max%.'
 field.value_range: 'Wartość "%name%" powinna być z przedziału od %min% do %max%.'
+list.conflict.key: ~
+list.conflict.value: ~

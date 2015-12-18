@@ -104,3 +104,5 @@ field.conflict.name: 'Numele campului deja exista.'
 field.min_max_values: 'Valoarea maxima trebuie sa fie mai mare decat cea minima.'
 field.default_value: 'Valoarea implicita trebuie sa fie in intervalul %min% la %max%.'
 field.value_range: 'Valoarea "%name%" trebuie sa fie in intervalul %min% pana la %max%.'
+list.conflict.key: ~
+list.conflict.value: ~

@@ -1,6 +1,12 @@
 # Keep voters sorted alphabetically.
 services:
 
+    etraxis.voter.list_item:
+        class: eTraxis\Voter\ListItemVoter
+        public: false
+        tags: [{ name: security.voter }]
+        arguments: [ "@etraxis.repository.field_values" ]
+
     etraxis.voter.project:
         class: eTraxis\Voter\ProjectVoter
         public: false

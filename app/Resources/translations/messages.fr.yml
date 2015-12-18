@@ -104,3 +104,5 @@ field.conflict.name: 'Il existe déjà un champ portant ce nom.'
 field.min_max_values: 'Le maximum doit être superieur au minimum.'
 field.default_value: 'La valeur par défaut doit être comprise entre %min% et %max%.'
 field.value_range: 'La valeur de "%name%" doit être comprise entre %min% et %max%.'
+list.conflict.key: ~
+list.conflict.value: ~
