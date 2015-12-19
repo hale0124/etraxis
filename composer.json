@@ -5,6 +5,7 @@
     "license": "GPL-3.0",
     "require": {
         "php"                                  : "~5.5|~7.0",
+        "ext-bcmath"                           : "*",
         "ext-ctype"                            : "*",
         "ext-iconv"                            : "*",
         "ext-mbstring"                         : "*",
