@@ -94,3 +94,8 @@ services:
         class: eTraxis\SimpleBus\Fields\Handler\DeleteFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\DeleteFieldCommand }]
         arguments: [ "@logger", "@doctrine" ]
+
+    command.field.set_order:
+        class: eTraxis\SimpleBus\Fields\Handler\SetOrderFieldCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\SetOrderFieldCommand }]
+        arguments: [ "@logger", "@doctrine" ]
