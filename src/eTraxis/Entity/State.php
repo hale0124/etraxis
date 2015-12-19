@@ -117,7 +117,7 @@ class State
      * @var ArrayCollection List of state fields.
      *
      * @ORM\OneToMany(targetEntity="Field", mappedBy="state")
-     * @ORM\OrderBy({"name" = "ASC"})
+     * @ORM\OrderBy({"indexNumber" = "ASC"})
      */
     private $fields;
 
@@ -366,6 +366,8 @@ class State
      */
     public function getFields()
     {
-        return $this->fields;
+        return $this->fields->filter(function (Field $field) {
+            return $field->getRemovedAt() === 0;
+        });
     }
 }

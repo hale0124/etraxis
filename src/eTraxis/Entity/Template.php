@@ -163,7 +163,7 @@ class Template
      * @var ArrayCollection List of template fields.
      *
      * @ORM\OneToMany(targetEntity="Field", mappedBy="template")
-     * @ORM\OrderBy({"name" = "ASC"})
+     * @ORM\OrderBy({"indexNumber" = "ASC"})
      */
     private $fields;
 
@@ -548,7 +548,7 @@ class Template
     public function getFields()
     {
         return $this->fields->filter(function (Field $field) {
-            return $field->getStateId() === null;
+            return $field->getRemovedAt() === 0 && $field->getStateId() === null;
         });
     }
 }
