@@ -27,4 +27,5 @@ security:
                 domain:   ~
 
     access_control:
-        - { path: ^/admin/, roles: ROLE_ADMIN }
+        - { path: ^/admin/,    roles: ROLE_ADMIN }
+        - { path: ^/settings/, roles: ROLE_USER  }
