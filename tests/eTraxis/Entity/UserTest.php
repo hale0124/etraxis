@@ -192,8 +192,8 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->object->setAdmin(true);
         $roles = $this->object->getRoles();
 
-        $this->assertTrue(in_array('ROLE_USER', $roles));
-        $this->assertTrue(in_array('ROLE_ADMIN', $roles));
+        $this->assertTrue(in_array(User::ROLE_USER, $roles));
+        $this->assertTrue(in_array(User::ROLE_ADMIN, $roles));
     }
 
     public function testGetRolesAsUser()
@@ -201,8 +201,8 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->object->setAdmin(false);
         $roles = $this->object->getRoles();
 
-        $this->assertTrue(in_array('ROLE_USER', $roles));
-        $this->assertFalse(in_array('ROLE_ADMIN', $roles));
+        $this->assertTrue(in_array(User::ROLE_USER, $roles));
+        $this->assertFalse(in_array(User::ROLE_ADMIN, $roles));
     }
 
     public function testGetSalt()

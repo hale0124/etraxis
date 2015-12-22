@@ -29,6 +29,10 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  */
 class User implements AdvancedUserInterface
 {
+    // Roles.
+    const ROLE_ADMIN = 'ROLE_ADMIN';
+    const ROLE_USER  = 'ROLE_USER';
+
     // Constraints.
     const MAX_USERNAME    = 100;
     const MAX_FULLNAME    = 64;
@@ -763,10 +767,10 @@ class User implements AdvancedUserInterface
      */
     public function getRoles()
     {
-        $roles = ['ROLE_USER'];
+        $roles = [self::ROLE_USER];
 
         if ($this->isAdmin) {
-            $roles[] = 'ROLE_ADMIN';
+            $roles[] = self::ROLE_ADMIN;
         }
 
         return $roles;
