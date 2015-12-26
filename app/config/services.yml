@@ -4,6 +4,31 @@ imports:
 
 services:
 
+    etraxis.provider:
+        class: eTraxis\Security\InternalUserProvider
+        public: false
+        arguments:
+            - "@logger"
+            - "@etraxis.repository.users"
+
+    etraxis.encoder:
+        class: eTraxis\Security\InternalPasswordEncoder
+        public: false
+        arguments:
+            - "@translator"
+            - "%password_min_length%"
+
+    etraxis.authenticator.ldap:
+        class: eTraxis\Security\Authenticator\LdapAuthenticator
+        public: false
+        arguments:
+            - "@router"
+            - "@session"
+            - "@logger"
+            - "@command_bus"
+            - "@ldap"
+            - "%ldap_basedn%"
+
     ldap:
         class: eTraxis\Service\LdapService
         arguments:
@@ -29,26 +54,3 @@ services:
 
     etraxis.export:
         class: eTraxis\Service\ExportService
-
-    etraxis.provider:
-        class: eTraxis\Security\InternalUserProvider
-        public: false
-        arguments:
-            - "@logger"
-            - "@etraxis.repository.users"
-
-    etraxis.encoder:
-        class: eTraxis\Security\InternalPasswordEncoder
-        public: false
-        arguments:
-            - "@translator"
-            - "%password_min_length%"
-
-    ldap.authenticator:
-        class: eTraxis\Security\LdapAuthenticator
-        public: false
-        arguments:
-            - "@logger"
-            - "@command_bus"
-            - "@ldap"
-            - "%ldap_basedn%"

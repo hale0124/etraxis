@@ -13,13 +13,14 @@ security:
             pattern:  ^/(_(profiler|wdt)|css|images|js)/
             security: false
 
-        default:
+        main:
             pattern:    ^/
             form_login: ~
             logout:     ~
             anonymous:  ~
-            simple_form:
-                authenticator: ldap.authenticator
+            guard:
+                authenticators:
+                    - etraxis.authenticator.ldap
             remember_me:
                 secret:   "%secret%"
                 lifetime: 2592000
