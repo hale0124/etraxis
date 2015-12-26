@@ -85,9 +85,8 @@ class AuthenticationListener implements EventSubscriberInterface
         $token = $event->getAuthenticationToken();
 
         if ($token->getUsername()) {
-            $this->logger->info('Authentication failure', [$token->getUsername()]);
 
-            $credentials = $token->getCredentials();
+            $this->logger->info('Authentication failure', [$token->getUsername()]);
 
             $command = new LockUserCommand([
                 'username' => $token->getUsername(),
