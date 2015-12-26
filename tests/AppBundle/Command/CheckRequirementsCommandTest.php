@@ -29,6 +29,10 @@ class CheckRequirementsCommandTest extends BaseTestCase
             'SimpleXML  OK',
         ];
 
+        if ($this->client->getContainer()->getParameter('ldap_host')) {
+            $extensions[] = 'ldap       OK';
+        }
+
         $platform = $this->doctrine->getConnection()->getDatabasePlatform()->getName();
 
         switch ($platform) {
