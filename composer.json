@@ -34,8 +34,9 @@
         "psr-4": {
             "": [ "src/", "tests/" ]
         },
-        "files": [
-            "app/AppKernel.php"
+        "classmap": [
+            "app/AppKernel.php",
+            "app/AppCache.php"
         ]
     },
     "minimum-stability": "stable",
