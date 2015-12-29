@@ -21,6 +21,12 @@ use Symfony\Component\HttpKernel\HttpKernelInterface;
 
 class KernelListenerTest extends BaseTestCase
 {
+    /** @var \Symfony\Component\HttpFoundation\RequestStack */
+    protected $request_stack;
+
+    /** @var \Symfony\Component\Security\Http\Authentication\AuthenticationUtils */
+    protected $authentication_utils;
+
     /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface */
     protected $authorization_checker;
 
@@ -31,6 +37,8 @@ class KernelListenerTest extends BaseTestCase
     {
         parent::setUp();
 
+        $this->request_stack         = $this->client->getContainer()->get('request_stack');
+        $this->authentication_utils  = $this->client->getContainer()->get('security.authentication_utils');
         $this->authorization_checker = $this->client->getContainer()->get('security.authorization_checker');
         $this->token_storage         = $this->client->getContainer()->get('security.token_storage');
     }
@@ -42,11 +50,14 @@ class KernelListenerTest extends BaseTestCase
         $request->setSession($this->session);
         $request->cookies->set($this->session->getName(), $this->session->getId());
 
+        $this->request_stack->push($request);
+
         $event = new GetResponseEvent(static::$kernel, $request, HttpKernelInterface::MASTER_REQUEST);
 
         $object = new KernelListener(
             $this->router,
             $this->translator,
+            $this->authentication_utils,
             $this->authorization_checker,
             $this->token_storage,
             'ru');
@@ -64,11 +75,14 @@ class KernelListenerTest extends BaseTestCase
         $request->cookies->set($this->session->getName(), $this->session->getId());
         $request->attributes->set('_locale', 'ja');
 
+        $this->request_stack->push($request);
+
         $event = new GetResponseEvent(static::$kernel, $request, HttpKernelInterface::MASTER_REQUEST);
 
         $object = new KernelListener(
             $this->router,
             $this->translator,
+            $this->authentication_utils,
             $this->authorization_checker,
             $this->token_storage,
             'ru');
@@ -86,11 +100,14 @@ class KernelListenerTest extends BaseTestCase
         $request  = new Request();
         $response = new Response();
 
+        $this->request_stack->push($request);
+
         $event = new FilterResponseEvent(static::$kernel, $request, HttpKernelInterface::MASTER_REQUEST, $response);
 
         $object = new KernelListener(
             $this->router,
             $this->translator,
+            $this->authentication_utils,
             $this->authorization_checker,
             $this->token_storage,
             'en');
@@ -106,11 +123,14 @@ class KernelListenerTest extends BaseTestCase
 
         $response->headers->set('Location', $this->router->generate('login', [], Router::ABSOLUTE_URL));
 
+        $this->request_stack->push($request);
+
         $event = new FilterResponseEvent(static::$kernel, $request, HttpKernelInterface::MASTER_REQUEST, $response);
 
         $object = new KernelListener(
             $this->router,
             $this->translator,
+            $this->authentication_utils,
             $this->authorization_checker,
             $this->token_storage,
             'en');
@@ -126,11 +146,14 @@ class KernelListenerTest extends BaseTestCase
 
         $request->headers->set('X-Requested-With', 'XMLHttpRequest');
 
+        $this->request_stack->push($request);
+
         $event = new FilterResponseEvent(static::$kernel, $request, HttpKernelInterface::MASTER_REQUEST, $response);
 
         $object = new KernelListener(
             $this->router,
             $this->translator,
+            $this->authentication_utils,
             $this->authorization_checker,
             $this->token_storage,
             'en');
@@ -147,11 +170,14 @@ class KernelListenerTest extends BaseTestCase
         $request->headers->set('X-Requested-With', 'XMLHttpRequest');
         $response->headers->set('Location', $this->router->generate('login', [], Router::ABSOLUTE_URL));
 
+        $this->request_stack->push($request);
+
         $event = new FilterResponseEvent(static::$kernel, $request, HttpKernelInterface::MASTER_REQUEST, $response);
 
         $object = new KernelListener(
             $this->router,
             $this->translator,
+            $this->authentication_utils,
             $this->authorization_checker,
             $this->token_storage,
             'en');

@@ -26,7 +26,7 @@ security.remember_me: 'Emlékezzen rám'
 security.session_expired: 'Your session has expired. Please login again.'
 security.confirm_exit: 'Biztos ki szeretne lépni?'
 security.authentication: Azonosítás
-'Bad credentials': 'Ismeretlen felhasználónév vagy rossz jelszó.'
+'Bad credentials.': 'Ismeretlen felhasználónév vagy rossz jelszó.'
 'User account is disabled.': 'A felhasználót letiltották.'
 'User account is locked.': 'A felhasználó ki lett zárva a rendszerből.'
 settings: Beállítások

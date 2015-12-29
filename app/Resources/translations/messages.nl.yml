@@ -26,7 +26,7 @@ security.remember_me: 'Blijf ingelogd'
 security.session_expired: 'Uw sessie is verlopen. U dient opnieuw in te loggen.'
 security.confirm_exit: 'Ben je zeker dat je wilt uitloggen?'
 security.authentication: Authenticatie
-'Bad credentials': 'Onbekende gebruikersnaam of verkeerd wachtwoord.'
+'Bad credentials.': 'Onbekende gebruikersnaam of verkeerd wachtwoord.'
 'User account is disabled.': 'Account is uitgeschakeld.'
 'User account is locked.': 'Account is vergrendeld.'
 settings: Instellingen

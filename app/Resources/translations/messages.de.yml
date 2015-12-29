@@ -26,7 +26,7 @@ security.remember_me: 'Angemeldet bleiben'
 security.session_expired: 'Ihre Sitzung ist abgelaufen. Bitte melden Sie sich erneut an.'
 security.confirm_exit: 'Möchten Sie wirklich beenden?'
 security.authentication: Authentifizierung
-'Bad credentials': 'Unbekannter Benutzername oder falsches Passwort.'
+'Bad credentials.': 'Unbekannter Benutzername oder falsches Passwort.'
 'User account is disabled.': 'Konto ist deaktiviert.'
 'User account is locked.': 'Konto ist gesperrt.'
 settings: Einstellungen

@@ -26,7 +26,7 @@ security.remember_me: 'Sürekli bağlı kal'
 security.session_expired: 'Oturum zaman aşımına uğradı. Lütfen tekrar giriş yapın.'
 security.confirm_exit: 'Çıkmak istediğinizden emin misiniz?'
 security.authentication: 'Kimlik Denetimi'
-'Bad credentials': 'Bilinmeyen kullanıcı adı ya da yanlış parola.'
+'Bad credentials.': 'Bilinmeyen kullanıcı adı ya da yanlış parola.'
 'User account is disabled.': 'Hesap kapalı.'
 'User account is locked.': 'Hesap kilitli.'
 settings: Ayarlar

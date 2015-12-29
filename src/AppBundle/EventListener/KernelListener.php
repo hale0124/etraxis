@@ -22,6 +22,7 @@ use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -31,6 +32,7 @@ class KernelListener implements EventSubscriberInterface
 {
     protected $router;
     protected $translator;
+    protected $authentication_utils;
     protected $authorization_checker;
     protected $token_storage;
     protected $locale;
@@ -40,6 +42,7 @@ class KernelListener implements EventSubscriberInterface
      *
      * @param   Router                        $router
      * @param   TranslatorInterface           $translator
+     * @param   AuthenticationUtils           $authentication_utils
      * @param   AuthorizationCheckerInterface $authorization_checker
      * @param   TokenStorageInterface         $token_storage
      * @param   string                        $locale
@@ -47,12 +50,14 @@ class KernelListener implements EventSubscriberInterface
     public function __construct(
         Router                        $router,
         TranslatorInterface           $translator,
+        AuthenticationUtils           $authentication_utils,
         AuthorizationCheckerInterface $authorization_checker,
         TokenStorageInterface         $token_storage,
         $locale)
     {
         $this->router                = $router;
         $this->translator            = $translator;
+        $this->authentication_utils  = $authentication_utils;
         $this->authorization_checker = $authorization_checker;
         $this->token_storage         = $token_storage;
         $this->locale                = $locale;
@@ -105,7 +110,11 @@ class KernelListener implements EventSubscriberInterface
 
         // If user is redirected to login page and it was an AJAX request - override the response.
         if ($request->isXmlHttpRequest() && $response->isRedirect($this->router->generate('login', [], Router::ABSOLUTE_URL))) {
-            $event->setResponse(new Response($this->translator->trans('security.session_expired'), Response::HTTP_UNAUTHORIZED));
+
+            $error   = $this->authentication_utils->getLastAuthenticationError();
+            $message = $error === null ? 'security.session_expired' : $error->getMessage();
+
+            $event->setResponse(new Response($this->translator->trans($message), Response::HTTP_UNAUTHORIZED));
         }
     }
 
