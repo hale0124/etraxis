@@ -32,12 +32,17 @@
     },
     "autoload": {
         "psr-4": {
-            "": [ "src/", "tests/" ]
+            "": "src/"
         },
         "classmap": [
             "app/AppKernel.php",
             "app/AppCache.php"
         ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "": "tests/"
+        }
     },
     "minimum-stability": "stable",
     "config": {
