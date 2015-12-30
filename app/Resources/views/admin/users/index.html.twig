@@ -4,55 +4,51 @@
 
 {% block content %}
 
-    <div class="container">
-        <div class="columns">
-            <div class="column full-width">
-                <button type="button" id="btn-create">{{ 'button.create'|trans }}</button>
-                <span class="buttonset">
-                    <button type="button" id="btn-disable" disabled="disabled">{{ 'button.disable'|trans }}</button>
-                    <button type="button" id="btn-enable" disabled="disabled">{{ 'button.enable'|trans }}</button>
-                </span>
-                <button type="button" id="btn-export">{{ 'button.export'|trans }}</button>
-            </div>
+    <div class="grid-row">
+        <div class="grid-100">
+            <button type="button" id="btn-create">{{ 'button.create'|trans }}</button>
+            <span class="buttonset">
+                <button type="button" id="btn-disable" disabled="disabled">{{ 'button.disable'|trans }}</button>
+                <button type="button" id="btn-enable" disabled="disabled">{{ 'button.enable'|trans }}</button>
+            </span>
+            <button type="button" id="btn-export">{{ 'button.export'|trans }}</button>
         </div>
     </div>
 
-    <div class="container">
-        <div class="columns">
-            <div class="column full-width">
-                <table id="users" class="cell-border hover" data-src="{{ path('admin_users_list') }}">
-                    <thead>
-                        <tr>
-                            <th>{{ 'user.username'|trans }}</th>
-                            <th>{{ 'user.fullname'|trans }}</th>
-                            <th>{{ 'user.email'|trans }}</th>
-                            <th>{{ 'permissions'|trans }}</th>
-                            <th>{{ 'security.authentication'|trans }}</th>
-                            <th>{{ 'description'|trans }}</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td>
-                                <select>
-                                    <option value="admin">{{ 'role.administrator'|trans }}</option>
-                                    <option value="user">{{ 'role.user'|trans }}</option>
-                                </select>
-                            </td>
-                            <td>
-                                <select>
-                                    <option value="etraxis">eTraxis</option>
-                                    <option value="ldap">LDAP</option>
-                                </select>
-                            </td>
-                            <td><input type="text"></td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
+    <div class="grid-row">
+        <div class="grid-100">
+            <table id="users" class="cell-border hover" data-src="{{ path('admin_users_list') }}">
+                <thead>
+                    <tr>
+                        <th>{{ 'user.username'|trans }}</th>
+                        <th>{{ 'user.fullname'|trans }}</th>
+                        <th>{{ 'user.email'|trans }}</th>
+                        <th>{{ 'permissions'|trans }}</th>
+                        <th>{{ 'security.authentication'|trans }}</th>
+                        <th>{{ 'description'|trans }}</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td>
+                            <select>
+                                <option value="admin">{{ 'role.administrator'|trans }}</option>
+                                <option value="user">{{ 'role.user'|trans }}</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select>
+                                <option value="etraxis">eTraxis</option>
+                                <option value="ldap">LDAP</option>
+                            </select>
+                        </td>
+                        <td><input type="text"></td>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
     </div>
 

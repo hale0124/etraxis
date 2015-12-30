@@ -54,11 +54,11 @@
                     // Display "please wait" inside the tab while it's being loaded.
                     beforeLoad: function(event, ui) {
 
-                        $(ui.panel).html('<div class="columns"><div class="column">' + eTraxis.i18n.PleaseWait + '</div></div>');
+                        $(ui.panel).html('<div class="grid-row"><div class="grid-100">' + eTraxis.i18n.PleaseWait + '</div></div>');
 
                         // Display error message inside the tab if load has failed.
                         ui.ajaxSettings.error = function(jqXHR, textStatus) {
-                            $(ui.panel).html('<div class="columns"><div class="column">' + (textStatus == 'error' ? eTraxis.i18n.Error : textStatus) + '</div></div>');
+                            $(ui.panel).html('<div class="grid-row"><div class="grid-100">' + (textStatus == 'error' ? eTraxis.i18n.Error : textStatus) + '</div></div>');
                         };
                     },
 

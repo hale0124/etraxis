@@ -5,54 +5,50 @@
 
 {% block content %}
 
-    <div class="container">
-        <div class="columns">
+    <div class="grid-row">
 
-            <div class="column one-half">
-                {{ form_start(appearance_form) }}
-                <fieldset>
-                    <legend>{{ 'appearance'|trans }}</legend>
+        <div class="grid-50 mobile-grid-100 mobile-grid-row">
+            {{ form_start(appearance_form) }}
+            <fieldset>
+                <legend>{{ 'appearance'|trans }}</legend>
 
-                    {{ form_row(appearance_form.locale) }}
-                    {{ form_row(appearance_form.theme) }}
-                    {{ form_row(appearance_form.timezone) }}
+                {{ form_row(appearance_form.locale) }}
+                {{ form_row(appearance_form.theme) }}
+                {{ form_row(appearance_form.timezone) }}
 
-                    <div class="columns control">
-                        <div class="column one-third">&nbsp;</div>
-                        <div class="column two-thirds">
-                            <input type="submit" value="{{ 'button.save'|trans }}">
-                        </div>
+                <div class="grid-container grid-parent grid-row">
+                    <div class="grid-66 prefix-33">
+                        <input type="submit" value="{{ 'button.save'|trans }}">
                     </div>
+                </div>
 
-                </fieldset>
-                {{ form_end(appearance_form) }}
-            </div>
-
-            {% if not app.user.ldap %}
-
-            <div class="column one-half">
-                {{ form_start(password_form) }}
-                <fieldset>
-                    <legend>{{ 'user.password'|trans }}</legend>
-
-                    {{ form_row(password_form.current_password) }}
-                    {{ form_row(password_form.new_password) }}
-                    {{ form_row(password_form.confirmation) }}
-
-                    <div class="columns control">
-                        <div class="column one-third">&nbsp;</div>
-                        <div class="column two-thirds">
-                            <input type="submit" value="{{ 'user.change_password'|trans }}">
-                        </div>
-                    </div>
-
-                </fieldset>
-                {{ form_end(password_form) }}
-            </div>
-
-            {% endif %}
-
+            </fieldset>
+            {{ form_end(appearance_form) }}
         </div>
+
+        {% if not app.user.ldap %}
+
+        <div class="grid-50 mobile-grid-100 mobile-grid-row">
+            {{ form_start(password_form) }}
+            <fieldset>
+                <legend>{{ 'user.password'|trans }}</legend>
+
+                {{ form_row(password_form.current_password) }}
+                {{ form_row(password_form.new_password) }}
+                {{ form_row(password_form.confirmation) }}
+
+                <div class="grid-container grid-parent grid-row">
+                    <div class="grid-66 prefix-33">
+                        <input type="submit" value="{{ 'user.change_password'|trans }}">
+                    </div>
+                </div>
+
+            </fieldset>
+            {{ form_end(password_form) }}
+        </div>
+
+        {% endif %}
+
     </div>
 
 {% endblock %}

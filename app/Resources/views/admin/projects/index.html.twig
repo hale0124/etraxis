@@ -4,35 +4,31 @@
 
 {% block content %}
 
-    <div class="container">
-        <div class="columns">
-            <div class="column full-width">
-                <button type="button" id="btn-create">{{ 'button.create'|trans }}</button>
-                <button type="button" id="btn-export">{{ 'button.export'|trans }}</button>
-            </div>
+    <div class="grid-row">
+        <div class="grid-100">
+            <button type="button" id="btn-create">{{ 'button.create'|trans }}</button>
+            <button type="button" id="btn-export">{{ 'button.export'|trans }}</button>
         </div>
     </div>
 
-    <div class="container">
-        <div class="columns">
-            <div class="column full-width">
-                <table id="projects" class="cell-border hover" data-src="{{ path('admin_projects_list') }}">
-                    <thead>
-                        <tr>
-                            <th>{{ 'project.name'|trans }}</th>
-                            <th>{{ 'project.start_time'|trans }}</th>
-                            <th>{{ 'description'|trans }}</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                            <td><input type="text"></td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
+    <div class="grid-row">
+        <div class="grid-100">
+            <table id="projects" class="cell-border hover" data-src="{{ path('admin_projects_list') }}">
+                <thead>
+                    <tr>
+                        <th>{{ 'project.name'|trans }}</th>
+                        <th>{{ 'project.start_time'|trans }}</th>
+                        <th>{{ 'description'|trans }}</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                        <td><input type="text"></td>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
     </div>
 

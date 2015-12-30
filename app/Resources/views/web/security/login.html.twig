@@ -2,51 +2,48 @@
 
 {% block content %}
 
-    <div class="container">
-        <div class="columns">
-            <div class="column full-width">
+    <div class="grid-row">
+        <div class="grid-50 prefix-25 mobile-grid-100">
 
-                <form action="{{ path('login_check') }}" method="post">
-                    <fieldset>
-                        <div class="container">
+            <form action="{{ path('login_check') }}" method="post">
+                <fieldset>
+                    <legend>{{ 'security.log_in'|trans }}</legend>
 
-                            <div class="columns control">
-                                <div class="column one-third label">
-                                    <label for="username">{{ 'user.username'|trans }}:</label>
-                                </div>
-                                <div class="column one-third">
-                                    <input class="full-width" type="text" id="username" name="_username" placeholder="{{ 'required'|trans }}" value="{{ last_username }}">
-                                </div>
-                            </div>
-
-                            <div class="columns control">
-                                <div class="column one-third label">
-                                    <label for="password">{{ 'user.password'|trans }}:</label>
-                                </div>
-                                <div class="column one-third">
-                                    <input class="full-width" type="password" id="password" name="_password" placeholder="{{ 'required'|trans }}">
-                                </div>
-                            </div>
-
-                            <div class="columns control">
-                                <div class="column one-third centered">
-                                    <input type="checkbox" id="remember_me" name="_remember_me">
-                                    <label for="remember_me">{{ 'security.remember_me'|trans }}</label>
-                                </div>
-                            </div>
-
-                            <div class="columns control">
-                                <div class="column one-third centered">
-                                    <input type="submit" value="{{ 'security.log_in'|trans }}">
-                                    <a class="right" href="{{ path('forgot_password') }}">{{ 'security.forgot_password'|trans }}</a>
-                                </div>
-                            </div>
-
+                    <div class="grid-container grid-parent grid-row">
+                        <div class="grid-33">
+                            <label for="username">{{ 'user.username'|trans }}:</label>
                         </div>
-                    </fieldset>
-                </form>
+                        <div class="grid-66">
+                            <input class="grid-100 mobile-grid-100" type="text" id="username" name="_username" placeholder="{{ 'required'|trans }}" value="{{ last_username }}">
+                        </div>
+                    </div>
 
-            </div>
+                    <div class="grid-container grid-parent grid-row">
+                        <div class="grid-33">
+                            <label for="password">{{ 'user.password'|trans }}:</label>
+                        </div>
+                        <div class="grid-66">
+                            <input class="grid-100 mobile-grid-100" type="password" id="password" name="_password" placeholder="{{ 'required'|trans }}">
+                        </div>
+                    </div>
+
+                    <div class="grid-container grid-parent grid-row">
+                        <div class="grid-66 prefix-33">
+                            <input type="checkbox" id="remember_me" name="_remember_me">
+                            <label for="remember_me">{{ 'security.remember_me'|trans }}</label>
+                        </div>
+                    </div>
+
+                    <div class="grid-container grid-parent grid-row">
+                        <div class="grid-66 prefix-33">
+                            <input type="submit" value="{{ 'security.log_in'|trans }}">
+                            <a class="right" href="{{ path('forgot_password') }}">{{ 'security.forgot_password'|trans }}</a>
+                        </div>
+                    </div>
+
+                </fieldset>
+            </form>
+
         </div>
     </div>
 

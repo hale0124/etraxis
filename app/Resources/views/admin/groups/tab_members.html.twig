@@ -1,38 +1,40 @@
 {% import "macro.html.twig" as macro %}
 
-<div class="columns">
-    <div class="column full-width">
-        <table>
-            <tr>
-                <td width="50%">
-                    <fieldset>
-                        <legend>{{ 'members'|trans }}</legend>
-                        <select id="users" size="20" multiple class="full-width">
-                            {% for user in members %}
-                                <option value="{{ user.id }}">{{ user.fullname }} ({{ user.username }})</option>
-                            {% endfor %}
-                        </select>
-                    </fieldset>
-                </td>
-                <td class="columns">
-                    <div class="column">
-                        <p><button type="button" id="btn-remove">&gt;&gt;</button></p>
-                        <p><button type="button" id="btn-add">&lt;&lt;</button></p>
-                    </div>
-                </td>
-                <td width="50%">
-                    <fieldset>
-                        <legend>{{ 'others'|trans }}</legend>
-                        <select id="others" size="20" multiple class="full-width">
-                            {% for user in others %}
-                                <option value="{{ user.id }}">{{ user.fullname }} ({{ user.username }})</option>
-                            {% endfor %}
-                        </select>
-                    </fieldset>
-                </td>
-            </tr>
-        </table>
+<div class="flex-container grid-container grid-parent grid-row">
+
+    <div class="grid-45">
+        <fieldset>
+            <legend>{{ 'members'|trans }}</legend>
+            <select id="users" size="20" multiple class="grid-100 mobile-grid-100">
+                {% for user in members %}
+                    <option value="{{ user.id }}">{{ user.fullname }} ({{ user.username }})</option>
+                {% endfor %}
+            </select>
+        </fieldset>
     </div>
+
+    <div class="grid-10 text-center">
+        <button type="button" class="grid-row grid-100" id="btn-remove">
+            <span class="hide-on-mobile">&gt;&gt;</span>
+            <span class="hide-on-desktop ui-icon ui-icon-arrowthick-1-s"></span>
+        </button>
+        <button type="button" class="grid-row grid-100" id="btn-add">
+            <span class="hide-on-mobile">&lt;&lt;</span>
+            <span class="hide-on-desktop ui-icon ui-icon-arrowthick-1-n">&lt;&lt;</span>
+        </button>
+    </div>
+
+    <div class="grid-45">
+        <fieldset>
+            <legend>{{ 'others'|trans }}</legend>
+            <select id="others" size="20" multiple class="grid-100 mobile-grid-100">
+                {% for user in others %}
+                    <option value="{{ user.id }}">{{ user.fullname }} ({{ user.username }})</option>
+                {% endfor %}
+            </select>
+        </fieldset>
+    </div>
+
 </div>
 
 <script>

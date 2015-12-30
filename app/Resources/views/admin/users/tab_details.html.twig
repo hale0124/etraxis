@@ -1,7 +1,7 @@
 {% import "macro.html.twig" as macro %}
 
-<div class="columns">
-    <div class="column full-width">
+<div class="grid-row">
+    <div class="grid-100">
         <button type="button" id="btn-back">{{ 'button.back'|trans }}</button>
         <button type="button" id="btn-edit">{{ 'button.edit'|trans }}</button>
         {% if can.delete %}
@@ -21,8 +21,8 @@
     </div>
 </div>
 
-<div class="columns">
-    <div class="column full-width">
+<div class="grid-row">
+    <div class="grid-100">
         <fieldset>
             {{ macro.row('user.username'|trans, user.username) }}
             {{ macro.row('user.fullname'|trans, user.fullname) }}

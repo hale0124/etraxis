@@ -4,48 +4,44 @@
 
 {% block content %}
 
-    <div class="container">
-        <div class="columns">
-            <div class="column full-width">
-                <button type="button" id="btn-create">{{ 'button.create'|trans }}</button>
-                <button type="button" id="btn-export">{{ 'button.export'|trans }}</button>
-            </div>
+    <div class="grid-row">
+        <div class="grid-100">
+            <button type="button" id="btn-create">{{ 'button.create'|trans }}</button>
+            <button type="button" id="btn-export">{{ 'button.export'|trans }}</button>
         </div>
     </div>
 
-    <div class="container">
-        <div class="columns">
-            <div class="column full-width">
-                <table id="groups" class="cell-border hover" data-src="{{ path('admin_groups_list') }}">
-                    <thead>
-                        <tr>
-                            <th>{{ 'group.name'|trans }}</th>
-                            <th>{{ 'group.type'|trans }}</th>
-                            <th>{{ 'project'|trans }}</th>
-                            <th>{{ 'description'|trans }}</th>
-                        </tr>
-                    </thead>
-                    <tfoot>
-                        <tr>
-                            <td><input type="text"></td>
-                            <td>
-                                <select>
-                                    <option value="global">{{ 'group.global'|trans }}</option>
-                                    <option value="local">{{ 'group.local'|trans }}</option>
-                                </select>
-                            </td>
-                            <td>
-                                <select>
-                                    {% for project in projects %}
-                                        <option value="{{ project.id }}">{{ project.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </td>
-                            <td><input type="text"></td>
-                        </tr>
-                    </tfoot>
-                </table>
-            </div>
+    <div class="grid-row">
+        <div class="grid-100">
+            <table id="groups" class="cell-border hover" data-src="{{ path('admin_groups_list') }}">
+                <thead>
+                    <tr>
+                        <th>{{ 'group.name'|trans }}</th>
+                        <th>{{ 'group.type'|trans }}</th>
+                        <th>{{ 'project'|trans }}</th>
+                        <th>{{ 'description'|trans }}</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td><input type="text"></td>
+                        <td>
+                            <select>
+                                <option value="global">{{ 'group.global'|trans }}</option>
+                                <option value="local">{{ 'group.local'|trans }}</option>
+                            </select>
+                        </td>
+                        <td>
+                            <select>
+                                {% for project in projects %}
+                                    <option value="{{ project.id }}">{{ project.name }}</option>
+                                {% endfor %}
+                            </select>
+                        </td>
+                        <td><input type="text"></td>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
     </div>
 

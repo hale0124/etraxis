@@ -4,11 +4,10 @@
 {% endblock form_start %}
 
 {% block form_row %}
-    <div class="columns control">
+    <div class="grid-container grid-parent grid-row">
         {# Checkboxes have a different layout to render #}
         {% if checked is defined %}
-            <div class="column one-third">&nbsp;</div>
-            <div class="column two-thirds">
+            <div class="grid-66 prefix-33">
                 <input type="hidden" name="{{ form.vars.full_name }}" value="0">
                 {{ form_widget(form) }}
                 {% if form.vars.disabled %}
@@ -18,11 +17,11 @@
                 {% endif %}
             </div>
         {% else %}
-            <div class="column one-third">
+            <div class="grid-33">
                 <label for="{{ form.vars.id }}">{{ label|trans }}:</label>
             </div>
-            <div class="column two-thirds">
-                {% set class = form.vars.disabled ? 'full-width ui-state-disabled' : 'full-width' %}
+            <div class="grid-66">
+                {% set class = form.vars.disabled ? 'grid-100 mobile-grid-100 ui-state-disabled' : 'grid-100 mobile-grid-100' %}
                 {% if form.vars.required %}
                     {{ form_widget(form, {'attr': {'class': class, 'placeholder': 'required'}}) }}
                 {% else %}

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
 
     <title>{{ title | default('eTraxis') }}</title>
 
@@ -21,7 +21,7 @@
 </head>
 <body>
     <nav>
-        <div class="content">
+        <div class="grid-container grid-parent">
             {% spaceless %}
 
                 <span class="fern"><a href="{{ path('homepage') }}"><img src="{{ asset('images/fern.png') }}"></a></span>
@@ -42,33 +42,31 @@
         </div>
     </nav>
 
-    <div class="content">
+    <main class="grid-container grid-parent">
 
-        <div class="container">
-            {% for flash in app.session.flashbag.get('notice') %}
-                <div class="columns">
-                    <div class="column full-width">
-                        <div class="highlight">{{ flash|trans }}</div>
-                    </div>
+        {% for flash in app.session.flashbag.get('notice') %}
+            <div class="grid-row">
+                <div class="grid-100">
+                    <div class="highlight">{{ flash|trans }}</div>
                 </div>
-            {% endfor %}
-        </div>
+            </div>
+        {% endfor %}
 
-        <div class="container">
-            {% for flash in app.session.flashbag.get('error') %}
-                <div class="columns">
-                    <div class="column full-width">
-                        <div class="error">{{ flash|trans }}</div>
-                    </div>
+        {% for flash in app.session.flashbag.get('error') %}
+            <div class="grid-row">
+                <div class="grid-100">
+                    <div class="error">{{ flash|trans }}</div>
                 </div>
-            {% endfor %}
-        </div>
+            </div>
+        {% endfor %}
 
         {% block content %}{% endblock %}
-    </div>
+    </main>
 
     <footer>
-        <a href="https://www.etraxis.com/" target="_blank">Copyright &copy; Artem Rodygin</a>
+        <div class="grid-container">
+            <a href="https://www.etraxis.com/" target="_blank">Copyright &copy; Artem Rodygin</a>
+        </div>
     </footer>
 
     <div id="__etraxis_modal" class="ui-helper-hidden"></div>

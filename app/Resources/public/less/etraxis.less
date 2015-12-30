@@ -1,18 +1,23 @@
-/* Variables */
-
-@min-width: 560px;  // any width below will be considered as mobile
-@max-width: 1200px; // maximum width of the content - extra space will be left blank
-
 /* Base */
 
 * {
     box-sizing: border-box;
 }
 
+html {
+    min-height: 100%;
+    position: relative;
+}
+
 body {
     font-family: Verdana, Geneva, sans-serif;
     font-size: 75%;
     line-height: 1.5;
+    margin-bottom: 30px;
+    min-height: 100%;
+}
+
+main {
 }
 
 p {
@@ -44,18 +49,6 @@ a {
     float: right;
 }
 
-.clearfix {
-    &:before,
-    &:after {
-        content: "";
-        display: table;
-    }
-
-    &:after {
-        clear: both;
-    }
-}
-
 .text-left {
     text-align: left;
 }
@@ -68,111 +61,41 @@ a {
     text-align: center;
 }
 
-/* Layout */
-
-.content {
-    min-width: 320px;
-    max-width: 1180px;
-    width: 100%;
-    margin: 0 auto;
-}
-
-.container {
-    width: 100%;
-    .clearfix;
-
-    > div {
-        @media (min-width: @max-width) {
-            margin-left: -10px;
-            margin-right: -10px;
-        }
+@media (min-width: 768px) {
+    .flex-container {
+        display: flex;
+        align-items: center;
     }
-}
-
-.columns {
-    .clearfix;
-    margin: 10px 0;
-}
-
-@media (min-width: @min-width) {
-
-    .column {
-        float: left;
-        padding: 0 10px;
-    }
-
-    .one-third {
-        width: 33.333333%;
-    }
-
-    .two-thirds {
-        width: 66.666667%;
-    }
-
-    .one-fourth {
-        width: 25%;
-    }
-
-    .one-half {
-        width: 50%;
-    }
-
-    .three-fourths {
-        width: 75%;
-    }
-
-    .one-fifth {
-        width: 20%;
-    }
-
-    .two-fifths {
-        width: 40%;
-    }
-
-    .three-fifths {
-        width: 60%;
-    }
-
-    .four-fifths {
-        width: 80%;
-    }
-}
-
-.full-width {
-    width: 100%;
 }
 
 /* Main menu */
 
 nav {
-    margin-bottom: 10px;
 
-    a, span {
-        display: inline-block;
-        font-size: 90%;
-        font-weight: bold;
-        line-height: 40px;
-        padding: 0 15px;
-        text-transform: uppercase;
-        vertical-align: middle;
-        white-space: nowrap;
-    }
+    div {
 
-    span.fern {
-        display: inline-block;
-        float: right;
-        height: 40px;
+        a, .fern {
+            display: inline-block;
+            font-size: 90%;
+            font-weight: bolder;
+            height: 40px;
+            line-height: 40px;
+            padding: 0 15px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
 
-        @media (min-width: @max-width) {
+        .fern {
+            float: right;
             padding-right: 0;
-        }
 
-        a {
-            padding: 0;
-        }
+            a {
+                padding-left: 0;
+            }
 
-        img {
-            padding-top: 5px;
+            img {
+                padding-top: 5px;
+            }
         }
     }
 }
@@ -186,14 +109,11 @@ nav {
 /* Footer */
 
 footer {
-    .content;
-
-    margin: 5px auto;
-    padding: 0 10px;
-
-    @media (min-width: @max-width) {
-        padding: 0;
-    }
+    bottom: 0;
+    height: 30px;
+    padding: 6px 0;
+    position: absolute;
+    width: 100%;
 }
 
 /* Input controls */
@@ -233,6 +153,10 @@ footer {
 .dialog {
     display: none;
     margin-top: 5px;
+
+    .ui-state-error {
+        margin-top: 5px;
+    }
 }
 
 fieldset {
@@ -240,38 +164,30 @@ fieldset {
     padding: 10px;
 }
 
+@media (min-width: 768px) {
+    .dialog fieldset {
+        min-width: 500px;
+    }
+}
+
 legend {
     margin: 0 5px;
     padding: 0 5px;
 }
 
-@media (min-width: @min-width) {
-    .control {
-        min-width: 500px;
-
-        .label {
-            text-align: right;
-        }
-    }
-}
-
-@media (max-width: @min-width) {
-    .control {
-        min-width: 250px;
-    }
-
+@media (max-width: 767px) {
     p.caption {
         font-weight: bold;
     }
 }
 
-.control label {
-    display: inline-block;
-    margin: 5px 0;
-}
-
 p.field-error {
     font-weight: bold;
+}
+
+label {
+    display: inline-block;
+    margin: 5px 0;
 }
 
 label.hint {
@@ -350,6 +266,20 @@ select {
             display: block;
             margin-left: 20px;
         }
+    }
+}
+
+/* Unsemantic */
+
+.grid-row {
+    margin-bottom: 10px;
+    margin-top: 10px;
+}
+
+@media (max-width: 767px) {
+    .mobile-grid-row {
+        margin-bottom: 10px;
+        margin-top: 10px;
     }
 }
 

@@ -52,6 +52,7 @@ gulp.task('stylesheets:libs', function() {
 
     var files = [
         'vendor/bower/normalize.css/normalize.css',
+        'vendor/bower/unsemantic/assets/stylesheets/unsemantic-grid-responsive-no-ie7.css',
         'app/Resources/public/css/jquery-ui.structure.css',
         'vendor/bower/datatables/media/css/jquery.dataTables_themeroller.css'
     ];

@@ -2,43 +2,40 @@
 
 {% block content %}
 
-    <div class="container">
-        <div class="columns">
-            <div class="column full-width">
+    <div class="grid-row">
+        <div class="grid-50 prefix-25 mobile-grid-100">
 
-                {{ form_start(form) }}
-                <fieldset>
-                    <div class="container">
+            {{ form_start(form) }}
+            <fieldset>
+                <legend>{{ 'security.change_password'|trans }}</legend>
 
-                        <div class="columns control">
-                            <div class="column one-third label">
-                                {{ form_label(form.password) }}:
-                            </div>
-                            <div class="column one-third">
-                                {{ form_widget(form.password, { attr: { class: 'full-width', placeholder: 'required' } }) }}
-                            </div>
-                        </div>
-
-                        <div class="columns control">
-                            <div class="column one-third label">
-                                {{ form_label(form.confirmation) }}:
-                            </div>
-                            <div class="column one-third">
-                                {{ form_widget(form.confirmation, { attr: { class: 'full-width', placeholder: 'required' } }) }}
-                            </div>
-                        </div>
-
-                        <div class="columns control">
-                            <div class="column one-third centered">
-                                <input type="submit" value="{{ 'button.ok'|trans }}">
-                            </div>
-                        </div>
-
+                <div class="grid-container grid-parent grid-row">
+                    <div class="grid-33">
+                        {{ form_label(form.password) }}:
                     </div>
-                </fieldset>
-                {{ form_end(form) }}
+                    <div class="grid-66">
+                        {{ form_widget(form.password, { attr: { class: 'grid-100 mobile-grid-100', placeholder: 'required' } }) }}
+                    </div>
+                </div>
 
-            </div>
+                <div class="grid-container grid-parent grid-row">
+                    <div class="grid-33">
+                        {{ form_label(form.confirmation) }}:
+                    </div>
+                    <div class="grid-66">
+                        {{ form_widget(form.confirmation, { attr: { class: 'grid-100 mobile-grid-100', placeholder: 'required' } }) }}
+                    </div>
+                </div>
+
+                <div class="grid-container grid-parent grid-row">
+                    <div class="grid-66 prefix-33">
+                        <input type="submit" value="{{ 'button.ok'|trans }}">
+                    </div>
+                </div>
+
+            </fieldset>
+            {{ form_end(form) }}
+
         </div>
     </div>
 
