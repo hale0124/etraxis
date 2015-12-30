@@ -74,7 +74,7 @@ eTraxis.modal = function(options) {
                     }
                 }
                 else {
-                    var response = xhr.responseJSON;
+                    var response = xhr.responseJSON ? xhr.responseJSON : xhr.responseText;
                     if (typeof response === 'object') {
                         $.each(response, function(id, message) {
                             var name = $('form', $modal).prop('name');
