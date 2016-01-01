@@ -78,6 +78,13 @@
     <script>
         $(function() {
 
+            $(document).ajaxError(function(e, xhr) {
+                if (xhr.status == 401) {
+                    eTraxis.unblock();
+                    eTraxis.alert(eTraxis.i18n.Error, xhr.responseText);
+                }
+            });
+
             $('body').initUI();
 
             $('#menu_logout').click(function() {

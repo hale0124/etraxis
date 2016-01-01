@@ -73,7 +73,7 @@ eTraxis.modal = function(options) {
                         $modal.remove();
                     }
                 }
-                else {
+                else if (xhr.status == 400) {
                     var response = xhr.responseJSON ? xhr.responseJSON : xhr.responseText;
                     if (typeof response === 'object') {
                         $.each(response, function(id, message) {
