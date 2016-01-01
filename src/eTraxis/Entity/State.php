@@ -366,8 +366,6 @@ class State
      */
     public function getFields()
     {
-        return $this->fields->filter(function (Field $field) {
-            return $field->getRemovedAt() === 0;
-        });
+        return $this->fields;
     }
 }

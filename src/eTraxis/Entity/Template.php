@@ -548,7 +548,7 @@ class Template
     public function getFields()
     {
         return $this->fields->filter(function (Field $field) {
-            return $field->getRemovedAt() === 0 && $field->getStateId() === null;
+            return $field->getStateId() === null;
         });
     }
 }
