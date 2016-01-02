@@ -1,0 +1,73 @@
+* {
+    box-sizing: border-box;
+}
+
+html {
+    min-height: 100%;
+    position: relative;
+}
+
+body {
+    font-family: Verdana, Geneva, sans-serif;
+    font-size: 75%;
+    line-height: 1.5;
+    margin-bottom: 30px;
+    min-height: 100%;
+}
+
+nav {
+    background: url("images/mainmenu-bg.png") repeat;
+
+    div {
+        background: url("images/mainmenu-splitter.png") repeat-y top left;
+
+        > a {
+            background: url("images/mainmenu-splitter.png") repeat-y top right;
+
+            &:hover {
+                background: url("images/mainmenu-splitter.png") no-repeat right, url("images/mainmenu-bg-hl.png") repeat-x;
+            }
+        }
+
+        a, .fern {
+            display: inline-block;
+            font-size: 90%;
+            font-weight: bolder;
+            height: 40px;
+            line-height: 40px;
+            padding: 0 15px;
+            text-transform: uppercase;
+            white-space: nowrap;
+        }
+
+        .fern {
+            float: right;
+            padding-right: 0;
+
+            a {
+                padding-left: 0;
+            }
+
+            img {
+                padding-top: 5px;
+            }
+        }
+    }
+}
+
+footer {
+    bottom: 0;
+    height: 30px;
+    padding: 6px 0;
+    position: absolute;
+    width: 100%;
+}
+
+p {
+    margin: 0;
+    text-align: justify;
+}
+
+a {
+    text-decoration: none;
+}

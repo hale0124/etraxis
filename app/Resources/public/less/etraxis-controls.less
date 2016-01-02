@@ -1,0 +1,106 @@
+/* Input controls */
+
+::-webkit-input-placeholder {
+    color: #dc322f;
+    opacity: 0.5;
+}
+
+::-moz-placeholder {
+    color: #dc322f;
+    opacity: 0.5;
+}
+
+:-moz-placeholder {
+    color: #dc322f;
+    opacity: 0.5;
+}
+
+:-ms-input-placeholder {
+    color: #dc322f;
+    opacity: 0.5;
+}
+
+.highlight,
+.error {
+    padding: 5px 10px;
+    text-align: left;
+
+    .ui-icon-close {
+        cursor: pointer;
+        float: right;
+        margin-left: 10px;
+    }
+}
+
+.dialog {
+    display: none;
+    margin-top: 5px;
+
+    .ui-state-error {
+        margin-top: 5px;
+    }
+}
+
+fieldset {
+    margin: 0;
+    padding: 10px;
+}
+
+@media (min-width: 768px) {
+    .dialog fieldset {
+        min-width: 500px;
+    }
+}
+
+legend {
+    margin: 0 5px;
+    padding: 0 5px;
+}
+
+@media (max-width: 767px) {
+    p.caption {
+        font-weight: bold;
+    }
+}
+
+p.field-error {
+    font-weight: bold;
+}
+
+label {
+    display: inline-block;
+    margin: 5px 0;
+}
+
+label.hint {
+    border-bottom: 1px dotted;
+    cursor: help;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+    padding: 5px 8px;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+    vertical-align: middle;
+}
+
+textarea {
+    padding: 4px 8px;
+    resize: vertical;
+}
+
+select {
+    padding: 4px;
+}
+
+.dropdown {
+    display: inline-block;
+
+    .ui-menu {
+        position: absolute;
+    }
+}

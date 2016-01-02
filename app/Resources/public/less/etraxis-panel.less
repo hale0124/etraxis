@@ -1,0 +1,45 @@
+/* Panels */
+
+.panel {
+
+    .panel-heading {
+        border-top: none;
+        border-left: none;
+        border-right: none;
+        padding: 4px 10px;
+
+        > div {
+            font-weight: bold;
+            padding-top: 5px;
+            padding-bottom: 4px;
+        }
+    }
+
+    .panel-body {
+        margin: 0;
+        padding: 0;
+
+        a {
+            display: block;
+            padding: 5px 10px;
+
+            &:hover {
+                background-color: whitesmoke;
+            }
+        }
+
+        .ui-icon {
+            float: left;
+            margin-right: 4px;
+
+            &.ui-icon-none {
+                background-image: none;
+            }
+        }
+
+        .panel-item {
+            display: block;
+            margin-left: 20px;
+        }
+    }
+}
