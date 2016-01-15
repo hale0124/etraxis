@@ -31,9 +31,6 @@ monolog:
         #    type:   chromephp
         #    level:  info
 
-swiftmailer:
-    delivery_address: "%delivery_address%"
-
 command_bus:
     logging: ~
 
