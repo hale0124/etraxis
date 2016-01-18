@@ -113,6 +113,24 @@
         },
 
         /**
+         * Finds specified item by its text.
+         * @param {string} text
+         * @returns {string} id
+         */
+        find: function(text) {
+            var result = '';
+
+            $('.panel-item', this.element).each(function() {
+                if ($(this).text() == text) {
+                    result = $(this).closest('a').data('id');
+                    return false;
+                }
+            });
+
+            return result;
+        },
+
+        /**
          * Selects specified item.
          * @param {string} id
          */

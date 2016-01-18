@@ -37,9 +37,8 @@
             });
         }
 
+        // Initialization.
         $(function() {
-
-            loadProjects();
 
             // Project clicked.
             $projects.on('panel.item.click', function(e, data) {
@@ -58,8 +57,9 @@
 
             // Project deleted.
             $(document).on('admin.project.deleted', function() {
-                loadProjects();
-                $content.html(null);
+                loadProjects(function() {
+                    $('a', $projects).first().click();
+                });
             });
 
             // New project.
@@ -70,15 +70,17 @@
                     success: function() {
                         var name = $('#project_name').val();
                         loadProjects(function() {
-                            $('.panel-item', $projects).each(function() {
-                                if ($(this).text() == name) {
-                                    $(this).closest('a').click();
-                                }
-                            });
+                            $projects.panel('expand');
+                            $projects.trigger('panel.item.click', $projects.panel('find', name));
                         });
                         return true;
                     }
                 });
+            });
+
+            // First initialization of the page.
+            loadProjects(function() {
+                $('a', $projects).first().click();
             });
         });
 
