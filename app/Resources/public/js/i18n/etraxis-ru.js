@@ -8,6 +8,8 @@ eTraxis.i18n = {
     Yes: 'Да',
     No: 'Нет',
     Close: 'Закрыть',
+    Expand: 'Развернуть',
+    Collapse: 'Свернуть',
     Error: 'Ошибка',
     PleaseWait: 'Пожалуйста, подождите...'
 };

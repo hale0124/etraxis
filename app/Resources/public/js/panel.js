@@ -21,6 +21,28 @@
             $('.panel-heading', this.element).addClass('ui-state-default ui-corner-top');
             $('.panel-body', this.element).addClass('ui-corner-bottom');
 
+            $('.panel-heading', this.element).prepend('<span class="ui-icon ui-icon-circle-triangle-n panel-toggle" title="' + eTraxis.i18n.Collapse + '"></span>');
+
+            $('.panel-heading', this.element).on('click', '.panel-toggle', function() {
+                if ($(this).hasClass('ui-icon-circle-triangle-n')) {
+                    $(this)
+                        .removeClass('ui-icon-circle-triangle-n')
+                        .addClass('ui-icon-circle-triangle-s')
+                        .attr('title', eTraxis.i18n.Expand)
+                    ;
+                    $('.panel-body', $(this).closest('.panel')).hide();
+                }
+                else {
+                    $(this)
+                        .removeClass('ui-icon-circle-triangle-s')
+                        .addClass('ui-icon-circle-triangle-n')
+                        .attr('title', eTraxis.i18n.Collapse)
+                    ;
+                    $('.panel-body', $(this).closest('.panel')).show();
+                }
+                return false;
+            });
+
             $('.panel-body', this.element).on('click', 'a', function() {
                 $(this).trigger('panel.item.click', $(this).data('id'));
                 return false;
@@ -33,7 +55,32 @@
         _destroy: function() {
             this.element.removeClass('ui-widget-content ui-corner-all');
             $('.panel-heading', this.element).removeClass('ui-state-default ui-corner-top');
+            $('.panel-heading .panel-toggle', this.element).remove();
             $('.panel-body', this.element).remove();
+        },
+
+        /**
+         * Collapses panel items.
+         */
+        collapse: function() {
+            $('.panel-heading .panel-toggle', this.element)
+                .removeClass('ui-icon-circle-triangle-n')
+                .addClass('ui-icon-circle-triangle-s')
+                .attr('title', eTraxis.i18n.Expand)
+            ;
+            $('.panel-body', this.element).hide();
+        },
+
+        /**
+         * Expands panel items.
+         */
+        expand: function() {
+            $('.panel-heading .panel-toggle', this.element)
+                .removeClass('ui-icon-circle-triangle-s')
+                .addClass('ui-icon-circle-triangle-n')
+                .attr('title', eTraxis.i18n.Collapse)
+            ;
+            $('.panel-body', this.element).show();
         },
 
         /**

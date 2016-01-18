@@ -8,6 +8,8 @@ eTraxis.i18n = {
     Yes: 'Igen',
     No: 'Nem',
     Close: 'Bezárás',
+    Expand: 'Bővíteni',
+    Collapse: 'Összeomlás',
     Error: 'Hiba',
     PleaseWait: 'Kérem várjon...'
 };

@@ -8,6 +8,8 @@ eTraxis.i18n = {
     Yes: 'Sí',
     No: 'No',
     Close: 'Cerrar',
+    Expand: 'Ampliar',
+    Collapse: 'Colapso',
     Error: 'Error',
     PleaseWait: 'Por favor espere...'
 };
