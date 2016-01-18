@@ -2,7 +2,6 @@
 
 <div class="grid-row">
     <div class="grid-100">
-        <button type="button" id="btn-back">{{ 'button.back'|trans }}</button>
         <button type="button" id="btn-edit">{{ 'button.edit'|trans }}</button>
         {% if can.delete %}
             <button type="button" id="btn-delete">{{ 'button.delete'|trans }}</button>
@@ -35,17 +34,13 @@
         var $tabs = $('#tabs-project');
         $('ul.ui-tabs-nav li[tabindex=0] a', $tabs).text('{{ project.name }}');
 
-        // "Back" button.
-        $('#btn-back').click(function() {
-            window.location.assign('{{ path('admin_projects') }}');
-        });
-
         // "Edit" button.
         $('#btn-edit').click(function() {
             eTraxis.modal({
                 url: '{{ path('admin_dlg_edit_project', {'id': project.id}) }}',
                 title: '{{ project.name }}',
                 success: function() {
+                    $(document).trigger('admin.project.edited', {{ project.id }});
                     reloadTab();
                     return true;
                 }
@@ -56,7 +51,7 @@
         $('#btn-delete').click(function() {
             eTraxis.confirm('{{ 'button.delete'|trans }}', '{{ 'project.confirm.delete'|trans }}', function() {
                 $.post('{{ path('admin_delete_project', {'id': project.id}) }}', function() {
-                    window.location.assign('{{ path('admin_projects') }}');
+                    $(document).trigger('admin.project.deleted', {{ project.id }});
                 });
             });
         });

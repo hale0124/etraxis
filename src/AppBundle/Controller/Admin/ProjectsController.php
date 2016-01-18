@@ -13,7 +13,6 @@ namespace AppBundle\Controller\Admin;
 
 use eTraxis\Entity\Project;
 use eTraxis\Form\ProjectForm;
-use eTraxis\Service\ExportCsvQuery;
 use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\SimpleBus\Projects;
 use eTraxis\Traits\ContainerTrait;
@@ -22,7 +21,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * Projects controller.
@@ -53,71 +51,18 @@ class ProjectsController extends Controller
      * @Action\Route("/list", name="admin_projects_list")
      * @Action\Method("GET")
      *
-     * @param   Request $request
-     *
      * @return  Response|JsonResponse
      */
-    public function listAction(Request $request)
+    public function listAction()
     {
         try {
-            $datatables = $this->getDataTables();
-            $results    = $datatables->handle($request, 'eTraxis:Project');
+            /** @var \eTraxis\Repository\ProjectsRepository $repository */
+            $repository = $this->getDoctrine()->getRepository('eTraxis:Project');
 
-            return new JsonResponse($results);
+            return new JsonResponse($repository->getProjects());
         }
         catch (\Exception $e) {
             return new Response($e->getMessage(), $e->getCode());
-        }
-    }
-
-    /**
-     * Exports list of projects as CSV file.
-     *
-     * @Action\Route("/csv", name="admin_projects_csv")
-     * @Action\Method("GET")
-     *
-     * @param   Request $request
-     *
-     * @return  StreamedResponse|JsonResponse
-     */
-    public function csvAction(Request $request)
-    {
-        try {
-            $request->query->set('start', 0);
-            $request->query->set('length', -1);
-
-            $datatables = $this->getDataTables();
-            $results    = $datatables->handle($request, 'eTraxis:Project');
-
-            $projects = array_map(function ($project) {
-                return array_slice($project, 0, 3);
-            }, $results['data']);
-
-            array_unshift($projects, [
-                $this->getTranslator()->trans('project.name'),
-                $this->getTranslator()->trans('project.start_time'),
-                $this->getTranslator()->trans('description'),
-            ]);
-
-            $query = new ExportCsvQuery($this->getFormData($request, 'export'));
-
-            /** @var \Symfony\Component\Validator\ConstraintViolationInterface[] $violations */
-            $violations = $this->get('validator')->validate($query);
-
-            if (count($violations)) {
-                throw new ValidationException($violations);
-            }
-
-            /** @var \eTraxis\Service\ExportInterface $export */
-            $export = $this->get('etraxis.export');
-
-            return $export->exportCsv($query, $projects);
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getCode());
-        }
-        catch (\Exception $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
         }
     }
 

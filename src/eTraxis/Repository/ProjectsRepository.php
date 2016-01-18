@@ -18,4 +18,23 @@ use Doctrine\ORM\EntityRepository;
  */
 class ProjectsRepository extends EntityRepository
 {
+    /**
+     * Finds all existing projects.
+     *
+     * @return  array
+     */
+    public function getProjects()
+    {
+        $repository = $this->getEntityManager()->getRepository('eTraxis:Project');
+
+        $query = $repository->createQueryBuilder('p');
+
+        $query
+            ->select('p.id')
+            ->addSelect('p.name')
+            ->orderBy('p.name')
+        ;
+
+        return $query->getQuery()->getResult();
+    }
 }
