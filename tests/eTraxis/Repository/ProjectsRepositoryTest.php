@@ -15,7 +15,7 @@ use eTraxis\Tests\BaseTestCase;
 
 class ProjectsRepositoryTest extends BaseTestCase
 {
-    public function testGetGroupMembersFound()
+    public function testGetProjects()
     {
         /** @var ProjectsRepository $repository */
         $repository = $this->doctrine->getManager()->getRepository('eTraxis:Project');

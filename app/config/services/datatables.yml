@@ -6,11 +6,6 @@ services:
         tags: [{ name: datatable, id: eTraxis:Group }]
         arguments: [ "@translator", "@etraxis.repository.groups" ]
 
-    etraxis.datatable.projects:
-        class: eTraxis\DataTables\ProjectsDataTable
-        tags: [{ name: datatable, id: eTraxis:Project }]
-        arguments: [ "@translator", "@localizer", "@etraxis.repository.projects" ]
-
     etraxis.datatable.users:
         class: eTraxis\DataTables\UsersDataTable
         tags: [{ name: datatable, id: eTraxis:User }]
