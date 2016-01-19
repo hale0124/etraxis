@@ -32,6 +32,7 @@ class ProjectsRepository extends EntityRepository
         $query
             ->select('p.id')
             ->addSelect('p.name')
+            ->addSelect('p.isSuspended')
             ->orderBy('p.name')
         ;
 

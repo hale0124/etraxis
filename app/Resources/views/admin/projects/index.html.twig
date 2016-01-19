@@ -29,7 +29,10 @@
             $projects.panel('clear');
             $.getJSON('{{ path('admin_projects_list') }}', function(data) {
                 $(data).each(function(index, item) {
-                    $projects.panel('append', item.id, item.name);
+                    var caption = item.isSuspended
+                        ? item.name + ' ({{ 'project.suspended'|trans|lower }})'
+                        : item.name;
+                    $projects.panel('append', item.id, caption);
                 });
                 if (typeof onLoad === 'function') {
                     onLoad();
