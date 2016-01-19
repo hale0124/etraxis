@@ -3,6 +3,12 @@
 {% block content %}
 
     <div class="grid-30 mobile-grid-100">
+        <div class="grid-row mobile-grid-row panel" id="groups">
+            <div class="panel-heading">
+                <span class="ui-icon ui-icon-circle-plus" id="btn-new-group" title="{{ 'button.create'|trans }}"></span>
+                <div>{{ 'groups'|trans }}</div>
+            </div>
+        </div>
         <div class="grid-row mobile-grid-row panel" id="projects">
             <div class="panel-heading">
                 <span class="ui-icon ui-icon-circle-plus" id="btn-new-project" title="{{ 'button.create'|trans }}"></span>
@@ -22,7 +28,22 @@
     <script>
 
         var $content  = $('#content');
+        var $groups   = $('#groups');
         var $projects = $('#projects');
+
+        // Loads panel of groups.
+        function loadGroups() {
+            var projectId = $projects.panel('selected');
+            $groups.panel('clear');
+            $.getJSON('{{ path('admin_groups_list', {'id': 0}) }}' + projectId, function(data) {
+                $(data).each(function(index, item) {
+                    var caption = item.projectId
+                        ? item.name
+                        : item.name + ' ({{ 'group.global'|trans|lower }})';
+                    $groups.panel('append', item.id, caption);
+                });
+            });
+        }
 
         // Loads panel of projects.
         function loadProjects(onLoad) {
@@ -43,11 +64,43 @@
         // Initialization.
         $(function() {
 
+            // Group clicked.
+            $groups.on('panel.item.click', function(e, data) {
+                $content.load('{{ path('admin_view_group', {'id': 0}) }}' + data, function() {
+                    $content.initUI();
+                });
+            });
+
+            // Group edited.
+            $(document).on('admin.group.edited', function() {
+                loadGroups();
+            });
+
+            // Group deleted.
+            $(document).on('admin.group.deleted', function() {
+                $content.html(null);
+                loadGroups();
+            });
+
+            // New group.
+            $('#btn-new-group').click(function() {
+                var projectId = $projects.panel('selected');
+                eTraxis.modal({
+                    url: '{{ path('admin_dlg_new_group') }}/' + projectId,
+                    title: '{{ 'group.new'|trans }}',
+                    success: function() {
+                        loadGroups();
+                        return true;
+                    }
+                });
+            });
+
             // Project clicked.
             $projects.on('panel.item.click', function(e, data) {
                 $content.load('{{ path('admin_view_project', {'id': 0}) }}' + data, function() {
                     $content.initUI();
                     $projects.panel('select', data);
+                    loadGroups();
                 });
             });
 
@@ -60,6 +113,7 @@
 
             // Project deleted.
             $(document).on('admin.project.deleted', function() {
+                $content.html(null);
                 loadProjects(function() {
                     $('a', $projects).first().click();
                 });
@@ -82,6 +136,8 @@
             });
 
             // First initialization of the page.
+            loadGroups();
+
             loadProjects(function() {
                 $('a', $projects).first().click();
             });

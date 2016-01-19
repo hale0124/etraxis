@@ -13,7 +13,6 @@ namespace AppBundle\Controller\Admin;
 
 use eTraxis\Form\GroupExForm;
 use eTraxis\Form\GroupForm;
-use eTraxis\Service\ExportCsvQuery;
 use eTraxis\SimpleBus\Groups;
 use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\Traits\ContainerTrait;
@@ -22,7 +21,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
@@ -35,93 +33,25 @@ class GroupsController extends Controller
     use ContainerTrait;
 
     /**
-     * Page with list of groups.
+     * Returns JSON list of groups.
      *
-     * @Action\Route("/", name="admin_groups")
+     * @Action\Route("/list/{id}", name="admin_groups_list", requirements={"id"="\d+"})
      * @Action\Method("GET")
      *
-     * @return  Response
-     */
-    public function indexAction()
-    {
-        return $this->render('admin/groups/index.html.twig', [
-            'projects' => $this->getDoctrine()->getRepository('eTraxis:Project')->findAll(),
-        ]);
-    }
-
-    /**
-     * Returns JSON list of groups for DataTables
-     * (see http://datatables.net/manual/server-side for details).
-     *
-     * @Action\Route("/list", name="admin_groups_list")
-     * @Action\Method("GET")
-     *
-     * @param   Request $request
+     * @param   int $id Project ID.
      *
      * @return  Response|JsonResponse
      */
-    public function listAction(Request $request)
+    public function listAction($id)
     {
         try {
-            $datatables = $this->getDataTables();
-            $results    = $datatables->handle($request, 'eTraxis:Group');
+            /** @var \eTraxis\Repository\GroupsRepository $repository */
+            $repository = $this->getDoctrine()->getRepository('eTraxis:Group');
 
-            return new JsonResponse($results);
+            return new JsonResponse($repository->getGroups($id));
         }
         catch (HttpException $e) {
             return new Response($e->getMessage(), $e->getStatusCode());
-        }
-    }
-
-    /**
-     * Exports list of groups as CSV file.
-     *
-     * @Action\Route("/csv", name="admin_groups_csv")
-     * @Action\Method("GET")
-     *
-     * @param   Request $request
-     *
-     * @return  StreamedResponse|JsonResponse
-     */
-    public function csvAction(Request $request)
-    {
-        try {
-            $request->query->set('start', 0);
-            $request->query->set('length', -1);
-
-            $datatables = $this->getDataTables();
-            $results    = $datatables->handle($request, 'eTraxis:Group');
-
-            $groups = array_map(function ($group) {
-                return array_slice($group, 0, 4);
-            }, $results['data']);
-
-            array_unshift($groups, [
-                $this->getTranslator()->trans('group.name'),
-                $this->getTranslator()->trans('group.type'),
-                $this->getTranslator()->trans('project'),
-                $this->getTranslator()->trans('description'),
-            ]);
-
-            $query = new ExportCsvQuery($this->getFormData($request, 'export'));
-
-            /** @var \Symfony\Component\Validator\ConstraintViolationInterface[] $violations */
-            $violations = $this->get('validator')->validate($query);
-
-            if (count($violations)) {
-                throw new ValidationException($violations);
-            }
-
-            /** @var \eTraxis\Service\ExportInterface $export */
-            $export = $this->get('etraxis.export');
-
-            return $export->exportCsv($query, $groups);
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -214,14 +144,16 @@ class GroupsController extends Controller
     /**
      * Renders dialog to create new group.
      *
-     * @Action\Route("/dlg/new", name="admin_dlg_new_group")
+     * @Action\Route("/dlg/new/{id}", name="admin_dlg_new_group", requirements={"id"="\d+"})
      * @Action\Method("GET")
+     *
+     * @param   int $id Project ID.
      *
      * @return  Response
      */
-    public function dlgNewAction()
+    public function dlgNewAction($id = null)
     {
-        $form = $this->createForm(GroupExForm::class, null, [
+        $form = $this->createForm(GroupExForm::class, ['id' => $id], [
             'action' => $this->generateUrl('admin_new_group'),
         ]);
 
@@ -236,7 +168,7 @@ class GroupsController extends Controller
      * @Action\Route("/dlg/edit/{id}", name="admin_dlg_edit_group", requirements={"id"="\d+"})
      * @Action\Method("GET")
      *
-     * @param   int     $id Group ID.
+     * @param   int $id Group ID.
      *
      * @return  Response
      */

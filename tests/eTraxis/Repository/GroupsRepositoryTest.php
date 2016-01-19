@@ -15,6 +15,32 @@ use eTraxis\Tests\BaseTestCase;
 
 class GroupsRepositoryTest extends BaseTestCase
 {
+    public function testGetGroups()
+    {
+        /** @var \eTraxis\Entity\Project $project */
+        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
+        $this->assertNotNull($project);
+
+        /** @var GroupsRepository $repository */
+        $repository = $this->doctrine->getManager()->getRepository('eTraxis:Group');
+
+        $result = $repository->getGroups($project->getId());
+
+        $groups = array_map(function ($group) {
+            return $group['name'];
+        }, $result);
+
+        $expected = [
+            'Crew',
+            'Managers',
+            'Nimbus',
+            'Planet Express, Inc.',
+            'Staff',
+        ];
+
+        $this->assertEquals($expected, $groups);
+    }
+
     public function testGetGroupMembersFound()
     {
         /** @var GroupsRepository $repository */

@@ -1,11 +1,6 @@
 # Keep datatables sorted alphabetically.
 services:
 
-    etraxis.datatable.groups:
-        class: eTraxis\DataTables\GroupsDataTable
-        tags: [{ name: datatable, id: eTraxis:Group }]
-        arguments: [ "@translator", "@etraxis.repository.groups" ]
-
     etraxis.datatable.users:
         class: eTraxis\DataTables\UsersDataTable
         tags: [{ name: datatable, id: eTraxis:User }]

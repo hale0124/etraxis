@@ -17,19 +17,14 @@ class GroupExFormTest extends BaseTestCase
 {
     public function testForm()
     {
-        /** @var \eTraxis\Entity\Group $group */
-        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Staff']);
+        $expected = rand(1, PHP_INT_MAX);
 
         /** @var \Symfony\Component\Form\FormFactoryInterface $factory */
         $factory = $this->client->getContainer()->get('form.factory');
 
-        $form = $factory->create(GroupExForm::class, $group);
+        $form = $factory->create(GroupExForm::class, ['id' => $expected]);
         $view = $form->createView();
 
-        $children = $view->children;
-
-        $this->assertEquals($children['name']->vars['data'], $group->getName());
-        $this->assertEquals($children['description']->vars['data'], $group->getDescription());
-        $this->assertEquals($children['project']->vars['data'], $group->getProject());
+        $this->assertEquals($view->vars['data']['id'], $expected);
     }
 }

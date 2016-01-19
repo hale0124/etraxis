@@ -19,6 +19,32 @@ use Doctrine\ORM\EntityRepository;
 class GroupsRepository extends EntityRepository
 {
     /**
+     * Finds all groups available for the specified project.
+     *
+     * @param   int $id Project ID.
+     *
+     * @return  array
+     */
+    public function getGroups($id)
+    {
+        $repository = $this->getEntityManager()->getRepository('eTraxis:Group');
+
+        $query = $repository->createQueryBuilder('g');
+
+        $query
+            ->select('g.id')
+            ->addSelect('g.name')
+            ->addSelect('g.projectId')
+            ->where('g.projectId IS NULL')
+            ->orWhere('g.projectId = :id')
+            ->setParameter('id', $id)
+            ->orderBy('g.name')
+        ;
+
+        return $query->getQuery()->getResult();
+    }
+
+    /**
      * Finds all accounts which belong to the specified group.
      *
      * @param   int $id Group ID.

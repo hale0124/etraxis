@@ -146,6 +146,15 @@
             ;
 
             $('.panel-body a[data-id="' + id + '"]', this.element).trigger('panel.item.select', id);
+        },
+
+        /**
+         * Finds currently selected item.
+         * @returns {string} id
+         */
+        selected: function() {
+            var $selected = $('.panel-body span.ui-icon-check', this.element);
+            return $selected.length == 0 ? '' : $selected.parent().data('id');
         }
     });
 

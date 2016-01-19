@@ -2,7 +2,6 @@
 
 <div class="grid-row">
     <div class="grid-100">
-        <button type="button" id="btn-back">{{ 'button.back'|trans }}</button>
         <button type="button" id="btn-edit">{{ 'button.edit'|trans }}</button>
         <button type="button" id="btn-delete">{{ 'button.delete'|trans }}</button>
     </div>
@@ -37,17 +36,13 @@
         var $tabs = $('#tabs-group');
         $('ul.ui-tabs-nav li[tabindex=0] a', $tabs).text('{{ group.name }}');
 
-        // "Back" button.
-        $('#btn-back').click(function() {
-            window.location.assign('{{ path('admin_groups') }}');
-        });
-
         // "Edit" button.
         $('#btn-edit').click(function() {
             eTraxis.modal({
                 url: '{{ path('admin_dlg_edit_group', {'id': group.id}) }}',
                 title: '{{ group.name }}',
                 success: function() {
+                    $(document).trigger('admin.group.deleted', {{ group.id }});
                     reloadTab();
                     return true;
                 }
@@ -58,7 +53,7 @@
         $('#btn-delete').click(function() {
             eTraxis.confirm('{{ 'button.delete'|trans }}', '{{ 'group.confirm.delete'|trans }}', function() {
                 $.post('{{ path('admin_delete_group', {'id': group.id}) }}', function() {
-                    window.location.assign('{{ path('admin_groups') }}');
+                    $(document).trigger('admin.group.deleted', {{ group.id }});
                 });
             });
         });

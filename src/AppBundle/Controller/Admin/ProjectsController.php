@@ -46,8 +46,7 @@ class ProjectsController extends Controller
     }
 
     /**
-     * Returns JSON list of projects for DataTables
-     * (see http://datatables.net/manual/server-side for details).
+     * Returns JSON list of projects.
      *
      * @Action\Route("/list", name="admin_projects_list")
      * @Action\Method("GET")

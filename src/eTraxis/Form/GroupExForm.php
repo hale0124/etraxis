@@ -11,7 +11,7 @@
 
 namespace eTraxis\Form;
 
-use Symfony\Bridge\Doctrine\Form\Type\EntityType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -39,13 +39,17 @@ class GroupExForm extends GroupForm
     {
         parent::buildForm($builder, $options);
 
-        // Project.
-        $builder->add('project', EntityType::class, [
-            'label'        => 'project',
-            'required'     => false,
-            'class'        => 'eTraxis:Project',
-            'choice_label' => 'name',
-            'placeholder'  => $this->translator->trans('group.global'),
+        /** @var \eTraxis\Entity\Group|array $data */
+        $data = $builder->getData();
+
+        // Global group.
+        $builder->add('project', CheckboxType::class, [
+            'label'    => 'group.local',
+            'value'    => is_object($data) ? $data->getProjectId() : $data['id'],
+            'required' => false,
+            'attr'     => [
+                'checked' => true,
+            ],
         ]);
     }
 }
