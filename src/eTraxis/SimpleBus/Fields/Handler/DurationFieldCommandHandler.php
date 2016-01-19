@@ -12,11 +12,9 @@
 namespace eTraxis\SimpleBus\Fields\Handler;
 
 use eTraxis\Entity\Field;
-use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Fields\CreateDurationFieldCommand;
 use eTraxis\SimpleBus\Fields\UpdateDurationFieldCommand;
 use eTraxis\SimpleBus\Middleware\ValidationException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Command handler.
@@ -28,8 +26,6 @@ class DurationFieldCommandHandler extends BaseFieldCommandHandler
      *
      * @param   CreateDurationFieldCommand|UpdateDurationFieldCommand $command
      *
-     * @throws  CommandException
-     * @throws  NotFoundHttpException
      * @throws  ValidationException
      */
     public function handle($command)

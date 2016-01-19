@@ -12,11 +12,9 @@
 namespace eTraxis\SimpleBus\Fields\Handler;
 
 use eTraxis\Entity\Field;
-use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Fields\CreateNumberFieldCommand;
 use eTraxis\SimpleBus\Fields\UpdateNumberFieldCommand;
 use eTraxis\SimpleBus\Middleware\ValidationException;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Command handler.
@@ -28,8 +26,6 @@ class NumberFieldCommandHandler extends BaseFieldCommandHandler
      *
      * @param   CreateNumberFieldCommand|UpdateNumberFieldCommand $command
      *
-     * @throws  CommandException
-     * @throws  NotFoundHttpException
      * @throws  ValidationException
      */
     public function handle($command)

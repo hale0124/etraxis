@@ -11,7 +11,6 @@
 
 namespace eTraxis\SimpleBus\Users\Handler;
 
-use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Users\SaveAppearanceCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -54,7 +53,6 @@ class SaveAppearanceCommandHandler
      *
      * @param   SaveAppearanceCommand $command
      *
-     * @throws  CommandException
      * @throws  NotFoundHttpException
      */
     public function handle(SaveAppearanceCommand $command)

@@ -82,7 +82,7 @@ class UpdateListItemCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedExceptionMessage Item with entered value already exists.
      */
     public function testValueConflict()

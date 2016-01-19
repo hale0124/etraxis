@@ -21,6 +21,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Projects controller.
@@ -61,8 +62,8 @@ class ProjectsController extends Controller
 
             return new JsonResponse($repository->getProjects());
         }
-        catch (\Exception $e) {
-            return new Response($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new Response($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -91,8 +92,8 @@ class ProjectsController extends Controller
                 'tab'     => $request->get('tab', 0),
             ]);
         }
-        catch (\Exception $e) {
-            return new Response($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new Response($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -125,8 +126,8 @@ class ProjectsController extends Controller
                 ],
             ]);
         }
-        catch (\Exception $e) {
-            return new Response($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new Response($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -180,8 +181,8 @@ class ProjectsController extends Controller
                 'form' => $form->createView(),
             ]);
         }
-        catch (\Exception $e) {
-            return new Response($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new Response($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -206,10 +207,10 @@ class ProjectsController extends Controller
             return new JsonResponse();
         }
         catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getCode());
+            return new JsonResponse($e->getMessages(), $e->getStatusCode());
         }
-        catch (\Exception $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -242,10 +243,10 @@ class ProjectsController extends Controller
             return new JsonResponse();
         }
         catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getCode());
+            return new JsonResponse($e->getMessages(), $e->getStatusCode());
         }
-        catch (\Exception $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -268,10 +269,10 @@ class ProjectsController extends Controller
             return new JsonResponse();
         }
         catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getCode());
+            return new JsonResponse($e->getMessages(), $e->getStatusCode());
         }
-        catch (\Exception $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
 }

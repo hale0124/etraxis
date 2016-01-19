@@ -74,7 +74,7 @@ class UpdateTemplateCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedExceptionMessage Template with entered name already exists.
      */
     public function testNameConflict()
@@ -117,7 +117,7 @@ class UpdateTemplateCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedExceptionMessage Template with entered prefix already exists.
      */
     public function testPrefixConflict()

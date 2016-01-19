@@ -90,7 +90,7 @@ class UpdateStateCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedExceptionMessage State with entered name already exists.
      */
     public function testNameConflict()
@@ -109,7 +109,7 @@ class UpdateStateCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedExceptionMessage State with entered abbreviation already exists.
      */
     public function testAbbreviationConflict()

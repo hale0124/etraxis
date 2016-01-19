@@ -12,10 +12,8 @@
 namespace eTraxis\SimpleBus\Fields\Handler;
 
 use eTraxis\Entity\Field;
-use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Fields\CreateCheckboxFieldCommand;
 use eTraxis\SimpleBus\Fields\UpdateCheckboxFieldCommand;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Command handler.
@@ -26,9 +24,6 @@ class CheckboxFieldCommandHandler extends BaseFieldCommandHandler
      * Creates or updates "checkbox" field.
      *
      * @param   CreateCheckboxFieldCommand|UpdateCheckboxFieldCommand $command
-     *
-     * @throws  CommandException
-     * @throws  NotFoundHttpException
      */
     public function handle($command)
     {

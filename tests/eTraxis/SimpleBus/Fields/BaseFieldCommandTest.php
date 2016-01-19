@@ -149,7 +149,7 @@ class BaseFieldCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedExceptionMessage Field with entered name already exists.
      */
     public function testCreateConflict()
@@ -236,7 +236,7 @@ class BaseFieldCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedExceptionMessage Field with entered name already exists.
      */
     public function testUpdateConflict()
@@ -266,7 +266,7 @@ class BaseFieldCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedExceptionMessage Unsupported command.
      */
     public function testUnsupportedCommand()

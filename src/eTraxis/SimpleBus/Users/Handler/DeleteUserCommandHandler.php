@@ -15,9 +15,9 @@ use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Users\DeleteUserCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Command handler.
@@ -50,7 +50,7 @@ class DeleteUserCommandHandler
      *
      * @param   DeleteUserCommand $command
      *
-     * @throws  AccessDeniedException
+     * @throws  AccessDeniedHttpException
      * @throws  NotFoundHttpException
      */
     public function handle(DeleteUserCommand $command)
@@ -66,7 +66,7 @@ class DeleteUserCommandHandler
         }
 
         if (!$this->security->isGranted(User::DELETE, $entity)) {
-            throw new AccessDeniedException();
+            throw new AccessDeniedHttpException();
         }
 
         $this->doctrine->getManager()->remove($entity);

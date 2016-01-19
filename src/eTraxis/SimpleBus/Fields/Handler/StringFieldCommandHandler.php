@@ -13,13 +13,10 @@ namespace eTraxis\SimpleBus\Fields\Handler;
 
 use eTraxis\Entity\Field;
 use eTraxis\Repository\StringValuesRepository;
-use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Fields\CreateStringFieldCommand;
 use eTraxis\SimpleBus\Fields\UpdateStringFieldCommand;
-use eTraxis\SimpleBus\Middleware\ValidationException;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -55,10 +52,6 @@ class StringFieldCommandHandler extends BaseFieldCommandHandler
      * Creates or updates "string" field.
      *
      * @param   CreateStringFieldCommand|UpdateStringFieldCommand $command
-     *
-     * @throws  CommandException
-     * @throws  NotFoundHttpException
-     * @throws  ValidationException
      */
     public function handle($command)
     {

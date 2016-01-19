@@ -11,10 +11,10 @@
 
 namespace eTraxis\SimpleBus\Groups\Handler;
 
-use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Groups\UpdateGroupCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -54,7 +54,7 @@ class UpdateGroupCommandHandler
      *
      * @param   UpdateGroupCommand $command
      *
-     * @throws  CommandException
+     * @throws  BadRequestHttpException
      * @throws  NotFoundHttpException
      */
     public function handle(UpdateGroupCommand $command)
@@ -79,7 +79,7 @@ class UpdateGroupCommandHandler
         if (count($errors)) {
             $message = $this->translator->trans($errors->get(0)->getMessage());
             $this->logger->error($message);
-            throw new CommandException($message);
+            throw new BadRequestHttpException($message);
         }
 
         $this->doctrine->getManager()->persist($entity);

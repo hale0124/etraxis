@@ -12,11 +12,11 @@
 namespace eTraxis\SimpleBus\Fields\Handler;
 
 use eTraxis\Entity\Field;
-use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Fields\CreateFieldBaseCommand;
 use eTraxis\SimpleBus\Fields\UpdateFieldBaseCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -58,8 +58,7 @@ class BaseFieldCommandHandler
      *
      * @return  Field
      *
-     * @throws  CommandException
-     * @throws  NotFoundHttpException
+     * @throws  BadRequestHttpException
      */
     protected function getEntity($command)
     {
@@ -71,7 +70,7 @@ class BaseFieldCommandHandler
             return $this->update($command);
         }
 
-        throw new CommandException('Unsupported command.');
+        throw new BadRequestHttpException('Unsupported command.');
     }
 
     /**
@@ -81,7 +80,7 @@ class BaseFieldCommandHandler
      *
      * @return  Field
      *
-     * @throws  CommandException
+     * @throws  BadRequestHttpException
      * @throws  NotFoundHttpException
      */
     private function create(CreateFieldBaseCommand $command)
@@ -130,7 +129,7 @@ class BaseFieldCommandHandler
         if (count($errors)) {
             $message = $this->translator->trans($errors->get(0)->getMessage());
             $this->logger->error($message);
-            throw new CommandException($message);
+            throw new BadRequestHttpException($message);
         }
 
         return $entity;
@@ -143,7 +142,7 @@ class BaseFieldCommandHandler
      *
      * @return  Field
      *
-     * @throws  CommandException
+     * @throws  BadRequestHttpException
      * @throws  NotFoundHttpException
      */
     private function update(UpdateFieldBaseCommand $command)
@@ -171,7 +170,7 @@ class BaseFieldCommandHandler
         if (count($errors)) {
             $message = $this->translator->trans($errors->get(0)->getMessage());
             $this->logger->error($message);
-            throw new CommandException($message);
+            throw new BadRequestHttpException($message);
         }
 
         return $entity;

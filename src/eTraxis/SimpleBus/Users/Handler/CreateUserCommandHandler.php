@@ -12,10 +12,10 @@
 namespace eTraxis\SimpleBus\Users\Handler;
 
 use eTraxis\Entity\User;
-use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Users\CreateUserCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -60,7 +60,7 @@ class CreateUserCommandHandler
      *
      * @param   CreateUserCommand $command
      *
-     * @throws  CommandException
+     * @throws  BadRequestHttpException
      */
     public function handle(CreateUserCommand $command)
     {
@@ -69,7 +69,7 @@ class CreateUserCommandHandler
         }
         catch (BadCredentialsException $e) {
             $this->logger->error($e->getMessage());
-            throw new CommandException($e->getMessage());
+            throw new BadRequestHttpException($e->getMessage());
         }
 
         $entity = new User();
@@ -94,7 +94,7 @@ class CreateUserCommandHandler
         if (count($errors)) {
             $message = $this->translator->trans($errors->get(0)->getMessage());
             $this->logger->error($message);
-            throw new CommandException($message);
+            throw new BadRequestHttpException($message);
         }
 
         $this->doctrine->getManager()->persist($entity);

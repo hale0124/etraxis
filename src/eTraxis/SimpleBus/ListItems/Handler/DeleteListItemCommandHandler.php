@@ -15,9 +15,9 @@ use eTraxis\Entity\ListItem;
 use eTraxis\SimpleBus\ListItems\DeleteListItemCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Command handler.
@@ -50,7 +50,7 @@ class DeleteListItemCommandHandler
      *
      * @param   DeleteListItemCommand $command
      *
-     * @throws  AccessDeniedException
+     * @throws  AccessDeniedHttpException
      * @throws  NotFoundHttpException
      */
     public function handle(DeleteListItemCommand $command)
@@ -68,7 +68,7 @@ class DeleteListItemCommandHandler
         }
 
         if (!$this->security->isGranted(ListItem::DELETE, $entity)) {
-            throw new AccessDeniedException();
+            throw new AccessDeniedHttpException('Access denied.');
         }
 
         $this->doctrine->getManager()->remove($entity);

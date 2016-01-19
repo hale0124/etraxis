@@ -11,10 +11,10 @@
 
 namespace eTraxis\SimpleBus\Users\Handler;
 
-use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Users\ResetPasswordCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -54,7 +54,7 @@ class ResetPasswordCommandHandler
      *
      * @param   ResetPasswordCommand $command
      *
-     * @throws  CommandException
+     * @throws  BadRequestHttpException
      */
     public function handle(ResetPasswordCommand $command)
     {
@@ -66,7 +66,7 @@ class ResetPasswordCommandHandler
             if ($user->isLdap()) {
                 $message = $this->translator->trans('password.cant_change');
                 $this->logger->error($message);
-                throw new CommandException($message);
+                throw new BadRequestHttpException($message);
             }
 
             if ($user->getResetTokenExpiresAt() > time()) {
@@ -76,7 +76,7 @@ class ResetPasswordCommandHandler
                 }
                 catch (BadCredentialsException $e) {
                     $this->logger->error($e->getMessage());
-                    throw new CommandException($e->getMessage());
+                    throw new BadRequestHttpException($e->getMessage());
                 }
 
                 $user

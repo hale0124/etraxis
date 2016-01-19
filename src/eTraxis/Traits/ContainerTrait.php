@@ -11,8 +11,8 @@
 
 namespace eTraxis\Traits;
 
-use eTraxis\SimpleBus\CommandException;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * A trait to extend standard controller class.
@@ -31,7 +31,7 @@ trait ContainerTrait
      *
      * @return  array Submitted data.
      *
-     * @throws  CommandException
+     * @throws  BadRequestHttpException
      */
     protected function getFormData(Request $request, $name = 'form')
     {
@@ -44,12 +44,12 @@ trait ContainerTrait
 
         if (!array_key_exists($name, $data)) {
             $logger->error('No data submitted.', [$name]);
-            throw new CommandException('No data submitted.');
+            throw new BadRequestHttpException('No data submitted.');
         }
 
         if (!array_key_exists('_token', $data[$name])) {
             $logger->error('CSRF token is missing.');
-            throw new CommandException('CSRF token is missing.');
+            throw new BadRequestHttpException('CSRF token is missing.');
         }
 
         /** @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $csrf */
@@ -58,7 +58,7 @@ trait ContainerTrait
 
         if ($data[$name]['_token'] !== $token->getValue()) {
             $logger->error('Invalid CSRF token.');
-            throw new CommandException('Invalid CSRF token.');
+            throw new BadRequestHttpException('Invalid CSRF token.');
         }
 
         return $data[$name];

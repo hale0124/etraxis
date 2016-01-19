@@ -13,7 +13,6 @@ namespace AppBundle\Controller\Web;
 
 use eTraxis\Form\AppearanceForm;
 use eTraxis\Form\ChangePasswordForm;
-use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\SimpleBus\Users;
 use eTraxis\Traits\ContainerTrait;
@@ -21,6 +20,8 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 
 /**
@@ -84,7 +85,7 @@ class SettingsController extends Controller
                 $this->setError($message);
             }
         }
-        catch (\Exception $e) {
+        catch (HttpException $e) {
             $this->setError($e->getMessage());
         }
 
@@ -109,7 +110,7 @@ class SettingsController extends Controller
         try {
 
             if ($user->isLdap()) {
-                throw new CommandException($this->getTranslator()->trans('password.cant_change'));
+                throw new BadRequestHttpException($this->getTranslator()->trans('password.cant_change'));
             }
 
             $data = $this->getFormData($request, 'change_password');
@@ -118,11 +119,11 @@ class SettingsController extends Controller
             $encoder = $this->get('etraxis.encoder');
 
             if (!$encoder->isPasswordValid($user->getPassword(), $data['current_password'], null)) {
-                throw new CommandException($this->getTranslator()->trans('password.wrong'));
+                throw new BadRequestHttpException($this->getTranslator()->trans('password.wrong'));
             }
 
             if ($data['new_password'] != $data['confirmation']) {
-                throw new CommandException($this->getTranslator()->trans('passwords.dont_match'));
+                throw new BadRequestHttpException($this->getTranslator()->trans('passwords.dont_match'));
             }
 
             $command = new Users\SetPasswordCommand([
@@ -142,7 +143,7 @@ class SettingsController extends Controller
                 $this->setError($message);
             }
         }
-        catch (\Exception $e) {
+        catch (HttpException $e) {
             $this->setError($e->getMessage());
         }
 

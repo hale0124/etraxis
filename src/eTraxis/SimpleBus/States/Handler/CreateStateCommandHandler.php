@@ -12,10 +12,10 @@
 namespace eTraxis\SimpleBus\States\Handler;
 
 use eTraxis\Entity\State;
-use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\States\CreateStateCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -55,7 +55,7 @@ class CreateStateCommandHandler
      *
      * @param   CreateStateCommand $command
      *
-     * @throws  CommandException
+     * @throws  BadRequestHttpException
      * @throws  NotFoundHttpException
      */
     public function handle(CreateStateCommand $command)
@@ -96,7 +96,7 @@ class CreateStateCommandHandler
         if (count($errors)) {
             $message = $this->translator->trans($errors->get(0)->getMessage());
             $this->logger->error($message);
-            throw new CommandException($message);
+            throw new BadRequestHttpException($message);
         }
 
         $this->doctrine->getManager()->persist($entity);

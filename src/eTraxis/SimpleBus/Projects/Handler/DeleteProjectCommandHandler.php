@@ -15,9 +15,9 @@ use eTraxis\Entity\Project;
 use eTraxis\SimpleBus\Projects\DeleteProjectCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Command handler.
@@ -50,7 +50,7 @@ class DeleteProjectCommandHandler
      *
      * @param   DeleteProjectCommand $command
      *
-     * @throws  AccessDeniedException
+     * @throws  AccessDeniedHttpException
      * @throws  NotFoundHttpException
      */
     public function handle(DeleteProjectCommand $command)
@@ -65,7 +65,7 @@ class DeleteProjectCommandHandler
         }
 
         if (!$this->security->isGranted(Project::DELETE, $entity)) {
-            throw new AccessDeniedException();
+            throw new AccessDeniedHttpException('Access denied.');
         }
 
         $this->doctrine->getManager()->remove($entity);

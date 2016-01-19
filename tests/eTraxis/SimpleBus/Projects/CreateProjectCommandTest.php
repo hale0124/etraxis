@@ -43,7 +43,7 @@ class CreateProjectCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedExceptionMessage Project with entered name already exists.
      */
     public function testProjectConflict()

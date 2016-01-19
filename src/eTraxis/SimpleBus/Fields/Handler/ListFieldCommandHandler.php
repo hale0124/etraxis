@@ -12,7 +12,6 @@
 namespace eTraxis\SimpleBus\Fields\Handler;
 
 use eTraxis\Entity\Field;
-use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Fields\CreateListFieldCommand;
 use eTraxis\SimpleBus\Fields\UpdateListFieldCommand;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -27,7 +26,6 @@ class ListFieldCommandHandler extends BaseFieldCommandHandler
      *
      * @param   CreateListFieldCommand|UpdateListFieldCommand $command
      *
-     * @throws  CommandException
      * @throws  NotFoundHttpException
      */
     public function handle($command)

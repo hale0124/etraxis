@@ -55,7 +55,7 @@ class CreateGroupCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedExceptionMessage Group with entered name already exists.
      */
     public function testGlobalGroupConflict()
@@ -68,7 +68,7 @@ class CreateGroupCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedExceptionMessage Group with entered name already exists.
      */
     public function testLocalGroupConflict()

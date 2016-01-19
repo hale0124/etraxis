@@ -77,7 +77,7 @@ class ContainerTraitTest extends KernelTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedExceptionMessage No data submitted.
      */
     public function testGetFormDataNoData()
@@ -98,7 +98,7 @@ class ContainerTraitTest extends KernelTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedExceptionMessage Invalid CSRF token.
      */
     public function testGetFormDataInvalidCsrf()
@@ -120,7 +120,7 @@ class ContainerTraitTest extends KernelTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedExceptionMessage CSRF token is missing.
      */
     public function testGetFormDataNoCsrf()

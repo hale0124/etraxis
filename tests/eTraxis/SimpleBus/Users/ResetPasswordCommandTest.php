@@ -55,7 +55,7 @@ class ResetPasswordCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedExceptionMessage This account uses an external authentication source. Impossible to change the password.
      */
     public function testLdap()
@@ -83,7 +83,7 @@ class ResetPasswordCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedExceptionMessage Password should be at least 6 characters length.
      */
     public function testTooShort()

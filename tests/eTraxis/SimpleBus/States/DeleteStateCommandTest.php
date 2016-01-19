@@ -48,7 +48,7 @@ class DeleteStateCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \Symfony\Component\Security\Core\Exception\AccessDeniedException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException
      */
     public function testAccessDenied()
     {

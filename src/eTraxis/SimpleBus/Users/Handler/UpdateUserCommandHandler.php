@@ -11,10 +11,10 @@
 
 namespace eTraxis\SimpleBus\Users\Handler;
 
-use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Users\UpdateUserCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -59,7 +59,7 @@ class UpdateUserCommandHandler
      *
      * @param   UpdateUserCommand $command
      *
-     * @throws  CommandException
+     * @throws  BadRequestHttpException
      * @throws  NotFoundHttpException
      */
     public function handle(UpdateUserCommand $command)
@@ -100,7 +100,7 @@ class UpdateUserCommandHandler
         if (count($errors)) {
             $message = $this->translator->trans($errors->get(0)->getMessage());
             $this->logger->error($message);
-            throw new CommandException($message);
+            throw new BadRequestHttpException($message);
         }
 
         $this->doctrine->getManager()->persist($entity);

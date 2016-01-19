@@ -13,13 +13,10 @@ namespace eTraxis\SimpleBus\Fields\Handler;
 
 use eTraxis\Entity\Field;
 use eTraxis\Repository\TextValuesRepository;
-use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Fields\CreateTextFieldCommand;
 use eTraxis\SimpleBus\Fields\UpdateTextFieldCommand;
-use eTraxis\SimpleBus\Middleware\ValidationException;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -55,10 +52,6 @@ class TextFieldCommandHandler extends BaseFieldCommandHandler
      * Creates or updates "text" field.
      *
      * @param   CreateTextFieldCommand|UpdateTextFieldCommand $command
-     *
-     * @throws  CommandException
-     * @throws  NotFoundHttpException
-     * @throws  ValidationException
      */
     public function handle($command)
     {

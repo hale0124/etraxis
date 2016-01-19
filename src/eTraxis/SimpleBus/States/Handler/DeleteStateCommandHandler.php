@@ -15,9 +15,9 @@ use eTraxis\Entity\State;
 use eTraxis\SimpleBus\States\DeleteStateCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Command handler.
@@ -50,7 +50,7 @@ class DeleteStateCommandHandler
      *
      * @param   DeleteStateCommand $command
      *
-     * @throws  AccessDeniedException
+     * @throws  AccessDeniedHttpException
      * @throws  NotFoundHttpException
      */
     public function handle(DeleteStateCommand $command)
@@ -65,7 +65,7 @@ class DeleteStateCommandHandler
         }
 
         if (!$this->security->isGranted(State::DELETE, $entity)) {
-            throw new AccessDeniedException();
+            throw new AccessDeniedHttpException('Access denied.');
         }
 
         $this->doctrine->getManager()->remove($entity);

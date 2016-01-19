@@ -15,9 +15,9 @@ use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\Templates\DeleteTemplateCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
  * Command handler.
@@ -50,7 +50,7 @@ class DeleteTemplateCommandHandler
      *
      * @param   DeleteTemplateCommand $command
      *
-     * @throws  AccessDeniedException
+     * @throws  AccessDeniedHttpException
      * @throws  NotFoundHttpException
      */
     public function handle(DeleteTemplateCommand $command)
@@ -65,7 +65,7 @@ class DeleteTemplateCommandHandler
         }
 
         if (!$this->security->isGranted(Template::DELETE, $entity)) {
-            throw new AccessDeniedException();
+            throw new AccessDeniedHttpException();
         }
 
         $this->doctrine->getManager()->remove($entity);

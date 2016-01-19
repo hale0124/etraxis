@@ -11,25 +11,25 @@
 
 namespace eTraxis\SimpleBus\Middleware;
 
-use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
  * Exception raised during last command validation.
  * All validation errors are available as a hash-array (keys are names of items being validated).
  * Contains HTTP status code and can be used in HTTP Response object.
  */
-class ValidationException extends \Exception
+class ValidationException extends BadRequestHttpException
 {
     protected $messages = [];
 
     /**
      * {@inheritdoc}
      */
-    public function __construct(array $messages, $code = Response::HTTP_BAD_REQUEST, \Exception $previous = null)
+    public function __construct(array $messages, $code = 0, \Exception $previous = null)
     {
         $this->messages = $messages;
 
-        parent::__construct(count($messages) ? reset($this->messages) : '', $code, $previous);
+        parent::__construct(count($messages) ? reset($this->messages) : '', $previous, $code);
     }
 
     /**

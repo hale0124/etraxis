@@ -12,11 +12,10 @@
 namespace eTraxis\SimpleBus\Projects\Handler;
 
 use eTraxis\Entity\Project;
-use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Projects\CreateProjectCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -55,8 +54,7 @@ class CreateProjectCommandHandler
      *
      * @param   CreateProjectCommand $command
      *
-     * @throws  CommandException
-     * @throws  NotFoundHttpException
+     * @throws  BadRequestHttpException
      */
     public function handle(CreateProjectCommand $command)
     {
@@ -74,7 +72,7 @@ class CreateProjectCommandHandler
         if (count($errors)) {
             $message = $this->translator->trans($errors->get(0)->getMessage());
             $this->logger->error($message);
-            throw new CommandException($message);
+            throw new BadRequestHttpException($message);
         }
 
         $this->doctrine->getManager()->persist($entity);

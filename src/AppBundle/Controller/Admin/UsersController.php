@@ -14,7 +14,6 @@ namespace AppBundle\Controller\Admin;
 use eTraxis\Entity\User;
 use eTraxis\Form\UserForm;
 use eTraxis\Service\ExportCsvQuery;
-use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\SimpleBus\Users;
 use eTraxis\Traits\ContainerTrait;
@@ -24,6 +23,8 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Users controller.
@@ -66,8 +67,8 @@ class UsersController extends Controller
 
             return new JsonResponse($results);
         }
-        catch (\Exception $e) {
-            return new Response($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new Response($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -118,10 +119,10 @@ class UsersController extends Controller
             return $export->exportCsv($query, $users);
         }
         catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getCode());
+            return new JsonResponse($e->getMessages(), $e->getStatusCode());
         }
-        catch (\Exception $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -150,8 +151,8 @@ class UsersController extends Controller
                 'tab'  => $request->get('tab', 0),
             ]);
         }
-        catch (\Exception $e) {
-            return new Response($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new Response($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -187,8 +188,8 @@ class UsersController extends Controller
                 ],
             ]);
         }
-        catch (\Exception $e) {
-            return new Response($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new Response($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -273,8 +274,8 @@ class UsersController extends Controller
                 'form' => $form->createView(),
             ]);
         }
-        catch (\Exception $e) {
-            return new Response($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new Response($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -294,7 +295,7 @@ class UsersController extends Controller
             $data = $this->getFormData($request, 'user');
 
             if ($data['password'] != $data['confirmation']) {
-                throw new CommandException($this->getTranslator()->trans('passwords.dont_match'));
+                throw new BadRequestHttpException($this->getTranslator()->trans('passwords.dont_match'));
             }
 
             $command = new Users\CreateUserCommand($data);
@@ -303,10 +304,10 @@ class UsersController extends Controller
             return new JsonResponse();
         }
         catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getCode());
+            return new JsonResponse($e->getMessages(), $e->getStatusCode());
         }
-        catch (\Exception $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -355,7 +356,7 @@ class UsersController extends Controller
             if (!$user->isLdap() && $data['password']) {
 
                 if ($data['password'] != $data['confirmation']) {
-                    throw new CommandException($this->getTranslator()->trans('passwords.dont_match'));
+                    throw new BadRequestHttpException($this->getTranslator()->trans('passwords.dont_match'));
                 }
 
                 $command = new Users\SetPasswordCommand([
@@ -371,10 +372,10 @@ class UsersController extends Controller
             return new JsonResponse();
         }
         catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getCode());
+            return new JsonResponse($e->getMessages(), $e->getStatusCode());
         }
-        catch (\Exception $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -397,10 +398,10 @@ class UsersController extends Controller
             return new JsonResponse();
         }
         catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getCode());
+            return new JsonResponse($e->getMessages(), $e->getStatusCode());
         }
-        catch (\Exception $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -423,10 +424,10 @@ class UsersController extends Controller
             return new JsonResponse();
         }
         catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getCode());
+            return new JsonResponse($e->getMessages(), $e->getStatusCode());
         }
-        catch (\Exception $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -449,10 +450,10 @@ class UsersController extends Controller
             return new JsonResponse();
         }
         catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getCode());
+            return new JsonResponse($e->getMessages(), $e->getStatusCode());
         }
-        catch (\Exception $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -475,10 +476,10 @@ class UsersController extends Controller
             return new JsonResponse();
         }
         catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getCode());
+            return new JsonResponse($e->getMessages(), $e->getStatusCode());
         }
-        catch (\Exception $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -505,10 +506,10 @@ class UsersController extends Controller
             return new JsonResponse();
         }
         catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getCode());
+            return new JsonResponse($e->getMessages(), $e->getStatusCode());
         }
-        catch (\Exception $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -535,10 +536,10 @@ class UsersController extends Controller
             return new JsonResponse();
         }
         catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getCode());
+            return new JsonResponse($e->getMessages(), $e->getStatusCode());
         }
-        catch (\Exception $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
 }

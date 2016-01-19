@@ -23,6 +23,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Groups controller.
@@ -67,8 +68,8 @@ class GroupsController extends Controller
 
             return new JsonResponse($results);
         }
-        catch (\Exception $e) {
-            return new Response($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new Response($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -117,10 +118,10 @@ class GroupsController extends Controller
             return $export->exportCsv($query, $groups);
         }
         catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getCode());
+            return new JsonResponse($e->getMessages(), $e->getStatusCode());
         }
-        catch (\Exception $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -149,8 +150,8 @@ class GroupsController extends Controller
                 'tab'   => $request->get('tab', 0),
             ]);
         }
-        catch (\Exception $e) {
-            return new Response($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new Response($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -177,8 +178,8 @@ class GroupsController extends Controller
                 'group' => $group,
             ]);
         }
-        catch (\Exception $e) {
-            return new Response($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new Response($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -256,8 +257,8 @@ class GroupsController extends Controller
                 'form' => $form->createView(),
             ]);
         }
-        catch (\Exception $e) {
-            return new Response($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new Response($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -282,10 +283,10 @@ class GroupsController extends Controller
             return new JsonResponse();
         }
         catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getCode());
+            return new JsonResponse($e->getMessages(), $e->getStatusCode());
         }
-        catch (\Exception $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -318,10 +319,10 @@ class GroupsController extends Controller
             return new JsonResponse();
         }
         catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getCode());
+            return new JsonResponse($e->getMessages(), $e->getStatusCode());
         }
-        catch (\Exception $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -344,10 +345,10 @@ class GroupsController extends Controller
             return new JsonResponse();
         }
         catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getCode());
+            return new JsonResponse($e->getMessages(), $e->getStatusCode());
         }
-        catch (\Exception $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -374,10 +375,10 @@ class GroupsController extends Controller
             return new JsonResponse();
         }
         catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getCode());
+            return new JsonResponse($e->getMessages(), $e->getStatusCode());
         }
-        catch (\Exception $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
 
@@ -404,10 +405,10 @@ class GroupsController extends Controller
             return new JsonResponse();
         }
         catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getCode());
+            return new JsonResponse($e->getMessages(), $e->getStatusCode());
         }
-        catch (\Exception $e) {
-            return new JsonResponse($e->getMessage(), $e->getCode());
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
 }

@@ -11,10 +11,10 @@
 
 namespace eTraxis\SimpleBus\ListItems\Handler;
 
-use eTraxis\SimpleBus\CommandException;
 use eTraxis\SimpleBus\ListItems\UpdateListItemCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -54,7 +54,7 @@ class UpdateListItemCommandHandler
      *
      * @param   UpdateListItemCommand $command
      *
-     * @throws  CommandException
+     * @throws  BadRequestHttpException
      * @throws  NotFoundHttpException
      */
     public function handle(UpdateListItemCommand $command)
@@ -79,7 +79,7 @@ class UpdateListItemCommandHandler
         if (count($errors)) {
             $message = $this->translator->trans($errors->get(0)->getMessage());
             $this->logger->error($message);
-            throw new CommandException($message);
+            throw new BadRequestHttpException($message);
         }
 
         $this->doctrine->getManager()->persist($entity);

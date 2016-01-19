@@ -21,6 +21,7 @@ use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Security controller.
@@ -143,7 +144,7 @@ class SecurityController extends Controller
 
                     return $this->redirect($this->generateUrl('login'));
                 }
-                catch (\Exception $e) {
+                catch (HttpException $e) {
                     $this->setError($e->getMessage());
                 }
             }
@@ -204,7 +205,7 @@ class SecurityController extends Controller
 
                     return $this->redirect($this->generateUrl('homepage'));
                 }
-                catch (\Exception $e) {
+                catch (HttpException $e) {
                     $this->setError($e->getMessage());
                 }
             }

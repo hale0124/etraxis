@@ -62,7 +62,7 @@ class CreateUserCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedExceptionMessage Password should be at least 6 characters length.
      */
     public function testPasswordTooShort()
@@ -83,7 +83,7 @@ class CreateUserCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\CommandException
+     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedExceptionMessage Account with entered user name already exists.
      */
     public function testUsernameConflict()
