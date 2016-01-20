@@ -23,6 +23,11 @@
 
             $('.panel-heading', this.element).prepend('<span class="ui-icon ui-icon-circle-triangle-n panel-toggle" title="' + eTraxis.i18n.Collapse + '"></span>');
 
+            $('.panel-heading', this.element).on('click', '> div', function() {
+                $('.panel-toggle', $(this).parent()).click();
+                return false;
+            });
+
             $('.panel-heading', this.element).on('click', '.panel-toggle', function() {
                 if ($(this).hasClass('ui-icon-circle-triangle-n')) {
                     $(this)
