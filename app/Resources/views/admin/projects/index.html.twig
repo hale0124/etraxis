@@ -3,16 +3,16 @@
 {% block content %}
 
     <div class="grid-30 mobile-grid-100">
-        <div class="grid-row mobile-grid-row panel" id="groups">
-            <div class="panel-heading">
-                <span class="ui-icon ui-icon-circle-plus" id="btn-new-group" title="{{ 'button.create'|trans }}"></span>
-                <div>{{ 'groups'|trans }}</div>
-            </div>
-        </div>
         <div class="grid-row mobile-grid-row panel" id="projects">
             <div class="panel-heading">
                 <span class="ui-icon ui-icon-circle-plus" id="btn-new-project" title="{{ 'button.create'|trans }}"></span>
                 <div>{{ 'projects'|trans }}</div>
+            </div>
+        </div>
+        <div class="grid-row mobile-grid-row panel" id="groups">
+            <div class="panel-heading">
+                <span class="ui-icon ui-icon-circle-plus" id="btn-new-group" title="{{ 'button.create'|trans }}"></span>
+                <div>{{ 'groups'|trans }}</div>
             </div>
         </div>
     </div>
@@ -27,48 +27,102 @@
 
     <script>
 
-        var $content  = $('#content');
-        var $groups   = $('#groups');
-        var $projects = $('#projects');
+        $(function() {
 
-        // Loads panel of groups.
-        function loadGroups() {
-            var projectId = $projects.panel('selected');
-            $groups.panel('clear');
-            $.getJSON('{{ path('admin_groups_list', {'id': 0}) }}' + projectId, function(data) {
-                $(data).each(function(index, item) {
-                    var caption = item.projectId
-                        ? item.name
-                        : item.name + ' ({{ 'group.global'|trans|lower }})';
-                    $groups.panel('append', item.id, caption);
-                });
-            });
-        }
+            var $content  = $('#content');
+            var $projects = $('#projects');
+            var $groups   = $('#groups');
 
-        // Loads panel of projects.
-        function loadProjects(onLoad) {
-            $projects.panel('clear');
-            $.getJSON('{{ path('admin_projects_list') }}', function(data) {
-                $(data).each(function(index, item) {
-                    var caption = item.isSuspended
-                        ? item.name + ' ({{ 'project.suspended'|trans|lower }})'
-                        : item.name;
-                    $projects.panel('append', item.id, caption);
+            //----------------------------------------------------------
+            //  Projects.
+            //----------------------------------------------------------
+
+            // Loads panel of projects.
+            var loadProjects = function(onLoad) {
+                $projects.panel('clear');
+                $.getJSON('{{ path('admin_projects_list') }}', function(data) {
+                    $(data).each(function(index, item) {
+                        var caption = item.isSuspended
+                                ? item.name + ' ({{ 'project.suspended'|trans|lower }})'
+                                : item.name;
+                        $projects.panel('append', item.id, caption);
+                    });
+                    if (typeof onLoad === 'function') {
+                        onLoad();
+                    }
                 });
-                if (typeof onLoad === 'function') {
-                    onLoad();
+            };
+
+            // Project clicked.
+            $projects.on('panel.item.click', function(e, data) {
+                if (data) {
+                    $content.load('{{ path('admin_view_project') }}/' + data, function() {
+                        $content.initUI();
+                        $projects.panel('select', data);
+                        loadGroups();
+                    });
                 }
             });
-        }
 
-        // Initialization.
-        $(function() {
+            // Project edited.
+            $(document).on('admin.project.edited', function(e, data) {
+                loadProjects(function() {
+                    $projects.panel('select', data);
+                });
+            });
+
+            // Project deleted.
+            $(document).on('admin.project.deleted', function() {
+                $content.html(null);
+                loadProjects(function() {
+                    $('a', $projects).first().click();
+                });
+            });
+
+            // New project.
+            $('#btn-new-project').click(function() {
+                eTraxis.modal({
+                    url: '{{ path('admin_dlg_new_project') }}',
+                    title: '{{ 'project.new'|trans }}',
+                    success: function() {
+                        var name = $('#project_name').val();
+                        if ($('#project_suspended').prop('checked')) {
+                            name += ' ({{ 'project.suspended'|trans|lower }})';
+                        }
+                        loadProjects(function() {
+                            $projects.panel('expand');
+                            $projects.trigger('panel.item.click', $projects.panel('find', name));
+                        });
+                        return true;
+                    }
+                });
+            });
+
+            //----------------------------------------------------------
+            //  Groups.
+            //----------------------------------------------------------
+
+            // Loads panel of groups.
+            var loadGroups = function() {
+                var projectId = $projects.panel('selected');
+                $groups.panel('clear');
+                $.getJSON('{{ path('admin_groups_list') }}/' + (projectId ? projectId : 0), function(data) {
+                    $(data).each(function(index, item) {
+                        var caption = item.projectId
+                                ? item.name
+                                : item.name + ' ({{ 'group.global'|trans|lower }})';
+                        $groups.panel('append', item.id, caption);
+                    });
+                });
+            };
 
             // Group clicked.
             $groups.on('panel.item.click', function(e, data) {
-                $content.load('{{ path('admin_view_group', {'id': 0}) }}' + data, function() {
-                    $content.initUI();
-                });
+                if (data) {
+                    $content.load('{{ path('admin_view_group') }}/' + data, function() {
+                        $content.initUI();
+                    });
+                }
             });
 
             // Group edited.
@@ -95,51 +149,18 @@
                 });
             });
 
-            // Project clicked.
-            $projects.on('panel.item.click', function(e, data) {
-                $content.load('{{ path('admin_view_project', {'id': 0}) }}' + data, function() {
-                    $content.initUI();
-                    $projects.panel('select', data);
-                    loadGroups();
-                });
-            });
-
-            // Project edited.
-            $(document).on('admin.project.edited', function(e, data) {
-                loadProjects(function() {
-                    $projects.panel('select', data);
-                });
-            });
-
-            // Project deleted.
-            $(document).on('admin.project.deleted', function() {
-                $content.html(null);
-                loadProjects(function() {
-                    $('a', $projects).first().click();
-                });
-            });
-
-            // New project.
-            $('#btn-new-project').click(function() {
-                eTraxis.modal({
-                    url: '{{ path('admin_dlg_new_project') }}',
-                    title: '{{ 'project.new'|trans }}',
-                    success: function() {
-                        var name = $('#project_name').val();
-                        loadProjects(function() {
-                            $projects.panel('expand');
-                            $projects.trigger('panel.item.click', $projects.panel('find', name));
-                        });
-                        return true;
-                    }
-                });
-            });
-
-            // First initialization of the page.
-            loadGroups();
+            //----------------------------------------------------------
+            //  Initialization.
+            //----------------------------------------------------------
 
             loadProjects(function() {
-                $('a', $projects).first().click();
+                var $a = $('a', $projects);
+                if ($a.length == 0) {
+                    loadGroups();
+                }
+                else {
+                    $a.first().click();
+                }
             });
         });
 

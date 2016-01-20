@@ -42,7 +42,7 @@ class GroupsController extends Controller
      *
      * @return  Response|JsonResponse
      */
-    public function listAction($id)
+    public function listAction($id = 0)
     {
         try {
             /** @var \eTraxis\Repository\GroupsRepository $repository */
@@ -66,7 +66,7 @@ class GroupsController extends Controller
      *
      * @return  Response
      */
-    public function viewAction(Request $request, $id)
+    public function viewAction(Request $request, $id = 0)
     {
         try {
             $group = $this->getDoctrine()->getRepository('eTraxis:Group')->find($id);

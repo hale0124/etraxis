@@ -109,7 +109,7 @@
          * Removes all items.
          */
         clear: function() {
-            $('.panel-body a', this.element).remove();
+            $('.panel-body', this.element).empty();
         },
 
         /**

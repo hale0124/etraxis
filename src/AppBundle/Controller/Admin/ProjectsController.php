@@ -77,7 +77,7 @@ class ProjectsController extends Controller
      *
      * @return  Response
      */
-    public function viewAction(Request $request, $id)
+    public function viewAction(Request $request, $id = 0)
     {
         try {
             $project = $this->getDoctrine()->getRepository('eTraxis:Project')->find($id);
