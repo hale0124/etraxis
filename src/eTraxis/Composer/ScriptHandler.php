@@ -40,7 +40,7 @@ class ScriptHandler
                 'run-sequence',
             ];
 
-            echo "\nInstalling npm modules\n";
+            echo PHP_EOL . 'Installing npm modules' . PHP_EOL;
             system('npm install ' . implode(' ', $modules));
         }
     }
@@ -52,10 +52,10 @@ class ScriptHandler
     {
         if (!getenv('TRAVIS')) {
 
-            echo "\nInstalling assets\n";
+            echo PHP_EOL . 'Installing assets' . PHP_EOL;
             system('bower install');
 
-            echo "\nProcessing assets\n";
+            echo PHP_EOL . 'Processing assets' . PHP_EOL;
             system('gulp');
         }
     }
@@ -67,10 +67,10 @@ class ScriptHandler
     {
         if (!getenv('TRAVIS')) {
 
-            echo "\nUpdating assets\n";
+            echo PHP_EOL . 'Updating assets' . PHP_EOL;
             system('bower update');
 
-            echo "\nProcessing assets\n";
+            echo PHP_EOL . 'Processing assets' . PHP_EOL;
             system('gulp');
         }
     }

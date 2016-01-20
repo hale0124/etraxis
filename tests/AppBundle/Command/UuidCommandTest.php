@@ -25,7 +25,7 @@ class UuidCommandTest extends BaseTestCase
         $commandTester = new CommandTester($application->find('etraxis:uuid'));
         $commandTester->execute([]);
 
-        $this->assertRegExp('/^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}[\n]{1}$)/', $commandTester->getDisplay());
+        $this->assertRegExp('/^([0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}[\r\n]{1}$)/', $commandTester->getDisplay());
     }
 
     public function testUuidHexOnly()
@@ -36,6 +36,6 @@ class UuidCommandTest extends BaseTestCase
         $commandTester = new CommandTester($application->find('etraxis:uuid'));
         $commandTester->execute(['--hex-only' => true]);
 
-        $this->assertRegExp('/^([0-9a-f]{32}[\n]{1}$)/', $commandTester->getDisplay());
+        $this->assertRegExp('/^([0-9a-f]{32}[\r\n]{1}$)/', $commandTester->getDisplay());
     }
 }

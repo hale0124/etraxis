@@ -56,7 +56,7 @@ class CheckRequirementsCommandTest extends BaseTestCase
 
         sort($extensions, SORT_STRING | SORT_FLAG_CASE);
 
-        $extensions = implode("\n", $extensions);
+        $extensions = implode(PHP_EOL, $extensions);
 
         $expected = <<<OUT
 Check PHP configuration
