@@ -15,6 +15,12 @@
                 <div>{{ 'groups'|trans }}</div>
             </div>
         </div>
+        <div class="grid-row mobile-grid-row panel" id="templates">
+            <div class="panel-heading">
+                <span class="ui-icon ui-icon-circle-plus" id="btn-new-template" title="{{ 'button.create'|trans }}"></span>
+                <div>{{ 'templates'|trans }}</div>
+            </div>
+        </div>
     </div>
 
     <div class="grid-70 mobile-grid-100 grid-row mobile-grid-row">
@@ -29,9 +35,10 @@
 
         $(function() {
 
-            var $content  = $('#content');
-            var $projects = $('#projects');
-            var $groups   = $('#groups');
+            var $content   = $('#content');
+            var $projects  = $('#projects');
+            var $groups    = $('#groups');
+            var $templates = $('#templates');
 
             //----------------------------------------------------------
             //  Projects.
@@ -60,6 +67,7 @@
                         $content.initUI();
                         $projects.panel('select', data);
                         loadGroups();
+                        loadTemplates();
                     });
                 }
             });
@@ -155,6 +163,67 @@
                         loadGroups(function() {
                             $groups.panel('expand');
                             $groups.trigger('panel.item.click', $groups.panel('find', name));
+                        });
+                        return true;
+                    }
+                });
+            });
+
+            //----------------------------------------------------------
+            //  Templates.
+            //----------------------------------------------------------
+
+            // Loads panel of templates.
+            var loadTemplates = function(onLoad) {
+                var projectId = $projects.panel('selected');
+                $templates.panel('clear');
+                $.getJSON('{{ path('admin_templates_list') }}/' + (projectId ? projectId : 0), function(data) {
+                    $(data).each(function(index, item) {
+                        var caption = item.isLocked
+                                ? item.name + ' ({{ 'template.locked'|trans|lower }})'
+                                : item.name;
+                        $templates.panel('append', item.id, caption);
+                    });
+                    if (typeof onLoad === 'function') {
+                        onLoad();
+                    }
+                });
+            };
+
+            // Template clicked.
+            $templates.on('panel.item.click', function(e, data) {
+                if (data) {
+                    $content.load('{{ path('admin_view_template') }}/' + data, function() {
+                        $content.initUI();
+                        $templates.panel('select', data);
+                    });
+                }
+            });
+
+            // Template edited.
+            $(document).on('admin.template.edited', function(e, data) {
+                loadTemplates(function() {
+                    $templates.panel('select', data);
+                });
+            });
+
+            // Template deleted.
+            $(document).on('admin.template.deleted', function() {
+                $content.html(null);
+                loadTemplates();
+            });
+
+            // New template.
+            $('#btn-new-template').click(function() {
+                var projectId = $projects.panel('selected');
+                eTraxis.modal({
+                    url: '{{ path('admin_dlg_new_template') }}/' + projectId,
+                    title: '{{ 'template.new'|trans }}',
+                    success: function() {
+                        var name = $('#template_name').val() + ' ({{ 'template.locked'|trans|lower }})';
+                        loadTemplates(function() {
+                            $templates.panel('expand');
+                            $templates.trigger('panel.item.click', $templates.panel('find', name));
                         });
                         return true;
                     }

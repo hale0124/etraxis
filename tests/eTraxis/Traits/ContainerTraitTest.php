@@ -51,9 +51,12 @@ class ContainerTraitTest extends KernelTestCase
             '_token' => $csrf->getToken('form')->getValue(),
             'fname'  => 'Artem',
             'lname'  => 'Rodygin',
+            'empty'  => '',
         ];
 
         $request = new Request(['form' => $formdata]);
+
+        $formdata['empty'] = null;
 
         $this->assertEquals($formdata, $this->object->getFormData($request));
     }
@@ -68,10 +71,13 @@ class ContainerTraitTest extends KernelTestCase
             '_token' => $csrf->getToken('user')->getValue(),
             'fname'  => 'Artem',
             'lname'  => 'Rodygin',
+            'empty'  => '',
         ];
 
         $request = new Request([], ['user' => $formdata]);
         $request->setMethod(Request::METHOD_POST);
+
+        $formdata['empty'] = null;
 
         $this->assertEquals($formdata, $this->object->getFormData($request, 'user'));
     }
