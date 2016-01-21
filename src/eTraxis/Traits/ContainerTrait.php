@@ -61,6 +61,12 @@ trait ContainerTrait
             throw new BadRequestHttpException('Invalid CSRF token.');
         }
 
+        foreach ($data[$name] as &$value) {
+            if (strlen($value) == 0) {
+                $value = null;
+            }
+        }
+
         return $data[$name];
     }
 
