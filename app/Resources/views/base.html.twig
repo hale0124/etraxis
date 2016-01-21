@@ -7,8 +7,13 @@
 
     <title>{{ title | default('eTraxis') }}</title>
 
-    <link href="{{ asset('css/libs.min.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/' ~ (app.user ? app.user.theme : theme) ~ '/etraxis.min.css') }}" rel="stylesheet">
+    {% for css in ['css/libs.css', 'css/%s/etraxis.css'] %}
+        {%- set css = css
+                | format(app.user ? app.user.theme : theme)
+                | replace(app.environment == 'dev' ? {} : {'.css': '.min.css'})
+        -%}
+        <link href="{{ asset(css) }}" rel="stylesheet">
+    {% endfor %}
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png')         }}">
@@ -71,9 +76,13 @@
 
     <div id="__etraxis_modal" class="ui-helper-hidden"></div>
 
-    <script src="{{ asset('js/libs.min.js') }}"></script>
-    <script src="{{ asset('js/etraxis-' ~ (app.user ? app.user.locale : locale) ~ '.min.js') }}"></script>
-    <script src="{{ asset('js/etraxis.min.js') }}"></script>
+    {% for js in ['js/libs.js', 'js/etraxis-%s.js', 'js/etraxis.js'] %}
+        {%- set js = js
+                | format(app.user ? app.user.locale : locale)
+                | replace(app.environment == 'dev' ? {} : {'.js': '.min.js'})
+        -%}
+        <script src="{{ asset(js) }}"></script>
+    {% endfor %}
 
     <script>
         $(function() {

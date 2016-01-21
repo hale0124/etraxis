@@ -45,6 +45,7 @@ app/console doctrine:schema:create
 ### Development
 
 ```bash
+gulp
 ./bin/php-cs-fixer fix
 ./bin/phpunit --coverage-html=vendor/coverage
 ```

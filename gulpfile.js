@@ -11,6 +11,7 @@ var gulp     = require('gulp');
 var addsrc   = require('gulp-add-src');
 var concat   = require('gulp-concat');
 var less     = require('gulp-less');
+var gulpif   = require('gulp-if');
 var insert   = require('gulp-insert');
 var minify   = require('gulp-minify-css');
 var plumber  = require('gulp-plumber');
@@ -21,6 +22,7 @@ var watch    = require('gulp-watch');
 var fs       = require('fs');
 var merge    = require('merge-stream');
 var sequence = require('run-sequence');
+var argv     = require('yargs').argv;
 
 /**
  * Performs all installation tasks in one.
@@ -58,8 +60,8 @@ gulp.task('stylesheets:libs', function() {
     ];
 
     gulp.src(files)
-        .pipe(minify())
-        .pipe(concat('libs.min.css'))
+        .pipe(gulpif(argv.production, minify()))
+        .pipe(concat(argv.production ? 'libs.min.css' : 'libs.css'))
         .pipe(gulp.dest('web/css/'));
 });
 
@@ -86,8 +88,8 @@ gulp.task('stylesheets:themes', function() {
             }))
             .pipe(less())
             .pipe(addsrc.prepend('app/Resources/public/css/' + folder + '/jquery-ui.theme.css'))
-            .pipe(minify())
-            .pipe(concat('etraxis.min.css'))
+            .pipe(gulpif(argv.production, minify()))
+            .pipe(concat(argv.production ? 'etraxis.min.css' : 'etraxis.css'))
             .pipe(gulp.dest('web/css/' + folder));
     });
 
@@ -108,8 +110,8 @@ gulp.task('javascripts:libs', function() {
     ];
 
     gulp.src(files)
-        .pipe(uglify())
-        .pipe(concat('libs.min.js'))
+        .pipe(gulpif(argv.production, uglify()))
+        .pipe(concat(argv.production ? 'libs.min.js' : 'libs.js'))
         .pipe(gulp.dest('web/js/'));
 
     gulp.src('vendor/bower/html5shiv/dist/html5shiv.min.js')
@@ -211,8 +213,8 @@ gulp.task('javascripts:i18n', function() {
         ];
 
         gulp.src(files)
-            .pipe(uglify())
-            .pipe(concat('etraxis-' + locale.replace('-', '_') + '.min.js'))
+            .pipe(gulpif(argv.production, uglify()))
+            .pipe(concat('etraxis-' + locale.replace('-', '_') + (argv.production ? '.min.js' : '.js')))
             .pipe(gulp.dest('web/js/'));
     });
 });
@@ -233,7 +235,7 @@ gulp.task('javascripts:etraxis', function() {
     ];
 
     gulp.src(files)
-        .pipe(uglify())
-        .pipe(concat('etraxis.min.js'))
+        .pipe(gulpif(argv.production, uglify()))
+        .pipe(concat(argv.production ? 'etraxis.min.js' : 'etraxis.js'))
         .pipe(gulp.dest('web/js/'));
 });

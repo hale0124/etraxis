@@ -27,6 +27,7 @@ class ScriptHandler
                 'gulp',
                 'gulp-add-src',
                 'gulp-concat',
+                'gulp-if',
                 'gulp-insert',
                 'gulp-less',
                 'gulp-minify-css',
@@ -38,6 +39,7 @@ class ScriptHandler
                 'fs',
                 'merge-stream',
                 'run-sequence',
+                'yargs',
             ];
 
             echo PHP_EOL . 'Installing npm modules' . PHP_EOL;
@@ -56,7 +58,9 @@ class ScriptHandler
             system('bower install');
 
             echo PHP_EOL . 'Processing assets' . PHP_EOL;
-            system('gulp');
+            system('gulp --production');
+
+            echo PHP_EOL . 'If you work in development environment, please don\'t forget to run "gulp" now.' . PHP_EOL;
         }
     }
 
@@ -71,7 +75,9 @@ class ScriptHandler
             system('bower update');
 
             echo PHP_EOL . 'Processing assets' . PHP_EOL;
-            system('gulp');
+            system('gulp --production');
+
+            echo PHP_EOL . 'If you work in development environment, please don\'t forget to run "gulp" now.' . PHP_EOL;
         }
     }
 }
