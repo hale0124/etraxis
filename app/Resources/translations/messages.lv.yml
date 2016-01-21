@@ -63,6 +63,7 @@ password.wrong: 'Nepareiza parole.'
 password.cant_change: 'Šis konts izmanto ārēju pilnvarošanas avotu. Nav iespējams nomainīt paroli.'
 security.forgot_password: 'Nozaudēta parole'
 security.forgot_password.email_sent: 'Jums tika nosūtīts e-pasts ar instrukcijām, kā izveidot jaunu paroli.'
+security.change_password: 'Mainīt paroli'
 security.password_expired: ~
 key.tab: ~
 key.space: ~
@@ -96,6 +97,18 @@ project.active: Aktīvs
 project.suspended: Atlikts
 project.confirm.delete: 'Vai tiešām vēlaties dzēst šo projektu?'
 project.conflict.name: 'Projekts ar tādu nosaukumu jau eksistē.'
+template: Lekāls
+templates: Lekāli
+template.new: 'Jauns lekāls'
+template.name: 'Lekāla nosaukums'
+template.prefix: Priedēklis
+template.critical_age: 'Kritisks vecums'
+template.frozen_time: 'Atlikšanas laiks'
+template.guest_access: 'Viesu piekļuve'
+template.status: Statuss
+template.active: Aktīvs
+template.locked: Bloķēts
+template.confirm.delete: 'Vai tiešām vēlaties dzēst šo lekālu?'
 template.conflict.name: 'Lekāls ar tādu nosaukumu jau eksistē.'
 template.conflict.prefix: 'Lekāls ar tādu priedēkli jau eksistē.'
 state.conflict.name: 'Stāvoklis ar tādu nosaukumu jau eksistē.'

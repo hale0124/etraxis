@@ -63,6 +63,7 @@ password.wrong: 'Falsches Kennwort.'
 password.cant_change: 'Dieses Konto verwendet eine externe Authentifizierungs-Quelle. Unmöglich, das Kennwort zu ändern.'
 security.forgot_password: 'Kennwort vergessen'
 security.forgot_password.email_sent: 'Eine E-Mail mit Anweisungen, ein neues Kennwort zu wählen, wurde Ihnen geschickt.'
+security.change_password: 'Kennwort ändern'
 security.password_expired: ~
 key.tab: ~
 key.space: ~
@@ -96,6 +97,18 @@ project.active: Aktiv
 project.suspended: Ausgesetzt
 project.confirm.delete: 'Möchten Sie dieses Projekt wirklich löschen?'
 project.conflict.name: 'Ein Projekt mit diesem Namen existiert bereits.'
+template: 'Art der Anfrage'
+templates: Anfragearten
+template.new: 'Neue Anfrageart'
+template.name: 'Name der Anfrageart'
+template.prefix: Präfix
+template.critical_age: 'Kritisches Alter'
+template.frozen_time: 'Einfrieren nach Ende'
+template.guest_access: Gastzugriff
+template.status: Status
+template.active: Aktiv
+template.locked: Gesperrt
+template.confirm.delete: 'Möchten Sie diese Anfrageart wirklich löschen?'
 template.conflict.name: 'Eine Anfrageart mit diesem Namen existiert bereits.'
 template.conflict.prefix: 'Eine Anfrageart mit diesem Präfix existiert bereits.'
 state.conflict.name: 'Ein Status mit diesem Namen existiert bereits.'

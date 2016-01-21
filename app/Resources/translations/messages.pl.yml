@@ -63,6 +63,7 @@ password.wrong: 'Złe hasło.'
 password.cant_change: 'To konto ma zewnętrzne źródło uwierzytelniania. Nie możesz zmienić hasła.'
 security.forgot_password: 'Zapomniane hasło'
 security.forgot_password.email_sent: 'E-mail z instrukcjami zmiany hasła został wysłany do Ciebie.'
+security.change_password: 'Zmień hasło'
 security.password_expired: ~
 key.tab: ~
 key.space: ~
@@ -96,6 +97,18 @@ project.active: Aktywny
 project.suspended: Zawieszony
 project.confirm.delete: 'Czy jesteś pewien, że chesz usunąć wybrany projekt?'
 project.conflict.name: 'Projekt o podanej nazwie już istnieje.'
+template: Szablon
+templates: Szablony
+template.new: 'Nowy szablon'
+template.name: 'Nazwa szablonu'
+template.prefix: Prefix
+template.critical_age: 'Czas krytyczny'
+template.frozen_time: 'Czas zamrożenia'
+template.guest_access: 'Dostęp anonimowy'
+template.status: Status
+template.active: Aktywny
+template.locked: Zablokowany
+template.confirm.delete: 'Czy jesteś pewien, że chesz usunąć wybrany szablon?'
 template.conflict.name: 'Szablon o podanej nazwie już istnieje.'
 template.conflict.prefix: 'Szablon o podanej prefixie już istnieje.'
 state.conflict.name: 'Stan o tej nazwie już istnieje.'

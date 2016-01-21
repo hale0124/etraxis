@@ -63,6 +63,7 @@ password.wrong: 'Hibás jelszó.'
 password.cant_change: 'A fiók külső azonosítási forrást használ. A jelszó megváltoztatása nem lehetséges.'
 security.forgot_password: 'Elfelejtett jelszó'
 security.forgot_password.email_sent: 'Egy e-mail üzenetben postáztunk Önnek egy leírást az új jelszó beállításáról.'
+security.change_password: 'Jelszó megváltoztatása'
 security.password_expired: ~
 key.tab: ~
 key.space: ~
@@ -96,6 +97,18 @@ project.active: Aktív
 project.suspended: Felfüggesztve
 project.confirm.delete: 'Biztos törölni szeretné a projektet?'
 project.conflict.name: 'Már létezik ilyen névvel ellátott projekt.'
+template: Sablon
+templates: Sablonok
+template.new: 'Új sablon'
+template.name: 'Sablon neve'
+template.prefix: Prefix
+template.critical_age: 'Kritikus határidő'
+template.frozen_time: 'Zárás után meddig módosítható'
+template.guest_access: 'Vendég felhasználó'
+template.status: Állapot
+template.active: Aktív
+template.locked: Zárolt
+template.confirm.delete: 'Biztos törölni szeretné a sablont?'
 template.conflict.name: 'Már létezik ilyen névvel ellátott sablon.'
 template.conflict.prefix: ~
 state.conflict.name: ~

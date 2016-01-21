@@ -63,6 +63,7 @@ password.wrong: 'Yanlış parola.'
 password.cant_change: 'Bu hesap harici bir denetim kaynağı kullanıyor. Parolayı değiştirmek mümkün değil.'
 security.forgot_password: 'Parolamı unuttum'
 security.forgot_password.email_sent: 'Yeni parola seçme talimatlarını içeren e-postanız gönderildi.'
+security.change_password: 'Parolayı değiştir'
 security.password_expired: ~
 key.tab: ~
 key.space: ~
@@ -96,6 +97,18 @@ project.active: Aktif
 project.suspended: Askıda
 project.confirm.delete: 'Bu projeyi silmek istediğinizden emin misiniz?'
 project.conflict.name: 'Girilen adda bir proje zaten var.'
+template: Şablon
+templates: Şablonlar
+template.new: 'Yeni şablon'
+template.name: 'Şablon adı'
+template.prefix: 'Ön ek'
+template.critical_age: 'Kritik dönem'
+template.frozen_time: 'Dondurulmuş zaman'
+template.guest_access: 'Konuk erişimi'
+template.status: Durum
+template.active: Aktif
+template.locked: Kilitli
+template.confirm.delete: 'Bu şablonu silmek istediğinizden emin misiniz?'
 template.conflict.name: ~
 template.conflict.prefix: ~
 state.conflict.name: ~

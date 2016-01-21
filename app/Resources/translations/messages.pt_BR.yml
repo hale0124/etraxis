@@ -63,6 +63,7 @@ password.wrong: 'Senha inválida.'
 password.cant_change: 'Esta conta utiliza autenticação externa. Não é possível alterar a senha.'
 security.forgot_password: 'Perdi minha senha'
 security.forgot_password.email_sent: 'Um e-mail com instruções para escolher uma nova senha foi enviado para você.'
+security.change_password: 'Alterar senha'
 security.password_expired: ~
 key.tab: ~
 key.space: ~
@@ -96,6 +97,18 @@ project.active: Ativo
 project.suspended: Suspenso
 project.confirm.delete: 'Tem certeza que quer apagar este projeto?'
 project.conflict.name: 'O projeto escolhido já existe.'
+template: Assunto
+templates: Templates
+template.new: 'Novo template'
+template.name: 'Nome do template'
+template.prefix: Prefixo
+template.critical_age: 'Idade crítica'
+template.frozen_time: 'Tempo de congelamento'
+template.guest_access: 'Acesso de convidado'
+template.status: Status
+template.active: Ativo
+template.locked: Travado
+template.confirm.delete: 'Tem certeza que quer apagar este template?'
 template.conflict.name: 'O template escolhido já existe.'
 template.conflict.prefix: 'O prefixo escolhido já existe.'
 state.conflict.name: 'O estado escolhido já existe.'

@@ -63,6 +63,7 @@ password.wrong: 'Contraseña incorrecta.'
 password.cant_change: 'Esta cuenta utiliza una fuente de autenticación externa. No es posible cambiar la contraseña.'
 security.forgot_password: '¿Olvidaste la contraseña?'
 security.forgot_password.email_sent: 'Se le ha enviado un correo con instrucciones para elegir una nueva contraseña.'
+security.change_password: 'Cambiar contraseña'
 security.password_expired: ~
 key.tab: ~
 key.space: ~
@@ -96,6 +97,18 @@ project.active: Activo
 project.suspended: Suspendido
 project.confirm.delete: '¿Está seguro de eliminar este proyecto?'
 project.conflict.name: 'Ya existe un Proyecto con ese nombre.'
+template: Plantilla
+templates: Plantillas
+template.new: 'Nueva plantilla'
+template.name: 'Nombre de plantilla'
+template.prefix: Prefijo
+template.critical_age: 'Auto expiración'
+template.frozen_time: 'Tiempo congelado'
+template.guest_access: 'Acceso de invitado'
+template.status: Estado
+template.active: Activo
+template.locked: Bloqueado
+template.confirm.delete: '¿Está seguro de eliminar esta plantilla?'
 template.conflict.name: 'Ya existe una Plantilla con ese nombre.'
 template.conflict.prefix: 'Ya existe una Plantilla con ese prefijo.'
 state.conflict.name: 'Ya existe un Estado con ese nombre.'

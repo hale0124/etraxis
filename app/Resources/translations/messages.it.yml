@@ -63,6 +63,7 @@ password.wrong: 'Password errata.'
 password.cant_change: 'Questo utente utilizza un metodo di autenticazione esterno. Impossibile cambiare la password.'
 security.forgot_password: 'Password dimenticata'
 security.forgot_password.email_sent: 'Ti è stata spedita una email con le istruzioni per cambiare la password.'
+security.change_password: 'Modifica password'
 security.password_expired: ~
 key.tab: ~
 key.space: ~
@@ -96,6 +97,18 @@ project.active: Attivo
 project.suspended: Sospeso
 project.confirm.delete: 'Eliminare questo progetto?'
 project.conflict.name: 'Nome progetto già utilizzato.'
+template: Modello
+templates: Modelli
+template.new: 'Nuovo modello'
+template.name: 'Nome del modello'
+template.prefix: Prefisso
+template.critical_age: 'Età critica'
+template.frozen_time: 'Tempo di congelamento'
+template.guest_access: 'Accesso ospite'
+template.status: Stato
+template.active: Attivo
+template.locked: Bloccato
+template.confirm.delete: 'Eliminare questo modello?'
 template.conflict.name: 'Un modello con lo stesso nome è già utilizzato.'
 template.conflict.prefix: 'Un modello con lo stesso prefisso è già utilizzato.'
 state.conflict.name: 'Uno stato con lo stesso nome è già utilizzato.'

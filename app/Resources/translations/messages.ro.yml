@@ -63,6 +63,7 @@ password.wrong: 'Parolă greșită.'
 password.cant_change: 'Acest cont folosește o sursă externă de autentificare. Nu se poate schimba parola.'
 security.forgot_password: 'Parolă uitată'
 security.forgot_password.email_sent: 'S-a trimis un email cu instrucțiuni de schimbare a parolei.'
+security.change_password: 'Schimbare parolă'
 security.password_expired: ~
 key.tab: ~
 key.space: ~
@@ -96,6 +97,18 @@ project.active: Activ
 project.suspended: Suspendat
 project.confirm.delete: 'Sunteti sigur ca doriti sa stergeti acest proiect?'
 project.conflict.name: 'Numele de proiect exista deja.'
+template: Sablon
+templates: Sabloane
+template.new: 'Sablon nou'
+template.name: 'Numele sablonului'
+template.prefix: Prefix
+template.critical_age: 'Vechimea critica'
+template.frozen_time: 'Timp de suspendare'
+template.guest_access: 'Acces pt vizitatori'
+template.status: Stare
+template.active: Activ
+template.locked: Blocat
+template.confirm.delete: 'Sunteti sigur ca doriti sa stergeti acest sablon?'
 template.conflict.name: 'Sablonul cu numele introdus exista deja.'
 template.conflict.prefix: 'Sablonul prefixul introdus exista deja.'
 state.conflict.name: 'Numele starii deja exista.'

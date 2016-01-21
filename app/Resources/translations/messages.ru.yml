@@ -63,6 +63,7 @@ password.wrong: 'Неверный пароль.'
 password.cant_change: 'Для данной учётной записи используется источник внешней аутентификации. Невозможно изменить пароль.'
 security.forgot_password: 'Восстановление пароля'
 security.forgot_password.email_sent: 'Вам отправлено письмо с инструкциями по выбору нового пароля.'
+security.change_password: 'Изменить пароль'
 security.password_expired: 'Срок действия Вашего пароля истек.'
 key.tab: Табуляция
 key.space: Пробел
@@ -96,6 +97,18 @@ project.active: Активный
 project.suspended: Заморожен
 project.confirm.delete: 'Вы уверены, что хотите удалить этот проект?'
 project.conflict.name: 'Проект с таким названием уже существует.'
+template: Шаблон
+templates: Шаблоны
+template.new: 'Новый шаблон'
+template.name: 'Название шаблона'
+template.prefix: Префикс
+template.critical_age: 'Критичный возраст'
+template.frozen_time: 'Время "заморозки"'
+template.guest_access: 'Гостевой доступ'
+template.status: Статус
+template.active: Активный
+template.locked: Заблокирован
+template.confirm.delete: 'Вы уверены, что хотите удалить этот шаблон?'
 template.conflict.name: 'Шаблон с таким названием уже существует.'
 template.conflict.prefix: 'Шаблон с таким префиксом уже существует.'
 state.conflict.name: 'Состояние с таким названием уже существует.'

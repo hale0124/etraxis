@@ -63,6 +63,7 @@ password.wrong: 'Incorrect wachtwoord.'
 password.cant_change: 'Dit account gebruikt een externe bron voor authenticatie. Het is niet mogelijk om het wachtwoord te veranderen.'
 security.forgot_password: 'Wachtwoord verloren'
 security.forgot_password.email_sent: 'Er is een e-mail naar u verstuurd met instructies over het kiezen van een nieuw wachtwoord.'
+security.change_password: 'Wijzig wachtwoord'
 security.password_expired: ~
 key.tab: ~
 key.space: ~
@@ -96,6 +97,18 @@ project.active: Actief
 project.suspended: Geschorst
 project.confirm.delete: 'Ben je zeker dat je dit project wilt verwijderen?'
 project.conflict.name: 'Project met ingevoerde naam bestaat reeds.'
+template: Sjabloon
+templates: Sjablonen
+template.new: 'Nieuw sjabloon'
+template.name: Sjabloonsnaam
+template.prefix: Voorvoegsel
+template.critical_age: 'Kritische leeftijd'
+template.frozen_time: 'Bevroren tijd'
+template.guest_access: 'Gast toegang'
+template.status: Status
+template.active: Actief
+template.locked: Geblokkeerd
+template.confirm.delete: 'Ben je zeker dat je dit sjabloon wilt verwijderen?'
 template.conflict.name: 'Sjabloon met ingevoerde naam bestaat reeds.'
 template.conflict.prefix: 'Sjabloon met ingevoerde voorvoegsel bestaat reeds.'
 state.conflict.name: 'Status met ingevoerde naam bestaat reeds.'

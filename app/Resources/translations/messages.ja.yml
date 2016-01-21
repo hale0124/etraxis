@@ -63,6 +63,7 @@ password.wrong: パスワードが違います。
 password.cant_change: このアカウントでは外部認証を使っています。パスワードは変更できません。
 security.forgot_password: パスワードの再発行
 security.forgot_password.email_sent: 新しいパスワードのメールを送信しました。
+security.change_password: パスワード変更
 security.password_expired: ~
 key.tab: ~
 key.space: ~
@@ -96,6 +97,18 @@ project.active: アクティブ
 project.suspended: 保留中
 project.confirm.delete: プロジェクトを削除してよろしいですか？
 project.conflict.name: 入力されたプロジェクトの名前は既に存在しています。
+template: テンプレート
+templates: テンプレート
+template.new: 新規テンプレート
+template.name: テンプレート名
+template.prefix: 接頭辞
+template.critical_age: 必須対応日数
+template.frozen_time: クローズ後編集凍結日数
+template.guest_access: ゲストとしてアクセス
+template.status: 状態
+template.active: アクティブ
+template.locked: ロック済み
+template.confirm.delete: テンプレートを削除してよろしいですか？
 template.conflict.name: ~
 template.conflict.prefix: ~
 state.conflict.name: ~

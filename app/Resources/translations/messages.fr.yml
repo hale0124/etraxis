@@ -63,6 +63,7 @@ password.wrong: 'Mot de passe incorrect.'
 password.cant_change: 'Ce compte utilise une authentification externe. Impossible de changer le mot de passe.'
 security.forgot_password: 'Mot de passe perdu'
 security.forgot_password.email_sent: 'Un message contenant les instructions pour choisir un nouveau mot de passe vous a été envoyé.'
+security.change_password: 'Changer de mot de passe'
 security.password_expired: ~
 key.tab: ~
 key.space: ~
@@ -96,6 +97,18 @@ project.active: Actif
 project.suspended: Suspendu
 project.confirm.delete: 'Etes-vous sur de vouloir effacer ce projet?'
 project.conflict.name: 'Il existe déjà un projet portant ce nom.'
+template: Modèle
+templates: Modèles
+template.new: 'Nouveau modèle'
+template.name: 'Nom du modèle'
+template.prefix: Préfixe
+template.critical_age: 'Age critique'
+template.frozen_time: 'Inacitvité (gel)'
+template.guest_access: 'Accès invité'
+template.status: Statut
+template.active: Actif
+template.locked: Verrouillé
+template.confirm.delete: 'Etes-vous sur de vouloir effacer ce modèle?'
 template.conflict.name: 'Il existe déjà un modèle portant ce nom.'
 template.conflict.prefix: 'Il existe déjà un modèle portant ce un préfixe.'
 state.conflict.name: 'Il existe déjà un état portant ce nom.'

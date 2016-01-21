@@ -63,6 +63,7 @@ password.wrong: 'Грешна парола.'
 password.cant_change: 'Този профил е с външен метод за оторизация. Невъзможна смяна на паролата.'
 security.forgot_password: 'Забравена парола'
 security.forgot_password.email_sent: 'Изпратен ви е e-mail с инструкции за избор на нова парола.'
+security.change_password: 'Промяна на парола'
 security.password_expired: ~
 key.tab: ~
 key.space: ~
@@ -96,6 +97,18 @@ project.active: Активен
 project.suspended: Преустановен
 project.confirm.delete: 'Сигурен ли сте че искате да изтриете този проект?'
 project.conflict.name: 'Вече същестува проект с въведеното име.'
+template: Темплейт
+templates: Темплейти
+template.new: 'Нов темплейт'
+template.name: 'Име на темплейт'
+template.prefix: Представка
+template.critical_age: 'Критическа възраст'
+template.frozen_time: 'Замръзено време'
+template.guest_access: 'Достъп за гости'
+template.status: Статус
+template.active: Активен
+template.locked: Заключен
+template.confirm.delete: 'Сигурен ли сте че искате да изтриете този темплейт?'
 template.conflict.name: 'Вече същестува темплейт с въведеното име.'
 template.conflict.prefix: 'Вече същестува темплейт с въведеното представка.'
 state.conflict.name: 'Вече съществува услови с въведеното име.'

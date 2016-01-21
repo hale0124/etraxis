@@ -63,6 +63,7 @@ password.wrong: 'Fel lösenord.'
 password.cant_change: 'Detta konto använder en extern autentiseringskälla. Det går inte att byta lösenord.'
 security.forgot_password: 'Glömt lösenord'
 security.forgot_password.email_sent: 'Ett mail med instruktioner om hur man väljer ett nytt lösenord har skickats till dig.'
+security.change_password: 'Ändra lösenord'
 security.password_expired: ~
 key.tab: ~
 key.space: ~
@@ -96,6 +97,18 @@ project.active: Aktiv
 project.suspended: Inaktiv
 project.confirm.delete: 'Är du säker på att du vill ta bort detta projektet?'
 project.conflict.name: 'Projekt med detta namnet finns redan.'
+template: Mall
+templates: Mallar
+template.new: 'Ny mall'
+template.name: 'Mall namn'
+template.prefix: Prefix
+template.critical_age: 'Kritisk ålder'
+template.frozen_time: 'Fryst tid'
+template.guest_access: 'Gäst åtkomst'
+template.status: Status
+template.active: Aktiv
+template.locked: Låst
+template.confirm.delete: 'Är du säker på att du vill ta bort den här mallen?'
 template.conflict.name: 'Mall med detta namnet finns redan.'
 template.conflict.prefix: 'Mall med detta prefixet finns redan.'
 state.conflict.name: 'Status med detta namnet finns redan.'

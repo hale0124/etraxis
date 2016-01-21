@@ -63,6 +63,7 @@ password.wrong: 'Chybné heslo.'
 password.cant_change: 'Tento účet používá externí autentifikaci. Zde heslo změnit nemůžete.'
 security.forgot_password: 'Zapomenuté heslo'
 security.forgot_password.email_sent: 'Byl vám zaslán email s intrukcemi jak si nastavíte nové heslo.'
+security.change_password: 'Změnit heslo'
 security.password_expired: ~
 key.tab: ~
 key.space: ~
@@ -96,6 +97,18 @@ project.active: Aktivní
 project.suspended: Pozastaven
 project.confirm.delete: 'Jste si jisti, že chcete smazat tento projekt?'
 project.conflict.name: 'Projekt se zadaným názvem již existuje.'
+template: Šablona
+templates: Šablony
+template.new: 'Nová šablona'
+template.name: 'Název šablony'
+template.prefix: Prefix
+template.critical_age: 'Kritické stáří'
+template.frozen_time: 'Čas zmrazení'
+template.guest_access: 'Anonymní přístup'
+template.status: Status
+template.active: Aktivní
+template.locked: Uzamčen
+template.confirm.delete: 'Jste si jisti, že chcete smazat tuto šablonu?'
 template.conflict.name: 'Šablona se zadaným jménem již existuje.'
 template.conflict.prefix: 'Šablona se zadaným předponou již existuje.'
 state.conflict.name: 'Stav se zadaným jménem již existuje.'
