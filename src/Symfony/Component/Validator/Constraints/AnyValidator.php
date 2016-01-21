@@ -48,8 +48,10 @@ class AnyValidator extends ConstraintValidator
         }
 
         if ($passed) {
-            for ($offset = $context->getViolations()->count(); $offset > $count; $offset--) {
-                $context->getViolations()->remove($offset - 1);
+            foreach ($context->getViolations() as $offset => $violation) {
+                if (--$count < 0) {
+                    $context->getViolations()->remove($offset);
+                }
             }
         }
     }
