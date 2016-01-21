@@ -76,6 +76,7 @@ size: Големина
 delimiter: Delimiter
 encoding: Шифриране
 line_endings: 'Завършване на ред'
+group: Група
 groups: Групи
 others: Други
 members: Потребители

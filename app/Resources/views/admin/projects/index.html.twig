@@ -103,7 +103,7 @@
             //----------------------------------------------------------
 
             // Loads panel of groups.
-            var loadGroups = function() {
+            var loadGroups = function(onLoad) {
                 var projectId = $projects.panel('selected');
                 $groups.panel('clear');
                 $.getJSON('{{ path('admin_groups_list') }}/' + (projectId ? projectId : 0), function(data) {
@@ -113,6 +113,9 @@
                                 : item.name + ' ({{ 'group.global'|trans|lower }})';
                         $groups.panel('append', item.id, caption);
                     });
+                    if (typeof onLoad === 'function') {
+                        onLoad();
+                    }
                 });
             };
 
@@ -126,8 +129,10 @@
             });
 
             // Group edited.
-            $(document).on('admin.group.edited', function() {
-                loadGroups();
+            $(document).on('admin.group.edited', function(e, data) {
+                loadGroups(function() {
+                    $groups.trigger('panel.item.click', data);
+                });
             });
 
             // Group deleted.
@@ -143,7 +148,14 @@
                     url: '{{ path('admin_dlg_new_group') }}/' + projectId,
                     title: '{{ 'group.new'|trans }}',
                     success: function() {
-                        loadGroups();
+                        var name = $('#group_name').val();
+                        if (!$('#group_project').prop('checked')) {
+                            name += ' ({{ 'group.global'|trans|lower }})';
+                        }
+                        loadGroups(function() {
+                            $groups.panel('expand');
+                            $groups.trigger('panel.item.click', $groups.panel('find', name));
+                        });
                         return true;
                     }
                 });

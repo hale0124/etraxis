@@ -76,6 +76,7 @@ size: Grootte
 delimiter: Begrenzer
 encoding: Encodering
 line_endings: Lijneindes
+group: Groep
 groups: Groepen
 others: Anderen
 members: Leden

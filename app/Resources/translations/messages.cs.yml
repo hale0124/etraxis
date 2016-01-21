@@ -76,6 +76,7 @@ size: Velikost
 delimiter: Oddělovač
 encoding: Kódování
 line_endings: 'Konce řádků'
+group: Skupina
 groups: Skupiny
 others: Ostatní
 members: Členové

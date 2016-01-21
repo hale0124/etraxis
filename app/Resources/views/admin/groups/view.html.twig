@@ -1,6 +1,6 @@
 <div class="tabs" id="tabs-group" data-tab="{{ tab }}">
     <ul>
-        <li><a href="{{ path('admin_tab_group_details', {'id': group.id}) }}">{{ group.name }}</a></li>
+        <li><a href="{{ path('admin_tab_group_details', {'id': group.id}) }}">{{ 'group'|trans }}</a></li>
         <li><a href="{{ path('admin_tab_group_members', {'id': group.id}) }}">{{ 'membership'|trans }}</a></li>
     </ul>
 </div>

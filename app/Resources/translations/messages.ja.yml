@@ -76,6 +76,7 @@ size: サイズ
 delimiter: 区切り文字
 encoding: 出力時のエンコード
 line_endings: 改行コード
+group: グループ
 groups: グループ
 others: その他
 members: メンバー

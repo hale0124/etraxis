@@ -76,6 +76,7 @@ size: Dimensione
 delimiter: Delimitatore
 encoding: Codifica
 line_endings: 'Terminatori di linea'
+group: Gruppo
 groups: Gruppi
 others: Altri
 members: Membri

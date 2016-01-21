@@ -43,11 +43,11 @@
 
     $(function() {
 
-        function reloadTab() {
+        var reloadTab = function() {
             var $tabs = $('#tabs-user');
             var current = $tabs.tabs('option', 'active');
             $tabs.tabs('load', current);
-        }
+        };
 
         // Update tab title - user name could be changed.
         var $tabs = $('#tabs-user');

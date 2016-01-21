@@ -76,6 +76,7 @@ size: Rozmiar
 delimiter: 'Znak rozdzielenia'
 encoding: Kodowanie
 line_endings: 'Zakończenie lini'
+group: Grupa
 groups: Grupy
 others: Inni
 members: Członek

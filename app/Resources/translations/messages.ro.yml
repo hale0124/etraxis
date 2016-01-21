@@ -76,6 +76,7 @@ size: Mărime
 delimiter: Delimitator
 encoding: Codare
 line_endings: 'Delimitator de linie'
+group: Grup
 groups: Grupuri
 others: Altele
 members: Membrii

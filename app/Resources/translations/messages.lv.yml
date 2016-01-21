@@ -76,6 +76,7 @@ size: Izmērs
 delimiter: Norobežotājs
 encoding: Kodēšana
 line_endings: 'Rindu nobeigumi'
+group: Grupa
 groups: Grupas
 others: Pārējie
 members: Dalībnieki

@@ -26,15 +26,11 @@
 
     $(function() {
 
-        function reloadTab() {
+        var reloadTab = function() {
             var $tabs = $('#tabs-group');
             var current = $tabs.tabs('option', 'active');
             $tabs.tabs('load', current);
-        }
-
-        // Update tab title - group name could be changed.
-        var $tabs = $('#tabs-group');
-        $('ul.ui-tabs-nav li[tabindex=0] a', $tabs).text('{{ group.name }}');
+        };
 
         // "Edit" button.
         $('#btn-edit').click(function() {
@@ -42,7 +38,7 @@
                 url: '{{ path('admin_dlg_edit_group', {'id': group.id}) }}',
                 title: '{{ group.name }}',
                 success: function() {
-                    $(document).trigger('admin.group.deleted', {{ group.id }});
+                    $(document).trigger('admin.group.edited', {{ group.id }});
                     reloadTab();
                     return true;
                 }

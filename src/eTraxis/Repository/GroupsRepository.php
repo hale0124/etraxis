@@ -33,8 +33,8 @@ class GroupsRepository extends EntityRepository
 
         $query
             ->select('g.id')
-            ->addSelect('g.name')
             ->addSelect('g.projectId')
+            ->addSelect('g.name')
             ->where('g.projectId IS NULL')
             ->orWhere('g.projectId = :id')
             ->setParameter('id', $id)

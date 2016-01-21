@@ -76,6 +76,7 @@ size: Tamaño
 delimiter: Delimitador
 encoding: Codificación
 line_endings: 'Final de línea'
+group: Grupo
 groups: Grupos
 others: Otros
 members: Miembros

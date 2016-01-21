@@ -76,6 +76,7 @@ size: Storlek
 delimiter: Avgränsare
 encoding: Kodning
 line_endings: Radslut
+group: Grupp
 groups: Grupper
 others: Andra
 members: Medlemmar

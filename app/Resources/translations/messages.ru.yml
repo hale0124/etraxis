@@ -76,6 +76,7 @@ size: Размер
 delimiter: Разделитель
 encoding: Кодировка
 line_endings: 'Концы строк'
+group: Группа
 groups: Группы
 others: Прочие
 members: Члены

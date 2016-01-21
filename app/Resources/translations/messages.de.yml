@@ -76,6 +76,7 @@ size: Größe
 delimiter: Trennzeichen
 encoding: Kodierung
 line_endings: Zeilenumbruch
+group: Gruppe
 groups: Gruppen
 others: Andere
 members: Mitglieder

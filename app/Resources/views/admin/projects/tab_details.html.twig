@@ -24,15 +24,11 @@
 
     $(function() {
 
-        function reloadTab() {
+        var reloadTab = function() {
             var $tabs = $('#tabs-project');
             var current = $tabs.tabs('option', 'active');
             $tabs.tabs('load', current);
-        }
-
-        // Update tab title - project name could be changed.
-        var $tabs = $('#tabs-project');
-        $('ul.ui-tabs-nav li[tabindex=0] a', $tabs).text('{{ project.name }}');
+        };
 
         // "Edit" button.
         $('#btn-edit').click(function() {

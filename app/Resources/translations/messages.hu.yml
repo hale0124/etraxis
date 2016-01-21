@@ -76,6 +76,7 @@ size: Méret
 delimiter: Mezőelválasztó
 encoding: Karakterkódolás
 line_endings: Sorvégződések
+group: Csoport
 groups: Csoportok
 others: 'További személyek'
 members: Tagok

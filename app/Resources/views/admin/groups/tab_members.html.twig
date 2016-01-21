@@ -39,11 +39,11 @@
 
     $(function() {
 
-        function reloadTab() {
+        var reloadTab = function() {
             var $tabs = $('#tabs-group');
             var current = $tabs.tabs('option', 'active');
             $tabs.tabs('load', current);
-        }
+        };
 
         // "<<" button (add users).
         $('#btn-add').click(function() {

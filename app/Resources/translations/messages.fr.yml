@@ -76,6 +76,7 @@ size: Taille
 delimiter: Délimiteur
 encoding: Codage
 line_endings: 'Fins de ligne'
+group: Groupe
 groups: Groupes
 others: Autres
 members: Membres

@@ -76,6 +76,7 @@ size: Size
 delimiter: Delimiter
 encoding: Encoding
 line_endings: 'Line endings'
+group: Group
 groups: Groups
 others: Others
 members: Members
