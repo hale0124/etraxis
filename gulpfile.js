@@ -79,7 +79,7 @@ gulp.task('stylesheets:themes', function() {
         });
 
     var tasks = folders.map(function(folder) {
-        return gulp.src('app/Resources/public/less/theme-' + folder + '.less')
+        return gulp.src('app/Resources/public/less/themes/theme-' + folder + '.less')
             .pipe(plumber({
                 errorHandler: function(error) {
                     console.log(error);
