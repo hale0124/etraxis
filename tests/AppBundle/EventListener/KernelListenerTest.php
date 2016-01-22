@@ -59,21 +59,20 @@ class KernelListenerTest extends BaseTestCase
             $this->translator,
             $this->authentication_utils,
             $this->authorization_checker,
-            $this->token_storage,
-            'ru');
+            $this->token_storage);
 
         $object->onKernelRequest($event);
 
-        $this->assertEquals('ru', $event->getRequest()->getLocale());
+        $this->assertEquals('en', $event->getRequest()->getLocale());
     }
 
-    public function testSetLocaleByRequest()
+    public function testSetLocaleBySession()
     {
         $request = new Request();
 
         $request->setSession($this->session);
         $request->cookies->set($this->session->getName(), $this->session->getId());
-        $request->attributes->set('_locale', 'ja');
+        $this->session->set('_locale', 'ja');
 
         $this->request_stack->push($request);
 
@@ -84,12 +83,8 @@ class KernelListenerTest extends BaseTestCase
             $this->translator,
             $this->authentication_utils,
             $this->authorization_checker,
-            $this->token_storage,
-            'ru');
+            $this->token_storage);
 
-        $object->onKernelRequest($event);
-
-        $request->attributes->remove('_locale');
         $object->onKernelRequest($event);
 
         $this->assertEquals('ja', $event->getRequest()->getLocale());
@@ -109,8 +104,7 @@ class KernelListenerTest extends BaseTestCase
             $this->translator,
             $this->authentication_utils,
             $this->authorization_checker,
-            $this->token_storage,
-            'en');
+            $this->token_storage);
 
         $object->onKernelResponse($event);
         $this->assertEquals(Response::HTTP_OK, $event->getResponse()->getStatusCode());
@@ -132,8 +126,7 @@ class KernelListenerTest extends BaseTestCase
             $this->translator,
             $this->authentication_utils,
             $this->authorization_checker,
-            $this->token_storage,
-            'en');
+            $this->token_storage);
 
         $object->onKernelResponse($event);
         $this->assertEquals(Response::HTTP_FOUND, $event->getResponse()->getStatusCode());
@@ -155,8 +148,7 @@ class KernelListenerTest extends BaseTestCase
             $this->translator,
             $this->authentication_utils,
             $this->authorization_checker,
-            $this->token_storage,
-            'en');
+            $this->token_storage);
 
         $object->onKernelResponse($event);
         $this->assertEquals(Response::HTTP_OK, $event->getResponse()->getStatusCode());
@@ -179,8 +171,7 @@ class KernelListenerTest extends BaseTestCase
             $this->translator,
             $this->authentication_utils,
             $this->authorization_checker,
-            $this->token_storage,
-            'en');
+            $this->token_storage);
 
         $object->onKernelResponse($event);
         $this->assertEquals(Response::HTTP_UNAUTHORIZED, $event->getResponse()->getStatusCode());

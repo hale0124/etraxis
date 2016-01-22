@@ -17,7 +17,6 @@ services:
             - "@security.authentication_utils"
             - "@security.authorization_checker"
             - "@security.token_storage"
-            - "%locale%"
 
     etraxis.listener.security:
         class: AppBundle\EventListener\SecurityListener
