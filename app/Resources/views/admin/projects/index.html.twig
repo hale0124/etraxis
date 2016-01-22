@@ -146,7 +146,7 @@
             // Group deleted.
             $(document).on('admin.group.deleted', function() {
                 $content.html(null);
-                loadGroups();
+                $projects.trigger('panel.item.click', $projects.panel('selected'));
             });
 
             // New group.
@@ -200,8 +200,8 @@
                 }
             });
 
-            // Template edited.
-            $(document).on('admin.template.edited', function(e, data) {
+            // Template edited / locked / unlocked.
+            $(document).on('admin.template.edited admin.template.locked admin.template.unlocked', function(e, data) {
                 loadTemplates(function() {
                     $templates.panel('select', data);
                 });
@@ -210,7 +210,7 @@
             // Template deleted.
             $(document).on('admin.template.deleted', function() {
                 $content.html(null);
-                loadTemplates();
+                $projects.trigger('panel.item.click', $projects.panel('selected'));
             });
 
             // New template.

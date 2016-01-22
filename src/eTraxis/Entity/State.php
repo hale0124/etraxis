@@ -23,7 +23,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  *                @ORM\UniqueConstraint(name="ix_states_name", columns={"template_id", "state_name"}),
  *                @ORM\UniqueConstraint(name="ix_states_abbr", columns={"template_id", "state_abbr"})
  *            })
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="eTraxis\Repository\StatesRepository")
  * @Assert\UniqueEntity(fields={"template", "name"}, message="state.conflict.name")
  * @Assert\UniqueEntity(fields={"template", "abbreviation"}, message="state.conflict.abbreviation")
  */

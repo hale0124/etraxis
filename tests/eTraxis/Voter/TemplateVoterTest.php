@@ -12,6 +12,7 @@
 namespace eTraxis\Voter;
 
 use eTraxis\Entity\Template;
+use eTraxis\SimpleBus\Templates\LockTemplateCommand;
 use eTraxis\Tests\BaseTestCase;
 
 class TemplateVoterTest extends BaseTestCase
@@ -70,5 +71,60 @@ class TemplateVoterTest extends BaseTestCase
 
         $this->assertFalse($this->security->isGranted(Template::DELETE, $template));
         $this->assertTrue($this->security->isGranted(Template::DELETE, $empty));
+    }
+
+    public function testLockUnlock()
+    {
+        $this->loginAs('hubert');
+
+        /** @var Template $template */
+        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+
+        $command = new LockTemplateCommand(['id' => $template->getId()]);
+        $this->command_bus->handle($command);
+
+        /** @var Template $delivery */
+        $delivery = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+
+        $this->assertTrue($delivery->isLocked());
+        $this->assertFalse($this->security->isGranted(Template::LOCK, $delivery));
+        $this->assertTrue($this->security->isGranted(Template::UNLOCK, $delivery));
+
+        /** @var Template $futurama */
+        $futurama = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Futurama']);
+
+        $this->assertFalse($futurama->isLocked());
+        $this->assertTrue($this->security->isGranted(Template::LOCK, $futurama));
+        $this->assertFalse($this->security->isGranted(Template::UNLOCK, $futurama));
+    }
+
+    public function testUnlockNoInitialState()
+    {
+        $this->loginAs('hubert');
+
+        /** @var \eTraxis\Entity\Project $project */
+        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
+
+        $template = new Template();
+
+        $template
+            ->setName('Issue')
+            ->setPrefix('bug')
+            ->setLocked(true)
+            ->setGuestAccess(false)
+            ->setRegisteredPermissions(0)
+            ->setAuthorPermissions(0)
+            ->setResponsiblePermissions(0)
+            ->setProject($project)
+        ;
+
+        $this->doctrine->getManager()->persist($template);
+        $this->doctrine->getManager()->flush();
+
+        /** @var Template $empty */
+        $empty = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Issue']);
+
+        $this->assertTrue($empty->isLocked());
+        $this->assertFalse($this->security->isGranted(Template::UNLOCK, $empty));
     }
 }

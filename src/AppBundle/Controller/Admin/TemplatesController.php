@@ -111,6 +111,8 @@ class TemplatesController extends Controller
                 'template' => $template,
                 'can'      => [
                     'delete' => $authChecker->isGranted(Template::DELETE, $template),
+                    'lock'   => $authChecker->isGranted(Template::LOCK, $template),
+                    'unlock' => $authChecker->isGranted(Template::UNLOCK, $template),
                 ],
             ]);
         }
@@ -252,6 +254,58 @@ class TemplatesController extends Controller
     {
         try {
             $command = new Templates\DeleteTemplateCommand(['id' => $id]);
+            $this->getCommandBus()->handle($command);
+
+            return new JsonResponse();
+        }
+        catch (ValidationException $e) {
+            return new JsonResponse($e->getMessages(), $e->getStatusCode());
+        }
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
+        }
+    }
+
+    /**
+     * Locks specified template.
+     *
+     * @Action\Route("/lock/{id}", name="admin_lock_template", requirements={"id"="\d+"})
+     * @Action\Method("POST")
+     *
+     * @param   int $id Template ID.
+     *
+     * @return  JsonResponse
+     */
+    public function lockAction($id)
+    {
+        try {
+            $command = new Templates\LockTemplateCommand(['id' => $id]);
+            $this->getCommandBus()->handle($command);
+
+            return new JsonResponse();
+        }
+        catch (ValidationException $e) {
+            return new JsonResponse($e->getMessages(), $e->getStatusCode());
+        }
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
+        }
+    }
+
+    /**
+     * Unlocks specified template.
+     *
+     * @Action\Route("/unlock/{id}", name="admin_unlock_template", requirements={"id"="\d+"})
+     * @Action\Method("POST")
+     *
+     * @param   int $id Template ID.
+     *
+     * @return  JsonResponse
+     */
+    public function unlockAction($id)
+    {
+        try {
+            $command = new Templates\UnlockTemplateCommand(['id' => $id]);
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();

@@ -36,6 +36,8 @@ class Template
 
     // Actions.
     const DELETE = 'template.delete';
+    const LOCK   = 'template.lock';
+    const UNLOCK = 'template.unlock';
 
     // Template access permissions.
     const PERMIT_CREATE_ISSUE         = 0x0001;

@@ -11,8 +11,10 @@
 
 namespace eTraxis\Voter;
 
+use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
 use eTraxis\Repository\IssuesRepository;
+use eTraxis\Repository\StatesRepository;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -21,16 +23,19 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  */
 class TemplateVoter extends Voter
 {
-    protected $repository;
+    protected $stateRepository;
+    protected $issueRepository;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   IssuesRepository $repository
+     * @param   StatesRepository $stateRepository
+     * @param   IssuesRepository $issueRepository
      */
-    public function __construct(IssuesRepository $repository)
+    public function __construct(StatesRepository $stateRepository, IssuesRepository $issueRepository)
     {
-        $this->repository = $repository;
+        $this->stateRepository = $stateRepository;
+        $this->issueRepository = $issueRepository;
     }
 
     /**
@@ -40,6 +45,8 @@ class TemplateVoter extends Voter
     {
         $attributes = [
             Template::DELETE,
+            Template::LOCK,
+            Template::UNLOCK,
         ];
 
         if (in_array($attribute, $attributes)) {
@@ -61,6 +68,12 @@ class TemplateVoter extends Voter
             case Template::DELETE:
                 return $this->isDeleteGranted($subject);
 
+            case Template::LOCK:
+                return $this->isLockGranted($subject);
+
+            case Template::UNLOCK:
+                return $this->isUnlockGranted($subject);
+
             default:
                 return false;
         }
@@ -76,7 +89,7 @@ class TemplateVoter extends Voter
     protected function isDeleteGranted($subject)
     {
         // Number of issues created by the template.
-        $query = $this->repository->createQueryBuilder('i')
+        $query = $this->issueRepository->createQueryBuilder('i')
             ->select('COUNT(i.id)')
             ->leftJoin('i.state', 's')
             ->where('s.templateId = :id')
@@ -87,5 +100,45 @@ class TemplateVoter extends Voter
 
         // Can't delete if at least one issue has been created by this template.
         return $count == 0;
+    }
+
+    /**
+     * Checks whether specified template can be locked.
+     *
+     * @param   Template $subject Template.
+     *
+     * @return  bool
+     */
+    protected function isLockGranted($subject)
+    {
+        return !$subject->isLocked();
+    }
+
+    /**
+     * Checks whether specified template can be unlocked.
+     *
+     * @param   Template $subject Template.
+     *
+     * @return  bool
+     */
+    protected function isUnlockGranted($subject)
+    {
+        if (!$subject->isLocked()) {
+            return false;
+        }
+
+        // Number of initial states of the template.
+        $query = $this->stateRepository->createQueryBuilder('s')
+            ->select('COUNT(s.id)')
+            ->where('s.templateId = :id')
+            ->andWhere('s.type = :type')
+            ->setParameter('id', $subject->getId())
+            ->setParameter('type', State::TYPE_INITIAL)
+        ;
+
+        $count = $query->getQuery()->getSingleScalarResult();
+
+        // Can't unlock if no initial state is set in the template.
+        return $count != 0;
     }
 }

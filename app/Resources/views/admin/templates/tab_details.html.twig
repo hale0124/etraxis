@@ -3,6 +3,12 @@
 <div class="grid-row">
     <div class="grid-100">
         <button type="button" id="btn-edit">{{ 'button.edit'|trans }}</button>
+        {% if can.lock %}
+            <button type="button" id="btn-lock">{{ 'button.lock'|trans }}</button>
+        {% endif %}
+        {% if can.unlock %}
+            <button type="button" id="btn-unlock">{{ 'button.unlock'|trans }}</button>
+        {% endif %}
         {% if can.delete %}
             <button type="button" id="btn-delete">{{ 'button.delete'|trans }}</button>
         {% endif %}
@@ -52,6 +58,22 @@
                 $.post('{{ path('admin_delete_template', {'id': template.id}) }}', function() {
                     $(document).trigger('admin.template.deleted', {{ template.id }});
                 });
+            });
+        });
+
+        // "Lock" button.
+        $('#btn-lock').click(function() {
+            $.post('{{ path('admin_lock_template', {'id': template.id}) }}', function() {
+                $(document).trigger('admin.template.locked', {{ template.id }});
+                reloadTab();
+            });
+        });
+
+        // "Unlock" button.
+        $('#btn-unlock').click(function() {
+            $.post('{{ path('admin_unlock_template', {'id': template.id}) }}', function() {
+                $(document).trigger('admin.template.unlocked', {{ template.id }});
+                reloadTab();
             });
         });
     });
