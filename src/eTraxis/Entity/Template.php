@@ -40,21 +40,21 @@ class Template
     const UNLOCK = 'template.unlock';
 
     // Template access permissions.
-    const PERMIT_CREATE_ISSUE         = 0x0001;
-    const PERMIT_MODIFY_ISSUE         = 0x0002;
-    const PERMIT_POSTPONE_ISSUE       = 0x0004;
-    const PERMIT_RESUME_ISSUE         = 0x0008;
-    const PERMIT_REASSIGN_ISSUE       = 0x0010;
-    const PERMIT_REOPEN_ISSUE         = 0x0020;
-    const PERMIT_ADD_COMMENT          = 0x0040;
-    const PERMIT_ADD_FILE             = 0x0080;
-    const PERMIT_REMOVE_FILE          = 0x0100;
-    const PERMIT_CONFIDENTIAL_COMMENT = 0x0200;
-    const PERMIT_SEND_REMINDER        = 0x0400;
-    const PERMIT_DELETE_ISSUE         = 0x0800;
-    const PERMIT_ADD_SUBISSUE         = 0x1000;
-    const PERMIT_REMOVE_SUBISSUE      = 0x2000;
-    const PERMIT_VIEW_ISSUE           = 0x40000000;
+    const PERMIT_CREATE_ISSUE    = 0x0001;
+    const PERMIT_EDIT_ISSUE      = 0x0002;
+    const PERMIT_POSTPONE_ISSUE  = 0x0004;
+    const PERMIT_RESUME_ISSUE    = 0x0008;
+    const PERMIT_REASSIGN_ISSUE  = 0x0010;
+    const PERMIT_REOPEN_ISSUE    = 0x0020;
+    const PERMIT_ADD_COMMENT     = 0x0040;
+    const PERMIT_ADD_FILE        = 0x0080;
+    const PERMIT_REMOVE_FILE     = 0x0100;
+    const PERMIT_PRIVATE_COMMENT = 0x0200;
+    const PERMIT_SEND_REMINDER   = 0x0400;
+    const PERMIT_DELETE_ISSUE    = 0x0800;
+    const PERMIT_ATTACH_SUBISSUE = 0x1000;
+    const PERMIT_DETACH_SUBISSUE = 0x2000;
+    const PERMIT_VIEW_ISSUE      = 0x40000000;
 
     /**
      * @var int Unique ID.

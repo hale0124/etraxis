@@ -56,20 +56,20 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
      */
     protected function loadDeliveryTemplate(ObjectManager $manager)
     {
-        $author      = Template::PERMIT_MODIFY_ISSUE | Template::PERMIT_ADD_COMMENT | Template::PERMIT_ADD_FILE | Template::PERMIT_REMOVE_FILE;
+        $author      = Template::PERMIT_EDIT_ISSUE | Template::PERMIT_ADD_COMMENT | Template::PERMIT_ADD_FILE | Template::PERMIT_REMOVE_FILE;
         $responsible = Template::PERMIT_ADD_COMMENT | Template::PERMIT_ADD_FILE;
 
         $permissions = [
             'group:managers' => [
                 Template::PERMIT_VIEW_ISSUE,
                 Template::PERMIT_CREATE_ISSUE,
-                Template::PERMIT_MODIFY_ISSUE,
+                Template::PERMIT_EDIT_ISSUE,
                 Template::PERMIT_POSTPONE_ISSUE,
                 Template::PERMIT_RESUME_ISSUE,
                 Template::PERMIT_REASSIGN_ISSUE,
                 Template::PERMIT_REOPEN_ISSUE,
                 Template::PERMIT_ADD_COMMENT,
-                Template::PERMIT_CONFIDENTIAL_COMMENT,
+                Template::PERMIT_PRIVATE_COMMENT,
                 Template::PERMIT_ADD_FILE,
                 Template::PERMIT_REMOVE_FILE,
                 Template::PERMIT_SEND_REMINDER,
@@ -138,7 +138,7 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
     protected function loadFuturamaTemplate(ObjectManager $manager)
     {
         $registered = Template::PERMIT_VIEW_ISSUE;
-        $author     = Template::PERMIT_MODIFY_ISSUE | Template::PERMIT_ADD_COMMENT | Template::PERMIT_ADD_FILE | Template::PERMIT_REMOVE_FILE;
+        $author     = Template::PERMIT_EDIT_ISSUE | Template::PERMIT_ADD_COMMENT | Template::PERMIT_ADD_FILE | Template::PERMIT_REMOVE_FILE;
 
         $template = new Template();
 
