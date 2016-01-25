@@ -30,7 +30,7 @@ class CreateStateCommandTest extends BaseTestCase
         $template     = $this->getTemplate();
         $name         = 'Started';
         $abbreviation = 'S';
-        $type         = State::TYPE_TRANSIENT;
+        $type         = State::TYPE_INTERIM;
         $responsible  = State::RESPONSIBLE_KEEP;
         $nextState    = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
 
@@ -71,7 +71,7 @@ class CreateStateCommandTest extends BaseTestCase
             'template'     => $this->getMaxId(),
             'name'         => 'Started',
             'abbreviation' => 'S',
-            'type'         => State::TYPE_TRANSIENT,
+            'type'         => State::TYPE_INTERIM,
             'responsible'  => State::RESPONSIBLE_KEEP,
         ]);
 
@@ -88,7 +88,7 @@ class CreateStateCommandTest extends BaseTestCase
             'template'     => $this->getTemplate()->getId(),
             'name'         => 'Started',
             'abbreviation' => 'S',
-            'type'         => State::TYPE_TRANSIENT,
+            'type'         => State::TYPE_INTERIM,
             'responsible'  => State::RESPONSIBLE_KEEP,
             'nextState'    => $this->getMaxId(),
         ]);
@@ -106,7 +106,7 @@ class CreateStateCommandTest extends BaseTestCase
             'template'     => $this->getTemplate()->getId(),
             'name'         => 'Delivered',
             'abbreviation' => 'S',
-            'type'         => State::TYPE_TRANSIENT,
+            'type'         => State::TYPE_INTERIM,
             'responsible'  => State::RESPONSIBLE_KEEP,
         ]);
 
@@ -123,7 +123,7 @@ class CreateStateCommandTest extends BaseTestCase
             'template'     => $this->getTemplate()->getId(),
             'name'         => 'Started',
             'abbreviation' => 'D',
-            'type'         => State::TYPE_TRANSIENT,
+            'type'         => State::TYPE_INTERIM,
             'responsible'  => State::RESPONSIBLE_KEEP,
         ]);
 

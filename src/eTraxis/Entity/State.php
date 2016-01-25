@@ -37,9 +37,9 @@ class State
     const DELETE = 'state.delete';
 
     // State types.
-    const TYPE_INITIAL   = 1;
-    const TYPE_TRANSIENT = 2;
-    const TYPE_FINAL     = 3;
+    const TYPE_INITIAL = 1;
+    const TYPE_INTERIM = 2;
+    const TYPE_FINAL   = 3;
 
     // State responsibility management.
     const RESPONSIBLE_KEEP   = 1;

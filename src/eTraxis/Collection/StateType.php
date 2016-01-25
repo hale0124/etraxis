@@ -24,9 +24,9 @@ class StateType extends AbstractStaticCollection
     public static function getCollection()
     {
         return [
-            State::TYPE_INITIAL   => 'type.initial',
-            State::TYPE_TRANSIENT => 'type.transient',
-            State::TYPE_FINAL     => 'type.final',
+            State::TYPE_INITIAL => 'type.initial',
+            State::TYPE_INTERIM => 'type.interim',
+            State::TYPE_FINAL   => 'type.final',
         ];
     }
 }

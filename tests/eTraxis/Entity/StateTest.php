@@ -49,7 +49,7 @@ class StateTest extends \PHPUnit_Framework_TestCase
 
     public function testType()
     {
-        $expected = State::TYPE_TRANSIENT;
+        $expected = State::TYPE_INTERIM;
         $this->object->setType($expected);
         $this->assertEquals($expected, $this->object->getType());
     }

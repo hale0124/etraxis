@@ -20,7 +20,7 @@ class StateTypeTest extends BaseTestCase
     {
         $expected = [
             State::TYPE_INITIAL,
-            State::TYPE_TRANSIENT,
+            State::TYPE_INTERIM,
             State::TYPE_FINAL,
         ];
 
