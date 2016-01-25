@@ -16,6 +16,7 @@ button.lock: Vergrendel
 button.unlock: Ontgrendel
 button.export: Exporteer
 button.import: Importeer
+button.select_all: 'Selecteer alles'
 required: vereist
 error.not_found: 'De pagina die u probeerde te benaderen bestaat niet of is verwijderd.'
 error.not_authorized: 'Het is u niet toegestaan deze pagina te raadplegen.'
@@ -47,8 +48,12 @@ user.enabled: Ingeschakeld
 user.disabled: Uitgeschakeld
 user.locked: Vergrendeld
 permissions: Permissies
+role: Rol
 role.administrator: Beheerder
 role.user: Gebruiker
+role.author: Auteur
+role.responsible: Verantwoordelijkheid
+role.registered: Geregistreerd
 description: Beschrijving
 language: Taal
 theme: Thema
@@ -79,6 +84,7 @@ line_endings: Lijneindes
 group: Groep
 groups: Groepen
 others: Anderen
+allowed: Toegelaten
 members: Leden
 membership: Lidmaatschap
 group.new: 'Nieuwe groep'
@@ -112,6 +118,39 @@ template.locked: Geblokkeerd
 template.confirm.delete: 'Ben je zeker dat je dit sjabloon wilt verwijderen?'
 template.conflict.name: 'Sjabloon met ingevoerde naam bestaat reeds.'
 template.conflict.prefix: 'Sjabloon met ingevoerde voorvoegsel bestaat reeds.'
+template.permission.view_issues: 'Bekijk Issues'
+template.permission.create_issues: ~
+template.permission.edit_issues: 'Issues bewerken'
+template.permission.postpone_issues: ~
+template.permission.resume_issues: ~
+template.permission.reassign_issues: ~
+template.permission.reopen_issues: ~
+template.permission.add_comments: ~
+template.permission.add_files: ~
+template.permission.remove_files: ~
+template.permission.private_comments: ~
+template.permission.send_reminders: ~
+template.permission.delete_issues: 'Issues verwijderen'
+template.permission.attach_subissues: ~
+template.permission.detach_subissues: ~
+state: Status
+states: Statussen
+state.new: 'Nieuwe status'
+state.name: Statusnaam
+state.abbreviation: Afkorting
+state.type: Statustype
+state.type.initial: Beginstatus
+state.type.interim: ~
+state.type.final: Eindstatus
+state.responsible: Verantwoordelijkheid
+state.responsibles: ~
+state.responsible.keep: 'Blijft ongewijzigd'
+state.responsible.assign: Toekennen
+state.responsible.remove: Verwijderen
+state.transitions: Overgangen
+state.next_by_default: 'Volgende standaardstatus'
+state.make_initial: 'Aanmaken beginstatus'
+state.confirm.delete: 'Ben je zeker dat je deze status wilt verwijderen?'
 state.conflict.name: 'Status met ingevoerde naam bestaat reeds.'
 state.conflict.abbreviation: 'Status met ingevoerde afkorting bestaat reeds.'
 field.conflict.name: 'Veld met ingevoerde naam bestaat reeds.'

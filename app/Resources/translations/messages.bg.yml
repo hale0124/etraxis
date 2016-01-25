@@ -16,6 +16,7 @@ button.lock: Заключено
 button.unlock: Отключено
 button.export: Изнеси
 button.import: Внасям
+button.select_all: 'Избери всичко'
 required: изискван
 error.not_found: 'Несъществуваща или преместена страница.'
 error.not_authorized: 'Нямате право на достъп до тази страница.'
@@ -47,8 +48,12 @@ user.enabled: Разреши
 user.disabled: Изключи
 user.locked: Заключен
 permissions: Права
+role: Роля
 role.administrator: Администратор
 role.user: Потребител
+role.author: Автор
+role.responsible: Отговорен
+role.registered: Регистриран
 description: Описание
 language: Език
 theme: Тема
@@ -64,12 +69,12 @@ password.cant_change: 'Този профил е с външен метод за 
 security.forgot_password: 'Забравена парола'
 security.forgot_password.email_sent: 'Изпратен ви е e-mail с инструкции за избор на нова парола.'
 security.change_password: 'Промяна на парола'
-security.password_expired: ~
+security.password_expired: 'Вашата парола е с изтекъл срок или администраторът изисква да я смените.'
 key.tab: ~
 key.space: ~
-comma: ~
+comma: Запетая
 colon: ~
-semicolon: ~
+semicolon: 'Точка и запетая'
 vertical_line: ~
 file: Файл
 size: Големина
@@ -79,6 +84,7 @@ line_endings: 'Завършване на ред'
 group: Група
 groups: Групи
 others: Други
+allowed: Позволен
 members: Потребители
 membership: Членство
 group.new: 'Нова група'
@@ -112,6 +118,39 @@ template.locked: Заключен
 template.confirm.delete: 'Сигурен ли сте че искате да изтриете този темплейт?'
 template.conflict.name: 'Вече същестува темплейт с въведеното име.'
 template.conflict.prefix: 'Вече същестува темплейт с въведеното представка.'
+template.permission.view_issues: 'Разглеждане на задачите'
+template.permission.create_issues: ~
+template.permission.edit_issues: 'Редактиране на задачи'
+template.permission.postpone_issues: ~
+template.permission.resume_issues: ~
+template.permission.reassign_issues: ~
+template.permission.reopen_issues: ~
+template.permission.add_comments: ~
+template.permission.add_files: ~
+template.permission.remove_files: ~
+template.permission.private_comments: ~
+template.permission.send_reminders: ~
+template.permission.delete_issues: 'Изтриване на задачи'
+template.permission.attach_subissues: ~
+template.permission.detach_subissues: ~
+state: Условие
+states: Условия
+state.new: 'Ново условие'
+state.name: 'Име на условие'
+state.abbreviation: Съкращение
+state.type: 'Тип на условие'
+state.type.initial: Рачален
+state.type.interim: ~
+state.type.final: Краен
+state.responsible: Отговорен
+state.responsibles: ~
+state.responsible.keep: 'Остави непроменено'
+state.responsible.assign: Определи
+state.responsible.remove: Премахни
+state.transitions: Преходи
+state.next_by_default: 'Следващо условие по подразбиране'
+state.make_initial: 'Направи начален'
+state.confirm.delete: 'Сигурен ли сте че искате да изтриете това условие?'
 state.conflict.name: 'Вече съществува услови с въведеното име.'
 state.conflict.abbreviation: 'Вече съществува услови с въведеното съкращение.'
 field.conflict.name: 'Вече съществува поле с въведеното име.'

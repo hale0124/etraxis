@@ -16,6 +16,7 @@ button.lock: Sperren
 button.unlock: Freischalten
 button.export: Exportieren
 button.import: Importieren
+button.select_all: 'Alles auswählen'
 required: erforderlich
 error.not_found: 'Anhang existiert nicht oder ist gelöscht worden.'
 error.not_authorized: 'Sie sind nicht berechtigt, auf diese Seite zuzugreifen.'
@@ -47,8 +48,12 @@ user.enabled: Aktiviert
 user.disabled: Deaktiviert
 user.locked: Gesperrt
 permissions: Berechtigungen
+role: Rolle
 role.administrator: Administrator
 role.user: Benutzer
+role.author: Verfasser(in)
+role.responsible: Bearbeiter(in)
+role.registered: Registriert
 description: Beschreibung
 language: Sprache
 theme: Aussehen
@@ -79,6 +84,7 @@ line_endings: Zeilenumbruch
 group: Gruppe
 groups: Gruppen
 others: Andere
+allowed: Erlaubt
 members: Mitglieder
 membership: Mitgliedschaft
 group.new: 'Neue Gruppe'
@@ -112,6 +118,39 @@ template.locked: Gesperrt
 template.confirm.delete: 'Möchten Sie diese Anfrageart wirklich löschen?'
 template.conflict.name: 'Eine Anfrageart mit diesem Namen existiert bereits.'
 template.conflict.prefix: 'Eine Anfrageart mit diesem Präfix existiert bereits.'
+template.permission.view_issues: 'Tickets anzeigen'
+template.permission.create_issues: ~
+template.permission.edit_issues: 'Tickets bearbeiten'
+template.permission.postpone_issues: ~
+template.permission.resume_issues: ~
+template.permission.reassign_issues: ~
+template.permission.reopen_issues: ~
+template.permission.add_comments: ~
+template.permission.add_files: ~
+template.permission.remove_files: ~
+template.permission.private_comments: ~
+template.permission.send_reminders: ~
+template.permission.delete_issues: 'Tickets löschen'
+template.permission.attach_subissues: ~
+template.permission.detach_subissues: ~
+state: Status
+states: Status
+state.new: 'Neuer Status'
+state.name: Statusname
+state.abbreviation: Abkürzung
+state.type: Statusart
+state.type.initial: Startstatus
+state.type.interim: ~
+state.type.final: Endstatus
+state.responsible: Bearbeiter(in)
+state.responsibles: ~
+state.responsible.keep: Beibehalten
+state.responsible.assign: Zuordnen
+state.responsible.remove: Abziehen
+state.transitions: Übergänge
+state.next_by_default: 'Standardmäßig nächster Zustand'
+state.make_initial: 'Als Startstatus'
+state.confirm.delete: 'Möchten Sie diesen Status wirklich löschen?'
 state.conflict.name: 'Ein Status mit diesem Namen existiert bereits.'
 state.conflict.abbreviation: 'Ein Status mit diesem Abkürzung existiert bereits.'
 field.conflict.name: 'Ein Zusatz mit diesem Namen existiert bereits.'

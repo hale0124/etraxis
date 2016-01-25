@@ -16,6 +16,7 @@ button.lock: Zablokuj
 button.unlock: Odblokuj
 button.export: Eksportuj
 button.import: Import
+button.select_all: 'Zaznacz wszystko'
 required: wymagany
 error.not_found: 'Strona do której próbujesz się dostać nie istnieje lub została usunięta.'
 error.not_authorized: 'Nie posiadasz autoryzacji do oglądania tej strony.'
@@ -47,8 +48,12 @@ user.enabled: Włączony
 user.disabled: Wyłączony
 user.locked: Zablokowany
 permissions: Uprawnienia
+role: Role
 role.administrator: Administrator
 role.user: Użytkownik
+role.author: Autor
+role.responsible: Odpowiedzialny
+role.registered: Zarejestrowany
 description: Opis
 language: Języki
 theme: Motyw
@@ -64,7 +69,7 @@ password.cant_change: 'To konto ma zewnętrzne źródło uwierzytelniania. Nie m
 security.forgot_password: 'Zapomniane hasło'
 security.forgot_password.email_sent: 'E-mail z instrukcjami zmiany hasła został wysłany do Ciebie.'
 security.change_password: 'Zmień hasło'
-security.password_expired: ~
+security.password_expired: 'Twoje hasło wygasło lub administrator wymaga jego zmiany.'
 key.tab: ~
 key.space: ~
 comma: ~
@@ -79,6 +84,7 @@ line_endings: 'Zakończenie lini'
 group: Grupa
 groups: Grupy
 others: Inni
+allowed: Dozwolony
 members: Członek
 membership: Członkowie
 group.new: 'Nowa grupa'
@@ -112,6 +118,39 @@ template.locked: Zablokowany
 template.confirm.delete: 'Czy jesteś pewien, że chesz usunąć wybrany szablon?'
 template.conflict.name: 'Szablon o podanej nazwie już istnieje.'
 template.conflict.prefix: 'Szablon o podanej prefixie już istnieje.'
+template.permission.view_issues: 'Przeglądanie zagadnień'
+template.permission.create_issues: ~
+template.permission.edit_issues: 'Edycja zagadnień'
+template.permission.postpone_issues: ~
+template.permission.resume_issues: ~
+template.permission.reassign_issues: ~
+template.permission.reopen_issues: ~
+template.permission.add_comments: ~
+template.permission.add_files: ~
+template.permission.remove_files: ~
+template.permission.private_comments: ~
+template.permission.send_reminders: ~
+template.permission.delete_issues: 'Usuwanie zagadnień'
+template.permission.attach_subissues: ~
+template.permission.detach_subissues: ~
+state: Stan
+states: Stany
+state.new: 'Nowy stan'
+state.name: 'Nazwa stanu'
+state.abbreviation: Skrót
+state.type: 'Typ stanu'
+state.type.initial: Początkowy
+state.type.interim: ~
+state.type.final: Końcowy
+state.responsible: Odpowiedzialny
+state.responsibles: ~
+state.responsible.keep: 'Nie zmieniaj'
+state.responsible.assign: Przydziel
+state.responsible.remove: Usuń
+state.transitions: Przejścia
+state.next_by_default: 'Następny status(domyślny)'
+state.make_initial: 'Utwórz początkowy'
+state.confirm.delete: 'Czy jesteś pewien, że chesz usunąć wybrany status?'
 state.conflict.name: 'Stan o tej nazwie już istnieje.'
 state.conflict.abbreviation: 'Stan o tej skrót już istnieje.'
 field.conflict.name: 'Pole o podanej nazwie już istnieje.'

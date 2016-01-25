@@ -16,6 +16,7 @@ button.lock: Lås
 button.unlock: 'Lås upp'
 button.export: Exportera
 button.import: Importera
+button.select_all: 'Markera alla'
 required: obligatorisk
 error.not_found: 'Sidan du försökte komma åt existerar inte eller är borttagen.'
 error.not_authorized: 'Du saknar behörighet att komma åt den här sidan.'
@@ -47,8 +48,12 @@ user.enabled: Aktiverad
 user.disabled: Inaktiverad
 user.locked: Låst
 permissions: Behörigheter
+role: Roll
 role.administrator: Administratör
 role.user: Användare
+role.author: Upphovsman
+role.responsible: Ansvarig
+role.registered: Registrerad
 description: Beskrivning
 language: Språk
 theme: Tema
@@ -79,6 +84,7 @@ line_endings: Radslut
 group: Grupp
 groups: Grupper
 others: Andra
+allowed: Tillåtna
 members: Medlemmar
 membership: Medlemskap
 group.new: 'Ny Grupp'
@@ -112,6 +118,39 @@ template.locked: Låst
 template.confirm.delete: 'Är du säker på att du vill ta bort den här mallen?'
 template.conflict.name: 'Mall med detta namnet finns redan.'
 template.conflict.prefix: 'Mall med detta prefixet finns redan.'
+template.permission.view_issues: 'Visa ärenden'
+template.permission.create_issues: ~
+template.permission.edit_issues: 'Ändra ärenden'
+template.permission.postpone_issues: ~
+template.permission.resume_issues: ~
+template.permission.reassign_issues: ~
+template.permission.reopen_issues: ~
+template.permission.add_comments: ~
+template.permission.add_files: ~
+template.permission.remove_files: ~
+template.permission.private_comments: ~
+template.permission.send_reminders: ~
+template.permission.delete_issues: 'Ta bort ärenden'
+template.permission.attach_subissues: ~
+template.permission.detach_subissues: ~
+state: Status
+states: Status
+state.new: 'Ny status'
+state.name: 'Status namn'
+state.abbreviation: Förkortning
+state.type: 'Status typ'
+state.type.initial: Första
+state.type.interim: ~
+state.type.final: Slutlig
+state.responsible: Ansvarig
+state.responsibles: ~
+state.responsible.keep: 'Behåll oförändrad'
+state.responsible.assign: Tilldela
+state.responsible.remove: 'Ta bort'
+state.transitions: Övergångar
+state.next_by_default: 'Nästa status som standard'
+state.make_initial: 'Gör första'
+state.confirm.delete: 'Är du säker på att du vill ta bort den här statusen?'
 state.conflict.name: 'Status med detta namnet finns redan.'
 state.conflict.abbreviation: 'Status med detta förkortningen finns redan.'
 field.conflict.name: 'Fält med detta namnet finns redan.'

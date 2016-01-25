@@ -16,6 +16,7 @@ button.lock: Blocca
 button.unlock: Sblocca
 button.export: Esporta
 button.import: Importa
+button.select_all: 'Seleziona tutto'
 required: obbligatorio
 error.not_found: 'La pagina desiderata non esiste o è stata rimossa.'
 error.not_authorized: 'Non sei autorizzato ad accedere a questa pagina.'
@@ -47,8 +48,12 @@ user.enabled: Abilitato
 user.disabled: Disabilitato
 user.locked: Bloccato
 permissions: Permessi
+role: Ruolo
 role.administrator: Amministratore
 role.user: Utente
+role.author: Autore
+role.responsible: Responsabile
+role.registered: Registrato
 description: Descrizione
 language: Lingua
 theme: Tema
@@ -64,7 +69,7 @@ password.cant_change: 'Questo utente utilizza un metodo di autenticazione estern
 security.forgot_password: 'Password dimenticata'
 security.forgot_password.email_sent: 'Ti è stata spedita una email con le istruzioni per cambiare la password.'
 security.change_password: 'Modifica password'
-security.password_expired: ~
+security.password_expired: 'La password è scaduta o l''amministratore ha richiesto che sia cambiata.'
 key.tab: ~
 key.space: ~
 comma: ~
@@ -79,6 +84,7 @@ line_endings: 'Terminatori di linea'
 group: Gruppo
 groups: Gruppi
 others: Altri
+allowed: Abilitato
 members: Membri
 membership: Membri
 group.new: 'Nuovo gruppo'
@@ -112,6 +118,39 @@ template.locked: Bloccato
 template.confirm.delete: 'Eliminare questo modello?'
 template.conflict.name: 'Un modello con lo stesso nome è già utilizzato.'
 template.conflict.prefix: 'Un modello con lo stesso prefisso è già utilizzato.'
+template.permission.view_issues: 'Mostra segnalazioni'
+template.permission.create_issues: ~
+template.permission.edit_issues: 'Modifica segnalazioni'
+template.permission.postpone_issues: ~
+template.permission.resume_issues: ~
+template.permission.reassign_issues: ~
+template.permission.reopen_issues: ~
+template.permission.add_comments: ~
+template.permission.add_files: ~
+template.permission.remove_files: ~
+template.permission.private_comments: ~
+template.permission.send_reminders: ~
+template.permission.delete_issues: 'Elimina segnalazioni'
+template.permission.attach_subissues: ~
+template.permission.detach_subissues: ~
+state: Stato
+states: Stati
+state.new: 'Nuovo stato'
+state.name: 'Nome dello stato'
+state.abbreviation: Abbreviazione
+state.type: 'Tipo dello stato'
+state.type.initial: Iniziale
+state.type.interim: ~
+state.type.final: Finale
+state.responsible: Responsabile
+state.responsibles: ~
+state.responsible.keep: Mantieni
+state.responsible.assign: Assegna
+state.responsible.remove: Rimuovi
+state.transitions: Transizioni
+state.next_by_default: 'Stato successivo predefinito'
+state.make_initial: 'Segna come iniziale'
+state.confirm.delete: 'Eliminare questo stato?'
 state.conflict.name: 'Uno stato con lo stesso nome è già utilizzato.'
 state.conflict.abbreviation: 'Uno stato con lo stesso abbreviazione è già utilizzato.'
 field.conflict.name: 'Nome campo già utilizzato.'

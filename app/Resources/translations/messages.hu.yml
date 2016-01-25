@@ -16,6 +16,7 @@ button.lock: Zárol
 button.unlock: Felnyit
 button.export: Export
 button.import: Importálás
+button.select_all: 'Mind kijelölése'
 required: kötelező
 error.not_found: 'Az oldal, amit meg szeretne nézni nem található, vagy átkerült egy másik helyre.'
 error.not_authorized: 'Nincs hozzáférési engedélye ehhez az oldalhoz.'
@@ -47,8 +48,12 @@ user.enabled: Engedélyezett
 user.disabled: Letiltott
 user.locked: Zárolt
 permissions: Jogosultságok
+role: Szerep
 role.administrator: Adminisztrátor
 role.user: Felhasználó
+role.author: Létrehozó
+role.responsible: Felelős
+role.registered: Regisztrálva
 description: Leírás
 language: Nyelv
 theme: Téma
@@ -79,6 +84,7 @@ line_endings: Sorvégződések
 group: Csoport
 groups: Csoportok
 others: 'További személyek'
+allowed: Engedélyezett
 members: Tagok
 membership: Tagság
 group.new: 'Új csoport'
@@ -112,6 +118,39 @@ template.locked: Zárolt
 template.confirm.delete: 'Biztos törölni szeretné a sablont?'
 template.conflict.name: 'Már létezik ilyen névvel ellátott sablon.'
 template.conflict.prefix: ~
+template.permission.view_issues: 'Feladatok megtekintése'
+template.permission.create_issues: ~
+template.permission.edit_issues: 'Feladatok szerkesztése'
+template.permission.postpone_issues: ~
+template.permission.resume_issues: ~
+template.permission.reassign_issues: ~
+template.permission.reopen_issues: ~
+template.permission.add_comments: ~
+template.permission.add_files: ~
+template.permission.remove_files: ~
+template.permission.private_comments: ~
+template.permission.send_reminders: ~
+template.permission.delete_issues: 'Feladatok törlése'
+template.permission.attach_subissues: ~
+template.permission.detach_subissues: ~
+state: Állapot
+states: Állapotok
+state.new: 'Új állapot'
+state.name: 'Állapot neve'
+state.abbreviation: Rövidítés
+state.type: 'Állapot típusa'
+state.type.initial: Kezdeti
+state.type.interim: ~
+state.type.final: Végső
+state.responsible: Felelős
+state.responsibles: ~
+state.responsible.keep: Változatlan
+state.responsible.assign: Hozzárendelés
+state.responsible.remove: Eltávolítás
+state.transitions: Állapotváltás
+state.next_by_default: 'Alapértelmezett következő állapot'
+state.make_initial: 'Legyen ez a kezdő állapot'
+state.confirm.delete: 'Biztos törölni szeretné az állapotot?'
 state.conflict.name: ~
 state.conflict.abbreviation: ~
 field.conflict.name: 'Már létezik ilyen névvel ellátott mező.'

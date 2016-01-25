@@ -16,6 +16,7 @@ button.lock: Bloķēt
 button.unlock: Atbloķēt
 button.export: Eksportēšana
 button.import: Imports
+button.select_all: 'Atlasīt visu'
 required: obligāts
 error.not_found: 'Lapa, ko Jūs mēģināt atvērt, neeksistē vai ir pārvietota.'
 error.not_authorized: 'Jums nav tiesību piekļūt šai lapai.'
@@ -47,8 +48,12 @@ user.enabled: Ieslēgts
 user.disabled: Izslēgts
 user.locked: Slēgts
 permissions: Atļaujas
+role: Loma
 role.administrator: Administrators
 role.user: Lietotājs
+role.author: Autors
+role.responsible: Atbildīgais
+role.registered: Reģistrēta
 description: Apraksts
 language: Valoda
 theme: Motīvs
@@ -79,6 +84,7 @@ line_endings: 'Rindu nobeigumi'
 group: Grupa
 groups: Grupas
 others: Pārējie
+allowed: Atļauti
 members: Dalībnieki
 membership: Dalība
 group.new: 'Jauna grupa'
@@ -112,6 +118,39 @@ template.locked: Bloķēts
 template.confirm.delete: 'Vai tiešām vēlaties dzēst šo lekālu?'
 template.conflict.name: 'Lekāls ar tādu nosaukumu jau eksistē.'
 template.conflict.prefix: 'Lekāls ar tādu priedēkli jau eksistē.'
+template.permission.view_issues: 'Apskatīt uzdevumus'
+template.permission.create_issues: ~
+template.permission.edit_issues: 'Rediģēt uzdevumus'
+template.permission.postpone_issues: ~
+template.permission.resume_issues: ~
+template.permission.reassign_issues: ~
+template.permission.reopen_issues: ~
+template.permission.add_comments: ~
+template.permission.add_files: ~
+template.permission.remove_files: ~
+template.permission.private_comments: ~
+template.permission.send_reminders: ~
+template.permission.delete_issues: 'Dzēst uzdevumus'
+template.permission.attach_subissues: ~
+template.permission.detach_subissues: ~
+state: Stāvoklis
+states: Stāvokļi
+state.new: 'Jauns stāvoklis'
+state.name: 'Stāvokļa nosaukums'
+state.abbreviation: Saīsinājums
+state.type: 'Stāvokļa tips'
+state.type.initial: Sākotnējs
+state.type.interim: ~
+state.type.final: Beigu
+state.responsible: Atbildīgais
+state.responsibles: ~
+state.responsible.keep: 'Atstāt neizmainītu'
+state.responsible.assign: Adresēt
+state.responsible.remove: Noņemt
+state.transitions: Pārejas
+state.next_by_default: 'Nākošais stāvoklis pēc noklusējuma'
+state.make_initial: 'Padarīt par sākotnēju'
+state.confirm.delete: 'Vai tiešām vēlaties dzēst šo stāvokli?'
 state.conflict.name: 'Stāvoklis ar tādu nosaukumu jau eksistē.'
 state.conflict.abbreviation: 'Stāvoklis ar tādu saīsinājumu jau eksistē.'
 field.conflict.name: 'Atribūts ar tādu nosaukumu jau eksistē.'

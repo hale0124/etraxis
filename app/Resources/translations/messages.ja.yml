@@ -16,6 +16,7 @@ button.lock: ロック(編集モード)
 button.unlock: ロック解除
 button.export: エクスポート
 button.import: インポート
+button.select_all: 全て選択
 required: 必須
 error.not_found: アクセスしようとしたページは存在しないか削除されています。
 error.not_authorized: このページのアクセスは許可されていません。
@@ -47,8 +48,12 @@ user.enabled: 有効
 user.disabled: 無効
 user.locked: ロック
 permissions: 権限
+role: ロール
 role.administrator: システム管理者
 role.user: ユーザー
+role.author: 起票者
+role.responsible: 対応者
+role.registered: 登録済み
 description: 説明
 language: 言語
 theme: テーマ
@@ -64,12 +69,12 @@ password.cant_change: このアカウントでは外部認証を使っていま�
 security.forgot_password: パスワードの再発行
 security.forgot_password.email_sent: 新しいパスワードのメールを送信しました。
 security.change_password: パスワード変更
-security.password_expired: ~
+security.password_expired: パスワードの有効期限が過ぎたか、システム管理者より変更を求められています。
 key.tab: ~
 key.space: ~
-comma: ~
+comma: コンマ
 colon: ~
-semicolon: ~
+semicolon: セミコロン
 vertical_line: ~
 file: ファイル
 size: サイズ
@@ -79,6 +84,7 @@ line_endings: 改行コード
 group: グループ
 groups: グループ
 others: その他
+allowed: 許可
 members: メンバー
 membership: メンバー
 group.new: 新規グループ
@@ -112,6 +118,39 @@ template.locked: ロック済み
 template.confirm.delete: テンプレートを削除してよろしいですか？
 template.conflict.name: ~
 template.conflict.prefix: ~
+template.permission.view_issues: チケットの閲覧
+template.permission.create_issues: ~
+template.permission.edit_issues: チケットの編集
+template.permission.postpone_issues: ~
+template.permission.resume_issues: ~
+template.permission.reassign_issues: ~
+template.permission.reopen_issues: ~
+template.permission.add_comments: ~
+template.permission.add_files: ~
+template.permission.remove_files: ~
+template.permission.private_comments: ~
+template.permission.send_reminders: ~
+template.permission.delete_issues: チケットの削除
+template.permission.attach_subissues: ~
+template.permission.detach_subissues: ~
+state: 状態
+states: ステータス
+state.new: 新規ステータス
+state.name: ステータス名
+state.abbreviation: 略称
+state.type: ステータス形式
+state.type.initial: 初期状態
+state.type.interim: ~
+state.type.final: 最終状態
+state.responsible: 対応者
+state.responsibles: ~
+state.responsible.keep: 変更しない
+state.responsible.assign: アサイン
+state.responsible.remove: 除去
+state.transitions: 遷移
+state.next_by_default: デフォルトの「次の状態」
+state.make_initial: 初期状態にする
+state.confirm.delete: ステータスを削除してよろしいですか？
 state.conflict.name: ~
 state.conflict.abbreviation: ~
 field.conflict.name: 入力されたフィールドの名前は既に存在しています。

@@ -16,6 +16,7 @@ button.lock: Verrouller
 button.unlock: Déverrouiller
 button.export: Exporter
 button.import: Importer
+button.select_all: 'Tout sélectionner'
 required: requis
 error.not_found: 'La page à laquelle vous souhaitez accéder n''existe pas ou a été supprimée.'
 error.not_authorized: 'Vous n''êtes pas autorisé à accéder à cette page.'
@@ -47,8 +48,12 @@ user.enabled: Activés
 user.disabled: Désactivés
 user.locked: Verrouillé
 permissions: Permissions
+role: Rôle
 role.administrator: Administrateur
 role.user: Utilisateur
+role.author: Auteur
+role.responsible: Responsable
+role.registered: Inscrit
 description: Description
 language: Langue
 theme: Thème
@@ -64,12 +69,12 @@ password.cant_change: 'Ce compte utilise une authentification externe. Impossibl
 security.forgot_password: 'Mot de passe perdu'
 security.forgot_password.email_sent: 'Un message contenant les instructions pour choisir un nouveau mot de passe vous a été envoyé.'
 security.change_password: 'Changer de mot de passe'
-security.password_expired: ~
+security.password_expired: 'Votre mot de passe a expiré ou nécessite d''être changé.'
 key.tab: ~
 key.space: ~
-comma: ~
+comma: Virgule
 colon: ~
-semicolon: ~
+semicolon: 'Point virgule'
 vertical_line: ~
 file: Fichier
 size: Taille
@@ -79,6 +84,7 @@ line_endings: 'Fins de ligne'
 group: Groupe
 groups: Groupes
 others: Autres
+allowed: Autoriser
 members: Membres
 membership: Appartenance
 group.new: 'Nouveau groupe'
@@ -112,6 +118,39 @@ template.locked: Verrouillé
 template.confirm.delete: 'Etes-vous sur de vouloir effacer ce modèle?'
 template.conflict.name: 'Il existe déjà un modèle portant ce nom.'
 template.conflict.prefix: 'Il existe déjà un modèle portant ce un préfixe.'
+template.permission.view_issues: 'Voir les demandes'
+template.permission.create_issues: ~
+template.permission.edit_issues: 'Modifier les demandes'
+template.permission.postpone_issues: ~
+template.permission.resume_issues: ~
+template.permission.reassign_issues: ~
+template.permission.reopen_issues: ~
+template.permission.add_comments: ~
+template.permission.add_files: ~
+template.permission.remove_files: ~
+template.permission.private_comments: ~
+template.permission.send_reminders: ~
+template.permission.delete_issues: 'Supprimer les demandes'
+template.permission.attach_subissues: ~
+template.permission.detach_subissues: ~
+state: Etat
+states: Etats
+state.new: 'Nouvel état'
+state.name: 'Nom de l''état'
+state.abbreviation: Abréviation
+state.type: 'Type de l''état'
+state.type.initial: Initial
+state.type.interim: ~
+state.type.final: Final
+state.responsible: Responsable
+state.responsibles: ~
+state.responsible.keep: 'Rester inchangé'
+state.responsible.assign: Affecter
+state.responsible.remove: Enlever
+state.transitions: Transitions
+state.next_by_default: 'Etat suivant par défaut'
+state.make_initial: 'Rendre initial'
+state.confirm.delete: 'Etes-vous sur de vouloir effacer cet état?'
 state.conflict.name: 'Il existe déjà un état portant ce nom.'
 state.conflict.abbreviation: 'Il existe déjà un état portant ce abréviation.'
 field.conflict.name: 'Il existe déjà un champ portant ce nom.'

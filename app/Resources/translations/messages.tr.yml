@@ -16,6 +16,7 @@ button.lock: Kilitle
 button.unlock: 'Kilidi Aç'
 button.export: 'Dışa aktar'
 button.import: 'İçe Aktar'
+button.select_all: 'Tümünü seç'
 required: gerekli
 error.not_found: 'Erişmek istediğiniz sayfa mevcut değil ya da kaldırılmış.'
 error.not_authorized: 'Bu sayfaya erişme yetkiniz yok.'
@@ -47,8 +48,12 @@ user.enabled: Etkinleştirildi
 user.disabled: Etkisizleştirildi
 user.locked: Kilitli
 permissions: İzinler
+role: Rol
 role.administrator: Yönetici
 role.user: Kullanıcı
+role.author: Yazar
+role.responsible: Sorumlu
+role.registered: Kayıtlı
 description: Yorum
 language: Dil
 theme: Tema
@@ -64,7 +69,7 @@ password.cant_change: 'Bu hesap harici bir denetim kaynağı kullanıyor. Parola
 security.forgot_password: 'Parolamı unuttum'
 security.forgot_password.email_sent: 'Yeni parola seçme talimatlarını içeren e-postanız gönderildi.'
 security.change_password: 'Parolayı değiştir'
-security.password_expired: ~
+security.password_expired: 'Parolanızın süresi dolmuş veya yönetici parolanızı değiştirmenizi.'
 key.tab: ~
 key.space: ~
 comma: ~
@@ -79,6 +84,7 @@ line_endings: 'Satır sonları'
 group: Grup
 groups: Gruplar
 others: Diğerleri
+allowed: 'İzin Verilen'
 members: Üyeler
 membership: Üyelik
 group.new: 'Yeni grup'
@@ -112,6 +118,39 @@ template.locked: Kilitli
 template.confirm.delete: 'Bu şablonu silmek istediğinizden emin misiniz?'
 template.conflict.name: ~
 template.conflict.prefix: ~
+template.permission.view_issues: 'İşleri Göster'
+template.permission.create_issues: ~
+template.permission.edit_issues: 'İşleri düzenleme'
+template.permission.postpone_issues: ~
+template.permission.resume_issues: ~
+template.permission.reassign_issues: ~
+template.permission.reopen_issues: ~
+template.permission.add_comments: ~
+template.permission.add_files: ~
+template.permission.remove_files: ~
+template.permission.private_comments: ~
+template.permission.send_reminders: ~
+template.permission.delete_issues: 'İşleri silme'
+template.permission.attach_subissues: ~
+template.permission.detach_subissues: ~
+state: Durum
+states: Durumlar
+state.new: 'Yeni durum'
+state.name: 'Durum adı'
+state.abbreviation: Kısaltma
+state.type: 'Durum tipi'
+state.type.initial: Ilk
+state.type.interim: ~
+state.type.final: Son
+state.responsible: Sorumlu
+state.responsibles: ~
+state.responsible.keep: 'Değişmeden kalan'
+state.responsible.assign: Ata
+state.responsible.remove: Kaldır
+state.transitions: Geçişler
+state.next_by_default: 'Varsayılan olarak sonraki durum'
+state.make_initial: 'İlk yap'
+state.confirm.delete: 'Bu durumu silmek istediğinizden emin misiniz?'
 state.conflict.name: ~
 state.conflict.abbreviation: ~
 field.conflict.name: 'Girilen adda bir alan zaten var.'

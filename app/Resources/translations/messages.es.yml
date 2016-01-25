@@ -16,6 +16,7 @@ button.lock: Bloquear
 button.unlock: Desbloquear
 button.export: Exportar
 button.import: Importar
+button.select_all: 'Seleccionar todo'
 required: obligatorio
 error.not_found: 'La página a la que intenta acceder no existe.'
 error.not_authorized: 'No tiene autorización para acceder a esta página.'
@@ -47,8 +48,12 @@ user.enabled: Habilitado
 user.disabled: Deshabilitado
 user.locked: Bloqueado
 permissions: Permisos
+role: Rol
 role.administrator: Administrador
 role.user: Usuario
+role.author: Autor
+role.responsible: Responsable
+role.registered: Registrado
 description: Descripción
 language: Idioma
 theme: Tema
@@ -64,12 +69,12 @@ password.cant_change: 'Esta cuenta utiliza una fuente de autenticación externa.
 security.forgot_password: '¿Olvidaste la contraseña?'
 security.forgot_password.email_sent: 'Se le ha enviado un correo con instrucciones para elegir una nueva contraseña.'
 security.change_password: 'Cambiar contraseña'
-security.password_expired: ~
+security.password_expired: 'Tu contraseña ha expirado o tu administrador requiere que la cambies.'
 key.tab: ~
 key.space: ~
 comma: ~
 colon: ~
-semicolon: ~
+semicolon: 'Punto y Coma'
 vertical_line: ~
 file: Fichero
 size: Tamaño
@@ -79,6 +84,7 @@ line_endings: 'Final de línea'
 group: Grupo
 groups: Grupos
 others: Otros
+allowed: Permitido
 members: Miembros
 membership: Membresía
 group.new: 'Nuevo grupo'
@@ -112,6 +118,39 @@ template.locked: Bloqueado
 template.confirm.delete: '¿Está seguro de eliminar esta plantilla?'
 template.conflict.name: 'Ya existe una Plantilla con ese nombre.'
 template.conflict.prefix: 'Ya existe una Plantilla con ese prefijo.'
+template.permission.view_issues: 'Ver peticiones'
+template.permission.create_issues: ~
+template.permission.edit_issues: 'Modificar peticiones'
+template.permission.postpone_issues: ~
+template.permission.resume_issues: ~
+template.permission.reassign_issues: ~
+template.permission.reopen_issues: ~
+template.permission.add_comments: ~
+template.permission.add_files: ~
+template.permission.remove_files: ~
+template.permission.private_comments: ~
+template.permission.send_reminders: ~
+template.permission.delete_issues: 'Borrar peticiones'
+template.permission.attach_subissues: ~
+template.permission.detach_subissues: ~
+state: Estado
+states: Estados
+state.new: 'Nuevo estado'
+state.name: 'Nombre de estado'
+state.abbreviation: Abreviatura
+state.type: 'Tipo de estado'
+state.type.initial: Inicial
+state.type.interim: ~
+state.type.final: Final
+state.responsible: Responsable
+state.responsibles: ~
+state.responsible.keep: 'Dejar sin cambios'
+state.responsible.assign: Asignar
+state.responsible.remove: Eliminar
+state.transitions: Transiciones
+state.next_by_default: 'Estado siguiente predeterminado'
+state.make_initial: 'Hacer inicial'
+state.confirm.delete: '¿Está seguro de eliminar este estado?'
 state.conflict.name: 'Ya existe un Estado con ese nombre.'
 state.conflict.abbreviation: 'Ya existe un Estado con ese inicial.'
 field.conflict.name: 'Ya existe un Campo con ese nombre.'

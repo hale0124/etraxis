@@ -16,6 +16,7 @@ button.lock: Travar
 button.unlock: Destravar
 button.export: Exportar
 button.import: Importar
+button.select_all: 'Selecinar todos'
 required: obrigatório
 error.not_found: 'A página que você está tentando acessar não existe ou foi excluída.'
 error.not_authorized: 'Você não está autorizado a acessar esta página.'
@@ -47,8 +48,12 @@ user.enabled: Habilitado
 user.disabled: Desabilitado
 user.locked: Bloqueado
 permissions: Permissões
+role: Papel
 role.administrator: Administrador
 role.user: Usuário
+role.author: Autor
+role.responsible: Responsável
+role.registered: Registrado
 description: Descrição
 language: Língua
 theme: Tema
@@ -79,6 +84,7 @@ line_endings: Finalização
 group: Grupo
 groups: Grupos
 others: Outros
+allowed: Permitido
 members: Membros
 membership: Membros
 group.new: 'Novo grupo'
@@ -112,6 +118,39 @@ template.locked: Travado
 template.confirm.delete: 'Tem certeza que quer apagar este template?'
 template.conflict.name: 'O template escolhido já existe.'
 template.conflict.prefix: 'O prefixo escolhido já existe.'
+template.permission.view_issues: 'Ver tarefas'
+template.permission.create_issues: ~
+template.permission.edit_issues: 'Editar tarefas'
+template.permission.postpone_issues: ~
+template.permission.resume_issues: ~
+template.permission.reassign_issues: ~
+template.permission.reopen_issues: ~
+template.permission.add_comments: ~
+template.permission.add_files: ~
+template.permission.remove_files: ~
+template.permission.private_comments: ~
+template.permission.send_reminders: ~
+template.permission.delete_issues: 'Excluir tarefas'
+template.permission.attach_subissues: ~
+template.permission.detach_subissues: ~
+state: Estado
+states: Estados
+state.new: 'Novo estado'
+state.name: 'Nome do estado'
+state.abbreviation: Abreviação
+state.type: 'Tipo do estado'
+state.type.initial: Inicial
+state.type.interim: ~
+state.type.final: Final
+state.responsible: Responsável
+state.responsibles: ~
+state.responsible.keep: 'Manter imutável'
+state.responsible.assign: Delegar
+state.responsible.remove: Remover
+state.transitions: Transições
+state.next_by_default: 'Próximo estado por padrão'
+state.make_initial: 'Tornar inicial'
+state.confirm.delete: 'Tem certeza que quer apagar este estado?'
 state.conflict.name: 'O estado escolhido já existe.'
 state.conflict.abbreviation: 'O abreviação já existe.'
 field.conflict.name: 'O Campo escolhido já existe.'

@@ -16,6 +16,7 @@ button.lock: Lock
 button.unlock: Unlock
 button.export: Export
 button.import: Import
+button.select_all: 'Select all'
 required: required
 error.not_found: 'The page you were trying to access doesn''t exist or has been removed.'
 error.not_authorized: 'You are not authorized to access this page.'
@@ -47,8 +48,12 @@ user.enabled: Enabled
 user.disabled: Disabled
 user.locked: Locked
 permissions: Permissions
+role: Role
 role.administrator: Administrator
 role.user: User
+role.author: Author
+role.responsible: Responsible
+role.registered: Registered
 description: Description
 language: Language
 theme: Theme
@@ -64,7 +69,7 @@ password.cant_change: 'This account uses an external authentication source. Impo
 security.forgot_password: 'Forgot password'
 security.forgot_password.email_sent: 'An email with instructions to choose a new password has been sent to you.'
 security.change_password: 'Change password'
-security.password_expired: 'Your password is expired.'
+security.password_expired: 'Your password has expired or the administrator requires you to change it.'
 key.tab: Tab
 key.space: Space
 comma: Comma
@@ -79,6 +84,7 @@ line_endings: 'Line endings'
 group: Group
 groups: Groups
 others: Others
+allowed: Allowed
 members: Members
 membership: Membership
 group.new: 'New group'
@@ -112,6 +118,39 @@ template.locked: Locked
 template.confirm.delete: 'Are you sure you want delete this template?'
 template.conflict.name: 'Template with entered name already exists.'
 template.conflict.prefix: 'Template with entered prefix already exists.'
+template.permission.view_issues: 'View issues'
+template.permission.create_issues: 'Create issues'
+template.permission.edit_issues: 'Edit issues'
+template.permission.postpone_issues: 'Postpone issues'
+template.permission.resume_issues: 'Resume issues'
+template.permission.reassign_issues: 'Reassign issues'
+template.permission.reopen_issues: 'Reopen issues'
+template.permission.add_comments: 'Add comments'
+template.permission.add_files: 'Add files'
+template.permission.remove_files: 'Remove files'
+template.permission.private_comments: 'Add/read private comments'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_issues: 'Delete issues'
+template.permission.attach_subissues: 'Attach subissues'
+template.permission.detach_subissues: 'Detach subissues'
+state: State
+states: States
+state.new: 'New state'
+state.name: 'State name'
+state.abbreviation: Abbreviation
+state.type: 'State type'
+state.type.initial: Initial
+state.type.interim: ~
+state.type.final: Final
+state.responsible: Responsible
+state.responsibles: ~
+state.responsible.keep: 'Keep unchanged'
+state.responsible.assign: Assign
+state.responsible.remove: Remove
+state.transitions: Transitions
+state.next_by_default: 'Next state by default'
+state.make_initial: 'Make initial'
+state.confirm.delete: 'Are you sure you want delete this state?'
 state.conflict.name: 'State with entered name already exists.'
 state.conflict.abbreviation: 'State with entered abbreviation already exists.'
 field.conflict.name: 'Field with entered name already exists.'

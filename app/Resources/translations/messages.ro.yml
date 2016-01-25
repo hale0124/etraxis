@@ -16,6 +16,7 @@ button.lock: Incuie
 button.unlock: Descuie
 button.export: Exporta
 button.import: Importa
+button.select_all: 'Selecteaza toate'
 required: obligatoriu
 error.not_found: 'Pagina pe care doriți să o accesați nu există sau a fost ștearsă.'
 error.not_authorized: 'Nu sunteți autorizat sa accesați această pagină.'
@@ -47,8 +48,12 @@ user.enabled: Activate
 user.disabled: Dezactivate
 user.locked: Blocat
 permissions: Permisiuni
+role: Rolul
 role.administrator: Administrator
 role.user: Utilizator
+role.author: Autor
+role.responsible: Responsabil
+role.registered: Inregistrat
 description: Descriere
 language: Limba
 theme: Tema
@@ -79,6 +84,7 @@ line_endings: 'Delimitator de linie'
 group: Grup
 groups: Grupuri
 others: Altele
+allowed: Permis
 members: Membrii
 membership: Apartenenta
 group.new: 'Grup nou'
@@ -112,6 +118,39 @@ template.locked: Blocat
 template.confirm.delete: 'Sunteti sigur ca doriti sa stergeti acest sablon?'
 template.conflict.name: 'Sablonul cu numele introdus exista deja.'
 template.conflict.prefix: 'Sablonul prefixul introdus exista deja.'
+template.permission.view_issues: 'View Issues'
+template.permission.create_issues: ~
+template.permission.edit_issues: 'Editează tichete'
+template.permission.postpone_issues: ~
+template.permission.resume_issues: ~
+template.permission.reassign_issues: ~
+template.permission.reopen_issues: ~
+template.permission.add_comments: ~
+template.permission.add_files: ~
+template.permission.remove_files: ~
+template.permission.private_comments: ~
+template.permission.send_reminders: ~
+template.permission.delete_issues: 'Șterge tichete'
+template.permission.attach_subissues: ~
+template.permission.detach_subissues: ~
+state: Stare
+states: Stare
+state.new: 'Stare nou'
+state.name: Stare
+state.abbreviation: Prescurtare
+state.type: 'Tipul starii'
+state.type.initial: Initial
+state.type.interim: ~
+state.type.final: Final
+state.responsible: Responsabil
+state.responsibles: ~
+state.responsible.keep: 'Nu modifica'
+state.responsible.assign: Asigneaza
+state.responsible.remove: Sterge
+state.transitions: Tranzitii
+state.next_by_default: 'Urmatoarea stare prestabilita'
+state.make_initial: 'Marcheaza ca initiala'
+state.confirm.delete: 'Sunteti sigur ca doriti sa stergeti aceasta stare?'
 state.conflict.name: 'Numele starii deja exista.'
 state.conflict.abbreviation: 'Prescurtarea starii deja exista.'
 field.conflict.name: 'Numele campului deja exista.'
