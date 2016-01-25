@@ -25,9 +25,9 @@ install:
     - composer install -n
 
 before_script:
-    - app/console --env=test --no-interaction doctrine:database:create
-    - app/console --env=test --no-interaction doctrine:schema:create
-    - app/console --env=test --no-interaction doctrine:fixtures:load --fixtures=src/AppBundle/DataFixtures/Tests
+    - ./bin/console --env=test --no-interaction doctrine:database:create
+    - ./bin/console --env=test --no-interaction doctrine:schema:create
+    - ./bin/console --env=test --no-interaction doctrine:fixtures:load --fixtures=src/AppBundle/DataFixtures/Tests
 
 script:
     - phpunit --coverage-clover=coverage.clover

@@ -9,18 +9,19 @@
         "ext-ctype"                            : "*",
         "ext-iconv"                            : "*",
         "ext-mbstring"                         : "*",
-        "symfony/symfony"                      : "~2.8",
+        "symfony/symfony"                      : "~3.0",
         "doctrine/orm"                         : "~2.5",
-        "doctrine/doctrine-bundle"             : "~1.4",
-        "doctrine/doctrine-fixtures-bundle"    : "~2.2",
-        "doctrine/doctrine-migrations-bundle"  : "~1.0",
-        "doctrine/migrations"                  : "~1.0",
+        "doctrine/doctrine-bundle"             : "~1.6",
+        "doctrine/doctrine-cache-bundle"       : "~1.2",
+        "doctrine/doctrine-fixtures-bundle"    : "~2.3",
+        "doctrine/doctrine-migrations-bundle"  : "~1.1",
+        "doctrine/migrations"                  : "~1.2",
         "symfony/swiftmailer-bundle"           : "~2.3",
-        "symfony/monolog-bundle"               : "~2.4",
+        "symfony/monolog-bundle"               : "~2.8",
         "sensio/distribution-bundle"           : "~5.0",
         "sensio/framework-extra-bundle"        : "~3.0",
         "incenteev/composer-parameter-handler" : "~2.0",
-        "simple-bus/symfony-bridge"            : "~4.0",
+        "simple-bus/symfony-bridge"            : "~4.1",
         "ramsey/uuid"                          : "~3.0",
         "etraxis/datatables-bundle"            : "~1.0"
     },
@@ -28,7 +29,7 @@
         "sensio/generator-bundle"              : "~3.0",
         "symfony/phpunit-bridge"               : "~2.7",
         "phpunit/phpunit"                      : "~5.0",
-        "fabpot/php-cs-fixer"                  : "~1.10"
+        "fabpot/php-cs-fixer"                  : "~1.11"
     },
     "autoload": {
         "psr-4": {
@@ -45,9 +46,6 @@
         }
     },
     "minimum-stability": "stable",
-    "config": {
-        "bin-dir": "bin"
-    },
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
@@ -69,7 +67,10 @@
     },
     "extra": {
         "symfony-app-dir": "app",
+        "symfony-bin-dir": "bin",
+        "symfony-var-dir": "var",
         "symfony-web-dir": "web",
+        "symfony-tests-dir": "tests",
         "symfony-assets-install": "relative",
         "incenteev-parameters": {
             "file": "app/config/parameters.yml"

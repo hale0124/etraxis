@@ -38,14 +38,14 @@ Also there is a "[Support Forum](https://forum.etraxis.com/)" available.
 
 ```bash
 composer.phar install
-app/console doctrine:database:create
-app/console doctrine:schema:create
+./bin/console doctrine:database:create
+./bin/console doctrine:schema:create
 ```
 
 ### Development
 
 ```bash
 gulp
-./bin/php-cs-fixer fix
-./bin/phpunit --coverage-html=vendor/coverage
+./vendor/bin/php-cs-fixer fix
+./vendor/bin/phpunit --coverage-html=var/coverage
 ```
