@@ -1,7 +1,4 @@
 /app/config/parameters.yml
-/app/SymfonyRequirements.php
-/app/bootstrap.php.cache
-/app/check.php
 /bin/
 !/bin/console
 /node_modules/
