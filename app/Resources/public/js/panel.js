@@ -92,11 +92,12 @@
          * Appends new item.
          * @param {string} id
          * @param {string} text
+         * @param {bool}   highlighted
          */
-        append: function(id, text) {
+        append: function(id, text, highlighted) {
             $('.panel-body > p', this.element).remove();
             $('.panel-body', this.element).append(
-                '<a data-id="' + id + '" href="#">' +
+                '<a data-id="' + id + '" href="#"' + (highlighted ? ' class="highlighted">' : '>') +
                 '<span class="ui-icon ui-icon-none"></span>' +
                 '<span class="panel-item">' + text + '</span>' +
                 '</a>'

@@ -49,10 +49,7 @@
                 $projects.panel('clear');
                 $.getJSON('{{ path('admin_projects_list') }}', function(data) {
                     $(data).each(function(index, item) {
-                        var caption = item.isSuspended
-                                ? item.name + ' ({{ 'project.suspended'|trans|lower }})'
-                                : item.name;
-                        $projects.panel('append', item.id, caption);
+                        $projects.panel('append', item.id, item.name, item.isSuspended);
                     });
                     if (typeof onLoad === 'function') {
                         onLoad();
@@ -94,9 +91,6 @@
                     title: '{{ 'project.new'|trans }}',
                     success: function() {
                         var name = $('#project_name').val();
-                        if ($('#project_suspended').prop('checked')) {
-                            name += ' ({{ 'project.suspended'|trans|lower }})';
-                        }
                         loadProjects(function() {
                             $projects.panel('expand');
                             $projects.trigger('panel.item.click', $projects.panel('find', name));
@@ -179,10 +173,7 @@
                 $templates.panel('clear');
                 $.getJSON('{{ path('admin_templates_list') }}/' + (projectId ? projectId : 0), function(data) {
                     $(data).each(function(index, item) {
-                        var caption = item.isLocked
-                                ? item.name + ' ({{ 'template.locked'|trans|lower }})'
-                                : item.name;
-                        $templates.panel('append', item.id, caption);
+                        $templates.panel('append', item.id, item.name, item.isLocked);
                     });
                     if (typeof onLoad === 'function') {
                         onLoad();
@@ -220,7 +211,7 @@
                     url: '{{ path('admin_dlg_new_template') }}/' + projectId,
                     title: '{{ 'template.new'|trans }}',
                     success: function() {
-                        var name = $('#template_name').val() + ' ({{ 'template.locked'|trans|lower }})';
+                        var name = $('#template_name').val();
                         loadTemplates(function() {
                             $templates.panel('expand');
                             $templates.trigger('panel.item.click', $templates.panel('find', name));
