@@ -12,25 +12,25 @@
 namespace eTraxis\SimpleBus\Fields\Handler;
 
 use eTraxis\Entity\Field;
-use eTraxis\SimpleBus\Fields\CreateIssueFieldCommand;
-use eTraxis\SimpleBus\Fields\UpdateIssueFieldCommand;
+use eTraxis\SimpleBus\Fields\CreateRecordFieldCommand;
+use eTraxis\SimpleBus\Fields\UpdateRecordFieldCommand;
 
 /**
  * Command handler.
  */
-class IssueFieldCommandHandler extends BaseFieldCommandHandler
+class RecordFieldCommandHandler extends BaseFieldCommandHandler
 {
     /**
-     * Creates or updates "issue" field.
+     * Creates or updates "record" field.
      *
-     * @param   CreateIssueFieldCommand|UpdateIssueFieldCommand $command
+     * @param   CreateRecordFieldCommand|UpdateRecordFieldCommand $command
      */
     public function handle($command)
     {
         $entity = $this->getEntity($command);
 
         $entity
-            ->setType(Field::TYPE_ISSUE)
+            ->setType(Field::TYPE_RECORD)
             ->setParameter1(null)
             ->setParameter2(null)
             ->setDefaultValue(null)

@@ -14,7 +14,7 @@ namespace eTraxis\SimpleBus\Fields;
 use eTraxis\Entity\Field;
 use eTraxis\Tests\BaseTestCase;
 
-class CreateIssueFieldCommandTest extends BaseTestCase
+class CreateRecordFieldCommandTest extends BaseTestCase
 {
     public function testSuccess()
     {
@@ -23,7 +23,7 @@ class CreateIssueFieldCommandTest extends BaseTestCase
 
         $this->assertNotNull($state);
 
-        $command = new CreateIssueFieldCommand([
+        $command = new CreateRecordFieldCommand([
             'template'     => $state->getTemplateId(),
             'state'        => $state->getId(),
             'name'         => 'Related ID',
@@ -38,7 +38,7 @@ class CreateIssueFieldCommandTest extends BaseTestCase
         $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => $command->name]);
 
         $this->assertInstanceOf('\eTraxis\Entity\Field', $field);
-        $this->assertEquals(Field::TYPE_ISSUE, $field->getType());
+        $this->assertEquals(Field::TYPE_RECORD, $field->getType());
         $this->assertNull($field->getParameter1());
         $this->assertNull($field->getParameter2());
         $this->assertNull($field->getDefaultValue());

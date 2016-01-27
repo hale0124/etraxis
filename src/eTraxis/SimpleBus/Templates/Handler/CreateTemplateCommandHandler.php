@@ -82,8 +82,8 @@ class CreateTemplateCommandHandler
             ->setGuestAccess($command->guestAccess)
             ->setLocked(true)
             ->setRegisteredPermissions(0)
-            ->setAuthorPermissions(Template::PERMIT_VIEW_ISSUE)
-            ->setResponsiblePermissions(Template::PERMIT_VIEW_ISSUE)
+            ->setAuthorPermissions(Template::PERMIT_VIEW_RECORD)
+            ->setResponsiblePermissions(Template::PERMIT_VIEW_RECORD)
         ;
 
         $errors = $this->validator->validate($entity);

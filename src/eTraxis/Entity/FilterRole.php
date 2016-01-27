@@ -37,8 +37,8 @@ class FilterRole
     /**
      * @var int One of following flags:
      *
-     *          FLAG_AUTHOR      - filter shows only issues, created by specified users
-     *          FLAG_RESPONSIBLE - filter shows only issues, assigned on specified users
+     *          FLAG_AUTHOR      - filter shows only records, created by specified users
+     *          FLAG_RESPONSIBLE - filter shows only records, assigned on specified users
      *
      * @ORM\Column(name="filter_flag", type="integer")
      * @ORM\Id
@@ -47,7 +47,7 @@ class FilterRole
     private $flag;
 
     /**
-     * @var int User ID who created an issue, or is its current responsible (depending on "filter_flag").
+     * @var int User ID who created a record, or is its current responsible (depending on "filter_flag").
      *
      * @ORM\Column(name="account_id", type="integer")
      * @ORM\Id
@@ -64,7 +64,7 @@ class FilterRole
     private $filter;
 
     /**
-     * @var User User who created an issue, or is its current responsible (depending on "filter_flag").
+     * @var User User who created a record, or is its current responsible (depending on "filter_flag").
      *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="account_id", referencedColumnName="account_id", onDelete="CASCADE")

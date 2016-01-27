@@ -21,15 +21,15 @@ services:
         factory: [ "@doctrine.orm.default_entity_manager", "getRepository" ]
         arguments: [ eTraxis\Entity\Group ]
 
-    etraxis.repository.issues:
-        class: Doctrine\ORM\EntityRepository
-        factory: [ "@doctrine.orm.default_entity_manager", "getRepository" ]
-        arguments: [ eTraxis\Entity\Issue ]
-
     etraxis.repository.projects:
         class: Doctrine\ORM\EntityRepository
         factory: [ "@doctrine.orm.default_entity_manager", "getRepository" ]
         arguments: [ eTraxis\Entity\Project ]
+
+    etraxis.repository.records:
+        class: Doctrine\ORM\EntityRepository
+        factory: [ "@doctrine.orm.default_entity_manager", "getRepository" ]
+        arguments: [ eTraxis\Entity\Record ]
 
     etraxis.repository.states:
         class: Doctrine\ORM\EntityRepository

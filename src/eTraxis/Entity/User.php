@@ -186,19 +186,19 @@ class User implements AdvancedUserInterface
     private $autoRefresh;
 
     /**
-     * @deprecated 4.1.0 ASCII code of character that should be used as CSV delimiter when user exports list of issues to CSV file.
+     * @deprecated 4.1.0 ASCII code of character that should be used as CSV delimiter when user exports list of records to CSV file.
      * @ORM\Column(name="csv_delim", type="integer")
      */
     private $csvDelim;
 
     /**
-     * @deprecated 4.1.0 Characters set that should be used when user exports list of issues to CSV file.
+     * @deprecated 4.1.0 Characters set that should be used when user exports list of records to CSV file.
      * @ORM\Column(name="csv_encoding", type="integer")
      */
     private $csvEncoding;
 
     /**
-     * @deprecated 4.1.0 Line endings that should be used when user exports list of issues to CSV file.
+     * @deprecated 4.1.0 Line endings that should be used when user exports list of records to CSV file.
      * @ORM\Column(name="csv_line_ends", type="integer")
      */
     private $csvLineEnds;

@@ -75,7 +75,7 @@ class ListItemVoter extends Voter
      */
     protected function isDeleteGranted($subject)
     {
-        // Number of issues where the list item is used.
+        // Number of records where the list item is used.
         $query = $this->repository->createQueryBuilder('v')
             ->select('COUNT(v.eventId)')
             ->where('v.fieldId = :field')
@@ -86,7 +86,7 @@ class ListItemVoter extends Voter
 
         $count = $query->getQuery()->getSingleScalarResult();
 
-        // Can't delete if this value has been appeared in at least one issue.
+        // Can't delete if this value has been appeared in at least one record.
         return $count == 0;
     }
 }

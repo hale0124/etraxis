@@ -63,7 +63,7 @@ class AddRemoveTemplatePermissionsCommandHandler
 
                 $permissions = $template->getAuthorPermissions();
                 $permissions = $this->permissions($command, $permissions);
-                $template->setAuthorPermissions($permissions | Template::PERMIT_VIEW_ISSUE);
+                $template->setAuthorPermissions($permissions | Template::PERMIT_VIEW_RECORD);
                 $this->doctrine->getManager()->persist($template);
 
                 break;
@@ -72,7 +72,7 @@ class AddRemoveTemplatePermissionsCommandHandler
 
                 $permissions = $template->getResponsiblePermissions();
                 $permissions = $this->permissions($command, $permissions);
-                $template->setResponsiblePermissions($permissions | Template::PERMIT_VIEW_ISSUE);
+                $template->setResponsiblePermissions($permissions | Template::PERMIT_VIEW_RECORD);
                 $this->doctrine->getManager()->persist($template);
 
                 break;

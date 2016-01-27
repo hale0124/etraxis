@@ -12,7 +12,7 @@
 namespace eTraxis\Voter;
 
 use eTraxis\Entity\Project;
-use eTraxis\Repository\IssuesRepository;
+use eTraxis\Repository\RecordsRepository;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -26,9 +26,9 @@ class ProjectVoter extends Voter
     /**
      * Dependency Injection constructor.
      *
-     * @param   IssuesRepository $repository
+     * @param   RecordsRepository $repository
      */
-    public function __construct(IssuesRepository $repository)
+    public function __construct(RecordsRepository $repository)
     {
         $this->repository = $repository;
     }
@@ -75,10 +75,10 @@ class ProjectVoter extends Voter
      */
     protected function isDeleteGranted($subject)
     {
-        // Number of issues belong to the project.
-        $query = $this->repository->createQueryBuilder('i')
-            ->select('COUNT(i.id)')
-            ->leftJoin('i.state', 's')
+        // Number of records belong to the project.
+        $query = $this->repository->createQueryBuilder('r')
+            ->select('COUNT(r.id)')
+            ->leftJoin('r.state', 's')
             ->leftJoin('s.template', 't')
             ->where('t.projectId = :id')
             ->setParameter('id', $subject->getId())
@@ -86,7 +86,7 @@ class ProjectVoter extends Voter
 
         $count = $query->getQuery()->getSingleScalarResult();
 
-        // Can't delete if project contains at least one issue.
+        // Can't delete if project contains at least one record.
         return $count == 0;
     }
 }

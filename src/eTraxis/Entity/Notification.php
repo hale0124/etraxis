@@ -34,19 +34,19 @@ class Notification
     const TYPE_TEMPLATE = 3;
 
     // Notification events.
-    const NOTIFY_ISSUE_CREATED    = 0x0001;
-    const NOTIFY_ISSUE_ASSIGNED   = 0x0002;
-    const NOTIFY_ISSUE_MODIFIED   = 0x0004;
-    const NOTIFY_STATE_CHANGED    = 0x0008;
-    const NOTIFY_ISSUE_POSTPONED  = 0x0010;
-    const NOTIFY_ISSUE_RESUMED    = 0x0020;
-    const NOTIFY_COMMENT_ADDED    = 0x0040;
-    const NOTIFY_FILE_ADDED       = 0x0080;
-    const NOTIFY_FILE_REMOVED     = 0x0100;
-    const NOTIFY_ISSUE_CLONED     = 0x0200;
-    const NOTIFY_SUBISSUE_ADDED   = 0x0400;
-    const NOTIFY_SUBISSUE_REMOVED = 0x0800;
-    const NOTIFY_ISSUE_REOPENED   = 0x1000;
+    const NOTIFY_RECORD_CREATED     = 0x0001;
+    const NOTIFY_RECORD_ASSIGNED    = 0x0002;
+    const NOTIFY_RECORD_MODIFIED    = 0x0004;
+    const NOTIFY_STATE_CHANGED      = 0x0008;
+    const NOTIFY_RECORD_POSTPONED   = 0x0010;
+    const NOTIFY_RECORD_RESUMED     = 0x0020;
+    const NOTIFY_COMMENT_ADDED      = 0x0040;
+    const NOTIFY_FILE_ADDED         = 0x0080;
+    const NOTIFY_FILE_REMOVED       = 0x0100;
+    const NOTIFY_RECORD_CLONED      = 0x0200;
+    const NOTIFY_SUBRECORD_ATTACHED = 0x0400;
+    const NOTIFY_SUBRECORD_DETACHED = 0x0800;
+    const NOTIFY_RECORD_REOPENED    = 0x1000;
 
     /**
      * @var int Unique ID.

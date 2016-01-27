@@ -38,7 +38,7 @@ class StateAssignee
     private $groupId;
 
     /**
-     * @var State State where issue can be moved to.
+     * @var State State where record can be moved to.
      *
      * @ORM\ManyToOne(targetEntity="State")
      * @ORM\JoinColumn(name="state_id", referencedColumnName="state_id", onDelete="CASCADE")

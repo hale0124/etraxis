@@ -65,7 +65,7 @@ class NotificationTest extends \PHPUnit_Framework_TestCase
 
     public function testEvents()
     {
-        $expected = Notification::NOTIFY_ISSUE_CREATED | Notification::NOTIFY_COMMENT_ADDED;
+        $expected = Notification::NOTIFY_RECORD_CREATED | Notification::NOTIFY_COMMENT_ADDED;
         $this->object->setEvents($expected);
         $this->assertEquals($expected, $this->object->getEvents());
     }

@@ -15,15 +15,15 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Issue.
+ * Record.
  *
  * @ORM\Table(name="tbl_records",
  *            uniqueConstraints={
  *                @ORM\UniqueConstraint(name="ix_records", columns={"creator_id", "creation_time"})
  *            })
- * @ORM\Entity(repositoryClass="eTraxis\Repository\IssuesRepository")
+ * @ORM\Entity(repositoryClass="eTraxis\Repository\RecordsRepository")
  */
-class Issue
+class Record
 {
     // Constraints.
     const MAX_SUBJECT = 250;
@@ -38,7 +38,7 @@ class Issue
     private $id;
 
     /**
-     * @var string Subject of the issue.
+     * @var string Subject of the record.
      *
      * @ORM\Column(name="subject", type="string", length=250)
      */
@@ -52,49 +52,49 @@ class Issue
     private $stateId;
 
     /**
-     * @var int ID of the issue's author.
+     * @var int ID of the record's author.
      *
      * @ORM\Column(name="creator_id", type="integer")
      */
     private $authorId;
 
     /**
-     * @var int ID of the current issue's responsible.
+     * @var int ID of the current record's responsible.
      *
      * @ORM\Column(name="responsible_id", type="integer", nullable=true)
      */
     private $responsibleId;
 
     /**
-     * @var int Unix Epoch timestamp when the issue was created.
+     * @var int Unix Epoch timestamp when the record was created.
      *
      * @ORM\Column(name="creation_time", type="integer")
      */
     private $createdAt;
 
     /**
-     * @var int Unix Epoch timestamp when the issue was changed last time.
+     * @var int Unix Epoch timestamp when the record was changed last time.
      *
      * @ORM\Column(name="change_time", type="integer")
      */
     private $changedAt;
 
     /**
-     * @var int Unix Epoch timestamp when the issue was closed.
+     * @var int Unix Epoch timestamp when the record was closed.
      *
      * @ORM\Column(name="closure_time", type="integer", nullable=true)
      */
     private $closedAt;
 
     /**
-     * @var int Unix Epoch timestamp when the postponed issue will be resumed back.
+     * @var int Unix Epoch timestamp when the postponed record will be resumed back.
      *
      * @ORM\Column(name="postpone_time", type="integer")
      */
     private $resumedAt;
 
     /**
-     * @var State Current state of the issue.
+     * @var State Current state of the record.
      *
      * @ORM\ManyToOne(targetEntity="State")
      * @ORM\JoinColumn(name="state_id", referencedColumnName="state_id")
@@ -102,7 +102,7 @@ class Issue
     private $state;
 
     /**
-     * @var User Author of the the issue.
+     * @var User Author of the the record.
      *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="creator_id", referencedColumnName="account_id")
@@ -110,7 +110,7 @@ class Issue
     private $author;
 
     /**
-     * @var User Current responsible of the issue.
+     * @var User Current responsible of the record.
      *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="responsible_id", referencedColumnName="account_id")
@@ -118,9 +118,9 @@ class Issue
     private $responsible;
 
     /**
-     * @var ArrayCollection List of issue events.
+     * @var ArrayCollection List of record events.
      *
-     * @ORM\OneToMany(targetEntity="Event", mappedBy="issue")
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="record")
      * @ORM\OrderBy({"createdAt" = "ASC"})
      */
     private $history;
@@ -128,12 +128,12 @@ class Issue
     /**
      * @var ArrayCollection List of state fields.
      *
-     * @ORM\OneToMany(targetEntity="Watcher", mappedBy="issue")
+     * @ORM\OneToMany(targetEntity="Watcher", mappedBy="record")
      */
     private $watchers;
 
     /**
-     * @var ArrayCollection List of sub-issues.
+     * @var ArrayCollection List of subrecords.
      *
      * @ORM\OneToMany(targetEntity="Child", mappedBy="parent")
      * @ORM\OrderBy({"childId" = "ASC"})
@@ -425,7 +425,7 @@ class Issue
     }
 
     /**
-     * Add event to the issue.
+     * Add event to the record.
      *
      * @param   Event $event
      *
@@ -439,7 +439,7 @@ class Issue
     }
 
     /**
-     * Remove event from the issue.
+     * Remove event from the record.
      *
      * @param   Event $event
      *
@@ -453,7 +453,7 @@ class Issue
     }
 
     /**
-     * Get issue history.
+     * Get record history.
      *
      * @return  ArrayCollection|Event[]
      */
@@ -491,7 +491,7 @@ class Issue
     }
 
     /**
-     * Get list of issue watchers.
+     * Get list of record watchers.
      *
      * @return  ArrayCollection|Watcher[]
      */
@@ -501,7 +501,7 @@ class Issue
     }
 
     /**
-     * Add subissue.
+     * Add subrecord.
      *
      * @param   Child $child
      *
@@ -515,7 +515,7 @@ class Issue
     }
 
     /**
-     * Remove subissue.
+     * Remove subrecord.
      *
      * @param   Child $child
      *
@@ -529,7 +529,7 @@ class Issue
     }
 
     /**
-     * Get list of subissues.
+     * Get list of subrecords.
      *
      * @return  ArrayCollection|Child[]
      */

@@ -47,7 +47,7 @@ class TemplateVoterTest extends BaseTestCase
         $template = new Template();
 
         $template
-            ->setName('Issue')
+            ->setName('Bug report')
             ->setPrefix('bug')
             ->setLocked(true)
             ->setGuestAccess(false)
@@ -64,7 +64,7 @@ class TemplateVoterTest extends BaseTestCase
         $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
 
         /** @var Template $empty */
-        $empty = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Issue']);
+        $empty = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Bug report']);
 
         $this->assertInstanceOf('eTraxis\Entity\Template', $template);
         $this->assertInstanceOf('eTraxis\Entity\Template', $empty);
@@ -108,7 +108,7 @@ class TemplateVoterTest extends BaseTestCase
         $template = new Template();
 
         $template
-            ->setName('Issue')
+            ->setName('Bug report')
             ->setPrefix('bug')
             ->setLocked(true)
             ->setGuestAccess(false)
@@ -122,7 +122,7 @@ class TemplateVoterTest extends BaseTestCase
         $this->doctrine->getManager()->flush();
 
         /** @var Template $empty */
-        $empty = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Issue']);
+        $empty = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Bug report']);
 
         $this->assertTrue($empty->isLocked());
         $this->assertFalse($this->security->isGranted(Template::UNLOCK, $empty));

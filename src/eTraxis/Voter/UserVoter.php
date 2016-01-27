@@ -134,18 +134,18 @@ class UserVoter extends Voter
 
         $countAsOriginator = $query->getQuery()->getSingleScalarResult();
 
-        // Number of issues had been assigned on subject.
+        // Number of records had been assigned on subject.
         $query = $this->repository->createQueryBuilder('e')
             ->select('COUNT(e.id)')
             ->where('e.type = :type')
             ->andWhere('e.parameter = :id')
-            ->setParameter('type', Event::ISSUE_ASSIGNED)
+            ->setParameter('type', Event::RECORD_ASSIGNED)
             ->setParameter('id', $subject->getId())
         ;
 
         $countAsAssignee = $query->getQuery()->getSingleScalarResult();
 
-        // Can't delete if user is mentioned in any issue log.
+        // Can't delete if user is mentioned in any record log.
         return $countAsOriginator == 0 && $countAsAssignee == 0;
     }
 

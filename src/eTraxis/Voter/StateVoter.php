@@ -76,18 +76,18 @@ class StateVoter extends Voter
      */
     protected function isDeleteGranted($subject)
     {
-        // Number of issues appeared in the state.
+        // Number of records appeared in the state.
         $query = $this->repository->createQueryBuilder('e')
             ->select('COUNT(e.id)')
             ->where('e.parameter = :id')
             ->andWhere('e.type IN (:types)')
             ->setParameter('id', $subject->getId())
-            ->setParameter('types', [Event::ISSUE_CREATED, Event::ISSUE_REOPENED, Event::STATE_CHANGED])
+            ->setParameter('types', [Event::RECORD_CREATED, Event::RECORD_REOPENED, Event::STATE_CHANGED])
         ;
 
         $count = $query->getQuery()->getSingleScalarResult();
 
-        // Can't delete if at least one issue has been appeared in this state.
+        // Can't delete if at least one record has been appeared in this state.
         return $count == 0;
     }
 }

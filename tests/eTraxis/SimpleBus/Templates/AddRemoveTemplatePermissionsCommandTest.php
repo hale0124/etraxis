@@ -36,13 +36,13 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $this->assertEquals(Template::PERMIT_ADD_FILE,    $permissions->getPermission() & Template::PERMIT_ADD_FILE);
         $this->assertEquals(Template::PERMIT_REMOVE_FILE, $permissions->getPermission() & Template::PERMIT_REMOVE_FILE);
-        $this->assertEquals(0,                            $permissions->getPermission() & Template::PERMIT_ATTACH_SUBISSUE);
-        $this->assertEquals(0,                            $permissions->getPermission() & Template::PERMIT_DETACH_SUBISSUE);
+        $this->assertEquals(0,                            $permissions->getPermission() & Template::PERMIT_ATTACH_SUBRECORD);
+        $this->assertEquals(0,                            $permissions->getPermission() & Template::PERMIT_DETACH_SUBRECORD);
 
         $command = new AddTemplatePermissionsCommand([
             'id'          => $template->getId(),
             'group'       => $group->getId(),
-            'permissions' => Template::PERMIT_ATTACH_SUBISSUE | Template::PERMIT_DETACH_SUBISSUE,
+            'permissions' => Template::PERMIT_ATTACH_SUBRECORD | Template::PERMIT_DETACH_SUBRECORD,
         ]);
 
         $this->command_bus->handle($command);
@@ -60,10 +60,10 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
             'templateId' => $template->getId(),
         ]);
 
-        $this->assertEquals(0,                                $permissions->getPermission() & Template::PERMIT_ADD_FILE);
-        $this->assertEquals(0,                                $permissions->getPermission() & Template::PERMIT_REMOVE_FILE);
-        $this->assertEquals(Template::PERMIT_ATTACH_SUBISSUE, $permissions->getPermission() & Template::PERMIT_ATTACH_SUBISSUE);
-        $this->assertEquals(Template::PERMIT_DETACH_SUBISSUE, $permissions->getPermission() & Template::PERMIT_DETACH_SUBISSUE);
+        $this->assertEquals(0,                                 $permissions->getPermission() & Template::PERMIT_ADD_FILE);
+        $this->assertEquals(0,                                 $permissions->getPermission() & Template::PERMIT_REMOVE_FILE);
+        $this->assertEquals(Template::PERMIT_ATTACH_SUBRECORD, $permissions->getPermission() & Template::PERMIT_ATTACH_SUBRECORD);
+        $this->assertEquals(Template::PERMIT_DETACH_SUBRECORD, $permissions->getPermission() & Template::PERMIT_DETACH_SUBRECORD);
     }
 
     public function testNewGroupPermissions()
@@ -86,7 +86,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
         $command = new AddTemplatePermissionsCommand([
             'id'          => $template->getId(),
             'group'       => $group->getId(),
-            'permissions' => Template::PERMIT_VIEW_ISSUE,
+            'permissions' => Template::PERMIT_VIEW_RECORD,
         ]);
 
         $this->command_bus->handle($command);
@@ -97,7 +97,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
         ]);
         $this->assertNotNull($permissions);
 
-        $this->assertEquals(Template::PERMIT_VIEW_ISSUE, $permissions->getPermission() & Template::PERMIT_VIEW_ISSUE);
+        $this->assertEquals(Template::PERMIT_VIEW_RECORD, $permissions->getPermission() & Template::PERMIT_VIEW_RECORD);
     }
 
     public function testRegisteredPermissions()
@@ -107,34 +107,34 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
         $this->assertNotNull($template);
         $id = $template->getId();
 
-        $this->assertEquals(0, $template->getRegisteredPermissions() & Template::PERMIT_VIEW_ISSUE);
-        $this->assertEquals(0, $template->getRegisteredPermissions() & Template::PERMIT_CREATE_ISSUE);
+        $this->assertEquals(0, $template->getRegisteredPermissions() & Template::PERMIT_VIEW_RECORD);
+        $this->assertEquals(0, $template->getRegisteredPermissions() & Template::PERMIT_CREATE_RECORD);
 
         $command = new AddTemplatePermissionsCommand([
             'id'          => $id,
             'group'       => SystemRole::REGISTERED,
-            'permissions' => Template::PERMIT_VIEW_ISSUE | Template::PERMIT_CREATE_ISSUE,
+            'permissions' => Template::PERMIT_VIEW_RECORD | Template::PERMIT_CREATE_RECORD,
         ]);
 
         $this->command_bus->handle($command);
 
         $template = $this->doctrine->getRepository('eTraxis:Template')->find($id);
 
-        $this->assertEquals(Template::PERMIT_VIEW_ISSUE,   $template->getRegisteredPermissions() & Template::PERMIT_VIEW_ISSUE);
-        $this->assertEquals(Template::PERMIT_CREATE_ISSUE, $template->getRegisteredPermissions() & Template::PERMIT_CREATE_ISSUE);
+        $this->assertEquals(Template::PERMIT_VIEW_RECORD,   $template->getRegisteredPermissions() & Template::PERMIT_VIEW_RECORD);
+        $this->assertEquals(Template::PERMIT_CREATE_RECORD, $template->getRegisteredPermissions() & Template::PERMIT_CREATE_RECORD);
 
         $command = new RemoveTemplatePermissionsCommand([
             'id'          => $id,
             'group'       => SystemRole::REGISTERED,
-            'permissions' => Template::PERMIT_CREATE_ISSUE,
+            'permissions' => Template::PERMIT_CREATE_RECORD,
         ]);
 
         $this->command_bus->handle($command);
 
         $template = $this->doctrine->getRepository('eTraxis:Template')->find($id);
 
-        $this->assertEquals(Template::PERMIT_VIEW_ISSUE, $template->getRegisteredPermissions() & Template::PERMIT_VIEW_ISSUE);
-        $this->assertEquals(0,                           $template->getRegisteredPermissions() & Template::PERMIT_CREATE_ISSUE);
+        $this->assertEquals(Template::PERMIT_VIEW_RECORD, $template->getRegisteredPermissions() & Template::PERMIT_VIEW_RECORD);
+        $this->assertEquals(0,                            $template->getRegisteredPermissions() & Template::PERMIT_CREATE_RECORD);
     }
 
     public function testAuthorPermissions()
@@ -144,44 +144,44 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
         $this->assertNotNull($template);
         $id = $template->getId();
 
-        $this->assertEquals(Template::PERMIT_EDIT_ISSUE, $template->getAuthorPermissions() & Template::PERMIT_EDIT_ISSUE);
-        $this->assertEquals(0,                           $template->getAuthorPermissions() & Template::PERMIT_REOPEN_ISSUE);
+        $this->assertEquals(Template::PERMIT_EDIT_RECORD, $template->getAuthorPermissions() & Template::PERMIT_EDIT_RECORD);
+        $this->assertEquals(0,                            $template->getAuthorPermissions() & Template::PERMIT_REOPEN_RECORD);
 
         $command = new AddTemplatePermissionsCommand([
             'id'          => $id,
             'group'       => SystemRole::AUTHOR,
-            'permissions' => Template::PERMIT_REOPEN_ISSUE,
+            'permissions' => Template::PERMIT_REOPEN_RECORD,
         ]);
 
         $this->command_bus->handle($command);
 
         $template = $this->doctrine->getRepository('eTraxis:Template')->find($id);
 
-        $this->assertEquals(Template::PERMIT_REOPEN_ISSUE, $template->getAuthorPermissions() & Template::PERMIT_REOPEN_ISSUE);
+        $this->assertEquals(Template::PERMIT_REOPEN_RECORD, $template->getAuthorPermissions() & Template::PERMIT_REOPEN_RECORD);
 
         $command = new RemoveTemplatePermissionsCommand([
             'id'          => $id,
             'group'       => SystemRole::AUTHOR,
-            'permissions' => Template::PERMIT_EDIT_ISSUE,
+            'permissions' => Template::PERMIT_EDIT_RECORD,
         ]);
 
         $this->command_bus->handle($command);
 
         $template = $this->doctrine->getRepository('eTraxis:Template')->find($id);
 
-        $this->assertEquals(0, $template->getAuthorPermissions() & Template::PERMIT_EDIT_ISSUE);
+        $this->assertEquals(0, $template->getAuthorPermissions() & Template::PERMIT_EDIT_RECORD);
 
         $command = new RemoveTemplatePermissionsCommand([
             'id'          => $id,
             'group'       => SystemRole::AUTHOR,
-            'permissions' => Template::PERMIT_VIEW_ISSUE,
+            'permissions' => Template::PERMIT_VIEW_RECORD,
         ]);
 
         $this->command_bus->handle($command);
 
         $template = $this->doctrine->getRepository('eTraxis:Template')->find($id);
 
-        $this->assertEquals(Template::PERMIT_VIEW_ISSUE, $template->getAuthorPermissions() & Template::PERMIT_VIEW_ISSUE);
+        $this->assertEquals(Template::PERMIT_VIEW_RECORD, $template->getAuthorPermissions() & Template::PERMIT_VIEW_RECORD);
     }
 
     public function testResponsiblePermissions()
@@ -192,19 +192,19 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
         $id = $template->getId();
 
         $this->assertEquals(Template::PERMIT_ADD_COMMENT, $template->getResponsiblePermissions() & Template::PERMIT_ADD_COMMENT);
-        $this->assertEquals(0,                            $template->getResponsiblePermissions() & Template::PERMIT_ATTACH_SUBISSUE);
+        $this->assertEquals(0,                            $template->getResponsiblePermissions() & Template::PERMIT_ATTACH_SUBRECORD);
 
         $command = new AddTemplatePermissionsCommand([
             'id'          => $id,
             'group'       => SystemRole::RESPONSIBLE,
-            'permissions' => Template::PERMIT_ATTACH_SUBISSUE,
+            'permissions' => Template::PERMIT_ATTACH_SUBRECORD,
         ]);
 
         $this->command_bus->handle($command);
 
         $template = $this->doctrine->getRepository('eTraxis:Template')->find($id);
 
-        $this->assertEquals(Template::PERMIT_ATTACH_SUBISSUE, $template->getResponsiblePermissions() & Template::PERMIT_ATTACH_SUBISSUE);
+        $this->assertEquals(Template::PERMIT_ATTACH_SUBRECORD, $template->getResponsiblePermissions() & Template::PERMIT_ATTACH_SUBRECORD);
 
         $command = new RemoveTemplatePermissionsCommand([
             'id'          => $id,
@@ -221,14 +221,14 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
         $command = new RemoveTemplatePermissionsCommand([
             'id'          => $id,
             'group'       => SystemRole::RESPONSIBLE,
-            'permissions' => Template::PERMIT_VIEW_ISSUE,
+            'permissions' => Template::PERMIT_VIEW_RECORD,
         ]);
 
         $this->command_bus->handle($command);
 
         $template = $this->doctrine->getRepository('eTraxis:Template')->find($id);
 
-        $this->assertEquals(Template::PERMIT_VIEW_ISSUE, $template->getResponsiblePermissions() & Template::PERMIT_VIEW_ISSUE);
+        $this->assertEquals(Template::PERMIT_VIEW_RECORD, $template->getResponsiblePermissions() & Template::PERMIT_VIEW_RECORD);
     }
 
     /**
@@ -240,7 +240,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
         $command = new AddTemplatePermissionsCommand([
             'id'          => $this->getMaxId(),
             'group'       => SystemRole::REGISTERED,
-            'permissions' => Template::PERMIT_VIEW_ISSUE,
+            'permissions' => Template::PERMIT_VIEW_RECORD,
         ]);
 
         $this->command_bus->handle($command);
@@ -259,7 +259,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
         $command = new RemoveTemplatePermissionsCommand([
             'id'          => $template->getId(),
             'group'       => $this->getMaxId(),
-            'permissions' => Template::PERMIT_VIEW_ISSUE,
+            'permissions' => Template::PERMIT_VIEW_RECORD,
         ]);
 
         $this->command_bus->handle($command);

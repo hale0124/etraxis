@@ -66,7 +66,7 @@ class Project
 
     /**
      * @var int Whether the project is suspended.
-     *          When project is suspended, its issues are read-only, and new issues cannot be created.
+     *          When project is suspended, its records are read-only, and new records cannot be created.
      *
      * @ORM\Column(name="is_suspended", type="integer")
      */

@@ -29,7 +29,7 @@ class FieldType extends AbstractStaticCollection
             Field::TYPE_TEXT     => 'type.text',
             Field::TYPE_CHECKBOX => 'type.checkbox',
             Field::TYPE_LIST     => 'type.list',
-            Field::TYPE_ISSUE    => 'type.issue',
+            Field::TYPE_RECORD   => 'type.record',
             Field::TYPE_DATE     => 'type.date',
             Field::TYPE_DURATION => 'type.duration',
             Field::TYPE_DECIMAL  => 'type.decimal',

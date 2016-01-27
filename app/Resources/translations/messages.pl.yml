@@ -118,21 +118,21 @@ template.locked: Zablokowany
 template.confirm.delete: 'Czy jesteś pewien, że chesz usunąć wybrany szablon?'
 template.conflict.name: 'Szablon o podanej nazwie już istnieje.'
 template.conflict.prefix: 'Szablon o podanej prefixie już istnieje.'
-template.permission.view_issues: 'Przeglądanie zagadnień'
-template.permission.create_issues: ~
-template.permission.edit_issues: 'Edycja zagadnień'
-template.permission.postpone_issues: ~
-template.permission.resume_issues: ~
-template.permission.reassign_issues: ~
-template.permission.reopen_issues: ~
+template.permission.view_records: ~
+template.permission.create_records: ~
+template.permission.edit_records: ~
+template.permission.postpone_records: ~
+template.permission.resume_records: ~
+template.permission.reassign_records: ~
+template.permission.reopen_records: ~
 template.permission.add_comments: ~
 template.permission.add_files: ~
 template.permission.remove_files: ~
 template.permission.private_comments: ~
 template.permission.send_reminders: ~
-template.permission.delete_issues: 'Usuwanie zagadnień'
-template.permission.attach_subissues: ~
-template.permission.detach_subissues: ~
+template.permission.delete_records: ~
+template.permission.attach_subrecords: ~
+template.permission.detach_subrecords: ~
 state: Stan
 states: Stany
 state.new: 'Nowy stan'

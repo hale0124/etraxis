@@ -14,8 +14,8 @@ namespace eTraxis\Repository;
 use Doctrine\ORM\EntityRepository;
 
 /**
- * Issues repository.
+ * Records repository.
  */
-class IssuesRepository extends EntityRepository
+class RecordsRepository extends EntityRepository
 {
 }

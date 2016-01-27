@@ -13,7 +13,7 @@ namespace eTraxis\Voter;
 
 use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
-use eTraxis\Repository\IssuesRepository;
+use eTraxis\Repository\RecordsRepository;
 use eTraxis\Repository\StatesRepository;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
@@ -24,18 +24,18 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 class TemplateVoter extends Voter
 {
     protected $stateRepository;
-    protected $issueRepository;
+    protected $recordRepository;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   StatesRepository $stateRepository
-     * @param   IssuesRepository $issueRepository
+     * @param   StatesRepository  $stateRepository
+     * @param   RecordsRepository $recordRepository
      */
-    public function __construct(StatesRepository $stateRepository, IssuesRepository $issueRepository)
+    public function __construct(StatesRepository $stateRepository, RecordsRepository $recordRepository)
     {
-        $this->stateRepository = $stateRepository;
-        $this->issueRepository = $issueRepository;
+        $this->stateRepository  = $stateRepository;
+        $this->recordRepository = $recordRepository;
     }
 
     /**
@@ -88,17 +88,17 @@ class TemplateVoter extends Voter
      */
     protected function isDeleteGranted($subject)
     {
-        // Number of issues created by the template.
-        $query = $this->issueRepository->createQueryBuilder('i')
-            ->select('COUNT(i.id)')
-            ->leftJoin('i.state', 's')
+        // Number of records created by the template.
+        $query = $this->recordRepository->createQueryBuilder('r')
+            ->select('COUNT(r.id)')
+            ->leftJoin('r.state', 's')
             ->where('s.templateId = :id')
             ->setParameter('id', $subject->getId())
         ;
 
         $count = $query->getQuery()->getSingleScalarResult();
 
-        // Can't delete if at least one issue has been created by this template.
+        // Can't delete if at least one record has been created by this template.
         return $count == 0;
     }
 

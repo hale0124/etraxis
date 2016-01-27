@@ -37,7 +37,7 @@ class TemplateGroupPermissionTest extends \PHPUnit_Framework_TestCase
 
     public function testPermission()
     {
-        $expected = Template::PERMIT_CREATE_ISSUE;
+        $expected = Template::PERMIT_CREATE_RECORD;
         $this->object->setPermission($expected);
         $this->assertEquals($expected, $this->object->getPermission());
     }

@@ -45,8 +45,8 @@ class FieldsCommandFactory
             case Field::TYPE_LIST:
                 return new CreateListFieldCommand($values);
 
-            case Field::TYPE_ISSUE:
-                return new CreateIssueFieldCommand($values);
+            case Field::TYPE_RECORD:
+                return new CreateRecordFieldCommand($values);
 
             case Field::TYPE_DATE:
                 return new CreateDateFieldCommand($values);
@@ -89,8 +89,8 @@ class FieldsCommandFactory
             case Field::TYPE_LIST:
                 return new UpdateListFieldCommand($values);
 
-            case Field::TYPE_ISSUE:
-                return new UpdateIssueFieldCommand($values);
+            case Field::TYPE_RECORD:
+                return new UpdateRecordFieldCommand($values);
 
             case Field::TYPE_DATE:
                 return new UpdateDateFieldCommand($values);

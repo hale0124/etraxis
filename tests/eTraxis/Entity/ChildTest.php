@@ -46,13 +46,13 @@ class ChildTest extends \PHPUnit_Framework_TestCase
 
     public function testParent()
     {
-        $this->object->setParent($issue = new Issue());
-        $this->assertSame($issue, $this->object->getParent());
+        $this->object->setParent($record = new Record());
+        $this->assertSame($record, $this->object->getParent());
     }
 
     public function testChild()
     {
-        $this->object->setChild($issue = new Issue());
-        $this->assertSame($issue, $this->object->getChild());
+        $this->object->setChild($record = new Record());
+        $this->assertSame($record, $this->object->getChild());
     }
 }

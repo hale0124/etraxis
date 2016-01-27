@@ -38,7 +38,7 @@ class Field
     const TYPE_TEXT     = 3;
     const TYPE_CHECKBOX = 4;
     const TYPE_LIST     = 5;
-    const TYPE_ISSUE    = 6;
+    const TYPE_RECORD   = 6;
     const TYPE_DATE     = 7;
     const TYPE_DURATION = 8;
     const TYPE_DECIMAL  = 9;
@@ -184,7 +184,7 @@ class Field
      *          "text"     - maximum allowed length of values (up to 4000)
      *          "checkbox" - NULL (not used)
      *          "list"     - NULL (not used)
-     *          "issue"    - NULL (not used)
+     *          "record"   - NULL (not used)
      *          "date"     - minimum of range of allowed values (amount of days since current date; negative value shifts to the past)
      *          "duration" - minimum of range of allowed values (amount of minutes from 0:00 till 999999:59)
      *
@@ -201,7 +201,7 @@ class Field
      *          "text"     - NULL (not used)
      *          "checkbox" - NULL (not used)
      *          "list"     - NULL (not used)
-     *          "issue"    - NULL (not used)
+     *          "record"   - NULL (not used)
      *          "date"     - maximum of range of allowed values (amount of days since current date; negative value shifts to the past)
      *          "duration" - maximum of range of allowed values (amount of minutes from 0:00 till 999999:59)
      *
@@ -218,7 +218,7 @@ class Field
      *          "text"     - default string value (foreign key to "text_values" table)
      *          "checkbox" - default state of checkbox (0 - unchecked, 1 - checked)
      *          "list"     - integer value of default list item (see "list_values" table)
-     *          "issue"    - NULL (not used)
+     *          "record"   - NULL (not used)
      *          "date"     - default date value (amount of days since current date; negative value shifts to the past)
      *          "duration" - default duration value (amount of minutes from 0:00 till 999999:59)
      *

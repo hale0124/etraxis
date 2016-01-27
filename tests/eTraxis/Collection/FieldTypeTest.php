@@ -24,7 +24,7 @@ class FieldTypeTest extends BaseTestCase
             Field::TYPE_TEXT,
             Field::TYPE_CHECKBOX,
             Field::TYPE_LIST,
-            Field::TYPE_ISSUE,
+            Field::TYPE_RECORD,
             Field::TYPE_DATE,
             Field::TYPE_DURATION,
             Field::TYPE_DECIMAL,

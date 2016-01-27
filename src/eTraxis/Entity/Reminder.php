@@ -59,7 +59,7 @@ class Reminder
     private $subject;
 
     /**
-     * @var int State of issues to be reminded about.
+     * @var int State of records to be reminded about.
      *
      * @ORM\Column(name="state_id", type="integer")
      */
@@ -88,7 +88,7 @@ class Reminder
     private $user;
 
     /**
-     * @var State State of issues to be reminded about.
+     * @var State State of records to be reminded about.
      *
      * @ORM\ManyToOne(targetEntity="State")
      * @ORM\JoinColumn(name="state_id", referencedColumnName="state_id", onDelete="CASCADE")

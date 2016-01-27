@@ -14,21 +14,21 @@ namespace eTraxis\SimpleBus\Fields;
 use eTraxis\Entity\Field;
 use eTraxis\Tests\BaseTestCase;
 
-class UpdateIssueFieldCommandTest extends BaseTestCase
+class UpdateRecordFieldCommandTest extends BaseTestCase
 {
     public function testSuccess()
     {
         /** @var Field $field */
         $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Delivery']);
 
-        $this->assertEquals(Field::TYPE_ISSUE, $field->getType());
+        $this->assertEquals(Field::TYPE_RECORD, $field->getType());
         $this->assertEquals('Delivery', $field->getName());
         $this->assertNull($field->getDescription());
         $this->assertFalse($field->isRequired());
         $this->assertTrue($field->hasGuestAccess());
         $this->assertFalse($field->getShowInEmails());
 
-        $command = new UpdateIssueFieldCommand([
+        $command = new UpdateRecordFieldCommand([
             'id'           => $field->getId(),
             'name'         => 'Delivery #',
             'description'  => 'ID of the delivery task',
@@ -41,7 +41,7 @@ class UpdateIssueFieldCommandTest extends BaseTestCase
 
         $field = $this->doctrine->getRepository('eTraxis:Field')->find($field->getId());
 
-        $this->assertEquals(Field::TYPE_ISSUE, $field->getType());
+        $this->assertEquals(Field::TYPE_RECORD, $field->getType());
         $this->assertEquals('Delivery #', $field->getName());
         $this->assertEquals('ID of the delivery task', $field->getDescription());
         $this->assertTrue($field->isRequired());

@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Issue change.
+ * Record change.
  *
  * @ORM\Table(name="tbl_changes",
  *            uniqueConstraints={

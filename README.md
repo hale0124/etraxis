@@ -6,7 +6,7 @@
 
 ### What is eTraxis
 
-eTraxis is an issues tracking system with ability to set up unlimited number of fully customizable workflows.
+eTraxis is a records tracking system with ability to set up unlimited number of fully customizable workflows.
 eTraxis can be used for tracking almost anything, but the most popular cases are *bugs tracker* and *helpdesk system*.
 
 ### Key features

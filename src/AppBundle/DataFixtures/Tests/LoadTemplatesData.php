@@ -56,18 +56,18 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
      */
     protected function loadDeliveryTemplate(ObjectManager $manager)
     {
-        $author      = Template::PERMIT_EDIT_ISSUE | Template::PERMIT_ADD_COMMENT | Template::PERMIT_ADD_FILE | Template::PERMIT_REMOVE_FILE;
+        $author      = Template::PERMIT_EDIT_RECORD | Template::PERMIT_ADD_COMMENT | Template::PERMIT_ADD_FILE | Template::PERMIT_REMOVE_FILE;
         $responsible = Template::PERMIT_ADD_COMMENT | Template::PERMIT_ADD_FILE;
 
         $permissions = [
             'group:managers' => [
-                Template::PERMIT_VIEW_ISSUE,
-                Template::PERMIT_CREATE_ISSUE,
-                Template::PERMIT_EDIT_ISSUE,
-                Template::PERMIT_POSTPONE_ISSUE,
-                Template::PERMIT_RESUME_ISSUE,
-                Template::PERMIT_REASSIGN_ISSUE,
-                Template::PERMIT_REOPEN_ISSUE,
+                Template::PERMIT_VIEW_RECORD,
+                Template::PERMIT_CREATE_RECORD,
+                Template::PERMIT_EDIT_RECORD,
+                Template::PERMIT_POSTPONE_RECORD,
+                Template::PERMIT_RESUME_RECORD,
+                Template::PERMIT_REASSIGN_RECORD,
+                Template::PERMIT_REOPEN_RECORD,
                 Template::PERMIT_ADD_COMMENT,
                 Template::PERMIT_PRIVATE_COMMENT,
                 Template::PERMIT_ADD_FILE,
@@ -75,10 +75,10 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
                 Template::PERMIT_SEND_REMINDER,
             ],
             'group:staff' => [
-                Template::PERMIT_VIEW_ISSUE,
+                Template::PERMIT_VIEW_RECORD,
             ],
             'group:crew' => [
-                Template::PERMIT_VIEW_ISSUE,
+                Template::PERMIT_VIEW_RECORD,
                 Template::PERMIT_ADD_COMMENT,
             ],
         ];
@@ -137,8 +137,8 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
      */
     protected function loadFuturamaTemplate(ObjectManager $manager)
     {
-        $registered = Template::PERMIT_VIEW_ISSUE;
-        $author     = Template::PERMIT_EDIT_ISSUE | Template::PERMIT_ADD_COMMENT | Template::PERMIT_ADD_FILE | Template::PERMIT_REMOVE_FILE;
+        $registered = Template::PERMIT_VIEW_RECORD;
+        $author     = Template::PERMIT_EDIT_RECORD | Template::PERMIT_ADD_COMMENT | Template::PERMIT_ADD_FILE | Template::PERMIT_REMOVE_FILE;
 
         $template = new Template();
 

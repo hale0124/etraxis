@@ -24,7 +24,7 @@ class DeleteTemplateCommandTest extends BaseTestCase
         $template = new Template();
 
         $template
-            ->setName('Issue')
+            ->setName('Bug report')
             ->setPrefix('bug')
             ->setLocked(true)
             ->setGuestAccess(false)
@@ -40,13 +40,13 @@ class DeleteTemplateCommandTest extends BaseTestCase
         $this->loginAs('hubert');
 
         /** @var \eTraxis\Entity\Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Issue']);
+        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Bug report']);
         $this->assertNotNull($template);
 
         $command = new DeleteTemplateCommand(['id' => $template->getId()]);
         $this->command_bus->handle($command);
 
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Issue']);
+        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Bug report']);
         $this->assertNull($template);
     }
 

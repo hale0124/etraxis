@@ -23,7 +23,7 @@ class FieldsCommandFactoryTest extends BaseTestCase
         $this->assertInstanceOf('\eTraxis\SimpleBus\Fields\CreateTextFieldCommand',     FieldsCommandFactory::getCreateCommand(Field::TYPE_TEXT));
         $this->assertInstanceOf('\eTraxis\SimpleBus\Fields\CreateCheckboxFieldCommand', FieldsCommandFactory::getCreateCommand(Field::TYPE_CHECKBOX));
         $this->assertInstanceOf('\eTraxis\SimpleBus\Fields\CreateListFieldCommand',     FieldsCommandFactory::getCreateCommand(Field::TYPE_LIST));
-        $this->assertInstanceOf('\eTraxis\SimpleBus\Fields\CreateIssueFieldCommand',    FieldsCommandFactory::getCreateCommand(Field::TYPE_ISSUE));
+        $this->assertInstanceOf('\eTraxis\SimpleBus\Fields\CreateRecordFieldCommand',   FieldsCommandFactory::getCreateCommand(Field::TYPE_RECORD));
         $this->assertInstanceOf('\eTraxis\SimpleBus\Fields\CreateDateFieldCommand',     FieldsCommandFactory::getCreateCommand(Field::TYPE_DATE));
         $this->assertInstanceOf('\eTraxis\SimpleBus\Fields\CreateDurationFieldCommand', FieldsCommandFactory::getCreateCommand(Field::TYPE_DURATION));
         $this->assertInstanceOf('\eTraxis\SimpleBus\Fields\CreateDecimalFieldCommand',  FieldsCommandFactory::getCreateCommand(Field::TYPE_DECIMAL));
@@ -38,7 +38,7 @@ class FieldsCommandFactoryTest extends BaseTestCase
         $this->assertInstanceOf('\eTraxis\SimpleBus\Fields\UpdateTextFieldCommand',     FieldsCommandFactory::getUpdateCommand(Field::TYPE_TEXT));
         $this->assertInstanceOf('\eTraxis\SimpleBus\Fields\UpdateCheckboxFieldCommand', FieldsCommandFactory::getUpdateCommand(Field::TYPE_CHECKBOX));
         $this->assertInstanceOf('\eTraxis\SimpleBus\Fields\UpdateListFieldCommand',     FieldsCommandFactory::getUpdateCommand(Field::TYPE_LIST));
-        $this->assertInstanceOf('\eTraxis\SimpleBus\Fields\UpdateIssueFieldCommand',    FieldsCommandFactory::getUpdateCommand(Field::TYPE_ISSUE));
+        $this->assertInstanceOf('\eTraxis\SimpleBus\Fields\UpdateRecordFieldCommand',   FieldsCommandFactory::getUpdateCommand(Field::TYPE_RECORD));
         $this->assertInstanceOf('\eTraxis\SimpleBus\Fields\UpdateDateFieldCommand',     FieldsCommandFactory::getUpdateCommand(Field::TYPE_DATE));
         $this->assertInstanceOf('\eTraxis\SimpleBus\Fields\UpdateDurationFieldCommand', FieldsCommandFactory::getUpdateCommand(Field::TYPE_DURATION));
         $this->assertInstanceOf('\eTraxis\SimpleBus\Fields\UpdateDecimalFieldCommand',  FieldsCommandFactory::getUpdateCommand(Field::TYPE_DECIMAL));

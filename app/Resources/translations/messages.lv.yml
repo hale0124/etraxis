@@ -118,21 +118,21 @@ template.locked: Bloķēts
 template.confirm.delete: 'Vai tiešām vēlaties dzēst šo lekālu?'
 template.conflict.name: 'Lekāls ar tādu nosaukumu jau eksistē.'
 template.conflict.prefix: 'Lekāls ar tādu priedēkli jau eksistē.'
-template.permission.view_issues: 'Apskatīt uzdevumus'
-template.permission.create_issues: ~
-template.permission.edit_issues: 'Rediģēt uzdevumus'
-template.permission.postpone_issues: ~
-template.permission.resume_issues: ~
-template.permission.reassign_issues: ~
-template.permission.reopen_issues: ~
+template.permission.view_records: ~
+template.permission.create_records: ~
+template.permission.edit_records: ~
+template.permission.postpone_records: ~
+template.permission.resume_records: ~
+template.permission.reassign_records: ~
+template.permission.reopen_records: ~
 template.permission.add_comments: ~
 template.permission.add_files: ~
 template.permission.remove_files: ~
 template.permission.private_comments: ~
 template.permission.send_reminders: ~
-template.permission.delete_issues: 'Dzēst uzdevumus'
-template.permission.attach_subissues: ~
-template.permission.detach_subissues: ~
+template.permission.delete_records: ~
+template.permission.attach_subrecords: ~
+template.permission.detach_subrecords: ~
 state: Stāvoklis
 states: Stāvokļi
 state.new: 'Jauns stāvoklis'

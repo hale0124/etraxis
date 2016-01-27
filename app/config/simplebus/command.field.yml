@@ -25,9 +25,9 @@ services:
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateListFieldCommand }]
         arguments: [ "@logger", "@validator", "@translator", "@doctrine" ]
 
-    command.field.create.issue:
-        class: eTraxis\SimpleBus\Fields\Handler\IssueFieldCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateIssueFieldCommand }]
+    command.field.create.record:
+        class: eTraxis\SimpleBus\Fields\Handler\RecordFieldCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateRecordFieldCommand }]
         arguments: [ "@logger", "@validator", "@translator", "@doctrine" ]
 
     command.field.create.date:
@@ -65,9 +65,9 @@ services:
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateCheckboxFieldCommand }]
         arguments: [ "@logger", "@validator", "@translator", "@doctrine" ]
 
-    command.field.update.issue:
-        class: eTraxis\SimpleBus\Fields\Handler\IssueFieldCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateIssueFieldCommand }]
+    command.field.update.record:
+        class: eTraxis\SimpleBus\Fields\Handler\RecordFieldCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateRecordFieldCommand }]
         arguments: [ "@logger", "@validator", "@translator", "@doctrine" ]
 
     command.field.update.list:

@@ -58,7 +58,7 @@ class FieldValue
      *          "text"     - string value (foreign key to "text_values" table)
      *          "checkbox" - state of checkbox (0 - unchecked, 1 - checked)
      *          "list"     - integer value of list item (see "list_values" table)
-     *          "issue"    - issue ID
+     *          "record"   - record ID
      *          "date"     - date value (Unix Epoch timestamp)
      *          "duration" - duration value (amount of minutes from 0:00 till 999999:59)
      *
@@ -67,7 +67,7 @@ class FieldValue
     private $valueId;
 
     /**
-     * @var int Whether this value is current one for this field of the issue.
+     * @var int Whether this value is current one for this field of the record.
      *
      * @ORM\Column(name="is_latest", type="integer")
      */

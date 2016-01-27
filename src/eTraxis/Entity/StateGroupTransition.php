@@ -22,7 +22,7 @@ use Doctrine\ORM\Mapping as ORM;
 class StateGroupTransition
 {
     /**
-     * @var int State ID where issue can be moved from.
+     * @var int State ID where record can be moved from.
      *
      * @ORM\Column(name="state_id_from", type="integer")
      * @ORM\Id
@@ -30,7 +30,7 @@ class StateGroupTransition
     private $fromStateId;
 
     /**
-     * @var int State ID where issue can be moved to.
+     * @var int State ID where record can be moved to.
      *
      * @ORM\Column(name="state_id_to", type="integer")
      * @ORM\Id
@@ -46,7 +46,7 @@ class StateGroupTransition
     private $groupId;
 
     /**
-     * @var State State where issue can be moved from.
+     * @var State State where record can be moved from.
      *
      * @ORM\ManyToOne(targetEntity="State")
      * @ORM\JoinColumn(name="state_id_from", referencedColumnName="state_id", onDelete="CASCADE")
@@ -54,7 +54,7 @@ class StateGroupTransition
     private $fromState;
 
     /**
-     * @var State State where issue can be moved to.
+     * @var State State where record can be moved to.
      *
      * @ORM\ManyToOne(targetEntity="State")
      * @ORM\JoinColumn(name="state_id_to", referencedColumnName="state_id", onDelete="CASCADE")

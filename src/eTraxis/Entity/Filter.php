@@ -79,12 +79,12 @@ class Filter
     /**
      * @var int Filter flags.
      *
-     *          FILTER_FLAG_CREATED_BY  - filter shows only issues created by specified users
-     *          FILTER_FLAG_ASSIGNED_TO - filter shows only issues assigned on specified user
-     *          FILTER_FLAG_UNCLOSED    - filter shows only opened issues
-     *          FILTER_FLAG_POSTPONED   - filter shows only postponed issues
-     *          FILTER_FLAG_ACTIVE      - filter shows only active (not postponed) issues
-     *          FILTER_FLAG_UNASSIGNED  - filter shows only unassigned issues
+     *          FILTER_FLAG_CREATED_BY  - filter shows only records created by specified users
+     *          FILTER_FLAG_ASSIGNED_TO - filter shows only records assigned on specified user
+     *          FILTER_FLAG_UNCLOSED    - filter shows only opened records
+     *          FILTER_FLAG_POSTPONED   - filter shows only postponed records
+     *          FILTER_FLAG_ACTIVE      - filter shows only active (not postponed) records
+     *          FILTER_FLAG_UNASSIGNED  - filter shows only unassigned records
      *
      * @ORM\Column(name="filter_flags", type="integer")
      */

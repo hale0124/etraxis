@@ -88,21 +88,21 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
 
     public function testRegisteredPermissions()
     {
-        $expected = Template::PERMIT_CREATE_ISSUE | Template::PERMIT_ADD_COMMENT;
+        $expected = Template::PERMIT_CREATE_RECORD | Template::PERMIT_ADD_COMMENT;
         $this->object->setRegisteredPermissions($expected);
         $this->assertEquals($expected, $this->object->getRegisteredPermissions());
     }
 
     public function testAuthorPermissions()
     {
-        $expected = Template::PERMIT_CREATE_ISSUE | Template::PERMIT_ADD_COMMENT;
+        $expected = Template::PERMIT_CREATE_RECORD | Template::PERMIT_ADD_COMMENT;
         $this->object->setAuthorPermissions($expected);
         $this->assertEquals($expected, $this->object->getAuthorPermissions());
     }
 
     public function testResponsiblePermissions()
     {
-        $expected = Template::PERMIT_CREATE_ISSUE | Template::PERMIT_ADD_COMMENT;
+        $expected = Template::PERMIT_CREATE_RECORD | Template::PERMIT_ADD_COMMENT;
         $this->object->setResponsiblePermissions($expected);
         $this->assertEquals($expected, $this->object->getResponsiblePermissions());
     }

@@ -1,6 +1,6 @@
 {
     "name": "etraxis/etraxis",
-    "description": "Issues tracking system with ability to set up unlimited number of fully customizable workflows.",
+    "description": "Records tracking system with ability to set up unlimited number of fully customizable workflows.",
     "type": "project",
     "license": "GPL-3.0",
     "require": {

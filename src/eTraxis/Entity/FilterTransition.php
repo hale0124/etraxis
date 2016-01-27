@@ -31,7 +31,7 @@ class FilterTransition
     private $filterId;
 
     /**
-     * @var int State ID that an issue was moved to.
+     * @var int State ID that a record was moved to.
      *
      * @ORM\Column(name="state_id", type="integer")
      * @ORM\Id
@@ -62,7 +62,7 @@ class FilterTransition
     private $filter;
 
     /**
-     * @var State State that an issue was moved to.
+     * @var State State that a record was moved to.
      *
      * @ORM\ManyToOne(targetEntity="State")
      * @ORM\JoinColumn(name="state_id", referencedColumnName="state_id", onDelete="CASCADE")

@@ -12,8 +12,8 @@
 namespace eTraxis\SimpleBus\Fields;
 
 /**
- * Updates specified "issue" field.
+ * Updates specified "record" field.
  */
-class UpdateIssueFieldCommand extends UpdateFieldBaseCommand
+class UpdateRecordFieldCommand extends UpdateFieldBaseCommand
 {
 }

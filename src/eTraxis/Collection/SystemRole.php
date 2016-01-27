@@ -16,8 +16,8 @@ namespace eTraxis\Collection;
  */
 class SystemRole extends AbstractStaticCollection
 {
-    const AUTHOR      = -1;  // creator of the issue
-    const RESPONSIBLE = -2;  // user assigned on the issue
+    const AUTHOR      = -1;  // creator of the record
+    const RESPONSIBLE = -2;  // user assigned on the record
     const REGISTERED  = -3;  // any authenticated user
 
     /**

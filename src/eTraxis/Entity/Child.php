@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Subissue.
+ * Subrecord.
  *
  * @ORM\Table(name="tbl_children")
  * @ORM\Entity
@@ -22,7 +22,7 @@ use Doctrine\ORM\Mapping as ORM;
 class Child
 {
     /**
-     * @var int ID of the parent issue.
+     * @var int ID of the parent record.
      *
      * @ORM\Column(name="parent_id", type="integer")
      * @ORM\Id
@@ -30,7 +30,7 @@ class Child
     private $parentId;
 
     /**
-     * @var int ID of the child issue.
+     * @var int ID of the child record.
      *
      * @ORM\Column(name="child_id", type="integer")
      * @ORM\Id
@@ -45,17 +45,17 @@ class Child
     private $isDependency;
 
     /**
-     * @var Issue Parent issue.
+     * @var Record Parent record.
      *
-     * @ORM\ManyToOne(targetEntity="Issue", inversedBy="children")
+     * @ORM\ManyToOne(targetEntity="Record", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="record_id")
      */
     private $parent;
 
     /**
-     * @var Issue Child issue.
+     * @var Record Child record.
      *
-     * @ORM\ManyToOne(targetEntity="Issue")
+     * @ORM\ManyToOne(targetEntity="Record")
      * @ORM\JoinColumn(name="child_id", referencedColumnName="record_id")
      */
     private $child;
@@ -135,11 +135,11 @@ class Child
     /**
      * Standard setter.
      *
-     * @param   Issue $parent
+     * @param   Record $parent
      *
      * @return  self
      */
-    public function setParent(Issue $parent)
+    public function setParent(Record $parent)
     {
         $this->parent = $parent;
 
@@ -149,7 +149,7 @@ class Child
     /**
      * Standard getter.
      *
-     * @return  Issue
+     * @return  Record
      */
     public function getParent()
     {
@@ -159,11 +159,11 @@ class Child
     /**
      * Standard setter.
      *
-     * @param   Issue $child
+     * @param   Record $child
      *
      * @return  self
      */
-    public function setChild(Issue $child)
+    public function setChild(Record $child)
     {
         $this->child = $child;
 
@@ -173,7 +173,7 @@ class Child
     /**
      * Standard getter.
      *
-     * @return  Issue
+     * @return  Record
      */
     public function getChild()
     {

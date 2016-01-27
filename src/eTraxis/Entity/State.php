@@ -70,7 +70,7 @@ class State
     private $name;
 
     /**
-     * @var string Abbreviation of the state (used in list of issues as a short-cut).
+     * @var string Abbreviation of the state (used in list of records as a short-cut).
      *
      * @ORM\Column(name="state_abbr", type="string", length=50)
      */

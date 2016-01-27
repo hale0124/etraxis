@@ -40,21 +40,21 @@ class Template
     const UNLOCK = 'template.unlock';
 
     // Template access permissions.
-    const PERMIT_CREATE_ISSUE    = 0x0001;
-    const PERMIT_EDIT_ISSUE      = 0x0002;
-    const PERMIT_POSTPONE_ISSUE  = 0x0004;
-    const PERMIT_RESUME_ISSUE    = 0x0008;
-    const PERMIT_REASSIGN_ISSUE  = 0x0010;
-    const PERMIT_REOPEN_ISSUE    = 0x0020;
-    const PERMIT_ADD_COMMENT     = 0x0040;
-    const PERMIT_ADD_FILE        = 0x0080;
-    const PERMIT_REMOVE_FILE     = 0x0100;
-    const PERMIT_PRIVATE_COMMENT = 0x0200;
-    const PERMIT_SEND_REMINDER   = 0x0400;
-    const PERMIT_DELETE_ISSUE    = 0x0800;
-    const PERMIT_ATTACH_SUBISSUE = 0x1000;
-    const PERMIT_DETACH_SUBISSUE = 0x2000;
-    const PERMIT_VIEW_ISSUE      = 0x40000000;
+    const PERMIT_CREATE_RECORD    = 0x0001;
+    const PERMIT_EDIT_RECORD      = 0x0002;
+    const PERMIT_POSTPONE_RECORD  = 0x0004;
+    const PERMIT_RESUME_RECORD    = 0x0008;
+    const PERMIT_REASSIGN_RECORD  = 0x0010;
+    const PERMIT_REOPEN_RECORD    = 0x0020;
+    const PERMIT_ADD_COMMENT      = 0x0040;
+    const PERMIT_ADD_FILE         = 0x0080;
+    const PERMIT_REMOVE_FILE      = 0x0100;
+    const PERMIT_PRIVATE_COMMENT  = 0x0200;
+    const PERMIT_SEND_REMINDER    = 0x0400;
+    const PERMIT_DELETE_RECORD    = 0x0800;
+    const PERMIT_ATTACH_SUBRECORD = 0x1000;
+    const PERMIT_DETACH_SUBRECORD = 0x2000;
+    const PERMIT_VIEW_RECORD      = 0x40000000;
 
     /**
      * @var int Unique ID.
@@ -80,24 +80,24 @@ class Template
     private $name;
 
     /**
-     * @var string Prefix of the template (used as a prefix in ID of issues, created using this template).
+     * @var string Prefix of the template (used as a prefix in ID of records, created using this template).
      *
      * @ORM\Column(name="template_prefix", type="string", length=3)
      */
     private $prefix;
 
     /**
-     * @var int When an issue remains opened more than this amount of days it is displayed in red in the list of issues.
+     * @var int When a record remains opened more than this amount of days it is displayed in red in the list of records.
      *
      * @ORM\Column(name="critical_age", type="integer", nullable=true)
      */
     private $criticalAge;
 
     /**
-     * @var int When an issue is closed a user cannot change its state anymore, but one still can modify its fields,
-     *          add comments and attach files. If frozen time is specified it will be allowed to modify issue this
-     *          amount of days after its closure. After that issue will become read-only. If this attribute is not
-     *          specified, issue will never become read-only.
+     * @var int When a record is closed a user cannot change its state anymore, but one still can modify its fields,
+     *          add comments and attach files. If frozen time is specified it will be allowed to modify record this
+     *          amount of days after its closure. After that record will become read-only. If this attribute is not
+     *          specified, record will never become read-only.
      *
      * @ORM\Column(name="frozen_time", type="integer", nullable=true)
      */
@@ -118,7 +118,7 @@ class Template
     private $isLocked;
 
     /**
-     * @var int Whether an issue, created using this template, is accessible for non-authenticated user.
+     * @var int Whether a record, created using this template, is accessible for non-authenticated user.
      *
      * @ORM\Column(name="guest_access", type="integer")
      */

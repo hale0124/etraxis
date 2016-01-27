@@ -26,11 +26,11 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals(null, $this->object->getId());
     }
 
-    public function testIssueId()
+    public function testRecordId()
     {
         $expected = rand(1, PHP_INT_MAX);
-        $this->object->setIssueId($expected);
-        $this->assertEquals($expected, $this->object->getIssueId());
+        $this->object->setRecordId($expected);
+        $this->assertEquals($expected, $this->object->getRecordId());
     }
 
     public function testUserId()
@@ -42,7 +42,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
 
     public function testType()
     {
-        $expected = Event::ISSUE_CREATED;
+        $expected = Event::RECORD_CREATED;
         $this->object->setType($expected);
         $this->assertEquals($expected, $this->object->getType());
     }
@@ -61,10 +61,10 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->object->getParameter());
     }
 
-    public function testIssue()
+    public function testRecord()
     {
-        $this->object->setIssue($issue = new Issue());
-        $this->assertSame($issue, $this->object->getIssue());
+        $this->object->setRecord($record = new Record());
+        $this->assertSame($record, $this->object->getRecord());
     }
 
     public function testUser()

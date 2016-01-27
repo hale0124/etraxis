@@ -21,11 +21,11 @@ class WatcherTest extends \PHPUnit_Framework_TestCase
         $this->object = new Watcher();
     }
 
-    public function testIssueId()
+    public function testRecordId()
     {
         $expected = rand(1, PHP_INT_MAX);
-        $this->object->setIssueId($expected);
-        $this->assertEquals($expected, $this->object->getIssueId());
+        $this->object->setRecordId($expected);
+        $this->assertEquals($expected, $this->object->getRecordId());
     }
 
     public function testWatcherId()
@@ -42,10 +42,10 @@ class WatcherTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->object->getInitiatorId());
     }
 
-    public function testIssue()
+    public function testRecord()
     {
-        $this->object->setIssue($issue = new Issue());
-        $this->assertSame($issue, $this->object->getIssue());
+        $this->object->setRecord($record = new Record());
+        $this->assertSame($record, $this->object->getRecord());
     }
 
     public function testWatcher()

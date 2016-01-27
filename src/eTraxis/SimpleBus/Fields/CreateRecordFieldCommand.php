@@ -12,8 +12,8 @@
 namespace eTraxis\SimpleBus\Fields;
 
 /**
- * Creates new "issue" field.
+ * Creates new "record" field.
  */
-class CreateIssueFieldCommand extends CreateFieldBaseCommand
+class CreateRecordFieldCommand extends CreateFieldBaseCommand
 {
 }

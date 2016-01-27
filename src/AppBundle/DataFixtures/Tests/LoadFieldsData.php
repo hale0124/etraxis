@@ -294,7 +294,7 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                 ],
                 7 => [
                     'name'        => 'Delivery',
-                    'type'        => Field::TYPE_ISSUE,
+                    'type'        => Field::TYPE_RECORD,
                     'required'    => false,
                     'guest'       => true,
                     'registered'  => Field::ACCESS_READ_ONLY,

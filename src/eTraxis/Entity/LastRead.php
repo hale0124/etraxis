@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Last reading time of issue.
+ * Last reading time of record.
  *
  * @ORM\Table(name="tbl_reads",
  *            indexes={
@@ -25,12 +25,12 @@ use Doctrine\ORM\Mapping as ORM;
 class LastRead
 {
     /**
-     * @var int Issue ID.
+     * @var int Record ID.
      *
      * @ORM\Column(name="record_id", type="integer")
      * @ORM\Id
      */
-    private $issueId;
+    private $recordId;
 
     /**
      * @var int User ID.
@@ -41,19 +41,19 @@ class LastRead
     private $userId;
 
     /**
-     * @var int Unix Epoch timestamp when the issue has been read by this user last time.
+     * @var int Unix Epoch timestamp when the record has been read by this user last time.
      *
      * @ORM\Column(name="read_time", type="integer")
      */
     private $readAt;
 
     /**
-     * @var Issue Issue.
+     * @var Record Record.
      *
-     * @ORM\ManyToOne(targetEntity="Issue")
+     * @ORM\ManyToOne(targetEntity="Record")
      * @ORM\JoinColumn(name="record_id", referencedColumnName="record_id", onDelete="CASCADE")
      */
-    private $issue;
+    private $record;
 
     /**
      * @var User User.
@@ -66,13 +66,13 @@ class LastRead
     /**
      * Standard setter.
      *
-     * @param   int $issueId
+     * @param   int $recordId
      *
      * @return  self
      */
-    public function setIssueId($issueId)
+    public function setRecordId($recordId)
     {
-        $this->issueId = $issueId;
+        $this->recordId = $recordId;
 
         return $this;
     }
@@ -82,9 +82,9 @@ class LastRead
      *
      * @return  int
      */
-    public function getIssueId()
+    public function getRecordId()
     {
-        return $this->issueId;
+        return $this->recordId;
     }
 
     /**
@@ -138,13 +138,13 @@ class LastRead
     /**
      * Standard setter.
      *
-     * @param   Issue $issue
+     * @param   Record $record
      *
      * @return  self
      */
-    public function setIssue(Issue $issue)
+    public function setRecord(Record $record)
     {
-        $this->issue = $issue;
+        $this->record = $record;
 
         return $this;
     }
@@ -152,11 +152,11 @@ class LastRead
     /**
      * Standard getter.
      *
-     * @return  Issue
+     * @return  Record
      */
-    public function getIssue()
+    public function getRecord()
     {
-        return $this->issue;
+        return $this->record;
     }
 
     /**

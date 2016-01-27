@@ -18,14 +18,14 @@ use eTraxis\Entity\DecimalValue;
 use eTraxis\Entity\Event;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\FieldValue;
-use eTraxis\Entity\Issue;
 use eTraxis\Entity\LastRead;
+use eTraxis\Entity\Record;
 use eTraxis\Entity\StringValue;
 use eTraxis\Entity\TextValue;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
-class LoadIssuesData extends AbstractFixture implements ContainerAwareInterface, OrderedFixtureInterface
+class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface, OrderedFixtureInterface
 {
     /** @var ContainerInterface */
     private $container;
@@ -51,18 +51,18 @@ class LoadIssuesData extends AbstractFixture implements ContainerAwareInterface,
      */
     public function load(ObjectManager $manager)
     {
-        $this->loadDeliveryIssues($manager);
-        $this->loadFuturamaIssues($manager);
+        $this->loadDeliveryRecords($manager);
+        $this->loadFuturamaRecords($manager);
     }
 
     /**
-     * Loads issues of "Delivery" template.
+     * Loads records of "Delivery" template.
      *
      * @param   ObjectManager $manager
      */
-    protected function loadDeliveryIssues(ObjectManager $manager)
+    protected function loadDeliveryRecords(ObjectManager $manager)
     {
-        $issues = [
+        $records = [
             '1ACV01' => [
                 'subject'     => 'Prizes for the claw crane',
                 'assignee'    => 'user:leela',
@@ -278,12 +278,12 @@ class LoadIssuesData extends AbstractFixture implements ContainerAwareInterface,
         $state_new       = $this->getReference('state:new');
         $state_delivered = $this->getReference('state:delivered');
 
-        foreach ($issues as $info) {
+        foreach ($records as $info) {
 
-            $issue = new Issue();
+            $record = new Record();
 
             /** @noinspection PhpParamsInspection */
-            $issue
+            $record
                 ->setSubject($info['subject'])
                 ->setCreatedAt(strtotime($info['date'] . ' 09:00:00'))
                 ->setChangedAt(strtotime($info['date'] . ' 09:00:00'))
@@ -296,24 +296,24 @@ class LoadIssuesData extends AbstractFixture implements ContainerAwareInterface,
             $event = new Event();
 
             $event
-                ->setType(Event::ISSUE_CREATED)
-                ->setCreatedAt($issue->getCreatedAt())
+                ->setType(Event::RECORD_CREATED)
+                ->setCreatedAt($record->getCreatedAt())
                 ->setParameter($state_new->getId())
-                ->setIssue($issue)
-                ->setUser($issue->getAuthor())
+                ->setRecord($record)
+                ->setUser($record->getAuthor())
             ;
 
             $event2 = new Event();
 
             $event2
-                ->setType(Event::ISSUE_ASSIGNED)
-                ->setCreatedAt($issue->getCreatedAt())
-                ->setParameter($issue->getResponsible()->getId())
-                ->setIssue($issue)
-                ->setUser($issue->getAuthor())
+                ->setType(Event::RECORD_ASSIGNED)
+                ->setCreatedAt($record->getCreatedAt())
+                ->setParameter($record->getResponsible()->getId())
+                ->setRecord($record)
+                ->setUser($record->getAuthor())
             ;
 
-            $manager->persist($issue);
+            $manager->persist($record);
             $manager->persist($event);
             $manager->persist($event2);
 
@@ -384,11 +384,11 @@ class LoadIssuesData extends AbstractFixture implements ContainerAwareInterface,
             $read = new LastRead();
 
             $read
-                ->setIssueId($issue->getId())
-                ->setUserId($issue->getAuthor()->getId())
-                ->setReadAt($issue->getCreatedAt())
-                ->setIssue($issue)
-                ->setUser($issue->getAuthor())
+                ->setRecordId($record->getId())
+                ->setUserId($record->getAuthor()->getId())
+                ->setReadAt($record->getCreatedAt())
+                ->setRecord($record)
+                ->setUser($record->getAuthor())
             ;
 
             $manager->persist($field);
@@ -402,8 +402,8 @@ class LoadIssuesData extends AbstractFixture implements ContainerAwareInterface,
                     ->setType(Event::STATE_CHANGED)
                     ->setCreatedAt(strtotime($info['date'] . ' 17:00:00'))
                     ->setParameter($state_delivered->getId())
-                    ->setIssue($issue)
-                    ->setUser($issue->getResponsible())
+                    ->setRecord($record)
+                    ->setUser($record->getResponsible())
                 ;
 
                 $manager->persist($event);
@@ -434,15 +434,15 @@ class LoadIssuesData extends AbstractFixture implements ContainerAwareInterface,
                 }
 
                 /** @noinspection PhpParamsInspection */
-                $issue
+                $record
                     ->setClosedAt($event->getCreatedAt())
                     ->setState($state_delivered)
                     ->setResponsible(null)
                 ;
 
                 $read = $this->container->get('doctrine')->getRepository('eTraxis:LastRead')->findOneBy([
-                    'issueId' => $issue->getId(),
-                    'userId'  => $event->getUser()->getId(),
+                    'recordId' => $record->getId(),
+                    'userId'   => $event->getUser()->getId(),
                 ]);
 
                 if (!$read) {
@@ -450,9 +450,9 @@ class LoadIssuesData extends AbstractFixture implements ContainerAwareInterface,
                     $read = new LastRead();
 
                     $read
-                        ->setIssueId($issue->getId())
+                        ->setRecordId($record->getId())
                         ->setUserId($event->getUser()->getId())
-                        ->setIssue($issue)
+                        ->setRecord($record)
                         ->setUser($event->getUser())
                     ;
                 }
@@ -460,7 +460,7 @@ class LoadIssuesData extends AbstractFixture implements ContainerAwareInterface,
                 $read->setReadAt($event->getCreatedAt());
 
                 $manager->persist($field);
-                $manager->persist($issue);
+                $manager->persist($record);
                 $manager->persist($read);
             }
         }
@@ -469,13 +469,13 @@ class LoadIssuesData extends AbstractFixture implements ContainerAwareInterface,
     }
 
     /**
-     * Loads issues of "Futurama" template.
+     * Loads records of "Futurama" template.
      *
      * @param   ObjectManager $manager
      */
-    protected function loadFuturamaIssues(ObjectManager $manager)
+    protected function loadFuturamaRecords(ObjectManager $manager)
     {
-        $issues = [
+        $records = [
             '1ACV01' => [
                 'subject'   => 'Space Pilot 3000',
                 'season'    => 1,
@@ -1889,12 +1889,12 @@ class LoadIssuesData extends AbstractFixture implements ContainerAwareInterface,
         $state_produced = $this->getReference('state:produced');
         $state_released = $this->getReference('state:released');
 
-        foreach ($issues as $code => $info) {
+        foreach ($records as $code => $info) {
 
-            $issue = new Issue();
+            $record = new Record();
 
             /** @noinspection PhpParamsInspection */
-            $issue
+            $record
                 ->setSubject($info['subject'])
                 ->setCreatedAt(strtotime($info['date'] . ' 09:00:00'))
                 ->setChangedAt(strtotime($info['date'] . ' 09:00:01'))
@@ -1908,24 +1908,24 @@ class LoadIssuesData extends AbstractFixture implements ContainerAwareInterface,
             $event = new Event();
 
             $event
-                ->setType(Event::ISSUE_CREATED)
-                ->setCreatedAt($issue->getCreatedAt())
+                ->setType(Event::RECORD_CREATED)
+                ->setCreatedAt($record->getCreatedAt())
                 ->setParameter($state_produced->getId())
-                ->setIssue($issue)
-                ->setUser($issue->getAuthor())
+                ->setRecord($record)
+                ->setUser($record->getAuthor())
             ;
 
             $event2 = new Event();
 
             $event2
                 ->setType(Event::STATE_CHANGED)
-                ->setCreatedAt($issue->getClosedAt())
+                ->setCreatedAt($record->getClosedAt())
                 ->setParameter($state_released->getId())
-                ->setIssue($issue)
-                ->setUser($issue->getAuthor())
+                ->setRecord($record)
+                ->setUser($record->getAuthor())
             ;
 
-            $manager->persist($issue);
+            $manager->persist($record);
             $manager->persist($event);
             $manager->persist($event2);
             $manager->flush();
@@ -1995,8 +1995,8 @@ class LoadIssuesData extends AbstractFixture implements ContainerAwareInterface,
             }
 
             $read = $this->container->get('doctrine')->getRepository('eTraxis:LastRead')->findOneBy([
-                'issueId' => $issue->getId(),
-                'userId'  => $event->getUser()->getId(),
+                'recordId' => $record->getId(),
+                'userId'   => $event->getUser()->getId(),
             ]);
 
             if (!$read) {
@@ -2004,9 +2004,9 @@ class LoadIssuesData extends AbstractFixture implements ContainerAwareInterface,
                 $read = new LastRead();
 
                 $read
-                    ->setIssueId($issue->getId())
+                    ->setRecordId($record->getId())
                     ->setUserId($event->getUser()->getId())
-                    ->setIssue($issue)
+                    ->setRecord($record)
                     ->setUser($event->getUser())
                 ;
             }

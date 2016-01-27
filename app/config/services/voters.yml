@@ -11,7 +11,7 @@ services:
         class: eTraxis\Voter\ProjectVoter
         public: false
         tags: [{ name: security.voter }]
-        arguments: [ "@etraxis.repository.issues" ]
+        arguments: [ "@etraxis.repository.records" ]
 
     etraxis.voter.state:
         class: eTraxis\Voter\StateVoter
@@ -23,7 +23,7 @@ services:
         class: eTraxis\Voter\TemplateVoter
         public: false
         tags: [{ name: security.voter }]
-        arguments: [ "@etraxis.repository.states", "@etraxis.repository.issues" ]
+        arguments: [ "@etraxis.repository.states", "@etraxis.repository.records" ]
 
     etraxis.voter.user:
         class: eTraxis\Voter\UserVoter

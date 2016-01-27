@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Issue watcher.
+ * Record watcher.
  *
  * @ORM\Table(name="tbl_record_subscribes")
  * @ORM\Entity
@@ -22,12 +22,12 @@ use Doctrine\ORM\Mapping as ORM;
 class Watcher
 {
     /**
-     * @var int Watched issue ID.
+     * @var int Watched record ID.
      *
      * @ORM\Column(name="record_id", type="integer")
      * @ORM\Id
      */
-    private $issueId;
+    private $recordId;
 
     /**
      * @var int Watcher ID.
@@ -38,7 +38,7 @@ class Watcher
     private $watcherId;
 
     /**
-     * @var int Initiator ID who set this user watch the issue.
+     * @var int Initiator ID who set this user watch the record.
      *
      * @ORM\Column(name="subscribed_by", type="integer")
      * @ORM\Id
@@ -46,12 +46,12 @@ class Watcher
     private $initiatorId;
 
     /**
-     * @var Issue Watched issue.
+     * @var Record Watched record.
      *
-     * @ORM\ManyToOne(targetEntity="Issue", inversedBy="watchers")
+     * @ORM\ManyToOne(targetEntity="Record", inversedBy="watchers")
      * @ORM\JoinColumn(name="record_id", referencedColumnName="record_id", onDelete="CASCADE")
      */
-    private $issue;
+    private $record;
 
     /**
      * @var User Watcher.
@@ -62,7 +62,7 @@ class Watcher
     private $watcher;
 
     /**
-     * @var User Initiator who set this user watch the issue.
+     * @var User Initiator who set this user watch the record.
      *
      * @ORM\ManyToOne(targetEntity="User")
      * @ORM\JoinColumn(name="subscribed_by", referencedColumnName="account_id", onDelete="CASCADE")
@@ -72,13 +72,13 @@ class Watcher
     /**
      * Standard setter.
      *
-     * @param   int $issueId
+     * @param   int $recordId
      *
      * @return  self
      */
-    public function setIssueId($issueId)
+    public function setRecordId($recordId)
     {
-        $this->issueId = $issueId;
+        $this->recordId = $recordId;
 
         return $this;
     }
@@ -88,9 +88,9 @@ class Watcher
      *
      * @return  int
      */
-    public function getIssueId()
+    public function getRecordId()
     {
-        return $this->issueId;
+        return $this->recordId;
     }
 
     /**
@@ -144,13 +144,13 @@ class Watcher
     /**
      * Standard setter.
      *
-     * @param   Issue $issue
+     * @param   Record $record
      *
      * @return  self
      */
-    public function setIssue(Issue $issue)
+    public function setRecord(Record $record)
     {
-        $this->issue = $issue;
+        $this->record = $record;
 
         return $this;
     }
@@ -158,11 +158,11 @@ class Watcher
     /**
      * Standard getter.
      *
-     * @return  Issue
+     * @return  Record
      */
-    public function getIssue()
+    public function getRecord()
     {
-        return $this->issue;
+        return $this->record;
     }
 
     /**

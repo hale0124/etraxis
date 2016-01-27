@@ -11,14 +11,14 @@
 
 namespace eTraxis\Entity;
 
-class IssueTest extends \PHPUnit_Framework_TestCase
+class RecordTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var Issue */
+    /** @var Record */
     private $object = null;
 
     protected function setUp()
     {
-        $this->object = new Issue();
+        $this->object = new Record();
     }
 
     public function testId()

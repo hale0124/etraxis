@@ -44,11 +44,11 @@ class FilterField
      *
      *          "number"   - minimum integer value (from -1000000000 till +1000000000), if NULL then any
      *          "decimal"  - minimum decimal value (foreign key to "DecimalValue"), if NULL then any
-     *          "string"   - substring of value (foreign key to "StringValue"), if NULL then only issues with empty fields will be shown
-     *          "text"     - substring of value (foreign key to "StringValue"), if NULL then only issues with empty fields will be shown
+     *          "string"   - substring of value (foreign key to "StringValue"), if NULL then only records with empty fields will be shown
+     *          "text"     - substring of value (foreign key to "StringValue"), if NULL then only records with empty fields will be shown
      *          "checkbox" - state of checkbox (0 — unchecked, 1 — checked)
      *          "list"     - integer value of list item, if NULL then any
-     *          "issue"    - issue ID, if NULL then any
+     *          "record"   - record ID, if NULL then any
      *          "date"     - minimum date value (Unix Epoch timestamp), if NULL then any
      *          "duration" - minimum duration value (amount of minutes from 0:00 till 999999:59), if NULL then any
      *
@@ -65,7 +65,7 @@ class FilterField
      *          "text"     - NULL (not used)
      *          "checkbox" - NULL (not used)
      *          "list"     - NULL (not used)
-     *          "issue"    - NULL (not used)
+     *          "record"   - NULL (not used)
      *          "date"     - maximum date value (Unix Epoch timestamp), if NULL then any
      *          "duration" - maximum duration value (amount of minutes from 0:00 till 999999:59), if NULL then any
      *
