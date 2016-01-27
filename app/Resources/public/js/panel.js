@@ -16,7 +16,7 @@
          * @private Constructor.
          */
         _create: function() {
-            this.element.append('<div class="panel-body"></div>');
+            this.element.append('<div class="panel-body"><p>—</p></div>');
             this.element.addClass('ui-widget-content ui-corner-all');
             $('.panel-heading', this.element).addClass('ui-state-default ui-corner-top');
             $('.panel-body', this.element).addClass('ui-corner-bottom');
@@ -94,6 +94,7 @@
          * @param {string} text
          */
         append: function(id, text) {
+            $('.panel-body > p', this.element).remove();
             $('.panel-body', this.element).append(
                 '<a data-id="' + id + '" href="#">' +
                 '<span class="ui-icon ui-icon-none"></span>' +
@@ -108,13 +109,19 @@
          */
         remove: function(id) {
             $('.panel-body a[data-id="' + id + '"]', this.element).remove();
+            if ($('.panel-body > a', this.element).length == 0) {
+                $('.panel-body', this.element).append('<p>—</p>');
+            }
         },
 
         /**
          * Removes all items.
          */
         clear: function() {
-            $('.panel-body', this.element).empty();
+            $('.panel-body', this.element)
+                .empty()
+                .append('<p>—</p>')
+            ;
         },
 
         /**
