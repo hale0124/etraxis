@@ -11,6 +11,7 @@
 
 namespace eTraxis\Repository;
 
+use eTraxis\Entity\Template;
 use eTraxis\Tests\BaseTestCase;
 
 class TemplatesRepositoryTest extends BaseTestCase
@@ -36,5 +37,27 @@ class TemplatesRepositoryTest extends BaseTestCase
         ];
 
         $this->assertEquals($expected, $templates);
+    }
+
+    public function testGetPermissions()
+    {
+        $local  = Template::PERMIT_VIEW_RECORD | Template::PERMIT_ADD_COMMENT;
+        $global = 0;
+
+        /** @var \eTraxis\Entity\Group $group_local */
+        /** @var \eTraxis\Entity\Group $group_global */
+        $group_local  = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Crew']);
+        $group_global = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Nimbus']);
+        $this->assertNotNull($group_local);
+        $this->assertNotNull($group_global);
+
+        /** @var TemplatesRepository $repository */
+        $repository = $this->doctrine->getManager()->getRepository('eTraxis:Template');
+
+        /** @var Template $template */
+        $template = $repository->findOneBy(['name' => 'Delivery']);
+
+        $this->assertEquals($local,  $repository->getPermissions($template->getId(), $group_local->getId()));
+        $this->assertEquals($global, $repository->getPermissions($template->getId(), $group_global->getId()));
     }
 }

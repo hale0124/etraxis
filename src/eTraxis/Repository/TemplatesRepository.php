@@ -27,9 +27,7 @@ class TemplatesRepository extends EntityRepository
      */
     public function getTemplates($id)
     {
-        $repository = $this->getEntityManager()->getRepository('eTraxis:Template');
-
-        $query = $repository->createQueryBuilder('t');
+        $query = $this->createQueryBuilder('t');
 
         $query
             ->select('t.id')
@@ -42,5 +40,32 @@ class TemplatesRepository extends EntityRepository
         ;
 
         return $query->getQuery()->getResult();
+    }
+
+    /**
+     * Returns permissions of specified group for specified template.
+     *
+     * @param   int $templateId Template ID.
+     * @param   int $groupId    Group ID.
+     *
+     * @return  int
+     */
+    public function getPermissions($templateId, $groupId)
+    {
+        $repository = $this->getEntityManager()->getRepository('eTraxis:TemplateGroupPermission');
+
+        $query = $repository->createQueryBuilder('tgp');
+
+        $query
+            ->select('tgp.permission')
+            ->where('tgp.templateId = :template')
+            ->andWhere('tgp.groupId = :group')
+            ->setParameter('template', $templateId)
+            ->setParameter('group', $groupId)
+        ;
+
+        $result = $query->getQuery()->getOneOrNullResult();
+
+        return $result == null ? 0 : $result['permission'];
     }
 }

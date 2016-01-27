@@ -27,9 +27,7 @@ class GroupsRepository extends EntityRepository
      */
     public function getGroups($id)
     {
-        $repository = $this->getEntityManager()->getRepository('eTraxis:Group');
-
-        $query = $repository->createQueryBuilder('g');
+        $query = $this->createQueryBuilder('g');
 
         $query
             ->select('g.id')
@@ -38,6 +36,49 @@ class GroupsRepository extends EntityRepository
             ->where('g.projectId IS NULL')
             ->orWhere('g.projectId = :id')
             ->setParameter('id', $id)
+            ->orderBy('g.name')
+        ;
+
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * Finds all local groups of the specified project.
+     *
+     * @param   int $id Project ID.
+     *
+     * @return  array
+     */
+    public function getLocalGroups($id)
+    {
+        $query = $this->createQueryBuilder('g');
+
+        $query
+            ->select('g.id')
+            ->addSelect('g.projectId')
+            ->addSelect('g.name')
+            ->where('g.projectId = :id')
+            ->setParameter('id', $id)
+            ->orderBy('g.name')
+        ;
+
+        return $query->getQuery()->getResult();
+    }
+
+    /**
+     * Finds all global groups.
+     *
+     * @return  array
+     */
+    public function getGlobalGroups()
+    {
+        $query = $this->createQueryBuilder('g');
+
+        $query
+            ->select('g.id')
+            ->addSelect('g.projectId')
+            ->addSelect('g.name')
+            ->where('g.projectId IS NULL')
             ->orderBy('g.name')
         ;
 

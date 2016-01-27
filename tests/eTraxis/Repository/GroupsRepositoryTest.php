@@ -41,6 +41,49 @@ class GroupsRepositoryTest extends BaseTestCase
         $this->assertEquals($expected, $groups);
     }
 
+    public function testGetLocalGroups()
+    {
+        /** @var \eTraxis\Entity\Project $project */
+        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
+        $this->assertNotNull($project);
+
+        /** @var GroupsRepository $repository */
+        $repository = $this->doctrine->getManager()->getRepository('eTraxis:Group');
+
+        $result = $repository->getLocalGroups($project->getId());
+
+        $groups = array_map(function ($group) {
+            return $group['name'];
+        }, $result);
+
+        $expected = [
+            'Crew',
+            'Managers',
+            'Staff',
+        ];
+
+        $this->assertEquals($expected, $groups);
+    }
+
+    public function testGetGlobalGroups()
+    {
+        /** @var GroupsRepository $repository */
+        $repository = $this->doctrine->getManager()->getRepository('eTraxis:Group');
+
+        $result = $repository->getGlobalGroups();
+
+        $groups = array_map(function ($group) {
+            return $group['name'];
+        }, $result);
+
+        $expected = [
+            'Nimbus',
+            'Planet Express, Inc.',
+        ];
+
+        $this->assertEquals($expected, $groups);
+    }
+
     public function testGetGroupMembersFound()
     {
         /** @var GroupsRepository $repository */

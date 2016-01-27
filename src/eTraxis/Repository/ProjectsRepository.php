@@ -25,9 +25,7 @@ class ProjectsRepository extends EntityRepository
      */
     public function getProjects()
     {
-        $repository = $this->getEntityManager()->getRepository('eTraxis:Project');
-
-        $query = $repository->createQueryBuilder('p');
+        $query = $this->createQueryBuilder('p');
 
         $query
             ->select('p.id')

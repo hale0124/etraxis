@@ -11,6 +11,7 @@
 
 namespace AppBundle\Controller\Admin;
 
+use eTraxis\Collection\SystemRole;
 use eTraxis\Entity\Template;
 use eTraxis\Form\TemplateForm;
 use eTraxis\SimpleBus\Middleware\ValidationException;
@@ -119,6 +120,59 @@ class TemplatesController extends Controller
         catch (HttpException $e) {
             return new Response($e->getMessage(), $e->getStatusCode());
         }
+    }
+
+    /**
+     * Tab with template's permissions.
+     *
+     * @Action\Route("/tab/permissions/{id}", name="admin_tab_template_permissions", requirements={"id"="\d+"})
+     * @Action\Method("GET")
+     *
+     * @param   int $id Template ID.
+     *
+     * @return  Response
+     */
+    public function tabPermissionsAction($id)
+    {
+        /** @var Template $template */
+        $template = $this->getDoctrine()->getRepository('eTraxis:Template')->find($id);
+
+        if (!$this) {
+            throw $this->createNotFoundException();
+        }
+
+        $permissions = [
+            'template.permission.view_records'      => Template::PERMIT_VIEW_RECORD,
+            'template.permission.create_records'    => Template::PERMIT_CREATE_RECORD,
+            'template.permission.edit_records'      => Template::PERMIT_EDIT_RECORD,
+            'template.permission.postpone_records'  => Template::PERMIT_POSTPONE_RECORD,
+            'template.permission.resume_records'    => Template::PERMIT_RESUME_RECORD,
+            'template.permission.reassign_records'  => Template::PERMIT_REASSIGN_RECORD,
+            'template.permission.reopen_records'    => Template::PERMIT_REOPEN_RECORD,
+            'template.permission.add_comments'      => Template::PERMIT_ADD_COMMENT,
+            'template.permission.add_files'         => Template::PERMIT_ADD_FILE,
+            'template.permission.remove_files'      => Template::PERMIT_REMOVE_FILE,
+            'template.permission.private_comments'  => Template::PERMIT_PRIVATE_COMMENT,
+            'template.permission.send_reminders'    => Template::PERMIT_SEND_REMINDER,
+            'template.permission.delete_records'    => Template::PERMIT_DELETE_RECORD,
+            'template.permission.attach_subrecords' => Template::PERMIT_ATTACH_SUBRECORD,
+            'template.permission.detach_subrecords' => Template::PERMIT_DETACH_SUBRECORD,
+        ];
+
+        /** @var \eTraxis\Repository\GroupsRepository $repository */
+        $repository = $this->getDoctrine()->getRepository('eTraxis:Group');
+
+        return $this->render('admin/templates/tab_permissions.html.twig', [
+            'template'    => $template,
+            'locals'      => $repository->getLocalGroups($template->getProjectId()),
+            'globals'     => $repository->getGlobalGroups(),
+            'permissions' => $permissions,
+            'role'        => [
+                'author'      => SystemRole::AUTHOR,
+                'responsible' => SystemRole::RESPONSIBLE,
+                'registered'  => SystemRole::REGISTERED,
+            ],
+        ]);
     }
 
     /**
@@ -306,6 +360,100 @@ class TemplatesController extends Controller
     {
         try {
             $command = new Templates\UnlockTemplateCommand(['id' => $id]);
+            $this->getCommandBus()->handle($command);
+
+            return new JsonResponse();
+        }
+        catch (ValidationException $e) {
+            return new JsonResponse($e->getMessages(), $e->getStatusCode());
+        }
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
+        }
+    }
+
+    /**
+     * Loads permissions of the specified template.
+     *
+     * @Action\Route("/permissions/{id}/{group}", name="admin_load_template_permissions", requirements={"id"="\d+", "group"="[\-]?\d+"})
+     * @Action\Method("GET")
+     *
+     * @param   int $id    Template ID.
+     * @param   int $group Group ID or system role.
+     *
+     * @return  JsonResponse
+     */
+    public function loadPermissionsAction($id, $group = null)
+    {
+        try {
+            /** @var \eTraxis\Repository\TemplatesRepository $repository */
+            $repository = $this->getDoctrine()->getRepository('eTraxis:Template');
+
+            /** @var Template $template */
+            $template = $repository->find($id);
+
+            if (!$template) {
+                throw $this->createNotFoundException();
+            }
+
+            switch ($group) {
+
+                case SystemRole::AUTHOR:
+                    $permissions = $template->getAuthorPermissions();
+                    $permissions |= Template::PERMIT_VIEW_RECORD;
+                    $permissions &= ~Template::PERMIT_CREATE_RECORD;
+                    break;
+
+                case SystemRole::RESPONSIBLE:
+                    $permissions = $template->getResponsiblePermissions();
+                    $permissions |= Template::PERMIT_VIEW_RECORD;
+                    $permissions &= ~Template::PERMIT_CREATE_RECORD;
+                    break;
+
+                case SystemRole::REGISTERED:
+                    $permissions = $template->getRegisteredPermissions();
+                    break;
+
+                default:
+                    $permissions = $repository->getPermissions($id, $group);
+            }
+
+            return new JsonResponse($permissions);
+        }
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
+        }
+    }
+
+    /**
+     * Saves permissions of the specified template.
+     *
+     * @Action\Route("/permissions/{id}/{group}", name="admin_save_template_permissions", requirements={"id"="\d+", "group"="[\-]?\d+"})
+     * @Action\Method("POST")
+     *
+     * @param   Request $request
+     * @param   int     $id    Template ID.
+     * @param   int     $group Group ID or system role.
+     *
+     * @return  JsonResponse
+     */
+    public function savePermissionsAction(Request $request, $id, $group = null)
+    {
+        try {
+            $command = new Templates\RemoveTemplatePermissionsCommand([
+                'id'          => $id,
+                'group'       => $group,
+                'permissions' => PHP_INT_MAX,
+            ]);
+
+            $this->getCommandBus()->handle($command);
+
+            $command = new Templates\AddTemplatePermissionsCommand([
+                'id'          => $id,
+                'group'       => $group,
+                'permissions' => intval($request->request->get('permissions')),
+            ]);
+
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();

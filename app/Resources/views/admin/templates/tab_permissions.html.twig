@@ -1,0 +1,84 @@
+<div class="grid-container grid-parent grid-row">
+
+    <div class="grid-50">
+        <fieldset>
+            <legend>{{ 'groups'|trans }}</legend>
+            <select id="group" size="20" class="grid-100 mobile-grid-100">
+                <option value="{{ role.author }}" selected>{{ 'role.author'|trans }} ({{ 'role'|trans|lower }})</option>
+                <option value="{{ role.responsible }}">{{ 'role.responsible'|trans }} ({{ 'role'|trans|lower }})</option>
+                <option value="{{ role.registered }}">{{ 'role.registered'|trans }} ({{ 'role'|trans|lower }})</option>
+                {% if locals|length > 0 %}
+                    <option disabled></option>
+                    {% for group in locals %}
+                        <option value="{{ group.id }}">{{ group.name }}</option>
+                    {% endfor %}
+                {% endif %}
+                {% if globals|length > 0 %}
+                    <option disabled></option>
+                    {% for group in globals %}
+                        <option value="{{ group.id }}">{{ group.name }} ({{ 'group.global'|trans|lower }})</option>
+                    {% endfor %}
+                {% endif %}
+            </select>
+        </fieldset>
+    </div>
+
+    <div class="grid-50">
+        <fieldset>
+            <legend>{{ 'permissions'|trans }}</legend>
+            {% for key, value in permissions %}
+                <div class="grid-100">
+                    <input type="checkbox" id="{{ key|replace('.', '_') }}" class="permissions" value="{{ value }}">
+                    <label for="{{ key|replace('.', '_') }}">{{ key|trans|lower }}</label>
+                </div>
+            {% endfor %}
+        </fieldset>
+        <div class="grid-row">
+            <button type="button" id="btn-save">{{ 'button.save'|trans }}</button>
+            <button type="button" id="btn-select">{{ 'button.select_all'|trans }}</button>
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+    $(function() {
+
+        // "Groups" list.
+        $('#group').change(function() {
+            var group = $(this).val();
+
+            $.get('{{ path('admin_load_template_permissions', {'id': template.id}) }}/' + group, function(data) {
+                $('#template_permission_view_records, #template_permission_create_records').disable(
+                    group == {{ role.author }} || group == {{ role.responsible }}
+                );
+                {% for key, value in permissions %}
+                $('#{{ key|replace('.', '_') }}').prop('checked', (data & {{ value }}) != 0);
+                {% endfor %}
+            });
+        }).change();
+
+        // "Save" button.
+        $('#btn-save').click(function() {
+            var group = $('#group').val();
+            var permissions = 0;
+
+            $('input[type="checkbox"].permissions').each(function() {
+                if ($(this).prop('checked')) {
+                    permissions |= $(this).val();
+                }
+            });
+
+            $.post('{{ path('admin_save_template_permissions', {'id': template.id}) }}/' + group, {
+                permissions: permissions
+            });
+        });
+
+        // "Select all" button.
+        $('#btn-select').click(function() {
+            $('input[type="checkbox"].permissions:not(:disabled)').prop('checked', true);
+        });
+    });
+
+</script>
