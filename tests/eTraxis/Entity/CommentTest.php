@@ -33,13 +33,13 @@ class CommentTest extends \PHPUnit_Framework_TestCase
         $this->assertEquals($expected, $this->object->getEventId());
     }
 
-    public function testIsConfidential()
+    public function testIsPrivate()
     {
-        $this->object->setConfidential(false);
-        $this->assertFalse($this->object->isConfidential());
+        $this->object->setPrivate(false);
+        $this->assertFalse($this->object->isPrivate());
 
-        $this->object->setConfidential(true);
-        $this->assertTrue($this->object->isConfidential());
+        $this->object->setPrivate(true);
+        $this->assertTrue($this->object->isPrivate());
     }
 
     public function testComment()

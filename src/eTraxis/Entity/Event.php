@@ -29,20 +29,20 @@ use Doctrine\ORM\Mapping as ORM;
 class Event
 {
     // Event types.
-    const RECORD_CREATED       = 1;
-    const RECORD_ASSIGNED      = 2;
-    const RECORD_MODIFIED      = 3;
-    const STATE_CHANGED        = 4;
-    const RECORD_POSTPONED     = 5;
-    const RECORD_RESUMED       = 6;
-    const COMMENT_ADDED        = 7;
-    const FILE_ADDED           = 8;
-    const FILE_REMOVED         = 9;
-    const RECORD_CLONED        = 10;
-    const SUBRECORD_ATTACHED   = 11;
-    const SUBRECORD_DETACHED   = 12;
-    const CONFIDENTIAL_COMMENT = 13;
-    const RECORD_REOPENED      = 14;
+    const RECORD_CREATED     = 1;
+    const RECORD_ASSIGNED    = 2;
+    const RECORD_MODIFIED    = 3;
+    const STATE_CHANGED      = 4;
+    const RECORD_POSTPONED   = 5;
+    const RECORD_RESUMED     = 6;
+    const COMMENT_ADDED      = 7;
+    const FILE_ADDED         = 8;
+    const FILE_REMOVED       = 9;
+    const RECORD_CLONED      = 10;
+    const SUBRECORD_ATTACHED = 11;
+    const SUBRECORD_DETACHED = 12;
+    const PRIVATE_COMMENT    = 13;
+    const RECORD_REOPENED    = 14;
 
     /**
      * @var int Unique ID.
@@ -84,20 +84,20 @@ class Event
     /**
      * @var int Parameter of the event. Depends on event type as following:
      *
-     *          "created"        - ID of first (initial) state of the created record
-     *          "modified"       - NULL (not used)
-     *          "assigned"       - ID of the user, the record has been assigned to
-     *          "postponed"      - Unix Epoch timestamp, when the record should be automatically resumed
-     *          "resumed"        - NULL (not used)
-     *          "reopened"       - ID of new state of the reopened record
-     *          "cloned"         - ID of the original record
-     *          "state-changed"  - ID of the state, the record has been changed to
-     *          "commented"      - NULL (not used)
-     *          "confidential"   - NULL (not used)
-     *          "file-added"     - NULL (not used)
-     *          "file-removed"   - NULL (not used)
-     *          "child-attached" - ID of the attached record
-     *          "child-detached" - ID of the detached record
+     *          "created"             - ID of first (initial) state of the created record
+     *          "modified"            - NULL (not used)
+     *          "assigned"            - ID of the user, the record has been assigned to
+     *          "postponed"           - Unix Epoch timestamp, when the record should be automatically resumed
+     *          "resumed"             - NULL (not used)
+     *          "reopened"            - ID of new state of the reopened record
+     *          "cloned"              - ID of the original record
+     *          "state-changed"       - ID of the state, the record has been changed to
+     *          "commented"           - NULL (not used)
+     *          "commented-privately" - NULL (not used)
+     *          "file-added"          - NULL (not used)
+     *          "file-removed"        - NULL (not used)
+     *          "child-attached"      - ID of the attached record
+     *          "child-detached"      - ID of the detached record
      *
      * @ORM\Column(name="event_param", type="integer", nullable=true)
      */

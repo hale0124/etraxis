@@ -41,11 +41,11 @@ class Comment
     private $eventId;
 
     /**
-     * @var int Whether comment is confidential.
+     * @var int Whether comment is private.
      *
      * @ORM\Column(name="is_confidential", type="integer")
      */
-    private $isConfidential;
+    private $isPrivate;
 
     /**
      * @var string Comment body.
@@ -99,13 +99,13 @@ class Comment
     /**
      * Standard setter.
      *
-     * @param   bool $isConfidential
+     * @param   bool $isPrivate
      *
      * @return  self
      */
-    public function setConfidential($isConfidential)
+    public function setPrivate($isPrivate)
     {
-        $this->isConfidential = $isConfidential ? 1 : 0;
+        $this->isPrivate = $isPrivate ? 1 : 0;
 
         return $this;
     }
@@ -115,9 +115,9 @@ class Comment
      *
      * @return  bool
      */
-    public function isConfidential()
+    public function isPrivate()
     {
-        return (bool) $this->isConfidential;
+        return (bool) $this->isPrivate;
     }
 
     /**
