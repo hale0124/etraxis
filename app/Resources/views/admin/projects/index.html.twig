@@ -9,13 +9,13 @@
                 <div>{{ 'projects'|trans }}</div>
             </div>
         </div>
-        <div class="grid-row mobile-grid-row panel" id="groups">
+        <div class="grid-row mobile-grid-row panel" id="groups" data-sections="2">
             <div class="panel-heading">
                 <span class="ui-icon ui-icon-circle-plus" id="btn-new-group" title="{{ 'button.create'|trans }}"></span>
                 <div>{{ 'groups'|trans }}</div>
             </div>
         </div>
-        <div class="grid-row mobile-grid-row panel" id="templates">
+        <div class="grid-row mobile-grid-row panel hidden" id="templates">
             <div class="panel-heading">
                 <span class="ui-icon ui-icon-circle-plus" id="btn-new-template" title="{{ 'button.create'|trans }}"></span>
                 <div>{{ 'templates'|trans }}</div>
@@ -67,6 +67,9 @@
                         loadTemplates();
                     });
                 }
+                else {
+                    loadGroups();
+                }
             });
 
             // Project edited.
@@ -110,10 +113,7 @@
                 $groups.panel('clear');
                 $.getJSON('{{ path('admin_groups_list') }}/' + (projectId ? projectId : 0), function(data) {
                     $(data).each(function(index, item) {
-                        var caption = item.projectId
-                                ? item.name
-                                : item.name + ' ({{ 'group.global'|trans|lower }})';
-                        $groups.panel('append', item.id, caption);
+                        $groups.panel('append', item.id, item.name, false, item.projectId ? 2 : 1);
                     });
                     if (typeof onLoad === 'function') {
                         onLoad();
@@ -131,10 +131,8 @@
             });
 
             // Group edited.
-            $(document).on('admin.group.edited', function(e, data) {
-                loadGroups(function() {
-                    $groups.trigger('panel.item.click', data);
-                });
+            $(document).on('admin.group.edited', function() {
+                loadGroups();
             });
 
             // Group deleted.
@@ -147,13 +145,10 @@
             $('#btn-new-group').click(function() {
                 var projectId = $projects.panel('selected');
                 eTraxis.modal({
-                    url: '{{ path('admin_dlg_new_group') }}/' + projectId,
+                    url: '{{ path('admin_dlg_new_group') }}/' + (projectId ? projectId : 0),
                     title: '{{ 'group.new'|trans }}',
                     success: function() {
                         var name = $('#group_name').val();
-                        if (!$('#group_project').prop('checked')) {
-                            name += ' ({{ 'group.global'|trans|lower }})';
-                        }
                         loadGroups(function() {
                             $groups.panel('expand');
                             $groups.trigger('panel.item.click', $groups.panel('find', name));
@@ -172,6 +167,12 @@
                 var projectId = $projects.panel('selected');
                 $templates.panel('clear');
                 $.getJSON('{{ path('admin_templates_list') }}/' + (projectId ? projectId : 0), function(data) {
+                    if (data.length == 0) {
+                        $templates.hide();
+                    }
+                    else {
+                        $templates.show();
+                    }
                     $(data).each(function(index, item) {
                         $templates.panel('append', item.id, item.name, item.isLocked);
                     });

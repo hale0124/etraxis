@@ -153,11 +153,19 @@ class GroupsController extends Controller
      */
     public function dlgNewAction($id = null)
     {
-        $form = $this->createForm(GroupExForm::class, ['id' => $id], [
+        $class = $id
+            ? GroupExForm::class
+            : GroupForm::class;
+
+        $form = $this->createForm($class, ['id' => $id], [
             'action' => $this->generateUrl('admin_new_group'),
         ]);
 
-        return $this->render('admin/groups/dlg_group_ex.html.twig', [
+        $template = $id
+            ? 'admin/groups/dlg_group_ex.html.twig'
+            : 'admin/groups/dlg_group.html.twig';
+
+        return $this->render($template, [
             'form' => $form->createView(),
         ]);
     }

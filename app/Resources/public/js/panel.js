@@ -16,12 +16,22 @@
          * @private Constructor.
          */
         _create: function() {
-            this.element.append('<div class="panel-body"><p>—</p></div>');
-            this.element.addClass('ui-widget-content ui-corner-all');
-            $('.panel-heading', this.element).addClass('ui-state-default ui-corner-top');
-            $('.panel-body', this.element).addClass('ui-corner-bottom');
+            var sections = parseInt($(this.element).data('sections'));
 
-            $('.panel-heading', this.element).prepend('<span class="ui-icon ui-icon-circle-triangle-n panel-toggle" title="' + eTraxis.i18n.Collapse + '"></span>');
+            if (!sections || sections < 1) {
+                sections = 1;
+            }
+
+            for (var i = 1; i <= sections;  i++) {
+                this.element.append('<div class="panel-body" data-id="' + i + '"><p>—</p></div>');
+            }
+
+            this.element.addClass('ui-widget-content ui-corner-all');
+
+            $('.panel-heading', this.element)
+                .addClass('ui-state-default ui-corner-top')
+                .prepend('<span class="ui-icon ui-icon-circle-triangle-n panel-toggle" title="' + eTraxis.i18n.Collapse + '"></span>')
+            ;
 
             $('.panel-heading', this.element).on('click', '> div', function() {
                 $('.panel-toggle', $(this).parent()).click();
@@ -93,10 +103,14 @@
          * @param {string} id
          * @param {string} text
          * @param {bool}   highlighted
+         * @param {int}    section
          */
-        append: function(id, text, highlighted) {
-            $('.panel-body > p', this.element).remove();
-            $('.panel-body', this.element).append(
+        append: function(id, text, highlighted, section) {
+            if (!section) {
+                section = 1;
+            }
+            $('.panel-body[data-id="' + section + '"] > p', this.element).remove();
+            $('.panel-body[data-id="' + section + '"]', this.element).append(
                 '<a data-id="' + id + '" href="#"' + (highlighted ? ' class="highlighted">' : '>') +
                 '<span class="ui-icon ui-icon-none"></span>' +
                 '<span class="panel-item">' + text + '</span>' +
