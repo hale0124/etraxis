@@ -53,18 +53,13 @@ class CreateTemplateCommand
     public $description;
 
     /**
-     * @Assert\Any({
-     *     @Assert\Blank(),
-     *     @Assert\Range(min = "1", max = "100")
+     * @Assert\Range(min = "1", max = "100")
      * })
      */
     public $criticalAge;
 
     /**
-     * @Assert\Any({
-     *     @Assert\Blank(),
-     *     @Assert\Range(min = "1", max = "100")
-     * })
+     * @Assert\Range(min = "1", max = "100")
      */
     public $frozenTime;
 
