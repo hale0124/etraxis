@@ -13,8 +13,6 @@ namespace AppBundle\Controller\Admin;
 
 use eTraxis\Entity\Project;
 use eTraxis\Form\ProjectForm;
-use eTraxis\SimpleBus\Middleware\ValidationException;
-use eTraxis\SimpleBus\Projects;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -27,8 +25,9 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  * Projects controller.
  *
  * @Action\Route("/projects")
+ * @Action\Method("GET")
  */
-class ProjectsController extends Controller
+class ProjectsGetController extends Controller
 {
     use ContainerTrait;
 
@@ -36,7 +35,6 @@ class ProjectsController extends Controller
      * Page with list of projects.
      *
      * @Action\Route("/", name="admin_projects")
-     * @Action\Method("GET")
      *
      * @return  Response
      */
@@ -49,7 +47,6 @@ class ProjectsController extends Controller
      * Returns JSON list of projects.
      *
      * @Action\Route("/list", name="admin_projects_list")
-     * @Action\Method("GET")
      *
      * @return  Response|JsonResponse
      */
@@ -70,7 +67,6 @@ class ProjectsController extends Controller
      * Shows specified project.
      *
      * @Action\Route("/{id}", name="admin_view_project", requirements={"id"="\d+"})
-     * @Action\Method("GET")
      *
      * @param   Request $request
      * @param   int     $id Project ID.
@@ -100,7 +96,6 @@ class ProjectsController extends Controller
      * Tab with project's details.
      *
      * @Action\Route("/tab/details/{id}", name="admin_tab_project_details", requirements={"id"="\d+"})
-     * @Action\Method("GET")
      *
      * @param   int $id Project ID.
      *
@@ -133,12 +128,11 @@ class ProjectsController extends Controller
     /**
      * Renders dialog to create new project.
      *
-     * @Action\Route("/dlg/new", name="admin_dlg_new_project")
-     * @Action\Method("GET")
+     * @Action\Route("/new")
      *
      * @return  Response
      */
-    public function dlgNewAction()
+    public function newAction()
     {
         $default = [
             'suspended' => true,
@@ -156,14 +150,13 @@ class ProjectsController extends Controller
     /**
      * Renders dialog to edit specified project.
      *
-     * @Action\Route("/dlg/edit/{id}", name="admin_dlg_edit_project", requirements={"id"="\d+"})
-     * @Action\Method("GET")
+     * @Action\Route("/edit/{id}", requirements={"id"="\d+"})
      *
      * @param   int     $id Project ID.
      *
      * @return  Response
      */
-    public function dlgEditAction($id)
+    public function editAction($id)
     {
         try {
             $project = $this->getDoctrine()->getRepository('eTraxis:Project')->find($id);
@@ -182,95 +175,6 @@ class ProjectsController extends Controller
         }
         catch (HttpException $e) {
             return new Response($e->getMessage(), $e->getStatusCode());
-        }
-    }
-
-    /**
-     * Processes submitted form when new project is being created.
-     *
-     * @Action\Route("/new", name="admin_new_project")
-     * @Action\Method("POST")
-     *
-     * @param   Request $request
-     *
-     * @return  JsonResponse
-     */
-    public function newAction(Request $request)
-    {
-        try {
-            $data = $this->getFormData($request, 'project');
-
-            $command = new Projects\CreateProjectCommand($data);
-            $this->getCommandBus()->handle($command);
-
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
-    }
-
-    /**
-     * Processes submitted form when specified project is being edited.
-     *
-     * @Action\Route("/edit/{id}", name="admin_edit_project", requirements={"id"="\d+"})
-     * @Action\Method("POST")
-     *
-     * @param   Request $request
-     * @param   int     $id Project ID.
-     *
-     * @return  JsonResponse
-     */
-    public function editAction(Request $request, $id)
-    {
-        try {
-            $project = $this->getDoctrine()->getRepository('eTraxis:Project')->find($id);
-
-            if (!$project) {
-                throw $this->createNotFoundException();
-            }
-
-            $data = $this->getFormData($request, 'project', ['id' => $id]);
-
-            $command = new Projects\UpdateProjectCommand($data);
-            $this->getCommandBus()->handle($command);
-
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
-    }
-
-    /**
-     * Deletes specified project.
-     *
-     * @Action\Route("/delete/{id}", name="admin_delete_project", requirements={"id"="\d+"})
-     * @Action\Method("POST")
-     *
-     * @param   int $id Project ID.
-     *
-     * @return  JsonResponse
-     */
-    public function deleteAction($id)
-    {
-        try {
-            $command = new Projects\DeleteProjectCommand(['id' => $id]);
-            $this->getCommandBus()->handle($command);
-
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
 }

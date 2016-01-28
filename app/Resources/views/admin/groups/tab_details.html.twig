@@ -35,7 +35,7 @@
         // "Edit" button.
         $('#btn-edit').click(function() {
             eTraxis.modal({
-                url: '{{ path('admin_dlg_edit_group', {'id': group.id}) }}',
+                url: '{{ path('admin_edit_group', {'id': group.id}) }}',
                 title: '{{ group.name }}',
                 success: function() {
                     $(document).trigger('admin.group.edited', {{ group.id }});

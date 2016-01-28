@@ -13,8 +13,6 @@ namespace AppBundle\Controller\Admin;
 
 use eTraxis\Form\GroupExForm;
 use eTraxis\Form\GroupForm;
-use eTraxis\SimpleBus\Groups;
-use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -27,8 +25,9 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  * Groups controller.
  *
  * @Action\Route("/groups")
+ * @Action\Method("GET")
  */
-class GroupsController extends Controller
+class GroupsGetController extends Controller
 {
     use ContainerTrait;
 
@@ -36,7 +35,6 @@ class GroupsController extends Controller
      * Returns JSON list of groups.
      *
      * @Action\Route("/list/{id}", name="admin_groups_list", requirements={"id"="\d+"})
-     * @Action\Method("GET")
      *
      * @param   int $id Project ID.
      *
@@ -59,7 +57,6 @@ class GroupsController extends Controller
      * Shows specified group.
      *
      * @Action\Route("/{id}", name="admin_view_group", requirements={"id"="\d+"})
-     * @Action\Method("GET")
      *
      * @param   Request $request
      * @param   int     $id Group ID.
@@ -89,7 +86,6 @@ class GroupsController extends Controller
      * Tab with group's details.
      *
      * @Action\Route("/tab/details/{id}", name="admin_tab_group_details", requirements={"id"="\d+"})
-     * @Action\Method("GET")
      *
      * @param   int $id Group ID.
      *
@@ -117,7 +113,6 @@ class GroupsController extends Controller
      * Tab with group's members.
      *
      * @Action\Route("/tab/groups/{id}", name="admin_tab_group_members", requirements={"id"="\d+"})
-     * @Action\Method("GET")
      *
      * @param   int $id Group ID.
      *
@@ -144,14 +139,13 @@ class GroupsController extends Controller
     /**
      * Renders dialog to create new group.
      *
-     * @Action\Route("/dlg/new/{id}", name="admin_dlg_new_group", requirements={"id"="\d+"})
-     * @Action\Method("GET")
+     * @Action\Route("/new/{id}", requirements={"id"="\d+"})
      *
      * @param   int $id Project ID.
      *
      * @return  Response
      */
-    public function dlgNewAction($id = null)
+    public function newAction($id = 0)
     {
         $class = $id
             ? GroupExForm::class
@@ -173,14 +167,13 @@ class GroupsController extends Controller
     /**
      * Renders dialog to edit specified group.
      *
-     * @Action\Route("/dlg/edit/{id}", name="admin_dlg_edit_group", requirements={"id"="\d+"})
-     * @Action\Method("GET")
+     * @Action\Route("/edit/{id}", requirements={"id"="\d+"})
      *
      * @param   int $id Group ID.
      *
      * @return  Response
      */
-    public function dlgEditAction($id)
+    public function editAction($id)
     {
         try {
             $group = $this->getDoctrine()->getRepository('eTraxis:Group')->find($id);
@@ -199,155 +192,6 @@ class GroupsController extends Controller
         }
         catch (HttpException $e) {
             return new Response($e->getMessage(), $e->getStatusCode());
-        }
-    }
-
-    /**
-     * Processes submitted form when new group is being created.
-     *
-     * @Action\Route("/new", name="admin_new_group")
-     * @Action\Method("POST")
-     *
-     * @param   Request $request
-     *
-     * @return  JsonResponse
-     */
-    public function newAction(Request $request)
-    {
-        try {
-            $data = $this->getFormData($request, 'group');
-
-            $command = new Groups\CreateGroupCommand($data);
-            $this->getCommandBus()->handle($command);
-
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
-    }
-
-    /**
-     * Processes submitted form when specified group is being edited.
-     *
-     * @Action\Route("/edit/{id}", name="admin_edit_group", requirements={"id"="\d+"})
-     * @Action\Method("POST")
-     *
-     * @param   Request $request
-     * @param   int     $id Group ID.
-     *
-     * @return  JsonResponse
-     */
-    public function editAction(Request $request, $id)
-    {
-        try {
-            $group = $this->getDoctrine()->getRepository('eTraxis:Group')->find($id);
-
-            if (!$group) {
-                throw $this->createNotFoundException();
-            }
-
-            $data = $this->getFormData($request, 'group', ['id' => $id]);
-
-            $command = new Groups\UpdateGroupCommand($data);
-            $this->getCommandBus()->handle($command);
-
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
-    }
-
-    /**
-     * Deletes specified group.
-     *
-     * @Action\Route("/delete/{id}", name="admin_delete_group", requirements={"id"="\d+"})
-     * @Action\Method("POST")
-     *
-     * @param   int $id Group ID.
-     *
-     * @return  JsonResponse
-     */
-    public function deleteAction($id)
-    {
-        try {
-            $command = new Groups\DeleteGroupCommand(['id' => $id]);
-            $this->getCommandBus()->handle($command);
-
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
-    }
-
-    /**
-     * Adds specified users to the group.
-     *
-     * @Action\Route("/users/add/{id}", name="admin_groups_add_users", requirements={"id"="\d+"})
-     * @Action\Method("POST")
-     *
-     * @param   Request $request
-     * @param   int     $id Group ID.
-     *
-     * @return  JsonResponse
-     */
-    public function addUsersAction(Request $request, $id)
-    {
-        try {
-            $command = new Groups\AddUsersCommand(
-                array_merge(['id' => $id], $request->request->all())
-            );
-
-            $this->getCommandBus()->handle($command);
-
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
-    }
-
-    /**
-     * Removes specified users from the group.
-     *
-     * @Action\Route("/users/remove/{id}", name="admin_groups_remove_users", requirements={"id"="\d+"})
-     * @Action\Method("POST")
-     *
-     * @param   Request $request
-     * @param   int     $id Group ID.
-     *
-     * @return  JsonResponse
-     */
-    public function removeUsersAction(Request $request, $id)
-    {
-        try {
-            $command = new Groups\RemoveUsersCommand(
-                array_merge(['id' => $id], $request->request->all())
-            );
-
-            $this->getCommandBus()->handle($command);
-
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
 }

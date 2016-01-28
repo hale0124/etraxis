@@ -66,7 +66,7 @@
             {% endif %}
 
             eTraxis.modal({
-                url: '{{ path('admin_dlg_edit_user', {'id': user.id}) }}',
+                url: '{{ path('admin_edit_user', {'id': user.id}) }}',
                 title: '{{ user.fullname }}',
                 success: function() {
                     {% if user.id == app.user.id %}

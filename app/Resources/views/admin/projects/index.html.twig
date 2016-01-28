@@ -90,7 +90,7 @@
             // New project.
             $('#btn-new-project').click(function() {
                 eTraxis.modal({
-                    url: '{{ path('admin_dlg_new_project') }}',
+                    url: '{{ path('admin_new_project') }}',
                     title: '{{ 'project.new'|trans }}',
                     success: function() {
                         var name = $('#project_name').val();
@@ -145,7 +145,7 @@
             $('#btn-new-group').click(function() {
                 var projectId = $projects.panel('selected');
                 eTraxis.modal({
-                    url: '{{ path('admin_dlg_new_group') }}/' + (projectId ? projectId : 0),
+                    url: '{{ path('admin_new_group') }}/' + (projectId ? projectId : 0),
                     title: '{{ 'group.new'|trans }}',
                     success: function() {
                         var name = $('#group_name').val();
@@ -209,7 +209,7 @@
             $('#btn-new-template').click(function() {
                 var projectId = $projects.panel('selected');
                 eTraxis.modal({
-                    url: '{{ path('admin_dlg_new_template') }}/' + projectId,
+                    url: '{{ path('admin_new_template') }}/' + projectId,
                     title: '{{ 'template.new'|trans }}',
                     success: function() {
                         var name = $('#template_name').val();

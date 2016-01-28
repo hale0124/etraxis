@@ -14,8 +14,6 @@ namespace AppBundle\Controller\Admin;
 use eTraxis\Collection\SystemRole;
 use eTraxis\Entity\Template;
 use eTraxis\Form\TemplateForm;
-use eTraxis\SimpleBus\Middleware\ValidationException;
-use eTraxis\SimpleBus\Templates;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -28,8 +26,9 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  * Templates controller.
  *
  * @Action\Route("/templates")
+ * @Action\Method("GET")
  */
-class TemplatesController extends Controller
+class TemplatesGetController extends Controller
 {
     use ContainerTrait;
 
@@ -37,7 +36,6 @@ class TemplatesController extends Controller
      * Returns JSON list of templates.
      *
      * @Action\Route("/list/{id}", name="admin_templates_list", requirements={"id"="\d+"})
-     * @Action\Method("GET")
      *
      * @param   int $id Project ID.
      *
@@ -60,7 +58,6 @@ class TemplatesController extends Controller
      * Shows specified template.
      *
      * @Action\Route("/{id}", name="admin_view_template", requirements={"id"="\d+"})
-     * @Action\Method("GET")
      *
      * @param   Request $request
      * @param   int     $id Template ID.
@@ -90,7 +87,6 @@ class TemplatesController extends Controller
      * Tab with template's details.
      *
      * @Action\Route("/tab/details/{id}", name="admin_tab_template_details", requirements={"id"="\d+"})
-     * @Action\Method("GET")
      *
      * @param   int $id Template ID.
      *
@@ -126,7 +122,6 @@ class TemplatesController extends Controller
      * Tab with template's permissions.
      *
      * @Action\Route("/tab/permissions/{id}", name="admin_tab_template_permissions", requirements={"id"="\d+"})
-     * @Action\Method("GET")
      *
      * @param   int $id Template ID.
      *
@@ -178,14 +173,13 @@ class TemplatesController extends Controller
     /**
      * Renders dialog to create new template.
      *
-     * @Action\Route("/dlg/new/{id}", name="admin_dlg_new_template", requirements={"id"="\d+"})
-     * @Action\Method("GET")
+     * @Action\Route("/new/{id}", requirements={"id"="\d+"})
      *
      * @param   int $id Project ID.
      *
      * @return  Response
      */
-    public function dlgNewAction($id = 0)
+    public function newAction($id)
     {
         $form = $this->createForm(TemplateForm::class, null, [
             'action' => $this->generateUrl('admin_new_template', ['id' => $id]),
@@ -199,14 +193,13 @@ class TemplatesController extends Controller
     /**
      * Renders dialog to edit specified template.
      *
-     * @Action\Route("/dlg/edit/{id}", name="admin_dlg_edit_template", requirements={"id"="\d+"})
-     * @Action\Method("GET")
+     * @Action\Route("/edit/{id}", requirements={"id"="\d+"})
      *
      * @param   int $id Template ID.
      *
      * @return  Response
      */
-    public function dlgEditAction($id)
+    public function editAction($id)
     {
         try {
             $template = $this->getDoctrine()->getRepository('eTraxis:Template')->find($id);
@@ -229,159 +222,16 @@ class TemplatesController extends Controller
     }
 
     /**
-     * Processes submitted form when new template is being created.
-     *
-     * @Action\Route("/new/{id}", name="admin_new_template", requirements={"id"="\d+"})
-     * @Action\Method("POST")
-     *
-     * @param   Request $request
-     * @param   int     $id Project ID.
-     *
-     * @return  JsonResponse
-     */
-    public function newAction(Request $request, $id)
-    {
-        try {
-            $data = $this->getFormData($request, 'template', ['project' => $id]);
-
-            $command = new Templates\CreateTemplateCommand($data);
-            $this->getCommandBus()->handle($command);
-
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
-    }
-
-    /**
-     * Processes submitted form when specified template is being edited.
-     *
-     * @Action\Route("/edit/{id}", name="admin_edit_template", requirements={"id"="\d+"})
-     * @Action\Method("POST")
-     *
-     * @param   Request $request
-     * @param   int     $id Template ID.
-     *
-     * @return  JsonResponse
-     */
-    public function editAction(Request $request, $id)
-    {
-        try {
-            $template = $this->getDoctrine()->getRepository('eTraxis:Template')->find($id);
-
-            if (!$template) {
-                throw $this->createNotFoundException();
-            }
-
-            $data = $this->getFormData($request, 'template', ['id' => $id]);
-
-            $command = new Templates\UpdateTemplateCommand($data);
-            $this->getCommandBus()->handle($command);
-
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
-    }
-
-    /**
-     * Deletes specified template.
-     *
-     * @Action\Route("/delete/{id}", name="admin_delete_template", requirements={"id"="\d+"})
-     * @Action\Method("POST")
-     *
-     * @param   int $id Template ID.
-     *
-     * @return  JsonResponse
-     */
-    public function deleteAction($id)
-    {
-        try {
-            $command = new Templates\DeleteTemplateCommand(['id' => $id]);
-            $this->getCommandBus()->handle($command);
-
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
-    }
-
-    /**
-     * Locks specified template.
-     *
-     * @Action\Route("/lock/{id}", name="admin_lock_template", requirements={"id"="\d+"})
-     * @Action\Method("POST")
-     *
-     * @param   int $id Template ID.
-     *
-     * @return  JsonResponse
-     */
-    public function lockAction($id)
-    {
-        try {
-            $command = new Templates\LockTemplateCommand(['id' => $id]);
-            $this->getCommandBus()->handle($command);
-
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
-    }
-
-    /**
-     * Unlocks specified template.
-     *
-     * @Action\Route("/unlock/{id}", name="admin_unlock_template", requirements={"id"="\d+"})
-     * @Action\Method("POST")
-     *
-     * @param   int $id Template ID.
-     *
-     * @return  JsonResponse
-     */
-    public function unlockAction($id)
-    {
-        try {
-            $command = new Templates\UnlockTemplateCommand(['id' => $id]);
-            $this->getCommandBus()->handle($command);
-
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
-    }
-
-    /**
      * Loads permissions of the specified template.
      *
      * @Action\Route("/permissions/{id}/{group}", name="admin_load_template_permissions", requirements={"id"="\d+", "group"="[\-]?\d+"})
-     * @Action\Method("GET")
      *
      * @param   int $id    Template ID.
      * @param   int $group Group ID or system role.
      *
      * @return  JsonResponse
      */
-    public function loadPermissionsAction($id, $group = null)
+    public function loadPermissionsAction($id, $group = 0)
     {
         try {
             /** @var \eTraxis\Repository\TemplatesRepository $repository */
@@ -417,47 +267,6 @@ class TemplatesController extends Controller
             }
 
             return new JsonResponse($permissions);
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
-    }
-
-    /**
-     * Saves permissions of the specified template.
-     *
-     * @Action\Route("/permissions/{id}/{group}", name="admin_save_template_permissions", requirements={"id"="\d+", "group"="[\-]?\d+"})
-     * @Action\Method("POST")
-     *
-     * @param   Request $request
-     * @param   int     $id    Template ID.
-     * @param   int     $group Group ID or system role.
-     *
-     * @return  JsonResponse
-     */
-    public function savePermissionsAction(Request $request, $id, $group = null)
-    {
-        try {
-            $command = new Templates\RemoveTemplatePermissionsCommand([
-                'id'          => $id,
-                'group'       => $group,
-                'permissions' => PHP_INT_MAX,
-            ]);
-
-            $this->getCommandBus()->handle($command);
-
-            $command = new Templates\AddTemplatePermissionsCommand([
-                'id'          => $id,
-                'group'       => $group,
-                'permissions' => intval($request->request->get('permissions')),
-            ]);
-
-            $this->getCommandBus()->handle($command);
-
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
         }
         catch (HttpException $e) {
             return new JsonResponse($e->getMessage(), $e->getStatusCode());
