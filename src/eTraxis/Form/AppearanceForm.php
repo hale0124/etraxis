@@ -17,25 +17,12 @@ use eTraxis\Collection\Timezone;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Appearance form.
  */
 class AppearanceForm extends AbstractType
 {
-    protected $translator;
-
-    /**
-     * Dependency Injection constructor.
-     *
-     * @param   TranslatorInterface $translator
-     */
-    public function __construct($translator)
-    {
-        $this->translator = $translator;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -43,26 +30,26 @@ class AppearanceForm extends AbstractType
     {
         // Locale.
         $builder->add('locale', ChoiceType::class, [
-            'label'             => 'language',
-            'required'          => true,
-            'choices'           => array_flip(Locale::getTranslatedCollection($this->translator)),
-            'choices_as_values' => true,
+            'label'                     => 'language',
+            'required'                  => true,
+            'choices'                   => array_flip(Locale::getCollection()),
+            'choice_translation_domain' => false,
         ]);
 
         // Theme.
         $builder->add('theme', ChoiceType::class, [
-            'label'             => 'theme',
-            'required'          => true,
-            'choices'           => array_flip(Theme::getCollection()),
-            'choices_as_values' => true,
+            'label'                     => 'theme',
+            'required'                  => true,
+            'choices'                   => array_flip(Theme::getCollection()),
+            'choice_translation_domain' => false,
         ]);
 
         // Timezone.
         $builder->add('timezone', ChoiceType::class, [
-            'label'             => 'timezone',
-            'required'          => true,
-            'choices'           => array_flip(Timezone::getCollection()),
-            'choices_as_values' => true,
+            'label'                     => 'timezone',
+            'required'                  => true,
+            'choices'                   => array_flip(Timezone::getCollection()),
+            'choice_translation_domain' => false,
         ]);
     }
 

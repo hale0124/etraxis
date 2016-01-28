@@ -20,14 +20,6 @@ class LocaleTest extends BaseTestCase
         $collection = Locale::getCollection();
 
         $this->assertArrayHasKey('ru', $collection);
-        $this->assertEquals('Russian', $collection['ru']);
-    }
-
-    public function testGetTranslatedCollection()
-    {
-        $collection = Locale::getTranslatedCollection($this->translator);
-
-        $this->assertArrayHasKey('ru', $collection);
         $this->assertEquals('Русский', $collection['ru']);
     }
 }

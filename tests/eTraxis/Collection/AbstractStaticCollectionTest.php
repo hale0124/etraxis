@@ -52,18 +52,6 @@ class AbstractStaticCollectionTest extends BaseTestCase
         $this->assertEquals($expected, TestStaticCollection::getAllValues());
     }
 
-    public function testGetTranslatedCollection()
-    {
-        $expected = [
-            'b_ok'     => 'OK',
-            'b_cancel' => 'Cancel',
-            'b_yes'    => 'Yes',
-            'b_no'     => 'No',
-        ];
-
-        $this->assertEquals($expected, TestStaticCollection::getTranslatedCollection($this->translator));
-    }
-
     public function testGetValue()
     {
         $this->assertEquals('button.ok', TestStaticCollection::getValue('b_ok'));

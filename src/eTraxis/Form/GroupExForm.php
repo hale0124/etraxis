@@ -13,25 +13,12 @@ namespace eTraxis\Form;
 
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Group form extended with project selector.
  */
 class GroupExForm extends GroupForm
 {
-    protected $translator;
-
-    /**
-     * Dependency Injection constructor.
-     *
-     * @param   TranslatorInterface $translator
-     */
-    public function __construct($translator)
-    {
-        $this->translator = $translator;
-    }
-
     /**
      * {@inheritdoc}
      */

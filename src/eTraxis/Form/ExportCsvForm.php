@@ -18,25 +18,12 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 
 /**
  * Export to CSV form.
  */
 class ExportCsvForm extends AbstractType
 {
-    protected $translator;
-
-    /**
-     * Dependency Injection constructor.
-     *
-     * @param   TranslatorInterface $translator
-     */
-    public function __construct($translator)
-    {
-        $this->translator = $translator;
-    }
-
     /**
      * {@inheritdoc}
      */
@@ -49,26 +36,25 @@ class ExportCsvForm extends AbstractType
 
         // Delimiter.
         $builder->add('delimiter', ChoiceType::class, [
-            'label'             => 'delimiter',
-            'required'          => true,
-            'choices'           => array_flip(CsvDelimiter::getTranslatedCollection($this->translator)),
-            'choices_as_values' => true,
+            'label'    => 'delimiter',
+            'required' => true,
+            'choices'  => array_flip(CsvDelimiter::getCollection()),
         ]);
 
         // Encoding.
         $builder->add('encoding', ChoiceType::class, [
-            'label'             => 'encoding',
-            'required'          => true,
-            'choices'           => array_flip(Encoding::getCollection()),
-            'choices_as_values' => true,
+            'label'                     => 'encoding',
+            'required'                  => true,
+            'choices'                   => array_flip(Encoding::getCollection()),
+            'choice_translation_domain' => false,
         ]);
 
         // Line endings.
         $builder->add('tail', ChoiceType::class, [
-            'label'             => 'line_endings',
-            'required'          => true,
-            'choices'           => array_flip(LineEnding::getCollection()),
-            'choices_as_values' => true,
+            'label'                     => 'line_endings',
+            'required'                  => true,
+            'choices'                   => array_flip(LineEnding::getCollection()),
+            'choice_translation_domain' => false,
         ]);
     }
 

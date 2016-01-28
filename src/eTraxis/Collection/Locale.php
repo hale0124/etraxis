@@ -11,8 +11,6 @@
 
 namespace eTraxis\Collection;
 
-use Symfony\Component\Translation\TranslatorInterface;
-
 /**
  * Static collection of locales.
  */
@@ -24,41 +22,27 @@ class Locale extends AbstractStaticCollection
     public static function getCollection()
     {
         return [
-            'bg'    => 'Bulgarian',
-            'cs'    => 'Czech',
-            'de'    => 'German',
+            'bg'    => 'Български',
+            'cs'    => 'Čeština',
+            'de'    => 'Deutsch',
             'en_AU' => 'English (Australia)',
             'en_CA' => 'English (Canada)',
             'en_NZ' => 'English (New Zealand)',
             'en_GB' => 'English (United Kingdom)',
             'en_US' => 'English (United States)',
-            'es'    => 'Spanish',
-            'fr'    => 'French',
-            'hu'    => 'Hungarian',
-            'it'    => 'Italian',
-            'ja'    => 'Japanese',
-            'lv'    => 'Latvian',
-            'nl'    => 'Dutch',
-            'pl'    => 'Polish',
-            'pt_BR' => 'Portuguese',
-            'ro'    => 'Romanian',
-            'ru'    => 'Russian',
-            'sv'    => 'Swedish',
-            'tr'    => 'Turkish',
+            'es'    => 'Español',
+            'fr'    => 'Français',
+            'hu'    => 'Magyar',
+            'it'    => 'Italiano',
+            'ja'    => '日本語',
+            'lv'    => 'Latviešu',
+            'nl'    => 'Nederlands',
+            'pl'    => 'Polski',
+            'pt_BR' => 'Português',
+            'ro'    => 'Română',
+            'ru'    => 'Русский',
+            'sv'    => 'Svenska',
+            'tr'    => 'Türkçe',
         ];
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public static function getTranslatedCollection(TranslatorInterface $translator)
-    {
-        $collection = static::getCollection();
-
-        foreach ($collection as $key => &$value) {
-            $value = $translator->trans('lang', [], null, $key);
-        }
-
-        return $collection;
     }
 }
