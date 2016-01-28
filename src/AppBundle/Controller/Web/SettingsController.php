@@ -70,7 +70,7 @@ class SettingsController extends Controller
     public function appearanceAction(Request $request)
     {
         try {
-            $data = $this->getFormData($request, 'appearance', ['id' => $id]);
+            $data = $this->getFormData($request, 'appearance', ['id' => $this->getUser()->getId()]);
 
             $command = new Users\SaveAppearanceCommand($data);
             $this->getCommandBus()->handle($command);
