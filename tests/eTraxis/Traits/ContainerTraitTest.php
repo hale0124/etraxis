@@ -82,6 +82,30 @@ class ContainerTraitTest extends KernelTestCase
         $this->assertEquals($formdata, $this->object->getFormData($request, 'user'));
     }
 
+    public function testGetFormDataExtra()
+    {
+        /** @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $csrf */
+        $csrf = static::$kernel->getContainer()->get('security.csrf.token_manager');
+        $csrf->refreshToken('form');
+
+        $formdata = [
+            '_token' => $csrf->getToken('form')->getValue(),
+            'fname'  => 'Artem',
+            'lname'  => 'Rodygin',
+        ];
+
+        $request = new Request(['form' => $formdata]);
+
+        $formdata['sex'] = 'male';
+
+        $this->assertEquals($formdata, $this->object->getFormData($request, 'form', ['sex' => 'male']));
+
+        $formdata['lname'] = 'R.';
+        unset($formdata['sex']);
+
+        $this->assertEquals($formdata, $this->object->getFormData($request, 'form', ['lname' => 'R.']));
+    }
+
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedExceptionMessage No data submitted.

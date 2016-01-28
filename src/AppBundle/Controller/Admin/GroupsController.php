@@ -250,8 +250,7 @@ class GroupsController extends Controller
                 throw $this->createNotFoundException();
             }
 
-            $data       = $this->getFormData($request, 'group');
-            $data['id'] = $id;
+            $data = $this->getFormData($request, 'group', ['id' => $id]);
 
             $command = new Groups\UpdateGroupCommand($data);
             $this->getCommandBus()->handle($command);

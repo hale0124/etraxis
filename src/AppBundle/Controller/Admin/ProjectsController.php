@@ -233,8 +233,7 @@ class ProjectsController extends Controller
                 throw $this->createNotFoundException();
             }
 
-            $data       = $this->getFormData($request, 'project');
-            $data['id'] = $id;
+            $data = $this->getFormData($request, 'project', ['id' => $id]);
 
             $command = new Projects\UpdateProjectCommand($data);
             $this->getCommandBus()->handle($command);

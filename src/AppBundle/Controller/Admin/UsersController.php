@@ -337,8 +337,7 @@ class UsersController extends Controller
 
             $em->beginTransaction();
 
-            $data       = $this->getFormData($request, 'user');
-            $data['id'] = $id;
+            $data = $this->getFormData($request, 'user', ['id' => $id]);
 
             if ($user->isLdap()) {
                 $data['username'] = $user->getUsername();

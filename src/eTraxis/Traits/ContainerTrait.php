@@ -28,12 +28,14 @@ trait ContainerTrait
      *
      * @param   Request $request Current request.
      * @param   string  $name    Form name.
+     * @param   array   $extra   Optional extra items to be added to the resulted array.
+     *                           In case of keys conflicts this array overrides submitted data.
      *
      * @return  array Submitted data.
      *
      * @throws  BadRequestHttpException
      */
-    protected function getFormData(Request $request, $name = 'form')
+    protected function getFormData(Request $request, $name = 'form', $extra = [])
     {
         /** @var \Psr\Log\LoggerInterface $logger */
         $logger = $this->container->get('logger');
@@ -67,7 +69,7 @@ trait ContainerTrait
             }
         }
 
-        return $data[$name];
+        return $extra + $data[$name];
     }
 
     /**

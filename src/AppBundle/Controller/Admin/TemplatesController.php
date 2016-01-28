@@ -242,8 +242,7 @@ class TemplatesController extends Controller
     public function newAction(Request $request, $id)
     {
         try {
-            $data            = $this->getFormData($request, 'template');
-            $data['project'] = $id;
+            $data = $this->getFormData($request, 'template', ['project' => $id]);
 
             $command = new Templates\CreateTemplateCommand($data);
             $this->getCommandBus()->handle($command);
@@ -278,8 +277,7 @@ class TemplatesController extends Controller
                 throw $this->createNotFoundException();
             }
 
-            $data       = $this->getFormData($request, 'template');
-            $data['id'] = $id;
+            $data = $this->getFormData($request, 'template', ['id' => $id]);
 
             $command = new Templates\UpdateTemplateCommand($data);
             $this->getCommandBus()->handle($command);
