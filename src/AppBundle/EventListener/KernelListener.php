@@ -35,6 +35,7 @@ class KernelListener implements EventSubscriberInterface
     protected $authentication_utils;
     protected $authorization_checker;
     protected $token_storage;
+    protected $locale;
 
     /**
      * Dependency Injection constructor.
@@ -44,19 +45,22 @@ class KernelListener implements EventSubscriberInterface
      * @param   AuthenticationUtils           $authentication_utils
      * @param   AuthorizationCheckerInterface $authorization_checker
      * @param   TokenStorageInterface         $token_storage
+     * @param   string                        $locale
      */
     public function __construct(
         Router                        $router,
         TranslatorInterface           $translator,
         AuthenticationUtils           $authentication_utils,
         AuthorizationCheckerInterface $authorization_checker,
-        TokenStorageInterface         $token_storage)
+        TokenStorageInterface         $token_storage,
+        $locale)
     {
         $this->router                = $router;
         $this->translator            = $translator;
         $this->authentication_utils  = $authentication_utils;
         $this->authorization_checker = $authorization_checker;
         $this->token_storage         = $token_storage;
+        $this->locale                = $locale;
     }
 
     /**
@@ -82,7 +86,7 @@ class KernelListener implements EventSubscriberInterface
 
         // Override global locale with current user's one.
         if ($request->hasPreviousSession()) {
-            $request->setLocale($request->getSession()->get('_locale', $request->getDefaultLocale()));
+            $request->setLocale($request->getSession()->get('_locale', $this->locale));
         }
     }
 
