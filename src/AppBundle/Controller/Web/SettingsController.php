@@ -77,7 +77,7 @@ class SettingsController extends Controller
 
             $this->get('session')->set('_locale', $command->locale);
 
-            $this->setNotice($this->getTranslator()->trans('changes.saved'));
+            $this->setNotice($this->getTranslator()->trans('changes.saved', [], null, $command->locale));
         }
         catch (ValidationException $e) {
             foreach ($e->getMessages() as $message) {
