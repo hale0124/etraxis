@@ -1,26 +1,38 @@
 # Keep listeners sorted alphabetically.
 services:
 
-    etraxis.listener.authentication:
-        class: AppBundle\EventListener\AuthenticationListener
-        tags: [{ name: kernel.event_subscriber }]
+    etraxis.listener.expired_password:
+        class: AppBundle\EventListener\ExpiredPassword
+        tags:
+            - { name: kernel.event_listener, event: kernel.controller, method: onAction }
         arguments:
-            - "@logger"
-            - "@command_bus"
+            - "@router"
+            - "@security.authorization_checker"
+            - "@security.token_storage"
 
-    etraxis.listener.kernel:
-        class: AppBundle\EventListener\KernelListener
-        tags: [{ name: kernel.event_subscriber }]
+    etraxis.listener.sticky_locale:
+        class: AppBundle\EventListener\StickyLocale
+        tags:
+            - { name: kernel.event_listener, event: security.interactive_login, method: saveLocale }
+            - { name: kernel.event_listener, event: kernel.request,             method: setLocale, priority: 10 }
+        arguments:
+            - "@session"
+            - "%locale%"
+
+    etraxis.listener.unauthorized_ajax_request:
+        class: AppBundle\EventListener\UnauthorizedAjaxRequest
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: onResponse }
         arguments:
             - "@router"
             - "@translator"
             - "@security.authentication_utils"
-            - "@security.authorization_checker"
-            - "@security.token_storage"
-            - "%locale%"
 
-    etraxis.listener.security:
-        class: AppBundle\EventListener\SecurityListener
-        tags: [{ name: kernel.event_subscriber }]
+    etraxis.listener.users_lockout:
+        class: AppBundle\EventListener\UsersLockout
+        tags:
+            - { name: kernel.event_listener, event: security.authentication.success, method: onSuccess }
+            - { name: kernel.event_listener, event: security.authentication.failure, method: onFailure }
         arguments:
-            - "@session"
+            - "@logger"
+            - "@command_bus"

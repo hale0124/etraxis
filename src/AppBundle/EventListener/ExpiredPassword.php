@@ -13,109 +13,43 @@ namespace AppBundle\EventListener;
 
 use eTraxis\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
-use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpKernel\KernelEvents;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
-use Symfony\Component\Translation\TranslatorInterface;
 
 /**
- * Kernel events listener.
+ * Forces user to change password if it's expired.
  */
-class KernelListener implements EventSubscriberInterface
+class ExpiredPassword
 {
     protected $router;
-    protected $translator;
-    protected $authentication_utils;
     protected $authorization_checker;
     protected $token_storage;
-    protected $locale;
 
     /**
      * Dependency Injection constructor.
      *
      * @param   Router                        $router
-     * @param   TranslatorInterface           $translator
-     * @param   AuthenticationUtils           $authentication_utils
      * @param   AuthorizationCheckerInterface $authorization_checker
      * @param   TokenStorageInterface         $token_storage
-     * @param   string                        $locale
      */
     public function __construct(
         Router                        $router,
-        TranslatorInterface           $translator,
-        AuthenticationUtils           $authentication_utils,
         AuthorizationCheckerInterface $authorization_checker,
-        TokenStorageInterface         $token_storage,
-        $locale)
+        TokenStorageInterface         $token_storage)
     {
         $this->router                = $router;
-        $this->translator            = $translator;
-        $this->authentication_utils  = $authentication_utils;
         $this->authorization_checker = $authorization_checker;
         $this->token_storage         = $token_storage;
-        $this->locale                = $locale;
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public static function getSubscribedEvents()
-    {
-        return [
-            KernelEvents::REQUEST    => ['onKernelRequest', 10],
-            KernelEvents::RESPONSE   => 'onKernelResponse',
-            KernelEvents::CONTROLLER => 'onKernelController',
-        ];
-    }
-
-    /**
-     * The REQUEST event occurs at the very beginning of request dispatching.
-     *
-     * @param   GetResponseEvent $event
-     */
-    public function onKernelRequest(GetResponseEvent $event)
-    {
-        $request = $event->getRequest();
-
-        // Override global locale with current user's one.
-        if ($request->hasPreviousSession()) {
-            $request->setLocale($request->getSession()->get('_locale', $this->locale));
-        }
-    }
-
-    /**
-     * The RESPONSE event occurs once a response was created for replying to a request.
-     *
-     * @param   FilterResponseEvent $event
-     */
-    public function onKernelResponse(FilterResponseEvent $event)
-    {
-        $request  = $event->getRequest();
-        $response = $event->getResponse();
-
-        // If user is redirected to login page and it was an AJAX request - override the response.
-        if ($request->isXmlHttpRequest() && $response->isRedirect($this->router->generate('login', [], Router::ABSOLUTE_URL))) {
-
-            $error   = $this->authentication_utils->getLastAuthenticationError();
-            $message = $error === null ? 'security.session_expired' : $error->getMessage();
-
-            $event->setResponse(new Response($this->translator->trans($message), Response::HTTP_UNAUTHORIZED));
-        }
-    }
-
-    /**
-     * The CONTROLLER event occurs once a controller was found for handling a request.
+     * Checks for password is expired before any controller's action is executed.
      *
      * @param   FilterControllerEvent $event
      */
-    public function onKernelController(FilterControllerEvent $event)
+    public function onAction(FilterControllerEvent $event)
     {
         $request     = $event->getRequest();
         $controllers = $event->getController();

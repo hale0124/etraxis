@@ -17,9 +17,9 @@ use Symfony\Component\Security\Core\Event\AuthenticationEvent;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
-class AuthenticationListenerTest extends BaseTestCase
+class UsersLockoutTest extends BaseTestCase
 {
-    public function testAuthenticationSuccess()
+    public function testSuccess()
     {
         $user = $this->findUser('artem');
 
@@ -29,21 +29,21 @@ class AuthenticationListenerTest extends BaseTestCase
 
         $success = new AuthenticationEvent($token);
 
-        $object = new AuthenticationListener($this->logger, $this->command_bus);
+        $object = new UsersLockout($this->logger, $this->command_bus);
 
-        $object->onAuthenticationSuccess($success);
+        $object->onSuccess($success);
         $this->assertTrue($this->findUser('artem')->isAccountNonLocked());
     }
 
-    public function testAuthenticationFailure()
+    public function testFailure()
     {
         $token = new UsernamePasswordToken('artem', 'secret', 'etraxis_provider');
 
         $failure = new AuthenticationFailureEvent($token, new AuthenticationException());
 
-        $object = new AuthenticationListener($this->logger, $this->command_bus);
+        $object = new UsersLockout($this->logger, $this->command_bus);
 
-        $object->onAuthenticationFailure($failure);
+        $object->onFailure($failure);
         $this->assertTrue($this->findUser('artem')->isAccountNonLocked());
     }
 }

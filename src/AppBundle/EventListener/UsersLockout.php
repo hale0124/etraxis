@@ -16,15 +16,13 @@ use eTraxis\SimpleBus\Users\LockUserCommand;
 use eTraxis\SimpleBus\Users\UnlockUserCommand;
 use Psr\Log\LoggerInterface;
 use SimpleBus\Message\Bus\MessageBus;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Symfony\Component\Security\Core\AuthenticationEvents;
 use Symfony\Component\Security\Core\Event\AuthenticationEvent;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
 
 /**
- * Authentication events listener.
+ * Locks/unlocks a user depending on result of its login attempt.
  */
-class AuthenticationListener implements EventSubscriberInterface
+class UsersLockout
 {
     protected $logger;
     protected $command_bus;
@@ -42,22 +40,11 @@ class AuthenticationListener implements EventSubscriberInterface
     }
 
     /**
-     * {@inheritdoc}
-     */
-    public static function getSubscribedEvents()
-    {
-        return [
-            AuthenticationEvents::AUTHENTICATION_SUCCESS => 'onAuthenticationSuccess',
-            AuthenticationEvents::AUTHENTICATION_FAILURE => 'onAuthenticationFailure',
-        ];
-    }
-
-    /**
      * Callback for successful authentication event.
      *
      * @param   AuthenticationEvent $event
      */
-    public function onAuthenticationSuccess(AuthenticationEvent $event)
+    public function onSuccess(AuthenticationEvent $event)
     {
         $token = $event->getAuthenticationToken();
 
@@ -80,7 +67,7 @@ class AuthenticationListener implements EventSubscriberInterface
      *
      * @param   AuthenticationFailureEvent $event
      */
-    public function onAuthenticationFailure(AuthenticationFailureEvent $event)
+    public function onFailure(AuthenticationFailureEvent $event)
     {
         $token = $event->getAuthenticationToken();
 
