@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
- * Templates controller.
+ * Templates "POST" controller.
  *
  * @Action\Route("/templates")
  * @Action\Method("POST")

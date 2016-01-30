@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
- * Projects controller.
+ * Projects "GET" controller.
  *
  * @Action\Route("/projects")
  * @Action\Method("GET")

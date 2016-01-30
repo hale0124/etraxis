@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
- * Projects controller.
+ * Projects "POST" controller.
  *
  * @Action\Route("/projects")
  * @Action\Method("POST")

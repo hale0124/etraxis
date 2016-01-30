@@ -23,7 +23,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
- * Templates controller.
+ * Templates "GET" controller.
  *
  * @Action\Route("/templates")
  * @Action\Method("GET")

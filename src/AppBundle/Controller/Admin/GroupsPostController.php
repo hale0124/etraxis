@@ -21,7 +21,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
- * Groups controller.
+ * Groups "POST" controller.
  *
  * @Action\Route("/groups")
  * @Action\Method("POST")

@@ -22,7 +22,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
- * Groups controller.
+ * Groups "GET" controller.
  *
  * @Action\Route("/groups")
  * @Action\Method("GET")
