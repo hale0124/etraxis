@@ -54,3 +54,6 @@ services:
 
     etraxis.export:
         class: eTraxis\Service\Export\ExportService
+
+    etraxis.export:
+        class: eTraxis\Service\FieldsFactory\FieldsFactoryService
