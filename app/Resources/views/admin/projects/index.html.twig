@@ -47,6 +47,7 @@
             // Loads panel of projects.
             var loadProjects = function(onLoad) {
                 $projects.panel('clear');
+                $templates.hide();
                 $.getJSON('{{ path('admin_projects_list') }}', function(data) {
                     $(data).each(function(index, item) {
                         $projects.panel('append', item.id, item.name, item.isSuspended);
@@ -166,20 +167,20 @@
             var loadTemplates = function(onLoad) {
                 var projectId = $projects.panel('selected');
                 $templates.panel('clear');
-                $.getJSON('{{ path('admin_templates_list') }}/' + (projectId ? projectId : 0), function(data) {
-                    if (data.length == 0) {
-                        $templates.hide();
-                    }
-                    else {
-                        $templates.show();
-                    }
-                    $(data).each(function(index, item) {
-                        $templates.panel('append', item.id, item.name, item.isLocked);
+                if (projectId) {
+                    $templates.show();
+                    $.getJSON('{{ path('admin_templates_list') }}/' + projectId, function(data) {
+                        $(data).each(function(index, item) {
+                            $templates.panel('append', item.id, item.name, item.isLocked);
+                        });
+                        if (typeof onLoad === 'function') {
+                            onLoad();
+                        }
                     });
-                    if (typeof onLoad === 'function') {
-                        onLoad();
-                    }
-                });
+                }
+                else {
+                    $templates.hide();
+                }
             };
 
             // Template clicked.
