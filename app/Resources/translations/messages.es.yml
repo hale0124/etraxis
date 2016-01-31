@@ -140,7 +140,7 @@ state.name: 'Nombre de estado'
 state.abbreviation: Abreviatura
 state.type: 'Tipo de estado'
 state.type.initial: Inicial
-state.type.interim: ~
+state.type.interim: Intermedio
 state.type.final: Final
 state.responsible: Responsable
 state.responsibles: ~
@@ -148,7 +148,7 @@ state.responsible.keep: 'Dejar sin cambios'
 state.responsible.assign: Asignar
 state.responsible.remove: Eliminar
 state.transitions: Transiciones
-state.next_by_default: 'Estado siguiente predeterminado'
+state.next_for: ~
 state.make_initial: 'Hacer inicial'
 state.confirm.delete: '¿Está seguro de eliminar este estado?'
 state.conflict.name: 'Ya existe un Estado con ese nombre.'

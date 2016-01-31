@@ -140,7 +140,7 @@ state.name: 'Stāvokļa nosaukums'
 state.abbreviation: Saīsinājums
 state.type: 'Stāvokļa tips'
 state.type.initial: Sākotnējs
-state.type.interim: ~
+state.type.interim: Vidus
 state.type.final: Beigu
 state.responsible: Atbildīgais
 state.responsibles: ~
@@ -148,7 +148,7 @@ state.responsible.keep: 'Atstāt neizmainītu'
 state.responsible.assign: Adresēt
 state.responsible.remove: Noņemt
 state.transitions: Pārejas
-state.next_by_default: 'Nākošais stāvoklis pēc noklusējuma'
+state.next_for: ~
 state.make_initial: 'Padarīt par sākotnēju'
 state.confirm.delete: 'Vai tiešām vēlaties dzēst šo stāvokli?'
 state.conflict.name: 'Stāvoklis ar tādu nosaukumu jau eksistē.'

@@ -140,7 +140,7 @@ state.name: 'Název stavu'
 state.abbreviation: Zkratka
 state.type: 'Typ stavu'
 state.type.initial: Počáteční
-state.type.interim: ~
+state.type.interim: Standardní
 state.type.final: Koncový
 state.responsible: Odpovědnost
 state.responsibles: ~
@@ -148,7 +148,7 @@ state.responsible.keep: Zachovat
 state.responsible.assign: Přiřadit
 state.responsible.remove: Odstranit
 state.transitions: Přechody
-state.next_by_default: 'Výchozí následující stav'
+state.next_for: ~
 state.make_initial: 'Vytvořit počáteční'
 state.confirm.delete: 'Jste si jisti, že chcete smazat tento stav?'
 state.conflict.name: 'Stav se zadaným jménem již existuje.'

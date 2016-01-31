@@ -140,7 +140,7 @@ state.name: 'Име на условие'
 state.abbreviation: Съкращение
 state.type: 'Тип на условие'
 state.type.initial: Рачален
-state.type.interim: ~
+state.type.interim: Междинен
 state.type.final: Краен
 state.responsible: Отговорен
 state.responsibles: ~
@@ -148,7 +148,7 @@ state.responsible.keep: 'Остави непроменено'
 state.responsible.assign: Определи
 state.responsible.remove: Премахни
 state.transitions: Преходи
-state.next_by_default: 'Следващо условие по подразбиране'
+state.next_for: ~
 state.make_initial: 'Направи начален'
 state.confirm.delete: 'Сигурен ли сте че искате да изтриете това условие?'
 state.conflict.name: 'Вече съществува услови с въведеното име.'

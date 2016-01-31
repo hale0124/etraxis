@@ -140,7 +140,7 @@ state.name: 'Название состояния'
 state.abbreviation: Сокращение
 state.type: 'Тип состояния'
 state.type.initial: Начальное
-state.type.interim: ~
+state.type.interim: Промежуточное
 state.type.final: Финальное
 state.responsible: Ответственный
 state.responsibles: ~
@@ -148,7 +148,7 @@ state.responsible.keep: 'Оставить без изменений'
 state.responsible.assign: Назначить
 state.responsible.remove: Убрать
 state.transitions: Переходы
-state.next_by_default: 'Следующее состояние по умолчанию'
+state.next_for: 'Следующее состояние по умолчанию для'
 state.make_initial: 'Сделать начальным'
 state.confirm.delete: 'Вы уверены, что хотите удалить это состояние?'
 state.conflict.name: 'Состояние с таким названием уже существует.'

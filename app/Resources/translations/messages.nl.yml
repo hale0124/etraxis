@@ -140,7 +140,7 @@ state.name: Statusnaam
 state.abbreviation: Afkorting
 state.type: Statustype
 state.type.initial: Beginstatus
-state.type.interim: ~
+state.type.interim: Tussenstatus
 state.type.final: Eindstatus
 state.responsible: Verantwoordelijkheid
 state.responsibles: ~
@@ -148,7 +148,7 @@ state.responsible.keep: 'Blijft ongewijzigd'
 state.responsible.assign: Toekennen
 state.responsible.remove: Verwijderen
 state.transitions: Overgangen
-state.next_by_default: 'Volgende standaardstatus'
+state.next_for: ~
 state.make_initial: 'Aanmaken beginstatus'
 state.confirm.delete: 'Ben je zeker dat je deze status wilt verwijderen?'
 state.conflict.name: 'Status met ingevoerde naam bestaat reeds.'

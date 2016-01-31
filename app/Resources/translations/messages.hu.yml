@@ -140,7 +140,7 @@ state.name: 'Állapot neve'
 state.abbreviation: Rövidítés
 state.type: 'Állapot típusa'
 state.type.initial: Kezdeti
-state.type.interim: ~
+state.type.interim: Köztes
 state.type.final: Végső
 state.responsible: Felelős
 state.responsibles: ~
@@ -148,7 +148,7 @@ state.responsible.keep: Változatlan
 state.responsible.assign: Hozzárendelés
 state.responsible.remove: Eltávolítás
 state.transitions: Állapotváltás
-state.next_by_default: 'Alapértelmezett következő állapot'
+state.next_for: ~
 state.make_initial: 'Legyen ez a kezdő állapot'
 state.confirm.delete: 'Biztos törölni szeretné az állapotot?'
 state.conflict.name: ~

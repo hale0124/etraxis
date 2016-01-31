@@ -140,7 +140,7 @@ state.name: Statusname
 state.abbreviation: Abkürzung
 state.type: Statusart
 state.type.initial: Startstatus
-state.type.interim: ~
+state.type.interim: Zwischenstatus
 state.type.final: Endstatus
 state.responsible: Bearbeiter(in)
 state.responsibles: ~
@@ -148,7 +148,7 @@ state.responsible.keep: Beibehalten
 state.responsible.assign: Zuordnen
 state.responsible.remove: Abziehen
 state.transitions: Übergänge
-state.next_by_default: 'Standardmäßig nächster Zustand'
+state.next_for: ~
 state.make_initial: 'Als Startstatus'
 state.confirm.delete: 'Möchten Sie diesen Status wirklich löschen?'
 state.conflict.name: 'Ein Status mit diesem Namen existiert bereits.'

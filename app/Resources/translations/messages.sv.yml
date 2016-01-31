@@ -140,7 +140,7 @@ state.name: 'Status namn'
 state.abbreviation: Förkortning
 state.type: 'Status typ'
 state.type.initial: Första
-state.type.interim: ~
+state.type.interim: Mellanliggande
 state.type.final: Slutlig
 state.responsible: Ansvarig
 state.responsibles: ~
@@ -148,7 +148,7 @@ state.responsible.keep: 'Behåll oförändrad'
 state.responsible.assign: Tilldela
 state.responsible.remove: 'Ta bort'
 state.transitions: Övergångar
-state.next_by_default: 'Nästa status som standard'
+state.next_for: ~
 state.make_initial: 'Gör första'
 state.confirm.delete: 'Är du säker på att du vill ta bort den här statusen?'
 state.conflict.name: 'Status med detta namnet finns redan.'

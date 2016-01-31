@@ -140,7 +140,7 @@ state.name: Stare
 state.abbreviation: Prescurtare
 state.type: 'Tipul starii'
 state.type.initial: Initial
-state.type.interim: ~
+state.type.interim: Intermediar
 state.type.final: Final
 state.responsible: Responsabil
 state.responsibles: ~
@@ -148,7 +148,7 @@ state.responsible.keep: 'Nu modifica'
 state.responsible.assign: Asigneaza
 state.responsible.remove: Sterge
 state.transitions: Tranzitii
-state.next_by_default: 'Urmatoarea stare prestabilita'
+state.next_for: ~
 state.make_initial: 'Marcheaza ca initiala'
 state.confirm.delete: 'Sunteti sigur ca doriti sa stergeti aceasta stare?'
 state.conflict.name: 'Numele starii deja exista.'

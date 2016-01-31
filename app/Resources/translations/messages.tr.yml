@@ -140,7 +140,7 @@ state.name: 'Durum adı'
 state.abbreviation: Kısaltma
 state.type: 'Durum tipi'
 state.type.initial: Ilk
-state.type.interim: ~
+state.type.interim: Orta
 state.type.final: Son
 state.responsible: Sorumlu
 state.responsibles: ~
@@ -148,7 +148,7 @@ state.responsible.keep: 'Değişmeden kalan'
 state.responsible.assign: Ata
 state.responsible.remove: Kaldır
 state.transitions: Geçişler
-state.next_by_default: 'Varsayılan olarak sonraki durum'
+state.next_for: ~
 state.make_initial: 'İlk yap'
 state.confirm.delete: 'Bu durumu silmek istediğinizden emin misiniz?'
 state.conflict.name: ~

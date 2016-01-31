@@ -140,7 +140,7 @@ state.name: ステータス名
 state.abbreviation: 略称
 state.type: ステータス形式
 state.type.initial: 初期状態
-state.type.interim: ~
+state.type.interim: 中間状態
 state.type.final: 最終状態
 state.responsible: 対応者
 state.responsibles: ~
@@ -148,7 +148,7 @@ state.responsible.keep: 変更しない
 state.responsible.assign: アサイン
 state.responsible.remove: 除去
 state.transitions: 遷移
-state.next_by_default: デフォルトの「次の状態」
+state.next_for: ~
 state.make_initial: 初期状態にする
 state.confirm.delete: ステータスを削除してよろしいですか？
 state.conflict.name: ~
