@@ -12,9 +12,9 @@
         <fieldset>
             {{ macro.row('group.name'|trans, group.name) }}
             {% if group.global %}
-                {{ macro.row('group.type'|trans, 'group.global'|trans) }}
+                {{ macro.row('group.type'|trans, 'group.global'|trans|lower) }}
             {% else %}
-                {{ macro.row('group.type'|trans, 'group.local'|trans) }}
+                {{ macro.row('group.type'|trans, 'group.local'|trans|lower) }}
                 {{ macro.row('project'|trans, group.project.name) }}
             {% endif %}
             {{ macro.row('description'|trans, group.description) }}

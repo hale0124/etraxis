@@ -28,9 +28,9 @@
             {{ macro.row('user.fullname'|trans, user.fullname) }}
             {{ macro.row('user.email'|trans, user.email) }}
             {{ macro.row('description'|trans, user.description) }}
-            {{ macro.row('permissions'|trans, user.admin ? 'role.administrator'|trans : 'role.user'|trans) }}
+            {{ macro.row('permissions'|trans, user.admin ? 'role.administrator'|trans|lower : 'role.user'|trans|lower) }}
             {% if user.accountNonLocked %}
-                {{ macro.row('user.status'|trans, user.disabled ? 'user.disabled'|trans : 'user.enabled'|trans) }}
+                {{ macro.row('user.status'|trans, user.disabled ? 'user.disabled'|trans|lower : 'user.enabled'|trans|lower) }}
             {% else %}
                 {{ macro.row('user.status'|trans, 'user.locked'|trans|lower) }}
             {% endif %}
