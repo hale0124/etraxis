@@ -9,7 +9,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Service;
+namespace eTraxis\Service\Ldap;
 
 use Psr\Log\LoggerInterface;
 

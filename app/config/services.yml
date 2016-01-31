@@ -30,7 +30,7 @@ services:
             - "%ldap_basedn%"
 
     ldap:
-        class: eTraxis\Service\LdapService
+        class: eTraxis\Service\Ldap\LdapService
         arguments:
             - "@logger"
             - "%ldap_host%"
@@ -40,17 +40,17 @@ services:
             - "%ldap_tls%"
 
     localizer:
-        class: eTraxis\Service\LocalizerService
+        class: eTraxis\Service\Localizer\LocalizerService
         arguments:
             - "@security.token_storage"
             - "%locale%"
 
     etraxis.mailer:
-        class: eTraxis\Service\MailerService
+        class: eTraxis\Service\Mailer\MailerService
         arguments:
             - "@logger"
             - "@twig"
             - "@mailer"
 
     etraxis.export:
-        class: eTraxis\Service\ExportService
+        class: eTraxis\Service\Export\ExportService

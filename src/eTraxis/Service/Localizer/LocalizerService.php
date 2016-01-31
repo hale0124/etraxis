@@ -9,7 +9,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Service;
+namespace eTraxis\Service\Localizer;
 
 use eTraxis\Collection\Locale;
 use eTraxis\Collection\Timezone;

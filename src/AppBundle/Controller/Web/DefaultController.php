@@ -14,7 +14,7 @@ namespace AppBundle\Controller\Web;
 use eTraxis\Collection\CsvDelimiter;
 use eTraxis\Collection\LineEnding;
 use eTraxis\Form\ExportCsvForm;
-use eTraxis\Service\ExportCsvQuery;
+use eTraxis\Service\Export\ExportCsvQuery;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

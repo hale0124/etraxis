@@ -9,7 +9,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Service;
+namespace eTraxis\Service\Export;
 
 use eTraxis\Collection\CsvDelimiter;
 use eTraxis\Collection\LineEnding;

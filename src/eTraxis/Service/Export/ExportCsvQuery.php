@@ -9,7 +9,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Service;
+namespace eTraxis\Service\Export;
 
 use eTraxis\Traits\ObjectInitiationTrait;
 use Symfony\Component\Validator\Constraints as Assert;

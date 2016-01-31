@@ -36,14 +36,14 @@ class ExportServiceTest extends BaseTestCase
 
         $this->expectOutputString(implode("\n", $expected));
 
-        $query = new ExportCsvQuery([
+        $query = new Export\ExportCsvQuery([
             'filename'  => 'test',
             'delimiter' => CsvDelimiter::COMMA,
             'encoding'  => 'UTF-8',
             'tail'      => LineEnding::UNIX,
         ]);
 
-        $service = new ExportService();
+        $service = new Export\ExportService();
 
         /** @var \Symfony\Component\HttpFoundation\StreamedResponse $request */
         $request = $service->exportCsv($query, $data);
@@ -74,14 +74,14 @@ class ExportServiceTest extends BaseTestCase
 
         $this->expectOutputString(implode("\r\n", $expected));
 
-        $query = new ExportCsvQuery([
+        $query = new Export\ExportCsvQuery([
             'filename'  => '.csv',
             'delimiter' => CsvDelimiter::SPACE,
             'encoding'  => 'Windows-1251',
             'tail'      => LineEnding::WINDOWS,
         ]);
 
-        $service = new ExportService();
+        $service = new Export\ExportService();
 
         /** @var \Symfony\Component\HttpFoundation\StreamedResponse $request */
         $request = $service->exportCsv($query, $data);

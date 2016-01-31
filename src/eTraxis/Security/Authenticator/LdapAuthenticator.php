@@ -11,7 +11,7 @@
 
 namespace eTraxis\Security\Authenticator;
 
-use eTraxis\Service\LdapInterface;
+use eTraxis\Service\Ldap\LdapInterface;
 use eTraxis\SimpleBus\Users\RegisterUserCommand;
 use Psr\Log\LoggerInterface;
 use SimpleBus\Message\Bus\MessageBus;

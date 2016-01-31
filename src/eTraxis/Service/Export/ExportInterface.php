@@ -9,7 +9,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Service;
+namespace eTraxis\Service\Export;
 
 use Symfony\Component\HttpFoundation\StreamedResponse;
 

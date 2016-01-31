@@ -13,7 +13,7 @@ namespace AppBundle\Controller\Admin;
 
 use eTraxis\Entity\User;
 use eTraxis\Form\UserForm;
-use eTraxis\Service\ExportCsvQuery;
+use eTraxis\Service\Export\ExportCsvQuery;
 use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
@@ -109,7 +109,7 @@ class UsersGetController extends Controller
                 throw new ValidationException($violations);
             }
 
-            /** @var \eTraxis\Service\ExportInterface $export */
+            /** @var \eTraxis\Service\Export\ExportInterface $export */
             $export = $this->get('etraxis.export');
 
             return $export->exportCsv($query, $users);

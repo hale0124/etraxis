@@ -11,7 +11,7 @@
 
 namespace eTraxis\Security\Authenticator;
 
-use eTraxis\Service\LdapInterface;
+use eTraxis\Service\Ldap\LdapInterface;
 use eTraxis\Tests\BaseTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;

@@ -32,7 +32,7 @@ class MailerServiceTest extends KernelTestCase
         $mailer = static::$kernel->getContainer()->get('mailer');
 
         /** @noinspection PhpParamsInspection */
-        $service = new MailerService($logger, $twig, $mailer);
+        $service = new Mailer\MailerService($logger, $twig, $mailer);
 
         $sent = $service->send(
             'noreply@example.com',

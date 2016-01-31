@@ -18,14 +18,14 @@ use eTraxis\Tests\BaseTestCase;
  */
 class LdapServiceTest extends BaseTestCase
 {
-    /** @var LdapService */
+    /** @var Ldap\LdapService */
     private $object = null;
 
     protected function setUp()
     {
         parent::setUp();
 
-        $this->object = new LdapService($this->logger,
+        $this->object = new Ldap\LdapService($this->logger,
             'ldap.forumsys.com',
             389,
             'CN=read-only-admin,DC=example,DC=com',
@@ -34,11 +34,11 @@ class LdapServiceTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\Service\LdapException
+     * @expectedException \eTraxis\Service\Ldap\LdapException
      */
     public function testConnectionHost()
     {
-        new LdapService($this->logger,
+        new Ldap\LdapService($this->logger,
             'ldap.example.com',
             389,
             'CN=read-only-admin,DC=example,DC=com',
@@ -47,11 +47,11 @@ class LdapServiceTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\Service\LdapException
+     * @expectedException \eTraxis\Service\Ldap\LdapException
      */
     public function testConnectionTls()
     {
-        new LdapService($this->logger,
+        new Ldap\LdapService($this->logger,
             'ldap.forumsys.com',
             389,
             'CN=read-only-admin,DC=example,DC=com',

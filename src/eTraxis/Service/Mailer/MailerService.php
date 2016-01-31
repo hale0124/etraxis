@@ -9,7 +9,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Service;
+namespace eTraxis\Service\Mailer;
 
 use Psr\Log\LoggerInterface;
 use Swift_Mailer;

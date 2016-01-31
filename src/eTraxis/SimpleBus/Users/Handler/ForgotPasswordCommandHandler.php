@@ -11,7 +11,7 @@
 
 namespace eTraxis\SimpleBus\Users\Handler;
 
-use eTraxis\Service\MailerInterface;
+use eTraxis\Service\Mailer\MailerInterface;
 use eTraxis\SimpleBus\Users\ForgotPasswordCommand;
 use Ramsey\Uuid\Uuid;
 use Symfony\Bridge\Doctrine\RegistryInterface;
