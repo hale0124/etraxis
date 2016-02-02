@@ -118,16 +118,19 @@ class CheckRequirementsCommand extends ContainerAwareCommand
             // MySQL
             case 'pdo_mysql':
                 $extensions[] = 'mysqli';
+                $extensions[] = 'pdo_mysql';
                 break;
 
             // PostgreSQL
             case 'pdo_pgsql':
                 $extensions[] = 'pgsql';
+                $extensions[] = 'pdo_pgsql';
                 break;
 
             // Microsoft SQL Server
             case 'pdo_sqlsrv':
                 $extensions[] = 'sqlsrv';
+                $extensions[] = 'pdo_sqlsrv';
                 break;
 
             // Oracle
