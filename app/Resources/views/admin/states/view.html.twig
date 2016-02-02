@@ -1,0 +1,6 @@
+<div class="tabs" id="tabs-state" data-tab="{{ tab }}">
+    <ul>
+        <li><a href="{{ path('admin_tab_state_details', {'id': state.id}) }}">{{ 'state'|trans }}</a></li>
+        <li><a href="{{ path('admin_tab_state_transitions', {'id': state.id}) }}">{{ 'state.transitions'|trans }}</a></li>
+    </ul>
+</div>

@@ -68,4 +68,42 @@ class StateVoterTest extends BaseTestCase
         $this->assertFalse($this->security->isGranted(State::DELETE, $state));
         $this->assertTrue($this->security->isGranted(State::DELETE, $empty));
     }
+
+    public function testInitial()
+    {
+        $this->loginAs('hubert');
+
+        /** @var \eTraxis\Entity\Template $template */
+        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+
+        $state = new State();
+
+        $state
+            ->setName('On the way')
+            ->setAbbreviation('O')
+            ->setType(State::TYPE_INTERIM)
+            ->setResponsible(State::RESPONSIBLE_KEEP)
+            ->setTemplate($template)
+        ;
+
+        $this->doctrine->getManager()->persist($state);
+        $this->doctrine->getManager()->flush();
+
+        /** @var State $initial */
+        $initial = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'New']);
+
+        /** @var State $interim */
+        $interim = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'On the way']);
+
+        /** @var State $final */
+        $final = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
+
+        $this->assertInstanceOf('eTraxis\Entity\State', $initial);
+        $this->assertInstanceOf('eTraxis\Entity\State', $interim);
+        $this->assertInstanceOf('eTraxis\Entity\State', $final);
+
+        $this->assertFalse($this->security->isGranted(State::INITIAL, $initial));
+        $this->assertTrue($this->security->isGranted(State::INITIAL, $interim));
+        $this->assertFalse($this->security->isGranted(State::INITIAL, $final));
+    }
 }

@@ -41,6 +41,7 @@ class StateVoter extends Voter
     {
         $attributes = [
             State::DELETE,
+            State::INITIAL,
         ];
 
         if (in_array($attribute, $attributes)) {
@@ -61,6 +62,9 @@ class StateVoter extends Voter
 
             case State::DELETE:
                 return $this->isDeleteGranted($subject);
+
+            case State::INITIAL:
+                return $this->isInitialGranted($subject);
 
             default:
                 return false;
@@ -89,5 +93,17 @@ class StateVoter extends Voter
 
         // Can't delete if at least one record has been appeared in this state.
         return $count == 0;
+    }
+
+    /**
+     * Checks whether specified state can be set as initial.
+     *
+     * @param   State $subject State.
+     *
+     * @return  bool
+     */
+    protected function isInitialGranted($subject)
+    {
+        return $subject->getType() == State::TYPE_INTERIM;
     }
 }

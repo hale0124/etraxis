@@ -18,4 +18,30 @@ use Doctrine\ORM\EntityRepository;
  */
 class StatesRepository extends EntityRepository
 {
+    /**
+     * Finds all states available for the specified template.
+     *
+     * @param   int $id Template ID.
+     *
+     * @return  array
+     */
+    public function getStates($id)
+    {
+        $query = $this->createQueryBuilder('s');
+
+        $query
+            ->select('s.id')
+            ->addSelect('s.templateId')
+            ->addSelect('s.name')
+            ->addSelect('s.abbreviation')
+            ->addSelect('s.type')
+            ->addSelect('s.responsible')
+            ->where('s.templateId = :id')
+            ->setParameter('id', $id)
+            ->orderBy('s.type')
+            ->addOrderBy('s.name')
+        ;
+
+        return $query->getQuery()->getResult();
+    }
 }

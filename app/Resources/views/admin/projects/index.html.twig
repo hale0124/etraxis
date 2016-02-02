@@ -21,6 +21,12 @@
                 <div>{{ 'templates'|trans }}</div>
             </div>
         </div>
+        <div class="grid-row mobile-grid-row panel hidden" id="states" data-sections="3">
+            <div class="panel-heading">
+                <span class="ui-icon ui-icon-circle-plus" id="btn-new-state" title="{{ 'button.create'|trans }}"></span>
+                <div>{{ 'states'|trans }}</div>
+            </div>
+        </div>
     </div>
 
     <div class="grid-70 mobile-grid-100 grid-row mobile-grid-row">
@@ -39,6 +45,7 @@
             var $projects  = $('#projects');
             var $groups    = $('#groups');
             var $templates = $('#templates');
+            var $states    = $('#states');
 
             //----------------------------------------------------------
             //  Projects.
@@ -167,6 +174,7 @@
             var loadTemplates = function(onLoad) {
                 var projectId = $projects.panel('selected');
                 $templates.panel('clear');
+                $states.hide();
                 if (projectId) {
                     $templates.show();
                     $.getJSON('{{ path('admin_templates_list') }}/' + projectId, function(data) {
@@ -189,6 +197,7 @@
                     $content.load('{{ path('admin_view_template') }}/' + data, function() {
                         $content.initUI();
                         $templates.panel('select', data);
+                        loadStates();
                     });
                 }
             });
@@ -217,6 +226,70 @@
                         loadTemplates(function() {
                             $templates.panel('expand');
                             $templates.trigger('panel.item.click', $templates.panel('find', name));
+                        });
+                        return true;
+                    }
+                });
+            });
+
+            //----------------------------------------------------------
+            //  States.
+            //----------------------------------------------------------
+
+            // Loads panel of states.
+            var loadStates = function(onLoad) {
+                var templateId = $templates.panel('selected');
+                $states.panel('clear');
+                if (templateId) {
+                    $states.show();
+                    $.getJSON('{{ path('admin_states_list') }}/' + templateId, function(data) {
+                        $(data).each(function(index, item) {
+                            $states.panel('append', item.id, item.name, false, item.type);
+                        });
+                        if (typeof onLoad === 'function') {
+                            onLoad();
+                        }
+                    });
+                }
+                else {
+                    $states.hide();
+                }
+            };
+
+            // State clicked.
+            $states.on('panel.item.click', function(e, data) {
+                if (data) {
+                    $content.load('{{ path('admin_view_state') }}/' + data, function() {
+                        $content.initUI();
+                        $states.panel('select', data);
+                    });
+                }
+            });
+
+            // State edited / set as initial.
+            $(document).on('admin.state.edited admin.state.initial', function(e, data) {
+                loadStates(function() {
+                    $states.panel('select', data);
+                });
+            });
+
+            // State deleted.
+            $(document).on('admin.state.deleted', function() {
+                $content.html(null);
+                $templates.trigger('panel.item.click', $templates.panel('selected'));
+            });
+
+            // New state.
+            $('#btn-new-state').click(function() {
+                var templateId = $templates.panel('selected');
+                eTraxis.modal({
+                    url: '{{ path('admin_new_state') }}/' + templateId,
+                    title: '{{ 'state.new'|trans }}',
+                    success: function() {
+                        var name = $('#state_name').val();
+                        loadStates(function() {
+                            $states.panel('expand');
+                            $states.trigger('panel.item.click', $states.panel('find', name));
                         });
                         return true;
                     }

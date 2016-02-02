@@ -34,7 +34,8 @@ class State
     const MAX_ABBREVIATION = 50;
 
     // Actions.
-    const DELETE = 'state.delete';
+    const DELETE  = 'state.delete';
+    const INITIAL = 'state.initial';
 
     // State types.
     const TYPE_INITIAL = 1;

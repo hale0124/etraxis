@@ -24,9 +24,9 @@ class StateResponsible extends AbstractStaticCollection
     public static function getCollection()
     {
         return [
-            State::RESPONSIBLE_KEEP   => 'responsible.keep',
-            State::RESPONSIBLE_ASSIGN => 'responsible.assign',
-            State::RESPONSIBLE_REMOVE => 'responsible.remove',
+            State::RESPONSIBLE_KEEP   => 'state.responsible.keep',
+            State::RESPONSIBLE_ASSIGN => 'state.responsible.assign',
+            State::RESPONSIBLE_REMOVE => 'state.responsible.remove',
         ];
     }
 }

@@ -1,0 +1,69 @@
+{% import 'macro.html.twig' as macro %}
+
+<div class="grid-row">
+    <div class="grid-100">
+        <button type="button" id="btn-edit">{{ 'button.edit'|trans }}</button>
+        {% if can.delete %}
+            <button type="button" id="btn-delete">{{ 'button.delete'|trans }}</button>
+        {% endif %}
+        {% if can.initial %}
+            <button type="button" id="btn-initial">{{ 'state.make_initial'|trans }}</button>
+        {% endif %}
+    </div>
+</div>
+
+<div class="grid-row">
+    <div class="grid-100">
+        <fieldset>
+            {{ macro.row('state.name'|trans, state.name) }}
+            {{ macro.row('state.abbreviation'|trans, state.abbreviation) }}
+            {{ macro.row('state.type'|trans, types[state.type]|trans|lower) }}
+            {% if (state.type != constant('eTraxis\\Entity\\State::TYPE_FINAL')) %}
+                {{ macro.row('state.responsible'|trans, responsibles[state.responsible]|trans|lower) }}
+            {% endif %}
+        </fieldset>
+    </div>
+</div>
+
+<script>
+
+    $(function() {
+
+        var reloadTab = function() {
+            var $tabs = $('#tabs-state');
+            var current = $tabs.tabs('option', 'active');
+            $tabs.tabs('load', current);
+        };
+
+        // "Edit" button.
+        $('#btn-edit').click(function() {
+            eTraxis.modal({
+                url: '{{ path('admin_edit_state', {'id': state.id}) }}',
+                title: '{{ state.name }}',
+                success: function() {
+                    $(document).trigger('admin.state.edited', {{ state.id }});
+                    reloadTab();
+                    return true;
+                }
+            });
+        });
+
+        // "Delete" button.
+        $('#btn-delete').click(function() {
+            eTraxis.confirm('{{ 'button.delete'|trans }}', '{{ 'state.confirm.delete'|trans }}', function() {
+                $.post('{{ path('admin_delete_state', {'id': state.id}) }}', function() {
+                    $(document).trigger('admin.state.deleted', {{ state.id }});
+                });
+            });
+        });
+
+        // "Make initial" button.
+        $('#btn-initial').click(function() {
+            $.post('{{ path('admin_initial_state', {'id': state.id}) }}', function() {
+                $(document).trigger('admin.state.initial', {{ state.id }});
+                reloadTab();
+            });
+        });
+    });
+
+</script>

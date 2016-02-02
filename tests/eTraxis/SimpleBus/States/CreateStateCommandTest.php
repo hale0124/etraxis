@@ -61,6 +61,55 @@ class CreateStateCommandTest extends BaseTestCase
         $this->assertEquals($nextState->getId(), $state->getNextState()->getId());
     }
 
+    public function testInitial()
+    {
+        /** @var \eTraxis\Repository\StatesRepository $repository */
+        $repository = $this->doctrine->getRepository('eTraxis:State');
+
+        /** @var \eTraxis\Entity\State $nextState */
+        $template     = $this->getTemplate();
+        $name         = 'Very first';
+        $abbreviation = 'VF';
+
+        /** @var \eTraxis\Entity\State $initial */
+        $initial = $repository->findOneBy(['name' => 'New']);
+        $this->assertEquals(State::TYPE_INITIAL, $initial->getType());
+
+        /** @var \eTraxis\Entity\State $state */
+        $state = $repository->findOneBy(['name' => $name]);
+
+        $this->assertNull($state);
+
+        $command = new CreateStateCommand([
+            'template'     => $template->getId(),
+            'name'         => $name,
+            'abbreviation' => $abbreviation,
+            'type'         => State::TYPE_INITIAL,
+            'responsible'  => State::RESPONSIBLE_KEEP,
+        ]);
+
+        $this->command_bus->handle($command);
+
+        $state = $repository->findOneBy(['name' => $name]);
+
+        $this->assertInstanceOf('eTraxis\Entity\State', $state);
+        $this->assertEquals($template->getId(), $state->getTemplate()->getId());
+        $this->assertEquals($name, $state->getName());
+        $this->assertEquals($abbreviation, $state->getAbbreviation());
+        $this->assertEquals(State::TYPE_INITIAL, $state->getType());
+
+        $query = $repository->createQueryBuilder('s')
+            ->select('COUNT(s.id)')
+            ->where('s.templateId = :id')
+            ->andWhere('s.type = :initial')
+            ->setParameter('id', $template->getId())
+            ->setParameter('initial', State::TYPE_INITIAL)
+        ;
+
+        $count = $query->getQuery()->getSingleScalarResult();
+        $this->assertEquals(1, $count);
+    }
+
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @expectedExceptionMessage Unknown template.

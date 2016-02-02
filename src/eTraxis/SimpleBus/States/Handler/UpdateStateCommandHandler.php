@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\States\Handler;
 
+use eTraxis\Entity\State;
 use eTraxis\SimpleBus\States\UpdateStateCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -61,7 +62,7 @@ class UpdateStateCommandHandler
     {
         $repository = $this->doctrine->getRepository('eTraxis:State');
 
-        /** @var \eTraxis\Entity\State $entity */
+        /** @var State $entity */
         $entity = $repository->find($command->id);
 
         if (!$entity) {
@@ -72,12 +73,12 @@ class UpdateStateCommandHandler
         $entity
             ->setName($command->name)
             ->setAbbreviation($command->abbreviation)
-            ->setResponsible($command->responsible)
+            ->setResponsible($entity->getType() == State::TYPE_FINAL ? State::RESPONSIBLE_REMOVE : $command->responsible)
         ;
 
         if ($command->nextState) {
 
-            /** @var \eTraxis\Entity\State $nextState */
+            /** @var State $nextState */
             $nextState = $repository->find($command->nextState);
 
             if (!$nextState) {

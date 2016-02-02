@@ -75,7 +75,7 @@ class CreateStateCommandHandler
             ->setName($command->name)
             ->setAbbreviation($command->abbreviation)
             ->setType($command->type)
-            ->setResponsible($command->responsible)
+            ->setResponsible($command->type == State::TYPE_FINAL ? State::RESPONSIBLE_REMOVE : $command->responsible)
         ;
 
         if ($command->nextState) {
@@ -99,7 +99,27 @@ class CreateStateCommandHandler
             throw new BadRequestHttpException($message);
         }
 
-        $this->doctrine->getManager()->persist($entity);
-        $this->doctrine->getManager()->flush();
+        /** @var \Doctrine\ORM\EntityManager $em */
+        $em = $this->doctrine->getManager();
+        $em->beginTransaction();
+
+        if ($command->type == State::TYPE_INITIAL) {
+
+            $query = $em->createQuery('
+                UPDATE eTraxis:State s
+                SET s.type = :interim
+                WHERE s.templateId = :id AND s.type = :initial
+            ');
+
+            $query->execute([
+                'id'      => $command->template,
+                'initial' => State::TYPE_INITIAL,
+                'interim' => State::TYPE_INTERIM,
+            ]);
+        }
+
+        $em->persist($entity);
+        $em->flush();
+        $em->commit();
     }
 }
