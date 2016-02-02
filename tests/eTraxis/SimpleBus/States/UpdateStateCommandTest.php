@@ -49,7 +49,7 @@ class UpdateStateCommandTest extends BaseTestCase
         $this->assertNotNull($state);
         $this->assertEquals('Completed', $state->getName());
         $this->assertEquals('C', $state->getAbbreviation());
-        $this->assertEquals(State::RESPONSIBLE_KEEP, $state->getResponsible());
+        $this->assertEquals(State::RESPONSIBLE_REMOVE, $state->getResponsible());
         $this->assertEquals($state->getNextState()->getId(), $state->getNextState()->getId());
     }
 
