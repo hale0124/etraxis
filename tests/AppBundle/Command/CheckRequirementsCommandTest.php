@@ -39,14 +39,17 @@ class CheckRequirementsCommandTest extends BaseTestCase
 
             case DatabasePlatform::MYSQL:
                 $extensions[] = 'mysqli     OK';
+                $extensions[] = 'pdo_mysql  OK';
                 break;
 
             case DatabasePlatform::POSTGRESQL:
                 $extensions[] = 'pgsql      OK';
+                $extensions[] = 'pdo_pgsql  OK';
                 break;
 
             case DatabasePlatform::MSSQL:
                 $extensions[] = 'sqlsrv     OK';
+                $extensions[] = 'pdo_sqlsrv OK';
                 break;
 
             case DatabasePlatform::ORACLE:
