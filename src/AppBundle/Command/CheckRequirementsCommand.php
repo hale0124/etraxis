@@ -27,7 +27,7 @@ class CheckRequirementsCommand extends ContainerAwareCommand
     {
         $this
             ->setName('etraxis:check:requirements')
-            ->setDescription('Check system requirements')
+            ->setDescription('Checks system requirements')
         ;
     }
 

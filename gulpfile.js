@@ -119,7 +119,7 @@ gulp.task('javascripts:libs', function() {
 });
 
 /**
- * Installs required DataTables translation (JSON) files to "web/js/datatables/" folder.
+ * Converts required DataTables translation (JSON) files into JavaScript files.
  */
 gulp.task('javascripts:datatables', function() {
 
