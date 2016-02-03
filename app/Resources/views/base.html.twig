@@ -52,7 +52,7 @@
         {% for flash in app.session.flashbag.get('notice') %}
             <div class="grid-row">
                 <div class="grid-100">
-                    <div class="highlight">{{ flash|trans }}</div>
+                    <div class="highlight">{{ flash }}</div>
                 </div>
             </div>
         {% endfor %}
@@ -60,7 +60,7 @@
         {% for flash in app.session.flashbag.get('error') %}
             <div class="grid-row">
                 <div class="grid-100">
-                    <div class="error">{{ flash|trans }}</div>
+                    <div class="error">{{ flash }}</div>
                 </div>
             </div>
         {% endfor %}
