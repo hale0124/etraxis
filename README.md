@@ -32,7 +32,7 @@ and more...
 
 ### Documentation
 
-All the documentation can be found at **[etraxis.github.io](http://etraxis.github.io/)**.
+All the documentation can be found at **[etraxis.github.io](https://etraxis.github.io/)**.
 Also there is a "[Support Forum](https://forum.etraxis.com/)" available.
 
 ### Install

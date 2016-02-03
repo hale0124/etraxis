@@ -2,7 +2,13 @@
     "name": "etraxis/etraxis",
     "description": "Records tracking system with ability to set up unlimited number of fully customizable workflows.",
     "type": "project",
+    "homepage": "https://github.com/etraxis/etraxis",
     "license": "GPL-3.0",
+    "support": {
+        "issues" : "https://github.com/etraxis/etraxis/issues",
+        "forum"  : "https://forum.etraxis.com/",
+        "docs"   : "https://etraxis.github.io/"
+    },
     "require": {
         "php"                                  : ">=5.5.9",
         "ext-bcmath"                           : "*",
