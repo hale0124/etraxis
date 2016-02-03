@@ -1,4 +1,4 @@
-lang: Русский
+# This file is auto-generated using Crowdin.
 button.ok: ОК
 button.cancel: Отмена
 button.yes: Да
@@ -143,7 +143,7 @@ state.type.initial: Начальное
 state.type.interim: Промежуточное
 state.type.final: Финальное
 state.responsible: Ответственный
-state.responsibles: ~
+state.responsibles: Ответственные
 state.responsible.keep: 'Оставить без изменений'
 state.responsible.assign: Назначить
 state.responsible.remove: Убрать

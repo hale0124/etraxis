@@ -1,4 +1,4 @@
-lang: Български
+# This file is auto-generated using Crowdin.
 button.ok: OK
 button.cancel: Откажи
 button.yes: Да
@@ -20,7 +20,7 @@ button.select_all: 'Избери всичко'
 required: изискван
 error.not_found: 'Несъществуваща или преместена страница.'
 error.not_authorized: 'Нямате право на достъп до тази страница.'
-changes.saved: ~
+changes.saved: 'Your changes were successfully saved.'
 security.log_in: Вход
 security.log_out: Изход
 security.remember_me: 'Запомни ме'
@@ -70,12 +70,12 @@ security.forgot_password: 'Забравена парола'
 security.forgot_password.email_sent: 'Изпратен ви е e-mail с инструкции за избор на нова парола.'
 security.change_password: 'Промяна на парола'
 security.password_expired: 'Вашата парола е с изтекъл срок или администраторът изисква да я смените.'
-key.tab: ~
-key.space: ~
+key.tab: Tab
+key.space: Space
 comma: Запетая
-colon: ~
+colon: Colon
 semicolon: 'Точка и запетая'
-vertical_line: ~
+vertical_line: 'Vertical line'
 file: Файл
 size: Големина
 delimiter: Delimiter
@@ -118,21 +118,21 @@ template.locked: Заключен
 template.confirm.delete: 'Сигурен ли сте че искате да изтриете този темплейт?'
 template.conflict.name: 'Вече същестува темплейт с въведеното име.'
 template.conflict.prefix: 'Вече същестува темплейт с въведеното представка.'
-template.permission.view_records: ~
-template.permission.create_records: ~
-template.permission.edit_records: ~
-template.permission.postpone_records: ~
-template.permission.resume_records: ~
-template.permission.reassign_records: ~
-template.permission.reopen_records: ~
-template.permission.add_comments: ~
-template.permission.add_files: ~
-template.permission.remove_files: ~
-template.permission.private_comments: ~
-template.permission.send_reminders: ~
-template.permission.delete_records: ~
-template.permission.attach_subrecords: ~
-template.permission.detach_subrecords: ~
+template.permission.view_records: 'View records'
+template.permission.create_records: 'Create records'
+template.permission.edit_records: 'Edit records'
+template.permission.postpone_records: 'Postpone records'
+template.permission.resume_records: 'Resume records'
+template.permission.reassign_records: 'Reassign records'
+template.permission.reopen_records: 'Reopen records'
+template.permission.add_comments: 'Add comments'
+template.permission.add_files: 'Add files'
+template.permission.remove_files: 'Remove files'
+template.permission.private_comments: 'Add/read private comments'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_records: 'Delete records'
+template.permission.attach_subrecords: 'Attach subrecords'
+template.permission.detach_subrecords: 'Detach subrecords'
 state: Условие
 states: Условия
 state.new: 'Ново условие'
@@ -143,12 +143,12 @@ state.type.initial: Рачален
 state.type.interim: Междинен
 state.type.final: Краен
 state.responsible: Отговорен
-state.responsibles: ~
+state.responsibles: Responsibles
 state.responsible.keep: 'Остави непроменено'
 state.responsible.assign: Определи
 state.responsible.remove: Премахни
 state.transitions: Преходи
-state.next_for: ~
+state.next_for: 'Next state by default for'
 state.make_initial: 'Направи начален'
 state.confirm.delete: 'Сигурен ли сте че искате да изтриете това условие?'
 state.conflict.name: 'Вече съществува услови с въведеното име.'
@@ -157,5 +157,5 @@ field.conflict.name: 'Вече съществува поле с въведено
 field.min_max_values: 'Mаксималната стойност трябва да е по-голяма от минималната.'
 field.default_value: 'Стойностите по подразбиране трябва да са в порядъка на %min% до %max%.'
 field.value_range: 'Стойност от "%name%" трябва да бъде в подръдъка от %min% до %max%.'
-list.conflict.key: ~
-list.conflict.value: ~
+list.conflict.key: 'Item with entered key already exists.'
+list.conflict.value: 'Item with entered value already exists.'

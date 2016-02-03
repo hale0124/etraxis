@@ -1,4 +1,4 @@
-lang: Magyar
+# This file is auto-generated using Crowdin.
 button.ok: OK
 button.cancel: Mégsem
 button.yes: Igen
@@ -69,13 +69,13 @@ password.cant_change: 'A fiók külső azonosítási forrást használ. A jelsz�
 security.forgot_password: 'Elfelejtett jelszó'
 security.forgot_password.email_sent: 'Egy e-mail üzenetben postáztunk Önnek egy leírást az új jelszó beállításáról.'
 security.change_password: 'Jelszó megváltoztatása'
-security.password_expired: ~
-key.tab: ~
-key.space: ~
-comma: ~
-colon: ~
-semicolon: ~
-vertical_line: ~
+security.password_expired: 'Your password has expired or the administrator requires you to change it.'
+key.tab: Tab
+key.space: Space
+comma: Comma
+colon: Colon
+semicolon: Semicolon
+vertical_line: 'Vertical line'
 file: Fájl
 size: Méret
 delimiter: Mezőelválasztó
@@ -117,22 +117,22 @@ template.active: Aktív
 template.locked: Zárolt
 template.confirm.delete: 'Biztos törölni szeretné a sablont?'
 template.conflict.name: 'Már létezik ilyen névvel ellátott sablon.'
-template.conflict.prefix: ~
-template.permission.view_records: ~
-template.permission.create_records: ~
-template.permission.edit_records: ~
-template.permission.postpone_records: ~
-template.permission.resume_records: ~
-template.permission.reassign_records: ~
-template.permission.reopen_records: ~
-template.permission.add_comments: ~
-template.permission.add_files: ~
-template.permission.remove_files: ~
-template.permission.private_comments: ~
-template.permission.send_reminders: ~
-template.permission.delete_records: ~
-template.permission.attach_subrecords: ~
-template.permission.detach_subrecords: ~
+template.conflict.prefix: 'Template with entered prefix already exists.'
+template.permission.view_records: 'View records'
+template.permission.create_records: 'Create records'
+template.permission.edit_records: 'Edit records'
+template.permission.postpone_records: 'Postpone records'
+template.permission.resume_records: 'Resume records'
+template.permission.reassign_records: 'Reassign records'
+template.permission.reopen_records: 'Reopen records'
+template.permission.add_comments: 'Add comments'
+template.permission.add_files: 'Add files'
+template.permission.remove_files: 'Remove files'
+template.permission.private_comments: 'Add/read private comments'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_records: 'Delete records'
+template.permission.attach_subrecords: 'Attach subrecords'
+template.permission.detach_subrecords: 'Detach subrecords'
 state: Állapot
 states: Állapotok
 state.new: 'Új állapot'
@@ -143,19 +143,19 @@ state.type.initial: Kezdeti
 state.type.interim: Köztes
 state.type.final: Végső
 state.responsible: Felelős
-state.responsibles: ~
+state.responsibles: Responsibles
 state.responsible.keep: Változatlan
 state.responsible.assign: Hozzárendelés
 state.responsible.remove: Eltávolítás
 state.transitions: Állapotváltás
-state.next_for: ~
+state.next_for: 'Next state by default for'
 state.make_initial: 'Legyen ez a kezdő állapot'
 state.confirm.delete: 'Biztos törölni szeretné az állapotot?'
-state.conflict.name: ~
-state.conflict.abbreviation: ~
+state.conflict.name: 'State with entered name already exists.'
+state.conflict.abbreviation: 'State with entered abbreviation already exists.'
 field.conflict.name: 'Már létezik ilyen névvel ellátott mező.'
 field.min_max_values: 'A maximum értéknek nagyobbnak kell lennie, mint 1.'
 field.default_value: 'Az alapértelmezett érték %min% és %max% közé kell, hogy essen.'
 field.value_range: 'A(z) "%name%" értéke %min% és %max% közé kell, hogy essen.'
-list.conflict.key: ~
-list.conflict.value: ~
+list.conflict.key: 'Item with entered key already exists.'
+list.conflict.value: 'Item with entered value already exists.'

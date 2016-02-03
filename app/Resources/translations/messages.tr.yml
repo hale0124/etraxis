@@ -1,4 +1,4 @@
-lang: Türkçe
+# This file is auto-generated using Crowdin.
 button.ok: Tamam
 button.cancel: Vazgeç
 button.yes: Evet
@@ -20,7 +20,7 @@ button.select_all: 'Tümünü seç'
 required: gerekli
 error.not_found: 'Erişmek istediğiniz sayfa mevcut değil ya da kaldırılmış.'
 error.not_authorized: 'Bu sayfaya erişme yetkiniz yok.'
-changes.saved: ~
+changes.saved: 'Your changes were successfully saved.'
 security.log_in: Giriş
 security.log_out: Çıkış
 security.remember_me: 'Sürekli bağlı kal'
@@ -70,12 +70,12 @@ security.forgot_password: 'Parolamı unuttum'
 security.forgot_password.email_sent: 'Yeni parola seçme talimatlarını içeren e-postanız gönderildi.'
 security.change_password: 'Parolayı değiştir'
 security.password_expired: 'Parolanızın süresi dolmuş veya yönetici parolanızı değiştirmenizi.'
-key.tab: ~
-key.space: ~
-comma: ~
-colon: ~
-semicolon: ~
-vertical_line: ~
+key.tab: Tab
+key.space: Space
+comma: Comma
+colon: Colon
+semicolon: Semicolon
+vertical_line: 'Vertical line'
 file: Dosya
 size: Boyut
 delimiter: Sınırlayıcı
@@ -116,23 +116,23 @@ template.status: Durum
 template.active: Aktif
 template.locked: Kilitli
 template.confirm.delete: 'Bu şablonu silmek istediğinizden emin misiniz?'
-template.conflict.name: ~
-template.conflict.prefix: ~
-template.permission.view_records: ~
-template.permission.create_records: ~
-template.permission.edit_records: ~
-template.permission.postpone_records: ~
-template.permission.resume_records: ~
-template.permission.reassign_records: ~
-template.permission.reopen_records: ~
-template.permission.add_comments: ~
-template.permission.add_files: ~
-template.permission.remove_files: ~
-template.permission.private_comments: ~
-template.permission.send_reminders: ~
-template.permission.delete_records: ~
-template.permission.attach_subrecords: ~
-template.permission.detach_subrecords: ~
+template.conflict.name: 'Template with entered name already exists.'
+template.conflict.prefix: 'Template with entered prefix already exists.'
+template.permission.view_records: 'View records'
+template.permission.create_records: 'Create records'
+template.permission.edit_records: 'Edit records'
+template.permission.postpone_records: 'Postpone records'
+template.permission.resume_records: 'Resume records'
+template.permission.reassign_records: 'Reassign records'
+template.permission.reopen_records: 'Reopen records'
+template.permission.add_comments: 'Add comments'
+template.permission.add_files: 'Add files'
+template.permission.remove_files: 'Remove files'
+template.permission.private_comments: 'Add/read private comments'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_records: 'Delete records'
+template.permission.attach_subrecords: 'Attach subrecords'
+template.permission.detach_subrecords: 'Detach subrecords'
 state: Durum
 states: Durumlar
 state.new: 'Yeni durum'
@@ -143,19 +143,19 @@ state.type.initial: Ilk
 state.type.interim: Orta
 state.type.final: Son
 state.responsible: Sorumlu
-state.responsibles: ~
+state.responsibles: Responsibles
 state.responsible.keep: 'Değişmeden kalan'
 state.responsible.assign: Ata
 state.responsible.remove: Kaldır
 state.transitions: Geçişler
-state.next_for: ~
+state.next_for: 'Next state by default for'
 state.make_initial: 'İlk yap'
 state.confirm.delete: 'Bu durumu silmek istediğinizden emin misiniz?'
-state.conflict.name: ~
-state.conflict.abbreviation: ~
+state.conflict.name: 'State with entered name already exists.'
+state.conflict.abbreviation: 'State with entered abbreviation already exists.'
 field.conflict.name: 'Girilen adda bir alan zaten var.'
 field.min_max_values: 'En yüksek değer, en düşük değerden daha büyük olmalıdır.'
 field.default_value: 'Varsayılan değer, %min% ile %max% arasında olmalıdır.'
 field.value_range: '"%name%" değeri %min% ile %max% arasında olmalıdır.'
-list.conflict.key: ~
-list.conflict.value: ~
+list.conflict.key: 'Item with entered key already exists.'
+list.conflict.value: 'Item with entered value already exists.'

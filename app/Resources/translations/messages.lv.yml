@@ -1,4 +1,4 @@
-lang: Latviešu
+# This file is auto-generated using Crowdin.
 button.ok: Labi
 button.cancel: Atcelt
 button.yes: Jā
@@ -20,7 +20,7 @@ button.select_all: 'Atlasīt visu'
 required: obligāts
 error.not_found: 'Lapa, ko Jūs mēģināt atvērt, neeksistē vai ir pārvietota.'
 error.not_authorized: 'Jums nav tiesību piekļūt šai lapai.'
-changes.saved: ~
+changes.saved: 'Your changes were successfully saved.'
 security.log_in: Ieiet
 security.log_out: Iziet
 security.remember_me: 'Atcerēties mani'
@@ -69,13 +69,13 @@ password.cant_change: 'Šis konts izmanto ārēju pilnvarošanas avotu. Nav iesp
 security.forgot_password: 'Nozaudēta parole'
 security.forgot_password.email_sent: 'Jums tika nosūtīts e-pasts ar instrukcijām, kā izveidot jaunu paroli.'
 security.change_password: 'Mainīt paroli'
-security.password_expired: ~
-key.tab: ~
-key.space: ~
-comma: ~
-colon: ~
-semicolon: ~
-vertical_line: ~
+security.password_expired: 'Your password has expired or the administrator requires you to change it.'
+key.tab: Tab
+key.space: Space
+comma: Comma
+colon: Colon
+semicolon: Semicolon
+vertical_line: 'Vertical line'
 file: Datne
 size: Izmērs
 delimiter: Norobežotājs
@@ -118,21 +118,21 @@ template.locked: Bloķēts
 template.confirm.delete: 'Vai tiešām vēlaties dzēst šo lekālu?'
 template.conflict.name: 'Lekāls ar tādu nosaukumu jau eksistē.'
 template.conflict.prefix: 'Lekāls ar tādu priedēkli jau eksistē.'
-template.permission.view_records: ~
-template.permission.create_records: ~
-template.permission.edit_records: ~
-template.permission.postpone_records: ~
-template.permission.resume_records: ~
-template.permission.reassign_records: ~
-template.permission.reopen_records: ~
-template.permission.add_comments: ~
-template.permission.add_files: ~
-template.permission.remove_files: ~
-template.permission.private_comments: ~
-template.permission.send_reminders: ~
-template.permission.delete_records: ~
-template.permission.attach_subrecords: ~
-template.permission.detach_subrecords: ~
+template.permission.view_records: 'View records'
+template.permission.create_records: 'Create records'
+template.permission.edit_records: 'Edit records'
+template.permission.postpone_records: 'Postpone records'
+template.permission.resume_records: 'Resume records'
+template.permission.reassign_records: 'Reassign records'
+template.permission.reopen_records: 'Reopen records'
+template.permission.add_comments: 'Add comments'
+template.permission.add_files: 'Add files'
+template.permission.remove_files: 'Remove files'
+template.permission.private_comments: 'Add/read private comments'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_records: 'Delete records'
+template.permission.attach_subrecords: 'Attach subrecords'
+template.permission.detach_subrecords: 'Detach subrecords'
 state: Stāvoklis
 states: Stāvokļi
 state.new: 'Jauns stāvoklis'
@@ -143,12 +143,12 @@ state.type.initial: Sākotnējs
 state.type.interim: Vidus
 state.type.final: Beigu
 state.responsible: Atbildīgais
-state.responsibles: ~
+state.responsibles: Responsibles
 state.responsible.keep: 'Atstāt neizmainītu'
 state.responsible.assign: Adresēt
 state.responsible.remove: Noņemt
 state.transitions: Pārejas
-state.next_for: ~
+state.next_for: 'Next state by default for'
 state.make_initial: 'Padarīt par sākotnēju'
 state.confirm.delete: 'Vai tiešām vēlaties dzēst šo stāvokli?'
 state.conflict.name: 'Stāvoklis ar tādu nosaukumu jau eksistē.'
@@ -157,5 +157,5 @@ field.conflict.name: 'Atribūts ar tādu nosaukumu jau eksistē.'
 field.min_max_values: 'Maksimālajam lielumam jābūt lielākam par minimālo.'
 field.default_value: 'Noklusējuma nozīmei jąbūt no %min% līdz %max% apgabalā.'
 field.value_range: '"%name%" lauciņa lielumam jābūt no %min% līdz %max% apgabalā.'
-list.conflict.key: ~
-list.conflict.value: ~
+list.conflict.key: 'Item with entered key already exists.'
+list.conflict.value: 'Item with entered value already exists.'

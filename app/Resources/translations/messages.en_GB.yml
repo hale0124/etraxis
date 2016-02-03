@@ -1,1 +1,161 @@
-lang: English (United Kingdom)
+# This file is auto-generated using Crowdin.
+button.ok: OK
+button.cancel: Cancel
+button.yes: 'Yes'
+button.no: 'No'
+button.save: Save
+button.close: Close
+button.back: Back
+button.next: Next
+button.create: Create
+button.edit: Edit
+button.delete: Delete
+button.disable: Disable
+button.enable: Enable
+button.lock: Lock
+button.unlock: Unlock
+button.export: Export
+button.import: Import
+button.select_all: 'Select all'
+required: required
+error.not_found: 'The page you were trying to access doesn''t exist or has been removed.'
+error.not_authorized: 'You are not authorized to access this page.'
+changes.saved: 'Your changes were successfully saved.'
+security.log_in: 'Log in'
+security.log_out: 'Log out'
+security.remember_me: 'Remember me'
+security.session_expired: 'Your session has expired. Please log in again.'
+security.confirm_exit: 'Are you sure you want exit?'
+security.authentication: Authentication
+'Bad credentials.': 'Unknown username or bad password.'
+'User account is disabled.': 'Account is disabled.'
+'User account is locked.': 'Account is locked.'
+settings: Settings
+appearance: Appearance
+administration: Administration
+users: Users
+user.new: 'New user'
+user.username: 'User name'
+user.fullname: 'Full name'
+user.email: Email
+user.password: Password
+user.current_password: 'Current password'
+user.new_password: 'New password'
+user.password_confirmation: Confirmation
+user.change_password: 'Change password'
+user.status: Status
+user.enabled: Enabled
+user.disabled: Disabled
+user.locked: Locked
+permissions: Permissions
+role: Role
+role.administrator: Administrator
+role.user: User
+role.author: Author
+role.responsible: Responsible
+role.registered: Registered
+description: Description
+language: Language
+theme: Theme
+timezone: Timezone
+user.confirm.delete: 'Are you sure you want delete this account?'
+user.conflict.username: 'Account with entered user name already exists.'
+user.invalid.username: 'Invalid user name.'
+password.too_short: 'Password should be at least %length% characters length.'
+passwords.dont_match: 'Passwords do not match.'
+password.changed: 'Password was successfully updated.'
+password.wrong: 'Wrong password.'
+password.cant_change: 'This account uses an external authentication source. Impossible to change the password.'
+security.forgot_password: 'Forgot password'
+security.forgot_password.email_sent: 'An email with instructions to choose a new password has been sent to you.'
+security.change_password: 'Change password'
+security.password_expired: 'Your password has expired or the administrator requires you to change it.'
+key.tab: Tab
+key.space: Space
+comma: Comma
+colon: Colon
+semicolon: Semicolon
+vertical_line: 'Vertical line'
+file: File
+size: Size
+delimiter: Delimiter
+encoding: Encoding
+line_endings: 'Line endings'
+group: Group
+groups: Groups
+others: Others
+allowed: Allowed
+members: Members
+membership: Membership
+group.new: 'New group'
+group.name: 'Group name'
+group.type: 'Group type'
+group.global: Global
+group.local: Local
+group.confirm.delete: 'Are you sure you want delete this group?'
+group.conflict.name: 'Group with entered name already exists.'
+project: Project
+projects: Projects
+project.new: 'New project'
+project.name: 'Project name'
+project.start_time: 'Start time'
+project.status: Status
+project.active: Active
+project.suspended: Suspended
+project.confirm.delete: 'Are you sure you want delete this project?'
+project.conflict.name: 'Project with entered name already exists.'
+template: Template
+templates: Templates
+template.new: 'New template'
+template.name: 'Template name'
+template.prefix: Prefix
+template.critical_age: 'Critical age'
+template.frozen_time: 'Frozen time'
+template.guest_access: 'Guest access'
+template.status: Status
+template.active: Active
+template.locked: Locked
+template.confirm.delete: 'Are you sure you want delete this template?'
+template.conflict.name: 'Template with entered name already exists.'
+template.conflict.prefix: 'Template with entered prefix already exists.'
+template.permission.view_records: 'View records'
+template.permission.create_records: 'Create records'
+template.permission.edit_records: 'Edit records'
+template.permission.postpone_records: 'Postpone records'
+template.permission.resume_records: 'Resume records'
+template.permission.reassign_records: 'Reassign records'
+template.permission.reopen_records: 'Reopen records'
+template.permission.add_comments: 'Add comments'
+template.permission.add_files: 'Add files'
+template.permission.remove_files: 'Remove files'
+template.permission.private_comments: 'Add/read private comments'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_records: 'Delete records'
+template.permission.attach_subrecords: 'Attach subrecords'
+template.permission.detach_subrecords: 'Detach subrecords'
+state: State
+states: States
+state.new: 'New state'
+state.name: 'State name'
+state.abbreviation: Abbreviation
+state.type: 'State type'
+state.type.initial: Initial
+state.type.interim: Interim
+state.type.final: Final
+state.responsible: Responsible
+state.responsibles: Responsibles
+state.responsible.keep: 'Keep unchanged'
+state.responsible.assign: Assign
+state.responsible.remove: Remove
+state.transitions: Transitions
+state.next_for: 'Next state by default for'
+state.make_initial: 'Make initial'
+state.confirm.delete: 'Are you sure you want delete this state?'
+state.conflict.name: 'State with entered name already exists.'
+state.conflict.abbreviation: 'State with entered abbreviation already exists.'
+field.conflict.name: 'Field with entered name already exists.'
+field.min_max_values: 'Maximum value should be greater then minimum one.'
+field.default_value: 'Default value should be in range from %min% to %max%.'
+field.value_range: 'Value of "%name%" should be in range from %min% to %max%.'
+list.conflict.key: 'Item with entered key already exists.'
+list.conflict.value: 'Item with entered value already exists.'

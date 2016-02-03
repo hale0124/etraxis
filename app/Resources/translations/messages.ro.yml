@@ -1,4 +1,4 @@
-lang: Română
+# This file is auto-generated using Crowdin.
 button.ok: OK
 button.cancel: Renunta
 button.yes: Da
@@ -20,7 +20,7 @@ button.select_all: 'Selecteaza toate'
 required: obligatoriu
 error.not_found: 'Pagina pe care doriți să o accesați nu există sau a fost ștearsă.'
 error.not_authorized: 'Nu sunteți autorizat sa accesați această pagină.'
-changes.saved: ~
+changes.saved: 'Your changes were successfully saved.'
 security.log_in: Autentificare
 security.log_out: Iesire
 security.remember_me: 'Păstrează autentificarea'
@@ -69,13 +69,13 @@ password.cant_change: 'Acest cont folosește o sursă externă de autentificare.
 security.forgot_password: 'Parolă uitată'
 security.forgot_password.email_sent: 'S-a trimis un email cu instrucțiuni de schimbare a parolei.'
 security.change_password: 'Schimbare parolă'
-security.password_expired: ~
-key.tab: ~
-key.space: ~
-comma: ~
-colon: ~
-semicolon: ~
-vertical_line: ~
+security.password_expired: 'Your password has expired or the administrator requires you to change it.'
+key.tab: Tab
+key.space: Space
+comma: Comma
+colon: Colon
+semicolon: Semicolon
+vertical_line: 'Vertical line'
 file: Fișier
 size: Mărime
 delimiter: Delimitator
@@ -118,21 +118,21 @@ template.locked: Blocat
 template.confirm.delete: 'Sunteti sigur ca doriti sa stergeti acest sablon?'
 template.conflict.name: 'Sablonul cu numele introdus exista deja.'
 template.conflict.prefix: 'Sablonul prefixul introdus exista deja.'
-template.permission.view_records: ~
-template.permission.create_records: ~
-template.permission.edit_records: ~
-template.permission.postpone_records: ~
-template.permission.resume_records: ~
-template.permission.reassign_records: ~
-template.permission.reopen_records: ~
-template.permission.add_comments: ~
-template.permission.add_files: ~
-template.permission.remove_files: ~
-template.permission.private_comments: ~
-template.permission.send_reminders: ~
-template.permission.delete_records: ~
-template.permission.attach_subrecords: ~
-template.permission.detach_subrecords: ~
+template.permission.view_records: 'View records'
+template.permission.create_records: 'Create records'
+template.permission.edit_records: 'Edit records'
+template.permission.postpone_records: 'Postpone records'
+template.permission.resume_records: 'Resume records'
+template.permission.reassign_records: 'Reassign records'
+template.permission.reopen_records: 'Reopen records'
+template.permission.add_comments: 'Add comments'
+template.permission.add_files: 'Add files'
+template.permission.remove_files: 'Remove files'
+template.permission.private_comments: 'Add/read private comments'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_records: 'Delete records'
+template.permission.attach_subrecords: 'Attach subrecords'
+template.permission.detach_subrecords: 'Detach subrecords'
 state: Stare
 states: Stare
 state.new: 'Stare nou'
@@ -143,12 +143,12 @@ state.type.initial: Initial
 state.type.interim: Intermediar
 state.type.final: Final
 state.responsible: Responsabil
-state.responsibles: ~
+state.responsibles: Responsibles
 state.responsible.keep: 'Nu modifica'
 state.responsible.assign: Asigneaza
 state.responsible.remove: Sterge
 state.transitions: Tranzitii
-state.next_for: ~
+state.next_for: 'Next state by default for'
 state.make_initial: 'Marcheaza ca initiala'
 state.confirm.delete: 'Sunteti sigur ca doriti sa stergeti aceasta stare?'
 state.conflict.name: 'Numele starii deja exista.'
@@ -157,5 +157,5 @@ field.conflict.name: 'Numele campului deja exista.'
 field.min_max_values: 'Valoarea maxima trebuie sa fie mai mare decat cea minima.'
 field.default_value: 'Valoarea implicita trebuie sa fie in intervalul %min% la %max%.'
 field.value_range: 'Valoarea "%name%" trebuie sa fie in intervalul %min% pana la %max%.'
-list.conflict.key: ~
-list.conflict.value: ~
+list.conflict.key: 'Item with entered key already exists.'
+list.conflict.value: 'Item with entered value already exists.'

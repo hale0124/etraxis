@@ -1,4 +1,4 @@
-lang: Polski
+# This file is auto-generated using Crowdin.
 button.ok: OK
 button.cancel: Anuluj
 button.yes: Tak
@@ -70,12 +70,12 @@ security.forgot_password: 'Zapomniane hasło'
 security.forgot_password.email_sent: 'E-mail z instrukcjami zmiany hasła został wysłany do Ciebie.'
 security.change_password: 'Zmień hasło'
 security.password_expired: 'Twoje hasło wygasło lub administrator wymaga jego zmiany.'
-key.tab: ~
-key.space: ~
-comma: ~
-colon: ~
-semicolon: ~
-vertical_line: ~
+key.tab: Tab
+key.space: Space
+comma: Comma
+colon: Colon
+semicolon: Semicolon
+vertical_line: 'Vertical line'
 file: Plik
 size: Rozmiar
 delimiter: 'Znak rozdzielenia'
@@ -118,21 +118,21 @@ template.locked: Zablokowany
 template.confirm.delete: 'Czy jesteś pewien, że chesz usunąć wybrany szablon?'
 template.conflict.name: 'Szablon o podanej nazwie już istnieje.'
 template.conflict.prefix: 'Szablon o podanej prefixie już istnieje.'
-template.permission.view_records: ~
-template.permission.create_records: ~
-template.permission.edit_records: ~
-template.permission.postpone_records: ~
-template.permission.resume_records: ~
-template.permission.reassign_records: ~
-template.permission.reopen_records: ~
-template.permission.add_comments: ~
-template.permission.add_files: ~
-template.permission.remove_files: ~
-template.permission.private_comments: ~
-template.permission.send_reminders: ~
-template.permission.delete_records: ~
-template.permission.attach_subrecords: ~
-template.permission.detach_subrecords: ~
+template.permission.view_records: 'View records'
+template.permission.create_records: 'Create records'
+template.permission.edit_records: 'Edit records'
+template.permission.postpone_records: 'Postpone records'
+template.permission.resume_records: 'Resume records'
+template.permission.reassign_records: 'Reassign records'
+template.permission.reopen_records: 'Reopen records'
+template.permission.add_comments: 'Add comments'
+template.permission.add_files: 'Add files'
+template.permission.remove_files: 'Remove files'
+template.permission.private_comments: 'Add/read private comments'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_records: 'Delete records'
+template.permission.attach_subrecords: 'Attach subrecords'
+template.permission.detach_subrecords: 'Detach subrecords'
 state: Stan
 states: Stany
 state.new: 'Nowy stan'
@@ -143,12 +143,12 @@ state.type.initial: Początkowy
 state.type.interim: Pośredni
 state.type.final: Końcowy
 state.responsible: Odpowiedzialny
-state.responsibles: ~
+state.responsibles: Responsibles
 state.responsible.keep: 'Nie zmieniaj'
 state.responsible.assign: Przydziel
 state.responsible.remove: Usuń
 state.transitions: Przejścia
-state.next_for: ~
+state.next_for: 'Next state by default for'
 state.make_initial: 'Utwórz początkowy'
 state.confirm.delete: 'Czy jesteś pewien, że chesz usunąć wybrany status?'
 state.conflict.name: 'Stan o tej nazwie już istnieje.'
@@ -157,5 +157,5 @@ field.conflict.name: 'Pole o podanej nazwie już istnieje.'
 field.min_max_values: 'Wartość maksymalna powinna być większa od wartości minimalnej.'
 field.default_value: 'Wartość domyślna powinna być z przedziału od %min% do %max%.'
 field.value_range: 'Wartość "%name%" powinna być z przedziału od %min% do %max%.'
-list.conflict.key: ~
-list.conflict.value: ~
+list.conflict.key: 'Item with entered key already exists.'
+list.conflict.value: 'Item with entered value already exists.'

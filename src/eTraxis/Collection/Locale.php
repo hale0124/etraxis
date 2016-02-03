@@ -38,7 +38,7 @@ class Locale extends AbstractStaticCollection
             'lv'    => 'Latviešu',
             'nl'    => 'Nederlands',
             'pl'    => 'Polski',
-            'pt_BR' => 'Português',
+            'pt_BR' => 'Português do Brasil',
             'ro'    => 'Română',
             'ru'    => 'Русский',
             'sv'    => 'Svenska',

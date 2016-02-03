@@ -1,4 +1,4 @@
-lang: Nederlands
+# This file is auto-generated using Crowdin.
 button.ok: OK
 button.cancel: Annuleren
 button.yes: Ja
@@ -20,7 +20,7 @@ button.select_all: 'Selecteer alles'
 required: vereist
 error.not_found: 'De pagina die u probeerde te benaderen bestaat niet of is verwijderd.'
 error.not_authorized: 'Het is u niet toegestaan deze pagina te raadplegen.'
-changes.saved: ~
+changes.saved: 'Your changes were successfully saved.'
 security.log_in: Inloggen
 security.log_out: Uitloggen
 security.remember_me: 'Blijf ingelogd'
@@ -69,13 +69,13 @@ password.cant_change: 'Dit account gebruikt een externe bron voor authenticatie.
 security.forgot_password: 'Wachtwoord verloren'
 security.forgot_password.email_sent: 'Er is een e-mail naar u verstuurd met instructies over het kiezen van een nieuw wachtwoord.'
 security.change_password: 'Wijzig wachtwoord'
-security.password_expired: ~
-key.tab: ~
-key.space: ~
-comma: ~
-colon: ~
-semicolon: ~
-vertical_line: ~
+security.password_expired: 'Your password has expired or the administrator requires you to change it.'
+key.tab: Tab
+key.space: Space
+comma: Comma
+colon: Colon
+semicolon: Semicolon
+vertical_line: 'Vertical line'
 file: Bestand
 size: Grootte
 delimiter: Begrenzer
@@ -118,21 +118,21 @@ template.locked: Geblokkeerd
 template.confirm.delete: 'Ben je zeker dat je dit sjabloon wilt verwijderen?'
 template.conflict.name: 'Sjabloon met ingevoerde naam bestaat reeds.'
 template.conflict.prefix: 'Sjabloon met ingevoerde voorvoegsel bestaat reeds.'
-template.permission.view_records: ~
-template.permission.create_records: ~
-template.permission.edit_records: ~
-template.permission.postpone_records: ~
-template.permission.resume_records: ~
-template.permission.reassign_records: ~
-template.permission.reopen_records: ~
-template.permission.add_comments: ~
-template.permission.add_files: ~
-template.permission.remove_files: ~
-template.permission.private_comments: ~
-template.permission.send_reminders: ~
-template.permission.delete_records: ~
-template.permission.attach_subrecords: ~
-template.permission.detach_subrecords: ~
+template.permission.view_records: 'View records'
+template.permission.create_records: 'Create records'
+template.permission.edit_records: 'Edit records'
+template.permission.postpone_records: 'Postpone records'
+template.permission.resume_records: 'Resume records'
+template.permission.reassign_records: 'Reassign records'
+template.permission.reopen_records: 'Reopen records'
+template.permission.add_comments: 'Add comments'
+template.permission.add_files: 'Add files'
+template.permission.remove_files: 'Remove files'
+template.permission.private_comments: 'Add/read private comments'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_records: 'Delete records'
+template.permission.attach_subrecords: 'Attach subrecords'
+template.permission.detach_subrecords: 'Detach subrecords'
 state: Status
 states: Statussen
 state.new: 'Nieuwe status'
@@ -143,12 +143,12 @@ state.type.initial: Beginstatus
 state.type.interim: Tussenstatus
 state.type.final: Eindstatus
 state.responsible: Verantwoordelijkheid
-state.responsibles: ~
+state.responsibles: Responsibles
 state.responsible.keep: 'Blijft ongewijzigd'
 state.responsible.assign: Toekennen
 state.responsible.remove: Verwijderen
 state.transitions: Overgangen
-state.next_for: ~
+state.next_for: 'Next state by default for'
 state.make_initial: 'Aanmaken beginstatus'
 state.confirm.delete: 'Ben je zeker dat je deze status wilt verwijderen?'
 state.conflict.name: 'Status met ingevoerde naam bestaat reeds.'
@@ -157,5 +157,5 @@ field.conflict.name: 'Veld met ingevoerde naam bestaat reeds.'
 field.min_max_values: 'Maximum waarde moet groter dan minimum waarde zijn.'
 field.default_value: 'Standaardwaarde moet in het bereik %min% tot %max% liggen.'
 field.value_range: 'Waarde "%name%" moet in het bereik %min% tot %max% liggen.'
-list.conflict.key: ~
-list.conflict.value: ~
+list.conflict.key: 'Item with entered key already exists.'
+list.conflict.value: 'Item with entered value already exists.'

@@ -1,4 +1,4 @@
-lang: Français
+# This file is auto-generated using Crowdin.
 button.ok: OK
 button.cancel: Annuler
 button.yes: Oui
@@ -20,7 +20,7 @@ button.select_all: 'Tout sélectionner'
 required: requis
 error.not_found: 'La page à laquelle vous souhaitez accéder n''existe pas ou a été supprimée.'
 error.not_authorized: 'Vous n''êtes pas autorisé à accéder à cette page.'
-changes.saved: ~
+changes.saved: 'Your changes were successfully saved.'
 security.log_in: 'Se connecter'
 security.log_out: 'Se déconnecter'
 security.remember_me: 'Se souvenir de moi'
@@ -70,12 +70,12 @@ security.forgot_password: 'Mot de passe perdu'
 security.forgot_password.email_sent: 'Un message contenant les instructions pour choisir un nouveau mot de passe vous a été envoyé.'
 security.change_password: 'Changer de mot de passe'
 security.password_expired: 'Votre mot de passe a expiré ou nécessite d''être changé.'
-key.tab: ~
-key.space: ~
+key.tab: Tab
+key.space: Space
 comma: Virgule
-colon: ~
+colon: Colon
 semicolon: 'Point virgule'
-vertical_line: ~
+vertical_line: 'Vertical line'
 file: Fichier
 size: Taille
 delimiter: Délimiteur
@@ -118,21 +118,21 @@ template.locked: Verrouillé
 template.confirm.delete: 'Etes-vous sur de vouloir effacer ce modèle?'
 template.conflict.name: 'Il existe déjà un modèle portant ce nom.'
 template.conflict.prefix: 'Il existe déjà un modèle portant ce un préfixe.'
-template.permission.view_records: ~
-template.permission.create_records: ~
-template.permission.edit_records: ~
-template.permission.postpone_records: ~
-template.permission.resume_records: ~
-template.permission.reassign_records: ~
-template.permission.reopen_records: ~
-template.permission.add_comments: ~
-template.permission.add_files: ~
-template.permission.remove_files: ~
-template.permission.private_comments: ~
-template.permission.send_reminders: ~
-template.permission.delete_records: ~
-template.permission.attach_subrecords: ~
-template.permission.detach_subrecords: ~
+template.permission.view_records: 'View records'
+template.permission.create_records: 'Create records'
+template.permission.edit_records: 'Edit records'
+template.permission.postpone_records: 'Postpone records'
+template.permission.resume_records: 'Resume records'
+template.permission.reassign_records: 'Reassign records'
+template.permission.reopen_records: 'Reopen records'
+template.permission.add_comments: 'Add comments'
+template.permission.add_files: 'Add files'
+template.permission.remove_files: 'Remove files'
+template.permission.private_comments: 'Add/read private comments'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_records: 'Delete records'
+template.permission.attach_subrecords: 'Attach subrecords'
+template.permission.detach_subrecords: 'Detach subrecords'
 state: Etat
 states: Etats
 state.new: 'Nouvel état'
@@ -143,12 +143,12 @@ state.type.initial: Initial
 state.type.interim: Intermédiaire
 state.type.final: Final
 state.responsible: Responsable
-state.responsibles: ~
+state.responsibles: Responsibles
 state.responsible.keep: 'Rester inchangé'
 state.responsible.assign: Affecter
 state.responsible.remove: Enlever
 state.transitions: Transitions
-state.next_for: ~
+state.next_for: 'Next state by default for'
 state.make_initial: 'Rendre initial'
 state.confirm.delete: 'Etes-vous sur de vouloir effacer cet état?'
 state.conflict.name: 'Il existe déjà un état portant ce nom.'
@@ -157,5 +157,5 @@ field.conflict.name: 'Il existe déjà un champ portant ce nom.'
 field.min_max_values: 'Le maximum doit être superieur au minimum.'
 field.default_value: 'La valeur par défaut doit être comprise entre %min% et %max%.'
 field.value_range: 'La valeur de "%name%" doit être comprise entre %min% et %max%.'
-list.conflict.key: ~
-list.conflict.value: ~
+list.conflict.key: 'Item with entered key already exists.'
+list.conflict.value: 'Item with entered value already exists.'

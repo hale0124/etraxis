@@ -1,4 +1,4 @@
-lang: Čeština
+# This file is auto-generated using Crowdin.
 button.ok: OK
 button.cancel: Zrušit
 button.yes: Ano
@@ -20,7 +20,7 @@ button.select_all: 'Vybrat vše'
 required: povinný
 error.not_found: 'Stránka, kterou se snažíte zobrazit, neexistuje nebo byla smazána.'
 error.not_authorized: 'Nemáte dostatečná práva pro zobrazení této stránky.'
-changes.saved: ~
+changes.saved: 'Your changes were successfully saved.'
 security.log_in: 'Přihlásit se'
 security.log_out: Odhlásit
 security.remember_me: 'Zůstat přihlášený'
@@ -70,12 +70,12 @@ security.forgot_password: 'Zapomenuté heslo'
 security.forgot_password.email_sent: 'Byl vám zaslán email s intrukcemi jak si nastavíte nové heslo.'
 security.change_password: 'Změnit heslo'
 security.password_expired: 'Platnost vašeho hesla vypršela a administrátor vás žádá o jeho změnu.'
-key.tab: ~
-key.space: ~
-comma: ~
-colon: ~
-semicolon: ~
-vertical_line: ~
+key.tab: Tab
+key.space: Space
+comma: Comma
+colon: Colon
+semicolon: Semicolon
+vertical_line: 'Vertical line'
 file: Soubor
 size: Velikost
 delimiter: Oddělovač
@@ -118,21 +118,21 @@ template.locked: Uzamčen
 template.confirm.delete: 'Jste si jisti, že chcete smazat tuto šablonu?'
 template.conflict.name: 'Šablona se zadaným jménem již existuje.'
 template.conflict.prefix: 'Šablona se zadaným předponou již existuje.'
-template.permission.view_records: ~
-template.permission.create_records: ~
-template.permission.edit_records: ~
-template.permission.postpone_records: ~
-template.permission.resume_records: ~
-template.permission.reassign_records: ~
-template.permission.reopen_records: ~
-template.permission.add_comments: ~
-template.permission.add_files: ~
-template.permission.remove_files: ~
-template.permission.private_comments: ~
-template.permission.send_reminders: ~
-template.permission.delete_records: ~
-template.permission.attach_subrecords: ~
-template.permission.detach_subrecords: ~
+template.permission.view_records: 'View records'
+template.permission.create_records: 'Create records'
+template.permission.edit_records: 'Edit records'
+template.permission.postpone_records: 'Postpone records'
+template.permission.resume_records: 'Resume records'
+template.permission.reassign_records: 'Reassign records'
+template.permission.reopen_records: 'Reopen records'
+template.permission.add_comments: 'Add comments'
+template.permission.add_files: 'Add files'
+template.permission.remove_files: 'Remove files'
+template.permission.private_comments: 'Add/read private comments'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_records: 'Delete records'
+template.permission.attach_subrecords: 'Attach subrecords'
+template.permission.detach_subrecords: 'Detach subrecords'
 state: Stav
 states: Stavy
 state.new: 'Nový stav'
@@ -143,12 +143,12 @@ state.type.initial: Počáteční
 state.type.interim: Standardní
 state.type.final: Koncový
 state.responsible: Odpovědnost
-state.responsibles: ~
+state.responsibles: Responsibles
 state.responsible.keep: Zachovat
 state.responsible.assign: Přiřadit
 state.responsible.remove: Odstranit
 state.transitions: Přechody
-state.next_for: ~
+state.next_for: 'Next state by default for'
 state.make_initial: 'Vytvořit počáteční'
 state.confirm.delete: 'Jste si jisti, že chcete smazat tento stav?'
 state.conflict.name: 'Stav se zadaným jménem již existuje.'
@@ -157,5 +157,5 @@ field.conflict.name: 'Pole se zadaným jménem již existuje.'
 field.min_max_values: 'Maximální hodnota musí být větší než minimální.'
 field.default_value: 'Výchozí hodnota musí být v rozmezí %min% až %max%.'
 field.value_range: 'Hodnota "%name%" musí být v rozmezí %min% až %max%.'
-list.conflict.key: ~
-list.conflict.value: ~
+list.conflict.key: 'Item with entered key already exists.'
+list.conflict.value: 'Item with entered value already exists.'

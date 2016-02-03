@@ -27,7 +27,7 @@ class TranslationsCommand extends Command
     {
         $this
             ->setName('etraxis:translations')
-            ->setDescription('Updates all translation files')
+            ->setDescription('Updates all translation files after they have been downloaded from Crowdin')
         ;
     }
 
@@ -36,13 +36,44 @@ class TranslationsCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $locales = [
+            'en_AU',
+            'en_CA',
+            'en_GB',
+            'en_NZ',
+            'en_US',
+            'pt_BR',
+        ];
+
+        // Rename ISO 15897 into ISO 639-1.
         foreach (scandir('app/Resources/translations') as $entry) {
 
             if (substr($entry, 0, 9) != 'messages.' || substr($entry, -4) != '.yml') {
                 continue;
             }
 
-            if (strpos($entry, 'en_') !== false) {
+            if (strpos($entry, '_') === false) {
+                continue;
+            }
+
+            if (is_file("app/Resources/translations/{$entry}")) {
+
+                $locale = substr($entry, 9, -4);
+
+                if (in_array($locale, $locales)) {
+                    continue;
+                }
+
+                $newname = str_replace($locale, substr($locale, 0, 2), $entry);
+
+                rename("app/Resources/translations/{$entry}", "app/Resources/translations/{$newname}");
+            }
+        }
+
+        // Update translation files.
+        foreach (scandir('app/Resources/translations') as $entry) {
+
+            if (substr($entry, 0, 9) != 'messages.' || substr($entry, -4) != '.yml') {
                 continue;
             }
 
@@ -55,7 +86,10 @@ class TranslationsCommand extends Command
                 exec("php ./bin/console translation:update --force --no-backup --quiet --no-interaction {$locale}");
 
                 $contents = file_get_contents("app/Resources/translations/{$entry}");
-                $contents = str_replace(': null', ': ~', $contents);
+
+                if ($locale != 'en') {
+                    $contents = "# This file is auto-generated using Crowdin.\n" . $contents;
+                }
 
                 file_put_contents("app/Resources/translations/{$entry}", $contents);
             }

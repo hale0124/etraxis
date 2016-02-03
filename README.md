@@ -3,6 +3,7 @@
 [![Code Coverage](https://scrutinizer-ci.com/g/etraxis/etraxis/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/etraxis/etraxis/?branch=master)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/etraxis/etraxis/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/etraxis/etraxis/?branch=master)
 [![SensioLabsInsight](https://img.shields.io/sensiolabs/i/0b93b04a-7ba8-49eb-b768-f1d4d1fa970c.svg)](https://insight.sensiolabs.com/projects/0b93b04a-7ba8-49eb-b768-f1d4d1fa970c)
+[![Crowdin](https://d322cqt584bo4o.cloudfront.net/etraxis/localized.svg)](https://crowdin.com/project/etraxis)
 
 ### What is eTraxis
 
