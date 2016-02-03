@@ -17,7 +17,6 @@ button.unlock: Sblocca
 button.export: Esporta
 button.import: Importa
 button.select_all: 'Seleziona tutto'
-required: obbligatorio
 error.not_found: 'La pagina desiderata non esiste o è stata rimossa.'
 error.not_authorized: 'Non sei autorizzato ad accedere a questa pagina.'
 changes.saved: 'Your changes were successfully saved.'
@@ -72,10 +71,10 @@ security.change_password: 'Modifica password'
 security.password_expired: 'La password è scaduta o l''amministratore ha richiesto che sia cambiata.'
 key.tab: Tab
 key.space: Space
-comma: Comma
-colon: Colon
-semicolon: Semicolon
-vertical_line: 'Vertical line'
+key.comma: Comma
+key.colon: Colon
+key.semicolon: Semicolon
+key.vertical_line: 'Vertical line'
 file: File
 size: Dimensione
 delimiter: Delimitatore
@@ -153,6 +152,7 @@ state.make_initial: 'Segna come iniziale'
 state.confirm.delete: 'Eliminare questo stato?'
 state.conflict.name: 'Uno stato con lo stesso nome è già utilizzato.'
 state.conflict.abbreviation: 'Uno stato con lo stesso abbreviazione è già utilizzato.'
+field.required: obbligatorio
 field.conflict.name: 'Nome campo già utilizzato.'
 field.min_max_values: 'Il valore massimo deve essere maggiore del valore minimo.'
 field.default_value: 'Il valore predefinito deve essere compreso tra %min% e %max%.'

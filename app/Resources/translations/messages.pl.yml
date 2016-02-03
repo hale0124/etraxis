@@ -17,7 +17,6 @@ button.unlock: Odblokuj
 button.export: Eksportuj
 button.import: Import
 button.select_all: 'Zaznacz wszystko'
-required: wymagany
 error.not_found: 'Strona do której próbujesz się dostać nie istnieje lub została usunięta.'
 error.not_authorized: 'Nie posiadasz autoryzacji do oglądania tej strony.'
 changes.saved: 'Zmiany zostały zapisane.'
@@ -72,10 +71,10 @@ security.change_password: 'Zmień hasło'
 security.password_expired: 'Twoje hasło wygasło lub administrator wymaga jego zmiany.'
 key.tab: Tab
 key.space: Space
-comma: Comma
-colon: Colon
-semicolon: Semicolon
-vertical_line: 'Vertical line'
+key.comma: Comma
+key.colon: Colon
+key.semicolon: Semicolon
+key.vertical_line: 'Vertical line'
 file: Plik
 size: Rozmiar
 delimiter: 'Znak rozdzielenia'
@@ -153,6 +152,7 @@ state.make_initial: 'Utwórz początkowy'
 state.confirm.delete: 'Czy jesteś pewien, że chesz usunąć wybrany status?'
 state.conflict.name: 'Stan o tej nazwie już istnieje.'
 state.conflict.abbreviation: 'Stan o tej skrót już istnieje.'
+field.required: wymagany
 field.conflict.name: 'Pole o podanej nazwie już istnieje.'
 field.min_max_values: 'Wartość maksymalna powinna być większa od wartości minimalnej.'
 field.default_value: 'Wartość domyślna powinna być z przedziału od %min% do %max%.'

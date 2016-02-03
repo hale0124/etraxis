@@ -17,7 +17,6 @@ button.unlock: ロック解除
 button.export: エクスポート
 button.import: インポート
 button.select_all: 全て選択
-required: 必須
 error.not_found: アクセスしようとしたページは存在しないか削除されています。
 error.not_authorized: このページのアクセスは許可されていません。
 changes.saved: 'Your changes were successfully saved.'
@@ -72,10 +71,10 @@ security.change_password: パスワード変更
 security.password_expired: パスワードの有効期限が過ぎたか、システム管理者より変更を求められています。
 key.tab: Tab
 key.space: Space
-comma: コンマ
-colon: Colon
-semicolon: セミコロン
-vertical_line: 'Vertical line'
+key.comma: コンマ
+key.colon: Colon
+key.semicolon: セミコロン
+key.vertical_line: 'Vertical line'
 file: ファイル
 size: サイズ
 delimiter: 区切り文字
@@ -153,6 +152,7 @@ state.make_initial: 初期状態にする
 state.confirm.delete: ステータスを削除してよろしいですか？
 state.conflict.name: 'State with entered name already exists.'
 state.conflict.abbreviation: 'State with entered abbreviation already exists.'
+field.required: 必須
 field.conflict.name: 入力されたフィールドの名前は既に存在しています。
 field.min_max_values: 最大値は最小値よりも大きい必要があります。
 field.default_value: 'デフォルトの値は %min% から %max% の範囲で指定できます。'

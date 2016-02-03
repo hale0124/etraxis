@@ -17,7 +17,6 @@ button.unlock: Отключено
 button.export: Изнеси
 button.import: Внасям
 button.select_all: 'Избери всичко'
-required: изискван
 error.not_found: 'Несъществуваща или преместена страница.'
 error.not_authorized: 'Нямате право на достъп до тази страница.'
 changes.saved: 'Your changes were successfully saved.'
@@ -72,10 +71,10 @@ security.change_password: 'Промяна на парола'
 security.password_expired: 'Вашата парола е с изтекъл срок или администраторът изисква да я смените.'
 key.tab: Tab
 key.space: Space
-comma: Запетая
-colon: Colon
-semicolon: 'Точка и запетая'
-vertical_line: 'Vertical line'
+key.comma: Запетая
+key.colon: Colon
+key.semicolon: 'Точка и запетая'
+key.vertical_line: 'Vertical line'
 file: Файл
 size: Големина
 delimiter: Delimiter
@@ -153,6 +152,7 @@ state.make_initial: 'Направи начален'
 state.confirm.delete: 'Сигурен ли сте че искате да изтриете това условие?'
 state.conflict.name: 'Вече съществува услови с въведеното име.'
 state.conflict.abbreviation: 'Вече съществува услови с въведеното съкращение.'
+field.required: изискван
 field.conflict.name: 'Вече съществува поле с въведеното име.'
 field.min_max_values: 'Mаксималната стойност трябва да е по-голяма от минималната.'
 field.default_value: 'Стойностите по подразбиране трябва да са в порядъка на %min% до %max%.'

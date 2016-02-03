@@ -17,7 +17,6 @@ button.unlock: 'Kilidi Aç'
 button.export: 'Dışa aktar'
 button.import: 'İçe Aktar'
 button.select_all: 'Tümünü seç'
-required: gerekli
 error.not_found: 'Erişmek istediğiniz sayfa mevcut değil ya da kaldırılmış.'
 error.not_authorized: 'Bu sayfaya erişme yetkiniz yok.'
 changes.saved: 'Your changes were successfully saved.'
@@ -72,10 +71,10 @@ security.change_password: 'Parolayı değiştir'
 security.password_expired: 'Parolanızın süresi dolmuş veya yönetici parolanızı değiştirmenizi.'
 key.tab: Tab
 key.space: Space
-comma: Comma
-colon: Colon
-semicolon: Semicolon
-vertical_line: 'Vertical line'
+key.comma: Comma
+key.colon: Colon
+key.semicolon: Semicolon
+key.vertical_line: 'Vertical line'
 file: Dosya
 size: Boyut
 delimiter: Sınırlayıcı
@@ -153,6 +152,7 @@ state.make_initial: 'İlk yap'
 state.confirm.delete: 'Bu durumu silmek istediğinizden emin misiniz?'
 state.conflict.name: 'State with entered name already exists.'
 state.conflict.abbreviation: 'State with entered abbreviation already exists.'
+field.required: gerekli
 field.conflict.name: 'Girilen adda bir alan zaten var.'
 field.min_max_values: 'En yüksek değer, en düşük değerden daha büyük olmalıdır.'
 field.default_value: 'Varsayılan değer, %min% ile %max% arasında olmalıdır.'

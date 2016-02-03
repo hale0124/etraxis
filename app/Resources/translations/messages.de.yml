@@ -17,7 +17,6 @@ button.unlock: Freischalten
 button.export: Exportieren
 button.import: Importieren
 button.select_all: 'Alles auswählen'
-required: erforderlich
 error.not_found: 'Anhang existiert nicht oder ist gelöscht worden.'
 error.not_authorized: 'Sie sind nicht berechtigt, auf diese Seite zuzugreifen.'
 changes.saved: 'Ihre Änderungen wurden erfolgreich gespeichert.'
@@ -72,10 +71,10 @@ security.change_password: 'Kennwort ändern'
 security.password_expired: 'Your password has expired or the administrator requires you to change it.'
 key.tab: Tab
 key.space: Space
-comma: Comma
-colon: Colon
-semicolon: Semicolon
-vertical_line: 'Vertical line'
+key.comma: Comma
+key.colon: Colon
+key.semicolon: Semicolon
+key.vertical_line: 'Vertical line'
 file: Datei
 size: Größe
 delimiter: Trennzeichen
@@ -153,6 +152,7 @@ state.make_initial: 'Als Startstatus'
 state.confirm.delete: 'Möchten Sie diesen Status wirklich löschen?'
 state.conflict.name: 'Ein Status mit diesem Namen existiert bereits.'
 state.conflict.abbreviation: 'Ein Status mit diesem Abkürzung existiert bereits.'
+field.required: erforderlich
 field.conflict.name: 'Ein Zusatz mit diesem Namen existiert bereits.'
 field.min_max_values: 'Das Maximum muss größer als das Minimum sein.'
 field.default_value: 'Der vorgegebene Wert muss im Bereich von %min% bis %max% liegen.'

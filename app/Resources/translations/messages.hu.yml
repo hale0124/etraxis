@@ -17,7 +17,6 @@ button.unlock: Felnyit
 button.export: Export
 button.import: Importálás
 button.select_all: 'Mind kijelölése'
-required: kötelező
 error.not_found: 'Az oldal, amit meg szeretne nézni nem található, vagy átkerült egy másik helyre.'
 error.not_authorized: 'Nincs hozzáférési engedélye ehhez az oldalhoz.'
 changes.saved: 'A módosítások sikeresen elmentve.'
@@ -72,10 +71,10 @@ security.change_password: 'Jelszó megváltoztatása'
 security.password_expired: 'Your password has expired or the administrator requires you to change it.'
 key.tab: Tab
 key.space: Space
-comma: Comma
-colon: Colon
-semicolon: Semicolon
-vertical_line: 'Vertical line'
+key.comma: Comma
+key.colon: Colon
+key.semicolon: Semicolon
+key.vertical_line: 'Vertical line'
 file: Fájl
 size: Méret
 delimiter: Mezőelválasztó
@@ -153,6 +152,7 @@ state.make_initial: 'Legyen ez a kezdő állapot'
 state.confirm.delete: 'Biztos törölni szeretné az állapotot?'
 state.conflict.name: 'State with entered name already exists.'
 state.conflict.abbreviation: 'State with entered abbreviation already exists.'
+field.required: kötelező
 field.conflict.name: 'Már létezik ilyen névvel ellátott mező.'
 field.min_max_values: 'A maximum értéknek nagyobbnak kell lennie, mint 1.'
 field.default_value: 'Az alapértelmezett érték %min% és %max% közé kell, hogy essen.'

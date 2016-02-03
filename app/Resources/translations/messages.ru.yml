@@ -17,33 +17,32 @@ button.unlock: Разблокировать
 button.export: Экспорт
 button.import: Импорт
 button.select_all: 'Выбрать все'
-required: обязательное
-error.not_found: 'Страница, на которую Вы пытаетесь зайти, не существует или удалена.'
-error.not_authorized: 'У Вас нет прав для посещения данной страницы.'
+error.not_found: 'Страница, к которой Вы обратились, не существует или была удалена.'
+error.not_authorized: 'Нет доступа к запрашиваемой странице.'
 changes.saved: 'Ваши изменения успешно сохранены.'
 security.log_in: Вход
 security.log_out: Выход
 security.remember_me: 'Запомнить меня'
-security.session_expired: 'Срок Вашей сессии истек. Пожалуйста авторизуйтесь еще раз.'
+security.session_expired: 'Ваша сессия истекла. Пожалуйста, войдите снова.'
 security.confirm_exit: 'Вы уверены, что хотите выйти?'
 security.authentication: Аутентификация
 'Bad credentials.': 'Неизвестный пользователь или неверный пароль.'
 'User account is disabled.': 'Учетная запись отключена.'
 'User account is locked.': 'Учетная запись заблокирована.'
 settings: Настройки
-appearance: 'Внешний вид'
+appearance: Оформление
 administration: Администрирование
 users: Пользователи
 user.new: 'Новый пользователь'
 user.username: 'Имя пользователя'
 user.fullname: 'Полное имя'
-user.email: Эл.почта
+user.email: 'Эл. почта'
 user.password: Пароль
 user.current_password: 'Текущий пароль'
 user.new_password: 'Новый пароль'
-user.password_confirmation: Подтверждение
+user.password_confirmation: 'Подтвердите пароль'
 user.change_password: 'Изменить пароль'
-user.status: Статус
+user.status: Состояние
 user.enabled: Включен
 user.disabled: Отключен
 user.locked: Заблокирован
@@ -56,31 +55,31 @@ role.responsible: Ответственный
 role.registered: Зарегистрированный
 description: Описание
 language: Язык
-theme: Дизайн
+theme: 'Тема оформления'
 timezone: 'Часовой пояс'
 user.confirm.delete: 'Вы уверены, что хотите удалить эту учетную запись?'
 user.conflict.username: 'Учетная запись с таким именем пользователя уже существует.'
 user.invalid.username: 'Неверное имя пользователя.'
 password.too_short: 'Пароль должен содержать как минимум %length% символов.'
 passwords.dont_match: 'Пароли не совпадают.'
-password.changed: 'Пароль успешно обновлён.'
-password.wrong: 'Неверный пароль.'
-password.cant_change: 'Для данной учётной записи используется источник внешней аутентификации. Невозможно изменить пароль.'
+password.changed: 'Пароль был успешно обновлён.'
+password.wrong: 'Неправильный пароль.'
+password.cant_change: 'Эта учетная запись использует механизм внешней аутентификации. Невозможно изменить пароль.'
 security.forgot_password: 'Восстановление пароля'
-security.forgot_password.email_sent: 'Вам отправлено письмо с инструкциями по выбору нового пароля.'
+security.forgot_password.email_sent: 'Письмо с инструкциями, как установить новый пароль, было отправлено на Ваш электронный адрес.'
 security.change_password: 'Изменить пароль'
 security.password_expired: 'Время действия Вашего пароля истекло или администратор потребовал сменить его.'
-key.tab: Табуляция
+key.tab: 'Знак табуляции'
 key.space: Пробел
-comma: Запятая
-colon: Двоеточие
-semicolon: 'Точка с запятой'
-vertical_line: 'Вертикальная линия'
+key.comma: Запятая
+key.colon: Двоеточие
+key.semicolon: 'Точка с запятой'
+key.vertical_line: 'Вертикальная линия'
 file: Файл
 size: Размер
 delimiter: Разделитель
 encoding: Кодировка
-line_endings: 'Концы строк'
+line_endings: 'Окончания строк'
 group: Группа
 groups: Группы
 others: Прочие
@@ -99,9 +98,9 @@ projects: Проекты
 project.new: 'Новый проект'
 project.name: 'Название проекта'
 project.start_time: 'Начало проекта'
-project.status: Статус
+project.status: Состояние
 project.active: Активный
-project.suspended: Заморожен
+project.suspended: Приостановлен
 project.confirm.delete: 'Вы уверены, что хотите удалить этот проект?'
 project.conflict.name: 'Проект с таким названием уже существует.'
 template: Шаблон
@@ -109,10 +108,10 @@ templates: Шаблоны
 template.new: 'Новый шаблон'
 template.name: 'Название шаблона'
 template.prefix: Префикс
-template.critical_age: 'Критичный возраст'
+template.critical_age: 'Критический возраст'
 template.frozen_time: 'Время "заморозки"'
 template.guest_access: 'Гостевой доступ'
-template.status: Статус
+template.status: Состояние
 template.active: Активный
 template.locked: Заблокирован
 template.confirm.delete: 'Вы уверены, что хотите удалить этот шаблон?'
@@ -137,9 +136,9 @@ state: Состояние
 states: Состояния
 state.new: 'Новое состояние'
 state.name: 'Название состояния'
-state.abbreviation: Сокращение
+state.abbreviation: Аббревиатура
 state.type: 'Тип состояния'
-state.type.initial: Начальное
+state.type.initial: Исходное
 state.type.interim: Промежуточное
 state.type.final: Финальное
 state.responsible: Ответственный
@@ -149,10 +148,11 @@ state.responsible.assign: Назначить
 state.responsible.remove: Убрать
 state.transitions: Переходы
 state.next_for: 'Следующее состояние по умолчанию для'
-state.make_initial: 'Сделать начальным'
+state.make_initial: 'Сделать исходным'
 state.confirm.delete: 'Вы уверены, что хотите удалить это состояние?'
 state.conflict.name: 'Состояние с таким названием уже существует.'
-state.conflict.abbreviation: 'Состояние с таким сокращением уже существует.'
+state.conflict.abbreviation: 'Состояние с такой аббревиатурой уже существует.'
+field.required: 'обязательное поле'
 field.conflict.name: 'Поле с таким названием уже существует.'
 field.min_max_values: 'Максимальное значение должно быть больше минимального.'
 field.default_value: 'Значение по умолчанию должно лежать в диапазоне от %min% до %max%.'
