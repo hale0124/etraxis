@@ -40,7 +40,9 @@
     },
     "autoload": {
         "psr-4": {
-            "": "src/"
+            "Symfony\\": "src/Symfony/",
+            "AppBundle\\": "src/AppBundle/",
+            "eTraxis\\": "src/eTraxis/"
         },
         "classmap": [
             "app/AppKernel.php",
@@ -49,7 +51,9 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "": "tests/"
+            "Symfony\\": "tests/Symfony/",
+            "AppBundle\\": "tests/AppBundle/",
+            "eTraxis\\": "tests/eTraxis/"
         }
     },
     "minimum-stability": "stable",
