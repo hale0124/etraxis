@@ -46,6 +46,11 @@
         }
     },
     "minimum-stability": "stable",
+    "config": {
+        "platform": {
+            "php": "5.5.9"
+        }
+    },
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",
