@@ -35,7 +35,7 @@ trait ContainerTrait
      *
      * @throws  BadRequestHttpException
      */
-    protected function getFormData(Request $request, $name = 'form', $extra = [])
+    protected function getFormData(Request $request, $name = null, $extra = [])
     {
         /** @var \Psr\Log\LoggerInterface $logger */
         $logger = $this->container->get('logger');
@@ -44,28 +44,35 @@ trait ContainerTrait
             ? $request->query->all()
             : $request->request->all();
 
-        if (!array_key_exists($name, $data)) {
-            $logger->error('No data submitted.', [$name]);
-            throw new BadRequestHttpException('No data submitted.');
-        }
-
-        if ($request->getMethod() == Request::METHOD_POST) {
-            if (!array_key_exists('_token', $data[$name])) {
-                $logger->error('CSRF token is missing.');
-                throw new BadRequestHttpException('CSRF token is missing.');
+        if (strlen($name) != 0) {
+            if (!array_key_exists($name, $data)) {
+                $logger->error('No data submitted.', [$name]);
+                throw new BadRequestHttpException('No data submitted.');
             }
 
-            /** @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $csrf */
-            $csrf  = $this->container->get('security.csrf.token_manager');
-            $token = $csrf->getToken($name);
-
-            if ($data[$name]['_token'] !== $token->getValue()) {
-                $logger->error('Invalid CSRF token.');
-                throw new BadRequestHttpException('Invalid CSRF token.');
-            }
+            $data = $data[$name];
         }
 
-        return $this->empty2null($extra + $data[$name]);
+        /**
+         * Replaces empty strings with nulls.
+         *
+         * @param   mixed $value A value to be updated. Can be an array.
+         * @return  mixed Updated value.
+         */
+        $empty2null = function ($value) use (&$empty2null) {
+
+            if (is_array($value)) {
+                foreach ($value as &$v) {
+                    $v = $empty2null($v);
+                }
+
+                return $value;
+            }
+
+            return strlen($value) == 0 ? null : $value;
+        };
+
+        return $empty2null($extra + $data);
     }
 
     /**
@@ -130,25 +137,5 @@ trait ContainerTrait
     protected function getDataTables()
     {
         return $this->container->get('datatables');
-    }
-
-    /**
-     * Replaces empty strings with nulls.
-     *
-     * @param   mixed $value A value to be updated. Can be an array.
-     *
-     * @return  mixed Updated value.
-     */
-    private function empty2null($value)
-    {
-        if (is_array($value)) {
-            foreach ($value as &$v) {
-                $v = $this->empty2null($v);
-            }
-
-            return $value;
-        }
-
-        return strlen($value) == 0 ? null : $value;
     }
 }

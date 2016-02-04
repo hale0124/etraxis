@@ -74,6 +74,10 @@
         </div>
     </footer>
 
+    {% if csrf is defined %}
+        <input type="hidden" id="__etraxis_token" value="{{ csrf.token('').value }}">
+    {% endif %}
+
     <div id="__etraxis_modal" class="ui-helper-hidden"></div>
 
     {% for js in ['js/libs.js', 'js/etraxis-%s.js', 'js/etraxis.js'] %}
@@ -87,12 +91,7 @@
     <script>
         $(function() {
 
-            $(document).ajaxError(function(e, xhr) {
-                if (xhr.status == 401) {
-                    eTraxis.unblock();
-                    eTraxis.alert(eTraxis.i18n.Error, xhr.responseText);
-                }
-            });
+            eTraxis.initAjax();
 
             $('body').initUI();
 

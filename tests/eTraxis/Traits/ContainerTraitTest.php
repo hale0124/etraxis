@@ -44,12 +44,12 @@ class ContainerTraitTest extends KernelTestCase
     public function testGetFormDataSuccessGet()
     {
         $formdata = [
-            'fname'  => 'Artem',
-            'lname'  => 'Rodygin',
-            'empty'  => '',
+            'fname' => 'Artem',
+            'lname' => 'Rodygin',
+            'empty' => '',
         ];
 
-        $request = new Request(['form' => $formdata]);
+        $request = new Request($formdata);
 
         $formdata['empty'] = null;
 
@@ -58,15 +58,10 @@ class ContainerTraitTest extends KernelTestCase
 
     public function testGetFormDataSuccessPost()
     {
-        /** @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $csrf */
-        $csrf = static::$kernel->getContainer()->get('security.csrf.token_manager');
-        $csrf->refreshToken('user');
-
         $formdata = [
-            '_token' => $csrf->getToken('user')->getValue(),
-            'fname'  => 'Artem',
-            'lname'  => 'Rodygin',
-            'empty'  => '',
+            'fname' => 'Artem',
+            'lname' => 'Rodygin',
+            'empty' => '',
         ];
 
         $request = new Request([], ['user' => $formdata]);
@@ -80,8 +75,8 @@ class ContainerTraitTest extends KernelTestCase
     public function testGetFormDataExtra()
     {
         $formdata = [
-            'fname'  => 'Artem',
-            'lname'  => 'Rodygin',
+            'fname' => 'Artem',
+            'lname' => 'Rodygin',
         ];
 
         $request = new Request(['form' => $formdata]);
@@ -103,53 +98,13 @@ class ContainerTraitTest extends KernelTestCase
     public function testGetFormDataNoData()
     {
         $formdata = [
-            'fname'  => 'Artem',
-            'lname'  => 'Rodygin',
+            'fname' => 'Artem',
+            'lname' => 'Rodygin',
         ];
 
         $request = new Request(['user' => $formdata]);
 
-        $this->object->getFormData($request);
-    }
-
-    /**
-     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
-     * @expectedExceptionMessage Invalid CSRF token.
-     */
-    public function testGetFormDataInvalidCsrf()
-    {
-        /** @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $csrf */
-        $csrf = static::$kernel->getContainer()->get('security.csrf.token_manager');
-        $csrf->refreshToken('user');
-        $csrf->refreshToken('form');
-
-        $formdata = [
-            '_token' => $csrf->getToken('user')->getValue(),
-            'fname'  => 'Artem',
-            'lname'  => 'Rodygin',
-        ];
-
-        $request = new Request([], ['form' => $formdata]);
-        $request->setMethod(Request::METHOD_POST);
-
-        $this->object->getFormData($request);
-    }
-
-    /**
-     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
-     * @expectedExceptionMessage CSRF token is missing.
-     */
-    public function testGetFormDataNoCsrf()
-    {
-        $formdata = [
-            'fname'  => 'Artem',
-            'lname'  => 'Rodygin',
-        ];
-
-        $request = new Request([], ['form' => $formdata]);
-        $request->setMethod(Request::METHOD_POST);
-
-        $this->object->getFormData($request);
+        $this->object->getFormData($request, 'form');
     }
 
     public function testSetNotice()

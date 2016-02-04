@@ -165,7 +165,9 @@ class UsersPostController extends Controller
     public function disableAction(Request $request)
     {
         try {
-            $command = new Users\DisableUsersCommand($request->request->all());
+            $data = $this->getFormData($request);
+
+            $command = new Users\DisableUsersCommand($data);
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();
@@ -190,7 +192,9 @@ class UsersPostController extends Controller
     public function enableAction(Request $request)
     {
         try {
-            $command = new Users\EnableUsersCommand($request->request->all());
+            $data = $this->getFormData($request);
+
+            $command = new Users\EnableUsersCommand($data);
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();
@@ -241,10 +245,9 @@ class UsersPostController extends Controller
     public function addGroupsAction(Request $request, $id)
     {
         try {
-            $command = new Users\AddGroupsCommand(
-                array_merge(['id' => $id], $request->request->all())
-            );
+            $data = $this->getFormData($request, null, ['id' => $id]);
 
+            $command = new Users\AddGroupsCommand($data);
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();
@@ -270,10 +273,9 @@ class UsersPostController extends Controller
     public function removeGroupsAction(Request $request, $id)
     {
         try {
-            $command = new Users\RemoveGroupsCommand(
-                array_merge(['id' => $id], $request->request->all())
-            );
+            $data = $this->getFormData($request, null, ['id' => $id]);
 
+            $command = new Users\RemoveGroupsCommand($data);
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();

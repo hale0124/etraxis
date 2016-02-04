@@ -8,6 +8,36 @@
 var eTraxis = window.eTraxis || {};
 
 /**
+ * Global one-time initialization of AJAX requests for just loaded page.
+ */
+eTraxis.initAjax = function() {
+
+    // Inject default CSRF token into POST AJAX requests if it's missing there.
+    $.ajaxPrefilter(function(options, originalOptions) {
+        if (options.type && options.type.toUpperCase() === 'POST') {
+            var $token = $('#__etraxis_token');
+            if ($token.length != 0) {
+                if (typeof originalOptions.data === 'undefined') {
+                    originalOptions.data = {};
+                }
+                if (typeof originalOptions.data === 'object' && typeof originalOptions.data._token === 'undefined') {
+                    originalOptions.data._token = $token.val();
+                    options.data = $.param(originalOptions.data);
+                }
+            }
+        }
+    });
+
+    // Show appropriate message to user if AJAX request ends up with '401 Unauthorized' HTTP error.
+    $(document).ajaxError(function(e, xhr) {
+        if (xhr.status === 401) {
+            eTraxis.unblock();
+            eTraxis.alert(eTraxis.i18n.Error, xhr.responseText);
+        }
+    });
+};
+
+/**
  * Blocks UI with specified message.
  *
  * @param {string} message Blocking message.

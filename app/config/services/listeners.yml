@@ -1,6 +1,14 @@
 # Keep listeners sorted alphabetically.
 services:
 
+    etraxis.listener.csrf_token:
+        class: AppBundle\EventListener\CsrfToken
+        tags:
+            - { name: kernel.event_listener, event: kernel.request, method: checkCsrfToken, priority: 15 }
+        arguments:
+            - "@logger"
+            - "@security.csrf.token_manager"
+
     etraxis.listener.expired_password:
         class: AppBundle\EventListener\ExpiredPassword
         tags:

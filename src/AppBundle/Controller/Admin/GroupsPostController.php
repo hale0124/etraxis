@@ -96,14 +96,17 @@ class GroupsPostController extends Controller
      *
      * @Action\Route("/delete/{id}", name="admin_delete_group", requirements={"id"="\d+"})
      *
-     * @param   int $id Group ID.
+     * @param   Request $request
+     * @param   int     $id Group ID.
      *
      * @return  JsonResponse
      */
-    public function deleteAction($id)
+    public function deleteAction(Request $request, $id)
     {
         try {
-            $command = new Groups\DeleteGroupCommand(['id' => $id]);
+            $data = $this->getFormData($request, null, ['id' => $id]);
+
+            $command = new Groups\DeleteGroupCommand($data);
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();
@@ -129,10 +132,9 @@ class GroupsPostController extends Controller
     public function addUsersAction(Request $request, $id)
     {
         try {
-            $command = new Groups\AddUsersCommand(
-                array_merge(['id' => $id], $request->request->all())
-            );
+            $data = $this->getFormData($request, null, ['id' => $id]);
 
+            $command = new Groups\AddUsersCommand($data);
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();
@@ -158,10 +160,9 @@ class GroupsPostController extends Controller
     public function removeUsersAction(Request $request, $id)
     {
         try {
-            $command = new Groups\RemoveUsersCommand(
-                array_merge(['id' => $id], $request->request->all())
-            );
+            $data = $this->getFormData($request, null, ['id' => $id]);
 
+            $command = new Groups\RemoveUsersCommand($data);
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();
