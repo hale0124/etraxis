@@ -43,12 +43,7 @@ class ContainerTraitTest extends KernelTestCase
 
     public function testGetFormDataSuccessGet()
     {
-        /** @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $csrf */
-        $csrf = static::$kernel->getContainer()->get('security.csrf.token_manager');
-        $csrf->refreshToken('form');
-
         $formdata = [
-            '_token' => $csrf->getToken('form')->getValue(),
             'fname'  => 'Artem',
             'lname'  => 'Rodygin',
             'empty'  => '',
@@ -84,12 +79,7 @@ class ContainerTraitTest extends KernelTestCase
 
     public function testGetFormDataExtra()
     {
-        /** @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $csrf */
-        $csrf = static::$kernel->getContainer()->get('security.csrf.token_manager');
-        $csrf->refreshToken('form');
-
         $formdata = [
-            '_token' => $csrf->getToken('form')->getValue(),
             'fname'  => 'Artem',
             'lname'  => 'Rodygin',
         ];
@@ -112,12 +102,7 @@ class ContainerTraitTest extends KernelTestCase
      */
     public function testGetFormDataNoData()
     {
-        /** @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $csrf */
-        $csrf = static::$kernel->getContainer()->get('security.csrf.token_manager');
-        $csrf->refreshToken('user');
-
         $formdata = [
-            '_token' => $csrf->getToken('user')->getValue(),
             'fname'  => 'Artem',
             'lname'  => 'Rodygin',
         ];
@@ -144,7 +129,8 @@ class ContainerTraitTest extends KernelTestCase
             'lname'  => 'Rodygin',
         ];
 
-        $request = new Request(['form' => $formdata]);
+        $request = new Request([], ['form' => $formdata]);
+        $request->setMethod(Request::METHOD_POST);
 
         $this->object->getFormData($request);
     }
@@ -160,7 +146,8 @@ class ContainerTraitTest extends KernelTestCase
             'lname'  => 'Rodygin',
         ];
 
-        $request = new Request(['form' => $formdata]);
+        $request = new Request([], ['form' => $formdata]);
+        $request->setMethod(Request::METHOD_POST);
 
         $this->object->getFormData($request);
     }

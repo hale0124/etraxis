@@ -49,27 +49,23 @@ trait ContainerTrait
             throw new BadRequestHttpException('No data submitted.');
         }
 
-        if (!array_key_exists('_token', $data[$name])) {
-            $logger->error('CSRF token is missing.');
-            throw new BadRequestHttpException('CSRF token is missing.');
-        }
+        if ($request->getMethod() == Request::METHOD_POST) {
+            if (!array_key_exists('_token', $data[$name])) {
+                $logger->error('CSRF token is missing.');
+                throw new BadRequestHttpException('CSRF token is missing.');
+            }
 
-        /** @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $csrf */
-        $csrf  = $this->container->get('security.csrf.token_manager');
-        $token = $csrf->getToken($name);
+            /** @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface $csrf */
+            $csrf  = $this->container->get('security.csrf.token_manager');
+            $token = $csrf->getToken($name);
 
-        if ($data[$name]['_token'] !== $token->getValue()) {
-            $logger->error('Invalid CSRF token.');
-            throw new BadRequestHttpException('Invalid CSRF token.');
-        }
-
-        foreach ($data[$name] as &$value) {
-            if (strlen($value) == 0) {
-                $value = null;
+            if ($data[$name]['_token'] !== $token->getValue()) {
+                $logger->error('Invalid CSRF token.');
+                throw new BadRequestHttpException('Invalid CSRF token.');
             }
         }
 
-        return $extra + $data[$name];
+        return $this->empty2null($extra + $data[$name]);
     }
 
     /**
@@ -134,5 +130,25 @@ trait ContainerTrait
     protected function getDataTables()
     {
         return $this->container->get('datatables');
+    }
+
+    /**
+     * Replaces empty strings with nulls.
+     *
+     * @param   mixed $value A value to be updated. Can be an array.
+     *
+     * @return  mixed Updated value.
+     */
+    private function empty2null($value)
+    {
+        if (is_array($value)) {
+            foreach ($value as &$v) {
+                $v = $this->empty2null($v);
+            }
+
+            return $value;
+        }
+
+        return strlen($value) == 0 ? null : $value;
     }
 }
