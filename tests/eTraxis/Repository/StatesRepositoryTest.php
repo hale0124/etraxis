@@ -11,6 +11,7 @@
 
 namespace eTraxis\Repository;
 
+use eTraxis\Collection\SystemRole;
 use eTraxis\Tests\BaseTestCase;
 
 class StatesRepositoryTest extends BaseTestCase
@@ -36,5 +37,49 @@ class StatesRepositoryTest extends BaseTestCase
         ];
 
         $this->assertEquals($expected, $states);
+    }
+
+    public function testGetRoleTransitions()
+    {
+        /** @var StatesRepository $repository */
+        $repository = $this->doctrine->getManager()->getRepository('eTraxis:State');
+
+        /** @var \eTraxis\Entity\State $new */
+        $new = $repository->findOneBy(['name' => 'New']);
+        $this->assertNotNull($new);
+
+        /** @var \eTraxis\Entity\State $delivered */
+        $delivered = $repository->findOneBy(['name' => 'Delivered']);
+        $this->assertNotNull($delivered);
+
+        $expected = [
+            $delivered->getId(),
+        ];
+
+        $this->assertEquals($expected, $repository->getRoleTransitions($new->getId(), SystemRole::RESPONSIBLE));
+    }
+
+    public function testGetGroupTransitions()
+    {
+        /** @var StatesRepository $repository */
+        $repository = $this->doctrine->getManager()->getRepository('eTraxis:State');
+
+        /** @var \eTraxis\Entity\Group $managers */
+        $managers = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Managers']);
+        $this->assertNotNull($managers);
+
+        /** @var \eTraxis\Entity\State $new */
+        $new = $repository->findOneBy(['name' => 'New']);
+        $this->assertNotNull($new);
+
+        /** @var \eTraxis\Entity\State $delivered */
+        $delivered = $repository->findOneBy(['name' => 'Delivered']);
+        $this->assertNotNull($delivered);
+
+        $expected = [
+            $delivered->getId(),
+        ];
+
+        $this->assertEquals($expected, $repository->getGroupTransitions($new->getId(), $managers->getId()));
     }
 }

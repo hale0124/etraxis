@@ -13,6 +13,7 @@ namespace AppBundle\Controller\Admin;
 
 use eTraxis\Collection\StateResponsible;
 use eTraxis\Collection\StateType;
+use eTraxis\Collection\SystemRole;
 use eTraxis\Entity\State;
 use eTraxis\Form\StateForm;
 use eTraxis\Traits\ContainerTrait;
@@ -138,8 +139,24 @@ class StatesGetController extends Controller
             throw $this->createNotFoundException();
         }
 
+        /** @var \eTraxis\Repository\StatesRepository $repository */
+        $repository = $this->getDoctrine()->getRepository('eTraxis:State');
+
+        $transitions = $repository->getStates($state->getTemplateId());
+
+        /** @var \eTraxis\Repository\GroupsRepository $repository */
+        $repository = $this->getDoctrine()->getRepository('eTraxis:Group');
+
         return $this->render('admin/states/tab_transitions.html.twig', [
-            'state' => $state,
+            'state'       => $state,
+            'locals'      => $repository->getLocalGroups($state->getTemplate()->getProjectId()),
+            'globals'     => $repository->getGlobalGroups(),
+            'transitions' => $transitions,
+            'role'        => [
+                'author'      => SystemRole::AUTHOR,
+                'responsible' => SystemRole::RESPONSIBLE,
+                'registered'  => SystemRole::REGISTERED,
+            ],
         ]);
     }
 
@@ -191,6 +208,40 @@ class StatesGetController extends Controller
         }
         catch (HttpException $e) {
             return new Response($e->getMessage(), $e->getStatusCode());
+        }
+    }
+
+    /**
+     * Loads transitions of the specified state.
+     *
+     * @Action\Route("/transitions/{id}/{group}", name="admin_load_state_transitions", requirements={"id"="\d+", "group"="[\-]?\d+"})
+     *
+     * @param   int $id    State ID.
+     * @param   int $group Group ID or system role.
+     *
+     * @return  JsonResponse
+     */
+    public function loadTransitionsAction($id, $group = 0)
+    {
+        try {
+            /** @var \eTraxis\Repository\StatesRepository $repository */
+            $repository = $this->getDoctrine()->getRepository('eTraxis:State');
+
+            /** @var State $state */
+            $state = $repository->find($id);
+
+            if (!$state) {
+                throw $this->createNotFoundException();
+            }
+
+            $transitions = array_key_exists($group, SystemRole::getCollection())
+                ? $repository->getRoleTransitions($id, $group)
+                : $repository->getGroupTransitions($id, $group);
+
+            return new JsonResponse($transitions);
+        }
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
 }

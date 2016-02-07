@@ -44,4 +44,66 @@ class StatesRepository extends EntityRepository
 
         return $query->getQuery()->getResult();
     }
+
+    /**
+     * Returns transitions of specified system role for specified state.
+     *
+     * @param   int $stateId State ID.
+     * @param   int $role    System role.
+     *
+     * @return  int[] List of state IDs.
+     */
+    public function getRoleTransitions($stateId, $role)
+    {
+        $repository = $this->getEntityManager()->getRepository('eTraxis:StateRoleTransition');
+
+        $query = $repository->createQueryBuilder('tr');
+
+        $query
+            ->select('tr.toStateId')
+            ->where('tr.fromStateId = :state')
+            ->andWhere('tr.role = :role')
+            ->setParameter('state', $stateId)
+            ->setParameter('role', $role)
+        ;
+
+        $results = [];
+
+        foreach ($query->getQuery()->getResult() as $result) {
+            $results[] = $result['toStateId'];
+        }
+
+        return $results;
+    }
+
+    /**
+     * Returns transitions of specified group for specified state.
+     *
+     * @param   int $stateId State ID.
+     * @param   int $groupId Group ID.
+     *
+     * @return  int[] List of state IDs.
+     */
+    public function getGroupTransitions($stateId, $groupId)
+    {
+        $repository = $this->getEntityManager()->getRepository('eTraxis:StateGroupTransition');
+
+        $query = $repository->createQueryBuilder('tr');
+
+        $query
+            ->select('tr.toStateId')
+            ->where('tr.fromStateId = :state')
+            ->andWhere('tr.groupId = :group')
+            ->setParameter('state', $stateId)
+            ->setParameter('group', $groupId)
+        ;
+
+        $results = [];
+
+        foreach ($query->getQuery()->getResult() as $result) {
+            $results[] = $result['toStateId'];
+        }
+
+        return $results;
+    }
 }

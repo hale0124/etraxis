@@ -64,10 +64,8 @@
             var group = $('#group').val();
             var permissions = 0;
 
-            $('input[type="checkbox"].permissions').each(function() {
-                if ($(this).prop('checked')) {
-                    permissions |= $(this).val();
-                }
+            $('input[type="checkbox"].permissions:checked').each(function() {
+                permissions |= $(this).val();
             });
 
             $.post('{{ path('admin_save_template_permissions', {'id': template.id}) }}/' + group, { permissions }, function() {
