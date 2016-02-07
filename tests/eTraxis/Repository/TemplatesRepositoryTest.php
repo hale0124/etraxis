@@ -11,6 +11,7 @@
 
 namespace eTraxis\Repository;
 
+use eTraxis\Collection\SystemRole;
 use eTraxis\Entity\Template;
 use eTraxis\Tests\BaseTestCase;
 
@@ -39,7 +40,25 @@ class TemplatesRepositoryTest extends BaseTestCase
         $this->assertEquals($expected, $templates);
     }
 
-    public function testGetPermissions()
+    public function testGetRolePermissions()
+    {
+        $author      = Template::PERMIT_VIEW_RECORD | Template::PERMIT_EDIT_RECORD | Template::PERMIT_ADD_COMMENT | Template::PERMIT_ADD_FILE | Template::PERMIT_REMOVE_FILE;
+        $responsible = Template::PERMIT_VIEW_RECORD | Template::PERMIT_ADD_COMMENT | Template::PERMIT_ADD_FILE;
+        $registered  = 0;
+
+        /** @var TemplatesRepository $repository */
+        $repository = $this->doctrine->getManager()->getRepository('eTraxis:Template');
+
+        /** @var Template $template */
+        $template = $repository->findOneBy(['name' => 'Delivery']);
+
+        $this->assertEquals($author,      $repository->getRolePermissions($template->getId(), SystemRole::AUTHOR));
+        $this->assertEquals($responsible, $repository->getRolePermissions($template->getId(), SystemRole::RESPONSIBLE));
+        $this->assertEquals($registered,  $repository->getRolePermissions($template->getId(), SystemRole::REGISTERED));
+        $this->assertEquals(0,            $repository->getRolePermissions($template->getId(), 0));
+    }
+
+    public function testGetGroupPermissions()
     {
         $local  = Template::PERMIT_VIEW_RECORD | Template::PERMIT_ADD_COMMENT;
         $global = 0;
@@ -57,7 +76,7 @@ class TemplatesRepositoryTest extends BaseTestCase
         /** @var Template $template */
         $template = $repository->findOneBy(['name' => 'Delivery']);
 
-        $this->assertEquals($local,  $repository->getPermissions($template->getId(), $group_local->getId()));
-        $this->assertEquals($global, $repository->getPermissions($template->getId(), $group_global->getId()));
+        $this->assertEquals($local,  $repository->getGroupPermissions($template->getId(), $group_local->getId()));
+        $this->assertEquals($global, $repository->getGroupPermissions($template->getId(), $group_global->getId()));
     }
 }

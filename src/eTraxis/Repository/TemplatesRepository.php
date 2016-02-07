@@ -12,6 +12,8 @@
 namespace eTraxis\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use eTraxis\Collection\SystemRole;
+use eTraxis\Entity\Template;
 
 /**
  * Templates repository.
@@ -43,6 +45,44 @@ class TemplatesRepository extends EntityRepository
     }
 
     /**
+     * Returns permissions of specified system role for specified template.
+     *
+     * @param   int $templateId Template ID.
+     * @param   int $role       System role.
+     *
+     * @return  int
+     */
+    public function getRolePermissions($templateId, $role)
+    {
+        /** @var Template $template */
+        $template = $this->find($templateId);
+
+        switch ($role) {
+
+            case SystemRole::AUTHOR:
+                $permissions = $template->getAuthorPermissions();
+                $permissions |= Template::PERMIT_VIEW_RECORD;
+                $permissions &= ~Template::PERMIT_CREATE_RECORD;
+                break;
+
+            case SystemRole::RESPONSIBLE:
+                $permissions = $template->getResponsiblePermissions();
+                $permissions |= Template::PERMIT_VIEW_RECORD;
+                $permissions &= ~Template::PERMIT_CREATE_RECORD;
+                break;
+
+            case SystemRole::REGISTERED:
+                $permissions = $template->getRegisteredPermissions();
+                break;
+
+            default:
+                $permissions = 0;
+        }
+
+        return $permissions;
+    }
+
+    /**
      * Returns permissions of specified group for specified template.
      *
      * @param   int $templateId Template ID.
@@ -50,7 +90,7 @@ class TemplatesRepository extends EntityRepository
      *
      * @return  int
      */
-    public function getPermissions($templateId, $groupId)
+    public function getGroupPermissions($templateId, $groupId)
     {
         $repository = $this->getEntityManager()->getRepository('eTraxis:TemplateGroupPermission');
 

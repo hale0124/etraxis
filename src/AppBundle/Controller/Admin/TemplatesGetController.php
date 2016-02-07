@@ -263,7 +263,7 @@ class TemplatesGetController extends Controller
                     break;
 
                 default:
-                    $permissions = $repository->getPermissions($id, $group);
+                    $permissions = $repository->getRolePermissions($id, $group);
             }
 
             return new JsonResponse($permissions);
