@@ -24,7 +24,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 /**
  * Projects "GET" controller.
  *
- * @Action\Route("/projects")
+ * @Action\Route("/projects", condition="request.isXmlHttpRequest()")
  * @Action\Method("GET")
  */
 class ProjectsGetController extends Controller
@@ -34,7 +34,7 @@ class ProjectsGetController extends Controller
     /**
      * Page with list of projects.
      *
-     * @Action\Route("/", name="admin_projects")
+     * @Action\Route("/", name="admin_projects", condition="")
      *
      * @return  Response
      */

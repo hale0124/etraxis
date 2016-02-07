@@ -23,7 +23,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 /**
  * Templates "POST" controller.
  *
- * @Action\Route("/templates")
+ * @Action\Route("/templates", condition="request.isXmlHttpRequest()")
  * @Action\Method("POST")
  */
 class TemplatesPostController extends Controller

@@ -23,7 +23,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 /**
  * Groups "POST" controller.
  *
- * @Action\Route("/groups")
+ * @Action\Route("/groups", condition="request.isXmlHttpRequest()")
  * @Action\Method("POST")
  */
 class GroupsPostController extends Controller

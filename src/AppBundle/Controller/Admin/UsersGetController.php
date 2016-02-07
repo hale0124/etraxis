@@ -27,7 +27,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 /**
  * Users "GET" controller.
  *
- * @Action\Route("/users")
+ * @Action\Route("/users", condition="request.isXmlHttpRequest()")
  * @Action\Method("GET")
  */
 class UsersGetController extends Controller
@@ -37,7 +37,7 @@ class UsersGetController extends Controller
     /**
      * Page with list of users.
      *
-     * @Action\Route("/", name="admin_users")
+     * @Action\Route("/", name="admin_users", condition="")
      *
      * @return  Response
      */
@@ -72,7 +72,7 @@ class UsersGetController extends Controller
     /**
      * Exports list of users as CSV file.
      *
-     * @Action\Route("/csv", name="admin_users_csv")
+     * @Action\Route("/csv", name="admin_users_csv", condition="")
      *
      * @param   Request $request
      *
@@ -125,7 +125,7 @@ class UsersGetController extends Controller
     /**
      * Shows specified user.
      *
-     * @Action\Route("/{id}", name="admin_view_user", requirements={"id"="\d+"})
+     * @Action\Route("/{id}", name="admin_view_user", condition="", requirements={"id"="\d+"})
      *
      * @param   Request $request
      * @param   int     $id User ID.

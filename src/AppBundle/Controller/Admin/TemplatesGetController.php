@@ -25,7 +25,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 /**
  * Templates "GET" controller.
  *
- * @Action\Route("/templates")
+ * @Action\Route("/templates", condition="request.isXmlHttpRequest()")
  * @Action\Method("GET")
  */
 class TemplatesGetController extends Controller

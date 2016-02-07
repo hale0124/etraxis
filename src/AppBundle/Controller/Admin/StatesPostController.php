@@ -24,7 +24,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 /**
  * States "POST" controller.
  *
- * @Action\Route("/states")
+ * @Action\Route("/states", condition="request.isXmlHttpRequest()")
  * @Action\Method("POST")
  */
 class StatesPostController extends Controller

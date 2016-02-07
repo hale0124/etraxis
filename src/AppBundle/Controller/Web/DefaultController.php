@@ -41,7 +41,7 @@ class DefaultController extends Controller
     /**
      * Renders dialog for export something into CSV.
      *
-     * @Action\Route("/dlg/export", name="dlg_export")
+     * @Action\Route("/dlg/export", name="dlg_export", condition="request.isXmlHttpRequest()")
      * @Action\Method("GET")
      *
      * @return  Response
@@ -67,7 +67,7 @@ class DefaultController extends Controller
     /**
      * Verifies submitted form of "Export to CSV" parameters.
      *
-     * @Action\Route("/export", name="export")
+     * @Action\Route("/export", name="export", condition="request.isXmlHttpRequest()")
      * @Action\Method("POST")
      *
      * @param   Request $request

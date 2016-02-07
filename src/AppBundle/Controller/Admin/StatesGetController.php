@@ -27,7 +27,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 /**
  * States "GET" controller.
  *
- * @Action\Route("/states")
+ * @Action\Route("/states", condition="request.isXmlHttpRequest()")
  * @Action\Method("GET")
  */
 class StatesGetController extends Controller

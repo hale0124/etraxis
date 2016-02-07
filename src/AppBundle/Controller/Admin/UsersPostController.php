@@ -24,7 +24,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 /**
  * Users "POST" controller.
  *
- * @Action\Route("/users")
+ * @Action\Route("/users", condition="request.isXmlHttpRequest()")
  * @Action\Method("POST")
  */
 class UsersPostController extends Controller

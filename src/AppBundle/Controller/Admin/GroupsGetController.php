@@ -24,7 +24,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 /**
  * Groups "GET" controller.
  *
- * @Action\Route("/groups")
+ * @Action\Route("/groups", condition="request.isXmlHttpRequest()")
  * @Action\Method("GET")
  */
 class GroupsGetController extends Controller
