@@ -33,12 +33,6 @@
 
     $(function() {
 
-        var reloadTab = function() {
-            var $tabs = $('#tabs-template');
-            var current = $tabs.tabs('option', 'active');
-            $tabs.tabs('load', current);
-        };
-
         // "Edit" button.
         $('#btn-edit').click(function() {
             eTraxis.modal({
@@ -46,7 +40,6 @@
                 title: '{{ template.name }}',
                 success: function() {
                     $(document).trigger('admin.template.edited', {{ template.id }});
-                    reloadTab();
                     return true;
                 }
             });
@@ -65,7 +58,6 @@
         $('#btn-lock').click(function() {
             $.post('{{ path('admin_lock_template', {'id': template.id}) }}', function() {
                 $(document).trigger('admin.template.locked', {{ template.id }});
-                reloadTab();
             });
         });
 
@@ -73,7 +65,6 @@
         $('#btn-unlock').click(function() {
             $.post('{{ path('admin_unlock_template', {'id': template.id}) }}', function() {
                 $(document).trigger('admin.template.unlocked', {{ template.id }});
-                reloadTab();
             });
         });
     });

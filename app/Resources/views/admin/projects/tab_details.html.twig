@@ -24,12 +24,6 @@
 
     $(function() {
 
-        var reloadTab = function() {
-            var $tabs = $('#tabs-project');
-            var current = $tabs.tabs('option', 'active');
-            $tabs.tabs('load', current);
-        };
-
         // "Edit" button.
         $('#btn-edit').click(function() {
             eTraxis.modal({
@@ -37,7 +31,6 @@
                 title: '{{ project.name }}',
                 success: function() {
                     $(document).trigger('admin.project.edited', {{ project.id }});
-                    reloadTab();
                     return true;
                 }
             });

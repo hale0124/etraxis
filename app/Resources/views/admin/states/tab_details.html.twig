@@ -29,12 +29,6 @@
 
     $(function() {
 
-        var reloadTab = function() {
-            var $tabs = $('#tabs-state');
-            var current = $tabs.tabs('option', 'active');
-            $tabs.tabs('load', current);
-        };
-
         // "Edit" button.
         $('#btn-edit').click(function() {
             eTraxis.modal({
@@ -42,7 +36,6 @@
                 title: '{{ state.name }}',
                 success: function() {
                     $(document).trigger('admin.state.edited', {{ state.id }});
-                    reloadTab();
                     return true;
                 }
             });
@@ -61,7 +54,6 @@
         $('#btn-initial').click(function() {
             $.post('{{ path('admin_initial_state', {'id': state.id}) }}', function() {
                 $(document).trigger('admin.state.initial', {{ state.id }});
-                reloadTab();
             });
         });
     });
