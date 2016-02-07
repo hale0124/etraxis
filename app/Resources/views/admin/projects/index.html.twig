@@ -83,7 +83,7 @@
             // Project edited.
             $(document).on('admin.project.edited', function(e, data) {
                 loadProjects(function() {
-                    $projects.panel('select', data);
+                    $projects.trigger('panel.item.click', data);
                 });
             });
 
@@ -205,7 +205,7 @@
             // Template edited / locked / unlocked.
             $(document).on('admin.template.edited admin.template.locked admin.template.unlocked', function(e, data) {
                 loadTemplates(function() {
-                    $templates.panel('select', data);
+                    $templates.trigger('panel.item.click', data);
                 });
             });
 
@@ -269,7 +269,7 @@
             // State edited / set as initial.
             $(document).on('admin.state.edited admin.state.initial', function(e, data) {
                 loadStates(function() {
-                    $states.panel('select', data);
+                    $states.trigger('panel.item.click', data);
                 });
             });
 
