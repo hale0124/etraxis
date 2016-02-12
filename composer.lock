@@ -4,9 +4,58 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e007837ce9db5482c5f8e31f048529ec",
-    "content-hash": "ca52ac4e5eb6f89ba12c8bf5172da9cd",
+    "hash": "cab2af819cec1bc19b7807b1eef8f91d",
+    "content-hash": "77979c72c1434d2bb4ff5a64a5872605",
     "packages": [
+        {
+            "name": "arodygin/datatables-bundle",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arodygin/datatables-bundle.git",
+                "reference": "38995dc057740dc6ec6d5a9998642d57f36cbaa9"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arodygin/datatables-bundle/zipball/38995dc057740dc6ec6d5a9998642d57f36cbaa9",
+                "reference": "38995dc057740dc6ec6d5a9998642d57f36cbaa9",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5.0",
+                "psr/log": "~1.0",
+                "symfony/config": "~2.3|~3.0",
+                "symfony/dependency-injection": "~2.3|~3.0",
+                "symfony/http-foundation": "~2.3|~3.0",
+                "symfony/http-kernel": "~2.3|~3.0",
+                "symfony/validator": "~2.3|~3.0"
+            },
+            "require-dev": {
+                "doctrine/annotations": "~1.2",
+                "doctrine/cache": "~1.5",
+                "fabpot/php-cs-fixer": "~1.10",
+                "phpunit/phpunit": "~4.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "DataTables\\": [
+                        "src/",
+                        "tests/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "DataTables Symfony bundle",
+            "keywords": [
+                "datatable",
+                "datatables"
+            ],
+            "time": "2015-12-01 08:21:57"
+        },
         {
             "name": "beberlei/assert",
             "version": "v2.4",
@@ -1066,55 +1115,6 @@
                 "orm"
             ],
             "time": "2016-01-05 21:34:58"
-        },
-        {
-            "name": "etraxis/datatables-bundle",
-            "version": "1.0.1",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/etraxis/datatables-bundle.git",
-                "reference": "38995dc057740dc6ec6d5a9998642d57f36cbaa9"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/etraxis/datatables-bundle/zipball/38995dc057740dc6ec6d5a9998642d57f36cbaa9",
-                "reference": "38995dc057740dc6ec6d5a9998642d57f36cbaa9",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5.0",
-                "psr/log": "~1.0",
-                "symfony/config": "~2.3|~3.0",
-                "symfony/dependency-injection": "~2.3|~3.0",
-                "symfony/http-foundation": "~2.3|~3.0",
-                "symfony/http-kernel": "~2.3|~3.0",
-                "symfony/validator": "~2.3|~3.0"
-            },
-            "require-dev": {
-                "doctrine/annotations": "~1.2",
-                "doctrine/cache": "~1.5",
-                "fabpot/php-cs-fixer": "~1.10",
-                "phpunit/phpunit": "~4.1"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "DataTables\\": [
-                        "src/",
-                        "tests/"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "DataTables Symfony bundle",
-            "keywords": [
-                "datatable",
-                "datatables"
-            ],
-            "time": "2015-12-01 08:21:57"
         },
         {
             "name": "incenteev/composer-parameter-handler",
