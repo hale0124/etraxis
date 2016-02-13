@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "cab2af819cec1bc19b7807b1eef8f91d",
-    "content-hash": "77979c72c1434d2bb4ff5a64a5872605",
+    "hash": "9608b9c880607b1378269efb5cb800b8",
+    "content-hash": "5c8194175b2cbd240466d9ae392794e2",
     "packages": [
         {
             "name": "arodygin/datatables-bundle",
-            "version": "1.0.1",
+            "version": "1.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/arodygin/datatables-bundle.git",
-                "reference": "38995dc057740dc6ec6d5a9998642d57f36cbaa9"
+                "reference": "f3d511173cf3170d01ded0809fa9da3552e393a5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arodygin/datatables-bundle/zipball/38995dc057740dc6ec6d5a9998642d57f36cbaa9",
-                "reference": "38995dc057740dc6ec6d5a9998642d57f36cbaa9",
+                "url": "https://api.github.com/repos/arodygin/datatables-bundle/zipball/f3d511173cf3170d01ded0809fa9da3552e393a5",
+                "reference": "f3d511173cf3170d01ded0809fa9da3552e393a5",
                 "shasum": ""
             },
             "require": {
@@ -54,7 +54,7 @@
                 "datatable",
                 "datatables"
             ],
-            "time": "2015-12-01 08:21:57"
+            "time": "2016-02-13 08:52:05"
         },
         {
             "name": "beberlei/assert",
@@ -1666,16 +1666,16 @@
         },
         {
             "name": "simple-bus/message-bus",
-            "version": "v2.2.1",
+            "version": "v2.2.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SimpleBus/MessageBus.git",
-                "reference": "bd29bfa9528b380c288a572f43fb42d3732ed290"
+                "reference": "723bf20b93e17e9e87e83032ec21d8b2452328cf"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SimpleBus/MessageBus/zipball/bd29bfa9528b380c288a572f43fb42d3732ed290",
-                "reference": "bd29bfa9528b380c288a572f43fb42d3732ed290",
+                "url": "https://api.github.com/repos/SimpleBus/MessageBus/zipball/723bf20b93e17e9e87e83032ec21d8b2452328cf",
+                "reference": "723bf20b93e17e9e87e83032ec21d8b2452328cf",
                 "shasum": ""
             },
             "require": {
@@ -1712,7 +1712,7 @@
                 "message",
                 "message bus"
             ],
-            "time": "2015-11-27 19:04:31"
+            "time": "2016-02-12 08:35:53"
         },
         {
             "name": "simple-bus/symfony-bridge",
@@ -2931,16 +2931,16 @@
         },
         {
             "name": "phpunit/phpunit",
-            "version": "4.8.22",
+            "version": "4.8.23",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sebastianbergmann/phpunit.git",
-                "reference": "dfb11aa5236376b4fc63853cf746af39fe780e72"
+                "reference": "6e351261f9cd33daf205a131a1ba61c6d33bd483"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/dfb11aa5236376b4fc63853cf746af39fe780e72",
-                "reference": "dfb11aa5236376b4fc63853cf746af39fe780e72",
+                "url": "https://api.github.com/repos/sebastianbergmann/phpunit/zipball/6e351261f9cd33daf205a131a1ba61c6d33bd483",
+                "reference": "6e351261f9cd33daf205a131a1ba61c6d33bd483",
                 "shasum": ""
             },
             "require": {
@@ -2999,7 +2999,7 @@
                 "testing",
                 "xunit"
             ],
-            "time": "2016-02-02 09:01:21"
+            "time": "2016-02-11 14:56:33"
         },
         {
             "name": "phpunit/phpunit-mock-objects",

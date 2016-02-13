@@ -59,7 +59,7 @@ class UsersDataTable implements DataTableHandlerInterface
         $query = $this->repository->createQueryBuilder('u');
 
         // Search.
-        if ($request->search['value']) {
+        if ($request->search->value) {
 
             $conditions = [
                 'LOWER(u.username) LIKE :search',
@@ -70,20 +70,20 @@ class UsersDataTable implements DataTableHandlerInterface
 
             $query
                 ->where('(' . implode(' OR ', $conditions) . ')')
-                ->setParameter('search', mb_strtolower("%{$request->search['value']}%"))
+                ->setParameter('search', mb_strtolower("%{$request->search->value}%"))
             ;
         }
 
         // Filter by columns.
         foreach ($request->columns as $column) {
 
-            if (!$column['search']['value']) {
+            if (!$column->search->value) {
                 continue;
             }
 
-            $value = mb_strtolower($column['search']['value']);
+            $value = mb_strtolower($column->search->value);
 
-            switch ($column['data']) {
+            switch ($column->data) {
 
                 case self::COLUMN_USERNAME:
 
@@ -158,7 +158,7 @@ class UsersDataTable implements DataTableHandlerInterface
                 self::COLUMN_DESCRIPTION    => 'u.description',
             ];
 
-            $query->addOrderBy($map[$order['column']], $order['dir']);
+            $query->addOrderBy($map[$order->column], $order->dir);
         }
 
         /** @var \eTraxis\Entity\User[] $entities */

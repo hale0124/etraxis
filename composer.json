@@ -29,7 +29,7 @@
         "incenteev/composer-parameter-handler" : "^2.0",
         "simple-bus/symfony-bridge"            : "^4.1",
         "ramsey/uuid"                          : "^3.0",
-        "arodygin/datatables-bundle"           : "^1.0"
+        "arodygin/datatables-bundle"           : "^1.1"
     },
     "require-dev": {
         "sensio/generator-bundle"              : "^3.0",
