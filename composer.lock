@@ -13,28 +13,31 @@
             "source": {
                 "type": "git",
                 "url": "https://github.com/arodygin/datatables-bundle.git",
-                "reference": "f3d511173cf3170d01ded0809fa9da3552e393a5"
+                "reference": "422667b46feccdc29b413c2fbfd5b065aebfc825"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arodygin/datatables-bundle/zipball/f3d511173cf3170d01ded0809fa9da3552e393a5",
-                "reference": "f3d511173cf3170d01ded0809fa9da3552e393a5",
+                "url": "https://api.github.com/repos/arodygin/datatables-bundle/zipball/422667b46feccdc29b413c2fbfd5b065aebfc825",
+                "reference": "422667b46feccdc29b413c2fbfd5b065aebfc825",
                 "shasum": ""
             },
             "require": {
                 "php": ">=5.5.0",
-                "psr/log": "~1.0",
-                "symfony/config": "~2.3|~3.0",
-                "symfony/dependency-injection": "~2.3|~3.0",
-                "symfony/http-foundation": "~2.3|~3.0",
-                "symfony/http-kernel": "~2.3|~3.0",
-                "symfony/validator": "~2.3|~3.0"
+                "psr/log": "^1.0",
+                "symfony/config": "^2.3|^3.0",
+                "symfony/dependency-injection": "^2.3|^3.0",
+                "symfony/http-foundation": "^2.3|^3.0",
+                "symfony/http-kernel": "^2.3|^3.0",
+                "symfony/validator": "^2.3|^3.0"
+            },
+            "replace": {
+                "etraxis/datatables-bundle": "self.version"
             },
             "require-dev": {
-                "doctrine/annotations": "~1.2",
-                "doctrine/cache": "~1.5",
-                "fabpot/php-cs-fixer": "~1.10",
-                "phpunit/phpunit": "~4.1"
+                "doctrine/annotations": "^1.2",
+                "doctrine/cache": "^1.5",
+                "fabpot/php-cs-fixer": "^1.10",
+                "phpunit/phpunit": "^4.1"
             },
             "type": "library",
             "autoload": {
@@ -50,11 +53,12 @@
                 "MIT"
             ],
             "description": "DataTables Symfony bundle",
+            "homepage": "https://github.com/arodygin/datatables-bundle",
             "keywords": [
                 "datatable",
                 "datatables"
             ],
-            "time": "2016-02-13 08:52:05"
+            "time": "2016-02-14 01:21:00"
         },
         {
             "name": "beberlei/assert",
