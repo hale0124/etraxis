@@ -4,7 +4,7 @@ services:
     etraxis.listener.csrf_token:
         class: AppBundle\EventListener\CsrfToken
         tags:
-            - { name: kernel.event_listener, event: kernel.request, method: checkCsrfToken, priority: 15 }
+            - { name: kernel.event_listener, event: kernel.request, method: checkCsrfToken }
         arguments:
             - "@logger"
             - "@security.csrf.token_manager"
