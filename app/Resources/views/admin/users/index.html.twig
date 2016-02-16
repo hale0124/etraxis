@@ -71,16 +71,6 @@
                 // Some buttons are disabled if no checkbox is ticked.
                 $('#btn-disable').disable(checked == 0);
                 $('#btn-enable').disable(checked == 0);
-
-                // If no checkbox is ticked, untick "Select all" checkbox.
-                if (checked == 0) {
-                    $('input[type="checkbox"].checkall', $table).prop('checked', false);
-                }
-
-                // If all checkboxes are ticked, tick "Select all" checkbox.
-                if (checked == $table.api().page.len()) {
-                    $('input[type="checkbox"].checkall', $table).prop('checked', true);
-                }
             };
 
             // Table has been redrawn.

@@ -166,8 +166,27 @@ var datatables_language = window.datatables_language || {};
                     $('tbody input[type="checkbox"]', $table).prop('checked', $(this).prop('checked'));
                 });
 
-                // Avoid "click" event on the first column.
+                // Toggle "Check all" if another checkbox is clicked.
+                $table.on('click', 'tbody tr td:first-child input[type="checkbox"]', function(e) {
+
+                    var checked = $('tbody tr td:first-child input[type="checkbox"]:checked', $table).length;
+
+                    // If no checkbox is ticked, untick "Select all" checkbox.
+                    if (checked == 0) {
+                        $('input[type="checkbox"].checkall', $table).prop('checked', false);
+                    }
+
+                    // If all checkboxes are ticked, tick "Select all" checkbox.
+                    if (checked == $table.api().page.len()) {
+                        $('input[type="checkbox"].checkall', $table).prop('checked', true);
+                    }
+
+                    e.stopPropagation();
+                });
+
+                // Simulate checkbox click when clicking on the first column.
                 $table.on('click', 'tbody tr td:first-child', function(e) {
+                    $('input[type="checkbox"]', this).click();
                     e.stopPropagation();
                 });
             }
@@ -272,6 +291,7 @@ var datatables_language = window.datatables_language || {};
                 // while recent request is still under processing.
                 // Unblock only if no more responses are expected.
                 if (json.draw == drawNumber) {
+                    $('input[type="checkbox"].checkall', $table).prop('checked', false);
                     tableUnblock($table);
                 }
             });
