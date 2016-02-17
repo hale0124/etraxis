@@ -12,6 +12,7 @@
 namespace eTraxis\SimpleBus\Users;
 
 use eTraxis\Entity\Group;
+use eTraxis\Entity\User;
 use eTraxis\Tests\BaseTestCase;
 
 class RemoveGroupsCommandTest extends BaseTestCase
@@ -19,7 +20,7 @@ class RemoveGroupsCommandTest extends BaseTestCase
     public function testSuccess()
     {
         /** @var \eTraxis\Repository\UsersRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository('eTraxis:User');
+        $repository = $this->doctrine->getManager()->getRepository(User::class);
 
         $user = $this->findUser('hubert');
 

@@ -55,7 +55,7 @@ class DeleteProjectCommandHandler
      */
     public function handle(DeleteProjectCommand $command)
     {
-        $repository = $this->doctrine->getRepository('eTraxis:Project');
+        $repository = $this->doctrine->getRepository(Project::class);
 
         $entity = $repository->find($command->id);
 

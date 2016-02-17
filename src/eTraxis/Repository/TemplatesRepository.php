@@ -14,6 +14,7 @@ namespace eTraxis\Repository;
 use Doctrine\ORM\EntityRepository;
 use eTraxis\Collection\SystemRole;
 use eTraxis\Entity\Template;
+use eTraxis\Entity\TemplateGroupPermission;
 
 /**
  * Templates repository.
@@ -92,7 +93,7 @@ class TemplatesRepository extends EntityRepository
      */
     public function getGroupPermissions($templateId, $groupId)
     {
-        $repository = $this->getEntityManager()->getRepository('eTraxis:TemplateGroupPermission');
+        $repository = $this->getEntityManager()->getRepository(TemplateGroupPermission::class);
 
         $query = $repository->createQueryBuilder('tgp');
 

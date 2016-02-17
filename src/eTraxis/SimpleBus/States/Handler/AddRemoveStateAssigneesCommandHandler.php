@@ -11,6 +11,8 @@
 
 namespace eTraxis\SimpleBus\States\Handler;
 
+use eTraxis\Entity\Group;
+use eTraxis\Entity\State;
 use eTraxis\Entity\StateAssignee;
 use eTraxis\SimpleBus\States\AddStateAssigneesCommand;
 use eTraxis\SimpleBus\States\RemoveStateAssigneesCommand;
@@ -47,8 +49,8 @@ class AddRemoveStateAssigneesCommandHandler
      */
     public function handle($command)
     {
-        /** @var \eTraxis\Entity\State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->find($command->id);
+        /** @var State $state */
+        $state = $this->doctrine->getRepository(State::class)->find($command->id);
 
         if (!$state) {
             $this->logger->error('Unknown state.', [$command->id]);
@@ -57,8 +59,8 @@ class AddRemoveStateAssigneesCommandHandler
 
         $projectId = $state->getTemplate()->getProjectId();
 
-        /** @var \eTraxis\Entity\Group[] $groups */
-        $groups = $this->doctrine->getRepository('eTraxis:Group')->findBy([
+        /** @var Group[] $groups */
+        $groups = $this->doctrine->getRepository(Group::class)->findBy([
             'id' => $command->groups,
         ]);
 

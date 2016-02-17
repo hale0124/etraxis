@@ -19,7 +19,7 @@ class UpdateListFieldCommandTest extends BaseTestCase
     public function testSuccess()
     {
         /** @var Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Season']);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Season']);
 
         $this->assertEquals(Field::TYPE_LIST, $field->getType());
         $this->assertEquals('Season', $field->getName());
@@ -41,7 +41,7 @@ class UpdateListFieldCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $field = $this->doctrine->getRepository('eTraxis:Field')->find($field->getId());
+        $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 
         $this->assertEquals(Field::TYPE_LIST, $field->getType());
         $this->assertEquals('Season #', $field->getName());
@@ -59,7 +59,7 @@ class UpdateListFieldCommandTest extends BaseTestCase
     public function testItemNotFound()
     {
         /** @var Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Season']);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Season']);
 
         $command = new UpdateListFieldCommand([
             'id'           => $field->getId(),

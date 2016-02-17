@@ -11,14 +11,15 @@
 
 namespace eTraxis\Form;
 
+use eTraxis\Entity\Template;
 use eTraxis\Tests\BaseTestCase;
 
 class TemplateFormTest extends BaseTestCase
 {
     public function testForm()
     {
-        /** @var \eTraxis\Entity\Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+        /** @var Template $template */
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
         /** @var \Symfony\Component\Form\FormFactoryInterface $factory */
         $factory = $this->client->getContainer()->get('form.factory');

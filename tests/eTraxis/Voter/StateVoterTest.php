@@ -12,6 +12,7 @@
 namespace eTraxis\Voter;
 
 use eTraxis\Entity\State;
+use eTraxis\Entity\Template;
 use eTraxis\Tests\BaseTestCase;
 
 class StateVoterTest extends BaseTestCase
@@ -31,7 +32,7 @@ class StateVoterTest extends BaseTestCase
         $this->loginAs('hubert');
 
         /** @var State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
         $this->assertFalse($this->security->isGranted('UNKNOWN', $state));
     }
@@ -40,8 +41,8 @@ class StateVoterTest extends BaseTestCase
     {
         $this->loginAs('hubert');
 
-        /** @var \eTraxis\Entity\Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+        /** @var Template $template */
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
         $state = new State();
 
@@ -57,10 +58,10 @@ class StateVoterTest extends BaseTestCase
         $this->doctrine->getManager()->flush();
 
         /** @var State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
         /** @var State $empty */
-        $empty = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Cancelled']);
+        $empty = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Cancelled']);
 
         $this->assertInstanceOf('eTraxis\Entity\State', $state);
         $this->assertInstanceOf('eTraxis\Entity\State', $empty);
@@ -73,8 +74,8 @@ class StateVoterTest extends BaseTestCase
     {
         $this->loginAs('hubert');
 
-        /** @var \eTraxis\Entity\Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+        /** @var Template $template */
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
         $state = new State();
 
@@ -90,13 +91,13 @@ class StateVoterTest extends BaseTestCase
         $this->doctrine->getManager()->flush();
 
         /** @var State $initial */
-        $initial = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'New']);
+        $initial = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
         /** @var State $interim */
-        $interim = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'On the way']);
+        $interim = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'On the way']);
 
         /** @var State $final */
-        $final = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
+        $final = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
         $this->assertInstanceOf('eTraxis\Entity\State', $initial);
         $this->assertInstanceOf('eTraxis\Entity\State', $interim);

@@ -11,6 +11,7 @@
 
 namespace AppBundle\Controller\Admin;
 
+use eTraxis\Entity\Group;
 use eTraxis\SimpleBus\Groups;
 use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\Traits\ContainerTrait;
@@ -70,7 +71,7 @@ class GroupsPostController extends Controller
     public function editAction(Request $request, $id)
     {
         try {
-            $group = $this->getDoctrine()->getRepository('eTraxis:Group')->find($id);
+            $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
 
             if (!$group) {
                 throw $this->createNotFoundException();

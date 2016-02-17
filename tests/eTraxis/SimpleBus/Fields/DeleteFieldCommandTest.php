@@ -11,14 +11,15 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
+use eTraxis\Entity\Field;
 use eTraxis\Tests\BaseTestCase;
 
 class DeleteFieldCommandTest extends BaseTestCase
 {
     public function testSuccess()
     {
-        /** @var \eTraxis\Entity\Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy([
+        /** @var Field $field */
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy([
             'name'      => 'Crew',
             'removedAt' => 0,
         ]);
@@ -28,7 +29,7 @@ class DeleteFieldCommandTest extends BaseTestCase
         $command = new DeleteFieldCommand(['id' => $field->getId()]);
         $this->command_bus->handle($command);
 
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy([
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy([
             'name'      => 'Crew',
             'removedAt' => 0,
         ]);

@@ -19,7 +19,7 @@ class UpdateNumberFieldCommandTest extends BaseTestCase
     public function testSuccess()
     {
         /** @var Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Episode']);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Episode']);
 
         $this->assertEquals(Field::TYPE_NUMBER, $field->getType());
         $this->assertEquals('Episode', $field->getName());
@@ -45,7 +45,7 @@ class UpdateNumberFieldCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $field = $this->doctrine->getRepository('eTraxis:Field')->find($field->getId());
+        $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 
         $this->assertEquals(Field::TYPE_NUMBER, $field->getType());
         $this->assertEquals('Episode #', $field->getName());
@@ -65,7 +65,7 @@ class UpdateNumberFieldCommandTest extends BaseTestCase
     public function testMinMaxValues()
     {
         /** @var Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Episode']);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Episode']);
 
         $this->assertNotNull($field);
 
@@ -89,7 +89,7 @@ class UpdateNumberFieldCommandTest extends BaseTestCase
     public function testDefaultValue()
     {
         /** @var Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Episode']);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Episode']);
 
         $this->assertNotNull($field);
 

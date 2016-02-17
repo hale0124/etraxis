@@ -11,6 +11,7 @@
 
 namespace AppBundle\Controller\Admin;
 
+use eTraxis\Entity\Project;
 use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\SimpleBus\Projects;
 use eTraxis\Traits\ContainerTrait;
@@ -70,7 +71,7 @@ class ProjectsPostController extends Controller
     public function editAction(Request $request, $id)
     {
         try {
-            $project = $this->getDoctrine()->getRepository('eTraxis:Project')->find($id);
+            $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
 
             if (!$project) {
                 throw $this->createNotFoundException();

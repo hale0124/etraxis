@@ -11,6 +11,8 @@
 
 namespace eTraxis\SimpleBus\Groups\Handler;
 
+use eTraxis\Entity\Group;
+use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Groups\AddUsersCommand;
 use eTraxis\SimpleBus\Groups\RemoveUsersCommand;
 use Psr\Log\LoggerInterface;
@@ -47,9 +49,9 @@ class AddRemoveUsersCommandHandler
     public function handle($command)
     {
         /** @var \Doctrine\ORM\EntityRepository $repository */
-        $repository = $this->doctrine->getRepository('eTraxis:Group');
+        $repository = $this->doctrine->getRepository(Group::class);
 
-        /** @var \eTraxis\Entity\Group $group */
+        /** @var Group $group */
         $group = $repository->find($command->id);
 
         if (!$group) {
@@ -57,7 +59,7 @@ class AddRemoveUsersCommandHandler
             throw new NotFoundHttpException('Unknown group.');
         }
 
-        $repository = $this->doctrine->getRepository('eTraxis:User');
+        $repository = $this->doctrine->getRepository(User::class);
 
         $query = $repository->createQueryBuilder('u');
 
@@ -67,7 +69,7 @@ class AddRemoveUsersCommandHandler
             ->setParameter('users', $command->users)
         ;
 
-        /** @var \eTraxis\Entity\User[] $users */
+        /** @var User[] $users */
         $users = $query->getQuery()->getResult();
 
         foreach ($users as $user) {

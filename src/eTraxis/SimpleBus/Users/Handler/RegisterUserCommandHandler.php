@@ -50,7 +50,7 @@ class RegisterUserCommandHandler
      */
     public function handle(RegisterUserCommand $command)
     {
-        $repository = $this->doctrine->getRepository('eTraxis:User');
+        $repository = $this->doctrine->getRepository(User::class);
 
         /** @var User $user */
         $user = $repository->findOneBy([

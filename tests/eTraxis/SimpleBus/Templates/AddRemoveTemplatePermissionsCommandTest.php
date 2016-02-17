@@ -12,7 +12,9 @@
 namespace eTraxis\SimpleBus\Templates;
 
 use eTraxis\Collection\SystemRole;
+use eTraxis\Entity\Group;
 use eTraxis\Entity\Template;
+use eTraxis\Entity\TemplateGroupPermission;
 use eTraxis\Tests\BaseTestCase;
 
 class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
@@ -20,15 +22,15 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
     public function testExistingGroupPermissions()
     {
         /** @var Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
         $this->assertNotNull($template);
 
-        /** @var \eTraxis\Entity\Group $group */
-        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Managers']);
+        /** @var Group $group */
+        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
         $this->assertNotNull($group);
 
-        /** @var \eTraxis\Entity\TemplateGroupPermission $permissions */
-        $permissions = $this->doctrine->getRepository('eTraxis:TemplateGroupPermission')->findOneBy([
+        /** @var TemplateGroupPermission $permissions */
+        $permissions = $this->doctrine->getRepository(TemplateGroupPermission::class)->findOneBy([
             'groupId'    => $group->getId(),
             'templateId' => $template->getId(),
         ]);
@@ -55,7 +57,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $permissions = $this->doctrine->getRepository('eTraxis:TemplateGroupPermission')->findOneBy([
+        $permissions = $this->doctrine->getRepository(TemplateGroupPermission::class)->findOneBy([
             'groupId'    => $group->getId(),
             'templateId' => $template->getId(),
         ]);
@@ -69,15 +71,15 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
     public function testNewGroupPermissions()
     {
         /** @var Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Futurama']);
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Futurama']);
         $this->assertNotNull($template);
 
-        /** @var \eTraxis\Entity\Group $group */
-        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Managers']);
+        /** @var Group $group */
+        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
         $this->assertNotNull($group);
 
-        /** @var \eTraxis\Entity\TemplateGroupPermission $permissions */
-        $permissions = $this->doctrine->getRepository('eTraxis:TemplateGroupPermission')->findOneBy([
+        /** @var TemplateGroupPermission $permissions */
+        $permissions = $this->doctrine->getRepository(TemplateGroupPermission::class)->findOneBy([
             'groupId'    => $group->getId(),
             'templateId' => $template->getId(),
         ]);
@@ -91,7 +93,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $permissions = $this->doctrine->getRepository('eTraxis:TemplateGroupPermission')->findOneBy([
+        $permissions = $this->doctrine->getRepository(TemplateGroupPermission::class)->findOneBy([
             'groupId'    => $group->getId(),
             'templateId' => $template->getId(),
         ]);
@@ -103,7 +105,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
     public function testRegisteredPermissions()
     {
         /** @var Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
         $this->assertNotNull($template);
         $id = $template->getId();
 
@@ -118,7 +120,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $template = $this->doctrine->getRepository('eTraxis:Template')->find($id);
+        $template = $this->doctrine->getRepository(Template::class)->find($id);
 
         $this->assertEquals(Template::PERMIT_VIEW_RECORD,   $template->getRegisteredPermissions() & Template::PERMIT_VIEW_RECORD);
         $this->assertEquals(Template::PERMIT_CREATE_RECORD, $template->getRegisteredPermissions() & Template::PERMIT_CREATE_RECORD);
@@ -131,7 +133,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $template = $this->doctrine->getRepository('eTraxis:Template')->find($id);
+        $template = $this->doctrine->getRepository(Template::class)->find($id);
 
         $this->assertEquals(Template::PERMIT_VIEW_RECORD, $template->getRegisteredPermissions() & Template::PERMIT_VIEW_RECORD);
         $this->assertEquals(0,                            $template->getRegisteredPermissions() & Template::PERMIT_CREATE_RECORD);
@@ -140,7 +142,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
     public function testAuthorPermissions()
     {
         /** @var Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
         $this->assertNotNull($template);
         $id = $template->getId();
 
@@ -155,7 +157,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $template = $this->doctrine->getRepository('eTraxis:Template')->find($id);
+        $template = $this->doctrine->getRepository(Template::class)->find($id);
 
         $this->assertEquals(Template::PERMIT_REOPEN_RECORD, $template->getAuthorPermissions() & Template::PERMIT_REOPEN_RECORD);
 
@@ -167,7 +169,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $template = $this->doctrine->getRepository('eTraxis:Template')->find($id);
+        $template = $this->doctrine->getRepository(Template::class)->find($id);
 
         $this->assertEquals(0, $template->getAuthorPermissions() & Template::PERMIT_EDIT_RECORD);
 
@@ -179,7 +181,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $template = $this->doctrine->getRepository('eTraxis:Template')->find($id);
+        $template = $this->doctrine->getRepository(Template::class)->find($id);
 
         $this->assertEquals(Template::PERMIT_VIEW_RECORD, $template->getAuthorPermissions() & Template::PERMIT_VIEW_RECORD);
     }
@@ -187,7 +189,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
     public function testResponsiblePermissions()
     {
         /** @var Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
         $this->assertNotNull($template);
         $id = $template->getId();
 
@@ -202,7 +204,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $template = $this->doctrine->getRepository('eTraxis:Template')->find($id);
+        $template = $this->doctrine->getRepository(Template::class)->find($id);
 
         $this->assertEquals(Template::PERMIT_ATTACH_SUBRECORD, $template->getResponsiblePermissions() & Template::PERMIT_ATTACH_SUBRECORD);
 
@@ -214,7 +216,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $template = $this->doctrine->getRepository('eTraxis:Template')->find($id);
+        $template = $this->doctrine->getRepository(Template::class)->find($id);
 
         $this->assertEquals(0, $template->getResponsiblePermissions() & Template::PERMIT_ADD_COMMENT);
 
@@ -226,7 +228,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $template = $this->doctrine->getRepository('eTraxis:Template')->find($id);
+        $template = $this->doctrine->getRepository(Template::class)->find($id);
 
         $this->assertEquals(Template::PERMIT_VIEW_RECORD, $template->getResponsiblePermissions() & Template::PERMIT_VIEW_RECORD);
     }
@@ -253,7 +255,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
     public function testNotFoundGroup()
     {
         /** @var Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
         $this->assertNotNull($template);
 
         $command = new RemoveTemplatePermissionsCommand([

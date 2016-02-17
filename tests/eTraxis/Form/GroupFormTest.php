@@ -11,14 +11,15 @@
 
 namespace eTraxis\Form;
 
+use eTraxis\Entity\Group;
 use eTraxis\Tests\BaseTestCase;
 
 class GroupFormTest extends BaseTestCase
 {
     public function testForm()
     {
-        /** @var \eTraxis\Entity\Group $group */
-        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Staff']);
+        /** @var Group $group */
+        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Staff']);
 
         /** @var \Symfony\Component\Form\FormFactoryInterface $factory */
         $factory = $this->client->getContainer()->get('form.factory');

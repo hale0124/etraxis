@@ -12,6 +12,7 @@
 namespace AppBundle\Controller\Admin;
 
 use eTraxis\Collection\SystemRole;
+use eTraxis\Entity\State;
 use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\SimpleBus\States;
 use eTraxis\Traits\ContainerTrait;
@@ -72,7 +73,7 @@ class StatesPostController extends Controller
     public function editAction(Request $request, $id)
     {
         try {
-            $state = $this->getDoctrine()->getRepository('eTraxis:State')->find($id);
+            $state = $this->getDoctrine()->getRepository(State::class)->find($id);
 
             if (!$state) {
                 throw $this->createNotFoundException();
@@ -158,7 +159,7 @@ class StatesPostController extends Controller
     {
         try {
             /** @var \eTraxis\Repository\StatesRepository $repository */
-            $repository = $this->getDoctrine()->getRepository('eTraxis:State');
+            $repository = $this->getDoctrine()->getRepository(State::class);
 
             $transitions_old = array_key_exists($group, SystemRole::getCollection())
                 ? $repository->getRoleTransitions($id, $group)

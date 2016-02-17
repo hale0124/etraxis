@@ -11,6 +11,7 @@
 
 namespace AppBundle\Controller\Admin;
 
+use eTraxis\Entity\Group;
 use eTraxis\Form\GroupExForm;
 use eTraxis\Form\GroupForm;
 use eTraxis\Traits\ContainerTrait;
@@ -44,7 +45,7 @@ class GroupsGetController extends Controller
     {
         try {
             /** @var \eTraxis\Repository\GroupsRepository $repository */
-            $repository = $this->getDoctrine()->getRepository('eTraxis:Group');
+            $repository = $this->getDoctrine()->getRepository(Group::class);
 
             return new JsonResponse($repository->getGroups($id));
         }
@@ -66,7 +67,7 @@ class GroupsGetController extends Controller
     public function viewAction(Request $request, $id = 0)
     {
         try {
-            $group = $this->getDoctrine()->getRepository('eTraxis:Group')->find($id);
+            $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
 
             if (!$group) {
                 throw $this->createNotFoundException();
@@ -94,7 +95,7 @@ class GroupsGetController extends Controller
     public function tabDetailsAction($id)
     {
         try {
-            $group = $this->getDoctrine()->getRepository('eTraxis:Group')->find($id);
+            $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
 
             if (!$group) {
                 throw $this->createNotFoundException();
@@ -121,7 +122,7 @@ class GroupsGetController extends Controller
     public function tabMembersAction($id)
     {
         /** @var \eTraxis\Repository\GroupsRepository $repository */
-        $repository = $this->getDoctrine()->getRepository('eTraxis:Group');
+        $repository = $this->getDoctrine()->getRepository(Group::class);
 
         $group = $repository->find($id);
 
@@ -176,7 +177,7 @@ class GroupsGetController extends Controller
     public function editAction($id)
     {
         try {
-            $group = $this->getDoctrine()->getRepository('eTraxis:Group')->find($id);
+            $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
 
             if (!$group) {
                 throw $this->createNotFoundException();

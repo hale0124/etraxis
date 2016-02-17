@@ -85,7 +85,7 @@ class UsersGetController extends Controller
             $request->query->set('length', -1);
 
             $datatables = $this->getDataTables();
-            $results    = $datatables->handle($request, 'eTraxis:User');
+            $results    = $datatables->handle($request, User::class);
 
             $users = array_map(function ($user) {
                 return array_slice($user, 1, 6);
@@ -135,7 +135,7 @@ class UsersGetController extends Controller
     public function viewAction(Request $request, $id)
     {
         try {
-            $user = $this->getDoctrine()->getRepository('eTraxis:User')->find($id);
+            $user = $this->getDoctrine()->getRepository(User::class)->find($id);
 
             if (!$user) {
                 throw $this->createNotFoundException();
@@ -163,7 +163,7 @@ class UsersGetController extends Controller
     public function tabDetailsAction($id)
     {
         try {
-            $user = $this->getDoctrine()->getRepository('eTraxis:User')->find($id);
+            $user = $this->getDoctrine()->getRepository(User::class)->find($id);
 
             if (!$user) {
                 throw $this->createNotFoundException();
@@ -199,7 +199,7 @@ class UsersGetController extends Controller
     public function tabGroupsAction($id)
     {
         /** @var \eTraxis\Repository\UsersRepository $repository */
-        $repository = $this->getDoctrine()->getRepository('eTraxis:User');
+        $repository = $this->getDoctrine()->getRepository(User::class);
 
         $user = $repository->find($id);
 
@@ -250,7 +250,7 @@ class UsersGetController extends Controller
     public function editAction($id)
     {
         try {
-            $user = $this->getDoctrine()->getRepository('eTraxis:User')->find($id);
+            $user = $this->getDoctrine()->getRepository(User::class)->find($id);
 
             if (!$user) {
                 throw $this->createNotFoundException();

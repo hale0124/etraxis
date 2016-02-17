@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Groups\Handler;
 
+use eTraxis\Entity\Group;
 use eTraxis\SimpleBus\Groups\DeleteGroupCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -45,7 +46,7 @@ class DeleteGroupCommandHandler
      */
     public function handle(DeleteGroupCommand $command)
     {
-        $repository = $this->doctrine->getRepository('eTraxis:Group');
+        $repository = $this->doctrine->getRepository(Group::class);
 
         $entity = $repository->find($command->id);
 

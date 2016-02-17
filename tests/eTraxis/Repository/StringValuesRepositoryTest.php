@@ -11,6 +11,7 @@
 
 namespace eTraxis\Repository;
 
+use eTraxis\Entity\StringValue;
 use eTraxis\Tests\BaseTestCase;
 
 class StringValuesRepositoryTest extends BaseTestCase
@@ -20,11 +21,11 @@ class StringValuesRepositoryTest extends BaseTestCase
         $expected = 'Artem Rodygin';
 
         /** @var StringValuesRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository('eTraxis:StringValue');
+        $repository = $this->doctrine->getManager()->getRepository(StringValue::class);
 
         $count = count($repository->findAll());
 
-        /** @var \eTraxis\Entity\StringValue $value */
+        /** @var StringValue $value */
         $value = $repository->findOneBy(['value' => $expected]);
 
         $this->assertNull($value);

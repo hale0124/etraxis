@@ -12,26 +12,30 @@
 namespace eTraxis\SimpleBus\States;
 
 use eTraxis\Collection\SystemRole;
+use eTraxis\Entity\Group;
+use eTraxis\Entity\State;
+use eTraxis\Entity\StateGroupTransition;
+use eTraxis\Entity\StateRoleTransition;
 use eTraxis\Tests\BaseTestCase;
 
 class AddRemoveStateTransitionsCommandTest extends BaseTestCase
 {
     public function testAddGroupTransitions()
     {
-        /** @var \eTraxis\Entity\State $state_new */
-        $state_new = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'New']);
+        /** @var State $state_new */
+        $state_new = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
         $this->assertNotNull($state_new);
 
-        /** @var \eTraxis\Entity\State $state_delivered */
-        $state_delivered = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
+        /** @var State $state_delivered */
+        $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
         $this->assertNotNull($state_delivered);
 
-        /** @var \eTraxis\Entity\Group $group */
-        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Crew']);
+        /** @var Group $group */
+        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
         $this->assertNotNull($group);
 
-        /** @var \eTraxis\Entity\StateGroupTransition $transition */
-        $transition = $this->doctrine->getRepository('eTraxis:StateGroupTransition')->findOneBy([
+        /** @var StateGroupTransition $transition */
+        $transition = $this->doctrine->getRepository(StateGroupTransition::class)->findOneBy([
             'fromStateId' => $state_new->getId(),
             'toStateId'   => $state_delivered->getId(),
             'groupId'     => $group->getId(),
@@ -46,7 +50,7 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $transition = $this->doctrine->getRepository('eTraxis:StateGroupTransition')->findOneBy([
+        $transition = $this->doctrine->getRepository(StateGroupTransition::class)->findOneBy([
             'fromStateId' => $state_new->getId(),
             'toStateId'   => $state_delivered->getId(),
             'groupId'     => $group->getId(),
@@ -56,20 +60,20 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
 
     public function testRemoveGroupTransitions()
     {
-        /** @var \eTraxis\Entity\State $state_new */
-        $state_new = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'New']);
+        /** @var State $state_new */
+        $state_new = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
         $this->assertNotNull($state_new);
 
-        /** @var \eTraxis\Entity\State $state_delivered */
-        $state_delivered = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
+        /** @var State $state_delivered */
+        $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
         $this->assertNotNull($state_delivered);
 
-        /** @var \eTraxis\Entity\Group $group */
-        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Managers']);
+        /** @var Group $group */
+        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
         $this->assertNotNull($group);
 
-        /** @var \eTraxis\Entity\StateGroupTransition $transition */
-        $transition = $this->doctrine->getRepository('eTraxis:StateGroupTransition')->findOneBy([
+        /** @var StateGroupTransition $transition */
+        $transition = $this->doctrine->getRepository(StateGroupTransition::class)->findOneBy([
             'fromStateId' => $state_new->getId(),
             'toStateId'   => $state_delivered->getId(),
             'groupId'     => $group->getId(),
@@ -84,7 +88,7 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $transition = $this->doctrine->getRepository('eTraxis:StateGroupTransition')->findOneBy([
+        $transition = $this->doctrine->getRepository(StateGroupTransition::class)->findOneBy([
             'fromStateId' => $state_new->getId(),
             'toStateId'   => $state_delivered->getId(),
             'groupId'     => $group->getId(),
@@ -94,16 +98,16 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
 
     public function testAddRoleTransitions()
     {
-        /** @var \eTraxis\Entity\State $state_new */
-        $state_new = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'New']);
+        /** @var State $state_new */
+        $state_new = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
         $this->assertNotNull($state_new);
 
-        /** @var \eTraxis\Entity\State $state_delivered */
-        $state_delivered = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
+        /** @var State $state_delivered */
+        $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
         $this->assertNotNull($state_delivered);
 
-        /** @var \eTraxis\Entity\StateRoleTransition $transition */
-        $transition = $this->doctrine->getRepository('eTraxis:StateRoleTransition')->findOneBy([
+        /** @var StateRoleTransition $transition */
+        $transition = $this->doctrine->getRepository(StateRoleTransition::class)->findOneBy([
             'fromStateId' => $state_new->getId(),
             'toStateId'   => $state_delivered->getId(),
             'role'        => SystemRole::AUTHOR,
@@ -118,7 +122,7 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $transition = $this->doctrine->getRepository('eTraxis:StateRoleTransition')->findOneBy([
+        $transition = $this->doctrine->getRepository(StateRoleTransition::class)->findOneBy([
             'fromStateId' => $state_new->getId(),
             'toStateId'   => $state_delivered->getId(),
             'role'        => SystemRole::AUTHOR,
@@ -128,16 +132,16 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
 
     public function testRemoveRoleTransitions()
     {
-        /** @var \eTraxis\Entity\State $state_new */
-        $state_new = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'New']);
+        /** @var State $state_new */
+        $state_new = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
         $this->assertNotNull($state_new);
 
-        /** @var \eTraxis\Entity\State $state_delivered */
-        $state_delivered = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
+        /** @var State $state_delivered */
+        $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
         $this->assertNotNull($state_delivered);
 
-        /** @var \eTraxis\Entity\StateRoleTransition $transition */
-        $transition = $this->doctrine->getRepository('eTraxis:StateRoleTransition')->findOneBy([
+        /** @var StateRoleTransition $transition */
+        $transition = $this->doctrine->getRepository(StateRoleTransition::class)->findOneBy([
             'fromStateId' => $state_new->getId(),
             'toStateId'   => $state_delivered->getId(),
             'role'        => SystemRole::RESPONSIBLE,
@@ -152,7 +156,7 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $transition = $this->doctrine->getRepository('eTraxis:StateRoleTransition')->findOneBy([
+        $transition = $this->doctrine->getRepository(StateRoleTransition::class)->findOneBy([
             'fromStateId' => $state_new->getId(),
             'toStateId'   => $state_delivered->getId(),
             'role'        => SystemRole::RESPONSIBLE,
@@ -162,18 +166,18 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
 
     public function testEmptyTransitions()
     {
-        $total = count($this->doctrine->getRepository('eTraxis:StateRoleTransition')->findAll());
+        $total = count($this->doctrine->getRepository(StateRoleTransition::class)->findAll());
 
-        /** @var \eTraxis\Entity\State $state_new */
-        $state_new = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'New']);
+        /** @var State $state_new */
+        $state_new = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
         $this->assertNotNull($state_new);
 
-        /** @var \eTraxis\Entity\State $state_produced */
-        $state_produced = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Produced']);
+        /** @var State $state_produced */
+        $state_produced = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Produced']);
         $this->assertNotNull($state_produced);
 
-        /** @var \eTraxis\Entity\State $state_released */
-        $state_released = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Released']);
+        /** @var State $state_released */
+        $state_released = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Released']);
         $this->assertNotNull($state_released);
 
         $command = new AddStateTransitionsCommand([
@@ -184,7 +188,7 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $this->assertCount($total, $this->doctrine->getRepository('eTraxis:StateRoleTransition')->findAll());
+        $this->assertCount($total, $this->doctrine->getRepository(StateRoleTransition::class)->findAll());
     }
 
     /**
@@ -193,8 +197,8 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
      */
     public function testNotFoundState()
     {
-        /** @var \eTraxis\Entity\State $state_delivered */
-        $state_delivered = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
+        /** @var State $state_delivered */
+        $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
         $this->assertNotNull($state_delivered);
 
         $command = new AddStateTransitionsCommand([
@@ -212,12 +216,12 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
      */
     public function testNotFoundGroup()
     {
-        /** @var \eTraxis\Entity\State $state_new */
-        $state_new = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'New']);
+        /** @var State $state_new */
+        $state_new = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
         $this->assertNotNull($state_new);
 
-        /** @var \eTraxis\Entity\State $state_delivered */
-        $state_delivered = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
+        /** @var State $state_delivered */
+        $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
         $this->assertNotNull($state_delivered);
 
         $command = new AddStateTransitionsCommand([

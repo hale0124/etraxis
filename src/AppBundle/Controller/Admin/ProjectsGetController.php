@@ -54,7 +54,7 @@ class ProjectsGetController extends Controller
     {
         try {
             /** @var \eTraxis\Repository\ProjectsRepository $repository */
-            $repository = $this->getDoctrine()->getRepository('eTraxis:Project');
+            $repository = $this->getDoctrine()->getRepository(Project::class);
 
             return new JsonResponse($repository->getProjects());
         }
@@ -76,7 +76,7 @@ class ProjectsGetController extends Controller
     public function viewAction(Request $request, $id = 0)
     {
         try {
-            $project = $this->getDoctrine()->getRepository('eTraxis:Project')->find($id);
+            $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
 
             if (!$project) {
                 throw $this->createNotFoundException();
@@ -104,7 +104,7 @@ class ProjectsGetController extends Controller
     public function tabDetailsAction($id)
     {
         try {
-            $project = $this->getDoctrine()->getRepository('eTraxis:Project')->find($id);
+            $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
 
             if (!$project) {
                 throw $this->createNotFoundException();
@@ -159,7 +159,7 @@ class ProjectsGetController extends Controller
     public function editAction($id)
     {
         try {
-            $project = $this->getDoctrine()->getRepository('eTraxis:Project')->find($id);
+            $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
 
             if (!$project) {
                 throw $this->createNotFoundException();

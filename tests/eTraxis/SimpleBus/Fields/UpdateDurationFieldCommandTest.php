@@ -19,7 +19,7 @@ class UpdateDurationFieldCommandTest extends BaseTestCase
     public function testSuccess()
     {
         /** @var Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Running time']);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Running time']);
 
         $this->assertEquals(Field::TYPE_DURATION, $field->getType());
         $this->assertEquals('Running time', $field->getName());
@@ -45,7 +45,7 @@ class UpdateDurationFieldCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $field = $this->doctrine->getRepository('eTraxis:Field')->find($field->getId());
+        $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 
         $this->assertEquals(Field::TYPE_DURATION, $field->getType());
         $this->assertEquals('Episode duration', $field->getName());
@@ -65,7 +65,7 @@ class UpdateDurationFieldCommandTest extends BaseTestCase
     public function testMinMaxValues()
     {
         /** @var Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Running time']);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Running time']);
 
         $this->assertNotNull($field);
 
@@ -89,7 +89,7 @@ class UpdateDurationFieldCommandTest extends BaseTestCase
     public function testDefaultValue()
     {
         /** @var Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Running time']);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Running time']);
 
         $this->assertNotNull($field);
 

@@ -12,6 +12,7 @@
 namespace eTraxis\SimpleBus\Fields;
 
 use eTraxis\Entity\Field;
+use eTraxis\Entity\TextValue;
 use eTraxis\Tests\BaseTestCase;
 
 class UpdateTextFieldCommandTest extends BaseTestCase
@@ -19,7 +20,7 @@ class UpdateTextFieldCommandTest extends BaseTestCase
     public function testSuccess()
     {
         /** @var Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Plot']);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Plot']);
 
         $this->assertEquals(Field::TYPE_TEXT, $field->getType());
         $this->assertEquals('Plot', $field->getName());
@@ -49,9 +50,9 @@ class UpdateTextFieldCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $field = $this->doctrine->getRepository('eTraxis:Field')->find($field->getId());
+        $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 
-        $default = $this->doctrine->getRepository('eTraxis:TextValue')->find($field->getDefaultValue());
+        $default = $this->doctrine->getRepository(TextValue::class)->find($field->getDefaultValue());
 
         $this->assertEquals(Field::TYPE_TEXT, $field->getType());
         $this->assertEquals('Story', $field->getName());

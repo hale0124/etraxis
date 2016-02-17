@@ -11,14 +11,15 @@
 
 namespace eTraxis\SimpleBus\Projects;
 
+use eTraxis\Entity\Project;
 use eTraxis\Tests\BaseTestCase;
 
 class UpdateProjectCommandTest extends BaseTestCase
 {
     public function testSuccess()
     {
-        /** @var \eTraxis\Entity\Project $project */
-        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
+        /** @var Project $project */
+        $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
 
         $this->assertNotNull($project);
         $this->assertNotEmpty($project->getDescription());
@@ -32,8 +33,8 @@ class UpdateProjectCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        /** @var \eTraxis\Entity\Project $project */
-        $project = $this->doctrine->getRepository('eTraxis:Project')->find($project->getId());
+        /** @var Project $project */
+        $project = $this->doctrine->getRepository(Project::class)->find($project->getId());
 
         $this->assertEquals('Awesome Express', $project->getName());
         $this->assertEquals('Newspaper-delivery company', $project->getDescription());
@@ -62,8 +63,8 @@ class UpdateProjectCommandTest extends BaseTestCase
      */
     public function testNameConflict()
     {
-        /** @var \eTraxis\Entity\Project $project */
-        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
+        /** @var Project $project */
+        $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
 
         $this->assertNotNull($project);
 

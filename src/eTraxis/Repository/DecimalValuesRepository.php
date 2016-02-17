@@ -28,7 +28,7 @@ class DecimalValuesRepository extends EntityRepository
      */
     public function save($value)
     {
-        /** @var \eTraxis\Entity\DecimalValue $entity */
+        /** @var DecimalValue $entity */
         $entity = $this->findOneBy(['value' => $value]);
 
         // If entity doesn't exist yet, save it.

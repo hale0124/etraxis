@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Templates\Handler;
 
+use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\Templates\LockTemplateCommand;
 use eTraxis\SimpleBus\Templates\UnlockTemplateCommand;
 use Psr\Log\LoggerInterface;
@@ -46,9 +47,9 @@ class LockUnlockTemplateCommandHandler
      */
     public function handle($command)
     {
-        $repository = $this->doctrine->getRepository('eTraxis:Template');
+        $repository = $this->doctrine->getRepository(Template::class);
 
-        /** @var \eTraxis\Entity\Template $entity */
+        /** @var Template $entity */
         $entity = $repository->find($command->id);
 
         if (!$entity) {

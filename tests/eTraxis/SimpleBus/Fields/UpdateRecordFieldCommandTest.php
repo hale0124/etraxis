@@ -19,7 +19,7 @@ class UpdateRecordFieldCommandTest extends BaseTestCase
     public function testSuccess()
     {
         /** @var Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Delivery']);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Delivery']);
 
         $this->assertEquals(Field::TYPE_RECORD, $field->getType());
         $this->assertEquals('Delivery', $field->getName());
@@ -39,7 +39,7 @@ class UpdateRecordFieldCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $field = $this->doctrine->getRepository('eTraxis:Field')->find($field->getId());
+        $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 
         $this->assertEquals(Field::TYPE_RECORD, $field->getType());
         $this->assertEquals('Delivery #', $field->getName());

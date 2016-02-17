@@ -11,6 +11,7 @@
 
 namespace AppBundle\Controller\Admin;
 
+use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\SimpleBus\Templates;
 use eTraxis\Traits\ContainerTrait;
@@ -71,7 +72,7 @@ class TemplatesPostController extends Controller
     public function editAction(Request $request, $id)
     {
         try {
-            $template = $this->getDoctrine()->getRepository('eTraxis:Template')->find($id);
+            $template = $this->getDoctrine()->getRepository(Template::class)->find($id);
 
             if (!$template) {
                 throw $this->createNotFoundException();

@@ -55,7 +55,7 @@ class DeleteTemplateCommandHandler
      */
     public function handle(DeleteTemplateCommand $command)
     {
-        $repository = $this->doctrine->getRepository('eTraxis:Template');
+        $repository = $this->doctrine->getRepository(Template::class);
 
         $entity = $repository->find($command->id);
 

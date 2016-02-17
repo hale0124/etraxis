@@ -13,14 +13,15 @@ namespace eTraxis\SimpleBus\Fields;
 
 use eTraxis\Entity\DecimalValue;
 use eTraxis\Entity\Field;
+use eTraxis\Entity\State;
 use eTraxis\Tests\BaseTestCase;
 
 class CreateDecimalFieldCommandTest extends BaseTestCase
 {
     public function testSuccess()
     {
-        /** @var \eTraxis\Entity\State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'New']);
+        /** @var State $state */
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
         $this->assertNotNull($state);
 
@@ -39,14 +40,14 @@ class CreateDecimalFieldCommandTest extends BaseTestCase
         $this->command_bus->handle($command);
 
         /** @var Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => $command->name]);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => $command->name]);
 
         /** @var DecimalValue $minValue */
         /** @var DecimalValue $maxValue */
         /** @var DecimalValue $default */
-        $minValue = $this->doctrine->getRepository('eTraxis:DecimalValue')->find($field->getParameter1());
-        $maxValue = $this->doctrine->getRepository('eTraxis:DecimalValue')->find($field->getParameter2());
-        $default  = $this->doctrine->getRepository('eTraxis:DecimalValue')->find($field->getDefaultValue());
+        $minValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameter1());
+        $maxValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameter2());
+        $default  = $this->doctrine->getRepository(DecimalValue::class)->find($field->getDefaultValue());
 
         $this->assertInstanceOf('\eTraxis\Entity\Field', $field);
         $this->assertEquals(Field::TYPE_DECIMAL, $field->getType());
@@ -61,8 +62,8 @@ class CreateDecimalFieldCommandTest extends BaseTestCase
      */
     public function testMinMaxValues()
     {
-        /** @var \eTraxis\Entity\State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'New']);
+        /** @var State $state */
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
         $this->assertNotNull($state);
 
@@ -86,8 +87,8 @@ class CreateDecimalFieldCommandTest extends BaseTestCase
      */
     public function testDefaultValue()
     {
-        /** @var \eTraxis\Entity\State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'New']);
+        /** @var State $state */
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
         $this->assertNotNull($state);
 

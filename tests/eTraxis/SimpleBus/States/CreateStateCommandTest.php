@@ -12,6 +12,7 @@
 namespace eTraxis\SimpleBus\States;
 
 use eTraxis\Entity\State;
+use eTraxis\Entity\Template;
 use eTraxis\Tests\BaseTestCase;
 
 class CreateStateCommandTest extends BaseTestCase
@@ -21,21 +22,21 @@ class CreateStateCommandTest extends BaseTestCase
      */
     private function getTemplate()
     {
-        return $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+        return $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
     }
 
     public function testSuccess()
     {
-        /** @var \eTraxis\Entity\State $nextState */
+        /** @var State $nextState */
         $template     = $this->getTemplate();
         $name         = 'Started';
         $abbreviation = 'S';
         $type         = State::TYPE_INTERIM;
         $responsible  = State::RESPONSIBLE_KEEP;
-        $nextState    = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
+        $nextState    = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
-        /** @var \eTraxis\Entity\State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => $name]);
+        /** @var State $state */
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => $name]);
 
         $this->assertNull($state);
 
@@ -50,7 +51,7 @@ class CreateStateCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => $name]);
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => $name]);
 
         $this->assertInstanceOf('eTraxis\Entity\State', $state);
         $this->assertEquals($template->getId(), $state->getTemplate()->getId());
@@ -64,18 +65,18 @@ class CreateStateCommandTest extends BaseTestCase
     public function testInitial()
     {
         /** @var \eTraxis\Repository\StatesRepository $repository */
-        $repository = $this->doctrine->getRepository('eTraxis:State');
+        $repository = $this->doctrine->getRepository(State::class);
 
-        /** @var \eTraxis\Entity\State $nextState */
+        /** @var State $nextState */
         $template     = $this->getTemplate();
         $name         = 'Very first';
         $abbreviation = 'VF';
 
-        /** @var \eTraxis\Entity\State $initial */
+        /** @var State $initial */
         $initial = $repository->findOneBy(['name' => 'New']);
         $this->assertEquals(State::TYPE_INITIAL, $initial->getType());
 
-        /** @var \eTraxis\Entity\State $state */
+        /** @var State $state */
         $state = $repository->findOneBy(['name' => $name]);
 
         $this->assertNull($state);

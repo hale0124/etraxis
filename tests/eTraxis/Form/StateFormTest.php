@@ -35,7 +35,7 @@ class StateFormTest extends BaseTestCase
     public function testFormInitialState()
     {
         /** @var State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'New']);
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
         /** @var \Symfony\Component\Form\FormFactoryInterface $factory */
         $factory = $this->client->getContainer()->get('form.factory');
@@ -54,7 +54,7 @@ class StateFormTest extends BaseTestCase
     public function testFormFinalState()
     {
         /** @var State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
         /** @var \Symfony\Component\Form\FormFactoryInterface $factory */
         $factory = $this->client->getContainer()->get('form.factory');

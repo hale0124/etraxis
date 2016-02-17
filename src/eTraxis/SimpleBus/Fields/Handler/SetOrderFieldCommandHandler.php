@@ -49,7 +49,7 @@ class SetOrderFieldCommandHandler
     public function handle(SetOrderFieldCommand $command)
     {
         /** @var \Doctrine\ORM\EntityRepository $repository */
-        $repository = $this->doctrine->getRepository('eTraxis:Field');
+        $repository = $this->doctrine->getRepository(Field::class);
 
         /** @var Field $entity */
         $entity = $repository->findOneBy([

@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Templates\Handler;
 
+use eTraxis\Entity\Project;
 use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\Templates\CreateTemplateCommand;
 use Psr\Log\LoggerInterface;
@@ -60,9 +61,9 @@ class CreateTemplateCommandHandler
      */
     public function handle(CreateTemplateCommand $command)
     {
-        $repository = $this->doctrine->getRepository('eTraxis:Project');
+        $repository = $this->doctrine->getRepository(Project::class);
 
-        /** @var \eTraxis\Entity\Project $project */
+        /** @var Project $project */
         $project = $repository->find($command->project);
 
         if (!$project) {

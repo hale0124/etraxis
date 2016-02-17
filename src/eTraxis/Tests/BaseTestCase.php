@@ -11,6 +11,7 @@
 
 namespace eTraxis\Tests;
 
+use eTraxis\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -100,11 +101,11 @@ class BaseTestCase extends WebTestCase
      * @param   string $username Login.
      * @param   bool   $ldap     Whether it's a LDAP user.
      *
-     * @return  \eTraxis\Entity\User|null Found user.
+     * @return  User|null Found user.
      */
     protected function findUser($username, $ldap = false)
     {
-        return $this->doctrine->getRepository('eTraxis:User')->findOneBy([
+        return $this->doctrine->getRepository(User::class)->findOneBy([
             'username' => $ldap ? $username : $username . '@eTraxis',
             'isLdap'   => $ldap ? 1 : 0,
         ]);

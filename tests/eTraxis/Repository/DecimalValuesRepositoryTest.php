@@ -11,6 +11,7 @@
 
 namespace eTraxis\Repository;
 
+use eTraxis\Entity\DecimalValue;
 use eTraxis\Tests\BaseTestCase;
 
 class DecimalValuesRepositoryTest extends BaseTestCase
@@ -20,11 +21,11 @@ class DecimalValuesRepositoryTest extends BaseTestCase
         $expected = '3.14159292';
 
         /** @var DecimalValuesRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository('eTraxis:DecimalValue');
+        $repository = $this->doctrine->getManager()->getRepository(DecimalValue::class);
 
         $count = count($repository->findAll());
 
-        /** @var \eTraxis\Entity\DecimalValue $value */
+        /** @var DecimalValue $value */
         $value = $repository->findOneBy(['value' => $expected]);
 
         $this->assertNull($value);

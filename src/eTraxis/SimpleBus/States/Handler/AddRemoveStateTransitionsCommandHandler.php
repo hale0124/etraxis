@@ -12,6 +12,8 @@
 namespace eTraxis\SimpleBus\States\Handler;
 
 use eTraxis\Collection\SystemRole;
+use eTraxis\Entity\Group;
+use eTraxis\Entity\State;
 use eTraxis\Entity\StateGroupTransition;
 use eTraxis\Entity\StateRoleTransition;
 use eTraxis\SimpleBus\States\AddStateTransitionsCommand;
@@ -49,16 +51,16 @@ class AddRemoveStateTransitionsCommandHandler
      */
     public function handle($command)
     {
-        /** @var \eTraxis\Entity\State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->find($command->id);
+        /** @var State $state */
+        $state = $this->doctrine->getRepository(State::class)->find($command->id);
 
         if (!$state) {
             $this->logger->error('Unknown state.', [$command->id]);
             throw new NotFoundHttpException('Unknown state.');
         }
 
-        /** @var \eTraxis\Entity\State[] $transitions */
-        $transitions = $this->doctrine->getRepository('eTraxis:State')->findBy([
+        /** @var State[] $transitions */
+        $transitions = $this->doctrine->getRepository(State::class)->findBy([
             'templateId' => $state->getTemplateId(),
             'id'         => $command->transitions,
         ]);
@@ -112,8 +114,8 @@ class AddRemoveStateTransitionsCommandHandler
         }
         else {
 
-            /** @var \eTraxis\Entity\Group $group */
-            $group = $this->doctrine->getRepository('eTraxis:Group')->find($command->group);
+            /** @var Group $group */
+            $group = $this->doctrine->getRepository(Group::class)->find($command->group);
 
             if (!$group) {
                 $em->rollback();

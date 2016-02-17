@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Users;
 
+use eTraxis\Entity\User;
 use eTraxis\Tests\BaseTestCase;
 
 class UpdateUserCommandTest extends BaseTestCase
@@ -43,7 +44,7 @@ class UpdateUserCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $user = $this->doctrine->getRepository('eTraxis:User')->find($user->getId());
+        $user = $this->doctrine->getRepository(User::class)->find($user->getId());
 
         $this->assertEquals('flexo', $user->getUsername());
         $this->assertEquals('Flexo', $user->getFullname());

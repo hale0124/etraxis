@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Projects;
 
+use eTraxis\Entity\Project;
 use eTraxis\Tests\BaseTestCase;
 
 class CreateProjectCommandTest extends BaseTestCase
@@ -20,8 +21,8 @@ class CreateProjectCommandTest extends BaseTestCase
         $name        = 'Awesome Express';
         $description = 'Newspaper-delivery company';
 
-        /** @var \eTraxis\Entity\Project $project */
-        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => $name]);
+        /** @var Project $project */
+        $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => $name]);
 
         $this->assertNull($project);
 
@@ -33,8 +34,8 @@ class CreateProjectCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        /** @var \eTraxis\Entity\Project $project */
-        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => $name]);
+        /** @var Project $project */
+        $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => $name]);
 
         $this->assertInstanceOf('eTraxis\Entity\Project', $project);
         $this->assertEquals($name, $project->getName());

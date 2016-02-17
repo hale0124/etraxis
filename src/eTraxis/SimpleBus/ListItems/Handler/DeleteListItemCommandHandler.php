@@ -55,7 +55,7 @@ class DeleteListItemCommandHandler
      */
     public function handle(DeleteListItemCommand $command)
     {
-        $repository = $this->doctrine->getRepository('eTraxis:ListItem');
+        $repository = $this->doctrine->getRepository(ListItem::class);
 
         $entity = $repository->findOneBy([
             'fieldId' => $command->field,

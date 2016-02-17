@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Templates;
 
+use eTraxis\Entity\Project;
 use eTraxis\Entity\Template;
 use eTraxis\Tests\BaseTestCase;
 
@@ -18,8 +19,8 @@ class DeleteTemplateCommandTest extends BaseTestCase
 {
     public function testSuccess()
     {
-        /** @var \eTraxis\Entity\Project $project */
-        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
+        /** @var Project $project */
+        $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
 
         $template = new Template();
 
@@ -39,14 +40,14 @@ class DeleteTemplateCommandTest extends BaseTestCase
 
         $this->loginAs('hubert');
 
-        /** @var \eTraxis\Entity\Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Bug report']);
+        /** @var Template $template */
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Bug report']);
         $this->assertNotNull($template);
 
         $command = new DeleteTemplateCommand(['id' => $template->getId()]);
         $this->command_bus->handle($command);
 
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Bug report']);
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Bug report']);
         $this->assertNull($template);
     }
 
@@ -57,8 +58,8 @@ class DeleteTemplateCommandTest extends BaseTestCase
     {
         $this->loginAs('hubert');
 
-        /** @var \eTraxis\Entity\Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+        /** @var Template $template */
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
         $this->assertNotNull($template);
 
         $command = new DeleteTemplateCommand(['id' => $template->getId()]);

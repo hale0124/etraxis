@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Projects\Handler;
 
+use eTraxis\Entity\Project;
 use eTraxis\SimpleBus\Projects\UpdateProjectCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -59,9 +60,9 @@ class UpdateProjectCommandHandler
      */
     public function handle(UpdateProjectCommand $command)
     {
-        $repository = $this->doctrine->getRepository('eTraxis:Project');
+        $repository = $this->doctrine->getRepository(Project::class);
 
-        /** @var \eTraxis\Entity\Project $entity */
+        /** @var Project $entity */
         $entity = $repository->find($command->id);
 
         if (!$entity) {

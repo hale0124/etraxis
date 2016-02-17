@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\ListItems;
 
+use eTraxis\Entity\Field;
 use eTraxis\Entity\ListItem;
 use eTraxis\Tests\BaseTestCase;
 
@@ -18,11 +19,11 @@ class UpdateListItemCommandTest extends BaseTestCase
 {
     public function testSuccess()
     {
-        /** @var \eTraxis\Entity\Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Season']);
+        /** @var Field $field */
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Season']);
 
         /** @var ListItem $item */
-        $item = $this->doctrine->getRepository('eTraxis:ListItem')->findOneBy([
+        $item = $this->doctrine->getRepository(ListItem::class)->findOneBy([
             'field' => $field->getId(),
             'key'   => 1,
         ]);
@@ -40,7 +41,7 @@ class UpdateListItemCommandTest extends BaseTestCase
         $this->command_bus->handle($command);
 
         /** @var ListItem $item */
-        $item = $this->doctrine->getRepository('eTraxis:ListItem')->findOneBy([
+        $item = $this->doctrine->getRepository(ListItem::class)->findOneBy([
             'field' => $field->getId(),
             'key'   => 1,
         ]);
@@ -69,8 +70,8 @@ class UpdateListItemCommandTest extends BaseTestCase
      */
     public function testUnknownItemByKey()
     {
-        /** @var \eTraxis\Entity\Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Season']);
+        /** @var Field $field */
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Season']);
 
         $command = new UpdateListItemCommand([
             'field' => $field->getId(),
@@ -87,8 +88,8 @@ class UpdateListItemCommandTest extends BaseTestCase
      */
     public function testValueConflict()
     {
-        /** @var \eTraxis\Entity\Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Season']);
+        /** @var Field $field */
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Season']);
 
         $command = new UpdateListItemCommand([
             'field' => $field->getId(),

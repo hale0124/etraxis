@@ -55,7 +55,7 @@ class DeleteStateCommandHandler
      */
     public function handle(DeleteStateCommand $command)
     {
-        $repository = $this->doctrine->getRepository('eTraxis:State');
+        $repository = $this->doctrine->getRepository(State::class);
 
         $entity = $repository->find($command->id);
 

@@ -31,7 +31,7 @@ class ProjectVoterTest extends BaseTestCase
         $this->loginAs('hubert');
 
         /** @var Project $project */
-        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
+        $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
 
         $this->assertFalse($this->security->isGranted('UNKNOWN', $project));
     }
@@ -41,10 +41,10 @@ class ProjectVoterTest extends BaseTestCase
         $this->loginAs('hubert');
 
         /** @var Project $project */
-        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
+        $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
 
         /** @var Project $project */
-        $empty = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'eTraxis 1.0']);
+        $empty = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'eTraxis 1.0']);
 
         $this->assertInstanceOf('eTraxis\Entity\Project', $project);
         $this->assertInstanceOf('eTraxis\Entity\Project', $empty);

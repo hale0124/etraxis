@@ -14,6 +14,7 @@ namespace AppBundle\Controller\Admin;
 use eTraxis\Collection\StateResponsible;
 use eTraxis\Collection\StateType;
 use eTraxis\Collection\SystemRole;
+use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
 use eTraxis\Form\StateForm;
 use eTraxis\Traits\ContainerTrait;
@@ -47,7 +48,7 @@ class StatesGetController extends Controller
     {
         try {
             /** @var \eTraxis\Repository\StatesRepository $repository */
-            $repository = $this->getDoctrine()->getRepository('eTraxis:State');
+            $repository = $this->getDoctrine()->getRepository(State::class);
 
             return new JsonResponse($repository->getStates($id));
         }
@@ -69,7 +70,7 @@ class StatesGetController extends Controller
     public function viewAction(Request $request, $id = 0)
     {
         try {
-            $state = $this->getDoctrine()->getRepository('eTraxis:State')->find($id);
+            $state = $this->getDoctrine()->getRepository(State::class)->find($id);
 
             if (!$state) {
                 throw $this->createNotFoundException();
@@ -97,7 +98,7 @@ class StatesGetController extends Controller
     public function tabDetailsAction($id)
     {
         try {
-            $state = $this->getDoctrine()->getRepository('eTraxis:State')->find($id);
+            $state = $this->getDoctrine()->getRepository(State::class)->find($id);
 
             if (!$state) {
                 throw $this->createNotFoundException();
@@ -133,19 +134,19 @@ class StatesGetController extends Controller
     public function tabTransitionsAction($id)
     {
         /** @var State $state */
-        $state = $this->getDoctrine()->getRepository('eTraxis:State')->find($id);
+        $state = $this->getDoctrine()->getRepository(State::class)->find($id);
 
         if (!$this) {
             throw $this->createNotFoundException();
         }
 
         /** @var \eTraxis\Repository\StatesRepository $repository */
-        $repository = $this->getDoctrine()->getRepository('eTraxis:State');
+        $repository = $this->getDoctrine()->getRepository(State::class);
 
         $transitions = $repository->getStates($state->getTemplateId());
 
         /** @var \eTraxis\Repository\GroupsRepository $repository */
-        $repository = $this->getDoctrine()->getRepository('eTraxis:Group');
+        $repository = $this->getDoctrine()->getRepository(Group::class);
 
         return $this->render('admin/states/tab_transitions.html.twig', [
             'state'       => $state,
@@ -192,7 +193,7 @@ class StatesGetController extends Controller
     public function editAction($id)
     {
         try {
-            $state = $this->getDoctrine()->getRepository('eTraxis:State')->find($id);
+            $state = $this->getDoctrine()->getRepository(State::class)->find($id);
 
             if (!$state) {
                 throw $this->createNotFoundException();
@@ -225,7 +226,7 @@ class StatesGetController extends Controller
     {
         try {
             /** @var \eTraxis\Repository\StatesRepository $repository */
-            $repository = $this->getDoctrine()->getRepository('eTraxis:State');
+            $repository = $this->getDoctrine()->getRepository(State::class);
 
             /** @var State $state */
             $state = $repository->find($id);

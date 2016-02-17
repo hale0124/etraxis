@@ -327,7 +327,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
 
             for ($i = 1; $i <= 3; $i++) {
 
-                $value = $this->container->get('doctrine')->getRepository('eTraxis:StringValue')->findOneBy([
+                $value = $this->container->get('doctrine')->getRepository(StringValue::class)->findOneBy([
                     'token' => md5($values[$i]),
                 ]);
 
@@ -440,7 +440,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
                     ->setResponsible(null)
                 ;
 
-                $read = $this->container->get('doctrine')->getRepository('eTraxis:LastRead')->findOneBy([
+                $read = $this->container->get('doctrine')->getRepository(LastRead::class)->findOneBy([
                     'recordId' => $record->getId(),
                     'userId'   => $event->getUser()->getId(),
                 ]);
@@ -1994,7 +1994,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
                 $manager->persist($value);
             }
 
-            $read = $this->container->get('doctrine')->getRepository('eTraxis:LastRead')->findOneBy([
+            $read = $this->container->get('doctrine')->getRepository(LastRead::class)->findOneBy([
                 'recordId' => $record->getId(),
                 'userId'   => $event->getUser()->getId(),
             ]);

@@ -12,14 +12,15 @@
 namespace eTraxis\SimpleBus\Fields;
 
 use eTraxis\Entity\Field;
+use eTraxis\Entity\State;
 use eTraxis\Tests\BaseTestCase;
 
 class CreateCheckboxFieldCommandTest extends BaseTestCase
 {
     public function testSuccess()
     {
-        /** @var \eTraxis\Entity\State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'New']);
+        /** @var State $state */
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
         $this->assertNotNull($state);
 
@@ -36,7 +37,7 @@ class CreateCheckboxFieldCommandTest extends BaseTestCase
         $this->command_bus->handle($command);
 
         /** @var Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => $command->name]);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => $command->name]);
 
         $this->assertInstanceOf('\eTraxis\Entity\Field', $field);
         $this->assertEquals(Field::TYPE_CHECKBOX, $field->getType());

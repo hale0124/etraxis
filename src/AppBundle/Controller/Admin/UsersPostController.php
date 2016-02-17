@@ -11,6 +11,7 @@
 
 namespace AppBundle\Controller\Admin;
 
+use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\SimpleBus\Users;
 use eTraxis\Traits\ContainerTrait;
@@ -78,8 +79,8 @@ class UsersPostController extends Controller
         $em = $this->getDoctrine()->getManager();
 
         try {
-            /** @var \eTraxis\Entity\User $user */
-            $user = $this->getDoctrine()->getRepository('eTraxis:User')->find($id);
+            /** @var User $user */
+            $user = $this->getDoctrine()->getRepository(User::class)->find($id);
 
             if (!$user) {
                 throw $this->createNotFoundException();

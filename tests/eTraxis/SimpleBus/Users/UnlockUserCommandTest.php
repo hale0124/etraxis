@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Users;
 
+use eTraxis\Entity\User;
 use eTraxis\Tests\BaseTestCase;
 
 class UnlockUserCommandTest extends BaseTestCase
@@ -27,13 +28,13 @@ class UnlockUserCommandTest extends BaseTestCase
         $this->doctrine->getManager()->persist($user);
         $this->doctrine->getManager()->flush();
 
-        $user = $this->doctrine->getRepository('eTraxis:User')->find($id);
+        $user = $this->doctrine->getRepository(User::class)->find($id);
         $this->assertEquals(1, $user->getAuthAttempts());
 
         $command = new UnlockUserCommand(['id' => $id]);
         $this->command_bus->handle($command);
 
-        $user = $this->doctrine->getRepository('eTraxis:User')->find($id);
+        $user = $this->doctrine->getRepository(User::class)->find($id);
         $this->assertEquals(0, $user->getAuthAttempts());
     }
 }

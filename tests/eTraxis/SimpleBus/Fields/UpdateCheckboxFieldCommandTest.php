@@ -19,7 +19,7 @@ class UpdateCheckboxFieldCommandTest extends BaseTestCase
     public function testSuccess()
     {
         /** @var Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Multipart']);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Multipart']);
 
         $this->assertEquals(Field::TYPE_CHECKBOX, $field->getType());
         $this->assertEquals('Multipart', $field->getName());
@@ -41,7 +41,7 @@ class UpdateCheckboxFieldCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $field = $this->doctrine->getRepository('eTraxis:Field')->find($field->getId());
+        $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 
         $this->assertEquals(Field::TYPE_CHECKBOX, $field->getType());
         $this->assertEquals('Is multipart', $field->getName());

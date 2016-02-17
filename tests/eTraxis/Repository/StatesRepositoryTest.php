@@ -12,18 +12,21 @@
 namespace eTraxis\Repository;
 
 use eTraxis\Collection\SystemRole;
+use eTraxis\Entity\Group;
+use eTraxis\Entity\State;
+use eTraxis\Entity\Template;
 use eTraxis\Tests\BaseTestCase;
 
 class StatesRepositoryTest extends BaseTestCase
 {
     public function testGetStates()
     {
-        /** @var \eTraxis\Entity\Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+        /** @var Template $template */
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
         $this->assertNotNull($template);
 
         /** @var StatesRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository('eTraxis:State');
+        $repository = $this->doctrine->getManager()->getRepository(State::class);
 
         $result = $repository->getStates($template->getId());
 
@@ -42,13 +45,13 @@ class StatesRepositoryTest extends BaseTestCase
     public function testGetRoleTransitions()
     {
         /** @var StatesRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository('eTraxis:State');
+        $repository = $this->doctrine->getManager()->getRepository(State::class);
 
-        /** @var \eTraxis\Entity\State $new */
+        /** @var State $new */
         $new = $repository->findOneBy(['name' => 'New']);
         $this->assertNotNull($new);
 
-        /** @var \eTraxis\Entity\State $delivered */
+        /** @var State $delivered */
         $delivered = $repository->findOneBy(['name' => 'Delivered']);
         $this->assertNotNull($delivered);
 
@@ -62,17 +65,17 @@ class StatesRepositoryTest extends BaseTestCase
     public function testGetGroupTransitions()
     {
         /** @var StatesRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository('eTraxis:State');
+        $repository = $this->doctrine->getManager()->getRepository(State::class);
 
-        /** @var \eTraxis\Entity\Group $managers */
-        $managers = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Managers']);
+        /** @var Group $managers */
+        $managers = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
         $this->assertNotNull($managers);
 
-        /** @var \eTraxis\Entity\State $new */
+        /** @var State $new */
         $new = $repository->findOneBy(['name' => 'New']);
         $this->assertNotNull($new);
 
-        /** @var \eTraxis\Entity\State $delivered */
+        /** @var State $delivered */
         $delivered = $repository->findOneBy(['name' => 'Delivered']);
         $this->assertNotNull($delivered);
 

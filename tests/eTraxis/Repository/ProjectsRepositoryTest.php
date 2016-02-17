@@ -11,6 +11,7 @@
 
 namespace eTraxis\Repository;
 
+use eTraxis\Entity\Project;
 use eTraxis\Tests\BaseTestCase;
 
 class ProjectsRepositoryTest extends BaseTestCase
@@ -18,7 +19,7 @@ class ProjectsRepositoryTest extends BaseTestCase
     public function testGetProjects()
     {
         /** @var ProjectsRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository('eTraxis:Project');
+        $repository = $this->doctrine->getManager()->getRepository(Project::class);
 
         $result = $repository->getProjects();
 

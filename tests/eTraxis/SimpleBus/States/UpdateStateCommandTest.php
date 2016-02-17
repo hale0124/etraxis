@@ -18,11 +18,11 @@ class UpdateStateCommandTest extends BaseTestCase
 {
     public function testSuccess()
     {
-        /** @var \eTraxis\Entity\State $nextState */
-        $nextState = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'New']);
+        /** @var State $nextState */
+        $nextState = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
-        /** @var \eTraxis\Entity\State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
+        /** @var State $state */
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
         $this->assertNotNull($state);
         $this->assertEquals('Delivered', $state->getName());
@@ -40,11 +40,11 @@ class UpdateStateCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
         $this->assertNull($state);
 
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Completed']);
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Completed']);
 
         $this->assertNotNull($state);
         $this->assertEquals('Completed', $state->getName());
@@ -75,8 +75,8 @@ class UpdateStateCommandTest extends BaseTestCase
      */
     public function testUnknownNextState()
     {
-        /** @var \eTraxis\Entity\State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
+        /** @var State $state */
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
         $command = new UpdateStateCommand([
             'id'           => $state->getId(),
@@ -95,8 +95,8 @@ class UpdateStateCommandTest extends BaseTestCase
      */
     public function testNameConflict()
     {
-        /** @var \eTraxis\Entity\State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
+        /** @var State $state */
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
         $command = new UpdateStateCommand([
             'id'           => $state->getId(),
@@ -114,8 +114,8 @@ class UpdateStateCommandTest extends BaseTestCase
      */
     public function testAbbreviationConflict()
     {
-        /** @var \eTraxis\Entity\State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
+        /** @var State $state */
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
         $command = new UpdateStateCommand([
             'id'           => $state->getId(),

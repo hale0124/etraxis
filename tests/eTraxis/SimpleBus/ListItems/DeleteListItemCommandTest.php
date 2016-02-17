@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\ListItems;
 
+use eTraxis\Entity\Field;
 use eTraxis\Entity\ListItem;
 use eTraxis\Tests\BaseTestCase;
 
@@ -18,8 +19,8 @@ class DeleteListItemCommandTest extends BaseTestCase
 {
     public function testSuccess()
     {
-        /** @var \eTraxis\Entity\Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Season']);
+        /** @var Field $field */
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Season']);
 
         $item = new ListItem();
 
@@ -36,7 +37,7 @@ class DeleteListItemCommandTest extends BaseTestCase
         $this->loginAs('hubert');
 
         /** @var ListItem $item */
-        $item = $this->doctrine->getRepository('eTraxis:ListItem')->findOneBy([
+        $item = $this->doctrine->getRepository(ListItem::class)->findOneBy([
             'fieldId' => $item->getFieldId(),
             'key'     => $item->getKey(),
         ]);
@@ -48,7 +49,7 @@ class DeleteListItemCommandTest extends BaseTestCase
         ]);
         $this->command_bus->handle($command);
 
-        $item = $this->doctrine->getRepository('eTraxis:ListItem')->findOneBy([
+        $item = $this->doctrine->getRepository(ListItem::class)->findOneBy([
             'fieldId' => $item->getFieldId(),
             'key'     => $item->getKey(),
         ]);
@@ -60,13 +61,13 @@ class DeleteListItemCommandTest extends BaseTestCase
      */
     public function testAccessDenied()
     {
-        /** @var \eTraxis\Entity\Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Season']);
+        /** @var Field $field */
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Season']);
 
         $this->loginAs('hubert');
 
         /** @var ListItem $item */
-        $item = $this->doctrine->getRepository('eTraxis:ListItem')->findOneBy([
+        $item = $this->doctrine->getRepository(ListItem::class)->findOneBy([
             'fieldId' => $field->getId(),
             'key'     => 1,
         ]);
@@ -85,8 +86,8 @@ class DeleteListItemCommandTest extends BaseTestCase
      */
     public function testNotFound()
     {
-        /** @var \eTraxis\Entity\Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Season']);
+        /** @var Field $field */
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Season']);
 
         $this->loginAs('hubert');
 

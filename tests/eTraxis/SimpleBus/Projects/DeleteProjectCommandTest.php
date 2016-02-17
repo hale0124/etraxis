@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Projects;
 
+use eTraxis\Entity\Project;
 use eTraxis\Tests\BaseTestCase;
 
 class DeleteProjectCommandTest extends BaseTestCase
@@ -19,14 +20,14 @@ class DeleteProjectCommandTest extends BaseTestCase
     {
         $this->loginAs('hubert');
 
-        /** @var \eTraxis\Entity\Project $project */
-        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'eTraxis 1.0']);
+        /** @var Project $project */
+        $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'eTraxis 1.0']);
         $this->assertNotNull($project);
 
         $command = new DeleteProjectCommand(['id' => $project->getId()]);
         $this->command_bus->handle($command);
 
-        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'eTraxis 1.0']);
+        $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'eTraxis 1.0']);
         $this->assertNull($project);
     }
 
@@ -37,8 +38,8 @@ class DeleteProjectCommandTest extends BaseTestCase
     {
         $this->loginAs('hubert');
 
-        /** @var \eTraxis\Entity\Project $project */
-        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
+        /** @var Project $project */
+        $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
         $this->assertNotNull($project);
 
         $command = new DeleteProjectCommand(['id' => $project->getId()]);

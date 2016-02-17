@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Users;
 
+use eTraxis\Entity\User;
 use eTraxis\Tests\BaseTestCase;
 
 class SaveAppearanceCommandTest extends BaseTestCase
@@ -33,7 +34,7 @@ class SaveAppearanceCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $user = $this->doctrine->getRepository('eTraxis:User')->find($user->getId());
+        $user = $this->doctrine->getRepository(User::class)->find($user->getId());
 
         $this->assertEquals('es', $user->getLocale());
         $this->assertEquals('humanity', $user->getTheme());

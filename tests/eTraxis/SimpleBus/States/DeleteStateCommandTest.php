@@ -12,14 +12,15 @@
 namespace eTraxis\SimpleBus\States;
 
 use eTraxis\Entity\State;
+use eTraxis\Entity\Template;
 use eTraxis\Tests\BaseTestCase;
 
 class DeleteStateCommandTest extends BaseTestCase
 {
     public function testSuccess()
     {
-        /** @var \eTraxis\Entity\Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+        /** @var Template $template */
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
         $state = new State();
 
@@ -36,14 +37,14 @@ class DeleteStateCommandTest extends BaseTestCase
 
         $this->loginAs('hubert');
 
-        /** @var \eTraxis\Entity\State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Cancelled']);
+        /** @var State $state */
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Cancelled']);
         $this->assertNotNull($state);
 
         $command = new DeleteStateCommand(['id' => $state->getId()]);
         $this->command_bus->handle($command);
 
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Cancelled']);
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Cancelled']);
         $this->assertNull($state);
     }
 
@@ -54,8 +55,8 @@ class DeleteStateCommandTest extends BaseTestCase
     {
         $this->loginAs('hubert');
 
-        /** @var \eTraxis\Entity\State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
+        /** @var State $state */
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
         $this->assertNotNull($state);
 
         $command = new DeleteStateCommand(['id' => $state->getId()]);

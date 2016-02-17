@@ -55,9 +55,9 @@ class DeleteUserCommandHandler
      */
     public function handle(DeleteUserCommand $command)
     {
-        $repository = $this->doctrine->getRepository('eTraxis:User');
+        $repository = $this->doctrine->getRepository(User::class);
 
-        /** @var \eTraxis\Entity\User $entity */
+        /** @var User $entity */
         $entity = $repository->find($command->id);
 
         if (!$entity) {

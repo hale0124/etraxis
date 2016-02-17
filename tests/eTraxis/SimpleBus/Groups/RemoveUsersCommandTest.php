@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Groups;
 
+use eTraxis\Entity\Group;
 use eTraxis\Entity\User;
 use eTraxis\Tests\BaseTestCase;
 
@@ -19,9 +20,9 @@ class RemoveUsersCommandTest extends BaseTestCase
     public function testSuccess()
     {
         /** @var \eTraxis\Repository\GroupsRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository('eTraxis:Group');
+        $repository = $this->doctrine->getManager()->getRepository(Group::class);
 
-        /** @var \eTraxis\Entity\Group $group */
+        /** @var Group $group */
         $group = $repository->findOneBy(['name' => 'Staff']);
 
         $members = $repository->getGroupMembers($group->getId());
@@ -68,8 +69,8 @@ class RemoveUsersCommandTest extends BaseTestCase
      */
     public function testEmptyGroups()
     {
-        /** @var \eTraxis\Entity\Group $group */
-        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Staff']);
+        /** @var Group $group */
+        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Staff']);
 
         $command = new RemoveUsersCommand([
             'id'    => $group->getId(),

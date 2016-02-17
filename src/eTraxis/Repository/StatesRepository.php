@@ -12,6 +12,8 @@
 namespace eTraxis\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use eTraxis\Entity\StateGroupTransition;
+use eTraxis\Entity\StateRoleTransition;
 
 /**
  * States repository.
@@ -55,7 +57,7 @@ class StatesRepository extends EntityRepository
      */
     public function getRoleTransitions($stateId, $role)
     {
-        $repository = $this->getEntityManager()->getRepository('eTraxis:StateRoleTransition');
+        $repository = $this->getEntityManager()->getRepository(StateRoleTransition::class);
 
         $query = $repository->createQueryBuilder('tr');
 
@@ -86,7 +88,7 @@ class StatesRepository extends EntityRepository
      */
     public function getGroupTransitions($stateId, $groupId)
     {
-        $repository = $this->getEntityManager()->getRepository('eTraxis:StateGroupTransition');
+        $repository = $this->getEntityManager()->getRepository(StateGroupTransition::class);
 
         $query = $repository->createQueryBuilder('tr');
 

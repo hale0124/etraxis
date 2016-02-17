@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Templates\Handler;
 
+use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\Templates\UpdateTemplateCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -59,9 +60,9 @@ class UpdateTemplateCommandHandler
      */
     public function handle(UpdateTemplateCommand $command)
     {
-        $repository = $this->doctrine->getRepository('eTraxis:Template');
+        $repository = $this->doctrine->getRepository(Template::class);
 
-        /** @var \eTraxis\Entity\Template $entity */
+        /** @var Template $entity */
         $entity = $repository->find($command->id);
 
         if (!$entity) {

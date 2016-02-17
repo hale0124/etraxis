@@ -18,11 +18,11 @@ class SetInitialStateCommandTest extends BaseTestCase
 {
     public function testSuccess()
     {
-        /** @var \eTraxis\Entity\State $new */
-        $new = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'New']);
+        /** @var State $new */
+        $new = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
-        /** @var \eTraxis\Entity\State $delivered */
-        $delivered = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
+        /** @var State $delivered */
+        $delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
         $this->assertEquals(State::TYPE_INITIAL, $new->getType());
         $this->assertNotEquals(State::TYPE_INITIAL, $delivered->getType());
@@ -32,8 +32,8 @@ class SetInitialStateCommandTest extends BaseTestCase
 
         $this->doctrine->getManager()->clear();
 
-        $new       = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'New']);
-        $delivered = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Delivered']);
+        $new       = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
+        $delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
         $this->assertNotEquals(State::TYPE_INITIAL, $new->getType());
         $this->assertEquals(State::TYPE_INITIAL, $delivered->getType());

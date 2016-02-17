@@ -11,18 +11,20 @@
 
 namespace eTraxis\Repository;
 
+use eTraxis\Entity\Group;
+use eTraxis\Entity\Project;
 use eTraxis\Tests\BaseTestCase;
 
 class GroupsRepositoryTest extends BaseTestCase
 {
     public function testGetGroups()
     {
-        /** @var \eTraxis\Entity\Project $project */
-        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
+        /** @var Project $project */
+        $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
         $this->assertNotNull($project);
 
         /** @var GroupsRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository('eTraxis:Group');
+        $repository = $this->doctrine->getManager()->getRepository(Group::class);
 
         $result = $repository->getGroups($project->getId());
 
@@ -43,12 +45,12 @@ class GroupsRepositoryTest extends BaseTestCase
 
     public function testGetLocalGroups()
     {
-        /** @var \eTraxis\Entity\Project $project */
-        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
+        /** @var Project $project */
+        $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
         $this->assertNotNull($project);
 
         /** @var GroupsRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository('eTraxis:Group');
+        $repository = $this->doctrine->getManager()->getRepository(Group::class);
 
         $result = $repository->getLocalGroups($project->getId());
 
@@ -68,7 +70,7 @@ class GroupsRepositoryTest extends BaseTestCase
     public function testGetGlobalGroups()
     {
         /** @var GroupsRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository('eTraxis:Group');
+        $repository = $this->doctrine->getManager()->getRepository(Group::class);
 
         $result = $repository->getGlobalGroups();
 
@@ -87,9 +89,9 @@ class GroupsRepositoryTest extends BaseTestCase
     public function testGetGroupMembersFound()
     {
         /** @var GroupsRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository('eTraxis:Group');
+        $repository = $this->doctrine->getManager()->getRepository(Group::class);
 
-        /** @var \eTraxis\Entity\Group $group */
+        /** @var Group $group */
         $group = $repository->findOneBy(['name' => 'Staff']);
 
         $result = $repository->getGroupMembers($group->getId());
@@ -114,7 +116,7 @@ class GroupsRepositoryTest extends BaseTestCase
     public function testGetGroupMembersNotFound()
     {
         /** @var GroupsRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository('eTraxis:Group');
+        $repository = $this->doctrine->getManager()->getRepository(Group::class);
 
         $result = $repository->getGroupMembers($this->getMaxId());
 
@@ -126,9 +128,9 @@ class GroupsRepositoryTest extends BaseTestCase
     public function testGetGroupNonMembersFound()
     {
         /** @var GroupsRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository('eTraxis:Group');
+        $repository = $this->doctrine->getManager()->getRepository(Group::class);
 
-        /** @var \eTraxis\Entity\Group $group */
+        /** @var Group $group */
         $group = $repository->findOneBy(['name' => 'Staff']);
 
         $result = $repository->getGroupNonMembers($group->getId());
@@ -155,7 +157,7 @@ class GroupsRepositoryTest extends BaseTestCase
     public function testGetGroupNonMembersNotFound()
     {
         /** @var GroupsRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository('eTraxis:Group');
+        $repository = $this->doctrine->getManager()->getRepository(Group::class);
 
         $result = $repository->getGroupNonMembers($this->getMaxId());
 

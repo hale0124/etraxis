@@ -12,6 +12,7 @@
 namespace eTraxis\SimpleBus\Templates\Handler;
 
 use eTraxis\Collection\SystemRole;
+use eTraxis\Entity\Group;
 use eTraxis\Entity\Template;
 use eTraxis\Entity\TemplateGroupPermission;
 use eTraxis\SimpleBus\Templates\AddTemplatePermissionsCommand;
@@ -49,8 +50,8 @@ class AddRemoveTemplatePermissionsCommandHandler
      */
     public function handle($command)
     {
-        /** @var \eTraxis\Entity\Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->find($command->id);
+        /** @var Template $template */
+        $template = $this->doctrine->getRepository(Template::class)->find($command->id);
 
         if (!$template) {
             $this->logger->error('Unknown template.', [$command->id]);
@@ -88,16 +89,16 @@ class AddRemoveTemplatePermissionsCommandHandler
 
             default:
 
-                /** @var \eTraxis\Entity\Group $group */
-                $group = $this->doctrine->getRepository('eTraxis:Group')->find($command->group);
+                /** @var Group $group */
+                $group = $this->doctrine->getRepository(Group::class)->find($command->group);
 
                 if (!$group) {
                     $this->logger->error('Unknown group.', [$command->group]);
                     throw new NotFoundHttpException('Unknown group.');
                 }
 
-                /** @var \eTraxis\Entity\TemplateGroupPermission $entity */
-                $entity = $this->doctrine->getRepository('eTraxis:TemplateGroupPermission')->findOneBy([
+                /** @var TemplateGroupPermission $entity */
+                $entity = $this->doctrine->getRepository(TemplateGroupPermission::class)->findOneBy([
                     'groupId'    => $group->getId(),
                     'templateId' => $template->getId(),
                 ]);

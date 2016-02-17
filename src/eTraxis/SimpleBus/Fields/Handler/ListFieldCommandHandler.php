@@ -12,6 +12,7 @@
 namespace eTraxis\SimpleBus\Fields\Handler;
 
 use eTraxis\Entity\Field;
+use eTraxis\Entity\ListItem;
 use eTraxis\SimpleBus\Fields\CreateListFieldCommand;
 use eTraxis\SimpleBus\Fields\UpdateListFieldCommand;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -40,9 +41,9 @@ class ListFieldCommandHandler extends BaseFieldCommandHandler
 
         if ($command instanceof UpdateListFieldCommand) {
 
-            $repository = $this->doctrine->getRepository('eTraxis:ListItem');
+            $repository = $this->doctrine->getRepository(ListItem::class);
 
-            /** @var \eTraxis\Entity\ListItem $item */
+            /** @var ListItem $item */
             $item = $repository->findOneBy([
                 'fieldId' => $command->id,
                 'key'     => $command->default,

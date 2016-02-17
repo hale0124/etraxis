@@ -11,20 +11,21 @@
 
 namespace eTraxis\SimpleBus\Groups;
 
+use eTraxis\Entity\Group;
 use eTraxis\Tests\BaseTestCase;
 
 class DeleteGroupCommandTest extends BaseTestCase
 {
     public function testSuccess()
     {
-        /** @var \eTraxis\Entity\Group $group */
-        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Staff']);
+        /** @var Group $group */
+        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Staff']);
         $this->assertNotNull($group);
 
         $command = new DeleteGroupCommand(['id' => $group->getId()]);
         $this->command_bus->handle($command);
 
-        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Staff']);
+        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Staff']);
         $this->assertNull($group);
     }
 

@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\ListItems\Handler;
 
+use eTraxis\Entity\ListItem;
 use eTraxis\SimpleBus\ListItems\UpdateListItemCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -59,9 +60,9 @@ class UpdateListItemCommandHandler
      */
     public function handle(UpdateListItemCommand $command)
     {
-        $repository = $this->doctrine->getRepository('eTraxis:ListItem');
+        $repository = $this->doctrine->getRepository(ListItem::class);
 
-        /** @var \eTraxis\Entity\ListItem $entity */
+        /** @var ListItem $entity */
         $entity = $repository->findOneBy([
             'fieldId' => $command->field,
             'key'     => $command->key,

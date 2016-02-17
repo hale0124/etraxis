@@ -11,6 +11,7 @@
 
 namespace eTraxis\DataTables;
 
+use eTraxis\Entity\User;
 use eTraxis\Tests\BaseTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
@@ -18,7 +19,7 @@ class UsersDataTableTest extends BaseTestCase
 {
     public function testBasic()
     {
-        $users = $this->doctrine->getRepository('eTraxis:User')->findAll();
+        $users = $this->doctrine->getRepository(User::class)->findAll();
 
         $request = new Request([
             'draw'    => mt_rand(),

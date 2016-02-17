@@ -12,6 +12,7 @@
 namespace eTraxis\SimpleBus\Groups\Handler;
 
 use eTraxis\Entity\Group;
+use eTraxis\Entity\Project;
 use eTraxis\SimpleBus\Groups\CreateGroupCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -69,9 +70,9 @@ class CreateGroupCommandHandler
 
         if ($command->project) {
 
-            $repository = $this->doctrine->getRepository('eTraxis:Project');
+            $repository = $this->doctrine->getRepository(Project::class);
 
-            /** @var \eTraxis\Entity\Project $project */
+            /** @var Project $project */
             $project = $repository->find($command->project);
 
             if (!$project) {

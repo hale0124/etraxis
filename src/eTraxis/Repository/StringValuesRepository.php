@@ -30,7 +30,7 @@ class StringValuesRepository extends EntityRepository
     {
         $token = md5($value);
 
-        /** @var \eTraxis\Entity\StringValue $entity */
+        /** @var StringValue $entity */
         $entity = $this->findOneBy(['token' => $token]);
 
         // If entity doesn't exist yet, save it.

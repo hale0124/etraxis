@@ -19,7 +19,7 @@ class UpdateDateFieldCommandTest extends BaseTestCase
     public function testSuccess()
     {
         /** @var Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Original air date']);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Original air date']);
 
         $this->assertEquals(Field::TYPE_DATE, $field->getType());
         $this->assertEquals('Original air date', $field->getName());
@@ -45,7 +45,7 @@ class UpdateDateFieldCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $field = $this->doctrine->getRepository('eTraxis:Field')->find($field->getId());
+        $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 
         $this->assertEquals(Field::TYPE_DATE, $field->getType());
         $this->assertEquals('Release date', $field->getName());
@@ -65,7 +65,7 @@ class UpdateDateFieldCommandTest extends BaseTestCase
     public function testMinMaxValues()
     {
         /** @var Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Original air date']);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Original air date']);
 
         $this->assertNotNull($field);
 
@@ -89,7 +89,7 @@ class UpdateDateFieldCommandTest extends BaseTestCase
     public function testDefaultValue()
     {
         /** @var Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Original air date']);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Original air date']);
 
         $this->assertNotNull($field);
 

@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Users\Handler;
 
+use eTraxis\Entity\User;
 use eTraxis\Service\Mailer\MailerInterface;
 use eTraxis\SimpleBus\Users\ForgotPasswordCommand;
 use Ramsey\Uuid\Uuid;
@@ -49,9 +50,9 @@ class ForgotPasswordCommandHandler
      */
     public function handle(ForgotPasswordCommand $command)
     {
-        $repository = $this->doctrine->getRepository('eTraxis:User');
+        $repository = $this->doctrine->getRepository(User::class);
 
-        /** @var \eTraxis\Entity\User $user */
+        /** @var User $user */
         if ($user = $repository->findOneBy(['username' => $command->username . '@eTraxis'])) {
 
             $user

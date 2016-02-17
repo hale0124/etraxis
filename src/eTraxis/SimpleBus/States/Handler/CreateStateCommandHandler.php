@@ -12,6 +12,7 @@
 namespace eTraxis\SimpleBus\States\Handler;
 
 use eTraxis\Entity\State;
+use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\States\CreateStateCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -60,8 +61,8 @@ class CreateStateCommandHandler
      */
     public function handle(CreateStateCommand $command)
     {
-        /** @var \eTraxis\Entity\Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->find($command->template);
+        /** @var Template $template */
+        $template = $this->doctrine->getRepository(Template::class)->find($command->template);
 
         if (!$template) {
             $this->logger->error('Unknown template.', [$command->template]);
@@ -80,8 +81,8 @@ class CreateStateCommandHandler
 
         if ($command->nextState) {
 
-            /** @var \eTraxis\Entity\State $nextState */
-            $nextState = $this->doctrine->getRepository('eTraxis:State')->find($command->nextState);
+            /** @var State $nextState */
+            $nextState = $this->doctrine->getRepository(State::class)->find($command->nextState);
 
             if (!$nextState) {
                 $this->logger->error('Unknown next state.', [$command->nextState]);

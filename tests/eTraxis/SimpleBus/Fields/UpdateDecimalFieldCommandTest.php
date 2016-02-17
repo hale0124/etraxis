@@ -20,13 +20,13 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
     public function testSuccess()
     {
         /** @var Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'U.S. viewers']);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'U.S. viewers']);
 
         /** @var DecimalValue $minValue */
         /** @var DecimalValue $maxValue */
         /** @var DecimalValue $default */
-        $minValue = $this->doctrine->getRepository('eTraxis:DecimalValue')->find($field->getParameter1());
-        $maxValue = $this->doctrine->getRepository('eTraxis:DecimalValue')->find($field->getParameter2());
+        $minValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameter1());
+        $maxValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameter2());
 
         $this->assertEquals(Field::TYPE_DECIMAL, $field->getType());
         $this->assertEquals('U.S. viewers', $field->getName());
@@ -52,11 +52,11 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $field = $this->doctrine->getRepository('eTraxis:Field')->find($field->getId());
+        $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 
-        $minValue = $this->doctrine->getRepository('eTraxis:DecimalValue')->find($field->getParameter1());
-        $maxValue = $this->doctrine->getRepository('eTraxis:DecimalValue')->find($field->getParameter2());
-        $default  = $this->doctrine->getRepository('eTraxis:DecimalValue')->find($field->getDefaultValue());
+        $minValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameter1());
+        $maxValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameter2());
+        $default  = $this->doctrine->getRepository(DecimalValue::class)->find($field->getDefaultValue());
 
         $this->assertEquals(Field::TYPE_DECIMAL, $field->getType());
         $this->assertEquals('Total U.S. viewers', $field->getName());
@@ -76,7 +76,7 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
     public function testMinMaxValues()
     {
         /** @var Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'U.S. viewers']);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'U.S. viewers']);
 
         $this->assertNotNull($field);
 
@@ -100,7 +100,7 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
     public function testDefaultValue()
     {
         /** @var Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'U.S. viewers']);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'U.S. viewers']);
 
         $this->assertNotNull($field);
 

@@ -11,6 +11,7 @@
 
 namespace eTraxis\Voter;
 
+use eTraxis\Entity\Project;
 use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\Templates\LockTemplateCommand;
 use eTraxis\Tests\BaseTestCase;
@@ -32,7 +33,7 @@ class TemplateVoterTest extends BaseTestCase
         $this->loginAs('hubert');
 
         /** @var Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
         $this->assertFalse($this->security->isGranted('UNKNOWN', $template));
     }
@@ -41,8 +42,8 @@ class TemplateVoterTest extends BaseTestCase
     {
         $this->loginAs('hubert');
 
-        /** @var \eTraxis\Entity\Project $project */
-        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
+        /** @var Project $project */
+        $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
 
         $template = new Template();
 
@@ -61,10 +62,10 @@ class TemplateVoterTest extends BaseTestCase
         $this->doctrine->getManager()->flush();
 
         /** @var Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
         /** @var Template $empty */
-        $empty = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Bug report']);
+        $empty = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Bug report']);
 
         $this->assertInstanceOf('eTraxis\Entity\Template', $template);
         $this->assertInstanceOf('eTraxis\Entity\Template', $empty);
@@ -78,20 +79,20 @@ class TemplateVoterTest extends BaseTestCase
         $this->loginAs('hubert');
 
         /** @var Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
         $command = new LockTemplateCommand(['id' => $template->getId()]);
         $this->command_bus->handle($command);
 
         /** @var Template $delivery */
-        $delivery = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+        $delivery = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
         $this->assertTrue($delivery->isLocked());
         $this->assertFalse($this->security->isGranted(Template::LOCK, $delivery));
         $this->assertTrue($this->security->isGranted(Template::UNLOCK, $delivery));
 
         /** @var Template $futurama */
-        $futurama = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Futurama']);
+        $futurama = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Futurama']);
 
         $this->assertFalse($futurama->isLocked());
         $this->assertTrue($this->security->isGranted(Template::LOCK, $futurama));
@@ -102,8 +103,8 @@ class TemplateVoterTest extends BaseTestCase
     {
         $this->loginAs('hubert');
 
-        /** @var \eTraxis\Entity\Project $project */
-        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
+        /** @var Project $project */
+        $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
 
         $template = new Template();
 
@@ -122,7 +123,7 @@ class TemplateVoterTest extends BaseTestCase
         $this->doctrine->getManager()->flush();
 
         /** @var Template $empty */
-        $empty = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Bug report']);
+        $empty = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Bug report']);
 
         $this->assertTrue($empty->isLocked());
         $this->assertFalse($this->security->isGranted(Template::UNLOCK, $empty));

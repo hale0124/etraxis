@@ -12,6 +12,7 @@
 namespace eTraxis\SimpleBus\Fields;
 
 use eTraxis\Entity\Field;
+use eTraxis\Entity\State;
 use eTraxis\Entity\StringValue;
 use eTraxis\Tests\BaseTestCase;
 
@@ -19,8 +20,8 @@ class CreateStringFieldCommandTest extends BaseTestCase
 {
     public function testSuccess()
     {
-        /** @var \eTraxis\Entity\State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'New']);
+        /** @var State $state */
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
         $this->assertNotNull($state);
 
@@ -41,10 +42,10 @@ class CreateStringFieldCommandTest extends BaseTestCase
         $this->command_bus->handle($command);
 
         /** @var Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => $command->name]);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => $command->name]);
 
         /** @var StringValue $default */
-        $default = $this->doctrine->getRepository('eTraxis:StringValue')->find($field->getDefaultValue());
+        $default = $this->doctrine->getRepository(StringValue::class)->find($field->getDefaultValue());
 
         $this->assertInstanceOf('\eTraxis\Entity\Field', $field);
         $this->assertEquals(Field::TYPE_STRING, $field->getType());

@@ -11,6 +11,7 @@
 
 namespace eTraxis\Voter;
 
+use eTraxis\Entity\Event;
 use eTraxis\Entity\User;
 use eTraxis\Tests\BaseTestCase;
 use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
@@ -41,7 +42,7 @@ class UserVoterTest extends BaseTestCase
         $scruffy = $this->findUser('scruffy');
 
         /** @var \eTraxis\Repository\EventsRepository $repository */
-        $repository = $this->doctrine->getRepository('eTraxis:Event');
+        $repository = $this->doctrine->getRepository(Event::class);
 
         $voter = new UserVoter($repository);
         $token = new AnonymousToken('', 'anon.');
@@ -64,7 +65,7 @@ class UserVoterTest extends BaseTestCase
         $hubert->setPasswordSetAt(time() - 86400 * 2);
 
         /** @var \eTraxis\Repository\EventsRepository $repository */
-        $repository = $this->doctrine->getRepository('eTraxis:Event');
+        $repository = $this->doctrine->getRepository(Event::class);
 
         $voter = new UserVoter($repository, 3);
         $this->assertEquals(UserVoter::ACCESS_DENIED, $voter->vote($token, $hubert, [User::SET_EXPIRED_PASSWORD]));

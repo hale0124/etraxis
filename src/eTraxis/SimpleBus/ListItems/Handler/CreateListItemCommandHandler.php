@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\ListItems\Handler;
 
+use eTraxis\Entity\Field;
 use eTraxis\Entity\ListItem;
 use eTraxis\SimpleBus\ListItems\CreateListItemCommand;
 use Psr\Log\LoggerInterface;
@@ -60,8 +61,8 @@ class CreateListItemCommandHandler
      */
     public function handle(CreateListItemCommand $command)
     {
-        /** @var \eTraxis\Entity\Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->find($command->field);
+        /** @var Field $field */
+        $field = $this->doctrine->getRepository(Field::class)->find($command->field);
 
         if (!$field) {
             $this->logger->error('Unknown field.', [$command->field]);

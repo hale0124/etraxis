@@ -12,6 +12,7 @@
 namespace eTraxis\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use eTraxis\Entity\User;
 
 /**
  * Groups repository.
@@ -90,11 +91,11 @@ class GroupsRepository extends EntityRepository
      *
      * @param   int $id Group ID.
      *
-     * @return  \eTraxis\Entity\User[]
+     * @return  User[]
      */
     public function getGroupMembers($id)
     {
-        $repository = $this->getEntityManager()->getRepository('eTraxis:User');
+        $repository = $this->getEntityManager()->getRepository(User::class);
 
         $query = $repository->createQueryBuilder('u');
 
@@ -115,7 +116,7 @@ class GroupsRepository extends EntityRepository
      *
      * @param   int $id Group ID.
      *
-     * @return  \eTraxis\Entity\User[]
+     * @return  User[]
      */
     public function getGroupNonMembers($id)
     {
@@ -123,7 +124,7 @@ class GroupsRepository extends EntityRepository
             return [];
         }
 
-        $repository = $this->getEntityManager()->getRepository('eTraxis:User');
+        $repository = $this->getEntityManager()->getRepository(User::class);
 
         // Find all accounts which belong to the group.
         $subquery = $repository->createQueryBuilder('u');

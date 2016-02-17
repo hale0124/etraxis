@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Fields\Handler;
 
+use eTraxis\Entity\Field;
 use eTraxis\SimpleBus\Fields\DeleteFieldCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -47,9 +48,9 @@ class DeleteFieldCommandHandler
      */
     public function handle(DeleteFieldCommand $command)
     {
-        $repository = $this->doctrine->getRepository('eTraxis:Field');
+        $repository = $this->doctrine->getRepository(Field::class);
 
-        /** @var \eTraxis\Entity\Field $entity */
+        /** @var Field $entity */
         $entity = $repository->findOneBy([
             'id'        => $command->id,
             'removedAt' => 0,

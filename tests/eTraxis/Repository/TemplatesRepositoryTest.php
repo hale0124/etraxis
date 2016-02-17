@@ -12,6 +12,8 @@
 namespace eTraxis\Repository;
 
 use eTraxis\Collection\SystemRole;
+use eTraxis\Entity\Group;
+use eTraxis\Entity\Project;
 use eTraxis\Entity\Template;
 use eTraxis\Tests\BaseTestCase;
 
@@ -19,12 +21,12 @@ class TemplatesRepositoryTest extends BaseTestCase
 {
     public function testGetTemplates()
     {
-        /** @var \eTraxis\Entity\Project $project */
-        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
+        /** @var Project $project */
+        $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
         $this->assertNotNull($project);
 
         /** @var TemplatesRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository('eTraxis:Template');
+        $repository = $this->doctrine->getManager()->getRepository(Template::class);
 
         $result = $repository->getTemplates($project->getId());
 
@@ -47,7 +49,7 @@ class TemplatesRepositoryTest extends BaseTestCase
         $registered  = 0;
 
         /** @var TemplatesRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository('eTraxis:Template');
+        $repository = $this->doctrine->getManager()->getRepository(Template::class);
 
         /** @var Template $template */
         $template = $repository->findOneBy(['name' => 'Delivery']);
@@ -63,15 +65,15 @@ class TemplatesRepositoryTest extends BaseTestCase
         $local  = Template::PERMIT_VIEW_RECORD | Template::PERMIT_ADD_COMMENT;
         $global = 0;
 
-        /** @var \eTraxis\Entity\Group $group_local */
-        /** @var \eTraxis\Entity\Group $group_global */
-        $group_local  = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Crew']);
-        $group_global = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Nimbus']);
+        /** @var Group $group_local */
+        /** @var Group $group_global */
+        $group_local  = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
+        $group_global = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Nimbus']);
         $this->assertNotNull($group_local);
         $this->assertNotNull($group_global);
 
         /** @var TemplatesRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository('eTraxis:Template');
+        $repository = $this->doctrine->getManager()->getRepository(Template::class);
 
         /** @var Template $template */
         $template = $repository->findOneBy(['name' => 'Delivery']);

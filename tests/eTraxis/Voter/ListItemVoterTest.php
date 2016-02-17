@@ -31,7 +31,7 @@ class ListItemVoterTest extends BaseTestCase
         $this->loginAs('hubert');
 
         /** @var ListItem $item */
-        $item = $this->doctrine->getRepository('eTraxis:ListItem')->findOneBy(['value' => 'Season 1']);
+        $item = $this->doctrine->getRepository(ListItem::class)->findOneBy(['value' => 'Season 1']);
 
         $this->assertFalse($this->security->isGranted('UNKNOWN', $item));
     }
@@ -41,7 +41,7 @@ class ListItemVoterTest extends BaseTestCase
         $this->loginAs('hubert');
 
         /** @var ListItem $used */
-        $used = $this->doctrine->getRepository('eTraxis:ListItem')->findOneBy(['value' => 'Season 1']);
+        $used = $this->doctrine->getRepository(ListItem::class)->findOneBy(['value' => 'Season 1']);
 
         $item = new ListItem();
 
@@ -55,7 +55,7 @@ class ListItemVoterTest extends BaseTestCase
         $this->doctrine->getManager()->persist($item);
         $this->doctrine->getManager()->flush();
 
-        $unused = $this->doctrine->getRepository('eTraxis:ListItem')->findOneBy(['value' => 'Season 8']);
+        $unused = $this->doctrine->getRepository(ListItem::class)->findOneBy(['value' => 'Season 8']);
 
         $this->assertInstanceOf('eTraxis\Entity\ListItem', $used);
         $this->assertInstanceOf('eTraxis\Entity\ListItem', $unused);

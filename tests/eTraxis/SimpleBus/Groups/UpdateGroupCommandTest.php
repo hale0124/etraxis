@@ -11,14 +11,15 @@
 
 namespace eTraxis\SimpleBus\Groups;
 
+use eTraxis\Entity\Group;
 use eTraxis\Tests\BaseTestCase;
 
 class UpdateGroupCommandTest extends BaseTestCase
 {
     public function testSuccess()
     {
-        /** @var \eTraxis\Entity\Group $group */
-        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Staff']);
+        /** @var Group $group */
+        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Staff']);
 
         $this->assertNotNull($group);
         $this->assertNotEmpty($group->getDescription());
@@ -31,8 +32,8 @@ class UpdateGroupCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        /** @var \eTraxis\Entity\Group $group */
-        $group = $this->doctrine->getRepository('eTraxis:Group')->find($group->getId());
+        /** @var Group $group */
+        $group = $this->doctrine->getRepository(Group::class)->find($group->getId());
 
         $this->assertEquals('Robots', $group->getName());
         $this->assertEquals('Mechanical beings', $group->getDescription());
@@ -59,8 +60,8 @@ class UpdateGroupCommandTest extends BaseTestCase
      */
     public function testNameConflict()
     {
-        /** @var \eTraxis\Entity\Group $group */
-        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Staff']);
+        /** @var Group $group */
+        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Staff']);
 
         $this->assertNotNull($group);
 

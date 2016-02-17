@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Users\Handler;
 
+use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Users\UpdateUserCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -64,12 +65,12 @@ class UpdateUserCommandHandler
      */
     public function handle(UpdateUserCommand $command)
     {
-        /** @var \eTraxis\Entity\User $user */
+        /** @var User $user */
         $user = $this->token_storage->getToken()->getUser();
 
-        $repository = $this->doctrine->getRepository('eTraxis:User');
+        $repository = $this->doctrine->getRepository(User::class);
 
-        /** @var \eTraxis\Entity\User $entity */
+        /** @var User $entity */
         $entity = $repository->find($command->id);
 
         if (!$entity) {

@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Groups\Handler;
 
+use eTraxis\Entity\Group;
 use eTraxis\SimpleBus\Groups\UpdateGroupCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -59,9 +60,9 @@ class UpdateGroupCommandHandler
      */
     public function handle(UpdateGroupCommand $command)
     {
-        $repository = $this->doctrine->getRepository('eTraxis:Group');
+        $repository = $this->doctrine->getRepository(Group::class);
 
-        /** @var \eTraxis\Entity\Group $entity */
+        /** @var Group $entity */
         $entity = $repository->find($command->id);
 
         if (!$entity) {

@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Users\Handler;
 
+use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Users\UnlockUserCommand;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -38,9 +39,9 @@ class UnlockUserCommandHandler
      */
     public function handle(UnlockUserCommand $command)
     {
-        $repository = $this->doctrine->getRepository('eTraxis:User');
+        $repository = $this->doctrine->getRepository(User::class);
 
-        /** @var \eTraxis\Entity\User $user */
+        /** @var User $user */
         if ($user = $repository->find($command->id)) {
 
             $user->setAuthAttempts(0);

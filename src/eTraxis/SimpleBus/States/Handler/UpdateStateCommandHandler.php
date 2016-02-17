@@ -60,7 +60,7 @@ class UpdateStateCommandHandler
      */
     public function handle(UpdateStateCommand $command)
     {
-        $repository = $this->doctrine->getRepository('eTraxis:State');
+        $repository = $this->doctrine->getRepository(State::class);
 
         /** @var State $entity */
         $entity = $repository->find($command->id);

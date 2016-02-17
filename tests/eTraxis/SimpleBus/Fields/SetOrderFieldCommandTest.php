@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
+use eTraxis\Entity\Field;
 use eTraxis\Tests\BaseTestCase;
 
 class SetOrderFieldCommandTest extends BaseTestCase
@@ -22,8 +23,8 @@ class SetOrderFieldCommandTest extends BaseTestCase
      */
     private function getFields($stateId)
     {
-        /** @var \eTraxis\Entity\Field[] $fields */
-        $fields = $this->doctrine->getRepository('eTraxis:Field')->findBy([
+        /** @var Field[] $fields */
+        $fields = $this->doctrine->getRepository(Field::class)->findBy([
             'stateId'   => $stateId,
             'removedAt' => 0,
         ], ['indexNumber' => 'ASC']);
@@ -46,8 +47,8 @@ class SetOrderFieldCommandTest extends BaseTestCase
             'Notes',
         ];
 
-        /** @var \eTraxis\Entity\Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy([
+        /** @var Field $field */
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy([
             'name'      => 'Delivery at',
             'removedAt' => 0,
         ]);
@@ -72,8 +73,8 @@ class SetOrderFieldCommandTest extends BaseTestCase
             'Notes',
         ];
 
-        /** @var \eTraxis\Entity\Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy([
+        /** @var Field $field */
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy([
             'name'      => 'Delivery to',
             'removedAt' => 0,
         ]);
@@ -98,8 +99,8 @@ class SetOrderFieldCommandTest extends BaseTestCase
             'Notes',
         ];
 
-        /** @var \eTraxis\Entity\Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy([
+        /** @var Field $field */
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy([
             'name'      => 'Delivery at',
             'removedAt' => 0,
         ]);
@@ -124,8 +125,8 @@ class SetOrderFieldCommandTest extends BaseTestCase
             'Delivery to',
         ];
 
-        /** @var \eTraxis\Entity\Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy([
+        /** @var Field $field */
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy([
             'name'      => 'Delivery to',
             'removedAt' => 0,
         ]);

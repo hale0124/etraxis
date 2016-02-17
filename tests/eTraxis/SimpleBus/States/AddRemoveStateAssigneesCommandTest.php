@@ -12,22 +12,25 @@
 namespace eTraxis\SimpleBus\States;
 
 use eTraxis\Entity\Group;
+use eTraxis\Entity\Project;
+use eTraxis\Entity\State;
+use eTraxis\Entity\StateAssignee;
 use eTraxis\Tests\BaseTestCase;
 
 class AddRemoveStateAssigneesCommandTest extends BaseTestCase
 {
     public function testAddAssignees()
     {
-        /** @var \eTraxis\Entity\State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'New']);
+        /** @var State $state */
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
         $this->assertNotNull($state);
 
-        /** @var \eTraxis\Entity\Group $group */
-        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Managers']);
+        /** @var Group $group */
+        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
         $this->assertNotNull($group);
 
-        /** @var \eTraxis\Entity\StateAssignee $assignee */
-        $assignee = $this->doctrine->getRepository('eTraxis:StateAssignee')->findOneBy([
+        /** @var StateAssignee $assignee */
+        $assignee = $this->doctrine->getRepository(StateAssignee::class)->findOneBy([
             'stateId' => $state->getId(),
             'groupId' => $group->getId(),
         ]);
@@ -40,7 +43,7 @@ class AddRemoveStateAssigneesCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $assignee = $this->doctrine->getRepository('eTraxis:StateAssignee')->findOneBy([
+        $assignee = $this->doctrine->getRepository(StateAssignee::class)->findOneBy([
             'stateId' => $state->getId(),
             'groupId' => $group->getId(),
         ]);
@@ -49,16 +52,16 @@ class AddRemoveStateAssigneesCommandTest extends BaseTestCase
 
     public function testRemoveAssignees()
     {
-        /** @var \eTraxis\Entity\State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'New']);
+        /** @var State $state */
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
         $this->assertNotNull($state);
 
-        /** @var \eTraxis\Entity\Group $group */
-        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Crew']);
+        /** @var Group $group */
+        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
         $this->assertNotNull($group);
 
-        /** @var \eTraxis\Entity\StateAssignee $assignee */
-        $assignee = $this->doctrine->getRepository('eTraxis:StateAssignee')->findOneBy([
+        /** @var StateAssignee $assignee */
+        $assignee = $this->doctrine->getRepository(StateAssignee::class)->findOneBy([
             'stateId' => $state->getId(),
             'groupId' => $group->getId(),
         ]);
@@ -71,7 +74,7 @@ class AddRemoveStateAssigneesCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $assignee = $this->doctrine->getRepository('eTraxis:StateAssignee')->findOneBy([
+        $assignee = $this->doctrine->getRepository(StateAssignee::class)->findOneBy([
             'stateId' => $state->getId(),
             'groupId' => $group->getId(),
         ]);
@@ -80,8 +83,8 @@ class AddRemoveStateAssigneesCommandTest extends BaseTestCase
 
     public function testEmptyAssignees()
     {
-        /** @var \eTraxis\Entity\Project $project */
-        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'eTraxis 1.0']);
+        /** @var Project $project */
+        $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'eTraxis 1.0']);
 
         $group = new Group();
 
@@ -94,10 +97,10 @@ class AddRemoveStateAssigneesCommandTest extends BaseTestCase
         $this->doctrine->getManager()->persist($group);
         $this->doctrine->getManager()->flush();
 
-        $total = count($this->doctrine->getRepository('eTraxis:StateAssignee')->findAll());
+        $total = count($this->doctrine->getRepository(StateAssignee::class)->findAll());
 
-        /** @var \eTraxis\Entity\State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'Produced']);
+        /** @var State $state */
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Produced']);
         $this->assertNotNull($state);
 
         $command = new AddStateAssigneesCommand([
@@ -107,7 +110,7 @@ class AddRemoveStateAssigneesCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $this->assertCount($total, $this->doctrine->getRepository('eTraxis:StateAssignee')->findAll());
+        $this->assertCount($total, $this->doctrine->getRepository(StateAssignee::class)->findAll());
     }
 
     /**
@@ -116,8 +119,8 @@ class AddRemoveStateAssigneesCommandTest extends BaseTestCase
      */
     public function testNotFoundState()
     {
-        /** @var \eTraxis\Entity\Group $group */
-        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => 'Managers']);
+        /** @var Group $group */
+        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
         $this->assertNotNull($group);
 
         $command = new AddStateAssigneesCommand([

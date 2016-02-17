@@ -12,6 +12,8 @@
 namespace eTraxis\SimpleBus\Fields;
 
 use eTraxis\Entity\Field;
+use eTraxis\Entity\State;
+use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\Fields\Handler\BaseFieldCommandHandler;
 use eTraxis\Tests\BaseTestCase;
 use eTraxis\Traits\ClassAccessTrait;
@@ -28,8 +30,8 @@ class BaseFieldCommandTest extends BaseTestCase
 {
     public function testCreateByTemplateSuccess()
     {
-        /** @var \eTraxis\Entity\Template $state */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+        /** @var Template $state */
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
         $this->assertNotNull($template);
 
@@ -64,8 +66,8 @@ class BaseFieldCommandTest extends BaseTestCase
 
     public function testCreateByStateSuccess()
     {
-        /** @var \eTraxis\Entity\State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'New']);
+        /** @var State $state */
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
         $this->assertNotNull($state);
 
@@ -154,8 +156,8 @@ class BaseFieldCommandTest extends BaseTestCase
      */
     public function testCreateConflict()
     {
-        /** @var \eTraxis\Entity\State $state */
-        $state = $this->doctrine->getRepository('eTraxis:State')->findOneBy(['name' => 'New']);
+        /** @var State $state */
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
         $this->assertNotNull($state);
 
@@ -180,7 +182,7 @@ class BaseFieldCommandTest extends BaseTestCase
     public function testUpdateSuccess()
     {
         /** @var Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Crew']);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
 
         $this->assertNotNull($field);
 
@@ -242,7 +244,7 @@ class BaseFieldCommandTest extends BaseTestCase
     public function testUpdateConflict()
     {
         /** @var Field $field */
-        $field = $this->doctrine->getRepository('eTraxis:Field')->findOneBy(['name' => 'Crew']);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
 
         $this->assertNotNull($field);
 

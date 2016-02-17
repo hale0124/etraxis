@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Users\Handler;
 
+use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Users\LockUserCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -54,9 +55,9 @@ class LockUserCommandHandler
      */
     public function handle(LockUserCommand $command)
     {
-        $repository = $this->doctrine->getRepository('eTraxis:User');
+        $repository = $this->doctrine->getRepository(User::class);
 
-        /** @var \eTraxis\Entity\User $user */
+        /** @var User $user */
         if ($user = $repository->findOneBy(['username' => $command->username . '@eTraxis'])) {
 
             if ($this->security_auth_attempts && $this->security_lock_time) {

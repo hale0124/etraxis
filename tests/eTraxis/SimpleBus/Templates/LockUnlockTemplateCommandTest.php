@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Templates;
 
+use eTraxis\Entity\Template;
 use eTraxis\Tests\BaseTestCase;
 
 class LockUnlockTemplateCommandTest extends BaseTestCase
@@ -20,7 +21,7 @@ class LockUnlockTemplateCommandTest extends BaseTestCase
      */
     private function getTemplate()
     {
-        return $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+        return $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
     }
 
     public function testSuccess()

@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Templates;
 
+use eTraxis\Entity\Project;
 use eTraxis\Entity\Template;
 use eTraxis\Tests\BaseTestCase;
 
@@ -18,8 +19,8 @@ class UpdateTemplateCommandTest extends BaseTestCase
 {
     public function testSuccess()
     {
-        /** @var \eTraxis\Entity\Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+        /** @var Template $template */
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
         $this->assertNotNull($template);
         $this->assertEquals('Delivery', $template->getName());
@@ -41,11 +42,11 @@ class UpdateTemplateCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
         $this->assertNull($template);
 
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Maintenance']);
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Maintenance']);
 
         $this->assertNotNull($template);
         $this->assertEquals('Maintenance', $template->getName());
@@ -79,8 +80,8 @@ class UpdateTemplateCommandTest extends BaseTestCase
      */
     public function testNameConflict()
     {
-        /** @var \eTraxis\Entity\Project $project */
-        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
+        /** @var Project $project */
+        $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
 
         $template = new Template();
 
@@ -98,8 +99,8 @@ class UpdateTemplateCommandTest extends BaseTestCase
         $this->doctrine->getManager()->persist($template);
         $this->doctrine->getManager()->flush();
 
-        /** @var \eTraxis\Entity\Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+        /** @var Template $template */
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
         $this->assertNotNull($template);
 
@@ -122,8 +123,8 @@ class UpdateTemplateCommandTest extends BaseTestCase
      */
     public function testPrefixConflict()
     {
-        /** @var \eTraxis\Entity\Project $project */
-        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
+        /** @var Project $project */
+        $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
 
         $template = new Template();
 
@@ -141,8 +142,8 @@ class UpdateTemplateCommandTest extends BaseTestCase
         $this->doctrine->getManager()->persist($template);
         $this->doctrine->getManager()->flush();
 
-        /** @var \eTraxis\Entity\Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => 'Delivery']);
+        /** @var Template $template */
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
         $this->assertNotNull($template);
 

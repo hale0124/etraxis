@@ -11,6 +11,8 @@
 
 namespace eTraxis\SimpleBus\Templates;
 
+use eTraxis\Entity\Project;
+use eTraxis\Entity\Template;
 use eTraxis\Tests\BaseTestCase;
 
 class CreateTemplateCommandTest extends BaseTestCase
@@ -20,7 +22,7 @@ class CreateTemplateCommandTest extends BaseTestCase
      */
     private function getProject()
     {
-        return $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
+        return $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
     }
 
     public function testSuccess()
@@ -31,8 +33,8 @@ class CreateTemplateCommandTest extends BaseTestCase
         $description = 'Nimbus technical maintenance';
         $guestAccess = true;
 
-        /** @var \eTraxis\Entity\Template $template */
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => $name]);
+        /** @var Template $template */
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => $name]);
 
         $this->assertNull($template);
 
@@ -46,7 +48,7 @@ class CreateTemplateCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $template = $this->doctrine->getRepository('eTraxis:Template')->findOneBy(['name' => $name]);
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => $name]);
 
         $this->assertInstanceOf('eTraxis\Entity\Template', $template);
         $this->assertEquals($project->getId(), $template->getProject()->getId());

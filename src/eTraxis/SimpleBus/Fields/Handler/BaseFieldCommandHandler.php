@@ -12,6 +12,8 @@
 namespace eTraxis\SimpleBus\Fields\Handler;
 
 use eTraxis\Entity\Field;
+use eTraxis\Entity\State;
+use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\Fields\CreateFieldBaseCommand;
 use eTraxis\SimpleBus\Fields\UpdateFieldBaseCommand;
 use Psr\Log\LoggerInterface;
@@ -99,8 +101,8 @@ class BaseFieldCommandHandler
         ;
 
         if ($command->state) {
-            /** @var \eTraxis\Entity\State $state */
-            $state = $this->doctrine->getRepository('eTraxis:State')->find($command->state);
+            /** @var State $state */
+            $state = $this->doctrine->getRepository(State::class)->find($command->state);
 
             if (!$state) {
                 $this->logger->error('Unknown state.', [$command->state]);
@@ -112,8 +114,8 @@ class BaseFieldCommandHandler
             $entity->setIndexNumber($state->getFields()->count() + 1);
         }
         else {
-            /** @var \eTraxis\Entity\Template $template */
-            $template = $this->doctrine->getRepository('eTraxis:Template')->find($command->template);
+            /** @var Template $template */
+            $template = $this->doctrine->getRepository(Template::class)->find($command->template);
 
             if (!$template) {
                 $this->logger->error('Unknown template.', [$command->template]);
@@ -147,9 +149,9 @@ class BaseFieldCommandHandler
      */
     private function update(UpdateFieldBaseCommand $command)
     {
-        $repository = $this->doctrine->getRepository('eTraxis:Field');
+        $repository = $this->doctrine->getRepository(Field::class);
 
-        /** @var \eTraxis\Entity\Field $entity */
+        /** @var Field $entity */
         $entity = $repository->find($command->id);
 
         if (!$entity) {

@@ -11,6 +11,8 @@
 
 namespace eTraxis\SimpleBus\Groups;
 
+use eTraxis\Entity\Group;
+use eTraxis\Entity\Project;
 use eTraxis\Tests\BaseTestCase;
 
 class CreateGroupCommandTest extends BaseTestCase
@@ -20,8 +22,8 @@ class CreateGroupCommandTest extends BaseTestCase
         $name        = 'Robots';
         $description = 'Mechanical beings';
 
-        /** @var \eTraxis\Entity\Group $group */
-        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => $name]);
+        /** @var Group $group */
+        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => $name]);
 
         $this->assertNull($group);
 
@@ -32,8 +34,8 @@ class CreateGroupCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        /** @var \eTraxis\Entity\Group $group */
-        $group = $this->doctrine->getRepository('eTraxis:Group')->findOneBy(['name' => $name]);
+        /** @var Group $group */
+        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => $name]);
 
         $this->assertInstanceOf('eTraxis\Entity\Group', $group);
         $this->assertEquals($name, $group->getName());
@@ -73,8 +75,8 @@ class CreateGroupCommandTest extends BaseTestCase
      */
     public function testLocalGroupConflict()
     {
-        /** @var \eTraxis\Entity\Project $project */
-        $project = $this->doctrine->getRepository('eTraxis:Project')->findOneBy(['name' => 'Planet Express']);
+        /** @var Project $project */
+        $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
 
         $command = new CreateGroupCommand([
             'name'    => 'Staff',

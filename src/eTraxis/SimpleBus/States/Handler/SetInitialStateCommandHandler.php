@@ -46,9 +46,9 @@ class SetInitialStateCommandHandler
      */
     public function handle(SetInitialStateCommand $command)
     {
-        $repository = $this->doctrine->getRepository('eTraxis:State');
+        $repository = $this->doctrine->getRepository(State::class);
 
-        /** @var \eTraxis\Entity\State $entity */
+        /** @var State $entity */
         $entity = $repository->find($command->id);
 
         if (!$entity) {

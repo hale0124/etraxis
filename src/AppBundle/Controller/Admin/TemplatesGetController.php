@@ -12,6 +12,7 @@
 namespace AppBundle\Controller\Admin;
 
 use eTraxis\Collection\SystemRole;
+use eTraxis\Entity\Group;
 use eTraxis\Entity\Template;
 use eTraxis\Form\TemplateForm;
 use eTraxis\Traits\ContainerTrait;
@@ -45,7 +46,7 @@ class TemplatesGetController extends Controller
     {
         try {
             /** @var \eTraxis\Repository\TemplatesRepository $repository */
-            $repository = $this->getDoctrine()->getRepository('eTraxis:Template');
+            $repository = $this->getDoctrine()->getRepository(Template::class);
 
             return new JsonResponse($repository->getTemplates($id));
         }
@@ -67,7 +68,7 @@ class TemplatesGetController extends Controller
     public function viewAction(Request $request, $id = 0)
     {
         try {
-            $template = $this->getDoctrine()->getRepository('eTraxis:Template')->find($id);
+            $template = $this->getDoctrine()->getRepository(Template::class)->find($id);
 
             if (!$template) {
                 throw $this->createNotFoundException();
@@ -95,7 +96,7 @@ class TemplatesGetController extends Controller
     public function tabDetailsAction($id)
     {
         try {
-            $template = $this->getDoctrine()->getRepository('eTraxis:Template')->find($id);
+            $template = $this->getDoctrine()->getRepository(Template::class)->find($id);
 
             if (!$template) {
                 throw $this->createNotFoundException();
@@ -130,7 +131,7 @@ class TemplatesGetController extends Controller
     public function tabPermissionsAction($id)
     {
         /** @var Template $template */
-        $template = $this->getDoctrine()->getRepository('eTraxis:Template')->find($id);
+        $template = $this->getDoctrine()->getRepository(Template::class)->find($id);
 
         if (!$this) {
             throw $this->createNotFoundException();
@@ -155,7 +156,7 @@ class TemplatesGetController extends Controller
         ];
 
         /** @var \eTraxis\Repository\GroupsRepository $repository */
-        $repository = $this->getDoctrine()->getRepository('eTraxis:Group');
+        $repository = $this->getDoctrine()->getRepository(Group::class);
 
         return $this->render('admin/templates/tab_permissions.html.twig', [
             'template'    => $template,
@@ -202,7 +203,7 @@ class TemplatesGetController extends Controller
     public function editAction($id)
     {
         try {
-            $template = $this->getDoctrine()->getRepository('eTraxis:Template')->find($id);
+            $template = $this->getDoctrine()->getRepository(Template::class)->find($id);
 
             if (!$template) {
                 throw $this->createNotFoundException();
@@ -235,7 +236,7 @@ class TemplatesGetController extends Controller
     {
         try {
             /** @var \eTraxis\Repository\TemplatesRepository $repository */
-            $repository = $this->getDoctrine()->getRepository('eTraxis:Template');
+            $repository = $this->getDoctrine()->getRepository(Template::class);
 
             /** @var Template $template */
             $template = $repository->find($id);
