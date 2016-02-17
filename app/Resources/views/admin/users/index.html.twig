@@ -63,21 +63,11 @@
                 checkboxes: 'users'
             });
 
-            // Resets state of dependent controls.
-            var resetState = function() {
-
-                var checked = $('input[name="users"]:checked', $table).length;
-
-                // Some buttons are disabled if no checkbox is ticked.
-                $('#btn-disable').disable(checked == 0);
-                $('#btn-enable').disable(checked == 0);
-            };
-
-            // Table has been redrawn.
-            $table.on('draw.dt', resetState);
-
-            // Click on a checkbox in the list.
-            $table.on('click', 'input[type="checkbox"]', resetState);
+            // Some buttons are disabled if no checkbox is ticked.
+            $table.on('checkbox.click', function(e, data) {
+                $('#btn-disable').disable(data.count == 0);
+                $('#btn-enable').disable(data.count == 0);
+            });
 
             // Click on a user in the list.
             $table.on('click', 'tbody tr', function() {

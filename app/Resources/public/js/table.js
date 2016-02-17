@@ -164,6 +164,12 @@ var datatables_language = window.datatables_language || {};
                 // ... implement "check all"/"uncheck all" ability for the checkbox in the header.
                 $table.on('click', 'input[type="checkbox"].checkall', function() {
                     $('tbody input[type="checkbox"]', $table).prop('checked', $(this).prop('checked'));
+
+                    // Notify about the event.
+                    $table.trigger('checkbox.click', {
+                        value: null,
+                        count: $('tbody tr td:first-child input[type="checkbox"]:checked', $table).length
+                    });
                 });
 
                 // Toggle "Check all" if another checkbox is clicked.
@@ -180,6 +186,12 @@ var datatables_language = window.datatables_language || {};
                     if (checked == $table.api().page.len()) {
                         $('input[type="checkbox"].checkall', $table).prop('checked', true);
                     }
+
+                    // Notify about the event.
+                    $table.trigger('checkbox.click', {
+                        value: $(this).val(),
+                        count: checked
+                    });
 
                     e.stopPropagation();
                 });
@@ -292,6 +304,10 @@ var datatables_language = window.datatables_language || {};
                 // Unblock only if no more responses are expected.
                 if (json.draw == drawNumber) {
                     $('input[type="checkbox"].checkall', $table).prop('checked', false);
+                    $table.trigger('checkbox.click', {
+                        value: null,
+                        count: 0
+                    });
                     tableUnblock($table);
                 }
             });
