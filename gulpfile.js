@@ -61,7 +61,7 @@ gulp.task('stylesheets:libs', function() {
 
     gulp.src(files)
         .pipe(gulpif(argv.production, minify()))
-        .pipe(concat(argv.production ? 'libs.min.css' : 'libs.css'))
+        .pipe(gulpif(argv.production, concat('libs.min.css')))
         .pipe(gulp.dest('web/css/'));
 });
 
@@ -111,7 +111,7 @@ gulp.task('javascripts:libs', function() {
 
     gulp.src(files)
         .pipe(gulpif(argv.production, uglify()))
-        .pipe(concat(argv.production ? 'libs.min.js' : 'libs.js'))
+        .pipe(gulpif(argv.production, concat('libs.min.js')))
         .pipe(gulp.dest('web/js/'));
 
     gulp.src('vendor/bower/html5shiv/dist/html5shiv.min.js')

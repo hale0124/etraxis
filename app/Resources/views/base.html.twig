@@ -7,13 +7,16 @@
 
     <title>{{ title | default('eTraxis') }}</title>
 
-    {% for css in ['css/libs.css', 'css/%s/etraxis.css'] %}
-        {%- set css = css
-                | format(app.user ? app.user.theme : theme)
-                | replace(app.environment == 'dev' ? {} : {'.css': '.min.css'})
-        -%}
-        <link href="{{ asset(css) }}" rel="stylesheet">
-    {% endfor %}
+    {% if app.environment == 'dev' %}
+        <link rel="stylesheet" href="{{ asset('css/normalize.css')                         }}">
+        <link rel="stylesheet" href="{{ asset('css/unsemantic-grid-responsive-no-ie7.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/jquery-ui.structure.css')               }}">
+        <link rel="stylesheet" href="{{ asset('css/jquery.dataTables_themeroller.css')     }}">
+        <link rel="stylesheet" href="{{ asset('css/%s/etraxis.css' | format(app.user ? app.user.theme : theme)) }}">
+    {% else %}
+        <link rel="stylesheet" href="{{ asset('css/libs.min.css') }}">
+        <link rel="stylesheet" href="{{ asset('css/%s/etraxis.min.css' | format(app.user ? app.user.theme : theme)) }}">
+    {% endif %}
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
     <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png')         }}">
@@ -80,13 +83,19 @@
 
     <div id="__etraxis_modal" class="ui-helper-hidden"></div>
 
-    {% for js in ['js/libs.js', 'js/etraxis-%s.js', 'js/etraxis.js'] %}
-        {%- set js = js
-                | format(app.user ? app.user.locale : locale)
-                | replace(app.environment == 'dev' ? {} : {'.js': '.min.js'})
-        -%}
-        <script src="{{ asset(js) }}"></script>
-    {% endfor %}
+    {% if app.environment == 'dev' %}
+        <script src="{{ asset('js/jquery.js')            }}"></script>
+        <script src="{{ asset('js/jquery-ui.js')         }}"></script>
+        <script src="{{ asset('js/jquery.blockUI.js')    }}"></script>
+        <script src="{{ asset('js/jquery.form.js')       }}"></script>
+        <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
+        <script src="{{ asset('js/etraxis.js')           }}"></script>
+        <script src="{{ asset('js/etraxis-%s.js' | format(app.user ? app.user.locale : locale)) }}"></script>
+    {% else %}
+        <script src="{{ asset('js/libs.min.js')    }}"></script>
+        <script src="{{ asset('js/etraxis.min.js') }}"></script>
+        <script src="{{ asset('js/etraxis-%s.min.js' | format(app.user ? app.user.locale : locale)) }}"></script>
+    {% endif %}
 
     <script>
         $(function() {
