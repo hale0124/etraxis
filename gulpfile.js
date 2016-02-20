@@ -1,5 +1,5 @@
 /*!
- *  Copyright (C) 2015 Artem Rodygin
+ *  Copyright (C) 2015-2016 Artem Rodygin
  *
  *  This file is part of eTraxis.
  *
@@ -112,9 +112,6 @@ gulp.task('javascripts:libs', function() {
     gulp.src(files)
         .pipe(gulpif(argv.production, uglify()))
         .pipe(gulpif(argv.production, concat('libs.min.js')))
-        .pipe(gulp.dest('web/js/'));
-
-    gulp.src('vendor/bower/html5shiv/dist/html5shiv.min.js')
         .pipe(gulp.dest('web/js/'));
 });
 
