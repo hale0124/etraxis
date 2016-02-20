@@ -30,7 +30,7 @@
 
             $('.panel-heading', this.element)
                 .addClass('ui-state-default ui-corner-top')
-                .prepend('<span class="ui-icon ui-icon-circle-triangle-n panel-toggle" title="' + eTraxis.i18n.Collapse + '"></span>')
+                .prepend('<span class="ui-icon ui-icon-circle-triangle-n panel-toggle" title="' + eTraxis.i18n['button.collapse'] + '"></span>')
             ;
 
             $('.panel-heading', this.element).on('click', '> div', function() {
@@ -43,7 +43,7 @@
                     $(this)
                         .removeClass('ui-icon-circle-triangle-n')
                         .addClass('ui-icon-circle-triangle-s')
-                        .attr('title', eTraxis.i18n.Expand)
+                        .attr('title', eTraxis.i18n['button.expand'])
                     ;
                     $('.panel-body', $(this).closest('.panel')).hide();
                 }
@@ -51,7 +51,7 @@
                     $(this)
                         .removeClass('ui-icon-circle-triangle-s')
                         .addClass('ui-icon-circle-triangle-n')
-                        .attr('title', eTraxis.i18n.Collapse)
+                        .attr('title', eTraxis.i18n['button.collapse'])
                     ;
                     $('.panel-body', $(this).closest('.panel')).show();
                 }
@@ -81,7 +81,7 @@
             $('.panel-heading .panel-toggle', this.element)
                 .removeClass('ui-icon-circle-triangle-n')
                 .addClass('ui-icon-circle-triangle-s')
-                .attr('title', eTraxis.i18n.Expand)
+                .attr('title', eTraxis.i18n['button.expand'])
             ;
             $('.panel-body', this.element).hide();
         },
@@ -93,7 +93,7 @@
             $('.panel-heading .panel-toggle', this.element)
                 .removeClass('ui-icon-circle-triangle-s')
                 .addClass('ui-icon-circle-triangle-n')
-                .attr('title', eTraxis.i18n.Collapse)
+                .attr('title', eTraxis.i18n['button.collapse'])
             ;
             $('.panel-body', this.element).show();
         },

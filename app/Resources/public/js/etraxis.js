@@ -32,7 +32,7 @@ eTraxis.initAjax = function() {
     $(document).ajaxError(function(e, xhr) {
         if (xhr.status === 401) {
             eTraxis.unblock();
-            eTraxis.alert(eTraxis.i18n.Error, xhr.responseText);
+            eTraxis.alert(eTraxis.i18n['error'], xhr.responseText);
         }
     });
 };
@@ -46,7 +46,7 @@ eTraxis.block = function(message) {
     $.blockUI({
         theme: true,
         title: null,
-        message: message ? message : eTraxis.i18n.PleaseWait,
+        message: message ? message : eTraxis.i18n['please_wait'],
         themedCSS: {
             padding: '10px'
         }
@@ -71,7 +71,7 @@ eTraxis.alert = function(title, message, onClose) {
 
     var buttons = {};
 
-    buttons[eTraxis.i18n.Close] = function() {
+    buttons[eTraxis.i18n['button.close']] = function() {
         $(this).dialog('close');
     };
 
@@ -98,14 +98,14 @@ eTraxis.confirm = function(title, message, onConfirm) {
 
     var buttons = {};
 
-    buttons[eTraxis.i18n.Yes] = function() {
+    buttons[eTraxis.i18n['button.yes']] = function() {
         $(this).dialog('close');
         if (typeof onConfirm === 'function') {
             onConfirm();
         }
     };
 
-    buttons[eTraxis.i18n.No] = function() {
+    buttons[eTraxis.i18n['button.no']] = function() {
         $(this).dialog('close');
     };
 

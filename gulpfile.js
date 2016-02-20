@@ -19,6 +19,7 @@ var rename   = require('gulp-rename');
 var strip    = require('gulp-strip-json-comments');
 var uglify   = require('gulp-uglify');
 var watch    = require('gulp-watch');
+var yaml     = require('gulp-yaml');
 var fs       = require('fs');
 var merge    = require('merge-stream');
 var sequence = require('run-sequence');
@@ -27,12 +28,12 @@ var argv     = require('yargs').argv;
 /**
  * Performs all installation tasks in one.
  */
-gulp.task('default', function(callback) {
+gulp.task('default', function() {
     sequence(
         ['stylesheets:libs', 'stylesheets:themes'],
         ['javascripts:libs', 'javascripts:etraxis'],
-        ['javascripts:datatables', 'javascripts:i18n'],
-        callback
+        ['javascripts:datatables', 'javascripts:translations'],
+        'javascripts:i18n'
     );
 });
 
@@ -59,7 +60,7 @@ gulp.task('stylesheets:libs', function() {
         'vendor/bower/datatables/media/css/jquery.dataTables_themeroller.css'
     ];
 
-    gulp.src(files)
+    return gulp.src(files)
         .pipe(gulpif(argv.production, minify()))
         .pipe(gulpif(argv.production, concat('libs.min.css')))
         .pipe(gulp.dest('web/css/'));
@@ -109,7 +110,7 @@ gulp.task('javascripts:libs', function() {
         'vendor/bower/datatables/media/js/jquery.dataTables.js'
     ];
 
-    gulp.src(files)
+    return gulp.src(files)
         .pipe(gulpif(argv.production, uglify()))
         .pipe(gulpif(argv.production, concat('libs.min.js')))
         .pipe(gulp.dest('web/js/'));
@@ -140,7 +141,7 @@ gulp.task('javascripts:datatables', function() {
         'vendor/bower/datatables-plugins/i18n/Turkish.lang'
     ];
 
-    gulp.src(i18n)
+    return gulp.src(i18n)
         .pipe(rename(function(path) {
 
             var i18n = {
@@ -170,6 +171,23 @@ gulp.task('javascripts:datatables', function() {
         .pipe(insert.prepend('var datatables_language = window.datatables_language ||'))
         .pipe(insert.append(';'))
         .pipe(gulp.dest('vendor/bower/datatables-plugins/i18n/'));
+});
+
+/**
+ * Converts eTraxis translation YAML files into JavaScript files.
+ */
+gulp.task('javascripts:translations', function() {
+
+    return gulp.src('app/Resources/translations/messages.*.yml')
+        .pipe(yaml({ space: 4 }))
+        .pipe(insert.prepend('eTraxis.i18n = '))
+        .pipe(insert.prepend('var eTraxis = window.eTraxis || {};\n\n'))
+        .pipe(insert.append(';\n'))
+        .pipe(rename(function(path) {
+            path.basename = path.basename.replace('messages.', 'etraxis-');
+            path.extname = '.js';
+        }))
+        .pipe(gulp.dest('vendor/bower/etraxis/i18n/'));
 });
 
 /**
@@ -206,10 +224,10 @@ gulp.task('javascripts:i18n', function() {
         var files = [
             'vendor/bower/jquery.ui/ui/i18n/datepicker-' + (locale.substr(0, 2) == 'en' ? 'en-GB' : locale) + '.js',
             'vendor/bower/datatables-plugins/i18n/datatables-' + (locale.substr(0, 2) == 'en' ? 'en' : locale) + '.js',
-            'app/Resources/public/js/i18n/etraxis-' + (locale.substr(0, 2) == 'en' ? 'en' : locale) + '.js'
+            'vendor/bower/etraxis/i18n/etraxis-' + locale.replace('-', '_') + '.js'
         ];
 
-        gulp.src(files)
+        return gulp.src(files)
             .pipe(gulpif(argv.production, uglify()))
             .pipe(concat('etraxis-' + locale.replace('-', '_') + (argv.production ? '.min.js' : '.js')))
             .pipe(gulp.dest('web/js/'));
@@ -231,7 +249,7 @@ gulp.task('javascripts:etraxis', function() {
         'app/Resources/public/js/table.js'
     ];
 
-    gulp.src(files)
+    return gulp.src(files)
         .pipe(gulpif(argv.production, uglify()))
         .pipe(concat(argv.production ? 'etraxis.min.js' : 'etraxis.js'))
         .pipe(gulp.dest('web/js/'));

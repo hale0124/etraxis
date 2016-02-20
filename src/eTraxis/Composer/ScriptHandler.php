@@ -36,6 +36,7 @@ class ScriptHandler
                 'gulp-strip-json-comments',
                 'gulp-uglify',
                 'gulp-watch',
+                'gulp-yaml',
                 'fs',
                 'merge-stream',
                 'run-sequence',

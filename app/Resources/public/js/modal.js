@@ -15,8 +15,8 @@ eTraxis.modal = function(options) {
     var settings = $.extend({
         url: null,
         title: null,
-        btnOk: eTraxis.i18n.Ok,
-        btnCancel: eTraxis.i18n.Cancel,
+        btnOk: eTraxis.i18n['button.ok'],
+        btnCancel: eTraxis.i18n['button.cancel'],
         data: {},
         success: null,
         error: null
@@ -83,7 +83,7 @@ eTraxis.modal = function(options) {
                         });
                     }
                     else {
-                        eTraxis.alert(eTraxis.i18n.Error, response);
+                        eTraxis.alert(eTraxis.i18n['button.error'], response);
                     }
                 }
             }
