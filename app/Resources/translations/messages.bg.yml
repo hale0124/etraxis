@@ -16,9 +16,13 @@ button.lock: Заключено
 button.unlock: Отключено
 button.export: Изнеси
 button.import: Внасям
+button.expand: Разширяване
+button.collapse: Свий
 button.select_all: 'Избери всичко'
+error: Грешка
 error.not_found: 'Несъществуваща или преместена страница.'
 error.not_authorized: 'Нямате право на достъп до тази страница.'
+please_wait: 'Моля изчакайте...'
 changes.saved: 'Your changes were successfully saved.'
 security.log_in: Вход
 security.log_out: Изход

@@ -16,9 +16,13 @@ button.lock: Travar
 button.unlock: Destravar
 button.export: Exportar
 button.import: Importar
+button.expand: Expanda
+button.collapse: Colapso
 button.select_all: 'Selecinar todos'
+error: Erro
 error.not_found: 'A página que você está tentando acessar não existe ou foi excluída.'
 error.not_authorized: 'Você não está autorizado a acessar esta página.'
+please_wait: 'Favor aguardar...'
 changes.saved: 'Alterações salvas com sucesso.'
 security.log_in: Logar
 security.log_out: Deslogar

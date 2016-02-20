@@ -16,9 +16,13 @@ button.lock: Vergrendel
 button.unlock: Ontgrendel
 button.export: Exporteer
 button.import: Importeer
+button.expand: Uitbreiden
+button.collapse: Ineenstorting
 button.select_all: 'Selecteer alles'
+error: Fout
 error.not_found: 'De pagina die u probeerde te benaderen bestaat niet of is verwijderd.'
 error.not_authorized: 'Het is u niet toegestaan deze pagina te raadplegen.'
+please_wait: 'Wacht alstublieft...'
 changes.saved: 'Your changes were successfully saved.'
 security.log_in: Inloggen
 security.log_out: Uitloggen

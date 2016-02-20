@@ -16,9 +16,13 @@ button.lock: Uzamknout
 button.unlock: Odemknout
 button.export: Exportovat
 button.import: Importovat
+button.expand: Rozšíření
+button.collapse: Kolaps
 button.select_all: 'Vybrat vše'
+error: Chyba
 error.not_found: 'Stránka, kterou se snažíte zobrazit, neexistuje nebo byla smazána.'
 error.not_authorized: 'Nemáte dostatečná práva pro zobrazení této stránky.'
+please_wait: 'Vyčkejte prosím...'
 changes.saved: 'Your changes were successfully saved.'
 security.log_in: 'Přihlásit se'
 security.log_out: Odhlásit

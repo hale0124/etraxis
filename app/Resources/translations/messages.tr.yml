@@ -16,9 +16,13 @@ button.lock: Kilitle
 button.unlock: 'Kilidi Aç'
 button.export: 'Dışa aktar'
 button.import: 'İçe Aktar'
+button.expand: Genişletin
+button.collapse: Çöküş
 button.select_all: 'Tümünü seç'
+error: Hata
 error.not_found: 'Erişmek istediğiniz sayfa mevcut değil ya da kaldırılmış.'
 error.not_authorized: 'Bu sayfaya erişme yetkiniz yok.'
+please_wait: 'Lütfen bekleyin...'
 changes.saved: 'Your changes were successfully saved.'
 security.log_in: Giriş
 security.log_out: Çıkış

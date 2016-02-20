@@ -16,9 +16,13 @@ button.lock: Lås
 button.unlock: 'Lås upp'
 button.export: Exportera
 button.import: Importera
+button.expand: Expandera
+button.collapse: Kollaps
 button.select_all: 'Markera alla'
+error: Fel
 error.not_found: 'Sidan du försökte komma åt existerar inte eller är borttagen.'
 error.not_authorized: 'Du saknar behörighet att komma åt den här sidan.'
+please_wait: 'Var god vänta...'
 changes.saved: 'Your changes were successfully saved.'
 security.log_in: 'Logga in'
 security.log_out: 'Logga ut'

@@ -16,9 +16,13 @@ button.lock: Bloķēt
 button.unlock: Atbloķēt
 button.export: Eksportēšana
 button.import: Imports
+button.expand: Izvērsiet
+button.collapse: Sabrukums
 button.select_all: 'Atlasīt visu'
+error: Kļūda
 error.not_found: 'Lapa, ko Jūs mēģināt atvērt, neeksistē vai ir pārvietota.'
 error.not_authorized: 'Jums nav tiesību piekļūt šai lapai.'
+please_wait: 'Lūdzu uzgaidiet...'
 changes.saved: 'Your changes were successfully saved.'
 security.log_in: Ieiet
 security.log_out: Iziet

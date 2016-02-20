@@ -16,9 +16,13 @@ button.lock: Verrouller
 button.unlock: Déverrouiller
 button.export: Exporter
 button.import: Importer
+button.expand: Développez
+button.collapse: 'L''effondrement'
 button.select_all: 'Tout sélectionner'
+error: Erreur
 error.not_found: 'La page à laquelle vous souhaitez accéder n''existe pas ou a été supprimée.'
 error.not_authorized: 'Vous n''êtes pas autorisé à accéder à cette page.'
+please_wait: 'Veuillez patienter...'
 changes.saved: 'Your changes were successfully saved.'
 security.log_in: 'Se connecter'
 security.log_out: 'Se déconnecter'

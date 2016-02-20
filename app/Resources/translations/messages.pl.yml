@@ -16,9 +16,13 @@ button.lock: Zablokuj
 button.unlock: Odblokuj
 button.export: Eksportuj
 button.import: Import
+button.expand: Rozwiń
+button.collapse: Zwiń
 button.select_all: 'Zaznacz wszystko'
+error: Błąd
 error.not_found: 'Strona do której próbujesz się dostać nie istnieje lub została usunięta.'
 error.not_authorized: 'Nie posiadasz autoryzacji do oglądania tej strony.'
+please_wait: 'Proszę czekać...'
 changes.saved: 'Zmiany zostały zapisane.'
 security.log_in: Logowanie
 security.log_out: Wyloguj
