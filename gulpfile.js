@@ -227,6 +227,7 @@ gulp.task('javascripts:etraxis', function() {
     return gulp.src(files)
         .pipe(gulpif(argv.production, uglify()))
         .pipe(concat(argv.production ? 'etraxis.min.js' : 'etraxis.js'))
+        .pipe(insert.prepend('"use strict";\n'))
         .pipe(gulp.dest('web/js/'));
 });
 
