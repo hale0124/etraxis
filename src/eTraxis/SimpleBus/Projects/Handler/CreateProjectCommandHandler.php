@@ -16,7 +16,6 @@ use eTraxis\SimpleBus\Projects\CreateProjectCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
@@ -26,27 +25,23 @@ class CreateProjectCommandHandler
 {
     protected $logger;
     protected $validator;
-    protected $translator;
     protected $doctrine;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface     $logger
-     * @param   ValidatorInterface  $validator
-     * @param   TranslatorInterface $translator
-     * @param   RegistryInterface   $doctrine
+     * @param   LoggerInterface    $logger
+     * @param   ValidatorInterface $validator
+     * @param   RegistryInterface  $doctrine
      */
     public function __construct(
-        LoggerInterface     $logger,
-        ValidatorInterface  $validator,
-        TranslatorInterface $translator,
-        RegistryInterface   $doctrine)
+        LoggerInterface    $logger,
+        ValidatorInterface $validator,
+        RegistryInterface  $doctrine)
     {
-        $this->logger     = $logger;
-        $this->validator  = $validator;
-        $this->translator = $translator;
-        $this->doctrine   = $doctrine;
+        $this->logger    = $logger;
+        $this->validator = $validator;
+        $this->doctrine  = $doctrine;
     }
 
     /**
@@ -70,7 +65,7 @@ class CreateProjectCommandHandler
         $errors = $this->validator->validate($entity);
 
         if (count($errors)) {
-            $message = $this->translator->trans($errors->get(0)->getMessage());
+            $message = $errors->get(0)->getMessage();
             $this->logger->error($message);
             throw new BadRequestHttpException($message);
         }

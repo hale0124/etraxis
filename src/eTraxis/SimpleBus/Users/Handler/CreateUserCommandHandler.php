@@ -18,7 +18,6 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
-use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
@@ -28,7 +27,6 @@ class CreateUserCommandHandler
 {
     protected $logger;
     protected $validator;
-    protected $translator;
     protected $doctrine;
     protected $password_encoder;
 
@@ -37,20 +35,17 @@ class CreateUserCommandHandler
      *
      * @param   LoggerInterface          $logger
      * @param   ValidatorInterface       $validator
-     * @param   TranslatorInterface      $translator
      * @param   RegistryInterface        $doctrine
      * @param   PasswordEncoderInterface $password_encoder
      */
     public function __construct(
         LoggerInterface          $logger,
         ValidatorInterface       $validator,
-        TranslatorInterface      $translator,
         RegistryInterface        $doctrine,
         PasswordEncoderInterface $password_encoder)
     {
         $this->logger           = $logger;
         $this->validator        = $validator;
-        $this->translator       = $translator;
         $this->doctrine         = $doctrine;
         $this->password_encoder = $password_encoder;
     }
@@ -92,7 +87,7 @@ class CreateUserCommandHandler
         $errors = $this->validator->validate($entity);
 
         if (count($errors)) {
-            $message = $this->translator->trans($errors->get(0)->getMessage());
+            $message = $errors->get(0)->getMessage();
             $this->logger->error($message);
             throw new BadRequestHttpException($message);
         }

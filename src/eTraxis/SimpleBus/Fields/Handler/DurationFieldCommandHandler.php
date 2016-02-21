@@ -15,12 +15,37 @@ use eTraxis\Entity\Field;
 use eTraxis\SimpleBus\Fields\CreateDurationFieldCommand;
 use eTraxis\SimpleBus\Fields\UpdateDurationFieldCommand;
 use eTraxis\SimpleBus\Middleware\ValidationException;
+use Psr\Log\LoggerInterface;
+use Symfony\Bridge\Doctrine\RegistryInterface;
+use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Command handler.
  */
 class DurationFieldCommandHandler extends BaseFieldCommandHandler
 {
+    protected $translator;
+
+    /**
+     * Dependency Injection constructor.
+     *
+     * @param   LoggerInterface     $logger
+     * @param   ValidatorInterface  $validator
+     * @param   RegistryInterface   $doctrine
+     * @param   TranslatorInterface $translator
+     */
+    public function __construct(
+        LoggerInterface     $logger,
+        ValidatorInterface  $validator,
+        RegistryInterface   $doctrine,
+        TranslatorInterface $translator)
+    {
+        parent::__construct($logger, $validator, $doctrine);
+
+        $this->translator = $translator;
+    }
+
     /**
      * Creates or updates "duration" field.
      *

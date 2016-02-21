@@ -16,7 +16,6 @@ use eTraxis\SimpleBus\Users\SaveAppearanceCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
-use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
@@ -26,27 +25,23 @@ class SaveAppearanceCommandHandler
 {
     protected $logger;
     protected $validator;
-    protected $translator;
     protected $doctrine;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface     $logger
-     * @param   ValidatorInterface  $validator
-     * @param   TranslatorInterface $translator
-     * @param   RegistryInterface   $doctrine
+     * @param   LoggerInterface    $logger
+     * @param   ValidatorInterface $validator
+     * @param   RegistryInterface  $doctrine
      */
     public function __construct(
-        LoggerInterface     $logger,
-        ValidatorInterface  $validator,
-        TranslatorInterface $translator,
-        RegistryInterface   $doctrine)
+        LoggerInterface    $logger,
+        ValidatorInterface $validator,
+        RegistryInterface  $doctrine)
     {
-        $this->logger     = $logger;
-        $this->validator  = $validator;
-        $this->translator = $translator;
-        $this->doctrine   = $doctrine;
+        $this->logger    = $logger;
+        $this->validator = $validator;
+        $this->doctrine  = $doctrine;
     }
 
     /**

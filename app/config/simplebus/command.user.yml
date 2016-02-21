@@ -18,12 +18,12 @@ services:
     command.user.create:
         class: eTraxis\SimpleBus\Users\Handler\CreateUserCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\CreateUserCommand }]
-        arguments: [ "@logger", "@validator", "@translator", "@doctrine", "@etraxis.encoder" ]
+        arguments: [ "@logger", "@validator", "@doctrine", "@etraxis.encoder" ]
 
     command.user.update:
         class: eTraxis\SimpleBus\Users\Handler\UpdateUserCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\UpdateUserCommand }]
-        arguments: [ "@logger", "@validator", "@translator", "@doctrine", "@security.token_storage" ]
+        arguments: [ "@logger", "@validator", "@doctrine", "@security.token_storage" ]
 
     command.user.delete:
         class: eTraxis\SimpleBus\Users\Handler\DeleteUserCommandHandler
@@ -43,7 +43,7 @@ services:
     command.settings.appearance:
         class: eTraxis\SimpleBus\Users\Handler\SaveAppearanceCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\SaveAppearanceCommand }]
-        arguments: [ "@logger", "@validator", "@translator", "@doctrine" ]
+        arguments: [ "@logger", "@validator", "@doctrine" ]
 
     command.password.set:
         class: eTraxis\SimpleBus\Users\Handler\SetPasswordCommandHandler

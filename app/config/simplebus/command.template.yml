@@ -3,12 +3,12 @@ services:
     command.template.create:
         class: eTraxis\SimpleBus\Templates\Handler\CreateTemplateCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Templates\CreateTemplateCommand }]
-        arguments: [ "@logger", "@validator", "@translator", "@doctrine" ]
+        arguments: [ "@logger", "@validator", "@doctrine" ]
 
     command.template.update:
         class: eTraxis\SimpleBus\Templates\Handler\UpdateTemplateCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Templates\UpdateTemplateCommand }]
-        arguments: [ "@logger", "@validator", "@translator", "@doctrine" ]
+        arguments: [ "@logger", "@validator", "@doctrine" ]
 
     command.template.delete:
         class: eTraxis\SimpleBus\Templates\Handler\DeleteTemplateCommandHandler

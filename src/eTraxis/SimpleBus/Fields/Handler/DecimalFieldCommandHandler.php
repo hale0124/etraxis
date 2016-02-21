@@ -26,6 +26,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class DecimalFieldCommandHandler extends BaseFieldCommandHandler
 {
+    protected $translator;
     protected $repository;
 
     /**
@@ -33,19 +34,20 @@ class DecimalFieldCommandHandler extends BaseFieldCommandHandler
      *
      * @param   LoggerInterface         $logger
      * @param   ValidatorInterface      $validator
-     * @param   TranslatorInterface     $translator
      * @param   RegistryInterface       $doctrine
+     * @param   TranslatorInterface     $translator
      * @param   DecimalValuesRepository $repository
      */
     public function __construct(
         LoggerInterface         $logger,
         ValidatorInterface      $validator,
-        TranslatorInterface     $translator,
         RegistryInterface       $doctrine,
+        TranslatorInterface     $translator,
         DecimalValuesRepository $repository)
     {
-        parent::__construct($logger, $validator, $translator, $doctrine);
+        parent::__construct($logger, $validator, $doctrine);
 
+        $this->translator = $translator;
         $this->repository = $repository;
     }
 

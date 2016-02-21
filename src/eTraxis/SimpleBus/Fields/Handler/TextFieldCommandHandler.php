@@ -17,7 +17,6 @@ use eTraxis\SimpleBus\Fields\CreateTextFieldCommand;
 use eTraxis\SimpleBus\Fields\UpdateTextFieldCommand;
 use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
@@ -32,18 +31,16 @@ class TextFieldCommandHandler extends BaseFieldCommandHandler
      *
      * @param   LoggerInterface      $logger
      * @param   ValidatorInterface   $validator
-     * @param   TranslatorInterface  $translator
      * @param   RegistryInterface    $doctrine
      * @param   TextValuesRepository $repository
      */
     public function __construct(
         LoggerInterface      $logger,
         ValidatorInterface   $validator,
-        TranslatorInterface  $translator,
         RegistryInterface    $doctrine,
         TextValuesRepository $repository)
     {
-        parent::__construct($logger, $validator, $translator, $doctrine);
+        parent::__construct($logger, $validator, $doctrine);
 
         $this->repository = $repository;
     }

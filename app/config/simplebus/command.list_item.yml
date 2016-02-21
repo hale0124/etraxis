@@ -3,12 +3,12 @@ services:
     command.list_item.create:
         class: eTraxis\SimpleBus\ListItems\Handler\CreateListItemCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\ListItems\CreateListItemCommand }]
-        arguments: [ "@logger", "@validator", "@translator", "@doctrine" ]
+        arguments: [ "@logger", "@validator", "@doctrine" ]
 
     command.list_item.update:
         class: eTraxis\SimpleBus\ListItems\Handler\UpdateListItemCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\ListItems\UpdateListItemCommand }]
-        arguments: [ "@logger", "@validator", "@translator", "@doctrine" ]
+        arguments: [ "@logger", "@validator", "@doctrine" ]
 
     command.list_item.delete:
         class: eTraxis\SimpleBus\ListItems\Handler\DeleteListItemCommandHandler

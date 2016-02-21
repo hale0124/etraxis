@@ -18,7 +18,6 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
-use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
@@ -28,7 +27,6 @@ class UpdateUserCommandHandler
 {
     protected $logger;
     protected $validator;
-    protected $translator;
     protected $doctrine;
     protected $token_storage;
 
@@ -37,20 +35,17 @@ class UpdateUserCommandHandler
      *
      * @param   LoggerInterface       $logger
      * @param   ValidatorInterface    $validator
-     * @param   TranslatorInterface   $translator
      * @param   RegistryInterface     $doctrine
      * @param   TokenStorageInterface $token_storage
      */
     public function __construct(
         LoggerInterface       $logger,
         ValidatorInterface    $validator,
-        TranslatorInterface   $translator,
         RegistryInterface     $doctrine,
         TokenStorageInterface $token_storage)
     {
         $this->logger        = $logger;
         $this->validator     = $validator;
-        $this->translator    = $translator;
         $this->doctrine      = $doctrine;
         $this->token_storage = $token_storage;
     }
@@ -99,7 +94,7 @@ class UpdateUserCommandHandler
         $errors = $this->validator->validate($entity);
 
         if (count($errors)) {
-            $message = $this->translator->trans($errors->get(0)->getMessage());
+            $message = $errors->get(0)->getMessage();
             $this->logger->error($message);
             throw new BadRequestHttpException($message);
         }

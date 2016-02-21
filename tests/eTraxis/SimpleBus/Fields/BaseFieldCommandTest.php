@@ -47,7 +47,6 @@ class BaseFieldCommandTest extends BaseTestCase
         $handler = new FieldCommandStubHandler(
             $this->logger,
             $this->validator,
-            $this->translator,
             $this->doctrine
         );
 
@@ -83,7 +82,6 @@ class BaseFieldCommandTest extends BaseTestCase
         $handler = new FieldCommandStubHandler(
             $this->logger,
             $this->validator,
-            $this->translator,
             $this->doctrine
         );
 
@@ -118,7 +116,6 @@ class BaseFieldCommandTest extends BaseTestCase
         $handler = new FieldCommandStubHandler(
             $this->logger,
             $this->validator,
-            $this->translator,
             $this->doctrine
         );
 
@@ -143,7 +140,6 @@ class BaseFieldCommandTest extends BaseTestCase
         $handler = new FieldCommandStubHandler(
             $this->logger,
             $this->validator,
-            $this->translator,
             $this->doctrine
         );
 
@@ -172,7 +168,6 @@ class BaseFieldCommandTest extends BaseTestCase
         $handler = new FieldCommandStubHandler(
             $this->logger,
             $this->validator,
-            $this->translator,
             $this->doctrine
         );
 
@@ -198,7 +193,6 @@ class BaseFieldCommandTest extends BaseTestCase
         $handler = new FieldCommandStubHandler(
             $this->logger,
             $this->validator,
-            $this->translator,
             $this->doctrine
         );
 
@@ -230,7 +224,6 @@ class BaseFieldCommandTest extends BaseTestCase
         $handler = new FieldCommandStubHandler(
             $this->logger,
             $this->validator,
-            $this->translator,
             $this->doctrine
         );
 
@@ -260,7 +253,6 @@ class BaseFieldCommandTest extends BaseTestCase
         $handler = new FieldCommandStubHandler(
             $this->logger,
             $this->validator,
-            $this->translator,
             $this->doctrine
         );
 
@@ -278,7 +270,6 @@ class BaseFieldCommandTest extends BaseTestCase
         $handler = new FieldCommandStubHandler(
             $this->logger,
             $this->validator,
-            $this->translator,
             $this->doctrine
         );
 
