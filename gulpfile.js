@@ -10,9 +10,9 @@
 var gulp     = require('gulp');
 var addsrc   = require('gulp-add-src');
 var concat   = require('gulp-concat');
-var less     = require('gulp-less');
 var gulpif   = require('gulp-if');
 var insert   = require('gulp-insert');
+var less     = require('gulp-less');
 var minify   = require('gulp-minify-css');
 var plumber  = require('gulp-plumber');
 var rename   = require('gulp-rename');
@@ -31,9 +31,8 @@ var argv     = require('yargs').argv;
 gulp.task('default', function() {
     sequence(
         ['stylesheets:libs', 'stylesheets:themes'],
-        ['javascripts:libs', 'javascripts:etraxis'],
         ['javascripts:datatables', 'javascripts:translations'],
-        'javascripts:i18n'
+        ['javascripts:libs', 'javascripts:etraxis', 'javascripts:i18n']
     );
 });
 
@@ -95,25 +94,6 @@ gulp.task('stylesheets:themes', function() {
     });
 
     return merge(tasks);
-});
-
-/**
- * Installs vendors JavaScript files as one combined "web/js/libs.min.js" asset.
- */
-gulp.task('javascripts:libs', function() {
-
-    var files = [
-        'vendor/bower/jquery/dist/jquery.js',
-        'app/Resources/public/js/jquery-ui.js',
-        'vendor/bower/blockui/jquery.blockUI.js',
-        'vendor/bower/jquery-form/jquery.form.js',
-        'vendor/bower/datatables/media/js/jquery.dataTables.js'
-    ];
-
-    return gulp.src(files)
-        .pipe(gulpif(argv.production, uglify()))
-        .pipe(gulpif(argv.production, concat('libs.min.js')))
-        .pipe(gulp.dest('web/js/'));
 });
 
 /**
@@ -191,7 +171,47 @@ gulp.task('javascripts:translations', function() {
 });
 
 /**
- * Installs translation JavaScript files from all vendors and from eTraxis to "web/js/" folder.
+ * Installs vendors JavaScript files as one combined "web/js/libs.min.js" asset.
+ */
+gulp.task('javascripts:libs', function() {
+
+    var files = [
+        'vendor/bower/jquery/dist/jquery.js',
+        'app/Resources/public/js/jquery-ui.js',
+        'vendor/bower/blockui/jquery.blockUI.js',
+        'vendor/bower/jquery-form/jquery.form.js',
+        'vendor/bower/datatables/media/js/jquery.dataTables.js'
+    ];
+
+    return gulp.src(files)
+        .pipe(gulpif(argv.production, uglify()))
+        .pipe(gulpif(argv.production, concat('libs.min.js')))
+        .pipe(gulp.dest('web/js/'));
+});
+
+/**
+ * Installs eTraxis JavaScript files as one combined "web/js/etraxis.min.js" asset.
+ */
+gulp.task('javascripts:etraxis', function() {
+
+    var files = [
+        'app/Resources/public/js/etraxis.js',
+        'app/Resources/public/js/init-ui.js',
+        'app/Resources/public/js/disable.js',
+        'app/Resources/public/js/dropdown.js',
+        'app/Resources/public/js/modal.js',
+        'app/Resources/public/js/panel.js',
+        'app/Resources/public/js/table.js'
+    ];
+
+    return gulp.src(files)
+        .pipe(gulpif(argv.production, uglify()))
+        .pipe(concat(argv.production ? 'etraxis.min.js' : 'etraxis.js'))
+        .pipe(gulp.dest('web/js/'));
+});
+
+/**
+ * Installs translation JavaScript files from all vendors (including eTraxis) to "web/js/" folder.
  */
 gulp.task('javascripts:i18n', function() {
 
@@ -232,25 +252,4 @@ gulp.task('javascripts:i18n', function() {
             .pipe(concat('etraxis-' + locale.replace('-', '_') + (argv.production ? '.min.js' : '.js')))
             .pipe(gulp.dest('web/js/'));
     });
-});
-
-/**
- * Installs eTraxis JavaScript files as one combined "web/js/etraxis.min.js" asset.
- */
-gulp.task('javascripts:etraxis', function() {
-
-    var files = [
-        'app/Resources/public/js/etraxis.js',
-        'app/Resources/public/js/init-ui.js',
-        'app/Resources/public/js/disable.js',
-        'app/Resources/public/js/dropdown.js',
-        'app/Resources/public/js/modal.js',
-        'app/Resources/public/js/panel.js',
-        'app/Resources/public/js/table.js'
-    ];
-
-    return gulp.src(files)
-        .pipe(gulpif(argv.production, uglify()))
-        .pipe(concat(argv.production ? 'etraxis.min.js' : 'etraxis.js'))
-        .pipe(gulp.dest('web/js/'));
 });
