@@ -25,7 +25,7 @@
 
     <div class="grid-50">
         <fieldset>
-            <legend>{{ 'transitions'|trans }}</legend>
+            <legend>{{ 'states'|trans }}</legend>
             {% for transition in transitions %}
                 <div class="grid-100">
                     <input type="checkbox" id="transition-{{ transition.id }}" name="transitions[]" class="transitions" value="{{ transition.id }}">
@@ -67,7 +67,7 @@
             });
 
             $.post('{{ path('admin_save_state_transitions', {'id': state.id}) }}/' + group, { transitions }, function() {
-                eTraxis.alert('{{ 'transitions'|trans }}', '{{ 'changes.saved'|trans }}');
+                eTraxis.alert('{{ 'state.transitions'|trans }}', '{{ 'changes_saved'|trans }}');
             });
         });
 

@@ -69,7 +69,7 @@
             });
 
             $.post('{{ path('admin_save_template_permissions', {'id': template.id}) }}/' + group, { permissions }, function() {
-                eTraxis.alert('{{ 'permissions'|trans }}', '{{ 'changes.saved'|trans }}');
+                eTraxis.alert('{{ 'permissions'|trans }}', '{{ 'changes_saved'|trans }}');
             });
         });
 

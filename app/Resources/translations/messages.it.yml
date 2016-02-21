@@ -23,7 +23,7 @@ error: Errore
 error.not_found: 'La pagina desiderata non esiste o è stata rimossa.'
 error.not_authorized: 'Non sei autorizzato ad accedere a questa pagina.'
 please_wait: 'Attendere prego...'
-changes.saved: 'Your changes were successfully saved.'
+changes_saved: 'Your changes were successfully saved.'
 security.log_in: Entra
 security.log_out: Esci
 security.remember_me: Ricordami

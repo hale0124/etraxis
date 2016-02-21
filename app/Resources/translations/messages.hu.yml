@@ -23,7 +23,7 @@ error: Hiba
 error.not_found: 'Az oldal, amit meg szeretne nézni nem található, vagy átkerült egy másik helyre.'
 error.not_authorized: 'Nincs hozzáférési engedélye ehhez az oldalhoz.'
 please_wait: 'Kérem várjon...'
-changes.saved: 'A módosítások sikeresen elmentve.'
+changes_saved: 'A módosítások sikeresen elmentve.'
 security.log_in: Bejelentkezés
 security.log_out: Kijelentkezés
 security.remember_me: 'Emlékezzen rám'

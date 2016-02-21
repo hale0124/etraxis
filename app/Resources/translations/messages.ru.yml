@@ -23,7 +23,7 @@ error: Ошибка
 error.not_found: 'Страница, к которой Вы обратились, не существует или была удалена.'
 error.not_authorized: 'Нет доступа к запрашиваемой странице.'
 please_wait: 'Пожалуйста, подождите...'
-changes.saved: 'Ваши изменения успешно сохранены.'
+changes_saved: 'Ваши изменения успешно сохранены.'
 security.log_in: Вход
 security.log_out: Выход
 security.remember_me: 'Запомнить меня'

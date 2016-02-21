@@ -23,7 +23,7 @@ error: Erreur
 error.not_found: 'La page à laquelle vous souhaitez accéder n''existe pas ou a été supprimée.'
 error.not_authorized: 'Vous n''êtes pas autorisé à accéder à cette page.'
 please_wait: 'Veuillez patienter...'
-changes.saved: 'Your changes were successfully saved.'
+changes_saved: 'Your changes were successfully saved.'
 security.log_in: 'Se connecter'
 security.log_out: 'Se déconnecter'
 security.remember_me: 'Se souvenir de moi'

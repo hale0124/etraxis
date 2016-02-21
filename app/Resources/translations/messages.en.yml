@@ -22,7 +22,7 @@ error: Error
 error.not_found: 'The page you were trying to access doesn''t exist or has been removed.'
 error.not_authorized: 'You are not authorized to access this page.'
 please_wait: 'Please wait...'
-changes.saved: 'Your changes were successfully saved.'
+changes_saved: 'Your changes were successfully saved.'
 security.log_in: 'Log in'
 security.log_out: 'Log out'
 security.remember_me: 'Remember me'

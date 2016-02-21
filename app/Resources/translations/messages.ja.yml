@@ -23,7 +23,7 @@ error: エラー
 error.not_found: アクセスしようとしたページは存在しないか削除されています。
 error.not_authorized: このページのアクセスは許可されていません。
 please_wait: お待ちください...
-changes.saved: 'Your changes were successfully saved.'
+changes_saved: 'Your changes were successfully saved.'
 security.log_in: ログイン
 security.log_out: 終了
 security.remember_me: ログインを維持

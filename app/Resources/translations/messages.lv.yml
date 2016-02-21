@@ -23,7 +23,7 @@ error: Kļūda
 error.not_found: 'Lapa, ko Jūs mēģināt atvērt, neeksistē vai ir pārvietota.'
 error.not_authorized: 'Jums nav tiesību piekļūt šai lapai.'
 please_wait: 'Lūdzu uzgaidiet...'
-changes.saved: 'Your changes were successfully saved.'
+changes_saved: 'Your changes were successfully saved.'
 security.log_in: Ieiet
 security.log_out: Iziet
 security.remember_me: 'Atcerēties mani'

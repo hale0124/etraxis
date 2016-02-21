@@ -23,7 +23,7 @@ error: Erro
 error.not_found: 'A página que você está tentando acessar não existe ou foi excluída.'
 error.not_authorized: 'Você não está autorizado a acessar esta página.'
 please_wait: 'Favor aguardar...'
-changes.saved: 'Alterações salvas com sucesso.'
+changes_saved: 'Alterações salvas com sucesso.'
 security.log_in: Logar
 security.log_out: Deslogar
 security.remember_me: 'Permanecer logado'

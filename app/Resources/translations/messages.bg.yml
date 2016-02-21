@@ -23,7 +23,7 @@ error: Грешка
 error.not_found: 'Несъществуваща или преместена страница.'
 error.not_authorized: 'Нямате право на достъп до тази страница.'
 please_wait: 'Моля изчакайте...'
-changes.saved: 'Your changes were successfully saved.'
+changes_saved: 'Your changes were successfully saved.'
 security.log_in: Вход
 security.log_out: Изход
 security.remember_me: 'Запомни ме'

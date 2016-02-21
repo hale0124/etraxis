@@ -83,7 +83,7 @@ eTraxis.modal = function(options) {
                         });
                     }
                     else {
-                        eTraxis.alert(eTraxis.i18n['button.error'], response);
+                        eTraxis.alert(eTraxis.i18n['error'], response);
                     }
                 }
             }

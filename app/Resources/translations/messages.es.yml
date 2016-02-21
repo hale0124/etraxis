@@ -23,7 +23,7 @@ error: Error
 error.not_found: 'La página a la que intenta acceder no existe.'
 error.not_authorized: 'No tiene autorización para acceder a esta página.'
 please_wait: 'Por favor espere...'
-changes.saved: 'Cambios guardados correctamente.'
+changes_saved: 'Cambios guardados correctamente.'
 security.log_in: Ingresar
 security.log_out: Salir
 security.remember_me: 'Mantener la sesión abierta'
