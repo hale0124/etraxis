@@ -1,0 +1,12 @@
+# This file is auto-generated using Crowdin.
+user.invalid.username: 'Geçersiz kullanıcı adı.'
+user.conflict.username: 'Girilen kullanıcı adıyla bir hesap zaten var.'
+group.conflict.name: 'Girilen adda bir grup zaten var.'
+project.conflict.name: 'Girilen adda bir proje zaten var.'
+template.conflict.name: 'Template with entered name already exists.'
+template.conflict.prefix: 'Template with entered prefix already exists.'
+state.conflict.name: 'State with entered name already exists.'
+state.conflict.abbreviation: 'State with entered abbreviation already exists.'
+field.conflict.name: 'Girilen adda bir alan zaten var.'
+list.conflict.key: 'Item with entered key already exists.'
+list.conflict.value: 'Item with entered value already exists.'

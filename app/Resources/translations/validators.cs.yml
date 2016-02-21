@@ -1,0 +1,12 @@
+# This file is auto-generated using Crowdin.
+user.invalid.username: 'Neplatné uživatelské jméno.'
+user.conflict.username: 'Účet se zadaným uživatelským jménem již existuje.'
+group.conflict.name: 'Skupina se zadaným jménem již existuje.'
+project.conflict.name: 'Projekt se zadaným názvem již existuje.'
+template.conflict.name: 'Šablona se zadaným jménem již existuje.'
+template.conflict.prefix: 'Šablona se zadaným předponou již existuje.'
+state.conflict.name: 'Stav se zadaným jménem již existuje.'
+state.conflict.abbreviation: 'Stav se zadaným zkratkou již existuje.'
+field.conflict.name: 'Pole se zadaným jménem již existuje.'
+list.conflict.key: 'Item with entered key already exists.'
+list.conflict.value: 'Item with entered value already exists.'

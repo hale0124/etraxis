@@ -62,8 +62,6 @@ language: Langue
 theme: Thème
 timezone: 'Fuseau horaire'
 user.confirm.delete: 'Etes-vous sur de vouloir effacer ce compte?'
-user.conflict.username: 'Il existe déjà un compte portant ce nom.'
-user.invalid.username: 'Nom utilisateur invalide.'
 password.too_short: 'Le mot de passe doit comporter au moins %length% caracteres.'
 passwords.dont_match: 'Les mots de passe ne correspondent pas.'
 password.changed: 'Mot de passe mis à jour avec succès.'
@@ -96,7 +94,6 @@ group.type: 'Type de groupe'
 group.global: Global
 group.local: Local
 group.confirm.delete: 'Etes-vous sur de vouloir effacer ce groupe?'
-group.conflict.name: 'Il existe déjà un groupe portant ce nom.'
 project: Projet
 projects: Projets
 project.new: 'Nouveau projet'
@@ -106,7 +103,6 @@ project.status: Statut
 project.active: Actif
 project.suspended: Suspendu
 project.confirm.delete: 'Etes-vous sur de vouloir effacer ce projet?'
-project.conflict.name: 'Il existe déjà un projet portant ce nom.'
 template: Modèle
 templates: Modèles
 template.new: 'Nouveau modèle'
@@ -119,8 +115,6 @@ template.status: Statut
 template.active: Actif
 template.locked: Verrouillé
 template.confirm.delete: 'Etes-vous sur de vouloir effacer ce modèle?'
-template.conflict.name: 'Il existe déjà un modèle portant ce nom.'
-template.conflict.prefix: 'Il existe déjà un modèle portant ce un préfixe.'
 template.permission.view_records: 'View records'
 template.permission.create_records: 'Create records'
 template.permission.edit_records: 'Edit records'
@@ -154,12 +148,7 @@ state.transitions: Transitions
 state.next_for: 'Next state by default for'
 state.make_initial: 'Rendre initial'
 state.confirm.delete: 'Etes-vous sur de vouloir effacer cet état?'
-state.conflict.name: 'Il existe déjà un état portant ce nom.'
-state.conflict.abbreviation: 'Il existe déjà un état portant ce abréviation.'
 field.required: requis
-field.conflict.name: 'Il existe déjà un champ portant ce nom.'
 field.min_max_values: 'Le maximum doit être superieur au minimum.'
 field.default_value: 'La valeur par défaut doit être comprise entre %min% et %max%.'
 field.value_range: 'La valeur de "%name%" doit être comprise entre %min% et %max%.'
-list.conflict.key: 'Item with entered key already exists.'
-list.conflict.value: 'Item with entered value already exists.'

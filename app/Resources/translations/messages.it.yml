@@ -62,8 +62,6 @@ language: Lingua
 theme: Tema
 timezone: 'Fuso Orario'
 user.confirm.delete: 'Eliminare questo account?'
-user.conflict.username: 'Nome utente già utilizzato.'
-user.invalid.username: 'Nome utente non valido.'
 password.too_short: 'La password deve essere almeno lunga %length% caratteri.'
 passwords.dont_match: 'Le password non coincidono.'
 password.changed: 'La password è stata aggiornata.'
@@ -96,7 +94,6 @@ group.type: 'Tipo di gruppo'
 group.global: Globale
 group.local: Locale
 group.confirm.delete: 'Eliminare questo gruppo?'
-group.conflict.name: 'Nome gruppo già utilizzato.'
 project: Progetto
 projects: Progetti
 project.new: 'Nuovo progetto'
@@ -106,7 +103,6 @@ project.status: Stato
 project.active: Attivo
 project.suspended: Sospeso
 project.confirm.delete: 'Eliminare questo progetto?'
-project.conflict.name: 'Nome progetto già utilizzato.'
 template: Modello
 templates: Modelli
 template.new: 'Nuovo modello'
@@ -119,8 +115,6 @@ template.status: Stato
 template.active: Attivo
 template.locked: Bloccato
 template.confirm.delete: 'Eliminare questo modello?'
-template.conflict.name: 'Un modello con lo stesso nome è già utilizzato.'
-template.conflict.prefix: 'Un modello con lo stesso prefisso è già utilizzato.'
 template.permission.view_records: 'View records'
 template.permission.create_records: 'Create records'
 template.permission.edit_records: 'Edit records'
@@ -154,12 +148,7 @@ state.transitions: Transizioni
 state.next_for: 'Next state by default for'
 state.make_initial: 'Segna come iniziale'
 state.confirm.delete: 'Eliminare questo stato?'
-state.conflict.name: 'Uno stato con lo stesso nome è già utilizzato.'
-state.conflict.abbreviation: 'Uno stato con lo stesso abbreviazione è già utilizzato.'
 field.required: obbligatorio
-field.conflict.name: 'Nome campo già utilizzato.'
 field.min_max_values: 'Il valore massimo deve essere maggiore del valore minimo.'
 field.default_value: 'Il valore predefinito deve essere compreso tra %min% e %max%.'
 field.value_range: 'Il valore "%name%" deve essere compreso tra %min% e %max%.'
-list.conflict.key: 'Item with entered key already exists.'
-list.conflict.value: 'Item with entered value already exists.'

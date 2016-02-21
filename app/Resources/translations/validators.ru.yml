@@ -1,0 +1,12 @@
+# This file is auto-generated using Crowdin.
+user.invalid.username: 'Неверное имя пользователя.'
+user.conflict.username: 'Учетная запись с таким именем пользователя уже существует.'
+group.conflict.name: 'Группа с таким названием уже существует.'
+project.conflict.name: 'Проект с таким названием уже существует.'
+template.conflict.name: 'Шаблон с таким названием уже существует.'
+template.conflict.prefix: 'Шаблон с таким префиксом уже существует.'
+state.conflict.name: 'Состояние с таким названием уже существует.'
+state.conflict.abbreviation: 'Состояние с такой аббревиатурой уже существует.'
+field.conflict.name: 'Поле с таким названием уже существует.'
+list.conflict.key: 'Элемент с таким ключом уже существует.'
+list.conflict.value: 'Элемент с таким значением уже существует.'

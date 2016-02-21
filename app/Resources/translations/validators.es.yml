@@ -1,0 +1,12 @@
+# This file is auto-generated using Crowdin.
+user.invalid.username: 'Nombre de usuario inválido.'
+user.conflict.username: 'Ya existe una cuenta con ese nombre de usuario.'
+group.conflict.name: 'Ya existe un Grupo con ese nombre.'
+project.conflict.name: 'Ya existe un Proyecto con ese nombre.'
+template.conflict.name: 'Ya existe una Plantilla con ese nombre.'
+template.conflict.prefix: 'Ya existe una Plantilla con ese prefijo.'
+state.conflict.name: 'Ya existe un Estado con ese nombre.'
+state.conflict.abbreviation: 'Ya existe un Estado con ese inicial.'
+field.conflict.name: 'Ya existe un Campo con ese nombre.'
+list.conflict.key: 'Item with entered key already exists.'
+list.conflict.value: 'Item with entered value already exists.'

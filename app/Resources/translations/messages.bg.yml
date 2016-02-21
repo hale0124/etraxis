@@ -62,8 +62,6 @@ language: Език
 theme: Тема
 timezone: 'Времева зона'
 user.confirm.delete: 'Сигурен ли сте че искате да изтриете този акаунт?'
-user.conflict.username: 'Акаунт с въведенето потребителско име вече съществува.'
-user.invalid.username: 'Невалидно потребителско име.'
 password.too_short: 'Паролата трябва да е най-малко с %length% символ дължина.'
 passwords.dont_match: 'Паролите не са еднакви.'
 password.changed: 'Паролата е успешно променена.'
@@ -96,7 +94,6 @@ group.type: 'Тип на група'
 group.global: Глобално
 group.local: Локално
 group.confirm.delete: 'Сигурен ли сте че искате да изтриете тази група?'
-group.conflict.name: 'Вече съществува група с въведеното име.'
 project: Проект
 projects: Проекти
 project.new: 'Нов проект'
@@ -106,7 +103,6 @@ project.status: Статус
 project.active: Активен
 project.suspended: Преустановен
 project.confirm.delete: 'Сигурен ли сте че искате да изтриете този проект?'
-project.conflict.name: 'Вече същестува проект с въведеното име.'
 template: Темплейт
 templates: Темплейти
 template.new: 'Нов темплейт'
@@ -119,8 +115,6 @@ template.status: Статус
 template.active: Активен
 template.locked: Заключен
 template.confirm.delete: 'Сигурен ли сте че искате да изтриете този темплейт?'
-template.conflict.name: 'Вече същестува темплейт с въведеното име.'
-template.conflict.prefix: 'Вече същестува темплейт с въведеното представка.'
 template.permission.view_records: 'View records'
 template.permission.create_records: 'Create records'
 template.permission.edit_records: 'Edit records'
@@ -154,12 +148,7 @@ state.transitions: Преходи
 state.next_for: 'Next state by default for'
 state.make_initial: 'Направи начален'
 state.confirm.delete: 'Сигурен ли сте че искате да изтриете това условие?'
-state.conflict.name: 'Вече съществува услови с въведеното име.'
-state.conflict.abbreviation: 'Вече съществува услови с въведеното съкращение.'
 field.required: изискван
-field.conflict.name: 'Вече съществува поле с въведеното име.'
 field.min_max_values: 'Mаксималната стойност трябва да е по-голяма от минималната.'
 field.default_value: 'Стойностите по подразбиране трябва да са в порядъка на %min% до %max%.'
 field.value_range: 'Стойност от "%name%" трябва да бъде в подръдъка от %min% до %max%.'
-list.conflict.key: 'Item with entered key already exists.'
-list.conflict.value: 'Item with entered value already exists.'

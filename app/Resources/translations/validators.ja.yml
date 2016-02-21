@@ -1,0 +1,12 @@
+# This file is auto-generated using Crowdin.
+user.invalid.username: 無効なユーザー名です。
+user.conflict.username: 入力されたユーザーの名前は既に存在しています。
+group.conflict.name: 入力されたグループの名前は既に存在しています。
+project.conflict.name: 入力されたプロジェクトの名前は既に存在しています。
+template.conflict.name: 'Template with entered name already exists.'
+template.conflict.prefix: 'Template with entered prefix already exists.'
+state.conflict.name: 'State with entered name already exists.'
+state.conflict.abbreviation: 'State with entered abbreviation already exists.'
+field.conflict.name: 入力されたフィールドの名前は既に存在しています。
+list.conflict.key: 'Item with entered key already exists.'
+list.conflict.value: 'Item with entered value already exists.'

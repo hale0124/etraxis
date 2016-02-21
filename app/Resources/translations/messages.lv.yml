@@ -62,8 +62,6 @@ language: Valoda
 theme: Motīvs
 timezone: 'Laika zona'
 user.confirm.delete: 'Vai tiešām vēlaties dzēst šo kontu?'
-user.conflict.username: 'Lietotāja konts ar tādu lietotāja vārdu jau eksistē.'
-user.invalid.username: 'Nezināms lietotāja vārds.'
 password.too_short: 'Parolei jāsatur vismaz %length% simbolu.'
 passwords.dont_match: 'Paroles nesakrīt.'
 password.changed: 'Parole tika veiksmīgi atjaunota.'
@@ -96,7 +94,6 @@ group.type: 'Grupas tips'
 group.global: Globālā
 group.local: Lokālā
 group.confirm.delete: 'Vai tiešām vēlaties dzēst šo grupu?'
-group.conflict.name: 'Grupa ar tādu nosaukumu jau eksistē.'
 project: Projekts
 projects: Projekti
 project.new: 'Jauns projekts'
@@ -106,7 +103,6 @@ project.status: Statuss
 project.active: Aktīvs
 project.suspended: Atlikts
 project.confirm.delete: 'Vai tiešām vēlaties dzēst šo projektu?'
-project.conflict.name: 'Projekts ar tādu nosaukumu jau eksistē.'
 template: Lekāls
 templates: Lekāli
 template.new: 'Jauns lekāls'
@@ -119,8 +115,6 @@ template.status: Statuss
 template.active: Aktīvs
 template.locked: Bloķēts
 template.confirm.delete: 'Vai tiešām vēlaties dzēst šo lekālu?'
-template.conflict.name: 'Lekāls ar tādu nosaukumu jau eksistē.'
-template.conflict.prefix: 'Lekāls ar tādu priedēkli jau eksistē.'
 template.permission.view_records: 'View records'
 template.permission.create_records: 'Create records'
 template.permission.edit_records: 'Edit records'
@@ -154,12 +148,7 @@ state.transitions: Pārejas
 state.next_for: 'Next state by default for'
 state.make_initial: 'Padarīt par sākotnēju'
 state.confirm.delete: 'Vai tiešām vēlaties dzēst šo stāvokli?'
-state.conflict.name: 'Stāvoklis ar tādu nosaukumu jau eksistē.'
-state.conflict.abbreviation: 'Stāvoklis ar tādu saīsinājumu jau eksistē.'
 field.required: obligāts
-field.conflict.name: 'Atribūts ar tādu nosaukumu jau eksistē.'
 field.min_max_values: 'Maksimālajam lielumam jābūt lielākam par minimālo.'
 field.default_value: 'Noklusējuma nozīmei jąbūt no %min% līdz %max% apgabalā.'
 field.value_range: '"%name%" lauciņa lielumam jābūt no %min% līdz %max% apgabalā.'
-list.conflict.key: 'Item with entered key already exists.'
-list.conflict.value: 'Item with entered value already exists.'

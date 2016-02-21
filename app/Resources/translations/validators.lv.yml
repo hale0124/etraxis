@@ -1,0 +1,12 @@
+# This file is auto-generated using Crowdin.
+user.invalid.username: 'Nezināms lietotāja vārds.'
+user.conflict.username: 'Lietotāja konts ar tādu lietotāja vārdu jau eksistē.'
+group.conflict.name: 'Grupa ar tādu nosaukumu jau eksistē.'
+project.conflict.name: 'Projekts ar tādu nosaukumu jau eksistē.'
+template.conflict.name: 'Lekāls ar tādu nosaukumu jau eksistē.'
+template.conflict.prefix: 'Lekāls ar tādu priedēkli jau eksistē.'
+state.conflict.name: 'Stāvoklis ar tādu nosaukumu jau eksistē.'
+state.conflict.abbreviation: 'Stāvoklis ar tādu saīsinājumu jau eksistē.'
+field.conflict.name: 'Atribūts ar tādu nosaukumu jau eksistē.'
+list.conflict.key: 'Item with entered key already exists.'
+list.conflict.value: 'Item with entered value already exists.'

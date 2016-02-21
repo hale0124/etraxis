@@ -62,8 +62,6 @@ language: Języki
 theme: Motyw
 timezone: 'Strefa czasowa'
 user.confirm.delete: 'Czy jesteś pewien, że chesz usunąć wybrane konto?'
-user.conflict.username: 'Wprowadzona nazwa konta już istnieje.'
-user.invalid.username: 'Nieprawidłowa nazwa użytkownika.'
 password.too_short: 'Hasło powinno mieć co najmniej %length% znaków.'
 passwords.dont_match: 'Hasła nie są identyczne.'
 password.changed: 'Hasło prawidłowo zmienione.'
@@ -96,7 +94,6 @@ group.type: 'Typ grupy'
 group.global: Globalna
 group.local: Lokalna
 group.confirm.delete: 'Czy jesteś pewien, że chesz usunąć wybraną grupę?'
-group.conflict.name: 'Grupa o podanej nazwie już istnieje.'
 project: Projekt
 projects: Projekty
 project.new: 'Nowy projekt'
@@ -106,7 +103,6 @@ project.status: Status
 project.active: Aktywny
 project.suspended: Zawieszony
 project.confirm.delete: 'Czy jesteś pewien, że chesz usunąć wybrany projekt?'
-project.conflict.name: 'Projekt o podanej nazwie już istnieje.'
 template: Szablon
 templates: Szablony
 template.new: 'Nowy szablon'
@@ -119,8 +115,6 @@ template.status: Status
 template.active: Aktywny
 template.locked: Zablokowany
 template.confirm.delete: 'Czy jesteś pewien, że chesz usunąć wybrany szablon?'
-template.conflict.name: 'Szablon o podanej nazwie już istnieje.'
-template.conflict.prefix: 'Szablon o podanej prefixie już istnieje.'
 template.permission.view_records: 'View records'
 template.permission.create_records: 'Create records'
 template.permission.edit_records: 'Edit records'
@@ -154,12 +148,7 @@ state.transitions: Przejścia
 state.next_for: 'Next state by default for'
 state.make_initial: 'Utwórz początkowy'
 state.confirm.delete: 'Czy jesteś pewien, że chesz usunąć wybrany status?'
-state.conflict.name: 'Stan o tej nazwie już istnieje.'
-state.conflict.abbreviation: 'Stan o tej skrót już istnieje.'
 field.required: wymagany
-field.conflict.name: 'Pole o podanej nazwie już istnieje.'
 field.min_max_values: 'Wartość maksymalna powinna być większa od wartości minimalnej.'
 field.default_value: 'Wartość domyślna powinna być z przedziału od %min% do %max%.'
 field.value_range: 'Wartość "%name%" powinna być z przedziału od %min% do %max%.'
-list.conflict.key: 'Item with entered key already exists.'
-list.conflict.value: 'Item with entered value already exists.'

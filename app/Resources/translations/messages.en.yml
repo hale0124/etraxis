@@ -61,8 +61,6 @@ language: Language
 theme: Theme
 timezone: Timezone
 user.confirm.delete: 'Are you sure you want delete this account?'
-user.conflict.username: 'Account with entered user name already exists.'
-user.invalid.username: 'Invalid user name.'
 password.too_short: 'Password should be at least %length% characters length.'
 passwords.dont_match: 'Passwords do not match.'
 password.changed: 'Password was successfully updated.'
@@ -95,7 +93,6 @@ group.type: 'Group type'
 group.global: Global
 group.local: Local
 group.confirm.delete: 'Are you sure you want delete this group?'
-group.conflict.name: 'Group with entered name already exists.'
 project: Project
 projects: Projects
 project.new: 'New project'
@@ -105,7 +102,6 @@ project.status: Status
 project.active: Active
 project.suspended: Suspended
 project.confirm.delete: 'Are you sure you want delete this project?'
-project.conflict.name: 'Project with entered name already exists.'
 template: Template
 templates: Templates
 template.new: 'New template'
@@ -118,8 +114,6 @@ template.status: Status
 template.active: Active
 template.locked: Locked
 template.confirm.delete: 'Are you sure you want delete this template?'
-template.conflict.name: 'Template with entered name already exists.'
-template.conflict.prefix: 'Template with entered prefix already exists.'
 template.permission.view_records: 'View records'
 template.permission.create_records: 'Create records'
 template.permission.edit_records: 'Edit records'
@@ -153,12 +147,7 @@ state.transitions: Transitions
 state.next_for: 'Next state by default for'
 state.make_initial: 'Make initial'
 state.confirm.delete: 'Are you sure you want delete this state?'
-state.conflict.name: 'State with entered name already exists.'
-state.conflict.abbreviation: 'State with entered abbreviation already exists.'
 field.required: 'required field'
-field.conflict.name: 'Field with entered name already exists.'
 field.min_max_values: 'Maximum value should be greater then minimum one.'
 field.default_value: 'Default value should be in range from %min% to %max%.'
 field.value_range: 'Value of "%name%" should be in range from %min% to %max%.'
-list.conflict.key: 'Item with entered key already exists.'
-list.conflict.value: 'Item with entered value already exists.'

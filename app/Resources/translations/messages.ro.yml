@@ -62,8 +62,6 @@ language: Limba
 theme: Tema
 timezone: 'Fus orar'
 user.confirm.delete: 'Sunteti sigur ca doriti sa stergeti acest cont?'
-user.conflict.username: 'Numele de utilizator este deja folosit.'
-user.invalid.username: 'Nume utilizator invalid.'
 password.too_short: 'Parola trebuie sa aiba cel putin %length% caractere.'
 passwords.dont_match: 'Parola nu este identica.'
 password.changed: 'Parolă actualizată.'
@@ -96,7 +94,6 @@ group.type: 'Tipul grupului'
 group.global: Global
 group.local: Local
 group.confirm.delete: 'Sunteti sigur ca doriti sa stergeti acest grup?'
-group.conflict.name: 'Numele grupului exista deja.'
 project: Proiect
 projects: Proiecte
 project.new: 'Proiect nou'
@@ -106,7 +103,6 @@ project.status: Stare
 project.active: Activ
 project.suspended: Suspendat
 project.confirm.delete: 'Sunteti sigur ca doriti sa stergeti acest proiect?'
-project.conflict.name: 'Numele de proiect exista deja.'
 template: Sablon
 templates: Sabloane
 template.new: 'Sablon nou'
@@ -119,8 +115,6 @@ template.status: Stare
 template.active: Activ
 template.locked: Blocat
 template.confirm.delete: 'Sunteti sigur ca doriti sa stergeti acest sablon?'
-template.conflict.name: 'Sablonul cu numele introdus exista deja.'
-template.conflict.prefix: 'Sablonul prefixul introdus exista deja.'
 template.permission.view_records: 'View records'
 template.permission.create_records: 'Create records'
 template.permission.edit_records: 'Edit records'
@@ -154,12 +148,7 @@ state.transitions: Tranzitii
 state.next_for: 'Next state by default for'
 state.make_initial: 'Marcheaza ca initiala'
 state.confirm.delete: 'Sunteti sigur ca doriti sa stergeti aceasta stare?'
-state.conflict.name: 'Numele starii deja exista.'
-state.conflict.abbreviation: 'Prescurtarea starii deja exista.'
 field.required: obligatoriu
-field.conflict.name: 'Numele campului deja exista.'
 field.min_max_values: 'Valoarea maxima trebuie sa fie mai mare decat cea minima.'
 field.default_value: 'Valoarea implicita trebuie sa fie in intervalul %min% la %max%.'
 field.value_range: 'Valoarea "%name%" trebuie sa fie in intervalul %min% pana la %max%.'
-list.conflict.key: 'Item with entered key already exists.'
-list.conflict.value: 'Item with entered value already exists.'

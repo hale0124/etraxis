@@ -1,0 +1,12 @@
+# This file is auto-generated using Crowdin.
+user.invalid.username: 'Nome utente non valido.'
+user.conflict.username: 'Nome utente già utilizzato.'
+group.conflict.name: 'Nome gruppo già utilizzato.'
+project.conflict.name: 'Nome progetto già utilizzato.'
+template.conflict.name: 'Un modello con lo stesso nome è già utilizzato.'
+template.conflict.prefix: 'Un modello con lo stesso prefisso è già utilizzato.'
+state.conflict.name: 'Uno stato con lo stesso nome è già utilizzato.'
+state.conflict.abbreviation: 'Uno stato con lo stesso abbreviazione è già utilizzato.'
+field.conflict.name: 'Nome campo già utilizzato.'
+list.conflict.key: 'Item with entered key already exists.'
+list.conflict.value: 'Item with entered value already exists.'

@@ -62,8 +62,6 @@ language: Língua
 theme: Tema
 timezone: 'Fuso horário'
 user.confirm.delete: 'Tem certeza que quer apagar esta conta?'
-user.conflict.username: 'A conta escolhida já existe..'
-user.invalid.username: 'Usuário Inválido.'
 password.too_short: 'A senha deve conter pelo menos %length% caracteres.'
 passwords.dont_match: 'As senhas não conferem.'
 password.changed: 'Senha alterada com sucesso.'
@@ -96,7 +94,6 @@ group.type: 'Tipo do grupo'
 group.global: Global
 group.local: Local
 group.confirm.delete: 'Tem certeza que quer apagar este grupo?'
-group.conflict.name: 'O grupo escolhido já existe.'
 project: Projeto
 projects: Projetos
 project.new: 'Novo projeto'
@@ -106,7 +103,6 @@ project.status: Status
 project.active: Ativo
 project.suspended: Suspenso
 project.confirm.delete: 'Tem certeza que quer apagar este projeto?'
-project.conflict.name: 'O projeto escolhido já existe.'
 template: Assunto
 templates: Templates
 template.new: 'Novo template'
@@ -119,8 +115,6 @@ template.status: Status
 template.active: Ativo
 template.locked: Travado
 template.confirm.delete: 'Tem certeza que quer apagar este template?'
-template.conflict.name: 'O template escolhido já existe.'
-template.conflict.prefix: 'O prefixo escolhido já existe.'
 template.permission.view_records: 'View records'
 template.permission.create_records: 'Create records'
 template.permission.edit_records: 'Edit records'
@@ -154,12 +148,7 @@ state.transitions: Transições
 state.next_for: 'Next state by default for'
 state.make_initial: 'Tornar inicial'
 state.confirm.delete: 'Tem certeza que quer apagar este estado?'
-state.conflict.name: 'O estado escolhido já existe.'
-state.conflict.abbreviation: 'O abreviação já existe.'
 field.required: obrigatório
-field.conflict.name: 'O Campo escolhido já existe.'
 field.min_max_values: 'O valor máximo deve ser maior do que o mínimo.'
 field.default_value: 'O valor padrão deve conter valores entre %min% e %max%.'
 field.value_range: 'O Valor de "%name%" deve estar entre %min% e %max%.'
-list.conflict.key: 'Item with entered key already exists.'
-list.conflict.value: 'Item with entered value already exists.'

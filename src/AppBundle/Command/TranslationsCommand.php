@@ -36,6 +36,19 @@ class TranslationsCommand extends Command
      */
     protected function execute(InputInterface $input, OutputInterface $output)
     {
+        $this->rename('messages');
+        $this->rename('validators');
+
+        $this->update($output);
+    }
+
+    /**
+     * Renames specified translation files from ISO 15897 to ISO 639-1.
+     *
+     * @param   string $basename Base filename of translation files.
+     */
+    protected function rename($basename)
+    {
         $locales = [
             'en_AU',
             'en_CA',
@@ -45,10 +58,11 @@ class TranslationsCommand extends Command
             'pt_BR',
         ];
 
-        // Rename ISO 15897 into ISO 639-1.
+        $basename .= '.';
+
         foreach (scandir('app/Resources/translations') as $entry) {
 
-            if (substr($entry, 0, 9) != 'messages.' || substr($entry, -4) != '.yml') {
+            if (substr($entry, 0, strlen($basename)) != $basename || substr($entry, -4) != '.yml') {
                 continue;
             }
 
@@ -58,7 +72,7 @@ class TranslationsCommand extends Command
 
             if (is_file("app/Resources/translations/{$entry}")) {
 
-                $locale = substr($entry, 9, -4);
+                $locale = substr($entry, strlen($basename), -4);
 
                 if (in_array($locale, $locales)) {
                     continue;
@@ -69,8 +83,15 @@ class TranslationsCommand extends Command
                 rename("app/Resources/translations/{$entry}", "app/Resources/translations/{$newname}");
             }
         }
+    }
 
-        // Update translation files.
+    /**
+     * Updates translation files.
+     *
+     * @param   OutputInterface $output
+     */
+    protected function update(OutputInterface $output)
+    {
         foreach (scandir('app/Resources/translations') as $entry) {
 
             if (substr($entry, 0, 9) != 'messages.' || substr($entry, -4) != '.yml') {
@@ -79,20 +100,33 @@ class TranslationsCommand extends Command
 
             if (is_file("app/Resources/translations/{$entry}")) {
 
-                $output->writeln("Updating {$entry}");
-
                 $locale = substr($entry, 9, -4);
+
+                $output->writeln("Updating {$locale}");
 
                 exec("php ./bin/console translation:update --force --no-backup --quiet --no-interaction {$locale}");
 
-                $contents = file_get_contents("app/Resources/translations/{$entry}");
-
                 if ($locale != 'en') {
-                    $contents = "# This file is auto-generated using Crowdin.\n" . $contents;
+                    $this->comment("messages.{$locale}.yml");
+                    $this->comment("validators.{$locale}.yml");
                 }
-
-                file_put_contents("app/Resources/translations/{$entry}", $contents);
             }
+        }
+    }
+
+    /**
+     * Appends specified translation file with comment that it was auto-generated.
+     *
+     * @param   string $filename
+     */
+    protected function comment($filename)
+    {
+        if (is_file("app/Resources/translations/{$filename}")) {
+
+            $contents = file_get_contents("app/Resources/translations/{$filename}");
+            $contents = "# This file is auto-generated using Crowdin.\n" . $contents;
+
+            file_put_contents("app/Resources/translations/{$filename}", $contents);
         }
     }
 }

@@ -62,8 +62,6 @@ language: Язык
 theme: 'Тема оформления'
 timezone: 'Часовой пояс'
 user.confirm.delete: 'Вы уверены, что хотите удалить эту учетную запись?'
-user.conflict.username: 'Учетная запись с таким именем пользователя уже существует.'
-user.invalid.username: 'Неверное имя пользователя.'
 password.too_short: 'Пароль должен содержать как минимум %length% символов.'
 passwords.dont_match: 'Пароли не совпадают.'
 password.changed: 'Пароль был успешно обновлён.'
@@ -96,7 +94,6 @@ group.type: 'Тип группы'
 group.global: Глобальная
 group.local: Локальная
 group.confirm.delete: 'Вы уверены, что хотите удалить эту группу?'
-group.conflict.name: 'Группа с таким названием уже существует.'
 project: Проект
 projects: Проекты
 project.new: 'Новый проект'
@@ -106,7 +103,6 @@ project.status: Состояние
 project.active: Активный
 project.suspended: Приостановлен
 project.confirm.delete: 'Вы уверены, что хотите удалить этот проект?'
-project.conflict.name: 'Проект с таким названием уже существует.'
 template: Шаблон
 templates: Шаблоны
 template.new: 'Новый шаблон'
@@ -119,8 +115,6 @@ template.status: Состояние
 template.active: Активный
 template.locked: Заблокирован
 template.confirm.delete: 'Вы уверены, что хотите удалить этот шаблон?'
-template.conflict.name: 'Шаблон с таким названием уже существует.'
-template.conflict.prefix: 'Шаблон с таким префиксом уже существует.'
 template.permission.view_records: 'Просмотр записей'
 template.permission.create_records: 'Создание записей'
 template.permission.edit_records: 'Редактирование записей'
@@ -154,12 +148,7 @@ state.transitions: Переходы
 state.next_for: 'Следующее состояние по умолчанию для'
 state.make_initial: 'Сделать исходным'
 state.confirm.delete: 'Вы уверены, что хотите удалить это состояние?'
-state.conflict.name: 'Состояние с таким названием уже существует.'
-state.conflict.abbreviation: 'Состояние с такой аббревиатурой уже существует.'
 field.required: 'обязательное поле'
-field.conflict.name: 'Поле с таким названием уже существует.'
 field.min_max_values: 'Максимальное значение должно быть больше минимального.'
 field.default_value: 'Значение по умолчанию должно лежать в диапазоне от %min% до %max%.'
 field.value_range: 'Значение поля "%name%" должно лежать в диапазоне от %min% до %max%.'
-list.conflict.key: 'Элемент с таким ключом уже существует.'
-list.conflict.value: 'Элемент с таким значением уже существует.'

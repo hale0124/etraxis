@@ -62,8 +62,6 @@ language: Nyelv
 theme: Téma
 timezone: Időzóna
 user.confirm.delete: 'Biztos törölni szeretné a felhasználót?'
-user.conflict.username: 'Már létezik ilyen névvel ellátott felhasználó.'
-user.invalid.username: 'Érvénytelen felhasználónév.'
 password.too_short: 'A jelszónak legalább %length% hosszúságúnak kell lennie.'
 passwords.dont_match: 'A jelszavak nem egyeznek.'
 password.changed: 'A jelszó módosítása megtörtént.'
@@ -96,7 +94,6 @@ group.type: 'Csoport típusa'
 group.global: Globális
 group.local: Helyi
 group.confirm.delete: 'Biztos törölni szeretné a csoportot?'
-group.conflict.name: 'Már létezik ilyen névvel ellátott csoport.'
 project: Projekt
 projects: Projektek
 project.new: 'Új csoport'
@@ -106,7 +103,6 @@ project.status: Állapot
 project.active: Aktív
 project.suspended: Felfüggesztve
 project.confirm.delete: 'Biztos törölni szeretné a projektet?'
-project.conflict.name: 'Már létezik ilyen névvel ellátott projekt.'
 template: Sablon
 templates: Sablonok
 template.new: 'Új sablon'
@@ -119,8 +115,6 @@ template.status: Állapot
 template.active: Aktív
 template.locked: Zárolt
 template.confirm.delete: 'Biztos törölni szeretné a sablont?'
-template.conflict.name: 'Már létezik ilyen névvel ellátott sablon.'
-template.conflict.prefix: 'Template with entered prefix already exists.'
 template.permission.view_records: 'View records'
 template.permission.create_records: 'Create records'
 template.permission.edit_records: 'Edit records'
@@ -154,12 +148,7 @@ state.transitions: Állapotváltás
 state.next_for: 'Next state by default for'
 state.make_initial: 'Legyen ez a kezdő állapot'
 state.confirm.delete: 'Biztos törölni szeretné az állapotot?'
-state.conflict.name: 'State with entered name already exists.'
-state.conflict.abbreviation: 'State with entered abbreviation already exists.'
 field.required: kötelező
-field.conflict.name: 'Már létezik ilyen névvel ellátott mező.'
 field.min_max_values: 'A maximum értéknek nagyobbnak kell lennie, mint 1.'
 field.default_value: 'Az alapértelmezett érték %min% és %max% közé kell, hogy essen.'
 field.value_range: 'A(z) "%name%" értéke %min% és %max% közé kell, hogy essen.'
-list.conflict.key: 'Item with entered key already exists.'
-list.conflict.value: 'Item with entered value already exists.'

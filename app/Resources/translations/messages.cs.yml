@@ -62,8 +62,6 @@ language: Jazyk
 theme: Vzhled
 timezone: 'Časová zóna'
 user.confirm.delete: 'Jste si jisti, že chcete smazat tento účet?'
-user.conflict.username: 'Účet se zadaným uživatelským jménem již existuje.'
-user.invalid.username: 'Neplatné uživatelské jméno.'
 password.too_short: 'Heslo musí být dlouhé alespoň %length% znaků.'
 passwords.dont_match: 'Hesla se neshodují.'
 password.changed: 'Heslo bylo úspěšně změněno.'
@@ -96,7 +94,6 @@ group.type: 'Typ skupiny'
 group.global: Globální
 group.local: Místní
 group.confirm.delete: 'Jste si jisti, že chcete vymazat tuto skupinu?'
-group.conflict.name: 'Skupina se zadaným jménem již existuje.'
 project: Projekt
 projects: Projekty
 project.new: 'Nový projekt'
@@ -106,7 +103,6 @@ project.status: Status
 project.active: Aktivní
 project.suspended: Pozastaven
 project.confirm.delete: 'Jste si jisti, že chcete smazat tento projekt?'
-project.conflict.name: 'Projekt se zadaným názvem již existuje.'
 template: Šablona
 templates: Šablony
 template.new: 'Nová šablona'
@@ -119,8 +115,6 @@ template.status: Status
 template.active: Aktivní
 template.locked: Uzamčen
 template.confirm.delete: 'Jste si jisti, že chcete smazat tuto šablonu?'
-template.conflict.name: 'Šablona se zadaným jménem již existuje.'
-template.conflict.prefix: 'Šablona se zadaným předponou již existuje.'
 template.permission.view_records: 'View records'
 template.permission.create_records: 'Create records'
 template.permission.edit_records: 'Edit records'
@@ -154,12 +148,7 @@ state.transitions: Přechody
 state.next_for: 'Next state by default for'
 state.make_initial: 'Vytvořit počáteční'
 state.confirm.delete: 'Jste si jisti, že chcete smazat tento stav?'
-state.conflict.name: 'Stav se zadaným jménem již existuje.'
-state.conflict.abbreviation: 'Stav se zadaným zkratkou již existuje.'
 field.required: povinný
-field.conflict.name: 'Pole se zadaným jménem již existuje.'
 field.min_max_values: 'Maximální hodnota musí být větší než minimální.'
 field.default_value: 'Výchozí hodnota musí být v rozmezí %min% až %max%.'
 field.value_range: 'Hodnota "%name%" musí být v rozmezí %min% až %max%.'
-list.conflict.key: 'Item with entered key already exists.'
-list.conflict.value: 'Item with entered value already exists.'

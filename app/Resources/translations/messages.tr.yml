@@ -62,8 +62,6 @@ language: Dil
 theme: Tema
 timezone: 'Saat dilimi'
 user.confirm.delete: 'Bu hesabı silmek istediğinizden emin misiniz?'
-user.conflict.username: 'Girilen kullanıcı adıyla bir hesap zaten var.'
-user.invalid.username: 'Geçersiz kullanıcı adı.'
 password.too_short: 'Parola en az %length% karakter uzunluğunda olmalıdır.'
 passwords.dont_match: 'Parolalar uyuşmuyor.'
 password.changed: 'Parola başarıyla güncellendi.'
@@ -96,7 +94,6 @@ group.type: 'Grup tipi'
 group.global: Global
 group.local: Yerel
 group.confirm.delete: 'Bu grubu silek istediğinizden emin misiniz?'
-group.conflict.name: 'Girilen adda bir grup zaten var.'
 project: Proje
 projects: Projeler
 project.new: 'Yeni proje'
@@ -106,7 +103,6 @@ project.status: Durum
 project.active: Aktif
 project.suspended: Askıda
 project.confirm.delete: 'Bu projeyi silmek istediğinizden emin misiniz?'
-project.conflict.name: 'Girilen adda bir proje zaten var.'
 template: Şablon
 templates: Şablonlar
 template.new: 'Yeni şablon'
@@ -119,8 +115,6 @@ template.status: Durum
 template.active: Aktif
 template.locked: Kilitli
 template.confirm.delete: 'Bu şablonu silmek istediğinizden emin misiniz?'
-template.conflict.name: 'Template with entered name already exists.'
-template.conflict.prefix: 'Template with entered prefix already exists.'
 template.permission.view_records: 'View records'
 template.permission.create_records: 'Create records'
 template.permission.edit_records: 'Edit records'
@@ -154,12 +148,7 @@ state.transitions: Geçişler
 state.next_for: 'Next state by default for'
 state.make_initial: 'İlk yap'
 state.confirm.delete: 'Bu durumu silmek istediğinizden emin misiniz?'
-state.conflict.name: 'State with entered name already exists.'
-state.conflict.abbreviation: 'State with entered abbreviation already exists.'
 field.required: gerekli
-field.conflict.name: 'Girilen adda bir alan zaten var.'
 field.min_max_values: 'En yüksek değer, en düşük değerden daha büyük olmalıdır.'
 field.default_value: 'Varsayılan değer, %min% ile %max% arasında olmalıdır.'
 field.value_range: '"%name%" değeri %min% ile %max% arasında olmalıdır.'
-list.conflict.key: 'Item with entered key already exists.'
-list.conflict.value: 'Item with entered value already exists.'

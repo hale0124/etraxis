@@ -62,8 +62,6 @@ language: Idioma
 theme: Tema
 timezone: 'Zona horaria'
 user.confirm.delete: '¿Está seguro de eliminar esta cuenta?'
-user.conflict.username: 'Ya existe una cuenta con ese nombre de usuario.'
-user.invalid.username: 'Nombre de usuario inválido.'
 password.too_short: 'La contraseña debe tener una logintud mínima de %length% caracteres.'
 passwords.dont_match: 'Las contraseñas no coinciden.'
 password.changed: 'Contraseña modificada correctamente.'
@@ -96,7 +94,6 @@ group.type: 'Tipo de grupo'
 group.global: Global
 group.local: Local
 group.confirm.delete: '¿Está seguro de eliminar este grupo?'
-group.conflict.name: 'Ya existe un Grupo con ese nombre.'
 project: Proyecto
 projects: Proyectos
 project.new: 'Nuevo proyecto'
@@ -106,7 +103,6 @@ project.status: Estado
 project.active: Activo
 project.suspended: Suspendido
 project.confirm.delete: '¿Está seguro de eliminar este proyecto?'
-project.conflict.name: 'Ya existe un Proyecto con ese nombre.'
 template: Plantilla
 templates: Plantillas
 template.new: 'Nueva plantilla'
@@ -119,8 +115,6 @@ template.status: Estado
 template.active: Activo
 template.locked: Bloqueado
 template.confirm.delete: '¿Está seguro de eliminar esta plantilla?'
-template.conflict.name: 'Ya existe una Plantilla con ese nombre.'
-template.conflict.prefix: 'Ya existe una Plantilla con ese prefijo.'
 template.permission.view_records: 'View records'
 template.permission.create_records: 'Create records'
 template.permission.edit_records: 'Edit records'
@@ -154,12 +148,7 @@ state.transitions: Transiciones
 state.next_for: 'Next state by default for'
 state.make_initial: 'Hacer inicial'
 state.confirm.delete: '¿Está seguro de eliminar este estado?'
-state.conflict.name: 'Ya existe un Estado con ese nombre.'
-state.conflict.abbreviation: 'Ya existe un Estado con ese inicial.'
 field.required: obligatorio
-field.conflict.name: 'Ya existe un Campo con ese nombre.'
 field.min_max_values: 'El valor máximo debe ser mayor que el mínimo.'
 field.default_value: 'El valor predeterminado debe estar comprendido entre %min% y %max%.'
 field.value_range: 'El valor de "%name%" debe estar comprendido entre %min% y %max%.'
-list.conflict.key: 'Item with entered key already exists.'
-list.conflict.value: 'Item with entered value already exists.'

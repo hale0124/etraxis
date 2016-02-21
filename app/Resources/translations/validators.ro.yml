@@ -1,0 +1,12 @@
+# This file is auto-generated using Crowdin.
+user.invalid.username: 'Nume utilizator invalid.'
+user.conflict.username: 'Numele de utilizator este deja folosit.'
+group.conflict.name: 'Numele grupului exista deja.'
+project.conflict.name: 'Numele de proiect exista deja.'
+template.conflict.name: 'Sablonul cu numele introdus exista deja.'
+template.conflict.prefix: 'Sablonul prefixul introdus exista deja.'
+state.conflict.name: 'Numele starii deja exista.'
+state.conflict.abbreviation: 'Prescurtarea starii deja exista.'
+field.conflict.name: 'Numele campului deja exista.'
+list.conflict.key: 'Item with entered key already exists.'
+list.conflict.value: 'Item with entered value already exists.'

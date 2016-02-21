@@ -62,8 +62,6 @@ language: Sprache
 theme: Aussehen
 timezone: Zeitzone
 user.confirm.delete: 'Möchten Sie dieses Konto wirklich löschen?'
-user.conflict.username: 'Ein Konto mit diesem Benutzernamen existiert bereits.'
-user.invalid.username: 'Ungültiger Benutzername.'
 password.too_short: 'Das Passwort muss mindestens %length% Zeichen lang sein.'
 passwords.dont_match: 'Die Passwörter stimmen nicht überein.'
 password.changed: 'Kennwort wurde erfolgreich aktualisiert.'
@@ -96,7 +94,6 @@ group.type: Gruppenart
 group.global: Global
 group.local: Lokal
 group.confirm.delete: 'Möchten Sie diese Gruppe wirklich löschen?'
-group.conflict.name: 'Eine Gruppe mit diesem Namen existiert bereits.'
 project: Projekt
 projects: Projekte
 project.new: 'Neues Projekt'
@@ -106,7 +103,6 @@ project.status: Status
 project.active: Aktiv
 project.suspended: Ausgesetzt
 project.confirm.delete: 'Möchten Sie dieses Projekt wirklich löschen?'
-project.conflict.name: 'Ein Projekt mit diesem Namen existiert bereits.'
 template: 'Art der Anfrage'
 templates: Anfragearten
 template.new: 'Neue Anfrageart'
@@ -119,8 +115,6 @@ template.status: Status
 template.active: Aktiv
 template.locked: Gesperrt
 template.confirm.delete: 'Möchten Sie diese Anfrageart wirklich löschen?'
-template.conflict.name: 'Eine Anfrageart mit diesem Namen existiert bereits.'
-template.conflict.prefix: 'Eine Anfrageart mit diesem Präfix existiert bereits.'
 template.permission.view_records: 'View records'
 template.permission.create_records: 'Create records'
 template.permission.edit_records: 'Edit records'
@@ -154,12 +148,7 @@ state.transitions: Übergänge
 state.next_for: 'Next state by default for'
 state.make_initial: 'Als Startstatus'
 state.confirm.delete: 'Möchten Sie diesen Status wirklich löschen?'
-state.conflict.name: 'Ein Status mit diesem Namen existiert bereits.'
-state.conflict.abbreviation: 'Ein Status mit diesem Abkürzung existiert bereits.'
 field.required: erforderlich
-field.conflict.name: 'Ein Zusatz mit diesem Namen existiert bereits.'
 field.min_max_values: 'Das Maximum muss größer als das Minimum sein.'
 field.default_value: 'Der vorgegebene Wert muss im Bereich von %min% bis %max% liegen.'
 field.value_range: 'Der Wert von "%name%" muss im Bereich von %min% bis %max% liegen.'
-list.conflict.key: 'Item with entered key already exists.'
-list.conflict.value: 'Item with entered value already exists.'

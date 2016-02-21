@@ -62,8 +62,6 @@ language: Språk
 theme: Tema
 timezone: Tidszon
 user.confirm.delete: 'Är du säker på att du vill ta bort detta kontot?'
-user.conflict.username: 'Kontot med detta användarnamn finns redan.'
-user.invalid.username: 'Ogiltigt användarnamn.'
 password.too_short: 'Lösenord ska vara minst %length% tecken långt.'
 passwords.dont_match: 'Lösenorden matchar inte.'
 password.changed: 'Lösenordet har uppdaterats'
@@ -96,7 +94,6 @@ group.type: 'Grupp typ'
 group.global: Global
 group.local: Lokal
 group.confirm.delete: 'Är du säker på att du vill ta bort denna gruppen?'
-group.conflict.name: 'Grupp med detta namnet finns redan.'
 project: Projekt
 projects: Projekt
 project.new: 'Nytt projekt'
@@ -106,7 +103,6 @@ project.status: Status
 project.active: Aktiv
 project.suspended: Inaktiv
 project.confirm.delete: 'Är du säker på att du vill ta bort detta projektet?'
-project.conflict.name: 'Projekt med detta namnet finns redan.'
 template: Mall
 templates: Mallar
 template.new: 'Ny mall'
@@ -119,8 +115,6 @@ template.status: Status
 template.active: Aktiv
 template.locked: Låst
 template.confirm.delete: 'Är du säker på att du vill ta bort den här mallen?'
-template.conflict.name: 'Mall med detta namnet finns redan.'
-template.conflict.prefix: 'Mall med detta prefixet finns redan.'
 template.permission.view_records: 'View records'
 template.permission.create_records: 'Create records'
 template.permission.edit_records: 'Edit records'
@@ -154,12 +148,7 @@ state.transitions: Övergångar
 state.next_for: 'Next state by default for'
 state.make_initial: 'Gör första'
 state.confirm.delete: 'Är du säker på att du vill ta bort den här statusen?'
-state.conflict.name: 'Status med detta namnet finns redan.'
-state.conflict.abbreviation: 'Status med detta förkortningen finns redan.'
 field.required: obligatorisk
-field.conflict.name: 'Fält med detta namnet finns redan.'
 field.min_max_values: 'Högsta värdet bör vara större än minimum en.'
 field.default_value: 'Standardvärdet bör vara i intervallet från %min% till %max%.'
 field.value_range: 'Värdet av "%name%" ska vara i intervallet från %min% till %max%.'
-list.conflict.key: 'Item with entered key already exists.'
-list.conflict.value: 'Item with entered value already exists.'
