@@ -85,7 +85,7 @@ class UsersGetController extends Controller
             $request->query->set('length', -1);
 
             $datatables = $this->getDataTables();
-            $results    = $datatables->handle($request, User::class);
+            $results    = $datatables->handle($request, 'eTraxis:User');
 
             $users = array_map(function ($user) {
                 return array_slice($user, 1, 6);
