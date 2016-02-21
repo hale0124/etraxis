@@ -41,9 +41,10 @@ gulp.task('default', function() {
  * Watchs for changes in eTraxis files and updates affected assets when necessary.
  */
 gulp.task('watch', function() {
-    watch(['app/Resources/public/js/**', 'app/Resources/public/less/**'], function() {
+    watch(['app/Resources/public/less/**'], function() {
         gulp.start('stylesheets:themes');
-        gulp.start('javascripts:i18n');
+    });
+    watch(['app/Resources/public/js/**'], function() {
         gulp.start('javascripts:etraxis');
     });
 });
