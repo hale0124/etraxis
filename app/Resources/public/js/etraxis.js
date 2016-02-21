@@ -40,7 +40,7 @@ eTraxis.initAjax = function() {
 /**
  * Blocks UI with specified message.
  *
- * @param {string} message Blocking message.
+ * @param {string} [message] Blocking message.
  */
 eTraxis.block = function(message) {
     $.blockUI({
@@ -63,9 +63,9 @@ eTraxis.unblock = function() {
 /**
  * Simple message dialog (alternative to JavaScript "alert").
  *
- * @param {string}   title   Dialog title.
- * @param {string}   message Dialog message.
- * @param {function} onClose Optional handler to call when dialog is closed.
+ * @param {string}   title     Dialog title.
+ * @param {string}   message   Dialog message.
+ * @param {function} [onClose] Optional handler to call when dialog is closed.
  */
 eTraxis.alert = function(title, message, onClose) {
 
@@ -90,9 +90,9 @@ eTraxis.alert = function(title, message, onClose) {
 /**
  * Confirmation dialog (alternative to JavaScript "confirm").
  *
- * @param {string}   title     Dialog title.
- * @param {string}   message   Dialog message.
- * @param {function} onConfirm Optional handler to call when dialog is closed with confirmation (via "Yes" button).
+ * @param {string}   title       Dialog title.
+ * @param {string}   message     Dialog message.
+ * @param {function} [onConfirm] Optional handler to call when dialog is closed with confirmation (via "Yes" button).
  */
 eTraxis.confirm = function(title, message, onConfirm) {
 
@@ -123,8 +123,8 @@ eTraxis.confirm = function(title, message, onConfirm) {
 /**
  * Returns URL for specified route.
  *
- * @param {string} id     Route ID.
- * @param {object} params Optional parameters.
+ * @param {string} id       Route ID.
+ * @param {object} [params] Optional parameters.
  *
  * @returns {string} Route URL.
  */

@@ -100,10 +100,11 @@
 
         /**
          * Appends new item.
+         *
          * @param {string} id
          * @param {string} text
-         * @param {bool}   highlighted
-         * @param {int}    section
+         * @param {bool}   [highlighted]
+         * @param {int}    [section]
          */
         append: function(id, text, highlighted, section) {
             if (!section) {
@@ -120,6 +121,7 @@
 
         /**
          * Removes specified item.
+         *
          * @param {string} id
          */
         remove: function(id) {
@@ -141,6 +143,7 @@
 
         /**
          * Finds specified item by its text.
+         *
          * @param {string} text
          * @returns {string} id
          */
@@ -159,6 +162,7 @@
 
         /**
          * Selects specified item.
+         *
          * @param {string} id
          */
         select: function(id) {
@@ -177,6 +181,7 @@
 
         /**
          * Finds currently selected item.
+         *
          * @returns {string} id
          */
         selected: function() {
