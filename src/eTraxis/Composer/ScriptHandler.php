@@ -27,6 +27,7 @@ class ScriptHandler
                 'gulp',
                 'gulp-add-src',
                 'gulp-concat',
+                'gulp-exec',
                 'gulp-if',
                 'gulp-insert',
                 'gulp-less',

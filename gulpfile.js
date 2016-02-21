@@ -10,6 +10,7 @@
 var gulp     = require('gulp');
 var addsrc   = require('gulp-add-src');
 var concat   = require('gulp-concat');
+var exec     = require('gulp-exec');
 var gulpif   = require('gulp-if');
 var insert   = require('gulp-insert');
 var less     = require('gulp-less');
@@ -31,7 +32,7 @@ var argv     = require('yargs').argv;
 gulp.task('default', function() {
     sequence(
         ['stylesheets:libs', 'stylesheets:themes'],
-        ['javascripts:datatables', 'javascripts:translations'],
+        ['javascripts:routes', 'javascripts:datatables', 'javascripts:translations'],
         ['javascripts:libs', 'javascripts:etraxis', 'javascripts:i18n']
     );
 });
@@ -94,6 +95,23 @@ gulp.task('stylesheets:themes', function() {
     });
 
     return merge(tasks);
+});
+
+/**
+ * Generates a JavaScript file with all existing routes.
+ */
+gulp.task('javascripts:routes', function() {
+
+    var options = {
+        pipeStdout: true
+    };
+
+    return gulp.src('gulpfile.js')
+        .pipe(exec('./bin/console etraxis:routes', options))
+        .pipe(rename(function(path) {
+            path.basename = 'routes';
+        }))
+        .pipe(gulp.dest('vendor/bower/etraxis/'));
 });
 
 /**
@@ -195,6 +213,7 @@ gulp.task('javascripts:libs', function() {
 gulp.task('javascripts:etraxis', function() {
 
     var files = [
+        'vendor/bower/etraxis/routes.js',
         'app/Resources/public/js/etraxis.js',
         'app/Resources/public/js/init-ui.js',
         'app/Resources/public/js/disable.js',

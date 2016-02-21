@@ -119,3 +119,26 @@ eTraxis.confirm = function(title, message, onConfirm) {
             buttons: buttons
         });
 };
+
+/**
+ * Returns URL for specified route.
+ *
+ * @param {string} id     Route ID.
+ * @param {object} params Optional parameters.
+ *
+ * @returns {string} Route URL.
+ */
+eTraxis.route = function(id, params) {
+    var url = eTraxis.routes[id];
+
+    if (typeof params === 'object') {
+        console.log(params);
+        for (var name in params) {
+            if (params.hasOwnProperty(name)) {
+                url = url.replace('{' + name + '}', params[name]);
+            }
+        }
+    }
+
+    return $('body').data('url') + url;
+};

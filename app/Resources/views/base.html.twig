@@ -23,7 +23,7 @@
     <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon-72x72.png')   }}" sizes="72x72">
     <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon-114x114.png') }}" sizes="114x114">
 </head>
-<body>
+<body data-url="{{ url('homepage') | trim('/') | replace({'http:': null, 'https:': null}) }}">
     <nav>
         <div class="grid-container grid-parent">
             {% spaceless %}
