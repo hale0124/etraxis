@@ -1,16 +1,11 @@
 /*!
- *  Copyright (C) 2006-2015 Artem Rodygin
+ *  Copyright (C) 2006-2016 Artem Rodygin
  *
  *  You should have received a copy of the GNU General Public License
  *  along with the file. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var eTraxis = window.eTraxis || {};
-
-/**
- * Global one-time initialization of AJAX requests for just loaded page.
- */
-eTraxis.initAjax = function() {
+var eTraxis = (function() {
 
     // Inject default CSRF token into POST AJAX requests if it's missing there.
     $.ajaxPrefilter(function(options, originalOptions) {
@@ -35,110 +30,128 @@ eTraxis.initAjax = function() {
             eTraxis.alert(eTraxis.i18n['error'], xhr.responseText);
         }
     });
-};
 
-/**
- * Blocks UI with specified message.
- *
- * @param {string} [message] Blocking message.
- */
-eTraxis.block = function(message) {
-    $.blockUI({
-        theme: true,
-        title: null,
-        message: message ? message : eTraxis.i18n['please_wait'],
-        themedCSS: {
-            padding: '10px'
-        }
+    // Initialize jQuery UI widgets.
+    $(function() {
+        $('body').initUI();
     });
-};
 
-/**
- * Unblocks UI.
- */
-eTraxis.unblock = function() {
-    $.unblockUI();
-};
+    return {
 
-/**
- * Simple message dialog (alternative to JavaScript "alert").
- *
- * @param {string}   title     Dialog title.
- * @param {string}   message   Dialog message.
- * @param {function} [onClose] Optional handler to call when dialog is closed.
- */
-eTraxis.alert = function(title, message, onClose) {
+        /**
+         * Blocks UI with specified message.
+         *
+         * @param {string} [message] Blocking message.
+         */
+        block: function(message) {
+            $.blockUI({
+                theme: true,
+                title: null,
+                message: message ? message : eTraxis.i18n['please_wait'],
+                themedCSS: {
+                    padding: '10px'
+                }
+            });
+        },
 
-    var buttons = {};
+        /**
+         * Unblocks UI.
+         */
+        unblock: function() {
+            $.unblockUI();
+        },
 
-    buttons[eTraxis.i18n['button.close']] = function() {
-        $(this).dialog('close');
-    };
+        /**
+         * Simple message dialog (alternative to JavaScript "alert").
+         *
+         * @param {string}   title     Dialog title.
+         * @param {string}   message   Dialog message.
+         * @param {function} [onClose] Optional handler to call when dialog is closed.
+         */
+        alert: function(title, message, onClose) {
 
-    $('#__etraxis_modal')
-        .html(message)
-        .dialog({
-            title: title,
-            autoOpen: true,
-            modal: true,
-            resizable: false,
-            close: onClose,
-            buttons: buttons
-        });
-};
+            var buttons = {};
 
-/**
- * Confirmation dialog (alternative to JavaScript "confirm").
- *
- * @param {string}   title       Dialog title.
- * @param {string}   message     Dialog message.
- * @param {function} [onConfirm] Optional handler to call when dialog is closed with confirmation (via "Yes" button).
- */
-eTraxis.confirm = function(title, message, onConfirm) {
+            buttons[eTraxis.i18n['button.close']] = function() {
+                $(this).dialog('close');
+            };
 
-    var buttons = {};
+            $('#__etraxis_modal')
+                .html(message)
+                .dialog({
+                    title: title,
+                    autoOpen: true,
+                    modal: true,
+                    resizable: false,
+                    close: onClose,
+                    buttons: buttons
+                });
+        },
 
-    buttons[eTraxis.i18n['button.yes']] = function() {
-        $(this).dialog('close');
-        if (typeof onConfirm === 'function') {
-            onConfirm();
-        }
-    };
+        /**
+         * Confirmation dialog (alternative to JavaScript "confirm").
+         *
+         * @param {string}   title       Dialog title.
+         * @param {string}   message     Dialog message.
+         * @param {function} [onConfirm] Optional handler to call when dialog is closed with confirmation (via "Yes" button).
+         */
+        confirm: function(title, message, onConfirm) {
 
-    buttons[eTraxis.i18n['button.no']] = function() {
-        $(this).dialog('close');
-    };
+            var buttons = {};
 
-    $('#__etraxis_modal')
-        .html(message)
-        .dialog({
-            title: title,
-            autoOpen: true,
-            modal: true,
-            resizable: false,
-            buttons: buttons
-        });
-};
+            buttons[eTraxis.i18n['button.yes']] = function() {
+                $(this).dialog('close');
+                if (typeof onConfirm === 'function') {
+                    onConfirm();
+                }
+            };
 
-/**
- * Returns URL for specified route.
- *
- * @param {string} id       Route ID.
- * @param {object} [params] Optional parameters.
- *
- * @returns {string} Route URL.
- */
-eTraxis.route = function(id, params) {
-    var url = eTraxis.routes[id];
+            buttons[eTraxis.i18n['button.no']] = function() {
+                $(this).dialog('close');
+            };
 
-    if (typeof params === 'object') {
-        console.log(params);
-        for (var name in params) {
-            if (params.hasOwnProperty(name)) {
-                url = url.replace('{' + name + '}', params[name]);
+            $('#__etraxis_modal')
+                .html(message)
+                .dialog({
+                    title: title,
+                    autoOpen: true,
+                    modal: true,
+                    resizable: false,
+                    buttons: buttons
+                });
+        },
+
+        /**
+         * Returns URL for specified route.
+         *
+         * @param {string} id       Route ID.
+         * @param {object} [params] Optional parameters.
+         *
+         * @returns {string} Route URL.
+         */
+        route: function(id, params) {
+
+            var url = eTraxis.routes[id];
+
+            if (typeof params === 'object') {
+                console.log(params);
+                for (var name in params) {
+                    if (params.hasOwnProperty(name)) {
+                        url = url.replace('{' + name + '}', params[name]);
+                    }
+                }
             }
-        }
-    }
 
-    return $('body').data('url') + url;
-};
+            return $('body').data('url') + url;
+        },
+
+        /**
+         * Shows logout confirmation and forces logout if confirmed.
+         */
+        logout: function() {
+            eTraxis.confirm(eTraxis.i18n['security.log_out'], eTraxis.i18n['security.confirm_exit'], function() {
+                location.href = eTraxis.route('logout');
+            });
+        }
+    };
+})();

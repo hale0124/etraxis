@@ -5,8 +5,6 @@
  *  along with the file. If not, see <http://www.gnu.org/licenses/>.
  */
 
-var eTraxis = window.eTraxis || {};
-
 /**
  * Full-featured modal dialog.
  */

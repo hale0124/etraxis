@@ -37,7 +37,7 @@
                 {% block menu %}{% endblock %}
 
                 {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
-                    <a href="#" id="menu_logout">{{ 'security.log_out'|trans }}</a>
+                    <a onclick="eTraxis.logout()">{{ 'security.log_out'|trans }}</a>
                 {% else %}
                     <a href="{{ path('login') }}">{{ 'security.log_in'|trans }}</a>
                 {% endif %}
@@ -92,22 +92,6 @@
         <script src="{{ asset('js/etraxis.min.js') }}"></script>
         <script src="{{ asset('js/etraxis-%s.min.js' | format(app.user ? app.user.locale : locale)) }}"></script>
     {% endif %}
-
-    <script>
-        $(function() {
-
-            eTraxis.initAjax();
-
-            $('body').initUI();
-
-            $('#menu_logout').click(function() {
-                eTraxis.confirm('{{ 'security.log_out'|trans }}', '{{ 'security.confirm_exit'|trans }}', function() {
-                    location.href = '{{ path('logout') }}';
-                });
-                return false;
-            });
-        });
-    </script>
 
     {% block scripts %}{% endblock %}
 </body>

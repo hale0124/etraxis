@@ -42,8 +42,6 @@ class RoutesCommand extends ContainerAwareCommand
         /** @var \Symfony\Component\Routing\Route[] $routes */
         $routes = $router->getRouteCollection()->all();
 
-        $output->writeln('var eTraxis = window.eTraxis || {};');
-        $output->writeln('');
         $output->writeln('eTraxis.routes = {');
 
         foreach ($routes as $key => $route) {

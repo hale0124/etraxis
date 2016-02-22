@@ -214,14 +214,16 @@ gulp.task('javascripts:libs', function() {
 gulp.task('javascripts:etraxis', function() {
 
     var files = [
-        'vendor/bower/etraxis/routes.js',
+        // This file must go first as it defines the "eTraxis" object,
+        // which is welcome to be used or extended in any file below.
         'app/Resources/public/js/etraxis.js',
         'app/Resources/public/js/init-ui.js',
         'app/Resources/public/js/disable.js',
         'app/Resources/public/js/dropdown.js',
         'app/Resources/public/js/modal.js',
         'app/Resources/public/js/panel.js',
-        'app/Resources/public/js/table.js'
+        'app/Resources/public/js/table.js',
+        'vendor/bower/etraxis/routes.js'
     ];
 
     return gulp.src(files)
