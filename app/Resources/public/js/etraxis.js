@@ -7,6 +7,9 @@
 
 var eTraxis = (function() {
 
+    // Current user's ID (zero for anonymous).
+    var userId = $('body').data('user-id') || 0;
+
     // Inject default CSRF token into POST AJAX requests if it's missing there.
     $.ajaxPrefilter(function(options, originalOptions) {
         if (options.type && options.type.toUpperCase() === 'POST') {
@@ -37,6 +40,15 @@ var eTraxis = (function() {
     });
 
     return {
+
+        /**
+         * Returns ID of current user.
+         *
+         * @returns {number}
+         */
+        getUserId: function() {
+            return userId;
+        },
 
         /**
          * Blocks UI with specified message.
