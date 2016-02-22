@@ -146,7 +146,6 @@ var eTraxis = (function() {
             var url = eTraxis.routes[id];
 
             if (typeof params === 'object') {
-                console.log(params);
                 for (var name in params) {
                     if (params.hasOwnProperty(name)) {
                         url = url.replace('{' + name + '}', params[name]);
