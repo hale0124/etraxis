@@ -18,11 +18,13 @@ class SecurityControllerTest extends WebTestCase
 {
     private function isAuthenticated(Crawler $crawler)
     {
-        if (count($crawler->filter('a[href="/login"]')) === 1) {
+        $text = $crawler->filter('nav a')->last()->html();
+
+        if ($text == 'Log in') {
             return false;
         }
 
-        if (count($crawler->filter('a[id="menu_logout"]')->html()) === 1) {
+        if ($text == 'Log out') {
             return true;
         }
 
