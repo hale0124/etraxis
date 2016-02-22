@@ -33,7 +33,7 @@ gulp.task('default', function() {
     sequence(
         ['stylesheets:libs', 'stylesheets:themes'],
         ['javascripts:routes', 'javascripts:datatables', 'javascripts:translations'],
-        ['javascripts:libs', 'javascripts:etraxis', 'javascripts:i18n']
+        ['javascripts:libs', 'javascripts:etraxis:core', 'javascripts:etraxis:app', 'javascripts:i18n']
     );
 });
 
@@ -44,8 +44,11 @@ gulp.task('watch', function() {
     watch(['app/Resources/public/less/**'], function() {
         gulp.start('stylesheets:themes');
     });
-    watch(['app/Resources/public/js/**'], function() {
-        gulp.start('javascripts:etraxis');
+    watch(['app/Resources/public/js/*'], function() {
+        gulp.start('javascripts:etraxis:core');
+    });
+    watch(['app/Resources/public/js/*/**'], function() {
+        gulp.start('javascripts:etraxis:app');
     });
 });
 
@@ -209,9 +212,9 @@ gulp.task('javascripts:libs', function() {
 });
 
 /**
- * Installs eTraxis JavaScript files as one combined "web/js/etraxis.min.js" asset.
+ * Installs eTraxis core JavaScript files as one combined "web/js/etraxis.min.js" asset.
  */
-gulp.task('javascripts:etraxis', function() {
+gulp.task('javascripts:etraxis:core', function() {
 
     var files = [
         // This file must go first as it defines the "eTraxis" object,
@@ -229,6 +232,17 @@ gulp.task('javascripts:etraxis', function() {
     return gulp.src(files)
         .pipe(gulpif(argv.production, uglify()))
         .pipe(concat(argv.production ? 'etraxis.min.js' : 'etraxis.js'))
+        .pipe(insert.prepend('"use strict";\n'))
+        .pipe(gulp.dest('web/js/'));
+});
+
+/**
+ * Installs eTraxis application JavaScript files to "web/js/" folder.
+ */
+gulp.task('javascripts:etraxis:app', function() {
+
+    return gulp.src('app/Resources/public/js/*/**')
+        .pipe(gulpif(argv.production, uglify()))
         .pipe(insert.prepend('"use strict";\n'))
         .pipe(gulp.dest('web/js/'));
 });
