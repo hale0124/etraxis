@@ -4,7 +4,7 @@
 
     <div class="grid-row">
         <div class="grid-100">
-            <div class="tabs" id="tabs-user" data-tab="{{ tab }}">
+            <div class="tabs" id="tabs-user" data-tab="{{ tab }}" data-user-id="{{ user.id }}">
                 <ul>
                     <li><a href="{{ path('admin_tab_user_details', {'id': user.id}) }}">{{ user.fullname }}</a></li>
                     <li><a href="{{ path('admin_tab_user_groups', {'id': user.id}) }}">{{ 'groups'|trans }}</a></li>
@@ -12,5 +12,11 @@
             </div>
         </div>
     </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script src="{{ asset('js/admin/user.js') }}"></script>
 
 {% endblock %}

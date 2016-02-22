@@ -16,11 +16,11 @@
     </div>
 
     <div class="grid-10 text-center">
-        <button type="button" class="grid-row grid-100" id="btn-remove">
+        <button type="button" class="grid-row grid-100" onclick="UserApp.removeFromGroup()">
             <span class="hide-on-mobile">&gt;&gt;</span>
             <span class="hide-on-desktop ui-icon ui-icon-arrowthick-1-s"></span>
         </button>
-        <button type="button" class="grid-row grid-100" id="btn-add">
+        <button type="button" class="grid-row grid-100" onclick="UserApp.addToGroup()">
             <span class="hide-on-mobile">&lt;&lt;</span>
             <span class="hide-on-desktop ui-icon ui-icon-arrowthick-1-n">&lt;&lt;</span>
         </button>
@@ -42,36 +42,3 @@
     </div>
 
 </div>
-
-<script>
-
-    $(function() {
-
-        var reloadTab = function() {
-            var $tabs = $('#tabs-user');
-            var current = $tabs.tabs('option', 'active');
-            $tabs.tabs('load', current);
-        };
-
-        // "<<" button (add to group).
-        $('#btn-add').click(function() {
-            var groups = $('#others').val();
-            if (groups) {
-                $.post('{{ path('admin_users_add_groups', {'id': user.id}) }}', { groups: groups }, function() {
-                    reloadTab();
-                });
-            }
-        });
-
-        // ">>" button (remove from group).
-        $('#btn-remove').click(function() {
-            var groups = $('#groups').val();
-            if (groups) {
-                $.post('{{ path('admin_users_remove_groups', {'id': user.id}) }}', { groups: groups }, function() {
-                    reloadTab();
-                });
-            }
-        });
-    });
-
-</script>
