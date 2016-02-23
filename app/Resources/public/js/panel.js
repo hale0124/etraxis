@@ -142,6 +142,16 @@
         },
 
         /**
+         * Gets specified item by its ID.
+         *
+         * @param {string} id
+         * @returns {string} text
+         */
+        get: function(id) {
+            return $('.panel-body a[data-id="' + id + '"] .panel-item', this.element).text();
+        },
+
+        /**
          * Finds specified item by its text.
          *
          * @param {string} text
