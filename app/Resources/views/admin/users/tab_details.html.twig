@@ -3,19 +3,19 @@
 <div class="grid-row">
     <div class="grid-100">
         <button type="button" onclick="UserApp.back()">{{ 'button.back'|trans }}</button>
-        <button type="button" onclick="UserApp.edit()">{{ 'button.edit'|trans }}</button>
+        <button type="button" onclick="UserApp.edit({{ user.id }})">{{ 'button.edit'|trans }}</button>
         {% if can.delete %}
-            <button type="button" onclick="UserApp.delete()">{{ 'button.delete'|trans }}</button>
+            <button type="button" onclick="UserApp.delete({{ user.id }})">{{ 'button.delete'|trans }}</button>
         {% endif %}
         <span class="buttonset">
             {% if can.disable %}
-                <button type="button" onclick="UserApp.disable()">{{ 'button.disable'|trans }}</button>
+                <button type="button" onclick="UserApp.disable({{ user.id }})">{{ 'button.disable'|trans }}</button>
             {% endif %}
             {% if can.enable %}
-                <button type="button" onclick="UserApp.enable()">{{ 'button.enable'|trans }}</button>
+                <button type="button" onclick="UserApp.enable({{ user.id }})">{{ 'button.enable'|trans }}</button>
             {% endif %}
             {% if can.unlock %}
-                <button type="button" onclick="UserApp.unlock()">{{ 'button.unlock'|trans }}</button>
+                <button type="button" onclick="UserApp.unlock({{ user.id }})">{{ 'button.unlock'|trans }}</button>
             {% endif %}
         </span>
     </div>

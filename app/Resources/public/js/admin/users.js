@@ -31,7 +31,7 @@ var UsersApp = (function() {
          */
         create: function() {
             eTraxis.modal({
-                url: eTraxis.route('admin_new_user'),
+                url: eTraxis.route('admin_dlg_new_user'),
                 title: eTraxis.i18n['user.new'],
                 success: function() {
                     $table.api().draw(false);

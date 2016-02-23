@@ -7,9 +7,6 @@
 
 var UserApp = (function() {
 
-    // User's ID.
-    var userId = $('#tabs-user').data('user-id');
-
     /**
      * Reloads current tab to refresh its content.
      */
@@ -18,7 +15,7 @@ var UserApp = (function() {
         var current = $tabs.tabs('option', 'active');
         $tabs.one('tabsload', function() {
             var name = $('#user-details').data('name');
-            $('ul.ui-tabs-nav li[tabindex=0] a', $tabs).text(name);
+            $('ul.ui-tabs-nav li:first a', $tabs).text(name);
         });
         $tabs.tabs('load', current);
     };
@@ -34,19 +31,21 @@ var UserApp = (function() {
 
         /**
          * Invokes "Edit user" dialog.
+         *
+         * @param {number} id User ID.
          */
-        edit: function() {
-            if (userId == eTraxis.getUserId()) {
+        edit: function(id) {
+            if (id == eTraxis.getUserId()) {
                 $('#form_admin').disable(true);
                 $('#form_disabled').disable(true);
             }
 
             eTraxis.modal({
-                url: eTraxis.route('admin_edit_user', { id: userId }),
+                url: eTraxis.route('admin_dlg_edit_user', { id: id }),
                 title: $('#user-details').data('name'),
                 success: function() {
-                    if (userId == eTraxis.getUserId()) {
-                        window.location.assign(eTraxis.route('admin_view_user', {id: userId}));
+                    if (id == eTraxis.getUserId()) {
+                        window.location.assign(eTraxis.route('admin_view_user', { id: id }));
                     }
                     else {
                         reloadTab();
@@ -58,10 +57,12 @@ var UserApp = (function() {
 
         /**
          * Deletes user after confirmation.
+         *
+         * @param {number} id User ID.
          */
-        delete: function() {
+        delete: function(id) {
             eTraxis.confirm(eTraxis.i18n['button.delete'], eTraxis.i18n['user.confirm.delete'], function() {
-                $.post(eTraxis.route('admin_delete_user', { id: userId }), function() {
+                $.post(eTraxis.route('admin_delete_user', { id: id }), function() {
                     window.location.assign(eTraxis.route('admin_users'));
                 });
             });
@@ -69,44 +70,54 @@ var UserApp = (function() {
 
         /**
          * Disables user.
+         *
+         * @param {number} id User ID.
          */
-        disable: function() {
-            $.post(eTraxis.route('admin_disable_user'), { ids: [userId] }, reloadTab);
+        disable: function(id) {
+            $.post(eTraxis.route('admin_disable_user'), { ids: [id] }, reloadTab);
         },
 
         /**
          * Enables user.
+         *
+         * @param {number} id User ID.
          */
-        enable: function() {
-            $.post(eTraxis.route('admin_enable_user'), { ids: [userId] }, reloadTab);
+        enable: function(id) {
+            $.post(eTraxis.route('admin_enable_user'), { ids: [id] }, reloadTab);
         },
 
         /**
          * Unlocks user.
+         *
+         * @param {number} id User ID.
          */
-        unlock: function() {
-            $.post(eTraxis.route('admin_unlock_user', { id: userId }), reloadTab);
+        unlock: function(id) {
+            $.post(eTraxis.route('admin_unlock_user', { id: id }), reloadTab);
         },
 
         /**
-         * Adds the user to specified groups.
+         * Adds user to selected groups.
+         *
+         * @param {number} id User ID.
          */
-        addToGroup: function() {
+        addToGroup: function(id) {
             var groups = $('#others').val();
             if (groups) {
-                $.post(eTraxis.route('admin_users_add_groups', { id: userId }), { groups: groups }, function() {
+                $.post(eTraxis.route('admin_users_add_groups', { id: id }), { groups: groups }, function() {
                     reloadTab();
                 });
             }
         },
 
         /**
-         * Removes the user from specified groups.
+         * Removes user from selected groups.
+         *
+         * @param {number} id User ID.
          */
-        removeFromGroup: function() {
+        removeFromGroup: function(id) {
             var groups = $('#groups').val();
             if (groups) {
-                $.post(eTraxis.route('admin_users_remove_groups', { id: userId }), { groups: groups }, function() {
+                $.post(eTraxis.route('admin_users_remove_groups', { id: id }), { groups: groups }, function() {
                     reloadTab();
                 });
             }

@@ -217,7 +217,7 @@ class UsersGetController extends Controller
     /**
      * Renders dialog to create new user.
      *
-     * @Action\Route("/new")
+     * @Action\Route("/new", name="admin_dlg_new_user")
      *
      * @return  Response
      */
@@ -241,7 +241,7 @@ class UsersGetController extends Controller
     /**
      * Renders dialog to edit specified user.
      *
-     * @Action\Route("/edit/{id}", requirements={"id"="\d+"})
+     * @Action\Route("/edit/{id}", name="admin_dlg_edit_user", requirements={"id"="\d+"})
      *
      * @param   int     $id User ID.
      *
