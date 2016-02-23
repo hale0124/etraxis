@@ -1,0 +1,106 @@
+{% block html %}
+
+    <!DOCTYPE html>
+    <html lang="{{ (app.user ? app.user.locale : locale) }}">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+
+        {% include 'theme-color.html.twig' with {'theme': (app.user ? app.user.theme : theme)} %}
+
+        <title>{{ title | default('eTraxis') }}</title>
+
+        {% if app.environment == 'dev' %}
+            <link rel="stylesheet" href="{{ asset('css/normalize.css')                         }}">
+            <link rel="stylesheet" href="{{ asset('css/unsemantic-grid-responsive-no-ie7.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/jquery-ui.structure.css')               }}">
+            <link rel="stylesheet" href="{{ asset('css/jquery.dataTables_themeroller.css')     }}">
+            <link rel="stylesheet" href="{{ asset('css/%s/etraxis.css' | format(app.user ? app.user.theme : theme)) }}">
+        {% else %}
+            <link rel="stylesheet" href="{{ asset('css/libs.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/%s/etraxis.min.css' | format(app.user ? app.user.theme : theme)) }}">
+        {% endif %}
+
+        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}">
+        <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon.png')         }}">
+        <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon-72x72.png')   }}" sizes="72x72">
+        <link rel="apple-touch-icon" href="{{ asset('apple-touch-icon-114x114.png') }}" sizes="114x114">
+    </head>
+    <body data-url="{{ url('homepage') | trim('/') | replace({'http:': null, 'https:': null}) }}" data-user-id="{{ app.user ? app.user.id : null }}">
+    <nav>
+        <div class="grid-container grid-parent">
+            {% spaceless %}
+
+                <span class="fern"><a href="{{ path('homepage') }}"><img src="{{ asset('images/fern.png') }}"></a></span>
+
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <span class="fern">{{ app.user.fullname }}</span>
+                {% endif %}
+
+                {% block menu %}{% endblock %}
+
+                {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+                    <a onclick="eTraxis.logout()">{{ 'security.log_out'|trans }}</a>
+                {% else %}
+                    <a href="{{ path('login') }}">{{ 'security.log_in'|trans }}</a>
+                {% endif %}
+
+            {% endspaceless %}
+        </div>
+    </nav>
+
+    <main class="grid-container grid-parent">
+
+        {% for flash in app.session.flashbag.get('notice') %}
+            <div class="grid-row">
+                <div class="grid-100">
+                    <div class="highlight">{{ flash }}</div>
+                </div>
+            </div>
+        {% endfor %}
+
+        {% for flash in app.session.flashbag.get('error') %}
+            <div class="grid-row">
+                <div class="grid-100">
+                    <div class="error">{{ flash }}</div>
+                </div>
+            </div>
+        {% endfor %}
+
+        {% block content %}{% endblock %}
+
+    </main>
+
+    <footer>
+        <div class="grid-container">
+            <a href="https://www.etraxis.com/" target="_blank">Copyright &copy; Artem Rodygin</a>
+        </div>
+    </footer>
+
+    {% if csrf is defined %}
+        <input type="hidden" id="__etraxis_token" value="{{ csrf.token('').value }}">
+    {% endif %}
+
+    <div id="__etraxis_modal" class="ui-helper-hidden"></div>
+
+    {% if app.environment == 'dev' %}
+        <script src="{{ asset('js/jquery.js')            }}"></script>
+        <script src="{{ asset('js/jquery-ui.js')         }}"></script>
+        <script src="{{ asset('js/jquery.blockUI.js')    }}"></script>
+        <script src="{{ asset('js/jquery.form.js')       }}"></script>
+        <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
+        <script src="{{ asset('js/etraxis.js')           }}"></script>
+        <script src="{{ asset('js/etraxis-%s.js' | format(app.user ? app.user.locale : locale)) }}"></script>
+    {% else %}
+        <script src="{{ asset('js/libs.min.js')    }}"></script>
+        <script src="{{ asset('js/etraxis.min.js') }}"></script>
+        <script src="{{ asset('js/etraxis-%s.min.js' | format(app.user ? app.user.locale : locale)) }}"></script>
+    {% endif %}
+
+    {% block scripts %}{% endblock %}
+
+    </body>
+    </html>
+
+{% endblock %}
