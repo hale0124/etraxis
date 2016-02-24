@@ -42,7 +42,7 @@ class StatesPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function newAction(Request $request, $id = 0)
+    public function newAction(Request $request, $id)
     {
         try {
             $data = $this->getFormData($request, 'state', ['template' => $id]);
@@ -155,7 +155,7 @@ class StatesPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function saveTransitionsAction(Request $request, $id, $group = 0)
+    public function saveTransitionsAction(Request $request, $id, $group)
     {
         try {
             /** @var \eTraxis\Repository\StatesRepository $repository */

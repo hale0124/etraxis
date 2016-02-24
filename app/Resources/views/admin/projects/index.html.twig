@@ -5,25 +5,25 @@
     <div class="grid-30 mobile-grid-100">
         <div class="grid-row mobile-grid-row panel" id="projects">
             <div class="panel-heading">
-                <span class="ui-icon ui-icon-circle-plus" id="btn-new-project" title="{{ 'button.create'|trans }}"></span>
+                <span class="ui-icon ui-icon-circle-plus" onclick="ProjectsApp.create()" title="{{ 'button.create'|trans }}"></span>
                 <div>{{ 'projects'|trans }}</div>
             </div>
         </div>
         <div class="grid-row mobile-grid-row panel" id="groups" data-sections="2">
             <div class="panel-heading">
-                <span class="ui-icon ui-icon-circle-plus" id="btn-new-group" title="{{ 'button.create'|trans }}"></span>
+                <span class="ui-icon ui-icon-circle-plus" onclick="GroupsApp.create()" title="{{ 'button.create'|trans }}"></span>
                 <div>{{ 'groups'|trans }}</div>
             </div>
         </div>
         <div class="grid-row mobile-grid-row panel hidden" id="templates">
             <div class="panel-heading">
-                <span class="ui-icon ui-icon-circle-plus" id="btn-new-template" title="{{ 'button.create'|trans }}"></span>
+                <span class="ui-icon ui-icon-circle-plus" onclick="TemplatesApp.create()" title="{{ 'button.create'|trans }}"></span>
                 <div>{{ 'templates'|trans }}</div>
             </div>
         </div>
         <div class="grid-row mobile-grid-row panel hidden" id="states" data-sections="3">
             <div class="panel-heading">
-                <span class="ui-icon ui-icon-circle-plus" id="btn-new-state" title="{{ 'button.create'|trans }}"></span>
+                <span class="ui-icon ui-icon-circle-plus" onclick="StatesApp.create()" title="{{ 'button.create'|trans }}"></span>
                 <div>{{ 'states'|trans }}</div>
             </div>
         </div>
@@ -37,280 +37,10 @@
 
 {% block scripts %}
 
-    <script>
-
-        $(function() {
-
-            var $content   = $('#content');
-            var $projects  = $('#projects');
-            var $groups    = $('#groups');
-            var $templates = $('#templates');
-            var $states    = $('#states');
-
-            //----------------------------------------------------------
-            //  Projects.
-            //----------------------------------------------------------
-
-            // Loads panel of projects.
-            var loadProjects = function(onLoad) {
-                $projects.panel('clear');
-                $templates.hide();
-                $.getJSON('{{ path('admin_projects_list') }}', function(data) {
-                    $(data).each(function(index, item) {
-                        $projects.panel('append', item.id, item.name, item.isSuspended);
-                    });
-                    if (typeof onLoad === 'function') {
-                        onLoad();
-                    }
-                });
-            };
-
-            // Project clicked.
-            $projects.on('panel.item.click', function(e, data) {
-                if (data) {
-                    $content.load('{{ path('admin_view_project') }}/' + data, function() {
-                        $content.initUI();
-                        $projects.panel('select', data);
-                        loadGroups();
-                        loadTemplates();
-                    });
-                }
-                else {
-                    loadGroups();
-                }
-            });
-
-            // Project edited.
-            $(document).on('admin.project.edited', function(e, data) {
-                loadProjects(function() {
-                    $projects.trigger('panel.item.click', data);
-                });
-            });
-
-            // Project deleted.
-            $(document).on('admin.project.deleted', function() {
-                $content.html(null);
-                loadProjects(function() {
-                    $('a', $projects).first().click();
-                });
-            });
-
-            // New project.
-            $('#btn-new-project').click(function() {
-                eTraxis.modal({
-                    url: '{{ path('admin_new_project') }}',
-                    title: '{{ 'project.new'|trans }}',
-                    success: function() {
-                        var name = $('#project_name').val();
-                        loadProjects(function() {
-                            $projects.panel('expand');
-                            $projects.trigger('panel.item.click', $projects.panel('find', name));
-                        });
-                        return true;
-                    }
-                });
-            });
-
-            //----------------------------------------------------------
-            //  Groups.
-            //----------------------------------------------------------
-
-            // Loads panel of groups.
-            var loadGroups = function(onLoad) {
-                var projectId = $projects.panel('selected');
-                $groups.panel('clear');
-                $.getJSON('{{ path('admin_groups_list') }}/' + (projectId ? projectId : 0), function(data) {
-                    $(data).each(function(index, item) {
-                        $groups.panel('append', item.id, item.name, false, item.projectId ? 2 : 1);
-                    });
-                    if (typeof onLoad === 'function') {
-                        onLoad();
-                    }
-                });
-            };
-
-            // Group clicked.
-            $groups.on('panel.item.click', function(e, data) {
-                if (data) {
-                    $content.load('{{ path('admin_view_group') }}/' + data, function() {
-                        $content.initUI();
-                    });
-                }
-            });
-
-            // Group edited.
-            $(document).on('admin.group.edited', function() {
-                loadGroups();
-            });
-
-            // Group deleted.
-            $(document).on('admin.group.deleted', function() {
-                $content.html(null);
-                $projects.trigger('panel.item.click', $projects.panel('selected'));
-            });
-
-            // New group.
-            $('#btn-new-group').click(function() {
-                var projectId = $projects.panel('selected');
-                eTraxis.modal({
-                    url: '{{ path('admin_new_group') }}/' + (projectId ? projectId : 0),
-                    title: '{{ 'group.new'|trans }}',
-                    success: function() {
-                        var name = $('#group_name').val();
-                        loadGroups(function() {
-                            $groups.panel('expand');
-                            $groups.trigger('panel.item.click', $groups.panel('find', name));
-                        });
-                        return true;
-                    }
-                });
-            });
-
-            //----------------------------------------------------------
-            //  Templates.
-            //----------------------------------------------------------
-
-            // Loads panel of templates.
-            var loadTemplates = function(onLoad) {
-                var projectId = $projects.panel('selected');
-                $templates.panel('clear');
-                $states.hide();
-                if (projectId) {
-                    $templates.show();
-                    $.getJSON('{{ path('admin_templates_list') }}/' + projectId, function(data) {
-                        $(data).each(function(index, item) {
-                            $templates.panel('append', item.id, item.name, item.isLocked);
-                        });
-                        if (typeof onLoad === 'function') {
-                            onLoad();
-                        }
-                    });
-                }
-                else {
-                    $templates.hide();
-                }
-            };
-
-            // Template clicked.
-            $templates.on('panel.item.click', function(e, data) {
-                if (data) {
-                    $content.load('{{ path('admin_view_template') }}/' + data, function() {
-                        $content.initUI();
-                        $templates.panel('select', data);
-                        loadStates();
-                    });
-                }
-            });
-
-            // Template edited / locked / unlocked.
-            $(document).on('admin.template.edited admin.template.locked admin.template.unlocked', function(e, data) {
-                loadTemplates(function() {
-                    $templates.trigger('panel.item.click', data);
-                });
-            });
-
-            // Template deleted.
-            $(document).on('admin.template.deleted', function() {
-                $content.html(null);
-                $projects.trigger('panel.item.click', $projects.panel('selected'));
-            });
-
-            // New template.
-            $('#btn-new-template').click(function() {
-                var projectId = $projects.panel('selected');
-                eTraxis.modal({
-                    url: '{{ path('admin_new_template') }}/' + projectId,
-                    title: '{{ 'template.new'|trans }}',
-                    success: function() {
-                        var name = $('#template_name').val();
-                        loadTemplates(function() {
-                            $templates.panel('expand');
-                            $templates.trigger('panel.item.click', $templates.panel('find', name));
-                        });
-                        return true;
-                    }
-                });
-            });
-
-            //----------------------------------------------------------
-            //  States.
-            //----------------------------------------------------------
-
-            // Loads panel of states.
-            var loadStates = function(onLoad) {
-                var templateId = $templates.panel('selected');
-                $states.panel('clear');
-                if (templateId) {
-                    $states.show();
-                    $.getJSON('{{ path('admin_states_list') }}/' + templateId, function(data) {
-                        $(data).each(function(index, item) {
-                            $states.panel('append', item.id, item.name, false, item.type);
-                        });
-                        if (typeof onLoad === 'function') {
-                            onLoad();
-                        }
-                    });
-                }
-                else {
-                    $states.hide();
-                }
-            };
-
-            // State clicked.
-            $states.on('panel.item.click', function(e, data) {
-                if (data) {
-                    $content.load('{{ path('admin_view_state') }}/' + data, function() {
-                        $content.initUI();
-                        $states.panel('select', data);
-                    });
-                }
-            });
-
-            // State edited / set as initial.
-            $(document).on('admin.state.edited admin.state.initial', function(e, data) {
-                loadStates(function() {
-                    $states.trigger('panel.item.click', data);
-                });
-            });
-
-            // State deleted.
-            $(document).on('admin.state.deleted', function() {
-                $content.html(null);
-                $templates.trigger('panel.item.click', $templates.panel('selected'));
-            });
-
-            // New state.
-            $('#btn-new-state').click(function() {
-                var templateId = $templates.panel('selected');
-                eTraxis.modal({
-                    url: '{{ path('admin_new_state') }}/' + templateId,
-                    title: '{{ 'state.new'|trans }}',
-                    success: function() {
-                        var name = $('#state_name').val();
-                        loadStates(function() {
-                            $states.panel('expand');
-                            $states.trigger('panel.item.click', $states.panel('find', name));
-                        });
-                        return true;
-                    }
-                });
-            });
-
-            //----------------------------------------------------------
-            //  Initialization.
-            //----------------------------------------------------------
-
-            loadProjects(function() {
-                var $a = $('a', $projects);
-                if ($a.length == 0) {
-                    loadGroups();
-                }
-                else {
-                    $a.first().click();
-                }
-            });
-        });
-
-    </script>
+    <script src="{{ asset('js/admin/projects.js')  }}"></script>
+    <script src="{{ asset('js/admin/groups.js')    }}"></script>
+    <script src="{{ asset('js/admin/templates.js') }}"></script>
+    <script src="{{ asset('js/admin/states.js')    }}"></script>
+    <script src="{{ asset('js/admin/fields.js')    }}"></script>
 
 {% endblock %}

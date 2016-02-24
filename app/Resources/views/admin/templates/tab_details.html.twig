@@ -2,15 +2,15 @@
 
 <div class="grid-row">
     <div class="grid-100">
-        <button type="button" id="btn-edit">{{ 'button.edit'|trans }}</button>
+        <button type="button" onclick="TemplatesApp.edit({{ template.id }})">{{ 'button.edit'|trans }}</button>
         {% if can.lock %}
-            <button type="button" id="btn-lock">{{ 'button.lock'|trans }}</button>
+            <button type="button" onclick="TemplatesApp.lock({{ template.id }})">{{ 'button.lock'|trans }}</button>
         {% endif %}
         {% if can.unlock %}
-            <button type="button" id="btn-unlock">{{ 'button.unlock'|trans }}</button>
+            <button type="button" onclick="TemplatesApp.unlock({{ template.id }})">{{ 'button.unlock'|trans }}</button>
         {% endif %}
         {% if can.delete %}
-            <button type="button" id="btn-delete">{{ 'button.delete'|trans }}</button>
+            <button type="button" onclick="TemplatesApp.delete({{ template.id }})">{{ 'button.delete'|trans }}</button>
         {% endif %}
     </div>
 </div>
@@ -28,45 +28,3 @@
         </fieldset>
     </div>
 </div>
-
-<script>
-
-    $(function() {
-
-        // "Edit" button.
-        $('#btn-edit').click(function() {
-            eTraxis.modal({
-                url: '{{ path('admin_edit_template', {'id': template.id}) }}',
-                title: '{{ template.name }}',
-                success: function() {
-                    $(document).trigger('admin.template.edited', {{ template.id }});
-                    return true;
-                }
-            });
-        });
-
-        // "Delete" button.
-        $('#btn-delete').click(function() {
-            eTraxis.confirm('{{ 'button.delete'|trans }}', '{{ 'template.confirm.delete'|trans }}', function() {
-                $.post('{{ path('admin_delete_template', {'id': template.id}) }}', function() {
-                    $(document).trigger('admin.template.deleted', {{ template.id }});
-                });
-            });
-        });
-
-        // "Lock" button.
-        $('#btn-lock').click(function() {
-            $.post('{{ path('admin_lock_template', {'id': template.id}) }}', function() {
-                $(document).trigger('admin.template.locked', {{ template.id }});
-            });
-        });
-
-        // "Unlock" button.
-        $('#btn-unlock').click(function() {
-            $.post('{{ path('admin_unlock_template', {'id': template.id}) }}', function() {
-                $(document).trigger('admin.template.unlocked', {{ template.id }});
-            });
-        });
-    });
-
-</script>

@@ -73,7 +73,7 @@ class ProjectsGetController extends Controller
      *
      * @return  Response
      */
-    public function viewAction(Request $request, $id = 0)
+    public function viewAction(Request $request, $id)
     {
         try {
             $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
@@ -128,7 +128,7 @@ class ProjectsGetController extends Controller
     /**
      * Renders dialog to create new project.
      *
-     * @Action\Route("/new")
+     * @Action\Route("/new", name="admin_dlg_new_project")
      *
      * @return  Response
      */
@@ -150,7 +150,7 @@ class ProjectsGetController extends Controller
     /**
      * Renders dialog to edit specified project.
      *
-     * @Action\Route("/edit/{id}", requirements={"id"="\d+"})
+     * @Action\Route("/edit/{id}", name="admin_dlg_edit_project", requirements={"id"="\d+"})
      *
      * @param   int     $id Project ID.
      *

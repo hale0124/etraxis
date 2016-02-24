@@ -2,12 +2,12 @@
 
 <div class="grid-row">
     <div class="grid-100">
-        <button type="button" id="btn-edit">{{ 'button.edit'|trans }}</button>
+        <button type="button" onclick="StatesApp.edit({{ state.id }})">{{ 'button.edit'|trans }}</button>
         {% if can.delete %}
-            <button type="button" id="btn-delete">{{ 'button.delete'|trans }}</button>
+            <button type="button" onclick="StatesApp.delete({{ state.id }})">{{ 'button.delete'|trans }}</button>
         {% endif %}
         {% if can.initial %}
-            <button type="button" id="btn-initial">{{ 'state.make_initial'|trans }}</button>
+            <button type="button" onclick="StatesApp.initial({{ state.id }})">{{ 'state.make_initial'|trans }}</button>
         {% endif %}
     </div>
 </div>
@@ -24,38 +24,3 @@
         </fieldset>
     </div>
 </div>
-
-<script>
-
-    $(function() {
-
-        // "Edit" button.
-        $('#btn-edit').click(function() {
-            eTraxis.modal({
-                url: '{{ path('admin_edit_state', {'id': state.id}) }}',
-                title: '{{ state.name }}',
-                success: function() {
-                    $(document).trigger('admin.state.edited', {{ state.id }});
-                    return true;
-                }
-            });
-        });
-
-        // "Delete" button.
-        $('#btn-delete').click(function() {
-            eTraxis.confirm('{{ 'button.delete'|trans }}', '{{ 'state.confirm.delete'|trans }}', function() {
-                $.post('{{ path('admin_delete_state', {'id': state.id}) }}', function() {
-                    $(document).trigger('admin.state.deleted', {{ state.id }});
-                });
-            });
-        });
-
-        // "Make initial" button.
-        $('#btn-initial').click(function() {
-            $.post('{{ path('admin_initial_state', {'id': state.id}) }}', function() {
-                $(document).trigger('admin.state.initial', {{ state.id }});
-            });
-        });
-    });
-
-</script>

@@ -37,11 +37,11 @@ class GroupsGetController extends Controller
      *
      * @Action\Route("/list/{id}", name="admin_groups_list", requirements={"id"="\d+"})
      *
-     * @param   int $id Project ID.
+     * @param   int $id Project ID (NULL for global groups only).
      *
      * @return  Response|JsonResponse
      */
-    public function listAction($id = 0)
+    public function listAction($id = null)
     {
         try {
             /** @var \eTraxis\Repository\GroupsRepository $repository */
@@ -64,7 +64,7 @@ class GroupsGetController extends Controller
      *
      * @return  Response
      */
-    public function viewAction(Request $request, $id = 0)
+    public function viewAction(Request $request, $id)
     {
         try {
             $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
@@ -140,25 +140,25 @@ class GroupsGetController extends Controller
     /**
      * Renders dialog to create new group.
      *
-     * @Action\Route("/new/{id}", requirements={"id"="\d+"})
+     * @Action\Route("/new/{id}", name="admin_dlg_new_group", requirements={"id"="\d+"})
      *
-     * @param   int $id Project ID.
+     * @param   int $id Project ID (NULL for global group creation).
      *
      * @return  Response
      */
-    public function newAction($id = 0)
+    public function newAction($id = null)
     {
-        $class = $id
-            ? GroupExForm::class
-            : GroupForm::class;
+        $class = ($id === null)
+            ? GroupForm::class
+            : GroupExForm::class;
 
         $form = $this->createForm($class, ['id' => $id], [
             'action' => $this->generateUrl('admin_new_group'),
         ]);
 
-        $template = $id
-            ? 'admin/groups/dlg_group_ex.html.twig'
-            : 'admin/groups/dlg_group.html.twig';
+        $template = ($id === null)
+            ? 'admin/groups/dlg_group.html.twig'
+            : 'admin/groups/dlg_group_ex.html.twig';
 
         return $this->render($template, [
             'form' => $form->createView(),
@@ -168,7 +168,7 @@ class GroupsGetController extends Controller
     /**
      * Renders dialog to edit specified group.
      *
-     * @Action\Route("/edit/{id}", requirements={"id"="\d+"})
+     * @Action\Route("/edit/{id}", name="admin_dlg_edit_group", requirements={"id"="\d+"})
      *
      * @param   int $id Group ID.
      *

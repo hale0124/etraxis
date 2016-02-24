@@ -41,7 +41,7 @@ class TemplatesPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function newAction(Request $request, $id = 0)
+    public function newAction(Request $request, $id)
     {
         try {
             $data = $this->getFormData($request, 'template', ['project' => $id]);
@@ -179,7 +179,7 @@ class TemplatesPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function savePermissionsAction(Request $request, $id, $group = 0)
+    public function savePermissionsAction(Request $request, $id, $group)
     {
         try {
             $command = new Templates\RemoveTemplatePermissionsCommand([

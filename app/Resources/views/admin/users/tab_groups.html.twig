@@ -3,7 +3,7 @@
     <div class="grid-45">
         <fieldset>
             <legend>{{ 'groups'|trans }}</legend>
-            <select id="groups" size="20" multiple class="grid-100 mobile-grid-100">
+            <select id="groups" size="20" multiple title="{{ 'groups'|trans }}" class="grid-100 mobile-grid-100">
                 {% for group in groups %}
                     {% if group.project %}
                         <option value="{{ group.id }}">{{ group.name }} ({{ group.project.name }})</option>
@@ -29,7 +29,7 @@
     <div class="grid-45">
         <fieldset>
             <legend>{{ 'others'|trans }}</legend>
-            <select id="others" size="20" multiple class="grid-100 mobile-grid-100">
+            <select id="others" size="20" multiple title="{{ 'others'|trans }}" class="grid-100 mobile-grid-100">
                 {% for group in others %}
                     {% if group.project %}
                         <option value="{{ group.id }}">{{ group.name }} ({{ group.project.name }})</option>

@@ -44,7 +44,7 @@ class StatesGetController extends Controller
      *
      * @return  Response|JsonResponse
      */
-    public function listAction($id = 0)
+    public function listAction($id)
     {
         try {
             /** @var \eTraxis\Repository\StatesRepository $repository */
@@ -67,7 +67,7 @@ class StatesGetController extends Controller
      *
      * @return  Response
      */
-    public function viewAction(Request $request, $id = 0)
+    public function viewAction(Request $request, $id)
     {
         try {
             $state = $this->getDoctrine()->getRepository(State::class)->find($id);
@@ -164,7 +164,7 @@ class StatesGetController extends Controller
     /**
      * Renders dialog to create new state.
      *
-     * @Action\Route("/new/{id}", requirements={"id"="\d+"})
+     * @Action\Route("/new/{id}", name="admin_dlg_new_state", requirements={"id"="\d+"})
      *
      * @param   int $id Template ID.
      *
@@ -184,7 +184,7 @@ class StatesGetController extends Controller
     /**
      * Renders dialog to edit specified state.
      *
-     * @Action\Route("/edit/{id}", requirements={"id"="\d+"})
+     * @Action\Route("/edit/{id}", name="admin_dlg_edit_state", requirements={"id"="\d+"})
      *
      * @param   int $id State ID.
      *
@@ -222,7 +222,7 @@ class StatesGetController extends Controller
      *
      * @return  JsonResponse
      */
-    public function loadTransitionsAction($id, $group = 0)
+    public function loadTransitionsAction($id, $group)
     {
         try {
             /** @var \eTraxis\Repository\StatesRepository $repository */

@@ -3,7 +3,7 @@
     <div class="grid-50">
         <fieldset>
             <legend>{{ 'groups'|trans }}</legend>
-            <select id="group" size="20" class="grid-100 mobile-grid-100">
+            <select id="group" onchange="StatesApp.loadTransitions({{ state.id }})" size="20" title="{{ 'groups'|trans }}" class="grid-100 mobile-grid-100">
                 <option value="{{ role.author }}" selected>{{ 'role.author'|trans }} ({{ 'role'|trans|lower }})</option>
                 <option value="{{ role.responsible }}">{{ 'role.responsible'|trans }} ({{ 'role'|trans|lower }})</option>
                 <option value="{{ role.registered }}">{{ 'role.registered'|trans }} ({{ 'role'|trans|lower }})</option>
@@ -34,47 +34,9 @@
             {% endfor %}
         </fieldset>
         <div class="grid-row">
-            <button type="button" id="btn-save">{{ 'button.save'|trans }}</button>
-            <button type="button" id="btn-select">{{ 'button.select_all'|trans }}</button>
+            <button type="button" onclick="StatesApp.saveTransitions({{ state.id }})">{{ 'button.save'|trans }}</button>
+            <button type="button" onclick="StatesApp.selectAllTransitions()">{{ 'button.select_all'|trans }}</button>
         </div>
     </div>
 
 </div>
-
-<script>
-
-    $(function() {
-
-        // "Groups" list.
-        $('#group').change(function() {
-            var group = $(this).val();
-
-            $.get('{{ path('admin_load_state_transitions', {'id': state.id}) }}/' + group, function(data) {
-                $('input[type="checkbox"].transitions:not(:disabled)').prop('checked', false);
-                for (var i = 0; i < data.length; i++) {
-                    $('#transition-' + data[i]).prop('checked', true);
-                }
-            });
-        }).change();
-
-        // "Save" button.
-        $('#btn-save').click(function() {
-            var group = $('#group').val();
-            var transitions = [];
-
-            $('input[type="checkbox"].transitions:checked').each(function() {
-                transitions.push($(this).val());
-            });
-
-            $.post('{{ path('admin_save_state_transitions', {'id': state.id}) }}/' + group, { transitions }, function() {
-                eTraxis.alert('{{ 'state.transitions'|trans }}', '{{ 'changes_saved'|trans }}');
-            });
-        });
-
-        // "Select all" button.
-        $('#btn-select').click(function() {
-            $('input[type="checkbox"].transitions:not(:disabled)').prop('checked', true);
-        });
-    });
-
-</script>

@@ -42,7 +42,7 @@ class TemplatesGetController extends Controller
      *
      * @return  Response|JsonResponse
      */
-    public function listAction($id = 0)
+    public function listAction($id)
     {
         try {
             /** @var \eTraxis\Repository\TemplatesRepository $repository */
@@ -65,7 +65,7 @@ class TemplatesGetController extends Controller
      *
      * @return  Response
      */
-    public function viewAction(Request $request, $id = 0)
+    public function viewAction(Request $request, $id)
     {
         try {
             $template = $this->getDoctrine()->getRepository(Template::class)->find($id);
@@ -174,7 +174,7 @@ class TemplatesGetController extends Controller
     /**
      * Renders dialog to create new template.
      *
-     * @Action\Route("/new/{id}", requirements={"id"="\d+"})
+     * @Action\Route("/new/{id}", name="admin_dlg_new_template", requirements={"id"="\d+"})
      *
      * @param   int $id Project ID.
      *
@@ -194,7 +194,7 @@ class TemplatesGetController extends Controller
     /**
      * Renders dialog to edit specified template.
      *
-     * @Action\Route("/edit/{id}", requirements={"id"="\d+"})
+     * @Action\Route("/edit/{id}", name="admin_dlg_edit_template", requirements={"id"="\d+"})
      *
      * @param   int $id Template ID.
      *
@@ -232,7 +232,7 @@ class TemplatesGetController extends Controller
      *
      * @return  JsonResponse
      */
-    public function loadPermissionsAction($id, $group = 0)
+    public function loadPermissionsAction($id, $group)
     {
         try {
             /** @var \eTraxis\Repository\TemplatesRepository $repository */

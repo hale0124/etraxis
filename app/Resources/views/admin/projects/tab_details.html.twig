@@ -2,9 +2,9 @@
 
 <div class="grid-row">
     <div class="grid-100">
-        <button type="button" id="btn-edit">{{ 'button.edit'|trans }}</button>
+        <button type="button" onclick="ProjectsApp.edit({{ project.id }})">{{ 'button.edit'|trans }}</button>
         {% if can.delete %}
-            <button type="button" id="btn-delete">{{ 'button.delete'|trans }}</button>
+            <button type="button" onclick="ProjectsApp.delete({{ project.id }})">{{ 'button.delete'|trans }}</button>
         {% endif %}
     </div>
 </div>
@@ -19,31 +19,3 @@
         </fieldset>
     </div>
 </div>
-
-<script>
-
-    $(function() {
-
-        // "Edit" button.
-        $('#btn-edit').click(function() {
-            eTraxis.modal({
-                url: '{{ path('admin_edit_project', {'id': project.id}) }}',
-                title: '{{ project.name }}',
-                success: function() {
-                    $(document).trigger('admin.project.edited', {{ project.id }});
-                    return true;
-                }
-            });
-        });
-
-        // "Delete" button.
-        $('#btn-delete').click(function() {
-            eTraxis.confirm('{{ 'button.delete'|trans }}', '{{ 'project.confirm.delete'|trans }}', function() {
-                $.post('{{ path('admin_delete_project', {'id': project.id}) }}', function() {
-                    $(document).trigger('admin.project.deleted', {{ project.id }});
-                });
-            });
-        });
-    });
-
-</script>

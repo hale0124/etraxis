@@ -3,7 +3,7 @@
     <div class="grid-45">
         <fieldset>
             <legend>{{ 'members'|trans }}</legend>
-            <select id="users" size="20" multiple class="grid-100 mobile-grid-100">
+            <select id="users" size="20" multiple title="{{ 'members'|trans }}" class="grid-100 mobile-grid-100">
                 {% for user in members %}
                     <option value="{{ user.id }}">{{ user.fullname }} ({{ user.username }})</option>
                 {% endfor %}
@@ -12,11 +12,11 @@
     </div>
 
     <div class="grid-10 text-center">
-        <button type="button" class="grid-row grid-100" id="btn-remove">
+        <button type="button" class="grid-row grid-100" onclick="GroupsApp.removeUsers({{ group.id }})">
             <span class="hide-on-mobile">&gt;&gt;</span>
             <span class="hide-on-desktop ui-icon ui-icon-arrowthick-1-s"></span>
         </button>
-        <button type="button" class="grid-row grid-100" id="btn-add">
+        <button type="button" class="grid-row grid-100" onclick="GroupsApp.addUsers({{ group.id }})">
             <span class="hide-on-mobile">&lt;&lt;</span>
             <span class="hide-on-desktop ui-icon ui-icon-arrowthick-1-n">&lt;&lt;</span>
         </button>
@@ -25,7 +25,7 @@
     <div class="grid-45">
         <fieldset>
             <legend>{{ 'others'|trans }}</legend>
-            <select id="others" size="20" multiple class="grid-100 mobile-grid-100">
+            <select id="others" size="20" multiple title="{{ 'others'|trans }}" class="grid-100 mobile-grid-100">
                 {% for user in others %}
                     <option value="{{ user.id }}">{{ user.fullname }} ({{ user.username }})</option>
                 {% endfor %}
@@ -34,36 +34,3 @@
     </div>
 
 </div>
-
-<script>
-
-    $(function() {
-
-        var reloadTab = function() {
-            var $tabs = $('#tabs-group');
-            var current = $tabs.tabs('option', 'active');
-            $tabs.tabs('load', current);
-        };
-
-        // "<<" button (add users).
-        $('#btn-add').click(function() {
-            var users = $('#others').val();
-            if (users) {
-                $.post('{{ path('admin_groups_add_users', {'id': group.id}) }}', { users: users }, function() {
-                    reloadTab();
-                });
-            }
-        });
-
-        // ">>" button (remove users).
-        $('#btn-remove').click(function() {
-            var users = $('#users').val();
-            if (users) {
-                $.post('{{ path('admin_groups_remove_users', {'id': group.id}) }}', { users: users }, function() {
-                    reloadTab();
-                });
-            }
-        });
-    });
-
-</script>

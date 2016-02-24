@@ -28,22 +28,22 @@
                 </thead>
                 <tfoot>
                     <tr>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
-                        <td><input type="text"></td>
+                        <td><input type="text" title="{{ 'user.username'|trans }}"></td>
+                        <td><input type="text" title="{{ 'user.fullname'|trans }}"></td>
+                        <td><input type="text" title="{{ 'user.email'|trans }}"></td>
                         <td>
-                            <select>
+                            <select title="{{ 'permissions'|trans }}">
                                 <option value="admin">{{ 'role.administrator'|trans }}</option>
                                 <option value="user">{{ 'role.user'|trans }}</option>
                             </select>
                         </td>
                         <td>
-                            <select>
+                            <select title="{{ 'security.authentication'|trans }}">
                                 <option value="etraxis">eTraxis</option>
                                 <option value="ldap">LDAP</option>
                             </select>
                         </td>
-                        <td><input type="text"></td>
+                        <td><input type="text" title="{{ 'description'|trans }}"></td>
                     </tr>
                 </tfoot>
             </table>
