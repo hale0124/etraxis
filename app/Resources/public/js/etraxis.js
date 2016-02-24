@@ -143,6 +143,10 @@ var eTraxis = (function() {
          */
         route: function(id, params) {
 
+            if (!eTraxis.routes.hasOwnProperty(id)) {
+                throw 'Unknown route ID.';
+            }
+
             var url = eTraxis.routes[id];
 
             if (typeof params === 'object') {
