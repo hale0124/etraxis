@@ -63,12 +63,12 @@ class DurationFieldCommandHandler extends BaseFieldCommandHandler
 
         if ($minValue > $maxValue) {
             $this->logger->error('Minimum valus is greater than maximum one.', [$command->minValue, $command->maxValue]);
-            throw new ValidationException([$this->translator->trans('field.min_max_values')]);
+            throw new ValidationException([$this->translator->trans('field.error.min_max_values')]);
         }
 
         if ($default !== null) {
             if ($default < $minValue || $default > $maxValue) {
-                $error = $this->translator->trans('field.default_value', ['%min%' => $command->minValue, '%max%' => $command->maxValue]);
+                $error = $this->translator->trans('field.error.default_value', ['%min%' => $command->minValue, '%max%' => $command->maxValue]);
                 $this->logger->error($error, [$command->default]);
                 throw new ValidationException([$error]);
             }

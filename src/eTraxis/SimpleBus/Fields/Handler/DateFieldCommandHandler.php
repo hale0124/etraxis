@@ -59,12 +59,12 @@ class DateFieldCommandHandler extends BaseFieldCommandHandler
 
         if ($command->minValue > $command->maxValue) {
             $this->logger->error('Minimum valus is greater than maximum one.', [$command->minValue, $command->maxValue]);
-            throw new ValidationException([$this->translator->trans('field.min_max_values')]);
+            throw new ValidationException([$this->translator->trans('field.error.min_max_values')]);
         }
 
         if ($command->default !== null) {
             if ($command->default < $command->minValue || $command->default > $command->maxValue) {
-                $error = $this->translator->trans('field.default_value', ['%min%' => $command->minValue, '%max%' => $command->maxValue]);
+                $error = $this->translator->trans('field.error.default_value', ['%min%' => $command->minValue, '%max%' => $command->maxValue]);
                 $this->logger->error($error, [$command->default]);
                 throw new ValidationException([$error]);
             }
