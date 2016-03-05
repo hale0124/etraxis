@@ -16,6 +16,7 @@ eTraxis.modal = function(options) {
         btnOk: eTraxis.i18n['button.ok'],
         btnCancel: eTraxis.i18n['button.cancel'],
         data: {},
+        open: null,
         success: null,
         error: null
     }, options);
@@ -111,5 +112,9 @@ eTraxis.modal = function(options) {
                 $modal.remove();
             }
         });
+
+        if (typeof settings.open === 'function') {
+            settings.open();
+        }
     });
 };

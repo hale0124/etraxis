@@ -81,6 +81,12 @@ var StatesApp = (function() {
             eTraxis.modal({
                 url: eTraxis.route('admin_dlg_new_state', { id: id }),
                 title: eTraxis.i18n['state.new'],
+                open: function() {
+                    $('#state_type').change(function() {
+                        var isFinal = ($('#state_type').val() == 3);
+                        $('#state_responsible').disable(isFinal);
+                    });
+                },
                 success: function() {
                     var name = $('#state_name').val();
                     StatesApp.reload(id, function() {
