@@ -148,7 +148,34 @@ state.transitions: Přechody
 state.next_for: 'Next state by default for'
 state.make_initial: 'Vytvořit počáteční'
 state.confirm.delete: 'Jste si jisti, že chcete smazat tento stav?'
-field.required: povinný
-field.min_max_values: 'Maximální hodnota musí být větší než minimální.'
-field.default_value: 'Výchozí hodnota musí být v rozmezí %min% až %max%.'
-field.value_range: 'Hodnota "%name%" musí být v rozmezí %min% až %max%.'
+fields: Pole
+field.new: 'Nové pole'
+field.name: 'Název pole'
+field.type: 'Typ pole'
+field.type.number: Číslo
+field.type.decimal: 'Desetinné číslo'
+field.type.string: Text
+field.type.text: 'Víceřádkový text'
+field.type.checkbox: 'Zaškrtávací pole'
+field.type.list: Seznam
+field.type.record: Záznam
+field.type.date: Datum
+field.type.duration: 'Doba trvání'
+field.required: Povinný
+field.guest_access: 'Anonymní přístup'
+field.show_in_emails: 'Zobrazit v e-mailu'
+field.default_value: 'Výchozí hodnota'
+field.min_value: 'Min. hodnota'
+field.max_value: 'Max. hodnota'
+field.max_length: 'Max. délka'
+field.regex_check: 'PCRE pro kontrolu hodnot'
+field.regex_search: 'Vyhledávací PCRE pro transformaci hodnoty'
+field.regex_replace: 'Nahrazovací PCRE pro transformaci hodnoty'
+field.confirm.delete: 'Jste si jisti, že chcete smazat toto pole?'
+field.error.min_max_values: 'Maximální hodnota musí být větší než minimální.'
+field.error.default_value: 'Výchozí hodnota musí být v rozmezí %min% až %max%.'
+field.error.value_range: 'Hodnota "%name%" musí být v rozmezí %min% až %max%.'
+field.permissions.none: žádný/é
+field.permissions.read_only: 'pouze pro čtení'
+field.permissions.read_write: 'čtení i zápis'
+list.items: 'Položky seznamu'

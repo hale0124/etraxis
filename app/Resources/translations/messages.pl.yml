@@ -148,7 +148,34 @@ state.transitions: Przejścia
 state.next_for: 'Next state by default for'
 state.make_initial: 'Utwórz początkowy'
 state.confirm.delete: 'Czy jesteś pewien, że chesz usunąć wybrany status?'
-field.required: wymagany
-field.min_max_values: 'Wartość maksymalna powinna być większa od wartości minimalnej.'
-field.default_value: 'Wartość domyślna powinna być z przedziału od %min% do %max%.'
-field.value_range: 'Wartość "%name%" powinna być z przedziału od %min% do %max%.'
+fields: Pola
+field.new: 'Nowe pole'
+field.name: 'Nazwa pola'
+field.type: 'Typ pola'
+field.type.number: Liczba
+field.type.decimal: Dziesiętna
+field.type.string: Tekst
+field.type.text: 'Pole tekstowe'
+field.type.checkbox: Checkbox
+field.type.list: Lista
+field.type.record: Rekord
+field.type.date: Data
+field.type.duration: Czas
+field.required: Wymagany
+field.guest_access: 'Dostęp anonimowy'
+field.show_in_emails: 'Pokaż w e-mailu'
+field.default_value: 'Warość domyślna'
+field.min_value: Min.wartość
+field.max_value: Max.wartość
+field.max_length: Max.długość
+field.regex_check: 'PCRE do sprawdzenia wartości pola'
+field.regex_search: 'PCRE do przeszukiwania wartości pola'
+field.regex_replace: 'PCRE do zastąpienia wartości pola'
+field.confirm.delete: 'Czy jesteś pewien, że chesz usunąć wybrane pole?'
+field.error.min_max_values: 'Wartość maksymalna powinna być większa od wartości minimalnej.'
+field.error.default_value: 'Wartość domyślna powinna być z przedziału od %min% do %max%.'
+field.error.value_range: 'Wartość "%name%" powinna być z przedziału od %min% do %max%.'
+field.permissions.none: brak
+field.permissions.read_only: 'Pozwolenie na odczyt'
+field.permissions.read_write: 'Pozwolenie do zapisu'
+list.items: 'Pozycje listy'

@@ -148,7 +148,34 @@ state.transitions: Állapotváltás
 state.next_for: 'Next state by default for'
 state.make_initial: 'Legyen ez a kezdő állapot'
 state.confirm.delete: 'Biztos törölni szeretné az állapotot?'
-field.required: kötelező
-field.min_max_values: 'A maximum értéknek nagyobbnak kell lennie, mint 1.'
-field.default_value: 'Az alapértelmezett érték %min% és %max% közé kell, hogy essen.'
-field.value_range: 'A(z) "%name%" értéke %min% és %max% közé kell, hogy essen.'
+fields: Mezők
+field.new: 'Új mező'
+field.name: 'Mező neve'
+field.type: 'Mező típusa'
+field.type.number: Szám
+field.type.decimal: Tizedes
+field.type.string: Szöveg
+field.type.text: 'Többsoros szöveg'
+field.type.checkbox: 'Jelölő négyzet'
+field.type.list: Lista
+field.type.record: Rekord
+field.type.date: Dátum
+field.type.duration: Időtartam
+field.required: Kötelező
+field.guest_access: 'Vendég felhasználó'
+field.show_in_emails: 'Értesítőbe bekerüljön'
+field.default_value: 'Alapértelmezett érték'
+field.min_value: 'Min. érték'
+field.max_value: 'Max. érték'
+field.max_length: 'Max. hossz'
+field.regex_check: 'PCRE a mező értékeinek ellenőrzéséhez'
+field.regex_search: 'Kereső PCRE a mező értékeinek átalakításához'
+field.regex_replace: 'Lecserélő PCRE a mezők értékeinek átalakításához'
+field.confirm.delete: 'Biztos törölni szeretné a mezőt?'
+field.error.min_max_values: 'A maximum értéknek nagyobbnak kell lennie, mint 1.'
+field.error.default_value: 'Az alapértelmezett érték %min% és %max% közé kell, hogy essen.'
+field.error.value_range: 'A(z) "%name%" értéke %min% és %max% közé kell, hogy essen.'
+field.permissions.none: nincs
+field.permissions.read_only: 'csak olvasható'
+field.permissions.read_write: 'olvasás és írás'
+list.items: 'Lista elemei'

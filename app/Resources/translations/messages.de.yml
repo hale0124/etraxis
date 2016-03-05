@@ -148,7 +148,34 @@ state.transitions: Übergänge
 state.next_for: 'Next state by default for'
 state.make_initial: 'Als Startstatus'
 state.confirm.delete: 'Möchten Sie diesen Status wirklich löschen?'
-field.required: erforderlich
-field.min_max_values: 'Das Maximum muss größer als das Minimum sein.'
-field.default_value: 'Der vorgegebene Wert muss im Bereich von %min% bis %max% liegen.'
-field.value_range: 'Der Wert von "%name%" muss im Bereich von %min% bis %max% liegen.'
+fields: Zusätze
+field.new: 'Neuer Zusatz'
+field.name: Zusatzname
+field.type: Zusatzart
+field.type.number: Zahl
+field.type.decimal: Dezimal
+field.type.string: Text
+field.type.text: 'Mehrzeiliger Text'
+field.type.checkbox: Ankreuzfeld
+field.type.list: Auswahlliste
+field.type.record: Anfrage
+field.type.date: Datum
+field.type.duration: Bearbeitungsdauer
+field.required: Erforderlich
+field.guest_access: Gastzugriff
+field.show_in_emails: 'In E-Mails zeigen'
+field.default_value: Vorgabewert
+field.min_value: 'Min. Wert'
+field.max_value: 'Max. Wert'
+field.max_length: 'Max. Länge'
+field.regex_check: 'Erlaubte Werte als regulärer Ausdruck (PCRE)'
+field.regex_search: 'Suchmuster (PCRE) zum Umwandeln von Zusatzinformationen'
+field.regex_replace: 'Ersetzungsmuster (PCRE) zum Umwandeln von Zusatzinformationen'
+field.confirm.delete: 'Möchten Sie diesen Zusatz wirklich löschen?'
+field.error.min_max_values: 'Das Maximum muss größer als das Minimum sein.'
+field.error.default_value: 'Der vorgegebene Wert muss im Bereich von %min% bis %max% liegen.'
+field.error.value_range: 'Der Wert von "%name%" muss im Bereich von %min% bis %max% liegen.'
+field.permissions.none: keiner
+field.permissions.read_only: 'nur lesen'
+field.permissions.read_write: 'lesen und schreiben'
+list.items: Listeneinträge

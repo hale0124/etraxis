@@ -148,7 +148,34 @@ state.transitions: Pārejas
 state.next_for: 'Next state by default for'
 state.make_initial: 'Padarīt par sākotnēju'
 state.confirm.delete: 'Vai tiešām vēlaties dzēst šo stāvokli?'
-field.required: obligāts
-field.min_max_values: 'Maksimālajam lielumam jābūt lielākam par minimālo.'
-field.default_value: 'Noklusējuma nozīmei jąbūt no %min% līdz %max% apgabalā.'
-field.value_range: '"%name%" lauciņa lielumam jābūt no %min% līdz %max% apgabalā.'
+fields: Atribūti
+field.new: 'Jauns atribūts'
+field.name: 'Atribūta nosaukums'
+field.type: 'Atribūta tips'
+field.type.number: Skaitlis
+field.type.decimal: Decimāls
+field.type.string: Rinda
+field.type.text: 'Daudzrindu teksts'
+field.type.checkbox: 'Atlases šūna'
+field.type.list: Saraksts
+field.type.record: Ieraksts
+field.type.date: Datums
+field.type.duration: Ilgums
+field.required: Obligāts
+field.guest_access: 'Viesu piekļuve'
+field.show_in_emails: 'Rādīt e-pastos'
+field.default_value: 'Noklusējuma nozīme'
+field.min_value: Min.lielums
+field.max_value: Max.lielums
+field.max_length: Max.garums
+field.regex_check: 'PCRE lauku vērtību pārbaudei'
+field.regex_search: 'Meklēt PCRE lauku vērtību mainīšanai'
+field.regex_replace: 'Pārvietot PCRE lauku vērtību mainīšana'
+field.confirm.delete: 'Vai tiešām vēlaties dzēst šo atribūtu?'
+field.error.min_max_values: 'Maksimālajam lielumam jābūt lielākam par minimālo.'
+field.error.default_value: 'Noklusējuma nozīmei jąbūt no %min% līdz %max% apgabalā.'
+field.error.value_range: '"%name%" lauciņa lielumam jābūt no %min% līdz %max% apgabalā.'
+field.permissions.none: nav
+field.permissions.read_only: 'tikai nolasīšanai'
+field.permissions.read_write: 'lasīt un rakstīt'
+list.items: 'Saraksta elementi'

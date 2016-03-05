@@ -148,7 +148,34 @@ state.transitions: Преходи
 state.next_for: 'Next state by default for'
 state.make_initial: 'Направи начален'
 state.confirm.delete: 'Сигурен ли сте че искате да изтриете това условие?'
-field.required: изискван
-field.min_max_values: 'Mаксималната стойност трябва да е по-голяма от минималната.'
-field.default_value: 'Стойностите по подразбиране трябва да са в порядъка на %min% до %max%.'
-field.value_range: 'Стойност от "%name%" трябва да бъде в подръдъка от %min% до %max%.'
+fields: Полета
+field.new: 'Ново поле'
+field.name: 'Име на поле'
+field.type: 'Тип на поле'
+field.type.number: Номер
+field.type.decimal: Десетичен
+field.type.string: Стринг
+field.type.text: 'Многоредов текст'
+field.type.checkbox: 'Check box'
+field.type.list: Списък
+field.type.record: Запис
+field.type.date: дата
+field.type.duration: времетраене
+field.required: Изискван
+field.guest_access: 'Достъп за гости'
+field.show_in_emails: 'Покажи в мейлит'
+field.default_value: 'Стойност по подразбиране'
+field.min_value: Мин.стойност
+field.max_value: Макс.стойност
+field.max_length: Макс.дължина
+field.regex_check: 'PCRE за проверяване на стойностите на полетата'
+field.regex_search: 'Потърси PCRE за трансформиране на стойностите на полетата'
+field.regex_replace: 'Замести PCRE за трансформиране на стойностите на полетата'
+field.confirm.delete: 'Сигурен ли сте че искате да изтриете това поле?'
+field.error.min_max_values: 'Mаксималната стойност трябва да е по-голяма от минималната.'
+field.error.default_value: 'Стойностите по подразбиране трябва да са в порядъка на %min% до %max%.'
+field.error.value_range: 'Стойност от "%name%" трябва да бъде в подръдъка от %min% до %max%.'
+field.permissions.none: няма
+field.permissions.read_only: 'само за четене'
+field.permissions.read_write: 'четене и запис'
+list.items: 'Списък итеми'

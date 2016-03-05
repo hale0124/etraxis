@@ -148,7 +148,34 @@ state.transitions: Transitions
 state.next_for: 'Next state by default for'
 state.make_initial: 'Rendre initial'
 state.confirm.delete: 'Etes-vous sur de vouloir effacer cet état?'
-field.required: requis
-field.min_max_values: 'Le maximum doit être superieur au minimum.'
-field.default_value: 'La valeur par défaut doit être comprise entre %min% et %max%.'
-field.value_range: 'La valeur de "%name%" doit être comprise entre %min% et %max%.'
+fields: Champs
+field.new: 'Nouveau champ'
+field.name: 'Nom du champ'
+field.type: 'Type du champ'
+field.type.number: Nombre
+field.type.decimal: Décimal
+field.type.string: Chaîne
+field.type.text: 'Texte multiligne'
+field.type.checkbox: 'Case à cocher'
+field.type.list: Liste
+field.type.record: Enregistrement
+field.type.date: Date
+field.type.duration: Duree
+field.required: Requis
+field.guest_access: 'Accès invité'
+field.show_in_emails: 'Montrer dans les mails'
+field.default_value: 'Valeur par défaut'
+field.min_value: Minimum
+field.max_value: Maximum
+field.max_length: 'Longueur maxi'
+field.regex_check: 'PCRE pour contrôler les champs'
+field.regex_search: 'PCRE recherché pour transformer les champs'
+field.regex_replace: 'PCRE remplacé pour transformer les champs'
+field.confirm.delete: 'Etes-vous sur de vouloir effacer ce champ?'
+field.error.min_max_values: 'Le maximum doit être superieur au minimum.'
+field.error.default_value: 'La valeur par défaut doit être comprise entre %min% et %max%.'
+field.error.value_range: 'La valeur de "%name%" doit être comprise entre %min% et %max%.'
+field.permissions.none: aucun
+field.permissions.read_only: 'lecture seule'
+field.permissions.read_write: 'lecture et écriture'
+list.items: 'éléments de liste'

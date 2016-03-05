@@ -148,7 +148,34 @@ state.transitions: Geçişler
 state.next_for: 'Next state by default for'
 state.make_initial: 'İlk yap'
 state.confirm.delete: 'Bu durumu silmek istediğinizden emin misiniz?'
-field.required: gerekli
-field.min_max_values: 'En yüksek değer, en düşük değerden daha büyük olmalıdır.'
-field.default_value: 'Varsayılan değer, %min% ile %max% arasında olmalıdır.'
-field.value_range: '"%name%" değeri %min% ile %max% arasında olmalıdır.'
+fields: Alanlar
+field.new: 'Yeni alan'
+field.name: 'Alan adı'
+field.type: 'Alan tipi'
+field.type.number: Numara
+field.type.decimal: Ondalık
+field.type.string: Dizge
+field.type.text: 'Çok satırlı metin'
+field.type.checkbox: 'Onay kutusu'
+field.type.list: Liste
+field.type.record: Kayıt
+field.type.date: Tarih
+field.type.duration: Süre
+field.required: Gerekli
+field.guest_access: 'Konuk erişimi'
+field.show_in_emails: 'E-postalarda göster'
+field.default_value: 'Varsayılan değer'
+field.min_value: Min.değer
+field.max_value: Maks.değer
+field.max_length: Maks.uzunluk
+field.regex_check: 'Alan değerlerini denetleyecek PCRE'
+field.regex_search: 'Alan değerlerini dönüştürecek PCRE ara'
+field.regex_replace: 'Alan değerlerini dönüştürecek PCRE değiştir'
+field.confirm.delete: 'Bu alanı silmek istediğinizden emin misiniz?'
+field.error.min_max_values: 'En yüksek değer, en düşük değerden daha büyük olmalıdır.'
+field.error.default_value: 'Varsayılan değer, %min% ile %max% arasında olmalıdır.'
+field.error.value_range: '"%name%" değeri %min% ile %max% arasında olmalıdır.'
+field.permissions.none: yok
+field.permissions.read_only: salt-okunur
+field.permissions.read_write: 'okuma ve yazma'
+list.items: 'Ögeleri listele'

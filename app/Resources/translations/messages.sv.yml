@@ -148,7 +148,34 @@ state.transitions: Övergångar
 state.next_for: 'Next state by default for'
 state.make_initial: 'Gör första'
 state.confirm.delete: 'Är du säker på att du vill ta bort den här statusen?'
-field.required: obligatorisk
-field.min_max_values: 'Högsta värdet bör vara större än minimum en.'
-field.default_value: 'Standardvärdet bör vara i intervallet från %min% till %max%.'
-field.value_range: 'Värdet av "%name%" ska vara i intervallet från %min% till %max%.'
+fields: Fält
+field.new: 'Nytt fält'
+field.name: 'Fält namn'
+field.type: 'Fält typ'
+field.type.number: Nummer
+field.type.decimal: Decimal
+field.type.string: Sträng
+field.type.text: 'Flerraders text'
+field.type.checkbox: Kryssruta
+field.type.list: Lista
+field.type.record: Post
+field.type.date: Datum
+field.type.duration: Varaktighet
+field.required: Obligatorisk
+field.guest_access: 'Gäst åtkomst'
+field.show_in_emails: 'Visa i epost'
+field.default_value: Standardvärde
+field.min_value: Min.värde
+field.max_value: Max.värde
+field.max_length: Max.längd
+field.regex_check: 'PCRE för att kontrollera fältvärden'
+field.regex_search: 'Sök PCRE för att omvandla fältvärden'
+field.regex_replace: 'Ersätt PCRE för att omvandla fältvärden'
+field.confirm.delete: 'Är du säker på att du vill ta bort detta fältet?'
+field.error.min_max_values: 'Högsta värdet bör vara större än minimum en.'
+field.error.default_value: 'Standardvärdet bör vara i intervallet från %min% till %max%.'
+field.error.value_range: 'Värdet av "%name%" ska vara i intervallet från %min% till %max%.'
+field.permissions.none: inga
+field.permissions.read_only: skrivskyddad
+field.permissions.read_write: 'läsa och skriva'
+list.items: Listobjekt

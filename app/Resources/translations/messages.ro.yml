@@ -148,7 +148,34 @@ state.transitions: Tranzitii
 state.next_for: 'Next state by default for'
 state.make_initial: 'Marcheaza ca initiala'
 state.confirm.delete: 'Sunteti sigur ca doriti sa stergeti aceasta stare?'
-field.required: obligatoriu
-field.min_max_values: 'Valoarea maxima trebuie sa fie mai mare decat cea minima.'
-field.default_value: 'Valoarea implicita trebuie sa fie in intervalul %min% la %max%.'
-field.value_range: 'Valoarea "%name%" trebuie sa fie in intervalul %min% pana la %max%.'
+fields: Campuri
+field.new: 'Camp nou'
+field.name: 'Numele campului'
+field.type: 'Tipul campului'
+field.type.number: Numar
+field.type.decimal: Zecimal
+field.type.string: Text
+field.type.text: 'Text cu mai multe linii'
+field.type.checkbox: Bifa
+field.type.list: Lista
+field.type.record: Inregistrare
+field.type.date: Data
+field.type.duration: Durata
+field.required: Obligatoriu
+field.guest_access: 'Acces pt vizitatori'
+field.show_in_emails: 'Arata in mesaje'
+field.default_value: 'Valoare implicita'
+field.min_value: 'Valoare minima'
+field.max_value: 'Valoare maxima'
+field.max_length: 'Lungime maxima'
+field.regex_check: 'PCRE to check field values'
+field.regex_search: 'Search PCRE to transform field values'
+field.regex_replace: 'Replace PCRE to transform field values'
+field.confirm.delete: 'Sunteti sigur ca doriti sa stergeti acest camp?'
+field.error.min_max_values: 'Valoarea maxima trebuie sa fie mai mare decat cea minima.'
+field.error.default_value: 'Valoarea implicita trebuie sa fie in intervalul %min% la %max%.'
+field.error.value_range: 'Valoarea "%name%" trebuie sa fie in intervalul %min% pana la %max%.'
+field.permissions.none: niciunul
+field.permissions.read_only: 'doar afisare'
+field.permissions.read_write: 'afisare si scriere'
+list.items: 'Elementele listei'

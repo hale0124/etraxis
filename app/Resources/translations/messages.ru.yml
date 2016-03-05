@@ -148,7 +148,34 @@ state.transitions: Переходы
 state.next_for: 'Следующее состояние по умолчанию для'
 state.make_initial: 'Сделать исходным'
 state.confirm.delete: 'Вы уверены, что хотите удалить это состояние?'
-field.required: 'обязательное поле'
-field.min_max_values: 'Максимальное значение должно быть больше минимального.'
-field.default_value: 'Значение по умолчанию должно лежать в диапазоне от %min% до %max%.'
-field.value_range: 'Значение поля "%name%" должно лежать в диапазоне от %min% до %max%.'
+fields: Поля
+field.new: 'Новое поле'
+field.name: 'Название поля'
+field.type: 'Тип поля'
+field.type.number: 'Целое число'
+field.type.decimal: 'Вещественное число'
+field.type.string: Строка
+field.type.text: 'Многострочный текст'
+field.type.checkbox: '"Флаг"'
+field.type.list: Список
+field.type.record: Запись
+field.type.date: Дата
+field.type.duration: Продолжительность
+field.required: 'Обязательное поле'
+field.guest_access: 'Гостевой доступ'
+field.show_in_emails: 'Показывать в письмах'
+field.default_value: 'Значение по умолчанию'
+field.min_value: Мин.значение
+field.max_value: Макс.значение
+field.max_length: Макс.длина
+field.regex_check: 'PCRE для проверки значений'
+field.regex_search: 'PCRE-поиск для модификации значений'
+field.regex_replace: 'PCRE-замена для модификации значений'
+field.confirm.delete: 'Вы уверены, что хотите удалить этот атрибут?'
+field.error.min_max_values: 'Максимальное значение должно быть больше минимального.'
+field.error.default_value: 'Значение по умолчанию должно лежать в диапазоне от %min% до %max%.'
+field.error.value_range: 'Значение поля "%name%" должно лежать в диапазоне от %min% до %max%.'
+field.permissions.none: нет
+field.permissions.read_only: 'только чтение'
+field.permissions.read_write: 'чтение и запись'
+list.items: 'Элементы списка'

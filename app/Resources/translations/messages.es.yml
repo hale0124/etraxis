@@ -148,7 +148,34 @@ state.transitions: Transiciones
 state.next_for: 'Next state by default for'
 state.make_initial: 'Hacer inicial'
 state.confirm.delete: '¿Está seguro de eliminar este estado?'
-field.required: obligatorio
-field.min_max_values: 'El valor máximo debe ser mayor que el mínimo.'
-field.default_value: 'El valor predeterminado debe estar comprendido entre %min% y %max%.'
-field.value_range: 'El valor de "%name%" debe estar comprendido entre %min% y %max%.'
+fields: Campos
+field.new: 'Nuevo campo'
+field.name: 'Nombre de campo'
+field.type: 'Tipo de campo'
+field.type.number: Número
+field.type.decimal: Decimal
+field.type.string: Cadena
+field.type.text: 'Texto multilínea'
+field.type.checkbox: 'Casilla de verificación'
+field.type.list: Lista
+field.type.record: Registro
+field.type.date: Fecha
+field.type.duration: Duración
+field.required: Obligatorio
+field.guest_access: 'Acceso de invitado'
+field.show_in_emails: 'Mostrar en emails'
+field.default_value: 'Valor predeterminado'
+field.min_value: 'Valor Min.'
+field.max_value: 'Valor Max.'
+field.max_length: 'Longitud Max.'
+field.regex_check: 'Usar PCRE para verificar el valor de los campos'
+field.regex_search: 'Búsqueda PCRE para transformar el valor de los campos'
+field.regex_replace: 'Reemplazo PCRE para transformar el valor de los campos'
+field.confirm.delete: '¿Está seguro de eliminar este campo?'
+field.error.min_max_values: 'El valor máximo debe ser mayor que el mínimo.'
+field.error.default_value: 'El valor predeterminado debe estar comprendido entre %min% y %max%.'
+field.error.value_range: 'El valor de "%name%" debe estar comprendido entre %min% y %max%.'
+field.permissions.none: ninguno
+field.permissions.read_only: 'sólo lectura'
+field.permissions.read_write: 'lectura y escritura'
+list.items: 'Lista de ítems'

@@ -148,7 +148,34 @@ state.transitions: 遷移
 state.next_for: 'Next state by default for'
 state.make_initial: 初期状態にする
 state.confirm.delete: ステータスを削除してよろしいですか？
+fields: フィールド
+field.new: 新規フィールド
+field.name: フィールド名
+field.type: フィールド形式
+field.type.number: 数値
+field.type.decimal: 数値
+field.type.string: 文字列
+field.type.text: 複数行テキスト
+field.type.checkbox: チェックボックス
+field.type.list: リスト
+field.type.record: レコード
+field.type.date: 日付
+field.type.duration: 期間
 field.required: 必須
-field.min_max_values: 最大値は最小値よりも大きい必要があります。
-field.default_value: 'デフォルトの値は %min% から %max% の範囲で指定できます。'
-field.value_range: '値 %name% は、 %min% から %max% の範囲で指定できます。'
+field.guest_access: ゲストとしてアクセス
+field.show_in_emails: Eメール中に表示
+field.default_value: デフォルトの値
+field.min_value: 最小値
+field.max_value: 最大値
+field.max_length: 最大文字長
+field.regex_check: perl互換正規表現でフィールドの値をチェックする
+field.regex_search: 変換するフィールドの値を検索する際のperl互換正規表現
+field.regex_replace: フィールドの値を変換する際のperl互換正規表現
+field.confirm.delete: フィールドを削除してよろしいですか？
+field.error.min_max_values: 最大値は最小値よりも大きい必要があります。
+field.error.default_value: 'デフォルトの値は %min% から %max% の範囲で指定できます。'
+field.error.value_range: '値 %name% は、 %min% から %max% の範囲で指定できます。'
+field.permissions.none: なし
+field.permissions.read_only: 読み取り権限
+field.permissions.read_write: 書き込み権限
+list.items: リストのアイテム

@@ -148,7 +148,34 @@ state.transitions: Overgangen
 state.next_for: 'Next state by default for'
 state.make_initial: 'Aanmaken beginstatus'
 state.confirm.delete: 'Ben je zeker dat je deze status wilt verwijderen?'
-field.required: vereist
-field.min_max_values: 'Maximum waarde moet groter dan minimum waarde zijn.'
-field.default_value: 'Standaardwaarde moet in het bereik %min% tot %max% liggen.'
-field.value_range: 'Waarde "%name%" moet in het bereik %min% tot %max% liggen.'
+fields: Velden
+field.new: 'Nieuw veld'
+field.name: Veldnaam
+field.type: Veldtype
+field.type.number: Aantal
+field.type.decimal: UL
+field.type.string: Tekst
+field.type.text: 'Meerdere lijnentekst'
+field.type.checkbox: Aankruisen
+field.type.list: Lijst
+field.type.record: Record
+field.type.date: Datum
+field.type.duration: Tijdsduur
+field.required: Vereist
+field.guest_access: 'Gast toegang'
+field.show_in_emails: UL
+field.default_value: Standaardwaarde
+field.min_value: Min.waarde
+field.max_value: Max.waarde
+field.max_length: Max.grootte
+field.regex_check: 'PCRE om veldwaarden te controleren'
+field.regex_search: 'Doorzoek PCRE om veldwaarden om te zetten'
+field.regex_replace: 'Vervang PCRE om veldwaarden om te zetten'
+field.confirm.delete: 'Ben je zeker dat je dit veld wilt verwijderen?'
+field.error.min_max_values: 'Maximum waarde moet groter dan minimum waarde zijn.'
+field.error.default_value: 'Standaardwaarde moet in het bereik %min% tot %max% liggen.'
+field.error.value_range: 'Waarde "%name%" moet in het bereik %min% tot %max% liggen.'
+field.permissions.none: geen
+field.permissions.read_only: 'alleen lezen'
+field.permissions.read_write: 'lezen en schrijven'
+list.items: Oplijsten

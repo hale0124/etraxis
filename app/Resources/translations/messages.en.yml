@@ -147,7 +147,34 @@ state.transitions: Transitions
 state.next_for: 'Next state by default for'
 state.make_initial: 'Make initial'
 state.confirm.delete: 'Are you sure you want delete this state?'
-field.required: 'required field'
-field.min_max_values: 'Maximum value should be greater then minimum one.'
-field.default_value: 'Default value should be in range from %min% to %max%.'
-field.value_range: 'Value of "%name%" should be in range from %min% to %max%.'
+fields: Fields
+field.new: 'New field'
+field.name: 'Field name'
+field.type: 'Field type'
+field.type.number: Number
+field.type.decimal: Decimal
+field.type.string: String
+field.type.text: 'Multilined text'
+field.type.checkbox: 'Check box'
+field.type.list: List
+field.type.record: Record
+field.type.date: Date
+field.type.duration: Duration
+field.required: 'Required field'
+field.guest_access: 'Guest access'
+field.show_in_emails: 'Show in emails'
+field.default_value: 'Default value'
+field.min_value: Min.value
+field.max_value: Max.value
+field.max_length: Max.length
+field.regex_check: 'PCRE to check field values'
+field.regex_search: 'Search PCRE to transform field values'
+field.regex_replace: 'Replace PCRE to transform field values'
+field.confirm.delete: 'Are you sure you want delete this field?'
+field.error.min_max_values: 'Maximum value should be greater then minimum one.'
+field.error.default_value: 'Default value should be in range from %min% to %max%.'
+field.error.value_range: 'Value of "%name%" should be in range from %min% to %max%.'
+field.permissions.none: none
+field.permissions.read_only: read-only
+field.permissions.read_write: 'read and write'
+list.items: 'List items'
