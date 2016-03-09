@@ -148,6 +148,7 @@ state.transitions: Overgangen
 state.next_for: 'Next state by default for'
 state.make_initial: 'Aanmaken beginstatus'
 state.confirm.delete: 'Ben je zeker dat je deze status wilt verwijderen?'
+field: Veld
 fields: Velden
 field.new: 'Nieuw veld'
 field.name: Veldnaam

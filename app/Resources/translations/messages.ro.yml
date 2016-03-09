@@ -148,6 +148,7 @@ state.transitions: Tranzitii
 state.next_for: 'Next state by default for'
 state.make_initial: 'Marcheaza ca initiala'
 state.confirm.delete: 'Sunteti sigur ca doriti sa stergeti aceasta stare?'
+field: Camp
 fields: Campuri
 field.new: 'Camp nou'
 field.name: 'Numele campului'

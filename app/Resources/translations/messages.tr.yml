@@ -148,6 +148,7 @@ state.transitions: Geçişler
 state.next_for: 'Next state by default for'
 state.make_initial: 'İlk yap'
 state.confirm.delete: 'Bu durumu silmek istediğinizden emin misiniz?'
+field: Alanı
 fields: Alanlar
 field.new: 'Yeni alan'
 field.name: 'Alan adı'

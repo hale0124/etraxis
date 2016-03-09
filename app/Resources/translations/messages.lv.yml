@@ -148,6 +148,7 @@ state.transitions: Pārejas
 state.next_for: 'Next state by default for'
 state.make_initial: 'Padarīt par sākotnēju'
 state.confirm.delete: 'Vai tiešām vēlaties dzēst šo stāvokli?'
+field: Atribūts
 fields: Atribūti
 field.new: 'Jauns atribūts'
 field.name: 'Atribūta nosaukums'

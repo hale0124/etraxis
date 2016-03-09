@@ -148,6 +148,7 @@ state.transitions: Transições
 state.next_for: 'Next state by default for'
 state.make_initial: 'Tornar inicial'
 state.confirm.delete: 'Tem certeza que quer apagar este estado?'
+field: Campo
 fields: Campos
 field.new: 'Novo campo'
 field.name: 'Nome do campo'

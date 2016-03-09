@@ -148,6 +148,7 @@ state.transitions: Переходы
 state.next_for: 'Следующее состояние по умолчанию для'
 state.make_initial: 'Сделать исходным'
 state.confirm.delete: 'Вы уверены, что хотите удалить это состояние?'
+field: Поле
 fields: Поля
 field.new: 'Новое поле'
 field.name: 'Название поля'

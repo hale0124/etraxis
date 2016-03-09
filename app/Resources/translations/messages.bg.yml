@@ -148,6 +148,7 @@ state.transitions: Преходи
 state.next_for: 'Next state by default for'
 state.make_initial: 'Направи начален'
 state.confirm.delete: 'Сигурен ли сте че искате да изтриете това условие?'
+field: Поле
 fields: Полета
 field.new: 'Ново поле'
 field.name: 'Име на поле'

@@ -148,6 +148,7 @@ state.transitions: Állapotváltás
 state.next_for: 'Next state by default for'
 state.make_initial: 'Legyen ez a kezdő állapot'
 state.confirm.delete: 'Biztos törölni szeretné az állapotot?'
+field: Mező
 fields: Mezők
 field.new: 'Új mező'
 field.name: 'Mező neve'

@@ -148,6 +148,7 @@ state.transitions: 遷移
 state.next_for: 'Next state by default for'
 state.make_initial: 初期状態にする
 state.confirm.delete: ステータスを削除してよろしいですか？
+field: フィールド
 fields: フィールド
 field.new: 新規フィールド
 field.name: フィールド名

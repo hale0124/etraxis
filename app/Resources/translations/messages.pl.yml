@@ -148,6 +148,7 @@ state.transitions: Przejścia
 state.next_for: 'Next state by default for'
 state.make_initial: 'Utwórz początkowy'
 state.confirm.delete: 'Czy jesteś pewien, że chesz usunąć wybrany status?'
+field: Pole
 fields: Pola
 field.new: 'Nowe pole'
 field.name: 'Nazwa pola'

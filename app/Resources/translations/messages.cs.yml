@@ -148,6 +148,7 @@ state.transitions: Přechody
 state.next_for: 'Next state by default for'
 state.make_initial: 'Vytvořit počáteční'
 state.confirm.delete: 'Jste si jisti, že chcete smazat tento stav?'
+field: Pole
 fields: Pole
 field.new: 'Nové pole'
 field.name: 'Název pole'

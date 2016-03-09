@@ -148,6 +148,7 @@ state.transitions: Övergångar
 state.next_for: 'Next state by default for'
 state.make_initial: 'Gör första'
 state.confirm.delete: 'Är du säker på att du vill ta bort den här statusen?'
+field: Fält
 fields: Fält
 field.new: 'Nytt fält'
 field.name: 'Fält namn'

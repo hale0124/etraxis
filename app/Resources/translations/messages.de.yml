@@ -148,6 +148,7 @@ state.transitions: Übergänge
 state.next_for: 'Next state by default for'
 state.make_initial: 'Als Startstatus'
 state.confirm.delete: 'Möchten Sie diesen Status wirklich löschen?'
+field: Zusatz
 fields: Zusätze
 field.new: 'Neuer Zusatz'
 field.name: Zusatzname

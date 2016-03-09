@@ -148,6 +148,7 @@ state.transitions: Transizioni
 state.next_for: 'Next state by default for'
 state.make_initial: 'Segna come iniziale'
 state.confirm.delete: 'Eliminare questo stato?'
+field: Campo
 fields: Campi
 field.new: 'Nuovo campo'
 field.name: 'Nome del campo'

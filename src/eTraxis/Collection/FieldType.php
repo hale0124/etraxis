@@ -24,15 +24,15 @@ class FieldType extends AbstractStaticCollection
     public static function getCollection()
     {
         return [
-            Field::TYPE_NUMBER   => 'type.number',
-            Field::TYPE_STRING   => 'type.string',
-            Field::TYPE_TEXT     => 'type.text',
-            Field::TYPE_CHECKBOX => 'type.checkbox',
-            Field::TYPE_LIST     => 'type.list',
-            Field::TYPE_RECORD   => 'type.record',
-            Field::TYPE_DATE     => 'type.date',
-            Field::TYPE_DURATION => 'type.duration',
-            Field::TYPE_DECIMAL  => 'type.decimal',
+            Field::TYPE_NUMBER   => 'field.type.number',
+            Field::TYPE_STRING   => 'field.type.string',
+            Field::TYPE_TEXT     => 'field.type.text',
+            Field::TYPE_CHECKBOX => 'field.type.checkbox',
+            Field::TYPE_LIST     => 'field.type.list',
+            Field::TYPE_RECORD   => 'field.type.record',
+            Field::TYPE_DATE     => 'field.type.date',
+            Field::TYPE_DURATION => 'field.type.duration',
+            Field::TYPE_DECIMAL  => 'field.type.decimal',
         ];
     }
 }

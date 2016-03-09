@@ -24,9 +24,9 @@ class FieldAccess extends AbstractStaticCollection
     public static function getCollection()
     {
         return [
-            Field::ACCESS_DENIED     => 'access.denied',
-            Field::ACCESS_READ_ONLY  => 'access.read_only',
-            Field::ACCESS_READ_WRITE => 'access.read_write',
+            Field::ACCESS_DENIED     => 'field.permissions.none',
+            Field::ACCESS_READ_ONLY  => 'field.permissions.read_only',
+            Field::ACCESS_READ_WRITE => 'field.permissions.read_write',
         ];
     }
 }
