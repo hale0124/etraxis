@@ -32,6 +32,9 @@ class Field
     const MAX_DESCRIPTION = 1000;
     const MAX_REGEX       = 500;
 
+    // Actions.
+    const DELETE = 'field.delete';
+
     // Field type.
     const TYPE_NUMBER   = 1;
     const TYPE_STRING   = 2;

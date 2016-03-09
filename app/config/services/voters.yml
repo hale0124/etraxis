@@ -1,6 +1,11 @@
 # Keep voters sorted alphabetically.
 services:
 
+    etraxis.voter.field:
+        class: eTraxis\Voter\FieldVoter
+        public: false
+        tags: [{ name: security.voter }]
+
     etraxis.voter.list_item:
         class: eTraxis\Voter\ListItemVoter
         public: false
