@@ -1,0 +1,22 @@
+{% import 'macro.html.twig' as macro %}
+
+<div class="grid-row">
+    <div class="grid-100">
+        {% if can.delete %}
+            <button type="button" onclick="FieldsApp.delete({{ field.id }})">{{ 'button.delete'|trans }}</button>
+        {% endif %}
+    </div>
+</div>
+
+<div class="grid-row">
+    <div class="grid-100">
+        <fieldset>
+            {{ macro.row('field.name'|trans, field.name) }}
+            {{ macro.row('field.type'|trans, types[field.type]|trans|lower) }}
+            {{ macro.row('description'|trans, field.description) }}
+            {{ macro.row('field.required'|trans, field.isRequired ? 'button.yes'|trans|lower : 'button.no'|trans|lower) }}
+            {{ macro.row('field.guest_access'|trans, field.hasGuestAccess ? 'button.yes'|trans|lower : 'button.no'|trans|lower) }}
+            {{ macro.row('field.show_in_emails'|trans, field.showInEmails ? 'button.yes'|trans|lower : 'button.no'|trans|lower) }}
+        </fieldset>
+    </div>
+</div>
