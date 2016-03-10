@@ -49,6 +49,7 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
     {
         $this->loadDeliveryFields($manager);
         $this->loadFuturamaFields($manager);
+        $this->loadOtherFields($manager);
     }
 
     /**
@@ -384,6 +385,20 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
             $manager->persist($value);
         }
 
+        $manager->flush();
+    }
+
+    /**
+     * Loads assorted fields not related to any project.
+     *
+     * @param   ObjectManager $manager
+     */
+    protected function loadOtherFields(ObjectManager $manager)
+    {
+        $pi = new DecimalValue();
+        $pi->setValue('3.1415926535');
+
+        $manager->persist($pi);
         $manager->flush();
     }
 }

@@ -24,9 +24,6 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class DecimalValue
 {
-    // Constraints.
-    const SCALE = 10;
-
     /**
      * @var int Unique ID.
      *

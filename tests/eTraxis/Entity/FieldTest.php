@@ -227,6 +227,7 @@ class FieldTest extends BaseTestCase
 
     public function testFacades()
     {
-        $this->assertInstanceOf(Fields\NumberField::class, $this->object->asNumber());
+        $this->assertInstanceOf(Fields\NumberField::class,  $this->object->asNumber());
+        $this->assertInstanceOf(Fields\DecimalField::class, $this->object->asDecimal());
     }
 }

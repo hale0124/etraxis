@@ -872,4 +872,14 @@ class Field
     {
         return new Fields\NumberField($this);
     }
+
+    /**
+     * Returns facade for "decimal" field.
+     *
+     * @return  Fields\DecimalField
+     */
+    public function asDecimal()
+    {
+        return new Fields\DecimalField($this, $this->decimalValues);
+    }
 }
