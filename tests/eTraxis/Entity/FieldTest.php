@@ -234,5 +234,6 @@ class FieldTest extends BaseTestCase
         $this->assertInstanceOf(Fields\CheckboxField::class, $this->object->asCheckbox());
         $this->assertInstanceOf(Fields\ListField::class,     $this->object->asList());
         $this->assertInstanceOf(Fields\RecordField::class,   $this->object->asRecord());
+        $this->assertInstanceOf(Fields\DateField::class,     $this->object->asDate());
     }
 }

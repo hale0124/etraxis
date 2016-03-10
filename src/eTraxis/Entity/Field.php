@@ -932,4 +932,14 @@ class Field
     {
         return new Fields\RecordField($this);
     }
+
+    /**
+     * Returns facade for "date" field.
+     *
+     * @return  Fields\DateField
+     */
+    public function asDate()
+    {
+        return new Fields\DateField($this);
+    }
 }

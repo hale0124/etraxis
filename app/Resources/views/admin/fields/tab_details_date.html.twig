@@ -1,4 +1,9 @@
 {% extends 'admin/fields/tab_details.html.twig' %}
 
 {% block details %}
+
+    {{ macro.row('field.min_value'|trans, field.asDate.minValue) }}
+    {{ macro.row('field.max_value'|trans, field.asDate.maxValue) }}
+    {{ macro.row('field.default_value'|trans, field.asDate.defaultValue) }}
+
 {% endblock %}
