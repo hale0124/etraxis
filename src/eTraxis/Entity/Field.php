@@ -902,4 +902,14 @@ class Field
     {
         return new Fields\TextField($this, $this->textValues);
     }
+
+    /**
+     * Returns facade for "checkbox" field.
+     *
+     * @return  Fields\CheckboxField
+     */
+    public function asCheckbox()
+    {
+        return new Fields\CheckboxField($this);
+    }
 }
