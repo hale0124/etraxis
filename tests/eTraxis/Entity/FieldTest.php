@@ -11,14 +11,26 @@
 
 namespace eTraxis\Entity;
 
-class FieldTest extends \PHPUnit_Framework_TestCase
+use eTraxis\Tests\BaseTestCase;
+
+class FieldTest extends BaseTestCase
 {
     /** @var Field */
     private $object = null;
 
     protected function setUp()
     {
+        parent::setUp();
+
         $this->object = new Field();
+
+        /** @noinspection PhpParamsInspection */
+        $this->object
+            ->setDecimalValuesRepository($this->doctrine->getRepository(DecimalValue::class))
+            ->setStringValuesRepository($this->doctrine->getRepository(StringValue::class))
+            ->setTextValuesRepository($this->doctrine->getRepository(TextValue::class))
+            ->setListItemsRepository($this->doctrine->getRepository(ListItem::class))
+        ;
     }
 
     public function testId()

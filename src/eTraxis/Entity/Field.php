@@ -12,6 +12,10 @@
 namespace eTraxis\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use eTraxis\Repository\DecimalValuesRepository;
+use eTraxis\Repository\ListItemsRepository;
+use eTraxis\Repository\StringValuesRepository;
+use eTraxis\Repository\TextValuesRepository;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 
 /**
@@ -23,6 +27,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  *                @ORM\UniqueConstraint(name="ix_fields_order", columns={"state_id", "field_order", "removal_time"})
  *            })
  * @ORM\Entity(repositoryClass="eTraxis\Repository\FieldsRepository")
+ * @ORM\EntityListeners({"eTraxis\Entity\Fields\FieldListener"})
  * @Assert\UniqueEntity(fields={"template", "state", "name", "removedAt"}, message="field.conflict.name", ignoreNull=false)
  */
 class Field
@@ -50,6 +55,12 @@ class Field
     const ACCESS_DENIED     = 0;
     const ACCESS_READ_ONLY  = 1;
     const ACCESS_READ_WRITE = 2;
+
+    // Repositories.
+    protected $decimalValues;
+    protected $stringValues;
+    protected $textValues;
+    protected $listItems;
 
     /**
      * @var int Unique ID.
@@ -794,5 +805,61 @@ class Field
         }
 
         return $types[$this->type];
+    }
+
+    /**
+     * Dependency Injection setter.
+     *
+     * @param   DecimalValuesRepository $repository
+     *
+     * @return  self
+     */
+    public function setDecimalValuesRepository(DecimalValuesRepository $repository)
+    {
+        $this->decimalValues = $repository;
+
+        return $this;
+    }
+
+    /**
+     * Dependency Injection setter.
+     *
+     * @param   StringValuesRepository $repository
+     *
+     * @return  self
+     */
+    public function setStringValuesRepository(StringValuesRepository $repository)
+    {
+        $this->stringValues = $repository;
+
+        return $this;
+    }
+
+    /**
+     * Dependency Injection setter.
+     *
+     * @param   TextValuesRepository $repository
+     *
+     * @return  self
+     */
+    public function setTextValuesRepository(TextValuesRepository $repository)
+    {
+        $this->textValues = $repository;
+
+        return $this;
+    }
+
+    /**
+     * Dependency Injection setter.
+     *
+     * @param   ListItemsRepository $repository
+     *
+     * @return  self
+     */
+    public function setListItemsRepository(ListItemsRepository $repository)
+    {
+        $this->listItems = $repository;
+
+        return $this;
     }
 }

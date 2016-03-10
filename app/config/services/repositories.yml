@@ -26,6 +26,11 @@ services:
         factory: [ "@doctrine.orm.default_entity_manager", "getRepository" ]
         arguments: [ eTraxis\Entity\Group ]
 
+    etraxis.repository.list_items:
+        class: Doctrine\ORM\EntityRepository
+        factory: [ "@doctrine.orm.default_entity_manager", "getRepository" ]
+        arguments: [ eTraxis\Entity\ListItem ]
+
     etraxis.repository.projects:
         class: Doctrine\ORM\EntityRepository
         factory: [ "@doctrine.orm.default_entity_manager", "getRepository" ]

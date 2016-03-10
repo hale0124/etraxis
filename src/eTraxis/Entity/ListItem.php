@@ -24,7 +24,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  *            indexes={
  *                @ORM\Index(name="ix_lvl_id_val", columns={"field_id", "int_value", "str_value"})
  *            })
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="eTraxis\Repository\ListItemsRepository")
  * @Assert\UniqueEntity(fields={"field", "key"}, message="list.conflict.key")
  * @Assert\UniqueEntity(fields={"field", "value"}, message="list.conflict.value")
  */
