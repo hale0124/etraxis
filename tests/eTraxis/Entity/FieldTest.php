@@ -230,5 +230,6 @@ class FieldTest extends BaseTestCase
         $this->assertInstanceOf(Fields\NumberField::class,  $this->object->asNumber());
         $this->assertInstanceOf(Fields\DecimalField::class, $this->object->asDecimal());
         $this->assertInstanceOf(Fields\StringField::class,  $this->object->asString());
+        $this->assertInstanceOf(Fields\TextField::class,    $this->object->asText());
     }
 }

@@ -1,4 +1,8 @@
 {% extends 'admin/fields/tab_details.html.twig' %}
 
 {% block details %}
+
+    {{ macro.row('field.max_length'|trans, field.asText.maxLength) }}
+    {{ macro.row('field.default_value'|trans, field.asText.defaultValue) }}
+
 {% endblock %}

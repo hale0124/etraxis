@@ -892,4 +892,14 @@ class Field
     {
         return new Fields\StringField($this, $this->stringValues);
     }
+
+    /**
+     * Returns facade for "text" field.
+     *
+     * @return  Fields\TextField
+     */
+    public function asText()
+    {
+        return new Fields\TextField($this, $this->textValues);
+    }
 }
