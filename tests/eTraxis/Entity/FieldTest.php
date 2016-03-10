@@ -224,4 +224,9 @@ class FieldTest extends BaseTestCase
         $this->object->setType(0);
         $this->assertNull($this->object->getTypeEx());
     }
+
+    public function testFacades()
+    {
+        $this->assertInstanceOf(Fields\NumberField::class, $this->object->asNumber());
+    }
 }

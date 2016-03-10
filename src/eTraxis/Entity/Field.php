@@ -862,4 +862,14 @@ class Field
 
         return $this;
     }
+
+    /**
+     * Returns facade for "number" field.
+     *
+     * @return  Fields\NumberField
+     */
+    public function asNumber()
+    {
+        return new Fields\NumberField($this);
+    }
 }
