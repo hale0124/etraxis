@@ -94,6 +94,7 @@ class FieldsGetController extends Controller
     public function tabDetailsAction($id)
     {
         try {
+            /** @var Field $field */
             $field = $this->getDoctrine()->getRepository(Field::class)->find($id);
 
             if (!$field) {
@@ -103,7 +104,7 @@ class FieldsGetController extends Controller
             /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
             $authChecker = $this->get('security.authorization_checker');
 
-            return $this->render('admin/fields/tab_details.html.twig', [
+            return $this->render(sprintf('admin/fields/tab_details_%s.html.twig', $field->getTypeEx()), [
                 'field' => $field,
                 'types' => FieldType::getCollection(),
                 'can'   => [

@@ -767,4 +767,32 @@ class Field
     {
         return $this->state;
     }
+
+    /**
+     * Returns internal name of the type.
+     *
+     * @return  string
+     *
+     * @todo    Remove when switched from numeric type IDs to string ones.
+     */
+    public function getTypeEx()
+    {
+        $types = [
+            self::TYPE_NUMBER   => 'number',
+            self::TYPE_DECIMAL  => 'decimal',
+            self::TYPE_STRING   => 'string',
+            self::TYPE_TEXT     => 'text',
+            self::TYPE_CHECKBOX => 'checkbox',
+            self::TYPE_LIST     => 'list',
+            self::TYPE_RECORD   => 'record',
+            self::TYPE_DATE     => 'date',
+            self::TYPE_DURATION => 'duration',
+        ];
+
+        if (!array_key_exists($this->type, $types)) {
+            return null;
+        }
+
+        return $types[$this->type];
+    }
 }

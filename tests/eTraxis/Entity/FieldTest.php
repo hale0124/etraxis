@@ -179,4 +179,37 @@ class FieldTest extends \PHPUnit_Framework_TestCase
         $this->object->setState($state = new State());
         $this->assertSame($state, $this->object->getState());
     }
+
+    public function testTypeEx()
+    {
+        $this->object->setType(Field::TYPE_NUMBER);
+        $this->assertEquals('number', $this->object->getTypeEx());
+
+        $this->object->setType(Field::TYPE_DECIMAL);
+        $this->assertEquals('decimal', $this->object->getTypeEx());
+
+        $this->object->setType(Field::TYPE_STRING);
+        $this->assertEquals('string', $this->object->getTypeEx());
+
+        $this->object->setType(Field::TYPE_TEXT);
+        $this->assertEquals('text', $this->object->getTypeEx());
+
+        $this->object->setType(Field::TYPE_CHECKBOX);
+        $this->assertEquals('checkbox', $this->object->getTypeEx());
+
+        $this->object->setType(Field::TYPE_LIST);
+        $this->assertEquals('list', $this->object->getTypeEx());
+
+        $this->object->setType(Field::TYPE_RECORD);
+        $this->assertEquals('record', $this->object->getTypeEx());
+
+        $this->object->setType(Field::TYPE_DATE);
+        $this->assertEquals('date', $this->object->getTypeEx());
+
+        $this->object->setType(Field::TYPE_DURATION);
+        $this->assertEquals('duration', $this->object->getTypeEx());
+
+        $this->object->setType(0);
+        $this->assertNull($this->object->getTypeEx());
+    }
 }
