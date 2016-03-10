@@ -882,4 +882,14 @@ class Field
     {
         return new Fields\DecimalField($this, $this->decimalValues);
     }
+
+    /**
+     * Returns facade for "string" field.
+     *
+     * @return  Fields\StringField
+     */
+    public function asString()
+    {
+        return new Fields\StringField($this, $this->stringValues);
+    }
 }
