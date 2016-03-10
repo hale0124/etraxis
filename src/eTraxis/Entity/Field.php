@@ -922,4 +922,14 @@ class Field
     {
         return new Fields\ListField($this, $this->listItems);
     }
+
+    /**
+     * Returns facade for "record" field.
+     *
+     * @return  Fields\RecordField
+     */
+    public function asRecord()
+    {
+        return new Fields\RecordField($this);
+    }
 }
