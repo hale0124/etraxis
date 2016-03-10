@@ -912,4 +912,14 @@ class Field
     {
         return new Fields\CheckboxField($this);
     }
+
+    /**
+     * Returns facade for "list" field.
+     *
+     * @return  Fields\ListField
+     */
+    public function asList()
+    {
+        return new Fields\ListField($this, $this->listItems);
+    }
 }
