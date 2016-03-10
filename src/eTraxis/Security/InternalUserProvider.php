@@ -89,6 +89,6 @@ class InternalUserProvider implements UserProviderInterface
      */
     public function supportsClass($class)
     {
-        return $class === 'eTraxis\Entity\User';
+        return $class === User::class;
     }
 }

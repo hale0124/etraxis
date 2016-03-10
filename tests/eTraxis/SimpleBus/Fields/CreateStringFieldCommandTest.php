@@ -47,7 +47,7 @@ class CreateStringFieldCommandTest extends BaseTestCase
         /** @var StringValue $default */
         $default = $this->doctrine->getRepository(StringValue::class)->find($field->getDefaultValue());
 
-        $this->assertInstanceOf('\eTraxis\Entity\Field', $field);
+        $this->assertInstanceOf(Field::class, $field);
         $this->assertEquals(Field::TYPE_STRING, $field->getType());
         $this->assertEquals(100, $field->getParameter1());
         $this->assertEquals('N/A', $default->getValue());

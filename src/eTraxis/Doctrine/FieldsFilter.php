@@ -13,6 +13,7 @@ namespace eTraxis\Doctrine;
 
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Doctrine\ORM\Query\Filter\SQLFilter;
+use eTraxis\Entity\Field;
 
 /**
  * The filter to skip fields marked as deleted.
@@ -24,7 +25,7 @@ class FieldsFilter extends SQLFilter
      */
     public function addFilterConstraint(ClassMetadata $targetEntity, $targetTableAlias)
     {
-        if ($targetEntity->getName() != 'eTraxis\Entity\Field') {
+        if ($targetEntity->getName() != Field::class) {
             return '';
         }
 

@@ -11,6 +11,8 @@
 
 namespace eTraxis\Tests;
 
+use eTraxis\Entity\User;
+
 class BaseTestCaseTest extends BaseTestCase
 {
     public function testFindUser()
@@ -19,7 +21,7 @@ class BaseTestCaseTest extends BaseTestCase
 
         $user = $this->findUser('artem');
 
-        $this->assertInstanceOf('eTraxis\Entity\User', $user);
+        $this->assertInstanceOf(User::class, $user);
         $this->assertEquals('artem', $user->getUsername());
     }
 

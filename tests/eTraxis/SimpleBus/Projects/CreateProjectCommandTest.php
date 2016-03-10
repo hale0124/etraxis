@@ -37,7 +37,7 @@ class CreateProjectCommandTest extends BaseTestCase
         /** @var Project $project */
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => $name]);
 
-        $this->assertInstanceOf('eTraxis\Entity\Project', $project);
+        $this->assertInstanceOf(Project::class, $project);
         $this->assertEquals($name, $project->getName());
         $this->assertEquals($description, $project->getDescription());
         $this->assertTrue($project->isSuspended());

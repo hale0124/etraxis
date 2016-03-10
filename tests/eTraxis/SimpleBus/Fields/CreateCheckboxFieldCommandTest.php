@@ -39,7 +39,7 @@ class CreateCheckboxFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => $command->name]);
 
-        $this->assertInstanceOf('\eTraxis\Entity\Field', $field);
+        $this->assertInstanceOf(Field::class, $field);
         $this->assertEquals(Field::TYPE_CHECKBOX, $field->getType());
         $this->assertNull($field->getParameter1());
         $this->assertNull($field->getParameter2());

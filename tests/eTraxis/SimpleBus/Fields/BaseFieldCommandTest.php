@@ -52,7 +52,7 @@ class BaseFieldCommandTest extends BaseTestCase
 
         $field = $handler->getEntity($command);
 
-        $this->assertInstanceOf('\eTraxis\Entity\Field', $field);
+        $this->assertInstanceOf(Field::class, $field);
         $this->assertEquals($template->getId(), $field->getTemplate()->getId());
         $this->assertNull($field->getState());
         $this->assertEquals('Priority', $field->getName());
@@ -87,7 +87,7 @@ class BaseFieldCommandTest extends BaseTestCase
 
         $field = $handler->getEntity($command);
 
-        $this->assertInstanceOf('\eTraxis\Entity\Field', $field);
+        $this->assertInstanceOf(Field::class, $field);
         $this->assertEquals($state->getTemplateId(), $field->getTemplate()->getId());
         $this->assertEquals($state->getId(), $field->getState()->getId());
         $this->assertEquals('Priority', $field->getName());
@@ -198,7 +198,7 @@ class BaseFieldCommandTest extends BaseTestCase
 
         $entity = $handler->getEntity($command);
 
-        $this->assertInstanceOf('\eTraxis\Entity\Field', $entity);
+        $this->assertInstanceOf(Field::class, $entity);
         $this->assertEquals('Team', $entity->getName());
         $this->assertEquals('New description', $entity->getDescription());
         $this->assertFalse($entity->isRequired());

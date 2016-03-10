@@ -82,9 +82,9 @@ class UserVoterTest extends BaseTestCase
         $leela   = $this->findUser('leela');
         $scruffy = $this->findUser('scruffy');
 
-        $this->assertInstanceOf('eTraxis\Entity\User', $hubert);
-        $this->assertInstanceOf('eTraxis\Entity\User', $leela);
-        $this->assertInstanceOf('eTraxis\Entity\User', $scruffy);
+        $this->assertInstanceOf(User::class, $hubert);
+        $this->assertInstanceOf(User::class, $leela);
+        $this->assertInstanceOf(User::class, $scruffy);
 
         $this->assertFalse($this->security->isGranted(User::DELETE, $hubert));
         $this->assertFalse($this->security->isGranted(User::DELETE, $leela));
@@ -99,9 +99,9 @@ class UserVoterTest extends BaseTestCase
         $francine = $this->findUser('francine');
         $scruffy  = $this->findUser('scruffy');
 
-        $this->assertInstanceOf('eTraxis\Entity\User', $hubert);
-        $this->assertInstanceOf('eTraxis\Entity\User', $francine);
-        $this->assertInstanceOf('eTraxis\Entity\User', $scruffy);
+        $this->assertInstanceOf(User::class, $hubert);
+        $this->assertInstanceOf(User::class, $francine);
+        $this->assertInstanceOf(User::class, $scruffy);
 
         $this->assertFalse($this->security->isGranted(User::DISABLE, $hubert));
         $this->assertFalse($this->security->isGranted(User::DISABLE, $francine));
@@ -115,8 +115,8 @@ class UserVoterTest extends BaseTestCase
         $hubert   = $this->findUser('hubert');
         $francine = $this->findUser('francine');
 
-        $this->assertInstanceOf('eTraxis\Entity\User', $hubert);
-        $this->assertInstanceOf('eTraxis\Entity\User', $francine);
+        $this->assertInstanceOf(User::class, $hubert);
+        $this->assertInstanceOf(User::class, $francine);
 
         $this->assertFalse($this->security->isGranted(User::ENABLE, $hubert));
         $this->assertTrue($this->security->isGranted(User::ENABLE, $francine));
@@ -129,8 +129,8 @@ class UserVoterTest extends BaseTestCase
         $hubert = $this->findUser('hubert');
         $bender = $this->findUser('bender');
 
-        $this->assertInstanceOf('eTraxis\Entity\User', $hubert);
-        $this->assertInstanceOf('eTraxis\Entity\User', $bender);
+        $this->assertInstanceOf(User::class, $hubert);
+        $this->assertInstanceOf(User::class, $bender);
 
         $bender->setAuthAttempts(3);
         $bender->setLockedUntil(time() + 60);

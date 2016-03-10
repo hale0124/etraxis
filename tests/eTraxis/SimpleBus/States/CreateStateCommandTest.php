@@ -53,7 +53,7 @@ class CreateStateCommandTest extends BaseTestCase
 
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => $name]);
 
-        $this->assertInstanceOf('eTraxis\Entity\State', $state);
+        $this->assertInstanceOf(State::class, $state);
         $this->assertEquals($template->getId(), $state->getTemplate()->getId());
         $this->assertEquals($name, $state->getName());
         $this->assertEquals($abbreviation, $state->getAbbreviation());
@@ -93,7 +93,7 @@ class CreateStateCommandTest extends BaseTestCase
 
         $state = $repository->findOneBy(['name' => $name]);
 
-        $this->assertInstanceOf('eTraxis\Entity\State', $state);
+        $this->assertInstanceOf(State::class, $state);
         $this->assertEquals($template->getId(), $state->getTemplate()->getId());
         $this->assertEquals($name, $state->getName());
         $this->assertEquals($abbreviation, $state->getAbbreviation());

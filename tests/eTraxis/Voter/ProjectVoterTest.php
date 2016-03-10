@@ -46,8 +46,8 @@ class ProjectVoterTest extends BaseTestCase
         /** @var Project $project */
         $empty = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'eTraxis 1.0']);
 
-        $this->assertInstanceOf('eTraxis\Entity\Project', $project);
-        $this->assertInstanceOf('eTraxis\Entity\Project', $empty);
+        $this->assertInstanceOf(Project::class, $project);
+        $this->assertInstanceOf(Project::class, $empty);
 
         $this->assertFalse($this->security->isGranted(Project::DELETE, $project));
         $this->assertTrue($this->security->isGranted(Project::DELETE, $empty));

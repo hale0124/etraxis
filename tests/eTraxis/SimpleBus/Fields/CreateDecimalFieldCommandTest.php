@@ -49,7 +49,7 @@ class CreateDecimalFieldCommandTest extends BaseTestCase
         $maxValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameter2());
         $default  = $this->doctrine->getRepository(DecimalValue::class)->find($field->getDefaultValue());
 
-        $this->assertInstanceOf('\eTraxis\Entity\Field', $field);
+        $this->assertInstanceOf(Field::class, $field);
         $this->assertEquals(Field::TYPE_DECIMAL, $field->getType());
         $this->assertEquals('0.00', $minValue->getValue());
         $this->assertEquals('100000.0', $maxValue->getValue());

@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Users;
 
+use eTraxis\Entity\User;
 use eTraxis\Tests\BaseTestCase;
 
 class CreateUserCommandTest extends BaseTestCase
@@ -47,7 +48,7 @@ class CreateUserCommandTest extends BaseTestCase
 
         $user = $this->findUser($username);
 
-        $this->assertInstanceOf('eTraxis\Entity\User', $user);
+        $this->assertInstanceOf(User::class, $user);
         $this->assertEquals($username, $user->getUsername());
         $this->assertEquals($fullname, $user->getFullname());
         $this->assertEquals($email, $user->getEmail());

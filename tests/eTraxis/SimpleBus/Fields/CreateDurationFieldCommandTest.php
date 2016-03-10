@@ -41,7 +41,7 @@ class CreateDurationFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => $command->name]);
 
-        $this->assertInstanceOf('\eTraxis\Entity\Field', $field);
+        $this->assertInstanceOf(Field::class, $field);
         $this->assertEquals(Field::TYPE_DURATION, $field->getType());
         $this->assertEquals(0, $field->getParameter1());
         $this->assertEquals(10080, $field->getParameter2());

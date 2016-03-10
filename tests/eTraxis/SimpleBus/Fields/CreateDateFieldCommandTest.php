@@ -41,7 +41,7 @@ class CreateDateFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => $command->name]);
 
-        $this->assertInstanceOf('\eTraxis\Entity\Field', $field);
+        $this->assertInstanceOf(Field::class, $field);
         $this->assertEquals(Field::TYPE_DATE, $field->getType());
         $this->assertEquals(1, $field->getParameter1());
         $this->assertEquals(7, $field->getParameter2());

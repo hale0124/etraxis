@@ -57,8 +57,8 @@ class ListItemVoterTest extends BaseTestCase
 
         $unused = $this->doctrine->getRepository(ListItem::class)->findOneBy(['value' => 'Season 8']);
 
-        $this->assertInstanceOf('eTraxis\Entity\ListItem', $used);
-        $this->assertInstanceOf('eTraxis\Entity\ListItem', $unused);
+        $this->assertInstanceOf(ListItem::class, $used);
+        $this->assertInstanceOf(ListItem::class, $unused);
 
         $this->assertFalse($this->security->isGranted(ListItem::DELETE, $used));
         $this->assertTrue($this->security->isGranted(ListItem::DELETE, $unused));

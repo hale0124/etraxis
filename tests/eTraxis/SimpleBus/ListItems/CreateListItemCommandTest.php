@@ -46,7 +46,7 @@ class CreateListItemCommandTest extends BaseTestCase
             'key'     => $key,
         ]);
 
-        $this->assertInstanceOf('eTraxis\Entity\ListItem', $item);
+        $this->assertInstanceOf(ListItem::class, $item);
         $this->assertEquals($field->getId(), $item->getField()->getId());
         $this->assertEquals($key, $item->getKey());
         $this->assertEquals($value, $item->getValue());

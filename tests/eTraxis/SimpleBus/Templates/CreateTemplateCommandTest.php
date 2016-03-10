@@ -50,7 +50,7 @@ class CreateTemplateCommandTest extends BaseTestCase
 
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => $name]);
 
-        $this->assertInstanceOf('eTraxis\Entity\Template', $template);
+        $this->assertInstanceOf(Template::class, $template);
         $this->assertEquals($project->getId(), $template->getProject()->getId());
         $this->assertEquals($name, $template->getName());
         $this->assertEquals($prefix, $template->getPrefix());

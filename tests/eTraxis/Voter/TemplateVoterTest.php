@@ -67,8 +67,8 @@ class TemplateVoterTest extends BaseTestCase
         /** @var Template $empty */
         $empty = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Bug report']);
 
-        $this->assertInstanceOf('eTraxis\Entity\Template', $template);
-        $this->assertInstanceOf('eTraxis\Entity\Template', $empty);
+        $this->assertInstanceOf(Template::class, $template);
+        $this->assertInstanceOf(Template::class, $empty);
 
         $this->assertFalse($this->security->isGranted(Template::DELETE, $template));
         $this->assertTrue($this->security->isGranted(Template::DELETE, $empty));

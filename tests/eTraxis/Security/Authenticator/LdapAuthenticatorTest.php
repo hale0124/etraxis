@@ -14,6 +14,7 @@ namespace eTraxis\Security\Authenticator;
 use eTraxis\Service\Ldap\LdapInterface;
 use eTraxis\Tests\BaseTestCase;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class LdapServiceStub implements LdapInterface
@@ -164,7 +165,7 @@ class LdapAuthenticatorTest extends BaseTestCase
             'etraxis.provider'
         );
 
-        $this->assertInstanceOf('\\Symfony\\Component\\HttpFoundation\\Response', $response);
+        $this->assertInstanceOf(Response::class, $response);
     }
 
     public function testSupportsRememberMe()

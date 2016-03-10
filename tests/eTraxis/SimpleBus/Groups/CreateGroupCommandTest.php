@@ -37,7 +37,7 @@ class CreateGroupCommandTest extends BaseTestCase
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => $name]);
 
-        $this->assertInstanceOf('eTraxis\Entity\Group', $group);
+        $this->assertInstanceOf(Group::class, $group);
         $this->assertEquals($name, $group->getName());
         $this->assertEquals($description, $group->getDescription());
     }

@@ -41,7 +41,7 @@ class CreateNumberFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => $command->name]);
 
-        $this->assertInstanceOf('\eTraxis\Entity\Field', $field);
+        $this->assertInstanceOf(Field::class, $field);
         $this->assertEquals(Field::TYPE_NUMBER, $field->getType());
         $this->assertEquals(1, $field->getParameter1());
         $this->assertEquals(12, $field->getParameter2());

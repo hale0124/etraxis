@@ -12,6 +12,7 @@
 namespace AppBundle;
 
 use Doctrine\ORM\Query;
+use eTraxis\Doctrine\SortableNullsWalker;
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 class AppBundle extends Bundle
@@ -31,7 +32,7 @@ class AppBundle extends Bundle
 
             $em->getConfiguration()->setDefaultQueryHint(
                 Query::HINT_CUSTOM_OUTPUT_WALKER,
-                '\eTraxis\Doctrine\SortableNullsWalker'
+                SortableNullsWalker::class
             );
         }
     }

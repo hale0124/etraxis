@@ -63,8 +63,8 @@ class StateVoterTest extends BaseTestCase
         /** @var State $empty */
         $empty = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Cancelled']);
 
-        $this->assertInstanceOf('eTraxis\Entity\State', $state);
-        $this->assertInstanceOf('eTraxis\Entity\State', $empty);
+        $this->assertInstanceOf(State::class, $state);
+        $this->assertInstanceOf(State::class, $empty);
 
         $this->assertFalse($this->security->isGranted(State::DELETE, $state));
         $this->assertTrue($this->security->isGranted(State::DELETE, $empty));
@@ -99,9 +99,9 @@ class StateVoterTest extends BaseTestCase
         /** @var State $final */
         $final = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
-        $this->assertInstanceOf('eTraxis\Entity\State', $initial);
-        $this->assertInstanceOf('eTraxis\Entity\State', $interim);
-        $this->assertInstanceOf('eTraxis\Entity\State', $final);
+        $this->assertInstanceOf(State::class, $initial);
+        $this->assertInstanceOf(State::class, $interim);
+        $this->assertInstanceOf(State::class, $final);
 
         $this->assertFalse($this->security->isGranted(State::INITIAL, $initial));
         $this->assertTrue($this->security->isGranted(State::INITIAL, $interim));
