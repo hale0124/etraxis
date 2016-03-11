@@ -942,4 +942,14 @@ class Field
     {
         return new Fields\DateField($this);
     }
+
+    /**
+     * Returns facade for "duration" field.
+     *
+     * @return  Fields\DurationField
+     */
+    public function asDuration()
+    {
+        return new Fields\DurationField($this);
+    }
 }
