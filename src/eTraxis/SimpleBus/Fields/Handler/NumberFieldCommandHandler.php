@@ -70,10 +70,11 @@ class NumberFieldCommandHandler extends BaseFieldCommandHandler
             }
         }
 
-        $entity
-            ->setType(Field::TYPE_NUMBER)
-            ->setParameter1($command->minValue)
-            ->setParameter2($command->maxValue)
+        $entity->setType(Field::TYPE_NUMBER);
+
+        $entity->asNumber()
+            ->setMinValue($command->minValue)
+            ->setMaxValue($command->maxValue)
             ->setDefaultValue($command->default)
         ;
 

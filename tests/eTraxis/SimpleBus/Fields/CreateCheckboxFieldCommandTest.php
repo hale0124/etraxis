@@ -43,6 +43,6 @@ class CreateCheckboxFieldCommandTest extends BaseTestCase
         $this->assertEquals(Field::TYPE_CHECKBOX, $field->getType());
         $this->assertNull($field->getParameter1());
         $this->assertNull($field->getParameter2());
-        $this->assertTrue($field->getDefaultValue());
+        $this->assertTrue($field->asCheckbox()->getDefaultValue());
     }
 }

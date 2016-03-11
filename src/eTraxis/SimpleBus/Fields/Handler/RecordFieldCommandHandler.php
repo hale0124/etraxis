@@ -29,12 +29,7 @@ class RecordFieldCommandHandler extends BaseFieldCommandHandler
     {
         $entity = $this->getEntity($command);
 
-        $entity
-            ->setType(Field::TYPE_RECORD)
-            ->setParameter1(null)
-            ->setParameter2(null)
-            ->setDefaultValue(null)
-        ;
+        $entity->setType(Field::TYPE_RECORD);
 
         $this->doctrine->getManager()->persist($entity);
         $this->doctrine->getManager()->flush();

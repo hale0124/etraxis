@@ -74,11 +74,12 @@ class DurationFieldCommandHandler extends BaseFieldCommandHandler
             }
         }
 
-        $entity
-            ->setType(Field::TYPE_DURATION)
-            ->setParameter1($minValue)
-            ->setParameter2($maxValue)
-            ->setDefaultValue($default)
+        $entity->setType(Field::TYPE_DURATION);
+
+        $entity->asDuration()
+            ->setMinValue($command->minValue)
+            ->setMaxValue($command->maxValue)
+            ->setDefaultValue($command->default)
         ;
 
         $this->doctrine->getManager()->persist($entity);
@@ -94,8 +95,8 @@ class DurationFieldCommandHandler extends BaseFieldCommandHandler
      */
     protected function durationToInt($duration)
     {
-        list($min, $sec) = explode(':', $duration);
+        list($hh, $mm) = explode(':', $duration);
 
-        return $min * 60 + $sec;
+        return $hh * 60 + $mm;
     }
 }

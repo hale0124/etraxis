@@ -12,39 +12,14 @@
 namespace eTraxis\SimpleBus\Fields\Handler;
 
 use eTraxis\Entity\Field;
-use eTraxis\Repository\TextValuesRepository;
 use eTraxis\SimpleBus\Fields\CreateTextFieldCommand;
 use eTraxis\SimpleBus\Fields\UpdateTextFieldCommand;
-use Psr\Log\LoggerInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Command handler.
  */
 class TextFieldCommandHandler extends BaseFieldCommandHandler
 {
-    protected $repository;
-
-    /**
-     * Dependency Injection constructor.
-     *
-     * @param   LoggerInterface      $logger
-     * @param   ValidatorInterface   $validator
-     * @param   RegistryInterface    $doctrine
-     * @param   TextValuesRepository $repository
-     */
-    public function __construct(
-        LoggerInterface      $logger,
-        ValidatorInterface   $validator,
-        RegistryInterface    $doctrine,
-        TextValuesRepository $repository)
-    {
-        parent::__construct($logger, $validator, $doctrine);
-
-        $this->repository = $repository;
-    }
-
     /**
      * Creates or updates "text" field.
      *
@@ -56,11 +31,14 @@ class TextFieldCommandHandler extends BaseFieldCommandHandler
 
         $entity
             ->setType(Field::TYPE_TEXT)
-            ->setParameter1($command->maxLength)
-            ->setDefaultValue($this->repository->save($command->default))
             ->setRegexCheck($command->regexCheck)
             ->setRegexSearch($command->regexSearch)
             ->setRegexReplace($command->regexReplace)
+        ;
+
+        $entity->asText()
+            ->setMaxLength($command->maxLength)
+            ->setDefaultValue($command->default)
         ;
 
         $this->doctrine->getManager()->persist($entity);

@@ -70,10 +70,11 @@ class DateFieldCommandHandler extends BaseFieldCommandHandler
             }
         }
 
-        $entity
-            ->setType(Field::TYPE_DATE)
-            ->setParameter1($command->minValue)
-            ->setParameter2($command->maxValue)
+        $entity->setType(Field::TYPE_DATE);
+
+        $entity->asDate()
+            ->setMinValue($command->minValue)
+            ->setMaxValue($command->maxValue)
             ->setDefaultValue($command->default)
         ;
 

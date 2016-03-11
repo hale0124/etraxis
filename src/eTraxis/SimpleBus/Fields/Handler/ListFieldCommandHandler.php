@@ -33,11 +33,7 @@ class ListFieldCommandHandler extends BaseFieldCommandHandler
     {
         $entity = $this->getEntity($command);
 
-        $entity
-            ->setType(Field::TYPE_LIST)
-            ->setParameter1(null)
-            ->setParameter2(null)
-        ;
+        $entity->setType(Field::TYPE_LIST);
 
         if ($command instanceof UpdateListFieldCommand) {
 

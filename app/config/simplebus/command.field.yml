@@ -5,15 +5,20 @@ services:
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateNumberFieldCommand }]
         arguments: [ "@logger", "@validator", "@doctrine", "@translator" ]
 
+    command.field.create.decimal:
+        class: eTraxis\SimpleBus\Fields\Handler\DecimalFieldCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateDecimalFieldCommand }]
+        arguments: [ "@logger", "@validator", "@doctrine", "@translator" ]
+
     command.field.create.string:
         class: eTraxis\SimpleBus\Fields\Handler\StringFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateStringFieldCommand }]
-        arguments: [ "@logger", "@validator", "@doctrine", "@etraxis.repository.string_values" ]
+        arguments: [ "@logger", "@validator", "@doctrine" ]
 
     command.field.create.text:
         class: eTraxis\SimpleBus\Fields\Handler\TextFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateTextFieldCommand }]
-        arguments: [ "@logger", "@validator", "@doctrine", "@etraxis.repository.text_values" ]
+        arguments: [ "@logger", "@validator", "@doctrine" ]
 
     command.field.create.checkbox:
         class: eTraxis\SimpleBus\Fields\Handler\CheckboxFieldCommandHandler
@@ -40,25 +45,25 @@ services:
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateDurationFieldCommand }]
         arguments: [ "@logger", "@validator", "@doctrine", "@translator" ]
 
-    command.field.create.decimal:
-        class: eTraxis\SimpleBus\Fields\Handler\DecimalFieldCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateDecimalFieldCommand }]
-        arguments: [ "@logger", "@validator", "@doctrine", "@translator", "@etraxis.repository.decimal_values" ]
-
     command.field.update.number:
         class: eTraxis\SimpleBus\Fields\Handler\NumberFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateNumberFieldCommand }]
         arguments: [ "@logger", "@validator", "@doctrine", "@translator" ]
 
+    command.field.update.decimal:
+        class: eTraxis\SimpleBus\Fields\Handler\DecimalFieldCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateDecimalFieldCommand }]
+        arguments: [ "@logger", "@validator", "@doctrine", "@translator" ]
+
     command.field.update.string:
         class: eTraxis\SimpleBus\Fields\Handler\StringFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateStringFieldCommand }]
-        arguments: [ "@logger", "@validator", "@doctrine", "@etraxis.repository.string_values" ]
+        arguments: [ "@logger", "@validator", "@doctrine" ]
 
     command.field.update.text:
         class: eTraxis\SimpleBus\Fields\Handler\TextFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateTextFieldCommand }]
-        arguments: [ "@logger", "@validator", "@doctrine", "@etraxis.repository.text_values" ]
+        arguments: [ "@logger", "@validator", "@doctrine" ]
 
     command.field.update.checkbox:
         class: eTraxis\SimpleBus\Fields\Handler\CheckboxFieldCommandHandler
@@ -84,11 +89,6 @@ services:
         class: eTraxis\SimpleBus\Fields\Handler\DurationFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateDurationFieldCommand }]
         arguments: [ "@logger", "@validator", "@doctrine", "@translator" ]
-
-    command.field.update.decimal:
-        class: eTraxis\SimpleBus\Fields\Handler\DecimalFieldCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateDecimalFieldCommand }]
-        arguments: [ "@logger", "@validator", "@doctrine", "@translator", "@etraxis.repository.decimal_values" ]
 
     command.field.delete:
         class: eTraxis\SimpleBus\Fields\Handler\DeleteFieldCommandHandler

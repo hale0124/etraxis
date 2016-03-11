@@ -29,12 +29,9 @@ class CheckboxFieldCommandHandler extends BaseFieldCommandHandler
     {
         $entity = $this->getEntity($command);
 
-        $entity
-            ->setType(Field::TYPE_CHECKBOX)
-            ->setParameter1(null)
-            ->setParameter2(null)
-            ->setDefaultValue($command->default)
-        ;
+        $entity->setType(Field::TYPE_CHECKBOX);
+
+        $entity->asCheckbox()->setDefaultValue($command->default);
 
         $this->doctrine->getManager()->persist($entity);
         $this->doctrine->getManager()->flush();

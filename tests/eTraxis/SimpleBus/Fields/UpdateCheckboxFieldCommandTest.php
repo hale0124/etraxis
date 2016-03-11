@@ -49,6 +49,6 @@ class UpdateCheckboxFieldCommandTest extends BaseTestCase
         $this->assertFalse($field->isRequired());
         $this->assertTrue($field->hasGuestAccess());
         $this->assertTrue($field->getShowInEmails());
-        $this->assertTrue($field->getDefaultValue());
+        $this->assertTrue($field->asCheckbox()->getDefaultValue());
     }
 }

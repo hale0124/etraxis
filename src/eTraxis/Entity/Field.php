@@ -263,6 +263,12 @@ class Field
     {
         $this->removedAt    = 0;
         $this->addSeparator = 0;
+        $this->regexCheck   = null;
+        $this->regexSearch  = null;
+        $this->regexReplace = null;
+        $this->parameter1   = null;
+        $this->parameter2   = null;
+        $this->defaultValue = null;
     }
 
     /**

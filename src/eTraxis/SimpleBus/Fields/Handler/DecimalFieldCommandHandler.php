@@ -12,7 +12,6 @@
 namespace eTraxis\SimpleBus\Fields\Handler;
 
 use eTraxis\Entity\Field;
-use eTraxis\Repository\DecimalValuesRepository;
 use eTraxis\SimpleBus\Fields\CreateDecimalFieldCommand;
 use eTraxis\SimpleBus\Fields\UpdateDecimalFieldCommand;
 use eTraxis\SimpleBus\Middleware\ValidationException;
@@ -27,28 +26,24 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class DecimalFieldCommandHandler extends BaseFieldCommandHandler
 {
     protected $translator;
-    protected $repository;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface         $logger
-     * @param   ValidatorInterface      $validator
-     * @param   RegistryInterface       $doctrine
-     * @param   TranslatorInterface     $translator
-     * @param   DecimalValuesRepository $repository
+     * @param   LoggerInterface     $logger
+     * @param   ValidatorInterface  $validator
+     * @param   RegistryInterface   $doctrine
+     * @param   TranslatorInterface $translator
      */
     public function __construct(
-        LoggerInterface         $logger,
-        ValidatorInterface      $validator,
-        RegistryInterface       $doctrine,
-        TranslatorInterface     $translator,
-        DecimalValuesRepository $repository)
+        LoggerInterface     $logger,
+        ValidatorInterface  $validator,
+        RegistryInterface   $doctrine,
+        TranslatorInterface $translator)
     {
         parent::__construct($logger, $validator, $doctrine);
 
         $this->translator = $translator;
-        $this->repository = $repository;
     }
 
     /**
@@ -75,11 +70,12 @@ class DecimalFieldCommandHandler extends BaseFieldCommandHandler
             }
         }
 
-        $entity
-            ->setType(Field::TYPE_DECIMAL)
-            ->setParameter1($this->repository->save($command->minValue))
-            ->setParameter2($this->repository->save($command->maxValue))
-            ->setDefaultValue($this->repository->save($command->default))
+        $entity->setType(Field::TYPE_DECIMAL);
+
+        $entity->asDecimal()
+            ->setMinValue($command->minValue)
+            ->setMaxValue($command->maxValue)
+            ->setDefaultValue($command->default)
         ;
 
         $this->doctrine->getManager()->persist($entity);

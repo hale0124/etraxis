@@ -11,9 +11,7 @@
 
 namespace eTraxis\SimpleBus\Fields\Handler;
 
-use eTraxis\Entity\Field;
-use eTraxis\Entity\State;
-use eTraxis\Entity\Template;
+use eTraxis\Entity;
 use eTraxis\SimpleBus\Fields\CreateFieldBaseCommand;
 use eTraxis\SimpleBus\Fields\UpdateFieldBaseCommand;
 use Psr\Log\LoggerInterface;
@@ -53,7 +51,7 @@ class BaseFieldCommandHandler
      *
      * @param   CreateFieldBaseCommand|UpdateFieldBaseCommand $command
      *
-     * @return  Field
+     * @return  Entity\Field
      *
      * @throws  BadRequestHttpException
      */
@@ -75,29 +73,34 @@ class BaseFieldCommandHandler
      *
      * @param   CreateFieldBaseCommand $command
      *
-     * @return  Field
+     * @return  Entity\Field
      *
      * @throws  BadRequestHttpException
      * @throws  NotFoundHttpException
      */
     private function create(CreateFieldBaseCommand $command)
     {
-        $entity = new Field();
+        $entity = new Entity\Field();
 
+        /** @noinspection PhpParamsInspection */
         $entity
             ->setName($command->name)
             ->setDescription($command->description)
             ->setRequired($command->required)
             ->setGuestAccess($command->guestAccess)
             ->setShowInEmails($command->showInEmails)
-            ->setRegisteredAccess(Field::ACCESS_DENIED)
-            ->setAuthorAccess(Field::ACCESS_DENIED)
-            ->setResponsibleAccess(Field::ACCESS_DENIED)
+            ->setRegisteredAccess(Entity\Field::ACCESS_DENIED)
+            ->setAuthorAccess(Entity\Field::ACCESS_DENIED)
+            ->setResponsibleAccess(Entity\Field::ACCESS_DENIED)
+            ->setDecimalValuesRepository($this->doctrine->getRepository(Entity\DecimalValue::class))
+            ->setStringValuesRepository($this->doctrine->getRepository(Entity\StringValue::class))
+            ->setTextValuesRepository($this->doctrine->getRepository(Entity\TextValue::class))
+            ->setListItemsRepository($this->doctrine->getRepository(Entity\ListItem::class))
         ;
 
         if ($command->state) {
-            /** @var State $state */
-            $state = $this->doctrine->getRepository(State::class)->find($command->state);
+            /** @var Entity\State $state */
+            $state = $this->doctrine->getRepository(Entity\State::class)->find($command->state);
 
             if (!$state) {
                 $this->logger->error('Unknown state.', [$command->state]);
@@ -109,8 +112,8 @@ class BaseFieldCommandHandler
             $entity->setIndexNumber($state->getFields()->count() + 1);
         }
         else {
-            /** @var Template $template */
-            $template = $this->doctrine->getRepository(Template::class)->find($command->template);
+            /** @var Entity\Template $template */
+            $template = $this->doctrine->getRepository(Entity\Template::class)->find($command->template);
 
             if (!$template) {
                 $this->logger->error('Unknown template.', [$command->template]);
@@ -137,16 +140,16 @@ class BaseFieldCommandHandler
      *
      * @param   UpdateFieldBaseCommand $command
      *
-     * @return  Field
+     * @return  Entity\Field
      *
      * @throws  BadRequestHttpException
      * @throws  NotFoundHttpException
      */
     private function update(UpdateFieldBaseCommand $command)
     {
-        $repository = $this->doctrine->getRepository(Field::class);
+        $repository = $this->doctrine->getRepository(Entity\Field::class);
 
-        /** @var Field $entity */
+        /** @var Entity\Field $entity */
         $entity = $repository->find($command->id);
 
         if (!$entity) {
