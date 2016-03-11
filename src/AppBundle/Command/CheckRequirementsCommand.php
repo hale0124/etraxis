@@ -107,6 +107,7 @@ class CheckRequirementsCommand extends ContainerAwareCommand
             'json',         // also required by Symfony
             'SimpleXML',    // also required by Symfony
             'pcre',         // also required by Symfony
+            'bcmath',
             'iconv',
             'mbstring',
         ];

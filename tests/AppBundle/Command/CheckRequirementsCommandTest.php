@@ -21,6 +21,7 @@ class CheckRequirementsCommandTest extends BaseTestCase
     public function testOK()
     {
         $extensions = [
+            'bcmath     OK',
             'ctype      OK',
             'iconv      OK',
             'json       OK',
