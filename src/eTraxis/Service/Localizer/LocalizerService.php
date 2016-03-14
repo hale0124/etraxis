@@ -72,7 +72,7 @@ class LocalizerService implements LocalizerInterface
 
             if ($user instanceof UserInterface) {
                 $timezone = Timezone::getValue($user->getTimezone());
-                $offset   = timezone_offset_get(timezone_open($timezone), date_create()) - intval(date('Z'));
+                $offset   = timezone_offset_get(timezone_open($timezone), date_create()) - (int) date('Z');
             }
         }
 

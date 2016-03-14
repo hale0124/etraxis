@@ -193,7 +193,7 @@ class TemplatesPostController extends Controller
             $command = new Templates\AddTemplatePermissionsCommand([
                 'id'          => $id,
                 'group'       => $group,
-                'permissions' => intval($request->request->get('permissions')),
+                'permissions' => (int) $request->request->get('permissions'),
             ]);
 
             $this->getCommandBus()->handle($command);

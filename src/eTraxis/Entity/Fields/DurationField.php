@@ -128,7 +128,7 @@ class DurationField
             $value = self::MAX_VALUE;
         }
 
-        return intval(floor($value / 60)) . ':' . str_pad($value % 60, 2, '0', STR_PAD_LEFT);
+        return (int) floor($value / 60) . ':' . str_pad($value % 60, 2, '0', STR_PAD_LEFT);
     }
 
     /**
