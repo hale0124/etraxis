@@ -55,7 +55,7 @@ class MailerService implements MailerInterface
     public function send($recipients, $subject, $template, $args = [])
     {
         $this->logger->info('Send email', [$subject]);
-        $this->logger->info('Recipients', is_array($recipients) ? $recipients : [$recipients]);
+        $this->logger->info('Recipients', (array) $recipients);
 
         $body = $this->twig->render($template, $args);
 
