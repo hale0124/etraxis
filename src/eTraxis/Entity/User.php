@@ -781,7 +781,6 @@ class User implements AdvancedUserInterface
      */
     public function getSalt()
     {
-        return;
     }
 
     /**
