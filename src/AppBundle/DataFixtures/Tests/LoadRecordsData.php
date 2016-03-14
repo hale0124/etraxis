@@ -1987,7 +1987,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
                     ->setType($field->getType())
                     ->setValueId($field_value)
                     ->setCurrent(true)
-                    ->setEvent(substr($field_ref, 0, 14) == 'state:produced' ? $event : $event2)
+                    ->setEvent(strpos($field_ref, 'state:produced') !== false ? $event : $event2)
                     ->setField($field)
                 ;
 

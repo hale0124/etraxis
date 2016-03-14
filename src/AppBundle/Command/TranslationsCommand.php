@@ -62,7 +62,7 @@ class TranslationsCommand extends Command
 
         foreach (scandir('app/Resources/translations') as $entry) {
 
-            if (substr($entry, 0, strlen($basename)) != $basename || substr($entry, -4) != '.yml') {
+            if (!preg_match("/^{$basename}(.)+\\.yml$/", $entry)) {
                 continue;
             }
 
@@ -94,7 +94,7 @@ class TranslationsCommand extends Command
     {
         foreach (scandir('app/Resources/translations') as $entry) {
 
-            if (substr($entry, 0, 9) != 'messages.' || substr($entry, -4) != '.yml') {
+            if (!preg_match("/^messages\\.(.)+\\.yml$/", $entry)) {
                 continue;
             }
 
