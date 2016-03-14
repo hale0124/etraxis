@@ -68,7 +68,7 @@ class SetOrderFieldCommandHandler
 
         if ($command->order > $count) {
             $command->order = $count;
-        };
+        }
 
         $old_order = $entity->getIndexNumber();
 

@@ -56,7 +56,7 @@ class ListField
                 'key'     => $key,
             ]);
 
-            $key = ($item) ? $item->getKey() : null;
+            $key = ($item ? $item->getKey() : null);
         }
 
         $this->field->setDefaultValue($key);
@@ -93,6 +93,6 @@ class ListField
             'key'     => $key,
         ]);
 
-        return ($item) ? $item->getValue() : null;
+        return ($item ? $item->getValue() : null);
     }
 }
