@@ -144,9 +144,9 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
 
         foreach ($fields as $state_ref => $state_fields) {
 
-            foreach ($state_fields as $order => $info) {
+            $state = $this->getReference($state_ref);
 
-                $state = $this->getReference($state_ref);
+            foreach ($state_fields as $order => $info) {
 
                 $field = new Field();
 
@@ -180,9 +180,10 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
 
             foreach ($state_fields as $order => $info) {
 
+                $field = $this->getReference($state_ref . ':' . $order);
+
                 foreach ($info['permissions'] as $group_ref => $permissions) {
 
-                    $field = $this->getReference($state_ref . ':' . $order);
                     $group = $this->getReference($group_ref);
 
                     $access = new FieldGroupAccess();
@@ -333,9 +334,9 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
 
         foreach ($fields as $state_ref => $state_fields) {
 
-            foreach ($state_fields as $order => $info) {
+            $state = $this->getReference($state_ref);
 
-                $state = $this->getReference($state_ref);
+            foreach ($state_fields as $order => $info) {
 
                 $field = new Field();
 
