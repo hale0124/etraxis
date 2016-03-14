@@ -32,11 +32,9 @@ class MailerServiceTest extends KernelTestCase
         $mailer = static::$kernel->getContainer()->get('mailer');
 
         /** @noinspection PhpParamsInspection */
-        $service = new Mailer\MailerService($logger, $twig, $mailer);
+        $service = new Mailer\MailerService($logger, $twig, $mailer, 'noreply@example.com', 'eTraxis mailer');
 
         $sent = $service->send(
-            'noreply@example.com',
-            'eTraxis Support',
             'test@example.com',
             'Test',
             'email.html.twig'

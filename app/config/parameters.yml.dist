@@ -17,7 +17,7 @@ parameters:
     delivery_addresses:     ~
 
     mailfrom_address:       noreply@example.com
-    mailfrom_name:          "eTraxis Support"
+    mailfrom_name:          "eTraxis"
 
     ldap_host:              ~
     ldap_port:              ~

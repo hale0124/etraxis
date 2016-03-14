@@ -23,33 +23,44 @@ class MailerService implements MailerInterface
     protected $logger;
     protected $twig;
     protected $mailer;
+    protected $sender_address;
+    protected $sender_name;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface  $logger Debug logger.
-     * @param   Twig_Environment $twig   Templates renderer.
-     * @param   Swift_Mailer     $mailer Mailer service.
+     * @param   LoggerInterface  $logger         Debug logger.
+     * @param   Twig_Environment $twig           Templates renderer.
+     * @param   Swift_Mailer     $mailer         Mailer service.
+     * @param   string           $sender_address Sender address.
+     * @param   string           $sender_name    Sender name.
      */
-    public function __construct(LoggerInterface $logger, Twig_Environment $twig, Swift_Mailer $mailer)
+    public function __construct(
+        LoggerInterface  $logger,
+        Twig_Environment $twig,
+        Swift_Mailer     $mailer,
+        $sender_address,
+        $sender_name)
     {
-        $this->logger = $logger;
-        $this->twig   = $twig;
-        $this->mailer = $mailer;
+        $this->logger         = $logger;
+        $this->twig           = $twig;
+        $this->mailer         = $mailer;
+        $this->sender_address = $sender_address;
+        $this->sender_name    = $sender_name;
     }
 
     /**
      * {@inheritdoc}
      */
-    public function send($from_address, $from_name, $recipients, $subject, $template, $args = [])
+    public function send($recipients, $subject, $template, $args = [])
     {
-        $this->logger->info('Send email', [$from_address, $from_name, $subject]);
+        $this->logger->info('Send email', [$subject]);
         $this->logger->info('Recipients', is_array($recipients) ? $recipients : [$recipients]);
 
         $body = $this->twig->render($template, $args);
 
         $message = \Swift_Message::newInstance($subject, $body, 'text/html')
-            ->setFrom($from_address, $from_name)
+            ->setFrom([$this->sender_address => $this->sender_name])
             ->setTo($recipients)
         ;
 

@@ -24,23 +24,17 @@ class ForgotPasswordCommandHandler
 {
     protected $doctrine;
     protected $mailer;
-    protected $sender_address;
-    protected $sender_name;
 
     /**
      * Dependency Injection constructor.
      *
      * @param   RegistryInterface $doctrine
      * @param   MailerInterface   $mailer
-     * @param   string            $sender_address
-     * @param   string            $sender_name
      */
-    public function __construct(RegistryInterface $doctrine, MailerInterface $mailer, $sender_address, $sender_name)
+    public function __construct(RegistryInterface $doctrine, MailerInterface $mailer)
     {
-        $this->doctrine       = $doctrine;
-        $this->mailer         = $mailer;
-        $this->sender_address = $sender_address;
-        $this->sender_name    = $sender_name;
+        $this->doctrine = $doctrine;
+        $this->mailer   = $mailer;
     }
 
     /**
@@ -64,8 +58,6 @@ class ForgotPasswordCommandHandler
             $this->doctrine->getManager()->flush();
 
             $this->mailer->send(
-                $this->sender_address,
-                $this->sender_name,
                 [$user->getEmail() => $user->getFullname()],
                 'Reset password link for your eTraxis account',
                 'email/forgot_password.html.twig',

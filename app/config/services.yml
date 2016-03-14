@@ -51,6 +51,8 @@ services:
             - "@logger"
             - "@twig"
             - "@mailer"
+            - "%mailfrom_address%"
+            - "%mailfrom_name%"
 
     etraxis.export:
         class: eTraxis\Service\Export\ExportService

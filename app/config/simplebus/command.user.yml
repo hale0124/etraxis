@@ -53,7 +53,7 @@ services:
     command.password.forgot:
         class: eTraxis\SimpleBus\Users\Handler\ForgotPasswordCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\ForgotPasswordCommand }]
-        arguments: [ "@doctrine", "@etraxis.mailer", "%mailfrom_address%", "%mailfrom_name%" ]
+        arguments: [ "@doctrine", "@etraxis.mailer" ]
 
     command.password.reset:
         class: eTraxis\SimpleBus\Users\Handler\ResetPasswordCommandHandler
