@@ -33,14 +33,14 @@ trait ClassAccessTrait
      *
      * @param   string $name Name of the property.
      *
-     * @throws  \Exception If the property doesn't exist.
+     * @throws  \BadMethodCallException If the property doesn't exist.
      *
      * @return  mixed Current value of the property.
      */
     public function __get($name)
     {
         if (!property_exists($this, $name)) {
-            throw new \Exception(sprintf('Unknown property "%s" in class "%s".', $name, get_class($this)));
+            throw new \BadMethodCallException(sprintf('Unknown property "%s" in class "%s".', $name, get_class($this)));
         }
 
         return $this->$name;
@@ -52,12 +52,12 @@ trait ClassAccessTrait
      * @param   string $name  Property name.
      * @param   mixed  $value Property value.
      *
-     * @throws  \Exception Unknown property.
+     * @throws  \BadMethodCallException Unknown property.
      */
     public function __set($name, $value)
     {
         if (!property_exists($this, $name)) {
-            throw new \Exception(sprintf('Unknown property "%s" in class "%s".', $name, get_class($this)));
+            throw new \BadMethodCallException(sprintf('Unknown property "%s" in class "%s".', $name, get_class($this)));
         }
 
         $this->$name = $value;
@@ -69,7 +69,7 @@ trait ClassAccessTrait
      * @param   string $name      Method name.
      * @param   array  $arguments List of arguments to be passed in the call.
      *
-     * @throws  \Exception Unknown method.
+     * @throws  \BadMethodCallException Unknown method.
      *
      * @return  mixed Value returned from the method, if any.
      */
@@ -78,7 +78,7 @@ trait ClassAccessTrait
         $reflection = new \ReflectionObject($this);
 
         if (!$reflection->hasMethod($name)) {
-            throw new \Exception(sprintf('Unknown method "%s" in class "%s".', $name, get_class($this)));
+            throw new \BadMethodCallException(sprintf('Unknown method "%s" in class "%s".', $name, get_class($this)));
         }
 
         $method = $reflection->getMethod($name);
