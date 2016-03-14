@@ -144,6 +144,7 @@ class DurationField
             return null;
         }
 
+        /** @noinspection NotOptimalRegularExpressionsInspection */
         if (!preg_match('/^\d{1,6}:[0-5][0-9]$/', $value)) {
             return null;
         }
