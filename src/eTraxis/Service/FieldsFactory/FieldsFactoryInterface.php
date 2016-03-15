@@ -24,7 +24,7 @@ interface FieldsFactoryInterface
      *
      * @return  \eTraxis\SimpleBus\Fields\CreateFieldBaseCommand|null
      */
-    public function getCreateCommand($type, $values = []);
+    public function getCreateCommand($type, array $values = []);
 
     /**
      * Returns command to update a field.
@@ -34,5 +34,5 @@ interface FieldsFactoryInterface
      *
      * @return  \eTraxis\SimpleBus\Fields\UpdateFieldBaseCommand|null
      */
-    public function getUpdateCommand($type, $values = []);
+    public function getUpdateCommand($type, array $values = []);
 }

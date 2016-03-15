@@ -25,7 +25,7 @@ interface LdapInterface
      *
      * @return  array|false If user is found then the requested attributes are returned, otherwise FALSE.
      */
-    public function find($basedn, $username, $attributes = []);
+    public function find($basedn, $username, array $attributes = []);
 
     /**
      * Authenticates specified credentials against LDAP server.

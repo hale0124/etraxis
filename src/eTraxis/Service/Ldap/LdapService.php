@@ -101,7 +101,7 @@ class LdapService implements LdapInterface
     /**
      * {@inheritdoc}
      */
-    public function find($basedn, $username, $attributes = [])
+    public function find($basedn, $username, array $attributes = [])
     {
         if ($this->link === false) {
             $this->logger->info('LDAP connection is not configured.');

@@ -52,7 +52,7 @@ class MailerService implements MailerInterface
     /**
      * {@inheritdoc}
      */
-    public function send($recipients, $subject, $template, $args = [])
+    public function send($recipients, $subject, $template, array $args = [])
     {
         $this->logger->info('Send email', [$subject]);
         $this->logger->info('Recipients', (array) $recipients);

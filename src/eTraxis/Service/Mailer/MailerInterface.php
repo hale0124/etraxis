@@ -29,5 +29,5 @@ interface MailerInterface
      *
      * @return  int The number of recipients who were accepted for delivery.
      */
-    public function send($recipients, $subject, $template, $args = []);
+    public function send($recipients, $subject, $template, array $args = []);
 }

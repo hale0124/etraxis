@@ -21,7 +21,7 @@ trait ObjectInitiationTrait
      *
      * @param   array $values Initial values.
      */
-    public function __construct($values = [])
+    public function __construct(array $values = [])
     {
         foreach ($values as $property => $value) {
             if (property_exists($this, $property)) {

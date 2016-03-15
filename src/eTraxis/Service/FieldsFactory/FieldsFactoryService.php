@@ -22,7 +22,7 @@ class FieldsFactoryService implements FieldsFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function getCreateCommand($type, $values = [])
+    public function getCreateCommand($type, array $values = [])
     {
         switch ($type) {
 
@@ -61,7 +61,7 @@ class FieldsFactoryService implements FieldsFactoryInterface
     /**
      * {@inheritdoc}
      */
-    public function getUpdateCommand($type, $values = [])
+    public function getUpdateCommand($type, array $values = [])
     {
         switch ($type) {
 

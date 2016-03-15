@@ -35,7 +35,7 @@ trait ContainerTrait
      *
      * @throws  BadRequestHttpException
      */
-    protected function getFormData(Request $request, $name = null, $extra = [])
+    protected function getFormData(Request $request, $name = null, array $extra = [])
     {
         /** @var \Psr\Log\LoggerInterface $logger */
         $logger = $this->container->get('logger');
