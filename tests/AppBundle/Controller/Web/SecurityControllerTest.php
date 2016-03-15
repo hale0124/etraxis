@@ -33,14 +33,10 @@ class SecurityControllerTest extends WebTestCase
 
     private function isLoginPage(Crawler $crawler)
     {
-        if (count($crawler->filter('input[name="_username"]')) === 1 &&
+        return
+            count($crawler->filter('input[name="_username"]')) === 1 &&
             count($crawler->filter('input[name="_password"]')) === 1 &&
-            count($crawler->filter('input[type="submit"]')) === 1)
-        {
-            return true;
-        }
-
-        return false;
+            count($crawler->filter('input[type="submit"]')) === 1;
     }
 
     public function testLogin()
