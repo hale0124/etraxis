@@ -75,8 +75,8 @@ class CheckRequirementsCommand extends ContainerAwareCommand
         // default_charset
         $default_charset = ini_get('default_charset');
 
-        if (strlen($default_charset) == 0 || strtolower($default_charset) == 'utf-8') {
-            $report['default_charset'] = 'OK (' . (strlen($default_charset) == 0 ? 'empty' : $default_charset) . ')';
+        if (strlen($default_charset) === 0 || strtolower($default_charset) === 'utf-8') {
+            $report['default_charset'] = 'OK (' . (strlen($default_charset) === 0 ? 'empty' : $default_charset) . ')';
         }
         else {
             $report['default_charset'] = '<error>FAIL</error> (should be either commented, or set to "UTF-8")';
@@ -85,7 +85,7 @@ class CheckRequirementsCommand extends ContainerAwareCommand
         // date.timezone
         $timezone = ini_get('date.timezone');
 
-        if (strlen($timezone) == 0) {
+        if (strlen($timezone) === 0) {
             $report['date.timezone'] = '<error>FAIL</error> (undefined, should be set to one of supported timezones enumerated at <http://www.php.net/manual/timezones.php>)';
         }
         else {

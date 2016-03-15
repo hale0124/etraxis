@@ -25,7 +25,7 @@ class EntityIdValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         // Empty value is valid. Non-empty value may contain digits only.
-        if (strlen($value) != 0 && !ctype_digit("{$value}")) {
+        if (strlen($value) !== 0 && !ctype_digit("{$value}")) {
             /** @noinspection PhpUndefinedFieldInspection */
             $this->context->addViolation($constraint->message);
         }

@@ -71,7 +71,7 @@ class CreateStateCommandHandler
             ->setName($command->name)
             ->setAbbreviation($command->abbreviation)
             ->setType($command->type)
-            ->setResponsible($command->type == State::TYPE_FINAL ? State::RESPONSIBLE_REMOVE : $command->responsible)
+            ->setResponsible($command->type === State::TYPE_FINAL ? State::RESPONSIBLE_REMOVE : $command->responsible)
         ;
 
         if ($command->nextState) {
@@ -99,7 +99,7 @@ class CreateStateCommandHandler
         $em = $this->doctrine->getManager();
         $em->beginTransaction();
 
-        if ($command->type == State::TYPE_INITIAL) {
+        if ($command->type === State::TYPE_INITIAL) {
 
             $query = $em->createQuery('
                 UPDATE eTraxis:State s

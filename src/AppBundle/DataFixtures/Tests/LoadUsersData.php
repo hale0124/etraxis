@@ -212,7 +212,7 @@ class LoadUsersData extends AbstractFixture implements ContainerAwareInterface, 
             }
 
             // Make Zapp locked out.
-            if ($username == 'zapp') {
+            if ($username === 'zapp') {
                 $forever = 0x7FFFFFFF;
                 $user->setLockedUntil($forever);
             }

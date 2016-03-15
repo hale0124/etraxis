@@ -45,7 +45,7 @@ class RoutesCommand extends ContainerAwareCommand
         $output->writeln('eTraxis.routes = {');
 
         foreach ($routes as $key => $route) {
-            if ($key[0] != '_') {
+            if ($key[0] !== '_') {
                 $output->writeln(sprintf('    %s: \'%s\',', $key, $route->getPath()));
             }
         }

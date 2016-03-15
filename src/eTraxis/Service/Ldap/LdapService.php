@@ -129,7 +129,7 @@ class LdapService implements LdapInterface
                 return false;
             }
 
-            if (count($entries) == 0 || $entries['count'] == 0) {
+            if (count($entries) === 0 || (int) $entries['count'] === 0) {
                 $this->logger->error('No entries are found.');
 
                 return false;
@@ -149,7 +149,7 @@ class LdapService implements LdapInterface
                 }
             }
 
-            if (count($entry) != count($attributes)) {
+            if (count($entry) !== count($attributes)) {
                 return false;
             }
 

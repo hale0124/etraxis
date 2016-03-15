@@ -84,9 +84,9 @@ class ListItemVoter extends Voter
             ->setParameter('value', $subject->getKey())
         ;
 
-        $count = $query->getQuery()->getSingleScalarResult();
+        $count = (int) $query->getQuery()->getSingleScalarResult();
 
         // Can't delete if this value has been appeared in at least one record.
-        return $count == 0;
+        return $count === 0;
     }
 }

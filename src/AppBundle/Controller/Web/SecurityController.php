@@ -127,7 +127,7 @@ class SecurityController extends Controller
 
             $data = $this->getFormData($request, 'reset_password');
 
-            if ($data['password'] != $data['confirmation']) {
+            if ($data['password'] !== $data['confirmation']) {
                 $this->setError($this->getTranslator()->trans('passwords.dont_match'));
             }
             else {
@@ -188,7 +188,7 @@ class SecurityController extends Controller
 
             $data = $this->getFormData($request, 'reset_password');
 
-            if ($data['password'] != $data['confirmation']) {
+            if ($data['password'] !== $data['confirmation']) {
                 $this->setError($this->getTranslator()->trans('passwords.dont_match'));
             }
             else {

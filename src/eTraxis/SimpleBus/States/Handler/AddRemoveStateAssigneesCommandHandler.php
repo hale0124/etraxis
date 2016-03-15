@@ -67,12 +67,12 @@ class AddRemoveStateAssigneesCommandHandler
         $ids = [];
 
         foreach ($groups as $group) {
-            if ($group->getProjectId() === null || $group->getProjectId() == $projectId) {
+            if ($group->getProjectId() === null || $group->getProjectId() === $projectId) {
                 $ids[] = $group->getId();
             }
         }
 
-        if (count($ids) == 0) {
+        if (count($ids) === 0) {
             return;
         }
 
@@ -95,7 +95,7 @@ class AddRemoveStateAssigneesCommandHandler
 
             foreach ($groups as $group) {
 
-                if ($group->getProjectId() === null || $group->getProjectId() == $projectId) {
+                if ($group->getProjectId() === null || $group->getProjectId() === $projectId) {
 
                     $entity = new StateAssignee();
 

@@ -25,7 +25,7 @@ class FieldsFilter extends SQLFilter
      */
     public function addFilterConstraint(ClassMetadata $targetEntity, $targetTableAlias)
     {
-        if ($targetEntity->getName() != Field::class) {
+        if ($targetEntity->getName() !== Field::class) {
             return '';
         }
 

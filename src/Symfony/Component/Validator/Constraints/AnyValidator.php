@@ -39,7 +39,7 @@ class AnyValidator extends ConstraintValidator
             $validator->validate($value, $subconstraint);
             $thisCount = $context->getViolations()->count();
 
-            if ($thisCount == $lastCount) {
+            if ($thisCount === $lastCount) {
                 $passed = true;
                 break;
             }

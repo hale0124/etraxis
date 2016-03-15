@@ -84,9 +84,9 @@ class ProjectVoter extends Voter
             ->setParameter('id', $subject->getId())
         ;
 
-        $count = $query->getQuery()->getSingleScalarResult();
+        $count = (int) $query->getQuery()->getSingleScalarResult();
 
         // Can't delete if project contains at least one record.
-        return $count == 0;
+        return $count === 0;
     }
 }

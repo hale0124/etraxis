@@ -84,7 +84,7 @@ class UpdateUserCommandHandler
         ;
 
         // Don't disable yourself.
-        if ($entity->getId() != $user->getId()) {
+        if ($entity->getId() !== $user->getId()) {
             $entity
                 ->setAdmin($command->admin)
                 ->setDisabled($command->disabled)

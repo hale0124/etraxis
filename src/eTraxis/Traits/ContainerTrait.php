@@ -40,11 +40,11 @@ trait ContainerTrait
         /** @var \Psr\Log\LoggerInterface $logger */
         $logger = $this->container->get('logger');
 
-        $data = $request->getMethod() == Request::METHOD_GET
+        $data = $request->getMethod() === Request::METHOD_GET
             ? $request->query->all()
             : $request->request->all();
 
-        if (strlen($name) != 0) {
+        if (strlen($name) !== 0) {
             if (!array_key_exists($name, $data)) {
                 $logger->error('No data submitted.', [$name]);
                 throw new BadRequestHttpException('No data submitted.');
@@ -69,7 +69,7 @@ trait ContainerTrait
                 return $value;
             }
 
-            return strlen($value) == 0 ? null : $value;
+            return strlen($value) === 0 ? null : $value;
         };
 
         return $empty2null($extra + $data);

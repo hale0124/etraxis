@@ -61,12 +61,12 @@ class InternalPasswordEncoder extends BasePasswordEncoder
     public function isPasswordValid($encoded, $raw, $salt = null)
     {
         // base64-encoded binary SHA1 hash
-        if (strlen($encoded) == 28) {
+        if (strlen($encoded) === 28) {
             return $this->comparePasswords($encoded, $this->encodePassword($raw, $salt));
         }
 
         // MD5 hash
-        if (strlen($encoded) == 32) {
+        if (strlen($encoded) === 32) {
             return $this->comparePasswords($encoded, md5($raw));
         }
 

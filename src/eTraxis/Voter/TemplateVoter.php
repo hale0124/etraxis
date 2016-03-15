@@ -96,10 +96,10 @@ class TemplateVoter extends Voter
             ->setParameter('id', $subject->getId())
         ;
 
-        $count = $query->getQuery()->getSingleScalarResult();
+        $count = (int) $query->getQuery()->getSingleScalarResult();
 
         // Can't delete if at least one record has been created by this template.
-        return $count == 0;
+        return $count === 0;
     }
 
     /**
@@ -136,9 +136,9 @@ class TemplateVoter extends Voter
             ->setParameter('type', State::TYPE_INITIAL)
         ;
 
-        $count = $query->getQuery()->getSingleScalarResult();
+        $count = (int) $query->getQuery()->getSingleScalarResult();
 
         // Can't unlock if no initial state is set in the template.
-        return $count != 0;
+        return $count !== 0;
     }
 }

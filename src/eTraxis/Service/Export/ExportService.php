@@ -43,7 +43,7 @@ class ExportService implements ExportInterface
 
                 $result = implode($delimiter, array_map($callback, $row)) . $tail;
 
-                if ($query->encoding != 'UTF-8') {
+                if ($query->encoding !== 'UTF-8') {
                     $result = iconv('UTF-8', $query->encoding . '//TRANSLIT', $result);
                 }
 
@@ -51,11 +51,11 @@ class ExportService implements ExportInterface
             }
         });
 
-        if (substr($query->filename, -4) != '.csv') {
+        if (substr($query->filename, -4) !== '.csv') {
             $query->filename .= '.csv';
         }
 
-        if ($query->filename == '.csv') {
+        if ($query->filename === '.csv') {
             $query->filename = 'eTraxis.csv';
         }
 

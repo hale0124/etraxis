@@ -47,7 +47,7 @@ class DisableUsersCommandHandler
 
         // Don't disable yourself.
         $ids = array_filter($command->ids, function ($id) use ($user) {
-            return $id != $user->getId();
+            return $id !== $user->getId();
         });
 
         /** @var \Doctrine\ORM\EntityManager $em */

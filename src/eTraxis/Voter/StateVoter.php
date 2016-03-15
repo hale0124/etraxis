@@ -89,10 +89,10 @@ class StateVoter extends Voter
             ->setParameter('types', [Event::RECORD_CREATED, Event::RECORD_REOPENED, Event::STATE_CHANGED])
         ;
 
-        $count = $query->getQuery()->getSingleScalarResult();
+        $count = (int) $query->getQuery()->getSingleScalarResult();
 
         // Can't delete if at least one record has been appeared in this state.
-        return $count == 0;
+        return $count === 0;
     }
 
     /**
@@ -104,6 +104,6 @@ class StateVoter extends Voter
      */
     protected function isInitialGranted($subject)
     {
-        return $subject->getType() == State::TYPE_INTERIM;
+        return $subject->getType() === State::TYPE_INTERIM;
     }
 }

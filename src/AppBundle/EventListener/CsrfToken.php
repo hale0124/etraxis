@@ -46,7 +46,7 @@ class CsrfToken
     {
         $request = $event->getRequest();
 
-        if ($request->isXmlHttpRequest() && $request->getMethod() ==  Request::METHOD_POST) {
+        if ($request->isXmlHttpRequest() && $request->getMethod() ===  Request::METHOD_POST) {
 
             $data = $request->request->all();
 
@@ -54,7 +54,7 @@ class CsrfToken
             $name = reset($keys);
 
             // Check whether it is a submitted form.
-            if (count($data) == 1 && is_array($data[$name])) {
+            if (count($data) === 1 && is_array($data[$name])) {
                 $data = $data[$name];
             }
             else {

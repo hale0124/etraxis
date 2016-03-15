@@ -121,7 +121,7 @@ class SettingsController extends Controller
                 throw new BadRequestHttpException($this->getTranslator()->trans('password.wrong'));
             }
 
-            if ($data['new_password'] != $data['confirmation']) {
+            if ($data['new_password'] !== $data['confirmation']) {
                 throw new BadRequestHttpException($this->getTranslator()->trans('passwords.dont_match'));
             }
 

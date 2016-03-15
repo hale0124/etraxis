@@ -71,7 +71,7 @@ class AddRemoveStateTransitionsCommandHandler
             $ids[] = $transition->getId();
         }
 
-        if (count($ids) == 0) {
+        if (count($ids) === 0) {
             return;
         }
 

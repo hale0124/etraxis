@@ -121,7 +121,7 @@ class UserVoter extends Voter
         }
 
         // Can't delete himself.
-        if ($subject->getId() == $user->getId()) {
+        if ($subject->getId() === $user->getId()) {
             return false;
         }
 
@@ -132,7 +132,7 @@ class UserVoter extends Voter
             ->setParameter('id', $subject->getId())
         ;
 
-        $countAsOriginator = $query->getQuery()->getSingleScalarResult();
+        $countAsOriginator = (int) $query->getQuery()->getSingleScalarResult();
 
         // Number of records had been assigned on subject.
         $query = $this->repository->createQueryBuilder('e')
@@ -143,10 +143,10 @@ class UserVoter extends Voter
             ->setParameter('id', $subject->getId())
         ;
 
-        $countAsAssignee = $query->getQuery()->getSingleScalarResult();
+        $countAsAssignee = (int) $query->getQuery()->getSingleScalarResult();
 
         // Can't delete if user is mentioned in any record log.
-        return $countAsOriginator == 0 && $countAsAssignee == 0;
+        return $countAsOriginator === 0 && $countAsAssignee === 0;
     }
 
     /**
@@ -165,7 +165,7 @@ class UserVoter extends Voter
         }
 
         // Can't disable himself.
-        if ($subject->getId() == $user->getId()) {
+        if ($subject->getId() === $user->getId()) {
             return false;
         }
 

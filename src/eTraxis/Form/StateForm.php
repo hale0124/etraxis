@@ -62,7 +62,7 @@ class StateForm extends AbstractType
         }
 
         // Responsible.
-        if (is_object($state) && $state->getType() == State::TYPE_FINAL) {
+        if (is_object($state) && $state->getType() === State::TYPE_FINAL) {
             // Cannot change "Responsible" for existing final state.
             $builder->add('responsible', HiddenType::class, [
                 'required' => true,

@@ -106,7 +106,7 @@ class TranslationsCommand extends Command
 
                 exec("php ./bin/console translation:update --force --no-backup --quiet --no-interaction {$locale}");
 
-                if ($locale != 'en') {
+                if ($locale !== 'en') {
                     $this->comment("messages.{$locale}.yml");
                     $this->comment("validators.{$locale}.yml");
                 }

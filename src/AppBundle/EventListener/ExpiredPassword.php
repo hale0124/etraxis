@@ -66,7 +66,7 @@ class ExpiredPassword
         }
 
         // Avoid redirection loop.
-        if ($request->get('_route') == 'set_expired_password') {
+        if ($request->get('_route') === 'set_expired_password') {
             return;
         }
 
@@ -75,7 +75,7 @@ class ExpiredPassword
         $bundle = substr($class, 0, strpos($class, '\\'));
 
         // Skip any 3rd party controllers.
-        if ($bundle != 'AppBundle') {
+        if ($bundle !== 'AppBundle') {
             return;
         }
 

@@ -68,7 +68,7 @@ class UpdateStateCommandHandler
         $entity
             ->setName($command->name)
             ->setAbbreviation($command->abbreviation)
-            ->setResponsible($entity->getType() == State::TYPE_FINAL ? State::RESPONSIBLE_REMOVE : $command->responsible)
+            ->setResponsible($entity->getType() === State::TYPE_FINAL ? State::RESPONSIBLE_REMOVE : $command->responsible)
         ;
 
         if ($command->nextState) {

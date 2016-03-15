@@ -54,7 +54,7 @@ class UsersDataTable implements DataTableHandlerInterface
 
         $query = $this->repository->createQueryBuilder('u')->select('COUNT(u.id)');
 
-        $results->recordsTotal = $query->getQuery()->getSingleScalarResult();
+        $results->recordsTotal = (int) $query->getQuery()->getSingleScalarResult();
 
         $query = $this->repository->createQueryBuilder('u');
 
@@ -114,10 +114,10 @@ class UsersDataTable implements DataTableHandlerInterface
 
                 case self::COLUMN_PERMISSIONS:
 
-                    if ($value == 'admin') {
+                    if ($value === 'admin') {
                         $query->andWhere('u.isAdmin <> 0');
                     }
-                    elseif ($value == 'user') {
+                    elseif ($value === 'user') {
                         $query->andWhere('u.isAdmin = 0');
                     }
 
@@ -125,10 +125,10 @@ class UsersDataTable implements DataTableHandlerInterface
 
                 case self::COLUMN_AUTHENTICATION:
 
-                    if ($value == 'etraxis') {
+                    if ($value === 'etraxis') {
                         $query->andWhere('u.isLdap = 0');
                     }
-                    elseif ($value == 'ldap') {
+                    elseif ($value === 'ldap') {
                         $query->andWhere('u.isLdap <> 0');
                     }
 
@@ -166,7 +166,7 @@ class UsersDataTable implements DataTableHandlerInterface
 
         $results->recordsFiltered = count($entities);
 
-        for ($i = 0; $i < $request->length || $request->length == -1; $i++) {
+        for ($i = 0; $i < $request->length || $request->length === -1; $i++) {
 
             $index = $i + $request->start;
 
