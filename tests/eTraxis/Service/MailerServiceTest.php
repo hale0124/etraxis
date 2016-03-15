@@ -20,11 +20,6 @@ class MailerServiceTest extends KernelTestCase
         self::bootKernel();
     }
 
-    protected function tearDown()
-    {
-        parent::tearDown();
-    }
-
     public function testSend()
     {
         $logger = static::$kernel->getContainer()->get('logger');
