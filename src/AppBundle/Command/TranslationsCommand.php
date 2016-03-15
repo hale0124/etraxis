@@ -94,7 +94,7 @@ class TranslationsCommand extends Command
     {
         foreach (scandir('app/Resources/translations') as $entry) {
 
-            if (!preg_match("/^messages\\.(.)+\\.yml$/", $entry)) {
+            if (!preg_match('/^messages\.(.)+\.yml$/', $entry)) {
                 continue;
             }
 

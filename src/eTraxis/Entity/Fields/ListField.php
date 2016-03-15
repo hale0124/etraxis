@@ -93,6 +93,6 @@ class ListField
             'key'     => $key,
         ]);
 
-        return ($item ? $item->getValue() : null);
+        return $item ? $item->getValue() : null;
     }
 }
