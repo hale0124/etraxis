@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class LastReadTest extends \PHPUnit_Framework_TestCase
 {
     /** @var LastRead */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

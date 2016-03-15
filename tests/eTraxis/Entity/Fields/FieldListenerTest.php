@@ -18,7 +18,7 @@ use eTraxis\Tests\BaseTestCase;
 class FieldListenerTest extends BaseTestCase
 {
     /** @var FieldListener */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

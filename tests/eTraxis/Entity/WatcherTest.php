@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class WatcherTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Watcher */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

@@ -18,7 +18,7 @@ use Symfony\Component\Security\Core\User\User as SymfonyUser;
 class InternalUserProviderTest extends BaseTestCase
 {
     /** @var InternalUserProvider */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

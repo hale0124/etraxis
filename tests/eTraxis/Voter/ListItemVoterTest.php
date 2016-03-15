@@ -17,7 +17,7 @@ use eTraxis\Tests\BaseTestCase;
 class ListItemVoterTest extends BaseTestCase
 {
     /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker */
-    private $security = null;
+    private $security;
 
     protected function setUp()
     {

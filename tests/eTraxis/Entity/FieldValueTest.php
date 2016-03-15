@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class FieldValueTest extends \PHPUnit_Framework_TestCase
 {
     /** @var FieldValue */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

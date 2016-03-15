@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class ProjectTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Project */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

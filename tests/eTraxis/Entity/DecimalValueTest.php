@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class DecimalValueTest extends \PHPUnit_Framework_TestCase
 {
     /** @var DecimalValue */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

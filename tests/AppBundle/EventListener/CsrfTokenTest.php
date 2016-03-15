@@ -23,7 +23,7 @@ class CsrfTokenTest extends BaseTestCase
     protected $tokens;
 
     /** @var CsrfToken */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

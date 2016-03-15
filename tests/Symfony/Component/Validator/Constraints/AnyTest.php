@@ -22,7 +22,7 @@ class AnyStub
      *     @GreaterThanOrEqual(value = "100")
      * })
      */
-    public $id = null;
+    public $id;
 }
 
 class AnyTest extends BaseTestCase

@@ -13,7 +13,7 @@ namespace eTraxis\Migrations;
 
 class DatabasePlatformStub
 {
-    private $driver = null;
+    private $driver;
 
     public function __construct($driver)
     {

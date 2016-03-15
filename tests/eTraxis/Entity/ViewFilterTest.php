@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class ViewFilterTest extends \PHPUnit_Framework_TestCase
 {
     /** @var ViewFilter */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class FieldGroupAccessTest extends \PHPUnit_Framework_TestCase
 {
     /** @var FieldGroupAccess */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

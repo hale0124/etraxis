@@ -19,7 +19,7 @@ use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 class UserVoterTest extends BaseTestCase
 {
     /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker */
-    private $security = null;
+    private $security;
 
     protected function setUp()
     {

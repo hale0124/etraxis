@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class FilterRoleTest extends \PHPUnit_Framework_TestCase
 {
     /** @var FilterRole */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

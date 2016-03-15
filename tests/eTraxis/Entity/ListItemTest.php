@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class ListItemTest extends \PHPUnit_Framework_TestCase
 {
     /** @var ListItem */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

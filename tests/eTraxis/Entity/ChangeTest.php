@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class ChangeTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Change */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

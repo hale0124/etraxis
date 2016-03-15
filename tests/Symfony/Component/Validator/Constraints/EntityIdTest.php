@@ -18,7 +18,7 @@ class EntityIdStub
     /**
      * @EntityId()
      */
-    public $id = null;
+    public $id;
 }
 
 class EntityIdTest extends BaseTestCase

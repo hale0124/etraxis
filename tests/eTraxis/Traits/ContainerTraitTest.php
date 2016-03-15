@@ -24,7 +24,7 @@ class ControllerStub extends Controller
 class ContainerTraitTest extends KernelTestCase
 {
     /** @var ControllerStub */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

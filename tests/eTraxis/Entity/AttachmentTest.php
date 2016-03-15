@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class AttachmentTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Attachment */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

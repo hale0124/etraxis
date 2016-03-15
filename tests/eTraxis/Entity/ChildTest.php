@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class ChildTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Child */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class EventTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Event */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

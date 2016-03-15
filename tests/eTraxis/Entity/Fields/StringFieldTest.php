@@ -18,7 +18,7 @@ use eTraxis\Tests\BaseTestCase;
 class StringFieldTest extends BaseTestCase
 {
     /** @var Field */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

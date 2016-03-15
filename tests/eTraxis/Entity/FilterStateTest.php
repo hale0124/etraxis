@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class FilterStateTest extends \PHPUnit_Framework_TestCase
 {
     /** @var FilterState */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

@@ -24,7 +24,7 @@ class UserStub extends User
 class UserTest extends \PHPUnit_Framework_TestCase
 {
     /** @var UserStub */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

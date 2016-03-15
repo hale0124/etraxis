@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class NotificationTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Notification */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

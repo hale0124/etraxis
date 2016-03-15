@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class FilterSharingTest extends \PHPUnit_Framework_TestCase
 {
     /** @var FilterSharing */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

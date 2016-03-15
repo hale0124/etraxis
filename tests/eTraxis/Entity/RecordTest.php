@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class RecordTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Record */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

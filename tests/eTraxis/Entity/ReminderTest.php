@@ -16,7 +16,7 @@ use eTraxis\Collection\SystemRole;
 class ReminderTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Reminder */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

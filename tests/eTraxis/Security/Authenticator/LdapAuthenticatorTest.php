@@ -40,7 +40,7 @@ class LdapServiceStub implements LdapInterface
 class LdapAuthenticatorTest extends BaseTestCase
 {
     /** @var LdapAuthenticator */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

@@ -17,7 +17,7 @@ use eTraxis\Tests\BaseTestCase;
 class DurationFieldTest extends BaseTestCase
 {
     /** @var Field */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

@@ -16,7 +16,7 @@ use eTraxis\Tests\BaseTestCase;
 class InternalPasswordEncoderTest extends BaseTestCase
 {
     /** @var InternalPasswordEncoder */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

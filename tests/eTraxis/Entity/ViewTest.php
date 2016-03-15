@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class ViewTest extends \PHPUnit_Framework_TestCase
 {
     /** @var View */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

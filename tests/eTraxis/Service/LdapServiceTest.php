@@ -19,7 +19,7 @@ use eTraxis\Tests\BaseTestCase;
 class LdapServiceTest extends BaseTestCase
 {
     /** @var Ldap\LdapService */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

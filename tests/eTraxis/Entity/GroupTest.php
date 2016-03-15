@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class GroupTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Group */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

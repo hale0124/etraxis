@@ -17,7 +17,7 @@ use eTraxis\Tests\BaseTestCase;
 class DateFieldTest extends BaseTestCase
 {
     /** @var Field */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class TemplateGroupPermissionTest extends \PHPUnit_Framework_TestCase
 {
     /** @var TemplateGroupPermission */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

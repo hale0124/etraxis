@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class FilterTransitionTest extends \PHPUnit_Framework_TestCase
 {
     /** @var FilterTransition */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

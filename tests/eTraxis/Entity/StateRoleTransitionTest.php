@@ -16,7 +16,7 @@ use eTraxis\Collection\SystemRole;
 class StateRoleTransitionTest extends \PHPUnit_Framework_TestCase
 {
     /** @var StateRoleTransition */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

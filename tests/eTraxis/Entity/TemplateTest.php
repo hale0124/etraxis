@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class TemplateTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Template */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

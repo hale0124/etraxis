@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class TextValueTest extends \PHPUnit_Framework_TestCase
 {
     /** @var TextValue */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {

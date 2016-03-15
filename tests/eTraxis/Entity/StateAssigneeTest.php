@@ -14,7 +14,7 @@ namespace eTraxis\Entity;
 class StateAssigneeTest extends \PHPUnit_Framework_TestCase
 {
     /** @var StateAssignee */
-    private $object = null;
+    private $object;
 
     protected function setUp()
     {
