@@ -26,7 +26,7 @@ use eTraxis\Collection\DatabasePlatform;
 class EpochDateFunction extends FunctionNode
 {
     /** @var \Doctrine\ORM\Query\AST\InputParameter */
-    protected $parameter = null;
+    protected $parameter;
 
     /**
      * {@inheritdoc}

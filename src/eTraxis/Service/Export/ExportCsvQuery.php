@@ -29,23 +29,23 @@ class ExportCsvQuery
     /**
      * @Assert\NotBlank()
      */
-    public $filename = null;
+    public $filename;
 
     /**
      * @Assert\NotNull()
      * @Assert\Choice(callback = {"eTraxis\Collection\CsvDelimiter", "getAllKeys"})
      */
-    public $delimiter = null;
+    public $delimiter;
 
     /**
      * @Assert\NotNull()
      * @Assert\Choice(callback = {"eTraxis\Collection\Encoding", "getAllKeys"})
      */
-    public $encoding = null;
+    public $encoding;
 
     /**
      * @Assert\NotNull()
      * @Assert\Choice(callback = {"eTraxis\Collection\LineEnding", "getAllKeys"})
      */
-    public $tail = null;
+    public $tail;
 }
