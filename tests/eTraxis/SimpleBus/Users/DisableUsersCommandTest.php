@@ -41,7 +41,7 @@ class DisableUsersCommandTest extends BaseTestCase
         foreach ($usernames as $username) {
             $user = $this->findUser($username);
 
-            if ($user->getUsername() == 'hubert') {
+            if ($user->getUsername() === 'hubert') {
                 $this->assertFalse($user->isDisabled());
             }
             else {

@@ -20,11 +20,11 @@ class SecurityControllerTest extends WebTestCase
     {
         $text = $crawler->filter('nav a')->last()->html();
 
-        if ($text == 'Log in') {
+        if ($text === 'Log in') {
             return false;
         }
 
-        if ($text == 'Log out') {
+        if ($text === 'Log out') {
             return true;
         }
 

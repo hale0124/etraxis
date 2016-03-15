@@ -21,7 +21,7 @@ class LdapServiceStub implements LdapInterface
 {
     public function find($basedn, $username, array $attributes = [])
     {
-        if ($username != 'einstein') {
+        if ($username !== 'einstein') {
             return false;
         }
 
@@ -33,7 +33,7 @@ class LdapServiceStub implements LdapInterface
 
     public function authenticate($basedn, $username, $password)
     {
-        return $username == 'einstein' && $password == 'password';
+        return $username === 'einstein' && $password === 'password';
     }
 }
 
