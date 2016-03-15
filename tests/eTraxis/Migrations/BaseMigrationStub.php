@@ -13,9 +13,9 @@ namespace eTraxis\Migrations;
 
 class BaseMigrationStub extends BaseMigration
 {
-    public function __construct()
+    public function __construct($driver = 'unsupported')
     {
-        $this->connection = new ConnectionStub('unsupported');
+        $this->connection = new ConnectionStub($driver);
     }
 
     public function getVersion()

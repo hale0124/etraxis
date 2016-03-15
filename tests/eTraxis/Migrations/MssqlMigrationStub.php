@@ -17,7 +17,7 @@ class MssqlMigrationStub extends BaseMigrationStub implements MssqlMigrationInte
 {
     public function __construct()
     {
-        $this->connection = new ConnectionStub('mssql');
+        parent::__construct('mssql');
     }
 
     public function mssqlUp(Schema $schema)

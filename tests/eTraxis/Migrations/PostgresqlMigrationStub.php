@@ -17,7 +17,7 @@ class PostgresqlMigrationStub extends BaseMigrationStub implements PostgresqlMig
 {
     public function __construct()
     {
-        $this->connection = new ConnectionStub('postgresql');
+        parent::__construct('postgresql');
     }
 
     public function postgresqlUp(Schema $schema)

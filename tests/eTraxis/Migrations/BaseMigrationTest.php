@@ -19,15 +19,15 @@ class BaseMigrationTest extends BaseTestCase
     public function testVersion()
     {
         $expected  = '4.0.x';
-        $migration = new BaseMigrationStub($this->doctrine->getConnection());
+        $migration = new BaseMigrationStub();
 
-        $this->assertEquals($expected, $migration->getName());
+        $this->assertEquals($expected, $migration->getDescription());
     }
 
     public function testMysqlUpSuccess()
     {
         $schema    = new Schema();
-        $migration = new MysqlMigrationStub($this->doctrine->getConnection());
+        $migration = new MysqlMigrationStub();
 
         $this->expectOutputString('mysql up');
         $migration->up($schema);
@@ -36,7 +36,7 @@ class BaseMigrationTest extends BaseTestCase
     public function testMysqlDownSuccess()
     {
         $schema    = new Schema();
-        $migration = new MysqlMigrationStub($this->doctrine->getConnection());
+        $migration = new MysqlMigrationStub();
 
         $this->expectOutputString('mysql down');
         $migration->down($schema);
@@ -48,7 +48,7 @@ class BaseMigrationTest extends BaseTestCase
     public function testMysqlUpFailure()
     {
         $schema    = new Schema();
-        $migration = new BaseMigrationStub($this->doctrine->getConnection());
+        $migration = new BaseMigrationStub();
 
         $migration->up($schema);
     }
@@ -59,7 +59,7 @@ class BaseMigrationTest extends BaseTestCase
     public function testMysqlDownFailure()
     {
         $schema    = new Schema();
-        $migration = new BaseMigrationStub($this->doctrine->getConnection());
+        $migration = new BaseMigrationStub();
 
         $migration->down($schema);
     }
@@ -67,7 +67,7 @@ class BaseMigrationTest extends BaseTestCase
     public function testPostgresqlUpSuccess()
     {
         $schema    = new Schema();
-        $migration = new PostgresqlMigrationStub($this->doctrine->getConnection());
+        $migration = new PostgresqlMigrationStub();
 
         $this->expectOutputString('postgresql up');
         $migration->up($schema);
@@ -76,7 +76,7 @@ class BaseMigrationTest extends BaseTestCase
     public function testPostgresqlDownSuccess()
     {
         $schema    = new Schema();
-        $migration = new PostgresqlMigrationStub($this->doctrine->getConnection());
+        $migration = new PostgresqlMigrationStub();
 
         $this->expectOutputString('postgresql down');
         $migration->down($schema);
@@ -88,7 +88,7 @@ class BaseMigrationTest extends BaseTestCase
     public function testPostgresqlUpFailure()
     {
         $schema    = new Schema();
-        $migration = new BaseMigrationStub($this->doctrine->getConnection());
+        $migration = new BaseMigrationStub();
 
         $migration->up($schema);
     }
@@ -99,7 +99,7 @@ class BaseMigrationTest extends BaseTestCase
     public function testPostgresqlDownFailure()
     {
         $schema    = new Schema();
-        $migration = new BaseMigrationStub($this->doctrine->getConnection());
+        $migration = new BaseMigrationStub();
 
         $migration->down($schema);
     }
@@ -107,7 +107,7 @@ class BaseMigrationTest extends BaseTestCase
     public function testMssqlUpSuccess()
     {
         $schema    = new Schema();
-        $migration = new MssqlMigrationStub($this->doctrine->getConnection());
+        $migration = new MssqlMigrationStub();
 
         $this->expectOutputString('mssql up');
         $migration->up($schema);
@@ -116,7 +116,7 @@ class BaseMigrationTest extends BaseTestCase
     public function testMssqlDownSuccess()
     {
         $schema    = new Schema();
-        $migration = new MssqlMigrationStub($this->doctrine->getConnection());
+        $migration = new MssqlMigrationStub();
 
         $this->expectOutputString('mssql down');
         $migration->down($schema);
@@ -128,7 +128,7 @@ class BaseMigrationTest extends BaseTestCase
     public function testMssqlUpFailure()
     {
         $schema    = new Schema();
-        $migration = new BaseMigrationStub($this->doctrine->getConnection());
+        $migration = new BaseMigrationStub();
 
         $migration->up($schema);
     }
@@ -139,7 +139,7 @@ class BaseMigrationTest extends BaseTestCase
     public function testMssqlDownFailure()
     {
         $schema    = new Schema();
-        $migration = new BaseMigrationStub($this->doctrine->getConnection());
+        $migration = new BaseMigrationStub();
 
         $migration->down($schema);
     }
@@ -147,7 +147,7 @@ class BaseMigrationTest extends BaseTestCase
     public function testOracleUpSuccess()
     {
         $schema    = new Schema();
-        $migration = new OracleMigrationStub($this->doctrine->getConnection());
+        $migration = new OracleMigrationStub();
 
         $this->expectOutputString('oracle up');
         $migration->up($schema);
@@ -156,7 +156,7 @@ class BaseMigrationTest extends BaseTestCase
     public function testOracleDownSuccess()
     {
         $schema    = new Schema();
-        $migration = new OracleMigrationStub($this->doctrine->getConnection());
+        $migration = new OracleMigrationStub();
 
         $this->expectOutputString('oracle down');
         $migration->down($schema);
@@ -168,7 +168,7 @@ class BaseMigrationTest extends BaseTestCase
     public function testOracleUpFailure()
     {
         $schema    = new Schema();
-        $migration = new BaseMigrationStub($this->doctrine->getConnection());
+        $migration = new BaseMigrationStub();
 
         $migration->up($schema);
     }
@@ -179,7 +179,7 @@ class BaseMigrationTest extends BaseTestCase
     public function testOracleDownFailure()
     {
         $schema    = new Schema();
-        $migration = new BaseMigrationStub($this->doctrine->getConnection());
+        $migration = new BaseMigrationStub();
 
         $migration->down($schema);
     }

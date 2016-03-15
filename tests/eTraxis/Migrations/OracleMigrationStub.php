@@ -17,7 +17,7 @@ class OracleMigrationStub extends BaseMigrationStub implements OracleMigrationIn
 {
     public function __construct()
     {
-        $this->connection = new ConnectionStub('oracle');
+        parent::__construct('oracle');
     }
 
     public function oracleUp(Schema $schema)

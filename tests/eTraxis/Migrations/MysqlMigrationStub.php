@@ -17,7 +17,7 @@ class MysqlMigrationStub extends BaseMigrationStub implements MysqlMigrationInte
 {
     public function __construct()
     {
-        $this->connection = new ConnectionStub('mysql');
+        parent::__construct('mysql');
     }
 
     public function mysqlUp(Schema $schema)

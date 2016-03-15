@@ -28,21 +28,17 @@ abstract class BaseMigration extends AbstractMigration
     abstract public function getVersion();
 
     /**
-     * Returns custom migration name.
-     *
-     * @return  string
+     * {@inheritdoc}
      */
-    public function getName()
+    final public function getDescription()
     {
         return $this->getVersion();
     }
 
     /**
-     * Migrates the database up.
-     *
-     * @param   Schema $schema
+     * {@inheritdoc}
      */
-    public function up(Schema $schema)
+    final public function up(Schema $schema)
     {
         $platform = $this->checkDatabasePlatform();
         $up       = $platform . 'Up';
@@ -50,11 +46,9 @@ abstract class BaseMigration extends AbstractMigration
     }
 
     /**
-     * Migrates the database down.
-     *
-     * @param   Schema $schema
+     * {@inheritdoc}
      */
-    public function down(Schema $schema)
+    final public function down(Schema $schema)
     {
         $platform = $this->checkDatabasePlatform();
         $down     = $platform . 'Down';
