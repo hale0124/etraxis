@@ -28,7 +28,7 @@ class ViewColumnTest extends \PHPUnit_Framework_TestCase
 
     public function testViewId()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setViewId($expected);
         $this->assertEquals($expected, $this->object->getViewId());
     }
@@ -56,7 +56,7 @@ class ViewColumnTest extends \PHPUnit_Framework_TestCase
 
     public function testOrder()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setOrder($expected);
         $this->assertEquals($expected, $this->object->getOrder());
     }

@@ -28,7 +28,7 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
 
     public function testProjectId()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setProjectId($expected);
         $this->assertEquals($expected, $this->object->getProjectId());
     }
@@ -49,14 +49,14 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
 
     public function testCriticalAge()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setCriticalAge($expected);
         $this->assertEquals($expected, $this->object->getCriticalAge());
     }
 
     public function testFrozenTime()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setFrozenTime($expected);
         $this->assertEquals($expected, $this->object->getFrozenTime());
     }

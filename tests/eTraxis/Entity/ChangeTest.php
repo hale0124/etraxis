@@ -28,28 +28,28 @@ class ChangeTest extends \PHPUnit_Framework_TestCase
 
     public function testEventId()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setEventId($expected);
         $this->assertEquals($expected, $this->object->getEventId());
     }
 
     public function testFieldId()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setFieldId($expected);
         $this->assertEquals($expected, $this->object->getFieldId());
     }
 
     public function testOldValueId()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setOldValueId($expected);
         $this->assertEquals($expected, $this->object->getOldValueId());
     }
 
     public function testNewValueId()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setNewValueId($expected);
         $this->assertEquals($expected, $this->object->getNewValueId());
     }

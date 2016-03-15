@@ -28,7 +28,7 @@ class GroupTest extends \PHPUnit_Framework_TestCase
 
     public function testProjectId()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setProjectId($expected);
         $this->assertEquals($expected, $this->object->getProjectId());
     }

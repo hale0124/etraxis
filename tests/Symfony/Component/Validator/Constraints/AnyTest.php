@@ -37,7 +37,7 @@ class AnyTest extends BaseTestCase
     public function testInvalid()
     {
         $object     = new AnyStub();
-        $object->id = rand(-99, 99);
+        $object->id = mt_rand(-99, 99);
 
         $this->assertNotCount(0, $this->validator->validate($object));
     }

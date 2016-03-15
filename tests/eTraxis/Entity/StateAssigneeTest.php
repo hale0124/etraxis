@@ -23,14 +23,14 @@ class StateAssigneeTest extends \PHPUnit_Framework_TestCase
 
     public function testStateId()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setStateId($expected);
         $this->assertEquals($expected, $this->object->getStateId());
     }
 
     public function testGroupId()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setGroupId($expected);
         $this->assertEquals($expected, $this->object->getGroupId());
     }

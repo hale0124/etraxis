@@ -23,14 +23,14 @@ class ListItemTest extends \PHPUnit_Framework_TestCase
 
     public function testFieldId()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setFieldId($expected);
         $this->assertEquals($expected, $this->object->getFieldId());
     }
 
     public function testKey()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setKey($expected);
         $this->assertEquals($expected, $this->object->getKey());
     }

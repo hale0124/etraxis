@@ -40,14 +40,14 @@ class FieldTest extends BaseTestCase
 
     public function testTemplateId()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setTemplateId($expected);
         $this->assertEquals($expected, $this->object->getTemplateId());
     }
 
     public function testStateId()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setStateId($expected);
         $this->assertEquals($expected, $this->object->getStateId());
     }
@@ -75,7 +75,7 @@ class FieldTest extends BaseTestCase
 
     public function testIndexNumber()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setIndexNumber($expected);
         $this->assertEquals($expected, $this->object->getIndexNumber());
     }
@@ -161,21 +161,21 @@ class FieldTest extends BaseTestCase
 
     public function testParameter1()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setParameter1($expected);
         $this->assertEquals($expected, $this->object->getParameter1());
     }
 
     public function testParameter2()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setParameter2($expected);
         $this->assertEquals($expected, $this->object->getParameter2());
     }
 
     public function testDefaultValue()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setDefaultValue($expected);
         $this->assertEquals($expected, $this->object->getDefaultValue());
     }

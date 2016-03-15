@@ -23,28 +23,28 @@ class FilterFieldTest extends \PHPUnit_Framework_TestCase
 
     public function testFilterId()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setFilterId($expected);
         $this->assertEquals($expected, $this->object->getFilterId());
     }
 
     public function testFieldId()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setFieldId($expected);
         $this->assertEquals($expected, $this->object->getFieldId());
     }
 
     public function testParameter1()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setParameter1($expected);
         $this->assertEquals($expected, $this->object->getParameter1());
     }
 
     public function testParameter2()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setParameter2($expected);
         $this->assertEquals($expected, $this->object->getParameter2());
     }

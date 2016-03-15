@@ -28,7 +28,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 
     public function testUserId()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setUserId($expected);
         $this->assertEquals($expected, $this->object->getUserId());
     }
@@ -56,7 +56,7 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 
     public function testParameter()
     {
-        $expected = rand(1, PHP_INT_MAX);
+        $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setParameter($expected);
         $this->assertEquals($expected, $this->object->getParameter());
     }
