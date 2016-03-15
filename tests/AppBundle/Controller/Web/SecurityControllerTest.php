@@ -28,7 +28,7 @@ class SecurityControllerTest extends WebTestCase
             return true;
         }
 
-        throw new \Exception('Authentication status is indeterminable');
+        throw new \RuntimeException('Authentication status is indeterminable');
     }
 
     private function isLoginPage(Crawler $crawler)
