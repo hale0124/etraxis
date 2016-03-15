@@ -34,8 +34,8 @@ class UsersDataTableTest extends BaseTestCase
 
         $this->assertNotEmpty($results['data']);
 
-        $this->assertEquals(count($users), $results['recordsTotal']);
-        $this->assertEquals(count($users), $results['recordsFiltered']);
+        $this->assertCount($results['recordsTotal'], $users);
+        $this->assertCount($results['recordsFiltered'], $users);
         $this->assertEquals(count($users), count($results['data']));
     }
 
@@ -57,7 +57,7 @@ class UsersDataTableTest extends BaseTestCase
 
         $this->assertEquals($total, $results['recordsTotal']);
         $this->assertEquals($expected, $results['recordsFiltered']);
-        $this->assertEquals($expected, count($results['data']));
+        $this->assertCount($expected, $results['data']);
     }
 
     public function testFilterByUsername()
