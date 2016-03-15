@@ -19,7 +19,7 @@ use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class LdapServiceStub implements LdapInterface
 {
-    public function find($basedn, $username, $attributes = [])
+    public function find($basedn, $username, array $attributes = [])
     {
         if ($username != 'einstein') {
             return false;
