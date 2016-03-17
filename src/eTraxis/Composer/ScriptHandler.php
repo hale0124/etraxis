@@ -57,7 +57,7 @@ class ScriptHandler
         if (!getenv('TRAVIS')) {
 
             echo PHP_EOL . 'Installing assets' . PHP_EOL;
-            system('bower install');
+            system('bower --allow-root install');
 
             echo PHP_EOL . 'Processing assets' . PHP_EOL;
             system('gulp --production');
@@ -74,7 +74,7 @@ class ScriptHandler
         if (!getenv('TRAVIS')) {
 
             echo PHP_EOL . 'Updating assets' . PHP_EOL;
-            system('bower update');
+            system('bower --allow-root update');
 
             echo PHP_EOL . 'Processing assets' . PHP_EOL;
             system('gulp --production');
