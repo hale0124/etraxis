@@ -30,12 +30,14 @@ class TemplateForm extends AbstractType
         // Template name.
         $builder->add('name', TextType::class, [
             'label'    => 'template.name',
+            'required' => true,
             'attr'     => ['maxlength' => Template::MAX_NAME],
         ]);
 
         // Template prefix.
         $builder->add('prefix', TextType::class, [
             'label'    => 'template.prefix',
+            'required' => true,
             'attr'     => ['maxlength' => Template::MAX_PREFIX],
         ]);
 

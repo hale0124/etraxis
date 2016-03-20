@@ -30,6 +30,7 @@ class ProjectForm extends AbstractType
         // Project name.
         $builder->add('name', TextType::class, [
             'label'    => 'project.name',
+            'required' => true,
             'attr'     => ['maxlength' => Project::MAX_NAME],
         ]);
 

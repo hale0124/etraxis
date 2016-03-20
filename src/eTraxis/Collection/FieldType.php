@@ -25,6 +25,7 @@ class FieldType extends AbstractStaticCollection
     {
         return [
             Field::TYPE_NUMBER   => 'field.type.number',
+            Field::TYPE_DECIMAL  => 'field.type.decimal',
             Field::TYPE_STRING   => 'field.type.string',
             Field::TYPE_TEXT     => 'field.type.text',
             Field::TYPE_CHECKBOX => 'field.type.checkbox',
@@ -32,7 +33,6 @@ class FieldType extends AbstractStaticCollection
             Field::TYPE_RECORD   => 'field.type.record',
             Field::TYPE_DATE     => 'field.type.date',
             Field::TYPE_DURATION => 'field.type.duration',
-            Field::TYPE_DECIMAL  => 'field.type.decimal',
         ];
     }
 }

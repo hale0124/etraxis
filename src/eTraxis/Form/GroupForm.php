@@ -29,6 +29,7 @@ class GroupForm extends AbstractType
         // Group name.
         $builder->add('name', TextType::class, [
             'label'    => 'group.name',
+            'required' => true,
             'attr'     => ['maxlength' => Group::MAX_NAME],
         ]);
 

@@ -28,8 +28,9 @@ class ForgotPasswordForm extends AbstractType
     {
         // User name.
         $builder->add('username', TextType::class, [
-            'label' => 'user.username',
-            'attr'  => ['maxlength' => User::MAX_USERNAME],
+            'label'    => 'user.username',
+            'required' => true,
+            'attr'     => ['maxlength' => User::MAX_USERNAME],
         ]);
     }
 

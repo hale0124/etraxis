@@ -36,12 +36,14 @@ class StateForm extends AbstractType
         // State name.
         $builder->add('name', TextType::class, [
             'label'    => 'state.name',
+            'required' => true,
             'attr'     => ['maxlength' => State::MAX_NAME],
         ]);
 
         // State abbreviation.
         $builder->add('abbreviation', TextType::class, [
             'label'    => 'state.abbreviation',
+            'required' => true,
             'attr'     => ['maxlength' => State::MAX_ABBREVIATION],
         ]);
 

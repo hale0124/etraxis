@@ -31,7 +31,8 @@ class ExportCsvForm extends AbstractType
     {
         // File name.
         $builder->add('filename', TextType::class, [
-            'label' => 'file',
+            'label'    => 'file',
+            'required' => true,
         ]);
 
         // Delimiter.

@@ -20,6 +20,7 @@ class FieldTypeTest extends BaseTestCase
     {
         $expected = [
             Field::TYPE_NUMBER,
+            Field::TYPE_DECIMAL,
             Field::TYPE_STRING,
             Field::TYPE_TEXT,
             Field::TYPE_CHECKBOX,
@@ -27,7 +28,6 @@ class FieldTypeTest extends BaseTestCase
             Field::TYPE_RECORD,
             Field::TYPE_DATE,
             Field::TYPE_DURATION,
-            Field::TYPE_DECIMAL,
         ];
 
         $this->assertEquals($expected, array_keys(FieldType::getCollection()));

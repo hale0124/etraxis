@@ -28,14 +28,16 @@ class ResetPasswordForm extends AbstractType
     {
         // Password.
         $builder->add('password', PasswordType::class, [
-            'label' => 'user.new_password',
-            'attr'  => ['maxlength' => BasePasswordEncoder::MAX_PASSWORD_LENGTH],
+            'label'    => 'user.new_password',
+            'required' => true,
+            'attr'     => ['maxlength' => BasePasswordEncoder::MAX_PASSWORD_LENGTH],
         ]);
 
         // Confirmation.
         $builder->add('confirmation', PasswordType::class, [
-            'label' => 'user.password_confirmation',
-            'attr'  => ['maxlength' => BasePasswordEncoder::MAX_PASSWORD_LENGTH],
+            'label'    => 'user.password_confirmation',
+            'required' => true,
+            'attr'     => ['maxlength' => BasePasswordEncoder::MAX_PASSWORD_LENGTH],
         ]);
     }
 

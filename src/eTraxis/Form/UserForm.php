@@ -40,6 +40,7 @@ class UserForm extends AbstractType
         // User name.
         $builder->add('username', TextType::class, [
             'label'    => 'user.username',
+            'required' => true,
             'disabled' => is_object($user) && $user->isLdap(),
             'attr'     => ['maxlength' => User::MAX_USERNAME],
         ]);
@@ -47,6 +48,7 @@ class UserForm extends AbstractType
         // Full name.
         $builder->add('fullname', TextType::class, [
             'label'    => 'user.fullname',
+            'required' => true,
             'disabled' => is_object($user) && $user->isLdap(),
             'attr'     => ['maxlength' => User::MAX_FULLNAME],
         ]);
@@ -54,6 +56,7 @@ class UserForm extends AbstractType
         // Email.
         $builder->add('email', EmailType::class, [
             'label'    => 'user.email',
+            'required' => true,
             'disabled' => is_object($user) && $user->isLdap(),
             'attr'     => ['maxlength' => User::MAX_EMAIL],
         ]);
