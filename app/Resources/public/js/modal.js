@@ -78,7 +78,15 @@ eTraxis.modal = function(options) {
                         $.each(response, function(id, message) {
                             var name = $('form', $modal).prop('name');
                             var $control = $('#' + name + '_' + id);
-                            $control.after('<p class="ui-corner-all ui-state-error">' + message + '</p>');
+                            if ($control.length == 0) {
+                                $control = $('[data-id="' + id + '"]');
+                            }
+                            if ($control.length == 0) {
+                                eTraxis.alert(eTraxis.i18n['error'], message);
+                            }
+                            else {
+                                $control.after('<p class="ui-corner-all ui-state-error">' + message + '</p>');
+                            }
                         });
                     }
                     else {

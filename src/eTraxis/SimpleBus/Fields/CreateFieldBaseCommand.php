@@ -30,13 +30,14 @@ class CreateFieldBaseCommand
     use ObjectInitiationTrait;
 
     /**
-     * @Assert\NotBlank()
      * @Assert\EntityId()
+     * @Assert\Expression("value != false || this.state != false")
      */
     public $template;
 
     /**
      * @Assert\EntityId()
+     * @Assert\Expression("value != false || this.template != false")
      */
     public $state;
 

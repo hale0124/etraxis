@@ -61,6 +61,42 @@ var FieldsApp = (function() {
          */
         selected: function() {
             return $fields.panel('selected') || 0;
+        },
+
+        /**
+         * Invokes "New field" dialog.
+         */
+        create: function() {
+            var id = StatesApp.selected();
+            eTraxis.modal({
+                url: eTraxis.route('admin_dlg_new_field', { id: id }),
+                title: eTraxis.i18n['field.new'],
+                open: function() {
+                    $('#field_type').change(function() {
+                        var types = [null, 'number', 'string', 'text', 'checkbox', 'list', 'record', 'date', 'duration', 'decimal'];
+                        var value = $(this).val();
+                        var type = types[value];
+
+                        if (type == 'checkbox') {
+                            $('#field_required').parent().parent().hide();
+                        }
+                        else {
+                            $('#field_required').parent().parent().show();
+                        }
+
+                        $('.field-type-specific').disable(true).parent().parent().hide();
+                        $('.field-type-specific[name^="field[' + type + ']"]').disable(false).parent().parent().show();
+                    }).change();
+                },
+                success: function() {
+                    var name = $('#field_name').val();
+                    FieldsApp.reload(id, function() {
+                        $fields.panel('expand');
+                        FieldsApp.select($fields.panel('find', name));
+                    });
+                    return true;
+                }
+            });
         }
     };
 })();

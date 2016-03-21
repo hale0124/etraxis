@@ -1,0 +1,51 @@
+{% form_theme form 'form.html.twig' %}
+
+<div class="dialog">
+    {{ form_start(form) }}
+    <fieldset>
+        {{ form_row(form.name) }}
+        {{ form_row(form.type) }}
+
+        {# Number-specific inputs #}
+        {{ form_row(form.number.minValue) }}
+        {{ form_row(form.number.maxValue) }}
+        {{ form_row(form.number.default) }}
+
+        {# Decimal-specific inputs #}
+        {{ form_row(form.decimal.minValue) }}
+        {{ form_row(form.decimal.maxValue) }}
+        {{ form_row(form.decimal.default) }}
+
+        {# String-specific inputs #}
+        {{ form_row(form.string.maxLength) }}
+        {{ form_row(form.string.default) }}
+
+        {# Text-specific inputs #}
+        {{ form_row(form.text.maxLength) }}
+        {{ form_row(form.text.default) }}
+
+        {# Checkbox-specific inputs #}
+        {{ form_row(form.checkbox.default) }}
+
+        {# List-specific inputs #}
+
+        {# Record-specific inputs #}
+
+        {# Date-specific inputs #}
+        {{ form_row(form.date.minValue) }}
+        {{ form_row(form.date.maxValue) }}
+        {{ form_row(form.date.default) }}
+
+        {# Duration-specific inputs #}
+        {{ form_row(form.duration.minValue) }}
+        {{ form_row(form.duration.maxValue) }}
+        {{ form_row(form.duration.default) }}
+
+        {# Shared inputs #}
+        {{ form_row(form.description) }}
+        {{ form_row(form.required) }}
+        {{ form_row(form.guestAccess) }}
+        {{ form_row(form.showInEmails) }}
+    </fieldset>
+    {{ form_end(form) }}
+</div>

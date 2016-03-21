@@ -13,6 +13,7 @@ namespace AppBundle\Controller\Admin;
 
 use eTraxis\Collection\FieldType;
 use eTraxis\Entity\Field;
+use eTraxis\Form\FieldForm;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -115,5 +116,25 @@ class FieldsGetController extends Controller
         catch (HttpException $e) {
             return new Response($e->getMessage(), $e->getStatusCode());
         }
+    }
+
+    /**
+     * Renders dialog to create new field.
+     *
+     * @Action\Route("/new/{id}", name="admin_dlg_new_field", requirements={"id"="\d+"})
+     *
+     * @param   int $id State ID.
+     *
+     * @return  Response
+     */
+    public function newAction($id)
+    {
+        $form = $this->createForm(FieldForm::class, null, [
+            'action' => $this->generateUrl('admin_new_field', ['id' => $id]),
+        ]);
+
+        return $this->render('admin/fields/dlg_field.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

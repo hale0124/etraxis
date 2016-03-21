@@ -22,6 +22,9 @@
             </div>
             <div class="grid-66">
                 {% set class = form.vars.disabled ? 'grid-100 mobile-grid-100 ui-state-disabled' : 'grid-100 mobile-grid-100' %}
+                {% if form.vars.attr.class is defined %}
+                    {% set class = class ~ ' ' ~ form.vars.attr.class %}
+                {% endif %}
                 {% if form.vars.required %}
                     {{ form_widget(form, {'attr': {'class': class, 'placeholder': 'field.required'}}) }}
                 {% else %}
