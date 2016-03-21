@@ -27,6 +27,7 @@ class UpdateTextFieldCommand extends UpdateFieldBaseCommand
     /**
      * @Assert\NotBlank()
      * @Assert\Range(min = "1", max = "4000")
+     * @Assert\Regex("/^(\-|\+)?\d+$/")
      */
     public $maxLength;
 

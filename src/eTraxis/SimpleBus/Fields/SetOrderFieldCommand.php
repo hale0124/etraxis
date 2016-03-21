@@ -32,8 +32,8 @@ class SetOrderFieldCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Type(type = "int")
      * @Assert\Range(min = "1")
+     * @Assert\Regex("/^\d+$/")
      */
     public $order;
 }

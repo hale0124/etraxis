@@ -27,6 +27,7 @@ class CreateStringFieldCommand extends CreateFieldBaseCommand
     /**
      * @Assert\NotBlank()
      * @Assert\Range(min = "1", max = "250")
+     * @Assert\Regex("/^(\-|\+)?\d+$/")
      */
     public $maxLength;
 

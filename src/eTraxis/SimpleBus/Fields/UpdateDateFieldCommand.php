@@ -24,21 +24,21 @@ class UpdateDateFieldCommand extends UpdateFieldBaseCommand
 {
     /**
      * @Assert\NotBlank()
-     * @Assert\Type(type = "int")
      * @Assert\Range(min = "-2147483648", max = "2147483647")
+     * @Assert\Regex("/^(\-|\+)?\d+$/")
      */
     public $minValue;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Type(type = "int")
      * @Assert\Range(min = "-2147483648", max = "2147483647")
+     * @Assert\Regex("/^(\-|\+)?\d+$/")
      */
     public $maxValue;
 
     /**
-     * @Assert\Type(type = "int")
      * @Assert\Range(min = "-2147483648", max = "2147483647")
+     * @Assert\Regex("/^(\-|\+)?\d+$/")
      */
     public $default;
 }

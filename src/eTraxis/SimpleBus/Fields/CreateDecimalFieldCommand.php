@@ -24,20 +24,17 @@ class CreateDecimalFieldCommand extends CreateFieldBaseCommand
 {
     /**
      * @Assert\NotBlank()
-     * @Assert\Type(type = "string")
      * @Assert\Regex("/^(\-|\+)?\d{1,10}(\.\d{1,10})?$/")
      */
     public $minValue;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Type(type = "string")
      * @Assert\Regex("/^(\-|\+)?\d{1,10}(\.\d{1,10})?$/")
      */
     public $maxValue;
 
     /**
-     * @Assert\Type(type = "string")
      * @Assert\Regex("/^(\-|\+)?\d{1,10}(\.\d{1,10})?$/")
      */
     public $default;

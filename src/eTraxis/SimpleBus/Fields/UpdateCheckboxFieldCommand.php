@@ -22,7 +22,6 @@ class UpdateCheckboxFieldCommand extends UpdateFieldBaseCommand
 {
     /**
      * @Assert\NotNull()
-     * @Assert\Type(type = "bool")
      */
     public $default;
 }

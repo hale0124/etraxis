@@ -22,7 +22,6 @@ class CreateCheckboxFieldCommand extends CreateFieldBaseCommand
 {
     /**
      * @Assert\NotNull()
-     * @Assert\Type(type = "bool")
      */
     public $default;
 }

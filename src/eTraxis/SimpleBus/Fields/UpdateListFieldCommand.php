@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 class UpdateListFieldCommand extends UpdateFieldBaseCommand
 {
     /**
-     * @Assert\Type(type = "int")
+     * @Assert\Regex("/^(\-|\+)?\d+$/")
      * @Assert\GreaterThan(value = "0")
      */
     public $default;
