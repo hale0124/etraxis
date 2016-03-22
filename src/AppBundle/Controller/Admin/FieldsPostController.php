@@ -176,4 +176,29 @@ class FieldsPostController extends Controller
             return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
+
+    /**
+     * Deletes specified field.
+     *
+     * @Action\Route("/delete/{id}", name="admin_delete_field", requirements={"id"="\d+"})
+     *
+     * @param   int $id Field ID.
+     *
+     * @return  JsonResponse
+     */
+    public function deleteAction($id)
+    {
+        try {
+            $command = new Fields\DeleteFieldCommand(['id' => $id]);
+            $this->getCommandBus()->handle($command);
+
+            return new JsonResponse();
+        }
+        catch (ValidationException $e) {
+            return new JsonResponse($e->getMessages(), $e->getStatusCode());
+        }
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
+        }
+    }
 }

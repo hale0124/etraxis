@@ -37,6 +37,36 @@ class DeleteFieldCommandTest extends BaseTestCase
         $this->assertNull($field);
     }
 
+    public function testReorder()
+    {
+        /** @var Field $field1 */
+        /** @var Field $field2 */
+        /** @var Field $field3 */
+        /** @var Field $field4 */
+        $field1 = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
+        $field2 = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Delivery to']);
+        $field3 = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Delivery at']);
+        $field4 = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Notes']);
+
+        $this->assertEquals(1, $field1->getIndexNumber());
+        $this->assertEquals(2, $field2->getIndexNumber());
+        $this->assertEquals(3, $field3->getIndexNumber());
+        $this->assertEquals(4, $field4->getIndexNumber());
+
+        $command = new DeleteFieldCommand(['id' => $field2->getId()]);
+        $this->command_bus->handle($command);
+
+        $field1 = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
+        $field2 = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Delivery to']);
+        $field3 = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Delivery at']);
+        $field4 = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Notes']);
+
+        $this->assertEquals(1, $field1->getIndexNumber());
+        $this->assertNull($field2);
+        $this->assertEquals(2, $field3->getIndexNumber());
+        $this->assertEquals(3, $field4->getIndexNumber());
+    }
+
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @expectedExceptionMessage Unknown field.

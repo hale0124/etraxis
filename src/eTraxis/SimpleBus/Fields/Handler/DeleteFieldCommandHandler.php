@@ -61,12 +61,25 @@ class DeleteFieldCommandHandler
             throw new NotFoundHttpException('Unknown field.');
         }
 
+        $old_order = $entity->getIndexNumber();
+
         $entity
             ->setIndexNumber(0)
             ->setRemovedAt(time())
         ;
 
         $this->doctrine->getManager()->persist($entity);
+
+        // Reorder remaining fields.
+        $fields = $entity->getState()->getFields();
+
+        foreach ($fields as $field) {
+            if ($field->getIndexNumber() > $old_order) {
+                $field->setIndexNumber($field->getIndexNumber() - 1);
+                $this->doctrine->getManager()->persist($field);
+            }
+        }
+
         $this->doctrine->getManager()->flush();
     }
 }

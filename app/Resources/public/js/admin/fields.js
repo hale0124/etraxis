@@ -118,6 +118,20 @@ var FieldsApp = (function() {
                     return true;
                 }
             });
+        },
+
+        /**
+         * Deletes field after confirmation.
+         *
+         * @param {number} id Field ID.
+         */
+        delete: function(id) {
+            eTraxis.confirm(eTraxis.i18n['button.delete'], eTraxis.i18n['field.confirm.delete'], function() {
+                $.post(eTraxis.route('admin_delete_field', { id: id }), function() {
+                    $('#content').html(null);
+                    StatesApp.select(StatesApp.selected());
+                });
+            });
         }
     };
 })();
