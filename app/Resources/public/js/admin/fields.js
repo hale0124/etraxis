@@ -72,7 +72,9 @@ var FieldsApp = (function() {
                 url: eTraxis.route('admin_dlg_new_field', { id: id }),
                 title: eTraxis.i18n['field.new'],
                 open: function() {
-                    $('form[name=field]').closest('.ui-dialog').css('top', 25);
+                    var $dialog = $('form[name=field]').closest('.ui-dialog');
+                    var top = parseInt($dialog.css('top'), 10);
+                    $dialog.css('top', top + 25);
                     $('#field_type').change(function() {
                         var types = [null, 'number', 'string', 'text', 'checkbox', 'list', 'record', 'date', 'duration', 'decimal'];
                         var value = $(this).val();

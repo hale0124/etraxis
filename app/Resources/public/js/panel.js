@@ -16,7 +16,7 @@
          * @private Constructor.
          */
         _create: function() {
-            var sections = parseInt($(this.element).data('sections'));
+            var sections = parseInt($(this.element).data('sections'), 10);
 
             if (!sections || sections < 1) {
                 sections = 1;
