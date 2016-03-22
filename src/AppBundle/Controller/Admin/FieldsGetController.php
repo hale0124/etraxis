@@ -137,4 +137,35 @@ class FieldsGetController extends Controller
             'form' => $form->createView(),
         ]);
     }
+
+    /**
+     * Renders dialog to edit specified field.
+     *
+     * @Action\Route("/edit/{id}", name="admin_dlg_edit_field", requirements={"id"="\d+"})
+     *
+     * @param   int $id Field ID.
+     *
+     * @return  Response
+     */
+    public function editAction($id)
+    {
+        try {
+            $field = $this->getDoctrine()->getRepository(Field::class)->find($id);
+
+            if (!$field) {
+                throw $this->createNotFoundException();
+            }
+
+            $form = $this->createForm(FieldForm::class, $field, [
+                'action' => $this->generateUrl('admin_edit_field', ['id' => $id]),
+            ]);
+
+            return $this->render('admin/fields/dlg_field.html.twig', [
+                'form' => $form->createView(),
+            ]);
+        }
+        catch (HttpException $e) {
+            return new Response($e->getMessage(), $e->getStatusCode());
+        }
+    }
 }

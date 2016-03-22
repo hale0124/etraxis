@@ -2,6 +2,7 @@
 
 <div class="grid-row">
     <div class="grid-100">
+        <button type="button" onclick="FieldsApp.edit({{ field.id }})">{{ 'button.edit'|trans }}</button>
         {% if can.delete %}
             <button type="button" onclick="FieldsApp.delete({{ field.id }})">{{ 'button.delete'|trans }}</button>
         {% endif %}

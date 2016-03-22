@@ -4,46 +4,71 @@
     {{ form_start(form) }}
     <fieldset>
         {{ form_row(form.name) }}
-        {{ form_row(form.type) }}
+
+        {% if form.type is defined %}
+            {{ form_row(form.type) }}
+        {% endif %}
 
         {# Number-specific inputs #}
-        {{ form_row(form.asNumber.minValue) }}
-        {{ form_row(form.asNumber.maxValue) }}
-        {{ form_row(form.asNumber.defaultValue) }}
+        {% if form.asNumber is defined %}
+            {{ form_row(form.asNumber.minValue) }}
+            {{ form_row(form.asNumber.maxValue) }}
+            {{ form_row(form.asNumber.defaultValue) }}
+        {% endif %}
 
         {# Decimal-specific inputs #}
-        {{ form_row(form.asDecimal.minValue) }}
-        {{ form_row(form.asDecimal.maxValue) }}
-        {{ form_row(form.asDecimal.defaultValue) }}
+        {% if form.asDecimal is defined %}
+            {{ form_row(form.asDecimal.minValue) }}
+            {{ form_row(form.asDecimal.maxValue) }}
+            {{ form_row(form.asDecimal.defaultValue) }}
+        {% endif %}
 
         {# String-specific inputs #}
-        {{ form_row(form.asString.maxLength) }}
-        {{ form_row(form.asString.defaultValue) }}
+        {% if form.asString is defined %}
+            {{ form_row(form.asString.maxLength) }}
+            {{ form_row(form.asString.defaultValue) }}
+        {% endif %}
 
         {# Text-specific inputs #}
-        {{ form_row(form.asText.maxLength) }}
-        {{ form_row(form.asText.defaultValue) }}
+        {% if form.asText is defined %}
+            {{ form_row(form.asText.maxLength) }}
+            {{ form_row(form.asText.defaultValue) }}
+        {% endif %}
 
         {# Checkbox-specific inputs #}
-        {{ form_row(form.asCheckbox.defaultValue) }}
+        {% if form.asCheckbox is defined %}
+            {{ form_row(form.asCheckbox.defaultValue) }}
+        {% endif %}
 
         {# List-specific inputs #}
+        {% if form.asList is defined %}
+        {% endif %}
 
         {# Record-specific inputs #}
+        {% if form.asRecord is defined %}
+        {% endif %}
 
         {# Date-specific inputs #}
-        {{ form_row(form.asDate.minValue) }}
-        {{ form_row(form.asDate.maxValue) }}
-        {{ form_row(form.asDate.defaultValue) }}
+        {% if form.asDate is defined %}
+            {{ form_row(form.asDate.minValue) }}
+            {{ form_row(form.asDate.maxValue) }}
+            {{ form_row(form.asDate.defaultValue) }}
+        {% endif %}
 
         {# Duration-specific inputs #}
-        {{ form_row(form.asDuration.minValue) }}
-        {{ form_row(form.asDuration.maxValue) }}
-        {{ form_row(form.asDuration.defaultValue) }}
+        {% if form.asDuration is defined %}
+            {{ form_row(form.asDuration.minValue) }}
+            {{ form_row(form.asDuration.maxValue) }}
+            {{ form_row(form.asDuration.defaultValue) }}
+        {% endif %}
 
         {# Shared inputs #}
         {{ form_row(form.description) }}
-        {{ form_row(form.required) }}
+
+        {% if form.required is defined %}
+            {{ form_row(form.required) }}
+        {% endif %}
+
         {{ form_row(form.guestAccess) }}
         {{ form_row(form.showInEmails) }}
     </fieldset>

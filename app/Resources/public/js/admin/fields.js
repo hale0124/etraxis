@@ -98,6 +98,24 @@ var FieldsApp = (function() {
                     return true;
                 }
             });
+        },
+
+        /**
+         * Invokes "Edit field" dialog.
+         *
+         * @param {number} id Field ID.
+         */
+        edit: function(id) {
+            eTraxis.modal({
+                url: eTraxis.route('admin_dlg_edit_field', { id: id }),
+                title: $fields.panel('get', id),
+                success: function() {
+                    FieldsApp.reload(StatesApp.selected(), function() {
+                        FieldsApp.select(id);
+                    });
+                    return true;
+                }
+            });
         }
     };
 })();

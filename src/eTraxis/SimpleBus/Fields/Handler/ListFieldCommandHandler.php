@@ -39,15 +39,18 @@ class ListFieldCommandHandler extends BaseFieldCommandHandler
 
             $repository = $this->doctrine->getRepository(ListItem::class);
 
-            /** @var ListItem $item */
-            $item = $repository->findOneBy([
-                'fieldId' => $command->id,
-                'key'     => $command->defaultValue,
-            ]);
+            if ($command->defaultValue !== null) {
 
-            if (!$item) {
-                $this->logger->error('Unknown list item.', [$command->id, $command->defaultValue]);
-                throw new NotFoundHttpException('Unknown list item.');
+                /** @var ListItem $item */
+                $item = $repository->findOneBy([
+                    'fieldId' => $command->id,
+                    'key'     => $command->defaultValue,
+                ]);
+
+                if (!$item) {
+                    $this->logger->error('Unknown list item.', [$command->id, $command->defaultValue]);
+                    throw new NotFoundHttpException('Unknown list item.');
+                }
             }
 
             $entity->setDefaultValue($command->defaultValue);

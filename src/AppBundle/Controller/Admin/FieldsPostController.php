@@ -100,4 +100,80 @@ class FieldsPostController extends Controller
             return new JsonResponse($e->getMessage(), $e->getStatusCode());
         }
     }
+
+    /**
+     * Processes submitted form when specified field is being edited.
+     *
+     * @Action\Route("/edit/{id}", name="admin_edit_field", requirements={"id"="\d+"})
+     *
+     * @param   Request $request
+     * @param   int     $id Field ID.
+     *
+     * @return  JsonResponse
+     */
+    public function editAction(Request $request, $id)
+    {
+        try {
+            /** @var Field $field */
+            $field = $this->getDoctrine()->getRepository(Field::class)->find($id);
+
+            if (!$field) {
+                throw $this->createNotFoundException();
+            }
+
+            $data = $this->getFormData($request, 'field', ['id' => $id]);
+
+            switch ($field->getType()) {
+
+                case Field::TYPE_NUMBER:
+                    $command = new Fields\UpdateNumberFieldCommand($data + $data['asNumber']);
+                    break;
+
+                case Field::TYPE_DECIMAL:
+                    $command = new Fields\UpdateDecimalFieldCommand($data + $data['asDecimal']);
+                    break;
+
+                case Field::TYPE_STRING:
+                    $command = new Fields\UpdateStringFieldCommand($data + $data['asString']);
+                    break;
+
+                case Field::TYPE_TEXT:
+                    $command = new Fields\UpdateTextFieldCommand($data + $data['asText']);
+                    break;
+
+                case Field::TYPE_CHECKBOX:
+                    $command = new Fields\UpdateCheckboxFieldCommand($data + $data['asCheckbox'] + ['required' => false]);
+                    break;
+
+                case Field::TYPE_LIST:
+                    $command = new Fields\UpdateListFieldCommand($data);
+                    break;
+
+                case Field::TYPE_RECORD:
+                    $command = new Fields\UpdateRecordFieldCommand($data);
+                    break;
+
+                case Field::TYPE_DATE:
+                    $command = new Fields\UpdateDateFieldCommand($data + $data['asDate']);
+                    break;
+
+                case Field::TYPE_DURATION:
+                    $command = new Fields\UpdateDurationFieldCommand($data + $data['asDuration']);
+                    break;
+
+                default:
+                    throw new BadRequestHttpException();
+            }
+
+            $this->getCommandBus()->handle($command);
+
+            return new JsonResponse();
+        }
+        catch (ValidationException $e) {
+            return new JsonResponse($e->getMessages(), $e->getStatusCode());
+        }
+        catch (HttpException $e) {
+            return new JsonResponse($e->getMessage(), $e->getStatusCode());
+        }
+    }
 }
