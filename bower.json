@@ -2,7 +2,7 @@
     "name": "etraxis/etraxis",
     "license": "GPL-3.0",
     "dependencies": {
-        "normalize.css": "3.0.3",
+        "normalize.css": "4.0.0",
         "unsemantic": "1.0.3",
         "jquery": "2.2.2",
         "jquery.ui": "1.11.4",
