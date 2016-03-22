@@ -7,39 +7,39 @@
         {{ form_row(form.type) }}
 
         {# Number-specific inputs #}
-        {{ form_row(form.number.minValue) }}
-        {{ form_row(form.number.maxValue) }}
-        {{ form_row(form.number.default) }}
+        {{ form_row(form.asNumber.minValue) }}
+        {{ form_row(form.asNumber.maxValue) }}
+        {{ form_row(form.asNumber.default) }}
 
         {# Decimal-specific inputs #}
-        {{ form_row(form.decimal.minValue) }}
-        {{ form_row(form.decimal.maxValue) }}
-        {{ form_row(form.decimal.default) }}
+        {{ form_row(form.asDecimal.minValue) }}
+        {{ form_row(form.asDecimal.maxValue) }}
+        {{ form_row(form.asDecimal.default) }}
 
         {# String-specific inputs #}
-        {{ form_row(form.string.maxLength) }}
-        {{ form_row(form.string.default) }}
+        {{ form_row(form.asString.maxLength) }}
+        {{ form_row(form.asString.default) }}
 
         {# Text-specific inputs #}
-        {{ form_row(form.text.maxLength) }}
-        {{ form_row(form.text.default) }}
+        {{ form_row(form.asText.maxLength) }}
+        {{ form_row(form.asText.default) }}
 
         {# Checkbox-specific inputs #}
-        {{ form_row(form.checkbox.default) }}
+        {{ form_row(form.asCheckbox.default) }}
 
         {# List-specific inputs #}
 
         {# Record-specific inputs #}
 
         {# Date-specific inputs #}
-        {{ form_row(form.date.minValue) }}
-        {{ form_row(form.date.maxValue) }}
-        {{ form_row(form.date.default) }}
+        {{ form_row(form.asDate.minValue) }}
+        {{ form_row(form.asDate.maxValue) }}
+        {{ form_row(form.asDate.default) }}
 
         {# Duration-specific inputs #}
-        {{ form_row(form.duration.minValue) }}
-        {{ form_row(form.duration.maxValue) }}
-        {{ form_row(form.duration.default) }}
+        {{ form_row(form.asDuration.minValue) }}
+        {{ form_row(form.asDuration.maxValue) }}
+        {{ form_row(form.asDuration.default) }}
 
         {# Shared inputs #}
         {{ form_row(form.description) }}

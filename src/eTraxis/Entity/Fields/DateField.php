@@ -16,7 +16,7 @@ use eTraxis\Entity\Field;
 /**
  * Date field.
  */
-class DateField
+class DateField extends AbstractField
 {
     // Constraints.
     const MIN_VALUE = -2147483648;
@@ -33,6 +33,14 @@ class DateField
     public function __construct(Field $field)
     {
         $this->field = $field;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getSupportedKeys()
+    {
+        return ['minValue', 'maxValue', 'defaultValue'];
     }
 
     /**

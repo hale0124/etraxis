@@ -27,13 +27,13 @@ class FieldFormTest extends BaseTestCase
 
         $this->assertArrayHasKey('name', $children);
         $this->assertArrayHasKey('type', $children);
-        $this->assertArrayHasKey('number', $children);
-        $this->assertArrayHasKey('decimal', $children);
-        $this->assertArrayHasKey('string', $children);
-        $this->assertArrayHasKey('text', $children);
-        $this->assertArrayHasKey('checkbox', $children);
-        $this->assertArrayHasKey('date', $children);
-        $this->assertArrayHasKey('duration', $children);
+        $this->assertArrayHasKey('asNumber', $children);
+        $this->assertArrayHasKey('asDecimal', $children);
+        $this->assertArrayHasKey('asString', $children);
+        $this->assertArrayHasKey('asText', $children);
+        $this->assertArrayHasKey('asCheckbox', $children);
+        $this->assertArrayHasKey('asDate', $children);
+        $this->assertArrayHasKey('asDuration', $children);
         $this->assertArrayHasKey('description', $children);
         $this->assertArrayHasKey('required', $children);
         $this->assertArrayHasKey('guestAccess', $children);

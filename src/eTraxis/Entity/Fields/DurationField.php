@@ -16,7 +16,7 @@ use eTraxis\Entity\Field;
 /**
  * Duration field.
  */
-class DurationField
+class DurationField extends AbstractField
 {
     // Constraints.
     const MIN_VALUE = 0;
@@ -33,6 +33,14 @@ class DurationField
     public function __construct(Field $field)
     {
         $this->field = $field;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getSupportedKeys()
+    {
+        return ['minValue', 'maxValue', 'defaultValue'];
     }
 
     /**

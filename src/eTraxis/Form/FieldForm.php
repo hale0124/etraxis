@@ -45,15 +45,15 @@ class FieldForm extends AbstractType
         ]);
 
         // Type-specific inputs.
-        $builder->add('number',   Fields\NumberFieldType::class);
-        $builder->add('decimal',  Fields\DecimalFieldType::class);
-        $builder->add('string',   Fields\StringFieldType::class);
-        $builder->add('text',     Fields\TextFieldType::class);
-        $builder->add('checkbox', Fields\CheckboxFieldType::class);
+        $builder->add('asNumber',   Fields\NumberFieldType::class);
+        $builder->add('asDecimal',  Fields\DecimalFieldType::class);
+        $builder->add('asString',   Fields\StringFieldType::class);
+        $builder->add('asText',     Fields\TextFieldType::class);
+        $builder->add('asCheckbox', Fields\CheckboxFieldType::class);
         // no specific inputs for "list"
         // no specific inputs for "record"
-        $builder->add('date',     Fields\DateFieldType::class);
-        $builder->add('duration', Fields\DurationFieldType::class);
+        $builder->add('asDate',     Fields\DateFieldType::class);
+        $builder->add('asDuration', Fields\DurationFieldType::class);
 
         // Description.
         $builder->add('description', TextType::class, [

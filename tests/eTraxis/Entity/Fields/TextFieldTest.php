@@ -33,6 +33,24 @@ class TextFieldTest extends BaseTestCase
         ;
     }
 
+    public function testSupportedKeys()
+    {
+        $expected = ['maxLength', 'defaultValue'];
+
+        $field = $this->object->asText();
+
+        $reflection = new \ReflectionObject($field);
+        $method     = $reflection->getMethod('getSupportedKeys');
+        $method->setAccessible(true);
+        $actual = $method->invokeArgs($field, []);
+
+        $this->assertCount(count($expected), $actual);
+
+        foreach ($expected as $key) {
+            $this->assertContains($key, $actual);
+        }
+    }
+
     public function testMaxLength()
     {
         $field = $this->object->asText();

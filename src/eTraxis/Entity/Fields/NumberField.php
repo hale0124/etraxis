@@ -16,7 +16,7 @@ use eTraxis\Entity\Field;
 /**
  * Number field.
  */
-class NumberField
+class NumberField extends AbstractField
 {
     // Constraints.
     const MIN_VALUE = -1000000000;
@@ -33,6 +33,14 @@ class NumberField
     public function __construct(Field $field)
     {
         $this->field = $field;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getSupportedKeys()
+    {
+        return ['minValue', 'maxValue', 'defaultValue'];
     }
 
     /**

@@ -16,7 +16,7 @@ use eTraxis\Entity\Field;
 /**
  * Record field.
  */
-class RecordField
+class RecordField extends AbstractField
 {
     // Properties.
     protected $field;
@@ -29,5 +29,13 @@ class RecordField
     public function __construct(Field $field)
     {
         $this->field = $field;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getSupportedKeys()
+    {
+        return [];
     }
 }

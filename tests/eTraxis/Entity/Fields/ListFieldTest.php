@@ -27,6 +27,42 @@ class ListFieldTest extends BaseTestCase
         $this->object = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Season']);
     }
 
+    public function testSupportedKeys()
+    {
+        $expected = ['defaultKey', 'defaultValue'];
+
+        $field = $this->object->asList();
+
+        $reflection = new \ReflectionObject($field);
+        $method     = $reflection->getMethod('getSupportedKeys');
+        $method->setAccessible(true);
+        $actual = $method->invokeArgs($field, []);
+
+        $this->assertCount(count($expected), $actual);
+
+        foreach ($expected as $key) {
+            $this->assertContains($key, $actual);
+        }
+    }
+
+    public function testDefaultKey()
+    {
+        $field = $this->object->asList();
+
+        /** @var ListItem $item */
+        $item = $this->doctrine->getRepository(ListItem::class)->findOneBy(['key' => 3]);
+
+        $field->setDefaultKey($item->getKey());
+        $this->assertEquals($item->getKey(), $field->getDefaultKey());
+        $this->assertEquals($item->getValue(), $field->getDefaultValue());
+        $this->assertEquals($item->getKey(), $this->object->getDefaultValue());
+
+        $field->setDefaultKey(null);
+        $this->assertNull($field->getDefaultKey());
+        $this->assertNull($field->getDefaultValue());
+        $this->assertNull($this->object->getDefaultValue());
+    }
+
     public function testDefaultValue()
     {
         $field = $this->object->asList();
@@ -34,13 +70,13 @@ class ListFieldTest extends BaseTestCase
         /** @var ListItem $item */
         $item = $this->doctrine->getRepository(ListItem::class)->findOneBy(['key' => 3]);
 
-        $field->setDefaultItem($item->getKey());
-        $this->assertEquals($item->getKey(), $field->getDefaultItem());
+        $field->setDefaultValue($item->getValue());
+        $this->assertEquals($item->getKey(), $field->getDefaultKey());
         $this->assertEquals($item->getValue(), $field->getDefaultValue());
         $this->assertEquals($item->getKey(), $this->object->getDefaultValue());
 
-        $field->setDefaultItem(null);
-        $this->assertNull($field->getDefaultItem());
+        $field->setDefaultValue(null);
+        $this->assertNull($field->getDefaultKey());
         $this->assertNull($field->getDefaultValue());
         $this->assertNull($this->object->getDefaultValue());
     }

@@ -50,23 +50,23 @@ class FieldsPostController extends Controller
             switch ($data['type']) {
 
                 case Field::TYPE_NUMBER:
-                    $command = new Fields\CreateNumberFieldCommand($data + $data['number']);
+                    $command = new Fields\CreateNumberFieldCommand($data + $data['asNumber']);
                     break;
 
                 case Field::TYPE_DECIMAL:
-                    $command = new Fields\CreateDecimalFieldCommand($data + $data['decimal']);
+                    $command = new Fields\CreateDecimalFieldCommand($data + $data['asDecimal']);
                     break;
 
                 case Field::TYPE_STRING:
-                    $command = new Fields\CreateStringFieldCommand($data + $data['string']);
+                    $command = new Fields\CreateStringFieldCommand($data + $data['asString']);
                     break;
 
                 case Field::TYPE_TEXT:
-                    $command = new Fields\CreateTextFieldCommand($data + $data['text']);
+                    $command = new Fields\CreateTextFieldCommand($data + $data['asText']);
                     break;
 
                 case Field::TYPE_CHECKBOX:
-                    $command = new Fields\CreateCheckboxFieldCommand($data + $data['checkbox']);
+                    $command = new Fields\CreateCheckboxFieldCommand($data + $data['asCheckbox']);
                     break;
 
                 case Field::TYPE_LIST:
@@ -78,11 +78,11 @@ class FieldsPostController extends Controller
                     break;
 
                 case Field::TYPE_DATE:
-                    $command = new Fields\CreateDateFieldCommand($data + $data['date']);
+                    $command = new Fields\CreateDateFieldCommand($data + $data['asDate']);
                     break;
 
                 case Field::TYPE_DURATION:
-                    $command = new Fields\CreateDurationFieldCommand($data + $data['duration']);
+                    $command = new Fields\CreateDurationFieldCommand($data + $data['asDuration']);
                     break;
 
                 default:

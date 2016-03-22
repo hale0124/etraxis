@@ -17,7 +17,7 @@ use eTraxis\Repository\DecimalValuesRepository;
 /**
  * Decimal field.
  */
-class DecimalField
+class DecimalField extends AbstractField
 {
     // Constraints.
     const MIN_VALUE = '-9999999999.9999999999';
@@ -37,6 +37,14 @@ class DecimalField
     {
         $this->field      = $field;
         $this->repository = $repository;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getSupportedKeys()
+    {
+        return ['minValue', 'maxValue', 'defaultValue'];
     }
 
     /**

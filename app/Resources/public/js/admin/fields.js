@@ -76,7 +76,7 @@ var FieldsApp = (function() {
                     $('#field_type').change(function() {
                         var types = [null, 'number', 'string', 'text', 'checkbox', 'list', 'record', 'date', 'duration', 'decimal'];
                         var value = $(this).val();
-                        var type = types[value];
+                        var type = 'as' + types[value].charAt(0).toUpperCase() + types[value].slice(1);
 
                         if (type == 'checkbox') {
                             $('#field_required').parent().parent().hide();

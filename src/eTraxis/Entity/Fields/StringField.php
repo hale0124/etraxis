@@ -17,7 +17,7 @@ use eTraxis\Repository\StringValuesRepository;
 /**
  * String field.
  */
-class StringField
+class StringField extends AbstractField
 {
     // Constraints.
     const MIN_LENGTH = 1;
@@ -37,6 +37,14 @@ class StringField
     {
         $this->field      = $field;
         $this->repository = $repository;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getSupportedKeys()
+    {
+        return ['maxLength', 'defaultValue'];
     }
 
     /**

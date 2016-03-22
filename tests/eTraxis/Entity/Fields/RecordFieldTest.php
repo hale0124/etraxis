@@ -14,7 +14,7 @@ namespace eTraxis\Entity\Fields;
 use eTraxis\Entity\Field;
 use eTraxis\Tests\BaseTestCase;
 
-class CheckboxFieldTest extends BaseTestCase
+class RecordFieldTest extends BaseTestCase
 {
     /** @var Field */
     private $object;
@@ -24,14 +24,14 @@ class CheckboxFieldTest extends BaseTestCase
         parent::setUp();
 
         $this->object = new Field();
-        $this->object->setType(Field::TYPE_CHECKBOX);
+        $this->object->setType(Field::TYPE_RECORD);
     }
 
     public function testSupportedKeys()
     {
-        $expected = ['defaultValue'];
+        $expected = [];
 
-        $field = $this->object->asCheckbox();
+        $field = $this->object->asRecord();
 
         $reflection = new \ReflectionObject($field);
         $method     = $reflection->getMethod('getSupportedKeys');
@@ -43,18 +43,5 @@ class CheckboxFieldTest extends BaseTestCase
         foreach ($expected as $key) {
             $this->assertContains($key, $actual);
         }
-    }
-
-    public function testDefaultValue()
-    {
-        $field = $this->object->asCheckbox();
-
-        $field->setDefaultValue(true);
-        $this->assertTrue($field->getDefaultValue());
-        $this->assertEquals(1, $this->object->getDefaultValue());
-
-        $field->setDefaultValue(false);
-        $this->assertFalse($field->getDefaultValue());
-        $this->assertEquals(0, $this->object->getDefaultValue());
     }
 }

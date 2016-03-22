@@ -16,7 +16,7 @@ use eTraxis\Entity\Field;
 /**
  * Checkbox field.
  */
-class CheckboxField
+class CheckboxField extends AbstractField
 {
     // Properties.
     protected $field;
@@ -29,6 +29,14 @@ class CheckboxField
     public function __construct(Field $field)
     {
         $this->field = $field;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function getSupportedKeys()
+    {
+        return ['defaultValue'];
     }
 
     /**

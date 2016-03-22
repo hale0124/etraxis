@@ -27,6 +27,24 @@ class DurationFieldTest extends BaseTestCase
         $this->object->setType(Field::TYPE_DURATION);
     }
 
+    public function testSupportedKeys()
+    {
+        $expected = ['minValue', 'maxValue', 'defaultValue'];
+
+        $field = $this->object->asDuration();
+
+        $reflection = new \ReflectionObject($field);
+        $method     = $reflection->getMethod('getSupportedKeys');
+        $method->setAccessible(true);
+        $actual = $method->invokeArgs($field, []);
+
+        $this->assertCount(count($expected), $actual);
+
+        foreach ($expected as $key) {
+            $this->assertContains($key, $actual);
+        }
+    }
+
     public function testMinValue()
     {
         $field = $this->object->asDuration();
