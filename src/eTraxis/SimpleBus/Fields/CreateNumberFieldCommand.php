@@ -16,9 +16,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Creates new "number" field.
  *
- * @property    int $minValue Minimum allowed value.
- * @property    int $maxValue Maximum allowed value.
- * @property    int $default  Default value of the field.
+ * @property    int $minValue     Minimum allowed value.
+ * @property    int $maxValue     Maximum allowed value.
+ * @property    int $defaultValue Default value of the field.
  */
 class CreateNumberFieldCommand extends CreateFieldBaseCommand
 {
@@ -40,5 +40,5 @@ class CreateNumberFieldCommand extends CreateFieldBaseCommand
      * @Assert\Range(min = "-1000000000", max = "1000000000")
      * @Assert\Regex("/^(\-|\+)?\d+$/")
      */
-    public $default;
+    public $defaultValue;
 }

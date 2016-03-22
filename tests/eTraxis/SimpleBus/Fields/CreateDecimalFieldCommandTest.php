@@ -34,7 +34,7 @@ class CreateDecimalFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
             'minValue'     => '0.00',
             'maxValue'     => '100000.00',
-            'default'      => '499.95',
+            'defaultValue' => '499.95',
         ]);
 
         $this->command_bus->handle($command);
@@ -101,7 +101,7 @@ class CreateDecimalFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
             'minValue'     => '1',
             'maxValue'     => '100',
-            'default'      => '0.99',
+            'defaultValue' => '0.99',
         ]);
 
         $this->command_bus->handle($command);

@@ -17,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Updates specified "text" field.
  *
  * @property    int    $maxLength    Maximum allowed length of field values.
- * @property    string $default      Default value of the field.
+ * @property    string $defaultValue Default value of the field.
  * @property    string $regexCheck   Perl-compatible regular expression which values of the field must conform to.
  * @property    string $regexSearch  Perl-compatible regular expression to modify values of the field before display them (search for).
  * @property    string $regexReplace Perl-compatible regular expression to modify values of the field before display them (replace with).
@@ -34,7 +34,7 @@ class UpdateTextFieldCommand extends UpdateFieldBaseCommand
     /**
      * @Assert\Length(max = "4000")
      */
-    public $default;
+    public $defaultValue;
 
     /**
      * @Assert\Length(max = "500")

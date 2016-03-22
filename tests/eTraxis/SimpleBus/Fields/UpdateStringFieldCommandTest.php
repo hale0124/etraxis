@@ -42,7 +42,7 @@ class UpdateStringFieldCommandTest extends BaseTestCase
             'guestAccess'  => false,
             'showInEmails' => true,
             'maxLength'    => 6,
-            'default'      => '?ACV??',
+            'defaultValue' => '?ACV??',
             'regexCheck'   => '^(\d{1})ACV(\d{2})$',
             'regexSearch'  => '^(\d{1})ACV(\d{2})$',
             'regexReplace' => 'Season $1, Episode $2',

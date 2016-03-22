@@ -16,9 +16,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Updates specified "decimal" field.
  *
- * @property    float $minValue Minimum allowed value.
- * @property    float $maxValue Maximum allowed value.
- * @property    float $default  Default value of the field.
+ * @property    float $minValue     Minimum allowed value.
+ * @property    float $maxValue     Maximum allowed value.
+ * @property    float $defaultValue Default value of the field.
  */
 class UpdateDecimalFieldCommand extends UpdateFieldBaseCommand
 {
@@ -37,5 +37,5 @@ class UpdateDecimalFieldCommand extends UpdateFieldBaseCommand
     /**
      * @Assert\Regex("/^(\-|\+)?\d{1,10}(\.\d{1,10})?$/")
      */
-    public $default;
+    public $defaultValue;
 }

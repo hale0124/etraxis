@@ -40,7 +40,7 @@ class UpdateDateFieldCommandTest extends BaseTestCase
             'showInEmails' => true,
             'minValue'     => 1,
             'maxValue'     => 14,
-            'default'      => 10,
+            'defaultValue' => 10,
         ]);
 
         $this->command_bus->handle($command);
@@ -101,7 +101,7 @@ class UpdateDateFieldCommandTest extends BaseTestCase
             'showInEmails' => $field->getShowInEmails(),
             'minValue'     => 0,
             'maxValue'     => 7,
-            'default'      => 10,
+            'defaultValue' => 10,
         ]);
 
         $this->command_bus->handle($command);

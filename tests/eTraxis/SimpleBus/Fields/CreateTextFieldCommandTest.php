@@ -33,7 +33,7 @@ class CreateTextFieldCommandTest extends BaseTestCase
             'guestAccess'  => false,
             'showInEmails' => false,
             'maxLength'    => 1000,
-            'default'      => 'N/A',
+            'defaultValue' => 'N/A',
             'regexCheck'   => '(\d{3})-(\d{3})-(\d{4})',
             'regexSearch'  => '(\d{3})-(\d{3})-(\d{4})',
             'regexReplace' => '($1) $2-$3',

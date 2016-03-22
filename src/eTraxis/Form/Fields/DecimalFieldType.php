@@ -49,7 +49,7 @@ class DecimalFieldType extends AbstractType
         ]);
 
         // Default value.
-        $builder->add('default', TextType::class, [
+        $builder->add('defaultValue', TextType::class, [
             'label'    => 'field.default_value',
             'required' => false,
             'attr'     => [

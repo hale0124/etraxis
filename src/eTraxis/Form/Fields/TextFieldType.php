@@ -39,7 +39,7 @@ class TextFieldType extends AbstractType
         ]);
 
         // Default value.
-        $builder->add('default', TextareaType::class, [
+        $builder->add('defaultValue', TextareaType::class, [
             'label'    => 'field.default_value',
             'required' => false,
             'attr'     => [

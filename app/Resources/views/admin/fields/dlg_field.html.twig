@@ -9,23 +9,23 @@
         {# Number-specific inputs #}
         {{ form_row(form.asNumber.minValue) }}
         {{ form_row(form.asNumber.maxValue) }}
-        {{ form_row(form.asNumber.default) }}
+        {{ form_row(form.asNumber.defaultValue) }}
 
         {# Decimal-specific inputs #}
         {{ form_row(form.asDecimal.minValue) }}
         {{ form_row(form.asDecimal.maxValue) }}
-        {{ form_row(form.asDecimal.default) }}
+        {{ form_row(form.asDecimal.defaultValue) }}
 
         {# String-specific inputs #}
         {{ form_row(form.asString.maxLength) }}
-        {{ form_row(form.asString.default) }}
+        {{ form_row(form.asString.defaultValue) }}
 
         {# Text-specific inputs #}
         {{ form_row(form.asText.maxLength) }}
-        {{ form_row(form.asText.default) }}
+        {{ form_row(form.asText.defaultValue) }}
 
         {# Checkbox-specific inputs #}
-        {{ form_row(form.asCheckbox.default) }}
+        {{ form_row(form.asCheckbox.defaultValue) }}
 
         {# List-specific inputs #}
 
@@ -34,12 +34,12 @@
         {# Date-specific inputs #}
         {{ form_row(form.asDate.minValue) }}
         {{ form_row(form.asDate.maxValue) }}
-        {{ form_row(form.asDate.default) }}
+        {{ form_row(form.asDate.defaultValue) }}
 
         {# Duration-specific inputs #}
         {{ form_row(form.asDuration.minValue) }}
         {{ form_row(form.asDuration.maxValue) }}
-        {{ form_row(form.asDuration.default) }}
+        {{ form_row(form.asDuration.defaultValue) }}
 
         {# Shared inputs #}
         {{ form_row(form.description) }}

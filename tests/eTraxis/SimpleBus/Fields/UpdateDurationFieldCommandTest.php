@@ -40,7 +40,7 @@ class UpdateDurationFieldCommandTest extends BaseTestCase
             'showInEmails' => true,
             'minValue'     => '0:01',
             'maxValue'     => '2:00',
-            'default'      => '0:22',
+            'defaultValue' => '0:22',
         ]);
 
         $this->command_bus->handle($command);
@@ -101,7 +101,7 @@ class UpdateDurationFieldCommandTest extends BaseTestCase
             'showInEmails' => $field->getShowInEmails(),
             'minValue'     => '0:00',
             'maxValue'     => '23:59',
-            'default'      => '24:00',
+            'defaultValue' => '24:00',
         ]);
 
         $this->command_bus->handle($command);

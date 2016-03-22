@@ -62,10 +62,10 @@ class NumberFieldCommandHandler extends BaseFieldCommandHandler
             throw new ValidationException([$this->translator->trans('field.error.min_max_values')]);
         }
 
-        if ($command->default !== null) {
-            if ($command->default < $command->minValue || $command->default > $command->maxValue) {
+        if ($command->defaultValue !== null) {
+            if ($command->defaultValue < $command->minValue || $command->defaultValue > $command->maxValue) {
                 $error = $this->translator->trans('field.error.default_value', ['%min%' => $command->minValue, '%max%' => $command->maxValue]);
-                $this->logger->error($error, [$command->default]);
+                $this->logger->error($error, [$command->defaultValue]);
                 throw new ValidationException([$error]);
             }
         }
@@ -75,7 +75,7 @@ class NumberFieldCommandHandler extends BaseFieldCommandHandler
         $entity->asNumber()
             ->setMinValue($command->minValue)
             ->setMaxValue($command->maxValue)
-            ->setDefaultValue($command->default)
+            ->setDefaultValue($command->defaultValue)
         ;
 
         $this->doctrine->getManager()->persist($entity);

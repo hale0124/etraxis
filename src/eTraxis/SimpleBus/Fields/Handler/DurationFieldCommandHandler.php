@@ -59,7 +59,7 @@ class DurationFieldCommandHandler extends BaseFieldCommandHandler
 
         $minValue = $this->durationToInt($command->minValue);
         $maxValue = $this->durationToInt($command->maxValue);
-        $default  = ($command->default === null) ? null : $this->durationToInt($command->default);
+        $default  = ($command->defaultValue === null) ? null : $this->durationToInt($command->defaultValue);
 
         if ($minValue > $maxValue) {
             $this->logger->error('Minimum valus is greater than maximum one.', [$command->minValue, $command->maxValue]);
@@ -69,7 +69,7 @@ class DurationFieldCommandHandler extends BaseFieldCommandHandler
         if ($default !== null) {
             if ($default < $minValue || $default > $maxValue) {
                 $error = $this->translator->trans('field.error.default_value', ['%min%' => $command->minValue, '%max%' => $command->maxValue]);
-                $this->logger->error($error, [$command->default]);
+                $this->logger->error($error, [$command->defaultValue]);
                 throw new ValidationException([$error]);
             }
         }
@@ -79,7 +79,7 @@ class DurationFieldCommandHandler extends BaseFieldCommandHandler
         $entity->asDuration()
             ->setMinValue($command->minValue)
             ->setMaxValue($command->maxValue)
-            ->setDefaultValue($command->default)
+            ->setDefaultValue($command->defaultValue)
         ;
 
         $this->doctrine->getManager()->persist($entity);

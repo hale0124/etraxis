@@ -33,7 +33,7 @@ class CreateDateFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
             'minValue'     => 1,
             'maxValue'     => 7,
-            'default'      => 2,
+            'defaultValue' => 2,
         ]);
 
         $this->command_bus->handle($command);
@@ -93,7 +93,7 @@ class CreateDateFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
             'minValue'     => 1,
             'maxValue'     => 7,
-            'default'      => 10,
+            'defaultValue' => 10,
         ]);
 
         $this->command_bus->handle($command);

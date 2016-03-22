@@ -16,9 +16,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Updates specified "date" field.
  *
- * @property    int $minValue Minimum allowed value.
- * @property    int $maxValue Maximum allowed value.
- * @property    int $default  Default value of the field.
+ * @property    int $minValue     Minimum allowed value.
+ * @property    int $maxValue     Maximum allowed value.
+ * @property    int $defaultValue Default value of the field.
  */
 class UpdateDateFieldCommand extends UpdateFieldBaseCommand
 {
@@ -40,5 +40,5 @@ class UpdateDateFieldCommand extends UpdateFieldBaseCommand
      * @Assert\Range(min = "-2147483648", max = "2147483647")
      * @Assert\Regex("/^(\-|\+)?\d+$/")
      */
-    public $default;
+    public $defaultValue;
 }

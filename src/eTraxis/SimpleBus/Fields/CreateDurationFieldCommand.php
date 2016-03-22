@@ -16,9 +16,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Creates new "duration" field.
  *
- * @property    int $minValue Minimum allowed value.
- * @property    int $maxValue Maximum allowed value.
- * @property    int $default  Default value of the field.
+ * @property    int $minValue     Minimum allowed value.
+ * @property    int $maxValue     Maximum allowed value.
+ * @property    int $defaultValue Default value of the field.
  */
 class CreateDurationFieldCommand extends CreateFieldBaseCommand
 {
@@ -37,5 +37,5 @@ class CreateDurationFieldCommand extends CreateFieldBaseCommand
     /**
      * @Assert\Regex("/^\d{1,6}:[0-5][0-9]$/")
      */
-    public $default;
+    public $defaultValue;
 }

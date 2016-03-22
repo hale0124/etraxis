@@ -42,7 +42,7 @@ class UpdateTextFieldCommandTest extends BaseTestCase
             'guestAccess'  => false,
             'showInEmails' => true,
             'maxLength'    => 1000,
-            'default'      => 'TBD',
+            'defaultValue' => 'TBD',
             'regexCheck'   => '^(.+)$',
             'regexSearch'  => '^(.+)$',
             'regexReplace' => '$1',

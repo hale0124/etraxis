@@ -47,7 +47,7 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
             'showInEmails' => true,
             'minValue'     => '0.1',
             'maxValue'     => '50.0',
-            'default'      => '10.0',
+            'defaultValue' => '10.0',
         ]);
 
         $this->command_bus->handle($command);
@@ -112,7 +112,7 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
             'showInEmails' => $field->getShowInEmails(),
             'minValue'     => '0.00',
             'maxValue'     => '100.00',
-            'default'      => '101',
+            'defaultValue' => '101',
         ]);
 
         $this->command_bus->handle($command);

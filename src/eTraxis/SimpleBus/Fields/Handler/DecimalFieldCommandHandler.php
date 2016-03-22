@@ -62,10 +62,10 @@ class DecimalFieldCommandHandler extends BaseFieldCommandHandler
             throw new ValidationException([$this->translator->trans('field.error.min_max_values')]);
         }
 
-        if ($command->default !== null) {
-            if (bccomp($command->default, $command->minValue) < 0 || bccomp($command->default, $command->maxValue) > 0) {
+        if ($command->defaultValue !== null) {
+            if (bccomp($command->defaultValue, $command->minValue) < 0 || bccomp($command->defaultValue, $command->maxValue) > 0) {
                 $error = $this->translator->trans('field.error.default_value', ['%min%' => $command->minValue, '%max%' => $command->maxValue]);
-                $this->logger->error($error, [$command->default]);
+                $this->logger->error($error, [$command->defaultValue]);
                 throw new ValidationException([$error]);
             }
         }
@@ -75,7 +75,7 @@ class DecimalFieldCommandHandler extends BaseFieldCommandHandler
         $entity->asDecimal()
             ->setMinValue($command->minValue)
             ->setMaxValue($command->maxValue)
-            ->setDefaultValue($command->default)
+            ->setDefaultValue($command->defaultValue)
         ;
 
         $this->doctrine->getManager()->persist($entity);

@@ -33,7 +33,7 @@ class CreateNumberFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
             'minValue'     => 1,
             'maxValue'     => 12,
-            'default'      => 2,
+            'defaultValue' => 2,
         ]);
 
         $this->command_bus->handle($command);
@@ -93,7 +93,7 @@ class CreateNumberFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
             'minValue'     => 1,
             'maxValue'     => 12,
-            'default'      => 13,
+            'defaultValue' => 13,
         ]);
 
         $this->command_bus->handle($command);

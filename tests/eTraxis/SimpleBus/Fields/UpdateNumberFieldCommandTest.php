@@ -40,7 +40,7 @@ class UpdateNumberFieldCommandTest extends BaseTestCase
             'showInEmails' => true,
             'minValue'     => 0,
             'maxValue'     => 50,
-            'default'      => 1,
+            'defaultValue' => 1,
         ]);
 
         $this->command_bus->handle($command);
@@ -101,7 +101,7 @@ class UpdateNumberFieldCommandTest extends BaseTestCase
             'showInEmails' => $field->getShowInEmails(),
             'minValue'     => 1,
             'maxValue'     => 100,
-            'default'      => 0,
+            'defaultValue' => 0,
         ]);
 
         $this->command_bus->handle($command);

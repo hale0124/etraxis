@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Updates specified "list" field.
  *
- * @property    int $default Default value of the field.
+ * @property    int $defaultValue Default value of the field.
  */
 class UpdateListFieldCommand extends UpdateFieldBaseCommand
 {
@@ -24,5 +24,5 @@ class UpdateListFieldCommand extends UpdateFieldBaseCommand
      * @Assert\Regex("/^(\-|\+)?\d+$/")
      * @Assert\GreaterThan(value = "0")
      */
-    public $default;
+    public $defaultValue;
 }

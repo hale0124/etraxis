@@ -16,12 +16,12 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Creates new "checkbox" field.
  *
- * @property    bool $default Default value of the field.
+ * @property    bool $defaultValue Default value of the field.
  */
 class CreateCheckboxFieldCommand extends CreateFieldBaseCommand
 {
     /**
      * @Assert\NotNull()
      */
-    public $default;
+    public $defaultValue;
 }

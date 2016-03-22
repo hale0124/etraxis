@@ -38,7 +38,7 @@ class TextFieldCommandHandler extends BaseFieldCommandHandler
 
         $entity->asText()
             ->setMaxLength($command->maxLength)
-            ->setDefaultValue($command->default)
+            ->setDefaultValue($command->defaultValue)
         ;
 
         $this->doctrine->getManager()->persist($entity);

@@ -26,7 +26,7 @@ class CheckboxFieldType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         // Default value.
-        $builder->add('default', CheckboxType::class, [
+        $builder->add('defaultValue', CheckboxType::class, [
             'label'    => 'field.default_value',
             'required' => false,
             'attr'     => [

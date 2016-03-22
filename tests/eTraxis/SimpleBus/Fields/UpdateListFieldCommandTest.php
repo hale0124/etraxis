@@ -36,7 +36,7 @@ class UpdateListFieldCommandTest extends BaseTestCase
             'required'     => false,
             'guestAccess'  => false,
             'showInEmails' => true,
-            'default'      => 7,
+            'defaultValue' => 7,
         ]);
 
         $this->command_bus->handle($command);
@@ -67,7 +67,7 @@ class UpdateListFieldCommandTest extends BaseTestCase
             'required'     => $field->isRequired(),
             'guestAccess'  => $field->hasGuestAccess(),
             'showInEmails' => $field->getShowInEmails(),
-            'default'      => 8,
+            'defaultValue' => 8,
         ]);
 
         $this->command_bus->handle($command);

@@ -36,7 +36,7 @@ class UpdateCheckboxFieldCommandTest extends BaseTestCase
             'required'     => false,
             'guestAccess'  => true,
             'showInEmails' => true,
-            'default'      => true,
+            'defaultValue' => true,
         ]);
 
         $this->command_bus->handle($command);

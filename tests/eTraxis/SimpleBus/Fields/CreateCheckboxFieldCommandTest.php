@@ -31,7 +31,7 @@ class CreateCheckboxFieldCommandTest extends BaseTestCase
             'required'     => true,
             'guestAccess'  => false,
             'showInEmails' => false,
-            'default'      => true,
+            'defaultValue' => true,
         ]);
 
         $this->command_bus->handle($command);
