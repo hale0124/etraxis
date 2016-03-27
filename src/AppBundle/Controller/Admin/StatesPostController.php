@@ -13,10 +13,10 @@ namespace AppBundle\Controller\Admin;
 
 use eTraxis\Collection\SystemRole;
 use eTraxis\Entity\State;
-use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\SimpleBus\States;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
+use SimpleBus\ValidationException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

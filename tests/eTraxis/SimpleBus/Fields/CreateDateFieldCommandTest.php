@@ -49,7 +49,7 @@ class CreateDateFieldCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\Middleware\ValidationException
+     * @expectedException \SimpleBus\ValidationException
      * @expectedExceptionMessage Maximum value should be greater then minimum one.
      */
     public function testMinMaxValues()
@@ -74,7 +74,7 @@ class CreateDateFieldCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\Middleware\ValidationException
+     * @expectedException \SimpleBus\ValidationException
      * @expectedExceptionMessage Default value should be in range from 1 to 7.
      */
     public function testDefaultValue()

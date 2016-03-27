@@ -12,10 +12,10 @@
 namespace AppBundle\Controller\Admin;
 
 use eTraxis\Entity\User;
-use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\SimpleBus\Users;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
+use SimpleBus\ValidationException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

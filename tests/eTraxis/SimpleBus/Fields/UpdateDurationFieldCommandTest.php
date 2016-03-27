@@ -59,7 +59,7 @@ class UpdateDurationFieldCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\Middleware\ValidationException
+     * @expectedException \SimpleBus\ValidationException
      * @expectedExceptionMessage Maximum value should be greater then minimum one.
      */
     public function testMinMaxValues()
@@ -83,7 +83,7 @@ class UpdateDurationFieldCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\Middleware\ValidationException
+     * @expectedException \SimpleBus\ValidationException
      * @expectedExceptionMessage Default value should be in range from 0:00 to 23:59.
      */
     public function testDefaultValue()

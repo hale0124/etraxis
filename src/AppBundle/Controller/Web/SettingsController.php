@@ -13,10 +13,10 @@ namespace AppBundle\Controller\Web;
 
 use eTraxis\Form\AppearanceForm;
 use eTraxis\Form\ChangePasswordForm;
-use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\SimpleBus\Users;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
+use SimpleBus\ValidationException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

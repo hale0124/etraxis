@@ -63,7 +63,7 @@ class RemoveGroupsCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\Middleware\ValidationException
+     * @expectedException \SimpleBus\ValidationException
      * @expectedExceptionMessage This collection should contain 1 element or more.
      */
     public function testEmptyGroups()

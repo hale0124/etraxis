@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "dafb1a7ec76d9579bb0cbd776e47cbb5",
-    "content-hash": "3d996f5b1fef0ddc416baa66a1a30b2b",
+    "hash": "883049a3eee2162bea141f083414a78b",
+    "content-hash": "d2495324094dbdd46e7b1108434d40f2",
     "packages": [
         {
             "name": "arodygin/datatables-bundle",
@@ -59,6 +59,56 @@
                 "datatables"
             ],
             "time": "2016-03-27 05:03:19"
+        },
+        {
+            "name": "arodygin/simplebus-bundle",
+            "version": "1.0.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arodygin/SimpleBusExtraBundle.git",
+                "reference": "afd449bd78e4098f5ca19c5de6e9d005a1111df0"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arodygin/SimpleBusExtraBundle/zipball/afd449bd78e4098f5ca19c5de6e9d005a1111df0",
+                "reference": "afd449bd78e4098f5ca19c5de6e9d005a1111df0",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.5",
+                "simple-bus/symfony-bridge": "^4.1",
+                "symfony/config": "^2.8|^3.0",
+                "symfony/dependency-injection": "^2.8|^3.0",
+                "symfony/http-kernel": "^2.8|^3.0",
+                "symfony/validator": "^2.8|^3.0"
+            },
+            "require-dev": {
+                "doctrine/annotations": "^1.2",
+                "fabpot/php-cs-fixer": "^1.11",
+                "phpunit/phpunit": "^4.1",
+                "symfony/browser-kit": "^2.8|^3.0",
+                "symfony/framework-bundle": "^2.8|^3.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "SimpleBus\\": [
+                        "src/",
+                        "tests/"
+                    ]
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "SimpleBus Symfony bundle",
+            "homepage": "https://github.com/arodygin/SimpleBusExtraBundle",
+            "keywords": [
+                "SimpleBus",
+                "commandbus"
+            ],
+            "time": "2016-03-27 22:37:12"
         },
         {
             "name": "beberlei/assert",

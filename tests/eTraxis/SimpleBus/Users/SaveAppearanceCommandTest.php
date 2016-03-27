@@ -62,7 +62,7 @@ class SaveAppearanceCommandTest extends BaseTestCase
     }
 
     /**
-     * @expectedException \eTraxis\SimpleBus\Middleware\ValidationException
+     * @expectedException \SimpleBus\ValidationException
      * @expectedExceptionMessage This value should not be blank.
      */
     public function testEmptyCommand()
