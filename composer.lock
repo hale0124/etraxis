@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "e50ebfe78a0b75f8bad2daa1912ad286",
-    "content-hash": "86af26efba72d36f6962558b21cfa21b",
+    "hash": "dafb1a7ec76d9579bb0cbd776e47cbb5",
+    "content-hash": "3d996f5b1fef0ddc416baa66a1a30b2b",
     "packages": [
         {
             "name": "arodygin/datatables-bundle",
-            "version": "1.2.1",
+            "version": "1.2.2",
             "source": {
                 "type": "git",
-                "url": "https://github.com/arodygin/datatables-bundle.git",
-                "reference": "2946f552be60a27fbb83cfc2a82fe8c8654ed412"
+                "url": "https://github.com/arodygin/DataTablesBundle.git",
+                "reference": "0594af15c29b24ec72c455f7d2bb93555ae53a9e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arodygin/datatables-bundle/zipball/2946f552be60a27fbb83cfc2a82fe8c8654ed412",
-                "reference": "2946f552be60a27fbb83cfc2a82fe8c8654ed412",
+                "url": "https://api.github.com/repos/arodygin/DataTablesBundle/zipball/0594af15c29b24ec72c455f7d2bb93555ae53a9e",
+                "reference": "0594af15c29b24ec72c455f7d2bb93555ae53a9e",
                 "shasum": ""
             },
             "require": {
@@ -31,7 +31,7 @@
                 "symfony/validator": "^2.8|^3.0"
             },
             "replace": {
-                "etraxis/datatables-bundle": "self.version"
+                "etraxis/datatables-bundle": "*"
             },
             "require-dev": {
                 "doctrine/annotations": "^1.2",
@@ -53,12 +53,12 @@
                 "MIT"
             ],
             "description": "DataTables Symfony bundle",
-            "homepage": "https://github.com/arodygin/datatables-bundle",
+            "homepage": "https://github.com/arodygin/DataTablesBundle",
             "keywords": [
                 "datatable",
                 "datatables"
             ],
-            "time": "2016-03-15 08:54:10"
+            "time": "2016-03-27 05:03:19"
         },
         {
             "name": "beberlei/assert",
@@ -1584,16 +1584,16 @@
         },
         {
             "name": "sensio/framework-extra-bundle",
-            "version": "v3.0.15",
+            "version": "v3.0.16",
             "source": {
                 "type": "git",
                 "url": "https://github.com/sensiolabs/SensioFrameworkExtraBundle.git",
-                "reference": "40431d338da7ab4ef5f9edc1ba4551ea1d4d0782"
+                "reference": "507a15f56fa7699f6cc8c2c7de4080b19ce22546"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/40431d338da7ab4ef5f9edc1ba4551ea1d4d0782",
-                "reference": "40431d338da7ab4ef5f9edc1ba4551ea1d4d0782",
+                "url": "https://api.github.com/repos/sensiolabs/SensioFrameworkExtraBundle/zipball/507a15f56fa7699f6cc8c2c7de4080b19ce22546",
+                "reference": "507a15f56fa7699f6cc8c2c7de4080b19ce22546",
                 "shasum": ""
             },
             "require": {
@@ -1642,7 +1642,7 @@
                 "annotations",
                 "controllers"
             ],
-            "time": "2016-03-22 12:39:08"
+            "time": "2016-03-25 17:08:27"
         },
         {
             "name": "sensiolabs/security-checker",
