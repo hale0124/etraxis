@@ -62,16 +62,16 @@
         },
         {
             "name": "arodygin/simplebus-bundle",
-            "version": "1.0.1",
+            "version": "1.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/arodygin/SimpleBusExtraBundle.git",
-                "reference": "afd449bd78e4098f5ca19c5de6e9d005a1111df0"
+                "reference": "1981e4de645a49ba020e47801dc7b3a33bc4654e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arodygin/SimpleBusExtraBundle/zipball/afd449bd78e4098f5ca19c5de6e9d005a1111df0",
-                "reference": "afd449bd78e4098f5ca19c5de6e9d005a1111df0",
+                "url": "https://api.github.com/repos/arodygin/SimpleBusExtraBundle/zipball/1981e4de645a49ba020e47801dc7b3a33bc4654e",
+                "reference": "1981e4de645a49ba020e47801dc7b3a33bc4654e",
                 "shasum": ""
             },
             "require": {
@@ -108,7 +108,7 @@
                 "SimpleBus",
                 "commandbus"
             ],
-            "time": "2016-03-27 22:37:12"
+            "time": "2016-03-28 00:31:04"
         },
         {
             "name": "beberlei/assert",

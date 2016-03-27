@@ -11,7 +11,7 @@
 
 namespace eTraxis\SimpleBus\Users;
 
-use eTraxis\Traits\ObjectInitiationTrait;
+use SimpleBus\MessageTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class UnlockUserCommand
 {
-    use ObjectInitiationTrait;
+    use MessageTrait;
 
     /**
      * @Assert\NotBlank()
