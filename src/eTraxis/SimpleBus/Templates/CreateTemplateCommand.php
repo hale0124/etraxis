@@ -54,7 +54,6 @@ class CreateTemplateCommand
 
     /**
      * @Assert\Range(min = "1", max = "100")
-     * })
      */
     public $criticalAge;
 
