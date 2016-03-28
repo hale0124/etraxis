@@ -26,19 +26,19 @@ class FieldFormTest extends BaseTestCase
 
         $children = $view->children;
 
-        $this->assertArrayHasKey('name', $children);
-        $this->assertArrayHasKey('type', $children);
-        $this->assertArrayHasKey('asNumber', $children);
-        $this->assertArrayHasKey('asDecimal', $children);
-        $this->assertArrayHasKey('asString', $children);
-        $this->assertArrayHasKey('asText', $children);
-        $this->assertArrayHasKey('asCheckbox', $children);
-        $this->assertArrayHasKey('asDate', $children);
-        $this->assertArrayHasKey('asDuration', $children);
-        $this->assertArrayHasKey('description', $children);
-        $this->assertArrayHasKey('required', $children);
-        $this->assertArrayHasKey('guestAccess', $children);
-        $this->assertArrayHasKey('showInEmails', $children);
+        self::assertArrayHasKey('name', $children);
+        self::assertArrayHasKey('type', $children);
+        self::assertArrayHasKey('asNumber', $children);
+        self::assertArrayHasKey('asDecimal', $children);
+        self::assertArrayHasKey('asString', $children);
+        self::assertArrayHasKey('asText', $children);
+        self::assertArrayHasKey('asCheckbox', $children);
+        self::assertArrayHasKey('asDate', $children);
+        self::assertArrayHasKey('asDuration', $children);
+        self::assertArrayHasKey('description', $children);
+        self::assertArrayHasKey('required', $children);
+        self::assertArrayHasKey('guestAccess', $children);
+        self::assertArrayHasKey('showInEmails', $children);
     }
 
     public function testNumberForm()
@@ -54,19 +54,19 @@ class FieldFormTest extends BaseTestCase
 
         $children = $view->children;
 
-        $this->assertArrayHasKey('name', $children);
-        $this->assertArrayNotHasKey('type', $children);
-        $this->assertArrayHasKey('asNumber', $children);
-        $this->assertArrayNotHasKey('asDecimal', $children);
-        $this->assertArrayNotHasKey('asString', $children);
-        $this->assertArrayNotHasKey('asText', $children);
-        $this->assertArrayNotHasKey('asCheckbox', $children);
-        $this->assertArrayNotHasKey('asDate', $children);
-        $this->assertArrayNotHasKey('asDuration', $children);
-        $this->assertArrayHasKey('description', $children);
-        $this->assertArrayHasKey('required', $children);
-        $this->assertArrayHasKey('guestAccess', $children);
-        $this->assertArrayHasKey('showInEmails', $children);
+        self::assertArrayHasKey('name', $children);
+        self::assertArrayNotHasKey('type', $children);
+        self::assertArrayHasKey('asNumber', $children);
+        self::assertArrayNotHasKey('asDecimal', $children);
+        self::assertArrayNotHasKey('asString', $children);
+        self::assertArrayNotHasKey('asText', $children);
+        self::assertArrayNotHasKey('asCheckbox', $children);
+        self::assertArrayNotHasKey('asDate', $children);
+        self::assertArrayNotHasKey('asDuration', $children);
+        self::assertArrayHasKey('description', $children);
+        self::assertArrayHasKey('required', $children);
+        self::assertArrayHasKey('guestAccess', $children);
+        self::assertArrayHasKey('showInEmails', $children);
     }
 
     public function testDecimalForm()
@@ -82,19 +82,19 @@ class FieldFormTest extends BaseTestCase
 
         $children = $view->children;
 
-        $this->assertArrayHasKey('name', $children);
-        $this->assertArrayNotHasKey('type', $children);
-        $this->assertArrayNotHasKey('asNumber', $children);
-        $this->assertArrayHasKey('asDecimal', $children);
-        $this->assertArrayNotHasKey('asString', $children);
-        $this->assertArrayNotHasKey('asText', $children);
-        $this->assertArrayNotHasKey('asCheckbox', $children);
-        $this->assertArrayNotHasKey('asDate', $children);
-        $this->assertArrayNotHasKey('asDuration', $children);
-        $this->assertArrayHasKey('description', $children);
-        $this->assertArrayHasKey('required', $children);
-        $this->assertArrayHasKey('guestAccess', $children);
-        $this->assertArrayHasKey('showInEmails', $children);
+        self::assertArrayHasKey('name', $children);
+        self::assertArrayNotHasKey('type', $children);
+        self::assertArrayNotHasKey('asNumber', $children);
+        self::assertArrayHasKey('asDecimal', $children);
+        self::assertArrayNotHasKey('asString', $children);
+        self::assertArrayNotHasKey('asText', $children);
+        self::assertArrayNotHasKey('asCheckbox', $children);
+        self::assertArrayNotHasKey('asDate', $children);
+        self::assertArrayNotHasKey('asDuration', $children);
+        self::assertArrayHasKey('description', $children);
+        self::assertArrayHasKey('required', $children);
+        self::assertArrayHasKey('guestAccess', $children);
+        self::assertArrayHasKey('showInEmails', $children);
     }
 
     public function testStringForm()
@@ -110,19 +110,19 @@ class FieldFormTest extends BaseTestCase
 
         $children = $view->children;
 
-        $this->assertArrayHasKey('name', $children);
-        $this->assertArrayNotHasKey('type', $children);
-        $this->assertArrayNotHasKey('asNumber', $children);
-        $this->assertArrayNotHasKey('asDecimal', $children);
-        $this->assertArrayHasKey('asString', $children);
-        $this->assertArrayNotHasKey('asText', $children);
-        $this->assertArrayNotHasKey('asCheckbox', $children);
-        $this->assertArrayNotHasKey('asDate', $children);
-        $this->assertArrayNotHasKey('asDuration', $children);
-        $this->assertArrayHasKey('description', $children);
-        $this->assertArrayHasKey('required', $children);
-        $this->assertArrayHasKey('guestAccess', $children);
-        $this->assertArrayHasKey('showInEmails', $children);
+        self::assertArrayHasKey('name', $children);
+        self::assertArrayNotHasKey('type', $children);
+        self::assertArrayNotHasKey('asNumber', $children);
+        self::assertArrayNotHasKey('asDecimal', $children);
+        self::assertArrayHasKey('asString', $children);
+        self::assertArrayNotHasKey('asText', $children);
+        self::assertArrayNotHasKey('asCheckbox', $children);
+        self::assertArrayNotHasKey('asDate', $children);
+        self::assertArrayNotHasKey('asDuration', $children);
+        self::assertArrayHasKey('description', $children);
+        self::assertArrayHasKey('required', $children);
+        self::assertArrayHasKey('guestAccess', $children);
+        self::assertArrayHasKey('showInEmails', $children);
     }
 
     public function testTextForm()
@@ -138,19 +138,19 @@ class FieldFormTest extends BaseTestCase
 
         $children = $view->children;
 
-        $this->assertArrayHasKey('name', $children);
-        $this->assertArrayNotHasKey('type', $children);
-        $this->assertArrayNotHasKey('asNumber', $children);
-        $this->assertArrayNotHasKey('asDecimal', $children);
-        $this->assertArrayNotHasKey('asString', $children);
-        $this->assertArrayHasKey('asText', $children);
-        $this->assertArrayNotHasKey('asCheckbox', $children);
-        $this->assertArrayNotHasKey('asDate', $children);
-        $this->assertArrayNotHasKey('asDuration', $children);
-        $this->assertArrayHasKey('description', $children);
-        $this->assertArrayHasKey('required', $children);
-        $this->assertArrayHasKey('guestAccess', $children);
-        $this->assertArrayHasKey('showInEmails', $children);
+        self::assertArrayHasKey('name', $children);
+        self::assertArrayNotHasKey('type', $children);
+        self::assertArrayNotHasKey('asNumber', $children);
+        self::assertArrayNotHasKey('asDecimal', $children);
+        self::assertArrayNotHasKey('asString', $children);
+        self::assertArrayHasKey('asText', $children);
+        self::assertArrayNotHasKey('asCheckbox', $children);
+        self::assertArrayNotHasKey('asDate', $children);
+        self::assertArrayNotHasKey('asDuration', $children);
+        self::assertArrayHasKey('description', $children);
+        self::assertArrayHasKey('required', $children);
+        self::assertArrayHasKey('guestAccess', $children);
+        self::assertArrayHasKey('showInEmails', $children);
     }
 
     public function testCheckboxForm()
@@ -166,19 +166,19 @@ class FieldFormTest extends BaseTestCase
 
         $children = $view->children;
 
-        $this->assertArrayHasKey('name', $children);
-        $this->assertArrayNotHasKey('type', $children);
-        $this->assertArrayNotHasKey('asNumber', $children);
-        $this->assertArrayNotHasKey('asDecimal', $children);
-        $this->assertArrayNotHasKey('asString', $children);
-        $this->assertArrayNotHasKey('asText', $children);
-        $this->assertArrayHasKey('asCheckbox', $children);
-        $this->assertArrayNotHasKey('asDate', $children);
-        $this->assertArrayNotHasKey('asDuration', $children);
-        $this->assertArrayHasKey('description', $children);
-        $this->assertArrayNotHasKey('required', $children);
-        $this->assertArrayHasKey('guestAccess', $children);
-        $this->assertArrayHasKey('showInEmails', $children);
+        self::assertArrayHasKey('name', $children);
+        self::assertArrayNotHasKey('type', $children);
+        self::assertArrayNotHasKey('asNumber', $children);
+        self::assertArrayNotHasKey('asDecimal', $children);
+        self::assertArrayNotHasKey('asString', $children);
+        self::assertArrayNotHasKey('asText', $children);
+        self::assertArrayHasKey('asCheckbox', $children);
+        self::assertArrayNotHasKey('asDate', $children);
+        self::assertArrayNotHasKey('asDuration', $children);
+        self::assertArrayHasKey('description', $children);
+        self::assertArrayNotHasKey('required', $children);
+        self::assertArrayHasKey('guestAccess', $children);
+        self::assertArrayHasKey('showInEmails', $children);
     }
 
     public function testDateForm()
@@ -194,19 +194,19 @@ class FieldFormTest extends BaseTestCase
 
         $children = $view->children;
 
-        $this->assertArrayHasKey('name', $children);
-        $this->assertArrayNotHasKey('type', $children);
-        $this->assertArrayNotHasKey('asNumber', $children);
-        $this->assertArrayNotHasKey('asDecimal', $children);
-        $this->assertArrayNotHasKey('asString', $children);
-        $this->assertArrayNotHasKey('asText', $children);
-        $this->assertArrayNotHasKey('asCheckbox', $children);
-        $this->assertArrayHasKey('asDate', $children);
-        $this->assertArrayNotHasKey('asDuration', $children);
-        $this->assertArrayHasKey('description', $children);
-        $this->assertArrayHasKey('required', $children);
-        $this->assertArrayHasKey('guestAccess', $children);
-        $this->assertArrayHasKey('showInEmails', $children);
+        self::assertArrayHasKey('name', $children);
+        self::assertArrayNotHasKey('type', $children);
+        self::assertArrayNotHasKey('asNumber', $children);
+        self::assertArrayNotHasKey('asDecimal', $children);
+        self::assertArrayNotHasKey('asString', $children);
+        self::assertArrayNotHasKey('asText', $children);
+        self::assertArrayNotHasKey('asCheckbox', $children);
+        self::assertArrayHasKey('asDate', $children);
+        self::assertArrayNotHasKey('asDuration', $children);
+        self::assertArrayHasKey('description', $children);
+        self::assertArrayHasKey('required', $children);
+        self::assertArrayHasKey('guestAccess', $children);
+        self::assertArrayHasKey('showInEmails', $children);
     }
 
     public function testDurationForm()
@@ -222,18 +222,18 @@ class FieldFormTest extends BaseTestCase
 
         $children = $view->children;
 
-        $this->assertArrayHasKey('name', $children);
-        $this->assertArrayNotHasKey('type', $children);
-        $this->assertArrayNotHasKey('asNumber', $children);
-        $this->assertArrayNotHasKey('asDecimal', $children);
-        $this->assertArrayNotHasKey('asString', $children);
-        $this->assertArrayNotHasKey('asText', $children);
-        $this->assertArrayNotHasKey('asCheckbox', $children);
-        $this->assertArrayNotHasKey('asDate', $children);
-        $this->assertArrayHasKey('asDuration', $children);
-        $this->assertArrayHasKey('description', $children);
-        $this->assertArrayHasKey('required', $children);
-        $this->assertArrayHasKey('guestAccess', $children);
-        $this->assertArrayHasKey('showInEmails', $children);
+        self::assertArrayHasKey('name', $children);
+        self::assertArrayNotHasKey('type', $children);
+        self::assertArrayNotHasKey('asNumber', $children);
+        self::assertArrayNotHasKey('asDecimal', $children);
+        self::assertArrayNotHasKey('asString', $children);
+        self::assertArrayNotHasKey('asText', $children);
+        self::assertArrayNotHasKey('asCheckbox', $children);
+        self::assertArrayNotHasKey('asDate', $children);
+        self::assertArrayHasKey('asDuration', $children);
+        self::assertArrayHasKey('description', $children);
+        self::assertArrayHasKey('required', $children);
+        self::assertArrayHasKey('guestAccess', $children);
+        self::assertArrayHasKey('showInEmails', $children);
     }
 }

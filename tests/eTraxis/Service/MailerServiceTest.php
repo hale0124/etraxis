@@ -35,6 +35,6 @@ class MailerServiceTest extends KernelTestCase
             'email.html.twig'
         );
 
-        $this->assertEquals(1, $sent);
+        self::assertEquals(1, $sent);
     }
 }

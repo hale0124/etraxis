@@ -32,11 +32,11 @@ class UsersDataTableTest extends BaseTestCase
 
         $results = $this->datatables->handle($request, 'eTraxis:User');
 
-        $this->assertNotEmpty($results['data']);
+        self::assertNotEmpty($results['data']);
 
-        $this->assertCount($results['recordsTotal'], $users);
-        $this->assertCount($results['recordsFiltered'], $users);
-        $this->assertEquals(count($users), count($results['data']));
+        self::assertCount($results['recordsTotal'], $users);
+        self::assertCount($results['recordsFiltered'], $users);
+        self::assertEquals(count($users), count($results['data']));
     }
 
     public function testSearch()
@@ -55,9 +55,9 @@ class UsersDataTableTest extends BaseTestCase
 
         $results = $this->datatables->handle($request, 'eTraxis:User');
 
-        $this->assertEquals($total, $results['recordsTotal']);
-        $this->assertEquals($expected, $results['recordsFiltered']);
-        $this->assertCount($expected, $results['data']);
+        self::assertEquals($total, $results['recordsTotal']);
+        self::assertEquals($expected, $results['recordsFiltered']);
+        self::assertCount($expected, $results['data']);
     }
 
     public function testFilterByUsername()
@@ -90,7 +90,7 @@ class UsersDataTableTest extends BaseTestCase
             $actual[] = $user[UsersDataTable::COLUMN_USERNAME];
         }
 
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testFilterByFullname()
@@ -122,7 +122,7 @@ class UsersDataTableTest extends BaseTestCase
             $actual[] = $user[UsersDataTable::COLUMN_USERNAME];
         }
 
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testFilterByEmail()
@@ -155,7 +155,7 @@ class UsersDataTableTest extends BaseTestCase
             $actual[] = $user[UsersDataTable::COLUMN_USERNAME];
         }
 
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testFilterByPermissionsAdmin()
@@ -186,7 +186,7 @@ class UsersDataTableTest extends BaseTestCase
             $actual[] = $user[UsersDataTable::COLUMN_USERNAME];
         }
 
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testFilterByPermissionsUser()
@@ -208,7 +208,7 @@ class UsersDataTableTest extends BaseTestCase
 
         $results = $this->datatables->handle($request, 'eTraxis:User');
 
-        $this->assertCount($expected, $results['data']);
+        self::assertCount($expected, $results['data']);
     }
 
     public function testFilterByAuthenticationLdap()
@@ -238,7 +238,7 @@ class UsersDataTableTest extends BaseTestCase
             $actual[] = $user[UsersDataTable::COLUMN_USERNAME];
         }
 
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testFilterByAuthenticationEtraxis()
@@ -260,7 +260,7 @@ class UsersDataTableTest extends BaseTestCase
 
         $results = $this->datatables->handle($request, 'eTraxis:User');
 
-        $this->assertCount($expected, $results['data']);
+        self::assertCount($expected, $results['data']);
     }
 
     public function testFilterByDescription()
@@ -292,7 +292,7 @@ class UsersDataTableTest extends BaseTestCase
             $actual[] = $user[UsersDataTable::COLUMN_USERNAME];
         }
 
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testCombinedFilter()
@@ -327,7 +327,7 @@ class UsersDataTableTest extends BaseTestCase
             $actual[] = $user[UsersDataTable::COLUMN_USERNAME];
         }
 
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 
     public function testOrder()
@@ -369,6 +369,6 @@ class UsersDataTableTest extends BaseTestCase
             $actual[] = $user[UsersDataTable::COLUMN_USERNAME];
         }
 
-        $this->assertEquals($expected, $actual);
+        self::assertEquals($expected, $actual);
     }
 }

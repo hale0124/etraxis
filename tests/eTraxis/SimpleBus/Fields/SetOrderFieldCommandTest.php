@@ -53,7 +53,7 @@ class SetOrderFieldCommandTest extends BaseTestCase
             'removedAt' => 0,
         ]);
 
-        $this->assertNotNull($field);
+        self::assertNotNull($field);
 
         $command = new SetOrderFieldCommand([
             'id'    => $field->getId(),
@@ -61,7 +61,7 @@ class SetOrderFieldCommandTest extends BaseTestCase
         ]);
         $this->command_bus->handle($command);
 
-        $this->assertEquals($expected, $this->getFields($field->getStateId()));
+        self::assertEquals($expected, $this->getFields($field->getStateId()));
     }
 
     public function testSuccessDown()
@@ -79,7 +79,7 @@ class SetOrderFieldCommandTest extends BaseTestCase
             'removedAt' => 0,
         ]);
 
-        $this->assertNotNull($field);
+        self::assertNotNull($field);
 
         $command = new SetOrderFieldCommand([
             'id'    => $field->getId(),
@@ -87,7 +87,7 @@ class SetOrderFieldCommandTest extends BaseTestCase
         ]);
         $this->command_bus->handle($command);
 
-        $this->assertEquals($expected, $this->getFields($field->getStateId()));
+        self::assertEquals($expected, $this->getFields($field->getStateId()));
     }
 
     public function testSuccessTop()
@@ -105,7 +105,7 @@ class SetOrderFieldCommandTest extends BaseTestCase
             'removedAt' => 0,
         ]);
 
-        $this->assertNotNull($field);
+        self::assertNotNull($field);
 
         $command = new SetOrderFieldCommand([
             'id'    => $field->getId(),
@@ -113,7 +113,7 @@ class SetOrderFieldCommandTest extends BaseTestCase
         ]);
         $this->command_bus->handle($command);
 
-        $this->assertEquals($expected, $this->getFields($field->getStateId()));
+        self::assertEquals($expected, $this->getFields($field->getStateId()));
     }
 
     public function testSuccessBottom()
@@ -131,7 +131,7 @@ class SetOrderFieldCommandTest extends BaseTestCase
             'removedAt' => 0,
         ]);
 
-        $this->assertNotNull($field);
+        self::assertNotNull($field);
 
         $command = new SetOrderFieldCommand([
             'id'    => $field->getId(),
@@ -139,7 +139,7 @@ class SetOrderFieldCommandTest extends BaseTestCase
         ]);
         $this->command_bus->handle($command);
 
-        $this->assertEquals($expected, $this->getFields($field->getStateId()));
+        self::assertEquals($expected, $this->getFields($field->getStateId()));
     }
 
     /**

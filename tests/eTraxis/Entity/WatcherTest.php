@@ -25,38 +25,38 @@ class WatcherTest extends \PHPUnit_Framework_TestCase
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setRecordId($expected);
-        $this->assertEquals($expected, $this->object->getRecordId());
+        self::assertEquals($expected, $this->object->getRecordId());
     }
 
     public function testWatcherId()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setWatcherId($expected);
-        $this->assertEquals($expected, $this->object->getWatcherId());
+        self::assertEquals($expected, $this->object->getWatcherId());
     }
 
     public function testInitiatorId()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setInitiatorId($expected);
-        $this->assertEquals($expected, $this->object->getInitiatorId());
+        self::assertEquals($expected, $this->object->getInitiatorId());
     }
 
     public function testRecord()
     {
         $this->object->setRecord($record = new Record());
-        $this->assertSame($record, $this->object->getRecord());
+        self::assertSame($record, $this->object->getRecord());
     }
 
     public function testWatcher()
     {
         $this->object->setWatcher($user = new User());
-        $this->assertSame($user, $this->object->getWatcher());
+        self::assertSame($user, $this->object->getWatcher());
     }
 
     public function testInitiator()
     {
         $this->object->setInitiator($user = new User());
-        $this->assertSame($user, $this->object->getInitiator());
+        self::assertSame($user, $this->object->getInitiator());
     }
 }

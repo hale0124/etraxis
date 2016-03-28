@@ -28,22 +28,22 @@ class DecimalValuesRepositoryTest extends BaseTestCase
         /** @var DecimalValue $value */
         $value = $repository->findOneBy(['value' => $expected]);
 
-        $this->assertNull($value);
+        self::assertNull($value);
 
         // First attempt.
         $id1 = $repository->save($expected);
 
         $value = $repository->findOneBy(['value' => $expected]);
 
-        $this->assertNotNull($value);
-        $this->assertEquals($id1, $value->getId());
-        $this->assertEquals($expected, $value->getValue());
-        $this->assertCount($count + 1, $repository->findAll());
+        self::assertNotNull($value);
+        self::assertEquals($id1, $value->getId());
+        self::assertEquals($expected, $value->getValue());
+        self::assertCount($count + 1, $repository->findAll());
 
         // Second attempt.
         $id2 = $repository->save($expected);
 
-        $this->assertEquals($id1, $id2);
-        $this->assertCount($count + 1, $repository->findAll());
+        self::assertEquals($id1, $id2);
+        self::assertCount($count + 1, $repository->findAll());
     }
 }

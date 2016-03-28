@@ -29,8 +29,8 @@ class ProjectFormTest extends BaseTestCase
 
         $children = $view->children;
 
-        $this->assertEquals($children['name']->vars['data'], $project->getName());
-        $this->assertEquals($children['description']->vars['data'], $project->getDescription());
-        $this->assertEquals($children['suspended']->vars['data'], $project->isSuspended());
+        self::assertEquals($children['name']->vars['data'], $project->getName());
+        self::assertEquals($children['description']->vars['data'], $project->getDescription());
+        self::assertEquals($children['suspended']->vars['data'], $project->isSuspended());
     }
 }

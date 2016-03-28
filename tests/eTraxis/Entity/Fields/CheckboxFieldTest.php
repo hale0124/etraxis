@@ -38,10 +38,10 @@ class CheckboxFieldTest extends BaseTestCase
         $method->setAccessible(true);
         $actual = $method->invokeArgs($field, []);
 
-        $this->assertCount(count($expected), $actual);
+        self::assertCount(count($expected), $actual);
 
         foreach ($expected as $key) {
-            $this->assertContains($key, $actual);
+            self::assertContains($key, $actual);
         }
     }
 
@@ -50,11 +50,11 @@ class CheckboxFieldTest extends BaseTestCase
         $field = $this->object->asCheckbox();
 
         $field->setDefaultValue(true);
-        $this->assertTrue($field->getDefaultValue());
-        $this->assertEquals(1, $this->object->getDefaultValue());
+        self::assertTrue($field->getDefaultValue());
+        self::assertEquals(1, $this->object->getDefaultValue());
 
         $field->setDefaultValue(false);
-        $this->assertFalse($field->getDefaultValue());
-        $this->assertEquals(0, $this->object->getDefaultValue());
+        self::assertFalse($field->getDefaultValue());
+        self::assertEquals(0, $this->object->getDefaultValue());
     }
 }

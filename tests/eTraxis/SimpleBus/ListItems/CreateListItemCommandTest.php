@@ -46,10 +46,10 @@ class CreateListItemCommandTest extends BaseTestCase
             'key'     => $key,
         ]);
 
-        $this->assertInstanceOf(ListItem::class, $item);
-        $this->assertEquals($field->getId(), $item->getField()->getId());
-        $this->assertEquals($key, $item->getKey());
-        $this->assertEquals($value, $item->getValue());
+        self::assertInstanceOf(ListItem::class, $item);
+        self::assertEquals($field->getId(), $item->getField()->getId());
+        self::assertEquals($key, $item->getKey());
+        self::assertEquals($value, $item->getValue());
     }
 
     /**

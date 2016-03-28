@@ -45,9 +45,9 @@ class SecurityControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/login');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertTrue($this->isLoginPage($crawler));
-        $this->assertFalse($this->isAuthenticated($crawler));
+        self::assertEquals(200, $client->getResponse()->getStatusCode());
+        self::assertTrue($this->isLoginPage($crawler));
+        self::assertFalse($this->isAuthenticated($crawler));
 
         $form = $crawler->filter('input[type="submit"]')->form([
             '_username' => 'artem',
@@ -57,9 +57,9 @@ class SecurityControllerTest extends WebTestCase
         $client->submit($form);
         $crawler = $client->followRedirect();
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertTrue($this->isLoginPage($crawler));
-        $this->assertFalse($this->isAuthenticated($crawler));
+        self::assertEquals(200, $client->getResponse()->getStatusCode());
+        self::assertTrue($this->isLoginPage($crawler));
+        self::assertFalse($this->isAuthenticated($crawler));
 
         $form = $crawler->filter('input[type="submit"]')->form([
             '_username' => 'artem',
@@ -69,18 +69,18 @@ class SecurityControllerTest extends WebTestCase
         $client->submit($form);
         $crawler = $client->followRedirect();
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertFalse($this->isLoginPage($crawler));
-        $this->assertTrue($this->isAuthenticated($crawler));
+        self::assertEquals(200, $client->getResponse()->getStatusCode());
+        self::assertFalse($this->isLoginPage($crawler));
+        self::assertTrue($this->isAuthenticated($crawler));
 
         $client->request('GET', '/login');
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        self::assertEquals(302, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
-        $this->assertFalse($this->isLoginPage($crawler));
-        $this->assertTrue($this->isAuthenticated($crawler));
+        self::assertEquals(200, $client->getResponse()->getStatusCode());
+        self::assertFalse($this->isLoginPage($crawler));
+        self::assertTrue($this->isAuthenticated($crawler));
     }
 }

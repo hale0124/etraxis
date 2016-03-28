@@ -33,7 +33,7 @@ class ListItemVoterTest extends BaseTestCase
         /** @var ListItem $item */
         $item = $this->doctrine->getRepository(ListItem::class)->findOneBy(['value' => 'Season 1']);
 
-        $this->assertFalse($this->security->isGranted('UNKNOWN', $item));
+        self::assertFalse($this->security->isGranted('UNKNOWN', $item));
     }
 
     public function testDelete()
@@ -57,10 +57,10 @@ class ListItemVoterTest extends BaseTestCase
 
         $unused = $this->doctrine->getRepository(ListItem::class)->findOneBy(['value' => 'Season 8']);
 
-        $this->assertInstanceOf(ListItem::class, $used);
-        $this->assertInstanceOf(ListItem::class, $unused);
+        self::assertInstanceOf(ListItem::class, $used);
+        self::assertInstanceOf(ListItem::class, $unused);
 
-        $this->assertFalse($this->security->isGranted(ListItem::DELETE, $used));
-        $this->assertTrue($this->security->isGranted(ListItem::DELETE, $unused));
+        self::assertFalse($this->security->isGranted(ListItem::DELETE, $used));
+        self::assertTrue($this->security->isGranted(ListItem::DELETE, $unused));
     }
 }

@@ -31,7 +31,7 @@ class AnyTest extends BaseTestCase
     {
         $object = new AnyStub();
 
-        $this->assertNotCount(0, $this->validator->validate($object));
+        self::assertNotCount(0, $this->validator->validate($object));
     }
 
     public function testInvalid()
@@ -39,7 +39,7 @@ class AnyTest extends BaseTestCase
         $object     = new AnyStub();
         $object->id = mt_rand(-99, 99);
 
-        $this->assertNotCount(0, $this->validator->validate($object));
+        self::assertNotCount(0, $this->validator->validate($object));
     }
 
     public function testSuccess1()
@@ -47,7 +47,7 @@ class AnyTest extends BaseTestCase
         $object     = new AnyStub();
         $object->id = 100;
 
-        $this->assertCount(0, $this->validator->validate($object));
+        self::assertCount(0, $this->validator->validate($object));
     }
 
     public function testSuccess2()
@@ -55,6 +55,6 @@ class AnyTest extends BaseTestCase
         $object     = new AnyStub();
         $object->id = -100;
 
-        $this->assertCount(0, $this->validator->validate($object));
+        self::assertCount(0, $this->validator->validate($object));
     }
 }

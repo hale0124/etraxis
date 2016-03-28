@@ -35,16 +35,16 @@ class ContainerTraitTest extends KernelTestCase
 
     public function testGetCommandBus()
     {
-        $this->assertInstanceOf('\SimpleBus\Message\Bus\MessageBus', $this->object->getCommandBus());
+        self::assertInstanceOf('\SimpleBus\Message\Bus\MessageBus', $this->object->getCommandBus());
     }
 
     public function testGetEventBus()
     {
-        $this->assertInstanceOf('\SimpleBus\Message\Bus\MessageBus', $this->object->getEventBus());
+        self::assertInstanceOf('\SimpleBus\Message\Bus\MessageBus', $this->object->getEventBus());
     }
 
     public function testGetDataTables()
     {
-        $this->assertInstanceOf('\DataTables\DataTablesInterface', $this->object->getDataTables());
+        self::assertInstanceOf('\DataTables\DataTablesInterface', $this->object->getDataTables());
     }
 }

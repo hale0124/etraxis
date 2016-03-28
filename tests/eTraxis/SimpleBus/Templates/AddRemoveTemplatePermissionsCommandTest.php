@@ -23,23 +23,23 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
     {
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
-        $this->assertNotNull($template);
+        self::assertNotNull($template);
 
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
-        $this->assertNotNull($group);
+        self::assertNotNull($group);
 
         /** @var TemplateGroupPermission $permissions */
         $permissions = $this->doctrine->getRepository(TemplateGroupPermission::class)->findOneBy([
             'groupId'    => $group->getId(),
             'templateId' => $template->getId(),
         ]);
-        $this->assertNotNull($permissions);
+        self::assertNotNull($permissions);
 
-        $this->assertEquals(Template::PERMIT_ADD_FILE,    $permissions->getPermission() & Template::PERMIT_ADD_FILE);
-        $this->assertEquals(Template::PERMIT_REMOVE_FILE, $permissions->getPermission() & Template::PERMIT_REMOVE_FILE);
-        $this->assertEquals(0,                            $permissions->getPermission() & Template::PERMIT_ATTACH_SUBRECORD);
-        $this->assertEquals(0,                            $permissions->getPermission() & Template::PERMIT_DETACH_SUBRECORD);
+        self::assertEquals(Template::PERMIT_ADD_FILE,    $permissions->getPermission() & Template::PERMIT_ADD_FILE);
+        self::assertEquals(Template::PERMIT_REMOVE_FILE, $permissions->getPermission() & Template::PERMIT_REMOVE_FILE);
+        self::assertEquals(0,                            $permissions->getPermission() & Template::PERMIT_ATTACH_SUBRECORD);
+        self::assertEquals(0,                            $permissions->getPermission() & Template::PERMIT_DETACH_SUBRECORD);
 
         $command = new AddTemplatePermissionsCommand([
             'id'          => $template->getId(),
@@ -62,28 +62,28 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
             'templateId' => $template->getId(),
         ]);
 
-        $this->assertEquals(0,                                 $permissions->getPermission() & Template::PERMIT_ADD_FILE);
-        $this->assertEquals(0,                                 $permissions->getPermission() & Template::PERMIT_REMOVE_FILE);
-        $this->assertEquals(Template::PERMIT_ATTACH_SUBRECORD, $permissions->getPermission() & Template::PERMIT_ATTACH_SUBRECORD);
-        $this->assertEquals(Template::PERMIT_DETACH_SUBRECORD, $permissions->getPermission() & Template::PERMIT_DETACH_SUBRECORD);
+        self::assertEquals(0,                                 $permissions->getPermission() & Template::PERMIT_ADD_FILE);
+        self::assertEquals(0,                                 $permissions->getPermission() & Template::PERMIT_REMOVE_FILE);
+        self::assertEquals(Template::PERMIT_ATTACH_SUBRECORD, $permissions->getPermission() & Template::PERMIT_ATTACH_SUBRECORD);
+        self::assertEquals(Template::PERMIT_DETACH_SUBRECORD, $permissions->getPermission() & Template::PERMIT_DETACH_SUBRECORD);
     }
 
     public function testNewGroupPermissions()
     {
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Futurama']);
-        $this->assertNotNull($template);
+        self::assertNotNull($template);
 
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
-        $this->assertNotNull($group);
+        self::assertNotNull($group);
 
         /** @var TemplateGroupPermission $permissions */
         $permissions = $this->doctrine->getRepository(TemplateGroupPermission::class)->findOneBy([
             'groupId'    => $group->getId(),
             'templateId' => $template->getId(),
         ]);
-        $this->assertNull($permissions);
+        self::assertNull($permissions);
 
         $command = new AddTemplatePermissionsCommand([
             'id'          => $template->getId(),
@@ -97,20 +97,20 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
             'groupId'    => $group->getId(),
             'templateId' => $template->getId(),
         ]);
-        $this->assertNotNull($permissions);
+        self::assertNotNull($permissions);
 
-        $this->assertEquals(Template::PERMIT_VIEW_RECORD, $permissions->getPermission() & Template::PERMIT_VIEW_RECORD);
+        self::assertEquals(Template::PERMIT_VIEW_RECORD, $permissions->getPermission() & Template::PERMIT_VIEW_RECORD);
     }
 
     public function testRegisteredPermissions()
     {
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
-        $this->assertNotNull($template);
+        self::assertNotNull($template);
         $id = $template->getId();
 
-        $this->assertEquals(0, $template->getRegisteredPermissions() & Template::PERMIT_VIEW_RECORD);
-        $this->assertEquals(0, $template->getRegisteredPermissions() & Template::PERMIT_CREATE_RECORD);
+        self::assertEquals(0, $template->getRegisteredPermissions() & Template::PERMIT_VIEW_RECORD);
+        self::assertEquals(0, $template->getRegisteredPermissions() & Template::PERMIT_CREATE_RECORD);
 
         $command = new AddTemplatePermissionsCommand([
             'id'          => $id,
@@ -122,8 +122,8 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $template = $this->doctrine->getRepository(Template::class)->find($id);
 
-        $this->assertEquals(Template::PERMIT_VIEW_RECORD,   $template->getRegisteredPermissions() & Template::PERMIT_VIEW_RECORD);
-        $this->assertEquals(Template::PERMIT_CREATE_RECORD, $template->getRegisteredPermissions() & Template::PERMIT_CREATE_RECORD);
+        self::assertEquals(Template::PERMIT_VIEW_RECORD,   $template->getRegisteredPermissions() & Template::PERMIT_VIEW_RECORD);
+        self::assertEquals(Template::PERMIT_CREATE_RECORD, $template->getRegisteredPermissions() & Template::PERMIT_CREATE_RECORD);
 
         $command = new RemoveTemplatePermissionsCommand([
             'id'          => $id,
@@ -135,19 +135,19 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $template = $this->doctrine->getRepository(Template::class)->find($id);
 
-        $this->assertEquals(Template::PERMIT_VIEW_RECORD, $template->getRegisteredPermissions() & Template::PERMIT_VIEW_RECORD);
-        $this->assertEquals(0,                            $template->getRegisteredPermissions() & Template::PERMIT_CREATE_RECORD);
+        self::assertEquals(Template::PERMIT_VIEW_RECORD, $template->getRegisteredPermissions() & Template::PERMIT_VIEW_RECORD);
+        self::assertEquals(0,                            $template->getRegisteredPermissions() & Template::PERMIT_CREATE_RECORD);
     }
 
     public function testAuthorPermissions()
     {
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
-        $this->assertNotNull($template);
+        self::assertNotNull($template);
         $id = $template->getId();
 
-        $this->assertEquals(Template::PERMIT_EDIT_RECORD, $template->getAuthorPermissions() & Template::PERMIT_EDIT_RECORD);
-        $this->assertEquals(0,                            $template->getAuthorPermissions() & Template::PERMIT_REOPEN_RECORD);
+        self::assertEquals(Template::PERMIT_EDIT_RECORD, $template->getAuthorPermissions() & Template::PERMIT_EDIT_RECORD);
+        self::assertEquals(0,                            $template->getAuthorPermissions() & Template::PERMIT_REOPEN_RECORD);
 
         $command = new AddTemplatePermissionsCommand([
             'id'          => $id,
@@ -159,7 +159,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $template = $this->doctrine->getRepository(Template::class)->find($id);
 
-        $this->assertEquals(Template::PERMIT_REOPEN_RECORD, $template->getAuthorPermissions() & Template::PERMIT_REOPEN_RECORD);
+        self::assertEquals(Template::PERMIT_REOPEN_RECORD, $template->getAuthorPermissions() & Template::PERMIT_REOPEN_RECORD);
 
         $command = new RemoveTemplatePermissionsCommand([
             'id'          => $id,
@@ -171,7 +171,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $template = $this->doctrine->getRepository(Template::class)->find($id);
 
-        $this->assertEquals(0, $template->getAuthorPermissions() & Template::PERMIT_EDIT_RECORD);
+        self::assertEquals(0, $template->getAuthorPermissions() & Template::PERMIT_EDIT_RECORD);
 
         $command = new RemoveTemplatePermissionsCommand([
             'id'          => $id,
@@ -183,18 +183,18 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $template = $this->doctrine->getRepository(Template::class)->find($id);
 
-        $this->assertEquals(Template::PERMIT_VIEW_RECORD, $template->getAuthorPermissions() & Template::PERMIT_VIEW_RECORD);
+        self::assertEquals(Template::PERMIT_VIEW_RECORD, $template->getAuthorPermissions() & Template::PERMIT_VIEW_RECORD);
     }
 
     public function testResponsiblePermissions()
     {
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
-        $this->assertNotNull($template);
+        self::assertNotNull($template);
         $id = $template->getId();
 
-        $this->assertEquals(Template::PERMIT_ADD_COMMENT, $template->getResponsiblePermissions() & Template::PERMIT_ADD_COMMENT);
-        $this->assertEquals(0,                            $template->getResponsiblePermissions() & Template::PERMIT_ATTACH_SUBRECORD);
+        self::assertEquals(Template::PERMIT_ADD_COMMENT, $template->getResponsiblePermissions() & Template::PERMIT_ADD_COMMENT);
+        self::assertEquals(0,                            $template->getResponsiblePermissions() & Template::PERMIT_ATTACH_SUBRECORD);
 
         $command = new AddTemplatePermissionsCommand([
             'id'          => $id,
@@ -206,7 +206,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $template = $this->doctrine->getRepository(Template::class)->find($id);
 
-        $this->assertEquals(Template::PERMIT_ATTACH_SUBRECORD, $template->getResponsiblePermissions() & Template::PERMIT_ATTACH_SUBRECORD);
+        self::assertEquals(Template::PERMIT_ATTACH_SUBRECORD, $template->getResponsiblePermissions() & Template::PERMIT_ATTACH_SUBRECORD);
 
         $command = new RemoveTemplatePermissionsCommand([
             'id'          => $id,
@@ -218,7 +218,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $template = $this->doctrine->getRepository(Template::class)->find($id);
 
-        $this->assertEquals(0, $template->getResponsiblePermissions() & Template::PERMIT_ADD_COMMENT);
+        self::assertEquals(0, $template->getResponsiblePermissions() & Template::PERMIT_ADD_COMMENT);
 
         $command = new RemoveTemplatePermissionsCommand([
             'id'          => $id,
@@ -230,7 +230,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $template = $this->doctrine->getRepository(Template::class)->find($id);
 
-        $this->assertEquals(Template::PERMIT_VIEW_RECORD, $template->getResponsiblePermissions() & Template::PERMIT_VIEW_RECORD);
+        self::assertEquals(Template::PERMIT_VIEW_RECORD, $template->getResponsiblePermissions() & Template::PERMIT_VIEW_RECORD);
     }
 
     /**
@@ -256,7 +256,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
     {
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
-        $this->assertNotNull($template);
+        self::assertNotNull($template);
 
         $command = new RemoveTemplatePermissionsCommand([
             'id'          => $template->getId(),

@@ -22,7 +22,7 @@ class CreateNumberFieldCommandTest extends BaseTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
-        $this->assertNotNull($state);
+        self::assertNotNull($state);
 
         $command = new CreateNumberFieldCommand([
             'template'     => $state->getTemplateId(),
@@ -41,11 +41,11 @@ class CreateNumberFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => $command->name]);
 
-        $this->assertInstanceOf(Field::class, $field);
-        $this->assertEquals(Field::TYPE_NUMBER, $field->getType());
-        $this->assertEquals(1, $field->getParameter1());
-        $this->assertEquals(12, $field->getParameter2());
-        $this->assertEquals(2, $field->getDefaultValue());
+        self::assertInstanceOf(Field::class, $field);
+        self::assertEquals(Field::TYPE_NUMBER, $field->getType());
+        self::assertEquals(1, $field->getParameter1());
+        self::assertEquals(12, $field->getParameter2());
+        self::assertEquals(2, $field->getDefaultValue());
     }
 
     /**
@@ -57,7 +57,7 @@ class CreateNumberFieldCommandTest extends BaseTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
-        $this->assertNotNull($state);
+        self::assertNotNull($state);
 
         $command = new CreateNumberFieldCommand([
             'template'     => $state->getTemplateId(),
@@ -82,7 +82,7 @@ class CreateNumberFieldCommandTest extends BaseTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
-        $this->assertNotNull($state);
+        self::assertNotNull($state);
 
         $command = new CreateNumberFieldCommand([
             'template'     => $state->getTemplateId(),

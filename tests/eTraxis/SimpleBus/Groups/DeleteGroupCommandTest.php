@@ -20,13 +20,13 @@ class DeleteGroupCommandTest extends BaseTestCase
     {
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Staff']);
-        $this->assertNotNull($group);
+        self::assertNotNull($group);
 
         $command = new DeleteGroupCommand(['id' => $group->getId()]);
         $this->command_bus->handle($command);
 
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Staff']);
-        $this->assertNull($group);
+        self::assertNull($group);
     }
 
     /**

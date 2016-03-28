@@ -27,32 +27,32 @@ class StateRoleTransitionTest extends \PHPUnit_Framework_TestCase
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setFromStateId($expected);
-        $this->assertEquals($expected, $this->object->getFromStateId());
+        self::assertEquals($expected, $this->object->getFromStateId());
     }
 
     public function testToStateId()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setToStateId($expected);
-        $this->assertEquals($expected, $this->object->getToStateId());
+        self::assertEquals($expected, $this->object->getToStateId());
     }
 
     public function testRole()
     {
         $expected = SystemRole::AUTHOR;
         $this->object->setRole($expected);
-        $this->assertEquals($expected, $this->object->getRole());
+        self::assertEquals($expected, $this->object->getRole());
     }
 
     public function testFromState()
     {
         $this->object->setFromState($state = new State());
-        $this->assertSame($state, $this->object->getFromState());
+        self::assertSame($state, $this->object->getFromState());
     }
 
     public function testToState()
     {
         $this->object->setToState($state = new State());
-        $this->assertSame($state, $this->object->getToState());
+        self::assertSame($state, $this->object->getToState());
     }
 }

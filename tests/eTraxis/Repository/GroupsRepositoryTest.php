@@ -21,7 +21,7 @@ class GroupsRepositoryTest extends BaseTestCase
     {
         /** @var Project $project */
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
-        $this->assertNotNull($project);
+        self::assertNotNull($project);
 
         /** @var GroupsRepository $repository */
         $repository = $this->doctrine->getManager()->getRepository(Group::class);
@@ -40,14 +40,14 @@ class GroupsRepositoryTest extends BaseTestCase
             'Staff',
         ];
 
-        $this->assertEquals($expected, $groups);
+        self::assertEquals($expected, $groups);
     }
 
     public function testGetLocalGroups()
     {
         /** @var Project $project */
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
-        $this->assertNotNull($project);
+        self::assertNotNull($project);
 
         /** @var GroupsRepository $repository */
         $repository = $this->doctrine->getManager()->getRepository(Group::class);
@@ -64,7 +64,7 @@ class GroupsRepositoryTest extends BaseTestCase
             'Staff',
         ];
 
-        $this->assertEquals($expected, $groups);
+        self::assertEquals($expected, $groups);
     }
 
     public function testGetGlobalGroups()
@@ -83,7 +83,7 @@ class GroupsRepositoryTest extends BaseTestCase
             'Planet Express, Inc.',
         ];
 
-        $this->assertEquals($expected, $groups);
+        self::assertEquals($expected, $groups);
     }
 
     public function testGetGroupMembersFound()
@@ -110,7 +110,7 @@ class GroupsRepositoryTest extends BaseTestCase
             'leela',
         ];
 
-        $this->assertEquals($expected, $users);
+        self::assertEquals($expected, $users);
     }
 
     public function testGetGroupMembersNotFound()
@@ -122,7 +122,7 @@ class GroupsRepositoryTest extends BaseTestCase
 
         $expected = [];
 
-        $this->assertEquals($expected, $result);
+        self::assertEquals($expected, $result);
     }
 
     public function testGetGroupNonMembersFound()
@@ -151,7 +151,7 @@ class GroupsRepositoryTest extends BaseTestCase
             'zapp',
         ];
 
-        $this->assertEquals($expected, $users);
+        self::assertEquals($expected, $users);
     }
 
     public function testGetGroupNonMembersNotFound()
@@ -163,6 +163,6 @@ class GroupsRepositoryTest extends BaseTestCase
 
         $expected = [];
 
-        $this->assertEquals($expected, $result);
+        self::assertEquals($expected, $result);
     }
 }

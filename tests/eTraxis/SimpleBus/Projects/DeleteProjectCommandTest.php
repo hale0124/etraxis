@@ -22,13 +22,13 @@ class DeleteProjectCommandTest extends BaseTestCase
 
         /** @var Project $project */
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'eTraxis 1.0']);
-        $this->assertNotNull($project);
+        self::assertNotNull($project);
 
         $command = new DeleteProjectCommand(['id' => $project->getId()]);
         $this->command_bus->handle($command);
 
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'eTraxis 1.0']);
-        $this->assertNull($project);
+        self::assertNull($project);
     }
 
     /**
@@ -40,7 +40,7 @@ class DeleteProjectCommandTest extends BaseTestCase
 
         /** @var Project $project */
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
-        $this->assertNotNull($project);
+        self::assertNotNull($project);
 
         $command = new DeleteProjectCommand(['id' => $project->getId()]);
         $this->command_bus->handle($command);

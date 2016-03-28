@@ -19,8 +19,8 @@ class TimezoneTest extends BaseTestCase
     {
         $collection = Timezone::getCollection();
 
-        $this->assertContains('UTC', $collection);
-        $this->assertContains('Asia/Vladivostok', $collection);
-        $this->assertContains('Pacific/Auckland', $collection);
+        self::assertContains('UTC', $collection);
+        self::assertContains('Asia/Vladivostok', $collection);
+        self::assertContains('Pacific/Auckland', $collection);
     }
 }

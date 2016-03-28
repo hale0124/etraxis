@@ -21,15 +21,15 @@ class UpdateDateFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Original air date']);
 
-        $this->assertEquals(Field::TYPE_DATE, $field->getType());
-        $this->assertEquals('Original air date', $field->getName());
-        $this->assertNull($field->getDescription());
-        $this->assertTrue($field->isRequired());
-        $this->assertTrue($field->hasGuestAccess());
-        $this->assertFalse($field->getShowInEmails());
-        $this->assertEquals(0, $field->getParameter1());
-        $this->assertEquals(7, $field->getParameter2());
-        $this->assertNull($field->getDefaultValue());
+        self::assertEquals(Field::TYPE_DATE, $field->getType());
+        self::assertEquals('Original air date', $field->getName());
+        self::assertNull($field->getDescription());
+        self::assertTrue($field->isRequired());
+        self::assertTrue($field->hasGuestAccess());
+        self::assertFalse($field->getShowInEmails());
+        self::assertEquals(0, $field->getParameter1());
+        self::assertEquals(7, $field->getParameter2());
+        self::assertNull($field->getDefaultValue());
 
         $command = new UpdateDateFieldCommand([
             'id'           => $field->getId(),
@@ -47,15 +47,15 @@ class UpdateDateFieldCommandTest extends BaseTestCase
 
         $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 
-        $this->assertEquals(Field::TYPE_DATE, $field->getType());
-        $this->assertEquals('Release date', $field->getName());
-        $this->assertEquals('Date of the release', $field->getDescription());
-        $this->assertFalse($field->isRequired());
-        $this->assertFalse($field->hasGuestAccess());
-        $this->assertTrue($field->getShowInEmails());
-        $this->assertEquals(1, $field->getParameter1());
-        $this->assertEquals(14, $field->getParameter2());
-        $this->assertEquals(10, $field->getDefaultValue());
+        self::assertEquals(Field::TYPE_DATE, $field->getType());
+        self::assertEquals('Release date', $field->getName());
+        self::assertEquals('Date of the release', $field->getDescription());
+        self::assertFalse($field->isRequired());
+        self::assertFalse($field->hasGuestAccess());
+        self::assertTrue($field->getShowInEmails());
+        self::assertEquals(1, $field->getParameter1());
+        self::assertEquals(14, $field->getParameter2());
+        self::assertEquals(10, $field->getDefaultValue());
     }
 
     /**
@@ -67,7 +67,7 @@ class UpdateDateFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Original air date']);
 
-        $this->assertNotNull($field);
+        self::assertNotNull($field);
 
         $command = new UpdateDateFieldCommand([
             'id'           => $field->getId(),
@@ -91,7 +91,7 @@ class UpdateDateFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Original air date']);
 
-        $this->assertNotNull($field);
+        self::assertNotNull($field);
 
         $command = new UpdateDateFieldCommand([
             'id'           => $field->getId(),

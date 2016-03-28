@@ -23,7 +23,7 @@ class CreateDecimalFieldCommandTest extends BaseTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
-        $this->assertNotNull($state);
+        self::assertNotNull($state);
 
         $command = new CreateDecimalFieldCommand([
             'template'     => $state->getTemplateId(),
@@ -49,11 +49,11 @@ class CreateDecimalFieldCommandTest extends BaseTestCase
         $maxValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameter2());
         $default  = $this->doctrine->getRepository(DecimalValue::class)->find($field->getDefaultValue());
 
-        $this->assertInstanceOf(Field::class, $field);
-        $this->assertEquals(Field::TYPE_DECIMAL, $field->getType());
-        $this->assertEquals('0.00', $minValue->getValue());
-        $this->assertEquals('100000.0', $maxValue->getValue());
-        $this->assertEquals('499.95', $default->getValue());
+        self::assertInstanceOf(Field::class, $field);
+        self::assertEquals(Field::TYPE_DECIMAL, $field->getType());
+        self::assertEquals('0.00', $minValue->getValue());
+        self::assertEquals('100000.0', $maxValue->getValue());
+        self::assertEquals('499.95', $default->getValue());
     }
 
     /**
@@ -65,7 +65,7 @@ class CreateDecimalFieldCommandTest extends BaseTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
-        $this->assertNotNull($state);
+        self::assertNotNull($state);
 
         $command = new CreateDecimalFieldCommand([
             'template'     => $state->getTemplateId(),
@@ -90,7 +90,7 @@ class CreateDecimalFieldCommandTest extends BaseTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
-        $this->assertNotNull($state);
+        self::assertNotNull($state);
 
         $command = new CreateDecimalFieldCommand([
             'template'     => $state->getTemplateId(),

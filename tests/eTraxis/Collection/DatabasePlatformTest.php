@@ -24,6 +24,6 @@ class DatabasePlatformTest extends BaseTestCase
             DatabasePlatform::ORACLE,
         ];
 
-        $this->assertEquals($expected, array_keys(DatabasePlatform::getCollection()));
+        self::assertEquals($expected, array_keys(DatabasePlatform::getCollection()));
     }
 }

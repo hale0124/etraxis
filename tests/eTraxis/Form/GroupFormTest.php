@@ -29,7 +29,7 @@ class GroupFormTest extends BaseTestCase
 
         $children = $view->children;
 
-        $this->assertEquals($children['name']->vars['data'], $group->getName());
-        $this->assertEquals($children['description']->vars['data'], $group->getDescription());
+        self::assertEquals($children['name']->vars['data'], $group->getName());
+        self::assertEquals($children['description']->vars['data'], $group->getDescription());
     }
 }

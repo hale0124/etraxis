@@ -22,13 +22,13 @@ class UpdateUserCommandTest extends BaseTestCase
 
         $user = $this->findUser('bender');
 
-        $this->assertNotNull($user);
-        $this->assertNotEmpty($user->getDescription());
-        $this->assertFalse($user->isAdmin());
-        $this->assertFalse($user->isDisabled());
-        $this->assertEquals('en_US', $user->getLocale());
-        $this->assertEquals('azure', $user->getTheme());
-        $this->assertEquals(0, $user->getTimezone());
+        self::assertNotNull($user);
+        self::assertNotEmpty($user->getDescription());
+        self::assertFalse($user->isAdmin());
+        self::assertFalse($user->isDisabled());
+        self::assertEquals('en_US', $user->getLocale());
+        self::assertEquals('azure', $user->getTheme());
+        self::assertEquals(0, $user->getTimezone());
 
         $command = new UpdateUserCommand([
             'id'       => $user->getId(),
@@ -46,15 +46,15 @@ class UpdateUserCommandTest extends BaseTestCase
 
         $user = $this->doctrine->getRepository(User::class)->find($user->getId());
 
-        $this->assertEquals('flexo', $user->getUsername());
-        $this->assertEquals('Flexo', $user->getFullname());
-        $this->assertEquals('flexo@example.com', $user->getEmail());
-        $this->assertEmpty($user->getDescription());
-        $this->assertTrue($user->isAdmin());
-        $this->assertTrue($user->isDisabled());
-        $this->assertEquals('es', $user->getLocale());
-        $this->assertEquals('humanity', $user->getTheme());
-        $this->assertEquals(377, $user->getTimezone());
+        self::assertEquals('flexo', $user->getUsername());
+        self::assertEquals('Flexo', $user->getFullname());
+        self::assertEquals('flexo@example.com', $user->getEmail());
+        self::assertEmpty($user->getDescription());
+        self::assertTrue($user->isAdmin());
+        self::assertTrue($user->isDisabled());
+        self::assertEquals('es', $user->getLocale());
+        self::assertEquals('humanity', $user->getTheme());
+        self::assertEquals(377, $user->getTimezone());
     }
 
     /**
@@ -67,7 +67,7 @@ class UpdateUserCommandTest extends BaseTestCase
 
         $user = $this->findUser('flexo');
 
-        $this->assertNull($user);
+        self::assertNull($user);
 
         $command = new UpdateUserCommand([
             'id'       => $this->getMaxId(),
@@ -94,7 +94,7 @@ class UpdateUserCommandTest extends BaseTestCase
 
         $user = $this->findUser('fry');
 
-        $this->assertNotNull($user);
+        self::assertNotNull($user);
 
         $command = new UpdateUserCommand([
             'id'       => $user->getId(),

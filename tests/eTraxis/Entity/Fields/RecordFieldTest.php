@@ -38,10 +38,10 @@ class RecordFieldTest extends BaseTestCase
         $method->setAccessible(true);
         $actual = $method->invokeArgs($field, []);
 
-        $this->assertCount(count($expected), $actual);
+        self::assertCount(count($expected), $actual);
 
         foreach ($expected as $key) {
-            $this->assertContains($key, $actual);
+            self::assertContains($key, $actual);
         }
     }
 }

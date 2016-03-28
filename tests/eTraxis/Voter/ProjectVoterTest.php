@@ -33,7 +33,7 @@ class ProjectVoterTest extends BaseTestCase
         /** @var Project $project */
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
 
-        $this->assertFalse($this->security->isGranted('UNKNOWN', $project));
+        self::assertFalse($this->security->isGranted('UNKNOWN', $project));
     }
 
     public function testDelete()
@@ -46,10 +46,10 @@ class ProjectVoterTest extends BaseTestCase
         /** @var Project $project */
         $empty = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'eTraxis 1.0']);
 
-        $this->assertInstanceOf(Project::class, $project);
-        $this->assertInstanceOf(Project::class, $empty);
+        self::assertInstanceOf(Project::class, $project);
+        self::assertInstanceOf(Project::class, $empty);
 
-        $this->assertFalse($this->security->isGranted(Project::DELETE, $project));
-        $this->assertTrue($this->security->isGranted(Project::DELETE, $empty));
+        self::assertFalse($this->security->isGranted(Project::DELETE, $project));
+        self::assertTrue($this->security->isGranted(Project::DELETE, $empty));
     }
 }

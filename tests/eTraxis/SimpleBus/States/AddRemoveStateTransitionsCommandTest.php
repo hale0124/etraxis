@@ -24,15 +24,15 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
     {
         /** @var State $state_new */
         $state_new = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
-        $this->assertNotNull($state_new);
+        self::assertNotNull($state_new);
 
         /** @var State $state_delivered */
         $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
-        $this->assertNotNull($state_delivered);
+        self::assertNotNull($state_delivered);
 
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
-        $this->assertNotNull($group);
+        self::assertNotNull($group);
 
         /** @var StateGroupTransition $transition */
         $transition = $this->doctrine->getRepository(StateGroupTransition::class)->findOneBy([
@@ -40,7 +40,7 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
             'toStateId'   => $state_delivered->getId(),
             'groupId'     => $group->getId(),
         ]);
-        $this->assertNull($transition);
+        self::assertNull($transition);
 
         $command = new AddStateTransitionsCommand([
             'id'          => $state_new->getId(),
@@ -55,22 +55,22 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
             'toStateId'   => $state_delivered->getId(),
             'groupId'     => $group->getId(),
         ]);
-        $this->assertNotNull($transition);
+        self::assertNotNull($transition);
     }
 
     public function testRemoveGroupTransitions()
     {
         /** @var State $state_new */
         $state_new = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
-        $this->assertNotNull($state_new);
+        self::assertNotNull($state_new);
 
         /** @var State $state_delivered */
         $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
-        $this->assertNotNull($state_delivered);
+        self::assertNotNull($state_delivered);
 
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
-        $this->assertNotNull($group);
+        self::assertNotNull($group);
 
         /** @var StateGroupTransition $transition */
         $transition = $this->doctrine->getRepository(StateGroupTransition::class)->findOneBy([
@@ -78,7 +78,7 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
             'toStateId'   => $state_delivered->getId(),
             'groupId'     => $group->getId(),
         ]);
-        $this->assertNotNull($transition);
+        self::assertNotNull($transition);
 
         $command = new RemoveStateTransitionsCommand([
             'id'          => $state_new->getId(),
@@ -93,18 +93,18 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
             'toStateId'   => $state_delivered->getId(),
             'groupId'     => $group->getId(),
         ]);
-        $this->assertNull($transition);
+        self::assertNull($transition);
     }
 
     public function testAddRoleTransitions()
     {
         /** @var State $state_new */
         $state_new = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
-        $this->assertNotNull($state_new);
+        self::assertNotNull($state_new);
 
         /** @var State $state_delivered */
         $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
-        $this->assertNotNull($state_delivered);
+        self::assertNotNull($state_delivered);
 
         /** @var StateRoleTransition $transition */
         $transition = $this->doctrine->getRepository(StateRoleTransition::class)->findOneBy([
@@ -112,7 +112,7 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
             'toStateId'   => $state_delivered->getId(),
             'role'        => SystemRole::AUTHOR,
         ]);
-        $this->assertNull($transition);
+        self::assertNull($transition);
 
         $command = new AddStateTransitionsCommand([
             'id'          => $state_new->getId(),
@@ -127,18 +127,18 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
             'toStateId'   => $state_delivered->getId(),
             'role'        => SystemRole::AUTHOR,
         ]);
-        $this->assertNotNull($transition);
+        self::assertNotNull($transition);
     }
 
     public function testRemoveRoleTransitions()
     {
         /** @var State $state_new */
         $state_new = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
-        $this->assertNotNull($state_new);
+        self::assertNotNull($state_new);
 
         /** @var State $state_delivered */
         $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
-        $this->assertNotNull($state_delivered);
+        self::assertNotNull($state_delivered);
 
         /** @var StateRoleTransition $transition */
         $transition = $this->doctrine->getRepository(StateRoleTransition::class)->findOneBy([
@@ -146,7 +146,7 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
             'toStateId'   => $state_delivered->getId(),
             'role'        => SystemRole::RESPONSIBLE,
         ]);
-        $this->assertNotNull($transition);
+        self::assertNotNull($transition);
 
         $command = new RemoveStateTransitionsCommand([
             'id'          => $state_new->getId(),
@@ -161,7 +161,7 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
             'toStateId'   => $state_delivered->getId(),
             'role'        => SystemRole::RESPONSIBLE,
         ]);
-        $this->assertNull($transition);
+        self::assertNull($transition);
     }
 
     public function testEmptyTransitions()
@@ -170,15 +170,15 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
 
         /** @var State $state_new */
         $state_new = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
-        $this->assertNotNull($state_new);
+        self::assertNotNull($state_new);
 
         /** @var State $state_produced */
         $state_produced = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Produced']);
-        $this->assertNotNull($state_produced);
+        self::assertNotNull($state_produced);
 
         /** @var State $state_released */
         $state_released = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Released']);
-        $this->assertNotNull($state_released);
+        self::assertNotNull($state_released);
 
         $command = new AddStateTransitionsCommand([
             'id'          => $state_new->getId(),
@@ -188,7 +188,7 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $this->assertCount($total, $this->doctrine->getRepository(StateRoleTransition::class)->findAll());
+        self::assertCount($total, $this->doctrine->getRepository(StateRoleTransition::class)->findAll());
     }
 
     /**
@@ -199,7 +199,7 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
     {
         /** @var State $state_delivered */
         $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
-        $this->assertNotNull($state_delivered);
+        self::assertNotNull($state_delivered);
 
         $command = new AddStateTransitionsCommand([
             'id'          => $this->getMaxId(),
@@ -218,11 +218,11 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
     {
         /** @var State $state_new */
         $state_new = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
-        $this->assertNotNull($state_new);
+        self::assertNotNull($state_new);
 
         /** @var State $state_delivered */
         $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
-        $this->assertNotNull($state_delivered);
+        self::assertNotNull($state_delivered);
 
         $command = new AddStateTransitionsCommand([
             'id'          => $state_new->getId(),

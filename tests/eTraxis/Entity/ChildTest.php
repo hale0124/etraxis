@@ -25,34 +25,34 @@ class ChildTest extends \PHPUnit_Framework_TestCase
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setParentId($expected);
-        $this->assertEquals($expected, $this->object->getParentId());
+        self::assertEquals($expected, $this->object->getParentId());
     }
 
     public function testChildId()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setChildId($expected);
-        $this->assertEquals($expected, $this->object->getChildId());
+        self::assertEquals($expected, $this->object->getChildId());
     }
 
     public function testIsDependency()
     {
         $this->object->setDependency(false);
-        $this->assertFalse($this->object->isDependency());
+        self::assertFalse($this->object->isDependency());
 
         $this->object->setDependency(true);
-        $this->assertTrue($this->object->isDependency());
+        self::assertTrue($this->object->isDependency());
     }
 
     public function testParent()
     {
         $this->object->setParent($record = new Record());
-        $this->assertSame($record, $this->object->getParent());
+        self::assertSame($record, $this->object->getParent());
     }
 
     public function testChild()
     {
         $this->object->setChild($record = new Record());
-        $this->assertSame($record, $this->object->getChild());
+        self::assertSame($record, $this->object->getChild());
     }
 }

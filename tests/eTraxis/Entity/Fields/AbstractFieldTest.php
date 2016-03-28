@@ -34,16 +34,16 @@ class AbstractFieldTest extends BaseTestCase
     {
         $field = $this->object->asNumber();
 
-        $this->assertTrue($field->offsetExists('defaultValue'));
-        $this->assertFalse($field->offsetExists('unknownValue'));
+        self::assertTrue($field->offsetExists('defaultValue'));
+        self::assertFalse($field->offsetExists('unknownValue'));
     }
 
     public function testOffsetGet()
     {
         $field = $this->object->asNumber();
 
-        $this->assertEquals(NumberField::MIN_VALUE, $field->offsetGet('minValue'));
-        $this->assertEquals(NumberField::MAX_VALUE, $field->offsetGet('maxValue'));
+        self::assertEquals(NumberField::MIN_VALUE, $field->offsetGet('minValue'));
+        self::assertEquals(NumberField::MAX_VALUE, $field->offsetGet('maxValue'));
     }
 
     public function testOffsetSet()
@@ -52,10 +52,10 @@ class AbstractFieldTest extends BaseTestCase
 
         $expected = mt_rand(NumberField::MIN_VALUE, NumberField::MAX_VALUE);
 
-        $this->assertNull($field->getDefaultValue());
+        self::assertNull($field->getDefaultValue());
 
         $field->offsetSet('defaultValue', $expected);
-        $this->assertEquals($expected, $field->getDefaultValue());
+        self::assertEquals($expected, $field->getDefaultValue());
     }
 
     public function testOffsetUnset()
@@ -63,9 +63,9 @@ class AbstractFieldTest extends BaseTestCase
         $field = $this->object->asNumber();
 
         $field->setDefaultValue(mt_rand(NumberField::MIN_VALUE, NumberField::MAX_VALUE));
-        $this->assertNotNull($field->getDefaultValue());
+        self::assertNotNull($field->getDefaultValue());
 
         $field->offsetUnset('defaultValue');
-        $this->assertNull($field->getDefaultValue());
+        self::assertNull($field->getDefaultValue());
     }
 }

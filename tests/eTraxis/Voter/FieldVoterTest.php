@@ -35,7 +35,7 @@ class FieldVoterTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
 
-        $this->assertFalse($this->security->isGranted('UNKNOWN', $field));
+        self::assertFalse($this->security->isGranted('UNKNOWN', $field));
     }
 
     public function testDeleteLocked()
@@ -53,8 +53,8 @@ class FieldVoterTest extends BaseTestCase
 
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
-        $this->assertTrue($template->isLocked());
-        $this->assertTrue($this->security->isGranted(Field::DELETE, $field));
+        self::assertTrue($template->isLocked());
+        self::assertTrue($this->security->isGranted(Field::DELETE, $field));
     }
 
     public function testDeleteUnlocked()
@@ -67,7 +67,7 @@ class FieldVoterTest extends BaseTestCase
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
-        $this->assertFalse($template->isLocked());
-        $this->assertFalse($this->security->isGranted(Field::DELETE, $field));
+        self::assertFalse($template->isLocked());
+        self::assertFalse($this->security->isGranted(Field::DELETE, $field));
     }
 }

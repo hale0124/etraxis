@@ -25,6 +25,6 @@ class GroupExFormTest extends BaseTestCase
         $form = $factory->create(GroupExForm::class, ['id' => $expected]);
         $view = $form->createView();
 
-        $this->assertEquals($view->vars['data']['id'], $expected);
+        self::assertEquals($view->vars['data']['id'], $expected);
     }
 }

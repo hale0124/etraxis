@@ -26,8 +26,8 @@ class DisableUsersCommandTest extends BaseTestCase
         foreach ($usernames as $username) {
             $user = $this->findUser($username);
 
-            $this->assertNotNull($user);
-            $this->assertFalse($user->isDisabled());
+            self::assertNotNull($user);
+            self::assertFalse($user->isDisabled());
 
             $ids[] = $user->getId();
         }
@@ -42,10 +42,10 @@ class DisableUsersCommandTest extends BaseTestCase
             $user = $this->findUser($username);
 
             if ($user->getUsername() === 'hubert') {
-                $this->assertFalse($user->isDisabled());
+                self::assertFalse($user->isDisabled());
             }
             else {
-                $this->assertTrue($user->isDisabled());
+                self::assertTrue($user->isDisabled());
             }
         }
     }

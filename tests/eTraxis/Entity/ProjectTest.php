@@ -23,58 +23,58 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
 
     public function testId()
     {
-        $this->assertEquals(null, $this->object->getId());
+        self::assertEquals(null, $this->object->getId());
     }
 
     public function testName()
     {
         $expected = 'Name';
         $this->object->setName($expected);
-        $this->assertEquals($expected, $this->object->getName());
+        self::assertEquals($expected, $this->object->getName());
     }
 
     public function testDescription()
     {
         $expected = 'Description';
         $this->object->setDescription($expected);
-        $this->assertEquals($expected, $this->object->getDescription());
+        self::assertEquals($expected, $this->object->getDescription());
     }
 
     public function testCreatedAt()
     {
         $expected = time();
         $this->object->setCreatedAt($expected);
-        $this->assertEquals($expected, $this->object->getCreatedAt());
+        self::assertEquals($expected, $this->object->getCreatedAt());
     }
 
     public function testIsSuspended()
     {
         $this->object->setSuspended(false);
-        $this->assertFalse($this->object->isSuspended());
+        self::assertFalse($this->object->isSuspended());
 
         $this->object->setSuspended(true);
-        $this->assertTrue($this->object->isSuspended());
+        self::assertTrue($this->object->isSuspended());
     }
 
     public function testGroups()
     {
-        $this->assertCount(0, $this->object->getGroups());
+        self::assertCount(0, $this->object->getGroups());
 
         $this->object->addGroup($group = new Group());
-        $this->assertCount(1, $this->object->getGroups());
+        self::assertCount(1, $this->object->getGroups());
 
         $this->object->removeGroup($group);
-        $this->assertCount(0, $this->object->getGroups());
+        self::assertCount(0, $this->object->getGroups());
     }
 
     public function testTemplates()
     {
-        $this->assertCount(0, $this->object->getTemplates());
+        self::assertCount(0, $this->object->getTemplates());
 
         $this->object->addTemplate($template = new Template());
-        $this->assertCount(1, $this->object->getTemplates());
+        self::assertCount(1, $this->object->getTemplates());
 
         $this->object->removeTemplate($template);
-        $this->assertCount(0, $this->object->getTemplates());
+        self::assertCount(0, $this->object->getTemplates());
     }
 }

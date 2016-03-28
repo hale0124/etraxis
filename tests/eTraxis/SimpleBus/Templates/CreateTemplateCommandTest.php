@@ -36,7 +36,7 @@ class CreateTemplateCommandTest extends BaseTestCase
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => $name]);
 
-        $this->assertNull($template);
+        self::assertNull($template);
 
         $command = new CreateTemplateCommand([
             'project'     => $project->getId(),
@@ -50,12 +50,12 @@ class CreateTemplateCommandTest extends BaseTestCase
 
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => $name]);
 
-        $this->assertInstanceOf(Template::class, $template);
-        $this->assertEquals($project->getId(), $template->getProject()->getId());
-        $this->assertEquals($name, $template->getName());
-        $this->assertEquals($prefix, $template->getPrefix());
-        $this->assertEquals($description, $template->getDescription());
-        $this->assertEquals($guestAccess, $template->hasGuestAccess());
+        self::assertInstanceOf(Template::class, $template);
+        self::assertEquals($project->getId(), $template->getProject()->getId());
+        self::assertEquals($name, $template->getName());
+        self::assertEquals($prefix, $template->getPrefix());
+        self::assertEquals($description, $template->getDescription());
+        self::assertEquals($guestAccess, $template->hasGuestAccess());
     }
 
     /**

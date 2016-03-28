@@ -21,7 +21,7 @@ class SetPasswordCommandTest extends BaseTestCase
 
         $user = $this->findUser('artem');
 
-        $this->assertNotEquals($expected, $user->getPassword());
+        self::assertNotEquals($expected, $user->getPassword());
 
         $command = new SetPasswordCommand([
             'id'       => $user->getId(),
@@ -32,7 +32,7 @@ class SetPasswordCommandTest extends BaseTestCase
 
         $user = $this->findUser('artem');
 
-        $this->assertEquals($expected, $user->getPassword());
+        self::assertEquals($expected, $user->getPassword());
     }
 
     /**
@@ -42,7 +42,7 @@ class SetPasswordCommandTest extends BaseTestCase
     public function testLdap()
     {
         $user = $this->findUser('einstein', true);
-        $this->assertNotNull($user);
+        self::assertNotNull($user);
 
         $command = new SetPasswordCommand([
             'id'       => $user->getId(),

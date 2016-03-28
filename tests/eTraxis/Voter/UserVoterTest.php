@@ -34,7 +34,7 @@ class UserVoterTest extends BaseTestCase
 
         $hubert = $this->findUser('hubert');
 
-        $this->assertFalse($this->security->isGranted('UNKNOWN', $hubert));
+        self::assertFalse($this->security->isGranted('UNKNOWN', $hubert));
     }
 
     public function testAnonymous()
@@ -47,7 +47,7 @@ class UserVoterTest extends BaseTestCase
         $voter = new UserVoter($repository);
         $token = new AnonymousToken('', 'anon.');
 
-        $this->assertEquals(UserVoter::ACCESS_DENIED, $voter->vote($token, $scruffy, [User::DELETE, User::DISABLE]));
+        self::assertEquals(UserVoter::ACCESS_DENIED, $voter->vote($token, $scruffy, [User::DELETE, User::DISABLE]));
     }
 
     public function testSetExpiredPassword()
@@ -60,7 +60,7 @@ class UserVoterTest extends BaseTestCase
 
         $hubert = $this->findUser('hubert');
 
-        $this->assertFalse($this->security->isGranted(User::SET_EXPIRED_PASSWORD, $hubert));
+        self::assertFalse($this->security->isGranted(User::SET_EXPIRED_PASSWORD, $hubert));
 
         $hubert->setPasswordSetAt(time() - 86400 * 2);
 
@@ -68,10 +68,10 @@ class UserVoterTest extends BaseTestCase
         $repository = $this->doctrine->getRepository(Event::class);
 
         $voter = new UserVoter($repository, 3);
-        $this->assertEquals(UserVoter::ACCESS_DENIED, $voter->vote($token, $hubert, [User::SET_EXPIRED_PASSWORD]));
+        self::assertEquals(UserVoter::ACCESS_DENIED, $voter->vote($token, $hubert, [User::SET_EXPIRED_PASSWORD]));
 
         $voter = new UserVoter($repository, 1);
-        $this->assertEquals(UserVoter::ACCESS_GRANTED, $voter->vote($token, $hubert, [User::SET_EXPIRED_PASSWORD]));
+        self::assertEquals(UserVoter::ACCESS_GRANTED, $voter->vote($token, $hubert, [User::SET_EXPIRED_PASSWORD]));
     }
 
     public function testDelete()
@@ -82,13 +82,13 @@ class UserVoterTest extends BaseTestCase
         $leela   = $this->findUser('leela');
         $scruffy = $this->findUser('scruffy');
 
-        $this->assertInstanceOf(User::class, $hubert);
-        $this->assertInstanceOf(User::class, $leela);
-        $this->assertInstanceOf(User::class, $scruffy);
+        self::assertInstanceOf(User::class, $hubert);
+        self::assertInstanceOf(User::class, $leela);
+        self::assertInstanceOf(User::class, $scruffy);
 
-        $this->assertFalse($this->security->isGranted(User::DELETE, $hubert));
-        $this->assertFalse($this->security->isGranted(User::DELETE, $leela));
-        $this->assertTrue($this->security->isGranted(User::DELETE, $scruffy));
+        self::assertFalse($this->security->isGranted(User::DELETE, $hubert));
+        self::assertFalse($this->security->isGranted(User::DELETE, $leela));
+        self::assertTrue($this->security->isGranted(User::DELETE, $scruffy));
     }
 
     public function testDisable()
@@ -99,13 +99,13 @@ class UserVoterTest extends BaseTestCase
         $francine = $this->findUser('francine');
         $scruffy  = $this->findUser('scruffy');
 
-        $this->assertInstanceOf(User::class, $hubert);
-        $this->assertInstanceOf(User::class, $francine);
-        $this->assertInstanceOf(User::class, $scruffy);
+        self::assertInstanceOf(User::class, $hubert);
+        self::assertInstanceOf(User::class, $francine);
+        self::assertInstanceOf(User::class, $scruffy);
 
-        $this->assertFalse($this->security->isGranted(User::DISABLE, $hubert));
-        $this->assertFalse($this->security->isGranted(User::DISABLE, $francine));
-        $this->assertTrue($this->security->isGranted(User::DISABLE, $scruffy));
+        self::assertFalse($this->security->isGranted(User::DISABLE, $hubert));
+        self::assertFalse($this->security->isGranted(User::DISABLE, $francine));
+        self::assertTrue($this->security->isGranted(User::DISABLE, $scruffy));
     }
 
     public function testEnable()
@@ -115,11 +115,11 @@ class UserVoterTest extends BaseTestCase
         $hubert   = $this->findUser('hubert');
         $francine = $this->findUser('francine');
 
-        $this->assertInstanceOf(User::class, $hubert);
-        $this->assertInstanceOf(User::class, $francine);
+        self::assertInstanceOf(User::class, $hubert);
+        self::assertInstanceOf(User::class, $francine);
 
-        $this->assertFalse($this->security->isGranted(User::ENABLE, $hubert));
-        $this->assertTrue($this->security->isGranted(User::ENABLE, $francine));
+        self::assertFalse($this->security->isGranted(User::ENABLE, $hubert));
+        self::assertTrue($this->security->isGranted(User::ENABLE, $francine));
     }
 
     public function testUnlock()
@@ -129,13 +129,13 @@ class UserVoterTest extends BaseTestCase
         $hubert = $this->findUser('hubert');
         $bender = $this->findUser('bender');
 
-        $this->assertInstanceOf(User::class, $hubert);
-        $this->assertInstanceOf(User::class, $bender);
+        self::assertInstanceOf(User::class, $hubert);
+        self::assertInstanceOf(User::class, $bender);
 
         $bender->setAuthAttempts(3);
         $bender->setLockedUntil(time() + 60);
 
-        $this->assertTrue($this->security->isGranted(User::UNLOCK, $bender));
-        $this->assertFalse($this->security->isGranted(User::UNLOCK, $hubert));
+        self::assertTrue($this->security->isGranted(User::UNLOCK, $bender));
+        self::assertFalse($this->security->isGranted(User::UNLOCK, $hubert));
     }
 }

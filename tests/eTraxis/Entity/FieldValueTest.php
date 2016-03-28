@@ -25,48 +25,48 @@ class FieldValueTest extends \PHPUnit_Framework_TestCase
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setEventId($expected);
-        $this->assertEquals($expected, $this->object->getEventId());
+        self::assertEquals($expected, $this->object->getEventId());
     }
 
     public function testFieldId()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setFieldId($expected);
-        $this->assertEquals($expected, $this->object->getFieldId());
+        self::assertEquals($expected, $this->object->getFieldId());
     }
 
     public function testValueId()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setValueId($expected);
-        $this->assertEquals($expected, $this->object->getValueId());
+        self::assertEquals($expected, $this->object->getValueId());
     }
 
     public function testType()
     {
         $expected = Field::TYPE_NUMBER;
         $this->object->setType($expected);
-        $this->assertEquals($expected, $this->object->getType());
+        self::assertEquals($expected, $this->object->getType());
     }
 
     public function testIsCurrent()
     {
         $this->object->setCurrent(false);
-        $this->assertFalse($this->object->isCurrent());
+        self::assertFalse($this->object->isCurrent());
 
         $this->object->setCurrent(true);
-        $this->assertTrue($this->object->isCurrent());
+        self::assertTrue($this->object->isCurrent());
     }
 
     public function testEvent()
     {
         $this->object->setEvent($event = new Event());
-        $this->assertSame($event, $this->object->getEvent());
+        self::assertSame($event, $this->object->getEvent());
     }
 
     public function testField()
     {
         $this->object->setField($field = new Field());
-        $this->assertSame($field, $this->object->getField());
+        self::assertSame($field, $this->object->getField());
     }
 }

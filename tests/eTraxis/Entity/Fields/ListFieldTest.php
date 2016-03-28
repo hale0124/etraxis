@@ -38,10 +38,10 @@ class ListFieldTest extends BaseTestCase
         $method->setAccessible(true);
         $actual = $method->invokeArgs($field, []);
 
-        $this->assertCount(count($expected), $actual);
+        self::assertCount(count($expected), $actual);
 
         foreach ($expected as $key) {
-            $this->assertContains($key, $actual);
+            self::assertContains($key, $actual);
         }
     }
 
@@ -53,14 +53,14 @@ class ListFieldTest extends BaseTestCase
         $item = $this->doctrine->getRepository(ListItem::class)->findOneBy(['key' => 3]);
 
         $field->setDefaultKey($item->getKey());
-        $this->assertEquals($item->getKey(), $field->getDefaultKey());
-        $this->assertEquals($item->getValue(), $field->getDefaultValue());
-        $this->assertEquals($item->getKey(), $this->object->getDefaultValue());
+        self::assertEquals($item->getKey(), $field->getDefaultKey());
+        self::assertEquals($item->getValue(), $field->getDefaultValue());
+        self::assertEquals($item->getKey(), $this->object->getDefaultValue());
 
         $field->setDefaultKey(null);
-        $this->assertNull($field->getDefaultKey());
-        $this->assertNull($field->getDefaultValue());
-        $this->assertNull($this->object->getDefaultValue());
+        self::assertNull($field->getDefaultKey());
+        self::assertNull($field->getDefaultValue());
+        self::assertNull($this->object->getDefaultValue());
     }
 
     public function testDefaultValue()
@@ -71,13 +71,13 @@ class ListFieldTest extends BaseTestCase
         $item = $this->doctrine->getRepository(ListItem::class)->findOneBy(['key' => 3]);
 
         $field->setDefaultValue($item->getValue());
-        $this->assertEquals($item->getKey(), $field->getDefaultKey());
-        $this->assertEquals($item->getValue(), $field->getDefaultValue());
-        $this->assertEquals($item->getKey(), $this->object->getDefaultValue());
+        self::assertEquals($item->getKey(), $field->getDefaultKey());
+        self::assertEquals($item->getValue(), $field->getDefaultValue());
+        self::assertEquals($item->getKey(), $this->object->getDefaultValue());
 
         $field->setDefaultValue(null);
-        $this->assertNull($field->getDefaultKey());
-        $this->assertNull($field->getDefaultValue());
-        $this->assertNull($this->object->getDefaultValue());
+        self::assertNull($field->getDefaultKey());
+        self::assertNull($field->getDefaultValue());
+        self::assertNull($this->object->getDefaultValue());
     }
 }

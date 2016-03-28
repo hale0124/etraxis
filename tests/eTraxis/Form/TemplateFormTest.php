@@ -29,11 +29,11 @@ class TemplateFormTest extends BaseTestCase
 
         $children = $view->children;
 
-        $this->assertEquals($children['name']->vars['data'], $template->getName());
-        $this->assertEquals($children['prefix']->vars['data'], $template->getPrefix());
-        $this->assertEquals($children['criticalAge']->vars['data'], $template->getCriticalAge());
-        $this->assertEquals($children['frozenTime']->vars['data'], $template->getFrozenTime());
-        $this->assertEquals($children['description']->vars['data'], $template->getDescription());
-        $this->assertEquals($children['guestAccess']->vars['data'], $template->hasGuestAccess());
+        self::assertEquals($children['name']->vars['data'], $template->getName());
+        self::assertEquals($children['prefix']->vars['data'], $template->getPrefix());
+        self::assertEquals($children['criticalAge']->vars['data'], $template->getCriticalAge());
+        self::assertEquals($children['frozenTime']->vars['data'], $template->getFrozenTime());
+        self::assertEquals($children['description']->vars['data'], $template->getDescription());
+        self::assertEquals($children['guestAccess']->vars['data'], $template->hasGuestAccess());
     }
 }

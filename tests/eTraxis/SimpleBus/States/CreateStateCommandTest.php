@@ -38,7 +38,7 @@ class CreateStateCommandTest extends BaseTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => $name]);
 
-        $this->assertNull($state);
+        self::assertNull($state);
 
         $command = new CreateStateCommand([
             'template'     => $template->getId(),
@@ -53,13 +53,13 @@ class CreateStateCommandTest extends BaseTestCase
 
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => $name]);
 
-        $this->assertInstanceOf(State::class, $state);
-        $this->assertEquals($template->getId(), $state->getTemplate()->getId());
-        $this->assertEquals($name, $state->getName());
-        $this->assertEquals($abbreviation, $state->getAbbreviation());
-        $this->assertEquals($type, $state->getType());
-        $this->assertEquals($responsible, $state->getResponsible());
-        $this->assertEquals($nextState->getId(), $state->getNextState()->getId());
+        self::assertInstanceOf(State::class, $state);
+        self::assertEquals($template->getId(), $state->getTemplate()->getId());
+        self::assertEquals($name, $state->getName());
+        self::assertEquals($abbreviation, $state->getAbbreviation());
+        self::assertEquals($type, $state->getType());
+        self::assertEquals($responsible, $state->getResponsible());
+        self::assertEquals($nextState->getId(), $state->getNextState()->getId());
     }
 
     public function testInitial()
@@ -74,12 +74,12 @@ class CreateStateCommandTest extends BaseTestCase
 
         /** @var State $initial */
         $initial = $repository->findOneBy(['name' => 'New']);
-        $this->assertEquals(State::TYPE_INITIAL, $initial->getType());
+        self::assertEquals(State::TYPE_INITIAL, $initial->getType());
 
         /** @var State $state */
         $state = $repository->findOneBy(['name' => $name]);
 
-        $this->assertNull($state);
+        self::assertNull($state);
 
         $command = new CreateStateCommand([
             'template'     => $template->getId(),
@@ -93,11 +93,11 @@ class CreateStateCommandTest extends BaseTestCase
 
         $state = $repository->findOneBy(['name' => $name]);
 
-        $this->assertInstanceOf(State::class, $state);
-        $this->assertEquals($template->getId(), $state->getTemplate()->getId());
-        $this->assertEquals($name, $state->getName());
-        $this->assertEquals($abbreviation, $state->getAbbreviation());
-        $this->assertEquals(State::TYPE_INITIAL, $state->getType());
+        self::assertInstanceOf(State::class, $state);
+        self::assertEquals($template->getId(), $state->getTemplate()->getId());
+        self::assertEquals($name, $state->getName());
+        self::assertEquals($abbreviation, $state->getAbbreviation());
+        self::assertEquals(State::TYPE_INITIAL, $state->getType());
 
         $query = $repository->createQueryBuilder('s')
             ->select('COUNT(s.id)')
@@ -108,7 +108,7 @@ class CreateStateCommandTest extends BaseTestCase
         ;
 
         $count = $query->getQuery()->getSingleScalarResult();
-        $this->assertEquals(1, $count);
+        self::assertEquals(1, $count);
     }
 
     /**

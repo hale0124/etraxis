@@ -37,7 +37,7 @@ class AbstractStaticCollectionTest extends BaseTestCase
             'b_no',
         ];
 
-        $this->assertEquals($expected, TestStaticCollection::getAllKeys());
+        self::assertEquals($expected, TestStaticCollection::getAllKeys());
     }
 
     public function testGetAllValues()
@@ -49,12 +49,12 @@ class AbstractStaticCollectionTest extends BaseTestCase
             'button.no',
         ];
 
-        $this->assertEquals($expected, TestStaticCollection::getAllValues());
+        self::assertEquals($expected, TestStaticCollection::getAllValues());
     }
 
     public function testGetValue()
     {
-        $this->assertEquals('button.ok', TestStaticCollection::getValue('b_ok'));
-        $this->assertNull(TestStaticCollection::getValue('button.ok'));
+        self::assertEquals('button.ok', TestStaticCollection::getValue('b_ok'));
+        self::assertNull(TestStaticCollection::getValue('button.ok'));
     }
 }

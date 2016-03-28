@@ -19,8 +19,8 @@ class EnableUsersCommandTest extends BaseTestCase
     {
         $user = $this->findUser('veins');
 
-        $this->assertNotNull($user);
-        $this->assertTrue($user->isDisabled());
+        self::assertNotNull($user);
+        self::assertTrue($user->isDisabled());
 
         $command = new EnableUsersCommand([
             'ids' => [$user->getId()],
@@ -32,6 +32,6 @@ class EnableUsersCommandTest extends BaseTestCase
 
         $user = $this->findUser('veins');
 
-        $this->assertFalse($user->isDisabled());
+        self::assertFalse($user->isDisabled());
     }
 }

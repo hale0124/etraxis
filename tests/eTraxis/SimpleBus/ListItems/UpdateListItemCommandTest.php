@@ -28,9 +28,9 @@ class UpdateListItemCommandTest extends BaseTestCase
             'key'   => 1,
         ]);
 
-        $this->assertNotNull($item);
-        $this->assertEquals(1, $item->getKey());
-        $this->assertEquals('Season 1', $item->getValue());
+        self::assertNotNull($item);
+        self::assertEquals(1, $item->getKey());
+        self::assertEquals('Season 1', $item->getValue());
 
         $command = new UpdateListItemCommand([
             'field' => $field->getId(),
@@ -46,7 +46,7 @@ class UpdateListItemCommandTest extends BaseTestCase
             'key'   => 1,
         ]);
 
-        $this->assertEquals('Season 0', $item->getValue());
+        self::assertEquals('Season 0', $item->getValue());
     }
 
     /**

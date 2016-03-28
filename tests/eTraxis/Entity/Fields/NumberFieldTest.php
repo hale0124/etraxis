@@ -38,10 +38,10 @@ class NumberFieldTest extends BaseTestCase
         $method->setAccessible(true);
         $actual = $method->invokeArgs($field, []);
 
-        $this->assertCount(count($expected), $actual);
+        self::assertCount(count($expected), $actual);
 
         foreach ($expected as $key) {
-            $this->assertContains($key, $actual);
+            self::assertContains($key, $actual);
         }
     }
 
@@ -54,14 +54,14 @@ class NumberFieldTest extends BaseTestCase
         $max   = 2000000000;
 
         $field->setMinValue($value);
-        $this->assertEquals($value, $field->getMinValue());
-        $this->assertEquals($value, $this->object->getParameter1());
+        self::assertEquals($value, $field->getMinValue());
+        self::assertEquals($value, $this->object->getParameter1());
 
         $field->setMinValue($min);
-        $this->assertEquals(NumberField::MIN_VALUE, $field->getMinValue());
+        self::assertEquals(NumberField::MIN_VALUE, $field->getMinValue());
 
         $field->setMinValue($max);
-        $this->assertEquals(NumberField::MAX_VALUE, $field->getMinValue());
+        self::assertEquals(NumberField::MAX_VALUE, $field->getMinValue());
     }
 
     public function testMaxValue()
@@ -73,14 +73,14 @@ class NumberFieldTest extends BaseTestCase
         $max   = 2000000000;
 
         $field->setMaxValue($value);
-        $this->assertEquals($value, $field->getMaxValue());
-        $this->assertEquals($value, $this->object->getParameter2());
+        self::assertEquals($value, $field->getMaxValue());
+        self::assertEquals($value, $this->object->getParameter2());
 
         $field->setMaxValue($min);
-        $this->assertEquals(NumberField::MIN_VALUE, $field->getMaxValue());
+        self::assertEquals(NumberField::MIN_VALUE, $field->getMaxValue());
 
         $field->setMaxValue($max);
-        $this->assertEquals(NumberField::MAX_VALUE, $field->getMaxValue());
+        self::assertEquals(NumberField::MAX_VALUE, $field->getMaxValue());
     }
 
     public function testDefaultValue()
@@ -92,17 +92,17 @@ class NumberFieldTest extends BaseTestCase
         $max   = 2000000000;
 
         $field->setDefaultValue($value);
-        $this->assertEquals($value, $field->getDefaultValue());
-        $this->assertEquals($value, $this->object->getDefaultValue());
+        self::assertEquals($value, $field->getDefaultValue());
+        self::assertEquals($value, $this->object->getDefaultValue());
 
         $field->setDefaultValue($min);
-        $this->assertEquals(NumberField::MIN_VALUE, $field->getDefaultValue());
+        self::assertEquals(NumberField::MIN_VALUE, $field->getDefaultValue());
 
         $field->setDefaultValue($max);
-        $this->assertEquals(NumberField::MAX_VALUE, $field->getDefaultValue());
+        self::assertEquals(NumberField::MAX_VALUE, $field->getDefaultValue());
 
         $field->setDefaultValue(null);
-        $this->assertNull($field->getDefaultValue());
-        $this->assertNull($this->object->getDefaultValue());
+        self::assertNull($field->getDefaultValue());
+        self::assertNull($this->object->getDefaultValue());
     }
 }

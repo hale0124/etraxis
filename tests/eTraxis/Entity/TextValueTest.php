@@ -23,20 +23,20 @@ class TextValueTest extends \PHPUnit_Framework_TestCase
 
     public function testId()
     {
-        $this->assertEquals(null, $this->object->getId());
+        self::assertEquals(null, $this->object->getId());
     }
 
     public function testToken()
     {
         $expected = 'token';
         $this->object->setToken($expected);
-        $this->assertEquals($expected, $this->object->getToken());
+        self::assertEquals($expected, $this->object->getToken());
     }
 
     public function testValue()
     {
         $expected = str_pad('_', 4000, '_');
         $this->object->setValue($expected);
-        $this->assertEquals($expected, $this->object->getValue());
+        self::assertEquals($expected, $this->object->getValue());
     }
 }

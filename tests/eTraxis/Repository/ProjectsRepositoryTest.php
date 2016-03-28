@@ -34,6 +34,6 @@ class ProjectsRepositoryTest extends BaseTestCase
             'Planet Express',
         ];
 
-        $this->assertEquals($expected, $projects);
+        self::assertEquals($expected, $projects);
     }
 }

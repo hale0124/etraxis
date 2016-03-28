@@ -23,7 +23,7 @@ class StatesRepositoryTest extends BaseTestCase
     {
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
-        $this->assertNotNull($template);
+        self::assertNotNull($template);
 
         /** @var StatesRepository $repository */
         $repository = $this->doctrine->getManager()->getRepository(State::class);
@@ -39,7 +39,7 @@ class StatesRepositoryTest extends BaseTestCase
             'Delivered',
         ];
 
-        $this->assertEquals($expected, $states);
+        self::assertEquals($expected, $states);
     }
 
     public function testGetRoleTransitions()
@@ -49,17 +49,17 @@ class StatesRepositoryTest extends BaseTestCase
 
         /** @var State $new */
         $new = $repository->findOneBy(['name' => 'New']);
-        $this->assertNotNull($new);
+        self::assertNotNull($new);
 
         /** @var State $delivered */
         $delivered = $repository->findOneBy(['name' => 'Delivered']);
-        $this->assertNotNull($delivered);
+        self::assertNotNull($delivered);
 
         $expected = [
             $delivered->getId(),
         ];
 
-        $this->assertEquals($expected, $repository->getRoleTransitions($new->getId(), SystemRole::RESPONSIBLE));
+        self::assertEquals($expected, $repository->getRoleTransitions($new->getId(), SystemRole::RESPONSIBLE));
     }
 
     public function testGetGroupTransitions()
@@ -69,20 +69,20 @@ class StatesRepositoryTest extends BaseTestCase
 
         /** @var Group $managers */
         $managers = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
-        $this->assertNotNull($managers);
+        self::assertNotNull($managers);
 
         /** @var State $new */
         $new = $repository->findOneBy(['name' => 'New']);
-        $this->assertNotNull($new);
+        self::assertNotNull($new);
 
         /** @var State $delivered */
         $delivered = $repository->findOneBy(['name' => 'Delivered']);
-        $this->assertNotNull($delivered);
+        self::assertNotNull($delivered);
 
         $expected = [
             $delivered->getId(),
         ];
 
-        $this->assertEquals($expected, $repository->getGroupTransitions($new->getId(), $managers->getId()));
+        self::assertEquals($expected, $repository->getGroupTransitions($new->getId(), $managers->getId()));
     }
 }

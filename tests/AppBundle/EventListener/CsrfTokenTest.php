@@ -54,7 +54,7 @@ class CsrfTokenTest extends BaseTestCase
 
         $response = $event->getResponse();
 
-        $this->assertNull($response);
+        self::assertNull($response);
     }
 
     public function testFormSubmit()
@@ -79,7 +79,7 @@ class CsrfTokenTest extends BaseTestCase
 
         $response = $event->getResponse();
 
-        $this->assertNull($response);
+        self::assertNull($response);
     }
 
     public function testNoCsrfError()
@@ -99,9 +99,9 @@ class CsrfTokenTest extends BaseTestCase
 
         $response = $event->getResponse();
 
-        $this->assertNotNull($response);
-        $this->assertEquals(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
-        $this->assertEquals('CSRF token is missing.', $response->getContent());
+        self::assertNotNull($response);
+        self::assertEquals(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
+        self::assertEquals('CSRF token is missing.', $response->getContent());
     }
 
     public function testInvalidCsrfError()
@@ -125,8 +125,8 @@ class CsrfTokenTest extends BaseTestCase
 
         $response = $event->getResponse();
 
-        $this->assertNotNull($response);
-        $this->assertEquals(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
-        $this->assertEquals('Invalid CSRF token.', $response->getContent());
+        self::assertNotNull($response);
+        self::assertEquals(Response::HTTP_BAD_REQUEST, $response->getStatusCode());
+        self::assertEquals('Invalid CSRF token.', $response->getContent());
     }
 }

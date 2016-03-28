@@ -33,158 +33,158 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     public function testId()
     {
-        $this->assertEquals(null, $this->object->getId());
+        self::assertEquals(null, $this->object->getId());
     }
 
     public function testUsername()
     {
         $expected = 'Username';
         $this->object->setUsername($expected);
-        $this->assertEquals($expected, $this->object->getUsername());
+        self::assertEquals($expected, $this->object->getUsername());
     }
 
     public function testFullname()
     {
         $expected = 'Fullname';
         $this->object->setFullname($expected);
-        $this->assertEquals($expected, $this->object->getFullname());
+        self::assertEquals($expected, $this->object->getFullname());
     }
 
     public function testEmail()
     {
         $expected = 'Email';
         $this->object->setEmail($expected);
-        $this->assertEquals($expected, $this->object->getEmail());
+        self::assertEquals($expected, $this->object->getEmail());
     }
 
     public function testDescription()
     {
         $expected = 'Description';
         $this->object->setDescription($expected);
-        $this->assertEquals($expected, $this->object->getDescription());
+        self::assertEquals($expected, $this->object->getDescription());
     }
 
     public function testPassword()
     {
         $expected = 'Password';
         $this->object->setPassword($expected);
-        $this->assertEquals($expected, $this->object->getPassword());
+        self::assertEquals($expected, $this->object->getPassword());
     }
 
     public function testPasswordSetAt()
     {
         $expected = time();
         $this->object->setPasswordSetAt($expected);
-        $this->assertEquals($expected, $this->object->getPasswordSetAt());
+        self::assertEquals($expected, $this->object->getPasswordSetAt());
     }
 
     public function testResetToken()
     {
         $expected = Uuid::uuid4()->getHex();
         $this->object->setResetToken($expected);
-        $this->assertEquals($expected, $this->object->getResetToken());
+        self::assertEquals($expected, $this->object->getResetToken());
     }
 
     public function testResetTokenExpiresAt()
     {
         $expected = time();
         $this->object->setResetTokenExpiresAt($expected);
-        $this->assertEquals($expected, $this->object->getResetTokenExpiresAt());
+        self::assertEquals($expected, $this->object->getResetTokenExpiresAt());
     }
 
     public function testIsAdmin()
     {
         $this->object->setAdmin(false);
-        $this->assertFalse($this->object->isAdmin());
+        self::assertFalse($this->object->isAdmin());
 
         $this->object->setAdmin(true);
-        $this->assertTrue($this->object->isAdmin());
+        self::assertTrue($this->object->isAdmin());
     }
 
     public function testIsDisabled()
     {
         $this->object->setDisabled(false);
-        $this->assertFalse($this->object->isDisabled());
+        self::assertFalse($this->object->isDisabled());
 
         $this->object->setDisabled(true);
-        $this->assertTrue($this->object->isDisabled());
+        self::assertTrue($this->object->isDisabled());
     }
 
     public function testIsLdap()
     {
         $this->object->setLdap(false);
-        $this->assertFalse($this->object->isLdap());
+        self::assertFalse($this->object->isLdap());
 
         $this->object->setLdap(true);
-        $this->assertTrue($this->object->isLdap());
+        self::assertTrue($this->object->isLdap());
     }
 
     public function testAuthAttempts()
     {
         $expected = 0;
         $this->object->setAuthAttempts($expected);
-        $this->assertEquals($expected, $this->object->getAuthAttempts());
+        self::assertEquals($expected, $this->object->getAuthAttempts());
     }
 
     public function testLockedUntil()
     {
         $expected = time();
         $this->object->setLockedUntil($expected);
-        $this->assertEquals($expected, $this->object->getLockedUntil());
+        self::assertEquals($expected, $this->object->getLockedUntil());
     }
 
     public function testLocale()
     {
         $expected = 'ru';
         $this->object->setLocale($expected);
-        $this->assertEquals($expected, $this->object->getLocale());
+        self::assertEquals($expected, $this->object->getLocale());
     }
 
     public function testGetLocaleFallback()
     {
         $expected             = 'en_US';
         $this->object->locale = 0;
-        $this->assertEquals($expected, $this->object->getLocale());
+        self::assertEquals($expected, $this->object->getLocale());
     }
 
     public function testSetLocaleFallback()
     {
         $expected = 'en_US';
         $this->object->setLocale('xx-XX');
-        $this->assertEquals($expected, $this->object->getLocale());
+        self::assertEquals($expected, $this->object->getLocale());
     }
 
     public function testTimezone()
     {
         $expected = mt_rand();
         $this->object->setTimezone($expected);
-        $this->assertEquals($expected, $this->object->getTimezone());
+        self::assertEquals($expected, $this->object->getTimezone());
     }
 
     public function testViewId()
     {
         $expected = mt_rand();
         $this->object->setViewId($expected);
-        $this->assertEquals($expected, $this->object->getViewId());
+        self::assertEquals($expected, $this->object->getViewId());
     }
 
     public function testTheme()
     {
         $expected = 'emerald';
         $this->object->setTheme($expected);
-        $this->assertEquals($expected, $this->object->getTheme());
+        self::assertEquals($expected, $this->object->getTheme());
     }
 
     public function testThemeUnsupported()
     {
         $expected = 'azure';
         $this->object->setTheme('unsupported');
-        $this->assertEquals($expected, $this->object->getTheme());
+        self::assertEquals($expected, $this->object->getTheme());
     }
 
     public function testGroups()
     {
-        $this->assertCount(0, $this->object->getGroups());
+        self::assertCount(0, $this->object->getGroups());
     }
 
     public function testGetRolesAsAdmin()
@@ -192,8 +192,8 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->object->setAdmin(true);
         $roles = $this->object->getRoles();
 
-        $this->assertTrue(in_array(User::ROLE_USER, $roles));
-        $this->assertTrue(in_array(User::ROLE_ADMIN, $roles));
+        self::assertTrue(in_array(User::ROLE_USER, $roles));
+        self::assertTrue(in_array(User::ROLE_ADMIN, $roles));
     }
 
     public function testGetRolesAsUser()
@@ -201,14 +201,14 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $this->object->setAdmin(false);
         $roles = $this->object->getRoles();
 
-        $this->assertTrue(in_array(User::ROLE_USER, $roles));
-        $this->assertFalse(in_array(User::ROLE_ADMIN, $roles));
+        self::assertTrue(in_array(User::ROLE_USER, $roles));
+        self::assertFalse(in_array(User::ROLE_ADMIN, $roles));
     }
 
     public function testGetSalt()
     {
         /** @noinspection PhpVoidFunctionResultUsedInspection */
-        $this->assertNull($this->object->getSalt());
+        self::assertNull($this->object->getSalt());
     }
 
     public function testEraseCredentials()
@@ -218,40 +218,40 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     public function testIsAccountNonExpired()
     {
-        $this->assertTrue($this->object->isAccountNonExpired());
+        self::assertTrue($this->object->isAccountNonExpired());
     }
 
     public function testIsAccountNonLocked()
     {
-        $this->assertTrue($this->object->isAccountNonLocked());
+        self::assertTrue($this->object->isAccountNonLocked());
 
         $this->object->setLockedUntil(time() + 5);
-        $this->assertFalse($this->object->isAccountNonLocked());
+        self::assertFalse($this->object->isAccountNonLocked());
 
         $this->object->setLockedUntil(time() - 1);
-        $this->assertTrue($this->object->isAccountNonLocked());
+        self::assertTrue($this->object->isAccountNonLocked());
     }
 
     public function testIsCredentialsNonExpired()
     {
-        $this->assertTrue($this->object->isCredentialsNonExpired());
+        self::assertTrue($this->object->isCredentialsNonExpired());
     }
 
     public function testIsEnabled()
     {
         $this->object->setDisabled(false);
-        $this->assertTrue($this->object->isEnabled());
+        self::assertTrue($this->object->isEnabled());
 
         $this->object->setDisabled(true);
-        $this->assertFalse($this->object->isEnabled());
+        self::assertFalse($this->object->isEnabled());
     }
 
     public function testGetAuthenticationSource()
     {
         $this->object->setLdap(false);
-        $this->assertEquals('eTraxis', $this->object->getAuthenticationSource());
+        self::assertEquals('eTraxis', $this->object->getAuthenticationSource());
 
         $this->object->setLdap(true);
-        $this->assertEquals('LDAP', $this->object->getAuthenticationSource());
+        self::assertEquals('LDAP', $this->object->getAuthenticationSource());
     }
 }

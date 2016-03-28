@@ -63,7 +63,7 @@ class LdapAuthenticatorTest extends BaseTestCase
 
         $this->object->start($request);
 
-        $this->assertEquals('http://localhost/settings/', $this->session->get('_security.main.target_path'));
+        self::assertEquals('http://localhost/settings/', $this->session->get('_security.main.target_path'));
     }
 
     public function testTargetPathAjax()
@@ -74,7 +74,7 @@ class LdapAuthenticatorTest extends BaseTestCase
 
         $this->object->start($request);
 
-        $this->assertNull($this->session->get('_security.main.target_path'));
+        self::assertNull($this->session->get('_security.main.target_path'));
     }
 
     public function testGetCredentialsSuccess()
@@ -89,12 +89,12 @@ class LdapAuthenticatorTest extends BaseTestCase
             '_password' => 'secret',
         ]);
 
-        $this->assertEquals($expected, $this->object->getCredentials($request));
+        self::assertEquals($expected, $this->object->getCredentials($request));
     }
 
     public function testGetCredentialsFailure()
     {
-        $this->assertNull($this->object->getCredentials(new Request()));
+        self::assertNull($this->object->getCredentials(new Request()));
     }
 
     public function testGetUserSuccess()
@@ -107,7 +107,7 @@ class LdapAuthenticatorTest extends BaseTestCase
             'password' => 'password',
         ], $provider);
 
-        $this->assertInstanceOf('\\eTraxis\\Entity\\User', $user);
+        self::assertInstanceOf('\\eTraxis\\Entity\\User', $user);
     }
 
     /**
@@ -131,17 +131,17 @@ class LdapAuthenticatorTest extends BaseTestCase
 
         $user = $provider->loadUserByUsername('einstein');
 
-        $this->assertTrue($this->object->checkCredentials([
+        self::assertTrue($this->object->checkCredentials([
             'username' => 'einstein',
             'password' => 'password',
         ], $user));
 
-        $this->assertFalse($this->object->checkCredentials([
+        self::assertFalse($this->object->checkCredentials([
             'username' => 'einstein',
             'password' => 'wrong',
         ], $user));
 
-        $this->assertFalse($this->object->checkCredentials([
+        self::assertFalse($this->object->checkCredentials([
             'username' => 'unknown',
             'password' => 'password',
         ], $user));
@@ -149,7 +149,7 @@ class LdapAuthenticatorTest extends BaseTestCase
 
     public function testOnAuthenticationFailure()
     {
-        $this->assertNull($this->object->onAuthenticationFailure(new Request(), new AuthenticationException()));
+        self::assertNull($this->object->onAuthenticationFailure(new Request(), new AuthenticationException()));
     }
 
     public function testOnAuthenticationSuccess()
@@ -165,11 +165,11 @@ class LdapAuthenticatorTest extends BaseTestCase
             'etraxis.provider'
         );
 
-        $this->assertInstanceOf(Response::class, $response);
+        self::assertInstanceOf(Response::class, $response);
     }
 
     public function testSupportsRememberMe()
     {
-        $this->assertTrue($this->object->supportsRememberMe());
+        self::assertTrue($this->object->supportsRememberMe());
     }
 }

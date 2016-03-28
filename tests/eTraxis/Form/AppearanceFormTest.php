@@ -27,8 +27,8 @@ class AppearanceFormTest extends BaseTestCase
 
         $children = $view->children;
 
-        $this->assertEquals($children['locale']->vars['data'], $user->getLocale());
-        $this->assertEquals($children['theme']->vars['data'], $user->getTheme());
-        $this->assertEquals($children['timezone']->vars['data'], $user->getTimezone());
+        self::assertEquals($children['locale']->vars['data'], $user->getLocale());
+        self::assertEquals($children['theme']->vars['data'], $user->getTheme());
+        self::assertEquals($children['timezone']->vars['data'], $user->getTimezone());
     }
 }

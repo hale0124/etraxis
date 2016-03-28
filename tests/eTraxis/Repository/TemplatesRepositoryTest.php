@@ -23,7 +23,7 @@ class TemplatesRepositoryTest extends BaseTestCase
     {
         /** @var Project $project */
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
-        $this->assertNotNull($project);
+        self::assertNotNull($project);
 
         /** @var TemplatesRepository $repository */
         $repository = $this->doctrine->getManager()->getRepository(Template::class);
@@ -39,7 +39,7 @@ class TemplatesRepositoryTest extends BaseTestCase
             'Futurama',
         ];
 
-        $this->assertEquals($expected, $templates);
+        self::assertEquals($expected, $templates);
     }
 
     public function testGetRolePermissions()
@@ -54,10 +54,10 @@ class TemplatesRepositoryTest extends BaseTestCase
         /** @var Template $template */
         $template = $repository->findOneBy(['name' => 'Delivery']);
 
-        $this->assertEquals($author,      $repository->getRolePermissions($template->getId(), SystemRole::AUTHOR));
-        $this->assertEquals($responsible, $repository->getRolePermissions($template->getId(), SystemRole::RESPONSIBLE));
-        $this->assertEquals($registered,  $repository->getRolePermissions($template->getId(), SystemRole::REGISTERED));
-        $this->assertEquals(0,            $repository->getRolePermissions($template->getId(), 0));
+        self::assertEquals($author,      $repository->getRolePermissions($template->getId(), SystemRole::AUTHOR));
+        self::assertEquals($responsible, $repository->getRolePermissions($template->getId(), SystemRole::RESPONSIBLE));
+        self::assertEquals($registered,  $repository->getRolePermissions($template->getId(), SystemRole::REGISTERED));
+        self::assertEquals(0,            $repository->getRolePermissions($template->getId(), 0));
     }
 
     public function testGetGroupPermissions()
@@ -69,8 +69,8 @@ class TemplatesRepositoryTest extends BaseTestCase
         /** @var Group $group_global */
         $group_local  = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
         $group_global = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Nimbus']);
-        $this->assertNotNull($group_local);
-        $this->assertNotNull($group_global);
+        self::assertNotNull($group_local);
+        self::assertNotNull($group_global);
 
         /** @var TemplatesRepository $repository */
         $repository = $this->doctrine->getManager()->getRepository(Template::class);
@@ -78,7 +78,7 @@ class TemplatesRepositoryTest extends BaseTestCase
         /** @var Template $template */
         $template = $repository->findOneBy(['name' => 'Delivery']);
 
-        $this->assertEquals($local,  $repository->getGroupPermissions($template->getId(), $group_local->getId()));
-        $this->assertEquals($global, $repository->getGroupPermissions($template->getId(), $group_global->getId()));
+        self::assertEquals($local,  $repository->getGroupPermissions($template->getId(), $group_local->getId()));
+        self::assertEquals($global, $repository->getGroupPermissions($template->getId(), $group_global->getId()));
     }
 }

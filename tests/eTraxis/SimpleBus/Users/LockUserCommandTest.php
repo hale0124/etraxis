@@ -20,7 +20,7 @@ class LockUserCommandTest extends BaseTestCase
         $username = 'artem';
 
         $user = $this->findUser($username);
-        $this->assertNotNull($user);
+        self::assertNotNull($user);
 
         $expected = $user->getAuthAttempts() + 1;
 
@@ -32,12 +32,12 @@ class LockUserCommandTest extends BaseTestCase
         $this->command_bus->handle($command);
 
         $user = $this->findUser($username);
-        $this->assertEquals($expected, $user->getAuthAttempts());
+        self::assertEquals($expected, $user->getAuthAttempts());
 
         // second time
         $this->command_bus->handle($command);
 
         $user = $this->findUser($username);
-        $this->assertFalse($user->isAccountNonLocked());
+        self::assertFalse($user->isAccountNonLocked());
     }
 }

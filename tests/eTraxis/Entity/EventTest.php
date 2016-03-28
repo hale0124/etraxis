@@ -23,53 +23,53 @@ class EventTest extends \PHPUnit_Framework_TestCase
 
     public function testId()
     {
-        $this->assertEquals(null, $this->object->getId());
+        self::assertEquals(null, $this->object->getId());
     }
 
     public function testRecordId()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setRecordId($expected);
-        $this->assertEquals($expected, $this->object->getRecordId());
+        self::assertEquals($expected, $this->object->getRecordId());
     }
 
     public function testUserId()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setUserId($expected);
-        $this->assertEquals($expected, $this->object->getUserId());
+        self::assertEquals($expected, $this->object->getUserId());
     }
 
     public function testType()
     {
         $expected = Event::RECORD_CREATED;
         $this->object->setType($expected);
-        $this->assertEquals($expected, $this->object->getType());
+        self::assertEquals($expected, $this->object->getType());
     }
 
     public function testCreatedAt()
     {
         $expected = time();
         $this->object->setCreatedAt($expected);
-        $this->assertEquals($expected, $this->object->getCreatedAt());
+        self::assertEquals($expected, $this->object->getCreatedAt());
     }
 
     public function testParameter()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setParameter($expected);
-        $this->assertEquals($expected, $this->object->getParameter());
+        self::assertEquals($expected, $this->object->getParameter());
     }
 
     public function testRecord()
     {
         $this->object->setRecord($record = new Record());
-        $this->assertSame($record, $this->object->getRecord());
+        self::assertSame($record, $this->object->getRecord());
     }
 
     public function testUser()
     {
         $this->object->setUser($user = new User());
-        $this->assertSame($user, $this->object->getUser());
+        self::assertSame($user, $this->object->getUser());
     }
 }

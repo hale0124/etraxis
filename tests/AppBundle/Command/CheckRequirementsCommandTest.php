@@ -81,7 +81,7 @@ OUT;
         $commandTester = new CommandTester($application->find('etraxis:check:requirements'));
         $commandTester->execute([]);
 
-        $this->assertEquals($expected, $commandTester->getDisplay());
+        self::assertEquals($expected, $commandTester->getDisplay());
     }
 
     public function testDefaultCharset()
@@ -96,6 +96,6 @@ OUT;
         $commandTester = new CommandTester($application->find('etraxis:check:requirements'));
         $commandTester->execute([]);
 
-        $this->assertContains($expected, $commandTester->getDisplay());
+        self::assertContains($expected, $commandTester->getDisplay());
     }
 }

@@ -29,7 +29,7 @@ class CreateUserCommandTest extends BaseTestCase
 
         $user = $this->findUser($username);
 
-        $this->assertNull($user);
+        self::assertNull($user);
 
         $command = new CreateUserCommand([
             'username'    => $username,
@@ -48,18 +48,18 @@ class CreateUserCommandTest extends BaseTestCase
 
         $user = $this->findUser($username);
 
-        $this->assertInstanceOf(User::class, $user);
-        $this->assertEquals($username, $user->getUsername());
-        $this->assertEquals($fullname, $user->getFullname());
-        $this->assertEquals($email, $user->getEmail());
-        $this->assertEquals($description, $user->getDescription());
-        $this->assertEquals($encoded, $user->getPassword());
-        $this->assertTrue($user->isAdmin());
-        $this->assertFalse($user->isDisabled());
-        $this->assertFalse($user->isLdap());
-        $this->assertEquals(static::$kernel->getContainer()->getParameter('locale'), $user->getLocale());
-        $this->assertEquals(static::$kernel->getContainer()->getParameter('theme'), $user->getTheme());
-        $this->assertEquals(377, $user->getTimezone());
+        self::assertInstanceOf(User::class, $user);
+        self::assertEquals($username, $user->getUsername());
+        self::assertEquals($fullname, $user->getFullname());
+        self::assertEquals($email, $user->getEmail());
+        self::assertEquals($description, $user->getDescription());
+        self::assertEquals($encoded, $user->getPassword());
+        self::assertTrue($user->isAdmin());
+        self::assertFalse($user->isDisabled());
+        self::assertFalse($user->isLdap());
+        self::assertEquals(static::$kernel->getContainer()->getParameter('locale'), $user->getLocale());
+        self::assertEquals(static::$kernel->getContainer()->getParameter('theme'), $user->getTheme());
+        self::assertEquals(377, $user->getTimezone());
     }
 
     /**

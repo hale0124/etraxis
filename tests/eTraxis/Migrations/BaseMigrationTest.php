@@ -21,7 +21,7 @@ class BaseMigrationTest extends BaseTestCase
         $expected  = '4.0.x';
         $migration = new BaseMigrationStub();
 
-        $this->assertEquals($expected, $migration->getDescription());
+        self::assertEquals($expected, $migration->getDescription());
     }
 
     public function testMysqlUpSuccess()

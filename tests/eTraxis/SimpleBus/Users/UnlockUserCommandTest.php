@@ -19,7 +19,7 @@ class UnlockUserCommandTest extends BaseTestCase
     public function testUnlockUser()
     {
         $user = $this->findUser('artem');
-        $this->assertNotNull($user);
+        self::assertNotNull($user);
 
         $id = $user->getId();
 
@@ -29,12 +29,12 @@ class UnlockUserCommandTest extends BaseTestCase
         $this->doctrine->getManager()->flush();
 
         $user = $this->doctrine->getRepository(User::class)->find($id);
-        $this->assertEquals(1, $user->getAuthAttempts());
+        self::assertEquals(1, $user->getAuthAttempts());
 
         $command = new UnlockUserCommand(['id' => $id]);
         $this->command_bus->handle($command);
 
         $user = $this->doctrine->getRepository(User::class)->find($id);
-        $this->assertEquals(0, $user->getAuthAttempts());
+        self::assertEquals(0, $user->getAuthAttempts());
     }
 }

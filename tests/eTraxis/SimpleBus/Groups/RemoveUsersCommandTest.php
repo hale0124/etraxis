@@ -28,8 +28,8 @@ class RemoveUsersCommandTest extends BaseTestCase
         $members = $repository->getGroupMembers($group->getId());
         $others  = $repository->getGroupNonMembers($group->getId());
 
-        $this->assertNotCount(0, $members);
-        $this->assertNotCount(0, $others);
+        self::assertNotCount(0, $members);
+        self::assertNotCount(0, $others);
 
         $expected = count($members) + count($others);
 
@@ -45,8 +45,8 @@ class RemoveUsersCommandTest extends BaseTestCase
         $members = $repository->getGroupMembers($group->getId());
         $others  = $repository->getGroupNonMembers($group->getId());
 
-        $this->assertCount(0, $members);
-        $this->assertCount($expected, $others);
+        self::assertCount(0, $members);
+        self::assertCount($expected, $others);
     }
 
     /**

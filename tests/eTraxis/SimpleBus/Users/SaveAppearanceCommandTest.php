@@ -20,10 +20,10 @@ class SaveAppearanceCommandTest extends BaseTestCase
     {
         $user = $this->findUser('bender');
 
-        $this->assertNotNull($user);
-        $this->assertEquals('en_US', $user->getLocale());
-        $this->assertEquals('azure', $user->getTheme());
-        $this->assertEquals(0, $user->getTimezone());
+        self::assertNotNull($user);
+        self::assertEquals('en_US', $user->getLocale());
+        self::assertEquals('azure', $user->getTheme());
+        self::assertEquals(0, $user->getTimezone());
 
         $command = new SaveAppearanceCommand([
             'id'       => $user->getId(),
@@ -36,9 +36,9 @@ class SaveAppearanceCommandTest extends BaseTestCase
 
         $user = $this->doctrine->getRepository(User::class)->find($user->getId());
 
-        $this->assertEquals('es', $user->getLocale());
-        $this->assertEquals('humanity', $user->getTheme());
-        $this->assertEquals(377, $user->getTimezone());
+        self::assertEquals('es', $user->getLocale());
+        self::assertEquals('humanity', $user->getTheme());
+        self::assertEquals(377, $user->getTimezone());
     }
 
     /**
@@ -49,7 +49,7 @@ class SaveAppearanceCommandTest extends BaseTestCase
     {
         $user = $this->findUser('flexo');
 
-        $this->assertNull($user);
+        self::assertNull($user);
 
         $command = new SaveAppearanceCommand([
             'id'       => $this->getMaxId(),

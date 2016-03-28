@@ -35,7 +35,7 @@ class LocalizerServiceTest extends BaseTestCase
 
         $service = new Localizer\LocalizerService($token_storage, 'xx_XX');
 
-        $this->assertEquals($expected, $service->formatDate($service->getLocalTimestamp($this->getTimestamp())));
+        self::assertEquals($expected, $service->formatDate($service->getLocalTimestamp($this->getTimestamp())));
     }
 
     public function testTime()
@@ -49,7 +49,7 @@ class LocalizerServiceTest extends BaseTestCase
 
         $service = new Localizer\LocalizerService($token_storage, 'xx_XX');
 
-        $this->assertEquals($expected, $service->formatTime($service->getLocalTimestamp($this->getTimestamp())));
+        self::assertEquals($expected, $service->formatTime($service->getLocalTimestamp($this->getTimestamp())));
     }
 
     public function testEmptyToken()
@@ -60,7 +60,7 @@ class LocalizerServiceTest extends BaseTestCase
 
         $service = new Localizer\LocalizerService($token_storage, 'en_GB');
 
-        $this->assertEquals($expected, $service->formatDate($service->getLocalTimestamp($this->getTimestamp())));
+        self::assertEquals($expected, $service->formatDate($service->getLocalTimestamp($this->getTimestamp())));
     }
 
     public function testGuest()
@@ -74,6 +74,6 @@ class LocalizerServiceTest extends BaseTestCase
 
         $service = new Localizer\LocalizerService($token_storage, 'en_GB');
 
-        $this->assertEquals($expected, $service->formatDate($service->getLocalTimestamp($this->getTimestamp())));
+        self::assertEquals($expected, $service->formatDate($service->getLocalTimestamp($this->getTimestamp())));
     }
 }

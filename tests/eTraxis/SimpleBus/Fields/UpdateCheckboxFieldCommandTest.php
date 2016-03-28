@@ -21,13 +21,13 @@ class UpdateCheckboxFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Multipart']);
 
-        $this->assertEquals(Field::TYPE_CHECKBOX, $field->getType());
-        $this->assertEquals('Multipart', $field->getName());
-        $this->assertNull($field->getDescription());
-        $this->assertTrue($field->isRequired());
-        $this->assertFalse($field->hasGuestAccess());
-        $this->assertFalse($field->getShowInEmails());
-        $this->assertNull($field->getDefaultValue());
+        self::assertEquals(Field::TYPE_CHECKBOX, $field->getType());
+        self::assertEquals('Multipart', $field->getName());
+        self::assertNull($field->getDescription());
+        self::assertTrue($field->isRequired());
+        self::assertFalse($field->hasGuestAccess());
+        self::assertFalse($field->getShowInEmails());
+        self::assertNull($field->getDefaultValue());
 
         $command = new UpdateCheckboxFieldCommand([
             'id'           => $field->getId(),
@@ -43,12 +43,12 @@ class UpdateCheckboxFieldCommandTest extends BaseTestCase
 
         $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 
-        $this->assertEquals(Field::TYPE_CHECKBOX, $field->getType());
-        $this->assertEquals('Is multipart', $field->getName());
-        $this->assertEquals('Whether is multipart', $field->getDescription());
-        $this->assertFalse($field->isRequired());
-        $this->assertTrue($field->hasGuestAccess());
-        $this->assertTrue($field->getShowInEmails());
-        $this->assertTrue($field->asCheckbox()->getDefaultValue());
+        self::assertEquals(Field::TYPE_CHECKBOX, $field->getType());
+        self::assertEquals('Is multipart', $field->getName());
+        self::assertEquals('Whether is multipart', $field->getDescription());
+        self::assertFalse($field->isRequired());
+        self::assertTrue($field->hasGuestAccess());
+        self::assertTrue($field->getShowInEmails());
+        self::assertTrue($field->asCheckbox()->getDefaultValue());
     }
 }

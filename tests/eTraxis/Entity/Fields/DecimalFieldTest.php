@@ -44,10 +44,10 @@ class DecimalFieldTest extends BaseTestCase
         $method->setAccessible(true);
         $actual = $method->invokeArgs($field, []);
 
-        $this->assertCount(count($expected), $actual);
+        self::assertCount(count($expected), $actual);
 
         foreach ($expected as $key) {
-            $this->assertContains($key, $actual);
+            self::assertContains($key, $actual);
         }
     }
 
@@ -66,14 +66,14 @@ class DecimalFieldTest extends BaseTestCase
         $value = $repository->findOneBy(['value' => $pi]);
 
         $field->setMinValue($pi);
-        $this->assertEquals($pi, $field->getMinValue());
-        $this->assertEquals($value->getId(), $this->object->getParameter1());
+        self::assertEquals($pi, $field->getMinValue());
+        self::assertEquals($value->getId(), $this->object->getParameter1());
 
         $field->setMinValue($min);
-        $this->assertEquals(DecimalField::MIN_VALUE, $field->getMinValue());
+        self::assertEquals(DecimalField::MIN_VALUE, $field->getMinValue());
 
         $field->setMinValue($max);
-        $this->assertEquals(DecimalField::MAX_VALUE, $field->getMinValue());
+        self::assertEquals(DecimalField::MAX_VALUE, $field->getMinValue());
     }
 
     public function testMaxValue()
@@ -91,14 +91,14 @@ class DecimalFieldTest extends BaseTestCase
         $value = $repository->findOneBy(['value' => $pi]);
 
         $field->setMaxValue($pi);
-        $this->assertEquals($pi, $field->getMaxValue());
-        $this->assertEquals($value->getId(), $this->object->getParameter2());
+        self::assertEquals($pi, $field->getMaxValue());
+        self::assertEquals($value->getId(), $this->object->getParameter2());
 
         $field->setMaxValue($min);
-        $this->assertEquals(DecimalField::MIN_VALUE, $field->getMaxValue());
+        self::assertEquals(DecimalField::MIN_VALUE, $field->getMaxValue());
 
         $field->setMaxValue($max);
-        $this->assertEquals(DecimalField::MAX_VALUE, $field->getMaxValue());
+        self::assertEquals(DecimalField::MAX_VALUE, $field->getMaxValue());
     }
 
     public function testDefaultValue()
@@ -116,17 +116,17 @@ class DecimalFieldTest extends BaseTestCase
         $value = $repository->findOneBy(['value' => $pi]);
 
         $field->setDefaultValue($pi);
-        $this->assertEquals($pi, $field->getDefaultValue());
-        $this->assertEquals($value->getId(), $this->object->getDefaultValue());
+        self::assertEquals($pi, $field->getDefaultValue());
+        self::assertEquals($value->getId(), $this->object->getDefaultValue());
 
         $field->setDefaultValue($min);
-        $this->assertEquals(DecimalField::MIN_VALUE, $field->getDefaultValue());
+        self::assertEquals(DecimalField::MIN_VALUE, $field->getDefaultValue());
 
         $field->setDefaultValue($max);
-        $this->assertEquals(DecimalField::MAX_VALUE, $field->getDefaultValue());
+        self::assertEquals(DecimalField::MAX_VALUE, $field->getDefaultValue());
 
         $field->setDefaultValue(null);
-        $this->assertNull($field->getDefaultValue());
-        $this->assertNull($this->object->getDefaultValue());
+        self::assertNull($field->getDefaultValue());
+        self::assertNull($this->object->getDefaultValue());
     }
 }

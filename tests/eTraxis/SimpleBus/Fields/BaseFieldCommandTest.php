@@ -33,7 +33,7 @@ class BaseFieldCommandTest extends BaseTestCase
         /** @var Template $state */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
-        $this->assertNotNull($template);
+        self::assertNotNull($template);
 
         $command = new CreateFieldBaseCommand([
             'template'     => $template->getId(),
@@ -52,15 +52,15 @@ class BaseFieldCommandTest extends BaseTestCase
 
         $field = $handler->getEntity($command);
 
-        $this->assertInstanceOf(Field::class, $field);
-        $this->assertEquals($template->getId(), $field->getTemplate()->getId());
-        $this->assertNull($field->getState());
-        $this->assertEquals('Priority', $field->getName());
-        $this->assertEquals('Urgency level', $field->getDescription());
-        $this->assertTrue($field->isRequired());
-        $this->assertFalse($field->hasGuestAccess());
-        $this->assertFalse($field->getShowInEmails());
-        $this->assertEquals(1, $field->getIndexNumber());
+        self::assertInstanceOf(Field::class, $field);
+        self::assertEquals($template->getId(), $field->getTemplate()->getId());
+        self::assertNull($field->getState());
+        self::assertEquals('Priority', $field->getName());
+        self::assertEquals('Urgency level', $field->getDescription());
+        self::assertTrue($field->isRequired());
+        self::assertFalse($field->hasGuestAccess());
+        self::assertFalse($field->getShowInEmails());
+        self::assertEquals(1, $field->getIndexNumber());
     }
 
     public function testCreateByStateSuccess()
@@ -68,7 +68,7 @@ class BaseFieldCommandTest extends BaseTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
-        $this->assertNotNull($state);
+        self::assertNotNull($state);
 
         $command = new CreateFieldBaseCommand([
             'state'        => $state->getId(),
@@ -87,15 +87,15 @@ class BaseFieldCommandTest extends BaseTestCase
 
         $field = $handler->getEntity($command);
 
-        $this->assertInstanceOf(Field::class, $field);
-        $this->assertEquals($state->getTemplateId(), $field->getTemplate()->getId());
-        $this->assertEquals($state->getId(), $field->getState()->getId());
-        $this->assertEquals('Priority', $field->getName());
-        $this->assertEquals('Urgency level', $field->getDescription());
-        $this->assertTrue($field->isRequired());
-        $this->assertFalse($field->hasGuestAccess());
-        $this->assertFalse($field->getShowInEmails());
-        $this->assertEquals(5, $field->getIndexNumber());
+        self::assertInstanceOf(Field::class, $field);
+        self::assertEquals($state->getTemplateId(), $field->getTemplate()->getId());
+        self::assertEquals($state->getId(), $field->getState()->getId());
+        self::assertEquals('Priority', $field->getName());
+        self::assertEquals('Urgency level', $field->getDescription());
+        self::assertTrue($field->isRequired());
+        self::assertFalse($field->hasGuestAccess());
+        self::assertFalse($field->getShowInEmails());
+        self::assertEquals(5, $field->getIndexNumber());
     }
 
     /**
@@ -155,7 +155,7 @@ class BaseFieldCommandTest extends BaseTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
-        $this->assertNotNull($state);
+        self::assertNotNull($state);
 
         $command = new CreateFieldBaseCommand([
             'state'        => $state->getId(),
@@ -179,7 +179,7 @@ class BaseFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
 
-        $this->assertNotNull($field);
+        self::assertNotNull($field);
 
         $command = new UpdateFieldBaseCommand([
             'id'           => $field->getId(),
@@ -198,12 +198,12 @@ class BaseFieldCommandTest extends BaseTestCase
 
         $entity = $handler->getEntity($command);
 
-        $this->assertInstanceOf(Field::class, $entity);
-        $this->assertEquals('Team', $entity->getName());
-        $this->assertEquals('New description', $entity->getDescription());
-        $this->assertFalse($entity->isRequired());
-        $this->assertTrue($entity->hasGuestAccess());
-        $this->assertTrue($entity->getShowInEmails());
+        self::assertInstanceOf(Field::class, $entity);
+        self::assertEquals('Team', $entity->getName());
+        self::assertEquals('New description', $entity->getDescription());
+        self::assertFalse($entity->isRequired());
+        self::assertTrue($entity->hasGuestAccess());
+        self::assertTrue($entity->getShowInEmails());
     }
 
     /**
@@ -239,7 +239,7 @@ class BaseFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
 
-        $this->assertNotNull($field);
+        self::assertNotNull($field);
 
         $command = new UpdateFieldBaseCommand([
             'id'           => $field->getId(),

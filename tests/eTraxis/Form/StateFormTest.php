@@ -26,10 +26,10 @@ class StateFormTest extends BaseTestCase
 
         $children = $view->children;
 
-        $this->assertEmpty($children['name']->vars['data']);
-        $this->assertEmpty($children['abbreviation']->vars['data']);
-        $this->assertEquals($children['type']->vars['data'], State::TYPE_INTERIM);
-        $this->assertEmpty($children['responsible']->vars['data']);
+        self::assertEmpty($children['name']->vars['data']);
+        self::assertEmpty($children['abbreviation']->vars['data']);
+        self::assertEquals($children['type']->vars['data'], State::TYPE_INTERIM);
+        self::assertEmpty($children['responsible']->vars['data']);
     }
 
     public function testFormInitialState()
@@ -45,10 +45,10 @@ class StateFormTest extends BaseTestCase
 
         $children = $view->children;
 
-        $this->assertEquals($children['name']->vars['data'], $state->getName());
-        $this->assertEquals($children['abbreviation']->vars['data'], $state->getAbbreviation());
-        $this->assertEquals($children['type']->vars['data'], $state->getType());
-        $this->assertEquals($children['responsible']->vars['data'], $state->getResponsible());
+        self::assertEquals($children['name']->vars['data'], $state->getName());
+        self::assertEquals($children['abbreviation']->vars['data'], $state->getAbbreviation());
+        self::assertEquals($children['type']->vars['data'], $state->getType());
+        self::assertEquals($children['responsible']->vars['data'], $state->getResponsible());
     }
 
     public function testFormFinalState()
@@ -64,9 +64,9 @@ class StateFormTest extends BaseTestCase
 
         $children = $view->children;
 
-        $this->assertEquals($children['name']->vars['data'], $state->getName());
-        $this->assertEquals($children['abbreviation']->vars['data'], $state->getAbbreviation());
-        $this->assertEquals($children['type']->vars['data'], $state->getType());
-        $this->assertEquals($children['responsible']->vars['data'], $state->getResponsible());
+        self::assertEquals($children['name']->vars['data'], $state->getName());
+        self::assertEquals($children['abbreviation']->vars['data'], $state->getAbbreviation());
+        self::assertEquals($children['type']->vars['data'], $state->getType());
+        self::assertEquals($children['responsible']->vars['data'], $state->getResponsible());
     }
 }

@@ -54,7 +54,7 @@ class UnauthorizedAjaxRequestTest extends BaseTestCase
         $object = new UnauthorizedAjaxRequest($this->router, $this->translator, $this->authentication_utils);
 
         $object->onResponse($event);
-        $this->assertEquals(Response::HTTP_OK, $event->getResponse()->getStatusCode());
+        self::assertEquals(Response::HTTP_OK, $event->getResponse()->getStatusCode());
     }
 
     public function testHttpFailureRequest()
@@ -71,7 +71,7 @@ class UnauthorizedAjaxRequestTest extends BaseTestCase
         $object = new UnauthorizedAjaxRequest($this->router, $this->translator, $this->authentication_utils);
 
         $object->onResponse($event);
-        $this->assertEquals(Response::HTTP_FOUND, $event->getResponse()->getStatusCode());
+        self::assertEquals(Response::HTTP_FOUND, $event->getResponse()->getStatusCode());
     }
 
     public function testAjaxSuccessRequest()
@@ -88,7 +88,7 @@ class UnauthorizedAjaxRequestTest extends BaseTestCase
         $object = new UnauthorizedAjaxRequest($this->router, $this->translator, $this->authentication_utils);
 
         $object->onResponse($event);
-        $this->assertEquals(Response::HTTP_OK, $event->getResponse()->getStatusCode());
+        self::assertEquals(Response::HTTP_OK, $event->getResponse()->getStatusCode());
     }
 
     public function testAjaxFailureRequest()
@@ -106,6 +106,6 @@ class UnauthorizedAjaxRequestTest extends BaseTestCase
         $object = new UnauthorizedAjaxRequest($this->router, $this->translator, $this->authentication_utils);
 
         $object->onResponse($event);
-        $this->assertEquals(Response::HTTP_UNAUTHORIZED, $event->getResponse()->getStatusCode());
+        self::assertEquals(Response::HTTP_UNAUTHORIZED, $event->getResponse()->getStatusCode());
     }
 }

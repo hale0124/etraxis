@@ -28,15 +28,15 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
         $minValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameter1());
         $maxValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameter2());
 
-        $this->assertEquals(Field::TYPE_DECIMAL, $field->getType());
-        $this->assertEquals('U.S. viewers', $field->getName());
-        $this->assertNull($field->getDescription());
-        $this->assertFalse($field->isRequired());
-        $this->assertFalse($field->hasGuestAccess());
-        $this->assertFalse($field->getShowInEmails());
-        $this->assertEquals('0.0', $minValue->getValue());
-        $this->assertEquals('10.0', $maxValue->getValue());
-        $this->assertNull($field->getDefaultValue());
+        self::assertEquals(Field::TYPE_DECIMAL, $field->getType());
+        self::assertEquals('U.S. viewers', $field->getName());
+        self::assertNull($field->getDescription());
+        self::assertFalse($field->isRequired());
+        self::assertFalse($field->hasGuestAccess());
+        self::assertFalse($field->getShowInEmails());
+        self::assertEquals('0.0', $minValue->getValue());
+        self::assertEquals('10.0', $maxValue->getValue());
+        self::assertNull($field->getDefaultValue());
 
         $command = new UpdateDecimalFieldCommand([
             'id'           => $field->getId(),
@@ -58,15 +58,15 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
         $maxValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameter2());
         $default  = $this->doctrine->getRepository(DecimalValue::class)->find($field->getDefaultValue());
 
-        $this->assertEquals(Field::TYPE_DECIMAL, $field->getType());
-        $this->assertEquals('Total U.S. viewers', $field->getName());
-        $this->assertEquals('(millions)', $field->getDescription());
-        $this->assertTrue($field->isRequired());
-        $this->assertTrue($field->hasGuestAccess());
-        $this->assertTrue($field->getShowInEmails());
-        $this->assertEquals('0.1', $minValue->getValue());
-        $this->assertEquals('50.0', $maxValue->getValue());
-        $this->assertEquals('10.0', $default->getValue());
+        self::assertEquals(Field::TYPE_DECIMAL, $field->getType());
+        self::assertEquals('Total U.S. viewers', $field->getName());
+        self::assertEquals('(millions)', $field->getDescription());
+        self::assertTrue($field->isRequired());
+        self::assertTrue($field->hasGuestAccess());
+        self::assertTrue($field->getShowInEmails());
+        self::assertEquals('0.1', $minValue->getValue());
+        self::assertEquals('50.0', $maxValue->getValue());
+        self::assertEquals('10.0', $default->getValue());
     }
 
     /**
@@ -78,7 +78,7 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'U.S. viewers']);
 
-        $this->assertNotNull($field);
+        self::assertNotNull($field);
 
         $command = new UpdateDecimalFieldCommand([
             'id'           => $field->getId(),
@@ -102,7 +102,7 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'U.S. viewers']);
 
-        $this->assertNotNull($field);
+        self::assertNotNull($field);
 
         $command = new UpdateDecimalFieldCommand([
             'id'           => $field->getId(),

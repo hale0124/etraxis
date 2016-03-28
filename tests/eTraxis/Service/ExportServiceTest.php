@@ -48,9 +48,9 @@ class ExportServiceTest extends BaseTestCase
         /** @var \Symfony\Component\HttpFoundation\StreamedResponse $request */
         $request = $service->exportCsv($query, $data);
 
-        $this->assertEquals('UTF-8', $request->getCharset());
+        self::assertEquals('UTF-8', $request->getCharset());
 
-        $this->assertContains('test.csv', $request->headers->get('content-disposition'));
+        self::assertContains('test.csv', $request->headers->get('content-disposition'));
 
         $request->sendContent();
     }
@@ -86,9 +86,9 @@ class ExportServiceTest extends BaseTestCase
         /** @var \Symfony\Component\HttpFoundation\StreamedResponse $request */
         $request = $service->exportCsv($query, $data);
 
-        $this->assertEquals('Windows-1251', $request->getCharset());
+        self::assertEquals('Windows-1251', $request->getCharset());
 
-        $this->assertContains('eTraxis.csv', $request->headers->get('content-disposition'));
+        self::assertContains('eTraxis.csv', $request->headers->get('content-disposition'));
 
         $request->sendContent();
     }

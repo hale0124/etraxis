@@ -39,13 +39,13 @@ class DeleteStateCommandTest extends BaseTestCase
 
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Cancelled']);
-        $this->assertNotNull($state);
+        self::assertNotNull($state);
 
         $command = new DeleteStateCommand(['id' => $state->getId()]);
         $this->command_bus->handle($command);
 
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Cancelled']);
-        $this->assertNull($state);
+        self::assertNull($state);
     }
 
     /**
@@ -57,7 +57,7 @@ class DeleteStateCommandTest extends BaseTestCase
 
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
-        $this->assertNotNull($state);
+        self::assertNotNull($state);
 
         $command = new DeleteStateCommand(['id' => $state->getId()]);
         $this->command_bus->handle($command);

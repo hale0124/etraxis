@@ -27,8 +27,8 @@ class AddGroupsCommandTest extends BaseTestCase
         $groups = $repository->getUserGroups($user->getId());
         $others = $repository->getOtherGroups($user->getId());
 
-        $this->assertNotCount(0, $groups);
-        $this->assertNotCount(0, $others);
+        self::assertNotCount(0, $groups);
+        self::assertNotCount(0, $others);
 
         $expected = count($groups) + count($others);
 
@@ -44,8 +44,8 @@ class AddGroupsCommandTest extends BaseTestCase
         $groups = $repository->getUserGroups($user->getId());
         $others = $repository->getOtherGroups($user->getId());
 
-        $this->assertCount($expected, $groups);
-        $this->assertCount(0, $others);
+        self::assertCount($expected, $groups);
+        self::assertCount(0, $others);
     }
 
     /**

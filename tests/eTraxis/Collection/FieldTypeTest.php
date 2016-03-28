@@ -30,6 +30,6 @@ class FieldTypeTest extends BaseTestCase
             Field::TYPE_DURATION,
         ];
 
-        $this->assertEquals($expected, array_keys(FieldType::getCollection()));
+        self::assertEquals($expected, array_keys(FieldType::getCollection()));
     }
 }

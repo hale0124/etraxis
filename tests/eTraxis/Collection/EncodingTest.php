@@ -17,6 +17,6 @@ class EncodingTest extends BaseTestCase
 {
     public function testGetCollection()
     {
-        $this->assertArrayHasKey('UTF-8', Encoding::getCollection());
+        self::assertArrayHasKey('UTF-8', Encoding::getCollection());
     }
 }

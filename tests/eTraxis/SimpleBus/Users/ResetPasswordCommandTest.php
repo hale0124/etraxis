@@ -23,7 +23,7 @@ class ResetPasswordCommandTest extends BaseTestCase
         $username = 'artem';
 
         $user = $this->findUser($username);
-        $this->assertNotNull($user);
+        self::assertNotNull($user);
 
         $command = new ForgotPasswordCommand([
             'username' => $username,
@@ -39,7 +39,7 @@ class ResetPasswordCommandTest extends BaseTestCase
 
         $user = $this->findUser('artem');
 
-        $this->assertNotEquals($expected, $user->getPassword());
+        self::assertNotEquals($expected, $user->getPassword());
 
         $command = new ResetPasswordCommand([
             'token'    => $user->getResetToken(),
@@ -50,8 +50,8 @@ class ResetPasswordCommandTest extends BaseTestCase
 
         $user = $this->findUser('artem');
 
-        $this->assertEquals($expected, $user->getPassword());
-        $this->assertNull($user->getResetToken());
+        self::assertEquals($expected, $user->getPassword());
+        self::assertNull($user->getResetToken());
     }
 
     /**
@@ -64,7 +64,7 @@ class ResetPasswordCommandTest extends BaseTestCase
         $token    = Uuid::uuid4()->getHex();
 
         $user = $this->findUser($username, true);
-        $this->assertNotNull($user);
+        self::assertNotNull($user);
 
         $user->setResetToken($token);
 
@@ -72,7 +72,7 @@ class ResetPasswordCommandTest extends BaseTestCase
         $this->doctrine->getManager()->flush();
 
         $user = $this->findUser($username, true);
-        $this->assertNotNull($user);
+        self::assertNotNull($user);
 
         $command = new ResetPasswordCommand([
             'token'    => $user->getResetToken(),

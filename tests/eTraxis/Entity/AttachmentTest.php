@@ -23,49 +23,49 @@ class AttachmentTest extends \PHPUnit_Framework_TestCase
 
     public function testId()
     {
-        $this->assertEquals(null, $this->object->getId());
+        self::assertEquals(null, $this->object->getId());
     }
 
     public function testEventId()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setEventId($expected);
-        $this->assertEquals($expected, $this->object->getEventId());
+        self::assertEquals($expected, $this->object->getEventId());
     }
 
     public function testName()
     {
         $expected = 'Name';
         $this->object->setName($expected);
-        $this->assertEquals($expected, $this->object->getName());
+        self::assertEquals($expected, $this->object->getName());
     }
 
     public function testType()
     {
         $expected = 'Type';
         $this->object->setType($expected);
-        $this->assertEquals($expected, $this->object->getType());
+        self::assertEquals($expected, $this->object->getType());
     }
 
     public function testSize()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setSize($expected);
-        $this->assertEquals($expected, $this->object->getSize());
+        self::assertEquals($expected, $this->object->getSize());
     }
 
     public function testIsRemoved()
     {
         $this->object->setRemoved(false);
-        $this->assertFalse($this->object->isRemoved());
+        self::assertFalse($this->object->isRemoved());
 
         $this->object->setRemoved(true);
-        $this->assertTrue($this->object->isRemoved());
+        self::assertTrue($this->object->isRemoved());
     }
 
     public function testEvent()
     {
         $this->object->setEvent($state = new Event());
-        $this->assertSame($state, $this->object->getEvent());
+        self::assertSame($state, $this->object->getEvent());
     }
 }

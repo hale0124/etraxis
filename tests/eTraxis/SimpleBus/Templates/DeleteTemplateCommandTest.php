@@ -42,13 +42,13 @@ class DeleteTemplateCommandTest extends BaseTestCase
 
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Bug report']);
-        $this->assertNotNull($template);
+        self::assertNotNull($template);
 
         $command = new DeleteTemplateCommand(['id' => $template->getId()]);
         $this->command_bus->handle($command);
 
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Bug report']);
-        $this->assertNull($template);
+        self::assertNull($template);
     }
 
     /**
@@ -60,7 +60,7 @@ class DeleteTemplateCommandTest extends BaseTestCase
 
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
-        $this->assertNotNull($template);
+        self::assertNotNull($template);
 
         $command = new DeleteTemplateCommand(['id' => $template->getId()]);
         $this->command_bus->handle($command);

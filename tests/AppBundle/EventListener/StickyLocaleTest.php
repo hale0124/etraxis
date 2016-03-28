@@ -43,7 +43,7 @@ class StickyLocaleTest extends BaseTestCase
         $object = new StickyLocale($this->session, 'en');
         $object->saveLocale($event);
 
-        $this->assertEquals('ru', $this->session->get('_locale'));
+        self::assertEquals('ru', $this->session->get('_locale'));
     }
 
     public function testSetDefaultLocale()
@@ -61,7 +61,7 @@ class StickyLocaleTest extends BaseTestCase
 
         $object->setLocale($event);
 
-        $this->assertEquals('ru', $event->getRequest()->getLocale());
+        self::assertEquals('ru', $event->getRequest()->getLocale());
     }
 
     public function testSetLocaleBySession()
@@ -80,6 +80,6 @@ class StickyLocaleTest extends BaseTestCase
 
         $object->setLocale($event);
 
-        $this->assertEquals('ja', $event->getRequest()->getLocale());
+        self::assertEquals('ja', $event->getRequest()->getLocale());
     }
 }

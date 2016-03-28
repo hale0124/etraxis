@@ -44,10 +44,10 @@ class StringFieldTest extends BaseTestCase
         $method->setAccessible(true);
         $actual = $method->invokeArgs($field, []);
 
-        $this->assertCount(count($expected), $actual);
+        self::assertCount(count($expected), $actual);
 
         foreach ($expected as $key) {
-            $this->assertContains($key, $actual);
+            self::assertContains($key, $actual);
         }
     }
 
@@ -56,16 +56,16 @@ class StringFieldTest extends BaseTestCase
         $field = $this->object->asString();
 
         $field->setMaxLength(100);
-        $this->assertEquals(100, $field->getMaxLength());
-        $this->assertEquals(100, $this->object->getParameter1());
+        self::assertEquals(100, $field->getMaxLength());
+        self::assertEquals(100, $this->object->getParameter1());
 
         $field->setMaxLength(0);
-        $this->assertEquals(StringField::MIN_LENGTH, $field->getMaxLength());
-        $this->assertEquals(StringField::MIN_LENGTH, $this->object->getParameter1());
+        self::assertEquals(StringField::MIN_LENGTH, $field->getMaxLength());
+        self::assertEquals(StringField::MIN_LENGTH, $this->object->getParameter1());
 
         $field->setMaxLength(PHP_INT_MAX);
-        $this->assertEquals(StringField::MAX_LENGTH, $field->getMaxLength());
-        $this->assertEquals(StringField::MAX_LENGTH, $this->object->getParameter1());
+        self::assertEquals(StringField::MAX_LENGTH, $field->getMaxLength());
+        self::assertEquals(StringField::MAX_LENGTH, $this->object->getParameter1());
     }
 
     public function testDefaultValue()
@@ -79,17 +79,17 @@ class StringFieldTest extends BaseTestCase
         $value = $repository->findOneBy(['value' => 'Planet Express headquarters']);
 
         $field->setDefaultValue($value->getValue());
-        $this->assertEquals($value->getValue(), $field->getDefaultValue());
-        $this->assertEquals($value->getId(), $this->object->getDefaultValue());
+        self::assertEquals($value->getValue(), $field->getDefaultValue());
+        self::assertEquals($value->getId(), $this->object->getDefaultValue());
 
         $huge = str_pad(null, 1000);
         $trim = str_pad(null, StringField::MAX_LENGTH);
 
         $field->setDefaultValue($huge);
-        $this->assertEquals($trim, $field->getDefaultValue());
+        self::assertEquals($trim, $field->getDefaultValue());
 
         $field->setDefaultValue(null);
-        $this->assertNull($field->getDefaultValue());
-        $this->assertNull($this->object->getDefaultValue());
+        self::assertNull($field->getDefaultValue());
+        self::assertNull($this->object->getDefaultValue());
     }
 }

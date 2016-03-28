@@ -17,23 +17,23 @@ class BaseTestCaseTest extends BaseTestCase
 {
     public function testFindUser()
     {
-        $this->assertNull($this->findUser('unknown'));
+        self::assertNull($this->findUser('unknown'));
 
         $user = $this->findUser('artem');
 
-        $this->assertInstanceOf(User::class, $user);
-        $this->assertEquals('artem', $user->getUsername());
+        self::assertInstanceOf(User::class, $user);
+        self::assertEquals('artem', $user->getUsername());
     }
 
     public function testGetMaxId()
     {
-        $this->assertEquals(2147483647, $this->getMaxId());
+        self::assertEquals(2147483647, $this->getMaxId());
     }
 
     public function testLoginAs()
     {
-        $this->assertFalse($this->loginAs('unknown'));
-        $this->assertTrue($this->loginAs('artem'));
-        $this->assertTrue($this->loginAs('einstein', true));
+        self::assertFalse($this->loginAs('unknown'));
+        self::assertTrue($this->loginAs('artem'));
+        self::assertTrue($this->loginAs('einstein', true));
     }
 }

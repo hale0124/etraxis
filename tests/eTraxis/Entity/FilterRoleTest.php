@@ -25,32 +25,32 @@ class FilterRoleTest extends \PHPUnit_Framework_TestCase
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setFilterId($expected);
-        $this->assertEquals($expected, $this->object->getFilterId());
+        self::assertEquals($expected, $this->object->getFilterId());
     }
 
     public function testFlag()
     {
         $expected = FilterRole::AUTHOR;
         $this->object->setFlag($expected);
-        $this->assertEquals($expected, $this->object->getFlag());
+        self::assertEquals($expected, $this->object->getFlag());
     }
 
     public function testUserId()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setUserId($expected);
-        $this->assertEquals($expected, $this->object->getUserId());
+        self::assertEquals($expected, $this->object->getUserId());
     }
 
     public function testFilter()
     {
         $this->object->setFilter($filter = new Filter());
-        $this->assertSame($filter, $this->object->getFilter());
+        self::assertSame($filter, $this->object->getFilter());
     }
 
     public function testUser()
     {
         $this->object->setUser($user = new User());
-        $this->assertSame($user, $this->object->getUser());
+        self::assertSame($user, $this->object->getUser());
     }
 }

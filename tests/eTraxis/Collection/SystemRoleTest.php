@@ -23,6 +23,6 @@ class SystemRoleTest extends BaseTestCase
             SystemRole::REGISTERED,
         ];
 
-        $this->assertEquals($expected, array_keys(SystemRole::getCollection()));
+        self::assertEquals($expected, array_keys(SystemRole::getCollection()));
     }
 }

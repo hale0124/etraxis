@@ -21,8 +21,8 @@ class UpdateGroupCommandTest extends BaseTestCase
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Staff']);
 
-        $this->assertNotNull($group);
-        $this->assertNotEmpty($group->getDescription());
+        self::assertNotNull($group);
+        self::assertNotEmpty($group->getDescription());
 
         $command = new UpdateGroupCommand([
             'id'          => $group->getId(),
@@ -35,8 +35,8 @@ class UpdateGroupCommandTest extends BaseTestCase
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->find($group->getId());
 
-        $this->assertEquals('Robots', $group->getName());
-        $this->assertEquals('Mechanical beings', $group->getDescription());
+        self::assertEquals('Robots', $group->getName());
+        self::assertEquals('Mechanical beings', $group->getDescription());
     }
 
     /**
@@ -63,7 +63,7 @@ class UpdateGroupCommandTest extends BaseTestCase
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Staff']);
 
-        $this->assertNotNull($group);
+        self::assertNotNull($group);
 
         $command = new UpdateGroupCommand([
             'id'   => $group->getId(),

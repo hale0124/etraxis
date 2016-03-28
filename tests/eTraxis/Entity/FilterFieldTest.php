@@ -25,39 +25,39 @@ class FilterFieldTest extends \PHPUnit_Framework_TestCase
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setFilterId($expected);
-        $this->assertEquals($expected, $this->object->getFilterId());
+        self::assertEquals($expected, $this->object->getFilterId());
     }
 
     public function testFieldId()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setFieldId($expected);
-        $this->assertEquals($expected, $this->object->getFieldId());
+        self::assertEquals($expected, $this->object->getFieldId());
     }
 
     public function testParameter1()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setParameter1($expected);
-        $this->assertEquals($expected, $this->object->getParameter1());
+        self::assertEquals($expected, $this->object->getParameter1());
     }
 
     public function testParameter2()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setParameter2($expected);
-        $this->assertEquals($expected, $this->object->getParameter2());
+        self::assertEquals($expected, $this->object->getParameter2());
     }
 
     public function testFilter()
     {
         $this->object->setFilter($filter = new Filter());
-        $this->assertSame($filter, $this->object->getFilter());
+        self::assertSame($filter, $this->object->getFilter());
     }
 
     public function testField()
     {
         $this->object->setField($field = new Field());
-        $this->assertSame($field, $this->object->getField());
+        self::assertSame($field, $this->object->getField());
     }
 }

@@ -23,13 +23,13 @@ class DecimalValueTest extends \PHPUnit_Framework_TestCase
 
     public function testId()
     {
-        $this->assertEquals(null, $this->object->getId());
+        self::assertEquals(null, $this->object->getId());
     }
 
     public function testValue()
     {
         $expected = '1234567890.0987654321';
         $this->object->setValue($expected);
-        $this->assertEquals($expected, $this->object->getValue());
+        self::assertEquals($expected, $this->object->getValue());
     }
 }

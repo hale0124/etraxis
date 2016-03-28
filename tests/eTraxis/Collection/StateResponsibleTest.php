@@ -24,6 +24,6 @@ class StateResponsibleTest extends BaseTestCase
             State::RESPONSIBLE_REMOVE,
         ];
 
-        $this->assertEquals($expected, array_keys(StateResponsible::getCollection()));
+        self::assertEquals($expected, array_keys(StateResponsible::getCollection()));
     }
 }

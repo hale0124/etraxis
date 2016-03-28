@@ -27,7 +27,7 @@ class EntityIdTest extends BaseTestCase
     {
         $object = new EntityIdStub();
 
-        $this->assertCount(0, $this->validator->validate($object));
+        self::assertCount(0, $this->validator->validate($object));
     }
 
     public function testInvalid()
@@ -35,7 +35,7 @@ class EntityIdTest extends BaseTestCase
         $object     = new EntityIdStub();
         $object->id = 'test';
 
-        $this->assertNotCount(0, $this->validator->validate($object));
+        self::assertNotCount(0, $this->validator->validate($object));
     }
 
     public function testSuccess()
@@ -43,6 +43,6 @@ class EntityIdTest extends BaseTestCase
         $object     = new EntityIdStub();
         $object->id = mt_rand(1, $this->getMaxId());
 
-        $this->assertCount(0, $this->validator->validate($object));
+        self::assertCount(0, $this->validator->validate($object));
     }
 }

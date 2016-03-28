@@ -23,63 +23,63 @@ class NotificationTest extends \PHPUnit_Framework_TestCase
 
     public function testId()
     {
-        $this->assertEquals(null, $this->object->getId());
+        self::assertEquals(null, $this->object->getId());
     }
 
     public function testUserId()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setUserId($expected);
-        $this->assertEquals($expected, $this->object->getUserId());
+        self::assertEquals($expected, $this->object->getUserId());
     }
 
     public function testName()
     {
         $expected = 'Name';
         $this->object->setName($expected);
-        $this->assertEquals($expected, $this->object->getName());
+        self::assertEquals($expected, $this->object->getName());
     }
 
     public function testCarbonCopy()
     {
         $expected = 'CarbonCopy@example.com';
         $this->object->setCarbonCopy($expected);
-        $this->assertEquals($expected, $this->object->getCarbonCopy());
+        self::assertEquals($expected, $this->object->getCarbonCopy());
     }
 
     public function testIsActivated()
     {
         $this->object->setActivated(false);
-        $this->assertFalse($this->object->isActivated());
+        self::assertFalse($this->object->isActivated());
 
         $this->object->setActivated(true);
-        $this->assertTrue($this->object->isActivated());
+        self::assertTrue($this->object->isActivated());
     }
 
     public function testType()
     {
         $expected = Notification::TYPE_ALL;
         $this->object->setType($expected);
-        $this->assertEquals($expected, $this->object->getType());
+        self::assertEquals($expected, $this->object->getType());
     }
 
     public function testEvents()
     {
         $expected = Notification::NOTIFY_RECORD_CREATED | Notification::NOTIFY_COMMENT_ADDED;
         $this->object->setEvents($expected);
-        $this->assertEquals($expected, $this->object->getEvents());
+        self::assertEquals($expected, $this->object->getEvents());
     }
 
     public function testParameter()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setParameter($expected);
-        $this->assertEquals($expected, $this->object->getParameter());
+        self::assertEquals($expected, $this->object->getParameter());
     }
 
     public function testUser()
     {
         $this->object->setUser($user = new User());
-        $this->assertSame($user, $this->object->getUser());
+        self::assertSame($user, $this->object->getUser());
     }
 }

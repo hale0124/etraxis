@@ -33,7 +33,7 @@ class InternalPasswordEncoderTest extends BaseTestCase
             $this->object->encodePassword($raw);
         }
         catch (\Exception $exception) {
-            $this->fail();
+            self::fail();
         }
     }
 
@@ -45,7 +45,7 @@ class InternalPasswordEncoderTest extends BaseTestCase
             $this->object->encodePassword($raw);
         }
         catch (\Exception $exception) {
-            $this->fail();
+            self::fail();
         }
     }
 
@@ -74,7 +74,7 @@ class InternalPasswordEncoderTest extends BaseTestCase
         $encoded = 'mzMEbtOdGC462vqQRa1nh9S7wyE=';
         $valid   = 'legacy';
 
-        $this->assertEquals($encoded, $this->object->encodePassword($valid));
+        self::assertEquals($encoded, $this->object->encodePassword($valid));
     }
 
     public function testLegacyApache()
@@ -83,8 +83,8 @@ class InternalPasswordEncoderTest extends BaseTestCase
         $valid   = 'legacy';
         $invalid = 'invalid';
 
-        $this->assertTrue($this->object->isPasswordValid($encoded, $valid));
-        $this->assertFalse($this->object->isPasswordValid($encoded, $invalid));
+        self::assertTrue($this->object->isPasswordValid($encoded, $valid));
+        self::assertFalse($this->object->isPasswordValid($encoded, $invalid));
     }
 
     public function testLegacyMd5()
@@ -93,12 +93,12 @@ class InternalPasswordEncoderTest extends BaseTestCase
         $valid   = 'simple';
         $invalid = 'invalid';
 
-        $this->assertTrue($this->object->isPasswordValid($encoded, $valid));
-        $this->assertFalse($this->object->isPasswordValid($encoded, $invalid));
+        self::assertTrue($this->object->isPasswordValid($encoded, $valid));
+        self::assertFalse($this->object->isPasswordValid($encoded, $invalid));
     }
 
     public function testInvalid()
     {
-        $this->assertFalse($this->object->isPasswordValid(null, null));
+        self::assertFalse($this->object->isPasswordValid(null, null));
     }
 }

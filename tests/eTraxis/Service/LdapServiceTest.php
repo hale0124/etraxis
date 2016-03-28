@@ -64,54 +64,54 @@ class LdapServiceTest extends BaseTestCase
     {
         $entry = $this->object->find('DC=example,DC=com', 'einstein', ['cn', 'mail']);
 
-        $this->assertTrue(is_array($entry));
+        self::assertTrue(is_array($entry));
 
-        $this->assertArrayHasKey('cn', $entry);
-        $this->assertArrayHasKey('mail', $entry);
+        self::assertArrayHasKey('cn', $entry);
+        self::assertArrayHasKey('mail', $entry);
 
-        $this->assertEquals('Albert Einstein', $entry['cn']);
-        $this->assertEquals('einstein@ldap.forumsys.com', $entry['mail']);
+        self::assertEquals('Albert Einstein', $entry['cn']);
+        self::assertEquals('einstein@ldap.forumsys.com', $entry['mail']);
     }
 
     public function testFindFailure()
     {
         $entry = $this->object->find('DC=example,DC=com', 'einstein404', ['cn', 'mail']);
 
-        $this->assertFalse($entry);
+        self::assertFalse($entry);
     }
 
     public function testFindBadSearch()
     {
         $entry = $this->object->find('DC=invalid,DC=com', 'einstein', ['cn', 'mail']);
 
-        $this->assertFalse($entry);
+        self::assertFalse($entry);
     }
 
     public function testFindBadAttribute()
     {
         $entry = $this->object->find('DC=example,DC=com', 'einstein', ['cn', 'mail', 'invalid']);
 
-        $this->assertFalse($entry);
+        self::assertFalse($entry);
     }
 
     public function testAuthenticateSuccess()
     {
         $result = $this->object->authenticate('DC=example,DC=com', 'einstein', 'password');
 
-        $this->assertTrue($result);
+        self::assertTrue($result);
     }
 
     public function testAuthenticateFailureUsername()
     {
         $result = $this->object->authenticate('DC=example,DC=com', 'einstein404', 'password');
 
-        $this->assertFalse($result);
+        self::assertFalse($result);
     }
 
     public function testAuthenticateFailurePassword()
     {
         $result = $this->object->authenticate('DC=example,DC=com', 'einstein', 'wrong');
 
-        $this->assertFalse($result);
+        self::assertFalse($result);
     }
 }

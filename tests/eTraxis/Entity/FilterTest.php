@@ -23,47 +23,47 @@ class FilterTest extends \PHPUnit_Framework_TestCase
 
     public function testId()
     {
-        $this->assertEquals(null, $this->object->getId());
+        self::assertEquals(null, $this->object->getId());
     }
 
     public function testUserId()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setUserId($expected);
-        $this->assertEquals($expected, $this->object->getUserId());
+        self::assertEquals($expected, $this->object->getUserId());
     }
 
     public function testName()
     {
         $expected = 'Name';
         $this->object->setName($expected);
-        $this->assertEquals($expected, $this->object->getName());
+        self::assertEquals($expected, $this->object->getName());
     }
 
     public function testType()
     {
         $expected = Filter::TYPE_SEL_STATES;
         $this->object->setType($expected);
-        $this->assertEquals($expected, $this->object->getType());
+        self::assertEquals($expected, $this->object->getType());
     }
 
     public function testFlags()
     {
         $expected = Filter::FLAG_CREATED_BY | Filter::FLAG_ACTIVE;
         $this->object->setFlags($expected);
-        $this->assertEquals($expected, $this->object->getFlags());
+        self::assertEquals($expected, $this->object->getFlags());
     }
 
     public function testParameter()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setParameter($expected);
-        $this->assertEquals($expected, $this->object->getParameter());
+        self::assertEquals($expected, $this->object->getParameter());
     }
 
     public function testUser()
     {
         $this->object->setUser($user = new User());
-        $this->assertSame($user, $this->object->getUser());
+        self::assertSame($user, $this->object->getUser());
     }
 }

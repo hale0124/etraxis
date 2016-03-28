@@ -21,8 +21,8 @@ class UpdateProjectCommandTest extends BaseTestCase
         /** @var Project $project */
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
 
-        $this->assertNotNull($project);
-        $this->assertNotEmpty($project->getDescription());
+        self::assertNotNull($project);
+        self::assertNotEmpty($project->getDescription());
 
         $command = new UpdateProjectCommand([
             'id'          => $project->getId(),
@@ -36,9 +36,9 @@ class UpdateProjectCommandTest extends BaseTestCase
         /** @var Project $project */
         $project = $this->doctrine->getRepository(Project::class)->find($project->getId());
 
-        $this->assertEquals('Awesome Express', $project->getName());
-        $this->assertEquals('Newspaper-delivery company', $project->getDescription());
-        $this->assertTrue($project->isSuspended());
+        self::assertEquals('Awesome Express', $project->getName());
+        self::assertEquals('Newspaper-delivery company', $project->getDescription());
+        self::assertTrue($project->isSuspended());
     }
 
     /**
@@ -66,7 +66,7 @@ class UpdateProjectCommandTest extends BaseTestCase
         /** @var Project $project */
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
 
-        $this->assertNotNull($project);
+        self::assertNotNull($project);
 
         $command = new UpdateProjectCommand([
             'id'        => $project->getId(),

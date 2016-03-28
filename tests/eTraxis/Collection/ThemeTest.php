@@ -19,7 +19,7 @@ class ThemeTest extends BaseTestCase
     {
         $collection = Theme::getCollection();
 
-        $this->assertArrayHasKey('azure', $collection);
-        $this->assertEquals('Azure', $collection['azure']);
+        self::assertArrayHasKey('azure', $collection);
+        self::assertEquals('Azure', $collection['azure']);
     }
 }

@@ -24,6 +24,6 @@ class FieldAccessTest extends BaseTestCase
             Field::ACCESS_READ_WRITE,
         ];
 
-        $this->assertEquals($expected, array_keys(FieldAccess::getCollection()));
+        self::assertEquals($expected, array_keys(FieldAccess::getCollection()));
     }
 }

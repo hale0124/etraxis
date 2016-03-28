@@ -35,7 +35,7 @@ class TemplateVoterTest extends BaseTestCase
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
-        $this->assertFalse($this->security->isGranted('UNKNOWN', $template));
+        self::assertFalse($this->security->isGranted('UNKNOWN', $template));
     }
 
     public function testDelete()
@@ -67,11 +67,11 @@ class TemplateVoterTest extends BaseTestCase
         /** @var Template $empty */
         $empty = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Bug report']);
 
-        $this->assertInstanceOf(Template::class, $template);
-        $this->assertInstanceOf(Template::class, $empty);
+        self::assertInstanceOf(Template::class, $template);
+        self::assertInstanceOf(Template::class, $empty);
 
-        $this->assertFalse($this->security->isGranted(Template::DELETE, $template));
-        $this->assertTrue($this->security->isGranted(Template::DELETE, $empty));
+        self::assertFalse($this->security->isGranted(Template::DELETE, $template));
+        self::assertTrue($this->security->isGranted(Template::DELETE, $empty));
     }
 
     public function testLockUnlock()
@@ -87,16 +87,16 @@ class TemplateVoterTest extends BaseTestCase
         /** @var Template $delivery */
         $delivery = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
-        $this->assertTrue($delivery->isLocked());
-        $this->assertFalse($this->security->isGranted(Template::LOCK, $delivery));
-        $this->assertTrue($this->security->isGranted(Template::UNLOCK, $delivery));
+        self::assertTrue($delivery->isLocked());
+        self::assertFalse($this->security->isGranted(Template::LOCK, $delivery));
+        self::assertTrue($this->security->isGranted(Template::UNLOCK, $delivery));
 
         /** @var Template $futurama */
         $futurama = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Futurama']);
 
-        $this->assertFalse($futurama->isLocked());
-        $this->assertTrue($this->security->isGranted(Template::LOCK, $futurama));
-        $this->assertFalse($this->security->isGranted(Template::UNLOCK, $futurama));
+        self::assertFalse($futurama->isLocked());
+        self::assertTrue($this->security->isGranted(Template::LOCK, $futurama));
+        self::assertFalse($this->security->isGranted(Template::UNLOCK, $futurama));
     }
 
     public function testUnlockNoInitialState()
@@ -125,7 +125,7 @@ class TemplateVoterTest extends BaseTestCase
         /** @var Template $empty */
         $empty = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Bug report']);
 
-        $this->assertTrue($empty->isLocked());
-        $this->assertFalse($this->security->isGranted(Template::UNLOCK, $empty));
+        self::assertTrue($empty->isLocked());
+        self::assertFalse($this->security->isGranted(Template::UNLOCK, $empty));
     }
 }

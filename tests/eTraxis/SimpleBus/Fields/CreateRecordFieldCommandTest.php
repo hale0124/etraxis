@@ -22,7 +22,7 @@ class CreateRecordFieldCommandTest extends BaseTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
-        $this->assertNotNull($state);
+        self::assertNotNull($state);
 
         $command = new CreateRecordFieldCommand([
             'template'     => $state->getTemplateId(),
@@ -38,10 +38,10 @@ class CreateRecordFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => $command->name]);
 
-        $this->assertInstanceOf(Field::class, $field);
-        $this->assertEquals(Field::TYPE_RECORD, $field->getType());
-        $this->assertNull($field->getParameter1());
-        $this->assertNull($field->getParameter2());
-        $this->assertNull($field->getDefaultValue());
+        self::assertInstanceOf(Field::class, $field);
+        self::assertEquals(Field::TYPE_RECORD, $field->getType());
+        self::assertNull($field->getParameter1());
+        self::assertNull($field->getParameter2());
+        self::assertNull($field->getDefaultValue());
     }
 }

@@ -24,7 +24,7 @@ class CreateProjectCommandTest extends BaseTestCase
         /** @var Project $project */
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => $name]);
 
-        $this->assertNull($project);
+        self::assertNull($project);
 
         $command = new CreateProjectCommand([
             'name'        => $name,
@@ -37,10 +37,10 @@ class CreateProjectCommandTest extends BaseTestCase
         /** @var Project $project */
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => $name]);
 
-        $this->assertInstanceOf(Project::class, $project);
-        $this->assertEquals($name, $project->getName());
-        $this->assertEquals($description, $project->getDescription());
-        $this->assertTrue($project->isSuspended());
+        self::assertInstanceOf(Project::class, $project);
+        self::assertEquals($name, $project->getName());
+        self::assertEquals($description, $project->getDescription());
+        self::assertTrue($project->isSuspended());
     }
 
     /**

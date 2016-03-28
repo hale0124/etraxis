@@ -25,32 +25,32 @@ class TemplateGroupPermissionTest extends \PHPUnit_Framework_TestCase
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setGroupId($expected);
-        $this->assertEquals($expected, $this->object->getGroupId());
+        self::assertEquals($expected, $this->object->getGroupId());
     }
 
     public function testTemplateId()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setTemplateId($expected);
-        $this->assertEquals($expected, $this->object->getTemplateId());
+        self::assertEquals($expected, $this->object->getTemplateId());
     }
 
     public function testPermission()
     {
         $expected = Template::PERMIT_CREATE_RECORD;
         $this->object->setPermission($expected);
-        $this->assertEquals($expected, $this->object->getPermission());
+        self::assertEquals($expected, $this->object->getPermission());
     }
 
     public function testGroup()
     {
         $this->object->setGroup($group = new Group());
-        $this->assertSame($group, $this->object->getGroup());
+        self::assertSame($group, $this->object->getGroup());
     }
 
     public function testTemplate()
     {
         $this->object->setTemplate($template = new Template());
-        $this->assertSame($template, $this->object->getTemplate());
+        self::assertSame($template, $this->object->getTemplate());
     }
 }

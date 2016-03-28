@@ -22,17 +22,17 @@ class UpdateStringFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Production code']);
 
-        $this->assertEquals(Field::TYPE_STRING, $field->getType());
-        $this->assertEquals('Production code', $field->getName());
-        $this->assertNull($field->getDescription());
-        $this->assertTrue($field->isRequired());
-        $this->assertTrue($field->hasGuestAccess());
-        $this->assertFalse($field->getShowInEmails());
-        $this->assertEquals(7, $field->getParameter1());
-        $this->assertNull($field->getDefaultValue());
-        $this->assertNull($field->getRegexCheck());
-        $this->assertNull($field->getRegexSearch());
-        $this->assertNull($field->getRegexReplace());
+        self::assertEquals(Field::TYPE_STRING, $field->getType());
+        self::assertEquals('Production code', $field->getName());
+        self::assertNull($field->getDescription());
+        self::assertTrue($field->isRequired());
+        self::assertTrue($field->hasGuestAccess());
+        self::assertFalse($field->getShowInEmails());
+        self::assertEquals(7, $field->getParameter1());
+        self::assertNull($field->getDefaultValue());
+        self::assertNull($field->getRegexCheck());
+        self::assertNull($field->getRegexSearch());
+        self::assertNull($field->getRegexReplace());
 
         $command = new UpdateStringFieldCommand([
             'id'           => $field->getId(),
@@ -54,16 +54,16 @@ class UpdateStringFieldCommandTest extends BaseTestCase
 
         $default = $this->doctrine->getRepository(StringValue::class)->find($field->getDefaultValue());
 
-        $this->assertEquals(Field::TYPE_STRING, $field->getType());
-        $this->assertEquals('Code', $field->getName());
-        $this->assertEquals('(millions)', $field->getDescription());
-        $this->assertFalse($field->isRequired());
-        $this->assertFalse($field->hasGuestAccess());
-        $this->assertTrue($field->getShowInEmails());
-        $this->assertEquals(6, $field->getParameter1());
-        $this->assertEquals('?ACV??', $default->getValue());
-        $this->assertEquals('^(\d{1})ACV(\d{2})$', $field->getRegexCheck());
-        $this->assertEquals('^(\d{1})ACV(\d{2})$', $field->getRegexSearch());
-        $this->assertEquals('Season $1, Episode $2', $field->getRegexReplace());
+        self::assertEquals(Field::TYPE_STRING, $field->getType());
+        self::assertEquals('Code', $field->getName());
+        self::assertEquals('(millions)', $field->getDescription());
+        self::assertFalse($field->isRequired());
+        self::assertFalse($field->hasGuestAccess());
+        self::assertTrue($field->getShowInEmails());
+        self::assertEquals(6, $field->getParameter1());
+        self::assertEquals('?ACV??', $default->getValue());
+        self::assertEquals('^(\d{1})ACV(\d{2})$', $field->getRegexCheck());
+        self::assertEquals('^(\d{1})ACV(\d{2})$', $field->getRegexSearch());
+        self::assertEquals('Season $1, Episode $2', $field->getRegexReplace());
     }
 }

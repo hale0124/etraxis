@@ -25,9 +25,9 @@ class ExportCsvFormTest extends BaseTestCase
 
         $children = $view->children;
 
-        $this->assertArrayHasKey('filename', $children);
-        $this->assertArrayHasKey('delimiter', $children);
-        $this->assertArrayHasKey('encoding', $children);
-        $this->assertArrayHasKey('tail', $children);
+        self::assertArrayHasKey('filename', $children);
+        self::assertArrayHasKey('delimiter', $children);
+        self::assertArrayHasKey('encoding', $children);
+        self::assertArrayHasKey('tail', $children);
     }
 }

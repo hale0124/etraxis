@@ -21,12 +21,12 @@ class UpdateRecordFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Delivery']);
 
-        $this->assertEquals(Field::TYPE_RECORD, $field->getType());
-        $this->assertEquals('Delivery', $field->getName());
-        $this->assertNull($field->getDescription());
-        $this->assertFalse($field->isRequired());
-        $this->assertTrue($field->hasGuestAccess());
-        $this->assertFalse($field->getShowInEmails());
+        self::assertEquals(Field::TYPE_RECORD, $field->getType());
+        self::assertEquals('Delivery', $field->getName());
+        self::assertNull($field->getDescription());
+        self::assertFalse($field->isRequired());
+        self::assertTrue($field->hasGuestAccess());
+        self::assertFalse($field->getShowInEmails());
 
         $command = new UpdateRecordFieldCommand([
             'id'           => $field->getId(),
@@ -41,11 +41,11 @@ class UpdateRecordFieldCommandTest extends BaseTestCase
 
         $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 
-        $this->assertEquals(Field::TYPE_RECORD, $field->getType());
-        $this->assertEquals('Delivery #', $field->getName());
-        $this->assertEquals('ID of the delivery task', $field->getDescription());
-        $this->assertTrue($field->isRequired());
-        $this->assertFalse($field->hasGuestAccess());
-        $this->assertTrue($field->getShowInEmails());
+        self::assertEquals(Field::TYPE_RECORD, $field->getType());
+        self::assertEquals('Delivery #', $field->getName());
+        self::assertEquals('ID of the delivery task', $field->getDescription());
+        self::assertTrue($field->isRequired());
+        self::assertFalse($field->hasGuestAccess());
+        self::assertTrue($field->getShowInEmails());
     }
 }

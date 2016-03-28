@@ -24,8 +24,8 @@ class SetInitialStateCommandTest extends BaseTestCase
         /** @var State $delivered */
         $delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
-        $this->assertEquals(State::TYPE_INITIAL, $new->getType());
-        $this->assertNotEquals(State::TYPE_INITIAL, $delivered->getType());
+        self::assertEquals(State::TYPE_INITIAL, $new->getType());
+        self::assertNotEquals(State::TYPE_INITIAL, $delivered->getType());
 
         $command = new SetInitialStateCommand(['id' => $delivered->getId()]);
         $this->command_bus->handle($command);
@@ -35,8 +35,8 @@ class SetInitialStateCommandTest extends BaseTestCase
         $new       = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
         $delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
-        $this->assertNotEquals(State::TYPE_INITIAL, $new->getType());
-        $this->assertEquals(State::TYPE_INITIAL, $delivered->getType());
+        self::assertNotEquals(State::TYPE_INITIAL, $new->getType());
+        self::assertEquals(State::TYPE_INITIAL, $delivered->getType());
     }
 
     /**

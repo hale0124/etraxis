@@ -21,13 +21,13 @@ class UpdateListFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Season']);
 
-        $this->assertEquals(Field::TYPE_LIST, $field->getType());
-        $this->assertEquals('Season', $field->getName());
-        $this->assertNull($field->getDescription());
-        $this->assertTrue($field->isRequired());
-        $this->assertTrue($field->hasGuestAccess());
-        $this->assertFalse($field->getShowInEmails());
-        $this->assertNull($field->getDefaultValue());
+        self::assertEquals(Field::TYPE_LIST, $field->getType());
+        self::assertEquals('Season', $field->getName());
+        self::assertNull($field->getDescription());
+        self::assertTrue($field->isRequired());
+        self::assertTrue($field->hasGuestAccess());
+        self::assertFalse($field->getShowInEmails());
+        self::assertNull($field->getDefaultValue());
 
         $command = new UpdateListFieldCommand([
             'id'           => $field->getId(),
@@ -43,13 +43,13 @@ class UpdateListFieldCommandTest extends BaseTestCase
 
         $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 
-        $this->assertEquals(Field::TYPE_LIST, $field->getType());
-        $this->assertEquals('Season #', $field->getName());
-        $this->assertEquals('Season number', $field->getDescription());
-        $this->assertFalse($field->isRequired());
-        $this->assertFalse($field->hasGuestAccess());
-        $this->assertTrue($field->getShowInEmails());
-        $this->assertEquals(7, $field->getDefaultValue());
+        self::assertEquals(Field::TYPE_LIST, $field->getType());
+        self::assertEquals('Season #', $field->getName());
+        self::assertEquals('Season number', $field->getDescription());
+        self::assertFalse($field->isRequired());
+        self::assertFalse($field->hasGuestAccess());
+        self::assertTrue($field->getShowInEmails());
+        self::assertEquals(7, $field->getDefaultValue());
     }
 
     /**

@@ -25,7 +25,7 @@ class CreateGroupCommandTest extends BaseTestCase
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => $name]);
 
-        $this->assertNull($group);
+        self::assertNull($group);
 
         $command = new CreateGroupCommand([
             'name'        => $name,
@@ -37,9 +37,9 @@ class CreateGroupCommandTest extends BaseTestCase
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => $name]);
 
-        $this->assertInstanceOf(Group::class, $group);
-        $this->assertEquals($name, $group->getName());
-        $this->assertEquals($description, $group->getDescription());
+        self::assertInstanceOf(Group::class, $group);
+        self::assertEquals($name, $group->getName());
+        self::assertEquals($description, $group->getDescription());
     }
 
     /**

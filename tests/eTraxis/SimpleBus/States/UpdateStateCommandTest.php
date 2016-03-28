@@ -24,11 +24,11 @@ class UpdateStateCommandTest extends BaseTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
-        $this->assertNotNull($state);
-        $this->assertEquals('Delivered', $state->getName());
-        $this->assertEquals('D', $state->getAbbreviation());
-        $this->assertEquals(State::RESPONSIBLE_REMOVE, $state->getResponsible());
-        $this->assertNull($state->getNextState());
+        self::assertNotNull($state);
+        self::assertEquals('Delivered', $state->getName());
+        self::assertEquals('D', $state->getAbbreviation());
+        self::assertEquals(State::RESPONSIBLE_REMOVE, $state->getResponsible());
+        self::assertNull($state->getNextState());
 
         $command = new UpdateStateCommand([
             'id'           => $state->getId(),
@@ -42,15 +42,15 @@ class UpdateStateCommandTest extends BaseTestCase
 
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
-        $this->assertNull($state);
+        self::assertNull($state);
 
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Completed']);
 
-        $this->assertNotNull($state);
-        $this->assertEquals('Completed', $state->getName());
-        $this->assertEquals('C', $state->getAbbreviation());
-        $this->assertEquals(State::RESPONSIBLE_REMOVE, $state->getResponsible());
-        $this->assertEquals($state->getNextState()->getId(), $state->getNextState()->getId());
+        self::assertNotNull($state);
+        self::assertEquals('Completed', $state->getName());
+        self::assertEquals('C', $state->getAbbreviation());
+        self::assertEquals(State::RESPONSIBLE_REMOVE, $state->getResponsible());
+        self::assertEquals($state->getNextState()->getId(), $state->getNextState()->getId());
     }
 
     /**

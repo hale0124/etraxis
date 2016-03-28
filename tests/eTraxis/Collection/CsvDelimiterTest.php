@@ -26,16 +26,16 @@ class CsvDelimiterTest extends BaseTestCase
             CsvDelimiter::VERTICAL_LINE,
         ];
 
-        $this->assertEquals($expected, array_keys(CsvDelimiter::getCollection()));
+        self::assertEquals($expected, array_keys(CsvDelimiter::getCollection()));
     }
 
     public function testGetDelimiter()
     {
-        $this->assertEquals("\t", CsvDelimiter::getDelimiter(CsvDelimiter::TAB));
-        $this->assertEquals(' ', CsvDelimiter::getDelimiter(CsvDelimiter::SPACE));
-        $this->assertEquals(',', CsvDelimiter::getDelimiter(CsvDelimiter::COMMA));
-        $this->assertEquals(':', CsvDelimiter::getDelimiter(CsvDelimiter::COLON));
-        $this->assertEquals(';', CsvDelimiter::getDelimiter(CsvDelimiter::SEMICOLON));
-        $this->assertEquals('|', CsvDelimiter::getDelimiter(CsvDelimiter::VERTICAL_LINE));
+        self::assertEquals("\t", CsvDelimiter::getDelimiter(CsvDelimiter::TAB));
+        self::assertEquals(' ', CsvDelimiter::getDelimiter(CsvDelimiter::SPACE));
+        self::assertEquals(',', CsvDelimiter::getDelimiter(CsvDelimiter::COMMA));
+        self::assertEquals(':', CsvDelimiter::getDelimiter(CsvDelimiter::COLON));
+        self::assertEquals(';', CsvDelimiter::getDelimiter(CsvDelimiter::SEMICOLON));
+        self::assertEquals('|', CsvDelimiter::getDelimiter(CsvDelimiter::VERTICAL_LINE));
     }
 }

@@ -20,13 +20,13 @@ class DeleteUserCommandTest extends BaseTestCase
         $this->loginAs('hubert');
 
         $user = $this->findUser('scruffy');
-        $this->assertNotNull($user);
+        self::assertNotNull($user);
 
         $command = new DeleteUserCommand(['id' => $user->getId()]);
         $this->command_bus->handle($command);
 
         $user = $this->findUser('scruffy');
-        $this->assertNull($user);
+        self::assertNull($user);
     }
 
     /**
@@ -37,7 +37,7 @@ class DeleteUserCommandTest extends BaseTestCase
         $this->loginAs('scruffy');
 
         $user = $this->findUser('scruffy');
-        $this->assertNotNull($user);
+        self::assertNotNull($user);
 
         $command = new DeleteUserCommand(['id' => $user->getId()]);
         $this->command_bus->handle($command);

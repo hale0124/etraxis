@@ -34,18 +34,18 @@ class InternalUserProviderTest extends BaseTestCase
     {
         $result = $this->object->loadUserByUsername('artem');
 
-        $this->assertInstanceOf(eTraxisUser::class, $result);
-        $this->assertEquals('artem@example.com', $result->getEmail());
-        $this->assertFalse($result->isLdap());
+        self::assertInstanceOf(eTraxisUser::class, $result);
+        self::assertEquals('artem@example.com', $result->getEmail());
+        self::assertFalse($result->isLdap());
     }
 
     public function testLoadLdapUserByUsername()
     {
         $result = $this->object->loadUserByUsername('einstein');
 
-        $this->assertInstanceOf(eTraxisUser::class, $result);
-        $this->assertEquals('einstein@ldap.forumsys.com', $result->getEmail());
-        $this->assertTrue($result->isLdap());
+        self::assertInstanceOf(eTraxisUser::class, $result);
+        self::assertEquals('einstein@ldap.forumsys.com', $result->getEmail());
+        self::assertTrue($result->isLdap());
     }
 
     /**
@@ -64,7 +64,7 @@ class InternalUserProviderTest extends BaseTestCase
 
         $result = $this->object->refreshUser($user);
 
-        $this->assertInstanceOf(eTraxisUser::class, $result);
+        self::assertInstanceOf(eTraxisUser::class, $result);
     }
 
     /**
@@ -79,7 +79,7 @@ class InternalUserProviderTest extends BaseTestCase
 
     public function testSupportsClass()
     {
-        $this->assertFalse($this->object->supportsClass(SymfonyUser::class));
-        $this->assertTrue($this->object->supportsClass(eTraxisUser::class));
+        self::assertFalse($this->object->supportsClass(SymfonyUser::class));
+        self::assertTrue($this->object->supportsClass(eTraxisUser::class));
     }
 }

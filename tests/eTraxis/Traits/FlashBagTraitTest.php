@@ -41,9 +41,9 @@ class FlashBagTraitTest extends KernelTestCase
 
         $this->object->setNotice('Information');
 
-        $this->assertTrue($flashBag->has('notice'));
-        $this->assertCount(1, $flashBag->get('notice'));
-        $this->assertCount(0, $flashBag->get('notice'));
+        self::assertTrue($flashBag->has('notice'));
+        self::assertCount(1, $flashBag->get('notice'));
+        self::assertCount(0, $flashBag->get('notice'));
     }
 
     public function testSetError()
@@ -54,8 +54,8 @@ class FlashBagTraitTest extends KernelTestCase
 
         $this->object->setError('Error');
 
-        $this->assertTrue($flashBag->has('error'));
-        $this->assertCount(1, $flashBag->get('error'));
-        $this->assertCount(0, $flashBag->get('error'));
+        self::assertTrue($flashBag->has('error'));
+        self::assertCount(1, $flashBag->get('error'));
+        self::assertCount(0, $flashBag->get('error'));
     }
 }

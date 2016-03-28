@@ -25,26 +25,26 @@ class ListItemTest extends \PHPUnit_Framework_TestCase
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setFieldId($expected);
-        $this->assertEquals($expected, $this->object->getFieldId());
+        self::assertEquals($expected, $this->object->getFieldId());
     }
 
     public function testKey()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setKey($expected);
-        $this->assertEquals($expected, $this->object->getKey());
+        self::assertEquals($expected, $this->object->getKey());
     }
 
     public function testValue()
     {
         $expected = str_pad('_', 50, '_');
         $this->object->setValue($expected);
-        $this->assertEquals($expected, $this->object->getValue());
+        self::assertEquals($expected, $this->object->getValue());
     }
 
     public function testField()
     {
         $this->object->setField($field = new Field());
-        $this->assertSame($field, $this->object->getField());
+        self::assertSame($field, $this->object->getField());
     }
 }

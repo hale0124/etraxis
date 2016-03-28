@@ -34,7 +34,7 @@ class StateVoterTest extends BaseTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
-        $this->assertFalse($this->security->isGranted('UNKNOWN', $state));
+        self::assertFalse($this->security->isGranted('UNKNOWN', $state));
     }
 
     public function testDelete()
@@ -63,11 +63,11 @@ class StateVoterTest extends BaseTestCase
         /** @var State $empty */
         $empty = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Cancelled']);
 
-        $this->assertInstanceOf(State::class, $state);
-        $this->assertInstanceOf(State::class, $empty);
+        self::assertInstanceOf(State::class, $state);
+        self::assertInstanceOf(State::class, $empty);
 
-        $this->assertFalse($this->security->isGranted(State::DELETE, $state));
-        $this->assertTrue($this->security->isGranted(State::DELETE, $empty));
+        self::assertFalse($this->security->isGranted(State::DELETE, $state));
+        self::assertTrue($this->security->isGranted(State::DELETE, $empty));
     }
 
     public function testInitial()
@@ -99,12 +99,12 @@ class StateVoterTest extends BaseTestCase
         /** @var State $final */
         $final = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
-        $this->assertInstanceOf(State::class, $initial);
-        $this->assertInstanceOf(State::class, $interim);
-        $this->assertInstanceOf(State::class, $final);
+        self::assertInstanceOf(State::class, $initial);
+        self::assertInstanceOf(State::class, $interim);
+        self::assertInstanceOf(State::class, $final);
 
-        $this->assertFalse($this->security->isGranted(State::INITIAL, $initial));
-        $this->assertTrue($this->security->isGranted(State::INITIAL, $interim));
-        $this->assertFalse($this->security->isGranted(State::INITIAL, $final));
+        self::assertFalse($this->security->isGranted(State::INITIAL, $initial));
+        self::assertTrue($this->security->isGranted(State::INITIAL, $interim));
+        self::assertFalse($this->security->isGranted(State::INITIAL, $final));
     }
 }

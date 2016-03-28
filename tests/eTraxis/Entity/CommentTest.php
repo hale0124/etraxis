@@ -23,35 +23,35 @@ class CommentTest extends \PHPUnit_Framework_TestCase
 
     public function testId()
     {
-        $this->assertEquals(null, $this->object->getId());
+        self::assertEquals(null, $this->object->getId());
     }
 
     public function testEventId()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setEventId($expected);
-        $this->assertEquals($expected, $this->object->getEventId());
+        self::assertEquals($expected, $this->object->getEventId());
     }
 
     public function testIsPrivate()
     {
         $this->object->setPrivate(false);
-        $this->assertFalse($this->object->isPrivate());
+        self::assertFalse($this->object->isPrivate());
 
         $this->object->setPrivate(true);
-        $this->assertTrue($this->object->isPrivate());
+        self::assertTrue($this->object->isPrivate());
     }
 
     public function testComment()
     {
         $expected = 'Comment';
         $this->object->setComment($expected);
-        $this->assertEquals($expected, $this->object->getComment());
+        self::assertEquals($expected, $this->object->getComment());
     }
 
     public function testEvent()
     {
         $this->object->setEvent($state = new Event());
-        $this->assertSame($state, $this->object->getEvent());
+        self::assertSame($state, $this->object->getEvent());
     }
 }

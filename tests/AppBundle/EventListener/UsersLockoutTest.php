@@ -23,7 +23,7 @@ class UsersLockoutTest extends BaseTestCase
     {
         $user = $this->findUser('artem');
 
-        $this->assertNotNull($user);
+        self::assertNotNull($user);
 
         $token = new UsernamePasswordToken($user, 'secret', 'etraxis_provider');
 
@@ -32,7 +32,7 @@ class UsersLockoutTest extends BaseTestCase
         $object = new UsersLockout($this->logger, $this->command_bus);
 
         $object->onSuccess($success);
-        $this->assertTrue($this->findUser('artem')->isAccountNonLocked());
+        self::assertTrue($this->findUser('artem')->isAccountNonLocked());
     }
 
     public function testFailure()
@@ -44,6 +44,6 @@ class UsersLockoutTest extends BaseTestCase
         $object = new UsersLockout($this->logger, $this->command_bus);
 
         $object->onFailure($failure);
-        $this->assertTrue($this->findUser('artem')->isAccountNonLocked());
+        self::assertTrue($this->findUser('artem')->isAccountNonLocked());
     }
 }

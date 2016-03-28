@@ -36,7 +36,7 @@ class UsersRepositoryTest extends BaseTestCase
             'Managers',
         ];
 
-        $this->assertEquals($expected, $groups);
+        self::assertEquals($expected, $groups);
     }
 
     public function testGetUserGroupsNotFound()
@@ -48,7 +48,7 @@ class UsersRepositoryTest extends BaseTestCase
 
         $expected = [];
 
-        $this->assertEquals($expected, $result);
+        self::assertEquals($expected, $result);
     }
 
     public function testGetOtherGroupsFound()
@@ -70,7 +70,7 @@ class UsersRepositoryTest extends BaseTestCase
             'Staff',
         ];
 
-        $this->assertEquals($expected, $groups);
+        self::assertEquals($expected, $groups);
     }
 
     public function testGetOtherGroupsNotFound()
@@ -82,6 +82,6 @@ class UsersRepositoryTest extends BaseTestCase
 
         $expected = [];
 
-        $this->assertEquals($expected, $result);
+        self::assertEquals($expected, $result);
     }
 }

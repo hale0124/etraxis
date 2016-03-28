@@ -21,9 +21,9 @@ class FieldsFilterTest extends BaseTestCase
     {
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Produced']);
-        $this->assertNotNull($state);
+        self::assertNotNull($state);
 
-        $this->assertCount(7, $state->getFields());
+        self::assertCount(7, $state->getFields());
 
         /** @var Field $field */
         $field = $state->getFields()->get(6);
@@ -33,6 +33,6 @@ class FieldsFilterTest extends BaseTestCase
 
         $state = $this->doctrine->getRepository(State::class)->find($state->getId());
 
-        $this->assertCount(6, $state->getFields());
+        self::assertCount(6, $state->getFields());
     }
 }

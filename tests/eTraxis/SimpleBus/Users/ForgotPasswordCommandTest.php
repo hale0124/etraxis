@@ -20,7 +20,7 @@ class ForgotPasswordCommandTest extends BaseTestCase
         $username = 'artem';
 
         $user = $this->findUser($username);
-        $this->assertNotNull($user);
+        self::assertNotNull($user);
 
         $prevToken   = $user->getResetToken();
         $prevExpires = $user->getResetTokenExpiresAt();
@@ -34,8 +34,8 @@ class ForgotPasswordCommandTest extends BaseTestCase
 
         $user = $this->findUser($username);
 
-        $this->assertNotEquals($prevToken, $user->getResetToken());
-        $this->assertNotEquals($prevExpires, $user->getResetTokenExpiresAt());
-        $this->assertGreaterThan(time(), $user->getResetTokenExpiresAt());
+        self::assertNotEquals($prevToken, $user->getResetToken());
+        self::assertNotEquals($prevExpires, $user->getResetTokenExpiresAt());
+        self::assertGreaterThan(time(), $user->getResetTokenExpiresAt());
     }
 }

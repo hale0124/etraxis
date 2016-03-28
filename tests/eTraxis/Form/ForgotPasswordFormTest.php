@@ -25,6 +25,6 @@ class ForgotPasswordFormTest extends BaseTestCase
 
         $children = $view->children;
 
-        $this->assertArrayHasKey('username', $children);
+        self::assertArrayHasKey('username', $children);
     }
 }

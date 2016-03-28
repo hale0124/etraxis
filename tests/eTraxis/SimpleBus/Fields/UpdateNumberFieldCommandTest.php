@@ -21,15 +21,15 @@ class UpdateNumberFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Episode']);
 
-        $this->assertEquals(Field::TYPE_NUMBER, $field->getType());
-        $this->assertEquals('Episode', $field->getName());
-        $this->assertNull($field->getDescription());
-        $this->assertTrue($field->isRequired());
-        $this->assertTrue($field->hasGuestAccess());
-        $this->assertFalse($field->getShowInEmails());
-        $this->assertEquals(1, $field->getParameter1());
-        $this->assertEquals(100, $field->getParameter2());
-        $this->assertNull($field->getDefaultValue());
+        self::assertEquals(Field::TYPE_NUMBER, $field->getType());
+        self::assertEquals('Episode', $field->getName());
+        self::assertNull($field->getDescription());
+        self::assertTrue($field->isRequired());
+        self::assertTrue($field->hasGuestAccess());
+        self::assertFalse($field->getShowInEmails());
+        self::assertEquals(1, $field->getParameter1());
+        self::assertEquals(100, $field->getParameter2());
+        self::assertNull($field->getDefaultValue());
 
         $command = new UpdateNumberFieldCommand([
             'id'           => $field->getId(),
@@ -47,15 +47,15 @@ class UpdateNumberFieldCommandTest extends BaseTestCase
 
         $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 
-        $this->assertEquals(Field::TYPE_NUMBER, $field->getType());
-        $this->assertEquals('Episode #', $field->getName());
-        $this->assertEquals('ID of the episode', $field->getDescription());
-        $this->assertFalse($field->isRequired());
-        $this->assertFalse($field->hasGuestAccess());
-        $this->assertTrue($field->getShowInEmails());
-        $this->assertEquals(0, $field->getParameter1());
-        $this->assertEquals(50, $field->getParameter2());
-        $this->assertEquals(1, $field->getDefaultValue());
+        self::assertEquals(Field::TYPE_NUMBER, $field->getType());
+        self::assertEquals('Episode #', $field->getName());
+        self::assertEquals('ID of the episode', $field->getDescription());
+        self::assertFalse($field->isRequired());
+        self::assertFalse($field->hasGuestAccess());
+        self::assertTrue($field->getShowInEmails());
+        self::assertEquals(0, $field->getParameter1());
+        self::assertEquals(50, $field->getParameter2());
+        self::assertEquals(1, $field->getDefaultValue());
     }
 
     /**
@@ -67,7 +67,7 @@ class UpdateNumberFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Episode']);
 
-        $this->assertNotNull($field);
+        self::assertNotNull($field);
 
         $command = new UpdateNumberFieldCommand([
             'id'           => $field->getId(),
@@ -91,7 +91,7 @@ class UpdateNumberFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Episode']);
 
-        $this->assertNotNull($field);
+        self::assertNotNull($field);
 
         $command = new UpdateNumberFieldCommand([
             'id'           => $field->getId(),

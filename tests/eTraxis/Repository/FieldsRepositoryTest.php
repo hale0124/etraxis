@@ -21,7 +21,7 @@ class FieldsRepositoryTest extends BaseTestCase
     {
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
-        $this->assertNotNull($state);
+        self::assertNotNull($state);
 
         /** @var FieldsRepository $repository */
         $repository = $this->doctrine->getManager()->getRepository(Field::class);
@@ -39,6 +39,6 @@ class FieldsRepositoryTest extends BaseTestCase
             'Notes',
         ];
 
-        $this->assertEquals($expected, $fields);
+        self::assertEquals($expected, $fields);
     }
 }

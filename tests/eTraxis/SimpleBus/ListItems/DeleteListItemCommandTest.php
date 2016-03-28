@@ -41,7 +41,7 @@ class DeleteListItemCommandTest extends BaseTestCase
             'fieldId' => $item->getFieldId(),
             'key'     => $item->getKey(),
         ]);
-        $this->assertNotNull($item);
+        self::assertNotNull($item);
 
         $command = new DeleteListItemCommand([
             'field' => $item->getFieldId(),
@@ -53,7 +53,7 @@ class DeleteListItemCommandTest extends BaseTestCase
             'fieldId' => $item->getFieldId(),
             'key'     => $item->getKey(),
         ]);
-        $this->assertNull($item);
+        self::assertNull($item);
     }
 
     /**
@@ -71,7 +71,7 @@ class DeleteListItemCommandTest extends BaseTestCase
             'fieldId' => $field->getId(),
             'key'     => 1,
         ]);
-        $this->assertNotNull($item);
+        self::assertNotNull($item);
 
         $command = new DeleteListItemCommand([
             'field' => $item->getFieldId(),

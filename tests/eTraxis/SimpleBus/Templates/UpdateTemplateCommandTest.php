@@ -22,13 +22,13 @@ class UpdateTemplateCommandTest extends BaseTestCase
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
-        $this->assertNotNull($template);
-        $this->assertEquals('Delivery', $template->getName());
-        $this->assertEquals('PE', $template->getPrefix());
-        $this->assertEquals('Delivery task', $template->getDescription());
-        $this->assertNull($template->getCriticalAge());
-        $this->assertNull($template->getFrozenTime());
-        $this->assertFalse($template->hasGuestAccess());
+        self::assertNotNull($template);
+        self::assertEquals('Delivery', $template->getName());
+        self::assertEquals('PE', $template->getPrefix());
+        self::assertEquals('Delivery task', $template->getDescription());
+        self::assertNull($template->getCriticalAge());
+        self::assertNull($template->getFrozenTime());
+        self::assertFalse($template->hasGuestAccess());
 
         $command = new UpdateTemplateCommand([
             'id'          => $template->getId(),
@@ -44,17 +44,17 @@ class UpdateTemplateCommandTest extends BaseTestCase
 
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
-        $this->assertNull($template);
+        self::assertNull($template);
 
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Maintenance']);
 
-        $this->assertNotNull($template);
-        $this->assertEquals('Maintenance', $template->getName());
-        $this->assertEquals('M', $template->getPrefix());
-        $this->assertEquals('Nimbus technical maintenance', $template->getDescription());
-        $this->assertEquals(100, $template->getCriticalAge());
-        $this->assertEquals(100, $template->getFrozenTime());
-        $this->assertTrue($template->hasGuestAccess());
+        self::assertNotNull($template);
+        self::assertEquals('Maintenance', $template->getName());
+        self::assertEquals('M', $template->getPrefix());
+        self::assertEquals('Nimbus technical maintenance', $template->getDescription());
+        self::assertEquals(100, $template->getCriticalAge());
+        self::assertEquals(100, $template->getFrozenTime());
+        self::assertTrue($template->hasGuestAccess());
     }
 
     /**
@@ -102,7 +102,7 @@ class UpdateTemplateCommandTest extends BaseTestCase
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
-        $this->assertNotNull($template);
+        self::assertNotNull($template);
 
         $command = new UpdateTemplateCommand([
             'id'          => $template->getId(),
@@ -145,7 +145,7 @@ class UpdateTemplateCommandTest extends BaseTestCase
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
-        $this->assertNotNull($template);
+        self::assertNotNull($template);
 
         $command = new UpdateTemplateCommand([
             'id'          => $template->getId(),

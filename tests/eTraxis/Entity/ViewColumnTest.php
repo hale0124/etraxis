@@ -23,47 +23,47 @@ class ViewColumnTest extends \PHPUnit_Framework_TestCase
 
     public function testId()
     {
-        $this->assertEquals(null, $this->object->getId());
+        self::assertEquals(null, $this->object->getId());
     }
 
     public function testViewId()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setViewId($expected);
-        $this->assertEquals($expected, $this->object->getViewId());
+        self::assertEquals($expected, $this->object->getViewId());
     }
 
     public function testStateName()
     {
         $expected = 'State name';
         $this->object->setStateName($expected);
-        $this->assertEquals($expected, $this->object->getStateName());
+        self::assertEquals($expected, $this->object->getStateName());
     }
 
     public function testFieldName()
     {
         $expected = 'Field name';
         $this->object->setFieldName($expected);
-        $this->assertEquals($expected, $this->object->getFieldName());
+        self::assertEquals($expected, $this->object->getFieldName());
     }
 
     public function testType()
     {
         $expected = ViewColumn::TYPE_SUBJECT;
         $this->object->setType($expected);
-        $this->assertEquals($expected, $this->object->getType());
+        self::assertEquals($expected, $this->object->getType());
     }
 
     public function testOrder()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setOrder($expected);
-        $this->assertEquals($expected, $this->object->getOrder());
+        self::assertEquals($expected, $this->object->getOrder());
     }
 
     public function testView()
     {
         $this->object->setView($user = new View());
-        $this->assertSame($user, $this->object->getView());
+        self::assertSame($user, $this->object->getView());
     }
 }

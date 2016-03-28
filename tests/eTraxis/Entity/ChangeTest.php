@@ -23,46 +23,46 @@ class ChangeTest extends \PHPUnit_Framework_TestCase
 
     public function testId()
     {
-        $this->assertEquals(null, $this->object->getId());
+        self::assertEquals(null, $this->object->getId());
     }
 
     public function testEventId()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setEventId($expected);
-        $this->assertEquals($expected, $this->object->getEventId());
+        self::assertEquals($expected, $this->object->getEventId());
     }
 
     public function testFieldId()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setFieldId($expected);
-        $this->assertEquals($expected, $this->object->getFieldId());
+        self::assertEquals($expected, $this->object->getFieldId());
     }
 
     public function testOldValueId()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setOldValueId($expected);
-        $this->assertEquals($expected, $this->object->getOldValueId());
+        self::assertEquals($expected, $this->object->getOldValueId());
     }
 
     public function testNewValueId()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setNewValueId($expected);
-        $this->assertEquals($expected, $this->object->getNewValueId());
+        self::assertEquals($expected, $this->object->getNewValueId());
     }
 
     public function testEvent()
     {
         $this->object->setEvent($event = new Event());
-        $this->assertSame($event, $this->object->getEvent());
+        self::assertSame($event, $this->object->getEvent());
     }
 
     public function testField()
     {
         $this->object->setField($field = new Field());
-        $this->assertSame($field, $this->object->getField());
+        self::assertSame($field, $this->object->getField());
     }
 }

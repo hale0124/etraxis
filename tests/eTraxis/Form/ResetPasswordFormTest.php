@@ -25,7 +25,7 @@ class ResetPasswordFormTest extends BaseTestCase
 
         $children = $view->children;
 
-        $this->assertArrayHasKey('password', $children);
-        $this->assertArrayHasKey('confirmation', $children);
+        self::assertArrayHasKey('password', $children);
+        self::assertArrayHasKey('confirmation', $children);
     }
 }

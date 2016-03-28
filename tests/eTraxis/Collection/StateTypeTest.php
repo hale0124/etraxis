@@ -24,6 +24,6 @@ class StateTypeTest extends BaseTestCase
             State::TYPE_FINAL,
         ];
 
-        $this->assertEquals($expected, array_keys(StateType::getCollection()));
+        self::assertEquals($expected, array_keys(StateType::getCollection()));
     }
 }

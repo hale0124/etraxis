@@ -25,32 +25,32 @@ class LastReadTest extends \PHPUnit_Framework_TestCase
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setRecordId($expected);
-        $this->assertEquals($expected, $this->object->getRecordId());
+        self::assertEquals($expected, $this->object->getRecordId());
     }
 
     public function testUserId()
     {
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setUserId($expected);
-        $this->assertEquals($expected, $this->object->getUserId());
+        self::assertEquals($expected, $this->object->getUserId());
     }
 
     public function testRecord()
     {
         $this->object->setRecord($record = new Record());
-        $this->assertSame($record, $this->object->getRecord());
+        self::assertSame($record, $this->object->getRecord());
     }
 
     public function testUser()
     {
         $this->object->setUser($user = new User());
-        $this->assertSame($user, $this->object->getUser());
+        self::assertSame($user, $this->object->getUser());
     }
 
     public function testReadAt()
     {
         $expected = time();
         $this->object->setReadAt($expected);
-        $this->assertEquals($expected, $this->object->getReadAt());
+        self::assertEquals($expected, $this->object->getReadAt());
     }
 }

@@ -27,16 +27,16 @@ class UserFormTest extends BaseTestCase
 
         $children = $view->children;
 
-        $this->assertEquals($children['username']->vars['data'], $user->getUsername());
-        $this->assertEquals($children['fullname']->vars['data'], $user->getFullname());
-        $this->assertEquals($children['email']->vars['data'], $user->getEmail());
-        $this->assertEquals($children['description']->vars['data'], $user->getDescription());
-        $this->assertEmpty($children['password']->vars['data']);
-        $this->assertEmpty($children['confirmation']->vars['data']);
-        $this->assertEquals($children['locale']->vars['data'], $user->getLocale());
-        $this->assertEquals($children['theme']->vars['data'], $user->getTheme());
-        $this->assertEquals($children['timezone']->vars['data'], $user->getTimezone());
-        $this->assertEquals((bool) $children['admin']->vars['data'], $user->isAdmin());
-        $this->assertEquals((bool) $children['disabled']->vars['data'], $user->isDisabled());
+        self::assertEquals($children['username']->vars['data'], $user->getUsername());
+        self::assertEquals($children['fullname']->vars['data'], $user->getFullname());
+        self::assertEquals($children['email']->vars['data'], $user->getEmail());
+        self::assertEquals($children['description']->vars['data'], $user->getDescription());
+        self::assertEmpty($children['password']->vars['data']);
+        self::assertEmpty($children['confirmation']->vars['data']);
+        self::assertEquals($children['locale']->vars['data'], $user->getLocale());
+        self::assertEquals($children['theme']->vars['data'], $user->getTheme());
+        self::assertEquals($children['timezone']->vars['data'], $user->getTimezone());
+        self::assertEquals((bool) $children['admin']->vars['data'], $user->isAdmin());
+        self::assertEquals((bool) $children['disabled']->vars['data'], $user->isDisabled());
     }
 }

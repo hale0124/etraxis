@@ -26,7 +26,7 @@ class RegisterUserCommandTest extends BaseTestCase
 
         $user = $this->findUser($username, true);
 
-        $this->assertNull($user);
+        self::assertNull($user);
 
         // first time
         $command = new RegisterUserCommand([
@@ -41,13 +41,13 @@ class RegisterUserCommandTest extends BaseTestCase
 
         $id = $user->getId();
 
-        $this->assertInstanceOf(User::class, $user);
-        $this->assertEquals($username, $user->getUsername());
-        $this->assertEquals($fullname, $user->getFullname());
-        $this->assertEquals($email, $user->getEmail());
-        $this->assertEquals($locale, $user->getLocale());
-        $this->assertEquals($theme, $user->getTheme());
-        $this->assertTrue($user->isLdap());
+        self::assertInstanceOf(User::class, $user);
+        self::assertEquals($username, $user->getUsername());
+        self::assertEquals($fullname, $user->getFullname());
+        self::assertEquals($email, $user->getEmail());
+        self::assertEquals($locale, $user->getLocale());
+        self::assertEquals($theme, $user->getTheme());
+        self::assertTrue($user->isLdap());
 
         // second time
         $command = new RegisterUserCommand([
@@ -60,14 +60,14 @@ class RegisterUserCommandTest extends BaseTestCase
 
         $user = $this->findUser($username, true);
 
-        $this->assertInstanceOf(User::class, $user);
-        $this->assertEquals($id, $user->getId());
-        $this->assertEquals($username, $user->getUsername());
-        $this->assertEquals($fullname, $user->getFullname());
-        $this->assertEquals($email, $user->getEmail());
-        $this->assertEquals($locale, $user->getLocale());
-        $this->assertEquals($theme, $user->getTheme());
-        $this->assertTrue($user->isLdap());
+        self::assertInstanceOf(User::class, $user);
+        self::assertEquals($id, $user->getId());
+        self::assertEquals($username, $user->getUsername());
+        self::assertEquals($fullname, $user->getFullname());
+        self::assertEquals($email, $user->getEmail());
+        self::assertEquals($locale, $user->getLocale());
+        self::assertEquals($theme, $user->getTheme());
+        self::assertTrue($user->isLdap());
     }
 
     /**

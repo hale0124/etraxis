@@ -25,8 +25,8 @@ class ChangePasswordFormTest extends BaseTestCase
 
         $children = $view->children;
 
-        $this->assertArrayHasKey('current_password', $children);
-        $this->assertArrayHasKey('new_password', $children);
-        $this->assertArrayHasKey('confirmation', $children);
+        self::assertArrayHasKey('current_password', $children);
+        self::assertArrayHasKey('new_password', $children);
+        self::assertArrayHasKey('confirmation', $children);
     }
 }

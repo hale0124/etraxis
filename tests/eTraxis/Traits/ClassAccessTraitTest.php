@@ -46,8 +46,8 @@ class ClassAccessTraitTest extends \PHPUnit_Framework_TestCase
     {
         $object = new MyTestClassStub();
 
-        $this->assertTrue(isset($object->property));
-        $this->assertFalse(isset($object->unknown));
+        self::assertTrue(isset($object->property));
+        self::assertFalse(isset($object->unknown));
     }
 
     public function testGetPropertySuccess()
@@ -57,7 +57,7 @@ class ClassAccessTraitTest extends \PHPUnit_Framework_TestCase
 
         $object->setProperty($expected);
 
-        $this->assertEquals($expected, $object->property);
+        self::assertEquals($expected, $object->property);
     }
 
     /**
@@ -78,7 +78,7 @@ class ClassAccessTraitTest extends \PHPUnit_Framework_TestCase
 
         $object->property = $expected;
 
-        $this->assertEquals($expected, $object->getProperty());
+        self::assertEquals($expected, $object->getProperty());
     }
 
     /**
@@ -98,7 +98,7 @@ class ClassAccessTraitTest extends \PHPUnit_Framework_TestCase
         $object   = new MyTestClassStub();
         $expected = '<' . PHP_VERSION . '>';
 
-        $this->assertEquals($expected, $object->getVersion('<', '>'));
+        self::assertEquals($expected, $object->getVersion('<', '>'));
     }
 
     /**

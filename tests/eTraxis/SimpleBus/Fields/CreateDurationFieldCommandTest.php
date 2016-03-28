@@ -22,7 +22,7 @@ class CreateDurationFieldCommandTest extends BaseTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
-        $this->assertNotNull($state);
+        self::assertNotNull($state);
 
         $command = new CreateDurationFieldCommand([
             'template'     => $state->getTemplateId(),
@@ -41,11 +41,11 @@ class CreateDurationFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => $command->name]);
 
-        $this->assertInstanceOf(Field::class, $field);
-        $this->assertEquals(Field::TYPE_DURATION, $field->getType());
-        $this->assertEquals(0, $field->getParameter1());
-        $this->assertEquals(10080, $field->getParameter2());
-        $this->assertEquals(2880, $field->getDefaultValue());
+        self::assertInstanceOf(Field::class, $field);
+        self::assertEquals(Field::TYPE_DURATION, $field->getType());
+        self::assertEquals(0, $field->getParameter1());
+        self::assertEquals(10080, $field->getParameter2());
+        self::assertEquals(2880, $field->getDefaultValue());
     }
 
     /**
@@ -57,7 +57,7 @@ class CreateDurationFieldCommandTest extends BaseTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
-        $this->assertNotNull($state);
+        self::assertNotNull($state);
 
         $command = new CreateDurationFieldCommand([
             'template'     => $state->getTemplateId(),
@@ -82,7 +82,7 @@ class CreateDurationFieldCommandTest extends BaseTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
-        $this->assertNotNull($state);
+        self::assertNotNull($state);
 
         $command = new CreateDurationFieldCommand([
             'template'     => $state->getTemplateId(),

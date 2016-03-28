@@ -23,13 +23,13 @@ class LineEndingTest extends BaseTestCase
             LineEnding::MACINTOSH,
         ];
 
-        $this->assertEquals($expected, array_keys(LineEnding::getCollection()));
+        self::assertEquals($expected, array_keys(LineEnding::getCollection()));
     }
 
     public function testGetDelimiter()
     {
-        $this->assertEquals("\r\n", LineEnding::getLineEnding(LineEnding::WINDOWS));
-        $this->assertEquals("\n", LineEnding::getLineEnding(LineEnding::UNIX));
-        $this->assertEquals("\r", LineEnding::getLineEnding(LineEnding::MACINTOSH));
+        self::assertEquals("\r\n", LineEnding::getLineEnding(LineEnding::WINDOWS));
+        self::assertEquals("\n", LineEnding::getLineEnding(LineEnding::UNIX));
+        self::assertEquals("\r", LineEnding::getLineEnding(LineEnding::MACINTOSH));
     }
 }
