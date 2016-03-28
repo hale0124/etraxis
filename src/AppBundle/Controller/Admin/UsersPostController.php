@@ -47,7 +47,7 @@ class UsersPostController extends Controller
             $data = $request->request->get('user');
 
             if ($data['password'] !== $data['confirmation']) {
-                throw new BadRequestHttpException($this->getTranslator()->trans('passwords.dont_match'));
+                throw new BadRequestHttpException($this->container->get('translator')->trans('passwords.dont_match'));
             }
 
             $command = new Users\CreateUserCommand($data);
@@ -107,7 +107,7 @@ class UsersPostController extends Controller
             if (!$user->isLdap() && $data['password']) {
 
                 if ($data['password'] !== $data['confirmation']) {
-                    throw new BadRequestHttpException($this->getTranslator()->trans('passwords.dont_match'));
+                    throw new BadRequestHttpException($this->container->get('translator')->trans('passwords.dont_match'));
                 }
 
                 $command = new Users\SetPasswordCommand([

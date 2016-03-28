@@ -77,7 +77,7 @@ class SettingsController extends Controller
 
             $this->get('session')->set('_locale', $command->locale);
 
-            $this->setNotice($this->getTranslator()->trans('changes_saved', [], null, $command->locale));
+            $this->setNotice($this->container->get('translator')->trans('changes_saved', [], null, $command->locale));
         }
         catch (ValidationException $e) {
             foreach ($e->getMessages() as $message) {
@@ -109,7 +109,7 @@ class SettingsController extends Controller
         try {
 
             if ($user->isLdap()) {
-                throw new BadRequestHttpException($this->getTranslator()->trans('password.cant_change'));
+                throw new BadRequestHttpException($this->container->get('translator')->trans('password.cant_change'));
             }
 
             $data = $request->request->get('change_password');
@@ -118,11 +118,11 @@ class SettingsController extends Controller
             $encoder = $this->get('etraxis.encoder');
 
             if (!$encoder->isPasswordValid($user->getPassword(), $data['current_password'], null)) {
-                throw new BadRequestHttpException($this->getTranslator()->trans('password.wrong'));
+                throw new BadRequestHttpException($this->container->get('translator')->trans('password.wrong'));
             }
 
             if ($data['new_password'] !== $data['confirmation']) {
-                throw new BadRequestHttpException($this->getTranslator()->trans('passwords.dont_match'));
+                throw new BadRequestHttpException($this->container->get('translator')->trans('passwords.dont_match'));
             }
 
             $command = new Users\SetPasswordCommand([
@@ -132,10 +132,10 @@ class SettingsController extends Controller
 
             $this->getCommandBus()->handle($command);
 
-            $this->setNotice($this->getTranslator()->trans('password.changed'));
+            $this->setNotice($this->container->get('translator')->trans('password.changed'));
         }
         catch (BadCredentialsException $e) {
-            $this->setError($this->getTranslator()->trans('password.wrong'));
+            $this->setError($this->container->get('translator')->trans('password.wrong'));
         }
         catch (ValidationException $e) {
             foreach ($e->getMessages() as $message) {

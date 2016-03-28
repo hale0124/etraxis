@@ -43,16 +43,6 @@ trait ContainerTrait
     }
 
     /**
-     * Shortcut to get the Translator service.
-     *
-     * @return  \Symfony\Component\Translation\TranslatorInterface
-     */
-    protected function getTranslator()
-    {
-        return $this->container->get('translator');
-    }
-
-    /**
      * Shortcut to get the Command Bus service.
      *
      * @return  \SimpleBus\Message\Bus\MessageBus

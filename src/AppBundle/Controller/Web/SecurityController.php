@@ -90,7 +90,7 @@ class SecurityController extends Controller
 
             $this->getCommandBus()->handle($command);
 
-            $this->setNotice($this->getTranslator()->trans('security.forgot_password.email_sent'));
+            $this->setNotice($this->container->get('translator')->trans('security.forgot_password.email_sent'));
 
             return $this->redirect($this->generateUrl('homepage'));
         }
@@ -128,7 +128,7 @@ class SecurityController extends Controller
             $data = $request->request->get('reset_password');
 
             if ($data['password'] !== $data['confirmation']) {
-                $this->setError($this->getTranslator()->trans('passwords.dont_match'));
+                $this->setError($this->container->get('translator')->trans('passwords.dont_match'));
             }
             else {
 
@@ -140,7 +140,7 @@ class SecurityController extends Controller
 
                     $this->getCommandBus()->handle($command);
 
-                    $this->setNotice($this->getTranslator()->trans('password.changed'));
+                    $this->setNotice($this->container->get('translator')->trans('password.changed'));
 
                     return $this->redirect($this->generateUrl('login'));
                 }
@@ -189,7 +189,7 @@ class SecurityController extends Controller
             $data = $request->request->get('reset_password');
 
             if ($data['password'] !== $data['confirmation']) {
-                $this->setError($this->getTranslator()->trans('passwords.dont_match'));
+                $this->setError($this->container->get('translator')->trans('passwords.dont_match'));
             }
             else {
 
@@ -201,7 +201,7 @@ class SecurityController extends Controller
 
                     $this->getCommandBus()->handle($command);
 
-                    $this->setNotice($this->getTranslator()->trans('password.changed'));
+                    $this->setNotice($this->container->get('translator')->trans('password.changed'));
 
                     return $this->redirect($this->generateUrl('homepage'));
                 }

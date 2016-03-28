@@ -66,11 +66,6 @@ class ContainerTraitTest extends KernelTestCase
         $this->assertCount(0, $flashBag->get('error'));
     }
 
-    public function testTranslator()
-    {
-        $this->assertInstanceOf('\Symfony\Component\Translation\TranslatorInterface', $this->object->getTranslator());
-    }
-
     public function testGetCommandBus()
     {
         $this->assertInstanceOf('\SimpleBus\Message\Bus\MessageBus', $this->object->getCommandBus());

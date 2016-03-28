@@ -91,13 +91,16 @@ class UsersGetController extends Controller
                 return array_slice($user, 1, 6);
             }, $results['data']);
 
+            /** @var \Symfony\Component\Translation\TranslatorInterface $translator */
+            $translator = $this->container->get('translator');
+
             array_unshift($users, [
-                $this->getTranslator()->trans('user.username'),
-                $this->getTranslator()->trans('user.fullname'),
-                $this->getTranslator()->trans('user.email'),
-                $this->getTranslator()->trans('permissions'),
-                $this->getTranslator()->trans('security.authentication'),
-                $this->getTranslator()->trans('description'),
+                $translator->trans('user.username'),
+                $translator->trans('user.fullname'),
+                $translator->trans('user.email'),
+                $translator->trans('permissions'),
+                $translator->trans('security.authentication'),
+                $translator->trans('description'),
             ]);
 
             $query = new ExportCsvQuery($request->query->get('export'));
