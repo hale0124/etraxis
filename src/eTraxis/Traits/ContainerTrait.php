@@ -19,30 +19,6 @@ namespace eTraxis\Traits;
 trait ContainerTrait
 {
     /**
-     * Sets information message to be displayed on the next page.
-     *
-     * @param   string $notice Message.
-     */
-    protected function setNotice($notice)
-    {
-        /** @var \Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface $flashBag */
-        $flashBag = $this->container->get('session')->getFlashBag();
-        $flashBag->add('notice', $notice);
-    }
-
-    /**
-     * Sets error message to be displayed on the next page.
-     *
-     * @param   string $error Message.
-     */
-    protected function setError($error)
-    {
-        /** @var \Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface $flashBag */
-        $flashBag = $this->container->get('session')->getFlashBag();
-        $flashBag->add('error', $error);
-    }
-
-    /**
      * Shortcut to get the Command Bus service.
      *
      * @return  \SimpleBus\Message\Bus\MessageBus

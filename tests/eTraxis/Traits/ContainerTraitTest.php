@@ -11,14 +11,7 @@
 
 namespace eTraxis\Traits;
 
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-
-class ControllerStub extends Controller
-{
-    use ClassAccessTrait;
-    use ContainerTrait;
-}
 
 class ContainerTraitTest extends KernelTestCase
 {
@@ -38,32 +31,6 @@ class ContainerTraitTest extends KernelTestCase
         unset($this->object);
 
         parent::tearDown();
-    }
-
-    public function testSetNotice()
-    {
-        /** @var \Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface $flashBag */
-        $flashBag = $this->object->container->get('session')->getFlashBag();
-        $flashBag->clear();
-
-        $this->object->setNotice('Information');
-
-        $this->assertTrue($flashBag->has('notice'));
-        $this->assertCount(1, $flashBag->get('notice'));
-        $this->assertCount(0, $flashBag->get('notice'));
-    }
-
-    public function testSetError()
-    {
-        /** @var \Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface $flashBag */
-        $flashBag = $this->object->container->get('session')->getFlashBag();
-        $flashBag->clear();
-
-        $this->object->setError('Error');
-
-        $this->assertTrue($flashBag->has('error'));
-        $this->assertCount(1, $flashBag->get('error'));
-        $this->assertCount(0, $flashBag->get('error'));
     }
 
     public function testGetCommandBus()

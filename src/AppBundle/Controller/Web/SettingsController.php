@@ -15,6 +15,7 @@ use eTraxis\Form\AppearanceForm;
 use eTraxis\Form\ChangePasswordForm;
 use eTraxis\SimpleBus\Users;
 use eTraxis\Traits\ContainerTrait;
+use eTraxis\Traits\FlashBagTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use SimpleBus\ValidationException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -32,6 +33,7 @@ use Symfony\Component\Security\Core\Exception\BadCredentialsException;
 class SettingsController extends Controller
 {
     use ContainerTrait;
+    use FlashBagTrait;
 
     /**
      * Page with user's settings.

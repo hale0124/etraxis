@@ -18,6 +18,7 @@ use eTraxis\SimpleBus\Users\ForgotPasswordCommand;
 use eTraxis\SimpleBus\Users\ResetPasswordCommand;
 use eTraxis\SimpleBus\Users\SetPasswordCommand;
 use eTraxis\Traits\ContainerTrait;
+use eTraxis\Traits\FlashBagTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -29,6 +30,7 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
 class SecurityController extends Controller
 {
     use ContainerTrait;
+    use FlashBagTrait;
 
     /**
      * Login page.
