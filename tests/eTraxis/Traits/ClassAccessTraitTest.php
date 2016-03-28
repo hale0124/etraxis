@@ -11,35 +11,6 @@
 
 namespace eTraxis\Traits;
 
-class MyTestClass
-{
-    protected $property;
-
-    public function setProperty($value)
-    {
-        $this->property = $value;
-    }
-
-    public function getProperty()
-    {
-        return $this->property;
-    }
-
-    protected function getVersion($a, $b)
-    {
-        return $a . PHP_VERSION . $b;
-    }
-}
-
-/**
- * @method getVersion($prefix, $suffix)
- * @property mixed $property
- */
-class MyTestClassStub extends MyTestClass
-{
-    use ClassAccessTrait;
-}
-
 class ClassAccessTraitTest extends \PHPUnit_Framework_TestCase
 {
     public function testIsSet()

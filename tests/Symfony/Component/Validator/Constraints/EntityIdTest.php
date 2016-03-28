@@ -13,14 +13,6 @@ namespace Symfony\Component\Validator\Constraints;
 
 use eTraxis\Tests\BaseTestCase;
 
-class EntityIdStub
-{
-    /**
-     * @EntityId()
-     */
-    public $id;
-}
-
 class EntityIdTest extends BaseTestCase
 {
     public function testEmpty()

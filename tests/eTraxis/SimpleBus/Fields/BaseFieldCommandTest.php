@@ -14,17 +14,7 @@ namespace eTraxis\SimpleBus\Fields;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
-use eTraxis\SimpleBus\Fields\Handler\BaseFieldCommandHandler;
 use eTraxis\Tests\BaseTestCase;
-use eTraxis\Traits\ClassAccessTrait;
-
-/**
- * @method  Field getEntity($command)
- */
-class FieldCommandStubHandler extends BaseFieldCommandHandler
-{
-    use ClassAccessTrait;
-}
 
 class BaseFieldCommandTest extends BaseTestCase
 {

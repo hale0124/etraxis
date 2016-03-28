@@ -13,19 +13,6 @@ namespace eTraxis\Collection;
 
 use eTraxis\Tests\BaseTestCase;
 
-class TestStaticCollection extends AbstractStaticCollection
-{
-    public static function getCollection()
-    {
-        return [
-            'b_ok'     => 'button.ok',
-            'b_cancel' => 'button.cancel',
-            'b_yes'    => 'button.yes',
-            'b_no'     => 'button.no',
-        ];
-    }
-}
-
 class AbstractStaticCollectionTest extends BaseTestCase
 {
     public function testGetAllKeys()

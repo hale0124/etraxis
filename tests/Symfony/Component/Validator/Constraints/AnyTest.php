@@ -13,18 +13,6 @@ namespace Symfony\Component\Validator\Constraints;
 
 use eTraxis\Tests\BaseTestCase;
 
-class AnyStub
-{
-    /**
-     * @NotNull()
-     * @Any({
-     *     @LessThanOrEqual(value = "-100"),
-     *     @GreaterThanOrEqual(value = "100")
-     * })
-     */
-    public $id;
-}
-
 class AnyTest extends BaseTestCase
 {
     public function testEmpty()

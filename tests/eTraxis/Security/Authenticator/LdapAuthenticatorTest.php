@@ -11,31 +11,10 @@
 
 namespace eTraxis\Security\Authenticator;
 
-use eTraxis\Service\Ldap\LdapInterface;
 use eTraxis\Tests\BaseTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
-
-class LdapServiceStub implements LdapInterface
-{
-    public function find($basedn, $username, array $attributes = [])
-    {
-        if ($username !== 'einstein') {
-            return false;
-        }
-
-        return [
-            'cn'   => 'Albert Einstein',
-            'mail' => 'einstein@ldap.forumsys.com',
-        ];
-    }
-
-    public function authenticate($basedn, $username, $password)
-    {
-        return $username === 'einstein' && $password === 'password';
-    }
-}
 
 class LdapAuthenticatorTest extends BaseTestCase
 {

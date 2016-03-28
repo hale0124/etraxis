@@ -13,14 +13,6 @@ namespace eTraxis\Entity;
 
 use Ramsey\Uuid\Uuid;
 
-/**
- * @todo Remove in 4.1
- */
-class UserStub extends User
-{
-    public $locale;
-}
-
 class UserTest extends \PHPUnit_Framework_TestCase
 {
     /** @var UserStub */
