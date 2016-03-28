@@ -70,9 +70,9 @@ class SettingsController extends Controller
     public function appearanceAction(Request $request)
     {
         try {
-            $data = $this->getFormData($request, 'appearance', ['id' => $this->getUser()->getId()]);
+            $data = $request->request->get('appearance');
 
-            $command = new Users\SaveAppearanceCommand($data);
+            $command = new Users\SaveAppearanceCommand($data, ['id' => $this->getUser()->getId()]);
             $this->getCommandBus()->handle($command);
 
             $this->get('session')->set('_locale', $command->locale);
@@ -112,7 +112,7 @@ class SettingsController extends Controller
                 throw new BadRequestHttpException($this->getTranslator()->trans('password.cant_change'));
             }
 
-            $data = $this->getFormData($request, 'change_password');
+            $data = $request->request->get('change_password');
 
             /** @var \Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface $encoder */
             $encoder = $this->get('etraxis.encoder');

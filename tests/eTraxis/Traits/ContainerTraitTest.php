@@ -13,7 +13,6 @@ namespace eTraxis\Traits;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
-use Symfony\Component\HttpFoundation\Request;
 
 class ControllerStub extends Controller
 {
@@ -39,72 +38,6 @@ class ContainerTraitTest extends KernelTestCase
         unset($this->object);
 
         parent::tearDown();
-    }
-
-    public function testGetFormDataSuccessGet()
-    {
-        $formdata = [
-            'fname' => 'Artem',
-            'lname' => 'Rodygin',
-            'empty' => '',
-        ];
-
-        $request = new Request($formdata);
-
-        $formdata['empty'] = null;
-
-        $this->assertEquals($formdata, $this->object->getFormData($request));
-    }
-
-    public function testGetFormDataSuccessPost()
-    {
-        $formdata = [
-            'fname' => 'Artem',
-            'lname' => 'Rodygin',
-            'empty' => '',
-        ];
-
-        $request = new Request([], ['user' => $formdata]);
-        $request->setMethod(Request::METHOD_POST);
-
-        $formdata['empty'] = null;
-
-        $this->assertEquals($formdata, $this->object->getFormData($request, 'user'));
-    }
-
-    public function testGetFormDataExtra()
-    {
-        $formdata = [
-            'fname' => 'Artem',
-            'lname' => 'Rodygin',
-        ];
-
-        $request = new Request(['form' => $formdata]);
-
-        $formdata['sex'] = 'male';
-
-        $this->assertEquals($formdata, $this->object->getFormData($request, 'form', ['sex' => 'male']));
-
-        $formdata['lname'] = 'R.';
-        unset($formdata['sex']);
-
-        $this->assertEquals($formdata, $this->object->getFormData($request, 'form', ['lname' => 'R.']));
-    }
-
-    /**
-     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
-     * @expectedExceptionMessage No data submitted.
-     */
-    public function testGetFormDataNoData()
-    {
-        $formdata = [
-            'fname' => 'Artem',
-            'lname' => 'Rodygin',
-        ];
-
-        $request = new Request(['user' => $formdata]);
-
-        $this->object->getFormData($request, 'form');
     }
 
     public function testSetNotice()

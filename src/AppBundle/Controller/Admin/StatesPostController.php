@@ -45,9 +45,9 @@ class StatesPostController extends Controller
     public function newAction(Request $request, $id)
     {
         try {
-            $data = $this->getFormData($request, 'state', ['template' => $id]);
+            $data = $request->request->get('state');
 
-            $command = new States\CreateStateCommand($data);
+            $command = new States\CreateStateCommand($data, ['template' => $id]);
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();
@@ -79,9 +79,9 @@ class StatesPostController extends Controller
                 throw $this->createNotFoundException();
             }
 
-            $data = $this->getFormData($request, 'state', ['id' => $id]);
+            $data = $request->request->get('state');
 
-            $command = new States\UpdateStateCommand($data);
+            $command = new States\UpdateStateCommand($data, ['id' => $id]);
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();

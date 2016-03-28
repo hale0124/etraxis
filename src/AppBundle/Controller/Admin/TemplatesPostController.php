@@ -44,9 +44,9 @@ class TemplatesPostController extends Controller
     public function newAction(Request $request, $id)
     {
         try {
-            $data = $this->getFormData($request, 'template', ['project' => $id]);
+            $data = $request->request->get('template');
 
-            $command = new Templates\CreateTemplateCommand($data);
+            $command = new Templates\CreateTemplateCommand($data, ['project' => $id]);
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();
@@ -78,9 +78,9 @@ class TemplatesPostController extends Controller
                 throw $this->createNotFoundException();
             }
 
-            $data = $this->getFormData($request, 'template', ['id' => $id]);
+            $data = $request->request->get('template');
 
-            $command = new Templates\UpdateTemplateCommand($data);
+            $command = new Templates\UpdateTemplateCommand($data, ['id' => $id]);
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();

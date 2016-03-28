@@ -43,7 +43,7 @@ class GroupsPostController extends Controller
     public function newAction(Request $request)
     {
         try {
-            $data = $this->getFormData($request, 'group');
+            $data = $request->request->get('group');
 
             $command = new Groups\CreateGroupCommand($data);
             $this->getCommandBus()->handle($command);
@@ -77,9 +77,9 @@ class GroupsPostController extends Controller
                 throw $this->createNotFoundException();
             }
 
-            $data = $this->getFormData($request, 'group', ['id' => $id]);
+            $data = $request->request->get('group');
 
-            $command = new Groups\UpdateGroupCommand($data);
+            $command = new Groups\UpdateGroupCommand($data, ['id' => $id]);
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();
@@ -105,9 +105,9 @@ class GroupsPostController extends Controller
     public function deleteAction(Request $request, $id)
     {
         try {
-            $data = $this->getFormData($request, null, ['id' => $id]);
+            $data = $request->request->all();
 
-            $command = new Groups\DeleteGroupCommand($data);
+            $command = new Groups\DeleteGroupCommand($data, ['id' => $id]);
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();
@@ -133,9 +133,9 @@ class GroupsPostController extends Controller
     public function addUsersAction(Request $request, $id)
     {
         try {
-            $data = $this->getFormData($request, null, ['id' => $id]);
+            $data = $request->request->all();
 
-            $command = new Groups\AddUsersCommand($data);
+            $command = new Groups\AddUsersCommand($data, ['id' => $id]);
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();
@@ -161,9 +161,9 @@ class GroupsPostController extends Controller
     public function removeUsersAction(Request $request, $id)
     {
         try {
-            $data = $this->getFormData($request, null, ['id' => $id]);
+            $data = $request->request->all();
 
-            $command = new Groups\RemoveUsersCommand($data);
+            $command = new Groups\RemoveUsersCommand($data, ['id' => $id]);
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();

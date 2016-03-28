@@ -45,44 +45,44 @@ class FieldsPostController extends Controller
     public function newAction(Request $request, $id)
     {
         try {
-            $data = $this->getFormData($request, 'field', ['state' => $id]);
+            $data = $request->request->get('field');
 
             switch ($data['type']) {
 
                 case Field::TYPE_NUMBER:
-                    $command = new Fields\CreateNumberFieldCommand($data + $data['asNumber']);
+                    $command = new Fields\CreateNumberFieldCommand($data + $data['asNumber'], ['state' => $id]);
                     break;
 
                 case Field::TYPE_DECIMAL:
-                    $command = new Fields\CreateDecimalFieldCommand($data + $data['asDecimal']);
+                    $command = new Fields\CreateDecimalFieldCommand($data + $data['asDecimal'], ['state' => $id]);
                     break;
 
                 case Field::TYPE_STRING:
-                    $command = new Fields\CreateStringFieldCommand($data + $data['asString']);
+                    $command = new Fields\CreateStringFieldCommand($data + $data['asString'], ['state' => $id]);
                     break;
 
                 case Field::TYPE_TEXT:
-                    $command = new Fields\CreateTextFieldCommand($data + $data['asText']);
+                    $command = new Fields\CreateTextFieldCommand($data + $data['asText'], ['state' => $id]);
                     break;
 
                 case Field::TYPE_CHECKBOX:
-                    $command = new Fields\CreateCheckboxFieldCommand($data + $data['asCheckbox']);
+                    $command = new Fields\CreateCheckboxFieldCommand($data + $data['asCheckbox'], ['state' => $id]);
                     break;
 
                 case Field::TYPE_LIST:
-                    $command = new Fields\CreateListFieldCommand($data);
+                    $command = new Fields\CreateListFieldCommand($data, ['state' => $id]);
                     break;
 
                 case Field::TYPE_RECORD:
-                    $command = new Fields\CreateRecordFieldCommand($data);
+                    $command = new Fields\CreateRecordFieldCommand($data, ['state' => $id]);
                     break;
 
                 case Field::TYPE_DATE:
-                    $command = new Fields\CreateDateFieldCommand($data + $data['asDate']);
+                    $command = new Fields\CreateDateFieldCommand($data + $data['asDate'], ['state' => $id]);
                     break;
 
                 case Field::TYPE_DURATION:
-                    $command = new Fields\CreateDurationFieldCommand($data + $data['asDuration']);
+                    $command = new Fields\CreateDurationFieldCommand($data + $data['asDuration'], ['state' => $id]);
                     break;
 
                 default:
@@ -121,44 +121,44 @@ class FieldsPostController extends Controller
                 throw $this->createNotFoundException();
             }
 
-            $data = $this->getFormData($request, 'field', ['id' => $id]);
+            $data = $request->request->get('field');
 
             switch ($field->getType()) {
 
                 case Field::TYPE_NUMBER:
-                    $command = new Fields\UpdateNumberFieldCommand($data + $data['asNumber']);
+                    $command = new Fields\UpdateNumberFieldCommand($data + $data['asNumber'], ['id' => $id]);
                     break;
 
                 case Field::TYPE_DECIMAL:
-                    $command = new Fields\UpdateDecimalFieldCommand($data + $data['asDecimal']);
+                    $command = new Fields\UpdateDecimalFieldCommand($data + $data['asDecimal'], ['id' => $id]);
                     break;
 
                 case Field::TYPE_STRING:
-                    $command = new Fields\UpdateStringFieldCommand($data + $data['asString']);
+                    $command = new Fields\UpdateStringFieldCommand($data + $data['asString'], ['id' => $id]);
                     break;
 
                 case Field::TYPE_TEXT:
-                    $command = new Fields\UpdateTextFieldCommand($data + $data['asText']);
+                    $command = new Fields\UpdateTextFieldCommand($data + $data['asText'], ['id' => $id]);
                     break;
 
                 case Field::TYPE_CHECKBOX:
-                    $command = new Fields\UpdateCheckboxFieldCommand($data + $data['asCheckbox'] + ['required' => false]);
+                    $command = new Fields\UpdateCheckboxFieldCommand($data + $data['asCheckbox'], ['id' => $id, 'required' => false]);
                     break;
 
                 case Field::TYPE_LIST:
-                    $command = new Fields\UpdateListFieldCommand($data);
+                    $command = new Fields\UpdateListFieldCommand($data, ['id' => $id]);
                     break;
 
                 case Field::TYPE_RECORD:
-                    $command = new Fields\UpdateRecordFieldCommand($data);
+                    $command = new Fields\UpdateRecordFieldCommand($data, ['id' => $id]);
                     break;
 
                 case Field::TYPE_DATE:
-                    $command = new Fields\UpdateDateFieldCommand($data + $data['asDate']);
+                    $command = new Fields\UpdateDateFieldCommand($data + $data['asDate'], ['id' => $id]);
                     break;
 
                 case Field::TYPE_DURATION:
-                    $command = new Fields\UpdateDurationFieldCommand($data + $data['asDuration']);
+                    $command = new Fields\UpdateDurationFieldCommand($data + $data['asDuration'], ['id' => $id]);
                     break;
 
                 default:

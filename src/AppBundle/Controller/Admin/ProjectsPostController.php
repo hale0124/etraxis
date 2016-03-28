@@ -43,7 +43,7 @@ class ProjectsPostController extends Controller
     public function newAction(Request $request)
     {
         try {
-            $data = $this->getFormData($request, 'project');
+            $data = $request->request->get('project');
 
             $command = new Projects\CreateProjectCommand($data);
             $this->getCommandBus()->handle($command);
@@ -77,9 +77,9 @@ class ProjectsPostController extends Controller
                 throw $this->createNotFoundException();
             }
 
-            $data = $this->getFormData($request, 'project', ['id' => $id]);
+            $data = $request->request->get('project');
 
-            $command = new Projects\UpdateProjectCommand($data);
+            $command = new Projects\UpdateProjectCommand($data, ['id' => $id]);
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();

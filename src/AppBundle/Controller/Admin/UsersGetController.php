@@ -100,7 +100,7 @@ class UsersGetController extends Controller
                 $this->getTranslator()->trans('description'),
             ]);
 
-            $query = new ExportCsvQuery($this->getFormData($request, 'export'));
+            $query = new ExportCsvQuery($request->query->get('export'));
 
             /** @var \Symfony\Component\Validator\ConstraintViolationInterface[] $violations */
             $violations = $this->get('validator')->validate($query);

@@ -76,7 +76,7 @@ class DefaultController extends Controller
      */
     public function exportAction(Request $request)
     {
-        $query = new ExportCsvQuery($this->getFormData($request, 'export'));
+        $query = new ExportCsvQuery($request->request->get('export'));
 
         /** @var \Symfony\Component\Validator\ConstraintViolationListInterface $violations */
         $violations = $this->get('validator')->validate($query);

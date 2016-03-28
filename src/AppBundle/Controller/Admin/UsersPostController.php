@@ -44,7 +44,7 @@ class UsersPostController extends Controller
     public function newAction(Request $request)
     {
         try {
-            $data = $this->getFormData($request, 'user');
+            $data = $request->request->get('user');
 
             if ($data['password'] !== $data['confirmation']) {
                 throw new BadRequestHttpException($this->getTranslator()->trans('passwords.dont_match'));
@@ -88,7 +88,7 @@ class UsersPostController extends Controller
 
             $em->beginTransaction();
 
-            $data = $this->getFormData($request, 'user', ['id' => $id]);
+            $data = $request->request->get('user');
 
             if ($user->isLdap()) {
                 $data['username'] = $user->getUsername();
@@ -96,7 +96,7 @@ class UsersPostController extends Controller
                 $data['email']    = $user->getEmail();
             }
 
-            $command = new Users\UpdateUserCommand($data);
+            $command = new Users\UpdateUserCommand($data, ['id' => $id]);
             $this->getCommandBus()->handle($command);
 
             /** @noinspection TypeUnsafeComparisonInspection */
@@ -167,7 +167,7 @@ class UsersPostController extends Controller
     public function disableAction(Request $request)
     {
         try {
-            $data = $this->getFormData($request);
+            $data = $request->request->all();
 
             $command = new Users\DisableUsersCommand($data);
             $this->getCommandBus()->handle($command);
@@ -194,7 +194,7 @@ class UsersPostController extends Controller
     public function enableAction(Request $request)
     {
         try {
-            $data = $this->getFormData($request);
+            $data = $request->request->all();
 
             $command = new Users\EnableUsersCommand($data);
             $this->getCommandBus()->handle($command);
@@ -247,9 +247,9 @@ class UsersPostController extends Controller
     public function addGroupsAction(Request $request, $id)
     {
         try {
-            $data = $this->getFormData($request, null, ['id' => $id]);
+            $data = $request->request->all();
 
-            $command = new Users\AddGroupsCommand($data);
+            $command = new Users\AddGroupsCommand($data, ['id' => $id]);
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();
@@ -275,9 +275,9 @@ class UsersPostController extends Controller
     public function removeGroupsAction(Request $request, $id)
     {
         try {
-            $data = $this->getFormData($request, null, ['id' => $id]);
+            $data = $request->request->all();
 
-            $command = new Users\RemoveGroupsCommand($data);
+            $command = new Users\RemoveGroupsCommand($data, ['id' => $id]);
             $this->getCommandBus()->handle($command);
 
             return new JsonResponse();
