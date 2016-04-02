@@ -52,10 +52,6 @@ class UsersDataTable implements DataTableHandlerInterface
     {
         $results = new DataTableResults();
 
-        $query = $this->repository->createQueryBuilder('u')->select('COUNT(u.id)');
-
-        $results->recordsTotal = (int) $query->getQuery()->getSingleScalarResult();
-
         $query = $this->repository->createQueryBuilder('u');
 
         // Search.
@@ -144,6 +140,14 @@ class UsersDataTable implements DataTableHandlerInterface
                     break;
             }
         }
+        // Total number of entries.
+        $queryTotal = $this->repository->createQueryBuilder('u')->select('COUNT(u.id)');
+        $results->recordsTotal = (int) $queryTotal->getQuery()->getSingleScalarResult();
+
+        // Filtered number of entries.
+        $queryFiltered = clone $query;
+        $queryFiltered->select('COUNT(u.id)');
+        $results->recordsFiltered = (int) $queryFiltered->getQuery()->getSingleScalarResult();
 
         // Order.
         foreach ($request->order as $order) {
@@ -161,20 +165,16 @@ class UsersDataTable implements DataTableHandlerInterface
             $query->addOrderBy($map[$order->column], $order->dir);
         }
 
+        // Pagination.
+        $query
+            ->setFirstResult($request->start)
+            ->setMaxResults($request->length)
+        ;
+
         /** @var \eTraxis\Entity\User[] $entities */
         $entities = $query->getQuery()->getResult();
 
-        $results->recordsFiltered = count($entities);
-
-        for ($i = 0; $i < $request->length || $request->length === -1; $i++) {
-
-            $index = $i + $request->start;
-
-            if ($index >= $results->recordsFiltered) {
-                break;
-            }
-
-            $entity = $entities[$index];
+        foreach ($entities as $entity) {
 
             if (!$entity->isAccountNonLocked()) {
                 $color = 'red';
