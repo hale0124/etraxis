@@ -3,6 +3,10 @@
 table.dataTable {
     text-align: left;
 
+    input[type="checkbox"] {
+        margin: 0;
+    }
+
     tfoot {
 
         display: table-row-group;
@@ -17,21 +21,25 @@ table.dataTable {
             &:last-child {
                 border-right-width: 1px;
             }
+
+            input[type="checkbox"] {
+                margin: 0 7px;
+            }
         }
 
-        input,
+        input[type="text"],
         select {
             border-radius: 1px;
             font-weight: normal;
             width: 100%;
         }
 
-        input {
+        input[type="text"] {
             padding: 2px 6px;
         }
 
         select {
-            padding: 1px 2px;
+            padding: 1px 2px 2px 2px !important;
         }
     }
 
