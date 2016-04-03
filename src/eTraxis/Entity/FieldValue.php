@@ -43,8 +43,7 @@ class FieldValue
     private $fieldId;
 
     /**
-     * @var int Type of the field (obsolete).
-     *
+     * @deprecated 4.1.0
      * @ORM\Column(name="field_type", type="integer")
      */
     private $type;
@@ -140,13 +139,30 @@ class FieldValue
     /**
      * Standard setter.
      *
-     * @param   int $type
+     * @param   string $type
      *
      * @return  self
      */
     public function setType($type)
     {
-        $this->type = $type;
+        /**
+         * @deprecated 4.1.0 A stub for compatibility btw 3.6 and 4.0.
+         */
+        $types = [
+            'number'   => 1,
+            'string'   => 2,
+            'text'     => 3,
+            'checkbox' => 4,
+            'list'     => 5,
+            'record'   => 6,
+            'date'     => 7,
+            'duration' => 8,
+            'decimal'  => 9,
+        ];
+
+        if (array_key_exists($type, $types)) {
+            $this->type = $types[$type];
+        }
 
         return $this;
     }
@@ -154,11 +170,26 @@ class FieldValue
     /**
      * Standard getter.
      *
-     * @return  int
+     * @return  string
      */
     public function getType()
     {
-        return $this->type;
+        /**
+         * @deprecated 4.1.0 A stub for compatibility btw 3.6 and 4.0.
+         */
+        $types = [
+            1 => 'number',
+            2 => 'string',
+            3 => 'text',
+            4 => 'checkbox',
+            5 => 'list',
+            6 => 'record',
+            7 => 'date',
+            8 => 'duration',
+            9 => 'decimal',
+        ];
+
+        return $types[$this->type];
     }
 
     /**
