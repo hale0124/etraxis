@@ -140,8 +140,10 @@ class UsersDataTable implements DataTableHandlerInterface
                     break;
             }
         }
+
         // Total number of entries.
-        $queryTotal = $this->repository->createQueryBuilder('u')->select('COUNT(u.id)');
+        $queryTotal = $this->repository->createQueryBuilder('u');
+        $queryTotal->select('COUNT(u.id)');
         $results->recordsTotal = (int) $queryTotal->getQuery()->getSingleScalarResult();
 
         // Filtered number of entries.
@@ -166,10 +168,11 @@ class UsersDataTable implements DataTableHandlerInterface
         }
 
         // Pagination.
-        $query
-            ->setFirstResult($request->start)
-            ->setMaxResults($request->length)
-        ;
+        $query->setFirstResult($request->start);
+
+        if ($request->length >= 0) {
+            $query->setMaxResults($request->length);
+        }
 
         /** @var \eTraxis\Entity\User[] $entities */
         $entities = $query->getQuery()->getResult();
