@@ -371,4 +371,38 @@ class UsersDataTableTest extends BaseTestCase
 
         self::assertEquals($expected, $actual);
     }
+
+    public function testPagination()
+    {
+        // 2nd page
+        $expected = [
+            'leela',
+            'zapp',
+            'einstein',
+            'artem',
+        ];
+
+        $request = new Request([
+            'draw'    => mt_rand(),
+            'start'   => 10,
+            'length'  => 10,
+            'search'  => ['value' => null, 'regex' => 'false'],
+            'order'   => [
+                ['column' => UsersDataTable::COLUMN_DESCRIPTION, 'dir' => 'desc'],
+                ['column' => UsersDataTable::COLUMN_FULLNAME,    'dir' => 'asc'],
+            ],
+            'columns' => [],
+        ]);
+
+        $results = $this->datatables->handle($request, 'eTraxis:User');
+
+        $actual = [];
+
+        foreach ($results['data'] as $user) {
+            $actual[] = $user[UsersDataTable::COLUMN_USERNAME];
+        }
+
+        self::assertEquals($expected, $actual);
+        self::assertEquals(14, $results['recordsTotal']);
+    }
 }
