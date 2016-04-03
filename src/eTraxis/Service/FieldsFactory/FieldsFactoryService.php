@@ -68,6 +68,9 @@ class FieldsFactoryService implements FieldsFactoryInterface
             case Field::TYPE_NUMBER:
                 return new Fields\UpdateNumberFieldCommand($values);
 
+            case Field::TYPE_DECIMAL:
+                return new Fields\UpdateDecimalFieldCommand($values);
+
             case Field::TYPE_STRING:
                 return new Fields\UpdateStringFieldCommand($values);
 
@@ -88,9 +91,6 @@ class FieldsFactoryService implements FieldsFactoryInterface
 
             case Field::TYPE_DURATION:
                 return new Fields\UpdateDurationFieldCommand($values);
-
-            case Field::TYPE_DECIMAL:
-                return new Fields\UpdateDecimalFieldCommand($values);
 
             default:
                 return null;

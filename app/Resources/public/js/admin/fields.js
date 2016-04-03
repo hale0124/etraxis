@@ -76,11 +76,10 @@ var FieldsApp = (function() {
                     var top = parseInt($dialog.css('top'), 10);
                     $dialog.css('top', top + 25);
                     $('#field_type').change(function() {
-                        var types = [null, 'number', 'string', 'text', 'checkbox', 'list', 'record', 'date', 'duration', 'decimal'];
                         var value = $(this).val();
-                        var type = 'as' + types[value].charAt(0).toUpperCase() + types[value].slice(1);
+                        var type = 'as' + value.charAt(0).toUpperCase() + value.slice(1);
 
-                        if (type == 'checkbox') {
+                        if (type == 'asCheckbox') {
                             $('#field_required').parent().parent().hide();
                         }
                         else {

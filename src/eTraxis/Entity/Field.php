@@ -40,15 +40,15 @@ class Field
     const DELETE = 'field.delete';
 
     // Field type.
-    const TYPE_NUMBER   = 1;
-    const TYPE_STRING   = 2;
-    const TYPE_TEXT     = 3;
-    const TYPE_CHECKBOX = 4;
-    const TYPE_LIST     = 5;
-    const TYPE_RECORD   = 6;
-    const TYPE_DATE     = 7;
-    const TYPE_DURATION = 8;
-    const TYPE_DECIMAL  = 9;
+    const TYPE_NUMBER   = 'number';
+    const TYPE_DECIMAL  = 'decimal';
+    const TYPE_STRING   = 'string';
+    const TYPE_TEXT     = 'text';
+    const TYPE_CHECKBOX = 'checkbox';
+    const TYPE_LIST     = 'list';
+    const TYPE_RECORD   = 'record';
+    const TYPE_DATE     = 'date';
+    const TYPE_DURATION = 'duration';
 
     // Field access.
     const ACCESS_DENIED     = 0;
@@ -294,13 +294,30 @@ class Field
     /**
      * Standard setter.
      *
-     * @param   int $type
+     * @param   string $type
      *
      * @return  self
      */
     public function setType($type)
     {
-        $this->type = $type;
+        /**
+         * @deprecated 4.1.0 A stub for compatibility btw 3.6 and 4.0.
+         */
+        $types = [
+            'number'   => 1,
+            'string'   => 2,
+            'text'     => 3,
+            'checkbox' => 4,
+            'list'     => 5,
+            'record'   => 6,
+            'date'     => 7,
+            'duration' => 8,
+            'decimal'  => 9,
+        ];
+
+        if (array_key_exists($type, $types)) {
+            $this->type = $types[$type];
+        }
 
         return $this;
     }
@@ -308,11 +325,26 @@ class Field
     /**
      * Standard getter.
      *
-     * @return  int
+     * @return  string
      */
     public function getType()
     {
-        return $this->type;
+        /**
+         * @deprecated 4.1.0 A stub for compatibility btw 3.6 and 4.0.
+         */
+        $types = [
+            1 => 'number',
+            2 => 'string',
+            3 => 'text',
+            4 => 'checkbox',
+            5 => 'list',
+            6 => 'record',
+            7 => 'date',
+            8 => 'duration',
+            9 => 'decimal',
+        ];
+
+        return $types[$this->type];
     }
 
     /**
@@ -597,34 +629,6 @@ class Field
     public function getState()
     {
         return $this->state;
-    }
-
-    /**
-     * Returns internal name of the type.
-     *
-     * @return  string
-     *
-     * @todo    Remove when switched from numeric type IDs to string ones.
-     */
-    public function getTypeEx()
-    {
-        $types = [
-            self::TYPE_NUMBER   => 'number',
-            self::TYPE_DECIMAL  => 'decimal',
-            self::TYPE_STRING   => 'string',
-            self::TYPE_TEXT     => 'text',
-            self::TYPE_CHECKBOX => 'checkbox',
-            self::TYPE_LIST     => 'list',
-            self::TYPE_RECORD   => 'record',
-            self::TYPE_DATE     => 'date',
-            self::TYPE_DURATION => 'duration',
-        ];
-
-        if (!array_key_exists($this->type, $types)) {
-            return null;
-        }
-
-        return $types[$this->type];
     }
 
     /**

@@ -23,6 +23,7 @@ class FieldsFactoryServiceTest extends BaseTestCase
         $factory = new FieldsFactoryService();
 
         self::assertInstanceOf(Fields\CreateNumberFieldCommand::class,   $factory->getCreateCommand(Field::TYPE_NUMBER));
+        self::assertInstanceOf(Fields\CreateDecimalFieldCommand::class,  $factory->getCreateCommand(Field::TYPE_DECIMAL));
         self::assertInstanceOf(Fields\CreateStringFieldCommand::class,   $factory->getCreateCommand(Field::TYPE_STRING));
         self::assertInstanceOf(Fields\CreateTextFieldCommand::class,     $factory->getCreateCommand(Field::TYPE_TEXT));
         self::assertInstanceOf(Fields\CreateCheckboxFieldCommand::class, $factory->getCreateCommand(Field::TYPE_CHECKBOX));
@@ -30,9 +31,8 @@ class FieldsFactoryServiceTest extends BaseTestCase
         self::assertInstanceOf(Fields\CreateRecordFieldCommand::class,   $factory->getCreateCommand(Field::TYPE_RECORD));
         self::assertInstanceOf(Fields\CreateDateFieldCommand::class,     $factory->getCreateCommand(Field::TYPE_DATE));
         self::assertInstanceOf(Fields\CreateDurationFieldCommand::class, $factory->getCreateCommand(Field::TYPE_DURATION));
-        self::assertInstanceOf(Fields\CreateDecimalFieldCommand::class,  $factory->getCreateCommand(Field::TYPE_DECIMAL));
 
-        self::assertNull($factory->getCreateCommand(0));
+        self::assertNull($factory->getCreateCommand('unknown'));
     }
 
     public function testUpdate()
@@ -40,6 +40,7 @@ class FieldsFactoryServiceTest extends BaseTestCase
         $factory = new FieldsFactoryService();
 
         self::assertInstanceOf(Fields\UpdateNumberFieldCommand::class,   $factory->getUpdateCommand(Field::TYPE_NUMBER));
+        self::assertInstanceOf(Fields\UpdateDecimalFieldCommand::class,  $factory->getUpdateCommand(Field::TYPE_DECIMAL));
         self::assertInstanceOf(Fields\UpdateStringFieldCommand::class,   $factory->getUpdateCommand(Field::TYPE_STRING));
         self::assertInstanceOf(Fields\UpdateTextFieldCommand::class,     $factory->getUpdateCommand(Field::TYPE_TEXT));
         self::assertInstanceOf(Fields\UpdateCheckboxFieldCommand::class, $factory->getUpdateCommand(Field::TYPE_CHECKBOX));
@@ -47,8 +48,7 @@ class FieldsFactoryServiceTest extends BaseTestCase
         self::assertInstanceOf(Fields\UpdateRecordFieldCommand::class,   $factory->getUpdateCommand(Field::TYPE_RECORD));
         self::assertInstanceOf(Fields\UpdateDateFieldCommand::class,     $factory->getUpdateCommand(Field::TYPE_DATE));
         self::assertInstanceOf(Fields\UpdateDurationFieldCommand::class, $factory->getUpdateCommand(Field::TYPE_DURATION));
-        self::assertInstanceOf(Fields\UpdateDecimalFieldCommand::class,  $factory->getUpdateCommand(Field::TYPE_DECIMAL));
 
-        self::assertNull($factory->getUpdateCommand(0));
+        self::assertNull($factory->getUpdateCommand('unknown'));
     }
 }

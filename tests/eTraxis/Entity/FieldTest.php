@@ -61,9 +61,35 @@ class FieldTest extends BaseTestCase
 
     public function testType()
     {
-        $expected = Field::TYPE_STRING;
-        $this->object->setType($expected);
-        self::assertEquals($expected, $this->object->getType());
+        $this->object->setType(Field::TYPE_NUMBER);
+        self::assertEquals('number', $this->object->getType());
+
+        $this->object->setType(Field::TYPE_DECIMAL);
+        self::assertEquals('decimal', $this->object->getType());
+
+        $this->object->setType(Field::TYPE_STRING);
+        self::assertEquals('string', $this->object->getType());
+
+        $this->object->setType(Field::TYPE_TEXT);
+        self::assertEquals('text', $this->object->getType());
+
+        $this->object->setType(Field::TYPE_CHECKBOX);
+        self::assertEquals('checkbox', $this->object->getType());
+
+        $this->object->setType(Field::TYPE_LIST);
+        self::assertEquals('list', $this->object->getType());
+
+        $this->object->setType(Field::TYPE_RECORD);
+        self::assertEquals('record', $this->object->getType());
+
+        $this->object->setType(Field::TYPE_DATE);
+        self::assertEquals('date', $this->object->getType());
+
+        $this->object->setType(Field::TYPE_DURATION);
+        self::assertEquals('duration', $this->object->getType());
+
+        $this->object->setType('unknown');
+        self::assertEquals('duration', $this->object->getType());
     }
 
     public function testDescription()
@@ -160,39 +186,6 @@ class FieldTest extends BaseTestCase
     {
         $this->object->setState($state = new State());
         self::assertSame($state, $this->object->getState());
-    }
-
-    public function testTypeEx()
-    {
-        $this->object->setType(Field::TYPE_NUMBER);
-        self::assertEquals('number', $this->object->getTypeEx());
-
-        $this->object->setType(Field::TYPE_DECIMAL);
-        self::assertEquals('decimal', $this->object->getTypeEx());
-
-        $this->object->setType(Field::TYPE_STRING);
-        self::assertEquals('string', $this->object->getTypeEx());
-
-        $this->object->setType(Field::TYPE_TEXT);
-        self::assertEquals('text', $this->object->getTypeEx());
-
-        $this->object->setType(Field::TYPE_CHECKBOX);
-        self::assertEquals('checkbox', $this->object->getTypeEx());
-
-        $this->object->setType(Field::TYPE_LIST);
-        self::assertEquals('list', $this->object->getTypeEx());
-
-        $this->object->setType(Field::TYPE_RECORD);
-        self::assertEquals('record', $this->object->getTypeEx());
-
-        $this->object->setType(Field::TYPE_DATE);
-        self::assertEquals('date', $this->object->getTypeEx());
-
-        $this->object->setType(Field::TYPE_DURATION);
-        self::assertEquals('duration', $this->object->getTypeEx());
-
-        $this->object->setType(0);
-        self::assertNull($this->object->getTypeEx());
     }
 
     public function testFacades()

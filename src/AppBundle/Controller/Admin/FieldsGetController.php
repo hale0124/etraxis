@@ -105,7 +105,7 @@ class FieldsGetController extends Controller
             /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
             $authChecker = $this->get('security.authorization_checker');
 
-            return $this->render(sprintf('admin/fields/tab_details_%s.html.twig', $field->getTypeEx()), [
+            return $this->render(sprintf('admin/fields/tab_details_%s.html.twig', $field->getType()), [
                 'field' => $field,
                 'types' => FieldType::getCollection(),
                 'can'   => [
