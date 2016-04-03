@@ -28,11 +28,11 @@ class UpdateStringFieldCommandTest extends BaseTestCase
         self::assertTrue($field->isRequired());
         self::assertTrue($field->hasGuestAccess());
         self::assertFalse($field->getShowInEmails());
-        self::assertEquals(7, $field->getParameter1());
-        self::assertNull($field->getDefaultValue());
-        self::assertNull($field->getRegexCheck());
-        self::assertNull($field->getRegexSearch());
-        self::assertNull($field->getRegexReplace());
+        self::assertEquals(7, $field->getParameters()->getParameter1());
+        self::assertNull($field->getParameters()->getDefaultValue());
+        self::assertNull($field->getRegex()->getCheck());
+        self::assertNull($field->getRegex()->getSearch());
+        self::assertNull($field->getRegex()->getReplace());
 
         $command = new UpdateStringFieldCommand([
             'id'           => $field->getId(),
@@ -52,7 +52,7 @@ class UpdateStringFieldCommandTest extends BaseTestCase
 
         $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 
-        $default = $this->doctrine->getRepository(StringValue::class)->find($field->getDefaultValue());
+        $default = $this->doctrine->getRepository(StringValue::class)->find($field->getParameters()->getDefaultValue());
 
         self::assertEquals(Field::TYPE_STRING, $field->getType());
         self::assertEquals('Code', $field->getName());
@@ -60,10 +60,10 @@ class UpdateStringFieldCommandTest extends BaseTestCase
         self::assertFalse($field->isRequired());
         self::assertFalse($field->hasGuestAccess());
         self::assertTrue($field->getShowInEmails());
-        self::assertEquals(6, $field->getParameter1());
+        self::assertEquals(6, $field->getParameters()->getParameter1());
         self::assertEquals('?ACV??', $default->getValue());
-        self::assertEquals('^(\d{1})ACV(\d{2})$', $field->getRegexCheck());
-        self::assertEquals('^(\d{1})ACV(\d{2})$', $field->getRegexSearch());
-        self::assertEquals('Season $1, Episode $2', $field->getRegexReplace());
+        self::assertEquals('^(\d{1})ACV(\d{2})$', $field->getRegex()->getCheck());
+        self::assertEquals('^(\d{1})ACV(\d{2})$', $field->getRegex()->getSearch());
+        self::assertEquals('Season $1, Episode $2', $field->getRegex()->getReplace());
     }
 }

@@ -57,15 +57,15 @@ class StringFieldTest extends BaseTestCase
 
         $field->setMaxLength(100);
         self::assertEquals(100, $field->getMaxLength());
-        self::assertEquals(100, $this->object->getParameter1());
+        self::assertEquals(100, $this->object->getParameters()->getParameter1());
 
         $field->setMaxLength(0);
         self::assertEquals(StringField::MIN_LENGTH, $field->getMaxLength());
-        self::assertEquals(StringField::MIN_LENGTH, $this->object->getParameter1());
+        self::assertEquals(StringField::MIN_LENGTH, $this->object->getParameters()->getParameter1());
 
         $field->setMaxLength(PHP_INT_MAX);
         self::assertEquals(StringField::MAX_LENGTH, $field->getMaxLength());
-        self::assertEquals(StringField::MAX_LENGTH, $this->object->getParameter1());
+        self::assertEquals(StringField::MAX_LENGTH, $this->object->getParameters()->getParameter1());
     }
 
     public function testDefaultValue()
@@ -80,7 +80,7 @@ class StringFieldTest extends BaseTestCase
 
         $field->setDefaultValue($value->getValue());
         self::assertEquals($value->getValue(), $field->getDefaultValue());
-        self::assertEquals($value->getId(), $this->object->getDefaultValue());
+        self::assertEquals($value->getId(), $this->object->getParameters()->getDefaultValue());
 
         $huge = str_pad(null, 1000);
         $trim = str_pad(null, StringField::MAX_LENGTH);
@@ -90,6 +90,6 @@ class StringFieldTest extends BaseTestCase
 
         $field->setDefaultValue(null);
         self::assertNull($field->getDefaultValue());
-        self::assertNull($this->object->getDefaultValue());
+        self::assertNull($this->object->getParameters()->getDefaultValue());
     }
 }

@@ -29,11 +29,12 @@ class StringFieldCommandHandler extends BaseFieldCommandHandler
     {
         $entity = $this->getEntity($command);
 
-        $entity
-            ->setType(Field::TYPE_STRING)
-            ->setRegexCheck($command->regexCheck)
-            ->setRegexSearch($command->regexSearch)
-            ->setRegexReplace($command->regexReplace)
+        $entity->setType(Field::TYPE_STRING);
+
+        $entity->getRegex()
+            ->setCheck($command->regexCheck)
+            ->setSearch($command->regexSearch)
+            ->setReplace($command->regexReplace)
         ;
 
         $entity->asString()

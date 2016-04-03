@@ -52,7 +52,7 @@ class DurationField extends AbstractField
      */
     public function setMinValue($value)
     {
-        $this->field->setParameter1($value === null ? self::MIN_VALUE : $this->str2int($value));
+        $this->field->getParameters()->setParameter1($value === null ? self::MIN_VALUE : $this->str2int($value));
 
         return $this;
     }
@@ -64,7 +64,7 @@ class DurationField extends AbstractField
      */
     public function getMinValue()
     {
-        return $this->int2str($this->field->getParameter1());
+        return $this->int2str($this->field->getParameters()->getParameter1());
     }
 
     /**
@@ -76,7 +76,7 @@ class DurationField extends AbstractField
      */
     public function setMaxValue($value)
     {
-        $this->field->setParameter2($value === null ? self::MAX_VALUE : $this->str2int($value));
+        $this->field->getParameters()->setParameter2($value === null ? self::MAX_VALUE : $this->str2int($value));
 
         return $this;
     }
@@ -88,7 +88,7 @@ class DurationField extends AbstractField
      */
     public function getMaxValue()
     {
-        return $this->int2str($this->field->getParameter2());
+        return $this->int2str($this->field->getParameters()->getParameter2());
     }
 
     /**
@@ -100,7 +100,7 @@ class DurationField extends AbstractField
      */
     public function setDefaultValue($value)
     {
-        $this->field->setDefaultValue($this->str2int($value));
+        $this->field->getParameters()->setDefaultValue($this->str2int($value));
 
         return $this;
     }
@@ -112,7 +112,7 @@ class DurationField extends AbstractField
      */
     public function getDefaultValue()
     {
-        return $this->int2str($this->field->getDefaultValue());
+        return $this->int2str($this->field->getParameters()->getDefaultValue());
     }
 
     /**

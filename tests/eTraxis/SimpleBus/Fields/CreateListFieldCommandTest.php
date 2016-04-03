@@ -40,8 +40,8 @@ class CreateListFieldCommandTest extends BaseTestCase
 
         self::assertInstanceOf(Field::class, $field);
         self::assertEquals(Field::TYPE_LIST, $field->getType());
-        self::assertNull($field->getParameter1());
-        self::assertNull($field->getParameter2());
-        self::assertNull($field->getDefaultValue());
+        self::assertNull($field->getParameters()->getParameter1());
+        self::assertNull($field->getParameters()->getParameter2());
+        self::assertNull($field->getParameters()->getDefaultValue());
     }
 }

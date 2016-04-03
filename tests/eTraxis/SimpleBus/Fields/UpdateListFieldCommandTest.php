@@ -27,7 +27,7 @@ class UpdateListFieldCommandTest extends BaseTestCase
         self::assertTrue($field->isRequired());
         self::assertTrue($field->hasGuestAccess());
         self::assertFalse($field->getShowInEmails());
-        self::assertNull($field->getDefaultValue());
+        self::assertNull($field->getParameters()->getDefaultValue());
 
         $command = new UpdateListFieldCommand([
             'id'           => $field->getId(),
@@ -49,7 +49,7 @@ class UpdateListFieldCommandTest extends BaseTestCase
         self::assertFalse($field->isRequired());
         self::assertFalse($field->hasGuestAccess());
         self::assertTrue($field->getShowInEmails());
-        self::assertEquals(7, $field->getDefaultValue());
+        self::assertEquals(7, $field->getParameters()->getDefaultValue());
     }
 
     /**

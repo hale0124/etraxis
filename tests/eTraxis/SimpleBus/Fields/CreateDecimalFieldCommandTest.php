@@ -45,9 +45,9 @@ class CreateDecimalFieldCommandTest extends BaseTestCase
         /** @var DecimalValue $minValue */
         /** @var DecimalValue $maxValue */
         /** @var DecimalValue $default */
-        $minValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameter1());
-        $maxValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameter2());
-        $default  = $this->doctrine->getRepository(DecimalValue::class)->find($field->getDefaultValue());
+        $minValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameters()->getParameter1());
+        $maxValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameters()->getParameter2());
+        $default  = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameters()->getDefaultValue());
 
         self::assertInstanceOf(Field::class, $field);
         self::assertEquals(Field::TYPE_DECIMAL, $field->getType());

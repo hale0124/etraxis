@@ -27,9 +27,9 @@ class UpdateNumberFieldCommandTest extends BaseTestCase
         self::assertTrue($field->isRequired());
         self::assertTrue($field->hasGuestAccess());
         self::assertFalse($field->getShowInEmails());
-        self::assertEquals(1, $field->getParameter1());
-        self::assertEquals(100, $field->getParameter2());
-        self::assertNull($field->getDefaultValue());
+        self::assertEquals(1, $field->getParameters()->getParameter1());
+        self::assertEquals(100, $field->getParameters()->getParameter2());
+        self::assertNull($field->getParameters()->getDefaultValue());
 
         $command = new UpdateNumberFieldCommand([
             'id'           => $field->getId(),
@@ -53,9 +53,9 @@ class UpdateNumberFieldCommandTest extends BaseTestCase
         self::assertFalse($field->isRequired());
         self::assertFalse($field->hasGuestAccess());
         self::assertTrue($field->getShowInEmails());
-        self::assertEquals(0, $field->getParameter1());
-        self::assertEquals(50, $field->getParameter2());
-        self::assertEquals(1, $field->getDefaultValue());
+        self::assertEquals(0, $field->getParameters()->getParameter1());
+        self::assertEquals(50, $field->getParameters()->getParameter2());
+        self::assertEquals(1, $field->getParameters()->getDefaultValue());
     }
 
     /**

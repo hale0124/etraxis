@@ -43,9 +43,9 @@ class CreateDurationFieldCommandTest extends BaseTestCase
 
         self::assertInstanceOf(Field::class, $field);
         self::assertEquals(Field::TYPE_DURATION, $field->getType());
-        self::assertEquals(0, $field->getParameter1());
-        self::assertEquals(10080, $field->getParameter2());
-        self::assertEquals(2880, $field->getDefaultValue());
+        self::assertEquals(0, $field->getParameters()->getParameter1());
+        self::assertEquals(10080, $field->getParameters()->getParameter2());
+        self::assertEquals(2880, $field->getParameters()->getDefaultValue());
     }
 
     /**

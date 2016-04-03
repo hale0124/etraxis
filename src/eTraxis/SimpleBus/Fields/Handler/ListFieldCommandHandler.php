@@ -53,7 +53,7 @@ class ListFieldCommandHandler extends BaseFieldCommandHandler
                 }
             }
 
-            $entity->setDefaultValue($command->defaultValue);
+            $entity->getParameters()->setDefaultValue($command->defaultValue);
         }
 
         $this->doctrine->getManager()->persist($entity);

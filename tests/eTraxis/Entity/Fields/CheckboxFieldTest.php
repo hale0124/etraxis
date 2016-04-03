@@ -51,10 +51,10 @@ class CheckboxFieldTest extends BaseTestCase
 
         $field->setDefaultValue(true);
         self::assertTrue($field->getDefaultValue());
-        self::assertEquals(1, $this->object->getDefaultValue());
+        self::assertEquals(1, $this->object->getParameters()->getDefaultValue());
 
         $field->setDefaultValue(false);
         self::assertFalse($field->getDefaultValue());
-        self::assertEquals(0, $this->object->getDefaultValue());
+        self::assertEquals(0, $this->object->getParameters()->getDefaultValue());
     }
 }

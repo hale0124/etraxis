@@ -43,9 +43,9 @@ class CreateNumberFieldCommandTest extends BaseTestCase
 
         self::assertInstanceOf(Field::class, $field);
         self::assertEquals(Field::TYPE_NUMBER, $field->getType());
-        self::assertEquals(1, $field->getParameter1());
-        self::assertEquals(12, $field->getParameter2());
-        self::assertEquals(2, $field->getDefaultValue());
+        self::assertEquals(1, $field->getParameters()->getParameter1());
+        self::assertEquals(12, $field->getParameters()->getParameter2());
+        self::assertEquals(2, $field->getParameters()->getDefaultValue());
     }
 
     /**

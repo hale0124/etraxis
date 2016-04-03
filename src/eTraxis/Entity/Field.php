@@ -35,7 +35,6 @@ class Field
     // Constraints.
     const MAX_NAME        = 50;
     const MAX_DESCRIPTION = 1000;
-    const MAX_REGEX       = 500;
 
     // Actions.
     const DELETE = 'field.delete';
@@ -169,76 +168,18 @@ class Field
     private $showInEmails;
 
     /**
-     * @var string Perl-compatible regular expression which values of the field must conform to.
+     * @var FieldRegex Perl-compatible regular expression options.
      *
-     * @ORM\Column(name="regex_check", type="string", length=500, nullable=true)
+     * @ORM\Embedded(class="FieldRegex")
      */
-    private $regexCheck;
+    private $regex;
 
     /**
-     * @var string Perl-compatible regular expression to modify values of the field before display them (search for).
+     * @var FieldParameters Field type-specific parameters.
      *
-     * @ORM\Column(name="regex_search", type="string", length=500, nullable=true)
+     * @ORM\Embedded(class="FieldParameters", columnPrefix=false)
      */
-    private $regexSearch;
-
-    /**
-     * @var string Perl-compatible regular expression to modify values of the field before display them (replace with).
-     *
-     * @ORM\Column(name="regex_replace", type="string", length=500, nullable=true)
-     */
-    private $regexReplace;
-
-    /**
-     * @var int First parameter of the field. Depends on field type as following:
-     *
-     *          "number"   - minimum of range of allowed values (from -1000000000 till +1000000000)
-     *          "decimal"  - minimum of range of allowed values (foreign key to "decimal_values" table)
-     *          "string"   - maximum allowed length of values (up to 250)
-     *          "text"     - maximum allowed length of values (up to 4000)
-     *          "checkbox" - NULL (not used)
-     *          "list"     - NULL (not used)
-     *          "record"   - NULL (not used)
-     *          "date"     - minimum of range of allowed values (amount of days since current date; negative value shifts to the past)
-     *          "duration" - minimum of range of allowed values (amount of minutes from 0:00 till 999999:59)
-     *
-     * @ORM\Column(name="param1", type="integer", nullable=true)
-     */
-    private $parameter1;
-
-    /**
-     * @var int Second parameter of the field. Depends on field type as following:
-     *
-     *          "number"   - maximum of range of allowed values (from -1000000000 till +1000000000)
-     *          "decimal"  - maximum of range of allowed values (foreign key to "decimal_values" table)
-     *          "string"   - NULL (not used)
-     *          "text"     - NULL (not used)
-     *          "checkbox" - NULL (not used)
-     *          "list"     - NULL (not used)
-     *          "record"   - NULL (not used)
-     *          "date"     - maximum of range of allowed values (amount of days since current date; negative value shifts to the past)
-     *          "duration" - maximum of range of allowed values (amount of minutes from 0:00 till 999999:59)
-     *
-     * @ORM\Column(name="param2", type="integer", nullable=true)
-     */
-    private $parameter2;
-
-    /**
-     * @var int Default value of the field. Depends on field type as following:
-     *
-     *          "number"   - default integer value (from -1000000000 till +1000000000)
-     *          "decimal"  - default decimal value (foreign key to "decimal_values" table)
-     *          "string"   - default string value (foreign key to "string_values" table)
-     *          "text"     - default string value (foreign key to "text_values" table)
-     *          "checkbox" - default state of checkbox (0 - unchecked, 1 - checked)
-     *          "list"     - integer value of default list item (see "list_values" table)
-     *          "record"   - NULL (not used)
-     *          "date"     - default date value (amount of days since current date; negative value shifts to the past)
-     *          "duration" - default duration value (amount of minutes from 0:00 till 999999:59)
-     *
-     * @ORM\Column(name="value_id", type="integer", nullable=true)
-     */
-    private $defaultValue;
+    private $parameters;
 
     /**
      * @var Template Template of the field.
@@ -263,12 +204,9 @@ class Field
     {
         $this->removedAt    = 0;
         $this->addSeparator = 0;
-        $this->regexCheck   = null;
-        $this->regexSearch  = null;
-        $this->regexReplace = null;
-        $this->parameter1   = null;
-        $this->parameter2   = null;
-        $this->defaultValue = null;
+
+        $this->regex      = new FieldRegex();
+        $this->parameters = new FieldParameters();
     }
 
     /**
@@ -594,147 +532,23 @@ class Field
     }
 
     /**
-     * Standard setter.
+     * Standard getter.
      *
-     * @param   string $regexCheck
-     *
-     * @return  self
+     * @return  FieldRegex
      */
-    public function setRegexCheck($regexCheck)
+    public function getRegex()
     {
-        $this->regexCheck = $regexCheck;
-
-        return $this;
+        return $this->regex;
     }
 
     /**
      * Standard getter.
      *
-     * @return  string
+     * @return  FieldParameters
      */
-    public function getRegexCheck()
+    public function getParameters()
     {
-        return $this->regexCheck;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   string $regexSearch
-     *
-     * @return  self
-     */
-    public function setRegexSearch($regexSearch)
-    {
-        $this->regexSearch = $regexSearch;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  string
-     */
-    public function getRegexSearch()
-    {
-        return $this->regexSearch;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   string $regexReplace
-     *
-     * @return  self
-     */
-    public function setRegexReplace($regexReplace)
-    {
-        $this->regexReplace = $regexReplace;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  string
-     */
-    public function getRegexReplace()
-    {
-        return $this->regexReplace;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $parameter1
-     *
-     * @return  self
-     */
-    public function setParameter1($parameter1)
-    {
-        $this->parameter1 = $parameter1;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getParameter1()
-    {
-        return $this->parameter1;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $parameter2
-     *
-     * @return  self
-     */
-    public function setParameter2($parameter2)
-    {
-        $this->parameter2 = $parameter2;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getParameter2()
-    {
-        return $this->parameter2;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $defaultValue
-     *
-     * @return  self
-     */
-    public function setDefaultValue($defaultValue)
-    {
-        $this->defaultValue = $defaultValue;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getDefaultValue()
-    {
-        return $this->defaultValue;
+        return $this->parameters;
     }
 
     /**

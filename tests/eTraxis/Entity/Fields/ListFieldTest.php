@@ -55,12 +55,12 @@ class ListFieldTest extends BaseTestCase
         $field->setDefaultKey($item->getKey());
         self::assertEquals($item->getKey(), $field->getDefaultKey());
         self::assertEquals($item->getValue(), $field->getDefaultValue());
-        self::assertEquals($item->getKey(), $this->object->getDefaultValue());
+        self::assertEquals($item->getKey(), $this->object->getParameters()->getDefaultValue());
 
         $field->setDefaultKey(null);
         self::assertNull($field->getDefaultKey());
         self::assertNull($field->getDefaultValue());
-        self::assertNull($this->object->getDefaultValue());
+        self::assertNull($this->object->getParameters()->getDefaultValue());
     }
 
     public function testDefaultValue()
@@ -73,11 +73,11 @@ class ListFieldTest extends BaseTestCase
         $field->setDefaultValue($item->getValue());
         self::assertEquals($item->getKey(), $field->getDefaultKey());
         self::assertEquals($item->getValue(), $field->getDefaultValue());
-        self::assertEquals($item->getKey(), $this->object->getDefaultValue());
+        self::assertEquals($item->getKey(), $this->object->getParameters()->getDefaultValue());
 
         $field->setDefaultValue(null);
         self::assertNull($field->getDefaultKey());
         self::assertNull($field->getDefaultValue());
-        self::assertNull($this->object->getDefaultValue());
+        self::assertNull($this->object->getParameters()->getDefaultValue());
     }
 }

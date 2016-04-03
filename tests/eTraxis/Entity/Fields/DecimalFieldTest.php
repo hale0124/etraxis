@@ -67,7 +67,7 @@ class DecimalFieldTest extends BaseTestCase
 
         $field->setMinValue($pi);
         self::assertEquals($pi, $field->getMinValue());
-        self::assertEquals($value->getId(), $this->object->getParameter1());
+        self::assertEquals($value->getId(), $this->object->getParameters()->getParameter1());
 
         $field->setMinValue($min);
         self::assertEquals(DecimalField::MIN_VALUE, $field->getMinValue());
@@ -92,7 +92,7 @@ class DecimalFieldTest extends BaseTestCase
 
         $field->setMaxValue($pi);
         self::assertEquals($pi, $field->getMaxValue());
-        self::assertEquals($value->getId(), $this->object->getParameter2());
+        self::assertEquals($value->getId(), $this->object->getParameters()->getParameter2());
 
         $field->setMaxValue($min);
         self::assertEquals(DecimalField::MIN_VALUE, $field->getMaxValue());
@@ -117,7 +117,7 @@ class DecimalFieldTest extends BaseTestCase
 
         $field->setDefaultValue($pi);
         self::assertEquals($pi, $field->getDefaultValue());
-        self::assertEquals($value->getId(), $this->object->getDefaultValue());
+        self::assertEquals($value->getId(), $this->object->getParameters()->getDefaultValue());
 
         $field->setDefaultValue($min);
         self::assertEquals(DecimalField::MIN_VALUE, $field->getDefaultValue());
@@ -127,6 +127,6 @@ class DecimalFieldTest extends BaseTestCase
 
         $field->setDefaultValue(null);
         self::assertNull($field->getDefaultValue());
-        self::assertNull($this->object->getDefaultValue());
+        self::assertNull($this->object->getParameters()->getDefaultValue());
     }
 }

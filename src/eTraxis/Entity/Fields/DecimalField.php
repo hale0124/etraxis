@@ -65,7 +65,7 @@ class DecimalField extends AbstractField
         }
 
         $id = $this->repository->save($value);
-        $this->field->setParameter1($id);
+        $this->field->getParameters()->setParameter1($id);
 
         return $this;
     }
@@ -78,7 +78,7 @@ class DecimalField extends AbstractField
     public function getMinValue()
     {
         /** @var \eTraxis\Entity\DecimalValue $value */
-        $value = $this->repository->find($this->field->getParameter1());
+        $value = $this->repository->find($this->field->getParameters()->getParameter1());
 
         return $value->getValue();
     }
@@ -101,7 +101,7 @@ class DecimalField extends AbstractField
         }
 
         $id = $this->repository->save($value);
-        $this->field->setParameter2($id);
+        $this->field->getParameters()->setParameter2($id);
 
         return $this;
     }
@@ -114,7 +114,7 @@ class DecimalField extends AbstractField
     public function getMaxValue()
     {
         /** @var \eTraxis\Entity\DecimalValue $value */
-        $value = $this->repository->find($this->field->getParameter2());
+        $value = $this->repository->find($this->field->getParameters()->getParameter2());
 
         return $value->getValue();
     }
@@ -143,7 +143,7 @@ class DecimalField extends AbstractField
             ? null
             : $this->repository->save($value);
 
-        $this->field->setDefaultValue($id);
+        $this->field->getParameters()->setDefaultValue($id);
 
         return $this;
     }
@@ -155,7 +155,7 @@ class DecimalField extends AbstractField
      */
     public function getDefaultValue()
     {
-        $id = $this->field->getDefaultValue();
+        $id = $this->field->getParameters()->getDefaultValue();
 
         if ($id === null) {
             return null;

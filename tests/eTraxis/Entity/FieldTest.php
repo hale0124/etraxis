@@ -138,46 +138,16 @@ class FieldTest extends BaseTestCase
         self::assertTrue($this->object->getShowInEmails());
     }
 
-    public function testRegexCheck()
+    public function testRegex()
     {
-        $expected = 'PCRE';
-        $this->object->setRegexCheck($expected);
-        self::assertEquals($expected, $this->object->getRegexCheck());
+        self::assertNotNull($this->object->getRegex());
+        self::assertInstanceOf(FieldRegex::class, $this->object->getRegex());
     }
 
-    public function testRegexSearch()
+    public function testParameters()
     {
-        $expected = 'PCRE';
-        $this->object->setRegexSearch($expected);
-        self::assertEquals($expected, $this->object->getRegexSearch());
-    }
-
-    public function testRegexReplace()
-    {
-        $expected = 'PCRE';
-        $this->object->setRegexReplace($expected);
-        self::assertEquals($expected, $this->object->getRegexReplace());
-    }
-
-    public function testParameter1()
-    {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setParameter1($expected);
-        self::assertEquals($expected, $this->object->getParameter1());
-    }
-
-    public function testParameter2()
-    {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setParameter2($expected);
-        self::assertEquals($expected, $this->object->getParameter2());
-    }
-
-    public function testDefaultValue()
-    {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setDefaultValue($expected);
-        self::assertEquals($expected, $this->object->getDefaultValue());
+        self::assertNotNull($this->object->getParameters());
+        self::assertInstanceOf(FieldParameters::class, $this->object->getParameters());
     }
 
     public function testTemplate()

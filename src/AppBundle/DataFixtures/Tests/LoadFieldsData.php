@@ -163,9 +163,12 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     ->setAuthorAccess($info['author'])
                     ->setResponsibleAccess($info['responsible'])
                     ->setShowInEmails(false)
-                    ->setParameter1($info['param1'])
                     ->setTemplate($state->getTemplate())
                     ->setState($state)
+                ;
+
+                $field->getParameters()
+                    ->setParameter1($info['param1'])
                 ;
 
                 $this->addReference($state_ref . ':' . $order, $field);
@@ -353,10 +356,13 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     ->setAuthorAccess($info['author'])
                     ->setResponsibleAccess($info['responsible'])
                     ->setShowInEmails(false)
-                    ->setParameter1($info['param1'])
-                    ->setParameter2($info['param2'])
                     ->setTemplate($state->getTemplate())
                     ->setState($state)
+                ;
+
+                $field->getParameters()
+                    ->setParameter1($info['param1'])
+                    ->setParameter2($info['param2'])
                 ;
 
                 $this->addReference($state_ref . ':' . $order, $field);

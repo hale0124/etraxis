@@ -56,19 +56,19 @@ class DurationFieldTest extends BaseTestCase
 
         $field->setMinValue(null);
         self::assertEquals($min, $field->getMinValue());
-        self::assertEquals(DurationField::MIN_VALUE, $this->object->getParameter1());
+        self::assertEquals(DurationField::MIN_VALUE, $this->object->getParameters()->getParameter1());
 
         $field->setMinValue($value);
         self::assertEquals($value, $field->getMinValue());
-        self::assertEquals($duration, $this->object->getParameter1());
+        self::assertEquals($duration, $this->object->getParameters()->getParameter1());
 
         $field->setMinValue($min);
         self::assertEquals($min, $field->getMinValue());
-        self::assertEquals(DurationField::MIN_VALUE, $this->object->getParameter1());
+        self::assertEquals(DurationField::MIN_VALUE, $this->object->getParameters()->getParameter1());
 
         $field->setMinValue($max);
         self::assertEquals($max, $field->getMinValue());
-        self::assertEquals(DurationField::MAX_VALUE, $this->object->getParameter1());
+        self::assertEquals(DurationField::MAX_VALUE, $this->object->getParameters()->getParameter1());
     }
 
     public function testMaxValue()
@@ -82,19 +82,19 @@ class DurationFieldTest extends BaseTestCase
 
         $field->setMaxValue(null);
         self::assertEquals($max, $field->getMaxValue());
-        self::assertEquals(DurationField::MAX_VALUE, $this->object->getParameter2());
+        self::assertEquals(DurationField::MAX_VALUE, $this->object->getParameters()->getParameter2());
 
         $field->setMaxValue($value);
         self::assertEquals($value, $field->getMaxValue());
-        self::assertEquals($duration, $this->object->getParameter2());
+        self::assertEquals($duration, $this->object->getParameters()->getParameter2());
 
         $field->setMaxValue($min);
         self::assertEquals($min, $field->getMaxValue());
-        self::assertEquals(DurationField::MIN_VALUE, $this->object->getParameter2());
+        self::assertEquals(DurationField::MIN_VALUE, $this->object->getParameters()->getParameter2());
 
         $field->setMaxValue($max);
         self::assertEquals($max, $field->getMaxValue());
-        self::assertEquals(DurationField::MAX_VALUE, $this->object->getParameter2());
+        self::assertEquals(DurationField::MAX_VALUE, $this->object->getParameters()->getParameter2());
     }
 
     public function testDefaultValue()
@@ -108,19 +108,19 @@ class DurationFieldTest extends BaseTestCase
 
         $field->setDefaultValue($value);
         self::assertEquals($value, $field->getDefaultValue());
-        self::assertEquals($duration, $this->object->getDefaultValue());
+        self::assertEquals($duration, $this->object->getParameters()->getDefaultValue());
 
         $field->setDefaultValue($min);
         self::assertEquals($min, $field->getDefaultValue());
-        self::assertEquals(DurationField::MIN_VALUE, $this->object->getDefaultValue());
+        self::assertEquals(DurationField::MIN_VALUE, $this->object->getParameters()->getDefaultValue());
 
         $field->setDefaultValue($max);
         self::assertEquals($max, $field->getDefaultValue());
-        self::assertEquals(DurationField::MAX_VALUE, $this->object->getDefaultValue());
+        self::assertEquals(DurationField::MAX_VALUE, $this->object->getParameters()->getDefaultValue());
 
         $field->setDefaultValue(null);
         self::assertNull($field->getDefaultValue());
-        self::assertNull($this->object->getDefaultValue());
+        self::assertNull($this->object->getParameters()->getDefaultValue());
     }
 
     public function testInvalidValues()
@@ -130,10 +130,10 @@ class DurationFieldTest extends BaseTestCase
         $min = '0:00';
         $max = '999999:59';
 
-        $this->object->setDefaultValue(-1);
+        $this->object->getParameters()->setDefaultValue(-1);
         self::assertEquals($min, $field->getDefaultValue());
 
-        $this->object->setDefaultValue(60000000);
+        $this->object->getParameters()->setDefaultValue(60000000);
         self::assertEquals($max, $field->getDefaultValue());
 
         $field->setDefaultValue('0:99');

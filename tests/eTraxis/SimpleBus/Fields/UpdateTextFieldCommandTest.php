@@ -28,11 +28,11 @@ class UpdateTextFieldCommandTest extends BaseTestCase
         self::assertTrue($field->isRequired());
         self::assertTrue($field->hasGuestAccess());
         self::assertFalse($field->getShowInEmails());
-        self::assertEquals(2000, $field->getParameter1());
-        self::assertNull($field->getDefaultValue());
-        self::assertNull($field->getRegexCheck());
-        self::assertNull($field->getRegexSearch());
-        self::assertNull($field->getRegexReplace());
+        self::assertEquals(2000, $field->getParameters()->getParameter1());
+        self::assertNull($field->getParameters()->getDefaultValue());
+        self::assertNull($field->getRegex()->getCheck());
+        self::assertNull($field->getRegex()->getSearch());
+        self::assertNull($field->getRegex()->getReplace());
 
         $command = new UpdateTextFieldCommand([
             'id'           => $field->getId(),
@@ -52,7 +52,7 @@ class UpdateTextFieldCommandTest extends BaseTestCase
 
         $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 
-        $default = $this->doctrine->getRepository(TextValue::class)->find($field->getDefaultValue());
+        $default = $this->doctrine->getRepository(TextValue::class)->find($field->getParameters()->getDefaultValue());
 
         self::assertEquals(Field::TYPE_TEXT, $field->getType());
         self::assertEquals('Story', $field->getName());
@@ -60,10 +60,10 @@ class UpdateTextFieldCommandTest extends BaseTestCase
         self::assertFalse($field->isRequired());
         self::assertFalse($field->hasGuestAccess());
         self::assertTrue($field->getShowInEmails());
-        self::assertEquals(1000, $field->getParameter1());
+        self::assertEquals(1000, $field->getParameters()->getParameter1());
         self::assertEquals('TBD', $default->getValue());
-        self::assertEquals('^(.+)$', $field->getRegexCheck());
-        self::assertEquals('^(.+)$', $field->getRegexSearch());
-        self::assertEquals('$1', $field->getRegexReplace());
+        self::assertEquals('^(.+)$', $field->getRegex()->getCheck());
+        self::assertEquals('^(.+)$', $field->getRegex()->getSearch());
+        self::assertEquals('$1', $field->getRegex()->getReplace());
     }
 }

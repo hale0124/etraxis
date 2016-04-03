@@ -27,7 +27,7 @@ class UpdateCheckboxFieldCommandTest extends BaseTestCase
         self::assertTrue($field->isRequired());
         self::assertFalse($field->hasGuestAccess());
         self::assertFalse($field->getShowInEmails());
-        self::assertNull($field->getDefaultValue());
+        self::assertNull($field->getParameters()->getDefaultValue());
 
         $command = new UpdateCheckboxFieldCommand([
             'id'           => $field->getId(),

@@ -55,7 +55,7 @@ class DateFieldTest extends BaseTestCase
 
         $field->setMinValue($value);
         self::assertEquals($value, $field->getMinValue());
-        self::assertEquals($value, $this->object->getParameter1());
+        self::assertEquals($value, $this->object->getParameters()->getParameter1());
 
         $field->setMinValue($min);
         self::assertEquals(DateField::MIN_VALUE, $field->getMinValue());
@@ -74,7 +74,7 @@ class DateFieldTest extends BaseTestCase
 
         $field->setMaxValue($value);
         self::assertEquals($value, $field->getMaxValue());
-        self::assertEquals($value, $this->object->getParameter2());
+        self::assertEquals($value, $this->object->getParameters()->getParameter2());
 
         $field->setMaxValue($min);
         self::assertEquals(DateField::MIN_VALUE, $field->getMaxValue());
@@ -93,7 +93,7 @@ class DateFieldTest extends BaseTestCase
 
         $field->setDefaultValue($value);
         self::assertEquals($value, $field->getDefaultValue());
-        self::assertEquals($value, $this->object->getDefaultValue());
+        self::assertEquals($value, $this->object->getParameters()->getDefaultValue());
 
         $field->setDefaultValue($min);
         self::assertEquals(DateField::MIN_VALUE, $field->getDefaultValue());
@@ -103,6 +103,6 @@ class DateFieldTest extends BaseTestCase
 
         $field->setDefaultValue(null);
         self::assertNull($field->getDefaultValue());
-        self::assertNull($this->object->getDefaultValue());
+        self::assertNull($this->object->getParameters()->getDefaultValue());
     }
 }

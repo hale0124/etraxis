@@ -67,7 +67,7 @@ class ListField extends AbstractField
             $key = ($item ? $item->getKey() : null);
         }
 
-        $this->field->setDefaultValue($key);
+        $this->field->getParameters()->setDefaultValue($key);
 
         return $this;
     }
@@ -79,7 +79,7 @@ class ListField extends AbstractField
      */
     public function getDefaultKey()
     {
-        return $this->field->getDefaultValue();
+        return $this->field->getParameters()->getDefaultValue();
     }
 
     /**
@@ -105,7 +105,7 @@ class ListField extends AbstractField
             $key = null;
         }
 
-        $this->field->setDefaultValue($key);
+        $this->field->getParameters()->setDefaultValue($key);
 
         return $this;
     }
@@ -117,7 +117,7 @@ class ListField extends AbstractField
      */
     public function getDefaultValue()
     {
-        $key = $this->field->getDefaultValue();
+        $key = $this->field->getParameters()->getDefaultValue();
 
         if ($key === null) {
             return null;

@@ -45,14 +45,14 @@ class CreateTextFieldCommandTest extends BaseTestCase
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => $command->name]);
 
         /** @var TextValue $default */
-        $default = $this->doctrine->getRepository(TextValue::class)->find($field->getDefaultValue());
+        $default = $this->doctrine->getRepository(TextValue::class)->find($field->getParameters()->getDefaultValue());
 
         self::assertInstanceOf(Field::class, $field);
         self::assertEquals(Field::TYPE_TEXT, $field->getType());
-        self::assertEquals(1000, $field->getParameter1());
+        self::assertEquals(1000, $field->getParameters()->getParameter1());
         self::assertEquals('N/A', $default->getValue());
-        self::assertEquals('(\d{3})-(\d{3})-(\d{4})', $field->getRegexCheck());
-        self::assertEquals('(\d{3})-(\d{3})-(\d{4})', $field->getRegexSearch());
-        self::assertEquals('($1) $2-$3', $field->getRegexReplace());
+        self::assertEquals('(\d{3})-(\d{3})-(\d{4})', $field->getRegex()->getCheck());
+        self::assertEquals('(\d{3})-(\d{3})-(\d{4})', $field->getRegex()->getSearch());
+        self::assertEquals('($1) $2-$3', $field->getRegex()->getReplace());
     }
 }

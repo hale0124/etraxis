@@ -64,7 +64,7 @@ class StringField extends AbstractField
             $length = self::MAX_LENGTH;
         }
 
-        $this->field->setParameter1($length);
+        $this->field->getParameters()->setParameter1($length);
 
         return $this;
     }
@@ -76,7 +76,7 @@ class StringField extends AbstractField
      */
     public function getMaxLength()
     {
-        return $this->field->getParameter1();
+        return $this->field->getParameters()->getParameter1();
     }
 
     /**
@@ -96,7 +96,7 @@ class StringField extends AbstractField
             ? null
             : $this->repository->save($value);
 
-        $this->field->setDefaultValue($id);
+        $this->field->getParameters()->setDefaultValue($id);
 
         return $this;
     }
@@ -108,7 +108,7 @@ class StringField extends AbstractField
      */
     public function getDefaultValue()
     {
-        $id = $this->field->getDefaultValue();
+        $id = $this->field->getParameters()->getDefaultValue();
 
         if ($id === null) {
             return null;

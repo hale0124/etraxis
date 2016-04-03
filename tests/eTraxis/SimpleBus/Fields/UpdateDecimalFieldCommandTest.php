@@ -25,8 +25,8 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
         /** @var DecimalValue $minValue */
         /** @var DecimalValue $maxValue */
         /** @var DecimalValue $default */
-        $minValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameter1());
-        $maxValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameter2());
+        $minValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameters()->getParameter1());
+        $maxValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameters()->getParameter2());
 
         self::assertEquals(Field::TYPE_DECIMAL, $field->getType());
         self::assertEquals('U.S. viewers', $field->getName());
@@ -36,7 +36,7 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
         self::assertFalse($field->getShowInEmails());
         self::assertEquals('0.0', $minValue->getValue());
         self::assertEquals('10.0', $maxValue->getValue());
-        self::assertNull($field->getDefaultValue());
+        self::assertNull($field->getParameters()->getDefaultValue());
 
         $command = new UpdateDecimalFieldCommand([
             'id'           => $field->getId(),
@@ -54,9 +54,9 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
 
         $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 
-        $minValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameter1());
-        $maxValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameter2());
-        $default  = $this->doctrine->getRepository(DecimalValue::class)->find($field->getDefaultValue());
+        $minValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameters()->getParameter1());
+        $maxValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameters()->getParameter2());
+        $default  = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameters()->getDefaultValue());
 
         self::assertEquals(Field::TYPE_DECIMAL, $field->getType());
         self::assertEquals('Total U.S. viewers', $field->getName());

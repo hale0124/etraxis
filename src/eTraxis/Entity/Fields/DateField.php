@@ -60,7 +60,7 @@ class DateField extends AbstractField
             $value = self::MAX_VALUE;
         }
 
-        $this->field->setParameter1($value);
+        $this->field->getParameters()->setParameter1($value);
 
         return $this;
     }
@@ -72,7 +72,7 @@ class DateField extends AbstractField
      */
     public function getMinValue()
     {
-        return $this->field->getParameter1();
+        return $this->field->getParameters()->getParameter1();
     }
 
     /**
@@ -92,7 +92,7 @@ class DateField extends AbstractField
             $value = self::MAX_VALUE;
         }
 
-        $this->field->setParameter2($value);
+        $this->field->getParameters()->setParameter2($value);
 
         return $this;
     }
@@ -104,7 +104,7 @@ class DateField extends AbstractField
      */
     public function getMaxValue()
     {
-        return $this->field->getParameter2();
+        return $this->field->getParameters()->getParameter2();
     }
 
     /**
@@ -127,7 +127,7 @@ class DateField extends AbstractField
             }
         }
 
-        $this->field->setDefaultValue($value);
+        $this->field->getParameters()->setDefaultValue($value);
 
         return $this;
     }
@@ -139,6 +139,6 @@ class DateField extends AbstractField
      */
     public function getDefaultValue()
     {
-        return $this->field->getDefaultValue();
+        return $this->field->getParameters()->getDefaultValue();
     }
 }

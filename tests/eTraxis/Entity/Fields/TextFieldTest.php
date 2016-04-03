@@ -57,15 +57,15 @@ class TextFieldTest extends BaseTestCase
 
         $field->setMaxLength(1000);
         self::assertEquals(1000, $field->getMaxLength());
-        self::assertEquals(1000, $this->object->getParameter1());
+        self::assertEquals(1000, $this->object->getParameters()->getParameter1());
 
         $field->setMaxLength(0);
         self::assertEquals(TextField::MIN_LENGTH, $field->getMaxLength());
-        self::assertEquals(TextField::MIN_LENGTH, $this->object->getParameter1());
+        self::assertEquals(TextField::MIN_LENGTH, $this->object->getParameters()->getParameter1());
 
         $field->setMaxLength(PHP_INT_MAX);
         self::assertEquals(TextField::MAX_LENGTH, $field->getMaxLength());
-        self::assertEquals(TextField::MAX_LENGTH, $this->object->getParameter1());
+        self::assertEquals(TextField::MAX_LENGTH, $this->object->getParameters()->getParameter1());
     }
 
     public function testDefaultValue()
@@ -90,7 +90,7 @@ class TextFieldTest extends BaseTestCase
 
         $field->setDefaultValue($tv);
         self::assertEquals($tv, $field->getDefaultValue());
-        self::assertEquals($value->getId(), $this->object->getDefaultValue());
+        self::assertEquals($value->getId(), $this->object->getParameters()->getDefaultValue());
 
         $huge = str_pad(null, 5000);
         $trim = str_pad(null, TextField::MAX_LENGTH);
@@ -100,6 +100,6 @@ class TextFieldTest extends BaseTestCase
 
         $field->setDefaultValue(null);
         self::assertNull($field->getDefaultValue());
-        self::assertNull($this->object->getDefaultValue());
+        self::assertNull($this->object->getParameters()->getDefaultValue());
     }
 }
