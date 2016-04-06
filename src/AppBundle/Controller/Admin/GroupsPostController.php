@@ -15,11 +15,9 @@ use eTraxis\Entity\Group;
 use eTraxis\SimpleBus\Groups;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
-use SimpleBus\ValidationException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Groups "POST" controller.
@@ -42,20 +40,12 @@ class GroupsPostController extends Controller
      */
     public function newAction(Request $request)
     {
-        try {
-            $data = $request->request->get('group');
+        $data = $request->request->get('group');
 
-            $command = new Groups\CreateGroupCommand($data);
-            $this->getCommandBus()->handle($command);
+        $command = new Groups\CreateGroupCommand($data);
+        $this->getCommandBus()->handle($command);
 
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse();
     }
 
     /**
@@ -70,26 +60,18 @@ class GroupsPostController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        try {
-            $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
+        $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
 
-            if (!$group) {
-                throw $this->createNotFoundException();
-            }
-
-            $data = $request->request->get('group');
-
-            $command = new Groups\UpdateGroupCommand($data, ['id' => $id]);
-            $this->getCommandBus()->handle($command);
-
-            return new JsonResponse();
+        if (!$group) {
+            throw $this->createNotFoundException();
         }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+
+        $data = $request->request->get('group');
+
+        $command = new Groups\UpdateGroupCommand($data, ['id' => $id]);
+        $this->getCommandBus()->handle($command);
+
+        return new JsonResponse();
     }
 
     /**
@@ -104,20 +86,12 @@ class GroupsPostController extends Controller
      */
     public function deleteAction(Request $request, $id)
     {
-        try {
-            $data = $request->request->all();
+        $data = $request->request->all();
 
-            $command = new Groups\DeleteGroupCommand($data, ['id' => $id]);
-            $this->getCommandBus()->handle($command);
+        $command = new Groups\DeleteGroupCommand($data, ['id' => $id]);
+        $this->getCommandBus()->handle($command);
 
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse();
     }
 
     /**
@@ -132,20 +106,12 @@ class GroupsPostController extends Controller
      */
     public function addUsersAction(Request $request, $id)
     {
-        try {
-            $data = $request->request->all();
+        $data = $request->request->all();
 
-            $command = new Groups\AddUsersCommand($data, ['id' => $id]);
-            $this->getCommandBus()->handle($command);
+        $command = new Groups\AddUsersCommand($data, ['id' => $id]);
+        $this->getCommandBus()->handle($command);
 
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse();
     }
 
     /**
@@ -160,19 +126,11 @@ class GroupsPostController extends Controller
      */
     public function removeUsersAction(Request $request, $id)
     {
-        try {
-            $data = $request->request->all();
+        $data = $request->request->all();
 
-            $command = new Groups\RemoveUsersCommand($data, ['id' => $id]);
-            $this->getCommandBus()->handle($command);
+        $command = new Groups\RemoveUsersCommand($data, ['id' => $id]);
+        $this->getCommandBus()->handle($command);
 
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse();
     }
 }

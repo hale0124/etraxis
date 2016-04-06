@@ -15,12 +15,10 @@ use eTraxis\Entity\Field;
 use eTraxis\SimpleBus\Fields;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
-use SimpleBus\ValidationException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Fields "POST" controller.
@@ -44,61 +42,53 @@ class FieldsPostController extends Controller
      */
     public function newAction(Request $request, $id)
     {
-        try {
-            $data = $request->request->get('field');
+        $data = $request->request->get('field');
 
-            switch ($data['type']) {
+        switch ($data['type']) {
 
-                case Field::TYPE_NUMBER:
-                    $command = new Fields\CreateNumberFieldCommand($data + $data['asNumber'], ['state' => $id]);
-                    break;
+            case Field::TYPE_NUMBER:
+                $command = new Fields\CreateNumberFieldCommand($data + $data['asNumber'], ['state' => $id]);
+                break;
 
-                case Field::TYPE_DECIMAL:
-                    $command = new Fields\CreateDecimalFieldCommand($data + $data['asDecimal'], ['state' => $id]);
-                    break;
+            case Field::TYPE_DECIMAL:
+                $command = new Fields\CreateDecimalFieldCommand($data + $data['asDecimal'], ['state' => $id]);
+                break;
 
-                case Field::TYPE_STRING:
-                    $command = new Fields\CreateStringFieldCommand($data + $data['asString'], ['state' => $id]);
-                    break;
+            case Field::TYPE_STRING:
+                $command = new Fields\CreateStringFieldCommand($data + $data['asString'], ['state' => $id]);
+                break;
 
-                case Field::TYPE_TEXT:
-                    $command = new Fields\CreateTextFieldCommand($data + $data['asText'], ['state' => $id]);
-                    break;
+            case Field::TYPE_TEXT:
+                $command = new Fields\CreateTextFieldCommand($data + $data['asText'], ['state' => $id]);
+                break;
 
-                case Field::TYPE_CHECKBOX:
-                    $command = new Fields\CreateCheckboxFieldCommand($data + $data['asCheckbox'], ['state' => $id]);
-                    break;
+            case Field::TYPE_CHECKBOX:
+                $command = new Fields\CreateCheckboxFieldCommand($data + $data['asCheckbox'], ['state' => $id]);
+                break;
 
-                case Field::TYPE_LIST:
-                    $command = new Fields\CreateListFieldCommand($data, ['state' => $id]);
-                    break;
+            case Field::TYPE_LIST:
+                $command = new Fields\CreateListFieldCommand($data, ['state' => $id]);
+                break;
 
-                case Field::TYPE_RECORD:
-                    $command = new Fields\CreateRecordFieldCommand($data, ['state' => $id]);
-                    break;
+            case Field::TYPE_RECORD:
+                $command = new Fields\CreateRecordFieldCommand($data, ['state' => $id]);
+                break;
 
-                case Field::TYPE_DATE:
-                    $command = new Fields\CreateDateFieldCommand($data + $data['asDate'], ['state' => $id]);
-                    break;
+            case Field::TYPE_DATE:
+                $command = new Fields\CreateDateFieldCommand($data + $data['asDate'], ['state' => $id]);
+                break;
 
-                case Field::TYPE_DURATION:
-                    $command = new Fields\CreateDurationFieldCommand($data + $data['asDuration'], ['state' => $id]);
-                    break;
+            case Field::TYPE_DURATION:
+                $command = new Fields\CreateDurationFieldCommand($data + $data['asDuration'], ['state' => $id]);
+                break;
 
-                default:
-                    throw new BadRequestHttpException();
-            }
-
-            $this->getCommandBus()->handle($command);
-
-            return new JsonResponse();
+            default:
+                throw new BadRequestHttpException();
         }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+
+        $this->getCommandBus()->handle($command);
+
+        return new JsonResponse();
     }
 
     /**
@@ -113,68 +103,60 @@ class FieldsPostController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        try {
-            /** @var Field $field */
-            $field = $this->getDoctrine()->getRepository(Field::class)->find($id);
+        /** @var Field $field */
+        $field = $this->getDoctrine()->getRepository(Field::class)->find($id);
 
-            if (!$field) {
-                throw $this->createNotFoundException();
-            }
-
-            $data = $request->request->get('field');
-
-            switch ($field->getType()) {
-
-                case Field::TYPE_NUMBER:
-                    $command = new Fields\UpdateNumberFieldCommand($data + $data['asNumber'], ['id' => $id]);
-                    break;
-
-                case Field::TYPE_DECIMAL:
-                    $command = new Fields\UpdateDecimalFieldCommand($data + $data['asDecimal'], ['id' => $id]);
-                    break;
-
-                case Field::TYPE_STRING:
-                    $command = new Fields\UpdateStringFieldCommand($data + $data['asString'], ['id' => $id]);
-                    break;
-
-                case Field::TYPE_TEXT:
-                    $command = new Fields\UpdateTextFieldCommand($data + $data['asText'], ['id' => $id]);
-                    break;
-
-                case Field::TYPE_CHECKBOX:
-                    $command = new Fields\UpdateCheckboxFieldCommand($data + $data['asCheckbox'], ['id' => $id, 'required' => false]);
-                    break;
-
-                case Field::TYPE_LIST:
-                    $command = new Fields\UpdateListFieldCommand($data, ['id' => $id]);
-                    break;
-
-                case Field::TYPE_RECORD:
-                    $command = new Fields\UpdateRecordFieldCommand($data, ['id' => $id]);
-                    break;
-
-                case Field::TYPE_DATE:
-                    $command = new Fields\UpdateDateFieldCommand($data + $data['asDate'], ['id' => $id]);
-                    break;
-
-                case Field::TYPE_DURATION:
-                    $command = new Fields\UpdateDurationFieldCommand($data + $data['asDuration'], ['id' => $id]);
-                    break;
-
-                default:
-                    throw new BadRequestHttpException();
-            }
-
-            $this->getCommandBus()->handle($command);
-
-            return new JsonResponse();
+        if (!$field) {
+            throw $this->createNotFoundException();
         }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
+
+        $data = $request->request->get('field');
+
+        switch ($field->getType()) {
+
+            case Field::TYPE_NUMBER:
+                $command = new Fields\UpdateNumberFieldCommand($data + $data['asNumber'], ['id' => $id]);
+                break;
+
+            case Field::TYPE_DECIMAL:
+                $command = new Fields\UpdateDecimalFieldCommand($data + $data['asDecimal'], ['id' => $id]);
+                break;
+
+            case Field::TYPE_STRING:
+                $command = new Fields\UpdateStringFieldCommand($data + $data['asString'], ['id' => $id]);
+                break;
+
+            case Field::TYPE_TEXT:
+                $command = new Fields\UpdateTextFieldCommand($data + $data['asText'], ['id' => $id]);
+                break;
+
+            case Field::TYPE_CHECKBOX:
+                $command = new Fields\UpdateCheckboxFieldCommand($data + $data['asCheckbox'], ['id' => $id, 'required' => false]);
+                break;
+
+            case Field::TYPE_LIST:
+                $command = new Fields\UpdateListFieldCommand($data, ['id' => $id]);
+                break;
+
+            case Field::TYPE_RECORD:
+                $command = new Fields\UpdateRecordFieldCommand($data, ['id' => $id]);
+                break;
+
+            case Field::TYPE_DATE:
+                $command = new Fields\UpdateDateFieldCommand($data + $data['asDate'], ['id' => $id]);
+                break;
+
+            case Field::TYPE_DURATION:
+                $command = new Fields\UpdateDurationFieldCommand($data + $data['asDuration'], ['id' => $id]);
+                break;
+
+            default:
+                throw new BadRequestHttpException();
         }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+
+        $this->getCommandBus()->handle($command);
+
+        return new JsonResponse();
     }
 
     /**
@@ -188,17 +170,9 @@ class FieldsPostController extends Controller
      */
     public function deleteAction($id)
     {
-        try {
-            $command = new Fields\DeleteFieldCommand(['id' => $id]);
-            $this->getCommandBus()->handle($command);
+        $command = new Fields\DeleteFieldCommand(['id' => $id]);
+        $this->getCommandBus()->handle($command);
 
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse();
     }
 }

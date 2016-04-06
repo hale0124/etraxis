@@ -20,7 +20,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Groups "GET" controller.
@@ -39,19 +38,14 @@ class GroupsGetController extends Controller
      *
      * @param   int $id Project ID (NULL for global groups only).
      *
-     * @return  Response|JsonResponse
+     * @return  JsonResponse
      */
     public function listAction($id = null)
     {
-        try {
-            /** @var \eTraxis\Repository\GroupsRepository $repository */
-            $repository = $this->getDoctrine()->getRepository(Group::class);
+        /** @var \eTraxis\Repository\GroupsRepository $repository */
+        $repository = $this->getDoctrine()->getRepository(Group::class);
 
-            return new JsonResponse($repository->getGroups($id));
-        }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse($repository->getGroups($id));
     }
 
     /**
@@ -66,21 +60,16 @@ class GroupsGetController extends Controller
      */
     public function viewAction(Request $request, $id)
     {
-        try {
-            $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
+        $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
 
-            if (!$group) {
-                throw $this->createNotFoundException();
-            }
+        if (!$group) {
+            throw $this->createNotFoundException();
+        }
 
-            return $this->render('admin/groups/view.html.twig', [
-                'group' => $group,
-                'tab'   => $request->get('tab', 0),
-            ]);
-        }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+        return $this->render('admin/groups/view.html.twig', [
+            'group' => $group,
+            'tab'   => $request->get('tab', 0),
+        ]);
     }
 
     /**
@@ -94,20 +83,15 @@ class GroupsGetController extends Controller
      */
     public function tabDetailsAction($id)
     {
-        try {
-            $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
+        $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
 
-            if (!$group) {
-                throw $this->createNotFoundException();
-            }
+        if (!$group) {
+            throw $this->createNotFoundException();
+        }
 
-            return $this->render('admin/groups/tab_details.html.twig', [
-                'group' => $group,
-            ]);
-        }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+        return $this->render('admin/groups/tab_details.html.twig', [
+            'group' => $group,
+        ]);
     }
 
     /**
@@ -176,23 +160,18 @@ class GroupsGetController extends Controller
      */
     public function editAction($id)
     {
-        try {
-            $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
+        $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
 
-            if (!$group) {
-                throw $this->createNotFoundException();
-            }
-
-            $form = $this->createForm(GroupForm::class, $group, [
-                'action' => $this->generateUrl('admin_edit_group', ['id' => $id]),
-            ]);
-
-            return $this->render('admin/groups/dlg_group.html.twig', [
-                'form' => $form->createView(),
-            ]);
+        if (!$group) {
+            throw $this->createNotFoundException();
         }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+
+        $form = $this->createForm(GroupForm::class, $group, [
+            'action' => $this->generateUrl('admin_edit_group', ['id' => $id]),
+        ]);
+
+        return $this->render('admin/groups/dlg_group.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

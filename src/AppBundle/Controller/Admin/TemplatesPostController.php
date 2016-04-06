@@ -15,11 +15,9 @@ use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\Templates;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
-use SimpleBus\ValidationException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Templates "POST" controller.
@@ -43,20 +41,12 @@ class TemplatesPostController extends Controller
      */
     public function newAction(Request $request, $id)
     {
-        try {
-            $data = $request->request->get('template');
+        $data = $request->request->get('template');
 
-            $command = new Templates\CreateTemplateCommand($data, ['project' => $id]);
-            $this->getCommandBus()->handle($command);
+        $command = new Templates\CreateTemplateCommand($data, ['project' => $id]);
+        $this->getCommandBus()->handle($command);
 
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse();
     }
 
     /**
@@ -71,26 +61,18 @@ class TemplatesPostController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        try {
-            $template = $this->getDoctrine()->getRepository(Template::class)->find($id);
+        $template = $this->getDoctrine()->getRepository(Template::class)->find($id);
 
-            if (!$template) {
-                throw $this->createNotFoundException();
-            }
-
-            $data = $request->request->get('template');
-
-            $command = new Templates\UpdateTemplateCommand($data, ['id' => $id]);
-            $this->getCommandBus()->handle($command);
-
-            return new JsonResponse();
+        if (!$template) {
+            throw $this->createNotFoundException();
         }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+
+        $data = $request->request->get('template');
+
+        $command = new Templates\UpdateTemplateCommand($data, ['id' => $id]);
+        $this->getCommandBus()->handle($command);
+
+        return new JsonResponse();
     }
 
     /**
@@ -104,18 +86,10 @@ class TemplatesPostController extends Controller
      */
     public function deleteAction($id)
     {
-        try {
-            $command = new Templates\DeleteTemplateCommand(['id' => $id]);
-            $this->getCommandBus()->handle($command);
+        $command = new Templates\DeleteTemplateCommand(['id' => $id]);
+        $this->getCommandBus()->handle($command);
 
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse();
     }
 
     /**
@@ -129,18 +103,10 @@ class TemplatesPostController extends Controller
      */
     public function lockAction($id)
     {
-        try {
-            $command = new Templates\LockTemplateCommand(['id' => $id]);
-            $this->getCommandBus()->handle($command);
+        $command = new Templates\LockTemplateCommand(['id' => $id]);
+        $this->getCommandBus()->handle($command);
 
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse();
     }
 
     /**
@@ -154,18 +120,10 @@ class TemplatesPostController extends Controller
      */
     public function unlockAction($id)
     {
-        try {
-            $command = new Templates\UnlockTemplateCommand(['id' => $id]);
-            $this->getCommandBus()->handle($command);
+        $command = new Templates\UnlockTemplateCommand(['id' => $id]);
+        $this->getCommandBus()->handle($command);
 
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse();
     }
 
     /**
@@ -181,30 +139,22 @@ class TemplatesPostController extends Controller
      */
     public function savePermissionsAction(Request $request, $id, $group)
     {
-        try {
-            $command = new Templates\RemoveTemplatePermissionsCommand([
-                'id'          => $id,
-                'group'       => $group,
-                'permissions' => PHP_INT_MAX,
-            ]);
+        $command = new Templates\RemoveTemplatePermissionsCommand([
+            'id'          => $id,
+            'group'       => $group,
+            'permissions' => PHP_INT_MAX,
+        ]);
 
-            $this->getCommandBus()->handle($command);
+        $this->getCommandBus()->handle($command);
 
-            $command = new Templates\AddTemplatePermissionsCommand([
-                'id'          => $id,
-                'group'       => $group,
-                'permissions' => (int) $request->request->get('permissions'),
-            ]);
+        $command = new Templates\AddTemplatePermissionsCommand([
+            'id'          => $id,
+            'group'       => $group,
+            'permissions' => (int) $request->request->get('permissions'),
+        ]);
 
-            $this->getCommandBus()->handle($command);
+        $this->getCommandBus()->handle($command);
 
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse();
     }
 }

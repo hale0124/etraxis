@@ -22,7 +22,6 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\StreamedResponse;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Users "GET" controller.
@@ -54,19 +53,14 @@ class UsersGetController extends Controller
      *
      * @param   Request $request
      *
-     * @return  Response|JsonResponse
+     * @return  JsonResponse
      */
     public function listAction(Request $request)
     {
-        try {
-            $datatables = $this->getDataTables();
-            $results    = $datatables->handle($request, 'eTraxis:User');
+        $datatables = $this->getDataTables();
+        $results    = $datatables->handle($request, 'eTraxis:User');
 
-            return new JsonResponse($results);
-        }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse($results);
     }
 
     /**
@@ -76,53 +70,45 @@ class UsersGetController extends Controller
      *
      * @param   Request $request
      *
-     * @return  StreamedResponse|JsonResponse
+     * @return  StreamedResponse
      */
     public function csvAction(Request $request)
     {
-        try {
-            $request->query->set('start', 0);
-            $request->query->set('length', -1);
+        $request->query->set('start', 0);
+        $request->query->set('length', -1);
 
-            $datatables = $this->getDataTables();
-            $results    = $datatables->handle($request, 'eTraxis:User');
+        $datatables = $this->getDataTables();
+        $results    = $datatables->handle($request, 'eTraxis:User');
 
-            $users = array_map(function ($user) {
-                return array_slice($user, 1, 6);
-            }, $results['data']);
+        $users = array_map(function ($user) {
+            return array_slice($user, 1, 6);
+        }, $results['data']);
 
-            /** @var \Symfony\Component\Translation\TranslatorInterface $translator */
-            $translator = $this->container->get('translator');
+        /** @var \Symfony\Component\Translation\TranslatorInterface $translator */
+        $translator = $this->container->get('translator');
 
-            array_unshift($users, [
-                $translator->trans('user.username'),
-                $translator->trans('user.fullname'),
-                $translator->trans('user.email'),
-                $translator->trans('permissions'),
-                $translator->trans('security.authentication'),
-                $translator->trans('description'),
-            ]);
+        array_unshift($users, [
+            $translator->trans('user.username'),
+            $translator->trans('user.fullname'),
+            $translator->trans('user.email'),
+            $translator->trans('permissions'),
+            $translator->trans('security.authentication'),
+            $translator->trans('description'),
+        ]);
 
-            $query = new ExportCsvQuery($request->query->get('export'));
+        $query = new ExportCsvQuery($request->query->get('export'));
 
-            /** @var \Symfony\Component\Validator\ConstraintViolationInterface[] $violations */
-            $violations = $this->get('validator')->validate($query);
+        /** @var \Symfony\Component\Validator\ConstraintViolationInterface[] $violations */
+        $violations = $this->get('validator')->validate($query);
 
-            if (count($violations)) {
-                throw new ValidationException($violations);
-            }
-
-            /** @var \eTraxis\Service\Export\ExportInterface $export */
-            $export = $this->get('etraxis.export');
-
-            return $export->exportCsv($query, $users);
+        if (count($violations)) {
+            throw new ValidationException($violations);
         }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+
+        /** @var \eTraxis\Service\Export\ExportInterface $export */
+        $export = $this->get('etraxis.export');
+
+        return $export->exportCsv($query, $users);
     }
 
     /**
@@ -137,21 +123,16 @@ class UsersGetController extends Controller
      */
     public function viewAction(Request $request, $id)
     {
-        try {
-            $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
 
-            if (!$user) {
-                throw $this->createNotFoundException();
-            }
+        if (!$user) {
+            throw $this->createNotFoundException();
+        }
 
-            return $this->render('admin/users/view.html.twig', [
-                'user' => $user,
-                'tab'  => $request->get('tab', 0),
-            ]);
-        }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+        return $this->render('admin/users/view.html.twig', [
+            'user' => $user,
+            'tab'  => $request->get('tab', 0),
+        ]);
     }
 
     /**
@@ -165,29 +146,24 @@ class UsersGetController extends Controller
      */
     public function tabDetailsAction($id)
     {
-        try {
-            $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
 
-            if (!$user) {
-                throw $this->createNotFoundException();
-            }
-
-            /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
-            $authChecker = $this->get('security.authorization_checker');
-
-            return $this->render('admin/users/tab_details.html.twig', [
-                'user' => $user,
-                'can'  => [
-                    'delete'  => $authChecker->isGranted(User::DELETE, $user),
-                    'disable' => $authChecker->isGranted(User::DISABLE, $user),
-                    'enable'  => $authChecker->isGranted(User::ENABLE, $user),
-                    'unlock'  => $authChecker->isGranted(User::UNLOCK, $user),
-                ],
-            ]);
+        if (!$user) {
+            throw $this->createNotFoundException();
         }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+
+        /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
+        $authChecker = $this->get('security.authorization_checker');
+
+        return $this->render('admin/users/tab_details.html.twig', [
+            'user' => $user,
+            'can'  => [
+                'delete'  => $authChecker->isGranted(User::DELETE, $user),
+                'disable' => $authChecker->isGranted(User::DISABLE, $user),
+                'enable'  => $authChecker->isGranted(User::ENABLE, $user),
+                'unlock'  => $authChecker->isGranted(User::UNLOCK, $user),
+            ],
+        ]);
     }
 
     /**
@@ -252,24 +228,19 @@ class UsersGetController extends Controller
      */
     public function editAction($id)
     {
-        try {
-            $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
 
-            if (!$user) {
-                throw $this->createNotFoundException();
-            }
-
-            $form = $this->createForm(UserForm::class, $user, [
-                'action' => $this->generateUrl('admin_edit_user', ['id' => $id]),
-            ]);
-
-            return $this->render('admin/users/dlg_user.html.twig', [
-                'user' => $user,
-                'form' => $form->createView(),
-            ]);
+        if (!$user) {
+            throw $this->createNotFoundException();
         }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+
+        $form = $this->createForm(UserForm::class, $user, [
+            'action' => $this->generateUrl('admin_edit_user', ['id' => $id]),
+        ]);
+
+        return $this->render('admin/users/dlg_user.html.twig', [
+            'user' => $user,
+            'form' => $form->createView(),
+        ]);
     }
 }

@@ -15,12 +15,10 @@ use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Users;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
-use SimpleBus\ValidationException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Users "POST" controller.
@@ -43,24 +41,16 @@ class UsersPostController extends Controller
      */
     public function newAction(Request $request)
     {
-        try {
-            $data = $request->request->get('user');
+        $data = $request->request->get('user');
 
-            if ($data['password'] !== $data['confirmation']) {
-                throw new BadRequestHttpException($this->container->get('translator')->trans('passwords.dont_match'));
-            }
+        if ($data['password'] !== $data['confirmation']) {
+            throw new BadRequestHttpException($this->container->get('translator')->trans('passwords.dont_match'));
+        }
 
-            $command = new Users\CreateUserCommand($data);
-            $this->getCommandBus()->handle($command);
+        $command = new Users\CreateUserCommand($data);
+        $this->getCommandBus()->handle($command);
 
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse();
     }
 
     /**
@@ -78,56 +68,48 @@ class UsersPostController extends Controller
         /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getDoctrine()->getManager();
 
-        try {
-            /** @var User $user */
-            $user = $this->getDoctrine()->getRepository(User::class)->find($id);
+        /** @var User $user */
+        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
 
-            if (!$user) {
-                throw $this->createNotFoundException();
+        if (!$user) {
+            throw $this->createNotFoundException();
+        }
+
+        $em->beginTransaction();
+
+        $data = $request->request->get('user');
+
+        if ($user->isLdap()) {
+            $data['username'] = $user->getUsername();
+            $data['fullname'] = $user->getFullname();
+            $data['email']    = $user->getEmail();
+        }
+
+        $command = new Users\UpdateUserCommand($data, ['id' => $id]);
+        $this->getCommandBus()->handle($command);
+
+        /** @noinspection TypeUnsafeComparisonInspection */
+        if ($this->getUser()->getId() == $id) {
+            $this->get('session')->set('_locale', $command->locale);
+        }
+
+        if (!$user->isLdap() && $data['password']) {
+
+            if ($data['password'] !== $data['confirmation']) {
+                throw new BadRequestHttpException($this->container->get('translator')->trans('passwords.dont_match'));
             }
 
-            $em->beginTransaction();
+            $command = new Users\SetPasswordCommand([
+                'id'       => $id,
+                'password' => $data['password'],
+            ]);
 
-            $data = $request->request->get('user');
-
-            if ($user->isLdap()) {
-                $data['username'] = $user->getUsername();
-                $data['fullname'] = $user->getFullname();
-                $data['email']    = $user->getEmail();
-            }
-
-            $command = new Users\UpdateUserCommand($data, ['id' => $id]);
             $this->getCommandBus()->handle($command);
-
-            /** @noinspection TypeUnsafeComparisonInspection */
-            if ($this->getUser()->getId() == $id) {
-                $this->get('session')->set('_locale', $command->locale);
-            }
-
-            if (!$user->isLdap() && $data['password']) {
-
-                if ($data['password'] !== $data['confirmation']) {
-                    throw new BadRequestHttpException($this->container->get('translator')->trans('passwords.dont_match'));
-                }
-
-                $command = new Users\SetPasswordCommand([
-                    'id'       => $id,
-                    'password' => $data['password'],
-                ]);
-
-                $this->getCommandBus()->handle($command);
-            }
-
-            $em->commit();
-
-            return new JsonResponse();
         }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+
+        $em->commit();
+
+        return new JsonResponse();
     }
 
     /**
@@ -141,18 +123,10 @@ class UsersPostController extends Controller
      */
     public function deleteAction($id)
     {
-        try {
-            $command = new Users\DeleteUserCommand(['id' => $id]);
-            $this->getCommandBus()->handle($command);
+        $command = new Users\DeleteUserCommand(['id' => $id]);
+        $this->getCommandBus()->handle($command);
 
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse();
     }
 
     /**
@@ -166,20 +140,12 @@ class UsersPostController extends Controller
      */
     public function disableAction(Request $request)
     {
-        try {
-            $data = $request->request->all();
+        $data = $request->request->all();
 
-            $command = new Users\DisableUsersCommand($data);
-            $this->getCommandBus()->handle($command);
+        $command = new Users\DisableUsersCommand($data);
+        $this->getCommandBus()->handle($command);
 
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse();
     }
 
     /**
@@ -193,20 +159,12 @@ class UsersPostController extends Controller
      */
     public function enableAction(Request $request)
     {
-        try {
-            $data = $request->request->all();
+        $data = $request->request->all();
 
-            $command = new Users\EnableUsersCommand($data);
-            $this->getCommandBus()->handle($command);
+        $command = new Users\EnableUsersCommand($data);
+        $this->getCommandBus()->handle($command);
 
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse();
     }
 
     /**
@@ -220,18 +178,10 @@ class UsersPostController extends Controller
      */
     public function unlockAction($id)
     {
-        try {
-            $command = new Users\UnlockUserCommand(['id' => $id]);
-            $this->getCommandBus()->handle($command);
+        $command = new Users\UnlockUserCommand(['id' => $id]);
+        $this->getCommandBus()->handle($command);
 
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse();
     }
 
     /**
@@ -246,20 +196,12 @@ class UsersPostController extends Controller
      */
     public function addGroupsAction(Request $request, $id)
     {
-        try {
-            $data = $request->request->all();
+        $data = $request->request->all();
 
-            $command = new Users\AddGroupsCommand($data, ['id' => $id]);
-            $this->getCommandBus()->handle($command);
+        $command = new Users\AddGroupsCommand($data, ['id' => $id]);
+        $this->getCommandBus()->handle($command);
 
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse();
     }
 
     /**
@@ -274,19 +216,11 @@ class UsersPostController extends Controller
      */
     public function removeGroupsAction(Request $request, $id)
     {
-        try {
-            $data = $request->request->all();
+        $data = $request->request->all();
 
-            $command = new Users\RemoveGroupsCommand($data, ['id' => $id]);
-            $this->getCommandBus()->handle($command);
+        $command = new Users\RemoveGroupsCommand($data, ['id' => $id]);
+        $this->getCommandBus()->handle($command);
 
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse();
     }
 }

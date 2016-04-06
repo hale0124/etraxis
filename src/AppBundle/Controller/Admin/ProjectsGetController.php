@@ -19,7 +19,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Projects "GET" controller.
@@ -48,19 +47,14 @@ class ProjectsGetController extends Controller
      *
      * @Action\Route("/list", name="admin_projects_list")
      *
-     * @return  Response|JsonResponse
+     * @return  JsonResponse
      */
     public function listAction()
     {
-        try {
-            /** @var \eTraxis\Repository\ProjectsRepository $repository */
-            $repository = $this->getDoctrine()->getRepository(Project::class);
+        /** @var \eTraxis\Repository\ProjectsRepository $repository */
+        $repository = $this->getDoctrine()->getRepository(Project::class);
 
-            return new JsonResponse($repository->getProjects());
-        }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse($repository->getProjects());
     }
 
     /**
@@ -75,21 +69,16 @@ class ProjectsGetController extends Controller
      */
     public function viewAction(Request $request, $id)
     {
-        try {
-            $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
+        $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
 
-            if (!$project) {
-                throw $this->createNotFoundException();
-            }
+        if (!$project) {
+            throw $this->createNotFoundException();
+        }
 
-            return $this->render('admin/projects/view.html.twig', [
-                'project' => $project,
-                'tab'     => $request->get('tab', 0),
-            ]);
-        }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+        return $this->render('admin/projects/view.html.twig', [
+            'project' => $project,
+            'tab'     => $request->get('tab', 0),
+        ]);
     }
 
     /**
@@ -103,26 +92,21 @@ class ProjectsGetController extends Controller
      */
     public function tabDetailsAction($id)
     {
-        try {
-            $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
+        $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
 
-            if (!$project) {
-                throw $this->createNotFoundException();
-            }
-
-            /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
-            $authChecker = $this->get('security.authorization_checker');
-
-            return $this->render('admin/projects/tab_details.html.twig', [
-                'project' => $project,
-                'can'     => [
-                    'delete' => $authChecker->isGranted(Project::DELETE, $project),
-                ],
-            ]);
+        if (!$project) {
+            throw $this->createNotFoundException();
         }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+
+        /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
+        $authChecker = $this->get('security.authorization_checker');
+
+        return $this->render('admin/projects/tab_details.html.twig', [
+            'project' => $project,
+            'can'     => [
+                'delete' => $authChecker->isGranted(Project::DELETE, $project),
+            ],
+        ]);
     }
 
     /**
@@ -158,23 +142,18 @@ class ProjectsGetController extends Controller
      */
     public function editAction($id)
     {
-        try {
-            $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
+        $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
 
-            if (!$project) {
-                throw $this->createNotFoundException();
-            }
-
-            $form = $this->createForm(ProjectForm::class, $project, [
-                'action' => $this->generateUrl('admin_edit_project', ['id' => $id]),
-            ]);
-
-            return $this->render('admin/projects/dlg_project.html.twig', [
-                'form' => $form->createView(),
-            ]);
+        if (!$project) {
+            throw $this->createNotFoundException();
         }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+
+        $form = $this->createForm(ProjectForm::class, $project, [
+            'action' => $this->generateUrl('admin_edit_project', ['id' => $id]),
+        ]);
+
+        return $this->render('admin/projects/dlg_project.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

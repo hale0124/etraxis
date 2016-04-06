@@ -36,6 +36,13 @@ services:
             - "@translator"
             - "@security.authentication_utils"
 
+    etraxis.listener.unhandled_exception:
+        class: AppBundle\EventListener\UnhandledException
+        tags:
+            - { name: kernel.event_listener, event: kernel.exception, method: onException }
+        arguments:
+            - "@logger"
+
     etraxis.listener.users_lockout:
         class: AppBundle\EventListener\UsersLockout
         tags:

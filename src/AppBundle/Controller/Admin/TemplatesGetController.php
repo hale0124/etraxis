@@ -21,7 +21,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Templates "GET" controller.
@@ -40,19 +39,14 @@ class TemplatesGetController extends Controller
      *
      * @param   int $id Project ID.
      *
-     * @return  Response|JsonResponse
+     * @return  JsonResponse
      */
     public function listAction($id)
     {
-        try {
-            /** @var \eTraxis\Repository\TemplatesRepository $repository */
-            $repository = $this->getDoctrine()->getRepository(Template::class);
+        /** @var \eTraxis\Repository\TemplatesRepository $repository */
+        $repository = $this->getDoctrine()->getRepository(Template::class);
 
-            return new JsonResponse($repository->getTemplates($id));
-        }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse($repository->getTemplates($id));
     }
 
     /**
@@ -67,21 +61,16 @@ class TemplatesGetController extends Controller
      */
     public function viewAction(Request $request, $id)
     {
-        try {
-            $template = $this->getDoctrine()->getRepository(Template::class)->find($id);
+        $template = $this->getDoctrine()->getRepository(Template::class)->find($id);
 
-            if (!$template) {
-                throw $this->createNotFoundException();
-            }
+        if (!$template) {
+            throw $this->createNotFoundException();
+        }
 
-            return $this->render('admin/templates/view.html.twig', [
-                'template' => $template,
-                'tab'      => $request->get('tab', 0),
-            ]);
-        }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+        return $this->render('admin/templates/view.html.twig', [
+            'template' => $template,
+            'tab'      => $request->get('tab', 0),
+        ]);
     }
 
     /**
@@ -95,28 +84,23 @@ class TemplatesGetController extends Controller
      */
     public function tabDetailsAction($id)
     {
-        try {
-            $template = $this->getDoctrine()->getRepository(Template::class)->find($id);
+        $template = $this->getDoctrine()->getRepository(Template::class)->find($id);
 
-            if (!$template) {
-                throw $this->createNotFoundException();
-            }
-
-            /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
-            $authChecker = $this->get('security.authorization_checker');
-
-            return $this->render('admin/templates/tab_details.html.twig', [
-                'template' => $template,
-                'can'      => [
-                    'delete' => $authChecker->isGranted(Template::DELETE, $template),
-                    'lock'   => $authChecker->isGranted(Template::LOCK, $template),
-                    'unlock' => $authChecker->isGranted(Template::UNLOCK, $template),
-                ],
-            ]);
+        if (!$template) {
+            throw $this->createNotFoundException();
         }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+
+        /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
+        $authChecker = $this->get('security.authorization_checker');
+
+        return $this->render('admin/templates/tab_details.html.twig', [
+            'template' => $template,
+            'can'      => [
+                'delete' => $authChecker->isGranted(Template::DELETE, $template),
+                'lock'   => $authChecker->isGranted(Template::LOCK, $template),
+                'unlock' => $authChecker->isGranted(Template::UNLOCK, $template),
+            ],
+        ]);
     }
 
     /**
@@ -202,24 +186,19 @@ class TemplatesGetController extends Controller
      */
     public function editAction($id)
     {
-        try {
-            $template = $this->getDoctrine()->getRepository(Template::class)->find($id);
+        $template = $this->getDoctrine()->getRepository(Template::class)->find($id);
 
-            if (!$template) {
-                throw $this->createNotFoundException();
-            }
-
-            $form = $this->createForm(TemplateForm::class, $template, [
-                'action' => $this->generateUrl('admin_edit_template', ['id' => $id]),
-            ]);
-
-            return $this->render('admin/templates/dlg_template.html.twig', [
-                'form' => $form->createView(),
-            ]);
+        if (!$template) {
+            throw $this->createNotFoundException();
         }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+
+        $form = $this->createForm(TemplateForm::class, $template, [
+            'action' => $this->generateUrl('admin_edit_template', ['id' => $id]),
+        ]);
+
+        return $this->render('admin/templates/dlg_template.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     /**
@@ -234,43 +213,38 @@ class TemplatesGetController extends Controller
      */
     public function loadPermissionsAction($id, $group)
     {
-        try {
-            /** @var \eTraxis\Repository\TemplatesRepository $repository */
-            $repository = $this->getDoctrine()->getRepository(Template::class);
+        /** @var \eTraxis\Repository\TemplatesRepository $repository */
+        $repository = $this->getDoctrine()->getRepository(Template::class);
 
-            /** @var Template $template */
-            $template = $repository->find($id);
+        /** @var Template $template */
+        $template = $repository->find($id);
 
-            if (!$template) {
-                throw $this->createNotFoundException();
-            }
-
-            switch ($group) {
-
-                case SystemRole::AUTHOR:
-                    $permissions = $template->getAuthorPermissions();
-                    $permissions |= Template::PERMIT_VIEW_RECORD;
-                    $permissions &= ~Template::PERMIT_CREATE_RECORD;
-                    break;
-
-                case SystemRole::RESPONSIBLE:
-                    $permissions = $template->getResponsiblePermissions();
-                    $permissions |= Template::PERMIT_VIEW_RECORD;
-                    $permissions &= ~Template::PERMIT_CREATE_RECORD;
-                    break;
-
-                case SystemRole::REGISTERED:
-                    $permissions = $template->getRegisteredPermissions();
-                    break;
-
-                default:
-                    $permissions = $repository->getRolePermissions($id, $group);
-            }
-
-            return new JsonResponse($permissions);
+        if (!$template) {
+            throw $this->createNotFoundException();
         }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
+
+        switch ($group) {
+
+            case SystemRole::AUTHOR:
+                $permissions = $template->getAuthorPermissions();
+                $permissions |= Template::PERMIT_VIEW_RECORD;
+                $permissions &= ~Template::PERMIT_CREATE_RECORD;
+                break;
+
+            case SystemRole::RESPONSIBLE:
+                $permissions = $template->getResponsiblePermissions();
+                $permissions |= Template::PERMIT_VIEW_RECORD;
+                $permissions &= ~Template::PERMIT_CREATE_RECORD;
+                break;
+
+            case SystemRole::REGISTERED:
+                $permissions = $template->getRegisteredPermissions();
+                break;
+
+            default:
+                $permissions = $repository->getRolePermissions($id, $group);
         }
+
+        return new JsonResponse($permissions);
     }
 }

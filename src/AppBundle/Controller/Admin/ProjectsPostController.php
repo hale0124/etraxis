@@ -15,11 +15,9 @@ use eTraxis\Entity\Project;
 use eTraxis\SimpleBus\Projects;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
-use SimpleBus\ValidationException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Projects "POST" controller.
@@ -42,20 +40,12 @@ class ProjectsPostController extends Controller
      */
     public function newAction(Request $request)
     {
-        try {
-            $data = $request->request->get('project');
+        $data = $request->request->get('project');
 
-            $command = new Projects\CreateProjectCommand($data);
-            $this->getCommandBus()->handle($command);
+        $command = new Projects\CreateProjectCommand($data);
+        $this->getCommandBus()->handle($command);
 
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse();
     }
 
     /**
@@ -70,26 +60,18 @@ class ProjectsPostController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        try {
-            $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
+        $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
 
-            if (!$project) {
-                throw $this->createNotFoundException();
-            }
-
-            $data = $request->request->get('project');
-
-            $command = new Projects\UpdateProjectCommand($data, ['id' => $id]);
-            $this->getCommandBus()->handle($command);
-
-            return new JsonResponse();
+        if (!$project) {
+            throw $this->createNotFoundException();
         }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+
+        $data = $request->request->get('project');
+
+        $command = new Projects\UpdateProjectCommand($data, ['id' => $id]);
+        $this->getCommandBus()->handle($command);
+
+        return new JsonResponse();
     }
 
     /**
@@ -103,17 +85,9 @@ class ProjectsPostController extends Controller
      */
     public function deleteAction($id)
     {
-        try {
-            $command = new Projects\DeleteProjectCommand(['id' => $id]);
-            $this->getCommandBus()->handle($command);
+        $command = new Projects\DeleteProjectCommand(['id' => $id]);
+        $this->getCommandBus()->handle($command);
 
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse();
     }
 }

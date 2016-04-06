@@ -16,11 +16,9 @@ use eTraxis\Entity\State;
 use eTraxis\SimpleBus\States;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
-use SimpleBus\ValidationException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * States "POST" controller.
@@ -44,20 +42,12 @@ class StatesPostController extends Controller
      */
     public function newAction(Request $request, $id)
     {
-        try {
-            $data = $request->request->get('state');
+        $data = $request->request->get('state');
 
-            $command = new States\CreateStateCommand($data, ['template' => $id]);
-            $this->getCommandBus()->handle($command);
+        $command = new States\CreateStateCommand($data, ['template' => $id]);
+        $this->getCommandBus()->handle($command);
 
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse();
     }
 
     /**
@@ -72,26 +62,18 @@ class StatesPostController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        try {
-            $state = $this->getDoctrine()->getRepository(State::class)->find($id);
+        $state = $this->getDoctrine()->getRepository(State::class)->find($id);
 
-            if (!$state) {
-                throw $this->createNotFoundException();
-            }
-
-            $data = $request->request->get('state');
-
-            $command = new States\UpdateStateCommand($data, ['id' => $id]);
-            $this->getCommandBus()->handle($command);
-
-            return new JsonResponse();
+        if (!$state) {
+            throw $this->createNotFoundException();
         }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+
+        $data = $request->request->get('state');
+
+        $command = new States\UpdateStateCommand($data, ['id' => $id]);
+        $this->getCommandBus()->handle($command);
+
+        return new JsonResponse();
     }
 
     /**
@@ -105,18 +87,10 @@ class StatesPostController extends Controller
      */
     public function deleteAction($id)
     {
-        try {
-            $command = new States\DeleteStateCommand(['id' => $id]);
-            $this->getCommandBus()->handle($command);
+        $command = new States\DeleteStateCommand(['id' => $id]);
+        $this->getCommandBus()->handle($command);
 
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse();
     }
 
     /**
@@ -130,18 +104,10 @@ class StatesPostController extends Controller
      */
     public function initialAction($id)
     {
-        try {
-            $command = new States\SetInitialStateCommand(['id' => $id]);
-            $this->getCommandBus()->handle($command);
+        $command = new States\SetInitialStateCommand(['id' => $id]);
+        $this->getCommandBus()->handle($command);
 
-            return new JsonResponse();
-        }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
-        }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse();
     }
 
     /**
@@ -157,43 +123,35 @@ class StatesPostController extends Controller
      */
     public function saveTransitionsAction(Request $request, $id, $group)
     {
-        try {
-            /** @var \eTraxis\Repository\StatesRepository $repository */
-            $repository = $this->getDoctrine()->getRepository(State::class);
+        /** @var \eTraxis\Repository\StatesRepository $repository */
+        $repository = $this->getDoctrine()->getRepository(State::class);
 
-            $transitions_old = array_key_exists($group, SystemRole::getCollection())
-                ? $repository->getRoleTransitions($id, $group)
-                : $repository->getGroupTransitions($id, $group);
+        $transitions_old = array_key_exists($group, SystemRole::getCollection())
+            ? $repository->getRoleTransitions($id, $group)
+            : $repository->getGroupTransitions($id, $group);
 
-            $transitions_new = $request->request->get('transitions', []);
+        $transitions_new = $request->request->get('transitions', []);
 
-            $command = new States\RemoveStateTransitionsCommand([
-                'id'          => $id,
-                'group'       => $group,
-                'transitions' => array_diff($transitions_old, $transitions_new),
-            ]);
+        $command = new States\RemoveStateTransitionsCommand([
+            'id'          => $id,
+            'group'       => $group,
+            'transitions' => array_diff($transitions_old, $transitions_new),
+        ]);
 
-            if (count($command->transitions)) {
-                $this->getCommandBus()->handle($command);
-            }
-
-            $command = new States\AddStateTransitionsCommand([
-                'id'          => $id,
-                'group'       => $group,
-                'transitions' => array_diff($transitions_new, $transitions_old),
-            ]);
-
-            if (count($command->transitions)) {
-                $this->getCommandBus()->handle($command);
-            }
-
-            return new JsonResponse();
+        if (count($command->transitions)) {
+            $this->getCommandBus()->handle($command);
         }
-        catch (ValidationException $e) {
-            return new JsonResponse($e->getMessages(), $e->getStatusCode());
+
+        $command = new States\AddStateTransitionsCommand([
+            'id'          => $id,
+            'group'       => $group,
+            'transitions' => array_diff($transitions_new, $transitions_old),
+        ]);
+
+        if (count($command->transitions)) {
+            $this->getCommandBus()->handle($command);
         }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+
+        return new JsonResponse();
     }
 }

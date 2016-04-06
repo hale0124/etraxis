@@ -23,7 +23,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * States "GET" controller.
@@ -42,19 +41,14 @@ class StatesGetController extends Controller
      *
      * @param   int $id Template ID.
      *
-     * @return  Response|JsonResponse
+     * @return  JsonResponse
      */
     public function listAction($id)
     {
-        try {
-            /** @var \eTraxis\Repository\StatesRepository $repository */
-            $repository = $this->getDoctrine()->getRepository(State::class);
+        /** @var \eTraxis\Repository\StatesRepository $repository */
+        $repository = $this->getDoctrine()->getRepository(State::class);
 
-            return new JsonResponse($repository->getStates($id));
-        }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse($repository->getStates($id));
     }
 
     /**
@@ -69,21 +63,16 @@ class StatesGetController extends Controller
      */
     public function viewAction(Request $request, $id)
     {
-        try {
-            $state = $this->getDoctrine()->getRepository(State::class)->find($id);
+        $state = $this->getDoctrine()->getRepository(State::class)->find($id);
 
-            if (!$state) {
-                throw $this->createNotFoundException();
-            }
+        if (!$state) {
+            throw $this->createNotFoundException();
+        }
 
-            return $this->render('admin/states/view.html.twig', [
-                'state' => $state,
-                'tab'   => $request->get('tab', 0),
-            ]);
-        }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+        return $this->render('admin/states/view.html.twig', [
+            'state' => $state,
+            'tab'   => $request->get('tab', 0),
+        ]);
     }
 
     /**
@@ -97,29 +86,24 @@ class StatesGetController extends Controller
      */
     public function tabDetailsAction($id)
     {
-        try {
-            $state = $this->getDoctrine()->getRepository(State::class)->find($id);
+        $state = $this->getDoctrine()->getRepository(State::class)->find($id);
 
-            if (!$state) {
-                throw $this->createNotFoundException();
-            }
-
-            /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
-            $authChecker = $this->get('security.authorization_checker');
-
-            return $this->render('admin/states/tab_details.html.twig', [
-                'state'        => $state,
-                'types'        => StateType::getCollection(),
-                'responsibles' => StateResponsible::getCollection(),
-                'can'          => [
-                    'delete'  => $authChecker->isGranted(State::DELETE, $state),
-                    'initial' => $authChecker->isGranted(State::INITIAL, $state),
-                ],
-            ]);
+        if (!$state) {
+            throw $this->createNotFoundException();
         }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+
+        /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
+        $authChecker = $this->get('security.authorization_checker');
+
+        return $this->render('admin/states/tab_details.html.twig', [
+            'state'        => $state,
+            'types'        => StateType::getCollection(),
+            'responsibles' => StateResponsible::getCollection(),
+            'can'          => [
+                'delete'  => $authChecker->isGranted(State::DELETE, $state),
+                'initial' => $authChecker->isGranted(State::INITIAL, $state),
+            ],
+        ]);
     }
 
     /**
@@ -192,24 +176,19 @@ class StatesGetController extends Controller
      */
     public function editAction($id)
     {
-        try {
-            $state = $this->getDoctrine()->getRepository(State::class)->find($id);
+        $state = $this->getDoctrine()->getRepository(State::class)->find($id);
 
-            if (!$state) {
-                throw $this->createNotFoundException();
-            }
-
-            $form = $this->createForm(StateForm::class, $state, [
-                'action' => $this->generateUrl('admin_edit_state', ['id' => $id]),
-            ]);
-
-            return $this->render('admin/states/dlg_state.html.twig', [
-                'form' => $form->createView(),
-            ]);
+        if (!$state) {
+            throw $this->createNotFoundException();
         }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+
+        $form = $this->createForm(StateForm::class, $state, [
+            'action' => $this->generateUrl('admin_edit_state', ['id' => $id]),
+        ]);
+
+        return $this->render('admin/states/dlg_state.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 
     /**
@@ -224,25 +203,20 @@ class StatesGetController extends Controller
      */
     public function loadTransitionsAction($id, $group)
     {
-        try {
-            /** @var \eTraxis\Repository\StatesRepository $repository */
-            $repository = $this->getDoctrine()->getRepository(State::class);
+        /** @var \eTraxis\Repository\StatesRepository $repository */
+        $repository = $this->getDoctrine()->getRepository(State::class);
 
-            /** @var State $state */
-            $state = $repository->find($id);
+        /** @var State $state */
+        $state = $repository->find($id);
 
-            if (!$state) {
-                throw $this->createNotFoundException();
-            }
-
-            $transitions = array_key_exists($group, SystemRole::getCollection())
-                ? $repository->getRoleTransitions($id, $group)
-                : $repository->getGroupTransitions($id, $group);
-
-            return new JsonResponse($transitions);
+        if (!$state) {
+            throw $this->createNotFoundException();
         }
-        catch (HttpException $e) {
-            return new JsonResponse($e->getMessage(), $e->getStatusCode());
-        }
+
+        $transitions = array_key_exists($group, SystemRole::getCollection())
+            ? $repository->getRoleTransitions($id, $group)
+            : $repository->getGroupTransitions($id, $group);
+
+        return new JsonResponse($transitions);
     }
 }

@@ -20,7 +20,6 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
  * Fields "GET" controller.
@@ -39,19 +38,14 @@ class FieldsGetController extends Controller
      *
      * @param   int $id State ID.
      *
-     * @return  Response|JsonResponse
+     * @return  JsonResponse
      */
     public function listAction($id)
     {
-        try {
-            /** @var \eTraxis\Repository\FieldsRepository $repository */
-            $repository = $this->getDoctrine()->getRepository(Field::class);
+        /** @var \eTraxis\Repository\FieldsRepository $repository */
+        $repository = $this->getDoctrine()->getRepository(Field::class);
 
-            return new JsonResponse($repository->getFields($id));
-        }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+        return new JsonResponse($repository->getFields($id));
     }
 
     /**
@@ -66,21 +60,16 @@ class FieldsGetController extends Controller
      */
     public function viewAction(Request $request, $id)
     {
-        try {
-            $field = $this->getDoctrine()->getRepository(Field::class)->find($id);
+        $field = $this->getDoctrine()->getRepository(Field::class)->find($id);
 
-            if (!$field) {
-                throw $this->createNotFoundException();
-            }
+        if (!$field) {
+            throw $this->createNotFoundException();
+        }
 
-            return $this->render('admin/fields/view.html.twig', [
-                'field' => $field,
-                'tab'   => $request->get('tab', 0),
-            ]);
-        }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+        return $this->render('admin/fields/view.html.twig', [
+            'field' => $field,
+            'tab'   => $request->get('tab', 0),
+        ]);
     }
 
     /**
@@ -94,28 +83,23 @@ class FieldsGetController extends Controller
      */
     public function tabDetailsAction($id)
     {
-        try {
-            /** @var Field $field */
-            $field = $this->getDoctrine()->getRepository(Field::class)->find($id);
+        /** @var Field $field */
+        $field = $this->getDoctrine()->getRepository(Field::class)->find($id);
 
-            if (!$field) {
-                throw $this->createNotFoundException();
-            }
-
-            /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
-            $authChecker = $this->get('security.authorization_checker');
-
-            return $this->render(sprintf('admin/fields/tab_details_%s.html.twig', $field->getType()), [
-                'field' => $field,
-                'types' => FieldType::getCollection(),
-                'can'   => [
-                    'delete' => $authChecker->isGranted(Field::DELETE, $field),
-                ],
-            ]);
+        if (!$field) {
+            throw $this->createNotFoundException();
         }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+
+        /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
+        $authChecker = $this->get('security.authorization_checker');
+
+        return $this->render(sprintf('admin/fields/tab_details_%s.html.twig', $field->getType()), [
+            'field' => $field,
+            'types' => FieldType::getCollection(),
+            'can'   => [
+                'delete' => $authChecker->isGranted(Field::DELETE, $field),
+            ],
+        ]);
     }
 
     /**
@@ -149,23 +133,18 @@ class FieldsGetController extends Controller
      */
     public function editAction($id)
     {
-        try {
-            $field = $this->getDoctrine()->getRepository(Field::class)->find($id);
+        $field = $this->getDoctrine()->getRepository(Field::class)->find($id);
 
-            if (!$field) {
-                throw $this->createNotFoundException();
-            }
-
-            $form = $this->createForm(FieldForm::class, $field, [
-                'action' => $this->generateUrl('admin_edit_field', ['id' => $id]),
-            ]);
-
-            return $this->render('admin/fields/dlg_field.html.twig', [
-                'form' => $form->createView(),
-            ]);
+        if (!$field) {
+            throw $this->createNotFoundException();
         }
-        catch (HttpException $e) {
-            return new Response($e->getMessage(), $e->getStatusCode());
-        }
+
+        $form = $this->createForm(FieldForm::class, $field, [
+            'action' => $this->generateUrl('admin_edit_field', ['id' => $id]),
+        ]);
+
+        return $this->render('admin/fields/dlg_field.html.twig', [
+            'form' => $form->createView(),
+        ]);
     }
 }

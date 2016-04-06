@@ -22,6 +22,7 @@ use eTraxis\Traits\FlashBagTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 
 /**
@@ -38,7 +39,7 @@ class SecurityController extends Controller
      * @Action\Route("/login", name="login")
      * @Action\Method({"GET", "POST"})
      *
-     * @return  \Symfony\Component\HttpFoundation\Response
+     * @return  Response
      */
     public function loginAction()
     {
@@ -69,7 +70,7 @@ class SecurityController extends Controller
      *
      * @param   Request $request
      *
-     * @return  \Symfony\Component\HttpFoundation\Response
+     * @return  Response
      */
     public function forgotPasswordAction(Request $request)
     {
@@ -111,7 +112,7 @@ class SecurityController extends Controller
      * @param   Request $request
      * @param   string  $token Reset password token.
      *
-     * @return  \Symfony\Component\HttpFoundation\Response
+     * @return  Response
      */
     public function resetPasswordAction(Request $request, $token)
     {
@@ -165,7 +166,7 @@ class SecurityController extends Controller
      *
      * @param   Request $request
      *
-     * @return  \Symfony\Component\HttpFoundation\Response
+     * @return  Response
      */
     public function setExpiredPasswordAction(Request $request)
     {
