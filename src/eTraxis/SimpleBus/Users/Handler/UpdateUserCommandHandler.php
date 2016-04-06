@@ -78,7 +78,7 @@ class UpdateUserCommandHandler
         ;
 
         // Don't disable yourself.
-        if ($entity->getId() !== $user->getId()) {
+        if ($entity !== $user) {
             $entity
                 ->setAdmin($command->admin)
                 ->setDisabled($command->disabled)
@@ -88,6 +88,10 @@ class UpdateUserCommandHandler
         $errors = $this->validator->validate($entity);
 
         if (count($errors)) {
+            if ($entity === $user) {
+                $this->doctrine->getManager()->refresh($user);
+            }
+
             throw new BadRequestHttpException($errors->get(0)->getMessage());
         }
 

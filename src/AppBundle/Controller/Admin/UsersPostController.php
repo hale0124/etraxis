@@ -88,8 +88,7 @@ class UsersPostController extends Controller
         $command = new Users\UpdateUserCommand($data, ['id' => $id]);
         $this->getCommandBus()->handle($command);
 
-        /** @noinspection TypeUnsafeComparisonInspection */
-        if ($this->getUser()->getId() == $id) {
+        if ($this->getUser() === $user) {
             $this->get('session')->set('_locale', $command->locale);
         }
 
