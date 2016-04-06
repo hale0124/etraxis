@@ -117,18 +117,12 @@ class UsersGetController extends Controller
      * @Action\Route("/{id}", name="admin_view_user", condition="", requirements={"id"="\d+"})
      *
      * @param   Request $request
-     * @param   int     $id User ID.
+     * @param   User    $user
      *
      * @return  Response
      */
-    public function viewAction(Request $request, $id)
+    public function viewAction(Request $request, User $user)
     {
-        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
-
-        if (!$user) {
-            throw $this->createNotFoundException();
-        }
-
         return $this->render('admin/users/view.html.twig', [
             'user' => $user,
             'tab'  => $request->get('tab', 0),
@@ -140,18 +134,12 @@ class UsersGetController extends Controller
      *
      * @Action\Route("/tab/details/{id}", name="admin_tab_user_details", requirements={"id"="\d+"})
      *
-     * @param   int $id User ID.
+     * @param   User $user
      *
      * @return  Response
      */
-    public function tabDetailsAction($id)
+    public function tabDetailsAction(User $user)
     {
-        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
-
-        if (!$user) {
-            throw $this->createNotFoundException();
-        }
-
         /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
         $authChecker = $this->get('security.authorization_checker');
 
@@ -171,25 +159,19 @@ class UsersGetController extends Controller
      *
      * @Action\Route("/tab/groups/{id}", name="admin_tab_user_groups", requirements={"id"="\d+"})
      *
-     * @param   int $id User ID.
+     * @param   User $user
      *
      * @return  Response
      */
-    public function tabGroupsAction($id)
+    public function tabGroupsAction(User $user)
     {
         /** @var \eTraxis\Repository\UsersRepository $repository */
         $repository = $this->getDoctrine()->getRepository(User::class);
 
-        $user = $repository->find($id);
-
-        if (!$user) {
-            throw $this->createNotFoundException();
-        }
-
         return $this->render('admin/users/tab_groups.html.twig', [
             'user'   => $user,
-            'groups' => $repository->getUserGroups($id),
-            'others' => $repository->getOtherGroups($id),
+            'groups' => $repository->getUserGroups($user->getId()),
+            'others' => $repository->getOtherGroups($user->getId()),
         ]);
     }
 
@@ -222,20 +204,14 @@ class UsersGetController extends Controller
      *
      * @Action\Route("/edit/{id}", name="admin_dlg_edit_user", requirements={"id"="\d+"})
      *
-     * @param   int     $id User ID.
+     * @param   User $user
      *
      * @return  Response
      */
-    public function editAction($id)
+    public function editAction(User $user)
     {
-        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
-
-        if (!$user) {
-            throw $this->createNotFoundException();
-        }
-
         $form = $this->createForm(UserForm::class, $user, [
-            'action' => $this->generateUrl('admin_edit_user', ['id' => $id]),
+            'action' => $this->generateUrl('admin_edit_user', ['id' => $user->getId()]),
         ]);
 
         return $this->render('admin/users/dlg_user.html.twig', [

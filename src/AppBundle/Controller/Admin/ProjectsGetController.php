@@ -63,18 +63,12 @@ class ProjectsGetController extends Controller
      * @Action\Route("/{id}", name="admin_view_project", requirements={"id"="\d+"})
      *
      * @param   Request $request
-     * @param   int     $id Project ID.
+     * @param   Project $project
      *
      * @return  Response
      */
-    public function viewAction(Request $request, $id)
+    public function viewAction(Request $request, Project $project)
     {
-        $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
-
-        if (!$project) {
-            throw $this->createNotFoundException();
-        }
-
         return $this->render('admin/projects/view.html.twig', [
             'project' => $project,
             'tab'     => $request->get('tab', 0),
@@ -86,18 +80,12 @@ class ProjectsGetController extends Controller
      *
      * @Action\Route("/tab/details/{id}", name="admin_tab_project_details", requirements={"id"="\d+"})
      *
-     * @param   int $id Project ID.
+     * @param   Project $project
      *
      * @return  Response
      */
-    public function tabDetailsAction($id)
+    public function tabDetailsAction(Project $project)
     {
-        $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
-
-        if (!$project) {
-            throw $this->createNotFoundException();
-        }
-
         /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
         $authChecker = $this->get('security.authorization_checker');
 
@@ -136,20 +124,14 @@ class ProjectsGetController extends Controller
      *
      * @Action\Route("/edit/{id}", name="admin_dlg_edit_project", requirements={"id"="\d+"})
      *
-     * @param   int     $id Project ID.
+     * @param   Project $project
      *
      * @return  Response
      */
-    public function editAction($id)
+    public function editAction(Project $project)
     {
-        $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
-
-        if (!$project) {
-            throw $this->createNotFoundException();
-        }
-
         $form = $this->createForm(ProjectForm::class, $project, [
-            'action' => $this->generateUrl('admin_edit_project', ['id' => $id]),
+            'action' => $this->generateUrl('admin_edit_project', ['id' => $project->getId()]),
         ]);
 
         return $this->render('admin/projects/dlg_project.html.twig', [

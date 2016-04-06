@@ -59,21 +59,14 @@ class UsersPostController extends Controller
      * @Action\Route("/edit/{id}", name="admin_edit_user", requirements={"id"="\d+"})
      *
      * @param   Request $request
-     * @param   int     $id User ID.
+     * @param   User    $user
      *
      * @return  JsonResponse
      */
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request, User $user)
     {
         /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->getDoctrine()->getManager();
-
-        /** @var User $user */
-        $user = $this->getDoctrine()->getRepository(User::class)->find($id);
-
-        if (!$user) {
-            throw $this->createNotFoundException();
-        }
 
         $em->beginTransaction();
 
@@ -85,7 +78,7 @@ class UsersPostController extends Controller
             $data['email']    = $user->getEmail();
         }
 
-        $command = new Users\UpdateUserCommand($data, ['id' => $id]);
+        $command = new Users\UpdateUserCommand($data, ['id' => $user->getId()]);
         $this->getCommandBus()->handle($command);
 
         if ($this->getUser() === $user) {
@@ -99,7 +92,7 @@ class UsersPostController extends Controller
             }
 
             $command = new Users\SetPasswordCommand([
-                'id'       => $id,
+                'id'       => $user->getId(),
                 'password' => $data['password'],
             ]);
 

@@ -54,18 +54,12 @@ class FieldsGetController extends Controller
      * @Action\Route("/{id}", name="admin_view_field", requirements={"id"="\d+"})
      *
      * @param   Request $request
-     * @param   int     $id Field ID.
+     * @param   Field   $field
      *
      * @return  Response
      */
-    public function viewAction(Request $request, $id)
+    public function viewAction(Request $request, Field $field)
     {
-        $field = $this->getDoctrine()->getRepository(Field::class)->find($id);
-
-        if (!$field) {
-            throw $this->createNotFoundException();
-        }
-
         return $this->render('admin/fields/view.html.twig', [
             'field' => $field,
             'tab'   => $request->get('tab', 0),
@@ -77,19 +71,12 @@ class FieldsGetController extends Controller
      *
      * @Action\Route("/tab/details/{id}", name="admin_tab_field_details", requirements={"id"="\d+"})
      *
-     * @param   int $id Field ID.
+     * @param   Field $field
      *
      * @return  Response
      */
-    public function tabDetailsAction($id)
+    public function tabDetailsAction(Field $field)
     {
-        /** @var Field $field */
-        $field = $this->getDoctrine()->getRepository(Field::class)->find($id);
-
-        if (!$field) {
-            throw $this->createNotFoundException();
-        }
-
         /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
         $authChecker = $this->get('security.authorization_checker');
 
@@ -127,20 +114,14 @@ class FieldsGetController extends Controller
      *
      * @Action\Route("/edit/{id}", name="admin_dlg_edit_field", requirements={"id"="\d+"})
      *
-     * @param   int $id Field ID.
+     * @param   Field $field
      *
      * @return  Response
      */
-    public function editAction($id)
+    public function editAction(Field $field)
     {
-        $field = $this->getDoctrine()->getRepository(Field::class)->find($id);
-
-        if (!$field) {
-            throw $this->createNotFoundException();
-        }
-
         $form = $this->createForm(FieldForm::class, $field, [
-            'action' => $this->generateUrl('admin_edit_field', ['id' => $id]),
+            'action' => $this->generateUrl('admin_edit_field', ['id' => $field->getId()]),
         ]);
 
         return $this->render('admin/fields/dlg_field.html.twig', [

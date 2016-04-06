@@ -54,19 +54,13 @@ class TemplatesGetController extends Controller
      *
      * @Action\Route("/{id}", name="admin_view_template", requirements={"id"="\d+"})
      *
-     * @param   Request $request
-     * @param   int     $id Template ID.
+     * @param   Request  $request
+     * @param   Template $template
      *
      * @return  Response
      */
-    public function viewAction(Request $request, $id)
+    public function viewAction(Request $request, Template $template)
     {
-        $template = $this->getDoctrine()->getRepository(Template::class)->find($id);
-
-        if (!$template) {
-            throw $this->createNotFoundException();
-        }
-
         return $this->render('admin/templates/view.html.twig', [
             'template' => $template,
             'tab'      => $request->get('tab', 0),
@@ -78,18 +72,12 @@ class TemplatesGetController extends Controller
      *
      * @Action\Route("/tab/details/{id}", name="admin_tab_template_details", requirements={"id"="\d+"})
      *
-     * @param   int $id Template ID.
+     * @param   Template $template
      *
      * @return  Response
      */
-    public function tabDetailsAction($id)
+    public function tabDetailsAction(Template $template)
     {
-        $template = $this->getDoctrine()->getRepository(Template::class)->find($id);
-
-        if (!$template) {
-            throw $this->createNotFoundException();
-        }
-
         /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
         $authChecker = $this->get('security.authorization_checker');
 
@@ -108,19 +96,12 @@ class TemplatesGetController extends Controller
      *
      * @Action\Route("/tab/permissions/{id}", name="admin_tab_template_permissions", requirements={"id"="\d+"})
      *
-     * @param   int $id Template ID.
+     * @param   Template $template
      *
      * @return  Response
      */
-    public function tabPermissionsAction($id)
+    public function tabPermissionsAction(Template $template)
     {
-        /** @var Template $template */
-        $template = $this->getDoctrine()->getRepository(Template::class)->find($id);
-
-        if (!$this) {
-            throw $this->createNotFoundException();
-        }
-
         $permissions = [
             'template.permission.view_records'      => Template::PERMIT_VIEW_RECORD,
             'template.permission.create_records'    => Template::PERMIT_CREATE_RECORD,
@@ -180,20 +161,14 @@ class TemplatesGetController extends Controller
      *
      * @Action\Route("/edit/{id}", name="admin_dlg_edit_template", requirements={"id"="\d+"})
      *
-     * @param   int $id Template ID.
+     * @param   Template $template
      *
      * @return  Response
      */
-    public function editAction($id)
+    public function editAction(Template $template)
     {
-        $template = $this->getDoctrine()->getRepository(Template::class)->find($id);
-
-        if (!$template) {
-            throw $this->createNotFoundException();
-        }
-
         $form = $this->createForm(TemplateForm::class, $template, [
-            'action' => $this->generateUrl('admin_edit_template', ['id' => $id]),
+            'action' => $this->generateUrl('admin_edit_template', ['id' => $template->getId()]),
         ]);
 
         return $this->render('admin/templates/dlg_template.html.twig', [
@@ -206,22 +181,15 @@ class TemplatesGetController extends Controller
      *
      * @Action\Route("/permissions/{id}/{group}", name="admin_load_template_permissions", requirements={"id"="\d+", "group"="[\-]?\d+"})
      *
-     * @param   int $id    Template ID.
-     * @param   int $group Group ID or system role.
+     * @param   Template $template
+     * @param   int      $group Group ID or system role.
      *
      * @return  JsonResponse
      */
-    public function loadPermissionsAction($id, $group)
+    public function loadPermissionsAction(Template $template, $group)
     {
         /** @var \eTraxis\Repository\TemplatesRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Template::class);
-
-        /** @var Template $template */
-        $template = $repository->find($id);
-
-        if (!$template) {
-            throw $this->createNotFoundException();
-        }
 
         switch ($group) {
 
@@ -242,7 +210,7 @@ class TemplatesGetController extends Controller
                 break;
 
             default:
-                $permissions = $repository->getRolePermissions($id, $group);
+                $permissions = $repository->getRolePermissions($template->getId(), $group);
         }
 
         return new JsonResponse($permissions);

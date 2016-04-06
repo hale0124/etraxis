@@ -11,7 +11,6 @@
 
 namespace AppBundle\Controller\Admin;
 
-use eTraxis\Entity\Project;
 use eTraxis\SimpleBus\Projects;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
@@ -60,12 +59,6 @@ class ProjectsPostController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        $project = $this->getDoctrine()->getRepository(Project::class)->find($id);
-
-        if (!$project) {
-            throw $this->createNotFoundException();
-        }
-
         $data = $request->request->get('project');
 
         $command = new Projects\UpdateProjectCommand($data, ['id' => $id]);

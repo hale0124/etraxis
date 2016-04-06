@@ -57,18 +57,12 @@ class StatesGetController extends Controller
      * @Action\Route("/{id}", name="admin_view_state", requirements={"id"="\d+"})
      *
      * @param   Request $request
-     * @param   int     $id State ID.
+     * @param   State   $state
      *
      * @return  Response
      */
-    public function viewAction(Request $request, $id)
+    public function viewAction(Request $request, State $state)
     {
-        $state = $this->getDoctrine()->getRepository(State::class)->find($id);
-
-        if (!$state) {
-            throw $this->createNotFoundException();
-        }
-
         return $this->render('admin/states/view.html.twig', [
             'state' => $state,
             'tab'   => $request->get('tab', 0),
@@ -80,18 +74,12 @@ class StatesGetController extends Controller
      *
      * @Action\Route("/tab/details/{id}", name="admin_tab_state_details", requirements={"id"="\d+"})
      *
-     * @param   int $id State ID.
+     * @param   State $state
      *
      * @return  Response
      */
-    public function tabDetailsAction($id)
+    public function tabDetailsAction(State $state)
     {
-        $state = $this->getDoctrine()->getRepository(State::class)->find($id);
-
-        if (!$state) {
-            throw $this->createNotFoundException();
-        }
-
         /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
         $authChecker = $this->get('security.authorization_checker');
 
@@ -111,19 +99,12 @@ class StatesGetController extends Controller
      *
      * @Action\Route("/tab/transitions/{id}", name="admin_tab_state_transitions", requirements={"id"="\d+"})
      *
-     * @param   int $id State ID.
+     * @param   State $state
      *
      * @return  Response
      */
-    public function tabTransitionsAction($id)
+    public function tabTransitionsAction(State $state)
     {
-        /** @var State $state */
-        $state = $this->getDoctrine()->getRepository(State::class)->find($id);
-
-        if (!$this) {
-            throw $this->createNotFoundException();
-        }
-
         /** @var \eTraxis\Repository\StatesRepository $repository */
         $repository = $this->getDoctrine()->getRepository(State::class);
 
@@ -170,20 +151,14 @@ class StatesGetController extends Controller
      *
      * @Action\Route("/edit/{id}", name="admin_dlg_edit_state", requirements={"id"="\d+"})
      *
-     * @param   int $id State ID.
+     * @param   State $state
      *
      * @return  Response
      */
-    public function editAction($id)
+    public function editAction(State $state)
     {
-        $state = $this->getDoctrine()->getRepository(State::class)->find($id);
-
-        if (!$state) {
-            throw $this->createNotFoundException();
-        }
-
         $form = $this->createForm(StateForm::class, $state, [
-            'action' => $this->generateUrl('admin_edit_state', ['id' => $id]),
+            'action' => $this->generateUrl('admin_edit_state', ['id' => $state->getId()]),
         ]);
 
         return $this->render('admin/states/dlg_state.html.twig', [
@@ -196,26 +171,19 @@ class StatesGetController extends Controller
      *
      * @Action\Route("/transitions/{id}/{group}", name="admin_load_state_transitions", requirements={"id"="\d+", "group"="[\-]?\d+"})
      *
-     * @param   int $id    State ID.
-     * @param   int $group Group ID or system role.
+     * @param   State $state
+     * @param   int   $group Group ID or system role.
      *
      * @return  JsonResponse
      */
-    public function loadTransitionsAction($id, $group)
+    public function loadTransitionsAction(State $state, $group)
     {
         /** @var \eTraxis\Repository\StatesRepository $repository */
         $repository = $this->getDoctrine()->getRepository(State::class);
 
-        /** @var State $state */
-        $state = $repository->find($id);
-
-        if (!$state) {
-            throw $this->createNotFoundException();
-        }
-
         $transitions = array_key_exists($group, SystemRole::getCollection())
-            ? $repository->getRoleTransitions($id, $group)
-            : $repository->getGroupTransitions($id, $group);
+            ? $repository->getRoleTransitions($state->getId(), $group)
+            : $repository->getGroupTransitions($state->getId(), $group);
 
         return new JsonResponse($transitions);
     }

@@ -11,7 +11,6 @@
 
 namespace AppBundle\Controller\Admin;
 
-use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\Templates;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
@@ -61,12 +60,6 @@ class TemplatesPostController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        $template = $this->getDoctrine()->getRepository(Template::class)->find($id);
-
-        if (!$template) {
-            throw $this->createNotFoundException();
-        }
-
         $data = $request->request->get('template');
 
         $command = new Templates\UpdateTemplateCommand($data, ['id' => $id]);

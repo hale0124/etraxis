@@ -54,18 +54,12 @@ class GroupsGetController extends Controller
      * @Action\Route("/{id}", name="admin_view_group", requirements={"id"="\d+"})
      *
      * @param   Request $request
-     * @param   int     $id Group ID.
+     * @param   Group   $group
      *
      * @return  Response
      */
-    public function viewAction(Request $request, $id)
+    public function viewAction(Request $request, Group $group)
     {
-        $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
-
-        if (!$group) {
-            throw $this->createNotFoundException();
-        }
-
         return $this->render('admin/groups/view.html.twig', [
             'group' => $group,
             'tab'   => $request->get('tab', 0),
@@ -77,18 +71,12 @@ class GroupsGetController extends Controller
      *
      * @Action\Route("/tab/details/{id}", name="admin_tab_group_details", requirements={"id"="\d+"})
      *
-     * @param   int $id Group ID.
+     * @param   Group $group
      *
      * @return  Response
      */
-    public function tabDetailsAction($id)
+    public function tabDetailsAction(Group $group)
     {
-        $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
-
-        if (!$group) {
-            throw $this->createNotFoundException();
-        }
-
         return $this->render('admin/groups/tab_details.html.twig', [
             'group' => $group,
         ]);
@@ -99,25 +87,19 @@ class GroupsGetController extends Controller
      *
      * @Action\Route("/tab/groups/{id}", name="admin_tab_group_members", requirements={"id"="\d+"})
      *
-     * @param   int $id Group ID.
+     * @param   Group $group
      *
      * @return  Response
      */
-    public function tabMembersAction($id)
+    public function tabMembersAction(Group $group)
     {
         /** @var \eTraxis\Repository\GroupsRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Group::class);
 
-        $group = $repository->find($id);
-
-        if (!$group) {
-            throw $this->createNotFoundException();
-        }
-
         return $this->render('admin/groups/tab_members.html.twig', [
             'group'   => $group,
-            'members' => $repository->getGroupMembers($id),
-            'others'  => $repository->getGroupNonMembers($id),
+            'members' => $repository->getGroupMembers($group->getId()),
+            'others'  => $repository->getGroupNonMembers($group->getId()),
         ]);
     }
 
@@ -154,20 +136,14 @@ class GroupsGetController extends Controller
      *
      * @Action\Route("/edit/{id}", name="admin_dlg_edit_group", requirements={"id"="\d+"})
      *
-     * @param   int $id Group ID.
+     * @param   Group $group
      *
      * @return  Response
      */
-    public function editAction($id)
+    public function editAction(Group $group)
     {
-        $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
-
-        if (!$group) {
-            throw $this->createNotFoundException();
-        }
-
         $form = $this->createForm(GroupForm::class, $group, [
-            'action' => $this->generateUrl('admin_edit_group', ['id' => $id]),
+            'action' => $this->generateUrl('admin_edit_group', ['id' => $group->getId()]),
         ]);
 
         return $this->render('admin/groups/dlg_group.html.twig', [

@@ -11,7 +11,6 @@
 
 namespace AppBundle\Controller\Admin;
 
-use eTraxis\Entity\Group;
 use eTraxis\SimpleBus\Groups;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
@@ -60,12 +59,6 @@ class GroupsPostController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        $group = $this->getDoctrine()->getRepository(Group::class)->find($id);
-
-        if (!$group) {
-            throw $this->createNotFoundException();
-        }
-
         $data = $request->request->get('group');
 
         $command = new Groups\UpdateGroupCommand($data, ['id' => $id]);

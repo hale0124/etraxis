@@ -97,57 +97,50 @@ class FieldsPostController extends Controller
      * @Action\Route("/edit/{id}", name="admin_edit_field", requirements={"id"="\d+"})
      *
      * @param   Request $request
-     * @param   int     $id Field ID.
+     * @param   Field   $field
      *
      * @return  JsonResponse
      */
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request, Field $field)
     {
-        /** @var Field $field */
-        $field = $this->getDoctrine()->getRepository(Field::class)->find($id);
-
-        if (!$field) {
-            throw $this->createNotFoundException();
-        }
-
         $data = $request->request->get('field');
 
         switch ($field->getType()) {
 
             case Field::TYPE_NUMBER:
-                $command = new Fields\UpdateNumberFieldCommand($data + $data['asNumber'], ['id' => $id]);
+                $command = new Fields\UpdateNumberFieldCommand($data + $data['asNumber'], ['id' => $field->getId()]);
                 break;
 
             case Field::TYPE_DECIMAL:
-                $command = new Fields\UpdateDecimalFieldCommand($data + $data['asDecimal'], ['id' => $id]);
+                $command = new Fields\UpdateDecimalFieldCommand($data + $data['asDecimal'], ['id' => $field->getId()]);
                 break;
 
             case Field::TYPE_STRING:
-                $command = new Fields\UpdateStringFieldCommand($data + $data['asString'], ['id' => $id]);
+                $command = new Fields\UpdateStringFieldCommand($data + $data['asString'], ['id' => $field->getId()]);
                 break;
 
             case Field::TYPE_TEXT:
-                $command = new Fields\UpdateTextFieldCommand($data + $data['asText'], ['id' => $id]);
+                $command = new Fields\UpdateTextFieldCommand($data + $data['asText'], ['id' => $field->getId()]);
                 break;
 
             case Field::TYPE_CHECKBOX:
-                $command = new Fields\UpdateCheckboxFieldCommand($data + $data['asCheckbox'], ['id' => $id, 'required' => false]);
+                $command = new Fields\UpdateCheckboxFieldCommand($data + $data['asCheckbox'], ['id' => $field->getId(), 'required' => false]);
                 break;
 
             case Field::TYPE_LIST:
-                $command = new Fields\UpdateListFieldCommand($data, ['id' => $id]);
+                $command = new Fields\UpdateListFieldCommand($data, ['id' => $field->getId()]);
                 break;
 
             case Field::TYPE_RECORD:
-                $command = new Fields\UpdateRecordFieldCommand($data, ['id' => $id]);
+                $command = new Fields\UpdateRecordFieldCommand($data, ['id' => $field->getId()]);
                 break;
 
             case Field::TYPE_DATE:
-                $command = new Fields\UpdateDateFieldCommand($data + $data['asDate'], ['id' => $id]);
+                $command = new Fields\UpdateDateFieldCommand($data + $data['asDate'], ['id' => $field->getId()]);
                 break;
 
             case Field::TYPE_DURATION:
-                $command = new Fields\UpdateDurationFieldCommand($data + $data['asDuration'], ['id' => $id]);
+                $command = new Fields\UpdateDurationFieldCommand($data + $data['asDuration'], ['id' => $field->getId()]);
                 break;
 
             default:

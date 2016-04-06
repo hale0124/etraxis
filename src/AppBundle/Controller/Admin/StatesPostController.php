@@ -62,12 +62,6 @@ class StatesPostController extends Controller
      */
     public function editAction(Request $request, $id)
     {
-        $state = $this->getDoctrine()->getRepository(State::class)->find($id);
-
-        if (!$state) {
-            throw $this->createNotFoundException();
-        }
-
         $data = $request->request->get('state');
 
         $command = new States\UpdateStateCommand($data, ['id' => $id]);
