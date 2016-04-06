@@ -18,7 +18,6 @@ use eTraxis\Entity\StateGroupTransition;
 use eTraxis\Entity\StateRoleTransition;
 use eTraxis\SimpleBus\States\AddStateTransitionsCommand;
 use eTraxis\SimpleBus\States\RemoveStateTransitionsCommand;
-use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -27,18 +26,15 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class AddRemoveStateTransitionsCommandHandler
 {
-    protected $logger;
     protected $doctrine;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface   $logger
      * @param   RegistryInterface $doctrine
      */
-    public function __construct(LoggerInterface $logger, RegistryInterface $doctrine)
+    public function __construct(RegistryInterface $doctrine)
     {
-        $this->logger   = $logger;
         $this->doctrine = $doctrine;
     }
 
@@ -55,7 +51,6 @@ class AddRemoveStateTransitionsCommandHandler
         $state = $this->doctrine->getRepository(State::class)->find($command->id);
 
         if (!$state) {
-            $this->logger->error('Unknown state.', [$command->id]);
             throw new NotFoundHttpException('Unknown state.');
         }
 
@@ -119,7 +114,6 @@ class AddRemoveStateTransitionsCommandHandler
 
             if (!$group) {
                 $em->rollback();
-                $this->logger->error('Unknown group.', [$command->group]);
                 throw new NotFoundHttpException('Unknown group.');
             }
 

@@ -13,7 +13,6 @@ namespace eTraxis\SimpleBus\Users\Handler;
 
 use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Users\UpdateUserCommand;
-use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -25,7 +24,6 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class UpdateUserCommandHandler
 {
-    protected $logger;
     protected $validator;
     protected $doctrine;
     protected $token_storage;
@@ -33,18 +31,15 @@ class UpdateUserCommandHandler
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface       $logger
      * @param   ValidatorInterface    $validator
      * @param   RegistryInterface     $doctrine
      * @param   TokenStorageInterface $token_storage
      */
     public function __construct(
-        LoggerInterface       $logger,
         ValidatorInterface    $validator,
         RegistryInterface     $doctrine,
         TokenStorageInterface $token_storage)
     {
-        $this->logger        = $logger;
         $this->validator     = $validator;
         $this->doctrine      = $doctrine;
         $this->token_storage = $token_storage;
@@ -69,7 +64,6 @@ class UpdateUserCommandHandler
         $entity = $repository->find($command->id);
 
         if (!$entity) {
-            $this->logger->error('Unknown user.', [$command->id]);
             throw new NotFoundHttpException('Unknown user.');
         }
 
@@ -94,9 +88,7 @@ class UpdateUserCommandHandler
         $errors = $this->validator->validate($entity);
 
         if (count($errors)) {
-            $message = $errors->get(0)->getMessage();
-            $this->logger->error($message);
-            throw new BadRequestHttpException($message);
+            throw new BadRequestHttpException($errors->get(0)->getMessage());
         }
 
         $this->doctrine->getManager()->persist($entity);

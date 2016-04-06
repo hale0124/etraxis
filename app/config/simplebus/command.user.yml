@@ -18,17 +18,17 @@ services:
     command.user.create:
         class: eTraxis\SimpleBus\Users\Handler\CreateUserCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\CreateUserCommand }]
-        arguments: [ "@logger", "@validator", "@doctrine", "@etraxis.encoder" ]
+        arguments: [ "@validator", "@doctrine", "@etraxis.encoder" ]
 
     command.user.update:
         class: eTraxis\SimpleBus\Users\Handler\UpdateUserCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\UpdateUserCommand }]
-        arguments: [ "@logger", "@validator", "@doctrine", "@security.token_storage" ]
+        arguments: [ "@validator", "@doctrine", "@security.token_storage" ]
 
     command.user.delete:
         class: eTraxis\SimpleBus\Users\Handler\DeleteUserCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\DeleteUserCommand }]
-        arguments: [ "@logger", "@doctrine", "@security.authorization_checker" ]
+        arguments: [ "@doctrine", "@security.authorization_checker" ]
 
     command.users.disable:
         class: eTraxis\SimpleBus\Users\Handler\DisableUsersCommandHandler
@@ -43,12 +43,12 @@ services:
     command.settings.appearance:
         class: eTraxis\SimpleBus\Users\Handler\SaveAppearanceCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\SaveAppearanceCommand }]
-        arguments: [ "@logger", "@validator", "@doctrine" ]
+        arguments: [ "@validator", "@doctrine" ]
 
     command.password.set:
         class: eTraxis\SimpleBus\Users\Handler\SetPasswordCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\SetPasswordCommand }]
-        arguments: [ "@logger", "@translator", "@doctrine", "@etraxis.encoder" ]
+        arguments: [ "@translator", "@doctrine", "@etraxis.encoder" ]
 
     command.password.forgot:
         class: eTraxis\SimpleBus\Users\Handler\ForgotPasswordCommandHandler
@@ -58,14 +58,14 @@ services:
     command.password.reset:
         class: eTraxis\SimpleBus\Users\Handler\ResetPasswordCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\ResetPasswordCommand }]
-        arguments: [ "@logger", "@translator", "@doctrine", "@etraxis.encoder" ]
+        arguments: [ "@translator", "@doctrine", "@etraxis.encoder" ]
 
     command.users.add_groups:
         class: eTraxis\SimpleBus\Users\Handler\AddRemoveGroupsCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\AddGroupsCommand }]
-        arguments: [ "@logger", "@doctrine" ]
+        arguments: [ "@doctrine" ]
 
     command.users.remove_groups:
         class: eTraxis\SimpleBus\Users\Handler\AddRemoveGroupsCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\RemoveGroupsCommand }]
-        arguments: [ "@logger", "@doctrine" ]
+        arguments: [ "@doctrine" ]

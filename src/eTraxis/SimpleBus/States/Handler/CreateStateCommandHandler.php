@@ -14,7 +14,6 @@ namespace eTraxis\SimpleBus\States\Handler;
 use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\States\CreateStateCommand;
-use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -25,23 +24,17 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class CreateStateCommandHandler
 {
-    protected $logger;
     protected $validator;
     protected $doctrine;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface    $logger
      * @param   ValidatorInterface $validator
      * @param   RegistryInterface  $doctrine
      */
-    public function __construct(
-        LoggerInterface    $logger,
-        ValidatorInterface $validator,
-        RegistryInterface  $doctrine)
+    public function __construct(ValidatorInterface $validator, RegistryInterface $doctrine)
     {
-        $this->logger    = $logger;
         $this->validator = $validator;
         $this->doctrine  = $doctrine;
     }
@@ -60,7 +53,6 @@ class CreateStateCommandHandler
         $template = $this->doctrine->getRepository(Template::class)->find($command->template);
 
         if (!$template) {
-            $this->logger->error('Unknown template.', [$command->template]);
             throw new NotFoundHttpException('Unknown template.');
         }
 
@@ -80,7 +72,6 @@ class CreateStateCommandHandler
             $nextState = $this->doctrine->getRepository(State::class)->find($command->nextState);
 
             if (!$nextState) {
-                $this->logger->error('Unknown next state.', [$command->nextState]);
                 throw new NotFoundHttpException('Unknown next state.');
             }
 
@@ -90,9 +81,7 @@ class CreateStateCommandHandler
         $errors = $this->validator->validate($entity);
 
         if (count($errors)) {
-            $message = $errors->get(0)->getMessage();
-            $this->logger->error($message);
-            throw new BadRequestHttpException($message);
+            throw new BadRequestHttpException($errors->get(0)->getMessage());
         }
 
         /** @var \Doctrine\ORM\EntityManager $em */

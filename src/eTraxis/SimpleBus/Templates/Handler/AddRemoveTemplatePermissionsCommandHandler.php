@@ -17,7 +17,6 @@ use eTraxis\Entity\Template;
 use eTraxis\Entity\TemplateGroupPermission;
 use eTraxis\SimpleBus\Templates\AddTemplatePermissionsCommand;
 use eTraxis\SimpleBus\Templates\RemoveTemplatePermissionsCommand;
-use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -26,18 +25,15 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class AddRemoveTemplatePermissionsCommandHandler
 {
-    protected $logger;
     protected $doctrine;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface   $logger
      * @param   RegistryInterface $doctrine
      */
-    public function __construct(LoggerInterface $logger, RegistryInterface $doctrine)
+    public function __construct(RegistryInterface $doctrine)
     {
-        $this->logger   = $logger;
         $this->doctrine = $doctrine;
     }
 
@@ -54,7 +50,6 @@ class AddRemoveTemplatePermissionsCommandHandler
         $template = $this->doctrine->getRepository(Template::class)->find($command->id);
 
         if (!$template) {
-            $this->logger->error('Unknown template.', [$command->id]);
             throw new NotFoundHttpException('Unknown template.');
         }
 
@@ -93,7 +88,6 @@ class AddRemoveTemplatePermissionsCommandHandler
                 $group = $this->doctrine->getRepository(Group::class)->find($command->group);
 
                 if (!$group) {
-                    $this->logger->error('Unknown group.', [$command->group]);
                     throw new NotFoundHttpException('Unknown group.');
                 }
 

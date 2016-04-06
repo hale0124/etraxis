@@ -14,7 +14,6 @@ namespace eTraxis\SimpleBus\Templates\Handler;
 use eTraxis\Entity\Project;
 use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\Templates\CreateTemplateCommand;
-use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -25,23 +24,17 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class CreateTemplateCommandHandler
 {
-    protected $logger;
     protected $validator;
     protected $doctrine;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface    $logger
      * @param   ValidatorInterface $validator
      * @param   RegistryInterface  $doctrine
      */
-    public function __construct(
-        LoggerInterface    $logger,
-        ValidatorInterface $validator,
-        RegistryInterface  $doctrine)
+    public function __construct(ValidatorInterface $validator, RegistryInterface $doctrine)
     {
-        $this->logger    = $logger;
         $this->validator = $validator;
         $this->doctrine  = $doctrine;
     }
@@ -62,7 +55,6 @@ class CreateTemplateCommandHandler
         $project = $repository->find($command->project);
 
         if (!$project) {
-            $this->logger->error('Unknown project.', [$command->project]);
             throw new NotFoundHttpException('Unknown project.');
         }
 
@@ -85,9 +77,7 @@ class CreateTemplateCommandHandler
         $errors = $this->validator->validate($entity);
 
         if (count($errors)) {
-            $message = $errors->get(0)->getMessage();
-            $this->logger->error($message);
-            throw new BadRequestHttpException($message);
+            throw new BadRequestHttpException($errors->get(0)->getMessage());
         }
 
         $this->doctrine->getManager()->persist($entity);

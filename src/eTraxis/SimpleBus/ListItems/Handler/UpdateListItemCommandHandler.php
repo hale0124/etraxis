@@ -13,7 +13,6 @@ namespace eTraxis\SimpleBus\ListItems\Handler;
 
 use eTraxis\Entity\ListItem;
 use eTraxis\SimpleBus\ListItems\UpdateListItemCommand;
-use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -24,23 +23,17 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class UpdateListItemCommandHandler
 {
-    protected $logger;
     protected $validator;
     protected $doctrine;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface    $logger
      * @param   ValidatorInterface $validator
      * @param   RegistryInterface  $doctrine
      */
-    public function __construct(
-        LoggerInterface    $logger,
-        ValidatorInterface $validator,
-        RegistryInterface  $doctrine)
+    public function __construct(ValidatorInterface $validator, RegistryInterface $doctrine)
     {
-        $this->logger    = $logger;
         $this->validator = $validator;
         $this->doctrine  = $doctrine;
     }
@@ -64,7 +57,6 @@ class UpdateListItemCommandHandler
         ]);
 
         if (!$entity) {
-            $this->logger->error('Unknown list item.', [$command->field, $command->key]);
             throw new NotFoundHttpException('Unknown list item.');
         }
 
@@ -73,9 +65,7 @@ class UpdateListItemCommandHandler
         $errors = $this->validator->validate($entity);
 
         if (count($errors)) {
-            $message = $errors->get(0)->getMessage();
-            $this->logger->error($message);
-            throw new BadRequestHttpException($message);
+            throw new BadRequestHttpException($errors->get(0)->getMessage());
         }
 
         $this->doctrine->getManager()->persist($entity);

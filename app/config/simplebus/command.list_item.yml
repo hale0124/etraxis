@@ -3,14 +3,14 @@ services:
     command.list_item.create:
         class: eTraxis\SimpleBus\ListItems\Handler\CreateListItemCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\ListItems\CreateListItemCommand }]
-        arguments: [ "@logger", "@validator", "@doctrine" ]
+        arguments: [ "@validator", "@doctrine" ]
 
     command.list_item.update:
         class: eTraxis\SimpleBus\ListItems\Handler\UpdateListItemCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\ListItems\UpdateListItemCommand }]
-        arguments: [ "@logger", "@validator", "@doctrine" ]
+        arguments: [ "@validator", "@doctrine" ]
 
     command.list_item.delete:
         class: eTraxis\SimpleBus\ListItems\Handler\DeleteListItemCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\ListItems\DeleteListItemCommand }]
-        arguments: [ "@logger", "@doctrine", "@security.authorization_checker" ]
+        arguments: [ "@doctrine", "@security.authorization_checker" ]

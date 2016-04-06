@@ -34,13 +34,8 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
         ]);
 
-        $handler = new FieldCommandStubHandler(
-            $this->logger,
-            $this->validator,
-            $this->doctrine
-        );
-
-        $field = $handler->getEntity($command);
+        $handler = new FieldCommandStubHandler($this->validator, $this->doctrine);
+        $field   = $handler->getEntity($command);
 
         self::assertInstanceOf(Field::class, $field);
         self::assertEquals($template->getId(), $field->getTemplate()->getId());
@@ -69,13 +64,8 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
         ]);
 
-        $handler = new FieldCommandStubHandler(
-            $this->logger,
-            $this->validator,
-            $this->doctrine
-        );
-
-        $field = $handler->getEntity($command);
+        $handler = new FieldCommandStubHandler($this->validator, $this->doctrine);
+        $field   = $handler->getEntity($command);
 
         self::assertInstanceOf(Field::class, $field);
         self::assertEquals($state->getTemplateId(), $field->getTemplate()->getId());
@@ -103,12 +93,7 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
         ]);
 
-        $handler = new FieldCommandStubHandler(
-            $this->logger,
-            $this->validator,
-            $this->doctrine
-        );
-
+        $handler = new FieldCommandStubHandler($this->validator, $this->doctrine);
         $handler->getEntity($command);
     }
 
@@ -127,12 +112,7 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
         ]);
 
-        $handler = new FieldCommandStubHandler(
-            $this->logger,
-            $this->validator,
-            $this->doctrine
-        );
-
+        $handler = new FieldCommandStubHandler($this->validator, $this->doctrine);
         $handler->getEntity($command);
     }
 
@@ -155,12 +135,7 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
         ]);
 
-        $handler = new FieldCommandStubHandler(
-            $this->logger,
-            $this->validator,
-            $this->doctrine
-        );
-
+        $handler = new FieldCommandStubHandler($this->validator, $this->doctrine);
         $handler->getEntity($command);
     }
 
@@ -180,13 +155,8 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => true,
         ]);
 
-        $handler = new FieldCommandStubHandler(
-            $this->logger,
-            $this->validator,
-            $this->doctrine
-        );
-
-        $entity = $handler->getEntity($command);
+        $handler = new FieldCommandStubHandler($this->validator, $this->doctrine);
+        $entity  = $handler->getEntity($command);
 
         self::assertInstanceOf(Field::class, $entity);
         self::assertEquals('Team', $entity->getName());
@@ -211,12 +181,7 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => true,
         ]);
 
-        $handler = new FieldCommandStubHandler(
-            $this->logger,
-            $this->validator,
-            $this->doctrine
-        );
-
+        $handler = new FieldCommandStubHandler($this->validator, $this->doctrine);
         $handler->getEntity($command);
     }
 
@@ -240,12 +205,7 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => true,
         ]);
 
-        $handler = new FieldCommandStubHandler(
-            $this->logger,
-            $this->validator,
-            $this->doctrine
-        );
-
+        $handler = new FieldCommandStubHandler($this->validator, $this->doctrine);
         $handler->getEntity($command);
     }
 
@@ -257,12 +217,7 @@ class BaseFieldCommandTest extends BaseTestCase
     {
         $command = null;
 
-        $handler = new FieldCommandStubHandler(
-            $this->logger,
-            $this->validator,
-            $this->doctrine
-        );
-
+        $handler = new FieldCommandStubHandler($this->validator, $this->doctrine);
         $handler->getEntity($command);
     }
 }

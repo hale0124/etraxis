@@ -13,7 +13,6 @@ namespace eTraxis\SimpleBus\Fields\Handler;
 
 use eTraxis\Entity\Field;
 use eTraxis\SimpleBus\Fields\DeleteFieldCommand;
-use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -22,20 +21,15 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class DeleteFieldCommandHandler
 {
-    protected $logger;
     protected $doctrine;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface   $logger
      * @param   RegistryInterface $doctrine
      */
-    public function __construct(
-        LoggerInterface   $logger,
-        RegistryInterface $doctrine)
+    public function __construct(RegistryInterface $doctrine)
     {
-        $this->logger   = $logger;
         $this->doctrine = $doctrine;
     }
 
@@ -57,7 +51,6 @@ class DeleteFieldCommandHandler
         ]);
 
         if (!$entity) {
-            $this->logger->error('Unknown field.', [$command->id]);
             throw new NotFoundHttpException('Unknown field.');
         }
 

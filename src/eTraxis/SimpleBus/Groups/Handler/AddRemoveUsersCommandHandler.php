@@ -15,7 +15,6 @@ use eTraxis\Entity\Group;
 use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Groups\AddUsersCommand;
 use eTraxis\SimpleBus\Groups\RemoveUsersCommand;
-use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -24,18 +23,15 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class AddRemoveUsersCommandHandler
 {
-    protected $logger;
     protected $doctrine;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface   $logger
      * @param   RegistryInterface $doctrine
      */
-    public function __construct(LoggerInterface $logger, RegistryInterface $doctrine)
+    public function __construct(RegistryInterface $doctrine)
     {
-        $this->logger   = $logger;
         $this->doctrine = $doctrine;
     }
 
@@ -55,7 +51,6 @@ class AddRemoveUsersCommandHandler
         $group = $repository->find($command->id);
 
         if (!$group) {
-            $this->logger->error('Unknown group.', [$command->id]);
             throw new NotFoundHttpException('Unknown group.');
         }
 

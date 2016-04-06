@@ -13,7 +13,6 @@ namespace eTraxis\SimpleBus\Groups\Handler;
 
 use eTraxis\Entity\Group;
 use eTraxis\SimpleBus\Groups\DeleteGroupCommand;
-use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -22,18 +21,15 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class DeleteGroupCommandHandler
 {
-    protected $logger;
     protected $doctrine;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface   $logger
      * @param   RegistryInterface $doctrine
      */
-    public function __construct(LoggerInterface $logger, RegistryInterface $doctrine)
+    public function __construct(RegistryInterface $doctrine)
     {
-        $this->logger   = $logger;
         $this->doctrine = $doctrine;
     }
 
@@ -51,7 +47,6 @@ class DeleteGroupCommandHandler
         $entity = $repository->find($command->id);
 
         if (!$entity) {
-            $this->logger->error('Unknown group.', [$command->id]);
             throw new NotFoundHttpException('Unknown group.');
         }
 

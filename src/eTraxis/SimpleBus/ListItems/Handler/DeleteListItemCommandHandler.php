@@ -13,7 +13,6 @@ namespace eTraxis\SimpleBus\ListItems\Handler;
 
 use eTraxis\Entity\ListItem;
 use eTraxis\SimpleBus\ListItems\DeleteListItemCommand;
-use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -24,23 +23,17 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class DeleteListItemCommandHandler
 {
-    protected $logger;
     protected $doctrine;
     protected $security;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface               $logger
      * @param   RegistryInterface             $doctrine
      * @param   AuthorizationCheckerInterface $security
      */
-    public function __construct(
-        LoggerInterface               $logger,
-        RegistryInterface             $doctrine,
-        AuthorizationCheckerInterface $security)
+    public function __construct(RegistryInterface $doctrine, AuthorizationCheckerInterface $security)
     {
-        $this->logger   = $logger;
         $this->doctrine = $doctrine;
         $this->security = $security;
     }
@@ -63,7 +56,6 @@ class DeleteListItemCommandHandler
         ]);
 
         if (!$entity) {
-            $this->logger->error('Unknown list item.', [$command->field, $command->key]);
             throw new NotFoundHttpException('Unknown list item.');
         }
 

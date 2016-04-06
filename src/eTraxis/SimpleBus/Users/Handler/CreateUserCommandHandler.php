@@ -13,7 +13,6 @@ namespace eTraxis\SimpleBus\Users\Handler;
 
 use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Users\CreateUserCommand;
-use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
@@ -25,7 +24,6 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class CreateUserCommandHandler
 {
-    protected $logger;
     protected $validator;
     protected $doctrine;
     protected $password_encoder;
@@ -33,18 +31,15 @@ class CreateUserCommandHandler
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface          $logger
      * @param   ValidatorInterface       $validator
      * @param   RegistryInterface        $doctrine
      * @param   PasswordEncoderInterface $password_encoder
      */
     public function __construct(
-        LoggerInterface          $logger,
         ValidatorInterface       $validator,
         RegistryInterface        $doctrine,
         PasswordEncoderInterface $password_encoder)
     {
-        $this->logger           = $logger;
         $this->validator        = $validator;
         $this->doctrine         = $doctrine;
         $this->password_encoder = $password_encoder;
@@ -63,7 +58,6 @@ class CreateUserCommandHandler
             $encoded = $this->password_encoder->encodePassword($command->password, null);
         }
         catch (BadCredentialsException $e) {
-            $this->logger->error($e->getMessage());
             throw new BadRequestHttpException($e->getMessage());
         }
 
@@ -87,9 +81,7 @@ class CreateUserCommandHandler
         $errors = $this->validator->validate($entity);
 
         if (count($errors)) {
-            $message = $errors->get(0)->getMessage();
-            $this->logger->error($message);
-            throw new BadRequestHttpException($message);
+            throw new BadRequestHttpException($errors->get(0)->getMessage());
         }
 
         $this->doctrine->getManager()->persist($entity);

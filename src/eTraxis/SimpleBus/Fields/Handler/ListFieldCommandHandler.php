@@ -48,7 +48,6 @@ class ListFieldCommandHandler extends BaseFieldCommandHandler
                 ]);
 
                 if (!$item) {
-                    $this->logger->error('Unknown list item.', [$command->id, $command->defaultValue]);
                     throw new NotFoundHttpException('Unknown list item.');
                 }
             }

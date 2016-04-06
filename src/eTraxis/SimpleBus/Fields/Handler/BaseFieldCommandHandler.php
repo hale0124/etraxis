@@ -14,7 +14,6 @@ namespace eTraxis\SimpleBus\Fields\Handler;
 use eTraxis\Entity;
 use eTraxis\SimpleBus\Fields\CreateFieldBaseCommand;
 use eTraxis\SimpleBus\Fields\UpdateFieldBaseCommand;
-use Psr\Log\LoggerInterface;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -25,23 +24,17 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 class BaseFieldCommandHandler
 {
-    protected $logger;
     protected $validator;
     protected $doctrine;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface    $logger
      * @param   ValidatorInterface $validator
      * @param   RegistryInterface  $doctrine
      */
-    public function __construct(
-        LoggerInterface    $logger,
-        ValidatorInterface $validator,
-        RegistryInterface  $doctrine)
+    public function __construct(ValidatorInterface $validator, RegistryInterface $doctrine)
     {
-        $this->logger    = $logger;
         $this->validator = $validator;
         $this->doctrine  = $doctrine;
     }
@@ -103,7 +96,6 @@ class BaseFieldCommandHandler
             $state = $this->doctrine->getRepository(Entity\State::class)->find($command->state);
 
             if (!$state) {
-                $this->logger->error('Unknown state.', [$command->state]);
                 throw new NotFoundHttpException('Unknown state.');
             }
 
@@ -116,7 +108,6 @@ class BaseFieldCommandHandler
             $template = $this->doctrine->getRepository(Entity\Template::class)->find($command->template);
 
             if (!$template) {
-                $this->logger->error('Unknown template.', [$command->template]);
                 throw new NotFoundHttpException('Unknown template.');
             }
 
@@ -127,9 +118,7 @@ class BaseFieldCommandHandler
         $errors = $this->validator->validate($entity);
 
         if (count($errors)) {
-            $message = $errors->get(0)->getMessage();
-            $this->logger->error($message);
-            throw new BadRequestHttpException($message);
+            throw new BadRequestHttpException($errors->get(0)->getMessage());
         }
 
         return $entity;
@@ -153,7 +142,6 @@ class BaseFieldCommandHandler
         $entity = $repository->find($command->id);
 
         if (!$entity) {
-            $this->logger->error('Unknown field.', [$command->id]);
             throw new NotFoundHttpException('Unknown field.');
         }
 
@@ -168,9 +156,7 @@ class BaseFieldCommandHandler
         $errors = $this->validator->validate($entity);
 
         if (count($errors)) {
-            $message = $errors->get(0)->getMessage();
-            $this->logger->error($message);
-            throw new BadRequestHttpException($message);
+            throw new BadRequestHttpException($errors->get(0)->getMessage());
         }
 
         return $entity;
