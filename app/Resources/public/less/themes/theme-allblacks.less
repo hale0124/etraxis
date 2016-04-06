@@ -50,9 +50,13 @@ a {
 
 table.dataTable {
 
-    tbody tr {
-        background-color: #000;
+    tbody, tfoot {
+        tr {
+            background-color: #000;
+        }
+    }
 
+    tbody tr {
         &.red {
             color: #ff6247;
         }
@@ -67,26 +71,30 @@ table.dataTable {
     }
 
     &.row-border {
-        tbody tr td {
-            border-top: none;
-            border-bottom: 1px solid #333;
+        tbody, tfoot {
+            tr td {
+                border-top: none;
+                border-bottom: 1px solid #333;
+            }
         }
     }
 
     &.cell-border {
-        tbody tr td {
-            border-top: none;
-            border-bottom: 1px solid #333;
-            border-left: 1px solid #333;
-            border-right: none;
-        }
+        tbody, tfoot {
+            tr td {
+                border-top: none;
+                border-bottom: 1px solid #333;
+                border-left: 1px solid #333;
+                border-right: none;
 
-        tbody tr td:first-child {
-            border-left: 1px solid #333;
-        }
+                &:first-child {
+                    border-left: 1px solid #333;
+                }
 
-        tbody tr td:last-child {
-            border-right: 1px solid #333;
+                &:last-child {
+                    border-right: 1px solid #333;
+                }
+            }
         }
     }
 
