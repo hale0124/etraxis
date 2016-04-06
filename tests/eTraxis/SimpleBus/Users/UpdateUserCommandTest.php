@@ -92,7 +92,7 @@ class UpdateUserCommandTest extends BaseTestCase
     {
         $this->loginAs('hubert');
 
-        $user = $this->findUser('fry');
+        $user = $this->findUser('hubert');
 
         self::assertNotNull($user);
 
