@@ -54,18 +54,19 @@ class ViewColumn
     /**
      * @var int Unique ID.
      *
-     * @ORM\Column(name="column_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="column_id", type="integer")
      */
     private $id;
 
     /**
-     * @var int View ID.
+     * @var View View.
      *
-     * @ORM\Column(name="view_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="View")
+     * @ORM\JoinColumn(name="view_id", nullable=false, referencedColumnName="view_id", onDelete="CASCADE")
      */
-    private $viewId;
+    private $view;
 
     /**
      * @var string Name of state which owns a field this column is linked to.
@@ -96,166 +97,4 @@ class ViewColumn
      * @ORM\Column(name="column_order", type="integer")
      */
     private $order;
-
-    /**
-     * @var View View.
-     *
-     * @ORM\ManyToOne(targetEntity="View")
-     * @ORM\JoinColumn(name="view_id", referencedColumnName="view_id", onDelete="CASCADE")
-     */
-    private $view;
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $viewId
-     *
-     * @return  self
-     */
-    public function setViewId($viewId)
-    {
-        $this->viewId = $viewId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getViewId()
-    {
-        return $this->viewId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   string $stateName
-     *
-     * @return  self
-     */
-    public function setStateName($stateName)
-    {
-        $this->stateName = $stateName;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  string
-     */
-    public function getStateName()
-    {
-        return $this->stateName;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   string $fieldName
-     *
-     * @return  self
-     */
-    public function setFieldName($fieldName)
-    {
-        $this->fieldName = $fieldName;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  string
-     */
-    public function getFieldName()
-    {
-        return $this->fieldName;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $type
-     *
-     * @return  self
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $order
-     *
-     * @return  self
-     */
-    public function setOrder($order)
-    {
-        $this->order = $order;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getOrder()
-    {
-        return $this->order;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   View $view
-     *
-     * @return  self
-     */
-    public function setView(View $view)
-    {
-        $this->view = $view;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  View
-     */
-    public function getView()
-    {
-        return $this->view;
-    }
 }

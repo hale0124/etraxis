@@ -39,16 +39,18 @@ class ListItem
     /**
      * @var int Field ID.
      *
-     * @ORM\Column(name="field_id", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(name="field_id", type="integer")
      */
     private $fieldId;
 
     /**
      * @var int Key of the item.
      *
-     * @ORM\Column(name="int_value", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(name="int_value", type="integer")
      */
     private $key;
 

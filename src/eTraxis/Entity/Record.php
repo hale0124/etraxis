@@ -31,9 +31,9 @@ class Record
     /**
      * @var int Unique ID.
      *
-     * @ORM\Column(name="record_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="record_id", type="integer")
      */
     private $id;
 
@@ -136,7 +136,7 @@ class Record
      * @var ArrayCollection List of subrecords.
      *
      * @ORM\OneToMany(targetEntity="Child", mappedBy="parent")
-     * @ORM\OrderBy({"childId" = "ASC"})
+     * @ORM\OrderBy({"child" = "ASC"})
      */
     private $children;
 

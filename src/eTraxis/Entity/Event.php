@@ -47,9 +47,9 @@ class Event
     /**
      * @var int Unique ID.
      *
-     * @ORM\Column(name="event_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="event_id", type="integer")
      */
     private $id;
 

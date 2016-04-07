@@ -37,9 +37,9 @@ class Project
     /**
      * @var int Unique ID.
      *
-     * @ORM\Column(name="project_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="project_id", type="integer")
      */
     private $id;
 

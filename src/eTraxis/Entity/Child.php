@@ -22,31 +22,10 @@ use Doctrine\ORM\Mapping as ORM;
 class Child
 {
     /**
-     * @var int ID of the parent record.
-     *
-     * @ORM\Column(name="parent_id", type="integer")
-     * @ORM\Id
-     */
-    private $parentId;
-
-    /**
-     * @var int ID of the child record.
-     *
-     * @ORM\Column(name="child_id", type="integer")
-     * @ORM\Id
-     */
-    private $childId;
-
-    /**
-     * @var int Whether the child is a dependency for the parent.
-     *
-     * @ORM\Column(name="is_dependency", type="integer")
-     */
-    private $isDependency;
-
-    /**
      * @var Record Parent record.
      *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="Record", inversedBy="children")
      * @ORM\JoinColumn(name="parent_id", referencedColumnName="record_id")
      */
@@ -55,128 +34,17 @@ class Child
     /**
      * @var Record Child record.
      *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="Record")
      * @ORM\JoinColumn(name="child_id", referencedColumnName="record_id")
      */
     private $child;
 
     /**
-     * Standard setter.
+     * @var int Whether the child is a dependency for the parent.
      *
-     * @param   int $parentId
-     *
-     * @return  self
+     * @ORM\Column(name="is_dependency", type="integer")
      */
-    public function setParentId($parentId)
-    {
-        $this->parentId = $parentId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getParentId()
-    {
-        return $this->parentId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $childId
-     *
-     * @return  self
-     */
-    public function setChildId($childId)
-    {
-        $this->childId = $childId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getChildId()
-    {
-        return $this->childId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   bool $isDependency
-     *
-     * @return  self
-     */
-    public function setDependency($isDependency)
-    {
-        $this->isDependency = $isDependency ? 1 : 0;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  bool
-     */
-    public function isDependency()
-    {
-        return (bool) $this->isDependency;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   Record $parent
-     *
-     * @return  self
-     */
-    public function setParent(Record $parent)
-    {
-        $this->parent = $parent;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  Record
-     */
-    public function getParent()
-    {
-        return $this->parent;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   Record $child
-     *
-     * @return  self
-     */
-    public function setChild(Record $child)
-    {
-        $this->child = $child;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  Record
-     */
-    public function getChild()
-    {
-        return $this->child;
-    }
+    private $isDependency;
 }

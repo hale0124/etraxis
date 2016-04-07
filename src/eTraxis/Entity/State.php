@@ -50,9 +50,9 @@ class State
     /**
      * @var int Unique ID.
      *
-     * @ORM\Column(name="state_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="state_id", type="integer")
      */
     private $id;
 

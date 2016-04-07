@@ -29,16 +29,18 @@ class FieldValue
     /**
      * @var int Event ID.
      *
-     * @ORM\Column(name="event_id", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(name="event_id", type="integer")
      */
     private $eventId;
 
     /**
      * @var int Field ID.
      *
-     * @ORM\Column(name="field_id", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(name="field_id", type="integer")
      */
     private $fieldId;
 

@@ -24,16 +24,18 @@ class StateAssignee
     /**
      * @var int State ID.
      *
-     * @ORM\Column(name="state_id", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(name="state_id", type="integer")
      */
     private $stateId;
 
     /**
      * @var int Group ID.
      *
-     * @ORM\Column(name="group_id", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(name="group_id", type="integer")
      */
     private $groupId;
 

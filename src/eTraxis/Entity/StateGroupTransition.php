@@ -24,24 +24,27 @@ class StateGroupTransition
     /**
      * @var int State ID where record can be moved from.
      *
-     * @ORM\Column(name="state_id_from", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(name="state_id_from", type="integer")
      */
     private $fromStateId;
 
     /**
      * @var int State ID where record can be moved to.
      *
-     * @ORM\Column(name="state_id_to", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(name="state_id_to", type="integer")
      */
     private $toStateId;
 
     /**
      * @var int Group ID which is allowed to make this transition.
      *
-     * @ORM\Column(name="group_id", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(name="group_id", type="integer")
      */
     private $groupId;
 

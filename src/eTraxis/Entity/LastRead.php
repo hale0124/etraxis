@@ -27,16 +27,18 @@ class LastRead
     /**
      * @var int Record ID.
      *
-     * @ORM\Column(name="record_id", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(name="record_id", type="integer")
      */
     private $recordId;
 
     /**
      * @var int User ID.
      *
-     * @ORM\Column(name="account_id", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(name="account_id", type="integer")
      */
     private $userId;
 

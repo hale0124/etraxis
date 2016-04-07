@@ -44,18 +44,19 @@ class Filter
     /**
      * @var int Unique ID.
      *
-     * @ORM\Column(name="filter_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="filter_id", type="integer")
      */
     private $id;
 
     /**
-     * @var int Owner of the filter.
+     * @var User Owner of the filter.
      *
-     * @ORM\Column(name="account_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="account_id", nullable=false, referencedColumnName="account_id", onDelete="CASCADE")
      */
-    private $userId;
+    private $user;
 
     /**
      * @var string Name of the filter.
@@ -101,166 +102,4 @@ class Filter
      * @ORM\Column(name="filter_param", type="integer", nullable=true)
      */
     private $parameter;
-
-    /**
-     * @var User Owner of the filter.
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="account_id", referencedColumnName="account_id", onDelete="CASCADE")
-     */
-    private $user;
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $userId
-     *
-     * @return  self
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   string $name
-     *
-     * @return  self
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $type
-     *
-     * @return  self
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $flags
-     *
-     * @return  self
-     */
-    public function setFlags($flags)
-    {
-        $this->flags = $flags;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getFlags()
-    {
-        return $this->flags;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $parameter
-     *
-     * @return  self
-     */
-    public function setParameter($parameter)
-    {
-        $this->parameter = $parameter;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getParameter()
-    {
-        return $this->parameter;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   User $user
-     *
-     * @return  self
-     */
-    public function setUser(User $user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
 }

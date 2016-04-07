@@ -24,24 +24,27 @@ class FieldGroupAccess
     /**
      * @var int Field ID.
      *
-     * @ORM\Column(name="field_id", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(name="field_id", type="integer")
      */
     private $fieldId;
 
     /**
      * @var int Group ID.
      *
-     * @ORM\Column(name="group_id", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(name="group_id", type="integer")
      */
     private $groupId;
 
     /**
      * @var int Access level of the group.
      *
-     * @ORM\Column(name="perms", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(name="perms", type="integer")
      */
     private $access;
 

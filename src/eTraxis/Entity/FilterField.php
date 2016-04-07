@@ -22,22 +22,24 @@ use Doctrine\ORM\Mapping as ORM;
 class FilterField
 {
     /**
-     * @var int Filter ID.
+     * @var Filter Filter.
      *
-     * @ORM\Column(name="filter_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\ManyToOne(targetEntity="Filter")
+     * @ORM\JoinColumn(name="filter_id", referencedColumnName="filter_id", onDelete="CASCADE")
      */
-    private $filterId;
+    private $filter;
 
     /**
-     * @var int Field ID which values should be examined.
+     * @var Field Field which values should be examined.
      *
-     * @ORM\Column(name="field_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\ManyToOne(targetEntity="Field")
+     * @ORM\JoinColumn(name="field_id", referencedColumnName="field_id", onDelete="CASCADE")
      */
-    private $fieldId;
+    private $field;
 
     /**
      * @var int Allowed range of the field values. Depends on the field type as following:
@@ -72,164 +74,4 @@ class FilterField
      * @ORM\Column(name="param2", type="integer", nullable=true)
      */
     private $parameter2;
-
-    /**
-     * @var Filter Filter.
-     *
-     * @ORM\ManyToOne(targetEntity="Filter")
-     * @ORM\JoinColumn(name="filter_id", referencedColumnName="filter_id", onDelete="CASCADE")
-     */
-    private $filter;
-
-    /**
-     * @var Field Field which values should be examined.
-     *
-     * @ORM\ManyToOne(targetEntity="Field")
-     * @ORM\JoinColumn(name="field_id", referencedColumnName="field_id", onDelete="CASCADE")
-     */
-    private $field;
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $filterId
-     *
-     * @return  self
-     */
-    public function setFilterId($filterId)
-    {
-        $this->filterId = $filterId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getFilterId()
-    {
-        return $this->filterId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $fieldId
-     *
-     * @return  self
-     */
-    public function setFieldId($fieldId)
-    {
-        $this->fieldId = $fieldId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getFieldId()
-    {
-        return $this->fieldId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $parameter1
-     *
-     * @return  self
-     */
-    public function setParameter1($parameter1)
-    {
-        $this->parameter1 = $parameter1;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getParameter1()
-    {
-        return $this->parameter1;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $parameter2
-     *
-     * @return  self
-     */
-    public function setParameter2($parameter2)
-    {
-        $this->parameter2 = $parameter2;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getParameter2()
-    {
-        return $this->parameter2;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   Filter $filter
-     *
-     * @return  self
-     */
-    public function setFilter(Filter $filter)
-    {
-        $this->filter = $filter;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  Filter
-     */
-    public function getFilter()
-    {
-        return $this->filter;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   Field $field
-     *
-     * @return  self
-     */
-    public function setField(Field $field)
-    {
-        $this->field = $field;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  Field
-     */
-    public function getField()
-    {
-        return $this->field;
-    }
 }

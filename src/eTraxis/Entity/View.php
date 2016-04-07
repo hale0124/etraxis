@@ -30,18 +30,19 @@ class View
     /**
      * @var int Unique ID.
      *
-     * @ORM\Column(name="view_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="view_id", type="integer")
      */
     private $id;
 
     /**
-     * @var int Owner of the view.
+     * @var User Owner of the view.
      *
-     * @ORM\Column(name="account_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="account_id", nullable=false, referencedColumnName="account_id", onDelete="CASCADE")
      */
-    private $userId;
+    private $user;
 
     /**
      * @var string Name of the view.
@@ -49,94 +50,4 @@ class View
      * @ORM\Column(name="view_name", type="string", length=50)
      */
     private $name;
-
-    /**
-     * @var User Owner of the view.
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="account_id", referencedColumnName="account_id", onDelete="CASCADE")
-     */
-    private $user;
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $userId
-     *
-     * @return  self
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   string $name
-     *
-     * @return  self
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   User $user
-     *
-     * @return  self
-     */
-    public function setUser(User $user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
 }

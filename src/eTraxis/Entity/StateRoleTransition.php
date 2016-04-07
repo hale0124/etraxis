@@ -24,24 +24,27 @@ class StateRoleTransition
     /**
      * @var int State ID where record can be moved from.
      *
-     * @ORM\Column(name="state_id_from", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(name="state_id_from", type="integer")
      */
     private $fromStateId;
 
     /**
      * @var int State ID where record can be moved to.
      *
-     * @ORM\Column(name="state_id_to", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(name="state_id_to", type="integer")
      */
     private $toStateId;
 
     /**
      * @var int System role which is allowed to make this transition.
      *
-     * @ORM\Column(name="role", type="integer")
      * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\Column(name="role", type="integer")
      */
     private $role;
 

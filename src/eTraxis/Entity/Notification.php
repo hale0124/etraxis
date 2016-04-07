@@ -51,18 +51,19 @@ class Notification
     /**
      * @var int Unique ID.
      *
-     * @ORM\Column(name="subscribe_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="subscribe_id", type="integer")
      */
     private $id;
 
     /**
-     * @var int User ID.
+     * @var User Owner of the notification.
      *
-     * @ORM\Column(name="account_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="account_id", nullable=false, referencedColumnName="account_id", onDelete="CASCADE")
      */
-    private $userId;
+    private $user;
 
     /**
      * @var string Name of the notification.
@@ -109,214 +110,4 @@ class Notification
      * @ORM\Column(name="subscribe_param", type="integer", nullable=true)
      */
     private $parameter;
-
-    /**
-     * @var User Owner of the notification.
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="account_id", referencedColumnName="account_id", onDelete="CASCADE")
-     */
-    private $user;
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $userId
-     *
-     * @return  self
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   string $name
-     *
-     * @return  self
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   string $carbonCopy
-     *
-     * @return  self
-     */
-    public function setCarbonCopy($carbonCopy)
-    {
-        $this->carbonCopy = $carbonCopy;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  string
-     */
-    public function getCarbonCopy()
-    {
-        return $this->carbonCopy;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   bool $isActivated
-     *
-     * @return  self
-     */
-    public function setActivated($isActivated)
-    {
-        $this->isActivated = $isActivated ? 1 : 0;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  bool
-     */
-    public function isActivated()
-    {
-        return (bool) $this->isActivated;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $type
-     *
-     * @return  self
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $events
-     *
-     * @return  self
-     */
-    public function setEvents($events)
-    {
-        $this->events = $events;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getEvents()
-    {
-        return $this->events;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $parameter
-     *
-     * @return  self
-     */
-    public function setParameter($parameter)
-    {
-        $this->parameter = $parameter;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getParameter()
-    {
-        return $this->parameter;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   User $user
-     *
-     * @return  self
-     */
-    public function setUser(User $user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
 }
