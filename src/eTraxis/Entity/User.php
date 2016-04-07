@@ -162,48 +162,6 @@ class User implements AdvancedUserInterface
     private $timezone;
 
     /**
-     * @deprecated 4.1.0 Number of rows in text boxes.
-     * @ORM\Column(name="text_rows", type="integer")
-     */
-    private $textRows;
-
-    /**
-     * @deprecated 4.1.0 Number of rows per page in the list.
-     * @ORM\Column(name="page_rows", type="integer")
-     */
-    private $pageRows;
-
-    /**
-     * @deprecated 4.1.0 Number of bookmarks per page in the list.
-     * @ORM\Column(name="page_bkms", type="integer")
-     */
-    private $pageBkms;
-
-    /**
-     * @deprecated 4.1.0 How often eTraxis pages should be auto-reloaded (in minutes). Zero disables auto-refresh.
-     * @ORM\Column(name="auto_refresh", type="integer")
-     */
-    private $autoRefresh;
-
-    /**
-     * @deprecated 4.1.0 ASCII code of character that should be used as CSV delimiter when user exports list of records to CSV file.
-     * @ORM\Column(name="csv_delim", type="integer")
-     */
-    private $csvDelim;
-
-    /**
-     * @deprecated 4.1.0 Characters set that should be used when user exports list of records to CSV file.
-     * @ORM\Column(name="csv_encoding", type="integer")
-     */
-    private $csvEncoding;
-
-    /**
-     * @deprecated 4.1.0 Line endings that should be used when user exports list of records to CSV file.
-     * @ORM\Column(name="csv_line_ends", type="integer")
-     */
-    private $csvLineEnds;
-
-    /**
      * @var int Current view ID.
      *
      * @ORM\Column(name="view_id", type="integer", nullable=true)
@@ -226,6 +184,13 @@ class User implements AdvancedUserInterface
     private $groups;
 
     /**
+     * @var UserDeprecated Deprecated features.
+     *
+     * @ORM\Embedded(class="UserDeprecated", columnPrefix=false)
+     */
+    private $deprecated;
+
+    /**
      * Constructor.
      */
     public function __construct()
@@ -243,15 +208,8 @@ class User implements AdvancedUserInterface
 
         $this->timezone = 0;
 
-        $this->textRows    = 0;
-        $this->pageRows    = 0;
-        $this->pageBkms    = 0;
-        $this->autoRefresh = 0;
-        $this->csvDelim    = 0;
-        $this->csvEncoding = 0;
-        $this->csvLineEnds = 0;
-
-        $this->groups = new ArrayCollection();
+        $this->groups     = new ArrayCollection();
+        $this->deprecated = new UserDeprecated();
     }
 
     /**

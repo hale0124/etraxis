@@ -155,12 +155,6 @@ class Field
     private $responsibleAccess;
 
     /**
-     * @deprecated 4.1.0
-     * @ORM\Column(name="add_separator", type="integer")
-     */
-    private $addSeparator;
-
-    /**
      * @var int Whether to add this field in email notifications.
      *
      * @ORM\Column(name="show_in_emails", type="integer")
@@ -198,15 +192,22 @@ class Field
     private $state;
 
     /**
+     * @var FieldDeprecated Deprecated features.
+     *
+     * @ORM\Embedded(class="FieldDeprecated", columnPrefix=false)
+     */
+    private $deprecated;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->removedAt    = 0;
-        $this->addSeparator = 0;
+        $this->removedAt = 0;
 
         $this->regex      = new FieldRegex();
         $this->parameters = new FieldParameters();
+        $this->deprecated = new FieldDeprecated();
     }
 
     /**
