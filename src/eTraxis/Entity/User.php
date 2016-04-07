@@ -49,9 +49,9 @@ class User implements AdvancedUserInterface
     /**
      * @var int Unique ID.
      *
-     * @ORM\Column(name="account_id", type="integer")
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(name="account_id", type="integer")
      */
     private $id;
 
@@ -162,18 +162,19 @@ class User implements AdvancedUserInterface
     private $timezone;
 
     /**
-     * @var int Current view ID.
-     *
-     * @ORM\Column(name="view_id", type="integer", nullable=true)
-     */
-    private $viewId;
-
-    /**
      * @var string Name of UI theme (e.g. "Emerald").
      *
      * @ORM\Column(name="theme_name", type="string", length=50)
      */
     private $theme;
+
+    /**
+     * @var View Current view.
+     *
+     * @ORM\OneToOne(targetEntity="View")
+     * @ORM\JoinColumn(name="view_id", referencedColumnName="view_id")
+     */
+    public $view;
 
     /**
      * @var ArrayCollection List of groups the user is member of.
@@ -657,30 +658,6 @@ class User implements AdvancedUserInterface
     /**
      * Standard setter.
      *
-     * @param   int $viewId
-     *
-     * @return  self
-     */
-    public function setViewId($viewId)
-    {
-        $this->viewId = $viewId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getViewId()
-    {
-        return $this->viewId;
-    }
-
-    /**
-     * Standard setter.
-     *
      * @param   string $theme
      *
      * @return  self
@@ -708,6 +685,30 @@ class User implements AdvancedUserInterface
         }
 
         return $theme;
+    }
+
+    /**
+     * Standard setter.
+     *
+     * @param   View $view
+     *
+     * @return  self
+     */
+    public function setView($view)
+    {
+        $this->view = $view;
+
+        return $this;
+    }
+
+    /**
+     * Standard getter.
+     *
+     * @return  View
+     */
+    public function getView()
+    {
+        return $this->view;
     }
 
     /**

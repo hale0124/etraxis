@@ -153,13 +153,6 @@ class UserTest extends \PHPUnit_Framework_TestCase
         self::assertEquals($expected, $this->object->getTimezone());
     }
 
-    public function testViewId()
-    {
-        $expected = mt_rand();
-        $this->object->setViewId($expected);
-        self::assertEquals($expected, $this->object->getViewId());
-    }
-
     public function testTheme()
     {
         $expected = 'emerald';
@@ -172,6 +165,13 @@ class UserTest extends \PHPUnit_Framework_TestCase
         $expected = 'azure';
         $this->object->setTheme('unsupported');
         self::assertEquals($expected, $this->object->getTheme());
+    }
+
+    public function testView()
+    {
+        $expected = new View();
+        $this->object->setView($expected);
+        self::assertEquals($expected, $this->object->getView());
     }
 
     public function testGroups()
