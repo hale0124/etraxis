@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "883049a3eee2162bea141f083414a78b",
-    "content-hash": "d2495324094dbdd46e7b1108434d40f2",
+    "hash": "4aa200f8994456a9f41b0818107e67ee",
+    "content-hash": "78623dcde44044d778531a3f40886ac3",
     "packages": [
         {
             "name": "arodygin/datatables-bundle",
@@ -2654,6 +2654,52 @@
             ],
             "description": "A tool to automatically fix PHP code style",
             "time": "2016-02-26 07:37:29"
+        },
+        {
+            "name": "leedavis81/altr-ego",
+            "version": "v1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/leedavis81/altr-ego.git",
+                "reference": "179befa2e54371b29314d339d7eb24031598212f"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/leedavis81/altr-ego/zipball/179befa2e54371b29314d339d7eb24031598212f",
+                "reference": "179befa2e54371b29314d339d7eb24031598212f",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "3.7.*"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-0": {
+                    "AltrEgo": "library/",
+                    "AltrEgoTest": "tests/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Lee Davis",
+                    "email": "leedavis81@hotmail.com",
+                    "homepage": "http://leedavis81.github.io",
+                    "role": "Developer"
+                }
+            ],
+            "description": "Access an objects protected / private properties and methods",
+            "keywords": [
+                "break scope",
+                "php"
+            ],
+            "time": "2013-07-25 17:43:38"
         },
         {
             "name": "phpdocumentor/reflection-docblock",

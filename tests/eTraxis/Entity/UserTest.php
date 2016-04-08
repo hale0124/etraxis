@@ -11,16 +11,17 @@
 
 namespace eTraxis\Entity;
 
+use AltrEgo\AltrEgo;
 use Ramsey\Uuid\Uuid;
 
 class UserTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var UserStub */
+    /** @var User */
     private $object;
 
     protected function setUp()
     {
-        $this->object = new UserStub();
+        $this->object = new User();
     }
 
     public function testId()
@@ -134,9 +135,12 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     public function testGetLocaleFallback()
     {
-        $expected             = 'en_US';
-        $this->object->locale = 0;
-        self::assertEquals($expected, $this->object->getLocale());
+        /** @var object $object */
+        $object = AltrEgo::create(new User());
+
+        $expected       = 'en_US';
+        $object->locale = 0;
+        self::assertEquals($expected, $object->getLocale());
     }
 
     public function testSetLocaleFallback()

@@ -11,18 +11,20 @@
 
 namespace eTraxis\Traits;
 
+use AltrEgo\AltrEgo;
+use AppBundle\Controller\Web\SecurityController;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class FlashBagTraitTest extends KernelTestCase
 {
-    /** @var ControllerStub */
+    /** @var SecurityController */
     private $object;
 
     protected function setUp()
     {
         self::bootKernel();
 
-        $this->object = new ControllerStub();
+        $this->object = AltrEgo::create(new SecurityController());
         $this->object->setContainer(static::$kernel->getContainer());
     }
 

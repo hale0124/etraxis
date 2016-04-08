@@ -11,9 +11,11 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
+use AltrEgo\AltrEgo;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
+use eTraxis\SimpleBus\Fields\Handler\BaseFieldCommandHandler;
 use eTraxis\Tests\BaseTestCase;
 
 class BaseFieldCommandTest extends BaseTestCase
@@ -34,8 +36,11 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
         ]);
 
-        $handler = new FieldCommandStubHandler($this->validator, $this->doctrine);
-        $field   = $handler->getEntity($command);
+        /** @var object $handler */
+        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
+
+        /** @var Field $field */
+        $field = $handler->getEntity($command);
 
         self::assertInstanceOf(Field::class, $field);
         self::assertEquals($template->getId(), $field->getTemplate()->getId());
@@ -64,8 +69,11 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
         ]);
 
-        $handler = new FieldCommandStubHandler($this->validator, $this->doctrine);
-        $field   = $handler->getEntity($command);
+        /** @var object $handler */
+        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
+
+        /** @var Field $field */
+        $field = $handler->getEntity($command);
 
         self::assertInstanceOf(Field::class, $field);
         self::assertEquals($state->getTemplateId(), $field->getTemplate()->getId());
@@ -93,7 +101,8 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
         ]);
 
-        $handler = new FieldCommandStubHandler($this->validator, $this->doctrine);
+        /** @var object $handler */
+        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
         $handler->getEntity($command);
     }
 
@@ -112,7 +121,8 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
         ]);
 
-        $handler = new FieldCommandStubHandler($this->validator, $this->doctrine);
+        /** @var object $handler */
+        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
         $handler->getEntity($command);
     }
 
@@ -135,7 +145,8 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
         ]);
 
-        $handler = new FieldCommandStubHandler($this->validator, $this->doctrine);
+        /** @var object $handler */
+        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
         $handler->getEntity($command);
     }
 
@@ -155,8 +166,11 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => true,
         ]);
 
-        $handler = new FieldCommandStubHandler($this->validator, $this->doctrine);
-        $entity  = $handler->getEntity($command);
+        /** @var object $handler */
+        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
+
+        /** @var Field $entity */
+        $entity = $handler->getEntity($command);
 
         self::assertInstanceOf(Field::class, $entity);
         self::assertEquals('Team', $entity->getName());
@@ -181,7 +195,8 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => true,
         ]);
 
-        $handler = new FieldCommandStubHandler($this->validator, $this->doctrine);
+        /** @var object $handler */
+        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
         $handler->getEntity($command);
     }
 
@@ -205,7 +220,8 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => true,
         ]);
 
-        $handler = new FieldCommandStubHandler($this->validator, $this->doctrine);
+        /** @var object $handler */
+        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
         $handler->getEntity($command);
     }
 
@@ -217,7 +233,8 @@ class BaseFieldCommandTest extends BaseTestCase
     {
         $command = null;
 
-        $handler = new FieldCommandStubHandler($this->validator, $this->doctrine);
+        /** @var object $handler */
+        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
         $handler->getEntity($command);
     }
 }
