@@ -52,8 +52,9 @@ class UnhandledException
                 $response = new JsonResponse($exception->getMessages(), $exception->getStatusCode());
             }
             elseif ($exception instanceof HttpException) {
-                $this->logger->error('HTTP exception', [$exception->getMessage()]);
-                $response = new JsonResponse($exception->getMessage(), $exception->getStatusCode());
+                $message = $exception->getMessage() ?: Response::$statusTexts[$exception->getStatusCode()];
+                $this->logger->error('HTTP exception', [$message]);
+                $response = new JsonResponse($message, $exception->getStatusCode());
             }
             else {
                 $this->logger->error('Exception', [$exception->getMessage()]);

@@ -60,7 +60,7 @@ class DeleteListItemCommandHandler
         }
 
         if (!$this->security->isGranted(ListItem::DELETE, $entity)) {
-            throw new AccessDeniedHttpException('Access denied.');
+            throw new AccessDeniedHttpException();
         }
 
         $this->doctrine->getManager()->remove($entity);

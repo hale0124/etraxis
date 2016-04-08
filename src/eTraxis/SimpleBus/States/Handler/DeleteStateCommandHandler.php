@@ -57,7 +57,7 @@ class DeleteStateCommandHandler
         }
 
         if (!$this->security->isGranted(State::DELETE, $entity)) {
-            throw new AccessDeniedHttpException('Access denied.');
+            throw new AccessDeniedHttpException();
         }
 
         $this->doctrine->getManager()->remove($entity);

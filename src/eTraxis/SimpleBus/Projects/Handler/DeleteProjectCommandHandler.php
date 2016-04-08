@@ -57,7 +57,7 @@ class DeleteProjectCommandHandler
         }
 
         if (!$this->security->isGranted(Project::DELETE, $entity)) {
-            throw new AccessDeniedHttpException('Access denied.');
+            throw new AccessDeniedHttpException();
         }
 
         $this->doctrine->getManager()->remove($entity);
