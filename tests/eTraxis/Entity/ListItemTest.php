@@ -21,11 +21,10 @@ class ListItemTest extends \PHPUnit_Framework_TestCase
         $this->object = new ListItem();
     }
 
-    public function testFieldId()
+    public function testField()
     {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setFieldId($expected);
-        self::assertEquals($expected, $this->object->getFieldId());
+        $this->object->setField($field = new Field());
+        self::assertSame($field, $this->object->getField());
     }
 
     public function testKey()
@@ -40,11 +39,5 @@ class ListItemTest extends \PHPUnit_Framework_TestCase
         $expected = str_pad('_', 50, '_');
         $this->object->setValue($expected);
         self::assertEquals($expected, $this->object->getValue());
-    }
-
-    public function testField()
-    {
-        $this->object->setField($field = new Field());
-        self::assertSame($field, $this->object->getField());
     }
 }

@@ -30,7 +30,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  * @ORM\EntityListeners({"eTraxis\Entity\Fields\FieldListener"})
  * @Assert\UniqueEntity(fields={"template", "state", "name", "removedAt"}, message="field.conflict.name", ignoreNull=false)
  */
-class Field
+class Field implements \JsonSerializable
 {
     // Constraints.
     const MAX_NAME        = 50;
@@ -71,18 +71,20 @@ class Field
     private $id;
 
     /**
-     * @var int Template ID of the field.
+     * @var Template Template of the field.
      *
-     * @ORM\Column(name="template_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="Template", inversedBy="fields")
+     * @ORM\JoinColumn(name="template_id", nullable=false, referencedColumnName="template_id", onDelete="CASCADE")
      */
-    private $templateId;
+    private $template;
 
     /**
-     * @var int State ID of the field (NULL in case of global field).
+     * @var State State of the field (NULL in case of global field).
      *
-     * @ORM\Column(name="state_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="State", inversedBy="fields")
+     * @ORM\JoinColumn(name="state_id", referencedColumnName="state_id", onDelete="CASCADE")
      */
-    private $stateId;
+    private $state;
 
     /**
      * @var string Name of the field.
@@ -176,22 +178,6 @@ class Field
     private $parameters;
 
     /**
-     * @var Template Template of the field.
-     *
-     * @ORM\ManyToOne(targetEntity="Template", inversedBy="fields")
-     * @ORM\JoinColumn(name="template_id", referencedColumnName="template_id", onDelete="CASCADE")
-     */
-    private $template;
-
-    /**
-     * @var State State of the field (NULL in case of global field).
-     *
-     * @ORM\ManyToOne(targetEntity="State", inversedBy="fields")
-     * @ORM\JoinColumn(name="state_id", referencedColumnName="state_id", onDelete="CASCADE")
-     */
-    private $state;
-
-    /**
      * @var FieldDeprecated Deprecated features.
      *
      * @ORM\Embedded(class="FieldDeprecated", columnPrefix=false)
@@ -211,7 +197,7 @@ class Field
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -221,55 +207,55 @@ class Field
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
-     * @param   int $templateId
+     * @param   Template $template
      *
      * @return  self
      */
-    public function setTemplateId($templateId)
+    public function setTemplate(Template $template)
     {
-        $this->templateId = $templateId;
+        $this->template = $template;
 
         return $this;
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
-     * @return  int
+     * @return  Template
      */
-    public function getTemplateId()
+    public function getTemplate()
     {
-        return $this->templateId;
+        return $this->template;
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
-     * @param   int $stateId
+     * @param   State $state
      *
      * @return  self
      */
-    public function setStateId($stateId)
+    public function setState(State $state = null)
     {
-        $this->stateId = $stateId;
+        $this->state = $state;
 
         return $this;
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
-     * @return  int
+     * @return  State
      */
-    public function getStateId()
+    public function getState()
     {
-        return $this->stateId;
+        return $this->state;
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   string $name
      *
@@ -283,7 +269,7 @@ class Field
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  string
      */
@@ -293,7 +279,7 @@ class Field
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   string $type
      *
@@ -324,7 +310,7 @@ class Field
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  string
      */
@@ -349,7 +335,7 @@ class Field
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   string $description
      *
@@ -363,7 +349,7 @@ class Field
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  string
      */
@@ -373,7 +359,7 @@ class Field
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   int $indexNumber
      *
@@ -387,7 +373,7 @@ class Field
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -397,7 +383,7 @@ class Field
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   int $removedAt
      *
@@ -411,7 +397,7 @@ class Field
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -421,7 +407,7 @@ class Field
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   bool $isRequired
      *
@@ -435,7 +421,7 @@ class Field
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  bool
      */
@@ -445,7 +431,7 @@ class Field
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   bool $hasGuestAccess
      *
@@ -459,7 +445,7 @@ class Field
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  bool
      */
@@ -469,7 +455,7 @@ class Field
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   int $registeredAccess
      *
@@ -483,7 +469,7 @@ class Field
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -493,7 +479,7 @@ class Field
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   int $authorAccess
      *
@@ -507,7 +493,7 @@ class Field
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -517,7 +503,7 @@ class Field
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   int $responsibleAccess
      *
@@ -531,7 +517,7 @@ class Field
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -541,7 +527,7 @@ class Field
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   bool $showInEmails
      *
@@ -555,7 +541,7 @@ class Field
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  bool
      */
@@ -565,7 +551,7 @@ class Field
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  FieldRegex
      */
@@ -575,61 +561,13 @@ class Field
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  FieldParameters
      */
     public function getParameters()
     {
         return $this->parameters;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   Template $template
-     *
-     * @return  self
-     */
-    public function setTemplate(Template $template)
-    {
-        $this->template = $template;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  Template
-     */
-    public function getTemplate()
-    {
-        return $this->template;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   State $state
-     *
-     * @return  self
-     */
-    public function setState(State $state = null)
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  State
-     */
-    public function getState()
-    {
-        return $this->state;
     }
 
     /**
@@ -776,5 +714,19 @@ class Field
     public function asDuration()
     {
         return new Fields\DurationField($this);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'id'          => $this->id,
+            'name'        => $this->name,
+            'type'        => $this->type,
+            'description' => $this->description,
+            'isRequired'  => $this->isRequired,
+        ];
     }
 }

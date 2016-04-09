@@ -31,8 +31,8 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         /** @var TemplateGroupPermission $permissions */
         $permissions = $this->doctrine->getRepository(TemplateGroupPermission::class)->findOneBy([
-            'groupId'    => $group->getId(),
-            'templateId' => $template->getId(),
+            'group'    => $group,
+            'template' => $template,
         ]);
         self::assertNotNull($permissions);
 
@@ -58,8 +58,8 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
         $this->command_bus->handle($command);
 
         $permissions = $this->doctrine->getRepository(TemplateGroupPermission::class)->findOneBy([
-            'groupId'    => $group->getId(),
-            'templateId' => $template->getId(),
+            'group'    => $group,
+            'template' => $template,
         ]);
 
         self::assertEquals(0,                                 $permissions->getPermission() & Template::PERMIT_ADD_FILE);
@@ -80,8 +80,8 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         /** @var TemplateGroupPermission $permissions */
         $permissions = $this->doctrine->getRepository(TemplateGroupPermission::class)->findOneBy([
-            'groupId'    => $group->getId(),
-            'templateId' => $template->getId(),
+            'group'    => $group,
+            'template' => $template,
         ]);
         self::assertNull($permissions);
 
@@ -94,8 +94,8 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
         $this->command_bus->handle($command);
 
         $permissions = $this->doctrine->getRepository(TemplateGroupPermission::class)->findOneBy([
-            'groupId'    => $group->getId(),
-            'templateId' => $template->getId(),
+            'group'    => $group,
+            'template' => $template,
         ]);
         self::assertNotNull($permissions);
 

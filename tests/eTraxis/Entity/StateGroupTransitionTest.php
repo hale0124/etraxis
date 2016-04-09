@@ -21,27 +21,6 @@ class StateGroupTransitionTest extends \PHPUnit_Framework_TestCase
         $this->object = new StateGroupTransition();
     }
 
-    public function testFromStateId()
-    {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setFromStateId($expected);
-        self::assertEquals($expected, $this->object->getFromStateId());
-    }
-
-    public function testToStateId()
-    {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setToStateId($expected);
-        self::assertEquals($expected, $this->object->getToStateId());
-    }
-
-    public function testGroupId()
-    {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setGroupId($expected);
-        self::assertEquals($expected, $this->object->getGroupId());
-    }
-
     public function testFromState()
     {
         $this->object->setFromState($state = new State());

@@ -13,6 +13,7 @@ namespace AppBundle\Controller\Admin;
 
 use eTraxis\Collection\FieldType;
 use eTraxis\Entity\Field;
+use eTraxis\Entity\State;
 use eTraxis\Form\FieldForm;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
@@ -36,16 +37,13 @@ class FieldsGetController extends Controller
      *
      * @Action\Route("/list/{id}", name="admin_fields_list", requirements={"id"="\d+"})
      *
-     * @param   int $id State ID.
+     * @param   State $state.
      *
      * @return  JsonResponse
      */
-    public function listAction($id)
+    public function listAction(State $state)
     {
-        /** @var \eTraxis\Repository\FieldsRepository $repository */
-        $repository = $this->getDoctrine()->getRepository(Field::class);
-
-        return new JsonResponse($repository->getFields($id));
+        return new JsonResponse($state->getFields());
     }
 
     /**

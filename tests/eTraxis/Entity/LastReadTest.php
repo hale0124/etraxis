@@ -21,20 +21,6 @@ class LastReadTest extends \PHPUnit_Framework_TestCase
         $this->object = new LastRead();
     }
 
-    public function testRecordId()
-    {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setRecordId($expected);
-        self::assertEquals($expected, $this->object->getRecordId());
-    }
-
-    public function testUserId()
-    {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setUserId($expected);
-        self::assertEquals($expected, $this->object->getUserId());
-    }
-
     public function testRecord()
     {
         $this->object->setRecord($record = new Record());

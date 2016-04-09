@@ -25,7 +25,7 @@ class CreateDurationFieldCommandTest extends BaseTestCase
         self::assertNotNull($state);
 
         $command = new CreateDurationFieldCommand([
-            'template'     => $state->getTemplateId(),
+            'template'     => $state->getTemplate()->getId(),
             'state'        => $state->getId(),
             'name'         => 'Duration',
             'required'     => true,
@@ -60,7 +60,7 @@ class CreateDurationFieldCommandTest extends BaseTestCase
         self::assertNotNull($state);
 
         $command = new CreateDurationFieldCommand([
-            'template'     => $state->getTemplateId(),
+            'template'     => $state->getTemplate()->getId(),
             'state'        => $state->getId(),
             'name'         => 'Duration',
             'required'     => true,
@@ -85,7 +85,7 @@ class CreateDurationFieldCommandTest extends BaseTestCase
         self::assertNotNull($state);
 
         $command = new CreateDurationFieldCommand([
-            'template'     => $state->getTemplateId(),
+            'template'     => $state->getTemplate()->getId(),
             'state'        => $state->getId(),
             'name'         => 'Duration',
             'required'     => true,

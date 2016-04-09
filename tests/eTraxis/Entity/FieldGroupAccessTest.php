@@ -21,28 +21,6 @@ class FieldGroupAccessTest extends \PHPUnit_Framework_TestCase
         $this->object = new FieldGroupAccess();
     }
 
-    public function testFieldId()
-    {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setFieldId($expected);
-        self::assertEquals($expected, $this->object->getFieldId());
-    }
-
-    public function testGroupId()
-    {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setGroupId($expected);
-        self::assertEquals($expected, $this->object->getGroupId());
-    }
-
-    public function testAccess()
-    {
-        $expected = Field::ACCESS_READ_ONLY;
-
-        $this->object->setAccess($expected);
-        self::assertEquals($expected, $this->object->getAccess());
-    }
-
     public function testField()
     {
         $this->object->setField($field = new Field());
@@ -53,5 +31,13 @@ class FieldGroupAccessTest extends \PHPUnit_Framework_TestCase
     {
         $this->object->setGroup($group = new Group());
         self::assertSame($group, $this->object->getGroup());
+    }
+
+    public function testAccess()
+    {
+        $expected = Field::ACCESS_READ_ONLY;
+
+        $this->object->setAccess($expected);
+        self::assertEquals($expected, $this->object->getAccess());
     }
 }

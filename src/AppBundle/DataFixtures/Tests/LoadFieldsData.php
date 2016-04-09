@@ -193,11 +193,9 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
 
                     /** @noinspection PhpParamsInspection */
                     $access
-                        ->setFieldId($field->getId())
-                        ->setGroupId($group->getId())
-                        ->setAccess($permissions)
                         ->setField($field)
                         ->setGroup($group)
+                        ->setAccess($permissions)
                     ;
 
                     $manager->persist($access);
@@ -381,10 +379,9 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
             $value = new ListItem();
 
             $value
-                ->setFieldId($field->getId())
+                ->setField($field)
                 ->setKey($i)
                 ->setValue('Season ' . $i)
-                ->setField($field)
             ;
 
             $this->addReference('value:list:' . $i, $value);

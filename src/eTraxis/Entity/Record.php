@@ -45,25 +45,28 @@ class Record
     private $subject;
 
     /**
-     * @var int ID of the current state.
+     * @var State Current state of the record.
      *
-     * @ORM\Column(name="state_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="State")
+     * @ORM\JoinColumn(name="state_id", nullable=false, referencedColumnName="state_id")
      */
-    private $stateId;
+    private $state;
 
     /**
-     * @var int ID of the record's author.
+     * @var User Author of the the record.
      *
-     * @ORM\Column(name="creator_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="creator_id", nullable=false, referencedColumnName="account_id")
      */
-    private $authorId;
+    private $author;
 
     /**
-     * @var int ID of the current record's responsible.
+     * @var User Current responsible of the record.
      *
-     * @ORM\Column(name="responsible_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="responsible_id", referencedColumnName="account_id")
      */
-    private $responsibleId;
+    private $responsible;
 
     /**
      * @var int Unix Epoch timestamp when the record was created.
@@ -92,30 +95,6 @@ class Record
      * @ORM\Column(name="postpone_time", type="integer")
      */
     private $resumedAt;
-
-    /**
-     * @var State Current state of the record.
-     *
-     * @ORM\ManyToOne(targetEntity="State")
-     * @ORM\JoinColumn(name="state_id", referencedColumnName="state_id")
-     */
-    private $state;
-
-    /**
-     * @var User Author of the the record.
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="creator_id", referencedColumnName="account_id")
-     */
-    private $author;
-
-    /**
-     * @var User Current responsible of the record.
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="responsible_id", referencedColumnName="account_id")
-     */
-    private $responsible;
 
     /**
      * @var ArrayCollection List of record events.
@@ -151,7 +130,7 @@ class Record
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -161,7 +140,7 @@ class Record
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   string $subject
      *
@@ -175,7 +154,7 @@ class Record
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  string
      */
@@ -185,175 +164,7 @@ class Record
     }
 
     /**
-     * Standard setter.
-     *
-     * @param   int $stateId
-     *
-     * @return  self
-     */
-    public function setStateId($stateId)
-    {
-        $this->stateId = $stateId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getStateId()
-    {
-        return $this->stateId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $authorId
-     *
-     * @return  self
-     */
-    public function setAuthorId($authorId)
-    {
-        $this->authorId = $authorId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getAuthorId()
-    {
-        return $this->authorId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $responsibleId
-     *
-     * @return  self
-     */
-    public function setResponsibleId($responsibleId)
-    {
-        $this->responsibleId = $responsibleId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getResponsibleId()
-    {
-        return $this->responsibleId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $createdAt
-     *
-     * @return  self
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $changedAt
-     *
-     * @return  self
-     */
-    public function setChangedAt($changedAt)
-    {
-        $this->changedAt = $changedAt;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getChangedAt()
-    {
-        return $this->changedAt;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $closedAt
-     *
-     * @return  self
-     */
-    public function setClosedAt($closedAt)
-    {
-        $this->closedAt = $closedAt;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getClosedAt()
-    {
-        return $this->closedAt;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $resumedAt
-     *
-     * @return  self
-     */
-    public function setResumedAt($resumedAt)
-    {
-        $this->resumedAt = $resumedAt;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getResumedAt()
-    {
-        return $this->resumedAt;
-    }
-
-    /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   State $state
      *
@@ -367,7 +178,7 @@ class Record
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  State
      */
@@ -377,7 +188,7 @@ class Record
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   User $author
      *
@@ -391,7 +202,7 @@ class Record
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  User
      */
@@ -401,7 +212,7 @@ class Record
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   User $responsible
      *
@@ -415,13 +226,109 @@ class Record
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  User
      */
     public function getResponsible()
     {
         return $this->responsible;
+    }
+
+    /**
+     * Property setter.
+     *
+     * @param   int $createdAt
+     *
+     * @return  self
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  int
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Property setter.
+     *
+     * @param   int $changedAt
+     *
+     * @return  self
+     */
+    public function setChangedAt($changedAt)
+    {
+        $this->changedAt = $changedAt;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  int
+     */
+    public function getChangedAt()
+    {
+        return $this->changedAt;
+    }
+
+    /**
+     * Property setter.
+     *
+     * @param   int $closedAt
+     *
+     * @return  self
+     */
+    public function setClosedAt($closedAt)
+    {
+        $this->closedAt = $closedAt;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  int
+     */
+    public function getClosedAt()
+    {
+        return $this->closedAt;
+    }
+
+    /**
+     * Property setter.
+     *
+     * @param   int $resumedAt
+     *
+     * @return  self
+     */
+    public function setResumedAt($resumedAt)
+    {
+        $this->resumedAt = $resumedAt;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  int
+     */
+    public function getResumedAt()
+    {
+        return $this->resumedAt;
     }
 
     /**
@@ -455,11 +362,11 @@ class Record
     /**
      * Get record history.
      *
-     * @return  ArrayCollection|Event[]
+     * @return  Event[]
      */
     public function getHistory()
     {
-        return $this->history;
+        return $this->history->toArray();
     }
 
     /**
@@ -493,11 +400,11 @@ class Record
     /**
      * Get list of record watchers.
      *
-     * @return  ArrayCollection|Watcher[]
+     * @return  Watcher[]
      */
     public function getWatchers()
     {
-        return $this->watchers;
+        return $this->watchers->toArray();
     }
 
     /**
@@ -531,10 +438,10 @@ class Record
     /**
      * Get list of subrecords.
      *
-     * @return  ArrayCollection|Child[]
+     * @return  Child[]
      */
     public function getChildren()
     {
-        return $this->children;
+        return $this->children->toArray();
     }
 }

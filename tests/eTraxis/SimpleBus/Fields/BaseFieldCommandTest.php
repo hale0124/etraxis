@@ -36,7 +36,7 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
         ]);
 
-        /** @var object $handler */
+        /** @var mixed $handler */
         $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
 
         /** @var Field $field */
@@ -69,15 +69,15 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
         ]);
 
-        /** @var object $handler */
+        /** @var mixed $handler */
         $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
 
         /** @var Field $field */
         $field = $handler->getEntity($command);
 
         self::assertInstanceOf(Field::class, $field);
-        self::assertEquals($state->getTemplateId(), $field->getTemplate()->getId());
-        self::assertEquals($state->getId(), $field->getState()->getId());
+        self::assertEquals($state->getTemplate(), $field->getTemplate());
+        self::assertEquals($state, $field->getState());
         self::assertEquals('Priority', $field->getName());
         self::assertEquals('Urgency level', $field->getDescription());
         self::assertTrue($field->isRequired());
@@ -101,7 +101,7 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
         ]);
 
-        /** @var object $handler */
+        /** @var mixed $handler */
         $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
         $handler->getEntity($command);
     }
@@ -121,7 +121,7 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
         ]);
 
-        /** @var object $handler */
+        /** @var mixed $handler */
         $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
         $handler->getEntity($command);
     }
@@ -145,7 +145,7 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
         ]);
 
-        /** @var object $handler */
+        /** @var mixed $handler */
         $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
         $handler->getEntity($command);
     }
@@ -166,7 +166,7 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => true,
         ]);
 
-        /** @var object $handler */
+        /** @var mixed $handler */
         $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
 
         /** @var Field $entity */
@@ -195,7 +195,7 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => true,
         ]);
 
-        /** @var object $handler */
+        /** @var mixed $handler */
         $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
         $handler->getEntity($command);
     }
@@ -220,7 +220,7 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => true,
         ]);
 
-        /** @var object $handler */
+        /** @var mixed $handler */
         $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
         $handler->getEntity($command);
     }
@@ -233,7 +233,7 @@ class BaseFieldCommandTest extends BaseTestCase
     {
         $command = null;
 
-        /** @var object $handler */
+        /** @var mixed $handler */
         $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
         $handler->getEntity($command);
     }

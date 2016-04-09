@@ -12,20 +12,21 @@
 namespace eTraxis\SimpleBus\Fields;
 
 use eTraxis\Entity\Field;
+use eTraxis\Entity\State;
 use eTraxis\Tests\BaseTestCase;
 
 class SetOrderFieldCommandTest extends BaseTestCase
 {
     /**
-     * @param   int $stateId
+     * @param   State $state
      *
      * @return  array
      */
-    private function getFields($stateId)
+    private function getFields(State $state)
     {
         /** @var Field[] $fields */
         $fields = $this->doctrine->getRepository(Field::class)->findBy([
-            'stateId'   => $stateId,
+            'state'     => $state,
             'removedAt' => 0,
         ], ['indexNumber' => 'ASC']);
 
@@ -61,7 +62,7 @@ class SetOrderFieldCommandTest extends BaseTestCase
         ]);
         $this->command_bus->handle($command);
 
-        self::assertEquals($expected, $this->getFields($field->getStateId()));
+        self::assertEquals($expected, $this->getFields($field->getState()));
     }
 
     public function testSuccessDown()
@@ -87,7 +88,7 @@ class SetOrderFieldCommandTest extends BaseTestCase
         ]);
         $this->command_bus->handle($command);
 
-        self::assertEquals($expected, $this->getFields($field->getStateId()));
+        self::assertEquals($expected, $this->getFields($field->getState()));
     }
 
     public function testSuccessTop()
@@ -113,7 +114,7 @@ class SetOrderFieldCommandTest extends BaseTestCase
         ]);
         $this->command_bus->handle($command);
 
-        self::assertEquals($expected, $this->getFields($field->getStateId()));
+        self::assertEquals($expected, $this->getFields($field->getState()));
     }
 
     public function testSuccessBottom()
@@ -139,7 +140,7 @@ class SetOrderFieldCommandTest extends BaseTestCase
         ]);
         $this->command_bus->handle($command);
 
-        self::assertEquals($expected, $this->getFields($field->getStateId()));
+        self::assertEquals($expected, $this->getFields($field->getState()));
     }
 
     /**

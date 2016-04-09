@@ -27,7 +27,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  * @Assert\UniqueEntity(fields={"template", "name"}, message="state.conflict.name")
  * @Assert\UniqueEntity(fields={"template", "abbreviation"}, message="state.conflict.abbreviation")
  */
-class State
+class State implements \JsonSerializable
 {
     // Constraints.
     const MAX_NAME         = 50;
@@ -57,11 +57,12 @@ class State
     private $id;
 
     /**
-     * @var int Template ID of the state.
+     * @var Template Template of the state.
      *
-     * @ORM\Column(name="template_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="Template", inversedBy="states")
+     * @ORM\JoinColumn(name="template_id", nullable=false, referencedColumnName="template_id", onDelete="CASCADE")
      */
-    private $templateId;
+    private $template;
 
     /**
      * @var string Name of the state.
@@ -92,21 +93,6 @@ class State
     private $responsible;
 
     /**
-     * @var int ID of the state which is next by default.
-     *
-     * @ORM\Column(name="next_state_id", type="integer", nullable=true)
-     */
-    private $nextStateId;
-
-    /**
-     * @var Template Template of the state.
-     *
-     * @ORM\ManyToOne(targetEntity="Template", inversedBy="states")
-     * @ORM\JoinColumn(name="template_id", referencedColumnName="template_id", onDelete="CASCADE")
-     */
-    private $template;
-
-    /**
      * @var State Next state by default.
      *
      * @ORM\ManyToOne(targetEntity="State")
@@ -131,7 +117,7 @@ class State
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -141,151 +127,7 @@ class State
     }
 
     /**
-     * Standard setter.
-     *
-     * @param   int $templateId
-     *
-     * @return  self
-     */
-    public function setTemplateId($templateId)
-    {
-        $this->templateId = $templateId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getTemplateId()
-    {
-        return $this->templateId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   string $name
-     *
-     * @return  self
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   string $abbreviation
-     *
-     * @return  self
-     */
-    public function setAbbreviation($abbreviation)
-    {
-        $this->abbreviation = $abbreviation;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  string
-     */
-    public function getAbbreviation()
-    {
-        return $this->abbreviation;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $type
-     *
-     * @return  self
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $responsible
-     *
-     * @return  self
-     */
-    public function setResponsible($responsible)
-    {
-        $this->responsible = $responsible;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getResponsible()
-    {
-        return $this->responsible;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $nextStateId
-     *
-     * @return  self
-     */
-    public function setNextStateId($nextStateId)
-    {
-        $this->nextStateId = $nextStateId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getNextStateId()
-    {
-        return $this->nextStateId;
-    }
-
-    /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   Template $template
      *
@@ -299,7 +141,7 @@ class State
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  Template
      */
@@ -309,7 +151,103 @@ class State
     }
 
     /**
-     * Standard setter.
+     * Property setter.
+     *
+     * @param   string $name
+     *
+     * @return  self
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Property setter.
+     *
+     * @param   string $abbreviation
+     *
+     * @return  self
+     */
+    public function setAbbreviation($abbreviation)
+    {
+        $this->abbreviation = $abbreviation;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  string
+     */
+    public function getAbbreviation()
+    {
+        return $this->abbreviation;
+    }
+
+    /**
+     * Property setter.
+     *
+     * @param   int $type
+     *
+     * @return  self
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  int
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Property setter.
+     *
+     * @param   int $responsible
+     *
+     * @return  self
+     */
+    public function setResponsible($responsible)
+    {
+        $this->responsible = $responsible;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  int
+     */
+    public function getResponsible()
+    {
+        return $this->responsible;
+    }
+
+    /**
+     * Property setter.
      *
      * @param   State $state
      *
@@ -323,7 +261,7 @@ class State
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  State
      */
@@ -363,10 +301,24 @@ class State
     /**
      * Get list of state fields.
      *
-     * @return  ArrayCollection|Field[]
+     * @return  Field[]
      */
     public function getFields()
     {
-        return $this->fields;
+        return $this->fields->toArray();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'id'           => $this->id,
+            'name'         => $this->name,
+            'abbreviation' => $this->abbreviation,
+            'type'         => $this->type,
+            'responsible'  => $this->responsible,
+        ];
     }
 }

@@ -28,20 +28,14 @@ class StringValuesRepository extends EntityRepository
      */
     public function save($value)
     {
-        $token = md5($value);
-
         /** @var StringValue $entity */
-        $entity = $this->findOneBy(['token' => $token]);
+        $entity = $this->findOneBy(['token' => md5($value)]);
 
         // If entity doesn't exist yet, save it.
         if ($entity === null) {
 
             $entity = new StringValue();
-
-            $entity
-                ->setToken($token)
-                ->setValue($value)
-            ;
+            $entity->setValue($value);
 
             $em = $this->getEntityManager();
 

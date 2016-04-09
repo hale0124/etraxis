@@ -121,15 +121,15 @@ class UserVoter extends Voter
         }
 
         // Can't delete himself.
-        if ($subject->getId() === $user->getId()) {
+        if ($subject === $user) {
             return false;
         }
 
         // Number of events originated by subject.
         $query = $this->repository->createQueryBuilder('e')
             ->select('COUNT(e.id)')
-            ->where('e.userId = :id')
-            ->setParameter('id', $subject->getId())
+            ->where('e.user = :user')
+            ->setParameter('user', $subject)
         ;
 
         $countAsOriginator = (int) $query->getQuery()->getSingleScalarResult();
@@ -165,7 +165,7 @@ class UserVoter extends Voter
         }
 
         // Can't disable himself.
-        if ($subject->getId() === $user->getId()) {
+        if ($subject === $user) {
             return false;
         }
 

@@ -36,9 +36,9 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
 
         /** @var StateGroupTransition $transition */
         $transition = $this->doctrine->getRepository(StateGroupTransition::class)->findOneBy([
-            'fromStateId' => $state_new->getId(),
-            'toStateId'   => $state_delivered->getId(),
-            'groupId'     => $group->getId(),
+            'fromState' => $state_new,
+            'toState'   => $state_delivered,
+            'group'     => $group,
         ]);
         self::assertNull($transition);
 
@@ -51,9 +51,9 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
         $this->command_bus->handle($command);
 
         $transition = $this->doctrine->getRepository(StateGroupTransition::class)->findOneBy([
-            'fromStateId' => $state_new->getId(),
-            'toStateId'   => $state_delivered->getId(),
-            'groupId'     => $group->getId(),
+            'fromState' => $state_new,
+            'toState'   => $state_delivered,
+            'group'     => $group,
         ]);
         self::assertNotNull($transition);
     }
@@ -74,9 +74,9 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
 
         /** @var StateGroupTransition $transition */
         $transition = $this->doctrine->getRepository(StateGroupTransition::class)->findOneBy([
-            'fromStateId' => $state_new->getId(),
-            'toStateId'   => $state_delivered->getId(),
-            'groupId'     => $group->getId(),
+            'fromState' => $state_new,
+            'toState'   => $state_delivered,
+            'group'     => $group,
         ]);
         self::assertNotNull($transition);
 
@@ -89,9 +89,9 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
         $this->command_bus->handle($command);
 
         $transition = $this->doctrine->getRepository(StateGroupTransition::class)->findOneBy([
-            'fromStateId' => $state_new->getId(),
-            'toStateId'   => $state_delivered->getId(),
-            'groupId'     => $group->getId(),
+            'fromState' => $state_new,
+            'toState'   => $state_delivered,
+            'group'     => $group,
         ]);
         self::assertNull($transition);
     }
@@ -108,9 +108,9 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
 
         /** @var StateRoleTransition $transition */
         $transition = $this->doctrine->getRepository(StateRoleTransition::class)->findOneBy([
-            'fromStateId' => $state_new->getId(),
-            'toStateId'   => $state_delivered->getId(),
-            'role'        => SystemRole::AUTHOR,
+            'fromState' => $state_new,
+            'toState'   => $state_delivered,
+            'role'      => SystemRole::AUTHOR,
         ]);
         self::assertNull($transition);
 
@@ -123,9 +123,9 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
         $this->command_bus->handle($command);
 
         $transition = $this->doctrine->getRepository(StateRoleTransition::class)->findOneBy([
-            'fromStateId' => $state_new->getId(),
-            'toStateId'   => $state_delivered->getId(),
-            'role'        => SystemRole::AUTHOR,
+            'fromState' => $state_new,
+            'toState'   => $state_delivered,
+            'role'      => SystemRole::AUTHOR,
         ]);
         self::assertNotNull($transition);
     }
@@ -142,9 +142,9 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
 
         /** @var StateRoleTransition $transition */
         $transition = $this->doctrine->getRepository(StateRoleTransition::class)->findOneBy([
-            'fromStateId' => $state_new->getId(),
-            'toStateId'   => $state_delivered->getId(),
-            'role'        => SystemRole::RESPONSIBLE,
+            'fromState' => $state_new,
+            'toState'   => $state_delivered,
+            'role'      => SystemRole::RESPONSIBLE,
         ]);
         self::assertNotNull($transition);
 
@@ -157,9 +157,9 @@ class AddRemoveStateTransitionsCommandTest extends BaseTestCase
         $this->command_bus->handle($command);
 
         $transition = $this->doctrine->getRepository(StateRoleTransition::class)->findOneBy([
-            'fromStateId' => $state_new->getId(),
-            'toStateId'   => $state_delivered->getId(),
-            'role'        => SystemRole::RESPONSIBLE,
+            'fromState' => $state_new,
+            'toState'   => $state_delivered,
+            'role'      => SystemRole::RESPONSIBLE,
         ]);
         self::assertNull($transition);
     }

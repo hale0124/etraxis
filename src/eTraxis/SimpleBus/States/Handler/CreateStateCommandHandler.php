@@ -93,13 +93,13 @@ class CreateStateCommandHandler
             $query = $em->createQuery('
                 UPDATE eTraxis:State s
                 SET s.type = :interim
-                WHERE s.templateId = :id AND s.type = :initial
+                WHERE s.template = :template AND s.type = :initial
             ');
 
             $query->execute([
-                'id'      => $command->template,
-                'initial' => State::TYPE_INITIAL,
-                'interim' => State::TYPE_INTERIM,
+                'template' => $template,
+                'initial'  => State::TYPE_INITIAL,
+                'interim'  => State::TYPE_INTERIM,
             ]);
         }
 

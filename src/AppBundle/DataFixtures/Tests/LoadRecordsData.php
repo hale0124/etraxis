@@ -334,7 +334,6 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
                 if (!$value) {
 
                     $value = new StringValue();
-                    $value->setToken(md5($values[$i]));
                     $value->setValue($values[$i]);
 
                     $manager->persist($value);
@@ -345,13 +344,11 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
 
                 /** @noinspection PhpParamsInspection */
                 $field
-                    ->setEventId($event->getId())
-                    ->setFieldId($this->getReference('state:new:' . $i)->getId())
+                    ->setEvent($event)
+                    ->setField($this->getReference('state:new:' . $i))
                     ->setType(Field::TYPE_STRING)
                     ->setValueId($value->getId())
                     ->setCurrent(true)
-                    ->setEvent($event)
-                    ->setField($this->getReference('state:new:' . $i))
                 ;
 
                 $manager->persist($field);
@@ -361,18 +358,15 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
 
             /** @noinspection PhpParamsInspection */
             $field
-                ->setEventId($event->getId())
-                ->setFieldId($this->getReference('state:new:4')->getId())
-                ->setType(Field::TYPE_TEXT)
-                ->setCurrent(true)
                 ->setEvent($event)
                 ->setField($this->getReference('state:new:4'))
+                ->setType(Field::TYPE_TEXT)
+                ->setCurrent(true)
             ;
 
             if ($info['notes']) {
 
                 $value = new TextValue();
-                $value->setToken(md5($info['notes']));
                 $value->setValue($info['notes']);
 
                 $manager->persist($value);
@@ -384,11 +378,9 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             $read = new LastRead();
 
             $read
-                ->setRecordId($record->getId())
-                ->setUserId($record->getAuthor()->getId())
-                ->setReadAt($record->getCreatedAt())
                 ->setRecord($record)
                 ->setUser($record->getAuthor())
+                ->setReadAt($record->getCreatedAt())
             ;
 
             $manager->persist($field);
@@ -413,18 +405,15 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
 
                 /** @noinspection PhpParamsInspection */
                 $field
-                    ->setEventId($event->getId())
-                    ->setFieldId($this->getReference('state:delivered:1')->getId())
-                    ->setType(Field::TYPE_TEXT)
-                    ->setCurrent(true)
                     ->setEvent($event)
                     ->setField($this->getReference('state:delivered:1'))
+                    ->setType(Field::TYPE_TEXT)
+                    ->setCurrent(true)
                 ;
 
                 if ($info['notes2']) {
 
                     $value = new TextValue();
-                    $value->setToken(md5($info['notes2']));
                     $value->setValue($info['notes2']);
 
                     $manager->persist($value);
@@ -441,8 +430,8 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
                 ;
 
                 $read = $this->container->get('doctrine')->getRepository(LastRead::class)->findOneBy([
-                    'recordId' => $record->getId(),
-                    'userId'   => $event->getUser()->getId(),
+                    'record' => $record,
+                    'user'   => $event->getUser(),
                 ]);
 
                 if (!$read) {
@@ -450,8 +439,6 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
                     $read = new LastRead();
 
                     $read
-                        ->setRecordId($record->getId())
-                        ->setUserId($event->getUser()->getId())
                         ->setRecord($record)
                         ->setUser($event->getUser())
                     ;
@@ -1951,11 +1938,9 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             }
 
             $string_value = new StringValue();
-            $string_value->setToken(md5($code));
             $string_value->setValue($code);
 
             $text_value = new TextValue();
-            $text_value->setToken(md5($info['plot']));
             $text_value->setValue($info['plot']);
 
             $manager->persist($string_value);
@@ -1982,21 +1967,19 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
 
                 /** @noinspection PhpParamsInspection */
                 $value
-                    ->setEventId($event->getId())
-                    ->setFieldId($field->getId())
+                    ->setEvent(strpos($field_ref, 'state:produced') !== false ? $event : $event2)
+                    ->setField($field)
                     ->setType($field->getType())
                     ->setValueId($field_value)
                     ->setCurrent(true)
-                    ->setEvent(strpos($field_ref, 'state:produced') !== false ? $event : $event2)
-                    ->setField($field)
                 ;
 
                 $manager->persist($value);
             }
 
             $read = $this->container->get('doctrine')->getRepository(LastRead::class)->findOneBy([
-                'recordId' => $record->getId(),
-                'userId'   => $event->getUser()->getId(),
+                'record' => $record,
+                'user'   => $event->getUser(),
             ]);
 
             if (!$read) {
@@ -2004,8 +1987,6 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
                 $read = new LastRead();
 
                 $read
-                    ->setRecordId($record->getId())
-                    ->setUserId($event->getUser()->getId())
                     ->setRecord($record)
                     ->setUser($event->getUser())
                 ;

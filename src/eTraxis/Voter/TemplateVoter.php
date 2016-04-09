@@ -92,8 +92,8 @@ class TemplateVoter extends Voter
         $query = $this->recordRepository->createQueryBuilder('r')
             ->select('COUNT(r.id)')
             ->leftJoin('r.state', 's')
-            ->where('s.templateId = :id')
-            ->setParameter('id', $subject->getId())
+            ->where('s.template = :template')
+            ->setParameter('template', $subject)
         ;
 
         $count = (int) $query->getQuery()->getSingleScalarResult();
@@ -130,9 +130,9 @@ class TemplateVoter extends Voter
         // Number of initial states of the template.
         $query = $this->stateRepository->createQueryBuilder('s')
             ->select('COUNT(s.id)')
-            ->where('s.templateId = :id')
+            ->where('s.template = :template')
             ->andWhere('s.type = :type')
-            ->setParameter('id', $subject->getId())
+            ->setParameter('template', $subject)
             ->setParameter('type', State::TYPE_INITIAL)
         ;
 

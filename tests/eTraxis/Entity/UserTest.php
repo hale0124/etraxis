@@ -26,7 +26,12 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     public function testId()
     {
-        self::assertEquals(null, $this->object->getId());
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
+
+        $expected   = mt_rand(1, PHP_INT_MAX);
+        $object->id = $expected;
+        self::assertEquals($expected, $this->object->getId());
     }
 
     public function testUsername()
@@ -135,12 +140,12 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     public function testGetLocaleFallback()
     {
-        /** @var object $object */
-        $object = AltrEgo::create(new User());
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
 
         $expected       = 'en_US';
         $object->locale = 0;
-        self::assertEquals($expected, $object->getLocale());
+        self::assertEquals($expected, $this->object->getLocale());
     }
 
     public function testSetLocaleFallback()

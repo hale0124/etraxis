@@ -37,13 +37,14 @@ class ListItem
     const DELETE = 'list_item.delete';
 
     /**
-     * @var int Field ID.
+     * @var Field Field.
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\Column(name="field_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="Field")
+     * @ORM\JoinColumn(name="field_id", referencedColumnName="field_id", onDelete="CASCADE")
      */
-    private $fieldId;
+    private $field;
 
     /**
      * @var int Key of the item.
@@ -62,87 +63,7 @@ class ListItem
     private $value;
 
     /**
-     * @var Field Field.
-     *
-     * @ORM\ManyToOne(targetEntity="Field")
-     * @ORM\JoinColumn(name="field_id", referencedColumnName="field_id", onDelete="CASCADE")
-     */
-    private $field;
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $fieldId
-     *
-     * @return  self
-     */
-    public function setFieldId($fieldId)
-    {
-        $this->fieldId = $fieldId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getFieldId()
-    {
-        return $this->fieldId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $key
-     *
-     * @return  self
-     */
-    public function setKey($key)
-    {
-        $this->key = $key;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getKey()
-    {
-        return $this->key;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   string $value
-     *
-     * @return  self
-     */
-    public function setValue($value)
-    {
-        $this->value = $value;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  string
-     */
-    public function getValue()
-    {
-        return $this->value;
-    }
-
-    /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   Field $field
      *
@@ -156,12 +77,60 @@ class ListItem
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  Field
      */
     public function getField()
     {
         return $this->field;
+    }
+
+    /**
+     * Property setter.
+     *
+     * @param   int $key
+     *
+     * @return  self
+     */
+    public function setKey($key)
+    {
+        $this->key = $key;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  int
+     */
+    public function getKey()
+    {
+        return $this->key;
+    }
+
+    /**
+     * Property setter.
+     *
+     * @param   string $value
+     *
+     * @return  self
+     */
+    public function setValue($value)
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  string
+     */
+    public function getValue()
+    {
+        return $this->value;
     }
 }

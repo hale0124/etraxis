@@ -101,9 +101,9 @@ class CreateStateCommandTest extends BaseTestCase
 
         $query = $repository->createQueryBuilder('s')
             ->select('COUNT(s.id)')
-            ->where('s.templateId = :id')
+            ->where('s.template = :template')
             ->andWhere('s.type = :initial')
-            ->setParameter('id', $template->getId())
+            ->setParameter('template', $template)
             ->setParameter('initial', State::TYPE_INITIAL)
         ;
 

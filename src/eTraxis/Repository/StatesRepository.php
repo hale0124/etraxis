@@ -12,6 +12,8 @@
 namespace eTraxis\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use eTraxis\Entity\Group;
+use eTraxis\Entity\State;
 use eTraxis\Entity\StateGroupTransition;
 use eTraxis\Entity\StateRoleTransition;
 
@@ -21,58 +23,32 @@ use eTraxis\Entity\StateRoleTransition;
 class StatesRepository extends EntityRepository
 {
     /**
-     * Finds all states available for the specified template.
-     *
-     * @param   int $id Template ID.
-     *
-     * @return  array
-     */
-    public function getStates($id)
-    {
-        $query = $this->createQueryBuilder('s');
-
-        $query
-            ->select('s.id')
-            ->addSelect('s.templateId')
-            ->addSelect('s.name')
-            ->addSelect('s.abbreviation')
-            ->addSelect('s.type')
-            ->addSelect('s.responsible')
-            ->where('s.templateId = :id')
-            ->setParameter('id', $id)
-            ->orderBy('s.type')
-            ->addOrderBy('s.name')
-        ;
-
-        return $query->getQuery()->getResult();
-    }
-
-    /**
      * Returns transitions of specified system role for specified state.
      *
-     * @param   int $stateId State ID.
-     * @param   int $role    System role.
+     * @param   State $state
+     * @param   int   $role
      *
-     * @return  int[] List of state IDs.
+     * @return  State[] List of states.
      */
-    public function getRoleTransitions($stateId, $role)
+    public function getRoleTransitions(State $state, $role)
     {
         $repository = $this->getEntityManager()->getRepository(StateRoleTransition::class);
 
         $query = $repository->createQueryBuilder('tr');
 
         $query
-            ->select('tr.toStateId')
-            ->where('tr.fromStateId = :state')
+            ->select('tr')
+            ->where('tr.fromState = :state')
             ->andWhere('tr.role = :role')
-            ->setParameter('state', $stateId)
+            ->setParameter('state', $state)
             ->setParameter('role', $role)
         ;
 
         $results = [];
 
+        /** @var StateRoleTransition $result */
         foreach ($query->getQuery()->getResult() as $result) {
-            $results[] = $result['toStateId'];
+            $results[] = $result->getToState();
         }
 
         return $results;
@@ -81,29 +57,30 @@ class StatesRepository extends EntityRepository
     /**
      * Returns transitions of specified group for specified state.
      *
-     * @param   int $stateId State ID.
-     * @param   int $groupId Group ID.
+     * @param   State $state
+     * @param   Group $group
      *
-     * @return  int[] List of state IDs.
+     * @return  State[] List of states.
      */
-    public function getGroupTransitions($stateId, $groupId)
+    public function getGroupTransitions(State $state, Group $group)
     {
         $repository = $this->getEntityManager()->getRepository(StateGroupTransition::class);
 
         $query = $repository->createQueryBuilder('tr');
 
         $query
-            ->select('tr.toStateId')
-            ->where('tr.fromStateId = :state')
-            ->andWhere('tr.groupId = :group')
-            ->setParameter('state', $stateId)
-            ->setParameter('group', $groupId)
+            ->select('tr')
+            ->where('tr.fromState = :state')
+            ->andWhere('tr.group = :group')
+            ->setParameter('state', $state)
+            ->setParameter('group', $group)
         ;
 
         $results = [];
 
+        /** @var StateGroupTransition $result */
         foreach ($query->getQuery()->getResult() as $result) {
-            $results[] = $result['toStateId'];
+            $results[] = $result->getToState();
         }
 
         return $results;

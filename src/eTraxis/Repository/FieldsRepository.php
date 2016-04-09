@@ -18,27 +18,4 @@ use Doctrine\ORM\EntityRepository;
  */
 class FieldsRepository extends EntityRepository
 {
-    /**
-     * Finds all fields available for the specified state.
-     *
-     * @param   int $id State ID.
-     *
-     * @return  array
-     */
-    public function getFields($id)
-    {
-        $query = $this->createQueryBuilder('f');
-
-        $query
-            ->select('f.id')
-            ->addSelect('f.stateId')
-            ->addSelect('f.name')
-            ->where('f.stateId = :id')
-            ->andWhere('f.removedAt = 0')
-            ->setParameter('id', $id)
-            ->orderBy('f.indexNumber')
-        ;
-
-        return $query->getQuery()->getResult();
-    }
 }

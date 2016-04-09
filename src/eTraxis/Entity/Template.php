@@ -27,7 +27,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  * @Assert\UniqueEntity(fields={"project", "name"}, message="template.conflict.name")
  * @Assert\UniqueEntity(fields={"project", "prefix"}, message="template.conflict.prefix")
  */
-class Template
+class Template implements \JsonSerializable
 {
     // Constraints.
     const MAX_NAME        = 50;
@@ -66,11 +66,12 @@ class Template
     private $id;
 
     /**
-     * @var int Project ID of the template.
+     * @var Project Project of the template.
      *
-     * @ORM\Column(name="project_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="Project", inversedBy="templates")
+     * @ORM\JoinColumn(name="project_id", nullable=false, referencedColumnName="project_id", onDelete="CASCADE")
      */
-    private $projectId;
+    private $project;
 
     /**
      * @var string Name of the template.
@@ -146,14 +147,6 @@ class Template
     private $responsiblePermissions;
 
     /**
-     * @var Project Project of the template.
-     *
-     * @ORM\ManyToOne(targetEntity="Project", inversedBy="templates")
-     * @ORM\JoinColumn(name="project_id", referencedColumnName="project_id", onDelete="CASCADE")
-     */
-    private $project;
-
-    /**
      * @var ArrayCollection List of template states.
      *
      * @ORM\OneToMany(targetEntity="State", mappedBy="template")
@@ -179,7 +172,7 @@ class Template
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -189,31 +182,7 @@ class Template
     }
 
     /**
-     * Standard setter.
-     *
-     * @param   int $projectId
-     *
-     * @return  self
-     */
-    public function setProjectId($projectId)
-    {
-        $this->projectId = $projectId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getProjectId()
-    {
-        return $this->projectId;
-    }
-
-    /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   string $name
      *
@@ -227,7 +196,7 @@ class Template
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  string
      */
@@ -237,7 +206,7 @@ class Template
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   string $prefix
      *
@@ -251,7 +220,7 @@ class Template
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  string
      */
@@ -261,7 +230,7 @@ class Template
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   int $criticalAge
      *
@@ -275,7 +244,7 @@ class Template
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -285,7 +254,7 @@ class Template
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   int $frozenTime
      *
@@ -299,7 +268,7 @@ class Template
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -309,7 +278,7 @@ class Template
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   string $description
      *
@@ -323,7 +292,7 @@ class Template
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  string
      */
@@ -333,7 +302,7 @@ class Template
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   bool $isLocked
      *
@@ -347,7 +316,7 @@ class Template
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  bool
      */
@@ -357,7 +326,7 @@ class Template
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   bool $hasGuestAccess
      *
@@ -371,7 +340,7 @@ class Template
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  bool
      */
@@ -381,7 +350,7 @@ class Template
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   int $registeredPermissions
      *
@@ -395,7 +364,7 @@ class Template
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -405,7 +374,7 @@ class Template
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   int $authorPermissions
      *
@@ -419,7 +388,7 @@ class Template
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -429,7 +398,7 @@ class Template
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   int $responsiblePermissions
      *
@@ -443,7 +412,7 @@ class Template
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -453,7 +422,7 @@ class Template
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   Project $project
      *
@@ -467,7 +436,7 @@ class Template
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  Project
      */
@@ -507,11 +476,11 @@ class Template
     /**
      * Get list of template states.
      *
-     * @return  ArrayCollection|State[]
+     * @return  State[]
      */
     public function getStates()
     {
-        return $this->states;
+        return $this->states->toArray();
     }
 
     /**
@@ -545,12 +514,28 @@ class Template
     /**
      * Get list of template fields.
      *
-     * @return  ArrayCollection|Field[]
+     * @return  Field[]
      */
     public function getFields()
     {
         return $this->fields->filter(function (Field $field) {
-            return $field->getStateId() === null;
-        });
+            return $field->getState() === null;
+        })->toArray();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'id'          => $this->id,
+            'name'        => $this->name,
+            'prefix'      => $this->prefix,
+            'criticalAge' => $this->criticalAge,
+            'frozenTime'  => $this->frozenTime,
+            'description' => $this->description,
+            'isLocked'    => $this->isLocked,
+        ];
     }
 }

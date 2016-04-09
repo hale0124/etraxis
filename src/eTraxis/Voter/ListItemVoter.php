@@ -77,10 +77,10 @@ class ListItemVoter extends Voter
     {
         // Number of records where the list item is used.
         $query = $this->repository->createQueryBuilder('v')
-            ->select('COUNT(v.eventId)')
-            ->where('v.fieldId = :field')
+            ->select('COUNT(v.event)')
+            ->where('v.field = :field')
             ->andWhere('v.valueId = :value')
-            ->setParameter('field', $subject->getFieldId())
+            ->setParameter('field', $subject->getField())
             ->setParameter('value', $subject->getKey())
         ;
 

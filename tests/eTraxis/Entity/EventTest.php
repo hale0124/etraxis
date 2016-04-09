@@ -11,6 +11,8 @@
 
 namespace eTraxis\Entity;
 
+use AltrEgo\AltrEgo;
+
 class EventTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Event */
@@ -23,21 +25,24 @@ class EventTest extends \PHPUnit_Framework_TestCase
 
     public function testId()
     {
-        self::assertEquals(null, $this->object->getId());
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
+
+        $expected   = mt_rand(1, PHP_INT_MAX);
+        $object->id = $expected;
+        self::assertEquals($expected, $this->object->getId());
     }
 
-    public function testRecordId()
+    public function testRecord()
     {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setRecordId($expected);
-        self::assertEquals($expected, $this->object->getRecordId());
+        $this->object->setRecord($record = new Record());
+        self::assertSame($record, $this->object->getRecord());
     }
 
-    public function testUserId()
+    public function testUser()
     {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setUserId($expected);
-        self::assertEquals($expected, $this->object->getUserId());
+        $this->object->setUser($user = new User());
+        self::assertSame($user, $this->object->getUser());
     }
 
     public function testType()
@@ -59,17 +64,5 @@ class EventTest extends \PHPUnit_Framework_TestCase
         $expected = mt_rand(1, PHP_INT_MAX);
         $this->object->setParameter($expected);
         self::assertEquals($expected, $this->object->getParameter());
-    }
-
-    public function testRecord()
-    {
-        $this->object->setRecord($record = new Record());
-        self::assertSame($record, $this->object->getRecord());
-    }
-
-    public function testUser()
-    {
-        $this->object->setUser($user = new User());
-        self::assertSame($user, $this->object->getUser());
     }
 }

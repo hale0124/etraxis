@@ -42,8 +42,8 @@ class CreateListItemCommandTest extends BaseTestCase
 
         /** @var ListItem $item */
         $item = $this->doctrine->getRepository(ListItem::class)->findOneBy([
-            'fieldId' => $field->getId(),
-            'key'     => $key,
+            'field' => $field,
+            'key'   => $key,
         ]);
 
         self::assertInstanceOf(ListItem::class, $item);

@@ -12,6 +12,7 @@
 namespace AppBundle\Controller\Admin;
 
 use eTraxis\Collection\SystemRole;
+use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
 use eTraxis\SimpleBus\States;
 use eTraxis\Traits\ContainerTrait;
@@ -120,9 +121,22 @@ class StatesPostController extends Controller
         /** @var \eTraxis\Repository\StatesRepository $repository */
         $repository = $this->getDoctrine()->getRepository(State::class);
 
-        $transitions_old = array_key_exists($group, SystemRole::getCollection())
-            ? $repository->getRoleTransitions($id, $group)
-            : $repository->getGroupTransitions($id, $group);
+        /** @var State $state */
+        $state = $repository->find($id);
+
+        if (array_key_exists($group, SystemRole::getCollection())) {
+            $transitions_old = $repository->getRoleTransitions($state, $group);
+        }
+        else {
+            /** @var Group $g */
+            $g = $this->getDoctrine()->getRepository(Group::class)->find($group);
+
+            if ($g === null) {
+                $this->createNotFoundException();
+            }
+
+            $transitions_old = $repository->getGroupTransitions($state, $g);
+        }
 
         $transitions_new = $request->request->get('transitions', []);
 

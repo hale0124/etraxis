@@ -60,8 +60,8 @@ class ListField extends AbstractField
 
             /** @var \eTraxis\Entity\ListItem $item */
             $item = $this->repository->findOneBy([
-                'fieldId' => $this->field->getId(),
-                'key'     => $key,
+                'field' => $this->field,
+                'key'   => $key,
             ]);
 
             $key = ($item ? $item->getKey() : null);
@@ -95,8 +95,8 @@ class ListField extends AbstractField
 
             /** @var \eTraxis\Entity\ListItem $item */
             $item = $this->repository->findOneBy([
-                'fieldId' => $this->field->getId(),
-                'value'   => $value,
+                'field' => $this->field,
+                'value' => $value,
             ]);
 
             $key = ($item ? $item->getKey() : null);
@@ -125,8 +125,8 @@ class ListField extends AbstractField
 
         /** @var \eTraxis\Entity\ListItem $item */
         $item = $this->repository->findOneBy([
-            'fieldId' => $this->field->getId(),
-            'key'     => $key,
+            'field' => $this->field,
+            'key'   => $key,
         ]);
 
         return $item ? $item->getValue() : null;

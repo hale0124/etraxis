@@ -22,22 +22,24 @@ use Doctrine\ORM\Mapping as ORM;
 class StateRoleTransition
 {
     /**
-     * @var int State ID where record can be moved from.
+     * @var State State where record can be moved from.
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\Column(name="state_id_from", type="integer")
+     * @ORM\ManyToOne(targetEntity="State")
+     * @ORM\JoinColumn(name="state_id_from", referencedColumnName="state_id", onDelete="CASCADE")
      */
-    private $fromStateId;
+    private $fromState;
 
     /**
-     * @var int State ID where record can be moved to.
+     * @var State State where record can be moved to.
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\Column(name="state_id_to", type="integer")
+     * @ORM\ManyToOne(targetEntity="State")
+     * @ORM\JoinColumn(name="state_id_to", referencedColumnName="state_id", onDelete="CASCADE")
      */
-    private $toStateId;
+    private $toState;
 
     /**
      * @var int System role which is allowed to make this transition.
@@ -49,95 +51,7 @@ class StateRoleTransition
     private $role;
 
     /**
-     * @var State State where record can be moved from.
-     *
-     * @ORM\ManyToOne(targetEntity="State")
-     * @ORM\JoinColumn(name="state_id_from", referencedColumnName="state_id", onDelete="CASCADE")
-     */
-    private $fromState;
-
-    /**
-     * @var State State where record can be moved to.
-     *
-     * @ORM\ManyToOne(targetEntity="State")
-     * @ORM\JoinColumn(name="state_id_to", referencedColumnName="state_id", onDelete="CASCADE")
-     */
-    private $toState;
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $fromStateId
-     *
-     * @return  self
-     */
-    public function setFromStateId($fromStateId)
-    {
-        $this->fromStateId = $fromStateId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getFromStateId()
-    {
-        return $this->fromStateId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $toStateId
-     *
-     * @return  self
-     */
-    public function setToStateId($toStateId)
-    {
-        $this->toStateId = $toStateId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getToStateId()
-    {
-        return $this->toStateId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $role
-     *
-     * @return  self
-     */
-    public function setRole($role)
-    {
-        $this->role = $role;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getRole()
-    {
-        return $this->role;
-    }
-
-    /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   State $fromState
      *
@@ -151,7 +65,7 @@ class StateRoleTransition
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  State
      */
@@ -161,7 +75,7 @@ class StateRoleTransition
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   State $toState
      *
@@ -175,12 +89,36 @@ class StateRoleTransition
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  State
      */
     public function getToState()
     {
         return $this->toState;
+    }
+
+    /**
+     * Property setter.
+     *
+     * @param   int $role
+     *
+     * @return  self
+     */
+    public function setRole($role)
+    {
+        $this->role = $role;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  int
+     */
+    public function getRole()
+    {
+        return $this->role;
     }
 }

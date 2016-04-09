@@ -41,7 +41,7 @@ class DecimalValue
     private $value;
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -51,7 +51,7 @@ class DecimalValue
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   string $value
      *
@@ -65,7 +65,7 @@ class DecimalValue
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  string
      */

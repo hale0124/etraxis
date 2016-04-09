@@ -22,22 +22,24 @@ use Doctrine\ORM\Mapping as ORM;
 class FieldGroupAccess
 {
     /**
-     * @var int Field ID.
+     * @var Field Field.
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\Column(name="field_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="Field")
+     * @ORM\JoinColumn(name="field_id", referencedColumnName="field_id", onDelete="CASCADE")
      */
-    private $fieldId;
+    private $field;
 
     /**
-     * @var int Group ID.
+     * @var Group Group.
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\Column(name="group_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="Group")
+     * @ORM\JoinColumn(name="group_id", referencedColumnName="group_id", onDelete="CASCADE")
      */
-    private $groupId;
+    private $group;
 
     /**
      * @var int Access level of the group.
@@ -49,95 +51,7 @@ class FieldGroupAccess
     private $access;
 
     /**
-     * @var Field Field.
-     *
-     * @ORM\ManyToOne(targetEntity="Field")
-     * @ORM\JoinColumn(name="field_id", referencedColumnName="field_id", onDelete="CASCADE")
-     */
-    private $field;
-
-    /**
-     * @var Group Group.
-     *
-     * @ORM\ManyToOne(targetEntity="Group")
-     * @ORM\JoinColumn(name="group_id", referencedColumnName="group_id", onDelete="CASCADE")
-     */
-    private $group;
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $fieldId
-     *
-     * @return  self
-     */
-    public function setFieldId($fieldId)
-    {
-        $this->fieldId = $fieldId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getFieldId()
-    {
-        return $this->fieldId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $groupId
-     *
-     * @return  self
-     */
-    public function setGroupId($groupId)
-    {
-        $this->groupId = $groupId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getGroupId()
-    {
-        return $this->groupId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $access
-     *
-     * @return  self
-     */
-    public function setAccess($access)
-    {
-        $this->access = $access;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getAccess()
-    {
-        return $this->access;
-    }
-
-    /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   Field $field
      *
@@ -151,7 +65,7 @@ class FieldGroupAccess
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  Field
      */
@@ -161,7 +75,7 @@ class FieldGroupAccess
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   Group $group
      *
@@ -175,12 +89,36 @@ class FieldGroupAccess
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  Group
      */
     public function getGroup()
     {
         return $this->group;
+    }
+
+    /**
+     * Property setter.
+     *
+     * @param   int $access
+     *
+     * @return  self
+     */
+    public function setAccess($access)
+    {
+        $this->access = $access;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  int
+     */
+    public function getAccess()
+    {
+        return $this->access;
     }
 }

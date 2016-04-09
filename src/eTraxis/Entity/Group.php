@@ -25,7 +25,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="eTraxis\Repository\GroupsRepository")
  * @Assert\UniqueEntity(fields={"project", "name"}, message="group.conflict.name", ignoreNull=false)
  */
-class Group
+class Group implements \JsonSerializable
 {
     // Constraints.
     const MAX_NAME        = 25;
@@ -41,11 +41,12 @@ class Group
     private $id;
 
     /**
-     * @var int Project ID of the group.
+     * @var Project Project of the group (NULL if the group is global).
      *
-     * @ORM\Column(name="project_id", type="integer", nullable=true)
+     * @ORM\ManyToOne(targetEntity="Project", inversedBy="groups")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="project_id", onDelete="CASCADE")
      */
-    private $projectId;
+    private $project;
 
     /**
      * @var string Name of the group.
@@ -60,14 +61,6 @@ class Group
      * @ORM\Column(name="description", type="string", length=100, nullable=true)
      */
     private $description;
-
-    /**
-     * @var Project Project of the group (NULL if the group is global).
-     *
-     * @ORM\ManyToOne(targetEntity="Project", inversedBy="groups")
-     * @ORM\JoinColumn(name="project_id", referencedColumnName="project_id", onDelete="CASCADE")
-     */
-    private $project;
 
     /**
      * @var ArrayCollection List of members.
@@ -89,7 +82,7 @@ class Group
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -99,79 +92,7 @@ class Group
     }
 
     /**
-     * Standard setter.
-     *
-     * @param   int $projectId
-     *
-     * @return  self
-     */
-    public function setProjectId($projectId)
-    {
-        $this->projectId = $projectId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getProjectId()
-    {
-        return $this->projectId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   string $name
-     *
-     * @return  self
-     */
-    public function setName($name)
-    {
-        $this->name = $name;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  string
-     */
-    public function getName()
-    {
-        return $this->name;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   string $description
-     *
-     * @return  self
-     */
-    public function setDescription($description)
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  string
-     */
-    public function getDescription()
-    {
-        return $this->description;
-    }
-
-    /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   Project $project
      *
@@ -185,13 +106,61 @@ class Group
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  Project
      */
     public function getProject()
     {
         return $this->project;
+    }
+
+    /**
+     * Property setter.
+     *
+     * @param   string $name
+     *
+     * @return  self
+     */
+    public function setName($name)
+    {
+        $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Property setter.
+     *
+     * @param   string $description
+     *
+     * @return  self
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  string
+     */
+    public function getDescription()
+    {
+        return $this->description;
     }
 
     /**
@@ -225,11 +194,11 @@ class Group
     /**
      * Get list of group members.
      *
-     * @return  ArrayCollection|User[]
+     * @return  User[]
      */
     public function getUsers()
     {
-        return $this->users;
+        return $this->users->toArray();
     }
 
     /**
@@ -239,6 +208,19 @@ class Group
      */
     public function isGlobal()
     {
-        return !$this->projectId;
+        return $this->project === null;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'id'          => $this->id,
+            'project'     => $this->project ? $this->project->getId() : null,
+            'name'        => $this->name,
+            'description' => $this->description,
+        ];
     }
 }

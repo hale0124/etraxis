@@ -26,7 +26,7 @@ class FieldsFilterTest extends BaseTestCase
         self::assertCount(7, $state->getFields());
 
         /** @var Field $field */
-        $field = $state->getFields()->get(6);
+        $field = $state->getFields()[6];
 
         $this->doctrine->getManager()->remove($field);
         $this->doctrine->getManager()->flush();

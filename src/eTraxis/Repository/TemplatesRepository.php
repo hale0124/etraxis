@@ -13,6 +13,7 @@ namespace eTraxis\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use eTraxis\Collection\SystemRole;
+use eTraxis\Entity\Group;
 use eTraxis\Entity\Template;
 use eTraxis\Entity\TemplateGroupPermission;
 
@@ -22,42 +23,15 @@ use eTraxis\Entity\TemplateGroupPermission;
 class TemplatesRepository extends EntityRepository
 {
     /**
-     * Finds all templates available for the specified project.
-     *
-     * @param   int $id Project ID.
-     *
-     * @return  array
-     */
-    public function getTemplates($id)
-    {
-        $query = $this->createQueryBuilder('t');
-
-        $query
-            ->select('t.id')
-            ->addSelect('t.projectId')
-            ->addSelect('t.name')
-            ->addSelect('t.isLocked')
-            ->where('t.projectId = :id')
-            ->setParameter('id', $id)
-            ->orderBy('t.name')
-        ;
-
-        return $query->getQuery()->getResult();
-    }
-
-    /**
      * Returns permissions of specified system role for specified template.
      *
-     * @param   int $templateId Template ID.
-     * @param   int $role       System role.
+     * @param   Template  $template
+     * @param   int       $role     System role.
      *
      * @return  int
      */
-    public function getRolePermissions($templateId, $role)
+    public function getRolePermissions(Template $template, $role)
     {
-        /** @var Template $template */
-        $template = $this->find($templateId);
-
         switch ($role) {
 
             case SystemRole::AUTHOR:
@@ -86,12 +60,12 @@ class TemplatesRepository extends EntityRepository
     /**
      * Returns permissions of specified group for specified template.
      *
-     * @param   int $templateId Template ID.
-     * @param   int $groupId    Group ID.
+     * @param   Template  $template
+     * @param   Group     $group
      *
      * @return  int
      */
-    public function getGroupPermissions($templateId, $groupId)
+    public function getGroupPermissions(Template $template, Group $group)
     {
         $repository = $this->getEntityManager()->getRepository(TemplateGroupPermission::class);
 
@@ -99,10 +73,10 @@ class TemplatesRepository extends EntityRepository
 
         $query
             ->select('tgp.permission')
-            ->where('tgp.templateId = :template')
-            ->andWhere('tgp.groupId = :group')
-            ->setParameter('template', $templateId)
-            ->setParameter('group', $groupId)
+            ->where('tgp.template = :template')
+            ->andWhere('tgp.group = :group')
+            ->setParameter('template', $template)
+            ->setParameter('group', $group)
         ;
 
         $result = $query->getQuery()->getOneOrNullResult();

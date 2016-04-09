@@ -93,15 +93,13 @@ class AddRemoveTemplatePermissionsCommandHandler
 
                 /** @var TemplateGroupPermission $entity */
                 $entity = $this->doctrine->getRepository(TemplateGroupPermission::class)->findOneBy([
-                    'groupId'    => $group->getId(),
-                    'templateId' => $template->getId(),
+                    'group'    => $group,
+                    'template' => $template,
                 ]);
 
                 if (!$entity) {
                     $entity = new TemplateGroupPermission();
 
-                    $entity->setGroupId($group->getId());
-                    $entity->setTemplateId($template->getId());
                     $entity->setGroup($group);
                     $entity->setTemplate($template);
                 }

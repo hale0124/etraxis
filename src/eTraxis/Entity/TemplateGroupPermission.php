@@ -22,22 +22,24 @@ use Doctrine\ORM\Mapping as ORM;
 class TemplateGroupPermission
 {
     /**
-     * @var int Group ID.
+     * @var Group Group.
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\Column(name="group_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="Group")
+     * @ORM\JoinColumn(name="group_id", referencedColumnName="group_id", onDelete="CASCADE")
      */
-    private $groupId;
+    private $group;
 
     /**
-     * @var int Template ID.
+     * @var Template Template.
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\Column(name="template_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="Template")
+     * @ORM\JoinColumn(name="template_id", referencedColumnName="template_id", onDelete="CASCADE")
      */
-    private $templateId;
+    private $template;
 
     /**
      * @var int Permission granted to the group for this template.
@@ -47,95 +49,7 @@ class TemplateGroupPermission
     private $permission;
 
     /**
-     * @var Group Group.
-     *
-     * @ORM\ManyToOne(targetEntity="Group")
-     * @ORM\JoinColumn(name="group_id", referencedColumnName="group_id", onDelete="CASCADE")
-     */
-    private $group;
-
-    /**
-     * @var Template Template.
-     *
-     * @ORM\ManyToOne(targetEntity="Template")
-     * @ORM\JoinColumn(name="template_id", referencedColumnName="template_id", onDelete="CASCADE")
-     */
-    private $template;
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $groupId
-     *
-     * @return  self
-     */
-    public function setGroupId($groupId)
-    {
-        $this->groupId = $groupId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getGroupId()
-    {
-        return $this->groupId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $templateId
-     *
-     * @return  self
-     */
-    public function setTemplateId($templateId)
-    {
-        $this->templateId = $templateId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getTemplateId()
-    {
-        return $this->templateId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $permission
-     *
-     * @return  self
-     */
-    public function setPermission($permission)
-    {
-        $this->permission = $permission;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getPermission()
-    {
-        return $this->permission;
-    }
-
-    /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   Group $group
      *
@@ -149,7 +63,7 @@ class TemplateGroupPermission
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  Group
      */
@@ -159,7 +73,7 @@ class TemplateGroupPermission
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   Template $template
      *
@@ -173,12 +87,36 @@ class TemplateGroupPermission
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  Template
      */
     public function getTemplate()
     {
         return $this->template;
+    }
+
+    /**
+     * Property setter.
+     *
+     * @param   int $permission
+     *
+     * @return  self
+     */
+    public function setPermission($permission)
+    {
+        $this->permission = $permission;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  int
+     */
+    public function getPermission()
+    {
+        return $this->permission;
     }
 }

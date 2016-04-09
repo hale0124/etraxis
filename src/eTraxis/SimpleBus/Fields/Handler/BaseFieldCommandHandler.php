@@ -101,7 +101,7 @@ class BaseFieldCommandHandler
 
             $entity->setState($state);
             $entity->setTemplate($state->getTemplate());
-            $entity->setIndexNumber($state->getFields()->count() + 1);
+            $entity->setIndexNumber(count($state->getFields()) + 1);
         }
         else {
             /** @var Entity\Template $template */
@@ -112,7 +112,7 @@ class BaseFieldCommandHandler
             }
 
             $entity->setTemplate($template);
-            $entity->setIndexNumber($template->getFields()->count() + 1);
+            $entity->setIndexNumber(count($template->getFields()) + 1);
         }
 
         $errors = $this->validator->validate($entity);

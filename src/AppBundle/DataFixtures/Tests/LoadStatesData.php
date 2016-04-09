@@ -92,8 +92,6 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
 
         /** @noinspection PhpParamsInspection */
         $assignee
-            ->setStateId($state_new->getId())
-            ->setGroupId($this->getReference('group:crew')->getId())
             ->setState($state_new)
             ->setGroup($this->getReference('group:crew'))
         ;
@@ -102,9 +100,6 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
 
         /** @noinspection PhpParamsInspection */
         $group_transition
-            ->setFromStateId($state_new->getId())
-            ->setToStateId($state_delivered->getId())
-            ->setGroupId($this->getReference('group:managers')->getId())
             ->setFromState($state_new)
             ->setToState($state_delivered)
             ->setGroup($this->getReference('group:managers'))
@@ -113,11 +108,9 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
         $role_transition = new StateRoleTransition();
 
         $role_transition
-            ->setFromStateId($state_new->getId())
-            ->setToStateId($state_delivered->getId())
-            ->setRole(SystemRole::RESPONSIBLE)
             ->setFromState($state_new)
             ->setToState($state_delivered)
+            ->setRole(SystemRole::RESPONSIBLE)
         ;
 
         $manager->persist($assignee);
@@ -165,11 +158,9 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
         $transition = new StateRoleTransition();
 
         $transition
-            ->setFromStateId($state_produced->getId())
-            ->setToStateId($state_released->getId())
-            ->setRole(SystemRole::AUTHOR)
             ->setFromState($state_produced)
             ->setToState($state_released)
+            ->setRole(SystemRole::AUTHOR)
         ;
 
         $manager->persist($transition);

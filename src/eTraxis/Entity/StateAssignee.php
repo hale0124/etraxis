@@ -22,26 +22,10 @@ use Doctrine\ORM\Mapping as ORM;
 class StateAssignee
 {
     /**
-     * @var int State ID.
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\Column(name="state_id", type="integer")
-     */
-    private $stateId;
-
-    /**
-     * @var int Group ID.
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\Column(name="group_id", type="integer")
-     */
-    private $groupId;
-
-    /**
      * @var State State where record can be moved to.
      *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="State")
      * @ORM\JoinColumn(name="state_id", referencedColumnName="state_id", onDelete="CASCADE")
      */
@@ -50,61 +34,15 @@ class StateAssignee
     /**
      * @var Group Group which members can be assigned on this transition.
      *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="Group")
      * @ORM\JoinColumn(name="group_id", referencedColumnName="group_id", onDelete="CASCADE")
      */
     private $group;
 
     /**
-     * Standard setter.
-     *
-     * @param   int $stateId
-     *
-     * @return  self
-     */
-    public function setStateId($stateId)
-    {
-        $this->stateId = $stateId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getStateId()
-    {
-        return $this->stateId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $groupId
-     *
-     * @return  self
-     */
-    public function setGroupId($groupId)
-    {
-        $this->groupId = $groupId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getGroupId()
-    {
-        return $this->groupId;
-    }
-
-    /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   State $state
      *
@@ -118,7 +56,7 @@ class StateAssignee
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  State
      */
@@ -128,7 +66,7 @@ class StateAssignee
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   Group $group
      *
@@ -142,7 +80,7 @@ class StateAssignee
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  Group
      */

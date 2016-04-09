@@ -14,34 +14,10 @@ namespace eTraxis\Repository;
 use eTraxis\Collection\SystemRole;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
-use eTraxis\Entity\Template;
 use eTraxis\Tests\BaseTestCase;
 
 class StatesRepositoryTest extends BaseTestCase
 {
-    public function testGetStates()
-    {
-        /** @var Template $template */
-        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
-        self::assertNotNull($template);
-
-        /** @var StatesRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository(State::class);
-
-        $result = $repository->getStates($template->getId());
-
-        $states = array_map(function ($state) {
-            return $state['name'];
-        }, $result);
-
-        $expected = [
-            'New',
-            'Delivered',
-        ];
-
-        self::assertEquals($expected, $states);
-    }
-
     public function testGetRoleTransitions()
     {
         /** @var StatesRepository $repository */
@@ -56,10 +32,10 @@ class StatesRepositoryTest extends BaseTestCase
         self::assertNotNull($delivered);
 
         $expected = [
-            $delivered->getId(),
+            $delivered,
         ];
 
-        self::assertEquals($expected, $repository->getRoleTransitions($new->getId(), SystemRole::RESPONSIBLE));
+        self::assertEquals($expected, $repository->getRoleTransitions($new, SystemRole::RESPONSIBLE));
     }
 
     public function testGetGroupTransitions()
@@ -80,9 +56,9 @@ class StatesRepositoryTest extends BaseTestCase
         self::assertNotNull($delivered);
 
         $expected = [
-            $delivered->getId(),
+            $delivered,
         ];
 
-        self::assertEquals($expected, $repository->getGroupTransitions($new->getId(), $managers->getId()));
+        self::assertEquals($expected, $repository->getGroupTransitions($new, $managers));
     }
 }

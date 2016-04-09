@@ -117,11 +117,9 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
 
             /** @noinspection PhpParamsInspection */
             $permission
-                ->setTemplateId($template->getId())
-                ->setGroupId($group->getId())
-                ->setPermission($flags)
                 ->setTemplate($template)
                 ->setGroup($group)
+                ->setPermission($flags)
             ;
 
             $manager->persist($permission);

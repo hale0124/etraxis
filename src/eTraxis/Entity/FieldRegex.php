@@ -55,7 +55,7 @@ class FieldRegex
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   string $check
      *
@@ -69,7 +69,7 @@ class FieldRegex
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  string
      */
@@ -79,7 +79,7 @@ class FieldRegex
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   string $search
      *
@@ -93,7 +93,7 @@ class FieldRegex
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  string
      */
@@ -103,7 +103,7 @@ class FieldRegex
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   string $replace
      *
@@ -117,7 +117,7 @@ class FieldRegex
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  string
      */

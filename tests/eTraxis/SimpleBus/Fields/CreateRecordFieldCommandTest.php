@@ -25,7 +25,7 @@ class CreateRecordFieldCommandTest extends BaseTestCase
         self::assertNotNull($state);
 
         $command = new CreateRecordFieldCommand([
-            'template'     => $state->getTemplateId(),
+            'template'     => $state->getTemplate()->getId(),
             'state'        => $state->getId(),
             'name'         => 'Related ID',
             'required'     => true,

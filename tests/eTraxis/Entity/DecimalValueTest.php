@@ -11,6 +11,8 @@
 
 namespace eTraxis\Entity;
 
+use AltrEgo\AltrEgo;
+
 class DecimalValueTest extends \PHPUnit_Framework_TestCase
 {
     /** @var DecimalValue */
@@ -23,7 +25,12 @@ class DecimalValueTest extends \PHPUnit_Framework_TestCase
 
     public function testId()
     {
-        self::assertEquals(null, $this->object->getId());
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
+
+        $expected   = mt_rand(1, PHP_INT_MAX);
+        $object->id = $expected;
+        self::assertEquals($expected, $this->object->getId());
     }
 
     public function testValue()

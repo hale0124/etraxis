@@ -24,7 +24,7 @@ class UpdateListItemCommandTest extends BaseTestCase
 
         /** @var ListItem $item */
         $item = $this->doctrine->getRepository(ListItem::class)->findOneBy([
-            'field' => $field->getId(),
+            'field' => $field,
             'key'   => 1,
         ]);
 
@@ -42,7 +42,7 @@ class UpdateListItemCommandTest extends BaseTestCase
 
         /** @var ListItem $item */
         $item = $this->doctrine->getRepository(ListItem::class)->findOneBy([
-            'field' => $field->getId(),
+            'field' => $field,
             'key'   => 1,
         ]);
 
@@ -51,7 +51,7 @@ class UpdateListItemCommandTest extends BaseTestCase
 
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     * @expectedExceptionMessage Unknown list item.
+     * @expectedExceptionMessage Unknown field.
      */
     public function testUnknownItemByField()
     {

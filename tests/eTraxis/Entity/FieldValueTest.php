@@ -21,18 +21,16 @@ class FieldValueTest extends \PHPUnit_Framework_TestCase
         $this->object = new FieldValue();
     }
 
-    public function testEventId()
+    public function testEvent()
     {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setEventId($expected);
-        self::assertEquals($expected, $this->object->getEventId());
+        $this->object->setEvent($event = new Event());
+        self::assertSame($event, $this->object->getEvent());
     }
 
-    public function testFieldId()
+    public function testField()
     {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setFieldId($expected);
-        self::assertEquals($expected, $this->object->getFieldId());
+        $this->object->setField($field = new Field());
+        self::assertSame($field, $this->object->getField());
     }
 
     public function testValueId()
@@ -56,17 +54,5 @@ class FieldValueTest extends \PHPUnit_Framework_TestCase
 
         $this->object->setCurrent(true);
         self::assertTrue($this->object->isCurrent());
-    }
-
-    public function testEvent()
-    {
-        $this->object->setEvent($event = new Event());
-        self::assertSame($event, $this->object->getEvent());
-    }
-
-    public function testField()
-    {
-        $this->object->setField($field = new Field());
-        self::assertSame($field, $this->object->getField());
     }
 }

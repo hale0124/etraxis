@@ -48,7 +48,7 @@ class TextValue
     private $value;
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -58,31 +58,7 @@ class TextValue
     }
 
     /**
-     * Standard setter.
-     *
-     * @param   string $token
-     *
-     * @return  self
-     */
-    public function setToken($token)
-    {
-        $this->token = $token;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  string
-     */
-    public function getToken()
-    {
-        return $this->token;
-    }
-
-    /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   string $value
      *
@@ -90,13 +66,14 @@ class TextValue
      */
     public function setValue($value)
     {
+        $this->token = md5($value);
         $this->value = $value;
 
         return $this;
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  string
      */

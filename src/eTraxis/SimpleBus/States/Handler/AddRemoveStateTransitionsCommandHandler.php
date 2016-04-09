@@ -56,19 +56,9 @@ class AddRemoveStateTransitionsCommandHandler
 
         /** @var State[] $transitions */
         $transitions = $this->doctrine->getRepository(State::class)->findBy([
-            'templateId' => $state->getTemplateId(),
-            'id'         => $command->transitions,
+            'template' => $state->getTemplate(),
+            'id'       => $command->transitions,
         ]);
-
-        $ids = [];
-
-        foreach ($transitions as $transition) {
-            $ids[] = $transition->getId();
-        }
-
-        if (count($ids) === 0) {
-            return;
-        }
 
         /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->doctrine->getManager();
@@ -78,15 +68,15 @@ class AddRemoveStateTransitionsCommandHandler
 
             $query = $em->createQuery('
                 DELETE eTraxis:StateRoleTransition t
-                WHERE t.fromStateId = :state
+                WHERE t.fromState = :state
+                AND t.toState IN (:transitions)
                 AND t.role = :role
-                AND t.toStateId IN (:ids)
             ');
 
             $query->execute([
-                'ids'   => $ids,
-                'state' => $state->getId(),
-                'role'  => $command->group,
+                'state'       => $state,
+                'transitions' => $transitions,
+                'role'        => $command->group,
             ]);
 
             if ($command instanceof AddStateTransitionsCommand) {
@@ -96,11 +86,9 @@ class AddRemoveStateTransitionsCommandHandler
                     $entity = new StateRoleTransition();
 
                     $entity
-                        ->setFromStateId($state->getId())
-                        ->setToStateId($transition->getId())
-                        ->setRole($command->group)
                         ->setFromState($state)
                         ->setToState($transition)
+                        ->setRole($command->group)
                     ;
 
                     $em->persist($entity);
@@ -119,15 +107,15 @@ class AddRemoveStateTransitionsCommandHandler
 
             $query = $em->createQuery('
                 DELETE eTraxis:StateGroupTransition t
-                WHERE t.fromStateId = :state
-                AND t.groupId = :group
-                AND t.toStateId IN (:ids)
+                WHERE t.fromState = :state
+                AND t.toState IN (:transitions)
+                AND t.group = :group
             ');
 
             $query->execute([
-                'ids'   => $ids,
-                'state' => $state->getId(),
-                'group' => $group->getId(),
+                'state'       => $state,
+                'transitions' => $transitions,
+                'group'       => $group,
             ]);
 
             if ($command instanceof AddStateTransitionsCommand) {
@@ -137,9 +125,6 @@ class AddRemoveStateTransitionsCommandHandler
                     $entity = new StateGroupTransition();
 
                     $entity
-                        ->setFromStateId($state->getId())
-                        ->setToStateId($transition->getId())
-                        ->setGroupId($group->getId())
                         ->setFromState($state)
                         ->setToState($transition)
                         ->setGroup($group)

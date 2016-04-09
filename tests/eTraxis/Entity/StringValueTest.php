@@ -11,6 +11,8 @@
 
 namespace eTraxis\Entity;
 
+use AltrEgo\AltrEgo;
+
 class StringValueTest extends \PHPUnit_Framework_TestCase
 {
     /** @var StringValue */
@@ -23,20 +25,22 @@ class StringValueTest extends \PHPUnit_Framework_TestCase
 
     public function testId()
     {
-        self::assertEquals(null, $this->object->getId());
-    }
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
 
-    public function testToken()
-    {
-        $expected = 'token';
-        $this->object->setToken($expected);
-        self::assertEquals($expected, $this->object->getToken());
+        $expected   = mt_rand(1, PHP_INT_MAX);
+        $object->id = $expected;
+        self::assertEquals($expected, $this->object->getId());
     }
 
     public function testValue()
     {
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
+
         $expected = str_pad('_', 150, '_');
         $this->object->setValue($expected);
+        self::assertEquals(md5($expected), $object->token);
         self::assertEquals($expected, $this->object->getValue());
     }
 }

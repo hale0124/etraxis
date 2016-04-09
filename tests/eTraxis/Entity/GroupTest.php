@@ -11,6 +11,8 @@
 
 namespace eTraxis\Entity;
 
+use AltrEgo\AltrEgo;
+
 class GroupTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Group */
@@ -23,14 +25,21 @@ class GroupTest extends \PHPUnit_Framework_TestCase
 
     public function testId()
     {
-        self::assertEquals(null, $this->object->getId());
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
+
+        $expected   = mt_rand(1, PHP_INT_MAX);
+        $object->id = $expected;
+        self::assertEquals($expected, $this->object->getId());
     }
 
-    public function testProjectId()
+    public function testProject()
     {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setProjectId($expected);
-        self::assertEquals($expected, $this->object->getProjectId());
+        $this->object->setProject($project = new Project());
+        self::assertSame($project, $this->object->getProject());
+
+        $this->object->setProject();
+        self::assertNull($this->object->getProject());
     }
 
     public function testName()
@@ -47,15 +56,6 @@ class GroupTest extends \PHPUnit_Framework_TestCase
         self::assertEquals($expected, $this->object->getDescription());
     }
 
-    public function testProject()
-    {
-        $this->object->setProject($project = new Project());
-        self::assertSame($project, $this->object->getProject());
-
-        $this->object->setProject();
-        self::assertNull($this->object->getProject());
-    }
-
     public function testUsers()
     {
         self::assertCount(0, $this->object->getUsers());
@@ -70,5 +70,17 @@ class GroupTest extends \PHPUnit_Framework_TestCase
     public function testIsGlobal()
     {
         self::assertTrue($this->object->isGlobal());
+    }
+
+    public function testJsonSerialize()
+    {
+        $expected = [
+            'id',
+            'project',
+            'name',
+            'description',
+        ];
+
+        self::assertEquals($expected, array_keys($this->object->jsonSerialize()));
     }
 }

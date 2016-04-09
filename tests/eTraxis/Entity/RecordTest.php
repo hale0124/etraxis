@@ -11,6 +11,8 @@
 
 namespace eTraxis\Entity;
 
+use AltrEgo\AltrEgo;
+
 class RecordTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Record */
@@ -23,7 +25,12 @@ class RecordTest extends \PHPUnit_Framework_TestCase
 
     public function testId()
     {
-        self::assertEquals(null, $this->object->getId());
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
+
+        $expected   = mt_rand(1, PHP_INT_MAX);
+        $object->id = $expected;
+        self::assertEquals($expected, $this->object->getId());
     }
 
     public function testSubject()
@@ -33,25 +40,22 @@ class RecordTest extends \PHPUnit_Framework_TestCase
         self::assertEquals($expected, $this->object->getSubject());
     }
 
-    public function testStateId()
+    public function testState()
     {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setStateId($expected);
-        self::assertEquals($expected, $this->object->getStateId());
+        $this->object->setState($state = new State());
+        self::assertSame($state, $this->object->getState());
     }
 
-    public function testAuthorId()
+    public function testAuthor()
     {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setAuthorId($expected);
-        self::assertEquals($expected, $this->object->getAuthorId());
+        $this->object->setAuthor($user = new User());
+        self::assertSame($user, $this->object->getAuthor());
     }
 
-    public function testResponsibleId()
+    public function testResponsible()
     {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setResponsibleId($expected);
-        self::assertEquals($expected, $this->object->getResponsibleId());
+        $this->object->setResponsible($user = new User());
+        self::assertSame($user, $this->object->getResponsible());
     }
 
     public function testCreatedAt()
@@ -80,24 +84,6 @@ class RecordTest extends \PHPUnit_Framework_TestCase
         $expected = time();
         $this->object->setResumedAt($expected);
         self::assertEquals($expected, $this->object->getResumedAt());
-    }
-
-    public function testState()
-    {
-        $this->object->setState($state = new State());
-        self::assertSame($state, $this->object->getState());
-    }
-
-    public function testAuthor()
-    {
-        $this->object->setAuthor($user = new User());
-        self::assertSame($user, $this->object->getAuthor());
-    }
-
-    public function testResponsible()
-    {
-        $this->object->setResponsible($user = new User());
-        self::assertSame($user, $this->object->getResponsible());
     }
 
     public function testHistory()

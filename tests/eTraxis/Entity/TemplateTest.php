@@ -11,6 +11,8 @@
 
 namespace eTraxis\Entity;
 
+use AltrEgo\AltrEgo;
+
 class TemplateTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Template */
@@ -23,14 +25,18 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
 
     public function testId()
     {
-        self::assertEquals(null, $this->object->getId());
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
+
+        $expected   = mt_rand(1, PHP_INT_MAX);
+        $object->id = $expected;
+        self::assertEquals($expected, $this->object->getId());
     }
 
-    public function testProjectId()
+    public function testProject()
     {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setProjectId($expected);
-        self::assertEquals($expected, $this->object->getProjectId());
+        $this->object->setProject($project = new Project());
+        self::assertSame($project, $this->object->getProject());
     }
 
     public function testName()
@@ -107,12 +113,6 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
         self::assertEquals($expected, $this->object->getResponsiblePermissions());
     }
 
-    public function testProject()
-    {
-        $this->object->setProject($project = new Project());
-        self::assertSame($project, $this->object->getProject());
-    }
-
     public function testStates()
     {
         self::assertCount(0, $this->object->getStates());
@@ -133,5 +133,20 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
 
         $this->object->removeField($field);
         self::assertCount(0, $this->object->getFields());
+    }
+
+    public function testJsonSerialize()
+    {
+        $expected = [
+            'id',
+            'name',
+            'prefix',
+            'criticalAge',
+            'frozenTime',
+            'description',
+            'isLocked',
+        ];
+
+        self::assertEquals($expected, array_keys($this->object->jsonSerialize()));
     }
 }

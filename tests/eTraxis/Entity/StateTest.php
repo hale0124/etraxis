@@ -11,6 +11,8 @@
 
 namespace eTraxis\Entity;
 
+use AltrEgo\AltrEgo;
+
 class StateTest extends \PHPUnit_Framework_TestCase
 {
     /** @var State */
@@ -23,14 +25,18 @@ class StateTest extends \PHPUnit_Framework_TestCase
 
     public function testId()
     {
-        self::assertEquals(null, $this->object->getId());
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
+
+        $expected   = mt_rand(1, PHP_INT_MAX);
+        $object->id = $expected;
+        self::assertEquals($expected, $this->object->getId());
     }
 
-    public function testTemplateId()
+    public function testTemplate()
     {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setTemplateId($expected);
-        self::assertEquals($expected, $this->object->getTemplateId());
+        $this->object->setTemplate($template = new Template());
+        self::assertSame($template, $this->object->getTemplate());
     }
 
     public function testName()
@@ -61,19 +67,6 @@ class StateTest extends \PHPUnit_Framework_TestCase
         self::assertEquals($expected, $this->object->getResponsible());
     }
 
-    public function testNextStateId()
-    {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setNextStateId($expected);
-        self::assertEquals($expected, $this->object->getNextStateId());
-    }
-
-    public function testTemplate()
-    {
-        $this->object->setTemplate($template = new Template());
-        self::assertSame($template, $this->object->getTemplate());
-    }
-
     public function testNextState()
     {
         $this->object->setNextState($state = new State());
@@ -89,5 +82,18 @@ class StateTest extends \PHPUnit_Framework_TestCase
 
         $this->object->removeField($field);
         self::assertCount(0, $this->object->getFields());
+    }
+
+    public function testJsonSerialize()
+    {
+        $expected = [
+            'id',
+            'name',
+            'abbreviation',
+            'type',
+            'responsible',
+        ];
+
+        self::assertEquals($expected, array_keys($this->object->jsonSerialize()));
     }
 }

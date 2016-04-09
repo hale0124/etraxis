@@ -156,9 +156,9 @@ var StatesApp = (function() {
 
                 $('input[type="checkbox"].transitions').prop('checked', false);
 
-                for (var i = 0; i < data.length; i++) {
-                    $('#transition-' + data[i]).prop('checked', true);
-                }
+                $(data).each(function(index, item) {
+                    $('#transition-' + item.id).prop('checked', true);
+                });
             });
         },
 

@@ -12,6 +12,8 @@
 namespace eTraxis\Repository;
 
 use Doctrine\ORM\EntityRepository;
+use eTraxis\Entity\Group;
+use eTraxis\Entity\Project;
 use eTraxis\Entity\User;
 
 /**
@@ -22,44 +24,19 @@ class GroupsRepository extends EntityRepository
     /**
      * Finds all groups available for the specified project.
      *
-     * @param   int $id Project ID.
+     * @param   Project $project
      *
-     * @return  array
+     * @return  \eTraxis\Entity\Group[]
      */
-    public function getGroups($id)
+    public function getGroups(Project $project)
     {
         $query = $this->createQueryBuilder('g');
 
         $query
-            ->select('g.id')
-            ->addSelect('g.projectId')
-            ->addSelect('g.name')
-            ->where('g.projectId IS NULL')
-            ->orWhere('g.projectId = :id')
-            ->setParameter('id', $id)
-            ->orderBy('g.name')
-        ;
-
-        return $query->getQuery()->getResult();
-    }
-
-    /**
-     * Finds all local groups of the specified project.
-     *
-     * @param   int $id Project ID.
-     *
-     * @return  array
-     */
-    public function getLocalGroups($id)
-    {
-        $query = $this->createQueryBuilder('g');
-
-        $query
-            ->select('g.id')
-            ->addSelect('g.projectId')
-            ->addSelect('g.name')
-            ->where('g.projectId = :id')
-            ->setParameter('id', $id)
+            ->select('g')
+            ->where('g.project IS NULL')
+            ->orWhere('g.project = :project')
+            ->setParameter('project', $project)
             ->orderBy('g.name')
         ;
 
@@ -69,17 +46,15 @@ class GroupsRepository extends EntityRepository
     /**
      * Finds all global groups.
      *
-     * @return  array
+     * @return  \eTraxis\Entity\Group[]
      */
     public function getGlobalGroups()
     {
         $query = $this->createQueryBuilder('g');
 
         $query
-            ->select('g.id')
-            ->addSelect('g.projectId')
-            ->addSelect('g.name')
-            ->where('g.projectId IS NULL')
+            ->select('g')
+            ->where('g.project IS NULL')
             ->orderBy('g.name')
         ;
 
@@ -89,11 +64,11 @@ class GroupsRepository extends EntityRepository
     /**
      * Finds all accounts which belong to the specified group.
      *
-     * @param   int $id Group ID.
+     * @param   Group $group
      *
      * @return  User[]
      */
-    public function getGroupMembers($id)
+    public function getGroupMembers(Group $group)
     {
         $repository = $this->getEntityManager()->getRepository(User::class);
 
@@ -102,8 +77,8 @@ class GroupsRepository extends EntityRepository
         $query
             ->select('u')
             ->join('u.groups', 'g')
-            ->where('g.id = :id')
-            ->setParameter('id', $id)
+            ->where('g = :group')
+            ->setParameter('group', $group)
             ->orderBy('u.fullname')
             ->addOrderBy('u.username')
         ;
@@ -114,16 +89,12 @@ class GroupsRepository extends EntityRepository
     /**
      * Finds all accounts which doesn't belong to the specified group.
      *
-     * @param   int $id Group ID.
+     * @param   Group $group
      *
      * @return  User[]
      */
-    public function getGroupNonMembers($id)
+    public function getGroupNonMembers(Group $group)
     {
-        if (!$this->find($id)) {
-            return [];
-        }
-
         $repository = $this->getEntityManager()->getRepository(User::class);
 
         // Find all accounts which belong to the group.
@@ -132,8 +103,8 @@ class GroupsRepository extends EntityRepository
         $subquery
             ->select('u.id')
             ->join('u.groups', 'g')
-            ->where('g.id = :id')
-            ->setParameter('id', $id)
+            ->where('g = :group')
+            ->setParameter('group', $group)
         ;
 
         $members = $subquery->getQuery()->getArrayResult();

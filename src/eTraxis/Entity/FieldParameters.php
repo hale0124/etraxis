@@ -82,7 +82,7 @@ class FieldParameters
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   int $parameter1
      *
@@ -96,7 +96,7 @@ class FieldParameters
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -106,7 +106,7 @@ class FieldParameters
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   int $parameter2
      *
@@ -120,7 +120,7 @@ class FieldParameters
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -130,7 +130,7 @@ class FieldParameters
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   int $defaultValue
      *
@@ -144,7 +144,7 @@ class FieldParameters
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */

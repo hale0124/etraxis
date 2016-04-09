@@ -25,7 +25,7 @@ class CreateCheckboxFieldCommandTest extends BaseTestCase
         self::assertNotNull($state);
 
         $command = new CreateCheckboxFieldCommand([
-            'template'     => $state->getTemplateId(),
+            'template'     => $state->getTemplate()->getId(),
             'state'        => $state->getId(),
             'name'         => 'Required',
             'required'     => true,

@@ -31,8 +31,8 @@ class AddRemoveStateAssigneesCommandTest extends BaseTestCase
 
         /** @var StateAssignee $assignee */
         $assignee = $this->doctrine->getRepository(StateAssignee::class)->findOneBy([
-            'stateId' => $state->getId(),
-            'groupId' => $group->getId(),
+            'state' => $state,
+            'group' => $group,
         ]);
         self::assertNull($assignee);
 
@@ -44,8 +44,8 @@ class AddRemoveStateAssigneesCommandTest extends BaseTestCase
         $this->command_bus->handle($command);
 
         $assignee = $this->doctrine->getRepository(StateAssignee::class)->findOneBy([
-            'stateId' => $state->getId(),
-            'groupId' => $group->getId(),
+            'state' => $state,
+            'group' => $group,
         ]);
         self::assertNotNull($assignee);
     }
@@ -62,8 +62,8 @@ class AddRemoveStateAssigneesCommandTest extends BaseTestCase
 
         /** @var StateAssignee $assignee */
         $assignee = $this->doctrine->getRepository(StateAssignee::class)->findOneBy([
-            'stateId' => $state->getId(),
-            'groupId' => $group->getId(),
+            'state' => $state,
+            'group' => $group,
         ]);
         self::assertNotNull($assignee);
 
@@ -75,8 +75,8 @@ class AddRemoveStateAssigneesCommandTest extends BaseTestCase
         $this->command_bus->handle($command);
 
         $assignee = $this->doctrine->getRepository(StateAssignee::class)->findOneBy([
-            'stateId' => $state->getId(),
-            'groupId' => $group->getId(),
+            'state' => $state,
+            'group' => $group,
         ]);
         self::assertNull($assignee);
     }
@@ -90,7 +90,6 @@ class AddRemoveStateAssigneesCommandTest extends BaseTestCase
 
         $group
             ->setName('Developers')
-            ->setProjectId($project->getId())
             ->setProject($project)
         ;
 

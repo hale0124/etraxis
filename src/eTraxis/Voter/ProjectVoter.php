@@ -80,8 +80,8 @@ class ProjectVoter extends Voter
             ->select('COUNT(r.id)')
             ->leftJoin('r.state', 's')
             ->leftJoin('s.template', 't')
-            ->where('t.projectId = :id')
-            ->setParameter('id', $subject->getId())
+            ->where('t.project = :project')
+            ->setParameter('project', $subject)
         ;
 
         $count = (int) $query->getQuery()->getSingleScalarResult();

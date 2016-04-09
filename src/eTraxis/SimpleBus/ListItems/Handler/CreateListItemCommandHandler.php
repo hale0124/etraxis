@@ -59,10 +59,9 @@ class CreateListItemCommandHandler
         $entity = new ListItem();
 
         $entity
-            ->setFieldId($field->getId())
+            ->setField($field)
             ->setKey($command->key)
             ->setValue($command->value)
-            ->setField($field)
         ;
 
         $errors = $this->validator->validate($entity);

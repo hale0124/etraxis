@@ -11,6 +11,7 @@
 
 namespace eTraxis\Entity;
 
+use AltrEgo\AltrEgo;
 use eTraxis\Tests\BaseTestCase;
 
 class FieldTest extends BaseTestCase
@@ -35,21 +36,24 @@ class FieldTest extends BaseTestCase
 
     public function testId()
     {
-        self::assertEquals(null, $this->object->getId());
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
+
+        $expected   = mt_rand(1, PHP_INT_MAX);
+        $object->id = $expected;
+        self::assertEquals($expected, $this->object->getId());
     }
 
-    public function testTemplateId()
+    public function testTemplate()
     {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setTemplateId($expected);
-        self::assertEquals($expected, $this->object->getTemplateId());
+        $this->object->setTemplate($template = new Template());
+        self::assertSame($template, $this->object->getTemplate());
     }
 
-    public function testStateId()
+    public function testState()
     {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setStateId($expected);
-        self::assertEquals($expected, $this->object->getStateId());
+        $this->object->setState($state = new State());
+        self::assertSame($state, $this->object->getState());
     }
 
     public function testName()
@@ -176,18 +180,6 @@ class FieldTest extends BaseTestCase
         self::assertInstanceOf(FieldParameters::class, $this->object->getParameters());
     }
 
-    public function testTemplate()
-    {
-        $this->object->setTemplate($template = new Template());
-        self::assertSame($template, $this->object->getTemplate());
-    }
-
-    public function testState()
-    {
-        $this->object->setState($state = new State());
-        self::assertSame($state, $this->object->getState());
-    }
-
     public function testFacades()
     {
         self::assertInstanceOf(Fields\NumberField::class,   $this->object->asNumber());
@@ -199,5 +191,18 @@ class FieldTest extends BaseTestCase
         self::assertInstanceOf(Fields\RecordField::class,   $this->object->asRecord());
         self::assertInstanceOf(Fields\DateField::class,     $this->object->asDate());
         self::assertInstanceOf(Fields\DurationField::class, $this->object->asDuration());
+    }
+
+    public function testJsonSerialize()
+    {
+        $expected = [
+            'id',
+            'name',
+            'type',
+            'description',
+            'isRequired',
+        ];
+
+        self::assertEquals($expected, array_keys($this->object->jsonSerialize()));
     }
 }

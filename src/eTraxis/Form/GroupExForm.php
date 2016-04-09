@@ -32,7 +32,7 @@ class GroupExForm extends GroupForm
         // Global group.
         $builder->add('project', CheckboxType::class, [
             'label'    => 'group.local',
-            'value'    => is_object($data) ? $data->getProjectId() : $data['id'],
+            'value'    => is_object($data) ? $data->getProject()->getId() : $data['id'],
             'required' => false,
             'attr'     => [
                 'checked' => true,

@@ -46,10 +46,9 @@ class ListItemVoterTest extends BaseTestCase
         $item = new ListItem();
 
         $item
-            ->setFieldId($used->getFieldId())
+            ->setField($used->getField())
             ->setKey(8)
             ->setValue('Season 8')
-            ->setField($used->getField())
         ;
 
         $this->doctrine->getManager()->persist($item);

@@ -52,24 +52,12 @@ class AddRemoveStateAssigneesCommandHandler
             throw new NotFoundHttpException('Unknown state.');
         }
 
-        $projectId = $state->getTemplate()->getProjectId();
+        $project = $state->getTemplate()->getProject();
 
         /** @var Group[] $groups */
         $groups = $this->doctrine->getRepository(Group::class)->findBy([
             'id' => $command->groups,
         ]);
-
-        $ids = [];
-
-        foreach ($groups as $group) {
-            if ($group->getProjectId() === null || $group->getProjectId() === $projectId) {
-                $ids[] = $group->getId();
-            }
-        }
-
-        if (count($ids) === 0) {
-            return;
-        }
 
         /** @var \Doctrine\ORM\EntityManager $em */
         $em = $this->doctrine->getManager();
@@ -77,26 +65,24 @@ class AddRemoveStateAssigneesCommandHandler
 
         $query = $em->createQuery('
             DELETE eTraxis:StateAssignee a
-            WHERE a.stateId = :state
-            AND a.groupId IN (:ids)
+            WHERE a.state = :state
+            AND a.group IN (:groups)
         ');
 
         $query->execute([
-            'state' => $state->getId(),
-            'ids'   => $ids,
+            'state'  => $state,
+            'groups' => $groups,
         ]);
 
         if ($command instanceof AddStateAssigneesCommand) {
 
             foreach ($groups as $group) {
 
-                if ($group->getProjectId() === null || $group->getProjectId() === $projectId) {
+                if ($group->getProject() === null || $group->getProject() === $project) {
 
                     $entity = new StateAssignee();
 
                     $entity
-                        ->setStateId($state->getId())
-                        ->setGroupId($group->getId())
                         ->setState($state)
                         ->setGroup($group)
                     ;

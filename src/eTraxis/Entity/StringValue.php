@@ -51,7 +51,7 @@ class StringValue
     private $value;
 
     /**
-     * Get 'id'.
+     * Property getter.
      *
      * @return  int
      */
@@ -61,31 +61,7 @@ class StringValue
     }
 
     /**
-     * Set 'token'.
-     *
-     * @param   string $token
-     *
-     * @return  self
-     */
-    public function setToken($token)
-    {
-        $this->token = $token;
-
-        return $this;
-    }
-
-    /**
-     * Get 'token'.
-     *
-     * @return  string
-     */
-    public function getToken()
-    {
-        return $this->token;
-    }
-
-    /**
-     * Set 'value'.
+     * Property setter.
      *
      * @param   string $value
      *
@@ -93,13 +69,14 @@ class StringValue
      */
     public function setValue($value)
     {
+        $this->token = md5($value);
         $this->value = $value;
 
         return $this;
     }
 
     /**
-     * Get 'value'.
+     * Property getter.
      *
      * @return  string
      */

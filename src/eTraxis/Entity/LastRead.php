@@ -25,22 +25,24 @@ use Doctrine\ORM\Mapping as ORM;
 class LastRead
 {
     /**
-     * @var int Record ID.
+     * @var Record Record.
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\Column(name="record_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="Record")
+     * @ORM\JoinColumn(name="record_id", referencedColumnName="record_id", onDelete="CASCADE")
      */
-    private $recordId;
+    private $record;
 
     /**
-     * @var int User ID.
+     * @var User User.
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\Column(name="account_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="account_id", referencedColumnName="account_id", onDelete="CASCADE")
      */
-    private $userId;
+    private $user;
 
     /**
      * @var int Unix Epoch timestamp when the record has been read by this user last time.
@@ -50,95 +52,7 @@ class LastRead
     private $readAt;
 
     /**
-     * @var Record Record.
-     *
-     * @ORM\ManyToOne(targetEntity="Record")
-     * @ORM\JoinColumn(name="record_id", referencedColumnName="record_id", onDelete="CASCADE")
-     */
-    private $record;
-
-    /**
-     * @var User User.
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="account_id", referencedColumnName="account_id", onDelete="CASCADE")
-     */
-    private $user;
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $recordId
-     *
-     * @return  self
-     */
-    public function setRecordId($recordId)
-    {
-        $this->recordId = $recordId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getRecordId()
-    {
-        return $this->recordId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $userId
-     *
-     * @return  self
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $readAt
-     *
-     * @return  self
-     */
-    public function setReadAt($readAt)
-    {
-        $this->readAt = $readAt;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getReadAt()
-    {
-        return $this->readAt;
-    }
-
-    /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   Record $record
      *
@@ -152,7 +66,7 @@ class LastRead
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  Record
      */
@@ -162,7 +76,7 @@ class LastRead
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   User $user
      *
@@ -176,12 +90,36 @@ class LastRead
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  User
      */
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Property setter.
+     *
+     * @param   int $readAt
+     *
+     * @return  self
+     */
+    public function setReadAt($readAt)
+    {
+        $this->readAt = $readAt;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  int
+     */
+    public function getReadAt()
+    {
+        return $this->readAt;
     }
 }

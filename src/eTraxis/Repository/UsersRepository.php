@@ -13,6 +13,7 @@ namespace eTraxis\Repository;
 
 use Doctrine\ORM\EntityRepository;
 use eTraxis\Entity\Group;
+use eTraxis\Entity\User;
 
 /**
  * Users repository.
@@ -22,11 +23,11 @@ class UsersRepository extends EntityRepository
     /**
      * Finds all groups the specified account belongs to.
      *
-     * @param   int $id User ID.
+     * @param   User $user
      *
      * @return  Group[]
      */
-    public function getUserGroups($id)
+    public function getUserGroups(User $user)
     {
         $repository = $this->getEntityManager()->getRepository(Group::class);
 
@@ -37,8 +38,8 @@ class UsersRepository extends EntityRepository
             ->addSelect('p')
             ->join('g.users', 'u')
             ->leftJoin('g.project', 'p')
-            ->where('u.id = :id')
-            ->setParameter('id', $id)
+            ->where('u = :user')
+            ->setParameter('user', $user)
             ->orderBy('p.name')
             ->addOrderBy('g.name')
         ;
@@ -49,16 +50,12 @@ class UsersRepository extends EntityRepository
     /**
      * Finds all groups the specified account doesn't belong to.
      *
-     * @param   int $id User ID.
+     * @param   User $user
      *
      * @return  Group[]
      */
-    public function getOtherGroups($id)
+    public function getOtherGroups(User $user)
     {
-        if (!$this->find($id)) {
-            return [];
-        }
-
         $repository = $this->getEntityManager()->getRepository(Group::class);
 
         // Find all groups the account belong to.
@@ -67,8 +64,8 @@ class UsersRepository extends EntityRepository
         $subquery
             ->select('g.id')
             ->join('g.users', 'u')
-            ->where('u.id = :id')
-            ->setParameter('id', $id)
+            ->where('u = :user')
+            ->setParameter('user', $user)
         ;
 
         $groups = $subquery->getQuery()->getArrayResult();

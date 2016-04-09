@@ -21,16 +21,14 @@ class ProjectsRepository extends EntityRepository
     /**
      * Finds all existing projects.
      *
-     * @return  array
+     * @return  \eTraxis\Entity\Project[]
      */
     public function getProjects()
     {
         $query = $this->createQueryBuilder('p');
 
         $query
-            ->select('p.id')
-            ->addSelect('p.name')
-            ->addSelect('p.isSuspended')
+            ->select('p')
             ->orderBy('p.name')
         ;
 

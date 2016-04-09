@@ -13,6 +13,7 @@ namespace eTraxis\Repository;
 
 use eTraxis\Entity\Group;
 use eTraxis\Entity\Project;
+use eTraxis\Entity\User;
 use eTraxis\Tests\BaseTestCase;
 
 class GroupsRepositoryTest extends BaseTestCase
@@ -26,10 +27,10 @@ class GroupsRepositoryTest extends BaseTestCase
         /** @var GroupsRepository $repository */
         $repository = $this->doctrine->getManager()->getRepository(Group::class);
 
-        $result = $repository->getGroups($project->getId());
+        $result = $repository->getGroups($project);
 
-        $groups = array_map(function ($group) {
-            return $group['name'];
+        $groups = array_map(function (Group $group) {
+            return $group->getName();
         }, $result);
 
         $expected = [
@@ -37,30 +38,6 @@ class GroupsRepositoryTest extends BaseTestCase
             'Managers',
             'Nimbus',
             'Planet Express, Inc.',
-            'Staff',
-        ];
-
-        self::assertEquals($expected, $groups);
-    }
-
-    public function testGetLocalGroups()
-    {
-        /** @var Project $project */
-        $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
-        self::assertNotNull($project);
-
-        /** @var GroupsRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository(Group::class);
-
-        $result = $repository->getLocalGroups($project->getId());
-
-        $groups = array_map(function ($group) {
-            return $group['name'];
-        }, $result);
-
-        $expected = [
-            'Crew',
-            'Managers',
             'Staff',
         ];
 
@@ -74,8 +51,8 @@ class GroupsRepositoryTest extends BaseTestCase
 
         $result = $repository->getGlobalGroups();
 
-        $groups = array_map(function ($group) {
-            return $group['name'];
+        $groups = array_map(function (Group $group) {
+            return $group->getName();
         }, $result);
 
         $expected = [
@@ -86,7 +63,7 @@ class GroupsRepositoryTest extends BaseTestCase
         self::assertEquals($expected, $groups);
     }
 
-    public function testGetGroupMembersFound()
+    public function testGetGroupMembers()
     {
         /** @var GroupsRepository $repository */
         $repository = $this->doctrine->getManager()->getRepository(Group::class);
@@ -94,10 +71,9 @@ class GroupsRepositoryTest extends BaseTestCase
         /** @var Group $group */
         $group = $repository->findOneBy(['name' => 'Staff']);
 
-        $result = $repository->getGroupMembers($group->getId());
+        $result = $repository->getGroupMembers($group);
 
-        $users = array_map(function ($user) {
-            /** @var \eTraxis\Entity\User $user */
+        $users = array_map(function (User $user) {
             return $user->getUsername();
         }, $result);
 
@@ -113,19 +89,7 @@ class GroupsRepositoryTest extends BaseTestCase
         self::assertEquals($expected, $users);
     }
 
-    public function testGetGroupMembersNotFound()
-    {
-        /** @var GroupsRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository(Group::class);
-
-        $result = $repository->getGroupMembers($this->getMaxId());
-
-        $expected = [];
-
-        self::assertEquals($expected, $result);
-    }
-
-    public function testGetGroupNonMembersFound()
+    public function testGetGroupNonMembers()
     {
         /** @var GroupsRepository $repository */
         $repository = $this->doctrine->getManager()->getRepository(Group::class);
@@ -133,10 +97,9 @@ class GroupsRepositoryTest extends BaseTestCase
         /** @var Group $group */
         $group = $repository->findOneBy(['name' => 'Staff']);
 
-        $result = $repository->getGroupNonMembers($group->getId());
+        $result = $repository->getGroupNonMembers($group);
 
-        $users = array_map(function ($user) {
-            /** @var \eTraxis\Entity\User $user */
+        $users = array_map(function (User $user) {
             return $user->getUsername();
         }, $result);
 
@@ -152,17 +115,5 @@ class GroupsRepositoryTest extends BaseTestCase
         ];
 
         self::assertEquals($expected, $users);
-    }
-
-    public function testGetGroupNonMembersNotFound()
-    {
-        /** @var GroupsRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository(Group::class);
-
-        $result = $repository->getGroupNonMembers($this->getMaxId());
-
-        $expected = [];
-
-        self::assertEquals($expected, $result);
     }
 }

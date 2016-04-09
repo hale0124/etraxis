@@ -21,20 +21,6 @@ class StateAssigneeTest extends \PHPUnit_Framework_TestCase
         $this->object = new StateAssignee();
     }
 
-    public function testStateId()
-    {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setStateId($expected);
-        self::assertEquals($expected, $this->object->getStateId());
-    }
-
-    public function testGroupId()
-    {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setGroupId($expected);
-        self::assertEquals($expected, $this->object->getGroupId());
-    }
-
     public function testState()
     {
         $this->object->setState($state = new State());

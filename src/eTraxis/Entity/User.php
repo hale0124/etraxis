@@ -214,7 +214,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -224,7 +224,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   string $username
      *
@@ -242,7 +242,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  string
      */
@@ -252,7 +252,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   string $fullname
      *
@@ -266,7 +266,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  string
      */
@@ -276,7 +276,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   string $email
      *
@@ -290,7 +290,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  string
      */
@@ -300,7 +300,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   string $description
      *
@@ -314,7 +314,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  string
      */
@@ -324,7 +324,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   string $password
      *
@@ -338,7 +338,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  string
      */
@@ -348,7 +348,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   int $passwordSetAt
      *
@@ -362,7 +362,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -372,7 +372,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   string $resetToken
      *
@@ -386,7 +386,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  string
      */
@@ -396,7 +396,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   int $resetTokenExpiresAt
      *
@@ -410,7 +410,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -420,7 +420,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   bool $isAdmin
      *
@@ -434,7 +434,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  bool
      */
@@ -444,7 +444,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   bool $isDisabled
      *
@@ -458,7 +458,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  bool
      */
@@ -468,7 +468,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   bool $isLdap
      *
@@ -488,7 +488,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  bool
      */
@@ -498,7 +498,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   int $authAttempts
      *
@@ -512,7 +512,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -522,7 +522,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   int $lockedUntil
      *
@@ -536,7 +536,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -546,7 +546,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   string $locale
      *
@@ -591,7 +591,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  string
      */
@@ -632,7 +632,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   int $timezone
      *
@@ -646,7 +646,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -656,7 +656,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   string $theme
      *
@@ -672,7 +672,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  string
      */
@@ -688,7 +688,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   View $view
      *
@@ -702,7 +702,7 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  View
      */
@@ -714,11 +714,11 @@ class User implements AdvancedUserInterface
     /**
      * Get list of groups the user is member of.
      *
-     * @return  ArrayCollection|Group[]
+     * @return  Group[]
      */
     public function getGroups()
     {
-        return $this->groups;
+        return $this->groups->toArray();
     }
 
     /**

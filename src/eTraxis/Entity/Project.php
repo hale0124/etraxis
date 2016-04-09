@@ -25,7 +25,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="eTraxis\Repository\ProjectsRepository")
  * @Assert\UniqueEntity(fields={"name"}, message="project.conflict.name")
  */
-class Project
+class Project implements \JsonSerializable
 {
     // Constraints.
     const MAX_NAME        = 25;
@@ -98,7 +98,7 @@ class Project
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -108,7 +108,7 @@ class Project
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   string $name
      *
@@ -122,7 +122,7 @@ class Project
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  string
      */
@@ -132,7 +132,7 @@ class Project
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   string $description
      *
@@ -146,7 +146,7 @@ class Project
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  string
      */
@@ -156,7 +156,7 @@ class Project
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   int $createdAt
      *
@@ -170,7 +170,7 @@ class Project
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -180,7 +180,7 @@ class Project
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   bool $isSuspended
      *
@@ -194,7 +194,7 @@ class Project
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  bool
      */
@@ -234,11 +234,11 @@ class Project
     /**
      * Get list of project groups.
      *
-     * @return  ArrayCollection|Group[]
+     * @return  Group[]
      */
     public function getGroups()
     {
-        return $this->groups;
+        return $this->groups->toArray();
     }
 
     /**
@@ -272,10 +272,23 @@ class Project
     /**
      * Get list of project templates.
      *
-     * @return  ArrayCollection|Template[]
+     * @return  Template[]
      */
     public function getTemplates()
     {
-        return $this->templates;
+        return $this->templates->toArray();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function jsonSerialize()
+    {
+        return [
+            'id'          => $this->id,
+            'name'        => $this->name,
+            'description' => $this->description,
+            'isSuspended' => $this->isSuspended,
+        ];
     }
 }

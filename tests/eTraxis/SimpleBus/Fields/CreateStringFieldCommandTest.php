@@ -26,7 +26,7 @@ class CreateStringFieldCommandTest extends BaseTestCase
         self::assertNotNull($state);
 
         $command = new CreateStringFieldCommand([
-            'template'     => $state->getTemplateId(),
+            'template'     => $state->getTemplate()->getId(),
             'state'        => $state->getId(),
             'name'         => 'Client',
             'required'     => true,

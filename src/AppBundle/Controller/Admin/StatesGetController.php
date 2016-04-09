@@ -16,6 +16,7 @@ use eTraxis\Collection\StateType;
 use eTraxis\Collection\SystemRole;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
+use eTraxis\Entity\Template;
 use eTraxis\Form\StateForm;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
@@ -39,16 +40,13 @@ class StatesGetController extends Controller
      *
      * @Action\Route("/list/{id}", name="admin_states_list", requirements={"id"="\d+"})
      *
-     * @param   int $id Template ID.
+     * @param   Template $template
      *
      * @return  JsonResponse
      */
-    public function listAction($id)
+    public function listAction(Template $template)
     {
-        /** @var \eTraxis\Repository\StatesRepository $repository */
-        $repository = $this->getDoctrine()->getRepository(State::class);
-
-        return new JsonResponse($repository->getStates($id));
+        return new JsonResponse($template->getStates());
     }
 
     /**
@@ -105,17 +103,14 @@ class StatesGetController extends Controller
      */
     public function tabTransitionsAction(State $state)
     {
-        /** @var \eTraxis\Repository\StatesRepository $repository */
-        $repository = $this->getDoctrine()->getRepository(State::class);
-
-        $transitions = $repository->getStates($state->getTemplateId());
+        $transitions = $state->getTemplate()->getStates();
 
         /** @var \eTraxis\Repository\GroupsRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Group::class);
 
         return $this->render('admin/states/tab_transitions.html.twig', [
             'state'       => $state,
-            'locals'      => $repository->getLocalGroups($state->getTemplate()->getProjectId()),
+            'locals'      => $state->getTemplate()->getProject()->getGroups(),
             'globals'     => $repository->getGlobalGroups(),
             'transitions' => $transitions,
             'role'        => [
@@ -167,24 +162,38 @@ class StatesGetController extends Controller
     }
 
     /**
-     * Loads transitions of the specified state.
+     * Loads transitions of the specified role for the specified state.
      *
-     * @Action\Route("/transitions/{id}/{group}", name="admin_load_state_transitions", requirements={"id"="\d+", "group"="[\-]?\d+"})
+     * @Action\Route("/transitions/{id}/{role}", name="admin_load_state_transitions_role", requirements={"id"="\d+", "role"="[\-]\d+"})
      *
      * @param   State $state
-     * @param   int   $group Group ID or system role.
+     * @param   int   $role
      *
      * @return  JsonResponse
      */
-    public function loadTransitionsAction(State $state, $group)
+    public function loadRoleTransitionsAction(State $state, $role)
     {
         /** @var \eTraxis\Repository\StatesRepository $repository */
         $repository = $this->getDoctrine()->getRepository(State::class);
 
-        $transitions = array_key_exists($group, SystemRole::getCollection())
-            ? $repository->getRoleTransitions($state->getId(), $group)
-            : $repository->getGroupTransitions($state->getId(), $group);
+        return new JsonResponse($repository->getRoleTransitions($state, $role));
+    }
 
-        return new JsonResponse($transitions);
+    /**
+     * Loads transitions of the specified group for the specified state.
+     *
+     * @Action\Route("/transitions/{id}/{group}", name="admin_load_state_transitions", requirements={"id"="\d+", "group"="\d+"})
+     *
+     * @param   State $state
+     * @param   Group $group
+     *
+     * @return  JsonResponse
+     */
+    public function loadGroupTransitionsAction(State $state, Group $group)
+    {
+        /** @var \eTraxis\Repository\StatesRepository $repository */
+        $repository = $this->getDoctrine()->getRepository(State::class);
+
+        return new JsonResponse($repository->getGroupTransitions($state, $group));
     }
 }

@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\ListItems\Handler;
 
+use eTraxis\Entity\Field;
 use eTraxis\Entity\ListItem;
 use eTraxis\SimpleBus\ListItems\UpdateListItemCommand;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -48,12 +49,19 @@ class UpdateListItemCommandHandler
      */
     public function handle(UpdateListItemCommand $command)
     {
+        /** @var Field $field */
+        $field = $this->doctrine->getRepository(Field::class)->find($command->field);
+
+        if (!$field) {
+            throw new NotFoundHttpException('Unknown field.');
+        }
+
         $repository = $this->doctrine->getRepository(ListItem::class);
 
         /** @var ListItem $entity */
         $entity = $repository->findOneBy([
-            'fieldId' => $command->field,
-            'key'     => $command->key,
+            'field' => $field,
+            'key'   => $command->key,
         ]);
 
         if (!$entity) {

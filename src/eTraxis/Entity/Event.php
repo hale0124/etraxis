@@ -54,18 +54,20 @@ class Event
     private $id;
 
     /**
-     * @var int Record ID.
+     * @var Record Record.
      *
-     * @ORM\Column(name="record_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="Record", inversedBy="history")
+     * @ORM\JoinColumn(name="record_id", nullable=false, referencedColumnName="record_id")
      */
-    private $recordId;
+    private $record;
 
     /**
-     * @var int User ID who raised the event.
+     * @var User User who raised the event.
      *
-     * @ORM\Column(name="originator_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="User")
+     * @ORM\JoinColumn(name="originator_id", nullable=false, referencedColumnName="account_id")
      */
-    private $userId;
+    private $user;
 
     /**
      * @var int Type of the event.
@@ -104,23 +106,7 @@ class Event
     private $parameter;
 
     /**
-     * @var Record Record.
-     *
-     * @ORM\ManyToOne(targetEntity="Record", inversedBy="history")
-     * @ORM\JoinColumn(name="record_id", referencedColumnName="record_id")
-     */
-    private $record;
-
-    /**
-     * @var User User who raised the event.
-     *
-     * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="originator_id", referencedColumnName="account_id")
-     */
-    private $user;
-
-    /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -130,127 +116,7 @@ class Event
     }
 
     /**
-     * Standard setter.
-     *
-     * @param   int $recordId
-     *
-     * @return  self
-     */
-    public function setRecordId($recordId)
-    {
-        $this->recordId = $recordId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getRecordId()
-    {
-        return $this->recordId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $userId
-     *
-     * @return  self
-     */
-    public function setUserId($userId)
-    {
-        $this->userId = $userId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getUserId()
-    {
-        return $this->userId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $type
-     *
-     * @return  self
-     */
-    public function setType($type)
-    {
-        $this->type = $type;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getType()
-    {
-        return $this->type;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $createdAt
-     *
-     * @return  self
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getCreatedAt()
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $parameter
-     *
-     * @return  self
-     */
-    public function setParameter($parameter)
-    {
-        $this->parameter = $parameter;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getParameter()
-    {
-        return $this->parameter;
-    }
-
-    /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   Record $record
      *
@@ -264,7 +130,7 @@ class Event
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  Record
      */
@@ -274,7 +140,7 @@ class Event
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   User $user
      *
@@ -288,12 +154,84 @@ class Event
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  User
      */
     public function getUser()
     {
         return $this->user;
+    }
+
+    /**
+     * Property setter.
+     *
+     * @param   int $type
+     *
+     * @return  self
+     */
+    public function setType($type)
+    {
+        $this->type = $type;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  int
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Property setter.
+     *
+     * @param   int $createdAt
+     *
+     * @return  self
+     */
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  int
+     */
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    /**
+     * Property setter.
+     *
+     * @param   int $parameter
+     *
+     * @return  self
+     */
+    public function setParameter($parameter)
+    {
+        $this->parameter = $parameter;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  int
+     */
+    public function getParameter()
+    {
+        return $this->parameter;
     }
 }

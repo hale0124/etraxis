@@ -12,6 +12,7 @@
 namespace AppBundle\Controller\Admin;
 
 use eTraxis\Entity\Group;
+use eTraxis\Entity\Project;
 use eTraxis\Form\GroupExForm;
 use eTraxis\Form\GroupForm;
 use eTraxis\Traits\ContainerTrait;
@@ -36,16 +37,31 @@ class GroupsGetController extends Controller
      *
      * @Action\Route("/list/{id}", name="admin_groups_list", requirements={"id"="\d+"})
      *
-     * @param   int $id Project ID (NULL for global groups only).
+     * @param   Project $project
      *
      * @return  JsonResponse
      */
-    public function listAction($id = null)
+    public function listAction(Project $project)
     {
         /** @var \eTraxis\Repository\GroupsRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Group::class);
 
-        return new JsonResponse($repository->getGroups($id));
+        return new JsonResponse($repository->getGroups($project));
+    }
+
+    /**
+     * Returns JSON list of global groups only.
+     *
+     * @Action\Route("/list", name="admin_groups_list_global")
+     *
+     * @return  JsonResponse
+     */
+    public function listGlobalAction()
+    {
+        /** @var \eTraxis\Repository\GroupsRepository $repository */
+        $repository = $this->getDoctrine()->getRepository(Group::class);
+
+        return new JsonResponse($repository->getGlobalGroups());
     }
 
     /**
@@ -98,8 +114,8 @@ class GroupsGetController extends Controller
 
         return $this->render('admin/groups/tab_members.html.twig', [
             'group'   => $group,
-            'members' => $repository->getGroupMembers($group->getId()),
-            'others'  => $repository->getGroupNonMembers($group->getId()),
+            'members' => $repository->getGroupMembers($group),
+            'others'  => $repository->getGroupNonMembers($group),
         ]);
     }
 

@@ -38,9 +38,10 @@ var GroupsApp = (function() {
          */
         reload: function(id, callback) {
             $groups.panel('clear');
-            $.getJSON(eTraxis.route('admin_groups_list', { id: id }), function(data) {
+            var url = id ? 'admin_groups_list' : 'admin_groups_list_global';
+            $.getJSON(eTraxis.route(url, { id: id }), function(data) {
                 $(data).each(function(index, item) {
-                    $groups.panel('append', item['id'], item['name'], false, item['projectId'] ? SECTION_LOCAL : SECTION_GLOBAL);
+                    $groups.panel('append', item['id'], item['name'], false, item['project'] ? SECTION_LOCAL : SECTION_GLOBAL);
                 });
                 if (typeof callback === 'function') {
                     callback();

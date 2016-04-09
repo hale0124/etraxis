@@ -13,6 +13,7 @@ namespace AppBundle\Controller\Admin;
 
 use eTraxis\Collection\SystemRole;
 use eTraxis\Entity\Group;
+use eTraxis\Entity\Project;
 use eTraxis\Entity\Template;
 use eTraxis\Form\TemplateForm;
 use eTraxis\Traits\ContainerTrait;
@@ -37,16 +38,13 @@ class TemplatesGetController extends Controller
      *
      * @Action\Route("/list/{id}", name="admin_templates_list", requirements={"id"="\d+"})
      *
-     * @param   int $id Project ID.
+     * @param   Project $project
      *
      * @return  JsonResponse
      */
-    public function listAction($id)
+    public function listAction(Project $project)
     {
-        /** @var \eTraxis\Repository\TemplatesRepository $repository */
-        $repository = $this->getDoctrine()->getRepository(Template::class);
-
-        return new JsonResponse($repository->getTemplates($id));
+        return new JsonResponse($project->getTemplates());
     }
 
     /**
@@ -125,7 +123,7 @@ class TemplatesGetController extends Controller
 
         return $this->render('admin/templates/tab_permissions.html.twig', [
             'template'    => $template,
-            'locals'      => $repository->getLocalGroups($template->getProjectId()),
+            'locals'      => $template->getProject()->getGroups(),
             'globals'     => $repository->getGlobalGroups(),
             'permissions' => $permissions,
             'role'        => [
@@ -177,42 +175,38 @@ class TemplatesGetController extends Controller
     }
 
     /**
-     * Loads permissions of the specified template.
+     * Loads permissions of the specified role for the specified template.
      *
-     * @Action\Route("/permissions/{id}/{group}", name="admin_load_template_permissions", requirements={"id"="\d+", "group"="[\-]?\d+"})
+     * @Action\Route("/permissions/{id}/{role}", name="admin_load_template_permissions_role", requirements={"id"="\d+", "role"="[\-]\d+"})
      *
      * @param   Template $template
-     * @param   int      $group Group ID or system role.
+     * @param   int      $role
      *
      * @return  JsonResponse
      */
-    public function loadPermissionsAction(Template $template, $group)
+    public function loadRolePermissionsAction(Template $template, $role)
     {
         /** @var \eTraxis\Repository\TemplatesRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Template::class);
 
-        switch ($group) {
+        return new JsonResponse($repository->getRolePermissions($template, $role));
+    }
 
-            case SystemRole::AUTHOR:
-                $permissions = $template->getAuthorPermissions();
-                $permissions |= Template::PERMIT_VIEW_RECORD;
-                $permissions &= ~Template::PERMIT_CREATE_RECORD;
-                break;
+    /**
+     * Loads permissions of the specified group for the specified template.
+     *
+     * @Action\Route("/permissions/{id}/{group}", name="admin_load_template_permissions", requirements={"id"="\d+", "group"="\d+"})
+     *
+     * @param   Template $template
+     * @param   Group     $group
+     *
+     * @return  JsonResponse
+     */
+    public function loadGroupPermissionsAction(Template $template, Group $group)
+    {
+        /** @var \eTraxis\Repository\TemplatesRepository $repository */
+        $repository = $this->getDoctrine()->getRepository(Template::class);
 
-            case SystemRole::RESPONSIBLE:
-                $permissions = $template->getResponsiblePermissions();
-                $permissions |= Template::PERMIT_VIEW_RECORD;
-                $permissions &= ~Template::PERMIT_CREATE_RECORD;
-                break;
-
-            case SystemRole::REGISTERED:
-                $permissions = $template->getRegisteredPermissions();
-                break;
-
-            default:
-                $permissions = $repository->getRolePermissions($template->getId(), $group);
-        }
-
-        return new JsonResponse($permissions);
+        return new JsonResponse($repository->getGroupPermissions($template, $group));
     }
 }

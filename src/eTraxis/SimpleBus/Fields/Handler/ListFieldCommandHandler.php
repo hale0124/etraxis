@@ -43,8 +43,8 @@ class ListFieldCommandHandler extends BaseFieldCommandHandler
 
                 /** @var ListItem $item */
                 $item = $repository->findOneBy([
-                    'fieldId' => $command->id,
-                    'key'     => $command->defaultValue,
+                    'field' => $entity,
+                    'key'   => $command->defaultValue,
                 ]);
 
                 if (!$item) {

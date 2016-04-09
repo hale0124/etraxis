@@ -16,14 +16,14 @@ use eTraxis\Tests\BaseTestCase;
 
 class UsersRepositoryTest extends BaseTestCase
 {
-    public function testGetUserGroupsFound()
+    public function testGetUserGroups()
     {
         /** @var UsersRepository $repository */
         $repository = $this->doctrine->getManager()->getRepository(User::class);
 
         $user = $this->findUser('hubert');
 
-        $result = $repository->getUserGroups($user->getId());
+        $result = $repository->getUserGroups($user);
 
         $groups = array_map(function ($group) {
             /** @var \eTraxis\Entity\Group $group */
@@ -39,26 +39,14 @@ class UsersRepositoryTest extends BaseTestCase
         self::assertEquals($expected, $groups);
     }
 
-    public function testGetUserGroupsNotFound()
-    {
-        /** @var UsersRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository(User::class);
-
-        $result = $repository->getUserGroups($this->getMaxId());
-
-        $expected = [];
-
-        self::assertEquals($expected, $result);
-    }
-
-    public function testGetOtherGroupsFound()
+    public function testGetOtherGroups()
     {
         /** @var UsersRepository $repository */
         $repository = $this->doctrine->getManager()->getRepository(User::class);
 
         $user = $this->findUser('hubert');
 
-        $result = $repository->getOtherGroups($user->getId());
+        $result = $repository->getOtherGroups($user);
 
         $groups = array_map(function ($group) {
             /** @var \eTraxis\Entity\Group $group */
@@ -71,17 +59,5 @@ class UsersRepositoryTest extends BaseTestCase
         ];
 
         self::assertEquals($expected, $groups);
-    }
-
-    public function testGetOtherGroupsNotFound()
-    {
-        /** @var UsersRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository(User::class);
-
-        $result = $repository->getOtherGroups($this->getMaxId());
-
-        $expected = [];
-
-        self::assertEquals($expected, $result);
     }
 }

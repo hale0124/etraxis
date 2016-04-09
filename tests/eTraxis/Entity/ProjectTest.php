@@ -11,6 +11,8 @@
 
 namespace eTraxis\Entity;
 
+use AltrEgo\AltrEgo;
+
 class ProjectTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Project */
@@ -23,7 +25,12 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
 
     public function testId()
     {
-        self::assertEquals(null, $this->object->getId());
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
+
+        $expected   = mt_rand(1, PHP_INT_MAX);
+        $object->id = $expected;
+        self::assertEquals($expected, $this->object->getId());
     }
 
     public function testName()
@@ -76,5 +83,17 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
 
         $this->object->removeTemplate($template);
         self::assertCount(0, $this->object->getTemplates());
+    }
+
+    public function testJsonSerialize()
+    {
+        $expected = [
+            'id',
+            'name',
+            'description',
+            'isSuspended',
+        ];
+
+        self::assertEquals($expected, array_keys($this->object->jsonSerialize()));
     }
 }

@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\ListItems\Handler;
 
+use eTraxis\Entity\Field;
 use eTraxis\Entity\ListItem;
 use eTraxis\SimpleBus\ListItems\DeleteListItemCommand;
 use Symfony\Bridge\Doctrine\RegistryInterface;
@@ -48,11 +49,18 @@ class DeleteListItemCommandHandler
      */
     public function handle(DeleteListItemCommand $command)
     {
+        /** @var Field $field */
+        $field = $this->doctrine->getRepository(Field::class)->find($command->field);
+
+        if (!$field) {
+            throw new NotFoundHttpException('Unknown field.');
+        }
+
         $repository = $this->doctrine->getRepository(ListItem::class);
 
         $entity = $repository->findOneBy([
-            'fieldId' => $command->field,
-            'key'     => $command->key,
+            'field' => $field,
+            'key'   => $command->key,
         ]);
 
         if (!$entity) {

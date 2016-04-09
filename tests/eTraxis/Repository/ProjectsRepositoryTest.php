@@ -23,8 +23,8 @@ class ProjectsRepositoryTest extends BaseTestCase
 
         $result = $repository->getProjects();
 
-        $projects = array_map(function ($project) {
-            return $project['name'];
+        $projects = array_map(function (Project $project) {
+            return $project->getName();
         }, $result);
 
         $expected = [

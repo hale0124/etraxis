@@ -22,35 +22,10 @@ use Doctrine\ORM\Mapping as ORM;
 class StateGroupTransition
 {
     /**
-     * @var int State ID where record can be moved from.
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\Column(name="state_id_from", type="integer")
-     */
-    private $fromStateId;
-
-    /**
-     * @var int State ID where record can be moved to.
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\Column(name="state_id_to", type="integer")
-     */
-    private $toStateId;
-
-    /**
-     * @var int Group ID which is allowed to make this transition.
-     *
-     * @ORM\Id
-     * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\Column(name="group_id", type="integer")
-     */
-    private $groupId;
-
-    /**
      * @var State State where record can be moved from.
      *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="State")
      * @ORM\JoinColumn(name="state_id_from", referencedColumnName="state_id", onDelete="CASCADE")
      */
@@ -59,6 +34,8 @@ class StateGroupTransition
     /**
      * @var State State where record can be moved to.
      *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="State")
      * @ORM\JoinColumn(name="state_id_to", referencedColumnName="state_id", onDelete="CASCADE")
      */
@@ -67,85 +44,15 @@ class StateGroupTransition
     /**
      * @var Group Group which is allowed to make this transition.
      *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="Group")
      * @ORM\JoinColumn(name="group_id", referencedColumnName="group_id", onDelete="CASCADE")
      */
     private $group;
 
     /**
-     * Standard setter.
-     *
-     * @param   int $fromStateId
-     *
-     * @return  self
-     */
-    public function setFromStateId($fromStateId)
-    {
-        $this->fromStateId = $fromStateId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getFromStateId()
-    {
-        return $this->fromStateId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $toStateId
-     *
-     * @return  self
-     */
-    public function setToStateId($toStateId)
-    {
-        $this->toStateId = $toStateId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getToStateId()
-    {
-        return $this->toStateId;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $groupId
-     *
-     * @return  self
-     */
-    public function setGroupId($groupId)
-    {
-        $this->groupId = $groupId;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  int
-     */
-    public function getGroupId()
-    {
-        return $this->groupId;
-    }
-
-    /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   State $fromState
      *
@@ -159,7 +66,7 @@ class StateGroupTransition
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  State
      */
@@ -169,7 +76,7 @@ class StateGroupTransition
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   State $toState
      *
@@ -183,7 +90,7 @@ class StateGroupTransition
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  State
      */
@@ -193,7 +100,7 @@ class StateGroupTransition
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   Group $group
      *
@@ -207,7 +114,7 @@ class StateGroupTransition
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  Group
      */

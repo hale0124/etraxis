@@ -27,22 +27,24 @@ use Doctrine\ORM\Mapping as ORM;
 class FieldValue
 {
     /**
-     * @var int Event ID.
+     * @var Event Event.
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\Column(name="event_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="Event")
+     * @ORM\JoinColumn(name="event_id", referencedColumnName="event_id")
      */
-    private $eventId;
+    private $event;
 
     /**
-     * @var int Field ID.
+     * @var Field Field.
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\Column(name="field_id", type="integer")
+     * @ORM\ManyToOne(targetEntity="Field")
+     * @ORM\JoinColumn(name="field_id", referencedColumnName="field_id")
      */
-    private $fieldId;
+    private $field;
 
     /**
      * @deprecated 4.1.0
@@ -75,71 +77,55 @@ class FieldValue
     private $isCurrent;
 
     /**
-     * @var Event Event.
+     * Property setter.
      *
-     * @ORM\ManyToOne(targetEntity="Event")
-     * @ORM\JoinColumn(name="event_id", referencedColumnName="event_id")
-     */
-    private $event;
-
-    /**
-     * @var Field Field.
-     *
-     * @ORM\ManyToOne(targetEntity="Field")
-     * @ORM\JoinColumn(name="field_id", referencedColumnName="field_id")
-     */
-    private $field;
-
-    /**
-     * Standard setter.
-     *
-     * @param   int $eventId
+     * @param   Event $event
      *
      * @return  self
      */
-    public function setEventId($eventId)
+    public function setEvent(Event $event)
     {
-        $this->eventId = $eventId;
+        $this->event = $event;
 
         return $this;
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
-     * @return  int
+     * @return  Event
      */
-    public function getEventId()
+    public function getEvent()
     {
-        return $this->eventId;
+        return $this->event;
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
-     * @param   int $fieldId
+     * @param   Field $field
      *
      * @return  self
      */
-    public function setFieldId($fieldId)
+    public function setField(Field $field)
     {
-        $this->fieldId = $fieldId;
+        $this->field = $field;
 
         return $this;
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
-     * @return  int
+     * @return  Field
      */
-    public function getFieldId()
+    public function getField()
     {
-        return $this->fieldId;
+        return $this->field;
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   string $type
      *
@@ -170,7 +156,7 @@ class FieldValue
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  string
      */
@@ -195,7 +181,7 @@ class FieldValue
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   int $valueId
      *
@@ -209,7 +195,7 @@ class FieldValue
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  int
      */
@@ -219,7 +205,7 @@ class FieldValue
     }
 
     /**
-     * Standard setter.
+     * Property setter.
      *
      * @param   bool $isCurrent
      *
@@ -233,60 +219,12 @@ class FieldValue
     }
 
     /**
-     * Standard getter.
+     * Property getter.
      *
      * @return  bool
      */
     public function isCurrent()
     {
         return (bool) $this->isCurrent;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   Event $event
-     *
-     * @return  self
-     */
-    public function setEvent(Event $event)
-    {
-        $this->event = $event;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  Event
-     */
-    public function getEvent()
-    {
-        return $this->event;
-    }
-
-    /**
-     * Standard setter.
-     *
-     * @param   Field $field
-     *
-     * @return  self
-     */
-    public function setField(Field $field)
-    {
-        $this->field = $field;
-
-        return $this;
-    }
-
-    /**
-     * Standard getter.
-     *
-     * @return  Field
-     */
-    public function getField()
-    {
-        return $this->field;
     }
 }

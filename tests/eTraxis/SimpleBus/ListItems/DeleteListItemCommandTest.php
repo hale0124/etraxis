@@ -25,10 +25,9 @@ class DeleteListItemCommandTest extends BaseTestCase
         $item = new ListItem();
 
         $item
-            ->setFieldId($field->getId())
+            ->setField($field)
             ->setKey(8)
             ->setValue('Season 8')
-            ->setField($field)
         ;
 
         $this->doctrine->getManager()->persist($item);
@@ -38,20 +37,20 @@ class DeleteListItemCommandTest extends BaseTestCase
 
         /** @var ListItem $item */
         $item = $this->doctrine->getRepository(ListItem::class)->findOneBy([
-            'fieldId' => $item->getFieldId(),
-            'key'     => $item->getKey(),
+            'field' => $item->getField(),
+            'key'   => $item->getKey(),
         ]);
         self::assertNotNull($item);
 
         $command = new DeleteListItemCommand([
-            'field' => $item->getFieldId(),
+            'field' => $item->getField()->getId(),
             'key'   => $item->getKey(),
         ]);
         $this->command_bus->handle($command);
 
         $item = $this->doctrine->getRepository(ListItem::class)->findOneBy([
-            'fieldId' => $item->getFieldId(),
-            'key'     => $item->getKey(),
+            'field' => $item->getField(),
+            'key'   => $item->getKey(),
         ]);
         self::assertNull($item);
     }
@@ -68,14 +67,29 @@ class DeleteListItemCommandTest extends BaseTestCase
 
         /** @var ListItem $item */
         $item = $this->doctrine->getRepository(ListItem::class)->findOneBy([
-            'fieldId' => $field->getId(),
-            'key'     => 1,
+            'field' => $field,
+            'key'   => 1,
         ]);
         self::assertNotNull($item);
 
         $command = new DeleteListItemCommand([
-            'field' => $item->getFieldId(),
+            'field' => $item->getField()->getId(),
             'key'   => $item->getKey(),
+        ]);
+        $this->command_bus->handle($command);
+    }
+
+    /**
+     * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
+     * @expectedExceptionMessage Unknown field.
+     */
+    public function testNotFoundByField()
+    {
+        $this->loginAs('hubert');
+
+        $command = new DeleteListItemCommand([
+            'field' => $this->getMaxId(),
+            'key'   => $this->getMaxId(),
         ]);
         $this->command_bus->handle($command);
     }
@@ -84,7 +98,7 @@ class DeleteListItemCommandTest extends BaseTestCase
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @expectedExceptionMessage Unknown list item.
      */
-    public function testNotFound()
+    public function testNotFoundByKey()
     {
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Season']);
