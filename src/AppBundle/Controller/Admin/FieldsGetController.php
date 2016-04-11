@@ -37,7 +37,7 @@ class FieldsGetController extends Controller
      *
      * @Action\Route("/list/{id}", name="admin_fields_list", requirements={"id"="\d+"})
      *
-     * @param   State $state.
+     * @param   State $state
      *
      * @return  JsonResponse
      */
