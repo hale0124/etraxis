@@ -71,6 +71,7 @@ var ProjectsApp = (function() {
         first: function() {
             var $a = $('a', $projects);
             if ($a.length == 0) {
+                $('#content').html(null);
                 GroupsApp.reload();
             }
             else {
