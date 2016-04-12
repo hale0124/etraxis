@@ -70,15 +70,16 @@ class AddRemoveGroupsCommandHandler
         foreach ($groups as $group) {
 
             if ($command instanceof AddGroupsCommand) {
-                $group->addUser($user);
+                $group->addMember($user);
             }
             elseif ($command instanceof RemoveGroupsCommand) {
-                $group->removeUser($user);
+                $group->removeMember($user);
             }
 
             $this->doctrine->getManager()->persist($group);
         }
 
         $this->doctrine->getManager()->flush();
+        $this->doctrine->getManager()->refresh($user);
     }
 }

@@ -93,6 +93,8 @@ class Project implements \JsonSerializable
      */
     public function __construct()
     {
+        $this->createdAt = time();
+
         $this->groups    = new ArrayCollection();
         $this->templates = new ArrayCollection();
     }
@@ -156,20 +158,6 @@ class Project implements \JsonSerializable
     }
 
     /**
-     * Property setter.
-     *
-     * @param   int $createdAt
-     *
-     * @return  self
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
      * Property getter.
      *
      * @return  int
@@ -204,34 +192,6 @@ class Project implements \JsonSerializable
     }
 
     /**
-     * Add group to the project.
-     *
-     * @param   Group $group
-     *
-     * @return  self
-     */
-    public function addGroup(Group $group)
-    {
-        $this->groups[] = $group;
-
-        return $this;
-    }
-
-    /**
-     * Remove group from the project.
-     *
-     * @param   Group $group
-     *
-     * @return  self
-     */
-    public function removeGroup(Group $group)
-    {
-        $this->groups->removeElement($group);
-
-        return $this;
-    }
-
-    /**
      * Get list of project groups.
      *
      * @return  Group[]
@@ -239,34 +199,6 @@ class Project implements \JsonSerializable
     public function getGroups()
     {
         return $this->groups->toArray();
-    }
-
-    /**
-     * Add template to the project.
-     *
-     * @param   Template $template
-     *
-     * @return  self
-     */
-    public function addTemplate(Template $template)
-    {
-        $this->templates[] = $template;
-
-        return $this;
-    }
-
-    /**
-     * Remove template from the project.
-     *
-     * @param   Template $template
-     *
-     * @return  self
-     */
-    public function removeTemplate(Template $template)
-    {
-        $this->templates->removeElement($template);
-
-        return $this;
     }
 
     /**
@@ -288,7 +220,8 @@ class Project implements \JsonSerializable
             'id'          => $this->id,
             'name'        => $this->name,
             'description' => $this->description,
-            'isSuspended' => $this->isSuspended,
+            'createdAt'   => date('Y-m-d', $this->createdAt),
+            'isSuspended' => (bool) $this->isSuspended,
         ];
     }
 }

@@ -36,7 +36,7 @@ class GroupTest extends \PHPUnit_Framework_TestCase
     public function testProject()
     {
         $this->object->setProject($project = new Project());
-        self::assertSame($project, $this->object->getProject());
+        self::assertEquals($project, $this->object->getProject());
 
         $this->object->setProject();
         self::assertNull($this->object->getProject());
@@ -56,20 +56,20 @@ class GroupTest extends \PHPUnit_Framework_TestCase
         self::assertEquals($expected, $this->object->getDescription());
     }
 
-    public function testUsers()
-    {
-        self::assertCount(0, $this->object->getUsers());
-
-        $this->object->addUser($user = new User());
-        self::assertCount(1, $this->object->getUsers());
-
-        $this->object->removeUser($user);
-        self::assertCount(0, $this->object->getUsers());
-    }
-
     public function testIsGlobal()
     {
         self::assertTrue($this->object->isGlobal());
+    }
+
+    public function testMembers()
+    {
+        self::assertCount(0, $this->object->getMembers());
+
+        $this->object->addMember($user = new User());
+        self::assertCount(1, $this->object->getMembers());
+
+        $this->object->removeMember($user);
+        self::assertCount(0, $this->object->getMembers());
     }
 
     public function testJsonSerialize()

@@ -124,6 +124,13 @@ class Record
      */
     public function __construct()
     {
+        $this->responsible = null;
+
+        $this->createdAt = time();
+        $this->changedAt = time();
+        $this->closedAt  = null;
+        $this->resumedAt = 0;
+
         $this->history  = new ArrayCollection();
         $this->watchers = new ArrayCollection();
         $this->children = new ArrayCollection();
@@ -164,20 +171,6 @@ class Record
     }
 
     /**
-     * Property setter.
-     *
-     * @param   State $state
-     *
-     * @return  self
-     */
-    public function setState(State $state)
-    {
-        $this->state = $state;
-
-        return $this;
-    }
-
-    /**
      * Property getter.
      *
      * @return  State
@@ -185,20 +178,6 @@ class Record
     public function getState()
     {
         return $this->state;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   User $author
-     *
-     * @return  self
-     */
-    public function setAuthor(User $author)
-    {
-        $this->author = $author;
-
-        return $this;
     }
 
     /**
@@ -212,20 +191,6 @@ class Record
     }
 
     /**
-     * Property setter.
-     *
-     * @param   User $responsible
-     *
-     * @return  self
-     */
-    public function setResponsible(User $responsible = null)
-    {
-        $this->responsible = $responsible;
-
-        return $this;
-    }
-
-    /**
      * Property getter.
      *
      * @return  User
@@ -236,20 +201,6 @@ class Record
     }
 
     /**
-     * Property setter.
-     *
-     * @param   int $createdAt
-     *
-     * @return  self
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
-    }
-
-    /**
      * Property getter.
      *
      * @return  int
@@ -257,106 +208,6 @@ class Record
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   int $changedAt
-     *
-     * @return  self
-     */
-    public function setChangedAt($changedAt)
-    {
-        $this->changedAt = $changedAt;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  int
-     */
-    public function getChangedAt()
-    {
-        return $this->changedAt;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   int $closedAt
-     *
-     * @return  self
-     */
-    public function setClosedAt($closedAt)
-    {
-        $this->closedAt = $closedAt;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  int
-     */
-    public function getClosedAt()
-    {
-        return $this->closedAt;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   int $resumedAt
-     *
-     * @return  self
-     */
-    public function setResumedAt($resumedAt)
-    {
-        $this->resumedAt = $resumedAt;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  int
-     */
-    public function getResumedAt()
-    {
-        return $this->resumedAt;
-    }
-
-    /**
-     * Add event to the record.
-     *
-     * @param   Event $event
-     *
-     * @return  self
-     */
-    public function addEvent(Event $event)
-    {
-        $this->history[] = $event;
-
-        return $this;
-    }
-
-    /**
-     * Remove event from the record.
-     *
-     * @param   Event $event
-     *
-     * @return  self
-     */
-    public function removeEvent(Event $event)
-    {
-        $this->history->removeElement($event);
-
-        return $this;
     }
 
     /**

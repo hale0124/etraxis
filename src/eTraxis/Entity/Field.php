@@ -11,11 +11,9 @@
 
 namespace eTraxis\Entity;
 
+use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\Mapping as ORM;
-use eTraxis\Repository\DecimalValuesRepository;
-use eTraxis\Repository\ListItemsRepository;
-use eTraxis\Repository\StringValuesRepository;
-use eTraxis\Repository\TextValuesRepository;
+use eTraxis\Collection;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 
 /**
@@ -209,37 +207,14 @@ class Field implements \JsonSerializable
     /**
      * Property setter.
      *
-     * @param   Template $template
-     *
-     * @return  self
-     */
-    public function setTemplate(Template $template)
-    {
-        $this->template = $template;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  Template
-     */
-    public function getTemplate()
-    {
-        return $this->template;
-    }
-
-    /**
-     * Property setter.
-     *
      * @param   State $state
      *
      * @return  self
      */
     public function setState(State $state = null)
     {
-        $this->state = $state;
+        $this->state    = $state;
+        $this->template = $state->getTemplate();
 
         return $this;
     }
@@ -287,20 +262,7 @@ class Field implements \JsonSerializable
      */
     public function setType($type)
     {
-        /**
-         * @deprecated 4.1.0 A stub for compatibility btw 3.6 and 4.0.
-         */
-        $types = [
-            'number'   => 1,
-            'string'   => 2,
-            'text'     => 3,
-            'checkbox' => 4,
-            'list'     => 5,
-            'record'   => 6,
-            'date'     => 7,
-            'duration' => 8,
-            'decimal'  => 9,
-        ];
+        $types = array_flip(Collection\LegacyFieldType::getCollection());
 
         if (array_key_exists($type, $types)) {
             $this->type = $types[$type];
@@ -316,20 +278,11 @@ class Field implements \JsonSerializable
      */
     public function getType()
     {
-        /**
-         * @deprecated 4.1.0 A stub for compatibility btw 3.6 and 4.0.
-         */
-        $types = [
-            1 => 'number',
-            2 => 'string',
-            3 => 'text',
-            4 => 'checkbox',
-            5 => 'list',
-            6 => 'record',
-            7 => 'date',
-            8 => 'duration',
-            9 => 'decimal',
-        ];
+        $types = Collection\LegacyFieldType::getCollection();
+
+        if (!array_key_exists($this->type, $types)) {
+            return null;
+        }
 
         return $types[$this->type];
     }
@@ -383,27 +336,26 @@ class Field implements \JsonSerializable
     }
 
     /**
-     * Property setter.
-     *
-     * @param   int $removedAt
+     * Removes (deletes softly) the field.
      *
      * @return  self
      */
-    public function setRemovedAt($removedAt)
+    public function remove()
     {
-        $this->removedAt = $removedAt;
+        $this->removedAt   = time();
+        $this->indexNumber = 0;
 
         return $this;
     }
 
     /**
-     * Property getter.
+     * Checks whether the field is removed (soft-deleted).
      *
-     * @return  int
+     * @return  bool
      */
-    public function getRemovedAt()
+    public function isRemoved()
     {
-        return $this->removedAt;
+        return $this->removedAt !== 0;
     }
 
     /**
@@ -573,55 +525,16 @@ class Field implements \JsonSerializable
     /**
      * Dependency Injection setter.
      *
-     * @param   DecimalValuesRepository $repository
+     * @param   ObjectManager $manager
      *
      * @return  self
      */
-    public function setDecimalValuesRepository(DecimalValuesRepository $repository)
+    public function injectDependencies(ObjectManager $manager)
     {
-        $this->decimalValues = $repository;
-
-        return $this;
-    }
-
-    /**
-     * Dependency Injection setter.
-     *
-     * @param   StringValuesRepository $repository
-     *
-     * @return  self
-     */
-    public function setStringValuesRepository(StringValuesRepository $repository)
-    {
-        $this->stringValues = $repository;
-
-        return $this;
-    }
-
-    /**
-     * Dependency Injection setter.
-     *
-     * @param   TextValuesRepository $repository
-     *
-     * @return  self
-     */
-    public function setTextValuesRepository(TextValuesRepository $repository)
-    {
-        $this->textValues = $repository;
-
-        return $this;
-    }
-
-    /**
-     * Dependency Injection setter.
-     *
-     * @param   ListItemsRepository $repository
-     *
-     * @return  self
-     */
-    public function setListItemsRepository(ListItemsRepository $repository)
-    {
-        $this->listItems = $repository;
+        $this->decimalValues = $manager->getRepository(DecimalValue::class);
+        $this->stringValues  = $manager->getRepository(StringValue::class);
+        $this->textValues    = $manager->getRepository(TextValue::class);
+        $this->listItems     = $manager->getRepository(ListItem::class);
 
         return $this;
     }
@@ -726,7 +639,7 @@ class Field implements \JsonSerializable
             'name'        => $this->name,
             'type'        => $this->type,
             'description' => $this->description,
-            'isRequired'  => $this->isRequired,
+            'isRequired'  => (bool) $this->isRequired,
         ];
     }
 }

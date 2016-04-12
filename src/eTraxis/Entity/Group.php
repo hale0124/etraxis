@@ -69,16 +69,16 @@ class Group implements \JsonSerializable
      * @ORM\JoinTable(name="tbl_membership",
      *                joinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="group_id")},
      *                inverseJoinColumns={@ORM\JoinColumn(name="account_id", referencedColumnName="account_id")})
-     * @ORM\OrderBy({"fullname" = "ASC"})
+     * @ORM\OrderBy({"fullname" = "ASC", "username" = "ASC"})
      */
-    private $users;
+    private $members;
 
     /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->users = new ArrayCollection();
+        $this->members = new ArrayCollection();
     }
 
     /**
@@ -164,15 +164,25 @@ class Group implements \JsonSerializable
     }
 
     /**
+     * Returns whether group is global.
+     *
+     * @return  bool
+     */
+    public function isGlobal()
+    {
+        return $this->project === null;
+    }
+
+    /**
      * Add user to the group.
      *
      * @param   User $user
      *
      * @return  self
      */
-    public function addUser(User $user)
+    public function addMember(User $user)
     {
-        $this->users[] = $user;
+        $this->members[] = $user;
 
         return $this;
     }
@@ -184,9 +194,9 @@ class Group implements \JsonSerializable
      *
      * @return  self
      */
-    public function removeUser(User $user)
+    public function removeMember(User $user)
     {
-        $this->users->removeElement($user);
+        $this->members->removeElement($user);
 
         return $this;
     }
@@ -196,19 +206,9 @@ class Group implements \JsonSerializable
      *
      * @return  User[]
      */
-    public function getUsers()
+    public function getMembers()
     {
-        return $this->users->toArray();
-    }
-
-    /**
-     * Returns whether group is global.
-     *
-     * @return  bool
-     */
-    public function isGlobal()
-    {
-        return $this->project === null;
+        return $this->members->toArray();
     }
 
     /**

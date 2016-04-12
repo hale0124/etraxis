@@ -89,8 +89,8 @@ class AddRemoveStateAssigneesCommandTest extends BaseTestCase
         $group = new Group();
 
         $group
-            ->setName('Developers')
             ->setProject($project)
+            ->setName('Developers')
         ;
 
         $this->doctrine->getManager()->persist($group);

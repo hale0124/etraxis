@@ -13,9 +13,9 @@ namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use eTraxis\Collection\Theme;
+use eTraxis\Collection;
+use Ramsey\Uuid\Uuid;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
-use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
  * User.
@@ -27,11 +27,15 @@ use Symfony\Component\Security\Core\User\AdvancedUserInterface;
  * @ORM\Entity(repositoryClass="eTraxis\Repository\UsersRepository")
  * @Assert\UniqueEntity(fields={"username"}, message="user.conflict.username")
  */
-class User implements AdvancedUserInterface
+class User extends AbstractUser
 {
     // Roles.
     const ROLE_ADMIN = 'ROLE_ADMIN';
     const ROLE_USER  = 'ROLE_USER';
+
+    // Authentication source.
+    const AUTH_INTERNAL = 'eTraxis';
+    const AUTH_LDAP     = 'LDAP';
 
     // Constraints.
     const MAX_USERNAME    = 100;
@@ -112,6 +116,21 @@ class User implements AdvancedUserInterface
     private $resetTokenExpiresAt;
 
     /**
+     * @var int Number of consecutive unsuccessful attempts to authenticate.
+     *
+     * @ORM\Column(name="locks_count", type="integer")
+     */
+    private $authAttempts;
+
+    /**
+     * @var int Unix Epoch timestamp which the account is locked till.
+     *          If in the past, the account is considered as not locked.
+     *
+     * @ORM\Column(name="lock_time", type="integer")
+     */
+    private $lockedUntil;
+
+    /**
      * @var int Whether user has administration privileges.
      *
      * @ORM\Column(name="is_admin", type="integer")
@@ -133,21 +152,6 @@ class User implements AdvancedUserInterface
     private $isLdap;
 
     /**
-     * @var int Number of consecutive unsuccessful attempts to authenticate.
-     *
-     * @ORM\Column(name="locks_count", type="integer")
-     */
-    private $authAttempts;
-
-    /**
-     * @var int Unix Epoch timestamp which the account is locked till.
-     *          If in the past, the account is considered as not locked.
-     *
-     * @ORM\Column(name="lock_time", type="integer")
-     */
-    private $lockedUntil;
-
-    /**
      * @var int Locale ID of user interface.
      *
      * @ORM\Column(name="locale", type="integer")
@@ -155,18 +159,18 @@ class User implements AdvancedUserInterface
     private $locale;
 
     /**
-     * @var int Timezone ID.
-     *
-     * @ORM\Column(name="timezone", type="integer")
-     */
-    private $timezone;
-
-    /**
      * @var string Name of UI theme (e.g. "Emerald").
      *
      * @ORM\Column(name="theme_name", type="string", length=50)
      */
     private $theme;
+
+    /**
+     * @var int Timezone ID.
+     *
+     * @ORM\Column(name="timezone", type="integer")
+     */
+    private $timezone;
 
     /**
      * @var View Current view.
@@ -179,7 +183,7 @@ class User implements AdvancedUserInterface
     /**
      * @var ArrayCollection List of groups the user is member of.
      *
-     * @ORM\ManyToMany(targetEntity="Group", mappedBy="users")
+     * @ORM\ManyToMany(targetEntity="Group", mappedBy="members")
      * @ORM\OrderBy({"name" = "ASC"})
      */
     private $groups;
@@ -196,16 +200,16 @@ class User implements AdvancedUserInterface
      */
     public function __construct()
     {
+        $this->password            = null;
         $this->passwordSetAt       = 0;
         $this->resetToken          = null;
         $this->resetTokenExpiresAt = 0;
+        $this->authAttempts        = 0;
+        $this->lockedUntil         = 0;
 
         $this->isAdmin    = 0;
         $this->isDisabled = 0;
         $this->isLdap     = 0;
-
-        $this->authAttempts = 0;
-        $this->lockedUntil  = 0;
 
         $this->timezone = 0;
 
@@ -332,7 +336,10 @@ class User implements AdvancedUserInterface
      */
     public function setPassword($password)
     {
-        $this->password = $password;
+        if (!$this->isLdap) {
+            $this->password      = $password;
+            $this->passwordSetAt = time();
+        }
 
         return $this;
     }
@@ -348,75 +355,97 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Property setter.
+     * Checks whether user's password is expired.
      *
-     * @param   int $passwordSetAt
+     * @param   int $days Number of days a password is valid for.
      *
-     * @return  self
+     * @return  bool
      */
-    public function setPasswordSetAt($passwordSetAt)
+    public function isPasswordExpired($days)
     {
-        $this->passwordSetAt = $passwordSetAt;
+        $expires = $this->passwordSetAt + $days * 86400;
 
-        return $this;
+        return $expires <= time();
     }
 
     /**
-     * Property getter.
+     * Generates new "password reset" token.
      *
-     * @return  int
+     * @return  string Generated token.
      */
-    public function getPasswordSetAt()
+    public function generateResetToken()
     {
-        return $this->passwordSetAt;
-    }
+        $this->resetToken          = Uuid::uuid4()->getHex();
+        $this->resetTokenExpiresAt = time() + 7200; // 2 hours expiration
 
-    /**
-     * Property setter.
-     *
-     * @param   string $resetToken
-     *
-     * @return  self
-     */
-    public function setResetToken($resetToken)
-    {
-        $this->resetToken = $resetToken;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  string
-     */
-    public function getResetToken()
-    {
         return $this->resetToken;
     }
 
     /**
-     * Property setter.
-     *
-     * @param   int $resetTokenExpiresAt
+     * Clears current "password reset" token.
      *
      * @return  self
      */
-    public function setResetTokenExpiresAt($resetTokenExpiresAt)
+    public function clearResetToken()
     {
-        $this->resetTokenExpiresAt = $resetTokenExpiresAt;
+        $this->resetToken          = null;
+        $this->resetTokenExpiresAt = 0;
 
         return $this;
     }
 
     /**
-     * Property getter.
+     * Checks whether current "password reset" token is expired.
      *
-     * @return  int
+     * @return  bool
      */
-    public function getResetTokenExpiresAt()
+    public function isResetTokenExpired()
     {
-        return $this->resetTokenExpiresAt;
+        return $this->resetTokenExpiresAt <= time();
+    }
+
+    /**
+     * Increases locks count for the account.
+     *
+     * @param   int $max_auth_attempts Maximum number of attempts to log in.
+     * @param   int $lock_time         Number of minutes to lock out for.
+     *
+     * @return  bool Whether the account became locked.
+     */
+    public function lock($max_auth_attempts, $lock_time)
+    {
+        if (!$this->isLdap) {
+
+            $this->authAttempts++;
+
+            if ($this->authAttempts >= $max_auth_attempts) {
+                $this->authAttempts = 0;
+                $this->lockedUntil  = time() + $lock_time * 60;
+
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Unlocks the account.
+     */
+    public function unlock()
+    {
+        $this->authAttempts = 0;
+        $this->lockedUntil  = 0;
+    }
+
+    /**
+     * Checks whether account is locked.
+     *
+     * @return  bool
+     */
+    public function isAccountNonLocked()
+    {
+        return $this->lockedUntil < time();
     }
 
     /**
@@ -468,6 +497,14 @@ class User implements AdvancedUserInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function isEnabled()
+    {
+        return !$this->isDisabled;
+    }
+
+    /**
      * Property setter.
      *
      * @param   bool $isLdap
@@ -480,7 +517,11 @@ class User implements AdvancedUserInterface
 
         $this->username = str_replace('@eTraxis', null, $this->username);
 
-        if (!$isLdap) {
+        if ($isLdap) {
+            $this->password      = null;
+            $this->passwordSetAt = 0;
+        }
+        else {
             $this->username .= '@eTraxis';
         }
 
@@ -498,51 +539,13 @@ class User implements AdvancedUserInterface
     }
 
     /**
-     * Property setter.
+     * Returns authentication source of the user.
      *
-     * @param   int $authAttempts
-     *
-     * @return  self
+     * @return  string
      */
-    public function setAuthAttempts($authAttempts)
+    public function getAuthenticationSource()
     {
-        $this->authAttempts = $authAttempts;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  int
-     */
-    public function getAuthAttempts()
-    {
-        return $this->authAttempts;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   int $lockedUntil
-     *
-     * @return  self
-     */
-    public function setLockedUntil($lockedUntil)
-    {
-        $this->lockedUntil = $lockedUntil;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  int
-     */
-    public function getLockedUntil()
-    {
-        return $this->lockedUntil;
+        return $this->isLdap ? self::AUTH_LDAP : self::AUTH_INTERNAL;
     }
 
     /**
@@ -554,38 +557,11 @@ class User implements AdvancedUserInterface
      */
     public function setLocale($locale)
     {
-        /**
-         * @deprecated 4.1.0 A stub for compatibility btw 3.6 and 4.0.
-         */
-        $locales = [
-            'en_US' => 1000,
-            'en_GB' => 1001,
-            'en_CA' => 1002,
-            'en_AU' => 1003,
-            'en_NZ' => 1004,
-            'fr'    => 1010,
-            'de'    => 1020,
-            'it'    => 1030,
-            'es'    => 1040,
-            'pt_BR' => 1080,
-            'nl'    => 1090,
-            'sv'    => 2020,
-            'lv'    => 2050,
-            'ru'    => 3000,
-            'pl'    => 3030,
-            'cs'    => 3040,
-            'hu'    => 3060,
-            'bg'    => 3130,
-            'ro'    => 3140,
-            'ja'    => 5000,
-            'tr'    => 6000,
-        ];
+        $locales = array_flip(Collection\LegacyLocale::getCollection());
 
-        if (!array_key_exists($locale, $locales)) {
-            $locale = 'en_US';
+        if (array_key_exists($locale, $locales)) {
+            $this->locale = $locales[$locale];
         }
-
-        $this->locale = $locales[$locale];
 
         return $this;
     }
@@ -597,32 +573,7 @@ class User implements AdvancedUserInterface
      */
     public function getLocale()
     {
-        /**
-         * @deprecated 4.1.0 A stub for compatibility btw 3.6 and 4.0.
-         */
-        $locales = [
-            1000 => 'en_US',
-            1001 => 'en_GB',
-            1002 => 'en_CA',
-            1003 => 'en_AU',
-            1004 => 'en_NZ',
-            1010 => 'fr',
-            1020 => 'de',
-            1030 => 'it',
-            1040 => 'es',
-            1080 => 'pt_BR',
-            1090 => 'nl',
-            2020 => 'sv',
-            2050 => 'lv',
-            3000 => 'ru',
-            3030 => 'pl',
-            3040 => 'cs',
-            3060 => 'hu',
-            3130 => 'bg',
-            3140 => 'ro',
-            5000 => 'ja',
-            6000 => 'tr',
-        ];
+        $locales = Collection\LegacyLocale::getCollection();
 
         if (!array_key_exists($this->locale, $locales)) {
             $this->locale = 1000;
@@ -634,37 +585,13 @@ class User implements AdvancedUserInterface
     /**
      * Property setter.
      *
-     * @param   int $timezone
-     *
-     * @return  self
-     */
-    public function setTimezone($timezone)
-    {
-        $this->timezone = $timezone;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  int
-     */
-    public function getTimezone()
-    {
-        return $this->timezone;
-    }
-
-    /**
-     * Property setter.
-     *
      * @param   string $theme
      *
      * @return  self
      */
     public function setTheme($theme)
     {
-        if (in_array($theme, Theme::getAllKeys())) {
+        if (in_array($theme, Collection\Theme::getAllKeys())) {
             $this->theme = $theme;
         }
 
@@ -680,7 +607,7 @@ class User implements AdvancedUserInterface
     {
         $theme = strtolower($this->theme);
 
-        if (!in_array($theme, Theme::getAllKeys())) {
+        if (!in_array($theme, Collection\Theme::getAllKeys())) {
             $theme = 'azure';
         }
 
@@ -690,13 +617,15 @@ class User implements AdvancedUserInterface
     /**
      * Property setter.
      *
-     * @param   View $view
+     * @param   int $timezone
      *
      * @return  self
      */
-    public function setView($view)
+    public function setTimezone($timezone)
     {
-        $this->view = $view;
+        if (in_array($timezone, Collection\Timezone::getAllKeys())) {
+            $this->timezone = $timezone;
+        }
 
         return $this;
     }
@@ -704,11 +633,15 @@ class User implements AdvancedUserInterface
     /**
      * Property getter.
      *
-     * @return  View
+     * @return  int
      */
-    public function getView()
+    public function getTimezone()
     {
-        return $this->view;
+        if (!in_array($this->timezone, Collection\Timezone::getAllKeys())) {
+            $this->timezone = 0;
+        }
+
+        return $this->timezone;
     }
 
     /**
@@ -733,61 +666,5 @@ class User implements AdvancedUserInterface
         }
 
         return $roles;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function getSalt()
-    {
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function eraseCredentials()
-    {
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isAccountNonExpired()
-    {
-        return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isAccountNonLocked()
-    {
-        return $this->lockedUntil < time();
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isCredentialsNonExpired()
-    {
-        return true;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isEnabled()
-    {
-        return !$this->isDisabled;
-    }
-
-    /**
-     * Returns authentication source of the user.
-     *
-     * @return  string
-     */
-    public function getAuthenticationSource()
-    {
-        return $this->isLdap ? 'LDAP' : 'eTraxis';
     }
 }

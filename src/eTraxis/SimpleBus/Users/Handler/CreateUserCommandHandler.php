@@ -69,7 +69,6 @@ class CreateUserCommandHandler
             ->setEmail($command->email)
             ->setDescription($command->description)
             ->setPassword($encoded)
-            ->setPasswordSetAt(time())
             ->setAdmin($command->admin)
             ->setDisabled($command->disabled)
             ->setLdap(false)

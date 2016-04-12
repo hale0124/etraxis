@@ -62,14 +62,8 @@ class LockUserCommandHandler
 
             if ($this->security_auth_attempts && $this->security_lock_time) {
 
-                $user->setAuthAttempts($user->getAuthAttempts() + 1);
-
-                if ($user->getAuthAttempts() === $this->security_auth_attempts) {
-
+                if ($user->lock($this->security_auth_attempts, $this->security_lock_time)) {
                     $this->logger->info('Lock the account', [$this->security_lock_time]);
-
-                    $user->setAuthAttempts(0);
-                    $user->setLockedUntil(time() + $this->security_lock_time * 60);
                 }
 
                 $this->doctrine->getManager()->persist($user);

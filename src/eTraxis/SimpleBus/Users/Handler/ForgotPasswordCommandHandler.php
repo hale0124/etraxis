@@ -14,7 +14,6 @@ namespace eTraxis\SimpleBus\Users\Handler;
 use eTraxis\Entity\User;
 use eTraxis\Service\Mailer\MailerInterface;
 use eTraxis\SimpleBus\Users\ForgotPasswordCommand;
-use Ramsey\Uuid\Uuid;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
@@ -49,10 +48,7 @@ class ForgotPasswordCommandHandler
         /** @var User $user */
         if ($user = $repository->findOneBy(['username' => $command->username . '@eTraxis'])) {
 
-            $user
-                ->setResetToken(Uuid::uuid4()->getHex())
-                ->setResetTokenExpiresAt(time() + 7200)
-            ;
+            $token = $user->generateResetToken();
 
             $this->doctrine->getManager()->persist($user);
             $this->doctrine->getManager()->flush();
@@ -62,7 +58,7 @@ class ForgotPasswordCommandHandler
                 'Reset password link for your eTraxis account',
                 'email/forgot_password.html.twig',
                 [
-                    'token' => $user->getResetToken(),
+                    'token' => $token,
                     'ip'    => $command->ip,
                 ]
             );

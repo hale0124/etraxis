@@ -16,29 +16,6 @@ use eTraxis\Tests\BaseTestCase;
 
 class UsersRepositoryTest extends BaseTestCase
 {
-    public function testGetUserGroups()
-    {
-        /** @var UsersRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository(User::class);
-
-        $user = $this->findUser('hubert');
-
-        $result = $repository->getUserGroups($user);
-
-        $groups = array_map(function ($group) {
-            /** @var \eTraxis\Entity\Group $group */
-            return $group->getName();
-        }, $result);
-
-        $expected = [
-            'Planet Express, Inc.',
-            'Crew',
-            'Managers',
-        ];
-
-        self::assertEquals($expected, $groups);
-    }
-
     public function testGetOtherGroups()
     {
         /** @var UsersRepository $repository */

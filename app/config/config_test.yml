@@ -5,7 +5,7 @@ parameters:
     database_name:          xe
     locale:                 en_US
     security_auth_attempts: 2
-    security_lock_time:     1800
+    security_lock_time:     30
 
 framework:
     test: ~

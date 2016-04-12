@@ -106,6 +106,14 @@ class Event
     private $parameter;
 
     /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->createdAt = time();
+    }
+
+    /**
      * Property getter.
      *
      * @return  int
@@ -185,20 +193,6 @@ class Event
     public function getType()
     {
         return $this->type;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   int $createdAt
-     *
-     * @return  self
-     */
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
-
-        return $this;
     }
 
     /**

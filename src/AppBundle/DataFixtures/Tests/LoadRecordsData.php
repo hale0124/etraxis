@@ -11,6 +11,7 @@
 
 namespace AppBundle\DataFixtures\Tests;
 
+use AltrEgo\AltrEgo;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -283,35 +284,40 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             $record = new Record();
 
             /** @noinspection PhpParamsInspection */
-            $record
-                ->setSubject($info['subject'])
-                ->setCreatedAt(strtotime($info['date'] . ' 09:00:00'))
-                ->setChangedAt(strtotime($info['date'] . ' 09:00:00'))
-                ->setResumedAt(0)
-                ->setState($state_new)
-                ->setAuthor($this->getReference('user:hubert'))
-                ->setResponsible($this->getReference($info['assignee']))
-            ;
+            $record->setSubject($info['subject']);
+
+            /** @var \StdClass $altr_record */
+            $altr_record = AltrEgo::create($record);
+
+            $altr_record->state       = $state_new;
+            $altr_record->author      = $this->getReference('user:hubert');
+            $altr_record->responsible = $this->getReference($info['assignee']);
+            $altr_record->createdAt   = strtotime($info['date'] . ' 09:00:00');
+            $altr_record->changedAt   = strtotime($info['date'] . ' 09:00:00');
 
             $event = new Event();
 
             $event
-                ->setType(Event::RECORD_CREATED)
-                ->setCreatedAt($record->getCreatedAt())
-                ->setParameter($state_new->getId())
                 ->setRecord($record)
                 ->setUser($record->getAuthor())
+                ->setType(Event::RECORD_CREATED)
+                ->setParameter($state_new->getId())
             ;
+
+            /** @noinspection PhpUndefinedFieldInspection */
+            AltrEgo::create($event)->createdAt = $record->getCreatedAt();
 
             $event2 = new Event();
 
             $event2
-                ->setType(Event::RECORD_ASSIGNED)
-                ->setCreatedAt($record->getCreatedAt())
-                ->setParameter($record->getResponsible()->getId())
                 ->setRecord($record)
                 ->setUser($record->getAuthor())
+                ->setType(Event::RECORD_ASSIGNED)
+                ->setParameter($record->getResponsible()->getId())
             ;
+
+            /** @noinspection PhpUndefinedFieldInspection */
+            AltrEgo::create($event2)->createdAt = $record->getCreatedAt();
 
             $manager->persist($record);
             $manager->persist($event);
@@ -346,9 +352,8 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
                 $field
                     ->setEvent($event)
                     ->setField($this->getReference('state:new:' . $i))
-                    ->setType(Field::TYPE_STRING)
-                    ->setValueId($value->getId())
                     ->setCurrent(true)
+                    ->setValueId($value->getId())
                 ;
 
                 $manager->persist($field);
@@ -360,7 +365,6 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             $field
                 ->setEvent($event)
                 ->setField($this->getReference('state:new:4'))
-                ->setType(Field::TYPE_TEXT)
                 ->setCurrent(true)
             ;
 
@@ -380,8 +384,10 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             $read
                 ->setRecord($record)
                 ->setUser($record->getAuthor())
-                ->setReadAt($record->getCreatedAt())
             ;
+
+            /** @noinspection PhpUndefinedFieldInspection */
+            AltrEgo::create($read)->readAt = $record->getCreatedAt();
 
             $manager->persist($field);
             $manager->persist($read);
@@ -391,12 +397,14 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
                 $event = new Event();
 
                 $event
-                    ->setType(Event::STATE_CHANGED)
-                    ->setCreatedAt(strtotime($info['date'] . ' 17:00:00'))
-                    ->setParameter($state_delivered->getId())
                     ->setRecord($record)
                     ->setUser($record->getResponsible())
+                    ->setType(Event::STATE_CHANGED)
+                    ->setParameter($state_delivered->getId())
                 ;
+
+                /** @noinspection PhpUndefinedFieldInspection */
+                AltrEgo::create($event)->createdAt = strtotime($info['date'] . ' 17:00:00');
 
                 $manager->persist($event);
                 $manager->flush();
@@ -407,7 +415,6 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
                 $field
                     ->setEvent($event)
                     ->setField($this->getReference('state:delivered:1'))
-                    ->setType(Field::TYPE_TEXT)
                     ->setCurrent(true)
                 ;
 
@@ -423,11 +430,9 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
                 }
 
                 /** @noinspection PhpParamsInspection */
-                $record
-                    ->setClosedAt($event->getCreatedAt())
-                    ->setState($state_delivered)
-                    ->setResponsible(null)
-                ;
+                $altr_record->closedAt    = $event->getCreatedAt();
+                $altr_record->state       = $state_delivered;
+                $altr_record->responsible = null;
 
                 $read = $this->container->get('doctrine')->getRepository(LastRead::class)->findOneBy([
                     'record' => $record,
@@ -444,7 +449,8 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
                     ;
                 }
 
-                $read->setReadAt($event->getCreatedAt());
+                /** @noinspection PhpUndefinedFieldInspection */
+                AltrEgo::create($read)->readAt = $event->getCreatedAt();
 
                 $manager->persist($field);
                 $manager->persist($record);
@@ -1881,36 +1887,40 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             $record = new Record();
 
             /** @noinspection PhpParamsInspection */
-            $record
-                ->setSubject($info['subject'])
-                ->setCreatedAt(strtotime($info['date'] . ' 09:00:00'))
-                ->setChangedAt(strtotime($info['date'] . ' 09:00:01'))
-                ->setClosedAt(strtotime($info['date'] . ' 09:00:01'))
-                ->setResumedAt(0)
-                ->setState($state_released)
-                ->setAuthor($this->getReference('user:artem'))
-                ->setResponsible(null)
-            ;
+            $record->setSubject($info['subject']);
+
+            /** @var \StdClass $altr_record */
+            $altr_record = AltrEgo::create($record);
+
+            $altr_record->state     = $state_released;
+            $altr_record->author    = $this->getReference('user:artem');
+            $altr_record->createdAt = strtotime($info['date'] . ' 09:00:00');
+            $altr_record->changedAt = strtotime($info['date'] . ' 09:00:01');
+            $altr_record->closedAt  = strtotime($info['date'] . ' 09:00:01');
 
             $event = new Event();
 
             $event
-                ->setType(Event::RECORD_CREATED)
-                ->setCreatedAt($record->getCreatedAt())
-                ->setParameter($state_produced->getId())
                 ->setRecord($record)
                 ->setUser($record->getAuthor())
+                ->setType(Event::RECORD_CREATED)
+                ->setParameter($state_produced->getId())
             ;
+
+            /** @noinspection PhpUndefinedFieldInspection */
+            AltrEgo::create($event)->createdAt = $record->getCreatedAt();
 
             $event2 = new Event();
 
             $event2
-                ->setType(Event::STATE_CHANGED)
-                ->setCreatedAt($record->getClosedAt())
-                ->setParameter($state_released->getId())
                 ->setRecord($record)
                 ->setUser($record->getAuthor())
+                ->setType(Event::STATE_CHANGED)
+                ->setParameter($state_released->getId())
             ;
+
+            /** @noinspection PhpUndefinedFieldInspection */
+            AltrEgo::create($event2)->createdAt = $record->getCreatedAt();
 
             $manager->persist($record);
             $manager->persist($event);
@@ -1969,9 +1979,8 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
                 $value
                     ->setEvent(strpos($field_ref, 'state:produced') !== false ? $event : $event2)
                     ->setField($field)
-                    ->setType($field->getType())
-                    ->setValueId($field_value)
                     ->setCurrent(true)
+                    ->setValueId($field_value)
                 ;
 
                 $manager->persist($value);
@@ -1992,7 +2001,8 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
                 ;
             }
 
-            $read->setReadAt($event2->getCreatedAt());
+            /** @noinspection PhpUndefinedFieldInspection */
+            AltrEgo::create($read)->readAt = $event2->getCreatedAt();
 
             $manager->persist($read);
             $manager->flush();

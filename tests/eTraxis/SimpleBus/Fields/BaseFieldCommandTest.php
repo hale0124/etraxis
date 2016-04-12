@@ -14,46 +14,12 @@ namespace eTraxis\SimpleBus\Fields;
 use AltrEgo\AltrEgo;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\State;
-use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\Fields\Handler\BaseFieldCommandHandler;
 use eTraxis\Tests\BaseTestCase;
 
 class BaseFieldCommandTest extends BaseTestCase
 {
-    public function testCreateByTemplateSuccess()
-    {
-        /** @var Template $state */
-        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
-
-        self::assertNotNull($template);
-
-        $command = new CreateFieldBaseCommand([
-            'template'     => $template->getId(),
-            'name'         => 'Priority',
-            'description'  => 'Urgency level',
-            'required'     => true,
-            'guestAccess'  => false,
-            'showInEmails' => false,
-        ]);
-
-        /** @var mixed $handler */
-        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
-
-        /** @var Field $field */
-        $field = $handler->getEntity($command);
-
-        self::assertInstanceOf(Field::class, $field);
-        self::assertEquals($template->getId(), $field->getTemplate()->getId());
-        self::assertNull($field->getState());
-        self::assertEquals('Priority', $field->getName());
-        self::assertEquals('Urgency level', $field->getDescription());
-        self::assertTrue($field->isRequired());
-        self::assertFalse($field->hasGuestAccess());
-        self::assertFalse($field->getShowInEmails());
-        self::assertEquals(1, $field->getIndexNumber());
-    }
-
-    public function testCreateByStateSuccess()
+    public function testCreateSuccess()
     {
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
@@ -76,41 +42,20 @@ class BaseFieldCommandTest extends BaseTestCase
         $field = $handler->getEntity($command);
 
         self::assertInstanceOf(Field::class, $field);
-        self::assertEquals($state->getTemplate(), $field->getTemplate());
         self::assertEquals($state, $field->getState());
         self::assertEquals('Priority', $field->getName());
         self::assertEquals('Urgency level', $field->getDescription());
+        self::assertEquals(5, $field->getIndexNumber());
         self::assertTrue($field->isRequired());
         self::assertFalse($field->hasGuestAccess());
         self::assertFalse($field->getShowInEmails());
-        self::assertEquals(5, $field->getIndexNumber());
-    }
-
-    /**
-     * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
-     * @expectedExceptionMessage Unknown template.
-     */
-    public function testCreateByTemplateNotFound()
-    {
-        $command = new CreateFieldBaseCommand([
-            'template'     => $this->getMaxId(),
-            'name'         => 'Priority',
-            'description'  => 'Urgency level',
-            'required'     => true,
-            'guestAccess'  => false,
-            'showInEmails' => false,
-        ]);
-
-        /** @var mixed $handler */
-        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
-        $handler->getEntity($command);
     }
 
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @expectedExceptionMessage Unknown state.
      */
-    public function testCreateByStateNotFound()
+    public function testCreateNotFound()
     {
         $command = new CreateFieldBaseCommand([
             'state'        => $this->getMaxId(),

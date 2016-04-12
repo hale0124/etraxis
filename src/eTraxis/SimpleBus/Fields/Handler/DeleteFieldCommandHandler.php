@@ -56,10 +56,7 @@ class DeleteFieldCommandHandler
 
         $old_order = $entity->getIndexNumber();
 
-        $entity
-            ->setIndexNumber(0)
-            ->setRemovedAt(time())
-        ;
+        $entity->remove();
 
         $this->doctrine->getManager()->persist($entity);
 

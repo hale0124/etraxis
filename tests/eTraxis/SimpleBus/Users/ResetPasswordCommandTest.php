@@ -11,8 +11,8 @@
 
 namespace eTraxis\SimpleBus\Users;
 
+use AltrEgo\AltrEgo;
 use eTraxis\Tests\BaseTestCase;
-use Ramsey\Uuid\Uuid;
 
 class ResetPasswordCommandTest extends BaseTestCase
 {
@@ -39,10 +39,13 @@ class ResetPasswordCommandTest extends BaseTestCase
 
         $user = $this->findUser('artem');
 
+        /** @var \StdClass $user2 */
+        $user2 = AltrEgo::create($user);
+
         self::assertNotEquals($expected, $user->getPassword());
 
         $command = new ResetPasswordCommand([
-            'token'    => $user->getResetToken(),
+            'token'    => $user2->resetToken,
             'password' => 'legacy',
         ]);
 
@@ -51,7 +54,7 @@ class ResetPasswordCommandTest extends BaseTestCase
         $user = $this->findUser('artem');
 
         self::assertEquals($expected, $user->getPassword());
-        self::assertNull($user->getResetToken());
+        self::assertNull($user2->resetToken);
     }
 
     /**
@@ -61,12 +64,11 @@ class ResetPasswordCommandTest extends BaseTestCase
     public function testLdap()
     {
         $username = 'einstein';
-        $token    = Uuid::uuid4()->getHex();
 
         $user = $this->findUser($username, true);
         self::assertNotNull($user);
 
-        $user->setResetToken($token);
+        $token = $user->generateResetToken();
 
         $this->doctrine->getManager()->persist($user);
         $this->doctrine->getManager()->flush();
@@ -75,7 +77,7 @@ class ResetPasswordCommandTest extends BaseTestCase
         self::assertNotNull($user);
 
         $command = new ResetPasswordCommand([
-            'token'    => $user->getResetToken(),
+            'token'    => $token,
             'password' => 'legacy',
         ]);
 
@@ -88,10 +90,11 @@ class ResetPasswordCommandTest extends BaseTestCase
      */
     public function testTooShort()
     {
-        $user = $this->findUser('artem');
+        /** @var \StdClass $user */
+        $user = AltrEgo::create($this->findUser('artem'));
 
         $command = new ResetPasswordCommand([
-            'token'    => $user->getResetToken(),
+            'token'    => $user->resetToken,
             'password' => 'short',
         ]);
 

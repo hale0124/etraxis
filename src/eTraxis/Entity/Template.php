@@ -184,6 +184,30 @@ class Template implements \JsonSerializable
     /**
      * Property setter.
      *
+     * @param   Project $project
+     *
+     * @return  self
+     */
+    public function setProject(Project $project)
+    {
+        $this->project = $project;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  Project
+     */
+    public function getProject()
+    {
+        return $this->project;
+    }
+
+    /**
+     * Property setter.
+     *
      * @param   string $name
      *
      * @return  self
@@ -422,58 +446,6 @@ class Template implements \JsonSerializable
     }
 
     /**
-     * Property setter.
-     *
-     * @param   Project $project
-     *
-     * @return  self
-     */
-    public function setProject(Project $project)
-    {
-        $this->project = $project;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  Project
-     */
-    public function getProject()
-    {
-        return $this->project;
-    }
-
-    /**
-     * Add state to the template.
-     *
-     * @param   State $state
-     *
-     * @return  self
-     */
-    public function addState(State $state)
-    {
-        $this->states[] = $state;
-
-        return $this;
-    }
-
-    /**
-     * Remove state from the template.
-     *
-     * @param   State $state
-     *
-     * @return  self
-     */
-    public function removeState(State $state)
-    {
-        $this->states->removeElement($state);
-
-        return $this;
-    }
-
-    /**
      * Get list of template states.
      *
      * @return  State[]
@@ -481,46 +453,6 @@ class Template implements \JsonSerializable
     public function getStates()
     {
         return $this->states->toArray();
-    }
-
-    /**
-     * Add field to the template.
-     *
-     * @param   Field $field
-     *
-     * @return  self
-     */
-    public function addField(Field $field)
-    {
-        $this->fields[] = $field;
-
-        return $this;
-    }
-
-    /**
-     * Remove field from the template.
-     *
-     * @param   Field $field
-     *
-     * @return  self
-     */
-    public function removeField(Field $field)
-    {
-        $this->fields->removeElement($field);
-
-        return $this;
-    }
-
-    /**
-     * Get list of template fields.
-     *
-     * @return  Field[]
-     */
-    public function getFields()
-    {
-        return $this->fields->filter(function (Field $field) {
-            return $field->getState() === null;
-        })->toArray();
     }
 
     /**
@@ -535,7 +467,7 @@ class Template implements \JsonSerializable
             'criticalAge' => $this->criticalAge,
             'frozenTime'  => $this->frozenTime,
             'description' => $this->description,
-            'isLocked'    => $this->isLocked,
+            'isLocked'    => (bool) $this->isLocked,
         ];
     }
 }

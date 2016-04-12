@@ -64,21 +64,21 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
 
         /** @noinspection PhpParamsInspection */
         $state_new
+            ->setTemplate($this->getReference('template:delivery'))
             ->setName('New')
             ->setAbbreviation('N')
             ->setType(State::TYPE_INITIAL)
             ->setResponsible(State::RESPONSIBLE_ASSIGN)
-            ->setTemplate($this->getReference('template:delivery'))
             ->setNextState($state_delivered)
         ;
 
         /** @noinspection PhpParamsInspection */
         $state_delivered
+            ->setTemplate($this->getReference('template:delivery'))
             ->setName('Delivered')
             ->setAbbreviation('D')
             ->setType(State::TYPE_FINAL)
             ->setResponsible(State::RESPONSIBLE_REMOVE)
-            ->setTemplate($this->getReference('template:delivery'))
         ;
 
         $this->addReference('state:new', $state_new);
@@ -131,21 +131,21 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
 
         /** @noinspection PhpParamsInspection */
         $state_produced
+            ->setTemplate($this->getReference('template:futurama'))
             ->setName('Produced')
             ->setAbbreviation('P')
             ->setType(State::TYPE_INITIAL)
             ->setResponsible(State::RESPONSIBLE_KEEP)
-            ->setTemplate($this->getReference('template:futurama'))
             ->setNextState($state_released)
         ;
 
         /** @noinspection PhpParamsInspection */
         $state_released
+            ->setTemplate($this->getReference('template:futurama'))
             ->setName('Released')
             ->setAbbreviation('R')
             ->setType(State::TYPE_FINAL)
             ->setResponsible(State::RESPONSIBLE_REMOVE)
-            ->setTemplate($this->getReference('template:futurama'))
         ;
 
         $this->addReference('state:produced', $state_produced);

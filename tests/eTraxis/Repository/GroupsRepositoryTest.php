@@ -63,32 +63,6 @@ class GroupsRepositoryTest extends BaseTestCase
         self::assertEquals($expected, $groups);
     }
 
-    public function testGetGroupMembers()
-    {
-        /** @var GroupsRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository(Group::class);
-
-        /** @var Group $group */
-        $group = $repository->findOneBy(['name' => 'Staff']);
-
-        $result = $repository->getGroupMembers($group);
-
-        $users = array_map(function (User $user) {
-            return $user->getUsername();
-        }, $result);
-
-        $expected = [
-            'bender',
-            'amy',
-            'zoidberg',
-            'fry',
-            'scruffy',
-            'leela',
-        ];
-
-        self::assertEquals($expected, $users);
-    }
-
     public function testGetGroupNonMembers()
     {
         /** @var GroupsRepository $repository */

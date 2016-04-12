@@ -26,7 +26,6 @@ class CreateDecimalFieldCommandTest extends BaseTestCase
         self::assertNotNull($state);
 
         $command = new CreateDecimalFieldCommand([
-            'template'     => $state->getTemplate()->getId(),
             'state'        => $state->getId(),
             'name'         => 'Price',
             'required'     => true,
@@ -68,7 +67,6 @@ class CreateDecimalFieldCommandTest extends BaseTestCase
         self::assertNotNull($state);
 
         $command = new CreateDecimalFieldCommand([
-            'template'     => $state->getTemplate()->getId(),
             'state'        => $state->getId(),
             'name'         => 'Month',
             'required'     => true,
@@ -93,7 +91,6 @@ class CreateDecimalFieldCommandTest extends BaseTestCase
         self::assertNotNull($state);
 
         $command = new CreateDecimalFieldCommand([
-            'template'     => $state->getTemplate()->getId(),
             'state'        => $state->getId(),
             'name'         => 'Month',
             'required'     => true,

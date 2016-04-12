@@ -25,11 +25,11 @@ class DeleteStateCommandTest extends BaseTestCase
         $state = new State();
 
         $state
+            ->setTemplate($template)
             ->setName('Cancelled')
             ->setAbbreviation('C')
             ->setType(State::TYPE_FINAL)
             ->setResponsible(State::RESPONSIBLE_REMOVE)
-            ->setTemplate($template)
         ;
 
         $this->doctrine->getManager()->persist($state);

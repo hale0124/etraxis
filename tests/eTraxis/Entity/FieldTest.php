@@ -24,14 +24,7 @@ class FieldTest extends BaseTestCase
         parent::setUp();
 
         $this->object = new Field();
-
-        /** @noinspection PhpParamsInspection */
-        $this->object
-            ->setDecimalValuesRepository($this->doctrine->getRepository(DecimalValue::class))
-            ->setStringValuesRepository($this->doctrine->getRepository(StringValue::class))
-            ->setTextValuesRepository($this->doctrine->getRepository(TextValue::class))
-            ->setListItemsRepository($this->doctrine->getRepository(ListItem::class))
-        ;
+        $this->object->injectDependencies($this->doctrine->getManager());
     }
 
     public function testId()
@@ -44,16 +37,10 @@ class FieldTest extends BaseTestCase
         self::assertEquals($expected, $this->object->getId());
     }
 
-    public function testTemplate()
-    {
-        $this->object->setTemplate($template = new Template());
-        self::assertSame($template, $this->object->getTemplate());
-    }
-
     public function testState()
     {
         $this->object->setState($state = new State());
-        self::assertSame($state, $this->object->getState());
+        self::assertEquals($state, $this->object->getState());
     }
 
     public function testName()
@@ -65,6 +52,8 @@ class FieldTest extends BaseTestCase
 
     public function testType()
     {
+        self::assertNull($this->object->getType());
+
         $this->object->setType(Field::TYPE_NUMBER);
         self::assertEquals('number', $this->object->getType());
 
@@ -110,11 +99,12 @@ class FieldTest extends BaseTestCase
         self::assertEquals($expected, $this->object->getIndexNumber());
     }
 
-    public function testRemovedAt()
+    public function testRemove()
     {
-        $expected = time();
-        $this->object->setRemovedAt($expected);
-        self::assertEquals($expected, $this->object->getRemovedAt());
+        self::assertFalse($this->object->isRemoved());
+
+        $this->object->remove();
+        self::assertTrue($this->object->isRemoved());
     }
 
     public function testIsRequired()

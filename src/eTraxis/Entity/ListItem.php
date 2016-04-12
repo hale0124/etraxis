@@ -71,7 +71,9 @@ class ListItem
      */
     public function setField(Field $field)
     {
-        $this->field = $field;
+        if ($field->getType() === Field::TYPE_LIST) {
+            $this->field = $field;
+        }
 
         return $this;
     }

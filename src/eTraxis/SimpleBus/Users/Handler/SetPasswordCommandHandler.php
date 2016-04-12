@@ -72,10 +72,7 @@ class SetPasswordCommandHandler
                 throw new BadRequestHttpException($e->getMessage());
             }
 
-            $entity
-                ->setPassword($encoded)
-                ->setPasswordSetAt(time())
-            ;
+            $entity->setPassword($encoded);
 
             $this->doctrine->getManager()->persist($entity);
             $this->doctrine->getManager()->flush();

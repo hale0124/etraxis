@@ -70,10 +70,10 @@ class AddRemoveUsersCommandHandler
         foreach ($users as $user) {
 
             if ($command instanceof AddUsersCommand) {
-                $group->addUser($user);
+                $group->addMember($user);
             }
             elseif ($command instanceof RemoveUsersCommand) {
-                $group->removeUser($user);
+                $group->removeMember($user);
             }
         }
 

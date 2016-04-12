@@ -25,7 +25,6 @@ class CreateDateFieldCommandTest extends BaseTestCase
         self::assertNotNull($state);
 
         $command = new CreateDateFieldCommand([
-            'template'     => $state->getTemplate()->getId(),
             'state'        => $state->getId(),
             'name'         => 'Deadline',
             'required'     => true,
@@ -60,7 +59,6 @@ class CreateDateFieldCommandTest extends BaseTestCase
         self::assertNotNull($state);
 
         $command = new CreateDateFieldCommand([
-            'template'     => $state->getTemplate()->getId(),
             'state'        => $state->getId(),
             'name'         => 'Deadline',
             'required'     => true,
@@ -85,7 +83,6 @@ class CreateDateFieldCommandTest extends BaseTestCase
         self::assertNotNull($state);
 
         $command = new CreateDateFieldCommand([
-            'template'     => $state->getTemplate()->getId(),
             'state'        => $state->getId(),
             'name'         => 'Deadline',
             'required'     => true,

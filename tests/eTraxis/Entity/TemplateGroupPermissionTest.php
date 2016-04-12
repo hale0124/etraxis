@@ -24,13 +24,13 @@ class TemplateGroupPermissionTest extends \PHPUnit_Framework_TestCase
     public function testGroup()
     {
         $this->object->setGroup($group = new Group());
-        self::assertSame($group, $this->object->getGroup());
+        self::assertEquals($group, $this->object->getGroup());
     }
 
     public function testTemplate()
     {
         $this->object->setTemplate($template = new Template());
-        self::assertSame($template, $this->object->getTemplate());
+        self::assertEquals($template, $this->object->getTemplate());
     }
 
     public function testPermission()

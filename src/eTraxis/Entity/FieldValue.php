@@ -12,6 +12,7 @@
 namespace eTraxis\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use eTraxis\Collection;
 
 /**
  * Field value.
@@ -53,6 +54,13 @@ class FieldValue
     private $type;
 
     /**
+     * @var int Whether this value is current one for this field of the record.
+     *
+     * @ORM\Column(name="is_latest", type="integer")
+     */
+    private $isCurrent;
+
+    /**
      * @var int Value of the field. Depends on field type as following:
      *
      *          "number"   - integer value (from -1000000000 till +1000000000)
@@ -68,13 +76,6 @@ class FieldValue
      * @ORM\Column(name="value_id", type="integer", nullable=true)
      */
     private $valueId;
-
-    /**
-     * @var int Whether this value is current one for this field of the record.
-     *
-     * @ORM\Column(name="is_latest", type="integer")
-     */
-    private $isCurrent;
 
     /**
      * Property setter.
@@ -111,42 +112,8 @@ class FieldValue
     {
         $this->field = $field;
 
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  Field
-     */
-    public function getField()
-    {
-        return $this->field;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   string $type
-     *
-     * @return  self
-     */
-    public function setType($type)
-    {
-        /**
-         * @deprecated 4.1.0 A stub for compatibility btw 3.6 and 4.0.
-         */
-        $types = [
-            'number'   => 1,
-            'string'   => 2,
-            'text'     => 3,
-            'checkbox' => 4,
-            'list'     => 5,
-            'record'   => 6,
-            'date'     => 7,
-            'duration' => 8,
-            'decimal'  => 9,
-        ];
+        $type  = $field->getType();
+        $types = array_flip(Collection\LegacyFieldType::getCollection());
 
         if (array_key_exists($type, $types)) {
             $this->type = $types[$type];
@@ -158,50 +125,11 @@ class FieldValue
     /**
      * Property getter.
      *
-     * @return  string
+     * @return  Field
      */
-    public function getType()
+    public function getField()
     {
-        /**
-         * @deprecated 4.1.0 A stub for compatibility btw 3.6 and 4.0.
-         */
-        $types = [
-            1 => 'number',
-            2 => 'string',
-            3 => 'text',
-            4 => 'checkbox',
-            5 => 'list',
-            6 => 'record',
-            7 => 'date',
-            8 => 'duration',
-            9 => 'decimal',
-        ];
-
-        return $types[$this->type];
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   int $valueId
-     *
-     * @return  self
-     */
-    public function setValueId($valueId)
-    {
-        $this->valueId = $valueId;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  int
-     */
-    public function getValueId()
-    {
-        return $this->valueId;
+        return $this->field;
     }
 
     /**
@@ -226,5 +154,33 @@ class FieldValue
     public function isCurrent()
     {
         return (bool) $this->isCurrent;
+    }
+
+    /**
+     * Property setter.
+     *
+     * @param   int $valueId
+     *
+     * @return  self
+     *
+     * @todo Refactor into type-specific functions.
+     */
+    public function setValueId($valueId)
+    {
+        $this->valueId = $valueId;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  int
+     *
+     * @todo Refactor into type-specific functions.
+     */
+    public function getValueId()
+    {
+        return $this->valueId;
     }
 }

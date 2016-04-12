@@ -152,19 +152,17 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
 
                 /** @noinspection PhpParamsInspection */
                 $field
+                    ->setState($state)
                     ->setName($info['name'])
                     ->setType($info['type'])
                     ->setDescription($info['description'])
                     ->setIndexNumber($order)
-                    ->setRemovedAt(0)
                     ->setRequired($info['required'])
                     ->setGuestAccess($info['guest'])
                     ->setRegisteredAccess($info['registered'])
                     ->setAuthorAccess($info['author'])
                     ->setResponsibleAccess($info['responsible'])
                     ->setShowInEmails(false)
-                    ->setTemplate($state->getTemplate())
-                    ->setState($state)
                 ;
 
                 $field->getParameters()
@@ -343,19 +341,17 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
 
                 /** @noinspection PhpParamsInspection */
                 $field
+                    ->setState($state)
                     ->setName($info['name'])
                     ->setType($info['type'])
                     ->setDescription(null)
                     ->setIndexNumber($order)
-                    ->setRemovedAt(0)
                     ->setRequired($info['required'])
                     ->setGuestAccess($info['guest'])
                     ->setRegisteredAccess($info['registered'])
                     ->setAuthorAccess($info['author'])
                     ->setResponsibleAccess($info['responsible'])
                     ->setShowInEmails(false)
-                    ->setTemplate($state->getTemplate())
-                    ->setState($state)
                 ;
 
                 $field->getParameters()

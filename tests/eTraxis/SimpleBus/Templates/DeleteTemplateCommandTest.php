@@ -25,6 +25,7 @@ class DeleteTemplateCommandTest extends BaseTestCase
         $template = new Template();
 
         $template
+            ->setProject($project)
             ->setName('Bug report')
             ->setPrefix('bug')
             ->setLocked(true)
@@ -32,7 +33,6 @@ class DeleteTemplateCommandTest extends BaseTestCase
             ->setRegisteredPermissions(0)
             ->setAuthorPermissions(0)
             ->setResponsiblePermissions(0)
-            ->setProject($project)
         ;
 
         $this->doctrine->getManager()->persist($template);

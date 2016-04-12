@@ -25,7 +25,6 @@ class CreateNumberFieldCommandTest extends BaseTestCase
         self::assertNotNull($state);
 
         $command = new CreateNumberFieldCommand([
-            'template'     => $state->getTemplate()->getId(),
             'state'        => $state->getId(),
             'name'         => 'Month',
             'required'     => true,
@@ -60,7 +59,6 @@ class CreateNumberFieldCommandTest extends BaseTestCase
         self::assertNotNull($state);
 
         $command = new CreateNumberFieldCommand([
-            'template'     => $state->getTemplate()->getId(),
             'state'        => $state->getId(),
             'name'         => 'Month',
             'required'     => true,
@@ -85,7 +83,6 @@ class CreateNumberFieldCommandTest extends BaseTestCase
         self::assertNotNull($state);
 
         $command = new CreateNumberFieldCommand([
-            'template'     => $state->getTemplate()->getId(),
             'state'        => $state->getId(),
             'name'         => 'Month',
             'required'     => true,

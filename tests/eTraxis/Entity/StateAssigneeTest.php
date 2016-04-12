@@ -24,12 +24,12 @@ class StateAssigneeTest extends \PHPUnit_Framework_TestCase
     public function testState()
     {
         $this->object->setState($state = new State());
-        self::assertSame($state, $this->object->getState());
+        self::assertEquals($state, $this->object->getState());
     }
 
     public function testGroup()
     {
         $this->object->setGroup($group = new Group());
-        self::assertSame($group, $this->object->getGroup());
+        self::assertEquals($group, $this->object->getGroup());
     }
 }

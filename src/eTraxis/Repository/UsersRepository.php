@@ -21,33 +21,6 @@ use eTraxis\Entity\User;
 class UsersRepository extends EntityRepository
 {
     /**
-     * Finds all groups the specified account belongs to.
-     *
-     * @param   User $user
-     *
-     * @return  Group[]
-     */
-    public function getUserGroups(User $user)
-    {
-        $repository = $this->getEntityManager()->getRepository(Group::class);
-
-        $query = $repository->createQueryBuilder('g');
-
-        $query
-            ->select('g')
-            ->addSelect('p')
-            ->join('g.users', 'u')
-            ->leftJoin('g.project', 'p')
-            ->where('u = :user')
-            ->setParameter('user', $user)
-            ->orderBy('p.name')
-            ->addOrderBy('g.name')
-        ;
-
-        return $query->getQuery()->getResult();
-    }
-
-    /**
      * Finds all groups the specified account doesn't belong to.
      *
      * @param   User $user
@@ -58,19 +31,6 @@ class UsersRepository extends EntityRepository
     {
         $repository = $this->getEntityManager()->getRepository(Group::class);
 
-        // Find all groups the account belong to.
-        $subquery = $repository->createQueryBuilder('g');
-
-        $subquery
-            ->select('g.id')
-            ->join('g.users', 'u')
-            ->where('u = :user')
-            ->setParameter('user', $user)
-        ;
-
-        $groups = $subquery->getQuery()->getArrayResult();
-
-        // Find all other groups.
         $query = $repository->createQueryBuilder('g');
 
         $query
@@ -81,10 +41,11 @@ class UsersRepository extends EntityRepository
             ->addOrderBy('g.name')
         ;
 
-        if (count($groups)) {
+        $groups = $user->getGroups();
 
+        if (count($groups) > 0) {
             $query
-                ->where($query->expr()->notIn('g.id', ':groups'))
+                ->where($query->expr()->notIn('g', ':groups'))
                 ->setParameter('groups', $groups)
             ;
         }

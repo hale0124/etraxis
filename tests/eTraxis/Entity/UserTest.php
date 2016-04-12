@@ -12,7 +12,7 @@
 namespace eTraxis\Entity;
 
 use AltrEgo\AltrEgo;
-use Ramsey\Uuid\Uuid;
+use eTraxis\Collection\Timezone;
 
 class UserTest extends \PHPUnit_Framework_TestCase
 {
@@ -64,30 +64,74 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
     public function testPassword()
     {
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
+
         $expected = 'Password';
+        self::assertGreaterThan(1, time() - $object->passwordSetAt);
         $this->object->setPassword($expected);
         self::assertEquals($expected, $this->object->getPassword());
+        self::assertLessThanOrEqual(1, time() - $object->passwordSetAt);
     }
 
-    public function testPasswordSetAt()
+    public function testIsPasswordExpired()
     {
-        $expected = time();
-        $this->object->setPasswordSetAt($expected);
-        self::assertEquals($expected, $this->object->getPasswordSetAt());
+        $this->object->setPassword('secret');
+
+        self::assertFalse($this->object->isPasswordExpired(1));
+        self::assertTrue($this->object->isPasswordExpired(0));
     }
 
     public function testResetToken()
     {
-        $expected = Uuid::uuid4()->getHex();
-        $this->object->setResetToken($expected);
-        self::assertEquals($expected, $this->object->getResetToken());
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
+
+        $this->object->generateResetToken();
+        self::assertNotNull($object->resetToken);
+        self::assertNotEquals(0, $object->resetTokenExpiresAt);
+
+        $this->object->clearResetToken();
+        self::assertNull($object->resetToken);
+        self::assertEquals(0, $object->resetTokenExpiresAt);
     }
 
-    public function testResetTokenExpiresAt()
+    public function testIsResetTokenExpired()
     {
-        $expected = time();
-        $this->object->setResetTokenExpiresAt($expected);
-        self::assertEquals($expected, $this->object->getResetTokenExpiresAt());
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
+
+        $this->object->generateResetToken();
+        self::assertFalse($this->object->isResetTokenExpired());
+
+        $object->resetTokenExpiresAt -= 7200;
+        self::assertTrue($this->object->isResetTokenExpired());
+    }
+
+    public function testLockUnlock()
+    {
+        $this->object->lock(2, 30);
+        self::assertTrue($this->object->isAccountNonLocked());
+
+        $this->object->lock(2, 30);
+        self::assertFalse($this->object->isAccountNonLocked());
+
+        $this->object->unlock();
+        self::assertTrue($this->object->isAccountNonLocked());
+    }
+
+    public function testIsAccountNonLocked()
+    {
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
+
+        self::assertTrue($this->object->isAccountNonLocked());
+
+        $object->lockedUntil = time() + 5;
+        self::assertFalse($this->object->isAccountNonLocked());
+
+        $object->lockedUntil = time() - 1;
+        self::assertTrue($this->object->isAccountNonLocked());
     }
 
     public function testIsAdmin()
@@ -108,6 +152,15 @@ class UserTest extends \PHPUnit_Framework_TestCase
         self::assertTrue($this->object->isDisabled());
     }
 
+    public function testIsEnabled()
+    {
+        $this->object->setDisabled(false);
+        self::assertTrue($this->object->isEnabled());
+
+        $this->object->setDisabled(true);
+        self::assertFalse($this->object->isEnabled());
+    }
+
     public function testIsLdap()
     {
         $this->object->setLdap(false);
@@ -117,18 +170,13 @@ class UserTest extends \PHPUnit_Framework_TestCase
         self::assertTrue($this->object->isLdap());
     }
 
-    public function testAuthAttempts()
+    public function testGetAuthenticationSource()
     {
-        $expected = 0;
-        $this->object->setAuthAttempts($expected);
-        self::assertEquals($expected, $this->object->getAuthAttempts());
-    }
+        $this->object->setLdap(false);
+        self::assertEquals(User::AUTH_INTERNAL, $this->object->getAuthenticationSource());
 
-    public function testLockedUntil()
-    {
-        $expected = time();
-        $this->object->setLockedUntil($expected);
-        self::assertEquals($expected, $this->object->getLockedUntil());
+        $this->object->setLdap(true);
+        self::assertEquals(User::AUTH_LDAP, $this->object->getAuthenticationSource());
     }
 
     public function testLocale()
@@ -155,13 +203,6 @@ class UserTest extends \PHPUnit_Framework_TestCase
         self::assertEquals($expected, $this->object->getLocale());
     }
 
-    public function testTimezone()
-    {
-        $expected = mt_rand();
-        $this->object->setTimezone($expected);
-        self::assertEquals($expected, $this->object->getTimezone());
-    }
-
     public function testTheme()
     {
         $expected = 'emerald';
@@ -176,11 +217,28 @@ class UserTest extends \PHPUnit_Framework_TestCase
         self::assertEquals($expected, $this->object->getTheme());
     }
 
-    public function testView()
+    public function testTimezone()
     {
-        $expected = new View();
-        $this->object->setView($expected);
-        self::assertEquals($expected, $this->object->getView());
+        $timezones = array_flip(Timezone::getCollection());
+        $expected  = $timezones['Pacific/Auckland'];
+
+        $this->object->setTimezone($expected);
+        self::assertEquals($expected, $this->object->getTimezone());
+
+        $this->object->setTimezone(PHP_INT_MAX);
+        self::assertEquals($expected, $this->object->getTimezone());
+    }
+
+    public function testTimezoneUnsupported()
+    {
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
+
+        $expected         = 0;
+        $object->timezone = PHP_INT_MAX;
+
+        self::assertEquals(PHP_INT_MAX, $object->timezone);
+        self::assertEquals($expected, $this->object->getTimezone());
     }
 
     public function testGroups()
@@ -204,55 +262,5 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
         self::assertTrue(in_array(User::ROLE_USER, $roles));
         self::assertFalse(in_array(User::ROLE_ADMIN, $roles));
-    }
-
-    public function testGetSalt()
-    {
-        /** @noinspection PhpVoidFunctionResultUsedInspection */
-        self::assertNull($this->object->getSalt());
-    }
-
-    public function testEraseCredentials()
-    {
-        $this->object->eraseCredentials();
-    }
-
-    public function testIsAccountNonExpired()
-    {
-        self::assertTrue($this->object->isAccountNonExpired());
-    }
-
-    public function testIsAccountNonLocked()
-    {
-        self::assertTrue($this->object->isAccountNonLocked());
-
-        $this->object->setLockedUntil(time() + 5);
-        self::assertFalse($this->object->isAccountNonLocked());
-
-        $this->object->setLockedUntil(time() - 1);
-        self::assertTrue($this->object->isAccountNonLocked());
-    }
-
-    public function testIsCredentialsNonExpired()
-    {
-        self::assertTrue($this->object->isCredentialsNonExpired());
-    }
-
-    public function testIsEnabled()
-    {
-        $this->object->setDisabled(false);
-        self::assertTrue($this->object->isEnabled());
-
-        $this->object->setDisabled(true);
-        self::assertFalse($this->object->isEnabled());
-    }
-
-    public function testGetAuthenticationSource()
-    {
-        $this->object->setLdap(false);
-        self::assertEquals('eTraxis', $this->object->getAuthenticationSource());
-
-        $this->object->setLdap(true);
-        self::assertEquals('LDAP', $this->object->getAuthenticationSource());
     }
 }

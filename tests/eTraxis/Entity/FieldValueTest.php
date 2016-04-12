@@ -11,6 +11,8 @@
 
 namespace eTraxis\Entity;
 
+use AltrEgo\AltrEgo;
+
 class FieldValueTest extends \PHPUnit_Framework_TestCase
 {
     /** @var FieldValue */
@@ -24,27 +26,25 @@ class FieldValueTest extends \PHPUnit_Framework_TestCase
     public function testEvent()
     {
         $this->object->setEvent($event = new Event());
-        self::assertSame($event, $this->object->getEvent());
+        self::assertEquals($event, $this->object->getEvent());
     }
 
     public function testField()
     {
         $this->object->setField($field = new Field());
-        self::assertSame($field, $this->object->getField());
-    }
-
-    public function testValueId()
-    {
-        $expected = mt_rand(1, PHP_INT_MAX);
-        $this->object->setValueId($expected);
-        self::assertEquals($expected, $this->object->getValueId());
+        self::assertEquals($field, $this->object->getField());
     }
 
     public function testType()
     {
-        $expected = Field::TYPE_NUMBER;
-        $this->object->setType($expected);
-        self::assertEquals($expected, $this->object->getType());
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
+        self::assertNotEquals(1, $object->type);
+
+        $field = new Field();
+        $field->setType(Field::TYPE_STRING);
+        $this->object->setField($field);
+        self::assertEquals(2, $object->type);
     }
 
     public function testIsCurrent()
@@ -54,5 +54,12 @@ class FieldValueTest extends \PHPUnit_Framework_TestCase
 
         $this->object->setCurrent(true);
         self::assertTrue($this->object->isCurrent());
+    }
+
+    public function testValueId()
+    {
+        $expected = mt_rand(1, PHP_INT_MAX);
+        $this->object->setValueId($expected);
+        self::assertEquals($expected, $this->object->getValueId());
     }
 }

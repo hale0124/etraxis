@@ -13,6 +13,7 @@ namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use eTraxis\Collection;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 
 /**
@@ -98,7 +99,7 @@ class State implements \JsonSerializable
      * @ORM\ManyToOne(targetEntity="State")
      * @ORM\JoinColumn(name="next_state_id", referencedColumnName="state_id", onDelete="CASCADE")
      */
-    private $next_state;
+    private $nextState;
 
     /**
      * @var ArrayCollection List of state fields.
@@ -207,7 +208,9 @@ class State implements \JsonSerializable
      */
     public function setType($type)
     {
-        $this->type = $type;
+        if (in_array($type, Collection\StateType::getAllKeys())) {
+            $this->type = $type;
+        }
 
         return $this;
     }
@@ -231,7 +234,9 @@ class State implements \JsonSerializable
      */
     public function setResponsible($responsible)
     {
-        $this->responsible = $responsible;
+        if (in_array($responsible, Collection\StateResponsible::getAllKeys())) {
+            $this->responsible = $responsible;
+        }
 
         return $this;
     }
@@ -255,7 +260,11 @@ class State implements \JsonSerializable
      */
     public function setNextState(State $state)
     {
-        $this->next_state = $state;
+        if ($state !== null && $state->getTemplate() !== $this->template) {
+            return $this;
+        }
+
+        $this->nextState = $state;
 
         return $this;
     }
@@ -267,35 +276,7 @@ class State implements \JsonSerializable
      */
     public function getNextState()
     {
-        return $this->next_state;
-    }
-
-    /**
-     * Add field to the state.
-     *
-     * @param   Field $field
-     *
-     * @return  self
-     */
-    public function addField(Field $field)
-    {
-        $this->fields[] = $field;
-
-        return $this;
-    }
-
-    /**
-     * Remove field from the state.
-     *
-     * @param   Field $field
-     *
-     * @return  self
-     */
-    public function removeField(Field $field)
-    {
-        $this->fields->removeElement($field);
-
-        return $this;
+        return $this->nextState;
     }
 
     /**

@@ -77,6 +77,7 @@ class BaseFieldCommandHandler
 
         /** @noinspection PhpParamsInspection */
         $entity
+            ->injectDependencies($this->doctrine->getManager())
             ->setName($command->name)
             ->setDescription($command->description)
             ->setRequired($command->required)
@@ -85,35 +86,17 @@ class BaseFieldCommandHandler
             ->setRegisteredAccess(Entity\Field::ACCESS_DENIED)
             ->setAuthorAccess(Entity\Field::ACCESS_DENIED)
             ->setResponsibleAccess(Entity\Field::ACCESS_DENIED)
-            ->setDecimalValuesRepository($this->doctrine->getRepository(Entity\DecimalValue::class))
-            ->setStringValuesRepository($this->doctrine->getRepository(Entity\StringValue::class))
-            ->setTextValuesRepository($this->doctrine->getRepository(Entity\TextValue::class))
-            ->setListItemsRepository($this->doctrine->getRepository(Entity\ListItem::class))
         ;
 
-        if ($command->state) {
-            /** @var Entity\State $state */
-            $state = $this->doctrine->getRepository(Entity\State::class)->find($command->state);
+        /** @var Entity\State $state */
+        $state = $this->doctrine->getRepository(Entity\State::class)->find($command->state);
 
-            if (!$state) {
-                throw new NotFoundHttpException('Unknown state.');
-            }
-
-            $entity->setState($state);
-            $entity->setTemplate($state->getTemplate());
-            $entity->setIndexNumber(count($state->getFields()) + 1);
+        if (!$state) {
+            throw new NotFoundHttpException('Unknown state.');
         }
-        else {
-            /** @var Entity\Template $template */
-            $template = $this->doctrine->getRepository(Entity\Template::class)->find($command->template);
 
-            if (!$template) {
-                throw new NotFoundHttpException('Unknown template.');
-            }
-
-            $entity->setTemplate($template);
-            $entity->setIndexNumber(count($template->getFields()) + 1);
-        }
+        $entity->setState($state);
+        $entity->setIndexNumber(count($state->getFields()) + 1);
 
         $errors = $this->validator->validate($entity);
 

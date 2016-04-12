@@ -87,6 +87,7 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
 
         /** @noinspection PhpParamsInspection */
         $template
+            ->setProject($this->getReference('project:planetexpress'))
             ->setName('Delivery')
             ->setPrefix('PE')
             ->setDescription('Delivery task')
@@ -95,7 +96,6 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
             ->setRegisteredPermissions(0)
             ->setAuthorPermissions($author)
             ->setResponsiblePermissions($responsible)
-            ->setProject($this->getReference('project:planetexpress'))
         ;
 
         $this->addReference('template:delivery', $template);
@@ -117,8 +117,8 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
 
             /** @noinspection PhpParamsInspection */
             $permission
-                ->setTemplate($template)
                 ->setGroup($group)
+                ->setTemplate($template)
                 ->setPermission($flags)
             ;
 
@@ -142,6 +142,7 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
 
         /** @noinspection PhpParamsInspection */
         $template
+            ->setProject($this->getReference('project:planetexpress'))
             ->setName('Futurama')
             ->setPrefix('F')
             ->setDescription('Futurama episode')
@@ -150,7 +151,6 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
             ->setRegisteredPermissions($registered)
             ->setAuthorPermissions($author)
             ->setResponsiblePermissions(0)
-            ->setProject($this->getReference('project:planetexpress'))
         ;
 
         $this->addReference('template:futurama', $template);

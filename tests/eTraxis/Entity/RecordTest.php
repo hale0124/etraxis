@@ -11,26 +11,25 @@
 
 namespace eTraxis\Entity;
 
-use AltrEgo\AltrEgo;
+use eTraxis\Tests\BaseTestCase;
 
-class RecordTest extends \PHPUnit_Framework_TestCase
+class RecordTest extends BaseTestCase
 {
     /** @var Record */
     private $object;
 
     protected function setUp()
     {
-        $this->object = new Record();
+        parent::setUp();
+
+        $this->object = $this->doctrine->getManager()->getRepository(Record::class)->findOneBy([
+            'subject' => 'Prizes for the claw crane',
+        ]);
     }
 
     public function testId()
     {
-        /** @var \StdClass $object */
-        $object = AltrEgo::create($this->object);
-
-        $expected   = mt_rand(1, PHP_INT_MAX);
-        $object->id = $expected;
-        self::assertEquals($expected, $this->object->getId());
+        self::assertNotNull($this->object->getId());
     }
 
     public function testSubject()
@@ -42,59 +41,27 @@ class RecordTest extends \PHPUnit_Framework_TestCase
 
     public function testState()
     {
-        $this->object->setState($state = new State());
-        self::assertSame($state, $this->object->getState());
+        self::assertEquals('Delivered', $this->object->getState()->getName());
     }
 
     public function testAuthor()
     {
-        $this->object->setAuthor($user = new User());
-        self::assertSame($user, $this->object->getAuthor());
+        self::assertEquals('Hubert J. Farnsworth', $this->object->getAuthor()->getFullname());
     }
 
     public function testResponsible()
     {
-        $this->object->setResponsible($user = new User());
-        self::assertSame($user, $this->object->getResponsible());
+        self::assertNull($this->object->getResponsible());
     }
 
     public function testCreatedAt()
     {
-        $expected = time();
-        $this->object->setCreatedAt($expected);
-        self::assertEquals($expected, $this->object->getCreatedAt());
-    }
-
-    public function testChangedAt()
-    {
-        $expected = time();
-        $this->object->setChangedAt($expected);
-        self::assertEquals($expected, $this->object->getChangedAt());
-    }
-
-    public function testClosedAt()
-    {
-        $expected = time();
-        $this->object->setClosedAt($expected);
-        self::assertEquals($expected, $this->object->getClosedAt());
-    }
-
-    public function testResumedAt()
-    {
-        $expected = time();
-        $this->object->setResumedAt($expected);
-        self::assertEquals($expected, $this->object->getResumedAt());
+        self::assertEquals('1999-04-04', date('Y-m-d', $this->object->getCreatedAt()));
     }
 
     public function testHistory()
     {
-        self::assertCount(0, $this->object->getHistory());
-
-        $this->object->addEvent($event = new Event());
-        self::assertCount(1, $this->object->getHistory());
-
-        $this->object->removeEvent($event);
-        self::assertCount(0, $this->object->getHistory());
+        self::assertCount(3, $this->object->getHistory());
     }
 
     public function testWatchers()

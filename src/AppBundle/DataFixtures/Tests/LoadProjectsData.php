@@ -11,6 +11,7 @@
 
 namespace AppBundle\DataFixtures\Tests;
 
+use AltrEgo\AltrEgo;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -57,9 +58,11 @@ class LoadProjectsData extends AbstractFixture implements ContainerAwareInterfac
 
             $project
                 ->setName($name)
-                ->setCreatedAt(strtotime($date))
                 ->setSuspended(true)
             ;
+
+            /** @noinspection PhpUndefinedFieldInspection */
+            AltrEgo::create($project)->createdAt = strtotime($date);
 
             $manager->persist($project);
         }
@@ -97,23 +100,25 @@ class LoadProjectsData extends AbstractFixture implements ContainerAwareInterfac
         $project
             ->setName('Planet Express')
             ->setDescription('Interplanetary delivery company')
-            ->setCreatedAt(strtotime('1999-03-28'))
             ->setSuspended(false)
         ;
+
+        /** @noinspection PhpUndefinedFieldInspection */
+        AltrEgo::create($project)->createdAt = strtotime('1999-03-28');
 
         foreach ($groups as $name => $description) {
 
             $group = new Group();
 
             $group
+                ->setProject($project)
                 ->setName(ucwords($name))
                 ->setDescription($description)
-                ->setProject($project)
             ;
 
             foreach ($members[$name] as $member) {
                 /** @noinspection PhpParamsInspection */
-                $group->addUser($this->getReference('user:' . $member));
+                $group->addMember($this->getReference('user:' . $member));
             }
 
             $this->addReference('group:' . $name, $group);

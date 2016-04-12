@@ -11,32 +11,31 @@
 
 namespace eTraxis\Entity;
 
-use AltrEgo\AltrEgo;
+use eTraxis\Tests\BaseTestCase;
 
-class StateTest extends \PHPUnit_Framework_TestCase
+class StateTest extends BaseTestCase
 {
     /** @var State */
     private $object;
 
     protected function setUp()
     {
-        $this->object = new State();
+        parent::setUp();
+
+        $this->object = $this->doctrine->getManager()->getRepository(State::class)->findOneBy([
+            'name' => 'New',
+        ]);
     }
 
     public function testId()
     {
-        /** @var \StdClass $object */
-        $object = AltrEgo::create($this->object);
-
-        $expected   = mt_rand(1, PHP_INT_MAX);
-        $object->id = $expected;
-        self::assertEquals($expected, $this->object->getId());
+        self::assertNotNull($this->object->getId());
     }
 
     public function testTemplate()
     {
         $this->object->setTemplate($template = new Template());
-        self::assertSame($template, $this->object->getTemplate());
+        self::assertEquals($template, $this->object->getTemplate());
     }
 
     public function testName()
@@ -69,31 +68,30 @@ class StateTest extends \PHPUnit_Framework_TestCase
 
     public function testNextState()
     {
-        $this->object->setNextState($state = new State());
-        self::assertSame($state, $this->object->getNextState());
+        $state = new State();
+        $this->object->setNextState($state);
+        self::assertNotEquals($state, $this->object->getNextState());
+
+        $state->setTemplate($this->object->getTemplate());
+        $this->object->setNextState($state);
+        self::assertEquals($state, $this->object->getNextState());
     }
 
     public function testFields()
     {
-        self::assertCount(0, $this->object->getFields());
-
-        $this->object->addField($field = new Field());
-        self::assertCount(1, $this->object->getFields());
-
-        $this->object->removeField($field);
-        self::assertCount(0, $this->object->getFields());
+        self::assertCount(4, $this->object->getFields());
     }
 
     public function testJsonSerialize()
     {
         $expected = [
-            'id',
-            'name',
-            'abbreviation',
-            'type',
-            'responsible',
+            'id'           => $this->object->getId(),
+            'name'         => $this->object->getName(),
+            'abbreviation' => $this->object->getAbbreviation(),
+            'type'         => $this->object->getType(),
+            'responsible'  => $this->object->getResponsible(),
         ];
 
-        self::assertEquals($expected, array_keys($this->object->jsonSerialize()));
+        self::assertEquals($expected, $this->object->jsonSerialize());
     }
 }

@@ -11,6 +11,7 @@
 
 namespace eTraxis\Voter;
 
+use AltrEgo\AltrEgo;
 use eTraxis\Entity\Event;
 use eTraxis\Entity\User;
 use eTraxis\Tests\BaseTestCase;
@@ -62,7 +63,10 @@ class UserVoterTest extends BaseTestCase
 
         self::assertFalse($this->security->isGranted(User::SET_EXPIRED_PASSWORD, $hubert));
 
-        $hubert->setPasswordSetAt(time() - 86400 * 2);
+        /** @var \StdClass $hubert2 */
+        $hubert2 = AltrEgo::create($hubert);
+
+        $hubert2->passwordSetAt = time() - 86400 * 2;
 
         /** @var \eTraxis\Repository\EventsRepository $repository */
         $repository = $this->doctrine->getRepository(Event::class);
@@ -132,8 +136,10 @@ class UserVoterTest extends BaseTestCase
         self::assertInstanceOf(User::class, $hubert);
         self::assertInstanceOf(User::class, $bender);
 
-        $bender->setAuthAttempts(3);
-        $bender->setLockedUntil(time() + 60);
+        $auth_attempts = $this->client->getContainer()->getParameter('security_auth_attempts');
+        $lock_time     = $this->client->getContainer()->getParameter('security_lock_time');
+
+        do {} while(!$bender->lock($auth_attempts, $lock_time));
 
         self::assertTrue($this->security->isGranted(User::UNLOCK, $bender));
         self::assertFalse($this->security->isGranted(User::UNLOCK, $hubert));

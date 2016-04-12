@@ -170,7 +170,6 @@ class UsersGetController extends Controller
 
         return $this->render('admin/users/tab_groups.html.twig', [
             'user'   => $user,
-            'groups' => $repository->getUserGroups($user),
             'others' => $repository->getOtherGroups($user),
         ]);
     }

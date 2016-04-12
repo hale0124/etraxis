@@ -47,11 +47,11 @@ class StateVoterTest extends BaseTestCase
         $state = new State();
 
         $state
+            ->setTemplate($template)
             ->setName('Cancelled')
             ->setAbbreviation('C')
             ->setType(State::TYPE_FINAL)
             ->setResponsible(State::RESPONSIBLE_REMOVE)
-            ->setTemplate($template)
         ;
 
         $this->doctrine->getManager()->persist($state);
@@ -80,11 +80,11 @@ class StateVoterTest extends BaseTestCase
         $state = new State();
 
         $state
+            ->setTemplate($template)
             ->setName('On the way')
             ->setAbbreviation('O')
             ->setType(State::TYPE_INTERIM)
             ->setResponsible(State::RESPONSIBLE_KEEP)
-            ->setTemplate($template)
         ;
 
         $this->doctrine->getManager()->persist($state);

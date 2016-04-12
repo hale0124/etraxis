@@ -28,8 +28,8 @@ class DecimalFieldTest extends BaseTestCase
 
         /** @noinspection PhpParamsInspection */
         $this->object
+            ->injectDependencies($this->doctrine->getManager())
             ->setType(Field::TYPE_DECIMAL)
-            ->setDecimalValuesRepository($this->doctrine->getRepository(DecimalValue::class))
         ;
     }
 

@@ -63,7 +63,7 @@ class ResetPasswordCommandHandler
                 throw new BadRequestHttpException($this->translator->trans('password.cant_change'));
             }
 
-            if ($user->getResetTokenExpiresAt() > time()) {
+            if (!$user->isResetTokenExpired()) {
 
                 try {
                     $encoded = $this->password_encoder->encodePassword($command->password, null);
@@ -74,8 +74,7 @@ class ResetPasswordCommandHandler
 
                 $user
                     ->setPassword($encoded)
-                    ->setPasswordSetAt(time())
-                    ->setResetToken(null)
+                    ->clearResetToken()
                 ;
 
                 $this->doctrine->getManager()->persist($user);

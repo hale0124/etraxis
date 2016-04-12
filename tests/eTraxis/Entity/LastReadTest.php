@@ -11,6 +11,8 @@
 
 namespace eTraxis\Entity;
 
+use AltrEgo\AltrEgo;
+
 class LastReadTest extends \PHPUnit_Framework_TestCase
 {
     /** @var LastRead */
@@ -23,20 +25,19 @@ class LastReadTest extends \PHPUnit_Framework_TestCase
 
     public function testRecord()
     {
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
+
         $this->object->setRecord($record = new Record());
-        self::assertSame($record, $this->object->getRecord());
+        self::assertEquals($record, $object->record);
     }
 
     public function testUser()
     {
-        $this->object->setUser($user = new User());
-        self::assertSame($user, $this->object->getUser());
-    }
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
 
-    public function testReadAt()
-    {
-        $expected = time();
-        $this->object->setReadAt($expected);
-        self::assertEquals($expected, $this->object->getReadAt());
+        $this->object->setUser($user = new User());
+        self::assertEquals($user, $object->user);
     }
 }

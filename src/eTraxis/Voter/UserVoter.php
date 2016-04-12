@@ -100,9 +100,7 @@ class UserVoter extends Voter
             return false;
         }
 
-        $expires = $subject->getPasswordSetAt() + $this->password_expiration * 86400;
-
-        return $expires < time();
+        return $subject->isPasswordExpired($this->password_expiration);
     }
 
     /**

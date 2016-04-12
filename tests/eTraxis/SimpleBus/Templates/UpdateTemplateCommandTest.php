@@ -86,6 +86,7 @@ class UpdateTemplateCommandTest extends BaseTestCase
         $template = new Template();
 
         $template
+            ->setProject($project)
             ->setName('Maintenance')
             ->setPrefix('M')
             ->setLocked(true)
@@ -93,7 +94,6 @@ class UpdateTemplateCommandTest extends BaseTestCase
             ->setRegisteredPermissions(0)
             ->setAuthorPermissions(0)
             ->setResponsiblePermissions(0)
-            ->setProject($project)
         ;
 
         $this->doctrine->getManager()->persist($template);
@@ -129,6 +129,7 @@ class UpdateTemplateCommandTest extends BaseTestCase
         $template = new Template();
 
         $template
+            ->setProject($project)
             ->setName('Maintenance')
             ->setPrefix('M')
             ->setLocked(true)
@@ -136,7 +137,6 @@ class UpdateTemplateCommandTest extends BaseTestCase
             ->setRegisteredPermissions(0)
             ->setAuthorPermissions(0)
             ->setResponsiblePermissions(0)
-            ->setProject($project)
         ;
 
         $this->doctrine->getManager()->persist($template);

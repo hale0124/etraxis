@@ -26,7 +26,6 @@ class CreateTextFieldCommandTest extends BaseTestCase
         self::assertNotNull($state);
 
         $command = new CreateTextFieldCommand([
-            'template'     => $state->getTemplate()->getId(),
             'state'        => $state->getId(),
             'name'         => 'Comment',
             'required'     => true,

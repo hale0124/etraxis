@@ -11,26 +11,25 @@
 
 namespace eTraxis\Entity;
 
-use AltrEgo\AltrEgo;
+use eTraxis\Tests\BaseTestCase;
 
-class ProjectTest extends \PHPUnit_Framework_TestCase
+class ProjectTest extends BaseTestCase
 {
     /** @var Project */
     private $object;
 
     protected function setUp()
     {
-        $this->object = new Project();
+        parent::setUp();
+
+        $this->object = $this->doctrine->getManager()->getRepository(Project::class)->findOneBy([
+            'name' => 'Planet Express',
+        ]);
     }
 
     public function testId()
     {
-        /** @var \StdClass $object */
-        $object = AltrEgo::create($this->object);
-
-        $expected   = mt_rand(1, PHP_INT_MAX);
-        $object->id = $expected;
-        self::assertEquals($expected, $this->object->getId());
+        self::assertNotNull($this->object->getId());
     }
 
     public function testName()
@@ -49,8 +48,7 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
 
     public function testCreatedAt()
     {
-        $expected = time();
-        $this->object->setCreatedAt($expected);
+        $expected = strtotime('1999-03-28');
         self::assertEquals($expected, $this->object->getCreatedAt());
     }
 
@@ -65,35 +63,24 @@ class ProjectTest extends \PHPUnit_Framework_TestCase
 
     public function testGroups()
     {
-        self::assertCount(0, $this->object->getGroups());
-
-        $this->object->addGroup($group = new Group());
-        self::assertCount(1, $this->object->getGroups());
-
-        $this->object->removeGroup($group);
-        self::assertCount(0, $this->object->getGroups());
+        self::assertCount(3, $this->object->getGroups());
     }
 
     public function testTemplates()
     {
-        self::assertCount(0, $this->object->getTemplates());
-
-        $this->object->addTemplate($template = new Template());
-        self::assertCount(1, $this->object->getTemplates());
-
-        $this->object->removeTemplate($template);
-        self::assertCount(0, $this->object->getTemplates());
+        self::assertCount(2, $this->object->getTemplates());
     }
 
     public function testJsonSerialize()
     {
         $expected = [
-            'id',
-            'name',
-            'description',
-            'isSuspended',
+            'id'          => $this->object->getId(),
+            'name'        => $this->object->getName(),
+            'description' => $this->object->getDescription(),
+            'createdAt'   => '1999-03-28',
+            'isSuspended' => $this->object->isSuspended(),
         ];
 
-        self::assertEquals($expected, array_keys($this->object->jsonSerialize()));
+        self::assertEquals($expected, $this->object->jsonSerialize());
     }
 }

@@ -52,6 +52,14 @@ class LastRead
     private $readAt;
 
     /**
+     * Constructor.
+     */
+    public function __construct()
+    {
+        $this->readAt = time();
+    }
+
+    /**
      * Property setter.
      *
      * @param   Record $record
@@ -66,16 +74,6 @@ class LastRead
     }
 
     /**
-     * Property getter.
-     *
-     * @return  Record
-     */
-    public function getRecord()
-    {
-        return $this->record;
-    }
-
-    /**
      * Property setter.
      *
      * @param   User $user
@@ -87,39 +85,5 @@ class LastRead
         $this->user = $user;
 
         return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  User
-     */
-    public function getUser()
-    {
-        return $this->user;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   int $readAt
-     *
-     * @return  self
-     */
-    public function setReadAt($readAt)
-    {
-        $this->readAt = $readAt;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  int
-     */
-    public function getReadAt()
-    {
-        return $this->readAt;
     }
 }

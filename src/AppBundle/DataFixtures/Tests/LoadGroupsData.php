@@ -82,7 +82,7 @@ class LoadGroupsData extends AbstractFixture implements ContainerAwareInterface,
 
             foreach ($row['members'] as $member) {
                 /** @noinspection PhpParamsInspection */
-                $group->addUser($this->getReference('user:' . $member));
+                $group->addMember($this->getReference('user:' . $member));
             }
 
             $manager->persist($group);

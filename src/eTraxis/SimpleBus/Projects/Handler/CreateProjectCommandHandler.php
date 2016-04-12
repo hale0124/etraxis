@@ -51,7 +51,6 @@ class CreateProjectCommandHandler
         $entity
             ->setName($command->name)
             ->setDescription($command->description)
-            ->setCreatedAt(time())
             ->setSuspended($command->suspended)
         ;
 

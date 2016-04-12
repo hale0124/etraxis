@@ -17,7 +17,6 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Base command to create new field.
  *
- * @property    int    $template     ID of the field's template.
  * @property    int    $state        ID of the field's state.
  * @property    string $name         Field name.
  * @property    string $description  Description.
@@ -30,14 +29,8 @@ class CreateFieldBaseCommand
     use MessageTrait;
 
     /**
+     * @Assert\NotBlank()
      * @Assert\EntityId()
-     * @Assert\Expression("value != false || this.state != false")
-     */
-    public $template;
-
-    /**
-     * @Assert\EntityId()
-     * @Assert\Expression("value != false || this.template != false")
      */
     public $state;
 

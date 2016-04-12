@@ -26,13 +26,13 @@ class StateRoleTransitionTest extends \PHPUnit_Framework_TestCase
     public function testFromState()
     {
         $this->object->setFromState($state = new State());
-        self::assertSame($state, $this->object->getFromState());
+        self::assertEquals($state, $this->object->getFromState());
     }
 
     public function testToState()
     {
         $this->object->setToState($state = new State());
-        self::assertSame($state, $this->object->getToState());
+        self::assertEquals($state, $this->object->getToState());
     }
 
     public function testRole()

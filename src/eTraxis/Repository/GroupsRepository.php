@@ -26,7 +26,7 @@ class GroupsRepository extends EntityRepository
      *
      * @param   Project $project
      *
-     * @return  \eTraxis\Entity\Group[]
+     * @return  Group[]
      */
     public function getGroups(Project $project)
     {
@@ -46,7 +46,7 @@ class GroupsRepository extends EntityRepository
     /**
      * Finds all global groups.
      *
-     * @return  \eTraxis\Entity\Group[]
+     * @return  Group[]
      */
     public function getGlobalGroups()
     {
@@ -56,31 +56,6 @@ class GroupsRepository extends EntityRepository
             ->select('g')
             ->where('g.project IS NULL')
             ->orderBy('g.name')
-        ;
-
-        return $query->getQuery()->getResult();
-    }
-
-    /**
-     * Finds all accounts which belong to the specified group.
-     *
-     * @param   Group $group
-     *
-     * @return  User[]
-     */
-    public function getGroupMembers(Group $group)
-    {
-        $repository = $this->getEntityManager()->getRepository(User::class);
-
-        $query = $repository->createQueryBuilder('u');
-
-        $query
-            ->select('u')
-            ->join('u.groups', 'g')
-            ->where('g = :group')
-            ->setParameter('group', $group)
-            ->orderBy('u.fullname')
-            ->addOrderBy('u.username')
         ;
 
         return $query->getQuery()->getResult();
@@ -97,19 +72,6 @@ class GroupsRepository extends EntityRepository
     {
         $repository = $this->getEntityManager()->getRepository(User::class);
 
-        // Find all accounts which belong to the group.
-        $subquery = $repository->createQueryBuilder('u');
-
-        $subquery
-            ->select('u.id')
-            ->join('u.groups', 'g')
-            ->where('g = :group')
-            ->setParameter('group', $group)
-        ;
-
-        $members = $subquery->getQuery()->getArrayResult();
-
-        // Find all other accounts.
         $query = $repository->createQueryBuilder('u');
 
         $query
@@ -118,10 +80,11 @@ class GroupsRepository extends EntityRepository
             ->addOrderBy('u.username')
         ;
 
-        if (count($members)) {
+        $members = $group->getMembers();
 
+        if (count($members) > 0) {
             $query
-                ->where($query->expr()->notIn('u.id', ':members'))
+                ->where($query->expr()->notIn('u', ':members'))
                 ->setParameter('members', $members)
             ;
         }

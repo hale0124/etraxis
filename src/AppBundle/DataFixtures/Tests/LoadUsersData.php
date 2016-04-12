@@ -11,6 +11,7 @@
 
 namespace AppBundle\DataFixtures\Tests;
 
+use AltrEgo\AltrEgo;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -65,6 +66,7 @@ class LoadUsersData extends AbstractFixture implements ContainerAwareInterface, 
             'einstein' => [
                 'fullname'    => 'Albert Einstein',
                 'email'       => 'einstein@ldap.forumsys.com',
+                'password'    => 'secret',
                 'is_admin'    => false,
                 'is_disabled' => false,
                 'is_ldap'     => true,
@@ -199,7 +201,7 @@ class LoadUsersData extends AbstractFixture implements ContainerAwareInterface, 
                 ->setUsername($username)
                 ->setFullname($row['fullname'])
                 ->setEmail($row['email'])
-                ->setPassword($row['is_ldap'] ? null : $encoder->encodePassword($row['password']))
+                ->setPassword($encoder->encodePassword($row['password']))
                 ->setAdmin($row['is_admin'])
                 ->setDisabled($row['is_disabled'])
                 ->setLdap($row['is_ldap'])
@@ -213,8 +215,8 @@ class LoadUsersData extends AbstractFixture implements ContainerAwareInterface, 
 
             // Make Zapp locked out.
             if ($username === 'zapp') {
-                $forever = 0x7FFFFFFF;
-                $user->setLockedUntil($forever);
+                /** @noinspection PhpUndefinedFieldInspection */
+                AltrEgo::create($user)->lockedUntil = 0x7FFFFFFF;
             }
 
             $this->addReference('user:' . $username, $user);

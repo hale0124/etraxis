@@ -60,9 +60,9 @@ class UpdateTemplateCommandHandler
         $entity
             ->setName($command->name)
             ->setPrefix($command->prefix)
-            ->setDescription($command->description)
             ->setCriticalAge($command->criticalAge)
             ->setFrozenTime($command->frozenTime)
+            ->setDescription($command->description)
             ->setGuestAccess($command->guestAccess)
         ;
 

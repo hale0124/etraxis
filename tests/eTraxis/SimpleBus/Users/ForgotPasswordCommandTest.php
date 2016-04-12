@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Users;
 
+use AltrEgo\AltrEgo;
 use eTraxis\Tests\BaseTestCase;
 
 class ForgotPasswordCommandTest extends BaseTestCase
@@ -19,11 +20,15 @@ class ForgotPasswordCommandTest extends BaseTestCase
     {
         $username = 'artem';
 
-        $user = $this->findUser($username);
+        /** @var \StdClass $user */
+        $user = AltrEgo::create($this->findUser($username));
         self::assertNotNull($user);
 
-        $prevToken   = $user->getResetToken();
-        $prevExpires = $user->getResetTokenExpiresAt();
+        $prevToken   = $user->resetToken;
+        $prevExpires = $user->resetTokenExpiresAt;
+
+        /** @var \eTraxis\Entity\User $user */
+        self::assertTrue($user->isResetTokenExpired());
 
         $command = new ForgotPasswordCommand([
             'username' => $username,
@@ -32,10 +37,13 @@ class ForgotPasswordCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
-        $user = $this->findUser($username);
+        /** @var \StdClass $user */
+        $user = AltrEgo::create($this->findUser($username));
 
-        self::assertNotEquals($prevToken, $user->getResetToken());
-        self::assertNotEquals($prevExpires, $user->getResetTokenExpiresAt());
-        self::assertGreaterThan(time(), $user->getResetTokenExpiresAt());
+        self::assertNotEquals($prevToken, $user->resetToken);
+        self::assertNotEquals($prevExpires, $user->resetTokenExpiresAt);
+
+        /** @var \eTraxis\Entity\User $user */
+        self::assertFalse($user->isResetTokenExpired());
     }
 }

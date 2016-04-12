@@ -21,10 +21,20 @@ class ListItemTest extends \PHPUnit_Framework_TestCase
         $this->object = new ListItem();
     }
 
-    public function testField()
+    public function testFieldValid()
     {
-        $this->object->setField($field = new Field());
-        self::assertSame($field, $this->object->getField());
+        $field = new Field();
+        $field->setType(Field::TYPE_LIST);
+        $this->object->setField($field);
+        self::assertEquals($field, $this->object->getField());
+    }
+
+    public function testFieldInvalid()
+    {
+        $field = new Field();
+        $field->setType(Field::TYPE_STRING);
+        $this->object->setField($field);
+        self::assertNotEquals($field, $this->object->getField());
     }
 
     public function testKey()

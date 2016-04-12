@@ -28,8 +28,8 @@ class TextFieldTest extends BaseTestCase
 
         /** @noinspection PhpParamsInspection */
         $this->object
+            ->injectDependencies($this->doctrine->getManager())
             ->setType(Field::TYPE_TEXT)
-            ->setTextValuesRepository($this->doctrine->getRepository(TextValue::class))
         ;
     }
 

@@ -24,18 +24,18 @@ class StateGroupTransitionTest extends \PHPUnit_Framework_TestCase
     public function testFromState()
     {
         $this->object->setFromState($state = new State());
-        self::assertSame($state, $this->object->getFromState());
+        self::assertEquals($state, $this->object->getFromState());
     }
 
     public function testToState()
     {
         $this->object->setToState($state = new State());
-        self::assertSame($state, $this->object->getToState());
+        self::assertEquals($state, $this->object->getToState());
     }
 
     public function testGroup()
     {
         $this->object->setGroup($group = new Group());
-        self::assertSame($group, $this->object->getGroup());
+        self::assertEquals($group, $this->object->getGroup());
     }
 }

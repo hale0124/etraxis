@@ -11,32 +11,31 @@
 
 namespace eTraxis\Entity;
 
-use AltrEgo\AltrEgo;
+use eTraxis\Tests\BaseTestCase;
 
-class TemplateTest extends \PHPUnit_Framework_TestCase
+class TemplateTest extends BaseTestCase
 {
     /** @var Template */
     private $object;
 
     protected function setUp()
     {
-        $this->object = new Template();
+        parent::setUp();
+
+        $this->object = $this->doctrine->getManager()->getRepository(Template::class)->findOneBy([
+            'name' => 'Delivery',
+        ]);
     }
 
     public function testId()
     {
-        /** @var \StdClass $object */
-        $object = AltrEgo::create($this->object);
-
-        $expected   = mt_rand(1, PHP_INT_MAX);
-        $object->id = $expected;
-        self::assertEquals($expected, $this->object->getId());
+        self::assertNotNull($this->object->getId());
     }
 
     public function testProject()
     {
         $this->object->setProject($project = new Project());
-        self::assertSame($project, $this->object->getProject());
+        self::assertEquals($project, $this->object->getProject());
     }
 
     public function testName()
@@ -115,38 +114,21 @@ class TemplateTest extends \PHPUnit_Framework_TestCase
 
     public function testStates()
     {
-        self::assertCount(0, $this->object->getStates());
-
-        $this->object->addState($state = new State());
-        self::assertCount(1, $this->object->getStates());
-
-        $this->object->removeState($state);
-        self::assertCount(0, $this->object->getStates());
-    }
-
-    public function testFields()
-    {
-        self::assertCount(0, $this->object->getFields());
-
-        $this->object->addField($field = new Field());
-        self::assertCount(1, $this->object->getFields());
-
-        $this->object->removeField($field);
-        self::assertCount(0, $this->object->getFields());
+        self::assertCount(2, $this->object->getStates());
     }
 
     public function testJsonSerialize()
     {
         $expected = [
-            'id',
-            'name',
-            'prefix',
-            'criticalAge',
-            'frozenTime',
-            'description',
-            'isLocked',
+            'id'          => $this->object->getId(),
+            'name'        => $this->object->getName(),
+            'prefix'      => $this->object->getPrefix(),
+            'criticalAge' => $this->object->getCriticalAge(),
+            'frozenTime'  => $this->object->getFrozenTime(),
+            'description' => $this->object->getDescription(),
+            'isLocked'    => $this->object->isLocked(),
         ];
 
-        self::assertEquals($expected, array_keys($this->object->jsonSerialize()));
+        self::assertEquals($expected, $this->object->jsonSerialize());
     }
 }

@@ -63,6 +63,6 @@ class FieldVoter extends Voter
     protected function isDeleteGranted($subject)
     {
         // Can't delete if owning template is not locked.
-        return $subject->getTemplate()->isLocked();
+        return $subject->getState()->getTemplate()->isLocked();
     }
 }

@@ -36,13 +36,13 @@ class EventTest extends \PHPUnit_Framework_TestCase
     public function testRecord()
     {
         $this->object->setRecord($record = new Record());
-        self::assertSame($record, $this->object->getRecord());
+        self::assertEquals($record, $this->object->getRecord());
     }
 
     public function testUser()
     {
         $this->object->setUser($user = new User());
-        self::assertSame($user, $this->object->getUser());
+        self::assertEquals($user, $this->object->getUser());
     }
 
     public function testType()
@@ -54,9 +54,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
 
     public function testCreatedAt()
     {
-        $expected = time();
-        $this->object->setCreatedAt($expected);
-        self::assertEquals($expected, $this->object->getCreatedAt());
+        self::assertLessThanOrEqual(1, time() - $this->object->getCreatedAt());
     }
 
     public function testParameter()

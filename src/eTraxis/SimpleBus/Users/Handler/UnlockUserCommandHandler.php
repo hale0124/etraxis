@@ -44,8 +44,7 @@ class UnlockUserCommandHandler
         /** @var User $user */
         if ($user = $repository->find($command->id)) {
 
-            $user->setAuthAttempts(0);
-            $user->setLockedUntil(0);
+            $user->unlock();
 
             $this->doctrine->getManager()->persist($user);
             $this->doctrine->getManager()->flush();

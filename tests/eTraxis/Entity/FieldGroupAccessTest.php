@@ -24,13 +24,13 @@ class FieldGroupAccessTest extends \PHPUnit_Framework_TestCase
     public function testField()
     {
         $this->object->setField($field = new Field());
-        self::assertSame($field, $this->object->getField());
+        self::assertEquals($field, $this->object->getField());
     }
 
     public function testGroup()
     {
         $this->object->setGroup($group = new Group());
-        self::assertSame($group, $this->object->getGroup());
+        self::assertEquals($group, $this->object->getGroup());
     }
 
     public function testAccess()

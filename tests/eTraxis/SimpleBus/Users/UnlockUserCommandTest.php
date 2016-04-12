@@ -11,7 +11,6 @@
 
 namespace eTraxis\SimpleBus\Users;
 
-use eTraxis\Entity\User;
 use eTraxis\Tests\BaseTestCase;
 
 class UnlockUserCommandTest extends BaseTestCase
@@ -21,20 +20,16 @@ class UnlockUserCommandTest extends BaseTestCase
         $user = $this->findUser('artem');
         self::assertNotNull($user);
 
-        $id = $user->getId();
+        $auth_attempts = $this->client->getContainer()->getParameter('security_auth_attempts');
+        $lock_time     = $this->client->getContainer()->getParameter('security_lock_time');
 
-        $user->setAuthAttempts(1);
+        do {} while(!$user->lock($auth_attempts, $lock_time));
 
-        $this->doctrine->getManager()->persist($user);
-        $this->doctrine->getManager()->flush();
+        self::assertFalse($user->isAccountNonLocked());
 
-        $user = $this->doctrine->getRepository(User::class)->find($id);
-        self::assertEquals(1, $user->getAuthAttempts());
-
-        $command = new UnlockUserCommand(['id' => $id]);
+        $command = new UnlockUserCommand(['id' => $user->getId()]);
         $this->command_bus->handle($command);
 
-        $user = $this->doctrine->getRepository(User::class)->find($id);
-        self::assertEquals(0, $user->getAuthAttempts());
+        self::assertTrue($user->isAccountNonLocked());
     }
 }

@@ -113,9 +113,8 @@ class GroupsGetController extends Controller
         $repository = $this->getDoctrine()->getRepository(Group::class);
 
         return $this->render('admin/groups/tab_members.html.twig', [
-            'group'   => $group,
-            'members' => $repository->getGroupMembers($group),
-            'others'  => $repository->getGroupNonMembers($group),
+            'group'  => $group,
+            'others' => $repository->getGroupNonMembers($group),
         ]);
     }
 

@@ -22,8 +22,6 @@ class LockUserCommandTest extends BaseTestCase
         $user = $this->findUser($username);
         self::assertNotNull($user);
 
-        $expected = $user->getAuthAttempts() + 1;
-
         $command = new LockUserCommand([
             'username' => $username,
         ]);
@@ -32,7 +30,7 @@ class LockUserCommandTest extends BaseTestCase
         $this->command_bus->handle($command);
 
         $user = $this->findUser($username);
-        self::assertEquals($expected, $user->getAuthAttempts());
+        self::assertTrue($user->isAccountNonLocked());
 
         // second time
         $this->command_bus->handle($command);
