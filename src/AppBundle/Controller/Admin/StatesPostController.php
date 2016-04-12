@@ -45,6 +45,10 @@ class StatesPostController extends Controller
     {
         $data = $request->request->get('state');
 
+        if (!array_key_exists('responsible', $data)) {
+            $data['responsible'] = State::RESPONSIBLE_KEEP;
+        }
+
         $command = new States\CreateStateCommand($data, ['template' => $id]);
         $this->getCommandBus()->handle($command);
 
