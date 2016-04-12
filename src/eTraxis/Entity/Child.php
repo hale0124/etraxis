@@ -27,7 +27,7 @@ class Child
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="Record", inversedBy="children")
-     * @ORM\JoinColumn(name="parent_id", referencedColumnName="record_id")
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="record_id", onDelete="CASCADE")
      */
     private $parent;
 
@@ -37,7 +37,7 @@ class Child
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="Record")
-     * @ORM\JoinColumn(name="child_id", referencedColumnName="record_id")
+     * @ORM\JoinColumn(name="child_id", referencedColumnName="record_id", onDelete="CASCADE")
      */
     private $child;
 

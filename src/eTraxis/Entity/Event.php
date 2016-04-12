@@ -57,7 +57,7 @@ class Event
      * @var Record Record.
      *
      * @ORM\ManyToOne(targetEntity="Record", inversedBy="history")
-     * @ORM\JoinColumn(name="record_id", nullable=false, referencedColumnName="record_id")
+     * @ORM\JoinColumn(name="record_id", nullable=false, referencedColumnName="record_id", onDelete="CASCADE")
      */
     private $record;
 

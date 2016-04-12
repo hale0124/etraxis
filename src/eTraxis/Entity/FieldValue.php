@@ -32,7 +32,7 @@ class FieldValue
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="Event")
-     * @ORM\JoinColumn(name="event_id", referencedColumnName="event_id")
+     * @ORM\JoinColumn(name="event_id", referencedColumnName="event_id", onDelete="CASCADE")
      */
     private $event;
 

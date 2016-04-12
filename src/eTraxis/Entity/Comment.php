@@ -37,7 +37,7 @@ class Comment
      * @var Event Event.
      *
      * @ORM\ManyToOne(targetEntity="Event")
-     * @ORM\JoinColumn(name="event_id", nullable=false, referencedColumnName="event_id")
+     * @ORM\JoinColumn(name="event_id", nullable=false, referencedColumnName="event_id", onDelete="CASCADE")
      */
     private $event;
 
