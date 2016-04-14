@@ -211,7 +211,7 @@ class Field implements \JsonSerializable
      *
      * @return  self
      */
-    public function setState(State $state = null)
+    public function setState(State $state)
     {
         $this->state    = $state;
         $this->template = $state->getTemplate();
