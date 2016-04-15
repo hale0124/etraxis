@@ -11,11 +11,11 @@
 
 namespace eTraxis\SimpleBus\Fields\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Field;
 use eTraxis\SimpleBus\Fields\CreateNumberFieldCommand;
 use eTraxis\SimpleBus\Fields\UpdateNumberFieldCommand;
 use SimpleBus\ValidationException;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -29,16 +29,16 @@ class NumberFieldCommandHandler extends BaseFieldCommandHandler
     /**
      * Dependency Injection constructor.
      *
-     * @param   ValidatorInterface  $validator
-     * @param   RegistryInterface   $doctrine
-     * @param   TranslatorInterface $translator
+     * @param   ValidatorInterface     $validator
+     * @param   EntityManagerInterface $manager
+     * @param   TranslatorInterface    $translator
      */
     public function __construct(
-        ValidatorInterface  $validator,
-        RegistryInterface   $doctrine,
+        ValidatorInterface $validator,
+        EntityManagerInterface $manager,
         TranslatorInterface $translator)
     {
-        parent::__construct($validator, $doctrine);
+        parent::__construct($validator, $manager);
 
         $this->translator = $translator;
     }
@@ -60,7 +60,9 @@ class NumberFieldCommandHandler extends BaseFieldCommandHandler
 
         if ($command->defaultValue !== null) {
             if ($command->defaultValue < $command->minValue || $command->defaultValue > $command->maxValue) {
-                $error = $this->translator->trans('field.error.default_value', ['%min%' => $command->minValue, '%max%' => $command->maxValue]);
+                $error = $this->translator->trans('field.error.default_value', [
+                    '%min%' => $command->minValue, '%max%' => $command->maxValue,
+                ]);
                 throw new ValidationException([$error]);
             }
         }
@@ -68,12 +70,12 @@ class NumberFieldCommandHandler extends BaseFieldCommandHandler
         $entity->setType(Field::TYPE_NUMBER);
 
         $entity->asNumber()
-            ->setMinValue($command->minValue)
-            ->setMaxValue($command->maxValue)
-            ->setDefaultValue($command->defaultValue)
+               ->setMinValue($command->minValue)
+               ->setMaxValue($command->maxValue)
+               ->setDefaultValue($command->defaultValue)
         ;
 
-        $this->doctrine->getManager()->persist($entity);
-        $this->doctrine->getManager()->flush();
+        $this->manager->persist($entity);
+        $this->manager->flush();
     }
 }

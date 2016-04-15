@@ -11,9 +11,9 @@
 
 namespace eTraxis\SimpleBus\Users\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Users\SetPasswordCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
@@ -25,23 +25,23 @@ use Symfony\Component\Translation\TranslatorInterface;
 class SetPasswordCommandHandler
 {
     protected $translator;
-    protected $doctrine;
+    protected $manager;
     protected $password_encoder;
 
     /**
      * Dependency Injection constructor.
      *
      * @param   TranslatorInterface      $translator
-     * @param   RegistryInterface        $doctrine
+     * @param   EntityManagerInterface   $manager
      * @param   PasswordEncoderInterface $password_encoder
      */
     public function __construct(
-        TranslatorInterface      $translator,
-        RegistryInterface        $doctrine,
+        TranslatorInterface $translator,
+        EntityManagerInterface $manager,
         PasswordEncoderInterface $password_encoder)
     {
         $this->translator       = $translator;
-        $this->doctrine         = $doctrine;
+        $this->manager          = $manager;
         $this->password_encoder = $password_encoder;
     }
 
@@ -54,10 +54,8 @@ class SetPasswordCommandHandler
      */
     public function handle(SetPasswordCommand $command)
     {
-        $repository = $this->doctrine->getRepository(User::class);
-
         /** @var User $entity */
-        $entity = $repository->find($command->id);
+        $entity = $this->manager->find(User::class, $command->id);
 
         if ($entity) {
 
@@ -74,8 +72,8 @@ class SetPasswordCommandHandler
 
             $entity->setPassword($encoded);
 
-            $this->doctrine->getManager()->persist($entity);
-            $this->doctrine->getManager()->flush();
+            $this->manager->persist($entity);
+            $this->manager->flush();
         }
     }
 }

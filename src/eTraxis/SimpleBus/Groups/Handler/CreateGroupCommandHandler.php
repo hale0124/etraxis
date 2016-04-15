@@ -11,10 +11,10 @@
 
 namespace eTraxis\SimpleBus\Groups\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\Project;
 use eTraxis\SimpleBus\Groups\CreateGroupCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -25,18 +25,18 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class CreateGroupCommandHandler
 {
     protected $validator;
-    protected $doctrine;
+    protected $manager;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   ValidatorInterface $validator
-     * @param   RegistryInterface  $doctrine
+     * @param   ValidatorInterface     $validator
+     * @param   EntityManagerInterface $manager
      */
-    public function __construct(ValidatorInterface $validator, RegistryInterface $doctrine)
+    public function __construct(ValidatorInterface $validator, EntityManagerInterface $manager)
     {
         $this->validator = $validator;
-        $this->doctrine  = $doctrine;
+        $this->manager   = $manager;
     }
 
     /**
@@ -58,10 +58,8 @@ class CreateGroupCommandHandler
 
         if ($command->project) {
 
-            $repository = $this->doctrine->getRepository(Project::class);
-
             /** @var Project $project */
-            $project = $repository->find($command->project);
+            $project = $this->manager->find(Project::class, $command->project);
 
             if (!$project) {
                 throw new NotFoundHttpException('Unknown project.');
@@ -76,7 +74,7 @@ class CreateGroupCommandHandler
             throw new BadRequestHttpException($errors->get(0)->getMessage());
         }
 
-        $this->doctrine->getManager()->persist($entity);
-        $this->doctrine->getManager()->flush();
+        $this->manager->persist($entity);
+        $this->manager->flush();
     }
 }

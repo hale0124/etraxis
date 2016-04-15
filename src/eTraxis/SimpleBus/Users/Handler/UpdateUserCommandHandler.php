@@ -11,9 +11,9 @@
 
 namespace eTraxis\SimpleBus\Users\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Users\UpdateUserCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -25,23 +25,23 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class UpdateUserCommandHandler
 {
     protected $validator;
-    protected $doctrine;
+    protected $manager;
     protected $token_storage;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   ValidatorInterface    $validator
-     * @param   RegistryInterface     $doctrine
-     * @param   TokenStorageInterface $token_storage
+     * @param   ValidatorInterface     $validator
+     * @param   EntityManagerInterface $manager
+     * @param   TokenStorageInterface  $token_storage
      */
     public function __construct(
-        ValidatorInterface    $validator,
-        RegistryInterface     $doctrine,
+        ValidatorInterface $validator,
+        EntityManagerInterface $manager,
         TokenStorageInterface $token_storage)
     {
         $this->validator     = $validator;
-        $this->doctrine      = $doctrine;
+        $this->manager       = $manager;
         $this->token_storage = $token_storage;
     }
 
@@ -58,10 +58,8 @@ class UpdateUserCommandHandler
         /** @var User $user */
         $user = $this->token_storage->getToken()->getUser();
 
-        $repository = $this->doctrine->getRepository(User::class);
-
         /** @var User $entity */
-        $entity = $repository->find($command->id);
+        $entity = $this->manager->find(User::class, $command->id);
 
         if (!$entity) {
             throw new NotFoundHttpException('Unknown user.');
@@ -89,13 +87,13 @@ class UpdateUserCommandHandler
 
         if (count($errors)) {
             if ($entity === $user) {
-                $this->doctrine->getManager()->refresh($user);
+                $this->manager->refresh($user);
             }
 
             throw new BadRequestHttpException($errors->get(0)->getMessage());
         }
 
-        $this->doctrine->getManager()->persist($entity);
-        $this->doctrine->getManager()->flush();
+        $this->manager->persist($entity);
+        $this->manager->flush();
     }
 }

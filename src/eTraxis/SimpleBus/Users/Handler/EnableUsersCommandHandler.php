@@ -11,24 +11,24 @@
 
 namespace eTraxis\SimpleBus\Users\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\SimpleBus\Users\EnableUsersCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * Command handler.
  */
 class EnableUsersCommandHandler
 {
-    protected $doctrine;
+    protected $manager;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   RegistryInterface $doctrine
+     * @param   EntityManagerInterface $manager
      */
-    public function __construct(RegistryInterface $doctrine)
+    public function __construct(EntityManagerInterface $manager)
     {
-        $this->doctrine = $doctrine;
+        $this->manager = $manager;
     }
 
     /**
@@ -38,10 +38,7 @@ class EnableUsersCommandHandler
      */
     public function handle(EnableUsersCommand $command)
     {
-        /** @var \Doctrine\ORM\EntityManager $em */
-        $em = $this->doctrine->getManager();
-
-        $query = $em->createQuery('
+        $query = $this->manager->createQuery('
             UPDATE eTraxis:User u
             SET u.isDisabled = :state
             WHERE u.id IN (:ids)

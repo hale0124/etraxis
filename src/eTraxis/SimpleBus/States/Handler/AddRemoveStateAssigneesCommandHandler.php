@@ -11,12 +11,12 @@
 
 namespace eTraxis\SimpleBus\States\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
 use eTraxis\Entity\StateAssignee;
 use eTraxis\SimpleBus\States\AddStateAssigneesCommand;
 use eTraxis\SimpleBus\States\RemoveStateAssigneesCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -24,16 +24,16 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class AddRemoveStateAssigneesCommandHandler
 {
-    protected $doctrine;
+    protected $manager;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   RegistryInterface $doctrine
+     * @param   EntityManagerInterface $manager
      */
-    public function __construct(RegistryInterface $doctrine)
+    public function __construct(EntityManagerInterface $manager)
     {
-        $this->doctrine = $doctrine;
+        $this->manager = $manager;
     }
 
     /**
@@ -46,7 +46,7 @@ class AddRemoveStateAssigneesCommandHandler
     public function handle($command)
     {
         /** @var State $state */
-        $state = $this->doctrine->getRepository(State::class)->find($command->id);
+        $state = $this->manager->find(State::class, $command->id);
 
         if (!$state) {
             throw new NotFoundHttpException('Unknown state.');
@@ -55,15 +55,14 @@ class AddRemoveStateAssigneesCommandHandler
         $project = $state->getTemplate()->getProject();
 
         /** @var Group[] $groups */
-        $groups = $this->doctrine->getRepository(Group::class)->findBy([
+        $groups = $this->manager->getRepository(Group::class)->findBy([
             'id' => $command->groups,
-        ]);
+        ])
+        ;
 
-        /** @var \Doctrine\ORM\EntityManager $em */
-        $em = $this->doctrine->getManager();
-        $em->beginTransaction();
+        $this->manager->beginTransaction();
 
-        $query = $em->createQuery('
+        $query = $this->manager->createQuery('
             DELETE eTraxis:StateAssignee a
             WHERE a.state = :state
             AND a.group IN (:groups)
@@ -87,12 +86,12 @@ class AddRemoveStateAssigneesCommandHandler
                         ->setGroup($group)
                     ;
 
-                    $em->persist($entity);
+                    $this->manager->persist($entity);
                 }
             }
         }
 
-        $em->flush();
-        $em->commit();
+        $this->manager->flush();
+        $this->manager->commit();
     }
 }

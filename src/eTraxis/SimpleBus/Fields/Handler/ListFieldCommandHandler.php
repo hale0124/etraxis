@@ -37,12 +37,10 @@ class ListFieldCommandHandler extends BaseFieldCommandHandler
 
         if ($command instanceof UpdateListFieldCommand) {
 
-            $repository = $this->doctrine->getRepository(ListItem::class);
-
             if ($command->defaultValue !== null) {
 
                 /** @var ListItem $item */
-                $item = $repository->findOneBy([
+                $item = $this->manager->getRepository(ListItem::class)->findOneBy([
                     'field' => $entity,
                     'key'   => $command->defaultValue,
                 ]);
@@ -55,7 +53,7 @@ class ListFieldCommandHandler extends BaseFieldCommandHandler
             $entity->getParameters()->setDefaultValue($command->defaultValue);
         }
 
-        $this->doctrine->getManager()->persist($entity);
-        $this->doctrine->getManager()->flush();
+        $this->manager->persist($entity);
+        $this->manager->flush();
     }
 }

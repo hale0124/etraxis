@@ -11,10 +11,10 @@
 
 namespace eTraxis\SimpleBus\ListItems\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\ListItem;
 use eTraxis\SimpleBus\ListItems\DeleteListItemCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -24,18 +24,18 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class DeleteListItemCommandHandler
 {
-    protected $doctrine;
+    protected $manager;
     protected $security;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   RegistryInterface             $doctrine
+     * @param   EntityManagerInterface        $manager
      * @param   AuthorizationCheckerInterface $security
      */
-    public function __construct(RegistryInterface $doctrine, AuthorizationCheckerInterface $security)
+    public function __construct(EntityManagerInterface $manager, AuthorizationCheckerInterface $security)
     {
-        $this->doctrine = $doctrine;
+        $this->manager  = $manager;
         $this->security = $security;
     }
 
@@ -50,15 +50,13 @@ class DeleteListItemCommandHandler
     public function handle(DeleteListItemCommand $command)
     {
         /** @var Field $field */
-        $field = $this->doctrine->getRepository(Field::class)->find($command->field);
+        $field = $this->manager->find(Field::class, $command->field);
 
         if (!$field) {
             throw new NotFoundHttpException('Unknown field.');
         }
 
-        $repository = $this->doctrine->getRepository(ListItem::class);
-
-        $entity = $repository->findOneBy([
+        $entity = $this->manager->getRepository(ListItem::class)->findOneBy([
             'field' => $field,
             'key'   => $command->key,
         ]);
@@ -71,7 +69,7 @@ class DeleteListItemCommandHandler
             throw new AccessDeniedHttpException();
         }
 
-        $this->doctrine->getManager()->remove($entity);
-        $this->doctrine->getManager()->flush();
+        $this->manager->remove($entity);
+        $this->manager->flush();
     }
 }

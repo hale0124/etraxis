@@ -11,10 +11,11 @@
 
 namespace eTraxis\SimpleBus\Fields\Handler;
 
-use eTraxis\Entity;
+use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Entity\Field;
+use eTraxis\Entity\State;
 use eTraxis\SimpleBus\Fields\CreateFieldBaseCommand;
 use eTraxis\SimpleBus\Fields\UpdateFieldBaseCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -25,18 +26,18 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class BaseFieldCommandHandler
 {
     protected $validator;
-    protected $doctrine;
+    protected $manager;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   ValidatorInterface $validator
-     * @param   RegistryInterface  $doctrine
+     * @param   ValidatorInterface     $validator
+     * @param   EntityManagerInterface $manager
      */
-    public function __construct(ValidatorInterface $validator, RegistryInterface $doctrine)
+    public function __construct(ValidatorInterface $validator, EntityManagerInterface $manager)
     {
         $this->validator = $validator;
-        $this->doctrine  = $doctrine;
+        $this->manager   = $manager;
     }
 
     /**
@@ -44,7 +45,7 @@ class BaseFieldCommandHandler
      *
      * @param   CreateFieldBaseCommand|UpdateFieldBaseCommand $command
      *
-     * @return  Entity\Field
+     * @return  Field
      *
      * @throws  BadRequestHttpException
      */
@@ -66,30 +67,30 @@ class BaseFieldCommandHandler
      *
      * @param   CreateFieldBaseCommand $command
      *
-     * @return  Entity\Field
+     * @return  Field
      *
      * @throws  BadRequestHttpException
      * @throws  NotFoundHttpException
      */
     private function create(CreateFieldBaseCommand $command)
     {
-        $entity = new Entity\Field();
+        $entity = new Field();
 
         /** @noinspection PhpParamsInspection */
         $entity
-            ->injectDependencies($this->doctrine->getManager())
+            ->injectDependencies($this->manager)
             ->setName($command->name)
             ->setDescription($command->description)
             ->setRequired($command->required)
             ->setGuestAccess($command->guestAccess)
             ->setShowInEmails($command->showInEmails)
-            ->setRegisteredAccess(Entity\Field::ACCESS_DENIED)
-            ->setAuthorAccess(Entity\Field::ACCESS_DENIED)
-            ->setResponsibleAccess(Entity\Field::ACCESS_DENIED)
+            ->setRegisteredAccess(Field::ACCESS_DENIED)
+            ->setAuthorAccess(Field::ACCESS_DENIED)
+            ->setResponsibleAccess(Field::ACCESS_DENIED)
         ;
 
-        /** @var Entity\State $state */
-        $state = $this->doctrine->getRepository(Entity\State::class)->find($command->state);
+        /** @var State $state */
+        $state = $this->manager->find(State::class, $command->state);
 
         if (!$state) {
             throw new NotFoundHttpException('Unknown state.');
@@ -112,17 +113,15 @@ class BaseFieldCommandHandler
      *
      * @param   UpdateFieldBaseCommand $command
      *
-     * @return  Entity\Field
+     * @return  Field
      *
      * @throws  BadRequestHttpException
      * @throws  NotFoundHttpException
      */
     private function update(UpdateFieldBaseCommand $command)
     {
-        $repository = $this->doctrine->getRepository(Entity\Field::class);
-
-        /** @var Entity\Field $entity */
-        $entity = $repository->find($command->id);
+        /** @var Field $entity */
+        $entity = $this->manager->find(Field::class, $command->id);
 
         if (!$entity) {
             throw new NotFoundHttpException('Unknown field.');

@@ -11,25 +11,25 @@
 
 namespace eTraxis\SimpleBus\Users\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Users\UnlockUserCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * Command handler.
  */
 class UnlockUserCommandHandler
 {
-    protected $doctrine;
+    protected $manager;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   RegistryInterface $doctrine
+     * @param   EntityManagerInterface $manager
      */
-    public function __construct(RegistryInterface $doctrine)
+    public function __construct(EntityManagerInterface $manager)
     {
-        $this->doctrine = $doctrine;
+        $this->manager = $manager;
     }
 
     /**
@@ -39,15 +39,13 @@ class UnlockUserCommandHandler
      */
     public function handle(UnlockUserCommand $command)
     {
-        $repository = $this->doctrine->getRepository(User::class);
-
         /** @var User $user */
-        if ($user = $repository->find($command->id)) {
+        if ($user = $this->manager->find(User::class, $command->id)) {
 
             $user->unlock();
 
-            $this->doctrine->getManager()->persist($user);
-            $this->doctrine->getManager()->flush();
+            $this->manager->persist($user);
+            $this->manager->flush();
         }
     }
 }

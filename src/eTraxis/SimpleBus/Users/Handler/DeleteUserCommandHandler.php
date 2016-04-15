@@ -11,9 +11,9 @@
 
 namespace eTraxis\SimpleBus\Users\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Users\DeleteUserCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -23,18 +23,18 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class DeleteUserCommandHandler
 {
-    protected $doctrine;
+    protected $manager;
     protected $security;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   RegistryInterface             $doctrine
+     * @param   EntityManagerInterface        $manager
      * @param   AuthorizationCheckerInterface $security
      */
-    public function __construct(RegistryInterface $doctrine, AuthorizationCheckerInterface $security)
+    public function __construct(EntityManagerInterface $manager, AuthorizationCheckerInterface $security)
     {
-        $this->doctrine = $doctrine;
+        $this->manager  = $manager;
         $this->security = $security;
     }
 
@@ -48,10 +48,8 @@ class DeleteUserCommandHandler
      */
     public function handle(DeleteUserCommand $command)
     {
-        $repository = $this->doctrine->getRepository(User::class);
-
         /** @var User $entity */
-        $entity = $repository->find($command->id);
+        $entity = $this->manager->find(User::class, $command->id);
 
         if (!$entity) {
             throw new NotFoundHttpException('Unknown user.');
@@ -61,7 +59,7 @@ class DeleteUserCommandHandler
             throw new AccessDeniedHttpException();
         }
 
-        $this->doctrine->getManager()->remove($entity);
-        $this->doctrine->getManager()->flush();
+        $this->manager->remove($entity);
+        $this->manager->flush();
     }
 }

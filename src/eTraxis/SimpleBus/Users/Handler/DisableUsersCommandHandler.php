@@ -11,8 +11,8 @@
 
 namespace eTraxis\SimpleBus\Users\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\SimpleBus\Users\DisableUsersCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
@@ -20,18 +20,18 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 class DisableUsersCommandHandler
 {
-    protected $doctrine;
+    protected $manager;
     protected $token_storage;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   RegistryInterface     $doctrine
-     * @param   TokenStorageInterface $token_storage
+     * @param   EntityManagerInterface $manager
+     * @param   TokenStorageInterface  $token_storage
      */
-    public function __construct(RegistryInterface $doctrine, TokenStorageInterface $token_storage)
+    public function __construct(EntityManagerInterface $manager, TokenStorageInterface $token_storage)
     {
-        $this->doctrine      = $doctrine;
+        $this->manager       = $manager;
         $this->token_storage = $token_storage;
     }
 
@@ -50,10 +50,7 @@ class DisableUsersCommandHandler
             return $id !== $user->getId();
         });
 
-        /** @var \Doctrine\ORM\EntityManager $em */
-        $em = $this->doctrine->getManager();
-
-        $query = $em->createQuery('
+        $query = $this->manager->createQuery('
             UPDATE eTraxis:User u
             SET u.isDisabled = :state
             WHERE u.id IN (:ids)

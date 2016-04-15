@@ -11,9 +11,9 @@
 
 namespace eTraxis\SimpleBus\Projects\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Project;
 use eTraxis\SimpleBus\Projects\DeleteProjectCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -23,18 +23,18 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class DeleteProjectCommandHandler
 {
-    protected $doctrine;
+    protected $manager;
     protected $security;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   RegistryInterface             $doctrine
+     * @param   EntityManagerInterface        $manager
      * @param   AuthorizationCheckerInterface $security
      */
-    public function __construct(RegistryInterface $doctrine, AuthorizationCheckerInterface $security)
+    public function __construct(EntityManagerInterface $manager, AuthorizationCheckerInterface $security)
     {
-        $this->doctrine = $doctrine;
+        $this->manager  = $manager;
         $this->security = $security;
     }
 
@@ -48,9 +48,7 @@ class DeleteProjectCommandHandler
      */
     public function handle(DeleteProjectCommand $command)
     {
-        $repository = $this->doctrine->getRepository(Project::class);
-
-        $entity = $repository->find($command->id);
+        $entity = $this->manager->find(Project::class, $command->id);
 
         if (!$entity) {
             throw new NotFoundHttpException('Unknown project.');
@@ -60,7 +58,7 @@ class DeleteProjectCommandHandler
             throw new AccessDeniedHttpException();
         }
 
-        $this->doctrine->getManager()->remove($entity);
-        $this->doctrine->getManager()->flush();
+        $this->manager->remove($entity);
+        $this->manager->flush();
     }
 }

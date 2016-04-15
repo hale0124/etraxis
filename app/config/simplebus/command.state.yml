@@ -3,39 +3,39 @@ services:
     command.state.create:
         class: eTraxis\SimpleBus\States\Handler\CreateStateCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\CreateStateCommand }]
-        arguments: [ "@validator", "@doctrine" ]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager" ]
 
     command.state.update:
         class: eTraxis\SimpleBus\States\Handler\UpdateStateCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\UpdateStateCommand }]
-        arguments: [ "@validator", "@doctrine" ]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager" ]
 
     command.state.delete:
         class: eTraxis\SimpleBus\States\Handler\DeleteStateCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\DeleteStateCommand }]
-        arguments: [ "@doctrine", "@security.authorization_checker" ]
+        arguments: [ "@doctrine.orm.entity_manager", "@security.authorization_checker" ]
 
     command.state.set_initial:
         class: eTraxis\SimpleBus\States\Handler\SetInitialStateCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\SetInitialStateCommand }]
-        arguments: [ "@doctrine" ]
+        arguments: [ "@doctrine.orm.entity_manager" ]
 
     command.state.add_transitions:
         class: eTraxis\SimpleBus\States\Handler\AddRemoveStateTransitionsCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\AddStateTransitionsCommand }]
-        arguments: [ "@doctrine" ]
+        arguments: [ "@doctrine.orm.entity_manager" ]
 
     command.state.remove_transitions:
         class: eTraxis\SimpleBus\States\Handler\AddRemoveStateTransitionsCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\RemoveStateTransitionsCommand }]
-        arguments: [ "@doctrine" ]
+        arguments: [ "@doctrine.orm.entity_manager" ]
 
     command.state.add_assignees:
         class: eTraxis\SimpleBus\States\Handler\AddRemoveStateAssigneesCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\AddStateAssigneesCommand }]
-        arguments: [ "@doctrine" ]
+        arguments: [ "@doctrine.orm.entity_manager" ]
 
     command.state.remove_assignees:
         class: eTraxis\SimpleBus\States\Handler\AddRemoveStateAssigneesCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\RemoveStateAssigneesCommand }]
-        arguments: [ "@doctrine" ]
+        arguments: [ "@doctrine.orm.entity_manager" ]

@@ -11,10 +11,10 @@
 
 namespace eTraxis\SimpleBus\States\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\States\CreateStateCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -25,18 +25,18 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class CreateStateCommandHandler
 {
     protected $validator;
-    protected $doctrine;
+    protected $manager;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   ValidatorInterface $validator
-     * @param   RegistryInterface  $doctrine
+     * @param   ValidatorInterface     $validator
+     * @param   EntityManagerInterface $manager
      */
-    public function __construct(ValidatorInterface $validator, RegistryInterface $doctrine)
+    public function __construct(ValidatorInterface $validator, EntityManagerInterface $manager)
     {
         $this->validator = $validator;
-        $this->doctrine  = $doctrine;
+        $this->manager   = $manager;
     }
 
     /**
@@ -50,7 +50,7 @@ class CreateStateCommandHandler
     public function handle(CreateStateCommand $command)
     {
         /** @var Template $template */
-        $template = $this->doctrine->getRepository(Template::class)->find($command->template);
+        $template = $this->manager->find(Template::class, $command->template);
 
         if (!$template) {
             throw new NotFoundHttpException('Unknown template.');
@@ -69,7 +69,7 @@ class CreateStateCommandHandler
         if ($command->nextState) {
 
             /** @var State $nextState */
-            $nextState = $this->doctrine->getRepository(State::class)->find($command->nextState);
+            $nextState = $this->manager->find(State::class, $command->nextState);
 
             if (!$nextState) {
                 throw new NotFoundHttpException('Unknown next state.');
@@ -84,13 +84,11 @@ class CreateStateCommandHandler
             throw new BadRequestHttpException($errors->get(0)->getMessage());
         }
 
-        /** @var \Doctrine\ORM\EntityManager $em */
-        $em = $this->doctrine->getManager();
-        $em->beginTransaction();
+        $this->manager->beginTransaction();
 
         if ($command->type === State::TYPE_INITIAL) {
 
-            $query = $em->createQuery('
+            $query = $this->manager->createQuery('
                 UPDATE eTraxis:State s
                 SET s.type = :interim
                 WHERE s.template = :template AND s.type = :initial
@@ -103,8 +101,8 @@ class CreateStateCommandHandler
             ]);
         }
 
-        $em->persist($entity);
-        $em->flush();
-        $em->commit();
+        $this->manager->persist($entity);
+        $this->manager->flush();
+        $this->manager->commit();
     }
 }

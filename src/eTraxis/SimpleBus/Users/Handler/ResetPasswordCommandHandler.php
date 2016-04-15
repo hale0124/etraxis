@@ -11,9 +11,9 @@
 
 namespace eTraxis\SimpleBus\Users\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Users\ResetPasswordCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
@@ -25,23 +25,23 @@ use Symfony\Component\Translation\TranslatorInterface;
 class ResetPasswordCommandHandler
 {
     protected $translator;
-    protected $doctrine;
+    protected $manager;
     protected $password_encoder;
 
     /**
      * Dependency Injection constructor.
      *
      * @param   TranslatorInterface      $translator
-     * @param   RegistryInterface        $doctrine
+     * @param   EntityManagerInterface   $manager
      * @param   PasswordEncoderInterface $password_encoder
      */
     public function __construct(
-        TranslatorInterface      $translator,
-        RegistryInterface        $doctrine,
+        TranslatorInterface $translator,
+        EntityManagerInterface $manager,
         PasswordEncoderInterface $password_encoder)
     {
         $this->translator       = $translator;
-        $this->doctrine         = $doctrine;
+        $this->manager          = $manager;
         $this->password_encoder = $password_encoder;
     }
 
@@ -54,7 +54,7 @@ class ResetPasswordCommandHandler
      */
     public function handle(ResetPasswordCommand $command)
     {
-        $repository = $this->doctrine->getRepository(User::class);
+        $repository = $this->manager->getRepository(User::class);
 
         /** @var User $user */
         if ($user = $repository->findOneBy(['resetToken' => $command->token])) {
@@ -77,8 +77,8 @@ class ResetPasswordCommandHandler
                     ->clearResetToken()
                 ;
 
-                $this->doctrine->getManager()->persist($user);
-                $this->doctrine->getManager()->flush();
+                $this->manager->persist($user);
+                $this->manager->flush();
             }
         }
     }

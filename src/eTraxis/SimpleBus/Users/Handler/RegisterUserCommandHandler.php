@@ -11,10 +11,10 @@
 
 namespace eTraxis\SimpleBus\Users\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Users\RegisterUserCommand;
 use Psr\Log\LoggerInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * Command handler.
@@ -22,24 +22,24 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 class RegisterUserCommandHandler
 {
     protected $logger;
-    protected $doctrine;
+    protected $manager;
     protected $locale;
     protected $theme;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface   $logger
-     * @param   RegistryInterface $doctrine
-     * @param   string            $locale
-     * @param   string            $theme
+     * @param   LoggerInterface        $logger
+     * @param   EntityManagerInterface $manager
+     * @param   string                 $locale
+     * @param   string                 $theme
      */
-    public function __construct(LoggerInterface $logger, RegistryInterface $doctrine, $locale, $theme)
+    public function __construct(LoggerInterface $logger, EntityManagerInterface $manager, $locale, $theme)
     {
-        $this->logger   = $logger;
-        $this->doctrine = $doctrine;
-        $this->locale   = $locale;
-        $this->theme    = $theme;
+        $this->logger  = $logger;
+        $this->manager = $manager;
+        $this->locale  = $locale;
+        $this->theme   = $theme;
     }
 
     /**
@@ -50,7 +50,7 @@ class RegisterUserCommandHandler
      */
     public function handle(RegisterUserCommand $command)
     {
-        $repository = $this->doctrine->getRepository(User::class);
+        $repository = $this->manager->getRepository(User::class);
 
         /** @var User $user */
         $user = $repository->findOneBy([
@@ -88,7 +88,7 @@ class RegisterUserCommandHandler
             ;
         }
 
-        $this->doctrine->getManager()->persist($user);
-        $this->doctrine->getManager()->flush();
+        $this->manager->persist($user);
+        $this->manager->flush();
     }
 }

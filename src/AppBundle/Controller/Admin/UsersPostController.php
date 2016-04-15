@@ -65,10 +65,10 @@ class UsersPostController extends Controller
      */
     public function editAction(Request $request, User $user)
     {
-        /** @var \Doctrine\ORM\EntityManager $em */
-        $em = $this->getDoctrine()->getManager();
+        /** @var \Doctrine\ORM\EntityManagerInterface $manager */
+        $manager = $this->getDoctrine()->getManager();
 
-        $em->beginTransaction();
+        $manager->beginTransaction();
 
         $data = $request->request->get('user');
 
@@ -99,7 +99,7 @@ class UsersPostController extends Controller
             $this->getCommandBus()->handle($command);
         }
 
-        $em->commit();
+        $manager->commit();
 
         return new JsonResponse();
     }

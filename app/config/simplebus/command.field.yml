@@ -3,99 +3,99 @@ services:
     command.field.create.number:
         class: eTraxis\SimpleBus\Fields\Handler\NumberFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateNumberFieldCommand }]
-        arguments: [ "@validator", "@doctrine", "@translator" ]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager", "@translator" ]
 
     command.field.create.decimal:
         class: eTraxis\SimpleBus\Fields\Handler\DecimalFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateDecimalFieldCommand }]
-        arguments: [ "@validator", "@doctrine", "@translator" ]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager", "@translator" ]
 
     command.field.create.string:
         class: eTraxis\SimpleBus\Fields\Handler\StringFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateStringFieldCommand }]
-        arguments: [ "@validator", "@doctrine" ]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager" ]
 
     command.field.create.text:
         class: eTraxis\SimpleBus\Fields\Handler\TextFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateTextFieldCommand }]
-        arguments: [ "@validator", "@doctrine" ]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager" ]
 
     command.field.create.checkbox:
         class: eTraxis\SimpleBus\Fields\Handler\CheckboxFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateCheckboxFieldCommand }]
-        arguments: [ "@validator", "@doctrine" ]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager" ]
 
     command.field.create.list:
         class: eTraxis\SimpleBus\Fields\Handler\ListFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateListFieldCommand }]
-        arguments: [ "@validator", "@doctrine" ]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager" ]
 
     command.field.create.record:
         class: eTraxis\SimpleBus\Fields\Handler\RecordFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateRecordFieldCommand }]
-        arguments: [ "@validator", "@doctrine" ]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager" ]
 
     command.field.create.date:
         class: eTraxis\SimpleBus\Fields\Handler\DateFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateDateFieldCommand }]
-        arguments: [ "@validator", "@doctrine", "@translator" ]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager", "@translator" ]
 
     command.field.create.duration:
         class: eTraxis\SimpleBus\Fields\Handler\DurationFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\CreateDurationFieldCommand }]
-        arguments: [ "@validator", "@doctrine", "@translator" ]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager", "@translator" ]
 
     command.field.update.number:
         class: eTraxis\SimpleBus\Fields\Handler\NumberFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateNumberFieldCommand }]
-        arguments: [ "@validator", "@doctrine", "@translator" ]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager", "@translator" ]
 
     command.field.update.decimal:
         class: eTraxis\SimpleBus\Fields\Handler\DecimalFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateDecimalFieldCommand }]
-        arguments: [ "@validator", "@doctrine", "@translator" ]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager", "@translator" ]
 
     command.field.update.string:
         class: eTraxis\SimpleBus\Fields\Handler\StringFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateStringFieldCommand }]
-        arguments: [ "@validator", "@doctrine" ]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager" ]
 
     command.field.update.text:
         class: eTraxis\SimpleBus\Fields\Handler\TextFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateTextFieldCommand }]
-        arguments: [ "@validator", "@doctrine" ]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager" ]
 
     command.field.update.checkbox:
         class: eTraxis\SimpleBus\Fields\Handler\CheckboxFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateCheckboxFieldCommand }]
-        arguments: [ "@validator", "@doctrine" ]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager" ]
 
     command.field.update.record:
         class: eTraxis\SimpleBus\Fields\Handler\RecordFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateRecordFieldCommand }]
-        arguments: [ "@validator", "@doctrine" ]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager" ]
 
     command.field.update.list:
         class: eTraxis\SimpleBus\Fields\Handler\ListFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateListFieldCommand }]
-        arguments: [ "@validator", "@doctrine" ]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager" ]
 
     command.field.update.date:
         class: eTraxis\SimpleBus\Fields\Handler\DateFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateDateFieldCommand }]
-        arguments: [ "@validator", "@doctrine", "@translator" ]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager", "@translator" ]
 
     command.field.update.duration:
         class: eTraxis\SimpleBus\Fields\Handler\DurationFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\UpdateDurationFieldCommand }]
-        arguments: [ "@validator", "@doctrine", "@translator" ]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager", "@translator" ]
 
     command.field.delete:
         class: eTraxis\SimpleBus\Fields\Handler\DeleteFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\DeleteFieldCommand }]
-        arguments: [ "@doctrine" ]
+        arguments: [ "@doctrine.orm.entity_manager" ]
 
     command.field.set_order:
         class: eTraxis\SimpleBus\Fields\Handler\SetOrderFieldCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Fields\SetOrderFieldCommand }]
-        arguments: [ "@doctrine" ]
+        arguments: [ "@doctrine.orm.entity_manager" ]

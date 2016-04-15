@@ -11,9 +11,9 @@
 
 namespace eTraxis\SimpleBus\States\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\State;
 use eTraxis\SimpleBus\States\UpdateStateCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -24,18 +24,18 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class UpdateStateCommandHandler
 {
     protected $validator;
-    protected $doctrine;
+    protected $manager;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   ValidatorInterface $validator
-     * @param   RegistryInterface  $doctrine
+     * @param   ValidatorInterface     $validator
+     * @param   EntityManagerInterface $manager
      */
-    public function __construct(ValidatorInterface $validator, RegistryInterface $doctrine)
+    public function __construct(ValidatorInterface $validator, EntityManagerInterface $manager)
     {
         $this->validator = $validator;
-        $this->doctrine  = $doctrine;
+        $this->manager   = $manager;
     }
 
     /**
@@ -48,10 +48,8 @@ class UpdateStateCommandHandler
      */
     public function handle(UpdateStateCommand $command)
     {
-        $repository = $this->doctrine->getRepository(State::class);
-
         /** @var State $entity */
-        $entity = $repository->find($command->id);
+        $entity = $this->manager->find(State::class, $command->id);
 
         if (!$entity) {
             throw new NotFoundHttpException('Unknown state.');
@@ -60,13 +58,14 @@ class UpdateStateCommandHandler
         $entity
             ->setName($command->name)
             ->setAbbreviation($command->abbreviation)
-            ->setResponsible($entity->getType() === State::TYPE_FINAL ? State::RESPONSIBLE_REMOVE : $command->responsible)
+            ->setResponsible($entity->getType() === State::TYPE_FINAL ? State::RESPONSIBLE_REMOVE
+                : $command->responsible)
         ;
 
         if ($command->nextState) {
 
             /** @var State $nextState */
-            $nextState = $repository->find($command->nextState);
+            $nextState = $this->manager->find(State::class, $command->nextState);
 
             if (!$nextState) {
                 throw new NotFoundHttpException('Unknown next state.');
@@ -81,7 +80,7 @@ class UpdateStateCommandHandler
             throw new BadRequestHttpException($errors->get(0)->getMessage());
         }
 
-        $this->doctrine->getManager()->persist($entity);
-        $this->doctrine->getManager()->flush();
+        $this->manager->persist($entity);
+        $this->manager->flush();
     }
 }

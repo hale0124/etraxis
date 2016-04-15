@@ -11,11 +11,11 @@
 
 namespace eTraxis\SimpleBus\Fields\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Field;
 use eTraxis\SimpleBus\Fields\CreateDurationFieldCommand;
 use eTraxis\SimpleBus\Fields\UpdateDurationFieldCommand;
 use SimpleBus\ValidationException;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -29,16 +29,16 @@ class DurationFieldCommandHandler extends BaseFieldCommandHandler
     /**
      * Dependency Injection constructor.
      *
-     * @param   ValidatorInterface  $validator
-     * @param   RegistryInterface   $doctrine
-     * @param   TranslatorInterface $translator
+     * @param   ValidatorInterface     $validator
+     * @param   EntityManagerInterface $manager
+     * @param   TranslatorInterface    $translator
      */
     public function __construct(
-        ValidatorInterface  $validator,
-        RegistryInterface   $doctrine,
+        ValidatorInterface $validator,
+        EntityManagerInterface $manager,
         TranslatorInterface $translator)
     {
-        parent::__construct($validator, $doctrine);
+        parent::__construct($validator, $manager);
 
         $this->translator = $translator;
     }
@@ -64,7 +64,9 @@ class DurationFieldCommandHandler extends BaseFieldCommandHandler
 
         if ($default !== null) {
             if ($default < $minValue || $default > $maxValue) {
-                $error = $this->translator->trans('field.error.default_value', ['%min%' => $command->minValue, '%max%' => $command->maxValue]);
+                $error = $this->translator->trans('field.error.default_value', [
+                    '%min%' => $command->minValue, '%max%' => $command->maxValue,
+                ]);
                 throw new ValidationException([$error]);
             }
         }
@@ -72,13 +74,13 @@ class DurationFieldCommandHandler extends BaseFieldCommandHandler
         $entity->setType(Field::TYPE_DURATION);
 
         $entity->asDuration()
-            ->setMinValue($command->minValue)
-            ->setMaxValue($command->maxValue)
-            ->setDefaultValue($command->defaultValue)
+               ->setMinValue($command->minValue)
+               ->setMaxValue($command->maxValue)
+               ->setDefaultValue($command->defaultValue)
         ;
 
-        $this->doctrine->getManager()->persist($entity);
-        $this->doctrine->getManager()->flush();
+        $this->manager->persist($entity);
+        $this->manager->flush();
     }
 
     /**

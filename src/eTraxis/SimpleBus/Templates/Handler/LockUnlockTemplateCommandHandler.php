@@ -11,10 +11,10 @@
 
 namespace eTraxis\SimpleBus\Templates\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\Templates\LockTemplateCommand;
 use eTraxis\SimpleBus\Templates\UnlockTemplateCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -22,16 +22,16 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class LockUnlockTemplateCommandHandler
 {
-    protected $doctrine;
+    protected $manager;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   RegistryInterface $doctrine
+     * @param   EntityManagerInterface $manager
      */
-    public function __construct(RegistryInterface $doctrine)
+    public function __construct(EntityManagerInterface $manager)
     {
-        $this->doctrine = $doctrine;
+        $this->manager = $manager;
     }
 
     /**
@@ -43,10 +43,8 @@ class LockUnlockTemplateCommandHandler
      */
     public function handle($command)
     {
-        $repository = $this->doctrine->getRepository(Template::class);
-
         /** @var Template $entity */
-        $entity = $repository->find($command->id);
+        $entity = $this->manager->find(Template::class, $command->id);
 
         if (!$entity) {
             throw new NotFoundHttpException('Unknown template.');
@@ -59,7 +57,7 @@ class LockUnlockTemplateCommandHandler
             $entity->setLocked(false);
         }
 
-        $this->doctrine->getManager()->persist($entity);
-        $this->doctrine->getManager()->flush();
+        $this->manager->persist($entity);
+        $this->manager->flush();
     }
 }

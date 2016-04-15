@@ -11,9 +11,9 @@
 
 namespace eTraxis\SimpleBus\Templates\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\Templates\UpdateTemplateCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -24,18 +24,18 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class UpdateTemplateCommandHandler
 {
     protected $validator;
-    protected $doctrine;
+    protected $manager;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   ValidatorInterface $validator
-     * @param   RegistryInterface  $doctrine
+     * @param   ValidatorInterface     $validator
+     * @param   EntityManagerInterface $manager
      */
-    public function __construct(ValidatorInterface $validator, RegistryInterface $doctrine)
+    public function __construct(ValidatorInterface $validator, EntityManagerInterface $manager)
     {
         $this->validator = $validator;
-        $this->doctrine  = $doctrine;
+        $this->manager   = $manager;
     }
 
     /**
@@ -48,10 +48,8 @@ class UpdateTemplateCommandHandler
      */
     public function handle(UpdateTemplateCommand $command)
     {
-        $repository = $this->doctrine->getRepository(Template::class);
-
         /** @var Template $entity */
-        $entity = $repository->find($command->id);
+        $entity = $this->manager->find(Template::class, $command->id);
 
         if (!$entity) {
             throw new NotFoundHttpException('Unknown template.');
@@ -72,7 +70,7 @@ class UpdateTemplateCommandHandler
             throw new BadRequestHttpException($errors->get(0)->getMessage());
         }
 
-        $this->doctrine->getManager()->persist($entity);
-        $this->doctrine->getManager()->flush();
+        $this->manager->persist($entity);
+        $this->manager->flush();
     }
 }

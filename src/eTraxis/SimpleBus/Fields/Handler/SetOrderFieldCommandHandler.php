@@ -11,9 +11,9 @@
 
 namespace eTraxis\SimpleBus\Fields\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Field;
 use eTraxis\SimpleBus\Fields\SetOrderFieldCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -21,16 +21,16 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class SetOrderFieldCommandHandler
 {
-    protected $doctrine;
+    protected $manager;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   RegistryInterface $doctrine
+     * @param   EntityManagerInterface $manager
      */
-    public function __construct(RegistryInterface $doctrine)
+    public function __construct(EntityManagerInterface $manager)
     {
-        $this->doctrine = $doctrine;
+        $this->manager = $manager;
     }
 
     /**
@@ -42,11 +42,8 @@ class SetOrderFieldCommandHandler
      */
     public function handle(SetOrderFieldCommand $command)
     {
-        /** @var \Doctrine\ORM\EntityRepository $repository */
-        $repository = $this->doctrine->getRepository(Field::class);
-
         /** @var Field $entity */
-        $entity = $repository->findOneBy([
+        $entity = $this->manager->getRepository(Field::class)->findOneBy([
             'id'        => $command->id,
             'removedAt' => 0,
         ]);
@@ -93,7 +90,7 @@ class SetOrderFieldCommandHandler
     {
         $field->setIndexNumber($order);
 
-        $this->doctrine->getManager()->persist($field);
-        $this->doctrine->getManager()->flush();
+        $this->manager->persist($field);
+        $this->manager->flush();
     }
 }

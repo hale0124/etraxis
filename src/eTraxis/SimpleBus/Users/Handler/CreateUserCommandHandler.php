@@ -11,9 +11,9 @@
 
 namespace eTraxis\SimpleBus\Users\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Users\CreateUserCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
 use Symfony\Component\Security\Core\Exception\BadCredentialsException;
@@ -25,23 +25,23 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class CreateUserCommandHandler
 {
     protected $validator;
-    protected $doctrine;
+    protected $manager;
     protected $password_encoder;
 
     /**
      * Dependency Injection constructor.
      *
      * @param   ValidatorInterface       $validator
-     * @param   RegistryInterface        $doctrine
+     * @param   EntityManagerInterface   $manager
      * @param   PasswordEncoderInterface $password_encoder
      */
     public function __construct(
-        ValidatorInterface       $validator,
-        RegistryInterface        $doctrine,
+        ValidatorInterface $validator,
+        EntityManagerInterface $manager,
         PasswordEncoderInterface $password_encoder)
     {
         $this->validator        = $validator;
-        $this->doctrine         = $doctrine;
+        $this->manager          = $manager;
         $this->password_encoder = $password_encoder;
     }
 
@@ -83,7 +83,7 @@ class CreateUserCommandHandler
             throw new BadRequestHttpException($errors->get(0)->getMessage());
         }
 
-        $this->doctrine->getManager()->persist($entity);
-        $this->doctrine->getManager()->flush();
+        $this->manager->persist($entity);
+        $this->manager->flush();
     }
 }

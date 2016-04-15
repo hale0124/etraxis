@@ -11,10 +11,10 @@
 
 namespace eTraxis\SimpleBus\ListItems\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\ListItem;
 use eTraxis\SimpleBus\ListItems\CreateListItemCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
@@ -25,18 +25,18 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class CreateListItemCommandHandler
 {
     protected $validator;
-    protected $doctrine;
+    protected $manager;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   ValidatorInterface $validator
-     * @param   RegistryInterface  $doctrine
+     * @param   ValidatorInterface     $validator
+     * @param   EntityManagerInterface $manager
      */
-    public function __construct(ValidatorInterface $validator, RegistryInterface $doctrine)
+    public function __construct(ValidatorInterface $validator, EntityManagerInterface $manager)
     {
         $this->validator = $validator;
-        $this->doctrine  = $doctrine;
+        $this->manager   = $manager;
     }
 
     /**
@@ -50,7 +50,7 @@ class CreateListItemCommandHandler
     public function handle(CreateListItemCommand $command)
     {
         /** @var Field $field */
-        $field = $this->doctrine->getRepository(Field::class)->find($command->field);
+        $field = $this->manager->find(Field::class, $command->field);
 
         if (!$field) {
             throw new NotFoundHttpException('Unknown field.');
@@ -70,7 +70,7 @@ class CreateListItemCommandHandler
             throw new BadRequestHttpException($errors->get(0)->getMessage());
         }
 
-        $this->doctrine->getManager()->persist($entity);
-        $this->doctrine->getManager()->flush();
+        $this->manager->persist($entity);
+        $this->manager->flush();
     }
 }

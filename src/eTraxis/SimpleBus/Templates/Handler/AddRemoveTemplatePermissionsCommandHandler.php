@@ -11,13 +11,13 @@
 
 namespace eTraxis\SimpleBus\Templates\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Collection\SystemRole;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\Template;
 use eTraxis\Entity\TemplateGroupPermission;
 use eTraxis\SimpleBus\Templates\AddTemplatePermissionsCommand;
 use eTraxis\SimpleBus\Templates\RemoveTemplatePermissionsCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -25,16 +25,16 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class AddRemoveTemplatePermissionsCommandHandler
 {
-    protected $doctrine;
+    protected $manager;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   RegistryInterface $doctrine
+     * @param   EntityManagerInterface $manager
      */
-    public function __construct(RegistryInterface $doctrine)
+    public function __construct(EntityManagerInterface $manager)
     {
-        $this->doctrine = $doctrine;
+        $this->manager = $manager;
     }
 
     /**
@@ -47,7 +47,7 @@ class AddRemoveTemplatePermissionsCommandHandler
     public function handle($command)
     {
         /** @var Template $template */
-        $template = $this->doctrine->getRepository(Template::class)->find($command->id);
+        $template = $this->manager->find(Template::class, $command->id);
 
         if (!$template) {
             throw new NotFoundHttpException('Unknown template.');
@@ -60,7 +60,7 @@ class AddRemoveTemplatePermissionsCommandHandler
                 $permissions = $template->getAuthorPermissions();
                 $permissions = $this->permissions($command, $permissions);
                 $template->setAuthorPermissions($permissions | Template::PERMIT_VIEW_RECORD);
-                $this->doctrine->getManager()->persist($template);
+                $this->manager->persist($template);
 
                 break;
 
@@ -69,7 +69,7 @@ class AddRemoveTemplatePermissionsCommandHandler
                 $permissions = $template->getResponsiblePermissions();
                 $permissions = $this->permissions($command, $permissions);
                 $template->setResponsiblePermissions($permissions | Template::PERMIT_VIEW_RECORD);
-                $this->doctrine->getManager()->persist($template);
+                $this->manager->persist($template);
 
                 break;
 
@@ -78,24 +78,25 @@ class AddRemoveTemplatePermissionsCommandHandler
                 $permissions = $template->getRegisteredPermissions();
                 $permissions = $this->permissions($command, $permissions);
                 $template->setRegisteredPermissions($permissions);
-                $this->doctrine->getManager()->persist($template);
+                $this->manager->persist($template);
 
                 break;
 
             default:
 
                 /** @var Group $group */
-                $group = $this->doctrine->getRepository(Group::class)->find($command->group);
+                $group = $this->manager->find(Group::class, $command->group);
 
                 if (!$group) {
                     throw new NotFoundHttpException('Unknown group.');
                 }
 
                 /** @var TemplateGroupPermission $entity */
-                $entity = $this->doctrine->getRepository(TemplateGroupPermission::class)->findOneBy([
+                $entity = $this->manager->getRepository(TemplateGroupPermission::class)->findOneBy([
                     'group'    => $group,
                     'template' => $template,
-                ]);
+                ])
+                ;
 
                 if (!$entity) {
                     $entity = new TemplateGroupPermission();
@@ -107,10 +108,10 @@ class AddRemoveTemplatePermissionsCommandHandler
                 $permissions = $entity->getPermission();
                 $permissions = $this->permissions($command, $permissions);
                 $entity->setPermission($permissions);
-                $this->doctrine->getManager()->persist($entity);
+                $this->manager->persist($entity);
         }
 
-        $this->doctrine->getManager()->flush();
+        $this->manager->flush();
     }
 
     /**

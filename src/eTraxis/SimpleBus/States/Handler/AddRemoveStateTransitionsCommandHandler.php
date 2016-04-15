@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\States\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Collection\SystemRole;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
@@ -18,7 +19,6 @@ use eTraxis\Entity\StateGroupTransition;
 use eTraxis\Entity\StateRoleTransition;
 use eTraxis\SimpleBus\States\AddStateTransitionsCommand;
 use eTraxis\SimpleBus\States\RemoveStateTransitionsCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -26,16 +26,16 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class AddRemoveStateTransitionsCommandHandler
 {
-    protected $doctrine;
+    protected $manager;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   RegistryInterface $doctrine
+     * @param   EntityManagerInterface $manager
      */
-    public function __construct(RegistryInterface $doctrine)
+    public function __construct(EntityManagerInterface $manager)
     {
-        $this->doctrine = $doctrine;
+        $this->manager = $manager;
     }
 
     /**
@@ -48,25 +48,24 @@ class AddRemoveStateTransitionsCommandHandler
     public function handle($command)
     {
         /** @var State $state */
-        $state = $this->doctrine->getRepository(State::class)->find($command->id);
+        $state = $this->manager->find(State::class, $command->id);
 
         if (!$state) {
             throw new NotFoundHttpException('Unknown state.');
         }
 
         /** @var State[] $transitions */
-        $transitions = $this->doctrine->getRepository(State::class)->findBy([
+        $transitions = $this->manager->getRepository(State::class)->findBy([
             'template' => $state->getTemplate(),
             'id'       => $command->transitions,
-        ]);
+        ])
+        ;
 
-        /** @var \Doctrine\ORM\EntityManager $em */
-        $em = $this->doctrine->getManager();
-        $em->beginTransaction();
+        $this->manager->beginTransaction();
 
         if (array_key_exists($command->group, SystemRole::getCollection())) {
 
-            $query = $em->createQuery('
+            $query = $this->manager->createQuery('
                 DELETE eTraxis:StateRoleTransition t
                 WHERE t.fromState = :state
                 AND t.toState IN (:transitions)
@@ -91,21 +90,21 @@ class AddRemoveStateTransitionsCommandHandler
                         ->setRole($command->group)
                     ;
 
-                    $em->persist($entity);
+                    $this->manager->persist($entity);
                 }
             }
         }
         else {
 
             /** @var Group $group */
-            $group = $this->doctrine->getRepository(Group::class)->find($command->group);
+            $group = $this->manager->find(Group::class, $command->group);
 
             if (!$group) {
-                $em->rollback();
+                $this->manager->rollback();
                 throw new NotFoundHttpException('Unknown group.');
             }
 
-            $query = $em->createQuery('
+            $query = $this->manager->createQuery('
                 DELETE eTraxis:StateGroupTransition t
                 WHERE t.fromState = :state
                 AND t.toState IN (:transitions)
@@ -130,12 +129,12 @@ class AddRemoveStateTransitionsCommandHandler
                         ->setGroup($group)
                     ;
 
-                    $em->persist($entity);
+                    $this->manager->persist($entity);
                 }
             }
         }
 
-        $em->flush();
-        $em->commit();
+        $this->manager->flush();
+        $this->manager->commit();
     }
 }

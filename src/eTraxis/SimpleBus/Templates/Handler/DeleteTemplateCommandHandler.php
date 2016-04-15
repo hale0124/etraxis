@@ -11,9 +11,9 @@
 
 namespace eTraxis\SimpleBus\Templates\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\Templates\DeleteTemplateCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -23,18 +23,18 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
  */
 class DeleteTemplateCommandHandler
 {
-    protected $doctrine;
+    protected $manager;
     protected $security;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   RegistryInterface             $doctrine
+     * @param   EntityManagerInterface        $manager
      * @param   AuthorizationCheckerInterface $security
      */
-    public function __construct(RegistryInterface $doctrine, AuthorizationCheckerInterface $security)
+    public function __construct(EntityManagerInterface $manager, AuthorizationCheckerInterface $security)
     {
-        $this->doctrine = $doctrine;
+        $this->manager  = $manager;
         $this->security = $security;
     }
 
@@ -48,9 +48,7 @@ class DeleteTemplateCommandHandler
      */
     public function handle(DeleteTemplateCommand $command)
     {
-        $repository = $this->doctrine->getRepository(Template::class);
-
-        $entity = $repository->find($command->id);
+        $entity = $this->manager->find(Template::class, $command->id);
 
         if (!$entity) {
             throw new NotFoundHttpException('Unknown template.');
@@ -60,7 +58,7 @@ class DeleteTemplateCommandHandler
             throw new AccessDeniedHttpException();
         }
 
-        $this->doctrine->getManager()->remove($entity);
-        $this->doctrine->getManager()->flush();
+        $this->manager->remove($entity);
+        $this->manager->flush();
     }
 }

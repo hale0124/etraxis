@@ -35,8 +35,11 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
         ]);
 
+        /** @var \Doctrine\ORM\EntityManagerInterface $manager */
+        $manager = $this->doctrine->getManager();
+
         /** @var mixed $handler */
-        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
+        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $manager));
 
         /** @var Field $field */
         $field = $handler->getEntity($command);
@@ -66,8 +69,11 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
         ]);
 
+        /** @var \Doctrine\ORM\EntityManagerInterface $manager */
+        $manager = $this->doctrine->getManager();
+
         /** @var mixed $handler */
-        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
+        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $manager));
         $handler->getEntity($command);
     }
 
@@ -90,8 +96,11 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => false,
         ]);
 
+        /** @var \Doctrine\ORM\EntityManagerInterface $manager */
+        $manager = $this->doctrine->getManager();
+
         /** @var mixed $handler */
-        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
+        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $manager));
         $handler->getEntity($command);
     }
 
@@ -111,8 +120,11 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => true,
         ]);
 
+        /** @var \Doctrine\ORM\EntityManagerInterface $manager */
+        $manager = $this->doctrine->getManager();
+
         /** @var mixed $handler */
-        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
+        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $manager));
 
         /** @var Field $entity */
         $entity = $handler->getEntity($command);
@@ -140,8 +152,11 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => true,
         ]);
 
+        /** @var \Doctrine\ORM\EntityManagerInterface $manager */
+        $manager = $this->doctrine->getManager();
+
         /** @var mixed $handler */
-        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
+        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $manager));
         $handler->getEntity($command);
     }
 
@@ -165,8 +180,11 @@ class BaseFieldCommandTest extends BaseTestCase
             'showInEmails' => true,
         ]);
 
+        /** @var \Doctrine\ORM\EntityManagerInterface $manager */
+        $manager = $this->doctrine->getManager();
+
         /** @var mixed $handler */
-        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
+        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $manager));
         $handler->getEntity($command);
     }
 
@@ -178,8 +196,11 @@ class BaseFieldCommandTest extends BaseTestCase
     {
         $command = null;
 
+        /** @var \Doctrine\ORM\EntityManagerInterface $manager */
+        $manager = $this->doctrine->getManager();
+
         /** @var mixed $handler */
-        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $this->doctrine));
+        $handler = AltrEgo::create(new BaseFieldCommandHandler($this->validator, $manager));
         $handler->getEntity($command);
     }
 }

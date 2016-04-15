@@ -11,9 +11,9 @@
 
 namespace eTraxis\SimpleBus\Users\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Users\SaveAppearanceCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -23,18 +23,18 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class SaveAppearanceCommandHandler
 {
     protected $validator;
-    protected $doctrine;
+    protected $manager;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   ValidatorInterface $validator
-     * @param   RegistryInterface  $doctrine
+     * @param   ValidatorInterface     $validator
+     * @param   EntityManagerInterface $manager
      */
-    public function __construct(ValidatorInterface $validator, RegistryInterface $doctrine)
+    public function __construct(ValidatorInterface $validator, EntityManagerInterface $manager)
     {
         $this->validator = $validator;
-        $this->doctrine  = $doctrine;
+        $this->manager   = $manager;
     }
 
     /**
@@ -46,10 +46,8 @@ class SaveAppearanceCommandHandler
      */
     public function handle(SaveAppearanceCommand $command)
     {
-        $repository = $this->doctrine->getRepository(User::class);
-
         /** @var User $entity */
-        $entity = $repository->find($command->id);
+        $entity = $this->manager->find(User::class, $command->id);
 
         if (!$entity) {
             throw new NotFoundHttpException('Unknown user.');
@@ -61,7 +59,7 @@ class SaveAppearanceCommandHandler
             ->setTimezone($command->timezone)
         ;
 
-        $this->doctrine->getManager()->persist($entity);
-        $this->doctrine->getManager()->flush();
+        $this->manager->persist($entity);
+        $this->manager->flush();
     }
 }

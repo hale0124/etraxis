@@ -11,10 +11,10 @@
 
 namespace eTraxis\SimpleBus\Users\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Users\LockUserCommand;
 use Psr\Log\LoggerInterface;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * Command handler.
@@ -22,7 +22,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
 class LockUserCommandHandler
 {
     protected $logger;
-    protected $doctrine;
+    protected $manager;
 
     protected $security_auth_attempts;
     protected $security_lock_time;
@@ -30,19 +30,19 @@ class LockUserCommandHandler
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface   $logger
-     * @param   RegistryInterface $doctrine
-     * @param   int               $security_auth_attempts
-     * @param   int               $security_lock_time
+     * @param   LoggerInterface        $logger
+     * @param   EntityManagerInterface $manager
+     * @param   int                    $security_auth_attempts
+     * @param   int                    $security_lock_time
      */
     public function __construct(
-        LoggerInterface   $logger,
-        RegistryInterface $doctrine,
+        LoggerInterface $logger,
+        EntityManagerInterface $manager,
         $security_auth_attempts,
         $security_lock_time)
     {
-        $this->logger   = $logger;
-        $this->doctrine = $doctrine;
+        $this->logger  = $logger;
+        $this->manager = $manager;
 
         $this->security_auth_attempts = $security_auth_attempts;
         $this->security_lock_time     = $security_lock_time;
@@ -55,7 +55,7 @@ class LockUserCommandHandler
      */
     public function handle(LockUserCommand $command)
     {
-        $repository = $this->doctrine->getRepository(User::class);
+        $repository = $this->manager->getRepository(User::class);
 
         /** @var User $user */
         if ($user = $repository->findOneBy(['username' => $command->username . '@eTraxis'])) {
@@ -66,8 +66,8 @@ class LockUserCommandHandler
                     $this->logger->info('Lock the account', [$this->security_lock_time]);
                 }
 
-                $this->doctrine->getManager()->persist($user);
-                $this->doctrine->getManager()->flush();
+                $this->manager->persist($user);
+                $this->manager->flush();
             }
         }
     }

@@ -68,7 +68,7 @@ class BaseTestCase extends WebTestCase
         $this->event_bus   = $this->client->getContainer()->get('event_bus');
         $this->datatables  = $this->client->getContainer()->get('datatables');
 
-        /** @var \Doctrine\ORM\EntityManager $manager */
+        /** @var \Doctrine\ORM\EntityManagerInterface $manager */
         $manager = $this->doctrine->getManager();
         $manager->beginTransaction();
     }
@@ -78,7 +78,7 @@ class BaseTestCase extends WebTestCase
      */
     protected function tearDown()
     {
-        /** @var \Doctrine\ORM\EntityManager $manager */
+        /** @var \Doctrine\ORM\EntityManagerInterface $manager */
         $manager = $this->doctrine->getManager();
         $manager->rollback();
 

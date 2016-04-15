@@ -11,29 +11,29 @@
 
 namespace eTraxis\SimpleBus\Users\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\User;
 use eTraxis\Service\Mailer\MailerInterface;
 use eTraxis\SimpleBus\Users\ForgotPasswordCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 
 /**
  * Command handler.
  */
 class ForgotPasswordCommandHandler
 {
-    protected $doctrine;
+    protected $manager;
     protected $mailer;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   RegistryInterface $doctrine
-     * @param   MailerInterface   $mailer
+     * @param   EntityManagerInterface $manager
+     * @param   MailerInterface        $mailer
      */
-    public function __construct(RegistryInterface $doctrine, MailerInterface $mailer)
+    public function __construct(EntityManagerInterface $manager, MailerInterface $mailer)
     {
-        $this->doctrine = $doctrine;
-        $this->mailer   = $mailer;
+        $this->manager = $manager;
+        $this->mailer  = $mailer;
     }
 
     /**
@@ -43,15 +43,15 @@ class ForgotPasswordCommandHandler
      */
     public function handle(ForgotPasswordCommand $command)
     {
-        $repository = $this->doctrine->getRepository(User::class);
+        $repository = $this->manager->getRepository(User::class);
 
         /** @var User $user */
         if ($user = $repository->findOneBy(['username' => $command->username . '@eTraxis'])) {
 
             $token = $user->generateResetToken();
 
-            $this->doctrine->getManager()->persist($user);
-            $this->doctrine->getManager()->flush();
+            $this->manager->persist($user);
+            $this->manager->flush();
 
             $this->mailer->send(
                 [$user->getEmail() => $user->getFullname()],

@@ -11,9 +11,9 @@
 
 namespace eTraxis\SimpleBus\States\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\State;
 use eTraxis\SimpleBus\States\SetInitialStateCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -21,16 +21,16 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class SetInitialStateCommandHandler
 {
-    protected $doctrine;
+    protected $manager;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   RegistryInterface $doctrine
+     * @param   EntityManagerInterface $manager
      */
-    public function __construct(RegistryInterface $doctrine)
+    public function __construct(EntityManagerInterface $manager)
     {
-        $this->doctrine = $doctrine;
+        $this->manager = $manager;
     }
 
     /**
@@ -42,20 +42,16 @@ class SetInitialStateCommandHandler
      */
     public function handle(SetInitialStateCommand $command)
     {
-        $repository = $this->doctrine->getRepository(State::class);
-
         /** @var State $entity */
-        $entity = $repository->find($command->id);
+        $entity = $this->manager->find(State::class, $command->id);
 
         if (!$entity) {
             throw new NotFoundHttpException('Unknown state.');
         }
 
-        /** @var \Doctrine\ORM\EntityManager $em */
-        $em = $this->doctrine->getManager();
-        $em->beginTransaction();
+        $this->manager->beginTransaction();
 
-        $query = $em->createQuery('
+        $query = $this->manager->createQuery('
             UPDATE eTraxis:State s
             SET s.type = :interim
             WHERE s.template = :template AND s.type = :initial
@@ -67,7 +63,7 @@ class SetInitialStateCommandHandler
             'interim'  => State::TYPE_INTERIM,
         ]);
 
-        $query = $em->createQuery('
+        $query = $this->manager->createQuery('
             UPDATE eTraxis:State s
             SET s.type = :initial
             WHERE s.id = :id
@@ -78,6 +74,6 @@ class SetInitialStateCommandHandler
             'initial' => State::TYPE_INITIAL,
         ]);
 
-        $em->commit();
+        $this->manager->commit();
     }
 }

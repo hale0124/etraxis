@@ -11,11 +11,11 @@
 
 namespace eTraxis\SimpleBus\Groups\Handler;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Groups\AddUsersCommand;
 use eTraxis\SimpleBus\Groups\RemoveUsersCommand;
-use Symfony\Bridge\Doctrine\RegistryInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
@@ -23,16 +23,16 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
  */
 class AddRemoveUsersCommandHandler
 {
-    protected $doctrine;
+    protected $manager;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   RegistryInterface $doctrine
+     * @param   EntityManagerInterface $manager
      */
-    public function __construct(RegistryInterface $doctrine)
+    public function __construct(EntityManagerInterface $manager)
     {
-        $this->doctrine = $doctrine;
+        $this->manager = $manager;
     }
 
     /**
@@ -44,22 +44,18 @@ class AddRemoveUsersCommandHandler
      */
     public function handle($command)
     {
-        /** @var \Doctrine\ORM\EntityRepository $repository */
-        $repository = $this->doctrine->getRepository(Group::class);
-
         /** @var Group $group */
-        $group = $repository->find($command->id);
+        $group = $this->manager->find(Group::class, $command->id);
 
         if (!$group) {
             throw new NotFoundHttpException('Unknown group.');
         }
 
-        $repository = $this->doctrine->getRepository(User::class);
-
-        $query = $repository->createQueryBuilder('u');
+        $query = $this->manager->createQueryBuilder();
 
         $query
             ->select('u')
+            ->from(User::class, 'u')
             ->where($query->expr()->in('u.id', ':users'))
             ->setParameter('users', $command->users)
         ;
@@ -77,7 +73,7 @@ class AddRemoveUsersCommandHandler
             }
         }
 
-        $this->doctrine->getManager()->persist($group);
-        $this->doctrine->getManager()->flush();
+        $this->manager->persist($group);
+        $this->manager->flush();
     }
 }
