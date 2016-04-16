@@ -49,6 +49,5 @@ class DeleteGroupCommandHandler
         }
 
         $this->manager->remove($entity);
-        $this->manager->flush();
     }
 }

@@ -94,6 +94,5 @@ class UpdateUserCommandHandler
         }
 
         $this->manager->persist($entity);
-        $this->manager->flush();
     }
 }

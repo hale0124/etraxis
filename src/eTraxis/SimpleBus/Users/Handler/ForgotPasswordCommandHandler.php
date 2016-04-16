@@ -51,7 +51,6 @@ class ForgotPasswordCommandHandler
             $token = $user->generateResetToken();
 
             $this->manager->persist($user);
-            $this->manager->flush();
 
             $this->mailer->send(
                 [$user->getEmail() => $user->getFullname()],

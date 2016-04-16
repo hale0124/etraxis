@@ -40,6 +40,7 @@ class RemoveGroupsCommandTest extends BaseTestCase
         ]);
 
         $this->command_bus->handle($command);
+        $this->doctrine->getManager()->refresh($user);
 
         $groups = $user->getGroups();
         $others = $repository->getOtherGroups($user);

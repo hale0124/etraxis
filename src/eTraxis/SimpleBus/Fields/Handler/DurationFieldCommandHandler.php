@@ -80,7 +80,6 @@ class DurationFieldCommandHandler extends BaseFieldCommandHandler
         ;
 
         $this->manager->persist($entity);
-        $this->manager->flush();
     }
 
     /**

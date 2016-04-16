@@ -76,6 +76,5 @@ class NumberFieldCommandHandler extends BaseFieldCommandHandler
         ;
 
         $this->manager->persist($entity);
-        $this->manager->flush();
     }
 }

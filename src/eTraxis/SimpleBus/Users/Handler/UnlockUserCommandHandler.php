@@ -45,7 +45,6 @@ class UnlockUserCommandHandler
             $user->unlock();
 
             $this->manager->persist($user);
-            $this->manager->flush();
         }
     }
 }

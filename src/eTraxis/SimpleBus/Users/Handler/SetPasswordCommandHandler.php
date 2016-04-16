@@ -73,7 +73,6 @@ class SetPasswordCommandHandler
             $entity->setPassword($encoded);
 
             $this->manager->persist($entity);
-            $this->manager->flush();
         }
     }
 }

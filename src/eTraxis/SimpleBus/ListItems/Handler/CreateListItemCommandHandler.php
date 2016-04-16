@@ -71,6 +71,5 @@ class CreateListItemCommandHandler
         }
 
         $this->manager->persist($entity);
-        $this->manager->flush();
     }
 }

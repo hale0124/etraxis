@@ -67,7 +67,5 @@ class DeleteFieldCommandHandler
                 $this->manager->persist($field);
             }
         }
-
-        $this->manager->flush();
     }
 }

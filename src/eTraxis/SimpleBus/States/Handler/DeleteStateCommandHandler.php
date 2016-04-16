@@ -59,6 +59,5 @@ class DeleteStateCommandHandler
         }
 
         $this->manager->remove($entity);
-        $this->manager->flush();
     }
 }

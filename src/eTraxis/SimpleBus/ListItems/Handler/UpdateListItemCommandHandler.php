@@ -75,6 +75,5 @@ class UpdateListItemCommandHandler
         }
 
         $this->manager->persist($entity);
-        $this->manager->flush();
     }
 }

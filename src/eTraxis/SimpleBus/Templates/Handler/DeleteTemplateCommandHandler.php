@@ -59,6 +59,5 @@ class DeleteTemplateCommandHandler
         }
 
         $this->manager->remove($entity);
-        $this->manager->flush();
     }
 }

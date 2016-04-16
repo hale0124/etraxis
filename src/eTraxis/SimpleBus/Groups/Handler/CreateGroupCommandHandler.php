@@ -75,6 +75,5 @@ class CreateGroupCommandHandler
         }
 
         $this->manager->persist($entity);
-        $this->manager->flush();
     }
 }

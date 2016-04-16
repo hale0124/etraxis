@@ -34,6 +34,5 @@ class CheckboxFieldCommandHandler extends BaseFieldCommandHandler
         $entity->asCheckbox()->setDefaultValue($command->defaultValue);
 
         $this->manager->persist($entity);
-        $this->manager->flush();
     }
 }

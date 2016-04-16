@@ -32,6 +32,5 @@ class RecordFieldCommandHandler extends BaseFieldCommandHandler
         $entity->setType(Field::TYPE_RECORD);
 
         $this->manager->persist($entity);
-        $this->manager->flush();
     }
 }

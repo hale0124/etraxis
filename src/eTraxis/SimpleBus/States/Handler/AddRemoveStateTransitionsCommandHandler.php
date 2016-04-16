@@ -61,8 +61,6 @@ class AddRemoveStateTransitionsCommandHandler
         ])
         ;
 
-        $this->manager->beginTransaction();
-
         if (array_key_exists($command->group, SystemRole::getCollection())) {
 
             $query = $this->manager->createQuery('
@@ -100,7 +98,6 @@ class AddRemoveStateTransitionsCommandHandler
             $group = $this->manager->find(Group::class, $command->group);
 
             if (!$group) {
-                $this->manager->rollback();
                 throw new NotFoundHttpException('Unknown group.');
             }
 
@@ -133,8 +130,5 @@ class AddRemoveStateTransitionsCommandHandler
                 }
             }
         }
-
-        $this->manager->flush();
-        $this->manager->commit();
     }
 }

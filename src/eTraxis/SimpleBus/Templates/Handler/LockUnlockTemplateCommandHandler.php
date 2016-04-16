@@ -58,6 +58,5 @@ class LockUnlockTemplateCommandHandler
         }
 
         $this->manager->persist($entity);
-        $this->manager->flush();
     }
 }

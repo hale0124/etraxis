@@ -76,6 +76,5 @@ class DecimalFieldCommandHandler extends BaseFieldCommandHandler
         ;
 
         $this->manager->persist($entity);
-        $this->manager->flush();
     }
 }

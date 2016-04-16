@@ -60,6 +60,5 @@ class DeleteUserCommandHandler
         }
 
         $this->manager->remove($entity);
-        $this->manager->flush();
     }
 }

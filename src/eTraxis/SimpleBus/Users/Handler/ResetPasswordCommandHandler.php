@@ -78,7 +78,6 @@ class ResetPasswordCommandHandler
                 ;
 
                 $this->manager->persist($user);
-                $this->manager->flush();
             }
         }
     }

@@ -60,8 +60,6 @@ class AddRemoveStateAssigneesCommandHandler
         ])
         ;
 
-        $this->manager->beginTransaction();
-
         $query = $this->manager->createQuery('
             DELETE eTraxis:StateAssignee a
             WHERE a.state = :state
@@ -90,8 +88,5 @@ class AddRemoveStateAssigneesCommandHandler
                 }
             }
         }
-
-        $this->manager->flush();
-        $this->manager->commit();
     }
 }

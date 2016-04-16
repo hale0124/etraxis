@@ -110,8 +110,6 @@ class AddRemoveTemplatePermissionsCommandHandler
                 $entity->setPermission($permissions);
                 $this->manager->persist($entity);
         }
-
-        $this->manager->flush();
     }
 
     /**

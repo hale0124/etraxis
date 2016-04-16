@@ -74,8 +74,5 @@ class AddRemoveGroupsCommandHandler
 
             $this->manager->persist($group);
         }
-
-        $this->manager->flush();
-        $this->manager->refresh($user);
     }
 }

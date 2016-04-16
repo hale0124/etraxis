@@ -43,6 +43,5 @@ class StringFieldCommandHandler extends BaseFieldCommandHandler
         ;
 
         $this->manager->persist($entity);
-        $this->manager->flush();
     }
 }

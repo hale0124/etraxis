@@ -49,8 +49,6 @@ class SetInitialStateCommandHandler
             throw new NotFoundHttpException('Unknown state.');
         }
 
-        $this->manager->beginTransaction();
-
         $query = $this->manager->createQuery('
             UPDATE eTraxis:State s
             SET s.type = :interim
@@ -73,7 +71,5 @@ class SetInitialStateCommandHandler
             'id'      => $command->id,
             'initial' => State::TYPE_INITIAL,
         ]);
-
-        $this->manager->commit();
     }
 }

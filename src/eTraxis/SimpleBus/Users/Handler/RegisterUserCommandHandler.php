@@ -89,6 +89,5 @@ class RegisterUserCommandHandler
         }
 
         $this->manager->persist($user);
-        $this->manager->flush();
     }
 }

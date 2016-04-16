@@ -67,7 +67,6 @@ class LockUserCommandHandler
                 }
 
                 $this->manager->persist($user);
-                $this->manager->flush();
             }
         }
     }

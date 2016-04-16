@@ -59,6 +59,5 @@ class DeleteProjectCommandHandler
         }
 
         $this->manager->remove($entity);
-        $this->manager->flush();
     }
 }

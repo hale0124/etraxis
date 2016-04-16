@@ -84,8 +84,6 @@ class CreateStateCommandHandler
             throw new BadRequestHttpException($errors->get(0)->getMessage());
         }
 
-        $this->manager->beginTransaction();
-
         if ($command->type === State::TYPE_INITIAL) {
 
             $query = $this->manager->createQuery('
@@ -102,7 +100,5 @@ class CreateStateCommandHandler
         }
 
         $this->manager->persist($entity);
-        $this->manager->flush();
-        $this->manager->commit();
     }
 }

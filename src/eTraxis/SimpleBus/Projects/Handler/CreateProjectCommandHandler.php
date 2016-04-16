@@ -61,6 +61,5 @@ class CreateProjectCommandHandler
         }
 
         $this->manager->persist($entity);
-        $this->manager->flush();
     }
 }

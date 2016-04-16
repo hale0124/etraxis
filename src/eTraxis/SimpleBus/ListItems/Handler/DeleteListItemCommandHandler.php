@@ -70,6 +70,5 @@ class DeleteListItemCommandHandler
         }
 
         $this->manager->remove($entity);
-        $this->manager->flush();
     }
 }
