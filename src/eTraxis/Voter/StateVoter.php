@@ -11,9 +11,9 @@
 
 namespace eTraxis\Voter;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Event;
 use eTraxis\Entity\State;
-use eTraxis\Repository\EventsRepository;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -22,16 +22,16 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  */
 class StateVoter extends Voter
 {
-    protected $repository;
+    protected $manager;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   EventsRepository $repository
+     * @param   EntityManagerInterface $manager
      */
-    public function __construct(EventsRepository $repository)
+    public function __construct(EntityManagerInterface $manager)
     {
-        $this->repository = $repository;
+        $this->manager = $manager;
     }
 
     /**
@@ -81,8 +81,9 @@ class StateVoter extends Voter
     protected function isDeleteGranted($subject)
     {
         // Number of records appeared in the state.
-        $query = $this->repository->createQueryBuilder('e')
+        $query = $this->manager->createQueryBuilder()
             ->select('COUNT(e.id)')
+            ->from(Event::class, 'e')
             ->where('e.parameter = :id')
             ->andWhere('e.type IN (:types)')
             ->setParameter('id', $subject->getId())

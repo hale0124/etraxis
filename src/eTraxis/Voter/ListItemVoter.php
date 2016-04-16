@@ -11,8 +11,9 @@
 
 namespace eTraxis\Voter;
 
+use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Entity\FieldValue;
 use eTraxis\Entity\ListItem;
-use eTraxis\Repository\FieldValuesRepository;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -21,16 +22,16 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  */
 class ListItemVoter extends Voter
 {
-    protected $repository;
+    protected $manager;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   FieldValuesRepository $repository
+     * @param   EntityManagerInterface $manager
      */
-    public function __construct(FieldValuesRepository $repository)
+    public function __construct(EntityManagerInterface $manager)
     {
-        $this->repository = $repository;
+        $this->manager = $manager;
     }
 
     /**
@@ -76,8 +77,9 @@ class ListItemVoter extends Voter
     protected function isDeleteGranted($subject)
     {
         // Number of records where the list item is used.
-        $query = $this->repository->createQueryBuilder('v')
+        $query = $this->manager->createQueryBuilder()
             ->select('COUNT(v.event)')
+            ->from(FieldValue::class, 'v')
             ->where('v.field = :field')
             ->andWhere('v.valueId = :value')
             ->setParameter('field', $subject->getField())

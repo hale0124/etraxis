@@ -4,4 +4,4 @@ services:
     etraxis.datatable.users:
         class: eTraxis\DataTables\UsersDataTable
         tags: [{ name: datatable, id: eTraxis:User }]
-        arguments: [ "@translator", "@etraxis.repository.users" ]
+        arguments: [ "@doctrine.orm.entity_manager", "@translator" ]

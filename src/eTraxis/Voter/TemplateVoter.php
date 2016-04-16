@@ -11,10 +11,10 @@
 
 namespace eTraxis\Voter;
 
+use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Entity\Record;
 use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
-use eTraxis\Repository\RecordsRepository;
-use eTraxis\Repository\StatesRepository;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -23,19 +23,16 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  */
 class TemplateVoter extends Voter
 {
-    protected $stateRepository;
-    protected $recordRepository;
+    protected $manager;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   StatesRepository  $stateRepository
-     * @param   RecordsRepository $recordRepository
+     * @param   EntityManagerInterface $manager
      */
-    public function __construct(StatesRepository $stateRepository, RecordsRepository $recordRepository)
+    public function __construct(EntityManagerInterface $manager)
     {
-        $this->stateRepository  = $stateRepository;
-        $this->recordRepository = $recordRepository;
+        $this->manager = $manager;
     }
 
     /**
@@ -89,8 +86,9 @@ class TemplateVoter extends Voter
     protected function isDeleteGranted($subject)
     {
         // Number of records created by the template.
-        $query = $this->recordRepository->createQueryBuilder('r')
+        $query = $this->manager->createQueryBuilder()
             ->select('COUNT(r.id)')
+            ->from(Record::class, 'r')
             ->leftJoin('r.state', 's')
             ->where('s.template = :template')
             ->setParameter('template', $subject)
@@ -128,8 +126,9 @@ class TemplateVoter extends Voter
         }
 
         // Number of initial states of the template.
-        $query = $this->stateRepository->createQueryBuilder('s')
+        $query = $this->manager->createQueryBuilder()
             ->select('COUNT(s.id)')
+            ->from(State::class, 's')
             ->where('s.template = :template')
             ->andWhere('s.type = :type')
             ->setParameter('template', $subject)

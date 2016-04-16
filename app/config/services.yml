@@ -9,7 +9,7 @@ services:
         public: false
         arguments:
             - "@logger"
-            - "@etraxis.repository.users"
+            - "@doctrine.orm.entity_manager"
 
     etraxis.encoder:
         class: eTraxis\Security\InternalPasswordEncoder

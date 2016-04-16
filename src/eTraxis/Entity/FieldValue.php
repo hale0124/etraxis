@@ -23,7 +23,7 @@ use eTraxis\Collection;
  *                @ORM\Index(name="ix_fva_comb",  columns={"value_id", "field_type", "is_latest", "event_id"}),
  *                @ORM\Index(name="ix_fva_comb2", columns={"field_id", "value_id", "is_latest", "event_id"})
  *            })
- * @ORM\Entity(repositoryClass="eTraxis\Repository\FieldValuesRepository")
+ * @ORM\Entity
  */
 class FieldValue
 {

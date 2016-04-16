@@ -14,7 +14,8 @@ namespace eTraxis\DataTables;
 use DataTables\DataTableHandlerInterface;
 use DataTables\DataTableQuery;
 use DataTables\DataTableResults;
-use eTraxis\Repository\UsersRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Entity\User;
 use Symfony\Component\Translation\TranslatorInterface;
 
 /**
@@ -30,19 +31,19 @@ class UsersDataTable implements DataTableHandlerInterface
     const COLUMN_AUTHENTICATION = 5;
     const COLUMN_DESCRIPTION    = 6;
 
+    protected $manager;
     protected $translator;
-    protected $repository;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   TranslatorInterface $translator
-     * @param   UsersRepository     $repository
+     * @param   EntityManagerInterface $manager
+     * @param   TranslatorInterface    $translator
      */
-    public function __construct(TranslatorInterface $translator, UsersRepository $repository)
+    public function __construct(EntityManagerInterface $manager, TranslatorInterface $translator)
     {
+        $this->manager    = $manager;
         $this->translator = $translator;
-        $this->repository = $repository;
     }
 
     /**
@@ -52,7 +53,12 @@ class UsersDataTable implements DataTableHandlerInterface
     {
         $results = new DataTableResults();
 
-        $query = $this->repository->createQueryBuilder('u');
+        $query = $this->manager->createQueryBuilder();
+
+        $query
+            ->select('u')
+            ->from(User::class, 'u')
+        ;
 
         // Search.
         if ($request->search->value) {
@@ -142,8 +148,9 @@ class UsersDataTable implements DataTableHandlerInterface
         }
 
         // Total number of entries.
-        $queryTotal = $this->repository->createQueryBuilder('u');
+        $queryTotal = $this->manager->createQueryBuilder();
         $queryTotal->select('COUNT(u.id)');
+        $queryTotal->from(User::class, 'u');
         $results->recordsTotal = (int) $queryTotal->getQuery()->getSingleScalarResult();
 
         // Filtered number of entries.

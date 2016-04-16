@@ -24,7 +24,7 @@ use Doctrine\ORM\Mapping as ORM;
  *                @ORM\Index(name="ix_record", columns={"record_id"}),
  *                @ORM\Index(name="ix_evts_comb", columns={"event_id", "record_id"})
  *            })
- * @ORM\Entity(repositoryClass="eTraxis\Repository\EventsRepository")
+ * @ORM\Entity
  */
 class Event
 {

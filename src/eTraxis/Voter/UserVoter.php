@@ -11,9 +11,9 @@
 
 namespace eTraxis\Voter;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Event;
 use eTraxis\Entity\User;
-use eTraxis\Repository\EventsRepository;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -22,18 +22,18 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  */
 class UserVoter extends Voter
 {
-    protected $repository;
+    protected $manager;
     protected $password_expiration;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   EventsRepository $repository
-     * @param   int              $password_expiration
+     * @param   EntityManagerInterface $manager
+     * @param   int                    $password_expiration
      */
-    public function __construct(EventsRepository $repository, $password_expiration = null)
+    public function __construct(EntityManagerInterface $manager, $password_expiration = null)
     {
-        $this->repository          = $repository;
+        $this->manager             = $manager;
         $this->password_expiration = $password_expiration;
     }
 
@@ -124,8 +124,9 @@ class UserVoter extends Voter
         }
 
         // Number of events originated by subject.
-        $query = $this->repository->createQueryBuilder('e')
+        $query = $this->manager->createQueryBuilder()
             ->select('COUNT(e.id)')
+            ->from(Event::class, 'e')
             ->where('e.user = :user')
             ->setParameter('user', $subject)
         ;
@@ -133,8 +134,9 @@ class UserVoter extends Voter
         $countAsOriginator = (int) $query->getQuery()->getSingleScalarResult();
 
         // Number of records had been assigned on subject.
-        $query = $this->repository->createQueryBuilder('e')
+        $query = $this->manager->createQueryBuilder()
             ->select('COUNT(e.id)')
+            ->from(Event::class, 'e')
             ->where('e.type = :type')
             ->andWhere('e.parameter = :id')
             ->setParameter('type', Event::RECORD_ASSIGNED)

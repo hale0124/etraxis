@@ -10,28 +10,28 @@ services:
         class: eTraxis\Voter\ListItemVoter
         public: false
         tags: [{ name: security.voter }]
-        arguments: [ "@etraxis.repository.field_values" ]
+        arguments: [ "@doctrine.orm.entity_manager" ]
 
     etraxis.voter.project:
         class: eTraxis\Voter\ProjectVoter
         public: false
         tags: [{ name: security.voter }]
-        arguments: [ "@etraxis.repository.records" ]
+        arguments: [ "@doctrine.orm.entity_manager" ]
 
     etraxis.voter.state:
         class: eTraxis\Voter\StateVoter
         public: false
         tags: [{ name: security.voter }]
-        arguments: [ "@etraxis.repository.events" ]
+        arguments: [ "@doctrine.orm.entity_manager" ]
 
     etraxis.voter.template:
         class: eTraxis\Voter\TemplateVoter
         public: false
         tags: [{ name: security.voter }]
-        arguments: [ "@etraxis.repository.states", "@etraxis.repository.records" ]
+        arguments: [ "@doctrine.orm.entity_manager" ]
 
     etraxis.voter.user:
         class: eTraxis\Voter\UserVoter
         public: false
         tags: [{ name: security.voter }]
-        arguments: [ "@etraxis.repository.events", "%password_expiration%" ]
+        arguments: [ "@doctrine.orm.entity_manager", "%password_expiration%" ]

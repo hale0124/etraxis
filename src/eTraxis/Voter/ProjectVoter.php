@@ -11,8 +11,9 @@
 
 namespace eTraxis\Voter;
 
+use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Project;
-use eTraxis\Repository\RecordsRepository;
+use eTraxis\Entity\Record;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
@@ -21,16 +22,16 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  */
 class ProjectVoter extends Voter
 {
-    protected $repository;
+    protected $manager;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   RecordsRepository $repository
+     * @param   EntityManagerInterface $manager
      */
-    public function __construct(RecordsRepository $repository)
+    public function __construct(EntityManagerInterface $manager)
     {
-        $this->repository = $repository;
+        $this->manager = $manager;
     }
 
     /**
@@ -76,8 +77,9 @@ class ProjectVoter extends Voter
     protected function isDeleteGranted($subject)
     {
         // Number of records belong to the project.
-        $query = $this->repository->createQueryBuilder('r')
+        $query = $this->manager->createQueryBuilder()
             ->select('COUNT(r.id)')
+            ->from(Record::class, 'r')
             ->leftJoin('r.state', 's')
             ->leftJoin('s.template', 't')
             ->where('t.project = :project')
