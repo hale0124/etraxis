@@ -81,16 +81,22 @@ class SetOrderFieldCommandHandler
     }
 
     /**
-     * Immediately sets new order for specified field.
+     * Sets new order for specified field.
      *
      * @param   Field $field
      * @param   int   $order
      */
     protected function setOrder(Field $field, $order)
     {
-        $field->setIndexNumber($order);
+        $query = $this->manager->createQuery('
+            UPDATE eTraxis:Field f
+            SET f.indexNumber = :order
+            WHERE f.id = :field
+        ');
 
-        $this->manager->persist($field);
-        $this->manager->flush();
+        $query->execute([
+            'field' => $field->getId(),
+            'order' => $order,
+        ]);
     }
 }
