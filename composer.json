@@ -29,6 +29,7 @@
         "sensio/framework-extra-bundle"        : "^3.0.2",
         "incenteev/composer-parameter-handler" : "^2.0",
         "simple-bus/symfony-bridge"            : "^4.1",
+        "simple-bus/doctrine-orm-bridge"       : "^4.0",
         "ramsey/uuid"                          : "^3.0",
         "arodygin/simplebus-bundle"            : "^1.0",
         "arodygin/datatables-bundle"           : "^1.2"
