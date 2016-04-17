@@ -36,8 +36,8 @@ class CreateUserCommandHandler
      * @param   PasswordEncoderInterface $password_encoder
      */
     public function __construct(
-        ValidatorInterface $validator,
-        EntityManagerInterface $manager,
+        ValidatorInterface       $validator,
+        EntityManagerInterface   $manager,
         PasswordEncoderInterface $password_encoder)
     {
         $this->validator        = $validator;

@@ -36,7 +36,7 @@ class LockUserCommandHandler
      * @param   int                    $security_lock_time
      */
     public function __construct(
-        LoggerInterface $logger,
+        LoggerInterface        $logger,
         EntityManagerInterface $manager,
         $security_auth_attempts,
         $security_lock_time)

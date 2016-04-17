@@ -36,8 +36,8 @@ class ResetPasswordCommandHandler
      * @param   PasswordEncoderInterface $password_encoder
      */
     public function __construct(
-        TranslatorInterface $translator,
-        EntityManagerInterface $manager,
+        TranslatorInterface      $translator,
+        EntityManagerInterface   $manager,
         PasswordEncoderInterface $password_encoder)
     {
         $this->translator       = $translator;

@@ -34,9 +34,9 @@ class DateFieldCommandHandler extends BaseFieldCommandHandler
      * @param   TranslatorInterface    $translator
      */
     public function __construct(
-        ValidatorInterface $validator,
+        ValidatorInterface     $validator,
         EntityManagerInterface $manager,
-        TranslatorInterface $translator)
+        TranslatorInterface    $translator)
     {
         parent::__construct($validator, $manager);
 

@@ -36,9 +36,9 @@ class UpdateUserCommandHandler
      * @param   TokenStorageInterface  $token_storage
      */
     public function __construct(
-        ValidatorInterface $validator,
+        ValidatorInterface     $validator,
         EntityManagerInterface $manager,
-        TokenStorageInterface $token_storage)
+        TokenStorageInterface  $token_storage)
     {
         $this->validator     = $validator;
         $this->manager       = $manager;
