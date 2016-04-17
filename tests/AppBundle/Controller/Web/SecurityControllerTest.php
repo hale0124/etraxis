@@ -11,6 +11,7 @@
 
 namespace AppBundle\Controller\Web;
 
+use eTraxis\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DomCrawler\Crawler;
 
@@ -82,5 +83,15 @@ class SecurityControllerTest extends WebTestCase
         self::assertEquals(200, $client->getResponse()->getStatusCode());
         self::assertFalse($this->isLoginPage($crawler));
         self::assertTrue($this->isAuthenticated($crawler));
+
+        /** @var \Doctrine\ORM\EntityManagerInterface $manager */
+        $manager = $client->getContainer()->get('doctrine')->getManager();
+
+        /** @var User $user */
+        $user = $manager->getRepository(User::class)->findOneBy(['username' => 'artem@eTraxis']);
+        $user->unlock();
+
+        $manager->persist($user);
+        $manager->flush();
     }
 }

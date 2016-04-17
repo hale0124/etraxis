@@ -12,6 +12,7 @@
 namespace eTraxis\Voter;
 
 use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Entity\CurrentUser;
 use eTraxis\Entity\Event;
 use eTraxis\Entity\User;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -106,20 +107,20 @@ class UserVoter extends Voter
     /**
      * Checks whether specified user can be deleted.
      *
-     * @param   User $subject Subject user.
-     * @param   User $user    Current user.
+     * @param   User        $subject Subject user.
+     * @param   CurrentUser $user    Current user.
      *
      * @return  bool
      */
     protected function isDeleteGranted($subject, $user)
     {
         // User must be logged in.
-        if (!$user instanceof User) {
+        if (!$user instanceof CurrentUser) {
             return false;
         }
 
         // Can't delete himself.
-        if ($subject === $user) {
+        if ($subject->getId() === $user->getId()) {
             return false;
         }
 
@@ -152,20 +153,20 @@ class UserVoter extends Voter
     /**
      * Checks whether specified user can be disabled.
      *
-     * @param   User $subject Subject user.
-     * @param   User $user    Current user.
+     * @param   User        $subject Subject user.
+     * @param   CurrentUser $user    Current user.
      *
      * @return  bool
      */
     protected function isDisableGranted($subject, $user)
     {
         // User must be logged in.
-        if (!$user instanceof User) {
+        if (!$user instanceof CurrentUser) {
             return false;
         }
 
         // Can't disable himself.
-        if ($subject === $user) {
+        if ($subject->getId() === $user->getId()) {
             return false;
         }
 
@@ -193,6 +194,6 @@ class UserVoter extends Voter
      */
     protected function isUnlockGranted($subject)
     {
-        return !$subject->isAccountNonLocked();
+        return $subject->isLocked();
     }
 }

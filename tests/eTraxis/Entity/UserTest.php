@@ -13,25 +13,27 @@ namespace eTraxis\Entity;
 
 use AltrEgo\AltrEgo;
 use eTraxis\Collection\Timezone;
+use eTraxis\Tests\BaseTestCase;
 
-class UserTest extends \PHPUnit_Framework_TestCase
+class UserTest extends BaseTestCase
 {
     /** @var User */
     private $object;
 
     protected function setUp()
     {
-        $this->object = new User();
+        parent::setUp();
+
+        $this->object = $this->doctrine->getManager()->getRepository(User::class)->findOneBy([
+            'username' => 'artem@eTraxis',
+        ]);
     }
 
     public function testId()
     {
-        /** @var \StdClass $object */
-        $object = AltrEgo::create($this->object);
-
-        $expected   = mt_rand(1, PHP_INT_MAX);
-        $object->id = $expected;
-        self::assertEquals($expected, $this->object->getId());
+        $user = new User();
+        self::assertNull($user->getId());
+        self::assertNotNull($this->object->getId());
     }
 
     public function testUsername()
@@ -111,27 +113,27 @@ class UserTest extends \PHPUnit_Framework_TestCase
     public function testLockUnlock()
     {
         $this->object->lock(2, 30);
-        self::assertTrue($this->object->isAccountNonLocked());
+        self::assertFalse($this->object->isLocked());
 
         $this->object->lock(2, 30);
-        self::assertFalse($this->object->isAccountNonLocked());
+        self::assertTrue($this->object->isLocked());
 
         $this->object->unlock();
-        self::assertTrue($this->object->isAccountNonLocked());
+        self::assertFalse($this->object->isLocked());
     }
 
-    public function testIsAccountNonLocked()
+    public function testIsLocked()
     {
         /** @var \StdClass $object */
         $object = AltrEgo::create($this->object);
 
-        self::assertTrue($this->object->isAccountNonLocked());
+        self::assertFalse($this->object->isLocked());
 
         $object->lockedUntil = time() + 5;
-        self::assertFalse($this->object->isAccountNonLocked());
+        self::assertTrue($this->object->isLocked());
 
         $object->lockedUntil = time() - 1;
-        self::assertTrue($this->object->isAccountNonLocked());
+        self::assertFalse($this->object->isLocked());
     }
 
     public function testIsAdmin()
@@ -150,15 +152,6 @@ class UserTest extends \PHPUnit_Framework_TestCase
 
         $this->object->setDisabled(true);
         self::assertTrue($this->object->isDisabled());
-    }
-
-    public function testIsEnabled()
-    {
-        $this->object->setDisabled(false);
-        self::assertTrue($this->object->isEnabled());
-
-        $this->object->setDisabled(true);
-        self::assertFalse($this->object->isEnabled());
     }
 
     public function testIsLdap()
@@ -210,7 +203,17 @@ class UserTest extends \PHPUnit_Framework_TestCase
         self::assertEquals($expected, $this->object->getTheme());
     }
 
-    public function testThemeUnsupported()
+    public function testGetThemeFallback()
+    {
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
+
+        $expected      = 'azure';
+        $object->theme = 'unsupported';
+        self::assertEquals($expected, $this->object->getTheme());
+    }
+
+    public function testSetThemeFallback()
     {
         $expected = 'azure';
         $this->object->setTheme('unsupported');
@@ -246,21 +249,22 @@ class UserTest extends \PHPUnit_Framework_TestCase
         self::assertCount(0, $this->object->getGroups());
     }
 
-    public function testGetRolesAsAdmin()
+    public function testJsonSerialize()
     {
-        $this->object->setAdmin(true);
-        $roles = $this->object->getRoles();
+        $expected = [
+            'id'          => $this->object->getId(),
+            'username'    => $this->object->getUsername(),
+            'fullname'    => $this->object->getFullname(),
+            'email'       => $this->object->getEmail(),
+            'description' => $this->object->getDescription(),
+            'isAdmin'     => $this->object->isAdmin(),
+            'isDisabled'  => $this->object->isDisabled(),
+            'isLdap'      => $this->object->isLdap(),
+            'locale'      => $this->object->getLocale(),
+            'theme'       => $this->object->getTheme(),
+            'timezone'    => $this->object->getTimezone(),
+        ];
 
-        self::assertTrue(in_array(User::ROLE_USER, $roles));
-        self::assertTrue(in_array(User::ROLE_ADMIN, $roles));
-    }
-
-    public function testGetRolesAsUser()
-    {
-        $this->object->setAdmin(false);
-        $roles = $this->object->getRoles();
-
-        self::assertTrue(in_array(User::ROLE_USER, $roles));
-        self::assertFalse(in_array(User::ROLE_ADMIN, $roles));
+        self::assertEquals($expected, $this->object->jsonSerialize());
     }
 }

@@ -12,6 +12,7 @@
 namespace eTraxis\Security;
 
 use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Entity\CurrentUser;
 use eTraxis\Entity\User;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
@@ -53,7 +54,7 @@ class InternalUserProvider implements UserProviderInterface
         if ($user) {
             $this->logger->info('eTraxis account is found.', [$username]);
 
-            return $user;
+            return new CurrentUser($user);
         }
 
         $user = $this->manager->getRepository(User::class)->findOneBy([
@@ -69,7 +70,7 @@ class InternalUserProvider implements UserProviderInterface
 
         $user->setPassword(null);
 
-        return $user;
+        return new CurrentUser($user);
     }
 
     /**
@@ -77,7 +78,7 @@ class InternalUserProvider implements UserProviderInterface
      */
     public function refreshUser(UserInterface $user)
     {
-        if (!$user instanceof User) {
+        if (!$user instanceof CurrentUser) {
             throw new UnsupportedUserException();
         }
 
@@ -89,6 +90,6 @@ class InternalUserProvider implements UserProviderInterface
      */
     public function supportsClass($class)
     {
-        return $class === User::class;
+        return $class === CurrentUser::class;
     }
 }

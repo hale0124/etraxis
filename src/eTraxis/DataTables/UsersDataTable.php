@@ -186,7 +186,7 @@ class UsersDataTable implements DataTableHandlerInterface
 
         foreach ($entities as $entity) {
 
-            if (!$entity->isAccountNonLocked()) {
+            if ($entity->isLocked()) {
                 $color = 'red';
             }
             elseif ($entity->isDisabled()) {

@@ -11,6 +11,7 @@
 
 namespace eTraxis\Security\Authenticator;
 
+use eTraxis\Entity\CurrentUser;
 use eTraxis\Tests\BaseTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -86,7 +87,7 @@ class LdapAuthenticatorTest extends BaseTestCase
             'password' => 'password',
         ], $provider);
 
-        self::assertInstanceOf('\\eTraxis\\Entity\\User', $user);
+        self::assertInstanceOf(CurrentUser::class, $user);
     }
 
     /**

@@ -25,11 +25,11 @@ class UnlockUserCommandTest extends BaseTestCase
 
         do {} while(!$user->lock($auth_attempts, $lock_time));
 
-        self::assertFalse($user->isAccountNonLocked());
+        self::assertTrue($user->isLocked());
 
         $command = new UnlockUserCommand(['id' => $user->getId()]);
         $this->command_bus->handle($command);
 
-        self::assertTrue($user->isAccountNonLocked());
+        self::assertFalse($user->isLocked());
     }
 }

@@ -11,6 +11,7 @@
 
 namespace AppBundle\EventListener;
 
+use eTraxis\Entity\CurrentUser;
 use eTraxis\Tests\BaseTestCase;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Event\AuthenticationEvent;
@@ -25,14 +26,14 @@ class UsersLockoutTest extends BaseTestCase
 
         self::assertNotNull($user);
 
-        $token = new UsernamePasswordToken($user, 'secret', 'etraxis_provider');
+        $token = new UsernamePasswordToken(new CurrentUser($user), 'secret', 'etraxis_provider');
 
         $success = new AuthenticationEvent($token);
 
         $object = new UsersLockout($this->logger, $this->command_bus);
 
         $object->onSuccess($success);
-        self::assertTrue($this->findUser('artem')->isAccountNonLocked());
+        self::assertFalse($this->findUser('artem')->isLocked());
     }
 
     public function testFailure()
@@ -44,6 +45,6 @@ class UsersLockoutTest extends BaseTestCase
         $object = new UsersLockout($this->logger, $this->command_bus);
 
         $object->onFailure($failure);
-        self::assertTrue($this->findUser('artem')->isAccountNonLocked());
+        self::assertFalse($this->findUser('artem')->isLocked());
     }
 }

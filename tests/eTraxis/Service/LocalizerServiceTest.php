@@ -11,6 +11,7 @@
 
 namespace eTraxis\Service;
 
+use eTraxis\Entity\CurrentUser;
 use eTraxis\Tests\BaseTestCase;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorage;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
@@ -28,7 +29,7 @@ class LocalizerServiceTest extends BaseTestCase
     {
         $expected = '7/8/2004'; // en_US
 
-        $token = new UsernamePasswordToken($this->findUser('artem'), null, 'etraxis.provider');
+        $token = new UsernamePasswordToken(new CurrentUser($this->findUser('artem')), null, 'etraxis.provider');
 
         $token_storage = new TokenStorage();
         $token_storage->setToken($token);
@@ -42,7 +43,7 @@ class LocalizerServiceTest extends BaseTestCase
     {
         $expected = '1:00 PM'; // en_US
 
-        $token = new UsernamePasswordToken($this->findUser('artem'), null, 'etraxis.provider');
+        $token = new UsernamePasswordToken(new CurrentUser($this->findUser('artem')), null, 'etraxis.provider');
 
         $token_storage = new TokenStorage();
         $token_storage->setToken($token);

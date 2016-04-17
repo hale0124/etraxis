@@ -11,6 +11,7 @@
 
 namespace AppBundle\EventListener;
 
+use eTraxis\Entity\CurrentUser;
 use eTraxis\Tests\BaseTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
@@ -36,7 +37,7 @@ class StickyLocaleTest extends BaseTestCase
         $user->setLocale('ru');
 
         $request = new Request();
-        $token   = new UsernamePasswordToken($user, null, 'etraxis_provider');
+        $token   = new UsernamePasswordToken(new CurrentUser($user), null, 'etraxis_provider');
 
         $event = new InteractiveLoginEvent($request, $token);
 

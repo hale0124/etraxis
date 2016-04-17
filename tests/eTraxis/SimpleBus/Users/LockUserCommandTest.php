@@ -30,12 +30,12 @@ class LockUserCommandTest extends BaseTestCase
         $this->command_bus->handle($command);
 
         $user = $this->findUser($username);
-        self::assertTrue($user->isAccountNonLocked());
+        self::assertFalse($user->isLocked());
 
         // second time
         $this->command_bus->handle($command);
 
         $user = $this->findUser($username);
-        self::assertFalse($user->isAccountNonLocked());
+        self::assertTrue($user->isLocked());
     }
 }

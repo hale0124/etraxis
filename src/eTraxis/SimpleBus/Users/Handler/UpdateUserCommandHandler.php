@@ -55,7 +55,7 @@ class UpdateUserCommandHandler
      */
     public function handle(UpdateUserCommand $command)
     {
-        /** @var User $user */
+        /** @var \eTraxis\Entity\CurrentUser $user */
         $user = $this->token_storage->getToken()->getUser();
 
         /** @var User $entity */
@@ -76,7 +76,7 @@ class UpdateUserCommandHandler
         ;
 
         // Don't disable yourself.
-        if ($entity !== $user) {
+        if ($entity->getId() !== $user->getId()) {
             $entity
                 ->setAdmin($command->admin)
                 ->setDisabled($command->disabled)
@@ -86,10 +86,6 @@ class UpdateUserCommandHandler
         $errors = $this->validator->validate($entity);
 
         if (count($errors)) {
-            if ($entity === $user) {
-                $this->manager->refresh($user);
-            }
-
             throw new BadRequestHttpException($errors->get(0)->getMessage());
         }
 

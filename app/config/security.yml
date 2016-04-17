@@ -1,7 +1,7 @@
 security:
 
     encoders:
-        eTraxis\Entity\User:
+        eTraxis\Entity\CurrentUser:
             id: etraxis.encoder
 
     providers:

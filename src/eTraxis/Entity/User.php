@@ -27,12 +27,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="eTraxis\Repository\UsersRepository")
  * @Assert\UniqueEntity(fields={"username"}, message="user.conflict.username")
  */
-class User extends AbstractUser
+class User implements \JsonSerializable
 {
-    // Roles.
-    const ROLE_ADMIN = 'ROLE_ADMIN';
-    const ROLE_USER  = 'ROLE_USER';
-
     // Authentication source.
     const AUTH_INTERNAL = 'eTraxis';
     const AUTH_LDAP     = 'LDAP';
@@ -443,9 +439,9 @@ class User extends AbstractUser
      *
      * @return  bool
      */
-    public function isAccountNonLocked()
+    public function isLocked()
     {
-        return $this->lockedUntil < time();
+        return $this->lockedUntil >= time();
     }
 
     /**
@@ -494,14 +490,6 @@ class User extends AbstractUser
     public function isDisabled()
     {
         return (bool) $this->isDisabled;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function isEnabled()
-    {
-        return !$this->isDisabled;
     }
 
     /**
@@ -657,14 +645,20 @@ class User extends AbstractUser
     /**
      * {@inheritdoc}
      */
-    public function getRoles()
+    public function jsonSerialize()
     {
-        $roles = [self::ROLE_USER];
-
-        if ($this->isAdmin) {
-            $roles[] = self::ROLE_ADMIN;
-        }
-
-        return $roles;
+        return [
+            'id'          => $this->getId(),
+            'username'    => $this->getUsername(),
+            'fullname'    => $this->getFullname(),
+            'email'       => $this->getEmail(),
+            'description' => $this->getDescription(),
+            'isAdmin'     => $this->isAdmin(),
+            'isDisabled'  => $this->isDisabled(),
+            'isLdap'      => $this->isLdap(),
+            'locale'      => $this->getLocale(),
+            'theme'       => $this->getTheme(),
+            'timezone'    => $this->getTimezone(),
+        ];
     }
 }

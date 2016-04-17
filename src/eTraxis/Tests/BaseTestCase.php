@@ -11,6 +11,7 @@
 
 namespace eTraxis\Tests;
 
+use eTraxis\Entity\CurrentUser;
 use eTraxis\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
@@ -123,7 +124,9 @@ class BaseTestCase extends WebTestCase
     {
         if ($user = $this->findUser($username, $ldap)) {
 
-            $token = new UsernamePasswordToken($user, null, 'etraxis_provider', $user->getRoles());
+            $current = new CurrentUser($user);
+
+            $token = new UsernamePasswordToken($current, null, 'etraxis_provider', $current->getRoles());
             $this->client->getContainer()->get('security.token_storage')->setToken($token);
 
             $this->session->set('_security_default', serialize($token));

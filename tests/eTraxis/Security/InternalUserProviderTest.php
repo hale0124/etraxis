@@ -11,7 +11,8 @@
 
 namespace eTraxis\Security;
 
-use eTraxis\Entity\User as eTraxisUser;
+use eTraxis\Entity\CurrentUser;
+use eTraxis\Entity\User;
 use eTraxis\Tests\BaseTestCase;
 use Symfony\Component\Security\Core\User\User as SymfonyUser;
 
@@ -34,8 +35,8 @@ class InternalUserProviderTest extends BaseTestCase
     {
         $result = $this->object->loadUserByUsername('artem');
 
-        self::assertInstanceOf(eTraxisUser::class, $result);
-        self::assertEquals('artem@example.com', $result->getEmail());
+        self::assertInstanceOf(CurrentUser::class, $result);
+        self::assertEquals('Artem Rodygin', $result->getFullname());
         self::assertFalse($result->isLdap());
     }
 
@@ -43,8 +44,8 @@ class InternalUserProviderTest extends BaseTestCase
     {
         $result = $this->object->loadUserByUsername('einstein');
 
-        self::assertInstanceOf(eTraxisUser::class, $result);
-        self::assertEquals('einstein@ldap.forumsys.com', $result->getEmail());
+        self::assertInstanceOf(CurrentUser::class, $result);
+        self::assertEquals('Albert Einstein', $result->getFullname());
         self::assertTrue($result->isLdap());
     }
 
@@ -58,13 +59,14 @@ class InternalUserProviderTest extends BaseTestCase
 
     public function testRefreshUser()
     {
-        $user = new eTraxisUser();
+        $user = new User();
 
         $user->setUsername('artem');
 
-        $result = $this->object->refreshUser($user);
+        $result = $this->object->refreshUser(new CurrentUser($user));
 
-        self::assertInstanceOf(eTraxisUser::class, $result);
+        self::assertInstanceOf(CurrentUser::class, $result);
+        self::assertEquals('Artem Rodygin', $result->getFullname());
     }
 
     /**
@@ -80,6 +82,6 @@ class InternalUserProviderTest extends BaseTestCase
     public function testSupportsClass()
     {
         self::assertFalse($this->object->supportsClass(SymfonyUser::class));
-        self::assertTrue($this->object->supportsClass(eTraxisUser::class));
+        self::assertTrue($this->object->supportsClass(CurrentUser::class));
     }
 }
