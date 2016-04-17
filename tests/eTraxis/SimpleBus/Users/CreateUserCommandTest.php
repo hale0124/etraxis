@@ -57,9 +57,9 @@ class CreateUserCommandTest extends BaseTestCase
         self::assertTrue($user->isAdmin());
         self::assertFalse($user->isDisabled());
         self::assertFalse($user->isLdap());
-        self::assertEquals(static::$kernel->getContainer()->getParameter('locale'), $user->getLocale());
-        self::assertEquals(static::$kernel->getContainer()->getParameter('theme'), $user->getTheme());
-        self::assertEquals(377, $user->getTimezone());
+        self::assertEquals(static::$kernel->getContainer()->getParameter('locale'), $user->getSettings()->getLocale());
+        self::assertEquals(static::$kernel->getContainer()->getParameter('theme'), $user->getSettings()->getTheme());
+        self::assertEquals(377, $user->getSettings()->getTimezone());
     }
 
     /**

@@ -11,13 +11,9 @@
 
 namespace eTraxis\Form;
 
-use eTraxis\Collection\Locale;
-use eTraxis\Collection\Theme;
-use eTraxis\Collection\Timezone;
 use eTraxis\Entity\User;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -88,29 +84,8 @@ class UserForm extends AbstractType
             ]);
         }
 
-        // Locale.
-        $builder->add('locale', ChoiceType::class, [
-            'label'                     => 'language',
-            'required'                  => true,
-            'choices'                   => array_flip(Locale::getCollection()),
-            'choice_translation_domain' => false,
-        ]);
-
-        // Theme.
-        $builder->add('theme', ChoiceType::class, [
-            'label'                     => 'theme',
-            'required'                  => true,
-            'choices'                   => array_flip(Theme::getCollection()),
-            'choice_translation_domain' => false,
-        ]);
-
-        // Timezone.
-        $builder->add('timezone', ChoiceType::class, [
-            'label'                     => 'timezone',
-            'required'                  => true,
-            'choices'                   => array_flip(Timezone::getCollection()),
-            'choice_translation_domain' => false,
-        ]);
+        // Settings.
+        $builder->add('settings', AppearanceForm::class);
 
         // Administrator.
         $builder->add('admin', CheckboxType::class, [

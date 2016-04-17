@@ -12,7 +12,6 @@
 namespace eTraxis\Entity;
 
 use AltrEgo\AltrEgo;
-use eTraxis\Collection\Timezone;
 use eTraxis\Tests\BaseTestCase;
 
 class UserTest extends BaseTestCase
@@ -172,81 +171,15 @@ class UserTest extends BaseTestCase
         self::assertEquals(User::AUTH_LDAP, $this->object->getAuthenticationSource());
     }
 
-    public function testLocale()
-    {
-        $expected = 'ru';
-        $this->object->setLocale($expected);
-        self::assertEquals($expected, $this->object->getLocale());
-    }
-
-    public function testGetLocaleFallback()
-    {
-        /** @var \StdClass $object */
-        $object = AltrEgo::create($this->object);
-
-        $expected       = 'en_US';
-        $object->locale = 0;
-        self::assertEquals($expected, $this->object->getLocale());
-    }
-
-    public function testSetLocaleFallback()
-    {
-        $expected = 'en_US';
-        $this->object->setLocale('xx-XX');
-        self::assertEquals($expected, $this->object->getLocale());
-    }
-
-    public function testTheme()
-    {
-        $expected = 'emerald';
-        $this->object->setTheme($expected);
-        self::assertEquals($expected, $this->object->getTheme());
-    }
-
-    public function testGetThemeFallback()
-    {
-        /** @var \StdClass $object */
-        $object = AltrEgo::create($this->object);
-
-        $expected      = 'azure';
-        $object->theme = 'unsupported';
-        self::assertEquals($expected, $this->object->getTheme());
-    }
-
-    public function testSetThemeFallback()
-    {
-        $expected = 'azure';
-        $this->object->setTheme('unsupported');
-        self::assertEquals($expected, $this->object->getTheme());
-    }
-
-    public function testTimezone()
-    {
-        $timezones = array_flip(Timezone::getCollection());
-        $expected  = $timezones['Pacific/Auckland'];
-
-        $this->object->setTimezone($expected);
-        self::assertEquals($expected, $this->object->getTimezone());
-
-        $this->object->setTimezone(PHP_INT_MAX);
-        self::assertEquals($expected, $this->object->getTimezone());
-    }
-
-    public function testTimezoneUnsupported()
-    {
-        /** @var \StdClass $object */
-        $object = AltrEgo::create($this->object);
-
-        $expected         = 0;
-        $object->timezone = PHP_INT_MAX;
-
-        self::assertEquals(PHP_INT_MAX, $object->timezone);
-        self::assertEquals($expected, $this->object->getTimezone());
-    }
-
     public function testGroups()
     {
         self::assertCount(0, $this->object->getGroups());
+    }
+
+    public function testSettings()
+    {
+        self::assertNotNull($this->object->getSettings());
+        self::assertInstanceOf(UserSettings::class, $this->object->getSettings());
     }
 
     public function testJsonSerialize()
@@ -260,9 +193,9 @@ class UserTest extends BaseTestCase
             'isAdmin'     => $this->object->isAdmin(),
             'isDisabled'  => $this->object->isDisabled(),
             'isLdap'      => $this->object->isLdap(),
-            'locale'      => $this->object->getLocale(),
-            'theme'       => $this->object->getTheme(),
-            'timezone'    => $this->object->getTimezone(),
+            'locale'      => $this->object->getSettings()->getLocale(),
+            'theme'       => $this->object->getSettings()->getTheme(),
+            'timezone'    => $this->object->getSettings()->getTimezone(),
         ];
 
         self::assertEquals($expected, $this->object->jsonSerialize());

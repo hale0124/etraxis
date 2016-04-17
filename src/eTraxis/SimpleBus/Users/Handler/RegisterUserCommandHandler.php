@@ -83,6 +83,9 @@ class RegisterUserCommandHandler
                 ->setAdmin(false)
                 ->setDisabled(false)
                 ->setLdap(true)
+            ;
+
+            $user->getSettings()
                 ->setLocale($this->locale)
                 ->setTheme($this->theme)
             ;

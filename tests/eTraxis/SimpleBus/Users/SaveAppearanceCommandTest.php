@@ -21,9 +21,9 @@ class SaveAppearanceCommandTest extends BaseTestCase
         $user = $this->findUser('bender');
 
         self::assertNotNull($user);
-        self::assertEquals('en_US', $user->getLocale());
-        self::assertEquals('azure', $user->getTheme());
-        self::assertEquals(0, $user->getTimezone());
+        self::assertEquals('en_US', $user->getSettings()->getLocale());
+        self::assertEquals('azure', $user->getSettings()->getTheme());
+        self::assertEquals(0, $user->getSettings()->getTimezone());
 
         $command = new SaveAppearanceCommand([
             'id'       => $user->getId(),
@@ -34,11 +34,12 @@ class SaveAppearanceCommandTest extends BaseTestCase
 
         $this->command_bus->handle($command);
 
+        /** @var User $user */
         $user = $this->doctrine->getRepository(User::class)->find($user->getId());
 
-        self::assertEquals('es', $user->getLocale());
-        self::assertEquals('humanity', $user->getTheme());
-        self::assertEquals(377, $user->getTimezone());
+        self::assertEquals('es', $user->getSettings()->getLocale());
+        self::assertEquals('humanity', $user->getSettings()->getTheme());
+        self::assertEquals(377, $user->getSettings()->getTimezone());
     }
 
     /**

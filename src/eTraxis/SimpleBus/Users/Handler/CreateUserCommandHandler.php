@@ -72,6 +72,9 @@ class CreateUserCommandHandler
             ->setAdmin($command->admin)
             ->setDisabled($command->disabled)
             ->setLdap(false)
+        ;
+
+        $entity->getSettings()
             ->setLocale($command->locale)
             ->setTheme($command->theme)
             ->setTimezone($command->timezone)

@@ -34,7 +34,7 @@ class StickyLocaleTest extends BaseTestCase
     public function testSaveLocale()
     {
         $user = $this->findUser('artem');
-        $user->setLocale('ru');
+        $user->getSettings()->setLocale('ru');
 
         $request = new Request();
         $token   = new UsernamePasswordToken(new CurrentUser($user), null, 'etraxis_provider');

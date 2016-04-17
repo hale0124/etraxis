@@ -47,7 +47,7 @@ class LocalizerService implements LocalizerInterface
 
         if ($token = $this->token_storage->getToken()) {
 
-            /** @var \eTraxis\Entity\User $user */
+            /** @var \eTraxis\Entity\CurrentUser $user */
             $user = $token->getUser();
 
             if ($user instanceof UserInterface) {
@@ -67,7 +67,7 @@ class LocalizerService implements LocalizerInterface
 
         if ($token = $this->token_storage->getToken()) {
 
-            /** @var \eTraxis\Entity\User $user */
+            /** @var \eTraxis\Entity\CurrentUser $user */
             $user = $token->getUser();
 
             if ($user instanceof UserInterface) {

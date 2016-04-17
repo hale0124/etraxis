@@ -47,7 +47,7 @@ class UsersPostController extends Controller
             throw new BadRequestHttpException($this->container->get('translator')->trans('passwords.dont_match'));
         }
 
-        $command = new Users\CreateUserCommand($data);
+        $command = new Users\CreateUserCommand($data, $data['settings']);
         $this->getCommandBus()->handle($command);
 
         return new JsonResponse();
@@ -78,7 +78,7 @@ class UsersPostController extends Controller
             $data['email']    = $user->getEmail();
         }
 
-        $command = new Users\UpdateUserCommand($data, ['id' => $user->getId()]);
+        $command = new Users\UpdateUserCommand($data, $data['settings'] + ['id' => $user->getId()]);
         $this->getCommandBus()->handle($command);
 
         if ($this->getUser()->getId() === $user->getId()) {

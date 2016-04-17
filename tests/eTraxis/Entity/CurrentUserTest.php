@@ -56,21 +56,21 @@ class CurrentUserTest extends BaseTestCase
     {
         $user = new CurrentUser($this->object);
 
-        self::assertEquals($this->object->getLocale(), $user->getLocale());
+        self::assertEquals($this->object->getSettings()->getLocale(), $user->getLocale());
     }
 
     public function testTheme()
     {
         $user = new CurrentUser($this->object);
 
-        self::assertEquals($this->object->getTheme(), $user->getTheme());
+        self::assertEquals($this->object->getSettings()->getTheme(), $user->getTheme());
     }
 
     public function testTimezone()
     {
         $user = new CurrentUser($this->object);
 
-        self::assertEquals($this->object->getTimezone(), $user->getTimezone());
+        self::assertEquals($this->object->getSettings()->getTimezone(), $user->getTimezone());
     }
 
     public function testRolesAsAdmin()

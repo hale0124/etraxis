@@ -53,7 +53,7 @@ class SaveAppearanceCommandHandler
             throw new NotFoundHttpException('Unknown user.');
         }
 
-        $entity
+        $entity->getSettings()
             ->setLocale($command->locale)
             ->setTheme($command->theme)
             ->setTimezone($command->timezone)

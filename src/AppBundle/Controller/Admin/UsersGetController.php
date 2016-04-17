@@ -183,13 +183,13 @@ class UsersGetController extends Controller
      */
     public function newAction()
     {
-        $default = [
+        $settings = [
             'locale'   => $this->getParameter('locale'),
             'theme'    => $this->getParameter('theme'),
             'timezone' => 0,
         ];
 
-        $form = $this->createForm(UserForm::class, $default, [
+        $form = $this->createForm(UserForm::class, ['settings' => $settings], [
             'action' => $this->generateUrl('admin_new_user'),
         ]);
 

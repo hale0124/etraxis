@@ -33,9 +33,9 @@ class UserFormTest extends BaseTestCase
         self::assertEquals($children['description']->vars['data'], $user->getDescription());
         self::assertEmpty($children['password']->vars['data']);
         self::assertEmpty($children['confirmation']->vars['data']);
-        self::assertEquals($children['locale']->vars['data'], $user->getLocale());
-        self::assertEquals($children['theme']->vars['data'], $user->getTheme());
-        self::assertEquals($children['timezone']->vars['data'], $user->getTimezone());
+        self::assertEquals($children['settings']['locale']->vars['data'], $user->getSettings()->getLocale());
+        self::assertEquals($children['settings']['theme']->vars['data'], $user->getSettings()->getTheme());
+        self::assertEquals($children['settings']['timezone']->vars['data'], $user->getSettings()->getTimezone());
         self::assertEquals((bool) $children['admin']->vars['data'], $user->isAdmin());
         self::assertEquals((bool) $children['disabled']->vars['data'], $user->isDisabled());
     }

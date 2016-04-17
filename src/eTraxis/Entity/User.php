@@ -13,7 +13,6 @@ namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use eTraxis\Collection;
 use Ramsey\Uuid\Uuid;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 
@@ -148,41 +147,19 @@ class User implements \JsonSerializable
     private $isLdap;
 
     /**
-     * @var int Locale ID of user interface.
-     *
-     * @ORM\Column(name="locale", type="integer")
-     */
-    private $locale;
-
-    /**
-     * @var string Name of UI theme (e.g. "Emerald").
-     *
-     * @ORM\Column(name="theme_name", type="string", length=50)
-     */
-    private $theme;
-
-    /**
-     * @var int Timezone ID.
-     *
-     * @ORM\Column(name="timezone", type="integer")
-     */
-    private $timezone;
-
-    /**
-     * @var View Current view.
-     *
-     * @ORM\OneToOne(targetEntity="View")
-     * @ORM\JoinColumn(name="view_id", referencedColumnName="view_id")
-     */
-    public $view;
-
-    /**
      * @var ArrayCollection List of groups the user is member of.
      *
      * @ORM\ManyToMany(targetEntity="Group", mappedBy="members")
      * @ORM\OrderBy({"name" = "ASC"})
      */
     private $groups;
+
+    /**
+     * @var UserSettings User settings.
+     *
+     * @ORM\Embedded(class="UserSettings", columnPrefix=false)
+     */
+    private $settings;
 
     /**
      * @var UserDeprecated Deprecated features.
@@ -207,9 +184,8 @@ class User implements \JsonSerializable
         $this->isDisabled = 0;
         $this->isLdap     = 0;
 
-        $this->timezone = 0;
-
         $this->groups     = new ArrayCollection();
+        $this->settings   = new UserSettings();
         $this->deprecated = new UserDeprecated();
     }
 
@@ -537,102 +513,6 @@ class User implements \JsonSerializable
     }
 
     /**
-     * Property setter.
-     *
-     * @param   string $locale
-     *
-     * @return  self
-     */
-    public function setLocale($locale)
-    {
-        $locales = array_flip(Collection\LegacyLocale::getCollection());
-
-        if (array_key_exists($locale, $locales)) {
-            $this->locale = $locales[$locale];
-        }
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  string
-     */
-    public function getLocale()
-    {
-        $locales = Collection\LegacyLocale::getCollection();
-
-        if (!array_key_exists($this->locale, $locales)) {
-            $this->locale = 1000;
-        }
-
-        return $locales[$this->locale];
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   string $theme
-     *
-     * @return  self
-     */
-    public function setTheme($theme)
-    {
-        if (in_array($theme, Collection\Theme::getAllKeys())) {
-            $this->theme = $theme;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  string
-     */
-    public function getTheme()
-    {
-        $theme = strtolower($this->theme);
-
-        if (!in_array($theme, Collection\Theme::getAllKeys())) {
-            $theme = 'azure';
-        }
-
-        return $theme;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   int $timezone
-     *
-     * @return  self
-     */
-    public function setTimezone($timezone)
-    {
-        if (in_array($timezone, Collection\Timezone::getAllKeys())) {
-            $this->timezone = $timezone;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  int
-     */
-    public function getTimezone()
-    {
-        if (!in_array($this->timezone, Collection\Timezone::getAllKeys())) {
-            $this->timezone = 0;
-        }
-
-        return $this->timezone;
-    }
-
-    /**
      * Get list of groups the user is member of.
      *
      * @return  Group[]
@@ -640,6 +520,16 @@ class User implements \JsonSerializable
     public function getGroups()
     {
         return $this->groups->toArray();
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  UserSettings
+     */
+    public function getSettings()
+    {
+        return $this->settings;
     }
 
     /**
@@ -656,9 +546,9 @@ class User implements \JsonSerializable
             'isAdmin'     => $this->isAdmin(),
             'isDisabled'  => $this->isDisabled(),
             'isLdap'      => $this->isLdap(),
-            'locale'      => $this->getLocale(),
-            'theme'       => $this->getTheme(),
-            'timezone'    => $this->getTimezone(),
+            'locale'      => $this->getSettings()->getLocale(),
+            'theme'       => $this->getSettings()->getTheme(),
+            'timezone'    => $this->getSettings()->getTimezone(),
         ];
     }
 }

@@ -205,6 +205,9 @@ class LoadUsersData extends AbstractFixture implements ContainerAwareInterface, 
                 ->setAdmin($row['is_admin'])
                 ->setDisabled($row['is_disabled'])
                 ->setLdap($row['is_ldap'])
+            ;
+
+            $user->getSettings()
                 ->setLocale($this->container->getParameter('locale'))
                 ->setTheme($this->container->getParameter('theme'))
             ;

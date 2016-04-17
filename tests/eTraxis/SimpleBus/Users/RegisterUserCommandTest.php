@@ -45,8 +45,8 @@ class RegisterUserCommandTest extends BaseTestCase
         self::assertEquals($username, $user->getUsername());
         self::assertEquals($fullname, $user->getFullname());
         self::assertEquals($email, $user->getEmail());
-        self::assertEquals($locale, $user->getLocale());
-        self::assertEquals($theme, $user->getTheme());
+        self::assertEquals($locale, $user->getSettings()->getLocale());
+        self::assertEquals($theme, $user->getSettings()->getTheme());
         self::assertTrue($user->isLdap());
 
         // second time
@@ -65,8 +65,8 @@ class RegisterUserCommandTest extends BaseTestCase
         self::assertEquals($username, $user->getUsername());
         self::assertEquals($fullname, $user->getFullname());
         self::assertEquals($email, $user->getEmail());
-        self::assertEquals($locale, $user->getLocale());
-        self::assertEquals($theme, $user->getTheme());
+        self::assertEquals($locale, $user->getSettings()->getLocale());
+        self::assertEquals($theme, $user->getSettings()->getTheme());
         self::assertTrue($user->isLdap());
     }
 
