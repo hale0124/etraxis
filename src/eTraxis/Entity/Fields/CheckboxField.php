@@ -11,26 +11,11 @@
 
 namespace eTraxis\Entity\Fields;
 
-use eTraxis\Entity\Field;
-
 /**
  * Checkbox field.
  */
 class CheckboxField extends AbstractField
 {
-    // Properties.
-    protected $field;
-
-    /**
-     * Constructor.
-     *
-     * @param   Field $field
-     */
-    public function __construct(Field $field)
-    {
-        $this->field = $field;
-    }
-
     /**
      * {@inheritdoc}
      */

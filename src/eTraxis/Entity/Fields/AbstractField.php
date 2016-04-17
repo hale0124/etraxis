@@ -11,11 +11,26 @@
 
 namespace eTraxis\Entity\Fields;
 
+use eTraxis\Entity\Field;
+
 /**
  * Abstract facade for specific field type.
  */
 abstract class AbstractField implements \ArrayAccess
 {
+    /** @var Field */
+    protected $field;
+
+    /**
+     * Constructor.
+     *
+     * @param   Field $field
+     */
+    public function __construct(Field $field)
+    {
+        $this->field = $field;
+    }
+
     /**
      * Returns list of supported array keys.
      *

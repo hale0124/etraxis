@@ -24,7 +24,6 @@ class ListField extends AbstractField
     const MAX_ITEM_LENGTH = 50;
 
     // Properties.
-    protected $field;
     protected $repository;
 
     /**
@@ -35,7 +34,8 @@ class ListField extends AbstractField
      */
     public function __construct(Field $field, ListItemsRepository $repository)
     {
-        $this->field      = $field;
+        parent::__construct($field);
+
         $this->repository = $repository;
     }
 

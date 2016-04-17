@@ -11,8 +11,6 @@
 
 namespace eTraxis\Entity\Fields;
 
-use eTraxis\Entity\Field;
-
 /**
  * Date field.
  */
@@ -21,19 +19,6 @@ class DateField extends AbstractField
     // Constraints.
     const MIN_VALUE = -2147483648;
     const MAX_VALUE = 2147483647;
-
-    // Properties.
-    protected $field;
-
-    /**
-     * Constructor.
-     *
-     * @param   Field $field
-     */
-    public function __construct(Field $field)
-    {
-        $this->field = $field;
-    }
 
     /**
      * {@inheritdoc}

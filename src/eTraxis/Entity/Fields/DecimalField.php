@@ -24,7 +24,6 @@ class DecimalField extends AbstractField
     const MAX_VALUE = '9999999999.9999999999';
 
     // Properties.
-    protected $field;
     protected $repository;
 
     /**
@@ -35,7 +34,8 @@ class DecimalField extends AbstractField
      */
     public function __construct(Field $field, DecimalValuesRepository $repository)
     {
-        $this->field      = $field;
+        parent::__construct($field);
+
         $this->repository = $repository;
     }
 

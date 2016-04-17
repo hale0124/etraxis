@@ -24,7 +24,6 @@ class TextField extends AbstractField
     const MAX_LENGTH = 4000;
 
     // Properties.
-    protected $field;
     protected $repository;
 
     /**
@@ -35,7 +34,8 @@ class TextField extends AbstractField
      */
     public function __construct(Field $field, TextValuesRepository $repository)
     {
-        $this->field      = $field;
+        parent::__construct($field);
+
         $this->repository = $repository;
     }
 

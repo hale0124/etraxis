@@ -11,8 +11,6 @@
 
 namespace eTraxis\Entity\Fields;
 
-use eTraxis\Entity\Field;
-
 /**
  * Number field.
  */
@@ -21,19 +19,6 @@ class NumberField extends AbstractField
     // Constraints.
     const MIN_VALUE = -1000000000;
     const MAX_VALUE = 1000000000;
-
-    // Properties.
-    protected $field;
-
-    /**
-     * Constructor.
-     *
-     * @param   Field $field
-     */
-    public function __construct(Field $field)
-    {
-        $this->field = $field;
-    }
 
     /**
      * {@inheritdoc}

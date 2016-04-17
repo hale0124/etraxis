@@ -11,8 +11,6 @@
 
 namespace eTraxis\Entity\Fields;
 
-use eTraxis\Entity\Field;
-
 /**
  * Duration field.
  */
@@ -21,19 +19,6 @@ class DurationField extends AbstractField
     // Constraints.
     const MIN_VALUE = 0;
     const MAX_VALUE = 59999999;
-
-    // Properties.
-    protected $field;
-
-    /**
-     * Constructor.
-     *
-     * @param   Field $field
-     */
-    public function __construct(Field $field)
-    {
-        $this->field = $field;
-    }
 
     /**
      * {@inheritdoc}
