@@ -11,7 +11,6 @@
 
 namespace eTraxis\Entity;
 
-use Doctrine\Common\Persistence\ObjectManager;
 use Doctrine\ORM\Mapping as ORM;
 use eTraxis\Collection;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
@@ -25,10 +24,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  *                @ORM\UniqueConstraint(name="ix_fields_order", columns={"state_id", "field_order", "removal_time"})
  *            })
  * @ORM\Entity
- * @ORM\EntityListeners({"eTraxis\Entity\Fields\FieldListener"})
+ * @ORM\EntityListeners({"eTraxis\Entity\EntityListener"})
  * @Assert\UniqueEntity(fields={"template", "state", "name", "removedAt"}, message="field.conflict.name", ignoreNull=false)
  */
-class Field implements \JsonSerializable
+class Field extends Entity implements \JsonSerializable
 {
     // Constraints.
     const MAX_NAME        = 50;
@@ -52,12 +51,6 @@ class Field implements \JsonSerializable
     const ACCESS_DENIED     = 0;
     const ACCESS_READ_ONLY  = 1;
     const ACCESS_READ_WRITE = 2;
-
-    // Repositories.
-    protected $decimalValues;
-    protected $stringValues;
-    protected $textValues;
-    protected $listItems;
 
     /**
      * @var int Unique ID.
@@ -523,23 +516,6 @@ class Field implements \JsonSerializable
     }
 
     /**
-     * Dependency Injection setter.
-     *
-     * @param   ObjectManager $manager
-     *
-     * @return  self
-     */
-    public function injectDependencies(ObjectManager $manager)
-    {
-        $this->decimalValues = $manager->getRepository(DecimalValue::class);
-        $this->stringValues  = $manager->getRepository(StringValue::class);
-        $this->textValues    = $manager->getRepository(TextValue::class);
-        $this->listItems     = $manager->getRepository(ListItem::class);
-
-        return $this;
-    }
-
-    /**
      * Returns facade for "number" field.
      *
      * @return  Fields\NumberField
@@ -556,7 +532,7 @@ class Field implements \JsonSerializable
      */
     public function asDecimal()
     {
-        return new Fields\DecimalField($this, $this->decimalValues);
+        return new Fields\DecimalField($this, $this->manager->getRepository(DecimalValue::class));
     }
 
     /**
@@ -566,7 +542,7 @@ class Field implements \JsonSerializable
      */
     public function asString()
     {
-        return new Fields\StringField($this, $this->stringValues);
+        return new Fields\StringField($this, $this->manager->getRepository(StringValue::class));
     }
 
     /**
@@ -576,7 +552,7 @@ class Field implements \JsonSerializable
      */
     public function asText()
     {
-        return new Fields\TextField($this, $this->textValues);
+        return new Fields\TextField($this, $this->manager->getRepository(TextValue::class));
     }
 
     /**
@@ -596,7 +572,7 @@ class Field implements \JsonSerializable
      */
     public function asList()
     {
-        return new Fields\ListField($this, $this->listItems);
+        return new Fields\ListField($this, $this->manager->getRepository(ListItem::class));
     }
 
     /**

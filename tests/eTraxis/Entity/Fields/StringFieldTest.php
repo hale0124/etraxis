@@ -28,7 +28,7 @@ class StringFieldTest extends BaseTestCase
 
         /** @noinspection PhpParamsInspection */
         $this->object
-            ->injectDependencies($this->doctrine->getManager())
+            ->setEntityManager($this->doctrine->getManager())
             ->setType(Field::TYPE_STRING)
         ;
     }

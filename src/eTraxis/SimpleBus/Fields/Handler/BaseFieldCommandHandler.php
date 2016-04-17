@@ -78,7 +78,7 @@ class BaseFieldCommandHandler
 
         /** @noinspection PhpParamsInspection */
         $entity
-            ->injectDependencies($this->manager)
+            ->setEntityManager($this->manager)
             ->setName($command->name)
             ->setDescription($command->description)
             ->setRequired($command->required)

@@ -24,7 +24,9 @@ class FieldTest extends BaseTestCase
         parent::setUp();
 
         $this->object = new Field();
-        $this->object->injectDependencies($this->doctrine->getManager());
+
+        /** @noinspection PhpParamsInspection */
+        $this->object->setEntityManager($this->doctrine->getManager());
     }
 
     public function testId()

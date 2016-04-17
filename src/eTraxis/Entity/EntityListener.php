@@ -9,18 +9,17 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Entity\Fields;
+namespace eTraxis\Entity;
 
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use eTraxis\Entity\Field;
 
 /**
  * Entity listener.
  */
-class FieldListener
+class EntityListener
 {
-    public function postLoad(Field $field, LifecycleEventArgs $event)
+    public function postLoad(Entity $entity, LifecycleEventArgs $event)
     {
-        $field->injectDependencies($event->getEntityManager());
+        $entity->setEntityManager($event->getEntityManager());
     }
 }
