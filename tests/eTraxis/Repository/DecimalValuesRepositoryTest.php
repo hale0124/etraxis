@@ -20,7 +20,7 @@ class DecimalValuesRepositoryTest extends BaseTestCase
     {
         $expected = '3.14159292';
 
-        /** @var DecimalValuesRepository $repository */
+        /** @var CustomValuesRepositoryInterface $repository */
         $repository = $this->doctrine->getManager()->getRepository(DecimalValue::class);
 
         $count = count($repository->findAll());

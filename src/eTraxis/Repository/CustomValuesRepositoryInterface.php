@@ -11,11 +11,19 @@
 
 namespace eTraxis\Repository;
 
-use Doctrine\ORM\EntityRepository;
+use Doctrine\Common\Persistence\ObjectRepository;
 
 /**
- * List items repository.
+ * Custom values repository.
  */
-class ListItemsRepository extends EntityRepository
+interface CustomValuesRepositoryInterface extends ObjectRepository
 {
+    /**
+     * Saves specified custom value in the repository and returns its ID.
+     *
+     * @param   mixed $value Custom value.
+     *
+     * @return  int Value ID.
+     */
+    public function save($value);
 }

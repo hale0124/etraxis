@@ -11,8 +11,9 @@
 
 namespace eTraxis\Entity\Fields;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use eTraxis\Entity\Field;
-use eTraxis\Repository\StringValuesRepository;
+use eTraxis\Entity\StringValue;
 
 /**
  * String field.
@@ -23,18 +24,22 @@ class StringField extends AbstractField
     const MIN_LENGTH = 1;
     const MAX_LENGTH = 250;
 
-    // Properties.
+    /** @var \eTraxis\Repository\CustomValuesRepositoryInterface */
     protected $repository;
 
     /**
      * Constructor.
      *
-     * @param   Field                  $field
-     * @param   StringValuesRepository $repository
+     * @param   Field            $field
+     * @param   ObjectRepository $repository
      */
-    public function __construct(Field $field, StringValuesRepository $repository)
+    public function __construct(Field $field, ObjectRepository $repository)
     {
         parent::__construct($field);
+
+        if ($repository->getClassName() !== StringValue::class) {
+            throw new \InvalidArgumentException();
+        }
 
         $this->repository = $repository;
     }
@@ -114,7 +119,7 @@ class StringField extends AbstractField
             return null;
         }
 
-        /** @var \eTraxis\Entity\StringValue $value */
+        /** @var StringValue $value */
         $value = $this->repository->find($id);
 
         return $value->getValue();

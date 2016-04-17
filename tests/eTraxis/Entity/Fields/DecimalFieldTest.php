@@ -33,6 +33,14 @@ class DecimalFieldTest extends BaseTestCase
         ;
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidRepository()
+    {
+        new DecimalField($this->object, $this->doctrine->getManager()->getRepository(Field::class));
+    }
+
     public function testSupportedKeys()
     {
         $expected = ['minValue', 'maxValue', 'defaultValue'];
@@ -59,7 +67,7 @@ class DecimalFieldTest extends BaseTestCase
         $min = '-10000000000';
         $max = '10000000000';
 
-        /** @var \eTraxis\Repository\DecimalValuesRepository $repository */
+        /** @var \eTraxis\Repository\CustomValuesRepositoryInterface $repository */
         $repository = $this->doctrine->getRepository(DecimalValue::class);
 
         /** @var DecimalValue $value */
@@ -84,7 +92,7 @@ class DecimalFieldTest extends BaseTestCase
         $min = '-10000000000';
         $max = '10000000000';
 
-        /** @var \eTraxis\Repository\DecimalValuesRepository $repository */
+        /** @var \eTraxis\Repository\CustomValuesRepositoryInterface $repository */
         $repository = $this->doctrine->getRepository(DecimalValue::class);
 
         /** @var DecimalValue $value */
@@ -109,7 +117,7 @@ class DecimalFieldTest extends BaseTestCase
         $min = '-10000000000';
         $max = '10000000000';
 
-        /** @var \eTraxis\Repository\DecimalValuesRepository $repository */
+        /** @var \eTraxis\Repository\CustomValuesRepositoryInterface $repository */
         $repository = $this->doctrine->getRepository(DecimalValue::class);
 
         /** @var DecimalValue $value */

@@ -11,8 +11,9 @@
 
 namespace eTraxis\Entity\Fields;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use eTraxis\Entity\Field;
-use eTraxis\Repository\ListItemsRepository;
+use eTraxis\Entity\ListItem;
 
 /**
  * List field.
@@ -23,18 +24,22 @@ class ListField extends AbstractField
     const MIN_ITEM_VALUE  = 1;
     const MAX_ITEM_LENGTH = 50;
 
-    // Properties.
+    /** @var ObjectRepository */
     protected $repository;
 
     /**
      * Constructor.
      *
-     * @param   Field               $field
-     * @param   ListItemsRepository $repository
+     * @param   Field            $field
+     * @param   ObjectRepository $repository
      */
-    public function __construct(Field $field, ListItemsRepository $repository)
+    public function __construct(Field $field, ObjectRepository $repository)
     {
         parent::__construct($field);
+
+        if ($repository->getClassName() !== ListItem::class) {
+            throw new \InvalidArgumentException();
+        }
 
         $this->repository = $repository;
     }
@@ -58,7 +63,7 @@ class ListField extends AbstractField
     {
         if ($key !== null) {
 
-            /** @var \eTraxis\Entity\ListItem $item */
+            /** @var ListItem $item */
             $item = $this->repository->findOneBy([
                 'field' => $this->field,
                 'key'   => $key,
@@ -93,7 +98,7 @@ class ListField extends AbstractField
     {
         if ($value !== null) {
 
-            /** @var \eTraxis\Entity\ListItem $item */
+            /** @var ListItem $item */
             $item = $this->repository->findOneBy([
                 'field' => $this->field,
                 'value' => $value,
@@ -123,7 +128,7 @@ class ListField extends AbstractField
             return null;
         }
 
-        /** @var \eTraxis\Entity\ListItem $item */
+        /** @var ListItem $item */
         $item = $this->repository->findOneBy([
             'field' => $this->field,
             'key'   => $key,

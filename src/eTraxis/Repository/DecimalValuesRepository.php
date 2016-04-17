@@ -17,14 +17,10 @@ use eTraxis\Entity\DecimalValue;
 /**
  * Decimal values repository.
  */
-class DecimalValuesRepository extends EntityRepository
+class DecimalValuesRepository extends EntityRepository implements CustomValuesRepositoryInterface
 {
     /**
-     * Saves specified value in the repository and returns its ID.
-     *
-     * @param   string $value Decimal value.
-     *
-     * @return  int Value ID.
+     * {@inheritdoc}
      */
     public function save($value)
     {

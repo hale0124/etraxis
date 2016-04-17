@@ -11,8 +11,9 @@
 
 namespace eTraxis\Entity\Fields;
 
+use Doctrine\Common\Persistence\ObjectRepository;
+use eTraxis\Entity\DecimalValue;
 use eTraxis\Entity\Field;
-use eTraxis\Repository\DecimalValuesRepository;
 
 /**
  * Decimal field.
@@ -23,18 +24,22 @@ class DecimalField extends AbstractField
     const MIN_VALUE = '-9999999999.9999999999';
     const MAX_VALUE = '9999999999.9999999999';
 
-    // Properties.
+    /** @var \eTraxis\Repository\CustomValuesRepositoryInterface */
     protected $repository;
 
     /**
      * Constructor.
      *
-     * @param   Field                   $field
-     * @param   DecimalValuesRepository $repository
+     * @param   Field            $field
+     * @param   ObjectRepository $repository
      */
-    public function __construct(Field $field, DecimalValuesRepository $repository)
+    public function __construct(Field $field, ObjectRepository $repository)
     {
         parent::__construct($field);
+
+        if ($repository->getClassName() !== DecimalValue::class) {
+            throw new \InvalidArgumentException();
+        }
 
         $this->repository = $repository;
     }
@@ -77,7 +82,7 @@ class DecimalField extends AbstractField
      */
     public function getMinValue()
     {
-        /** @var \eTraxis\Entity\DecimalValue $value */
+        /** @var DecimalValue $value */
         $value = $this->repository->find($this->field->getParameters()->getParameter1());
 
         return $value->getValue();
@@ -113,7 +118,7 @@ class DecimalField extends AbstractField
      */
     public function getMaxValue()
     {
-        /** @var \eTraxis\Entity\DecimalValue $value */
+        /** @var DecimalValue $value */
         $value = $this->repository->find($this->field->getParameters()->getParameter2());
 
         return $value->getValue();
@@ -161,7 +166,7 @@ class DecimalField extends AbstractField
             return null;
         }
 
-        /** @var \eTraxis\Entity\DecimalValue $value */
+        /** @var DecimalValue $value */
         $value = $this->repository->find($id);
 
         return $value->getValue();

@@ -33,6 +33,14 @@ class StringFieldTest extends BaseTestCase
         ;
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidRepository()
+    {
+        new StringField($this->object, $this->doctrine->getManager()->getRepository(Field::class));
+    }
+
     public function testSupportedKeys()
     {
         $expected = ['maxLength', 'defaultValue'];
@@ -72,7 +80,7 @@ class StringFieldTest extends BaseTestCase
     {
         $field = $this->object->asString();
 
-        /** @var \eTraxis\Repository\StringValuesRepository $repository */
+        /** @var \eTraxis\Repository\CustomValuesRepositoryInterface $repository */
         $repository = $this->doctrine->getRepository(StringValue::class);
 
         /** @var StringValue $value */

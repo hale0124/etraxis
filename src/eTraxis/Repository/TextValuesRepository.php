@@ -17,14 +17,10 @@ use eTraxis\Entity\TextValue;
 /**
  * Text values repository.
  */
-class TextValuesRepository extends EntityRepository
+class TextValuesRepository extends EntityRepository implements CustomValuesRepositoryInterface
 {
     /**
-     * Saves specified value in the repository and returns its ID.
-     *
-     * @param   string $value Text value.
-     *
-     * @return  int Value ID.
+     * {@inheritdoc}
      */
     public function save($value)
     {

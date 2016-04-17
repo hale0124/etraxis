@@ -11,8 +11,9 @@
 
 namespace eTraxis\Entity\Fields;
 
+use Doctrine\Common\Persistence\ObjectRepository;
 use eTraxis\Entity\Field;
-use eTraxis\Repository\TextValuesRepository;
+use eTraxis\Entity\TextValue;
 
 /**
  * Text field.
@@ -23,18 +24,22 @@ class TextField extends AbstractField
     const MIN_LENGTH = 1;
     const MAX_LENGTH = 4000;
 
-    // Properties.
+    /** @var \eTraxis\Repository\CustomValuesRepositoryInterface */
     protected $repository;
 
     /**
      * Constructor.
      *
-     * @param   Field                $field
-     * @param   TextValuesRepository $repository
+     * @param   Field            $field
+     * @param   ObjectRepository $repository
      */
-    public function __construct(Field $field, TextValuesRepository $repository)
+    public function __construct(Field $field, ObjectRepository $repository)
     {
         parent::__construct($field);
+
+        if ($repository->getClassName() !== TextValue::class) {
+            throw new \InvalidArgumentException();
+        }
 
         $this->repository = $repository;
     }
@@ -114,7 +119,7 @@ class TextField extends AbstractField
             return null;
         }
 
-        /** @var \eTraxis\Entity\TextValue $value */
+        /** @var TextValue $value */
         $value = $this->repository->find($id);
 
         return $value->getValue();

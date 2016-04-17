@@ -20,7 +20,7 @@ class TextValuesRepositoryTest extends BaseTestCase
     {
         $expected = 'Artem Rodygin';
 
-        /** @var TextValuesRepository $repository */
+        /** @var CustomValuesRepositoryInterface $repository */
         $repository = $this->doctrine->getManager()->getRepository(TextValue::class);
 
         $count = count($repository->findAll());

@@ -33,6 +33,14 @@ class TextFieldTest extends BaseTestCase
         ;
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidRepository()
+    {
+        new TextField($this->object, $this->doctrine->getManager()->getRepository(Field::class));
+    }
+
     public function testSupportedKeys()
     {
         $expected = ['maxLength', 'defaultValue'];
@@ -82,7 +90,7 @@ class TextFieldTest extends BaseTestCase
             . 'Farnsworth hires the three to become his crew for his intergalactic delivery service, Planet Express, with Fry '
             . 'becoming a delivery boy.';
 
-        /** @var \eTraxis\Repository\TextValuesRepository $repository */
+        /** @var \eTraxis\Repository\CustomValuesRepositoryInterface $repository */
         $repository = $this->doctrine->getRepository(TextValue::class);
 
         /** @var TextValue $value */

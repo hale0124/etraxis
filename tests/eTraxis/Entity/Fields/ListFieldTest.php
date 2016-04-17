@@ -27,6 +27,14 @@ class ListFieldTest extends BaseTestCase
         $this->object = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Season']);
     }
 
+    /**
+     * @expectedException \InvalidArgumentException
+     */
+    public function testInvalidRepository()
+    {
+        new ListField($this->object, $this->doctrine->getManager()->getRepository(Field::class));
+    }
+
     public function testSupportedKeys()
     {
         $expected = ['defaultKey', 'defaultValue'];
