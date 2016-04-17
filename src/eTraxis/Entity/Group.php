@@ -217,10 +217,10 @@ class Group implements \JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'id'          => $this->id,
+            'id'          => $this->getId(),
             'project'     => $this->project ? $this->project->getId() : null,
-            'name'        => $this->name,
-            'description' => $this->description,
+            'name'        => $this->getName(),
+            'description' => $this->getDescription(),
         ];
     }
 }

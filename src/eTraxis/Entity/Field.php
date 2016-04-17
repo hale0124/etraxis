@@ -635,11 +635,11 @@ class Field implements \JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'id'          => $this->id,
-            'name'        => $this->name,
-            'type'        => $this->type,
-            'description' => $this->description,
-            'isRequired'  => (bool) $this->isRequired,
+            'id'          => $this->getId(),
+            'name'        => $this->getName(),
+            'type'        => $this->getType(),
+            'description' => $this->getDescription(),
+            'isRequired'  => $this->isRequired(),
         ];
     }
 }

@@ -295,11 +295,11 @@ class State implements \JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'id'           => $this->id,
-            'name'         => $this->name,
-            'abbreviation' => $this->abbreviation,
-            'type'         => $this->type,
-            'responsible'  => $this->responsible,
+            'id'           => $this->getId(),
+            'name'         => $this->getName(),
+            'abbreviation' => $this->getAbbreviation(),
+            'type'         => $this->getType(),
+            'responsible'  => $this->getResponsible(),
         ];
     }
 }

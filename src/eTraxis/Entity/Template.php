@@ -461,13 +461,13 @@ class Template implements \JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'id'          => $this->id,
-            'name'        => $this->name,
-            'prefix'      => $this->prefix,
-            'criticalAge' => $this->criticalAge,
-            'frozenTime'  => $this->frozenTime,
-            'description' => $this->description,
-            'isLocked'    => (bool) $this->isLocked,
+            'id'          => $this->getId(),
+            'name'        => $this->getName(),
+            'prefix'      => $this->getPrefix(),
+            'criticalAge' => $this->getCriticalAge(),
+            'frozenTime'  => $this->getFrozenTime(),
+            'description' => $this->getDescription(),
+            'isLocked'    => $this->isLocked(),
         ];
     }
 }

@@ -217,11 +217,11 @@ class Project implements \JsonSerializable
     public function jsonSerialize()
     {
         return [
-            'id'          => $this->id,
-            'name'        => $this->name,
-            'description' => $this->description,
-            'createdAt'   => date('Y-m-d', $this->createdAt),
-            'isSuspended' => (bool) $this->isSuspended,
+            'id'          => $this->getId(),
+            'name'        => $this->getName(),
+            'description' => $this->getDescription(),
+            'createdAt'   => date('Y-m-d', $this->getCreatedAt()),
+            'isSuspended' => $this->isSuspended(),
         ];
     }
 }
