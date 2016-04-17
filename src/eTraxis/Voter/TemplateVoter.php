@@ -83,7 +83,7 @@ class TemplateVoter extends Voter
      *
      * @return  bool
      */
-    protected function isDeleteGranted($subject)
+    protected function isDeleteGranted(Template $subject)
     {
         // Number of records created by the template.
         $query = $this->manager->createQueryBuilder()
@@ -107,7 +107,7 @@ class TemplateVoter extends Voter
      *
      * @return  bool
      */
-    protected function isLockGranted($subject)
+    protected function isLockGranted(Template $subject)
     {
         return !$subject->isLocked();
     }
@@ -119,7 +119,7 @@ class TemplateVoter extends Voter
      *
      * @return  bool
      */
-    protected function isUnlockGranted($subject)
+    protected function isUnlockGranted(Template $subject)
     {
         if (!$subject->isLocked()) {
             return false;

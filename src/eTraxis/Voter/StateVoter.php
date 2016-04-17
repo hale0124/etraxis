@@ -78,7 +78,7 @@ class StateVoter extends Voter
      *
      * @return  bool
      */
-    protected function isDeleteGranted($subject)
+    protected function isDeleteGranted(State $subject)
     {
         // Number of records appeared in the state.
         $query = $this->manager->createQueryBuilder()
@@ -103,7 +103,7 @@ class StateVoter extends Voter
      *
      * @return  bool
      */
-    protected function isInitialGranted($subject)
+    protected function isInitialGranted(State $subject)
     {
         return $subject->getType() === State::TYPE_INTERIM;
     }

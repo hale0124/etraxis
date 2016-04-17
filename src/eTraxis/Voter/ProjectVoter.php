@@ -74,7 +74,7 @@ class ProjectVoter extends Voter
      *
      * @return  bool
      */
-    protected function isDeleteGranted($subject)
+    protected function isDeleteGranted(Project $subject)
     {
         // Number of records belong to the project.
         $query = $this->manager->createQueryBuilder()

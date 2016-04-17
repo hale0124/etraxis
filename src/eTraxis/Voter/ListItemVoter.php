@@ -74,7 +74,7 @@ class ListItemVoter extends Voter
      *
      * @return  bool
      */
-    protected function isDeleteGranted($subject)
+    protected function isDeleteGranted(ListItem $subject)
     {
         // Number of records where the list item is used.
         $query = $this->manager->createQueryBuilder()

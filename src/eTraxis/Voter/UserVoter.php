@@ -94,7 +94,7 @@ class UserVoter extends Voter
      *
      * @return  bool
      */
-    protected function isSetExpiredPasswordGranted($subject)
+    protected function isSetExpiredPasswordGranted(User $subject)
     {
         // Deny if passwords do not expire at all.
         if ($this->password_expiration === null) {
@@ -112,7 +112,7 @@ class UserVoter extends Voter
      *
      * @return  bool
      */
-    protected function isDeleteGranted($subject, $user)
+    protected function isDeleteGranted(User $subject, $user)
     {
         // User must be logged in.
         if (!$user instanceof CurrentUser) {
@@ -158,7 +158,7 @@ class UserVoter extends Voter
      *
      * @return  bool
      */
-    protected function isDisableGranted($subject, $user)
+    protected function isDisableGranted(User $subject, $user)
     {
         // User must be logged in.
         if (!$user instanceof CurrentUser) {
@@ -180,7 +180,7 @@ class UserVoter extends Voter
      *
      * @return  bool
      */
-    protected function isEnableGranted($subject)
+    protected function isEnableGranted(User $subject)
     {
         return $subject->isDisabled();
     }
@@ -192,7 +192,7 @@ class UserVoter extends Voter
      *
      * @return  bool
      */
-    protected function isUnlockGranted($subject)
+    protected function isUnlockGranted(User $subject)
     {
         return $subject->isLocked();
     }
