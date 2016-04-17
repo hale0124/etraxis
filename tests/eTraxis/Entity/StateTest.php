@@ -29,6 +29,8 @@ class StateTest extends BaseTestCase
 
     public function testId()
     {
+        $state = new State();
+        self::assertNull($state->getId());
         self::assertNotNull($this->object->getId());
     }
 

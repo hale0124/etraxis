@@ -29,6 +29,8 @@ class ProjectTest extends BaseTestCase
 
     public function testId()
     {
+        $project = new Project();
+        self::assertNull($project->getId());
         self::assertNotNull($this->object->getId());
     }
 

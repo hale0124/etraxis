@@ -29,6 +29,8 @@ class TemplateTest extends BaseTestCase
 
     public function testId()
     {
+        $template = new Template();
+        self::assertNull($template->getId());
         self::assertNotNull($this->object->getId());
     }
 

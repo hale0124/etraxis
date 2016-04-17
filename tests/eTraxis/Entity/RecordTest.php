@@ -29,6 +29,8 @@ class RecordTest extends BaseTestCase
 
     public function testId()
     {
+        $record = new Record();
+        self::assertNull($record->getId());
         self::assertNotNull($this->object->getId());
     }
 
