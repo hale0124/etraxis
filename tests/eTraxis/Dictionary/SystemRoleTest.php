@@ -11,9 +11,7 @@
 
 namespace eTraxis\Dictionary;
 
-use eTraxis\Tests\BaseTestCase;
-
-class SystemRoleTest extends BaseTestCase
+class SystemRoleTest extends \PHPUnit_Framework_TestCase
 {
     public function testDictionary()
     {

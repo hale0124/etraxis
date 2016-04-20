@@ -11,9 +11,7 @@
 
 namespace eTraxis\Dictionary;
 
-use eTraxis\Tests\BaseTestCase;
-
-class LocaleTest extends BaseTestCase
+class LocaleTest extends \PHPUnit_Framework_TestCase
 {
     public function testDictionary()
     {

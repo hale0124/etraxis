@@ -11,9 +11,7 @@
 
 namespace eTraxis\Dictionary;
 
-use eTraxis\Tests\BaseTestCase;
-
-class DatabasePlatformTest extends BaseTestCase
+class DatabasePlatformTest extends \PHPUnit_Framework_TestCase
 {
     public function testDictionary()
     {

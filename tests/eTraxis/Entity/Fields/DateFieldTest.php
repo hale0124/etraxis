@@ -12,9 +12,8 @@
 namespace eTraxis\Entity\Fields;
 
 use eTraxis\Entity\Field;
-use eTraxis\Tests\BaseTestCase;
 
-class DateFieldTest extends BaseTestCase
+class DateFieldTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Field */
     private $object;

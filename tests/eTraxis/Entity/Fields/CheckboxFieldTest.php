@@ -12,9 +12,8 @@
 namespace eTraxis\Entity\Fields;
 
 use eTraxis\Entity\Field;
-use eTraxis\Tests\BaseTestCase;
 
-class CheckboxFieldTest extends BaseTestCase
+class CheckboxFieldTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Field */
     private $object;

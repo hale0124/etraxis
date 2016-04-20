@@ -12,9 +12,8 @@
 namespace eTraxis\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
-use eTraxis\Tests\BaseTestCase;
 
-class BaseMigrationTest extends BaseTestCase
+class BaseMigrationTest extends \PHPUnit_Framework_TestCase
 {
     public function testVersion()
     {

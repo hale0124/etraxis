@@ -11,9 +11,7 @@
 
 namespace eTraxis\Dictionary;
 
-use eTraxis\Tests\BaseTestCase;
-
-class CsvDelimiterTest extends BaseTestCase
+class CsvDelimiterTest extends \PHPUnit_Framework_TestCase
 {
     public function testDictionary()
     {

@@ -12,9 +12,8 @@
 namespace eTraxis\Entity\Fields;
 
 use eTraxis\Entity\Field;
-use eTraxis\Tests\BaseTestCase;
 
-class AbstractFieldTest extends BaseTestCase
+class AbstractFieldTest extends \PHPUnit_Framework_TestCase
 {
     /** @var Field */
     private $object;

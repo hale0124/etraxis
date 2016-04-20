@@ -11,9 +11,7 @@
 
 namespace eTraxis\Dictionary;
 
-use eTraxis\Tests\BaseTestCase;
-
-class LineEndingTest extends BaseTestCase
+class LineEndingTest extends \PHPUnit_Framework_TestCase
 {
     public function testDictionary()
     {

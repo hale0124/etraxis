@@ -11,9 +11,7 @@
 
 namespace eTraxis\Dictionary;
 
-use eTraxis\Tests\BaseTestCase;
-
-class TimezoneTest extends BaseTestCase
+class TimezoneTest extends \PHPUnit_Framework_TestCase
 {
     public function testDictionary()
     {

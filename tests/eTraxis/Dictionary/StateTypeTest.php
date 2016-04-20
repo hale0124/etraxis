@@ -12,9 +12,8 @@
 namespace eTraxis\Dictionary;
 
 use eTraxis\Entity\State;
-use eTraxis\Tests\BaseTestCase;
 
-class StateTypeTest extends BaseTestCase
+class StateTypeTest extends \PHPUnit_Framework_TestCase
 {
     public function testDictionary()
     {

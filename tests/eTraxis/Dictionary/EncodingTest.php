@@ -11,9 +11,7 @@
 
 namespace eTraxis\Dictionary;
 
-use eTraxis\Tests\BaseTestCase;
-
-class EncodingTest extends BaseTestCase
+class EncodingTest extends \PHPUnit_Framework_TestCase
 {
     public function testDictionary()
     {

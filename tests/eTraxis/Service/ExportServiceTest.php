@@ -13,9 +13,8 @@ namespace eTraxis\Service;
 
 use eTraxis\Dictionary\CsvDelimiter;
 use eTraxis\Dictionary\LineEnding;
-use eTraxis\Tests\BaseTestCase;
 
-class ExportServiceTest extends BaseTestCase
+class ExportServiceTest extends \PHPUnit_Framework_TestCase
 {
     public function test1()
     {

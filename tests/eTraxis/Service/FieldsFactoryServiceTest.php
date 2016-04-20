@@ -14,9 +14,8 @@ namespace eTraxis\Service;
 use eTraxis\Entity\Field;
 use eTraxis\Service\FieldsFactory\FieldsFactoryService;
 use eTraxis\SimpleBus\Fields;
-use eTraxis\Tests\BaseTestCase;
 
-class FieldsFactoryServiceTest extends BaseTestCase
+class FieldsFactoryServiceTest extends \PHPUnit_Framework_TestCase
 {
     public function testCreate()
     {

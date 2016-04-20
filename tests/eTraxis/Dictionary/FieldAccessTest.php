@@ -12,9 +12,8 @@
 namespace eTraxis\Dictionary;
 
 use eTraxis\Entity\Field;
-use eTraxis\Tests\BaseTestCase;
 
-class FieldAccessTest extends BaseTestCase
+class FieldAccessTest extends \PHPUnit_Framework_TestCase
 {
     public function testDictionary()
     {
