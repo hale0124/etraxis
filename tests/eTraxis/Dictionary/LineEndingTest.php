@@ -26,8 +26,8 @@ class LineEndingTest extends \PHPUnit_Framework_TestCase
 
     public function testGetDelimiter()
     {
-        self::assertEquals("\r\n", LineEnding::getLineEnding(LineEnding::WINDOWS));
-        self::assertEquals("\n", LineEnding::getLineEnding(LineEnding::UNIX));
-        self::assertEquals("\r", LineEnding::getLineEnding(LineEnding::MACINTOSH));
+        self::assertEquals("\r\n", LineEnding::get(LineEnding::WINDOWS));
+        self::assertEquals("\n", LineEnding::get(LineEnding::UNIX));
+        self::assertEquals("\r", LineEnding::get(LineEnding::MACINTOSH));
     }
 }

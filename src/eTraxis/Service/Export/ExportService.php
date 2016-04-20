@@ -28,8 +28,8 @@ class ExportService implements ExportInterface
     {
         $response = new StreamedResponse(function () use ($query, $data) {
 
-            $delimiter = CsvDelimiter::getDelimiter($query->delimiter);
-            $tail      = LineEnding::getLineEnding($query->tail);
+            $delimiter = CsvDelimiter::get($query->delimiter);
+            $tail      = LineEnding::get($query->tail);
 
             $callback = function ($item) use ($delimiter) {
                 $count = 0;

@@ -41,13 +41,9 @@ class CsvDelimiter extends StaticDictionary
     }
 
     /**
-     * Returns specified delimiter.
-     *
-     * @param   int $delimiter Delimiter ID.
-     *
-     * @return  string
+     * {@inheritdoc}
      */
-    public static function getDelimiter($delimiter)
+    public static function get($key)
     {
         $delimiters = [
             self::TAB           => "\t",
@@ -58,8 +54,6 @@ class CsvDelimiter extends StaticDictionary
             self::VERTICAL_LINE => '|',
         ];
 
-        return array_key_exists($delimiter, $delimiters)
-            ? $delimiters[$delimiter]
-            : null;
+        return array_key_exists($key, $delimiters) ? $delimiters[$key] : null;
     }
 }

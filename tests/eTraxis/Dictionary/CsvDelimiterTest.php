@@ -29,11 +29,11 @@ class CsvDelimiterTest extends \PHPUnit_Framework_TestCase
 
     public function testGetDelimiter()
     {
-        self::assertEquals("\t", CsvDelimiter::getDelimiter(CsvDelimiter::TAB));
-        self::assertEquals(' ', CsvDelimiter::getDelimiter(CsvDelimiter::SPACE));
-        self::assertEquals(',', CsvDelimiter::getDelimiter(CsvDelimiter::COMMA));
-        self::assertEquals(':', CsvDelimiter::getDelimiter(CsvDelimiter::COLON));
-        self::assertEquals(';', CsvDelimiter::getDelimiter(CsvDelimiter::SEMICOLON));
-        self::assertEquals('|', CsvDelimiter::getDelimiter(CsvDelimiter::VERTICAL_LINE));
+        self::assertEquals("\t", CsvDelimiter::get(CsvDelimiter::TAB));
+        self::assertEquals(' ', CsvDelimiter::get(CsvDelimiter::SPACE));
+        self::assertEquals(',', CsvDelimiter::get(CsvDelimiter::COMMA));
+        self::assertEquals(':', CsvDelimiter::get(CsvDelimiter::COLON));
+        self::assertEquals(';', CsvDelimiter::get(CsvDelimiter::SEMICOLON));
+        self::assertEquals('|', CsvDelimiter::get(CsvDelimiter::VERTICAL_LINE));
     }
 }

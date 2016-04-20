@@ -35,13 +35,9 @@ class LineEnding extends StaticDictionary
     }
 
     /**
-     * Returns specified line ending.
-     *
-     * @param   int $line_ending Line ending ID.
-     *
-     * @return  string
+     * {@inheritdoc}
      */
-    public static function getLineEnding($line_ending)
+    public static function get($key)
     {
         $line_endings = [
             self::WINDOWS   => "\r\n",
@@ -49,8 +45,6 @@ class LineEnding extends StaticDictionary
             self::MACINTOSH => "\r",
         ];
 
-        return array_key_exists($line_ending, $line_endings)
-            ? $line_endings[$line_ending]
-            : null;
+        return array_key_exists($key, $line_endings) ? $line_endings[$key] : null;
     }
 }
