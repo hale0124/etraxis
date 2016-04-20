@@ -13,7 +13,7 @@ namespace eTraxis\Migrations;
 
 use Doctrine\DBAL\Migrations\AbstractMigration;
 use Doctrine\DBAL\Schema\Schema;
-use eTraxis\Collection\DatabasePlatform;
+use eTraxis\Dictionary\DatabasePlatform;
 
 /**
  * Base eTraxis migration.

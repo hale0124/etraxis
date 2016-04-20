@@ -11,7 +11,7 @@
 
 namespace eTraxis\Entity;
 
-use eTraxis\Collection\SystemRole;
+use eTraxis\Dictionary\SystemRole;
 
 class StateRoleTransitionTest extends \PHPUnit_Framework_TestCase
 {

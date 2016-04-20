@@ -11,7 +11,7 @@
 
 namespace eTraxis\Form;
 
-use eTraxis\Collection\FieldType;
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\Field;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -44,7 +44,7 @@ class FieldForm extends AbstractType
             $builder->add('type', ChoiceType::class, [
                 'label'    => 'field.type',
                 'required' => true,
-                'choices'  => array_flip(FieldType::getCollection()),
+                'choices'  => array_flip(FieldType::all()),
                 'data'     => Field::TYPE_STRING,
             ]);
         }

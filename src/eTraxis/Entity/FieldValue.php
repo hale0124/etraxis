@@ -12,7 +12,7 @@
 namespace eTraxis\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use eTraxis\Collection;
+use eTraxis\Dictionary;
 
 /**
  * Field value.
@@ -113,7 +113,7 @@ class FieldValue
         $this->field = $field;
 
         $type  = $field->getType();
-        $types = array_flip(Collection\LegacyFieldType::getCollection());
+        $types = array_flip(Dictionary\LegacyFieldType::all());
 
         if (array_key_exists($type, $types)) {
             $this->type = $types[$type];

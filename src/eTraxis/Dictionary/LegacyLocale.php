@@ -9,19 +9,21 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
+
+use Dictionary\StaticDictionary;
 
 /**
  * Static collection of legacy locales.
  *
  * @deprecated 4.1.0 A stub for compatibility btw 3.6 and 4.0.
  */
-class LegacyLocale extends AbstractStaticCollection
+class LegacyLocale extends StaticDictionary
 {
     /**
      * {@inheritdoc}
      */
-    public static function getCollection()
+    public static function all()
     {
         return [
             1000 => 'en_US',

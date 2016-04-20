@@ -9,12 +9,14 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
+
+use Dictionary\StaticDictionary;
 
 /**
  * Static collection of CSV delimiters.
  */
-class CsvDelimiter extends AbstractStaticCollection
+class CsvDelimiter extends StaticDictionary
 {
     const TAB           = 1;
     const SPACE         = 2;
@@ -26,7 +28,7 @@ class CsvDelimiter extends AbstractStaticCollection
     /**
      * {@inheritdoc}
      */
-    public static function getCollection()
+    public static function all()
     {
         return [
             self::TAB           => 'key.tab',

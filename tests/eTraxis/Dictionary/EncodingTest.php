@@ -9,21 +9,14 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
 
-use eTraxis\Entity\State;
 use eTraxis\Tests\BaseTestCase;
 
-class StateResponsibleTest extends BaseTestCase
+class EncodingTest extends BaseTestCase
 {
-    public function testGetCollection()
+    public function testDictionary()
     {
-        $expected = [
-            State::RESPONSIBLE_KEEP,
-            State::RESPONSIBLE_ASSIGN,
-            State::RESPONSIBLE_REMOVE,
-        ];
-
-        self::assertEquals($expected, array_keys(StateResponsible::getCollection()));
+        self::assertContains('UTF-8', Encoding::keys());
     }
 }

@@ -9,17 +9,15 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
 
-class TestStaticCollection extends AbstractStaticCollection
+use eTraxis\Tests\BaseTestCase;
+
+class ThemeTest extends BaseTestCase
 {
-    public static function getCollection()
+    public function testDictionary()
     {
-        return [
-            'b_ok'     => 'button.ok',
-            'b_cancel' => 'button.cancel',
-            'b_yes'    => 'button.yes',
-            'b_no'     => 'button.no',
-        ];
+        self::assertContains('azure', Theme::keys());
+        self::assertEquals('Azure', Theme::get('azure'));
     }
 }

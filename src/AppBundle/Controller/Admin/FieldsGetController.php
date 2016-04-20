@@ -11,7 +11,7 @@
 
 namespace AppBundle\Controller\Admin;
 
-use eTraxis\Collection\FieldType;
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\State;
 use eTraxis\Form\FieldForm;
@@ -80,7 +80,7 @@ class FieldsGetController extends Controller
 
         return $this->render(sprintf('admin/fields/tab_details_%s.html.twig', $field->getType()), [
             'field' => $field,
-            'types' => FieldType::getCollection(),
+            'types' => FieldType::all(),
             'can'   => [
                 'delete' => $authChecker->isGranted(Field::DELETE, $field),
             ],

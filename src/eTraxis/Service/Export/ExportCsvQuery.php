@@ -33,19 +33,19 @@ class ExportCsvQuery
 
     /**
      * @Assert\NotNull()
-     * @Assert\Choice(callback = {"eTraxis\Collection\CsvDelimiter", "getAllKeys"})
+     * @Assert\Choice(callback = {"eTraxis\Dictionary\CsvDelimiter", "keys"})
      */
     public $delimiter;
 
     /**
      * @Assert\NotNull()
-     * @Assert\Choice(callback = {"eTraxis\Collection\Encoding", "getAllKeys"})
+     * @Assert\Choice(callback = {"eTraxis\Dictionary\Encoding", "keys"})
      */
     public $encoding;
 
     /**
      * @Assert\NotNull()
-     * @Assert\Choice(callback = {"eTraxis\Collection\LineEnding", "getAllKeys"})
+     * @Assert\Choice(callback = {"eTraxis\Dictionary\LineEnding", "keys"})
      */
     public $tail;
 }

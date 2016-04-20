@@ -9,19 +9,20 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
 
+use Dictionary\StaticDictionary;
 use eTraxis\Entity\Field;
 
 /**
  * Static collection of field types.
  */
-class FieldType extends AbstractStaticCollection
+class FieldType extends StaticDictionary
 {
     /**
      * {@inheritdoc}
      */
-    public static function getCollection()
+    public static function all()
     {
         return [
             Field::TYPE_NUMBER   => 'field.type.number',

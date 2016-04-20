@@ -12,7 +12,7 @@
 namespace eTraxis\SimpleBus\States\Handler;
 
 use Doctrine\ORM\EntityManagerInterface;
-use eTraxis\Collection\SystemRole;
+use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
 use eTraxis\Entity\StateGroupTransition;
@@ -61,7 +61,7 @@ class AddRemoveStateTransitionsCommandHandler
         ])
         ;
 
-        if (array_key_exists($command->group, SystemRole::getCollection())) {
+        if (SystemRole::has($command->group)) {
 
             $query = $this->manager->createQuery('
                 DELETE eTraxis:StateRoleTransition t

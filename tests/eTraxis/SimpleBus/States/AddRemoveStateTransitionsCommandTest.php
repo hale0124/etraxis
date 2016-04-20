@@ -11,7 +11,7 @@
 
 namespace eTraxis\SimpleBus\States;
 
-use eTraxis\Collection\SystemRole;
+use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
 use eTraxis\Entity\StateGroupTransition;

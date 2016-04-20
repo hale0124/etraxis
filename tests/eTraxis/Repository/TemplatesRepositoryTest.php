@@ -11,7 +11,7 @@
 
 namespace eTraxis\Repository;
 
-use eTraxis\Collection\SystemRole;
+use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\Template;
 use eTraxis\Tests\BaseTestCase;

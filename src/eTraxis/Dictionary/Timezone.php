@@ -9,17 +9,19 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
+
+use Dictionary\StaticDictionary;
 
 /**
  * Static collection of timezones.
  */
-class Timezone extends AbstractStaticCollection
+class Timezone extends StaticDictionary
 {
     /**
      * {@inheritdoc}
      */
-    public static function getCollection()
+    public static function all()
     {
         return [
             0   => 'UTC',

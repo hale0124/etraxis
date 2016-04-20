@@ -9,13 +9,13 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
 
 use eTraxis\Tests\BaseTestCase;
 
 class LineEndingTest extends BaseTestCase
 {
-    public function testGetCollection()
+    public function testDictionary()
     {
         $expected = [
             LineEnding::WINDOWS,
@@ -23,7 +23,7 @@ class LineEndingTest extends BaseTestCase
             LineEnding::MACINTOSH,
         ];
 
-        self::assertEquals($expected, array_keys(LineEnding::getCollection()));
+        self::assertEquals($expected, LineEnding::keys());
     }
 
     public function testGetDelimiter()

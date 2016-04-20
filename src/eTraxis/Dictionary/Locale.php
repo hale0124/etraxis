@@ -9,17 +9,19 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
+
+use Dictionary\StaticDictionary;
 
 /**
  * Static collection of locales.
  */
-class Locale extends AbstractStaticCollection
+class Locale extends StaticDictionary
 {
     /**
      * {@inheritdoc}
      */
-    public static function getCollection()
+    public static function all()
     {
         return [
             'bg'    => 'Български',

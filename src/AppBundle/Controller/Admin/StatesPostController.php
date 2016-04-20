@@ -11,7 +11,7 @@
 
 namespace AppBundle\Controller\Admin;
 
-use eTraxis\Collection\SystemRole;
+use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
 use eTraxis\SimpleBus\States;
@@ -128,7 +128,7 @@ class StatesPostController extends Controller
         /** @var State $state */
         $state = $repository->find($id);
 
-        if (array_key_exists($group, SystemRole::getCollection())) {
+        if (SystemRole::has($group)) {
             $transitions_old = $repository->getRoleTransitions($state, $group);
         }
         else {

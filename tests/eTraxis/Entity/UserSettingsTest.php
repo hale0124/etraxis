@@ -12,7 +12,7 @@
 namespace eTraxis\Entity;
 
 use AltrEgo\AltrEgo;
-use eTraxis\Collection\Timezone;
+use eTraxis\Dictionary\Timezone;
 
 class UserSettingsTest extends \PHPUnit_Framework_TestCase
 {
@@ -74,7 +74,7 @@ class UserSettingsTest extends \PHPUnit_Framework_TestCase
 
     public function testTimezone()
     {
-        $timezones = array_flip(Timezone::getCollection());
+        $timezones = array_flip(Timezone::all());
         $expected  = $timezones['Pacific/Auckland'];
 
         $this->object->setTimezone($expected);

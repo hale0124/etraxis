@@ -9,21 +9,27 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
 
 use eTraxis\Entity\Field;
 use eTraxis\Tests\BaseTestCase;
 
-class FieldAccessTest extends BaseTestCase
+class FieldTypeTest extends BaseTestCase
 {
-    public function testGetCollection()
+    public function testDictionary()
     {
         $expected = [
-            Field::ACCESS_DENIED,
-            Field::ACCESS_READ_ONLY,
-            Field::ACCESS_READ_WRITE,
+            Field::TYPE_NUMBER,
+            Field::TYPE_DECIMAL,
+            Field::TYPE_STRING,
+            Field::TYPE_TEXT,
+            Field::TYPE_CHECKBOX,
+            Field::TYPE_LIST,
+            Field::TYPE_RECORD,
+            Field::TYPE_DATE,
+            Field::TYPE_DURATION,
         ];
 
-        self::assertEquals($expected, array_keys(FieldAccess::getCollection()));
+        self::assertEquals($expected, FieldType::keys());
     }
 }

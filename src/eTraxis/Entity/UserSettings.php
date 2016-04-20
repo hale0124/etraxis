@@ -12,7 +12,7 @@
 namespace eTraxis\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use eTraxis\Collection;
+use eTraxis\Dictionary;
 
 /**
  * User settings.
@@ -67,7 +67,7 @@ class UserSettings implements \ArrayAccess
      */
     public function setLocale($locale)
     {
-        $locales = array_flip(Collection\LegacyLocale::getCollection());
+        $locales = array_flip(Dictionary\LegacyLocale::all());
 
         if (array_key_exists($locale, $locales)) {
             $this->locale = $locales[$locale];
@@ -83,13 +83,11 @@ class UserSettings implements \ArrayAccess
      */
     public function getLocale()
     {
-        $locales = Collection\LegacyLocale::getCollection();
-
-        if (!array_key_exists($this->locale, $locales)) {
+        if (!Dictionary\LegacyLocale::has($this->locale)) {
             $this->locale = 1000;
         }
 
-        return $locales[$this->locale];
+        return Dictionary\LegacyLocale::get($this->locale);
     }
 
     /**
@@ -101,7 +99,7 @@ class UserSettings implements \ArrayAccess
      */
     public function setTheme($theme)
     {
-        if (in_array($theme, Collection\Theme::getAllKeys())) {
+        if (Dictionary\Theme::has($theme)) {
             $this->theme = $theme;
         }
 
@@ -117,7 +115,7 @@ class UserSettings implements \ArrayAccess
     {
         $theme = strtolower($this->theme);
 
-        if (!in_array($theme, Collection\Theme::getAllKeys())) {
+        if (!Dictionary\Theme::has($theme)) {
             $theme = 'azure';
         }
 
@@ -133,7 +131,7 @@ class UserSettings implements \ArrayAccess
      */
     public function setTimezone($timezone)
     {
-        if (in_array($timezone, Collection\Timezone::getAllKeys())) {
+        if (Dictionary\Timezone::has($timezone)) {
             $this->timezone = $timezone;
         }
 
@@ -147,7 +145,7 @@ class UserSettings implements \ArrayAccess
      */
     public function getTimezone()
     {
-        if (!in_array($this->timezone, Collection\Timezone::getAllKeys())) {
+        if (!Dictionary\Timezone::has($this->timezone)) {
             $this->timezone = 0;
         }
 

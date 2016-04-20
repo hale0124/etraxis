@@ -47,7 +47,7 @@ class UpdateStateCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Choice(callback = {"eTraxis\Collection\StateResponsible", "getAllKeys"})
+     * @Assert\Choice(callback = {"eTraxis\Dictionary\StateResponsible", "keys"})
      */
     public $responsible;
 

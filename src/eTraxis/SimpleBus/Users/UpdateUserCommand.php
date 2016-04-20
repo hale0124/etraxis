@@ -65,19 +65,19 @@ class UpdateUserCommand
 
     /**
      * @Assert\NotNull()
-     * @Assert\Choice(callback = {"eTraxis\Collection\Locale", "getAllKeys"})
+     * @Assert\Choice(callback = {"eTraxis\Dictionary\Locale", "keys"})
      */
     public $locale;
 
     /**
      * @Assert\NotNull()
-     * @Assert\Choice(callback = {"eTraxis\Collection\Theme", "getAllKeys"})
+     * @Assert\Choice(callback = {"eTraxis\Dictionary\Theme", "keys"})
      */
     public $theme;
 
     /**
      * @Assert\NotNull()
-     * @Assert\Choice(callback = {"eTraxis\Collection\Timezone", "getAllKeys"})
+     * @Assert\Choice(callback = {"eTraxis\Dictionary\Timezone", "keys"})
      */
     public $timezone;
 

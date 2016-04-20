@@ -9,14 +9,16 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
 
 use eTraxis\Tests\BaseTestCase;
 
-class EncodingTest extends BaseTestCase
+class TimezoneTest extends BaseTestCase
 {
-    public function testGetCollection()
+    public function testDictionary()
     {
-        self::assertArrayHasKey('UTF-8', Encoding::getCollection());
+        self::assertContains('UTC', Timezone::all());
+        self::assertContains('Asia/Vladivostok', Timezone::all());
+        self::assertContains('Pacific/Auckland', Timezone::all());
     }
 }

@@ -48,13 +48,13 @@ class CreateStateCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Choice(callback = {"eTraxis\Collection\StateType", "getAllKeys"})
+     * @Assert\Choice(callback = {"eTraxis\Dictionary\StateType", "keys"})
      */
     public $type;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Choice(callback = {"eTraxis\Collection\StateResponsible", "getAllKeys"})
+     * @Assert\Choice(callback = {"eTraxis\Dictionary\StateResponsible", "keys"})
      */
     public $responsible;
 

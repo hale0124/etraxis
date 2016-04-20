@@ -9,17 +9,21 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
 
+use eTraxis\Entity\State;
 use eTraxis\Tests\BaseTestCase;
 
-class LocaleTest extends BaseTestCase
+class StateResponsibleTest extends BaseTestCase
 {
-    public function testGetCollection()
+    public function testDictionary()
     {
-        $collection = Locale::getCollection();
+        $expected = [
+            State::RESPONSIBLE_KEEP,
+            State::RESPONSIBLE_ASSIGN,
+            State::RESPONSIBLE_REMOVE,
+        ];
 
-        self::assertArrayHasKey('ru', $collection);
-        self::assertEquals('Русский', $collection['ru']);
+        self::assertEquals($expected, StateResponsible::keys());
     }
 }

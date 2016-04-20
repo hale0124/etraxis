@@ -9,17 +9,19 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
+
+use Dictionary\StaticDictionary;
 
 /**
  * Static collection of encodings.
  */
-class Encoding extends AbstractStaticCollection
+class Encoding extends StaticDictionary
 {
     /**
      * {@inheritdoc}
      */
-    public static function getCollection()
+    public static function all()
     {
         return [
             'ISO-8859-6'   => 'Arabic (ISO-8859-6)',

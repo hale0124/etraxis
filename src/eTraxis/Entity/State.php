@@ -13,7 +13,7 @@ namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use eTraxis\Collection;
+use eTraxis\Dictionary;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 
 /**
@@ -208,7 +208,7 @@ class State implements \JsonSerializable
      */
     public function setType($type)
     {
-        if (in_array($type, Collection\StateType::getAllKeys())) {
+        if (Dictionary\StateType::has($type)) {
             $this->type = $type;
         }
 
@@ -234,7 +234,7 @@ class State implements \JsonSerializable
      */
     public function setResponsible($responsible)
     {
-        if (in_array($responsible, Collection\StateResponsible::getAllKeys())) {
+        if (Dictionary\StateResponsible::has($responsible)) {
             $this->responsible = $responsible;
         }
 

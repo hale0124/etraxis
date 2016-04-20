@@ -11,8 +11,8 @@
 
 namespace eTraxis\Form;
 
-use eTraxis\Collection\StateResponsible;
-use eTraxis\Collection\StateType;
+use eTraxis\Dictionary\StateResponsible;
+use eTraxis\Dictionary\StateType;
 use eTraxis\Entity\State;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
@@ -58,7 +58,7 @@ class StateForm extends AbstractType
             $builder->add('type', ChoiceType::class, [
                 'label'    => 'state.type',
                 'required' => true,
-                'choices'  => array_flip(StateType::getCollection()),
+                'choices'  => array_flip(StateType::all()),
                 'data'     => State::TYPE_INTERIM,
             ]);
         }
@@ -74,7 +74,7 @@ class StateForm extends AbstractType
             $builder->add('responsible', ChoiceType::class, [
                 'label'    => 'state.responsible',
                 'required' => true,
-                'choices'  => array_flip(StateResponsible::getCollection()),
+                'choices'  => array_flip(StateResponsible::all()),
             ]);
         }
     }

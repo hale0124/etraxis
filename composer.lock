@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "853d36beb17cb74d935f6bd01f12fd03",
-    "content-hash": "a072e8a77d2c8df8f632ba008606c9b3",
+    "hash": "9bb0d65836d3496d041201b466d4e64e",
+    "content-hash": "e0757b30161cd61e495e4347162f2fea",
     "packages": [
         {
             "name": "arodygin/datatables-bundle",
@@ -59,6 +59,44 @@
                 "datatables"
             ],
             "time": "2016-03-28 02:33:25"
+        },
+        {
+            "name": "arodygin/php-dictionary",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/arodygin/php-dictionary.git",
+                "reference": "4f68bce77b96a4e6425ebd77912d853317396c35"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/arodygin/php-dictionary/zipball/4f68bce77b96a4e6425ebd77912d853317396c35",
+                "reference": "4f68bce77b96a4e6425ebd77912d853317396c35",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "fabpot/php-cs-fixer": "~1.11",
+                "phpunit/phpunit": "~4.1"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Dictionary\\": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "description": "Static dictionary implementation for PHP",
+            "homepage": "https://github.com/arodygin/php-dictionary",
+            "keywords": [
+                "dictionary"
+            ],
+            "time": "2016-04-19 10:51:59"
         },
         {
             "name": "arodygin/simplebus-bundle",

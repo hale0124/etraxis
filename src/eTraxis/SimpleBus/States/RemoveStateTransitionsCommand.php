@@ -35,7 +35,7 @@ class RemoveStateTransitionsCommand
      * @Assert\NotBlank()
      * @Assert\Any({
      *     @Assert\EntityId(),
-     *     @Assert\Choice(callback = {"eTraxis\Collection\SystemRole", "getAllKeys"})
+     *     @Assert\Choice(callback = {"eTraxis\Dictionary\SystemRole", "keys"})
      * })
      */
     public $group;

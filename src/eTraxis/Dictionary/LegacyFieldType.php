@@ -9,8 +9,9 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
 
+use Dictionary\StaticDictionary;
 use eTraxis\Entity\Field;
 
 /**
@@ -18,12 +19,12 @@ use eTraxis\Entity\Field;
  *
  * @deprecated 4.1.0 A stub for compatibility btw 3.6 and 4.0.
  */
-class LegacyFieldType extends AbstractStaticCollection
+class LegacyFieldType extends StaticDictionary
 {
     /**
      * {@inheritdoc}
      */
-    public static function getCollection()
+    public static function all()
     {
         return [
             1 => Field::TYPE_NUMBER,

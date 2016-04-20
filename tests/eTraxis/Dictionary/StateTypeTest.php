@@ -9,18 +9,21 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
 
+use eTraxis\Entity\State;
 use eTraxis\Tests\BaseTestCase;
 
-class TimezoneTest extends BaseTestCase
+class StateTypeTest extends BaseTestCase
 {
-    public function testGetCollection()
+    public function testDictionary()
     {
-        $collection = Timezone::getCollection();
+        $expected = [
+            State::TYPE_INITIAL,
+            State::TYPE_INTERIM,
+            State::TYPE_FINAL,
+        ];
 
-        self::assertContains('UTC', $collection);
-        self::assertContains('Asia/Vladivostok', $collection);
-        self::assertContains('Pacific/Auckland', $collection);
+        self::assertEquals($expected, StateType::keys());
     }
 }

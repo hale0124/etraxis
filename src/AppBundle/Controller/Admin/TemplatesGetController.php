@@ -11,7 +11,7 @@
 
 namespace AppBundle\Controller\Admin;
 
-use eTraxis\Collection\SystemRole;
+use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\Project;
 use eTraxis\Entity\Template;

@@ -9,24 +9,25 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
 
+use Dictionary\StaticDictionary;
 use eTraxis\Entity\State;
 
 /**
- * Static collection of state types.
+ * Static collection of state responsibility values.
  */
-class StateType extends AbstractStaticCollection
+class StateResponsible extends StaticDictionary
 {
     /**
      * {@inheritdoc}
      */
-    public static function getCollection()
+    public static function all()
     {
         return [
-            State::TYPE_INITIAL => 'state.type.initial',
-            State::TYPE_INTERIM => 'state.type.interim',
-            State::TYPE_FINAL   => 'state.type.final',
+            State::RESPONSIBLE_KEEP   => 'state.responsible.keep',
+            State::RESPONSIBLE_ASSIGN => 'state.responsible.assign',
+            State::RESPONSIBLE_REMOVE => 'state.responsible.remove',
         ];
     }
 }

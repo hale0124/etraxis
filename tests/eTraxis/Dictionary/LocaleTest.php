@@ -9,21 +9,15 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
 
 use eTraxis\Tests\BaseTestCase;
 
-class DatabasePlatformTest extends BaseTestCase
+class LocaleTest extends BaseTestCase
 {
-    public function testGetCollection()
+    public function testDictionary()
     {
-        $expected = [
-            DatabasePlatform::MYSQL,
-            DatabasePlatform::POSTGRESQL,
-            DatabasePlatform::MSSQL,
-            DatabasePlatform::ORACLE,
-        ];
-
-        self::assertEquals($expected, array_keys(DatabasePlatform::getCollection()));
+        self::assertContains('ru', Locale::keys());
+        self::assertEquals('Русский', Locale::get('ru'));
     }
 }

@@ -9,21 +9,21 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
 
-use eTraxis\Entity\State;
 use eTraxis\Tests\BaseTestCase;
 
-class StateTypeTest extends BaseTestCase
+class DatabasePlatformTest extends BaseTestCase
 {
-    public function testGetCollection()
+    public function testDictionary()
     {
         $expected = [
-            State::TYPE_INITIAL,
-            State::TYPE_INTERIM,
-            State::TYPE_FINAL,
+            DatabasePlatform::MYSQL,
+            DatabasePlatform::POSTGRESQL,
+            DatabasePlatform::MSSQL,
+            DatabasePlatform::ORACLE,
         ];
 
-        self::assertEquals($expected, array_keys(StateType::getCollection()));
+        self::assertEquals($expected, DatabasePlatform::keys());
     }
 }

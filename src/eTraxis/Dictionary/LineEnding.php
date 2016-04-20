@@ -9,12 +9,14 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
+
+use Dictionary\StaticDictionary;
 
 /**
  * Static collection of line ending.
  */
-class LineEnding extends AbstractStaticCollection
+class LineEnding extends StaticDictionary
 {
     const WINDOWS   = 1;
     const UNIX      = 2;
@@ -23,7 +25,7 @@ class LineEnding extends AbstractStaticCollection
     /**
      * {@inheritdoc}
      */
-    public static function getCollection()
+    public static function all()
     {
         return [
             self::WINDOWS   => 'Windows',

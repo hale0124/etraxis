@@ -11,9 +11,9 @@
 
 namespace AppBundle\Controller\Admin;
 
-use eTraxis\Collection\StateResponsible;
-use eTraxis\Collection\StateType;
-use eTraxis\Collection\SystemRole;
+use eTraxis\Dictionary\StateResponsible;
+use eTraxis\Dictionary\StateType;
+use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
@@ -83,8 +83,8 @@ class StatesGetController extends Controller
 
         return $this->render('admin/states/tab_details.html.twig', [
             'state'        => $state,
-            'types'        => StateType::getCollection(),
-            'responsibles' => StateResponsible::getCollection(),
+            'types'        => StateType::all(),
+            'responsibles' => StateResponsible::all(),
             'can'          => [
                 'delete'  => $authChecker->isGranted(State::DELETE, $state),
                 'initial' => $authChecker->isGranted(State::INITIAL, $state),

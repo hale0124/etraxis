@@ -9,13 +9,13 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
 
 use eTraxis\Tests\BaseTestCase;
 
 class CsvDelimiterTest extends BaseTestCase
 {
-    public function testGetCollection()
+    public function testDictionary()
     {
         $expected = [
             CsvDelimiter::TAB,
@@ -26,7 +26,7 @@ class CsvDelimiterTest extends BaseTestCase
             CsvDelimiter::VERTICAL_LINE,
         ];
 
-        self::assertEquals($expected, array_keys(CsvDelimiter::getCollection()));
+        self::assertEquals($expected, CsvDelimiter::keys());
     }
 
     public function testGetDelimiter()

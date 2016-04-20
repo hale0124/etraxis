@@ -9,12 +9,14 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
+
+use Dictionary\StaticDictionary;
 
 /**
  * Static collection of supported database platforms.
  */
-class DatabasePlatform extends AbstractStaticCollection
+class DatabasePlatform extends StaticDictionary
 {
     const MYSQL      = 'mysql';
     const POSTGRESQL = 'postgresql';
@@ -24,7 +26,7 @@ class DatabasePlatform extends AbstractStaticCollection
     /**
      * {@inheritdoc}
      */
-    public static function getCollection()
+    public static function all()
     {
         return [
             self::MYSQL      => 'MySQL',

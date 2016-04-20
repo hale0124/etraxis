@@ -11,8 +11,8 @@
 
 namespace AppBundle\Controller\Web;
 
-use eTraxis\Collection\CsvDelimiter;
-use eTraxis\Collection\LineEnding;
+use eTraxis\Dictionary\CsvDelimiter;
+use eTraxis\Dictionary\LineEnding;
 use eTraxis\Form\ExportCsvForm;
 use eTraxis\Service\Export\ExportCsvQuery;
 use eTraxis\Traits\ContainerTrait;

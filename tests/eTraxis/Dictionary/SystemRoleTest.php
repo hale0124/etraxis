@@ -9,13 +9,13 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
 
 use eTraxis\Tests\BaseTestCase;
 
 class SystemRoleTest extends BaseTestCase
 {
-    public function testGetCollection()
+    public function testDictionary()
     {
         $expected = [
             SystemRole::AUTHOR,
@@ -23,6 +23,6 @@ class SystemRoleTest extends BaseTestCase
             SystemRole::REGISTERED,
         ];
 
-        self::assertEquals($expected, array_keys(SystemRole::getCollection()));
+        self::assertEquals($expected, SystemRole::keys());
     }
 }

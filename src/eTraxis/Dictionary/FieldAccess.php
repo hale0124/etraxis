@@ -9,19 +9,20 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
 
+use Dictionary\StaticDictionary;
 use eTraxis\Entity\Field;
 
 /**
  * Static collection of field access levels.
  */
-class FieldAccess extends AbstractStaticCollection
+class FieldAccess extends StaticDictionary
 {
     /**
      * {@inheritdoc}
      */
-    public static function getCollection()
+    public static function all()
     {
         return [
             Field::ACCESS_DENIED     => 'field.permissions.none',

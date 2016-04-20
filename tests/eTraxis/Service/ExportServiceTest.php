@@ -11,8 +11,8 @@
 
 namespace eTraxis\Service;
 
-use eTraxis\Collection\CsvDelimiter;
-use eTraxis\Collection\LineEnding;
+use eTraxis\Dictionary\CsvDelimiter;
+use eTraxis\Dictionary\LineEnding;
 use eTraxis\Tests\BaseTestCase;
 
 class ExportServiceTest extends BaseTestCase

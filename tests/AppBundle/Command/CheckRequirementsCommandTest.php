@@ -11,7 +11,7 @@
 
 namespace AppBundle\Command;
 
-use eTraxis\Collection\DatabasePlatform;
+use eTraxis\Dictionary\DatabasePlatform;
 use eTraxis\Tests\BaseTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;

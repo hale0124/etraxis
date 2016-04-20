@@ -9,12 +9,14 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
+
+use Dictionary\StaticDictionary;
 
 /**
  * Static collection of system roles.
  */
-class SystemRole extends AbstractStaticCollection
+class SystemRole extends StaticDictionary
 {
     const AUTHOR      = -1;  // creator of the record
     const RESPONSIBLE = -2;  // user assigned on the record
@@ -23,7 +25,7 @@ class SystemRole extends AbstractStaticCollection
     /**
      * {@inheritdoc}
      */
-    public static function getCollection()
+    public static function all()
     {
         return [
             self::AUTHOR      => 'role.author',

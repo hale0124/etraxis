@@ -9,17 +9,21 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Collection;
+namespace eTraxis\Dictionary;
 
+use eTraxis\Entity\Field;
 use eTraxis\Tests\BaseTestCase;
 
-class ThemeTest extends BaseTestCase
+class FieldAccessTest extends BaseTestCase
 {
-    public function testGetCollection()
+    public function testDictionary()
     {
-        $collection = Theme::getCollection();
+        $expected = [
+            Field::ACCESS_DENIED,
+            Field::ACCESS_READ_ONLY,
+            Field::ACCESS_READ_WRITE,
+        ];
 
-        self::assertArrayHasKey('azure', $collection);
-        self::assertEquals('Azure', $collection['azure']);
+        self::assertEquals($expected, FieldAccess::keys());
     }
 }

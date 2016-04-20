@@ -12,7 +12,7 @@
 namespace eTraxis\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use eTraxis\Collection;
+use eTraxis\Dictionary;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 
 /**
@@ -255,7 +255,7 @@ class Field extends Entity implements \JsonSerializable
      */
     public function setType($type)
     {
-        $types = array_flip(Collection\LegacyFieldType::getCollection());
+        $types = array_flip(Dictionary\LegacyFieldType::all());
 
         if (array_key_exists($type, $types)) {
             $this->type = $types[$type];
@@ -271,13 +271,7 @@ class Field extends Entity implements \JsonSerializable
      */
     public function getType()
     {
-        $types = Collection\LegacyFieldType::getCollection();
-
-        if (!array_key_exists($this->type, $types)) {
-            return null;
-        }
-
-        return $types[$this->type];
+        return Dictionary\LegacyFieldType::get($this->type);
     }
 
     /**
