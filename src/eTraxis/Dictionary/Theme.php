@@ -18,6 +18,8 @@ use Dictionary\StaticDictionary;
  */
 class Theme extends StaticDictionary
 {
+    const FALLBACK = 'azure';
+
     /**
      * {@inheritdoc}
      */

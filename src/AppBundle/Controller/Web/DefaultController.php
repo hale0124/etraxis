@@ -11,8 +11,7 @@
 
 namespace AppBundle\Controller\Web;
 
-use eTraxis\Dictionary\CsvDelimiter;
-use eTraxis\Dictionary\LineEnding;
+use eTraxis\Dictionary;
 use eTraxis\Form\ExportCsvForm;
 use eTraxis\Service\Export\ExportCsvQuery;
 use eTraxis\Traits\ContainerTrait;
@@ -50,9 +49,9 @@ class DefaultController extends Controller
     {
         $default = [
             'filename'  => '.csv',
-            'delimiter' => CsvDelimiter::COMMA,
-            'encoding'  => 'UTF-8',
-            'tail'      => LineEnding::WINDOWS,
+            'delimiter' => Dictionary\CsvDelimiter::FALLBACK,
+            'encoding'  => Dictionary\Encoding::FALLBACK,
+            'tail'      => Dictionary\LineEnding::FALLBACK,
         ];
 
         $form = $this->createForm(ExportCsvForm::class, $default, [

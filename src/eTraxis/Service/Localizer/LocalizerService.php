@@ -55,7 +55,7 @@ class LocalizerService implements LocalizerInterface
             }
         }
 
-        return Locale::has($locale) ? $locale : 'en_US';
+        return Locale::has($locale) ? $locale : Locale::FALLBACK;
     }
 
     /**

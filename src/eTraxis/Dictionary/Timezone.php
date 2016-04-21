@@ -18,6 +18,8 @@ use Dictionary\StaticDictionary;
  */
 class Timezone extends StaticDictionary
 {
+    const FALLBACK = 0;
+
     /**
      * {@inheritdoc}
      */

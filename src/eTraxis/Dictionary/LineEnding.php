@@ -18,6 +18,8 @@ use Dictionary\StaticDictionary;
  */
 class LineEnding extends StaticDictionary
 {
+    const FALLBACK = self::WINDOWS;
+
     const WINDOWS   = 1;
     const UNIX      = 2;
     const MACINTOSH = 3;
@@ -45,6 +47,6 @@ class LineEnding extends StaticDictionary
             self::MACINTOSH => "\r",
         ];
 
-        return array_key_exists($key, $line_endings) ? $line_endings[$key] : null;
+        return array_key_exists($key, $line_endings) ? $line_endings[$key] : $line_endings[static::FALLBACK];
     }
 }

@@ -18,6 +18,8 @@ use Dictionary\StaticDictionary;
  */
 class Encoding extends StaticDictionary
 {
+    const FALLBACK = 'UTF-8';
+
     /**
      * {@inheritdoc}
      */

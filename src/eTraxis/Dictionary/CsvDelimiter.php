@@ -18,6 +18,8 @@ use Dictionary\StaticDictionary;
  */
 class CsvDelimiter extends StaticDictionary
 {
+    const FALLBACK = self::COMMA;
+
     const TAB           = 1;
     const SPACE         = 2;
     const COMMA         = 3;
@@ -54,6 +56,6 @@ class CsvDelimiter extends StaticDictionary
             self::VERTICAL_LINE => '|',
         ];
 
-        return array_key_exists($key, $delimiters) ? $delimiters[$key] : null;
+        return array_key_exists($key, $delimiters) ? $delimiters[$key] : $delimiters[static::FALLBACK];
     }
 }

@@ -18,6 +18,8 @@ use Dictionary\StaticDictionary;
  */
 class Locale extends StaticDictionary
 {
+    const FALLBACK = 'en_US';
+
     /**
      * {@inheritdoc}
      */

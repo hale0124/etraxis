@@ -67,11 +67,7 @@ class UserSettings implements \ArrayAccess
      */
     public function setLocale($locale)
     {
-        $locales = array_flip(Dictionary\LegacyLocale::all());
-
-        if (array_key_exists($locale, $locales)) {
-            $this->locale = $locales[$locale];
-        }
+        $this->locale = Dictionary\LegacyLocale::find($locale);
 
         return $this;
     }
@@ -83,10 +79,6 @@ class UserSettings implements \ArrayAccess
      */
     public function getLocale()
     {
-        if (!Dictionary\LegacyLocale::has($this->locale)) {
-            $this->locale = 1000;
-        }
-
         return Dictionary\LegacyLocale::get($this->locale);
     }
 
@@ -116,7 +108,7 @@ class UserSettings implements \ArrayAccess
         $theme = strtolower($this->theme);
 
         if (!Dictionary\Theme::has($theme)) {
-            $theme = 'azure';
+            $theme = Dictionary\Theme::FALLBACK;
         }
 
         return $theme;
@@ -146,7 +138,7 @@ class UserSettings implements \ArrayAccess
     public function getTimezone()
     {
         if (!Dictionary\Timezone::has($this->timezone)) {
-            $this->timezone = 0;
+            $this->timezone = Dictionary\Timezone::FALLBACK;
         }
 
         return $this->timezone;

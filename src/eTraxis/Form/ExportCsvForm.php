@@ -11,9 +11,7 @@
 
 namespace eTraxis\Form;
 
-use eTraxis\Dictionary\CsvDelimiter;
-use eTraxis\Dictionary\Encoding;
-use eTraxis\Dictionary\LineEnding;
+use eTraxis\Dictionary;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
@@ -39,14 +37,14 @@ class ExportCsvForm extends AbstractType
         $builder->add('delimiter', ChoiceType::class, [
             'label'    => 'delimiter',
             'required' => true,
-            'choices'  => array_flip(CsvDelimiter::all()),
+            'choices'  => array_flip(Dictionary\CsvDelimiter::all()),
         ]);
 
         // Encoding.
         $builder->add('encoding', ChoiceType::class, [
             'label'                     => 'encoding',
             'required'                  => true,
-            'choices'                   => array_flip(Encoding::all()),
+            'choices'                   => array_flip(Dictionary\Encoding::all()),
             'choice_translation_domain' => false,
         ]);
 
@@ -54,7 +52,7 @@ class ExportCsvForm extends AbstractType
         $builder->add('tail', ChoiceType::class, [
             'label'                     => 'line_endings',
             'required'                  => true,
-            'choices'                   => array_flip(LineEnding::all()),
+            'choices'                   => array_flip(Dictionary\LineEnding::all()),
             'choice_translation_domain' => false,
         ]);
     }

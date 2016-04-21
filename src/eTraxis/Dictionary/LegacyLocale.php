@@ -20,6 +20,8 @@ use Dictionary\StaticDictionary;
  */
 class LegacyLocale extends StaticDictionary
 {
+    const FALLBACK = 1000;
+
     /**
      * {@inheritdoc}
      */
