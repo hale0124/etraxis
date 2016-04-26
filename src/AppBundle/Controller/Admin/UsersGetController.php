@@ -165,12 +165,8 @@ class UsersGetController extends Controller
      */
     public function tabGroupsAction(User $user)
     {
-        /** @var \eTraxis\Repository\UsersRepository $repository */
-        $repository = $this->getDoctrine()->getRepository(User::class);
-
         return $this->render('admin/users/tab_groups.html.twig', [
-            'user'   => $user,
-            'others' => $repository->getOtherGroups($user),
+            'user' => $user,
         ]);
     }
 

@@ -12,20 +12,16 @@
 namespace eTraxis\SimpleBus\Users;
 
 use eTraxis\Entity\Group;
-use eTraxis\Entity\User;
 use eTraxis\Tests\BaseTestCase;
 
 class RemoveGroupsCommandTest extends BaseTestCase
 {
     public function testSuccess()
     {
-        /** @var \eTraxis\Repository\UsersRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository(User::class);
-
         $user = $this->findUser('hubert');
 
         $groups = $user->getGroups();
-        $others = $repository->getOtherGroups($user);
+        $others = $user->getOtherGroups();
 
         self::assertNotCount(0, $groups);
         self::assertNotCount(0, $others);
@@ -43,7 +39,7 @@ class RemoveGroupsCommandTest extends BaseTestCase
         $this->doctrine->getManager()->refresh($user);
 
         $groups = $user->getGroups();
-        $others = $repository->getOtherGroups($user);
+        $others = $user->getOtherGroups();
 
         self::assertCount(0, $groups);
         self::assertCount($expected, $others);

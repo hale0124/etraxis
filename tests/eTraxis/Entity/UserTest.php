@@ -24,7 +24,7 @@ class UserTest extends BaseTestCase
         parent::setUp();
 
         $this->object = $this->doctrine->getManager()->getRepository(User::class)->findOneBy([
-            'username' => 'artem@eTraxis',
+            'username' => 'hubert@eTraxis',
         ]);
     }
 
@@ -173,7 +173,35 @@ class UserTest extends BaseTestCase
 
     public function testGroups()
     {
-        self::assertCount(0, $this->object->getGroups());
+        $user = $this->findUser('hubert');
+
+        $groups = array_map(function (Group $group) {
+            return $group->getName();
+        }, $user->getGroups());
+
+        $expected = [
+            'Crew',
+            'Managers',
+            'Planet Express, Inc.',
+        ];
+
+        self::assertEquals($expected, $groups);
+    }
+
+    public function testOtherGroups()
+    {
+        $user = $this->findUser('hubert');
+
+        $groups = array_map(function (Group $group) {
+            return $group->getName();
+        }, $user->getOtherGroups());
+
+        $expected = [
+            'Nimbus',
+            'Staff',
+        ];
+
+        self::assertEquals($expected, $groups);
     }
 
     public function testSettings()

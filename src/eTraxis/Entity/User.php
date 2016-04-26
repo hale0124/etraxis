@@ -23,10 +23,11 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  *            uniqueConstraints={
  *                @ORM\UniqueConstraint(name="ix_accounts", columns={"username"})
  *            })
- * @ORM\Entity(repositoryClass="eTraxis\Repository\UsersRepository")
+ * @ORM\Entity
+ * @ORM\EntityListeners({"eTraxis\Entity\EntityListener"})
  * @Assert\UniqueEntity(fields={"username"}, message="user.conflict.username")
  */
-class User implements \JsonSerializable
+class User extends Entity implements \JsonSerializable
 {
     // Authentication source.
     const AUTH_INTERNAL = 'eTraxis';
@@ -513,13 +514,41 @@ class User implements \JsonSerializable
     }
 
     /**
-     * Get list of groups the user is member of.
+     * Returns list of groups the user is member of.
      *
      * @return  Group[]
      */
     public function getGroups()
     {
         return $this->groups->toArray();
+    }
+
+    /**
+     * Returns list of groups the user is not a member of.
+     *
+     * @return  Group[]
+     */
+    public function getOtherGroups()
+    {
+        $query = $this->manager->createQueryBuilder();
+
+        $query
+            ->select('g')
+            ->addSelect('p')
+            ->from(Group::class, 'g')
+            ->leftJoin('g.project', 'p')
+            ->orderBy('p.name')
+            ->addOrderBy('g.name')
+        ;
+
+        if (count($this->groups) > 0) {
+            $query
+                ->where($query->expr()->notIn('g', ':groups'))
+                ->setParameter('groups', $this->groups)
+            ;
+        }
+
+        return $query->getQuery()->getResult();
     }
 
     /**

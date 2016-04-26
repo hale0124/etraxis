@@ -30,7 +30,7 @@
         <fieldset>
             <legend>{{ 'others'|trans }}</legend>
             <select id="others" size="20" multiple title="{{ 'others'|trans }}" class="grid-100 mobile-grid-100">
-                {% for group in others %}
+                {% for group in user.otherGroups %}
                     {% if group.project %}
                         <option value="{{ group.id }}">{{ group.name }} ({{ group.project.name }})</option>
                     {% else %}
