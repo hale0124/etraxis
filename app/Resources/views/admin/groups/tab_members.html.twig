@@ -26,7 +26,7 @@
         <fieldset>
             <legend>{{ 'others'|trans }}</legend>
             <select id="others" size="20" multiple title="{{ 'others'|trans }}" class="grid-100 mobile-grid-100">
-                {% for user in others %}
+                {% for user in group.nonMembers %}
                     <option value="{{ user.id }}">{{ user.fullname }} ({{ user.username }})</option>
                 {% endfor %}
             </select>

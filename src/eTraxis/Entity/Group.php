@@ -23,9 +23,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  *                @ORM\UniqueConstraint(name="ix_groups", columns={"project_id", "group_name"})
  *            })
  * @ORM\Entity(repositoryClass="eTraxis\Repository\GroupsRepository")
+ * @ORM\EntityListeners({"eTraxis\Entity\EntityListener"})
  * @Assert\UniqueEntity(fields={"project", "name"}, message="group.conflict.name", ignoreNull=false)
  */
-class Group implements \JsonSerializable
+class Group extends Entity implements \JsonSerializable
 {
     // Constraints.
     const MAX_NAME        = 25;
@@ -174,7 +175,7 @@ class Group implements \JsonSerializable
     }
 
     /**
-     * Add user to the group.
+     * Adds user to the group.
      *
      * @param   User $user
      *
@@ -188,7 +189,7 @@ class Group implements \JsonSerializable
     }
 
     /**
-     * Remove user from the group.
+     * Removes user from the group.
      *
      * @param   User $user
      *
@@ -202,13 +203,39 @@ class Group implements \JsonSerializable
     }
 
     /**
-     * Get list of group members.
+     * Gets list of group members.
      *
      * @return  User[]
      */
     public function getMembers()
     {
         return $this->members->toArray();
+    }
+
+    /**
+     * Gets list of all users who are not members of the group.
+     *
+     * @return  User[]
+     */
+    public function getNonMembers()
+    {
+        $query = $this->manager->createQueryBuilder();
+
+        $query
+            ->select('u')
+            ->from(User::class, 'u')
+            ->orderBy('u.fullname')
+            ->addOrderBy('u.username')
+        ;
+
+        if (count($this->members) > 0) {
+            $query
+                ->where($query->expr()->notIn('u', ':members'))
+                ->setParameter('members', $this->members)
+            ;
+        }
+
+        return $query->getQuery()->getResult();
     }
 
     /**

@@ -46,7 +46,7 @@ class GroupsGetController extends Controller
         /** @var \eTraxis\Repository\GroupsRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Group::class);
 
-        return new JsonResponse($repository->getGroups($project));
+        return new JsonResponse(array_merge($repository->getGlobalGroups(), $project->getGroups()));
     }
 
     /**
@@ -109,12 +109,8 @@ class GroupsGetController extends Controller
      */
     public function tabMembersAction(Group $group)
     {
-        /** @var \eTraxis\Repository\GroupsRepository $repository */
-        $repository = $this->getDoctrine()->getRepository(Group::class);
-
         return $this->render('admin/groups/tab_members.html.twig', [
-            'group'  => $group,
-            'others' => $repository->getGroupNonMembers($group),
+            'group' => $group,
         ]);
     }
 

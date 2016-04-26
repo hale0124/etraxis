@@ -11,26 +11,27 @@
 
 namespace eTraxis\Entity;
 
-use AltrEgo\AltrEgo;
+use eTraxis\Tests\BaseTestCase;
 
-class GroupTest extends \PHPUnit_Framework_TestCase
+class GroupTest extends BaseTestCase
 {
     /** @var Group */
     private $object;
 
     protected function setUp()
     {
-        $this->object = new Group();
+        parent::setUp();
+
+        $this->object = $this->doctrine->getManager()->getRepository(Group::class)->findOneBy([
+            'name' => 'Crew',
+        ]);
     }
 
     public function testId()
     {
-        /** @var \StdClass $object */
-        $object = AltrEgo::create($this->object);
-
-        $expected   = mt_rand(1, PHP_INT_MAX);
-        $object->id = $expected;
-        self::assertEquals($expected, $this->object->getId());
+        $group = new Group();
+        self::assertNull($group->getId());
+        self::assertNotNull($this->object->getId());
     }
 
     public function testProject()
@@ -58,18 +59,31 @@ class GroupTest extends \PHPUnit_Framework_TestCase
 
     public function testIsGlobal()
     {
-        self::assertTrue($this->object->isGlobal());
+        self::assertFalse($this->object->isGlobal());
     }
 
     public function testMembers()
     {
-        self::assertCount(0, $this->object->getMembers());
+        $user = $this->findUser('artem');
+        self::assertCount(5, $this->object->getMembers());
 
-        $this->object->addMember($user = new User());
-        self::assertCount(1, $this->object->getMembers());
+        $this->object->addMember($user);
+        self::assertCount(6, $this->object->getMembers());
 
         $this->object->removeMember($user);
-        self::assertCount(0, $this->object->getMembers());
+        self::assertCount(5, $this->object->getMembers());
+    }
+
+    public function testNonMembers()
+    {
+        $user = $this->findUser('artem');
+        self::assertCount(9, $this->object->getNonMembers());
+
+        $this->object->addMember($user);
+        self::assertCount(8, $this->object->getNonMembers());
+
+        $this->object->removeMember($user);
+        self::assertCount(9, $this->object->getNonMembers());
     }
 
     public function testJsonSerialize()

@@ -26,7 +26,7 @@ class RemoveUsersCommandTest extends BaseTestCase
         $group = $repository->findOneBy(['name' => 'Staff']);
 
         $members = $group->getMembers();
-        $others  = $repository->getGroupNonMembers($group);
+        $others  = $group->getNonMembers();
 
         self::assertNotCount(0, $members);
         self::assertNotCount(0, $others);
@@ -43,7 +43,7 @@ class RemoveUsersCommandTest extends BaseTestCase
         $this->command_bus->handle($command);
 
         $members = $group->getMembers();
-        $others  = $repository->getGroupNonMembers($group);
+        $others  = $group->getNonMembers();
 
         self::assertCount(0, $members);
         self::assertCount($expected, $others);
