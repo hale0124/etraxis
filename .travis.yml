@@ -30,7 +30,7 @@ before_script:
     - ./bin/console --env=test --no-interaction doctrine:fixtures:load --fixtures=src/AppBundle/DataFixtures/Tests
 
 script:
-    - if [[ "$(phpenv version-name)" == "7.0" ]]; then phpunit; fi
-    - if [[ "$(phpenv version-name)" != "7.0" ]]; then phpunit --coverage-clover=coverage.clover; fi
-    - if [[ "$(phpenv version-name)" != "7.0" ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
-    - if [[ "$(phpenv version-name)" != "7.0" ]]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi
+    - if [[ "$(phpenv version-name)" != "7.0" ]]; then phpunit; fi
+    - if [[ "$(phpenv version-name)" == "7.0" ]]; then phpunit --coverage-clover=coverage.clover; fi
+    - if [[ "$(phpenv version-name)" == "7.0" ]]; then wget https://scrutinizer-ci.com/ocular.phar; fi
+    - if [[ "$(phpenv version-name)" == "7.0" ]]; then php ocular.phar code-coverage:upload --format=php-clover coverage.clover; fi
