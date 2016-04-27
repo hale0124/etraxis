@@ -14,7 +14,7 @@ namespace eTraxis\Dictionary;
 use Dictionary\StaticDictionary;
 
 /**
- * Static collection of supported database platforms.
+ * Supported database platforms.
  */
 class DatabasePlatform extends StaticDictionary
 {

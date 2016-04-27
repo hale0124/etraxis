@@ -14,7 +14,7 @@ namespace eTraxis\Dictionary;
 use Dictionary\StaticDictionary;
 
 /**
- * Static collection of encodings.
+ * Encodings.
  */
 class Encoding extends StaticDictionary
 {

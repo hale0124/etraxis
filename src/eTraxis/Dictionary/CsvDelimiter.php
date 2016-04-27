@@ -14,7 +14,7 @@ namespace eTraxis\Dictionary;
 use Dictionary\StaticDictionary;
 
 /**
- * Static collection of CSV delimiters.
+ * CSV delimiters.
  */
 class CsvDelimiter extends StaticDictionary
 {

@@ -15,7 +15,7 @@ use Dictionary\StaticDictionary;
 use eTraxis\Entity\State;
 
 /**
- * Static collection of state responsibility values.
+ * State responsibility values.
  */
 class StateResponsible extends StaticDictionary
 {

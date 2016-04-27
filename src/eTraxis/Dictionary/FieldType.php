@@ -15,7 +15,7 @@ use Dictionary\StaticDictionary;
 use eTraxis\Entity\Field;
 
 /**
- * Static collection of field types.
+ * Field types.
  */
 class FieldType extends StaticDictionary
 {

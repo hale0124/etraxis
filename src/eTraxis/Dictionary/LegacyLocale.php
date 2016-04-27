@@ -14,7 +14,7 @@ namespace eTraxis\Dictionary;
 use Dictionary\StaticDictionary;
 
 /**
- * Static collection of legacy locales.
+ * Legacy locales.
  *
  * @deprecated 4.1.0 A stub for compatibility btw 3.6 and 4.0.
  */

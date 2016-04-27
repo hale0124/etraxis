@@ -14,7 +14,7 @@ namespace eTraxis\Dictionary;
 use Dictionary\StaticDictionary;
 
 /**
- * Static collection of locales.
+ * Locales.
  */
 class Locale extends StaticDictionary
 {

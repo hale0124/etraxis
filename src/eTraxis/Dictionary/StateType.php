@@ -15,7 +15,7 @@ use Dictionary\StaticDictionary;
 use eTraxis\Entity\State;
 
 /**
- * Static collection of state types.
+ * State types.
  */
 class StateType extends StaticDictionary
 {

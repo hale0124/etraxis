@@ -15,7 +15,7 @@ use Dictionary\StaticDictionary;
 use eTraxis\Entity\Field;
 
 /**
- * Static collection of field access levels.
+ * Field access levels.
  */
 class FieldAccess extends StaticDictionary
 {

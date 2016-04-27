@@ -14,7 +14,7 @@ namespace eTraxis\Dictionary;
 use Dictionary\StaticDictionary;
 
 /**
- * Static collection of line ending.
+ * Line endings.
  */
 class LineEnding extends StaticDictionary
 {

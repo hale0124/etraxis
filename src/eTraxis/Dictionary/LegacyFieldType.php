@@ -15,7 +15,7 @@ use Dictionary\StaticDictionary;
 use eTraxis\Entity\Field;
 
 /**
- * Static collection of legacy field types.
+ * Legacy field types.
  *
  * @deprecated 4.1.0 A stub for compatibility btw 3.6 and 4.0.
  */

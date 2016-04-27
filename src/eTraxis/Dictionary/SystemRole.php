@@ -14,7 +14,7 @@ namespace eTraxis\Dictionary;
 use Dictionary\StaticDictionary;
 
 /**
- * Static collection of system roles.
+ * System roles.
  */
 class SystemRole extends StaticDictionary
 {

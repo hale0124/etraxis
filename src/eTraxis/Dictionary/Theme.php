@@ -14,7 +14,7 @@ namespace eTraxis\Dictionary;
 use Dictionary\StaticDictionary;
 
 /**
- * Static collection of themes.
+ * Themes.
  */
 class Theme extends StaticDictionary
 {
