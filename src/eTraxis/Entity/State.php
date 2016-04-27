@@ -24,11 +24,12 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  *                @ORM\UniqueConstraint(name="ix_states_name", columns={"template_id", "state_name"}),
  *                @ORM\UniqueConstraint(name="ix_states_abbr", columns={"template_id", "state_abbr"})
  *            })
- * @ORM\Entity(repositoryClass="eTraxis\Repository\StatesRepository")
+ * @ORM\Entity
+ * @ORM\EntityListeners({"eTraxis\Entity\EntityListener"})
  * @Assert\UniqueEntity(fields={"template", "name"}, message="state.conflict.name")
  * @Assert\UniqueEntity(fields={"template", "abbreviation"}, message="state.conflict.abbreviation")
  */
-class State implements \JsonSerializable
+class State extends Entity implements \JsonSerializable
 {
     // Constraints.
     const MAX_NAME         = 50;
@@ -287,6 +288,66 @@ class State implements \JsonSerializable
     public function getFields()
     {
         return $this->fields->toArray();
+    }
+
+    /**
+     * Returns transitions available to specified system role.
+     *
+     * @param   int $role
+     *
+     * @return  State[] List of states.
+     */
+    public function getRoleTransitions($role)
+    {
+        $query = $this->manager->createQueryBuilder();
+
+        $query
+            ->select('tr')
+            ->from(StateRoleTransition::class, 'tr')
+            ->where('tr.fromState = :state')
+            ->andWhere('tr.role = :role')
+            ->setParameter('state', $this)
+            ->setParameter('role', $role)
+        ;
+
+        $results = [];
+
+        /** @var StateRoleTransition $result */
+        foreach ($query->getQuery()->getResult() as $result) {
+            $results[] = $result->getToState();
+        }
+
+        return $results;
+    }
+
+    /**
+     * Returns transitions available to specified group.
+     *
+     * @param   Group $group
+     *
+     * @return  State[] List of states.
+     */
+    public function getGroupTransitions(Group $group)
+    {
+        $query = $this->manager->createQueryBuilder();
+
+        $query
+            ->select('tr')
+            ->from(StateGroupTransition::class, 'tr')
+            ->where('tr.fromState = :state')
+            ->andWhere('tr.group = :group')
+            ->setParameter('state', $this)
+            ->setParameter('group', $group)
+        ;
+
+        $results = [];
+
+        /** @var StateGroupTransition $result */
+        foreach ($query->getQuery()->getResult() as $result) {
+            $results[] = $result->getToState();
+        }
+
+        return $results;
     }
 
     /**

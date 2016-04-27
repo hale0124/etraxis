@@ -173,10 +173,7 @@ class StatesGetController extends Controller
      */
     public function loadRoleTransitionsAction(State $state, $role)
     {
-        /** @var \eTraxis\Repository\StatesRepository $repository */
-        $repository = $this->getDoctrine()->getRepository(State::class);
-
-        return new JsonResponse($repository->getRoleTransitions($state, $role));
+        return new JsonResponse($state->getRoleTransitions($role));
     }
 
     /**
@@ -191,9 +188,6 @@ class StatesGetController extends Controller
      */
     public function loadGroupTransitionsAction(State $state, Group $group)
     {
-        /** @var \eTraxis\Repository\StatesRepository $repository */
-        $repository = $this->getDoctrine()->getRepository(State::class);
-
-        return new JsonResponse($repository->getGroupTransitions($state, $group));
+        return new JsonResponse($state->getGroupTransitions($group));
     }
 }

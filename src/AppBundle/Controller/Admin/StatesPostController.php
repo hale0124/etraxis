@@ -122,14 +122,13 @@ class StatesPostController extends Controller
      */
     public function saveTransitionsAction(Request $request, $id, $group)
     {
-        /** @var \eTraxis\Repository\StatesRepository $repository */
         $repository = $this->getDoctrine()->getRepository(State::class);
 
         /** @var State $state */
         $state = $repository->find($id);
 
         if (SystemRole::has($group)) {
-            $transitions_old = $repository->getRoleTransitions($state, $group);
+            $transitions_old = $state->getRoleTransitions($group);
         }
         else {
             /** @var Group $g */
@@ -139,7 +138,9 @@ class StatesPostController extends Controller
                 $this->createNotFoundException();
             }
 
-            $transitions_old = $repository->getGroupTransitions($state, $g);
+            $transitions_old = array_map(function (State $s) {
+                return $s->getId();
+            }, $state->getGroupTransitions($g));
         }
 
         $transitions_new = $request->request->get('transitions', []);

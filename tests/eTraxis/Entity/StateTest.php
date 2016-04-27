@@ -11,6 +11,7 @@
 
 namespace eTraxis\Entity;
 
+use eTraxis\Dictionary\SystemRole;
 use eTraxis\Tests\BaseTestCase;
 
 class StateTest extends BaseTestCase
@@ -82,6 +83,48 @@ class StateTest extends BaseTestCase
     public function testFields()
     {
         self::assertCount(4, $this->object->getFields());
+    }
+
+    public function testGetRoleTransitions()
+    {
+        $repository = $this->doctrine->getManager()->getRepository(State::class);
+
+        /** @var State $new */
+        $new = $repository->findOneBy(['name' => 'New']);
+        self::assertNotNull($new);
+
+        /** @var State $delivered */
+        $delivered = $repository->findOneBy(['name' => 'Delivered']);
+        self::assertNotNull($delivered);
+
+        $expected = [
+            $delivered,
+        ];
+
+        self::assertEquals($expected, $new->getRoleTransitions(SystemRole::RESPONSIBLE));
+    }
+
+    public function testGetGroupTransitions()
+    {
+        $repository = $this->doctrine->getManager()->getRepository(State::class);
+
+        /** @var Group $managers */
+        $managers = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
+        self::assertNotNull($managers);
+
+        /** @var State $new */
+        $new = $repository->findOneBy(['name' => 'New']);
+        self::assertNotNull($new);
+
+        /** @var State $delivered */
+        $delivered = $repository->findOneBy(['name' => 'Delivered']);
+        self::assertNotNull($delivered);
+
+        $expected = [
+            $delivered,
+        ];
+
+        self::assertEquals($expected, $new->getGroupTransitions($managers));
     }
 
     public function testJsonSerialize()

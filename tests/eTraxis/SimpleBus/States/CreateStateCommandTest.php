@@ -64,7 +64,7 @@ class CreateStateCommandTest extends BaseTestCase
 
     public function testInitial()
     {
-        /** @var \eTraxis\Repository\StatesRepository $repository */
+        /** @var \Doctrine\ORM\EntityRepository $repository */
         $repository = $this->doctrine->getRepository(State::class);
 
         /** @var State $nextState */
