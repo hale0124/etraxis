@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Templates;
 
+use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\Project;
 use eTraxis\Entity\Template;
 use eTraxis\Tests\BaseTestCase;
@@ -30,9 +31,9 @@ class DeleteTemplateCommandTest extends BaseTestCase
             ->setPrefix('bug')
             ->setLocked(true)
             ->setGuestAccess(false)
-            ->setRegisteredPermissions(0)
-            ->setAuthorPermissions(0)
-            ->setResponsiblePermissions(0)
+            ->setRolePermissions(SystemRole::REGISTERED, 0)
+            ->setRolePermissions(SystemRole::AUTHOR, 0)
+            ->setRolePermissions(SystemRole::RESPONSIBLE, 0)
         ;
 
         $this->doctrine->getManager()->persist($template);

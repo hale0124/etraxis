@@ -109,8 +109,8 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
         self::assertNotNull($template);
         $id = $template->getId();
 
-        self::assertEquals(0, $template->getRegisteredPermissions() & Template::PERMIT_VIEW_RECORD);
-        self::assertEquals(0, $template->getRegisteredPermissions() & Template::PERMIT_CREATE_RECORD);
+        self::assertEquals(0, $template->getRolePermissions(SystemRole::REGISTERED) & Template::PERMIT_VIEW_RECORD);
+        self::assertEquals(0, $template->getRolePermissions(SystemRole::REGISTERED) & Template::PERMIT_CREATE_RECORD);
 
         $command = new AddTemplatePermissionsCommand([
             'id'          => $id,
@@ -122,8 +122,8 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $template = $this->doctrine->getRepository(Template::class)->find($id);
 
-        self::assertEquals(Template::PERMIT_VIEW_RECORD,   $template->getRegisteredPermissions() & Template::PERMIT_VIEW_RECORD);
-        self::assertEquals(Template::PERMIT_CREATE_RECORD, $template->getRegisteredPermissions() & Template::PERMIT_CREATE_RECORD);
+        self::assertEquals(Template::PERMIT_VIEW_RECORD,   $template->getRolePermissions(SystemRole::REGISTERED) & Template::PERMIT_VIEW_RECORD);
+        self::assertEquals(Template::PERMIT_CREATE_RECORD, $template->getRolePermissions(SystemRole::REGISTERED) & Template::PERMIT_CREATE_RECORD);
 
         $command = new RemoveTemplatePermissionsCommand([
             'id'          => $id,
@@ -135,8 +135,8 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $template = $this->doctrine->getRepository(Template::class)->find($id);
 
-        self::assertEquals(Template::PERMIT_VIEW_RECORD, $template->getRegisteredPermissions() & Template::PERMIT_VIEW_RECORD);
-        self::assertEquals(0,                            $template->getRegisteredPermissions() & Template::PERMIT_CREATE_RECORD);
+        self::assertEquals(Template::PERMIT_VIEW_RECORD, $template->getRolePermissions(SystemRole::REGISTERED) & Template::PERMIT_VIEW_RECORD);
+        self::assertEquals(0,                            $template->getRolePermissions(SystemRole::REGISTERED) & Template::PERMIT_CREATE_RECORD);
     }
 
     public function testAuthorPermissions()
@@ -146,8 +146,8 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
         self::assertNotNull($template);
         $id = $template->getId();
 
-        self::assertEquals(Template::PERMIT_EDIT_RECORD, $template->getAuthorPermissions() & Template::PERMIT_EDIT_RECORD);
-        self::assertEquals(0,                            $template->getAuthorPermissions() & Template::PERMIT_REOPEN_RECORD);
+        self::assertEquals(Template::PERMIT_EDIT_RECORD, $template->getRolePermissions(SystemRole::AUTHOR) & Template::PERMIT_EDIT_RECORD);
+        self::assertEquals(0,                            $template->getRolePermissions(SystemRole::AUTHOR) & Template::PERMIT_REOPEN_RECORD);
 
         $command = new AddTemplatePermissionsCommand([
             'id'          => $id,
@@ -159,7 +159,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $template = $this->doctrine->getRepository(Template::class)->find($id);
 
-        self::assertEquals(Template::PERMIT_REOPEN_RECORD, $template->getAuthorPermissions() & Template::PERMIT_REOPEN_RECORD);
+        self::assertEquals(Template::PERMIT_REOPEN_RECORD, $template->getRolePermissions(SystemRole::AUTHOR) & Template::PERMIT_REOPEN_RECORD);
 
         $command = new RemoveTemplatePermissionsCommand([
             'id'          => $id,
@@ -171,7 +171,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $template = $this->doctrine->getRepository(Template::class)->find($id);
 
-        self::assertEquals(0, $template->getAuthorPermissions() & Template::PERMIT_EDIT_RECORD);
+        self::assertEquals(0, $template->getRolePermissions(SystemRole::AUTHOR) & Template::PERMIT_EDIT_RECORD);
 
         $command = new RemoveTemplatePermissionsCommand([
             'id'          => $id,
@@ -183,7 +183,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $template = $this->doctrine->getRepository(Template::class)->find($id);
 
-        self::assertEquals(Template::PERMIT_VIEW_RECORD, $template->getAuthorPermissions() & Template::PERMIT_VIEW_RECORD);
+        self::assertEquals(Template::PERMIT_VIEW_RECORD, $template->getRolePermissions(SystemRole::AUTHOR) & Template::PERMIT_VIEW_RECORD);
     }
 
     public function testResponsiblePermissions()
@@ -193,8 +193,8 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
         self::assertNotNull($template);
         $id = $template->getId();
 
-        self::assertEquals(Template::PERMIT_ADD_COMMENT, $template->getResponsiblePermissions() & Template::PERMIT_ADD_COMMENT);
-        self::assertEquals(0,                            $template->getResponsiblePermissions() & Template::PERMIT_ATTACH_SUBRECORD);
+        self::assertEquals(Template::PERMIT_ADD_COMMENT, $template->getRolePermissions(SystemRole::RESPONSIBLE) & Template::PERMIT_ADD_COMMENT);
+        self::assertEquals(0,                            $template->getRolePermissions(SystemRole::RESPONSIBLE) & Template::PERMIT_ATTACH_SUBRECORD);
 
         $command = new AddTemplatePermissionsCommand([
             'id'          => $id,
@@ -206,7 +206,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $template = $this->doctrine->getRepository(Template::class)->find($id);
 
-        self::assertEquals(Template::PERMIT_ATTACH_SUBRECORD, $template->getResponsiblePermissions() & Template::PERMIT_ATTACH_SUBRECORD);
+        self::assertEquals(Template::PERMIT_ATTACH_SUBRECORD, $template->getRolePermissions(SystemRole::RESPONSIBLE) & Template::PERMIT_ATTACH_SUBRECORD);
 
         $command = new RemoveTemplatePermissionsCommand([
             'id'          => $id,
@@ -218,7 +218,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $template = $this->doctrine->getRepository(Template::class)->find($id);
 
-        self::assertEquals(0, $template->getResponsiblePermissions() & Template::PERMIT_ADD_COMMENT);
+        self::assertEquals(0, $template->getRolePermissions(SystemRole::RESPONSIBLE) & Template::PERMIT_ADD_COMMENT);
 
         $command = new RemoveTemplatePermissionsCommand([
             'id'          => $id,
@@ -230,7 +230,7 @@ class AddRemoveTemplatePermissionsCommandTest extends BaseTestCase
 
         $template = $this->doctrine->getRepository(Template::class)->find($id);
 
-        self::assertEquals(Template::PERMIT_VIEW_RECORD, $template->getResponsiblePermissions() & Template::PERMIT_VIEW_RECORD);
+        self::assertEquals(Template::PERMIT_VIEW_RECORD, $template->getRolePermissions(SystemRole::RESPONSIBLE) & Template::PERMIT_VIEW_RECORD);
     }
 
     /**

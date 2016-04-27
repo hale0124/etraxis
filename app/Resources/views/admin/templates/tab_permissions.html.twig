@@ -28,8 +28,8 @@
             <legend>{{ 'permissions'|trans }}</legend>
             {% for key, value in permissions %}
                 <div class="grid-100">
-                    <input type="checkbox" id="{{ key|replace('.', '_') }}" class="permissions" value="{{ value }}">
-                    <label for="{{ key|replace('.', '_') }}">{{ key|trans|lower }}</label>
+                    <input type="checkbox" id="{{ value|replace('.', '_') }}" class="permissions" value="{{ key }}">
+                    <label for="{{ value|replace('.', '_') }}">{{ value|trans|lower }}</label>
                 </div>
             {% endfor %}
         </fieldset>

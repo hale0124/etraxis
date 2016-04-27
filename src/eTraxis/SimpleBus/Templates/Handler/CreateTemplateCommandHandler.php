@@ -12,6 +12,7 @@
 namespace eTraxis\SimpleBus\Templates\Handler;
 
 use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\Project;
 use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\Templates\CreateTemplateCommand;
@@ -67,9 +68,9 @@ class CreateTemplateCommandHandler
             ->setDescription($command->description)
             ->setLocked(true)
             ->setGuestAccess($command->guestAccess)
-            ->setRegisteredPermissions(0)
-            ->setAuthorPermissions(Template::PERMIT_VIEW_RECORD)
-            ->setResponsiblePermissions(Template::PERMIT_VIEW_RECORD)
+            ->setRolePermissions(SystemRole::REGISTERED, 0)
+            ->setRolePermissions(SystemRole::AUTHOR, 0)
+            ->setRolePermissions(SystemRole::RESPONSIBLE, 0)
         ;
 
         $errors = $this->validator->validate($entity);

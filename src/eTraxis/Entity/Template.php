@@ -13,6 +13,7 @@ namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use eTraxis\Dictionary\SystemRole;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 
 /**
@@ -23,11 +24,12 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  *                @ORM\UniqueConstraint(name="ix_templates_name", columns={"project_id", "template_name"}),
  *                @ORM\UniqueConstraint(name="ix_templates_prefix", columns={"project_id", "template_prefix"})
  *            })
- * @ORM\Entity(repositoryClass="eTraxis\Repository\TemplatesRepository")
+ * @ORM\Entity
+ * @ORM\EntityListeners({"eTraxis\Entity\EntityListener"})
  * @Assert\UniqueEntity(fields={"project", "name"}, message="template.conflict.name")
  * @Assert\UniqueEntity(fields={"project", "prefix"}, message="template.conflict.prefix")
  */
-class Template implements \JsonSerializable
+class Template extends Entity implements \JsonSerializable
 {
     // Constraints.
     const MAX_NAME        = 50;
@@ -374,75 +376,93 @@ class Template implements \JsonSerializable
     }
 
     /**
-     * Property setter.
+     * Sets permissions of specified system role.
      *
-     * @param   int $registeredPermissions
+     * @param   int $role
+     * @param   int $permissions
      *
      * @return  self
      */
-    public function setRegisteredPermissions($registeredPermissions)
+    public function setRolePermissions($role, $permissions)
     {
-        $this->registeredPermissions = $registeredPermissions;
+        switch ($role) {
+
+            case SystemRole::AUTHOR:
+                $permissions |= self::PERMIT_VIEW_RECORD;
+                $permissions &= ~self::PERMIT_CREATE_RECORD;
+                $this->authorPermissions = $permissions;
+                break;
+
+            case SystemRole::RESPONSIBLE:
+                $permissions |= self::PERMIT_VIEW_RECORD;
+                $permissions &= ~self::PERMIT_CREATE_RECORD;
+                $this->responsiblePermissions = $permissions;
+                break;
+
+            case SystemRole::REGISTERED:
+                $this->registeredPermissions = $permissions;
+                break;
+        }
 
         return $this;
     }
 
     /**
-     * Property getter.
+     * Returns permissions of specified system role.
+     *
+     * @param   int $role
      *
      * @return  int
      */
-    public function getRegisteredPermissions()
+    public function getRolePermissions($role)
     {
-        return $this->registeredPermissions;
+        $permissions = 0;
+
+        switch ($role) {
+
+            case SystemRole::AUTHOR:
+                $permissions = $this->authorPermissions;
+                $permissions |= self::PERMIT_VIEW_RECORD;
+                $permissions &= ~self::PERMIT_CREATE_RECORD;
+                break;
+
+            case SystemRole::RESPONSIBLE:
+                $permissions = $this->responsiblePermissions;
+                $permissions |= self::PERMIT_VIEW_RECORD;
+                $permissions &= ~self::PERMIT_CREATE_RECORD;
+                break;
+
+            case SystemRole::REGISTERED:
+                $permissions = $this->registeredPermissions;
+                break;
+        }
+
+        return $permissions;
     }
 
     /**
-     * Property setter.
+     * Returns permissions of specified group.
      *
-     * @param   int $authorPermissions
-     *
-     * @return  self
-     */
-    public function setAuthorPermissions($authorPermissions)
-    {
-        $this->authorPermissions = $authorPermissions;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
+     * @param   Group $group
      *
      * @return  int
      */
-    public function getAuthorPermissions()
+    public function getGroupPermissions(Group $group)
     {
-        return $this->authorPermissions;
-    }
+        $query = $this->manager->createQueryBuilder();
 
-    /**
-     * Property setter.
-     *
-     * @param   int $responsiblePermissions
-     *
-     * @return  self
-     */
-    public function setResponsiblePermissions($responsiblePermissions)
-    {
-        $this->responsiblePermissions = $responsiblePermissions;
+        $query
+            ->select('tgp.permission')
+            ->from(TemplateGroupPermission::class, 'tgp')
+            ->where('tgp.template = :template')
+            ->andWhere('tgp.group = :group')
+            ->setParameter('template', $this)
+            ->setParameter('group', $group)
+        ;
 
-        return $this;
-    }
+        $result = $query->getQuery()->getOneOrNullResult();
 
-    /**
-     * Property getter.
-     *
-     * @return  int
-     */
-    public function getResponsiblePermissions()
-    {
-        return $this->responsiblePermissions;
+        return $result === null ? 0 : $result['permission'];
     }
 
     /**

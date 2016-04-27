@@ -12,6 +12,7 @@
 namespace AppBundle\Controller\Admin;
 
 use eTraxis\Dictionary\SystemRole;
+use eTraxis\Dictionary\TemplatePermission;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\Project;
 use eTraxis\Entity\Template;
@@ -100,24 +101,6 @@ class TemplatesGetController extends Controller
      */
     public function tabPermissionsAction(Template $template)
     {
-        $permissions = [
-            'template.permission.view_records'      => Template::PERMIT_VIEW_RECORD,
-            'template.permission.create_records'    => Template::PERMIT_CREATE_RECORD,
-            'template.permission.edit_records'      => Template::PERMIT_EDIT_RECORD,
-            'template.permission.postpone_records'  => Template::PERMIT_POSTPONE_RECORD,
-            'template.permission.resume_records'    => Template::PERMIT_RESUME_RECORD,
-            'template.permission.reassign_records'  => Template::PERMIT_REASSIGN_RECORD,
-            'template.permission.reopen_records'    => Template::PERMIT_REOPEN_RECORD,
-            'template.permission.add_comments'      => Template::PERMIT_ADD_COMMENT,
-            'template.permission.add_files'         => Template::PERMIT_ADD_FILE,
-            'template.permission.remove_files'      => Template::PERMIT_REMOVE_FILE,
-            'template.permission.private_comments'  => Template::PERMIT_PRIVATE_COMMENT,
-            'template.permission.send_reminders'    => Template::PERMIT_SEND_REMINDER,
-            'template.permission.delete_records'    => Template::PERMIT_DELETE_RECORD,
-            'template.permission.attach_subrecords' => Template::PERMIT_ATTACH_SUBRECORD,
-            'template.permission.detach_subrecords' => Template::PERMIT_DETACH_SUBRECORD,
-        ];
-
         /** @var \eTraxis\Repository\GroupsRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Group::class);
 
@@ -125,7 +108,7 @@ class TemplatesGetController extends Controller
             'template'    => $template,
             'locals'      => $template->getProject()->getGroups(),
             'globals'     => $repository->getGlobalGroups(),
-            'permissions' => $permissions,
+            'permissions' => TemplatePermission::all(),
             'role'        => [
                 'author'      => SystemRole::AUTHOR,
                 'responsible' => SystemRole::RESPONSIBLE,
@@ -186,10 +169,7 @@ class TemplatesGetController extends Controller
      */
     public function loadRolePermissionsAction(Template $template, $role)
     {
-        /** @var \eTraxis\Repository\TemplatesRepository $repository */
-        $repository = $this->getDoctrine()->getRepository(Template::class);
-
-        return new JsonResponse($repository->getRolePermissions($template, $role));
+        return new JsonResponse($template->getRolePermissions($role));
     }
 
     /**
@@ -204,9 +184,6 @@ class TemplatesGetController extends Controller
      */
     public function loadGroupPermissionsAction(Template $template, Group $group)
     {
-        /** @var \eTraxis\Repository\TemplatesRepository $repository */
-        $repository = $this->getDoctrine()->getRepository(Template::class);
-
-        return new JsonResponse($repository->getGroupPermissions($template, $group));
+        return new JsonResponse($template->getGroupPermissions($group));
     }
 }

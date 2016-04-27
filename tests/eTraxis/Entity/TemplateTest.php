@@ -11,6 +11,7 @@
 
 namespace eTraxis\Entity;
 
+use eTraxis\Dictionary\SystemRole;
 use eTraxis\Tests\BaseTestCase;
 
 class TemplateTest extends BaseTestCase
@@ -95,23 +96,50 @@ class TemplateTest extends BaseTestCase
 
     public function testRegisteredPermissions()
     {
-        $expected = Template::PERMIT_CREATE_RECORD | Template::PERMIT_ADD_COMMENT;
-        $this->object->setRegisteredPermissions($expected);
-        self::assertEquals($expected, $this->object->getRegisteredPermissions());
+        $permissions = Template::PERMIT_CREATE_RECORD | Template::PERMIT_ADD_COMMENT;
+        $expected    = Template::PERMIT_CREATE_RECORD | Template::PERMIT_ADD_COMMENT;
+
+        $this->object->setRolePermissions(SystemRole::REGISTERED, $permissions);
+        self::assertEquals($expected, $this->object->getRolePermissions(SystemRole::REGISTERED));
     }
 
     public function testAuthorPermissions()
     {
-        $expected = Template::PERMIT_CREATE_RECORD | Template::PERMIT_ADD_COMMENT;
-        $this->object->setAuthorPermissions($expected);
-        self::assertEquals($expected, $this->object->getAuthorPermissions());
+        $permissions = Template::PERMIT_CREATE_RECORD | Template::PERMIT_ADD_COMMENT;
+        $expected    = Template::PERMIT_VIEW_RECORD | Template::PERMIT_ADD_COMMENT;
+
+        $this->object->setRolePermissions(SystemRole::AUTHOR, $permissions);
+        self::assertEquals($expected, $this->object->getRolePermissions(SystemRole::AUTHOR));
     }
 
     public function testResponsiblePermissions()
     {
-        $expected = Template::PERMIT_CREATE_RECORD | Template::PERMIT_ADD_COMMENT;
-        $this->object->setResponsiblePermissions($expected);
-        self::assertEquals($expected, $this->object->getResponsiblePermissions());
+        $permissions = Template::PERMIT_CREATE_RECORD | Template::PERMIT_ADD_COMMENT;
+        $expected    = Template::PERMIT_VIEW_RECORD | Template::PERMIT_ADD_COMMENT;
+
+        $this->object->setRolePermissions(SystemRole::RESPONSIBLE, $permissions);
+        self::assertEquals($expected, $this->object->getRolePermissions(SystemRole::RESPONSIBLE));
+    }
+
+    public function testGetGroupPermissions()
+    {
+        $local  = Template::PERMIT_VIEW_RECORD | Template::PERMIT_ADD_COMMENT;
+        $global = 0;
+
+        /** @var Group $group_local */
+        /** @var Group $group_global */
+        $group_local  = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
+        $group_global = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Nimbus']);
+        self::assertNotNull($group_local);
+        self::assertNotNull($group_global);
+
+        $repository = $this->doctrine->getManager()->getRepository(Template::class);
+
+        /** @var Template $template */
+        $template = $repository->findOneBy(['name' => 'Delivery']);
+
+        self::assertEquals($local,  $template->getGroupPermissions($group_local));
+        self::assertEquals($global, $template->getGroupPermissions($group_global));
     }
 
     public function testStates()

@@ -53,62 +53,38 @@ class AddRemoveTemplatePermissionsCommandHandler
             throw new NotFoundHttpException('Unknown template.');
         }
 
-        switch ($command->group) {
+        if (SystemRole::has($command->group)) {
+            $permissions = $template->getRolePermissions($command->group);
+            $permissions = $this->permissions($command, $permissions);
+            $template->setRolePermissions($command->group, $permissions);
+            $this->manager->persist($template);
+        }
+        else {
+            /** @var Group $group */
+            $group = $this->manager->find(Group::class, $command->group);
 
-            case SystemRole::AUTHOR:
+            if (!$group) {
+                throw new NotFoundHttpException('Unknown group.');
+            }
 
-                $permissions = $template->getAuthorPermissions();
-                $permissions = $this->permissions($command, $permissions);
-                $template->setAuthorPermissions($permissions | Template::PERMIT_VIEW_RECORD);
-                $this->manager->persist($template);
+            /** @var TemplateGroupPermission $entity */
+            $entity = $this->manager->getRepository(TemplateGroupPermission::class)->findOneBy([
+                'group'    => $group,
+                'template' => $template,
+            ])
+            ;
 
-                break;
+            if (!$entity) {
+                $entity = new TemplateGroupPermission();
 
-            case SystemRole::RESPONSIBLE:
+                $entity->setGroup($group);
+                $entity->setTemplate($template);
+            }
 
-                $permissions = $template->getResponsiblePermissions();
-                $permissions = $this->permissions($command, $permissions);
-                $template->setResponsiblePermissions($permissions | Template::PERMIT_VIEW_RECORD);
-                $this->manager->persist($template);
-
-                break;
-
-            case SystemRole::REGISTERED:
-
-                $permissions = $template->getRegisteredPermissions();
-                $permissions = $this->permissions($command, $permissions);
-                $template->setRegisteredPermissions($permissions);
-                $this->manager->persist($template);
-
-                break;
-
-            default:
-
-                /** @var Group $group */
-                $group = $this->manager->find(Group::class, $command->group);
-
-                if (!$group) {
-                    throw new NotFoundHttpException('Unknown group.');
-                }
-
-                /** @var TemplateGroupPermission $entity */
-                $entity = $this->manager->getRepository(TemplateGroupPermission::class)->findOneBy([
-                    'group'    => $group,
-                    'template' => $template,
-                ])
-                ;
-
-                if (!$entity) {
-                    $entity = new TemplateGroupPermission();
-
-                    $entity->setGroup($group);
-                    $entity->setTemplate($template);
-                }
-
-                $permissions = $entity->getPermission();
-                $permissions = $this->permissions($command, $permissions);
-                $entity->setPermission($permissions);
-                $this->manager->persist($entity);
+            $permissions = $entity->getPermission();
+            $permissions = $this->permissions($command, $permissions);
+            $entity->setPermission($permissions);
+            $this->manager->persist($entity);
         }
     }
 

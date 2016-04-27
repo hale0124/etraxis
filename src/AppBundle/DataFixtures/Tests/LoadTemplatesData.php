@@ -14,6 +14,7 @@ namespace AppBundle\DataFixtures\Tests;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\Template;
 use eTraxis\Entity\TemplateGroupPermission;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -93,9 +94,9 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
             ->setDescription('Delivery task')
             ->setLocked(false)
             ->setGuestAccess(false)
-            ->setRegisteredPermissions(0)
-            ->setAuthorPermissions($author)
-            ->setResponsiblePermissions($responsible)
+            ->setRolePermissions(SystemRole::REGISTERED, 0)
+            ->setRolePermissions(SystemRole::AUTHOR, $author)
+            ->setRolePermissions(SystemRole::RESPONSIBLE, $responsible)
         ;
 
         $this->addReference('template:delivery', $template);
@@ -148,9 +149,9 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
             ->setDescription('Futurama episode')
             ->setLocked(false)
             ->setGuestAccess(true)
-            ->setRegisteredPermissions($registered)
-            ->setAuthorPermissions($author)
-            ->setResponsiblePermissions(0)
+            ->setRolePermissions(SystemRole::REGISTERED, $registered)
+            ->setRolePermissions(SystemRole::AUTHOR, $author)
+            ->setRolePermissions(SystemRole::RESPONSIBLE, 0)
         ;
 
         $this->addReference('template:futurama', $template);
