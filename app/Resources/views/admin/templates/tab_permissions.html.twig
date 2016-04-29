@@ -4,21 +4,29 @@
         <fieldset>
             <legend>{{ 'groups'|trans }}</legend>
             <select id="group" onchange="TemplatesApp.loadPermissions({{ template.id }})" size="20" title="{{ 'groups'|trans }}" class="grid-100 mobile-grid-100">
-                <option value="{{ role.author }}" selected>{{ 'role.author'|trans }} ({{ 'role'|trans|lower }})</option>
-                <option value="{{ role.responsible }}">{{ 'role.responsible'|trans }} ({{ 'role'|trans|lower }})</option>
-                <option value="{{ role.registered }}">{{ 'role.registered'|trans }} ({{ 'role'|trans|lower }})</option>
-                {% if locals|length > 0 %}
-                    <option disabled></option>
-                    {% for group in locals %}
-                        <option value="{{ group.id }}">{{ group.name }}</option>
-                    {% endfor %}
-                {% endif %}
-                {% if globals|length > 0 %}
-                    <option disabled></option>
-                    {% for group in globals %}
-                        <option value="{{ group.id }}">{{ group.name }} ({{ 'group.global'|trans|lower }})</option>
-                    {% endfor %}
-                {% endif %}
+
+                {% for role, name in roles %}
+                    {% if loop.first %}
+                        <option value="{{ role }}" selected>{{ name|trans }} ({{ 'role'|trans|lower }})</option>
+                    {% else %}
+                        <option value="{{ role }}">{{ name|trans }} ({{ 'role'|trans|lower }})</option>
+                    {% endif %}
+                {% endfor %}
+
+                {% for group in template.project.groups %}
+                    {% if loop.first %}
+                        <option disabled></option>
+                    {% endif %}
+                    <option value="{{ group.id }}">{{ group.name }}</option>
+                {% endfor %}
+
+                {% for group in groups %}
+                    {% if loop.first %}
+                        <option disabled></option>
+                    {% endif %}
+                    <option value="{{ group.id }}">{{ group.name }} ({{ 'group.global'|trans|lower }})</option>
+                {% endfor %}
+
             </select>
         </fieldset>
     </div>

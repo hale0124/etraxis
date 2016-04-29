@@ -11,6 +11,7 @@
 
 namespace AppBundle\Controller\Admin;
 
+use eTraxis\Entity\Group;
 use eTraxis\SimpleBus\Templates;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
@@ -120,29 +121,45 @@ class TemplatesPostController extends Controller
     }
 
     /**
-     * Saves permissions of the specified template.
+     * Saves permissions of the specified role for the specified template.
      *
-     * @Action\Route("/permissions/{id}/{group}", name="admin_save_template_permissions", requirements={"id"="\d+", "group"="[\-]?\d+"})
+     * @Action\Route("/permissions/{id}/{role}", name="admin_templates_save_role_permissions", requirements={"id"="\d+", "role"="\-\d+"})
      *
      * @param   Request $request
-     * @param   int     $id    Template ID.
-     * @param   int     $group Group ID or system role.
+     * @param   int     $id
+     * @param   int     $role
      *
      * @return  JsonResponse
      */
-    public function savePermissionsAction(Request $request, $id, $group)
+    public function saveRolePermissionsAction(Request $request, $id, $role)
     {
-        $command = new Templates\RemoveTemplatePermissionsCommand([
+        $command = new Templates\SetRoleTemplatePermissionsCommand([
             'id'          => $id,
-            'group'       => $group,
-            'permissions' => PHP_INT_MAX,
+            'role'        => $role,
+            'permissions' => (int) $request->request->get('permissions'),
         ]);
 
         $this->getCommandBus()->handle($command);
 
-        $command = new Templates\AddTemplatePermissionsCommand([
+        return new JsonResponse();
+    }
+
+    /**
+     * Saves permissions of the specified group for the specified template.
+     *
+     * @Action\Route("/permissions/{id}/{group}", name="admin_templates_save_group_permissions", requirements={"id"="\d+", "group"="\d+"})
+     *
+     * @param   Request $request
+     * @param   int     $id
+     * @param   Group   $group
+     *
+     * @return  JsonResponse
+     */
+    public function saveGroupPermissionsAction(Request $request, $id, Group $group)
+    {
+        $command = new Templates\SetGroupTemplatePermissionsCommand([
             'id'          => $id,
-            'group'       => $group,
+            'group'       => $group->getId(),
             'permissions' => (int) $request->request->get('permissions'),
         ]);
 

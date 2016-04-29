@@ -106,14 +106,9 @@ class TemplatesGetController extends Controller
 
         return $this->render('admin/templates/tab_permissions.html.twig', [
             'template'    => $template,
-            'locals'      => $template->getProject()->getGroups(),
-            'globals'     => $repository->getGlobalGroups(),
+            'groups'      => $repository->getGlobalGroups(),
+            'roles'       => SystemRole::all(),
             'permissions' => TemplatePermission::all(),
-            'role'        => [
-                'author'      => SystemRole::AUTHOR,
-                'responsible' => SystemRole::RESPONSIBLE,
-                'registered'  => SystemRole::REGISTERED,
-            ],
         ]);
     }
 
@@ -160,7 +155,7 @@ class TemplatesGetController extends Controller
     /**
      * Loads permissions of the specified role for the specified template.
      *
-     * @Action\Route("/permissions/{id}/{role}", name="admin_load_template_permissions_role", requirements={"id"="\d+", "role"="[\-]\d+"})
+     * @Action\Route("/permissions/{id}/{role}", name="admin_templates_load_role_permissions", requirements={"id"="\d+", "role"="\-\d+"})
      *
      * @param   Template $template
      * @param   int      $role
@@ -175,10 +170,10 @@ class TemplatesGetController extends Controller
     /**
      * Loads permissions of the specified group for the specified template.
      *
-     * @Action\Route("/permissions/{id}/{group}", name="admin_load_template_permissions", requirements={"id"="\d+", "group"="\d+"})
+     * @Action\Route("/permissions/{id}/{group}", name="admin_templates_load_group_permissions", requirements={"id"="\d+", "group"="\d+"})
      *
      * @param   Template $template
-     * @param   Group     $group
+     * @param   Group    $group
      *
      * @return  JsonResponse
      */

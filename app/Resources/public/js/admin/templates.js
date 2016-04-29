@@ -159,7 +159,11 @@ var TemplatesApp = (function() {
             var $tabs = $('#tabs-template');
             var group = $('#group', $tabs).val();
 
-            $.get(eTraxis.route('admin_load_template_permissions', { id: id, group: group }), function(data) {
+            var url = (group < 0)
+                ? eTraxis.route('admin_templates_load_role_permissions', { id: id, role: group })
+                : eTraxis.route('admin_templates_load_group_permissions', { id: id, group: group });
+
+            $.get(url, function(data) {
 
                 $('#template_permission_view_records, #template_permission_create_records', $tabs).disable(
                     group == -1 || group == -2
@@ -186,7 +190,11 @@ var TemplatesApp = (function() {
                 permissions |= $(this).val();
             });
 
-            $.post(eTraxis.route('admin_save_template_permissions', { id: id, group: group}), { permissions: permissions }, function() {
+            var url = (group < 0)
+                ? eTraxis.route('admin_templates_save_role_permissions', { id: id, role: group })
+                : eTraxis.route('admin_templates_save_group_permissions', { id: id, group: group });
+
+            $.post(url, { permissions: permissions }, function() {
                 eTraxis.alert(eTraxis.i18n['permissions'], eTraxis.i18n['changes_saved']);
             });
         },

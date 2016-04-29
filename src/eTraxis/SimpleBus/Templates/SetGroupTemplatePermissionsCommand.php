@@ -15,13 +15,13 @@ use SimpleBus\MessageTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Revokes permissions to specified template from specified group.
+ * Sets permissions of specified group to specified template.
  *
  * @property    int $id          Template ID.
- * @property    int $group       Group ID or system role.
+ * @property    int $group       Group ID.
  * @property    int $permissions Permissions.
  */
-class RemoveTemplatePermissionsCommand
+class SetGroupTemplatePermissionsCommand
 {
     use MessageTrait;
 
@@ -33,10 +33,7 @@ class RemoveTemplatePermissionsCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Any({
-     *     @Assert\EntityId(),
-     *     @Assert\Choice(callback = {"eTraxis\Dictionary\SystemRole", "keys"})
-     * })
+     * @Assert\EntityId()
      */
     public $group;
 

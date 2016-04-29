@@ -15,13 +15,13 @@ use SimpleBus\MessageTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Grants specified group with permissions to specified template.
+ * Sets permissions of specified role to specified template.
  *
  * @property    int $id          Template ID.
- * @property    int $group       Group ID or system role.
+ * @property    int $role        System role.
  * @property    int $permissions Permissions.
  */
-class AddTemplatePermissionsCommand
+class SetRoleTemplatePermissionsCommand
 {
     use MessageTrait;
 
@@ -33,12 +33,9 @@ class AddTemplatePermissionsCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Any({
-     *     @Assert\EntityId(),
-     *     @Assert\Choice(callback = {"eTraxis\Dictionary\SystemRole", "keys"})
-     * })
+     * @Assert\Choice(callback = {"eTraxis\Dictionary\SystemRole", "keys"})
      */
-    public $group;
+    public $role;
 
     /**
      * @Assert\NotBlank()

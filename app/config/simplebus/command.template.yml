@@ -25,12 +25,12 @@ services:
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Templates\UnlockTemplateCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]
 
-    command.template.add_permissions:
-        class: eTraxis\SimpleBus\Templates\Handler\AddRemoveTemplatePermissionsCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Templates\AddTemplatePermissionsCommand }]
+    command.template.set_role_permissions:
+        class: eTraxis\SimpleBus\Templates\Handler\SetRoleTemplatePermissionsCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Templates\SetRoleTemplatePermissionsCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]
 
-    command.template.remove_permissions:
-        class: eTraxis\SimpleBus\Templates\Handler\AddRemoveTemplatePermissionsCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Templates\RemoveTemplatePermissionsCommand }]
+    command.template.set_group_permissions:
+        class: eTraxis\SimpleBus\Templates\Handler\SetGroupTemplatePermissionsCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Templates\SetGroupTemplatePermissionsCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]
