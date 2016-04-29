@@ -14,15 +14,14 @@ namespace eTraxis\SimpleBus\States\Handler;
 use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
-use eTraxis\Entity\StateAssignee;
-use eTraxis\SimpleBus\States\AddStateAssigneesCommand;
-use eTraxis\SimpleBus\States\RemoveStateAssigneesCommand;
+use eTraxis\Entity\StateGroupTransition;
+use eTraxis\SimpleBus\States\SetGroupStateTransitionsCommand;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Command handler.
  */
-class AddRemoveStateAssigneesCommandHandler
+class SetGroupStateTransitionsCommandHandler
 {
     protected $manager;
 
@@ -37,13 +36,13 @@ class AddRemoveStateAssigneesCommandHandler
     }
 
     /**
-     * Manages allowed assignees of specified state.
+     * Manages transitions from specified state.
      *
-     * @param   AddStateAssigneesCommand|RemoveStateAssigneesCommand $command
+     * @param   SetGroupStateTransitionsCommand $command
      *
      * @throws  NotFoundHttpException
      */
-    public function handle($command)
+    public function handle(SetGroupStateTransitionsCommand $command)
     {
         /** @var State $state */
         $state = $this->manager->find(State::class, $command->id);
@@ -52,40 +51,41 @@ class AddRemoveStateAssigneesCommandHandler
             throw new NotFoundHttpException('Unknown state.');
         }
 
-        $project = $state->getTemplate()->getProject();
+        /** @var Group $group */
+        $group = $this->manager->find(Group::class, $command->group);
 
-        /** @var Group[] $groups */
-        $groups = $this->manager->getRepository(Group::class)->findBy([
-            'id' => $command->groups,
+        if (!$group) {
+            throw new NotFoundHttpException('Unknown group.');
+        }
+
+        /** @var State[] $transitions */
+        $transitions = $this->manager->getRepository(State::class)->findBy([
+            'template' => $state->getTemplate(),
+            'id'       => $command->transitions,
         ]);
 
         $query = $this->manager->createQuery('
-            DELETE eTraxis:StateAssignee a
-            WHERE a.state = :state
-            AND a.group IN (:groups)
+            DELETE eTraxis:StateGroupTransition t
+            WHERE t.fromState = :state
+            AND t.group = :group
         ');
 
         $query->execute([
-            'state'  => $state,
-            'groups' => $groups,
+            'state' => $state,
+            'group' => $group,
         ]);
 
-        if ($command instanceof AddStateAssigneesCommand) {
+        foreach ($transitions as $transition) {
 
-            foreach ($groups as $group) {
+            $entity = new StateGroupTransition();
 
-                if ($group->getProject() === null || $group->getProject() === $project) {
+            $entity
+                ->setFromState($state)
+                ->setToState($transition)
+                ->setGroup($group)
+            ;
 
-                    $entity = new StateAssignee();
-
-                    $entity
-                        ->setState($state)
-                        ->setGroup($group)
-                    ;
-
-                    $this->manager->persist($entity);
-                }
-            }
+            $this->manager->persist($entity);
         }
     }
 }

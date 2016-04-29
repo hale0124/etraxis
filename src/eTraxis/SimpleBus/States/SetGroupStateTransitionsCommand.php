@@ -15,13 +15,13 @@ use SimpleBus\MessageTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Removes specified transitions from specified state.
+ * Sets specified transitions from specified state.
  *
  * @property    int   $id          State ID.
- * @property    int   $group       Group ID or system role.
+ * @property    int   $group       Group ID.
  * @property    int[] $transitions Transitions (state IDs).
  */
-class RemoveStateTransitionsCommand
+class SetGroupStateTransitionsCommand
 {
     use MessageTrait;
 
@@ -33,17 +33,13 @@ class RemoveStateTransitionsCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Any({
-     *     @Assert\EntityId(),
-     *     @Assert\Choice(callback = {"eTraxis\Dictionary\SystemRole", "keys"})
-     * })
+     * @Assert\EntityId()
      */
     public $group;
 
     /**
-     * @Assert\NotBlank()
      * @Assert\Type(type = "array")
-     * @Assert\Count(min = "1", max = "100")
+     * @Assert\Count(min = "0", max = "100")
      * @Assert\All({
      *     @Assert\NotBlank(),
      *     @Assert\EntityId()

@@ -15,13 +15,13 @@ use SimpleBus\MessageTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Adds specified transitions from specified state.
+ * Sets specified transitions from specified state.
  *
  * @property    int   $id          State ID.
- * @property    int   $group       Group ID or system role.
+ * @property    int   $role        System role.
  * @property    int[] $transitions Transitions (state IDs).
  */
-class AddStateTransitionsCommand
+class SetRoleStateTransitionsCommand
 {
     use MessageTrait;
 
@@ -33,17 +33,13 @@ class AddStateTransitionsCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Any({
-     *     @Assert\EntityId(),
-     *     @Assert\Choice(callback = {"eTraxis\Dictionary\SystemRole", "keys"})
-     * })
+     * @Assert\Choice(callback = {"eTraxis\Dictionary\SystemRole", "keys"})
      */
-    public $group;
+    public $role;
 
     /**
-     * @Assert\NotBlank()
      * @Assert\Type(type = "array")
-     * @Assert\Count(min = "1", max = "100")
+     * @Assert\Count(min = "0", max = "100")
      * @Assert\All({
      *     @Assert\NotBlank(),
      *     @Assert\EntityId()

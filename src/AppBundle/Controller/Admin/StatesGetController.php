@@ -103,21 +103,13 @@ class StatesGetController extends Controller
      */
     public function tabTransitionsAction(State $state)
     {
-        $transitions = $state->getTemplate()->getStates();
-
         /** @var \eTraxis\Repository\GroupsRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Group::class);
 
         return $this->render('admin/states/tab_transitions.html.twig', [
-            'state'       => $state,
-            'locals'      => $state->getTemplate()->getProject()->getGroups(),
-            'globals'     => $repository->getGlobalGroups(),
-            'transitions' => $transitions,
-            'role'        => [
-                'author'      => SystemRole::AUTHOR,
-                'responsible' => SystemRole::RESPONSIBLE,
-                'registered'  => SystemRole::REGISTERED,
-            ],
+            'state'  => $state,
+            'groups' => $repository->getGlobalGroups(),
+            'roles'  => SystemRole::all(),
         ]);
     }
 
@@ -164,7 +156,7 @@ class StatesGetController extends Controller
     /**
      * Loads transitions of the specified role for the specified state.
      *
-     * @Action\Route("/transitions/{id}/{role}", name="admin_load_state_transitions_role", requirements={"id"="\d+", "role"="[\-]\d+"})
+     * @Action\Route("/transitions/{id}/{role}", name="admin_states_load_role_transitions", requirements={"id"="\d+", "role"="\-\d+"})
      *
      * @param   State $state
      * @param   int   $role
@@ -179,7 +171,7 @@ class StatesGetController extends Controller
     /**
      * Loads transitions of the specified group for the specified state.
      *
-     * @Action\Route("/transitions/{id}/{group}", name="admin_load_state_transitions", requirements={"id"="\d+", "group"="\d+"})
+     * @Action\Route("/transitions/{id}/{group}", name="admin_states_load_group_transitions", requirements={"id"="\d+", "group"="\d+"})
      *
      * @param   State $state
      * @param   Group $group

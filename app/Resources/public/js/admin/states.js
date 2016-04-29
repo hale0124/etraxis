@@ -152,7 +152,11 @@ var StatesApp = (function() {
             var $tabs = $('#tabs-state');
             var group = $('#group', $tabs).val();
 
-            $.get(eTraxis.route('admin_load_state_transitions', { id: id, group: group }), function(data) {
+            var url = (group < 0)
+                ? eTraxis.route('admin_states_load_role_transitions', { id: id, role: group })
+                : eTraxis.route('admin_states_load_group_transitions', { id: id, group: group });
+
+            $.get(url, function(data) {
 
                 $('input[type="checkbox"].transitions').prop('checked', false);
 
@@ -176,7 +180,11 @@ var StatesApp = (function() {
                 transitions.push($(this).val());
             });
 
-            $.post(eTraxis.route('admin_save_state_transitions', { id: id, group: group}), { transitions: transitions }, function() {
+            var url = (group < 0)
+                ? eTraxis.route('admin_states_save_role_transitions', { id: id, role: group })
+                : eTraxis.route('admin_states_save_group_transitions', { id: id, group: group });
+
+            $.post(url, { transitions: transitions }, function() {
                 eTraxis.alert(eTraxis.i18n['state.transitions'], eTraxis.i18n['changes_saved']);
             });
         },

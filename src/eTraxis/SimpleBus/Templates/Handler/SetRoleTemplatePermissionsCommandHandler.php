@@ -13,7 +13,7 @@ namespace eTraxis\SimpleBus\Templates\Handler;
 
 use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Template;
-use eTraxis\SimpleBus\Templates\SetRoleTemplatePermissionsCommand ;
+use eTraxis\SimpleBus\Templates\SetRoleTemplatePermissionsCommand;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**

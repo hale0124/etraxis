@@ -20,14 +20,14 @@ services:
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\SetInitialStateCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]
 
-    command.state.add_transitions:
-        class: eTraxis\SimpleBus\States\Handler\AddRemoveStateTransitionsCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\AddStateTransitionsCommand }]
+    command.state.set_role_transitions:
+        class: eTraxis\SimpleBus\States\Handler\SetRoleStateTransitionsCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\SetRoleStateTransitionsCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]
 
-    command.state.remove_transitions:
-        class: eTraxis\SimpleBus\States\Handler\AddRemoveStateTransitionsCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\RemoveStateTransitionsCommand }]
+    command.state.set_group_transitions:
+        class: eTraxis\SimpleBus\States\Handler\SetGroupStateTransitionsCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\SetGroupStateTransitionsCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]
 
     command.state.add_assignees:

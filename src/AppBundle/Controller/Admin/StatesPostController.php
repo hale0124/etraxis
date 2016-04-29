@@ -11,7 +11,6 @@
 
 namespace AppBundle\Controller\Admin;
 
-use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
 use eTraxis\SimpleBus\States;
@@ -110,60 +109,49 @@ class StatesPostController extends Controller
     }
 
     /**
-     * Saves transitions of the specified state.
+     * Saves transitions of the specified role for the specified state.
      *
-     * @Action\Route("/transitions/{id}/{group}", name="admin_save_state_transitions", requirements={"id"="\d+", "group"="[\-]?\d+"})
+     * @Action\Route("/transitions/{id}/{role}", name="admin_states_save_role_transitions", requirements={"id"="\d+", "role"="\-\d+"})
      *
      * @param   Request $request
-     * @param   int     $id    State ID.
-     * @param   int     $group Group ID or system role.
+     * @param   int     $id
+     * @param   int     $role
      *
      * @return  JsonResponse
      */
-    public function saveTransitionsAction(Request $request, $id, $group)
+    public function saveRoleTransitionsAction(Request $request, $id, $role)
     {
-        $repository = $this->getDoctrine()->getRepository(State::class);
-
-        /** @var State $state */
-        $state = $repository->find($id);
-
-        if (SystemRole::has($group)) {
-            $transitions_old = $state->getRoleTransitions($group);
-        }
-        else {
-            /** @var Group $g */
-            $g = $this->getDoctrine()->getRepository(Group::class)->find($group);
-
-            if ($g === null) {
-                $this->createNotFoundException();
-            }
-
-            $transitions_old = array_map(function (State $s) {
-                return $s->getId();
-            }, $state->getGroupTransitions($g));
-        }
-
-        $transitions_new = $request->request->get('transitions', []);
-
-        $command = new States\RemoveStateTransitionsCommand([
+        $command = new States\SetRoleStateTransitionsCommand([
             'id'          => $id,
-            'group'       => $group,
-            'transitions' => array_diff($transitions_old, $transitions_new),
+            'role'        => $role,
+            'transitions' => $request->request->get('transitions', []),
         ]);
 
-        if (count($command->transitions)) {
-            $this->getCommandBus()->handle($command);
-        }
+        $this->getCommandBus()->handle($command);
 
-        $command = new States\AddStateTransitionsCommand([
+        return new JsonResponse();
+    }
+
+    /**
+     * Saves transitions of the specified group for the specified state.
+     *
+     * @Action\Route("/transitions/{id}/{group}", name="admin_states_save_group_transitions", requirements={"id"="\d+", "group"="\d+"})
+     *
+     * @param   Request $request
+     * @param   int     $id
+     * @param   Group   $group
+     *
+     * @return  JsonResponse
+     */
+    public function saveGroupTransitionsAction(Request $request, $id, Group $group)
+    {
+        $command = new States\SetGroupStateTransitionsCommand([
             'id'          => $id,
-            'group'       => $group,
-            'transitions' => array_diff($transitions_new, $transitions_old),
+            'group'       => $group->getId(),
+            'transitions' => $request->request->get('transitions', []),
         ]);
 
-        if (count($command->transitions)) {
-            $this->getCommandBus()->handle($command);
-        }
+        $this->getCommandBus()->handle($command);
 
         return new JsonResponse();
     }

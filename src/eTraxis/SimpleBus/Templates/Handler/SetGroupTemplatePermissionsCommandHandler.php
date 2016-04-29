@@ -15,7 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\Template;
 use eTraxis\Entity\TemplateGroupPermission;
-use eTraxis\SimpleBus\Templates\SetGroupTemplatePermissionsCommand ;
+use eTraxis\SimpleBus\Templates\SetGroupTemplatePermissionsCommand;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
