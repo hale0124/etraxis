@@ -16,12 +16,12 @@ services:
         arguments: [ "@doctrine.orm.entity_manager", "@security.authorization_checker" ]
 
     command.template.lock:
-        class: eTraxis\SimpleBus\Templates\Handler\LockUnlockTemplateCommandHandler
+        class: eTraxis\SimpleBus\Templates\Handler\LockTemplateCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Templates\LockTemplateCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]
 
     command.template.unlock:
-        class: eTraxis\SimpleBus\Templates\Handler\LockUnlockTemplateCommandHandler
+        class: eTraxis\SimpleBus\Templates\Handler\UnlockTemplateCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Templates\UnlockTemplateCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]
 

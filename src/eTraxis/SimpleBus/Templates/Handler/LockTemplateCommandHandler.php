@@ -14,13 +14,12 @@ namespace eTraxis\SimpleBus\Templates\Handler;
 use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\Templates\LockTemplateCommand;
-use eTraxis\SimpleBus\Templates\UnlockTemplateCommand;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Command handler.
  */
-class LockUnlockTemplateCommandHandler
+class LockTemplateCommandHandler
 {
     protected $manager;
 
@@ -37,11 +36,11 @@ class LockUnlockTemplateCommandHandler
     /**
      * Locks specified template.
      *
-     * @param   LockTemplateCommand|UnlockTemplateCommand $command
+     * @param   LockTemplateCommand $command
      *
      * @throws  NotFoundHttpException
      */
-    public function handle($command)
+    public function handle(LockTemplateCommand $command)
     {
         /** @var Template $entity */
         $entity = $this->manager->find(Template::class, $command->id);
@@ -50,12 +49,7 @@ class LockUnlockTemplateCommandHandler
             throw new NotFoundHttpException('Unknown template.');
         }
 
-        if ($command instanceof LockTemplateCommand) {
-            $entity->setLocked(true);
-        }
-        elseif ($command instanceof UnlockTemplateCommand) {
-            $entity->setLocked(false);
-        }
+        $entity->setLocked(true);
 
         $this->manager->persist($entity);
     }
