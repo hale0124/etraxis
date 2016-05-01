@@ -61,11 +61,11 @@ services:
         arguments: [ "@translator", "@doctrine.orm.entity_manager", "@etraxis.encoder" ]
 
     command.users.add_groups:
-        class: eTraxis\SimpleBus\Users\Handler\AddRemoveGroupsCommandHandler
+        class: eTraxis\SimpleBus\Users\Handler\AddGroupsCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\AddGroupsCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]
 
     command.users.remove_groups:
-        class: eTraxis\SimpleBus\Users\Handler\AddRemoveGroupsCommandHandler
+        class: eTraxis\SimpleBus\Users\Handler\RemoveGroupsCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Users\RemoveGroupsCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]

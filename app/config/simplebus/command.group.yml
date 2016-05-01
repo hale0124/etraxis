@@ -16,11 +16,11 @@ services:
         arguments: [ "@doctrine.orm.entity_manager" ]
 
     command.groups.add_users:
-        class: eTraxis\SimpleBus\Groups\Handler\AddRemoveUsersCommandHandler
+        class: eTraxis\SimpleBus\Groups\Handler\AddUsersCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Groups\AddUsersCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]
 
     command.groups.remove_users:
-        class: eTraxis\SimpleBus\Groups\Handler\AddRemoveUsersCommandHandler
+        class: eTraxis\SimpleBus\Groups\Handler\RemoveUsersCommandHandler
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\Groups\RemoveUsersCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]

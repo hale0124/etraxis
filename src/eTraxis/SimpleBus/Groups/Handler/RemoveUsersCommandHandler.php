@@ -14,14 +14,13 @@ namespace eTraxis\SimpleBus\Groups\Handler;
 use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\User;
-use eTraxis\SimpleBus\Groups\AddUsersCommand;
 use eTraxis\SimpleBus\Groups\RemoveUsersCommand;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Command handler.
  */
-class AddRemoveUsersCommandHandler
+class RemoveUsersCommandHandler
 {
     protected $manager;
 
@@ -36,13 +35,13 @@ class AddRemoveUsersCommandHandler
     }
 
     /**
-     * Adds or removes specified accounts to/from group.
+     * Removes specified accounts from group.
      *
-     * @param   AddUsersCommand|RemoveUsersCommand $command
+     * @param   RemoveUsersCommand $command
      *
      * @throws  NotFoundHttpException
      */
-    public function handle($command)
+    public function handle(RemoveUsersCommand $command)
     {
         /** @var Group $group */
         $group = $this->manager->find(Group::class, $command->id);
@@ -64,13 +63,7 @@ class AddRemoveUsersCommandHandler
         $users = $query->getQuery()->getResult();
 
         foreach ($users as $user) {
-
-            if ($command instanceof AddUsersCommand) {
-                $group->addMember($user);
-            }
-            elseif ($command instanceof RemoveUsersCommand) {
-                $group->removeMember($user);
-            }
+            $group->removeMember($user);
         }
 
         $this->manager->persist($group);
