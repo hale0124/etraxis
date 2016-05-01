@@ -17,7 +17,7 @@ use eTraxis\Entity\State;
 use eTraxis\Entity\StateAssignee;
 use eTraxis\Tests\BaseTestCase;
 
-class AddRemoveStateAssigneesCommandTest extends BaseTestCase
+class AddStateAssigneesCommandTest extends BaseTestCase
 {
     public function testAddAssignees()
     {
@@ -50,35 +50,31 @@ class AddRemoveStateAssigneesCommandTest extends BaseTestCase
         self::assertNotNull($assignee);
     }
 
-    public function testRemoveAssignees()
+    public function testExistingAssignees()
     {
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
-        self::assertNotNull($state);
+        self::assertCount(1, $state->getAssigneeGroups());
 
-        /** @var Group $group */
-        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
-        self::assertNotNull($group);
+        /** @var Group $crew */
+        $crew = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
 
-        /** @var StateAssignee $assignee */
-        $assignee = $this->doctrine->getRepository(StateAssignee::class)->findOneBy([
-            'state' => $state,
-            'group' => $group,
-        ]);
-        self::assertNotNull($assignee);
+        /** @var Group $managers */
+        $managers = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
 
-        $command = new RemoveStateAssigneesCommand([
+        $command = new AddStateAssigneesCommand([
             'id'     => $state->getId(),
-            'groups' => [$group->getId()],
+            'groups' => [
+                $crew->getId(),
+                $managers->getId(),
+            ],
         ]);
 
         $this->command_bus->handle($command);
 
-        $assignee = $this->doctrine->getRepository(StateAssignee::class)->findOneBy([
-            'state' => $state,
-            'group' => $group,
-        ]);
-        self::assertNull($assignee);
+        /** @var State $state */
+        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
+        self::assertCount(2, $state->getAssigneeGroups());
     }
 
     public function testEmptyAssignees()

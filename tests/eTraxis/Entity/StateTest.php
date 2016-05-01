@@ -127,6 +127,19 @@ class StateTest extends BaseTestCase
         self::assertEquals($expected, $new->getGroupTransitions($managers));
     }
 
+    public function testGetAssigneeGroups()
+    {
+        /** @var Group $crew */
+        $crew = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
+        self::assertNotNull($crew);
+
+        $expected = [
+            $crew,
+        ];
+
+        self::assertEquals($expected, $this->object->getAssigneeGroups());
+    }
+
     public function testJsonSerialize()
     {
         $expected = [

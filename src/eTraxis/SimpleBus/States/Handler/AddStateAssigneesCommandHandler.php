@@ -16,13 +16,12 @@ use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
 use eTraxis\Entity\StateAssignee;
 use eTraxis\SimpleBus\States\AddStateAssigneesCommand;
-use eTraxis\SimpleBus\States\RemoveStateAssigneesCommand;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Command handler.
  */
-class AddRemoveStateAssigneesCommandHandler
+class AddStateAssigneesCommandHandler
 {
     protected $manager;
 
@@ -37,13 +36,13 @@ class AddRemoveStateAssigneesCommandHandler
     }
 
     /**
-     * Manages allowed assignees of specified state.
+     * Adds allowed assignees for specified state.
      *
-     * @param   AddStateAssigneesCommand|RemoveStateAssigneesCommand $command
+     * @param   AddStateAssigneesCommand $command
      *
      * @throws  NotFoundHttpException
      */
-    public function handle($command)
+    public function handle(AddStateAssigneesCommand $command)
     {
         /** @var State $state */
         $state = $this->manager->find(State::class, $command->id);
@@ -52,39 +51,32 @@ class AddRemoveStateAssigneesCommandHandler
             throw new NotFoundHttpException('Unknown state.');
         }
 
-        $project = $state->getTemplate()->getProject();
+        $project   = $state->getTemplate()->getProject();
+        $assignees = $state->getAssigneeGroups();
 
         /** @var Group[] $groups */
         $groups = $this->manager->getRepository(Group::class)->findBy([
             'id' => $command->groups,
         ]);
 
-        $query = $this->manager->createQuery('
-            DELETE eTraxis:StateAssignee a
-            WHERE a.state = :state
-            AND a.group IN (:groups)
-        ');
+        foreach ($groups as $group) {
 
-        $query->execute([
-            'state'  => $state,
-            'groups' => $groups,
-        ]);
+            // Skip already present group.
+            if (in_array($group, $assignees)) {
+                continue;
+            }
 
-        if ($command instanceof AddStateAssigneesCommand) {
+            // Group must be global or belong to the same project.
+            if ($group->getProject() === null || $group->getProject() === $project) {
 
-            foreach ($groups as $group) {
+                $entity = new StateAssignee();
 
-                if ($group->getProject() === null || $group->getProject() === $project) {
+                $entity
+                    ->setState($state)
+                    ->setGroup($group)
+                ;
 
-                    $entity = new StateAssignee();
-
-                    $entity
-                        ->setState($state)
-                        ->setGroup($group)
-                    ;
-
-                    $this->manager->persist($entity);
-                }
+                $this->manager->persist($entity);
             }
         }
     }

@@ -351,6 +351,35 @@ class State extends Entity implements \JsonSerializable
     }
 
     /**
+     * Returns list of possible assignee groups.
+     *
+     * @return  Group[] List of groups.
+     */
+    public function getAssigneeGroups()
+    {
+        $query = $this->manager->createQueryBuilder();
+
+        $query
+            ->select('sa')
+            ->addSelect('g')
+            ->from(StateAssignee::class, 'sa')
+            ->leftJoin('sa.group', 'g')
+            ->where('sa.state = :state')
+            ->orderBy('g.name')
+            ->setParameter('state', $this)
+        ;
+
+        $results = [];
+
+        /** @var StateAssignee $result */
+        foreach ($query->getQuery()->getResult() as $result) {
+            $results[] = $result->getGroup();
+        }
+
+        return $results;
+    }
+
+    /**
      * {@inheritdoc}
      */
     public function jsonSerialize()
