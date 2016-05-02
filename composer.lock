@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "9bb0d65836d3496d041201b466d4e64e",
-    "content-hash": "e0757b30161cd61e495e4347162f2fea",
+    "hash": "10d43869ce58a07ba4a9cd0f744d0b14",
+    "content-hash": "3ad36b3ac3f790a6601ce5bec0fa30b5",
     "packages": [
         {
             "name": "arodygin/datatables-bundle",
@@ -3759,7 +3759,7 @@
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
-        "php": ">=5.5.9",
+        "php": ">=7.0",
         "ext-bcmath": "*",
         "ext-ctype": "*",
         "ext-iconv": "*",
@@ -3768,6 +3768,6 @@
     },
     "platform-dev": [],
     "platform-overrides": {
-        "php": "5.5.9"
+        "php": "7.0"
     }
 }
