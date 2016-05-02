@@ -462,7 +462,7 @@ class Template extends Entity implements \JsonSerializable
 
         $result = $query->getQuery()->getOneOrNullResult();
 
-        return $result === null ? 0 : $result['permission'];
+        return $result['permission'] ?? 0;
     }
 
     /**

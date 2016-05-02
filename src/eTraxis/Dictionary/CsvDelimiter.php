@@ -56,6 +56,6 @@ class CsvDelimiter extends StaticDictionary
             self::VERTICAL_LINE => '|',
         ];
 
-        return array_key_exists($key, $delimiters) ? $delimiters[$key] : $delimiters[static::FALLBACK];
+        return $delimiters[$key] ?? $delimiters[static::FALLBACK];
     }
 }
