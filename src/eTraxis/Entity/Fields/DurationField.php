@@ -121,7 +121,7 @@ class DurationField extends AbstractField
             $value = self::MAX_VALUE;
         }
 
-        return (int) floor($value / 60) . ':' . str_pad($value % 60, 2, '0', STR_PAD_LEFT);
+        return intdiv($value, 60) . ':' . str_pad($value % 60, 2, '0', STR_PAD_LEFT);
     }
 
     /**
