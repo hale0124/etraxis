@@ -75,8 +75,8 @@ class CheckRequirementsCommand extends ContainerAwareCommand
         // default_charset
         $default_charset = ini_get('default_charset');
 
-        if (strlen($default_charset) === 0 || strtolower($default_charset) === 'utf-8') {
-            $report['default_charset'] = 'OK (' . (strlen($default_charset) === 0 ? 'empty' : $default_charset) . ')';
+        if (strtolower($default_charset) === 'utf-8') {
+            $report['default_charset'] = 'OK (' . $default_charset . ')';
         }
         else {
             $report['default_charset'] = '<error>FAIL</error> (should be either commented, or set to "UTF-8")';

@@ -83,11 +83,26 @@ OUT;
         self::assertEquals($expected, $commandTester->getDisplay());
     }
 
-    public function testDefaultCharset()
+    public function testWrongDefaultCharset()
     {
         $expected = 'default_charset  FAIL (should be either commented, or set to "UTF-8")';
 
         ini_set('default_charset', 'Windows-1251');
+
+        $application = new Application(self::$kernel);
+        $application->add(new CheckRequirementsCommand());
+
+        $commandTester = new CommandTester($application->find('etraxis:check:requirements'));
+        $commandTester->execute([]);
+
+        self::assertContains($expected, $commandTester->getDisplay());
+    }
+
+    public function testEmptyDefaultCharset()
+    {
+        $expected = 'default_charset  FAIL (should be either commented, or set to "UTF-8")';
+
+        ini_set('default_charset', '');
 
         $application = new Application(self::$kernel);
         $application->add(new CheckRequirementsCommand());
