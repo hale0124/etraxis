@@ -66,7 +66,6 @@ class CheckRequirementsCommandTest extends BaseTestCase
 Check PHP configuration
 
 default_charset  OK (UTF-8)
-date.timezone    OK (Pacific/Auckland)
 
 Check PHP extensions
 

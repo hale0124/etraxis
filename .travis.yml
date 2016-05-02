@@ -10,9 +10,8 @@ env:
 sudo: false
 
 before_install:
-    - echo 'extension = ldap.so'                >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
-    - echo 'default_charset = "UTF-8"'          >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
-    - echo 'date.timezone = "Pacific/Auckland"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
+    - echo 'extension = ldap.so'       >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
+    - echo 'default_charset = "UTF-8"' >> ~/.phpenv/versions/$(phpenv version-name)/etc/conf.d/travis.ini
 
 install:
     - cp app/config/travis/parameters.$DB.yml app/config/parameters.yml

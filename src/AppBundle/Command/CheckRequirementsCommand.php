@@ -82,16 +82,6 @@ class CheckRequirementsCommand extends ContainerAwareCommand
             $report['default_charset'] = '<error>FAIL</error> (should be either commented, or set to "UTF-8")';
         }
 
-        // date.timezone
-        $timezone = ini_get('date.timezone');
-
-        if (strlen($timezone) === 0) {
-            $report['date.timezone'] = '<error>FAIL</error> (undefined, should be set to one of supported timezones enumerated at <http://www.php.net/manual/timezones.php>)';
-        }
-        else {
-            $report['date.timezone'] = 'OK (' . $timezone . ')';
-        }
-
         $this->outputReport($output, $report);
     }
 
