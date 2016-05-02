@@ -73,7 +73,7 @@ class DeleteFieldCommandTest extends BaseTestCase
      */
     public function testNotFound()
     {
-        $command = new DeleteFieldCommand(['id' => $this->getMaxId()]);
+        $command = new DeleteFieldCommand(['id' => PHP_INT_MAX]);
         $this->command_bus->handle($command);
     }
 }

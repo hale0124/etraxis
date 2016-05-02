@@ -56,7 +56,7 @@ class AddUsersCommandTest extends BaseTestCase
     public function testNotFound()
     {
         $command = new AddUsersCommand([
-            'id'    => $this->getMaxId(),
+            'id'    => PHP_INT_MAX,
             'users' => [1, 2, 3],
         ]);
 

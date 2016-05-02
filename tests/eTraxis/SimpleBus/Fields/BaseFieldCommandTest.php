@@ -61,7 +61,7 @@ class BaseFieldCommandTest extends BaseTestCase
     public function testCreateNotFound()
     {
         $command = new CreateFieldBaseCommand([
-            'state'        => $this->getMaxId(),
+            'state'        => PHP_INT_MAX,
             'name'         => 'Priority',
             'description'  => 'Urgency level',
             'required'     => true,
@@ -144,7 +144,7 @@ class BaseFieldCommandTest extends BaseTestCase
     public function testUpdateNotFound()
     {
         $command = new UpdateFieldBaseCommand([
-            'id'           => $this->getMaxId(),
+            'id'           => PHP_INT_MAX,
             'name'         => 'Team',
             'description'  => 'New description',
             'required'     => false,

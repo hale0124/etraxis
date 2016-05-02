@@ -119,7 +119,7 @@ class AddStateAssigneesCommandTest extends BaseTestCase
         self::assertNotNull($group);
 
         $command = new AddStateAssigneesCommand([
-            'id'     => $this->getMaxId(),
+            'id'     => PHP_INT_MAX,
             'groups' => [$group->getId()],
         ]);
 

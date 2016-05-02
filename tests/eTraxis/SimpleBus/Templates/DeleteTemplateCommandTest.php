@@ -75,7 +75,7 @@ class DeleteTemplateCommandTest extends BaseTestCase
     {
         $this->loginAs('hubert');
 
-        $command = new DeleteTemplateCommand(['id' => $this->getMaxId()]);
+        $command = new DeleteTemplateCommand(['id' => PHP_INT_MAX]);
         $this->command_bus->handle($command);
     }
 }

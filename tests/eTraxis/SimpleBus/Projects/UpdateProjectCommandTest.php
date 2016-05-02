@@ -48,7 +48,7 @@ class UpdateProjectCommandTest extends BaseTestCase
     public function testUnknownProject()
     {
         $command = new UpdateProjectCommand([
-            'id'          => $this->getMaxId(),
+            'id'          => PHP_INT_MAX,
             'name'        => 'Awesome Express',
             'description' => 'Newspaper-delivery company',
             'suspended'   => true,

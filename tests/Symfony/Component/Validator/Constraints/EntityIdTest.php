@@ -33,7 +33,7 @@ class EntityIdTest extends BaseTestCase
     public function testSuccess()
     {
         $object     = new EntityIdStub();
-        $object->id = random_int(1, $this->getMaxId());
+        $object->id = random_int(1, PHP_INT_MAX);
 
         self::assertCount(0, $this->validator->validate($object));
     }

@@ -136,7 +136,7 @@ class SetOrderFieldCommandTest extends BaseTestCase
 
         $command = new SetOrderFieldCommand([
             'id'    => $field->getId(),
-            'order' => $this->getMaxId(),
+            'order' => PHP_INT_MAX,
         ]);
         $this->command_bus->handle($command);
 
@@ -150,7 +150,7 @@ class SetOrderFieldCommandTest extends BaseTestCase
     public function testNotFound()
     {
         $command = new SetOrderFieldCommand([
-            'id'    => $this->getMaxId(),
+            'id'    => PHP_INT_MAX,
             'order' => 1,
         ]);
 

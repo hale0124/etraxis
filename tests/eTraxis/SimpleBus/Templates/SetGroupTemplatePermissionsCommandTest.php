@@ -103,7 +103,7 @@ class SetGroupTemplatePermissionsCommandTest extends BaseTestCase
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
 
         $command = new SetGroupTemplatePermissionsCommand([
-            'id'          => $this->getMaxId(),
+            'id'          => PHP_INT_MAX,
             'group'       => $group->getId(),
             'permissions' => Template::PERMIT_VIEW_RECORD,
         ]);
@@ -123,7 +123,7 @@ class SetGroupTemplatePermissionsCommandTest extends BaseTestCase
 
         $command = new SetGroupTemplatePermissionsCommand([
             'id'          => $template->getId(),
-            'group'       => $this->getMaxId(),
+            'group'       => PHP_INT_MAX,
             'permissions' => Template::PERMIT_VIEW_RECORD,
         ]);
 

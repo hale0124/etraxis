@@ -52,7 +52,7 @@ class AddGroupsCommandTest extends BaseTestCase
     public function testNotFound()
     {
         $command = new AddGroupsCommand([
-            'id'     => $this->getMaxId(),
+            'id'     => PHP_INT_MAX,
             'groups' => [1, 2, 3],
         ]);
 

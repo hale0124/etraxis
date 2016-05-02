@@ -71,7 +71,7 @@ class UpdateUserCommandTest extends BaseTestCase
         self::assertNull($user);
 
         $command = new UpdateUserCommand([
-            'id'       => $this->getMaxId(),
+            'id'       => PHP_INT_MAX,
             'username' => 'flexo',
             'fullname' => 'Flexo',
             'email'    => 'flexo@example.com',

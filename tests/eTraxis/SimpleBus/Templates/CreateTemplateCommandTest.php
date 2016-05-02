@@ -65,7 +65,7 @@ class CreateTemplateCommandTest extends BaseTestCase
     public function testUnknownProject()
     {
         $command = new CreateTemplateCommand([
-            'project'     => $this->getMaxId(),
+            'project'     => PHP_INT_MAX,
             'name'        => 'Maintenance',
             'prefix'      => 'M',
             'description' => 'Nimbus technical maintenance',

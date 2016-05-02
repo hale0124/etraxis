@@ -88,8 +88,8 @@ class DeleteListItemCommandTest extends BaseTestCase
         $this->loginAs('hubert');
 
         $command = new DeleteListItemCommand([
-            'field' => $this->getMaxId(),
-            'key'   => $this->getMaxId(),
+            'field' => PHP_INT_MAX,
+            'key'   => PHP_INT_MAX,
         ]);
         $this->command_bus->handle($command);
     }
@@ -107,7 +107,7 @@ class DeleteListItemCommandTest extends BaseTestCase
 
         $command = new DeleteListItemCommand([
             'field' => $field->getId(),
-            'key'   => $this->getMaxId(),
+            'key'   => PHP_INT_MAX,
         ]);
         $this->command_bus->handle($command);
     }

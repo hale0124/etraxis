@@ -135,7 +135,7 @@ class SetRoleTemplatePermissionsCommandTest extends BaseTestCase
     public function testNotFoundTemplate()
     {
         $command = new SetRoleTemplatePermissionsCommand([
-            'id'          => $this->getMaxId(),
+            'id'          => PHP_INT_MAX,
             'role'        => SystemRole::REGISTERED,
             'permissions' => Template::PERMIT_VIEW_RECORD,
         ]);

@@ -65,7 +65,7 @@ class UpdateTemplateCommandTest extends BaseTestCase
     public function testUnknownTemplate()
     {
         $command = new UpdateTemplateCommand([
-            'id'          => $this->getMaxId(),
+            'id'          => PHP_INT_MAX,
             'name'        => 'Maintenance',
             'prefix'      => 'M',
             'description' => 'Nimbus technical maintenance',

@@ -53,7 +53,7 @@ class SaveAppearanceCommandTest extends BaseTestCase
         self::assertNull($user);
 
         $command = new SaveAppearanceCommand([
-            'id'       => $this->getMaxId(),
+            'id'       => PHP_INT_MAX,
             'locale'   => static::$kernel->getContainer()->getParameter('locale'),
             'theme'    => static::$kernel->getContainer()->getParameter('theme'),
             'timezone' => 0,

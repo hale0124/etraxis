@@ -50,7 +50,7 @@ class CreateGroupCommandTest extends BaseTestCase
     {
         $command = new CreateGroupCommand([
             'name'    => 'Robots',
-            'project' => $this->getMaxId(),
+            'project' => PHP_INT_MAX,
         ]);
 
         $this->command_bus->handle($command);

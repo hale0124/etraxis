@@ -35,7 +35,7 @@ class DeleteGroupCommandTest extends BaseTestCase
      */
     public function testNotFound()
     {
-        $command = new DeleteGroupCommand(['id' => $this->getMaxId()]);
+        $command = new DeleteGroupCommand(['id' => PHP_INT_MAX]);
         $this->command_bus->handle($command);
     }
 }

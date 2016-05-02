@@ -54,7 +54,7 @@ class DeleteProjectCommandTest extends BaseTestCase
     {
         $this->loginAs('hubert');
 
-        $command = new DeleteProjectCommand(['id' => $this->getMaxId()]);
+        $command = new DeleteProjectCommand(['id' => PHP_INT_MAX]);
         $this->command_bus->handle($command);
     }
 }

@@ -45,7 +45,7 @@ class SetInitialStateCommandTest extends BaseTestCase
      */
     public function testNotFound()
     {
-        $command = new SetInitialStateCommand(['id' => $this->getMaxId()]);
+        $command = new SetInitialStateCommand(['id' => PHP_INT_MAX]);
         $this->command_bus->handle($command);
     }
 }
