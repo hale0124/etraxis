@@ -17,8 +17,8 @@ namespace eTraxis\Entity\Fields;
 class DateField extends AbstractField
 {
     // Constraints.
-    const MIN_VALUE = -2147483648;
-    const MAX_VALUE = 2147483647;
+    const MIN_VALUE = -0x80000000;
+    const MAX_VALUE = 0x7FFFFFFF;
 
     /**
      * {@inheritdoc}
