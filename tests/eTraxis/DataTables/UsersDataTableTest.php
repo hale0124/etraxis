@@ -22,7 +22,7 @@ class UsersDataTableTest extends BaseTestCase
         $users = $this->doctrine->getRepository(User::class)->findAll();
 
         $request = new Request([
-            'draw'    => mt_rand(),
+            'draw'    => random_int(1, PHP_INT_MAX),
             'start'   => 0,
             'length'  => -1,
             'search'  => ['value' => null, 'regex' => 'false'],
@@ -45,7 +45,7 @@ class UsersDataTableTest extends BaseTestCase
         $expected = 8;
 
         $request = new Request([
-            'draw'    => mt_rand(),
+            'draw'    => random_int(1, PHP_INT_MAX),
             'start'   => 0,
             'length'  => -1,
             'search'  => ['value' => 'plANeTexprESS', 'regex' => 'false'],
@@ -70,7 +70,7 @@ class UsersDataTableTest extends BaseTestCase
         ];
 
         $request = new Request([
-            'draw'    => mt_rand(),
+            'draw'    => random_int(1, PHP_INT_MAX),
             'start'   => 0,
             'length'  => -1,
             'search'  => ['value' => null, 'regex' => 'false'],
@@ -102,7 +102,7 @@ class UsersDataTableTest extends BaseTestCase
         ];
 
         $request = new Request([
-            'draw'    => mt_rand(),
+            'draw'    => random_int(1, PHP_INT_MAX),
             'start'   => 0,
             'length'  => -1,
             'search'  => ['value' => null, 'regex' => 'false'],
@@ -135,7 +135,7 @@ class UsersDataTableTest extends BaseTestCase
         ];
 
         $request = new Request([
-            'draw'    => mt_rand(),
+            'draw'    => random_int(1, PHP_INT_MAX),
             'start'   => 0,
             'length'  => -1,
             'search'  => ['value' => null, 'regex' => 'false'],
@@ -166,7 +166,7 @@ class UsersDataTableTest extends BaseTestCase
         ];
 
         $request = new Request([
-            'draw'    => mt_rand(),
+            'draw'    => random_int(1, PHP_INT_MAX),
             'start'   => 0,
             'length'  => -1,
             'search'  => ['value' => null, 'regex' => 'false'],
@@ -194,7 +194,7 @@ class UsersDataTableTest extends BaseTestCase
         $expected = 12;
 
         $request = new Request([
-            'draw'    => mt_rand(),
+            'draw'    => random_int(1, PHP_INT_MAX),
             'start'   => 0,
             'length'  => -1,
             'search'  => ['value' => null, 'regex' => 'false'],
@@ -218,7 +218,7 @@ class UsersDataTableTest extends BaseTestCase
         ];
 
         $request = new Request([
-            'draw'    => mt_rand(),
+            'draw'    => random_int(1, PHP_INT_MAX),
             'start'   => 0,
             'length'  => -1,
             'search'  => ['value' => null, 'regex' => 'false'],
@@ -246,7 +246,7 @@ class UsersDataTableTest extends BaseTestCase
         $expected = 13;
 
         $request = new Request([
-            'draw'    => mt_rand(),
+            'draw'    => random_int(1, PHP_INT_MAX),
             'start'   => 0,
             'length'  => -1,
             'search'  => ['value' => null, 'regex' => 'false'],
@@ -272,7 +272,7 @@ class UsersDataTableTest extends BaseTestCase
         ];
 
         $request = new Request([
-            'draw'    => mt_rand(),
+            'draw'    => random_int(1, PHP_INT_MAX),
             'start'   => 0,
             'length'  => -1,
             'search'  => ['value' => null, 'regex' => 'false'],
@@ -305,7 +305,7 @@ class UsersDataTableTest extends BaseTestCase
         ];
 
         $request = new Request([
-            'draw'    => mt_rand(),
+            'draw'    => random_int(1, PHP_INT_MAX),
             'start'   => 0,
             'length'  => -1,
             'search'  => ['value' => null, 'regex' => 'false'],
@@ -350,7 +350,7 @@ class UsersDataTableTest extends BaseTestCase
         ];
 
         $request = new Request([
-            'draw'    => mt_rand(),
+            'draw'    => random_int(1, PHP_INT_MAX),
             'start'   => 0,
             'length'  => -1,
             'search'  => ['value' => null, 'regex' => 'false'],
@@ -383,7 +383,7 @@ class UsersDataTableTest extends BaseTestCase
         ];
 
         $request = new Request([
-            'draw'    => mt_rand(),
+            'draw'    => random_int(1, PHP_INT_MAX),
             'start'   => 10,
             'length'  => 10,
             'search'  => ['value' => null, 'regex' => 'false'],

@@ -58,7 +58,7 @@ class FieldValueTest extends \PHPUnit_Framework_TestCase
 
     public function testValueId()
     {
-        $expected = mt_rand(1, PHP_INT_MAX);
+        $expected = random_int(1, PHP_INT_MAX);
         $this->object->setValueId($expected);
         self::assertEquals($expected, $this->object->getValueId());
     }

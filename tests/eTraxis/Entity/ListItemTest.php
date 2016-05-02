@@ -39,7 +39,7 @@ class ListItemTest extends \PHPUnit_Framework_TestCase
 
     public function testKey()
     {
-        $expected = mt_rand(1, PHP_INT_MAX);
+        $expected = random_int(1, PHP_INT_MAX);
         $this->object->setKey($expected);
         self::assertEquals($expected, $this->object->getKey());
     }

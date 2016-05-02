@@ -48,7 +48,7 @@ class NumberFieldTest extends \PHPUnit_Framework_TestCase
     {
         $field = $this->object->asNumber();
 
-        $value = mt_rand(NumberField::MIN_VALUE, NumberField::MAX_VALUE);
+        $value = random_int(NumberField::MIN_VALUE, NumberField::MAX_VALUE);
         $min   = -2000000000;
         $max   = 2000000000;
 
@@ -67,7 +67,7 @@ class NumberFieldTest extends \PHPUnit_Framework_TestCase
     {
         $field = $this->object->asNumber();
 
-        $value = mt_rand(NumberField::MIN_VALUE, NumberField::MAX_VALUE);
+        $value = random_int(NumberField::MIN_VALUE, NumberField::MAX_VALUE);
         $min   = -2000000000;
         $max   = 2000000000;
 
@@ -86,7 +86,7 @@ class NumberFieldTest extends \PHPUnit_Framework_TestCase
     {
         $field = $this->object->asNumber();
 
-        $value = mt_rand(NumberField::MIN_VALUE, NumberField::MAX_VALUE);
+        $value = random_int(NumberField::MIN_VALUE, NumberField::MAX_VALUE);
         $min   = -2000000000;
         $max   = 2000000000;
 

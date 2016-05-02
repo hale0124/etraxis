@@ -49,7 +49,7 @@ class AbstractFieldTest extends \PHPUnit_Framework_TestCase
     {
         $field = $this->object->asNumber();
 
-        $expected = mt_rand(NumberField::MIN_VALUE, NumberField::MAX_VALUE);
+        $expected = random_int(NumberField::MIN_VALUE, NumberField::MAX_VALUE);
 
         self::assertNull($field->getDefaultValue());
 
@@ -61,7 +61,7 @@ class AbstractFieldTest extends \PHPUnit_Framework_TestCase
     {
         $field = $this->object->asNumber();
 
-        $field->setDefaultValue(mt_rand(NumberField::MIN_VALUE, NumberField::MAX_VALUE));
+        $field->setDefaultValue(random_int(NumberField::MIN_VALUE, NumberField::MAX_VALUE));
         self::assertNotNull($field->getDefaultValue());
 
         $field->offsetUnset('defaultValue');

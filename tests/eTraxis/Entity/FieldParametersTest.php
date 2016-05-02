@@ -23,21 +23,21 @@ class FieldParametersTest extends \PHPUnit_Framework_TestCase
 
     public function testParameter1()
     {
-        $expected = mt_rand(1, PHP_INT_MAX);
+        $expected = random_int(1, PHP_INT_MAX);
         $this->object->setParameter1($expected);
         self::assertEquals($expected, $this->object->getParameter1());
     }
 
     public function testParameter2()
     {
-        $expected = mt_rand(1, PHP_INT_MAX);
+        $expected = random_int(1, PHP_INT_MAX);
         $this->object->setParameter2($expected);
         self::assertEquals($expected, $this->object->getParameter2());
     }
 
     public function testDefaultValue()
     {
-        $expected = mt_rand(1, PHP_INT_MAX);
+        $expected = random_int(1, PHP_INT_MAX);
         $this->object->setDefaultValue($expected);
         self::assertEquals($expected, $this->object->getDefaultValue());
     }

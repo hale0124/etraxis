@@ -48,7 +48,7 @@ class DateFieldTest extends \PHPUnit_Framework_TestCase
     {
         $field = $this->object->asDate();
 
-        $value = mt_rand(DateField::MIN_VALUE, DateField::MAX_VALUE);
+        $value = random_int(DateField::MIN_VALUE, DateField::MAX_VALUE);
         $min   = DateField::MIN_VALUE - 1;
         $max   = DateField::MAX_VALUE + 1;
 
@@ -67,7 +67,7 @@ class DateFieldTest extends \PHPUnit_Framework_TestCase
     {
         $field = $this->object->asDate();
 
-        $value = mt_rand(DateField::MIN_VALUE, DateField::MAX_VALUE);
+        $value = random_int(DateField::MIN_VALUE, DateField::MAX_VALUE);
         $min   = DateField::MIN_VALUE - 1;
         $max   = DateField::MAX_VALUE + 1;
 
@@ -86,7 +86,7 @@ class DateFieldTest extends \PHPUnit_Framework_TestCase
     {
         $field = $this->object->asDate();
 
-        $value = mt_rand(DateField::MIN_VALUE, DateField::MAX_VALUE);
+        $value = random_int(DateField::MIN_VALUE, DateField::MAX_VALUE);
         $min   = DateField::MIN_VALUE - 1;
         $max   = DateField::MAX_VALUE + 1;
 

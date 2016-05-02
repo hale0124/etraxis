@@ -57,14 +57,14 @@ class TemplateTest extends BaseTestCase
 
     public function testCriticalAge()
     {
-        $expected = mt_rand(1, PHP_INT_MAX);
+        $expected = random_int(1, PHP_INT_MAX);
         $this->object->setCriticalAge($expected);
         self::assertEquals($expected, $this->object->getCriticalAge());
     }
 
     public function testFrozenTime()
     {
-        $expected = mt_rand(1, PHP_INT_MAX);
+        $expected = random_int(1, PHP_INT_MAX);
         $this->object->setFrozenTime($expected);
         self::assertEquals($expected, $this->object->getFrozenTime());
     }

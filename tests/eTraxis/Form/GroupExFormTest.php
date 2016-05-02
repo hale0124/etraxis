@@ -17,7 +17,7 @@ class GroupExFormTest extends BaseTestCase
 {
     public function testForm()
     {
-        $expected = mt_rand(1, PHP_INT_MAX);
+        $expected = random_int(1, PHP_INT_MAX);
 
         /** @var \Symfony\Component\Form\FormFactoryInterface $factory */
         $factory = $this->client->getContainer()->get('form.factory');

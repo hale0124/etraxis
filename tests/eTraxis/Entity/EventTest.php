@@ -28,7 +28,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
         /** @var \StdClass $object */
         $object = AltrEgo::create($this->object);
 
-        $expected   = mt_rand(1, PHP_INT_MAX);
+        $expected   = random_int(1, PHP_INT_MAX);
         $object->id = $expected;
         self::assertEquals($expected, $this->object->getId());
     }
@@ -59,7 +59,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
 
     public function testParameter()
     {
-        $expected = mt_rand(1, PHP_INT_MAX);
+        $expected = random_int(1, PHP_INT_MAX);
         $this->object->setParameter($expected);
         self::assertEquals($expected, $this->object->getParameter());
     }
