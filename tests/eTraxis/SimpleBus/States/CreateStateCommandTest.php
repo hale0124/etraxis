@@ -118,7 +118,7 @@ class CreateStateCommandTest extends BaseTestCase
     public function testUnknownTemplate()
     {
         $command = new CreateStateCommand([
-            'template'     => PHP_INT_MAX,
+            'template'     => self::UNKNOWN_ENTITY_ID,
             'name'         => 'Started',
             'abbreviation' => 'S',
             'type'         => State::TYPE_INTERIM,
@@ -140,7 +140,7 @@ class CreateStateCommandTest extends BaseTestCase
             'abbreviation' => 'S',
             'type'         => State::TYPE_INTERIM,
             'responsible'  => State::RESPONSIBLE_KEEP,
-            'nextState'    => PHP_INT_MAX,
+            'nextState'    => self::UNKNOWN_ENTITY_ID,
         ]);
 
         $this->command_bus->handle($command);

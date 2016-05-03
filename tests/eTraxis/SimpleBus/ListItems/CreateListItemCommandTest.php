@@ -59,7 +59,7 @@ class CreateListItemCommandTest extends BaseTestCase
     public function testUnknownField()
     {
         $command = new CreateListItemCommand([
-            'field' => PHP_INT_MAX,
+            'field' => self::UNKNOWN_ENTITY_ID,
             'key'   => 8,
             'value' => 'Season 8',
         ]);

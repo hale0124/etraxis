@@ -46,7 +46,7 @@ class UpdateGroupCommandTest extends BaseTestCase
     public function testUnknownGroup()
     {
         $command = new UpdateGroupCommand([
-            'id'          => PHP_INT_MAX,
+            'id'          => self::UNKNOWN_ENTITY_ID,
             'name'        => 'Robots',
             'description' => 'Mechanical beings',
         ]);

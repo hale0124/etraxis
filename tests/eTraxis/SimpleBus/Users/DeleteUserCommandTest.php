@@ -51,7 +51,7 @@ class DeleteUserCommandTest extends BaseTestCase
     {
         $this->loginAs('hubert');
 
-        $command = new DeleteUserCommand(['id' => PHP_INT_MAX]);
+        $command = new DeleteUserCommand(['id' => self::UNKNOWN_ENTITY_ID]);
         $this->command_bus->handle($command);
     }
 }

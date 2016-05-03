@@ -60,7 +60,7 @@ class RemoveStateAssigneesCommandTest extends BaseTestCase
         self::assertNotNull($group);
 
         $command = new RemoveStateAssigneesCommand([
-            'id'     => PHP_INT_MAX,
+            'id'     => self::UNKNOWN_ENTITY_ID,
             'groups' => [$group->getId()],
         ]);
 

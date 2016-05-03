@@ -97,7 +97,7 @@ class SetRoleStateTransitionsCommandTest extends BaseTestCase
         self::assertNotNull($state_delivered);
 
         $command = new SetRoleStateTransitionsCommand([
-            'id'          => PHP_INT_MAX,
+            'id'          => self::UNKNOWN_ENTITY_ID,
             'role'        => SystemRole::RESPONSIBLE,
             'transitions' => [$state_delivered->getId()],
         ]);

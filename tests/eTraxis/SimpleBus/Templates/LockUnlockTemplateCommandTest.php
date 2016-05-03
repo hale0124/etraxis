@@ -53,7 +53,7 @@ class LockUnlockTemplateCommandTest extends BaseTestCase
     {
         $this->loginAs('hubert');
 
-        $command = new LockTemplateCommand(['id' => PHP_INT_MAX]);
+        $command = new LockTemplateCommand(['id' => self::UNKNOWN_ENTITY_ID]);
         $this->command_bus->handle($command);
     }
 
@@ -65,7 +65,7 @@ class LockUnlockTemplateCommandTest extends BaseTestCase
     {
         $this->loginAs('hubert');
 
-        $command = new UnlockTemplateCommand(['id' => PHP_INT_MAX]);
+        $command = new UnlockTemplateCommand(['id' => self::UNKNOWN_ENTITY_ID]);
         $this->command_bus->handle($command);
     }
 }

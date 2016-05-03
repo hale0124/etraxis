@@ -60,7 +60,7 @@ class UpdateStateCommandTest extends BaseTestCase
     public function testUnknownState()
     {
         $command = new UpdateStateCommand([
-            'id'           => PHP_INT_MAX,
+            'id'           => self::UNKNOWN_ENTITY_ID,
             'name'         => 'Completed',
             'abbreviation' => 'C',
             'responsible'  => State::RESPONSIBLE_KEEP,
@@ -83,7 +83,7 @@ class UpdateStateCommandTest extends BaseTestCase
             'name'         => 'Completed',
             'abbreviation' => 'C',
             'responsible'  => State::RESPONSIBLE_KEEP,
-            'nextState'    => PHP_INT_MAX,
+            'nextState'    => self::UNKNOWN_ENTITY_ID,
         ]);
 
         $this->command_bus->handle($command);

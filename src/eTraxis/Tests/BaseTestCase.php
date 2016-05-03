@@ -22,6 +22,13 @@ use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
  */
 class BaseTestCase extends WebTestCase
 {
+    /**
+     * Maximum value of signed 32-bits integer which can be used as an ID of non-existing entity.
+     * The "PHP_INT_MAX" cannot be used as it causes "value 9223372036854775807 is out of range for type integer"
+     * SQL driver error for PostgreSQL on 64-bits platforms.
+     */
+    const UNKNOWN_ENTITY_ID = 0x7FFFFFFF;
+
     /** @var \Symfony\Bundle\FrameworkBundle\Client */
     protected $client;
 

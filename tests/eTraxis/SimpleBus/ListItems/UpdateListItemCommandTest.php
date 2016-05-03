@@ -56,7 +56,7 @@ class UpdateListItemCommandTest extends BaseTestCase
     public function testUnknownItemByField()
     {
         $command = new UpdateListItemCommand([
-            'field' => PHP_INT_MAX,
+            'field' => self::UNKNOWN_ENTITY_ID,
             'key'   => 1,
             'value' => 'Season 0',
         ]);

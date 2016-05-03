@@ -56,7 +56,7 @@ class RemoveUsersCommandTest extends BaseTestCase
     public function testNotFound()
     {
         $command = new RemoveUsersCommand([
-            'id'    => PHP_INT_MAX,
+            'id'    => self::UNKNOWN_ENTITY_ID,
             'users' => [1, 2, 3],
         ]);
 

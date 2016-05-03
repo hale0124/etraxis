@@ -52,7 +52,7 @@ class RemoveGroupsCommandTest extends BaseTestCase
     public function testNotFound()
     {
         $command = new RemoveGroupsCommand([
-            'id'     => PHP_INT_MAX,
+            'id'     => self::UNKNOWN_ENTITY_ID,
             'groups' => [1, 2, 3],
         ]);
 

@@ -150,7 +150,7 @@ class SetOrderFieldCommandTest extends BaseTestCase
     public function testNotFound()
     {
         $command = new SetOrderFieldCommand([
-            'id'    => PHP_INT_MAX,
+            'id'    => self::UNKNOWN_ENTITY_ID,
             'order' => 1,
         ]);
 

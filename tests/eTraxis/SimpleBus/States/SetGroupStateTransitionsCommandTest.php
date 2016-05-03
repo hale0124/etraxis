@@ -109,7 +109,7 @@ class SetGroupStateTransitionsCommandTest extends BaseTestCase
         self::assertNotNull($group);
 
         $command = new SetGroupStateTransitionsCommand([
-            'id'          => PHP_INT_MAX,
+            'id'          => self::UNKNOWN_ENTITY_ID,
             'group'       => $group->getId(),
             'transitions' => [$state_delivered->getId()],
         ]);
@@ -133,7 +133,7 @@ class SetGroupStateTransitionsCommandTest extends BaseTestCase
 
         $command = new SetGroupStateTransitionsCommand([
             'id'          => $state_new->getId(),
-            'group'       => PHP_INT_MAX,
+            'group'       => self::UNKNOWN_ENTITY_ID,
             'transitions' => [$state_delivered->getId()],
         ]);
 
