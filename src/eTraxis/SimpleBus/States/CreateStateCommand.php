@@ -30,7 +30,7 @@ class CreateStateCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\EntityId()
+     * @Assert\Regex("/^\d+$/")
      */
     public $template;
 
@@ -59,7 +59,7 @@ class CreateStateCommand
     public $responsible;
 
     /**
-     * @Assert\EntityId()
+     * @Assert\Regex("/^\d+$/")
      */
     public $nextState;
 }

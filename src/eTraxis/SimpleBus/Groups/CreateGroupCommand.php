@@ -26,7 +26,7 @@ class CreateGroupCommand
     use MessageTrait;
 
     /**
-     * @Assert\EntityId()
+     * @Assert\Regex("/^\d+$/")
      */
     public $project;
 

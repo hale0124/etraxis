@@ -25,7 +25,7 @@ class DeleteTemplateCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\EntityId()
+     * @Assert\Regex("/^\d+$/")
      */
     public $id;
 }

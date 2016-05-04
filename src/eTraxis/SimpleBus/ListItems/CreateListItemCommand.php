@@ -27,7 +27,7 @@ class CreateListItemCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\EntityId()
+     * @Assert\Regex("/^\d+$/")
      */
     public $field;
 

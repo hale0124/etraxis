@@ -29,7 +29,7 @@ class EnableUsersCommand
      * @Assert\Count(min = "1", max = "100")
      * @Assert\All({
      *     @Assert\NotBlank(),
-     *     @Assert\EntityId()
+     *     @Assert\Regex("/^\d+$/")
      * })
      */
     public $ids;

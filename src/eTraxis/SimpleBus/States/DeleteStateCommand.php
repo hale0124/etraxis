@@ -25,7 +25,7 @@ class DeleteStateCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\EntityId()
+     * @Assert\Regex("/^\d+$/")
      */
     public $id;
 }

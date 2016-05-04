@@ -25,7 +25,7 @@ class LockTemplateCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\EntityId()
+     * @Assert\Regex("/^\d+$/")
      */
     public $id;
 }

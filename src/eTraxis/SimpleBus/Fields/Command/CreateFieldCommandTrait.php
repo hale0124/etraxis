@@ -23,7 +23,7 @@ trait CreateFieldCommandTrait
 {
     /**
      * @Assert\NotBlank()
-     * @Assert\EntityId()
+     * @Assert\Regex("/^\d+$/")
      */
     public $state;
 }

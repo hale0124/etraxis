@@ -31,7 +31,7 @@ class CreateTemplateCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\EntityId()
+     * @Assert\Regex("/^\d+$/")
      */
     public $project;
 

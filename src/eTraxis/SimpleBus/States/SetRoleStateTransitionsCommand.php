@@ -27,7 +27,7 @@ class SetRoleStateTransitionsCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\EntityId()
+     * @Assert\Regex("/^\d+$/")
      */
     public $id;
 
@@ -42,7 +42,7 @@ class SetRoleStateTransitionsCommand
      * @Assert\Count(min = "0", max = "100")
      * @Assert\All({
      *     @Assert\NotBlank(),
-     *     @Assert\EntityId()
+     *     @Assert\Regex("/^\d+$/")
      * })
      */
     public $transitions;

@@ -27,7 +27,7 @@ class SetRoleTemplatePermissionsCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\EntityId()
+     * @Assert\Regex("/^\d+$/")
      */
     public $id;
 

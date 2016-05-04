@@ -27,13 +27,13 @@ class SetGroupStateTransitionsCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\EntityId()
+     * @Assert\Regex("/^\d+$/")
      */
     public $id;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\EntityId()
+     * @Assert\Regex("/^\d+$/")
      */
     public $group;
 
@@ -42,7 +42,7 @@ class SetGroupStateTransitionsCommand
      * @Assert\Count(min = "0", max = "100")
      * @Assert\All({
      *     @Assert\NotBlank(),
-     *     @Assert\EntityId()
+     *     @Assert\Regex("/^\d+$/")
      * })
      */
     public $transitions;

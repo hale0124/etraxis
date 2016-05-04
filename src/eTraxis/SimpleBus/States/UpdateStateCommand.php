@@ -29,7 +29,7 @@ class UpdateStateCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\EntityId()
+     * @Assert\Regex("/^\d+$/")
      */
     public $id;
 
@@ -52,7 +52,7 @@ class UpdateStateCommand
     public $responsible;
 
     /**
-     * @Assert\EntityId()
+     * @Assert\Regex("/^\d+$/")
      */
     public $nextState;
 }

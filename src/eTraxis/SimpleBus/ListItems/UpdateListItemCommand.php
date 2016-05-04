@@ -27,7 +27,7 @@ class UpdateListItemCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\EntityId()
+     * @Assert\Regex("/^\d+$/")
      */
     public $field;
 
