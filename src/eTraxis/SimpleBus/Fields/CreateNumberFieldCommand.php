@@ -11,34 +11,10 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
 /**
  * Creates new "number" field.
- *
- * @property    int $minValue     Minimum allowed value.
- * @property    int $maxValue     Maximum allowed value.
- * @property    int $defaultValue Default value of the field.
  */
-class CreateNumberFieldCommand extends CreateFieldBaseCommand
+class CreateNumberFieldCommand extends Command\NumberFieldCommand
 {
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Range(min = "-1000000000", max = "1000000000")
-     * @Assert\Regex("/^(\-|\+)?\d+$/")
-     */
-    public $minValue;
-
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Range(min = "-1000000000", max = "1000000000")
-     * @Assert\Regex("/^(\-|\+)?\d+$/")
-     */
-    public $maxValue;
-
-    /**
-     * @Assert\Range(min = "-1000000000", max = "1000000000")
-     * @Assert\Regex("/^(\-|\+)?\d+$/")
-     */
-    public $defaultValue;
+    use Command\CreateFieldCommandTrait;
 }

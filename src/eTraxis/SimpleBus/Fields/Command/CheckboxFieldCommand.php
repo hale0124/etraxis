@@ -9,12 +9,19 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\SimpleBus\Fields;
+namespace eTraxis\SimpleBus\Fields\Command;
+
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Updates specified "number" field.
+ * Create/update command for "checkbox" field.
+ *
+ * @property    bool $defaultValue Default value of the field.
  */
-class UpdateNumberFieldCommand extends Command\NumberFieldCommand
+class CheckboxFieldCommand extends FieldCommand
 {
-    use Command\UpdateFieldCommandTrait;
+    /**
+     * @Assert\NotNull()
+     */
+    public $defaultValue;
 }

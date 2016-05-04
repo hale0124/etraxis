@@ -9,12 +9,21 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\SimpleBus\Fields;
+namespace eTraxis\SimpleBus\Fields\Command;
+
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Updates specified "number" field.
+ * Command trait.
+ * Contains properties which are common for all commands to update specified field.
+ *
+ * @property    int $id Field ID.
  */
-class UpdateNumberFieldCommand extends Command\NumberFieldCommand
+trait UpdateFieldCommandTrait
 {
-    use Command\UpdateFieldCommandTrait;
+    /**
+     * @Assert\NotBlank()
+     * @Assert\EntityId()
+     */
+    public $id;
 }

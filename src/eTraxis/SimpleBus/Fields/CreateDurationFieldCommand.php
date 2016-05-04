@@ -11,31 +11,10 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
 /**
  * Creates new "duration" field.
- *
- * @property    int $minValue     Minimum allowed value.
- * @property    int $maxValue     Maximum allowed value.
- * @property    int $defaultValue Default value of the field.
  */
-class CreateDurationFieldCommand extends CreateFieldBaseCommand
+class CreateDurationFieldCommand extends Command\DurationFieldCommand
 {
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Regex("/^\d{1,6}:[0-5][0-9]$/")
-     */
-    public $minValue;
-
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Regex("/^\d{1,6}:[0-5][0-9]$/")
-     */
-    public $maxValue;
-
-    /**
-     * @Assert\Regex("/^\d{1,6}:[0-5][0-9]$/")
-     */
-    public $defaultValue;
+    use Command\CreateFieldCommandTrait;
 }

@@ -11,31 +11,10 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
 /**
  * Creates new "decimal" field.
- *
- * @property    float $minValue     Minimum allowed value.
- * @property    float $maxValue     Maximum allowed value.
- * @property    float $defaultValue Default value of the field.
  */
-class CreateDecimalFieldCommand extends CreateFieldBaseCommand
+class CreateDecimalFieldCommand extends Command\DecimalFieldCommand
 {
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Regex("/^(\-|\+)?\d{1,10}(\.\d{1,10})?$/")
-     */
-    public $minValue;
-
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Regex("/^(\-|\+)?\d{1,10}(\.\d{1,10})?$/")
-     */
-    public $maxValue;
-
-    /**
-     * @Assert\Regex("/^(\-|\+)?\d{1,10}(\.\d{1,10})?$/")
-     */
-    public $defaultValue;
+    use Command\CreateFieldCommandTrait;
 }

@@ -14,6 +14,7 @@ namespace eTraxis\SimpleBus\Fields;
 /**
  * Creates new "record" field.
  */
-class CreateRecordFieldCommand extends CreateFieldBaseCommand
+class CreateRecordFieldCommand extends Command\RecordFieldCommand
 {
+    use Command\CreateFieldCommandTrait;
 }

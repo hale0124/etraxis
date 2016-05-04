@@ -11,17 +11,10 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
-use Symfony\Component\Validator\Constraints as Assert;
-
 /**
  * Creates new "checkbox" field.
- *
- * @property    bool $defaultValue Default value of the field.
  */
-class CreateCheckboxFieldCommand extends CreateFieldBaseCommand
+class CreateCheckboxFieldCommand extends Command\CheckboxFieldCommand
 {
-    /**
-     * @Assert\NotNull()
-     */
-    public $defaultValue;
+    use Command\CreateFieldCommandTrait;
 }

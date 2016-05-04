@@ -9,30 +9,24 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\SimpleBus\Fields;
+namespace eTraxis\SimpleBus\Fields\Command;
 
 use SimpleBus\MessageTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Base command to create new field.
+ * Base command.
+ * Contains properties which are common for all commands to create or update a field.
  *
- * @property    int    $state        ID of the field's state.
  * @property    string $name         Field name.
  * @property    string $description  Description.
  * @property    bool   $required     Whether the field is required.
  * @property    bool   $guestAccess  Whether to grant view access to anonymous.
  * @property    bool   $showInEmails Whether to show the field in email notifications.
  */
-class CreateFieldBaseCommand
+class FieldCommand
 {
     use MessageTrait;
-
-    /**
-     * @Assert\NotBlank()
-     * @Assert\EntityId()
-     */
-    public $state;
 
     /**
      * @Assert\NotBlank()

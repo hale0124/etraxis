@@ -9,12 +9,11 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\SimpleBus\Fields;
+namespace eTraxis\SimpleBus\Fields\Command;
 
 /**
- * Updates specified "number" field.
+ * Create/update command for "list" field.
  */
-class UpdateNumberFieldCommand extends Command\NumberFieldCommand
+class ListFieldCommand extends FieldCommand
 {
-    use Command\UpdateFieldCommandTrait;
 }

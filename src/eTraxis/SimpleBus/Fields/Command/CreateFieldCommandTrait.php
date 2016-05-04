@@ -9,22 +9,21 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\SimpleBus\Fields;
+namespace eTraxis\SimpleBus\Fields\Command;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Updates specified "list" field.
+ * Command trait.
+ * Contains properties which are common for all commands to create new field.
  *
- * @property    int $defaultValue Default value of the field.
+ * @property    int $state ID of the field's state.
  */
-class UpdateListFieldCommand extends Command\ListFieldCommand
+trait CreateFieldCommandTrait
 {
-    use Command\UpdateFieldCommandTrait;
-
     /**
-     * @Assert\Regex("/^(\-|\+)?\d+$/")
-     * @Assert\GreaterThan(value = "0")
+     * @Assert\NotBlank()
+     * @Assert\EntityId()
      */
-    public $defaultValue;
+    public $state;
 }

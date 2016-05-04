@@ -14,6 +14,7 @@ namespace eTraxis\SimpleBus\Fields;
 /**
  * Updates specified "record" field.
  */
-class UpdateRecordFieldCommand extends UpdateFieldBaseCommand
+class UpdateRecordFieldCommand extends Command\RecordFieldCommand
 {
+    use Command\UpdateFieldCommandTrait;
 }

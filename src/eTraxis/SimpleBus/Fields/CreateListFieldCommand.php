@@ -14,6 +14,7 @@ namespace eTraxis\SimpleBus\Fields;
 /**
  * Creates new "list" field.
  */
-class CreateListFieldCommand extends CreateFieldBaseCommand
+class CreateListFieldCommand extends Command\ListFieldCommand
 {
+    use Command\CreateFieldCommandTrait;
 }
