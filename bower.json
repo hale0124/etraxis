@@ -3,7 +3,7 @@
     "license": "GPL-3.0",
     "dependencies": {
         "normalize.css": "4.1.1",
-        "unsemantic": "1.0.3",
+        "unsemantic": "1.1.2",
         "jquery": "2.2.3",
         "jquery.ui": "1.11.4",
         "blockui": "2.70",
