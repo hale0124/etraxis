@@ -49,7 +49,7 @@ class UsersDataTable implements DataTableHandlerInterface
     /**
      * {@inheritdoc}
      */
-    public function handle(DataTableQuery $request)
+    public function handle(DataTableQuery $request): DataTableResults
     {
         $results = new DataTableResults();
 

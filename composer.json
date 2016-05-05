@@ -33,7 +33,7 @@
         "ramsey/uuid"                          : "^3.0",
         "arodygin/php-dictionary"              : "^1.0",
         "arodygin/simplebus-bundle"            : "^1.0",
-        "arodygin/datatables-bundle"           : "^1.2"
+        "arodygin/datatables-bundle"           : "^2.0"
     },
     "require-dev": {
         "sensio/generator-bundle"              : "^3.0",

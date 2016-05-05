@@ -4,25 +4,25 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "31b8bb37af99f3200903ba3f8f494b6e",
-    "content-hash": "03fc2d3b8950e9a7920e0252b2d04ac9",
+    "hash": "e0e92b67681cf867357491497a2886a9",
+    "content-hash": "c603189eb69a8520f6d0fd794e9c7213",
     "packages": [
         {
             "name": "arodygin/datatables-bundle",
-            "version": "1.2.4",
+            "version": "2.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/arodygin/DataTablesBundle.git",
-                "reference": "83de4a3cc039790c6af531e6a022f220a2d71ccc"
+                "reference": "30cf6c5cb0a23458109480c47aaf70069faadf56"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arodygin/DataTablesBundle/zipball/83de4a3cc039790c6af531e6a022f220a2d71ccc",
-                "reference": "83de4a3cc039790c6af531e6a022f220a2d71ccc",
+                "url": "https://api.github.com/repos/arodygin/DataTablesBundle/zipball/30cf6c5cb0a23458109480c47aaf70069faadf56",
+                "reference": "30cf6c5cb0a23458109480c47aaf70069faadf56",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.5",
+                "php": ">=7.0",
                 "psr/log": "^1.0",
                 "symfony/config": "^2.8|^3.0",
                 "symfony/dependency-injection": "^2.8|^3.0",
@@ -37,7 +37,7 @@
                 "doctrine/annotations": "^1.2",
                 "doctrine/cache": "^1.5",
                 "fabpot/php-cs-fixer": "^1.10",
-                "phpunit/phpunit": "^4.1"
+                "phpunit/phpunit": "^5.0"
             },
             "type": "library",
             "autoload": {
@@ -58,7 +58,7 @@
                 "datatable",
                 "datatables"
             ],
-            "time": "2016-05-02 02:57:28"
+            "time": "2016-05-05 04:29:17"
         },
         {
             "name": "arodygin/php-dictionary",

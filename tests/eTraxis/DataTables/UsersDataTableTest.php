@@ -78,7 +78,7 @@ class UsersDataTableTest extends BaseTestCase
                 ['column' => UsersDataTable::COLUMN_USERNAME, 'dir' => 'asc'],
             ],
             'columns' => [
-                ['data' => UsersDataTable::COLUMN_USERNAME, 'search' => ['value' => 'eR', 'regex' => 'false'], 'name' => null, 'searchable' => 'true', 'orderable' => 'true'],
+                ['data' => UsersDataTable::COLUMN_USERNAME, 'search' => ['value' => 'eR', 'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
             ],
         ]);
 
@@ -110,7 +110,7 @@ class UsersDataTableTest extends BaseTestCase
                 ['column' => UsersDataTable::COLUMN_USERNAME, 'dir' => 'asc'],
             ],
             'columns' => [
-                ['data' => UsersDataTable::COLUMN_FULLNAME, 'search' => ['value' => 'dr.', 'regex' => 'false'], 'name' => null, 'searchable' => 'true', 'orderable' => 'true'],
+                ['data' => UsersDataTable::COLUMN_FULLNAME, 'search' => ['value' => 'dr.', 'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
             ],
         ]);
 
@@ -143,7 +143,7 @@ class UsersDataTableTest extends BaseTestCase
                 ['column' => UsersDataTable::COLUMN_USERNAME, 'dir' => 'asc'],
             ],
             'columns' => [
-                ['data' => UsersDataTable::COLUMN_EMAIL, 'search' => ['value' => 'NimBUs', 'regex' => 'false'], 'name' => null, 'searchable' => 'true', 'orderable' => 'true'],
+                ['data' => UsersDataTable::COLUMN_EMAIL, 'search' => ['value' => 'NimBUs', 'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
             ],
         ]);
 
@@ -174,7 +174,7 @@ class UsersDataTableTest extends BaseTestCase
                 ['column' => UsersDataTable::COLUMN_USERNAME, 'dir' => 'asc'],
             ],
             'columns' => [
-                ['data' => UsersDataTable::COLUMN_PERMISSIONS, 'search' => ['value' => 'Admin', 'regex' => 'false'], 'name' => null, 'searchable' => 'true', 'orderable' => 'true'],
+                ['data' => UsersDataTable::COLUMN_PERMISSIONS, 'search' => ['value' => 'Admin', 'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
             ],
         ]);
 
@@ -202,7 +202,7 @@ class UsersDataTableTest extends BaseTestCase
                 ['column' => UsersDataTable::COLUMN_USERNAME, 'dir' => 'asc'],
             ],
             'columns' => [
-                ['data' => UsersDataTable::COLUMN_PERMISSIONS, 'search' => ['value' => 'User', 'regex' => 'false'], 'name' => null, 'searchable' => 'true', 'orderable' => 'true'],
+                ['data' => UsersDataTable::COLUMN_PERMISSIONS, 'search' => ['value' => 'User', 'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
             ],
         ]);
 
@@ -226,7 +226,7 @@ class UsersDataTableTest extends BaseTestCase
                 ['column' => UsersDataTable::COLUMN_USERNAME, 'dir' => 'asc'],
             ],
             'columns' => [
-                ['data' => UsersDataTable::COLUMN_AUTHENTICATION, 'search' => ['value' => 'LDAP', 'regex' => 'false'], 'name' => null, 'searchable' => 'true', 'orderable' => 'true'],
+                ['data' => UsersDataTable::COLUMN_AUTHENTICATION, 'search' => ['value' => 'LDAP', 'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
             ],
         ]);
 
@@ -254,7 +254,7 @@ class UsersDataTableTest extends BaseTestCase
                 ['column' => UsersDataTable::COLUMN_USERNAME, 'dir' => 'asc'],
             ],
             'columns' => [
-                ['data' => UsersDataTable::COLUMN_AUTHENTICATION, 'search' => ['value' => 'eTraxis', 'regex' => 'false'], 'name' => null, 'searchable' => 'true', 'orderable' => 'true'],
+                ['data' => UsersDataTable::COLUMN_AUTHENTICATION, 'search' => ['value' => 'eTraxis', 'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
             ],
         ]);
 
@@ -280,7 +280,7 @@ class UsersDataTableTest extends BaseTestCase
                 ['column' => UsersDataTable::COLUMN_USERNAME, 'dir' => 'asc'],
             ],
             'columns' => [
-                ['data' => UsersDataTable::COLUMN_DESCRIPTION, 'search' => ['value' => 'tOR', 'regex' => 'false'], 'name' => null, 'searchable' => 'true', 'orderable' => 'true'],
+                ['data' => UsersDataTable::COLUMN_DESCRIPTION, 'search' => ['value' => 'tOR', 'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
             ],
         ]);
 
@@ -313,9 +313,9 @@ class UsersDataTableTest extends BaseTestCase
                 ['column' => UsersDataTable::COLUMN_USERNAME, 'dir' => 'asc'],
             ],
             'columns' => [
-                ['data' => UsersDataTable::COLUMN_USERNAME, 'search' => ['value' => '',              'regex' => 'false'], 'name' => null, 'searchable' => 'true', 'orderable' => 'true'],
-                ['data' => UsersDataTable::COLUMN_FULLNAME, 'search' => ['value' => 'eR',            'regex' => 'false'], 'name' => null, 'searchable' => 'true', 'orderable' => 'true'],
-                ['data' => UsersDataTable::COLUMN_EMAIL,    'search' => ['value' => 'plANeTexprESS', 'regex' => 'false'], 'name' => null, 'searchable' => 'true', 'orderable' => 'true'],
+                ['data' => UsersDataTable::COLUMN_USERNAME, 'search' => ['value' => '',              'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
+                ['data' => UsersDataTable::COLUMN_FULLNAME, 'search' => ['value' => 'eR',            'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
+                ['data' => UsersDataTable::COLUMN_EMAIL,    'search' => ['value' => 'plANeTexprESS', 'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
             ],
         ]);
 
