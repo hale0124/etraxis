@@ -12,6 +12,7 @@
 namespace eTraxis\SimpleBus\Fields\Command;
 
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\Mapping\ClassMetadata;
 
 /**
  * Command trait.
@@ -26,4 +27,17 @@ trait CreateFieldCommandTrait
      * @Assert\Regex("/^\d+$/")
      */
     public $state;
+
+    /**
+     * Validator annotations are ignored in traits, so reconfigure them evidently.
+     *
+     * @param   ClassMetadata $metadata
+     */
+    public static function loadValidatorMetadata(ClassMetadata $metadata)
+    {
+        $metadata
+            ->addPropertyConstraint('state', new Assert\NotBlank())
+            ->addPropertyConstraint('state', new Assert\Regex(['pattern' => '/^\d+$/']))
+        ;
+    }
 }
