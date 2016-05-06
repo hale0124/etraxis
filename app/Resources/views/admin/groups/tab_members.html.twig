@@ -2,9 +2,9 @@
 
     <div class="grid-45">
         <fieldset>
-            <legend>{{ 'members'|trans }}</legend>
-            <select id="users" size="20" multiple title="{{ 'members'|trans }}" class="grid-100 mobile-grid-100">
-                {% for user in group.members %}
+            <legend>{{ 'others'|trans }}</legend>
+            <select id="others" size="20" multiple title="{{ 'others'|trans }}" class="grid-100 mobile-grid-100">
+                {% for user in group.nonMembers %}
                     <option value="{{ user.id }}">{{ user.fullname }} ({{ user.username }})</option>
                 {% endfor %}
             </select>
@@ -12,11 +12,11 @@
     </div>
 
     <div class="grid-10 text-center">
-        <button type="button" class="grid-row grid-100" onclick="GroupsApp.removeUsers({{ group.id }})">
+        <button type="button" class="grid-row grid-100" onclick="GroupsApp.addUsers({{ group.id }})">
             <span class="hide-on-mobile">&gt;&gt;</span>
             <span class="hide-on-desktop ui-icon ui-icon-arrowthick-1-s"></span>
         </button>
-        <button type="button" class="grid-row grid-100" onclick="GroupsApp.addUsers({{ group.id }})">
+        <button type="button" class="grid-row grid-100" onclick="GroupsApp.removeUsers({{ group.id }})">
             <span class="hide-on-mobile">&lt;&lt;</span>
             <span class="hide-on-desktop ui-icon ui-icon-arrowthick-1-n">&lt;&lt;</span>
         </button>
@@ -24,9 +24,9 @@
 
     <div class="grid-45">
         <fieldset>
-            <legend>{{ 'others'|trans }}</legend>
-            <select id="others" size="20" multiple title="{{ 'others'|trans }}" class="grid-100 mobile-grid-100">
-                {% for user in group.nonMembers %}
+            <legend>{{ 'members'|trans }}</legend>
+            <select id="users" size="20" multiple title="{{ 'members'|trans }}" class="grid-100 mobile-grid-100">
+                {% for user in group.members %}
                     <option value="{{ user.id }}">{{ user.fullname }} ({{ user.username }})</option>
                 {% endfor %}
             </select>
