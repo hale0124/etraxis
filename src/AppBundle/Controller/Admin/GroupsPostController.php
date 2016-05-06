@@ -37,7 +37,7 @@ class GroupsPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request): JsonResponse
     {
         $data = $request->request->get('group');
 
@@ -57,7 +57,7 @@ class GroupsPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request, int $id): JsonResponse
     {
         $data = $request->request->get('group');
 
@@ -77,7 +77,7 @@ class GroupsPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function deleteAction(Request $request, $id)
+    public function deleteAction(Request $request, int $id): JsonResponse
     {
         $data = $request->request->all();
 
@@ -97,7 +97,7 @@ class GroupsPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function addUsersAction(Request $request, $id)
+    public function addUsersAction(Request $request, int $id): JsonResponse
     {
         $data = $request->request->all();
 
@@ -117,7 +117,7 @@ class GroupsPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function removeUsersAction(Request $request, $id)
+    public function removeUsersAction(Request $request, int $id): JsonResponse
     {
         $data = $request->request->all();
 

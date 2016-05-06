@@ -123,7 +123,7 @@ class Group extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
 
@@ -143,11 +143,11 @@ class Group extends Entity implements \JsonSerializable
     /**
      * Property setter.
      *
-     * @param   string $description
+     * @param   string|null $description
      *
      * @return  self
      */
-    public function setDescription($description)
+    public function setDescription(string $description = null)
     {
         $this->description = $description;
 
@@ -157,7 +157,7 @@ class Group extends Entity implements \JsonSerializable
     /**
      * Property getter.
      *
-     * @return  string
+     * @return  string|null
      */
     public function getDescription()
     {

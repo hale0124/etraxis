@@ -95,7 +95,7 @@ class ListItem
      *
      * @return  self
      */
-    public function setKey($key)
+    public function setKey(int $key)
     {
         $this->key = $key;
 
@@ -119,7 +119,7 @@ class ListItem
      *
      * @return  self
      */
-    public function setValue($value)
+    public function setValue(string $value)
     {
         $this->value = $value;
 

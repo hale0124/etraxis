@@ -35,9 +35,19 @@ class DurationField extends AbstractField
      *
      * @return  self
      */
-    public function setMinValue($value)
+    public function setMinValue(string $value)
     {
-        $this->field->getParameters()->setParameter1($value === null ? self::MIN_VALUE : $this->str2int($value));
+        $duration = $this->str2int($value);
+
+        if ($duration < self::MIN_VALUE) {
+            $duration = self::MIN_VALUE;
+        }
+
+        if ($duration > self::MAX_VALUE) {
+            $duration = self::MAX_VALUE;
+        }
+
+        $this->field->getParameters()->setParameter1($duration);
 
         return $this;
     }
@@ -59,9 +69,19 @@ class DurationField extends AbstractField
      *
      * @return  self
      */
-    public function setMaxValue($value)
+    public function setMaxValue(string $value)
     {
-        $this->field->getParameters()->setParameter2($value === null ? self::MAX_VALUE : $this->str2int($value));
+        $duration = $this->str2int($value);
+
+        if ($duration < self::MIN_VALUE) {
+            $duration = self::MIN_VALUE;
+        }
+
+        if ($duration > self::MAX_VALUE) {
+            $duration = self::MAX_VALUE;
+        }
+
+        $this->field->getParameters()->setParameter2($duration);
 
         return $this;
     }
@@ -83,7 +103,7 @@ class DurationField extends AbstractField
      *
      * @return  self
      */
-    public function setDefaultValue($value)
+    public function setDefaultValue(string $value = null)
     {
         $this->field->getParameters()->setDefaultValue($this->str2int($value));
 
@@ -107,7 +127,7 @@ class DurationField extends AbstractField
      *
      * @return  string|null String representation (e.g. for 127 it will be "2:07").
      */
-    protected function int2str($value)
+    protected function int2str(int $value = null)
     {
         if ($value === null) {
             return null;
@@ -131,7 +151,7 @@ class DurationField extends AbstractField
      *
      * @return  int|null Number of minutes (e.g. 127 for "2:07").
      */
-    protected function str2int($value)
+    protected function str2int(string $value = null)
     {
         if ($value === null) {
             return null;

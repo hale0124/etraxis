@@ -35,7 +35,7 @@ class NumberField extends AbstractField
      *
      * @return  self
      */
-    public function setMinValue($value)
+    public function setMinValue(int $value)
     {
         if ($value < self::MIN_VALUE) {
             $value = self::MIN_VALUE;
@@ -63,11 +63,11 @@ class NumberField extends AbstractField
     /**
      * Sets maximum allowed value of the field.
      *
-     * @param   string $value
+     * @param   int $value
      *
      * @return  self
      */
-    public function setMaxValue($value)
+    public function setMaxValue(int $value)
     {
         if ($value < self::MIN_VALUE) {
             $value = self::MIN_VALUE;
@@ -85,7 +85,7 @@ class NumberField extends AbstractField
     /**
      * Returns maximum allowed value of the field.
      *
-     * @return  string
+     * @return  int
      */
     public function getMaxValue()
     {
@@ -95,11 +95,11 @@ class NumberField extends AbstractField
     /**
      * Sets default value of the field.
      *
-     * @param   string|null $value
+     * @param   int|null $value
      *
      * @return  self
      */
-    public function setDefaultValue($value)
+    public function setDefaultValue(int $value = null)
     {
         if ($value !== null) {
 
@@ -120,7 +120,7 @@ class NumberField extends AbstractField
     /**
      * Returns default value of the field.
      *
-     * @return  string|null
+     * @return  int|null
      */
     public function getDefaultValue()
     {

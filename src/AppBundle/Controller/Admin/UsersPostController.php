@@ -39,7 +39,7 @@ class UsersPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function newAction(Request $request)
+    public function newAction(Request $request): JsonResponse
     {
         $data = $request->request->get('user');
 
@@ -63,7 +63,7 @@ class UsersPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function editAction(Request $request, User $user)
+    public function editAction(Request $request, User $user): JsonResponse
     {
         /** @var \Doctrine\ORM\EntityManagerInterface $manager */
         $manager = $this->getDoctrine()->getManager();
@@ -113,7 +113,7 @@ class UsersPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function deleteAction($id)
+    public function deleteAction(int $id): JsonResponse
     {
         $command = new Users\DeleteUserCommand(['id' => $id]);
         $this->getCommandBus()->handle($command);
@@ -130,7 +130,7 @@ class UsersPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function disableAction(Request $request)
+    public function disableAction(Request $request): JsonResponse
     {
         $data = $request->request->all();
 
@@ -149,7 +149,7 @@ class UsersPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function enableAction(Request $request)
+    public function enableAction(Request $request): JsonResponse
     {
         $data = $request->request->all();
 
@@ -168,7 +168,7 @@ class UsersPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function unlockAction($id)
+    public function unlockAction(int $id): JsonResponse
     {
         $command = new Users\UnlockUserCommand(['id' => $id]);
         $this->getCommandBus()->handle($command);
@@ -186,7 +186,7 @@ class UsersPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function addGroupsAction(Request $request, $id)
+    public function addGroupsAction(Request $request, int $id): JsonResponse
     {
         $data = $request->request->all();
 
@@ -206,7 +206,7 @@ class UsersPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function removeGroupsAction(Request $request, $id)
+    public function removeGroupsAction(Request $request, int $id): JsonResponse
     {
         $data = $request->request->all();
 

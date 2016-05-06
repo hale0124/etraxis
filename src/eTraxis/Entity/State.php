@@ -159,7 +159,7 @@ class State extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
 
@@ -183,7 +183,7 @@ class State extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setAbbreviation($abbreviation)
+    public function setAbbreviation(string $abbreviation)
     {
         $this->abbreviation = $abbreviation;
 
@@ -207,7 +207,7 @@ class State extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setType($type)
+    public function setType(int $type)
     {
         if (Dictionary\StateType::has($type)) {
             $this->type = $type;
@@ -233,7 +233,7 @@ class State extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setResponsible($responsible)
+    public function setResponsible(int $responsible)
     {
         if (Dictionary\StateResponsible::has($responsible)) {
             $this->responsible = $responsible;
@@ -297,7 +297,7 @@ class State extends Entity implements \JsonSerializable
      *
      * @return  State[] List of states.
      */
-    public function getRoleTransitions($role)
+    public function getRoleTransitions(int $role)
     {
         $query = $this->manager->createQueryBuilder();
 

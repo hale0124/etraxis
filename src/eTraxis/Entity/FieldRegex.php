@@ -57,11 +57,11 @@ class FieldRegex
     /**
      * Property setter.
      *
-     * @param   string $check
+     * @param   string|null $check
      *
      * @return  self
      */
-    public function setCheck($check)
+    public function setCheck(string $check = null)
     {
         $this->check = $check;
 
@@ -71,7 +71,7 @@ class FieldRegex
     /**
      * Property getter.
      *
-     * @return  string
+     * @return  string|null
      */
     public function getCheck()
     {
@@ -81,11 +81,11 @@ class FieldRegex
     /**
      * Property setter.
      *
-     * @param   string $search
+     * @param   string|null $search
      *
      * @return  self
      */
-    public function setSearch($search)
+    public function setSearch(string $search = null)
     {
         $this->search = $search;
 
@@ -95,7 +95,7 @@ class FieldRegex
     /**
      * Property getter.
      *
-     * @return  string
+     * @return  string|null
      */
     public function getSearch()
     {
@@ -105,11 +105,11 @@ class FieldRegex
     /**
      * Property setter.
      *
-     * @param   string $replace
+     * @param   string|null $replace
      *
      * @return  self
      */
-    public function setReplace($replace)
+    public function setReplace(string $replace = null)
     {
         $this->replace = $replace;
 
@@ -119,7 +119,7 @@ class FieldRegex
     /**
      * Property getter.
      *
-     * @return  string
+     * @return  string|null
      */
     public function getReplace()
     {

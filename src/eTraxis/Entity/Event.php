@@ -178,7 +178,7 @@ class Event
      *
      * @return  self
      */
-    public function setType($type)
+    public function setType(int $type)
     {
         $this->type = $type;
 
@@ -208,11 +208,11 @@ class Event
     /**
      * Property setter.
      *
-     * @param   int $parameter
+     * @param   int|null $parameter
      *
      * @return  self
      */
-    public function setParameter($parameter)
+    public function setParameter(int $parameter = null)
     {
         $this->parameter = $parameter;
 
@@ -222,7 +222,7 @@ class Event
     /**
      * Property getter.
      *
-     * @return  int
+     * @return  int|null
      */
     public function getParameter()
     {

@@ -47,7 +47,7 @@ class TranslationsCommand extends Command
      *
      * @param   string $basename Base filename of translation files.
      */
-    protected function rename($basename)
+    protected function rename(string $basename)
     {
         $locales = [
             'en_AU',
@@ -119,7 +119,7 @@ class TranslationsCommand extends Command
      *
      * @param   string $filename
      */
-    protected function comment($filename)
+    protected function comment(string $filename)
     {
         if (is_file("app/Resources/translations/{$filename}")) {
 

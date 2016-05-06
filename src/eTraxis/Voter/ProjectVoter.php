@@ -52,7 +52,7 @@ class ProjectVoter extends Voter
 
     /**
      * {@inheritdoc}
-     * @codeCoverageIgnoreStart
+     * @codeCoverageIgnore
      */
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
@@ -74,7 +74,7 @@ class ProjectVoter extends Voter
      *
      * @return  bool
      */
-    protected function isDeleteGranted(Project $subject)
+    protected function isDeleteGranted(Project $subject): bool
     {
         // Number of records belong to the project.
         $query = $this->manager->createQueryBuilder()

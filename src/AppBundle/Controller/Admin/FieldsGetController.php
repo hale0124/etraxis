@@ -41,7 +41,7 @@ class FieldsGetController extends Controller
      *
      * @return  JsonResponse
      */
-    public function listAction(State $state)
+    public function listAction(State $state): JsonResponse
     {
         return new JsonResponse($state->getFields());
     }
@@ -56,7 +56,7 @@ class FieldsGetController extends Controller
      *
      * @return  Response
      */
-    public function viewAction(Request $request, Field $field)
+    public function viewAction(Request $request, Field $field): Response
     {
         return $this->render('admin/fields/view.html.twig', [
             'field' => $field,
@@ -73,7 +73,7 @@ class FieldsGetController extends Controller
      *
      * @return  Response
      */
-    public function tabDetailsAction(Field $field)
+    public function tabDetailsAction(Field $field): Response
     {
         /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
         $authChecker = $this->get('security.authorization_checker');
@@ -96,7 +96,7 @@ class FieldsGetController extends Controller
      *
      * @return  Response
      */
-    public function newAction($id)
+    public function newAction(int $id): Response
     {
         $form = $this->createForm(FieldForm::class, null, [
             'action' => $this->generateUrl('admin_new_field', ['id' => $id]),
@@ -116,7 +116,7 @@ class FieldsGetController extends Controller
      *
      * @return  Response
      */
-    public function editAction(Field $field)
+    public function editAction(Field $field): Response
     {
         $form = $this->createForm(FieldForm::class, $field, [
             'action' => $this->generateUrl('admin_edit_field', ['id' => $field->getId()]),

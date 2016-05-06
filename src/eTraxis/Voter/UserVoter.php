@@ -32,7 +32,7 @@ class UserVoter extends Voter
      * @param   EntityManagerInterface $manager
      * @param   int                    $password_expiration
      */
-    public function __construct(EntityManagerInterface $manager, $password_expiration = null)
+    public function __construct(EntityManagerInterface $manager, int $password_expiration = null)
     {
         $this->manager             = $manager;
         $this->password_expiration = $password_expiration;
@@ -60,7 +60,7 @@ class UserVoter extends Voter
 
     /**
      * {@inheritdoc}
-     * @codeCoverageIgnoreStart
+     * @codeCoverageIgnore
      */
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
@@ -94,7 +94,7 @@ class UserVoter extends Voter
      *
      * @return  bool
      */
-    protected function isSetExpiredPasswordGranted(User $subject)
+    protected function isSetExpiredPasswordGranted(User $subject): bool
     {
         // Deny if passwords do not expire at all.
         if ($this->password_expiration === null) {
@@ -112,7 +112,7 @@ class UserVoter extends Voter
      *
      * @return  bool
      */
-    protected function isDeleteGranted(User $subject, $user)
+    protected function isDeleteGranted(User $subject, $user): bool
     {
         // User must be logged in.
         if (!$user instanceof CurrentUser) {
@@ -158,7 +158,7 @@ class UserVoter extends Voter
      *
      * @return  bool
      */
-    protected function isDisableGranted(User $subject, $user)
+    protected function isDisableGranted(User $subject, $user): bool
     {
         // User must be logged in.
         if (!$user instanceof CurrentUser) {
@@ -180,7 +180,7 @@ class UserVoter extends Voter
      *
      * @return  bool
      */
-    protected function isEnableGranted(User $subject)
+    protected function isEnableGranted(User $subject): bool
     {
         return $subject->isDisabled();
     }
@@ -192,7 +192,7 @@ class UserVoter extends Voter
      *
      * @return  bool
      */
-    protected function isUnlockGranted(User $subject)
+    protected function isUnlockGranted(User $subject): bool
     {
         return $subject->isLocked();
     }

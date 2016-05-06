@@ -59,7 +59,7 @@ class ListField extends AbstractField
      *
      * @return  self
      */
-    public function setDefaultKey($key)
+    public function setDefaultKey(int $key = null)
     {
         if ($key !== null) {
 
@@ -94,7 +94,7 @@ class ListField extends AbstractField
      *
      * @return  self
      */
-    public function setDefaultValue($value)
+    public function setDefaultValue(string $value = null)
     {
         if ($value !== null) {
 

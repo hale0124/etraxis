@@ -33,7 +33,7 @@ class InternalPasswordEncoder extends BasePasswordEncoder
      * @param   TranslatorInterface $translator
      * @param   int                 $min_length
      */
-    public function __construct(TranslatorInterface $translator, $min_length)
+    public function __construct(TranslatorInterface $translator, int $min_length)
     {
         $this->translator = $translator;
         $this->min_length = $min_length;

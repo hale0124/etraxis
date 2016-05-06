@@ -26,5 +26,5 @@ interface ExportInterface
      *
      * @return  StreamedResponse Resulted stream response to send back to user.
      */
-    public function exportCsv(ExportCsvQuery $query, array $data = []);
+    public function exportCsv(ExportCsvQuery $query, array $data = []): StreamedResponse;
 }

@@ -22,7 +22,7 @@ class DecimalValuesRepository extends EntityRepository implements CustomValuesRe
     /**
      * {@inheritdoc}
      */
-    public function save($value)
+    public function save(string $value)
     {
         /** @var DecimalValue $entity */
         $entity = $this->findOneBy(['value' => $value]);

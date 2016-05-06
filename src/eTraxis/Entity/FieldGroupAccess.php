@@ -105,7 +105,7 @@ class FieldGroupAccess
      *
      * @return  self
      */
-    public function setAccess($access)
+    public function setAccess(int $access)
     {
         $this->access = $access;
 

@@ -86,7 +86,7 @@ class SetOrderFieldCommandHandler
      * @param   Field $field
      * @param   int   $order
      */
-    protected function setOrder(Field $field, $order)
+    protected function setOrder(Field $field, int $order)
     {
         $query = $this->manager->createQuery('
             UPDATE eTraxis:Field f

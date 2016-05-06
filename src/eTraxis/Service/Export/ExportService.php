@@ -24,7 +24,7 @@ class ExportService implements ExportInterface
     /**
      * {@inheritdoc}
      */
-    public function exportCsv(ExportCsvQuery $query, array $data = [])
+    public function exportCsv(ExportCsvQuery $query, array $data = []): StreamedResponse
     {
         $response = new StreamedResponse(function () use ($query, $data) {
 

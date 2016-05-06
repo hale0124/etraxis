@@ -84,11 +84,11 @@ class FieldParameters
     /**
      * Property setter.
      *
-     * @param   int $parameter1
+     * @param   int|null $parameter1
      *
      * @return  self
      */
-    public function setParameter1($parameter1)
+    public function setParameter1(int $parameter1 = null)
     {
         $this->parameter1 = $parameter1;
 
@@ -98,7 +98,7 @@ class FieldParameters
     /**
      * Property getter.
      *
-     * @return  int
+     * @return  int|null
      */
     public function getParameter1()
     {
@@ -108,11 +108,11 @@ class FieldParameters
     /**
      * Property setter.
      *
-     * @param   int $parameter2
+     * @param   int|null $parameter2
      *
      * @return  self
      */
-    public function setParameter2($parameter2)
+    public function setParameter2(int $parameter2 = null)
     {
         $this->parameter2 = $parameter2;
 
@@ -122,7 +122,7 @@ class FieldParameters
     /**
      * Property getter.
      *
-     * @return  int
+     * @return  int|null
      */
     public function getParameter2()
     {
@@ -132,11 +132,11 @@ class FieldParameters
     /**
      * Property setter.
      *
-     * @param   int $defaultValue
+     * @param   int|null $defaultValue
      *
      * @return  self
      */
-    public function setDefaultValue($defaultValue)
+    public function setDefaultValue(int $defaultValue = null)
     {
         $this->defaultValue = $defaultValue;
 
@@ -146,7 +146,7 @@ class FieldParameters
     /**
      * Property getter.
      *
-     * @return  int
+     * @return  int|null
      */
     public function getDefaultValue()
     {

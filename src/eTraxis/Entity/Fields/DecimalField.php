@@ -59,7 +59,7 @@ class DecimalField extends AbstractField
      *
      * @return  self
      */
-    public function setMinValue($value)
+    public function setMinValue(string $value)
     {
         if (bccomp($value, self::MIN_VALUE) < 0) {
             $value = self::MIN_VALUE;
@@ -95,7 +95,7 @@ class DecimalField extends AbstractField
      *
      * @return  self
      */
-    public function setMaxValue($value)
+    public function setMaxValue(string $value)
     {
         if (bccomp($value, self::MIN_VALUE) < 0) {
             $value = self::MIN_VALUE;
@@ -131,7 +131,7 @@ class DecimalField extends AbstractField
      *
      * @return  self
      */
-    public function setDefaultValue($value)
+    public function setDefaultValue(string $value = null)
     {
         if ($value !== null) {
 

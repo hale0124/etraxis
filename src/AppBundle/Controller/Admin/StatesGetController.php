@@ -44,7 +44,7 @@ class StatesGetController extends Controller
      *
      * @return  JsonResponse
      */
-    public function listAction(Template $template)
+    public function listAction(Template $template): JsonResponse
     {
         return new JsonResponse($template->getStates());
     }
@@ -59,7 +59,7 @@ class StatesGetController extends Controller
      *
      * @return  Response
      */
-    public function viewAction(Request $request, State $state)
+    public function viewAction(Request $request, State $state): Response
     {
         return $this->render('admin/states/view.html.twig', [
             'state' => $state,
@@ -76,7 +76,7 @@ class StatesGetController extends Controller
      *
      * @return  Response
      */
-    public function tabDetailsAction(State $state)
+    public function tabDetailsAction(State $state): Response
     {
         /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
         $authChecker = $this->get('security.authorization_checker');
@@ -101,7 +101,7 @@ class StatesGetController extends Controller
      *
      * @return  Response
      */
-    public function tabTransitionsAction(State $state)
+    public function tabTransitionsAction(State $state): Response
     {
         /** @var \eTraxis\Repository\GroupsRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Group::class);
@@ -122,7 +122,7 @@ class StatesGetController extends Controller
      *
      * @return  Response
      */
-    public function newAction($id)
+    public function newAction(int $id): Response
     {
         $form = $this->createForm(StateForm::class, null, [
             'action' => $this->generateUrl('admin_new_state', ['id' => $id]),
@@ -142,7 +142,7 @@ class StatesGetController extends Controller
      *
      * @return  Response
      */
-    public function editAction(State $state)
+    public function editAction(State $state): Response
     {
         $form = $this->createForm(StateForm::class, $state, [
             'action' => $this->generateUrl('admin_edit_state', ['id' => $state->getId()]),
@@ -163,7 +163,7 @@ class StatesGetController extends Controller
      *
      * @return  JsonResponse
      */
-    public function loadRoleTransitionsAction(State $state, $role)
+    public function loadRoleTransitionsAction(State $state, int $role): JsonResponse
     {
         return new JsonResponse($state->getRoleTransitions($role));
     }
@@ -178,7 +178,7 @@ class StatesGetController extends Controller
      *
      * @return  JsonResponse
      */
-    public function loadGroupTransitionsAction(State $state, Group $group)
+    public function loadGroupTransitionsAction(State $state, Group $group): JsonResponse
     {
         return new JsonResponse($state->getGroupTransitions($group));
     }

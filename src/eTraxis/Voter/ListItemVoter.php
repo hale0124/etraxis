@@ -52,7 +52,7 @@ class ListItemVoter extends Voter
 
     /**
      * {@inheritdoc}
-     * @codeCoverageIgnoreStart
+     * @codeCoverageIgnore
      */
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
@@ -74,7 +74,7 @@ class ListItemVoter extends Voter
      *
      * @return  bool
      */
-    protected function isDeleteGranted(ListItem $subject)
+    protected function isDeleteGranted(ListItem $subject): bool
     {
         // Number of records where the list item is used.
         $query = $this->manager->createQueryBuilder()

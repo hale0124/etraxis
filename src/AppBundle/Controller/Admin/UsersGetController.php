@@ -40,7 +40,7 @@ class UsersGetController extends Controller
      *
      * @return  Response
      */
-    public function indexAction()
+    public function indexAction(): Response
     {
         return $this->render('admin/users/index.html.twig');
     }
@@ -55,7 +55,7 @@ class UsersGetController extends Controller
      *
      * @return  JsonResponse
      */
-    public function listAction(Request $request)
+    public function listAction(Request $request): JsonResponse
     {
         $datatables = $this->getDataTables();
         $results    = $datatables->handle($request, 'eTraxis:User');
@@ -72,7 +72,7 @@ class UsersGetController extends Controller
      *
      * @return  StreamedResponse
      */
-    public function csvAction(Request $request)
+    public function csvAction(Request $request): StreamedResponse
     {
         $request->query->set('start', 0);
         $request->query->set('length', -1);
@@ -121,7 +121,7 @@ class UsersGetController extends Controller
      *
      * @return  Response
      */
-    public function viewAction(Request $request, User $user)
+    public function viewAction(Request $request, User $user): Response
     {
         return $this->render('admin/users/view.html.twig', [
             'user' => $user,
@@ -138,7 +138,7 @@ class UsersGetController extends Controller
      *
      * @return  Response
      */
-    public function tabDetailsAction(User $user)
+    public function tabDetailsAction(User $user): Response
     {
         /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
         $authChecker = $this->get('security.authorization_checker');
@@ -163,7 +163,7 @@ class UsersGetController extends Controller
      *
      * @return  Response
      */
-    public function tabGroupsAction(User $user)
+    public function tabGroupsAction(User $user): Response
     {
         return $this->render('admin/users/tab_groups.html.twig', [
             'user' => $user,
@@ -177,7 +177,7 @@ class UsersGetController extends Controller
      *
      * @return  Response
      */
-    public function newAction()
+    public function newAction(): Response
     {
         $settings = [
             'locale'   => $this->getParameter('locale'),
@@ -203,7 +203,7 @@ class UsersGetController extends Controller
      *
      * @return  Response
      */
-    public function editAction(User $user)
+    public function editAction(User $user): Response
     {
         $form = $this->createForm(UserForm::class, $user, [
             'action' => $this->generateUrl('admin_edit_user', ['id' => $user->getId()]),

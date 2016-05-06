@@ -53,7 +53,7 @@ class StateVoter extends Voter
 
     /**
      * {@inheritdoc}
-     * @codeCoverageIgnoreStart
+     * @codeCoverageIgnore
      */
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
@@ -78,7 +78,7 @@ class StateVoter extends Voter
      *
      * @return  bool
      */
-    protected function isDeleteGranted(State $subject)
+    protected function isDeleteGranted(State $subject): bool
     {
         // Number of records appeared in the state.
         $query = $this->manager->createQueryBuilder()
@@ -103,7 +103,7 @@ class StateVoter extends Voter
      *
      * @return  bool
      */
-    protected function isInitialGranted(State $subject)
+    protected function isInitialGranted(State $subject): bool
     {
         return $subject->getType() === State::TYPE_INTERIM;
     }

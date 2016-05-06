@@ -29,7 +29,7 @@ class StickyLocale
      * @param   SessionInterface $session
      * @param   string           $locale
      */
-    public function __construct(SessionInterface $session, $locale)
+    public function __construct(SessionInterface $session, string $locale)
     {
         $this->session = $session;
         $this->locale  = $locale;

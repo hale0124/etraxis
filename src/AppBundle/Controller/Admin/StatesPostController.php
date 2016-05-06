@@ -40,7 +40,7 @@ class StatesPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function newAction(Request $request, $id)
+    public function newAction(Request $request, int $id): JsonResponse
     {
         $data = $request->request->get('state');
 
@@ -64,7 +64,7 @@ class StatesPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request, int $id): JsonResponse
     {
         $data = $request->request->get('state');
 
@@ -83,7 +83,7 @@ class StatesPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function deleteAction($id)
+    public function deleteAction(int $id): JsonResponse
     {
         $command = new States\DeleteStateCommand(['id' => $id]);
         $this->getCommandBus()->handle($command);
@@ -100,7 +100,7 @@ class StatesPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function initialAction($id)
+    public function initialAction(int $id): JsonResponse
     {
         $command = new States\SetInitialStateCommand(['id' => $id]);
         $this->getCommandBus()->handle($command);
@@ -119,7 +119,7 @@ class StatesPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function saveRoleTransitionsAction(Request $request, $id, $role)
+    public function saveRoleTransitionsAction(Request $request, int $id, int $role): JsonResponse
     {
         $command = new States\SetRoleStateTransitionsCommand([
             'id'          => $id,
@@ -143,7 +143,7 @@ class StatesPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function saveGroupTransitionsAction(Request $request, $id, Group $group)
+    public function saveGroupTransitionsAction(Request $request, int $id, Group $group): JsonResponse
     {
         $command = new States\SetGroupStateTransitionsCommand([
             'id'          => $id,

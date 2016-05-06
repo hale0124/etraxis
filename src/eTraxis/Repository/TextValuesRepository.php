@@ -22,7 +22,7 @@ class TextValuesRepository extends EntityRepository implements CustomValuesRepos
     /**
      * {@inheritdoc}
      */
-    public function save($value)
+    public function save(string $value)
     {
         /** @var TextValue $entity */
         $entity = $this->findOneBy(['token' => md5($value)]);

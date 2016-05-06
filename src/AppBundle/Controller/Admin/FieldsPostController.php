@@ -40,7 +40,7 @@ class FieldsPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function newAction(Request $request, $id)
+    public function newAction(Request $request, int $id): JsonResponse
     {
         $data = $request->request->get('field');
 
@@ -101,7 +101,7 @@ class FieldsPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function editAction(Request $request, Field $field)
+    public function editAction(Request $request, Field $field): JsonResponse
     {
         $data = $request->request->get('field');
 
@@ -161,7 +161,7 @@ class FieldsPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function deleteAction($id)
+    public function deleteAction(int $id): JsonResponse
     {
         $command = new Fields\DeleteFieldCommand(['id' => $id]);
         $this->getCommandBus()->handle($command);

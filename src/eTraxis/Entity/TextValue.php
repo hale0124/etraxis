@@ -64,7 +64,7 @@ class TextValue
      *
      * @return  self
      */
-    public function setValue($value)
+    public function setValue(string $value)
     {
         $this->token = md5($value);
         $this->value = $value;

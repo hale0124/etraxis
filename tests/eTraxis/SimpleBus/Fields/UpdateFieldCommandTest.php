@@ -30,6 +30,7 @@ class UpdateFieldCommandTest extends BaseTestCase
             'required'     => false,
             'guestAccess'  => true,
             'showInEmails' => true,
+            'maxLength'    => $field->asString()->getMaxLength(),
         ]);
 
         /** @var \Doctrine\ORM\EntityManagerInterface $manager */

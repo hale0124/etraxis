@@ -43,7 +43,7 @@ class TemplatesGetController extends Controller
      *
      * @return  JsonResponse
      */
-    public function listAction(Project $project)
+    public function listAction(Project $project): JsonResponse
     {
         return new JsonResponse($project->getTemplates());
     }
@@ -58,7 +58,7 @@ class TemplatesGetController extends Controller
      *
      * @return  Response
      */
-    public function viewAction(Request $request, Template $template)
+    public function viewAction(Request $request, Template $template): Response
     {
         return $this->render('admin/templates/view.html.twig', [
             'template' => $template,
@@ -75,7 +75,7 @@ class TemplatesGetController extends Controller
      *
      * @return  Response
      */
-    public function tabDetailsAction(Template $template)
+    public function tabDetailsAction(Template $template): Response
     {
         /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
         $authChecker = $this->get('security.authorization_checker');
@@ -99,7 +99,7 @@ class TemplatesGetController extends Controller
      *
      * @return  Response
      */
-    public function tabPermissionsAction(Template $template)
+    public function tabPermissionsAction(Template $template): Response
     {
         /** @var \eTraxis\Repository\GroupsRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Group::class);
@@ -121,7 +121,7 @@ class TemplatesGetController extends Controller
      *
      * @return  Response
      */
-    public function newAction($id)
+    public function newAction(int $id): Response
     {
         $form = $this->createForm(TemplateForm::class, null, [
             'action' => $this->generateUrl('admin_new_template', ['id' => $id]),
@@ -141,7 +141,7 @@ class TemplatesGetController extends Controller
      *
      * @return  Response
      */
-    public function editAction(Template $template)
+    public function editAction(Template $template): Response
     {
         $form = $this->createForm(TemplateForm::class, $template, [
             'action' => $this->generateUrl('admin_edit_template', ['id' => $template->getId()]),
@@ -162,7 +162,7 @@ class TemplatesGetController extends Controller
      *
      * @return  JsonResponse
      */
-    public function loadRolePermissionsAction(Template $template, $role)
+    public function loadRolePermissionsAction(Template $template, int $role): JsonResponse
     {
         return new JsonResponse($template->getRolePermissions($role));
     }
@@ -177,7 +177,7 @@ class TemplatesGetController extends Controller
      *
      * @return  JsonResponse
      */
-    public function loadGroupPermissionsAction(Template $template, Group $group)
+    public function loadGroupPermissionsAction(Template $template, Group $group): JsonResponse
     {
         return new JsonResponse($template->getGroupPermissions($group));
     }

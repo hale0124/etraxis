@@ -17,17 +17,15 @@ namespace eTraxis\Service\Mailer;
 interface MailerInterface
 {
     /**
-     * Sends email as specified.
+     * Sends an email to specified recipient.
      *
-     * If multiple recipients need to receive the message an array should be used.
-     * Example: array('receiver@domain.org', 'other@domain.org' => 'A name')
+     * @param   string $address  Recipient address.
+     * @param   string $name     Recipient name.
+     * @param   string $subject  Email subject.
+     * @param   string $template Path to Twig template of the email body.
+     * @param   array  $args     Twig template parameters.
      *
-     * @param   string|array $recipients Recipient address(es).
-     * @param   string       $subject    Email subject.
-     * @param   string       $template   Path to Twig template of the email body.
-     * @param   array        $args       Twig template parameters.
-     *
-     * @return  int The number of recipients who were accepted for delivery.
+     * @return  bool Whether the email was accepted for delivery.
      */
-    public function send($recipients, $subject, $template, array $args = []);
+    public function send(string $address, string $name, string $subject, string $template, array $args = []): bool;
 }

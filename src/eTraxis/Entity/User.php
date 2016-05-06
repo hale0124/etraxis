@@ -207,7 +207,7 @@ class User extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setUsername($username)
+    public function setUsername(string $username)
     {
         $this->username = $username;
 
@@ -235,7 +235,7 @@ class User extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setFullname($fullname)
+    public function setFullname(string $fullname)
     {
         $this->fullname = $fullname;
 
@@ -259,7 +259,7 @@ class User extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setEmail($email)
+    public function setEmail(string $email)
     {
         $this->email = $email;
 
@@ -279,11 +279,11 @@ class User extends Entity implements \JsonSerializable
     /**
      * Property setter.
      *
-     * @param   string $description
+     * @param   string|null $description
      *
      * @return  self
      */
-    public function setDescription($description)
+    public function setDescription(string $description = null)
     {
         $this->description = $description;
 
@@ -293,7 +293,7 @@ class User extends Entity implements \JsonSerializable
     /**
      * Property getter.
      *
-     * @return  string
+     * @return  string|null
      */
     public function getDescription()
     {
@@ -303,11 +303,11 @@ class User extends Entity implements \JsonSerializable
     /**
      * Property setter.
      *
-     * @param   string $password
+     * @param   string|null $password
      *
      * @return  self
      */
-    public function setPassword($password)
+    public function setPassword(string $password = null)
     {
         if (!$this->isLdap) {
             $this->password      = $password;
@@ -320,7 +320,7 @@ class User extends Entity implements \JsonSerializable
     /**
      * Property getter.
      *
-     * @return  string
+     * @return  string|null
      */
     public function getPassword()
     {
@@ -334,7 +334,7 @@ class User extends Entity implements \JsonSerializable
      *
      * @return  bool
      */
-    public function isPasswordExpired($days)
+    public function isPasswordExpired(int $days)
     {
         $expires = $this->passwordSetAt + $days * 86400;
 
@@ -385,7 +385,7 @@ class User extends Entity implements \JsonSerializable
      *
      * @return  bool Whether the account became locked.
      */
-    public function lock($max_auth_attempts, $lock_time)
+    public function lock(int $max_auth_attempts, int $lock_time)
     {
         if (!$this->isLdap) {
 
@@ -428,7 +428,7 @@ class User extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setAdmin($isAdmin)
+    public function setAdmin(bool $isAdmin)
     {
         $this->isAdmin = $isAdmin ? 1 : 0;
 
@@ -452,7 +452,7 @@ class User extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setDisabled($isDisabled)
+    public function setDisabled(bool $isDisabled)
     {
         $this->isDisabled = $isDisabled ? 1 : 0;
 
@@ -476,7 +476,7 @@ class User extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setLdap($isLdap)
+    public function setLdap(bool $isLdap)
     {
         $this->isLdap = $isLdap ? 1 : 0;
 

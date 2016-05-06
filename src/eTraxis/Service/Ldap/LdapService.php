@@ -35,7 +35,7 @@ class LdapService implements LdapInterface
      *
      * @throws  LdapException
      */
-    public function __construct(LoggerInterface $logger, $host, $port = null, $user = null, $password = null, $tls = false)
+    public function __construct(LoggerInterface $logger, string $host = null, int $port = null, string $user = null, string $password = null, bool $tls = false)
     {
         $this->logger = $logger;
 
@@ -101,7 +101,7 @@ class LdapService implements LdapInterface
     /**
      * {@inheritdoc}
      */
-    public function find($basedn, $username, array $attributes = [])
+    public function find(string $basedn, string $username, array $attributes = [])
     {
         if ($this->link === false) {
             $this->logger->info('LDAP connection is not configured.');
@@ -166,7 +166,7 @@ class LdapService implements LdapInterface
     /**
      * {@inheritdoc}
      */
-    public function authenticate($basedn, $username, $password)
+    public function authenticate(string $basedn, string $username, string $password)
     {
         if ($this->link === false) {
             $this->logger->info('LDAP connection is not configured.');

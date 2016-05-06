@@ -139,7 +139,7 @@ class FieldValue
      *
      * @return  self
      */
-    public function setCurrent($isCurrent)
+    public function setCurrent(bool $isCurrent)
     {
         $this->isCurrent = $isCurrent ? 1 : 0;
 
@@ -159,13 +159,13 @@ class FieldValue
     /**
      * Property setter.
      *
-     * @param   int $valueId
+     * @param   int|null $valueId
      *
      * @return  self
      *
      * @todo Refactor into type-specific functions.
      */
-    public function setValueId($valueId)
+    public function setValueId(int $valueId = null)
     {
         $this->valueId = $valueId;
 
@@ -175,7 +175,7 @@ class FieldValue
     /**
      * Property getter.
      *
-     * @return  int
+     * @return  int|null
      *
      * @todo Refactor into type-specific functions.
      */

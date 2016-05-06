@@ -19,6 +19,7 @@ use eTraxis\Traits\FlashBagTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use SimpleBus\ValidationException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -43,7 +44,7 @@ class SettingsController extends Controller
      *
      * @return  Response
      */
-    public function indexAction()
+    public function indexAction(): Response
     {
         $appearance_form = $this->createForm(AppearanceForm::class, $this->getUser(), [
             'action' => $this->generateUrl('settings_appearance'),
@@ -67,9 +68,9 @@ class SettingsController extends Controller
      *
      * @param   Request $request
      *
-     * @return  Response
+     * @return  RedirectResponse
      */
-    public function appearanceAction(Request $request)
+    public function appearanceAction(Request $request): RedirectResponse
     {
         try {
             $data = $request->request->get('appearance');
@@ -101,9 +102,9 @@ class SettingsController extends Controller
      *
      * @param   Request $request
      *
-     * @return  Response
+     * @return  RedirectResponse
      */
-    public function passwordAction(Request $request)
+    public function passwordAction(Request $request): RedirectResponse
     {
         /** @var \eTraxis\Entity\User $user */
         $user = $this->getUser();

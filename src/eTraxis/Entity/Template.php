@@ -214,7 +214,7 @@ class Template extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
 
@@ -238,7 +238,7 @@ class Template extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setPrefix($prefix)
+    public function setPrefix(string $prefix)
     {
         $this->prefix = $prefix;
 
@@ -258,11 +258,11 @@ class Template extends Entity implements \JsonSerializable
     /**
      * Property setter.
      *
-     * @param   int $criticalAge
+     * @param   int|null $criticalAge
      *
      * @return  self
      */
-    public function setCriticalAge($criticalAge)
+    public function setCriticalAge(int $criticalAge = null)
     {
         $this->criticalAge = $criticalAge;
 
@@ -272,7 +272,7 @@ class Template extends Entity implements \JsonSerializable
     /**
      * Property getter.
      *
-     * @return  int
+     * @return  int|null
      */
     public function getCriticalAge()
     {
@@ -282,11 +282,11 @@ class Template extends Entity implements \JsonSerializable
     /**
      * Property setter.
      *
-     * @param   int $frozenTime
+     * @param   int|null $frozenTime
      *
      * @return  self
      */
-    public function setFrozenTime($frozenTime)
+    public function setFrozenTime(int $frozenTime = null)
     {
         $this->frozenTime = $frozenTime;
 
@@ -296,7 +296,7 @@ class Template extends Entity implements \JsonSerializable
     /**
      * Property getter.
      *
-     * @return  int
+     * @return  int|null
      */
     public function getFrozenTime()
     {
@@ -306,11 +306,11 @@ class Template extends Entity implements \JsonSerializable
     /**
      * Property setter.
      *
-     * @param   string $description
+     * @param   string|null $description
      *
      * @return  self
      */
-    public function setDescription($description)
+    public function setDescription(string $description = null)
     {
         $this->description = $description;
 
@@ -320,7 +320,7 @@ class Template extends Entity implements \JsonSerializable
     /**
      * Property getter.
      *
-     * @return  string
+     * @return  string|null
      */
     public function getDescription()
     {
@@ -334,7 +334,7 @@ class Template extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setLocked($isLocked)
+    public function setLocked(bool $isLocked)
     {
         $this->isLocked = $isLocked ? 1 : 0;
 
@@ -358,7 +358,7 @@ class Template extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setGuestAccess($hasGuestAccess)
+    public function setGuestAccess(bool $hasGuestAccess)
     {
         $this->hasGuestAccess = $hasGuestAccess ? 1 : 0;
 
@@ -383,7 +383,7 @@ class Template extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setRolePermissions($role, $permissions)
+    public function setRolePermissions(int $role, int $permissions)
     {
         switch ($role) {
 
@@ -414,7 +414,7 @@ class Template extends Entity implements \JsonSerializable
      *
      * @return  int
      */
-    public function getRolePermissions($role)
+    public function getRolePermissions(int $role)
     {
         $permissions = 0;
 

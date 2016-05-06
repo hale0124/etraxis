@@ -53,10 +53,6 @@ class DurationFieldTest extends \PHPUnit_Framework_TestCase
         $min      = '0:00';
         $max      = '999999:59';
 
-        $field->setMinValue(null);
-        self::assertEquals($min, $field->getMinValue());
-        self::assertEquals(DurationField::MIN_VALUE, $this->object->getParameters()->getParameter1());
-
         $field->setMinValue($value);
         self::assertEquals($value, $field->getMinValue());
         self::assertEquals($duration, $this->object->getParameters()->getParameter1());
@@ -78,10 +74,6 @@ class DurationFieldTest extends \PHPUnit_Framework_TestCase
         $value    = '14:26';
         $min      = '0:00';
         $max      = '999999:59';
-
-        $field->setMaxValue(null);
-        self::assertEquals($max, $field->getMaxValue());
-        self::assertEquals(DurationField::MAX_VALUE, $this->object->getParameters()->getParameter2());
 
         $field->setMaxValue($value);
         self::assertEquals($value, $field->getMaxValue());

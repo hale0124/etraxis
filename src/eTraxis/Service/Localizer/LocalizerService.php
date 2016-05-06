@@ -30,7 +30,7 @@ class LocalizerService implements LocalizerInterface
      * @param   TokenStorageInterface $token_storage
      * @param   string                $locale
      */
-    public function __construct(TokenStorageInterface $token_storage, $locale)
+    public function __construct(TokenStorageInterface $token_storage, string $locale)
     {
         $this->token_storage = $token_storage;
         $this->locale        = $locale;
@@ -41,7 +41,7 @@ class LocalizerService implements LocalizerInterface
      *
      * @return  string ISO 639-1 language code with ISO 3166-1 alpha-2 country code (e.g. "pt_BR").
      */
-    protected function getLocale()
+    protected function getLocale(): string
     {
         $locale = $this->locale;
 
@@ -61,7 +61,7 @@ class LocalizerService implements LocalizerInterface
     /**
      * {@inheritdoc}
      */
-    public function getLocalTimestamp($timestamp)
+    public function getLocalTimestamp(int $timestamp): int
     {
         $offset = 0;
 
@@ -82,7 +82,7 @@ class LocalizerService implements LocalizerInterface
     /**
      * {@inheritdoc}
      */
-    public function formatDate($timestamp)
+    public function formatDate(int $timestamp): string
     {
         $format = [
             'bg'    => 'd.n.Y',
@@ -114,7 +114,7 @@ class LocalizerService implements LocalizerInterface
     /**
      * {@inheritdoc}
      */
-    public function formatTime($timestamp)
+    public function formatTime(int $timestamp): string
     {
         $format = [
             'bg'    => 'H:i',

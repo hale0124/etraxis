@@ -34,7 +34,7 @@ class RegisterUserCommandHandler
      * @param   string                 $locale
      * @param   string                 $theme
      */
-    public function __construct(LoggerInterface $logger, EntityManagerInterface $manager, $locale, $theme)
+    public function __construct(LoggerInterface $logger, EntityManagerInterface $manager, string $locale, string $theme)
     {
         $this->logger  = $logger;
         $this->manager = $manager;

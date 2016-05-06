@@ -75,7 +75,7 @@ abstract class FieldCommandHandler
      *
      * @throws  ValidationException
      */
-    protected function handleNumber(Field $entity, Command\NumberFieldCommand $command)
+    protected function handleNumber(Field $entity, Command\NumberFieldCommand $command): Field
     {
         if ($command->minValue > $command->maxValue) {
             throw new ValidationException([$this->translator->trans('field.error.min_max_values')]);
@@ -115,7 +115,7 @@ abstract class FieldCommandHandler
      *
      * @throws  ValidationException
      */
-    protected function handleDecimal(Field $entity, Command\DecimalFieldCommand $command)
+    protected function handleDecimal(Field $entity, Command\DecimalFieldCommand $command): Field
     {
         if (bccomp($command->minValue, $command->maxValue) > 0) {
             throw new ValidationException([$this->translator->trans('field.error.min_max_values')]);
@@ -153,7 +153,7 @@ abstract class FieldCommandHandler
      *
      * @return  Field Updated field entity.
      */
-    protected function handleString(Field $entity, Command\StringFieldCommand $command)
+    protected function handleString(Field $entity, Command\StringFieldCommand $command): Field
     {
         $entity->setType(Field::TYPE_STRING);
 
@@ -179,7 +179,7 @@ abstract class FieldCommandHandler
      *
      * @return  Field Updated field entity.
      */
-    protected function handleText(Field $entity, Command\TextFieldCommand $command)
+    protected function handleText(Field $entity, Command\TextFieldCommand $command): Field
     {
         $entity->setType(Field::TYPE_TEXT);
 
@@ -205,7 +205,7 @@ abstract class FieldCommandHandler
      *
      * @return  Field Updated field entity.
      */
-    protected function handleCheckbox(Field $entity, Command\CheckboxFieldCommand $command)
+    protected function handleCheckbox(Field $entity, Command\CheckboxFieldCommand $command): Field
     {
         $entity->setType(Field::TYPE_CHECKBOX);
 
@@ -224,7 +224,7 @@ abstract class FieldCommandHandler
      *
      * @throws  NotFoundHttpException
      */
-    protected function handleList(Field $entity, Command\ListFieldCommand $command)
+    protected function handleList(Field $entity, Command\ListFieldCommand $command): Field
     {
         $entity->setType(Field::TYPE_LIST);
 
@@ -257,7 +257,7 @@ abstract class FieldCommandHandler
      *
      * @return  Field Updated field entity.
      */
-    protected function handleRecord(Field $entity)
+    protected function handleRecord(Field $entity): Field
     {
         return $entity->setType(Field::TYPE_RECORD);
     }
@@ -272,7 +272,7 @@ abstract class FieldCommandHandler
      *
      * @throws  ValidationException
      */
-    protected function handleDate(Field $entity, Command\DateFieldCommand $command)
+    protected function handleDate(Field $entity, Command\DateFieldCommand $command): Field
     {
         if ($command->minValue > $command->maxValue) {
             throw new ValidationException([$this->translator->trans('field.error.min_max_values')]);
@@ -312,7 +312,7 @@ abstract class FieldCommandHandler
      *
      * @throws  ValidationException
      */
-    protected function handleDuration(Field $entity, Command\DurationFieldCommand $command)
+    protected function handleDuration(Field $entity, Command\DurationFieldCommand $command): Field
     {
         /**
          * Converts string with duration to integer value.

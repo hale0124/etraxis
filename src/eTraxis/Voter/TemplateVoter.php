@@ -55,7 +55,7 @@ class TemplateVoter extends Voter
 
     /**
      * {@inheritdoc}
-     * @codeCoverageIgnoreStart
+     * @codeCoverageIgnore
      */
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
@@ -83,7 +83,7 @@ class TemplateVoter extends Voter
      *
      * @return  bool
      */
-    protected function isDeleteGranted(Template $subject)
+    protected function isDeleteGranted(Template $subject): bool
     {
         // Number of records created by the template.
         $query = $this->manager->createQueryBuilder()
@@ -107,7 +107,7 @@ class TemplateVoter extends Voter
      *
      * @return  bool
      */
-    protected function isLockGranted(Template $subject)
+    protected function isLockGranted(Template $subject): bool
     {
         return !$subject->isLocked();
     }
@@ -119,7 +119,7 @@ class TemplateVoter extends Voter
      *
      * @return  bool
      */
-    protected function isUnlockGranted(Template $subject)
+    protected function isUnlockGranted(Template $subject): bool
     {
         if (!$subject->isLocked()) {
             return false;

@@ -101,7 +101,7 @@ class BaseTestCase extends WebTestCase
      *
      * @return  User|null Found user.
      */
-    protected function findUser($username, $ldap = false)
+    protected function findUser(string $username, bool $ldap = false)
     {
         return $this->doctrine->getRepository(User::class)->findOneBy([
             'username' => $ldap ? $username : $username . '@eTraxis',
@@ -117,7 +117,7 @@ class BaseTestCase extends WebTestCase
      *
      * @return  bool Whether user was authenticated.
      */
-    protected function loginAs($username, $ldap = false)
+    protected function loginAs(string $username, bool $ldap = false)
     {
         if ($user = $this->findUser($username, $ldap)) {
 

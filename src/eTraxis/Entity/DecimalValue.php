@@ -57,7 +57,7 @@ class DecimalValue
      *
      * @return  self
      */
-    public function setValue($value)
+    public function setValue(string $value)
     {
         $this->value = $value;
 

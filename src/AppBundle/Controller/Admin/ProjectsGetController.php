@@ -37,7 +37,7 @@ class ProjectsGetController extends Controller
      *
      * @return  Response
      */
-    public function indexAction()
+    public function indexAction(): Response
     {
         return $this->render('admin/projects/index.html.twig');
     }
@@ -49,7 +49,7 @@ class ProjectsGetController extends Controller
      *
      * @return  JsonResponse
      */
-    public function listAction()
+    public function listAction(): JsonResponse
     {
         /** @var \eTraxis\Repository\ProjectsRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Project::class);
@@ -67,7 +67,7 @@ class ProjectsGetController extends Controller
      *
      * @return  Response
      */
-    public function viewAction(Request $request, Project $project)
+    public function viewAction(Request $request, Project $project): Response
     {
         return $this->render('admin/projects/view.html.twig', [
             'project' => $project,
@@ -84,7 +84,7 @@ class ProjectsGetController extends Controller
      *
      * @return  Response
      */
-    public function tabDetailsAction(Project $project)
+    public function tabDetailsAction(Project $project): Response
     {
         /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
         $authChecker = $this->get('security.authorization_checker');
@@ -104,7 +104,7 @@ class ProjectsGetController extends Controller
      *
      * @return  Response
      */
-    public function newAction()
+    public function newAction(): Response
     {
         $default = [
             'suspended' => true,
@@ -128,7 +128,7 @@ class ProjectsGetController extends Controller
      *
      * @return  Response
      */
-    public function editAction(Project $project)
+    public function editAction(Project $project): Response
     {
         $form = $this->createForm(ProjectForm::class, $project, [
             'action' => $this->generateUrl('admin_edit_project', ['id' => $project->getId()]),

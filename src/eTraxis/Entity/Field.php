@@ -229,7 +229,7 @@ class Field extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
 
@@ -253,7 +253,7 @@ class Field extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setType($type)
+    public function setType(string $type)
     {
         $types = array_flip(Dictionary\LegacyFieldType::all());
 
@@ -277,11 +277,11 @@ class Field extends Entity implements \JsonSerializable
     /**
      * Property setter.
      *
-     * @param   string $description
+     * @param   string|null $description
      *
      * @return  self
      */
-    public function setDescription($description)
+    public function setDescription(string $description = null)
     {
         $this->description = $description;
 
@@ -291,7 +291,7 @@ class Field extends Entity implements \JsonSerializable
     /**
      * Property getter.
      *
-     * @return  string
+     * @return  string|null
      */
     public function getDescription()
     {
@@ -305,7 +305,7 @@ class Field extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setIndexNumber($indexNumber)
+    public function setIndexNumber(int $indexNumber)
     {
         $this->indexNumber = $indexNumber;
 
@@ -352,7 +352,7 @@ class Field extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setRequired($isRequired)
+    public function setRequired(bool $isRequired)
     {
         $this->isRequired = $isRequired ? 1 : 0;
 
@@ -376,7 +376,7 @@ class Field extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setGuestAccess($hasGuestAccess)
+    public function setGuestAccess(bool $hasGuestAccess)
     {
         $this->hasGuestAccess = $hasGuestAccess ? 1 : 0;
 
@@ -400,7 +400,7 @@ class Field extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setRegisteredAccess($registeredAccess)
+    public function setRegisteredAccess(int $registeredAccess)
     {
         $this->registeredAccess = $registeredAccess;
 
@@ -424,7 +424,7 @@ class Field extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setAuthorAccess($authorAccess)
+    public function setAuthorAccess(int $authorAccess)
     {
         $this->authorAccess = $authorAccess;
 
@@ -448,7 +448,7 @@ class Field extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setResponsibleAccess($responsibleAccess)
+    public function setResponsibleAccess(int $responsibleAccess)
     {
         $this->responsibleAccess = $responsibleAccess;
 
@@ -472,7 +472,7 @@ class Field extends Entity implements \JsonSerializable
      *
      * @return  self
      */
-    public function setShowInEmails($showInEmails)
+    public function setShowInEmails(bool $showInEmails)
     {
         $this->showInEmails = $showInEmails ? 1 : 0;
 

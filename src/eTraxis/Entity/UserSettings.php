@@ -65,7 +65,7 @@ class UserSettings implements \ArrayAccess
      *
      * @return  self
      */
-    public function setLocale($locale)
+    public function setLocale(string $locale)
     {
         $this->locale = Dictionary\LegacyLocale::find($locale);
 
@@ -89,7 +89,7 @@ class UserSettings implements \ArrayAccess
      *
      * @return  self
      */
-    public function setTheme($theme)
+    public function setTheme(string $theme)
     {
         if (Dictionary\Theme::has($theme)) {
             $this->theme = $theme;
@@ -121,7 +121,7 @@ class UserSettings implements \ArrayAccess
      *
      * @return  self
      */
-    public function setTimezone($timezone)
+    public function setTimezone(int $timezone)
     {
         if (Dictionary\Timezone::has($timezone)) {
             $this->timezone = $timezone;

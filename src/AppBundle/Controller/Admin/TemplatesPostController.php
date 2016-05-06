@@ -39,7 +39,7 @@ class TemplatesPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function newAction(Request $request, $id)
+    public function newAction(Request $request, int $id): JsonResponse
     {
         $data = $request->request->get('template');
 
@@ -59,7 +59,7 @@ class TemplatesPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function editAction(Request $request, $id)
+    public function editAction(Request $request, int $id): JsonResponse
     {
         $data = $request->request->get('template');
 
@@ -78,7 +78,7 @@ class TemplatesPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function deleteAction($id)
+    public function deleteAction(int $id): JsonResponse
     {
         $command = new Templates\DeleteTemplateCommand(['id' => $id]);
         $this->getCommandBus()->handle($command);
@@ -95,7 +95,7 @@ class TemplatesPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function lockAction($id)
+    public function lockAction(int $id): JsonResponse
     {
         $command = new Templates\LockTemplateCommand(['id' => $id]);
         $this->getCommandBus()->handle($command);
@@ -112,7 +112,7 @@ class TemplatesPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function unlockAction($id)
+    public function unlockAction(int $id): JsonResponse
     {
         $command = new Templates\UnlockTemplateCommand(['id' => $id]);
         $this->getCommandBus()->handle($command);
@@ -131,7 +131,7 @@ class TemplatesPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function saveRolePermissionsAction(Request $request, $id, $role)
+    public function saveRolePermissionsAction(Request $request, int $id, int $role): JsonResponse
     {
         $command = new Templates\SetRoleTemplatePermissionsCommand([
             'id'          => $id,
@@ -155,7 +155,7 @@ class TemplatesPostController extends Controller
      *
      * @return  JsonResponse
      */
-    public function saveGroupPermissionsAction(Request $request, $id, Group $group)
+    public function saveGroupPermissionsAction(Request $request, int $id, Group $group): JsonResponse
     {
         $command = new Templates\SetGroupTemplatePermissionsCommand([
             'id'          => $id,

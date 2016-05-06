@@ -46,7 +46,7 @@ class CheckRequirementsCommand extends ContainerAwareCommand
      * @param   OutputInterface $output
      * @param   array           $lines
      */
-    protected function outputReport(OutputInterface $output, $lines)
+    protected function outputReport(OutputInterface $output, array $lines)
     {
         $max = max(array_map(function ($s) {
             return strlen($s);

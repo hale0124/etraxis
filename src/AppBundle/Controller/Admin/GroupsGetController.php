@@ -41,7 +41,7 @@ class GroupsGetController extends Controller
      *
      * @return  JsonResponse
      */
-    public function listAction(Project $project)
+    public function listAction(Project $project): JsonResponse
     {
         /** @var \eTraxis\Repository\GroupsRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Group::class);
@@ -56,7 +56,7 @@ class GroupsGetController extends Controller
      *
      * @return  JsonResponse
      */
-    public function listGlobalAction()
+    public function listGlobalAction(): JsonResponse
     {
         /** @var \eTraxis\Repository\GroupsRepository $repository */
         $repository = $this->getDoctrine()->getRepository(Group::class);
@@ -74,7 +74,7 @@ class GroupsGetController extends Controller
      *
      * @return  Response
      */
-    public function viewAction(Request $request, Group $group)
+    public function viewAction(Request $request, Group $group): Response
     {
         return $this->render('admin/groups/view.html.twig', [
             'group' => $group,
@@ -91,7 +91,7 @@ class GroupsGetController extends Controller
      *
      * @return  Response
      */
-    public function tabDetailsAction(Group $group)
+    public function tabDetailsAction(Group $group): Response
     {
         return $this->render('admin/groups/tab_details.html.twig', [
             'group' => $group,
@@ -107,7 +107,7 @@ class GroupsGetController extends Controller
      *
      * @return  Response
      */
-    public function tabMembersAction(Group $group)
+    public function tabMembersAction(Group $group): Response
     {
         return $this->render('admin/groups/tab_members.html.twig', [
             'group' => $group,
@@ -123,7 +123,7 @@ class GroupsGetController extends Controller
      *
      * @return  Response
      */
-    public function newAction($id = null)
+    public function newAction(int $id = null): Response
     {
         $class = ($id === null)
             ? GroupForm::class
@@ -151,7 +151,7 @@ class GroupsGetController extends Controller
      *
      * @return  Response
      */
-    public function editAction(Group $group)
+    public function editAction(Group $group): Response
     {
         $form = $this->createForm(GroupForm::class, $group, [
             'action' => $this->generateUrl('admin_edit_group', ['id' => $group->getId()]),

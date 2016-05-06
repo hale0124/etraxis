@@ -50,7 +50,7 @@ class LdapAuthenticator extends AbstractAuthenticator
         LoggerInterface  $logger,
         MessageBus       $command_bus,
         LdapInterface    $ldap,
-        $basedn)
+        string           $basedn)
     {
         parent::__construct($router, $session);
 

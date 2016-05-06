@@ -116,7 +116,7 @@ class Project implements \JsonSerializable
      *
      * @return  self
      */
-    public function setName($name)
+    public function setName(string $name)
     {
         $this->name = $name;
 
@@ -136,11 +136,11 @@ class Project implements \JsonSerializable
     /**
      * Property setter.
      *
-     * @param   string $description
+     * @param   string|null $description
      *
      * @return  self
      */
-    public function setDescription($description)
+    public function setDescription(string $description = null)
     {
         $this->description = $description;
 
@@ -150,7 +150,7 @@ class Project implements \JsonSerializable
     /**
      * Property getter.
      *
-     * @return  string
+     * @return  string|null
      */
     public function getDescription()
     {
@@ -174,7 +174,7 @@ class Project implements \JsonSerializable
      *
      * @return  self
      */
-    public function setSuspended($isSuspended)
+    public function setSuspended(bool $isSuspended)
     {
         $this->isSuspended = $isSuspended ? 1 : 0;
 

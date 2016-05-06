@@ -105,7 +105,7 @@ class StateRoleTransition
      *
      * @return  self
      */
-    public function setRole($role)
+    public function setRole(int $role)
     {
         $this->role = $role;
 

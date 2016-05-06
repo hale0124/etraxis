@@ -32,7 +32,7 @@ class DefaultController extends Controller
      * @Action\Route("/", name="homepage")
      * @Action\Method("GET")
      */
-    public function indexAction()
+    public function indexAction(): Response
     {
         return $this->render('web/base.html.twig');
     }
@@ -45,7 +45,7 @@ class DefaultController extends Controller
      *
      * @return  Response
      */
-    public function dlgExportAction()
+    public function dlgExportAction(): Response
     {
         $default = [
             'filename'  => '.csv',
@@ -73,7 +73,7 @@ class DefaultController extends Controller
      *
      * @return  JsonResponse
      */
-    public function exportAction(Request $request)
+    public function exportAction(Request $request): JsonResponse
     {
         $query = new ExportCsvQuery($request->request->get('export'));
 

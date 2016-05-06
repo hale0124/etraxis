@@ -11,6 +11,9 @@
 
 namespace eTraxis\Traits;
 
+use DataTables\DataTablesInterface;
+use SimpleBus\Message\Bus\MessageBus;
+
 /**
  * A trait to extend standard controller class.
  *
@@ -21,9 +24,9 @@ trait ContainerTrait
     /**
      * Shortcut to get the Command Bus service.
      *
-     * @return  \SimpleBus\Message\Bus\MessageBus
+     * @return  MessageBus
      */
-    protected function getCommandBus()
+    protected function getCommandBus(): MessageBus
     {
         return $this->container->get('command_bus');
     }
@@ -31,9 +34,9 @@ trait ContainerTrait
     /**
      * Shortcut to get the Event Bus service.
      *
-     * @return  \SimpleBus\Message\Bus\MessageBus
+     * @return  MessageBus
      */
-    protected function getEventBus()
+    protected function getEventBus(): MessageBus
     {
         return $this->container->get('event_bus');
     }
@@ -41,9 +44,9 @@ trait ContainerTrait
     /**
      * Shortcut to get the DataTables service.
      *
-     * @return  \DataTables\DataTablesInterface
+     * @return  DataTablesInterface
      */
-    protected function getDataTables()
+    protected function getDataTables(): DataTablesInterface
     {
         return $this->container->get('datatables');
     }

@@ -23,7 +23,7 @@ trait FlashBagTrait
      *
      * @param   string $notice Message.
      */
-    protected function setNotice($notice)
+    protected function setNotice(string $notice)
     {
         /** @var \Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface $flashBag */
         $flashBag = $this->container->get('session')->getFlashBag();
@@ -35,7 +35,7 @@ trait FlashBagTrait
      *
      * @param   string $error Message.
      */
-    protected function setError($error)
+    protected function setError(string $error)
     {
         /** @var \Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface $flashBag */
         $flashBag = $this->container->get('session')->getFlashBag();

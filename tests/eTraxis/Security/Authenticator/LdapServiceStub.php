@@ -15,7 +15,7 @@ use eTraxis\Service\Ldap\LdapInterface;
 
 class LdapServiceStub implements LdapInterface
 {
-    public function find($basedn, $username, array $attributes = [])
+    public function find(string $basedn, string $username, array $attributes = [])
     {
         if ($username !== 'einstein') {
             return false;
@@ -27,7 +27,7 @@ class LdapServiceStub implements LdapInterface
         ];
     }
 
-    public function authenticate($basedn, $username, $password)
+    public function authenticate(string $basedn, string $username, string $password)
     {
         return $username === 'einstein' && $password === 'password';
     }

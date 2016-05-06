@@ -31,7 +31,7 @@ class CheckboxField extends AbstractField
      *
      * @return  self
      */
-    public function setDefaultValue($value)
+    public function setDefaultValue(bool $value)
     {
         $this->field->getParameters()->setDefaultValue($value ? 1 : 0);
 
@@ -45,6 +45,6 @@ class CheckboxField extends AbstractField
      */
     public function getDefaultValue()
     {
-        return $this->field->getParameters()->getDefaultValue() ? true : false;
+        return (bool) $this->field->getParameters()->getDefaultValue();
     }
 }

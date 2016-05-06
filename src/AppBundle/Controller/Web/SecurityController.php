@@ -41,7 +41,7 @@ class SecurityController extends Controller
      *
      * @return  Response
      */
-    public function loginAction()
+    public function loginAction(): Response
     {
         /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker $security */
         $security = $this->container->get('security.authorization_checker');
@@ -72,7 +72,7 @@ class SecurityController extends Controller
      *
      * @return  Response
      */
-    public function forgotPasswordAction(Request $request)
+    public function forgotPasswordAction(Request $request): Response
     {
         /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker $security */
         $security = $this->container->get('security.authorization_checker');
@@ -114,7 +114,7 @@ class SecurityController extends Controller
      *
      * @return  Response
      */
-    public function resetPasswordAction(Request $request, $token)
+    public function resetPasswordAction(Request $request, string $token): Response
     {
         /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker $security */
         $security = $this->container->get('security.authorization_checker');
@@ -168,7 +168,7 @@ class SecurityController extends Controller
      *
      * @return  Response
      */
-    public function setExpiredPasswordAction(Request $request)
+    public function setExpiredPasswordAction(Request $request): Response
     {
         /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker $security */
         $security = $this->container->get('security.authorization_checker');

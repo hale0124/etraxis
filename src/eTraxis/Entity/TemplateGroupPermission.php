@@ -103,7 +103,7 @@ class TemplateGroupPermission
      *
      * @return  self
      */
-    public function setPermission($permission)
+    public function setPermission(int $permission)
     {
         $this->permission = $permission;
 

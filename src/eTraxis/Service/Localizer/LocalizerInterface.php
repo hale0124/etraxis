@@ -23,7 +23,7 @@ interface LocalizerInterface
      *
      * @return  int Updated timestamp.
      */
-    public function getLocalTimestamp($timestamp);
+    public function getLocalTimestamp(int $timestamp): int;
 
     /**
      * Returns specified date formatted for current locale.
@@ -32,7 +32,7 @@ interface LocalizerInterface
      *
      * @return  string Formatted date.
      */
-    public function formatDate($timestamp);
+    public function formatDate(int $timestamp): string;
 
     /**
      * Returns specified time formatted for current locale.
@@ -41,5 +41,5 @@ interface LocalizerInterface
      *
      * @return  string Formatted time.
      */
-    public function formatTime($timestamp);
+    public function formatTime(int $timestamp): string;
 }

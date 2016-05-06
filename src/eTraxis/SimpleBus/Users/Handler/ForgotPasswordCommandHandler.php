@@ -53,7 +53,8 @@ class ForgotPasswordCommandHandler
             $this->manager->persist($user);
 
             $this->mailer->send(
-                [$user->getEmail() => $user->getFullname()],
+                $user->getEmail(),
+                $user->getFullname(),
                 'Reset password link for your eTraxis account',
                 'email/forgot_password.html.twig',
                 [

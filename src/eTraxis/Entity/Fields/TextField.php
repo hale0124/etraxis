@@ -59,7 +59,7 @@ class TextField extends AbstractField
      *
      * @return  self
      */
-    public function setMaxLength($length)
+    public function setMaxLength(int $length)
     {
         if ($length < self::MIN_LENGTH) {
             $length = self::MIN_LENGTH;
@@ -91,7 +91,7 @@ class TextField extends AbstractField
      *
      * @return  self
      */
-    public function setDefaultValue($value)
+    public function setDefaultValue(string $value = null)
     {
         if (mb_strlen($value) > self::MAX_LENGTH) {
             $value = substr($value, 0, self::MAX_LENGTH);

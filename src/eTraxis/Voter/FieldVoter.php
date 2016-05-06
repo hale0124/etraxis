@@ -38,7 +38,7 @@ class FieldVoter extends Voter
 
     /**
      * {@inheritdoc}
-     * @codeCoverageIgnoreStart
+     * @codeCoverageIgnore
      */
     protected function voteOnAttribute($attribute, $subject, TokenInterface $token)
     {
@@ -60,7 +60,7 @@ class FieldVoter extends Voter
      *
      * @return  bool
      */
-    protected function isDeleteGranted(Field $subject)
+    protected function isDeleteGranted(Field $subject): bool
     {
         // Can't delete if owning template is not locked.
         return $subject->getState()->getTemplate()->isLocked();

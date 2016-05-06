@@ -29,12 +29,13 @@ class MailerServiceTest extends KernelTestCase
         /** @noinspection PhpParamsInspection */
         $service = new Mailer\MailerService($logger, $twig, $mailer, 'noreply@example.com', 'eTraxis mailer');
 
-        $sent = $service->send(
+        $result = $service->send(
             'test@example.com',
+            'Recipient',
             'Test',
             'email.html.twig'
         );
 
-        self::assertEquals(1, $sent);
+        self::assertTrue($result);
     }
 }

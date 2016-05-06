@@ -153,7 +153,7 @@ class Record
      *
      * @return  self
      */
-    public function setSubject($subject)
+    public function setSubject(string $subject)
     {
         $this->subject = $subject;
 

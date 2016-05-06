@@ -39,8 +39,8 @@ class MailerService implements MailerInterface
         LoggerInterface  $logger,
         Twig_Environment $twig,
         Swift_Mailer     $mailer,
-        $sender_address,
-        $sender_name)
+        string           $sender_address,
+        string           $sender_name)
     {
         $this->logger         = $logger;
         $this->twig           = $twig;
@@ -52,18 +52,17 @@ class MailerService implements MailerInterface
     /**
      * {@inheritdoc}
      */
-    public function send($recipients, $subject, $template, array $args = [])
+    public function send(string $address, string $name, string $subject, string $template, array $args = []): bool
     {
-        $this->logger->info('Send email', [$subject]);
-        $this->logger->info('Recipients', (array) $recipients);
+        $this->logger->info('Send email', [$address, $name, $subject]);
 
         $body = $this->twig->render($template, $args);
 
         $message = \Swift_Message::newInstance($subject, $body, 'text/html')
             ->setFrom([$this->sender_address => $this->sender_name])
-            ->setTo($recipients)
+            ->setTo($address, $name)
         ;
 
-        return $this->mailer->send($message);
+        return $this->mailer->send($message) !== 0;
     }
 }
