@@ -94,7 +94,7 @@ class TextField extends AbstractField
     public function setDefaultValue(string $value = null)
     {
         if (mb_strlen($value) > self::MAX_LENGTH) {
-            $value = substr($value, 0, self::MAX_LENGTH);
+            $value = mb_substr($value, 0, self::MAX_LENGTH);
         }
 
         $id = ($value === null)
