@@ -13,12 +13,12 @@ namespace eTraxis\SimpleBus\States;
 
 use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
-use eTraxis\Entity\StateAssignee;
+use eTraxis\Entity\StateResponsibleGroup;
 use eTraxis\Tests\BaseTestCase;
 
-class RemoveStateAssigneesCommandTest extends BaseTestCase
+class RemoveStateResponsibleGroupsCommandTest extends BaseTestCase
 {
-    public function testRemoveAssignees()
+    public function testRemoveResponsibleGroups()
     {
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
@@ -28,25 +28,24 @@ class RemoveStateAssigneesCommandTest extends BaseTestCase
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
         self::assertNotNull($group);
 
-        /** @var StateAssignee $assignee */
-        $assignee = $this->doctrine->getRepository(StateAssignee::class)->findOneBy([
+        $responsible = $this->doctrine->getRepository(StateResponsibleGroup::class)->findOneBy([
             'state' => $state,
             'group' => $group,
         ]);
-        self::assertNotNull($assignee);
+        self::assertNotNull($responsible);
 
-        $command = new RemoveStateAssigneesCommand([
+        $command = new RemoveStateResponsibleGroupsCommand([
             'id'     => $state->getId(),
             'groups' => [$group->getId()],
         ]);
 
         $this->command_bus->handle($command);
 
-        $assignee = $this->doctrine->getRepository(StateAssignee::class)->findOneBy([
+        $responsible = $this->doctrine->getRepository(StateResponsibleGroup::class)->findOneBy([
             'state' => $state,
             'group' => $group,
         ]);
-        self::assertNull($assignee);
+        self::assertNull($responsible);
     }
 
     /**
@@ -59,7 +58,7 @@ class RemoveStateAssigneesCommandTest extends BaseTestCase
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
         self::assertNotNull($group);
 
-        $command = new RemoveStateAssigneesCommand([
+        $command = new RemoveStateResponsibleGroupsCommand([
             'id'     => self::UNKNOWN_ENTITY_ID,
             'groups' => [$group->getId()],
         ]);

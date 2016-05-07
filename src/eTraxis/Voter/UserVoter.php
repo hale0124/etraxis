@@ -144,10 +144,10 @@ class UserVoter extends Voter
             ->setParameter('id', $subject->getId())
         ;
 
-        $countAsAssignee = (int) $query->getQuery()->getSingleScalarResult();
+        $countAsResponsible = (int) $query->getQuery()->getSingleScalarResult();
 
         // Can't delete if user is mentioned in any record log.
-        return $countAsOriginator === 0 && $countAsAssignee === 0;
+        return $countAsOriginator === 0 && $countAsResponsible === 0;
     }
 
     /**

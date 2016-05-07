@@ -50,34 +50,38 @@ class SetRoleStateTransitionsCommandHandler
             throw new NotFoundHttpException('Unknown state.');
         }
 
-        /** @var State[] $transitions */
-        $transitions = $this->manager->getRepository(State::class)->findBy([
-            'template' => $state->getTemplate(),
-            'id'       => $command->transitions,
-        ]);
+        // Transitions are not applicable for final states.
+        if ($state->getType() !== State::TYPE_FINAL) {
 
-        $query = $this->manager->createQuery('
-            DELETE eTraxis:StateRoleTransition t
-            WHERE t.fromState = :state
-            AND t.role = :role
-        ');
+            /** @var State[] $transitions */
+            $transitions = $this->manager->getRepository(State::class)->findBy([
+                'template' => $state->getTemplate(),
+                'id'       => $command->transitions,
+            ]);
 
-        $query->execute([
-            'state' => $state,
-            'role'  => $command->role,
-        ]);
+            $query = $this->manager->createQuery('
+                DELETE eTraxis:StateRoleTransition t
+                WHERE t.fromState = :state
+                AND t.role = :role
+            ');
 
-        foreach ($transitions as $transition) {
+            $query->execute([
+                'state' => $state,
+                'role'  => $command->role,
+            ]);
 
-            $entity = new StateRoleTransition();
+            foreach ($transitions as $transition) {
 
-            $entity
-                ->setFromState($state)
-                ->setToState($transition)
-                ->setRole($command->role)
-            ;
+                $entity = new StateRoleTransition();
 
-            $this->manager->persist($entity);
+                $entity
+                    ->setFromState($state)
+                    ->setToState($transition)
+                    ->setRole($command->role)
+                ;
+
+                $this->manager->persist($entity);
+            }
         }
     }
 }

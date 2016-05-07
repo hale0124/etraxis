@@ -114,6 +114,22 @@ class StatesGetController extends Controller
     }
 
     /**
+     * Tab with state's responsible groups.
+     *
+     * @Action\Route("/tab/responsibles/{id}", name="admin_tab_state_responsibles", requirements={"id"="\d+"})
+     *
+     * @param   State $state
+     *
+     * @return  Response
+     */
+    public function tabResponsiblesAction(State $state): Response
+    {
+        return $this->render('admin/states/tab_responsibles.html.twig', [
+            'state' => $state,
+        ]);
+    }
+
+    /**
      * Renders dialog to create new state.
      *
      * @Action\Route("/new/{id}", name="admin_dlg_new_state", requirements={"id"="\d+"})

@@ -16,8 +16,8 @@ use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\State;
-use eTraxis\Entity\StateAssignee;
 use eTraxis\Entity\StateGroupTransition;
+use eTraxis\Entity\StateResponsibleGroup;
 use eTraxis\Entity\StateRoleTransition;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -88,10 +88,10 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
         $manager->persist($state_delivered);
         $manager->flush();
 
-        $assignee = new StateAssignee();
+        $responsible = new StateResponsibleGroup();
 
         /** @noinspection PhpParamsInspection */
-        $assignee
+        $responsible
             ->setState($state_new)
             ->setGroup($this->getReference('group:crew'))
         ;
@@ -113,7 +113,7 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
             ->setRole(SystemRole::RESPONSIBLE)
         ;
 
-        $manager->persist($assignee);
+        $manager->persist($responsible);
         $manager->persist($group_transition);
         $manager->persist($role_transition);
         $manager->flush();

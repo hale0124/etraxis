@@ -1,0 +1,44 @@
+<div class="flex-container grid-container grid-parent grid-row">
+
+    <div class="grid-45">
+        <fieldset>
+            <legend>{{ 'others'|trans }}</legend>
+            <select id="notResponsibleGroup" size="20" multiple title="{{ 'others'|trans }}" class="grid-100 mobile-grid-100">
+                {% for group in state.notResponsibleGroups %}
+                    {% if group.project %}
+                        <option value="{{ group.id }}">{{ group.name }}</option>
+                    {% else %}
+                        <option value="{{ group.id }}">{{ group.name }} ({{ 'group.global'|trans|lower }})</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </fieldset>
+    </div>
+
+    <div class="grid-10 text-center">
+        <button type="button" class="grid-row grid-100" onclick="StateApp.addGroups({{ state.id }})">
+            <span class="hide-on-mobile">&gt;&gt;</span>
+            <span class="hide-on-desktop ui-icon ui-icon-arrowthick-1-s"></span>
+        </button>
+        <button type="button" class="grid-row grid-100" onclick="StateApp.removeGroups({{ state.id }})">
+            <span class="hide-on-mobile">&lt;&lt;</span>
+            <span class="hide-on-desktop ui-icon ui-icon-arrowthick-1-n">&lt;&lt;</span>
+        </button>
+    </div>
+
+    <div class="grid-45">
+        <fieldset>
+            <legend>{{ 'groups'|trans }}</legend>
+            <select id="responsibleGroup" size="20" multiple title="{{ 'groups'|trans }}" class="grid-100 mobile-grid-100">
+                {% for group in state.responsibleGroups %}
+                    {% if group.project %}
+                        <option value="{{ group.id }}">{{ group.name }}</option>
+                    {% else %}
+                        <option value="{{ group.id }}">{{ group.name }} ({{ 'group.global'|trans|lower }})</option>
+                    {% endif %}
+                {% endfor %}
+            </select>
+        </fieldset>
+    </div>
+
+</div>

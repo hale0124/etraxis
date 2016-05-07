@@ -51,41 +51,45 @@ class SetGroupStateTransitionsCommandHandler
             throw new NotFoundHttpException('Unknown state.');
         }
 
-        /** @var Group $group */
-        $group = $this->manager->find(Group::class, $command->group);
+        // Transitions are not applicable for final states.
+        if ($state->getType() !== State::TYPE_FINAL) {
 
-        if (!$group) {
-            throw new NotFoundHttpException('Unknown group.');
-        }
+            /** @var Group $group */
+            $group = $this->manager->find(Group::class, $command->group);
 
-        /** @var State[] $transitions */
-        $transitions = $this->manager->getRepository(State::class)->findBy([
-            'template' => $state->getTemplate(),
-            'id'       => $command->transitions,
-        ]);
+            if (!$group) {
+                throw new NotFoundHttpException('Unknown group.');
+            }
 
-        $query = $this->manager->createQuery('
-            DELETE eTraxis:StateGroupTransition t
-            WHERE t.fromState = :state
-            AND t.group = :group
-        ');
+            /** @var State[] $transitions */
+            $transitions = $this->manager->getRepository(State::class)->findBy([
+                'template' => $state->getTemplate(),
+                'id'       => $command->transitions,
+            ]);
 
-        $query->execute([
-            'state' => $state,
-            'group' => $group,
-        ]);
+            $query = $this->manager->createQuery('
+                DELETE eTraxis:StateGroupTransition t
+                WHERE t.fromState = :state
+                AND t.group = :group
+            ');
 
-        foreach ($transitions as $transition) {
+            $query->execute([
+                'state' => $state,
+                'group' => $group,
+            ]);
 
-            $entity = new StateGroupTransition();
+            foreach ($transitions as $transition) {
 
-            $entity
-                ->setFromState($state)
-                ->setToState($transition)
-                ->setGroup($group)
-            ;
+                $entity = new StateGroupTransition();
 
-            $this->manager->persist($entity);
+                $entity
+                    ->setFromState($state)
+                    ->setToState($transition)
+                    ->setGroup($group)
+                ;
+
+                $this->manager->persist($entity);
+            }
         }
     }
 }

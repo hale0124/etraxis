@@ -60,13 +60,30 @@ class StateTest extends BaseTestCase
         $expected = State::TYPE_INTERIM;
         $this->object->setType($expected);
         self::assertEquals($expected, $this->object->getType());
+        self::assertEquals(State::RESPONSIBLE_ASSIGN, $this->object->getResponsible());
+
+        $expected = State::TYPE_FINAL;
+        $this->object->setType($expected);
+        self::assertEquals($expected, $this->object->getType());
+        self::assertEquals(State::RESPONSIBLE_REMOVE, $this->object->getResponsible());
     }
 
     public function testResponsible()
     {
-        $expected = State::RESPONSIBLE_ASSIGN;
+        $expected = State::RESPONSIBLE_KEEP;
+        self::assertNotEquals($expected, $this->object->getResponsible());
         $this->object->setResponsible($expected);
         self::assertEquals($expected, $this->object->getResponsible());
+    }
+
+    public function testResponsibleOnFinal()
+    {
+        $expected = State::RESPONSIBLE_KEEP;
+        self::assertNotEquals($expected, $this->object->getResponsible());
+
+        $this->object->setType(State::TYPE_FINAL);
+        $this->object->setResponsible($expected);
+        self::assertNotEquals($expected, $this->object->getResponsible());
     }
 
     public function testNextState()
@@ -78,6 +95,11 @@ class StateTest extends BaseTestCase
         $state->setTemplate($this->object->getTemplate());
         $this->object->setNextState($state);
         self::assertEquals($state, $this->object->getNextState());
+
+        $this->object->setType(State::TYPE_FINAL);
+        self::assertNull($this->object->getNextState());
+        $this->object->setNextState($state);
+        self::assertNull($this->object->getNextState());
     }
 
     public function testFields()
@@ -102,6 +124,9 @@ class StateTest extends BaseTestCase
         ];
 
         self::assertEquals($expected, $new->getRoleTransitions(SystemRole::RESPONSIBLE));
+
+        $new->setType(State::TYPE_FINAL);
+        self::assertEmpty($new->getRoleTransitions(SystemRole::RESPONSIBLE));
     }
 
     public function testGetGroupTransitions()
@@ -125,9 +150,12 @@ class StateTest extends BaseTestCase
         ];
 
         self::assertEquals($expected, $new->getGroupTransitions($managers));
+
+        $new->setType(State::TYPE_FINAL);
+        self::assertEmpty($new->getGroupTransitions($managers));
     }
 
-    public function testGetAssigneeGroups()
+    public function testGetResponsibleGroups()
     {
         /** @var Group $crew */
         $crew = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
@@ -137,7 +165,26 @@ class StateTest extends BaseTestCase
             $crew,
         ];
 
-        self::assertEquals($expected, $this->object->getAssigneeGroups());
+        self::assertEquals($expected, $this->object->getResponsibleGroups());
+
+        $this->object->setType(State::TYPE_FINAL);
+        self::assertEmpty($this->object->getResponsibleGroups());
+    }
+
+    public function testGetNotResponsibleGroups()
+    {
+        $expected = array_filter($this->doctrine->getRepository(Group::class)->findAll(), function (Group $group) {
+            return $group->getName() !== 'Crew';
+        });
+
+        usort($expected, function (Group $group1, Group $group2) {
+            return $group1->getName() <=> $group2->getName();
+        });
+
+        self::assertEquals($expected, $this->object->getNotResponsibleGroups());
+
+        $this->object->setType(State::TYPE_FINAL);
+        self::assertEmpty($this->object->getNotResponsibleGroups());
     }
 
     public function testJsonSerialize()

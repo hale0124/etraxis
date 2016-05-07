@@ -14,14 +14,13 @@ namespace eTraxis\SimpleBus\States\Handler;
 use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
-use eTraxis\Entity\StateAssignee;
-use eTraxis\SimpleBus\States\AddStateAssigneesCommand;
+use eTraxis\SimpleBus\States\RemoveStateResponsibleGroupsCommand;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 /**
  * Command handler.
  */
-class AddStateAssigneesCommandHandler
+class RemoveStateResponsibleGroupsCommandHandler
 {
     protected $manager;
 
@@ -36,13 +35,13 @@ class AddStateAssigneesCommandHandler
     }
 
     /**
-     * Adds allowed assignees for specified state.
+     * Removes allowed responsible groups for specified state.
      *
-     * @param   AddStateAssigneesCommand $command
+     * @param   RemoveStateResponsibleGroupsCommand $command
      *
      * @throws  NotFoundHttpException
      */
-    public function handle(AddStateAssigneesCommand $command)
+    public function handle(RemoveStateResponsibleGroupsCommand $command)
     {
         /** @var State $state */
         $state = $this->manager->find(State::class, $command->id);
@@ -51,33 +50,24 @@ class AddStateAssigneesCommandHandler
             throw new NotFoundHttpException('Unknown state.');
         }
 
-        $project   = $state->getTemplate()->getProject();
-        $assignees = $state->getAssigneeGroups();
+        // Responsible groups are applicable for assignable states only.
+        if ($state->getResponsible() === State::RESPONSIBLE_ASSIGN) {
 
-        /** @var Group[] $groups */
-        $groups = $this->manager->getRepository(Group::class)->findBy([
-            'id' => $command->groups,
-        ]);
+            /** @var Group[] $groups */
+            $groups = $this->manager->getRepository(Group::class)->findBy([
+                'id' => $command->groups,
+            ]);
 
-        foreach ($groups as $group) {
+            $query = $this->manager->createQuery('
+                DELETE eTraxis:StateResponsibleGroup srg
+                WHERE srg.state = :state
+                AND srg.group IN (:groups)
+            ');
 
-            // Skip already present group.
-            if (in_array($group, $assignees)) {
-                continue;
-            }
-
-            // Group must be global or belong to the same project.
-            if ($group->getProject() === null || $group->getProject() === $project) {
-
-                $entity = new StateAssignee();
-
-                $entity
-                    ->setState($state)
-                    ->setGroup($group)
-                ;
-
-                $this->manager->persist($entity);
-            }
+            $query->execute([
+                'state'  => $state,
+                'groups' => $groups,
+            ]);
         }
     }
 }

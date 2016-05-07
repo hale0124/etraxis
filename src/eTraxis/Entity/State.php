@@ -211,6 +211,12 @@ class State extends Entity implements \JsonSerializable
     {
         if (Dictionary\StateType::has($type)) {
             $this->type = $type;
+
+            // Final states cannot be assigned.
+            if ($type === self::TYPE_FINAL) {
+                $this->responsible = self::RESPONSIBLE_REMOVE;
+                $this->nextState   = null;
+            }
         }
 
         return $this;
@@ -235,6 +241,11 @@ class State extends Entity implements \JsonSerializable
      */
     public function setResponsible(int $responsible)
     {
+        // Final states cannot be assigned.
+        if ($this->type === self::TYPE_FINAL) {
+            return $this;
+        }
+
         if (Dictionary\StateResponsible::has($responsible)) {
             $this->responsible = $responsible;
         }
@@ -249,18 +260,29 @@ class State extends Entity implements \JsonSerializable
      */
     public function getResponsible()
     {
+        // Final states cannot be assigned.
+        if ($this->type === self::TYPE_FINAL) {
+            return self::RESPONSIBLE_REMOVE;
+        }
+
         return $this->responsible;
     }
 
     /**
      * Property setter.
      *
-     * @param   State $state
+     * @param   State|null $state
      *
      * @return  self
      */
-    public function setNextState(State $state)
+    public function setNextState(State $state = null)
     {
+        // Final states cannot have a next one.
+        if ($this->type === self::TYPE_FINAL) {
+            return $this;
+        }
+
+        // Next state must be of the same template.
         if ($state !== null && $state->getTemplate() !== $this->template) {
             return $this;
         }
@@ -273,11 +295,11 @@ class State extends Entity implements \JsonSerializable
     /**
      * Property getter.
      *
-     * @return  State
+     * @return  State|null
      */
     public function getNextState()
     {
-        return $this->nextState;
+        return $this->type === self::TYPE_FINAL ? null : $this->nextState;
     }
 
     /**
@@ -299,6 +321,11 @@ class State extends Entity implements \JsonSerializable
      */
     public function getRoleTransitions(int $role)
     {
+        // Transitions are not applicable for final states.
+        if ($this->type === self::TYPE_FINAL) {
+            return [];
+        }
+
         $query = $this->manager->createQueryBuilder();
 
         $query
@@ -329,6 +356,11 @@ class State extends Entity implements \JsonSerializable
      */
     public function getGroupTransitions(Group $group)
     {
+        // Transitions are not applicable for final states.
+        if ($this->type === self::TYPE_FINAL) {
+            return [];
+        }
+
         $query = $this->manager->createQueryBuilder();
 
         $query
@@ -351,32 +383,69 @@ class State extends Entity implements \JsonSerializable
     }
 
     /**
-     * Returns list of possible assignee groups.
+     * Returns list of responsible groups.
      *
      * @return  Group[] List of groups.
      */
-    public function getAssigneeGroups()
+    public function getResponsibleGroups()
     {
+        // Responsible groups are applicable for assignable states only.
+        if ($this->responsible !== self::RESPONSIBLE_ASSIGN) {
+            return [];
+        }
+
         $query = $this->manager->createQueryBuilder();
 
         $query
-            ->select('sa')
+            ->select('srg')
             ->addSelect('g')
-            ->from(StateAssignee::class, 'sa')
-            ->leftJoin('sa.group', 'g')
-            ->where('sa.state = :state')
+            ->from(StateResponsibleGroup::class, 'srg')
+            ->leftJoin('srg.group', 'g')
+            ->where('srg.state = :state')
             ->orderBy('g.name')
             ->setParameter('state', $this)
         ;
 
         $results = [];
 
-        /** @var StateAssignee $result */
+        /** @var StateResponsibleGroup $result */
         foreach ($query->getQuery()->getResult() as $result) {
             $results[] = $result->getGroup();
         }
 
         return $results;
+    }
+
+    /**
+     * Returns list of groups which are not responsibles.
+     *
+     * @return  Group[] List of groups.
+     */
+    public function getNotResponsibleGroups()
+    {
+        // Responsible groups are applicable for assignable states only.
+        if ($this->responsible !== self::RESPONSIBLE_ASSIGN) {
+            return [];
+        }
+
+        $groups = $this->getResponsibleGroups();
+
+        $query = $this->manager->createQueryBuilder();
+
+        $query
+            ->select('g')
+            ->from(Group::class, 'g')
+            ->orderBy('g.name')
+        ;
+
+        if (count($groups) > 0) {
+            $query
+                ->where($query->expr()->notIn('g.id', ':groups'))
+                ->setParameter('groups', $this->getResponsibleGroups())
+            ;
+        }
+
+        return $query->getQuery()->getResult();
     }
 
     /**

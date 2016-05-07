@@ -66,7 +66,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
         $records = [
             '1ACV01' => [
                 'subject'     => 'Prizes for the claw crane',
-                'assignee'    => 'user:leela',
+                'responsible' => 'user:leela',
                 'crew'        => 'Amy, Bender, Fry, Leela',
                 'delivery_to' => 'Sal',
                 'delivery_at' => 'Luna Park, Moon',
@@ -76,7 +76,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             ],
             '1ACV02' => [
                 'subject'     => 'Lug nuts',
-                'assignee'    => 'user:bender',
+                'responsible' => 'user:bender',
                 'crew'        => 'Bender, Fry, Leela',
                 'delivery_to' => 'Robots of Chapek 9',
                 'delivery_at' => 'Chapek 9',
@@ -86,7 +86,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             ],
             '1ACV03' => [
                 'subject'     => 'A sign saying "Please Don\'t Drink the Emperor"',
-                'assignee'    => 'user:leela',
+                'responsible' => 'user:leela',
                 'crew'        => 'Amy, Bender, Fry, Leela, Zoidberg',
                 'delivery_to' => 'Emperor Bont',
                 'delivery_at' => 'Trisol',
@@ -96,7 +96,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             ],
             '1ACV04' => [
                 'subject'     => 'Subpoenas',
-                'assignee'    => 'user:leela',
+                'responsible' => 'user:leela',
                 'crew'        => 'Fry, Leela, Bender',
                 'delivery_to' => 'Possibly Big Vinnie',
                 'delivery_at' => 'Sicily 8',
@@ -106,7 +106,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             ],
             '1ACV06' => [
                 'subject'     => 'Guenter',
-                'assignee'    => 'user:hubert',
+                'responsible' => 'user:hubert',
                 'crew'        => 'Bender, Fry, Leela, Prof. Farnsworth',
                 'delivery_to' => 'Prof. Farnsworth',
                 'delivery_at' => 'Mars University',
@@ -116,7 +116,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             ],
             '2ACV01' => [
                 'subject'     => 'Ceremonial oversized Scissors',
-                'assignee'    => 'user:leela',
+                'responsible' => 'user:leela',
                 'crew'        => 'Bender, Fry, Leela',
                 'delivery_to' => 'DOOP',
                 'delivery_at' => 'DOOP headquarters',
@@ -126,7 +126,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             ],
             '2ACV02' => [
                 'subject'     => 'Pillows',
-                'assignee'    => 'user:leela',
+                'responsible' => 'user:leela',
                 'crew'        => 'Bender, Fry, Leela',
                 'delivery_to' => 'Hotel management',
                 'delivery_at' => 'Hotel, Stumbos 4',
@@ -136,7 +136,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             ],
             '2ACV03' => [
                 'subject'     => 'Atom of jumbonium for the Miss Universe Pageant',
-                'assignee'    => 'user:leela',
+                'responsible' => 'user:leela',
                 'crew'        => 'Bender, Fry, Leela',
                 'delivery_to' => 'Bob Barker\'s head',
                 'delivery_at' => 'Tova 9',
@@ -146,7 +146,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             ],
             '2ACV04' => [
                 'subject'     => 'Popcorn',
-                'assignee'    => 'user:leela',
+                'responsible' => 'user:leela',
                 'crew'        => 'Bender, Fry, Leela',
                 'delivery_to' => 'People of Cineplex 14',
                 'delivery_at' => 'Cineplex 14',
@@ -156,7 +156,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             ],
             '3ACV01' => [
                 'subject'     => 'Letters for Santa',
-                'assignee'    => 'user:leela',
+                'responsible' => 'user:leela',
                 'crew'        => 'Bender, Fry, Leela',
                 'delivery_to' => 'Robot Santa Claus',
                 'delivery_at' => 'Neptune',
@@ -166,7 +166,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             ],
             '3ACV02' => [
                 'subject'     => 'A sandstone block',
-                'assignee'    => 'user:leela',
+                'responsible' => 'user:leela',
                 'crew'        => 'Bender, Fry, Leela',
                 'delivery_to' => 'Osirians',
                 'delivery_at' => 'Osiris 4',
@@ -176,7 +176,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             ],
             '4ACV01' => [
                 'subject'     => 'Medication',
-                'assignee'    => 'user:amy',
+                'responsible' => 'user:amy',
                 'crew'        => 'Amy, Bender, Fry, Leela',
                 'delivery_to' => 'Hive mind of Nigel 7',
                 'delivery_at' => 'Nigel 7',
@@ -186,7 +186,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             ],
             '4ACV02' => [
                 'subject'     => 'Candy hearts',
-                'assignee'    => 'user:leela',
+                'responsible' => 'user:leela',
                 'crew'        => 'Bender, Fry, Leela',
                 'delivery_to' => 'Lrrr and Ndnd',
                 'delivery_at' => 'Omicron Persei 8',
@@ -196,7 +196,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             ],
             '4ACV03' => [
                 'subject'     => 'Ice from Halley\'s Comet',
-                'assignee'    => 'user:leela',
+                'responsible' => 'user:leela',
                 'crew'        => 'Bender, Fry, Leela',
                 'delivery_to' => 'The people of Earth',
                 'delivery_at' => 'Earth',
@@ -206,7 +206,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             ],
             '5ACV01' => [
                 'subject'     => 'Barstool softener',
-                'assignee'    => 'user:hubert',
+                'responsible' => 'user:hubert',
                 'crew'        => 'Amy, Bender, Fry, Leela, Prof. Farnsworth, Zoidberg',
                 'delivery_to' => 'Nude Bartender',
                 'delivery_at' => 'Planet XXX',
@@ -216,7 +216,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             ],
             '5ACV02' => [
                 'subject'     => 'Billion-mile security fence',
-                'assignee'    => 'user:hubert',
+                'responsible' => 'user:hubert',
                 'crew'        => 'Hermes, Prof. Farnsworth, Scruffy, Zoidberg',
                 'delivery_to' => 'Leo Wong',
                 'delivery_at' => 'Deep Space',
@@ -226,7 +226,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             ],
             '6ACV01' => [
                 'subject'     => 'e-Waste',
-                'assignee'    => 'user:leela',
+                'responsible' => 'user:leela',
                 'crew'        => 'Bender, Fry, Leela',
                 'delivery_to' => 'Antarian workers',
                 'delivery_at' => 'Third World of the Antares system',
@@ -236,7 +236,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             ],
             '6ACV02' => [
                 'subject'     => 'A soufflé laced with nitroglycerine',
-                'assignee'    => 'user:hubert',
+                'responsible' => 'user:hubert',
                 'crew'        => 'Amy, Bender, Hermes, Fry, Leela, Prof. Farnsworth, Zoidberg',
                 'delivery_to' => 'Mrs. Astor',
                 'delivery_at' => 'Waldorf Asteroid',
@@ -246,7 +246,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             ],
             '6ACV03' => [
                 'subject'     => 'New clamps for Francis X. Clampazzo.',
-                'assignee'    => 'user:leela',
+                'responsible' => 'user:leela',
                 'crew'        => 'Bender, Fry, Leela',
                 'delivery_to' => 'Francis X. Clampazzo',
                 'delivery_at' => 'The Donbot\'s mansion, Long Long Island',
@@ -256,7 +256,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             ],
             '6ACV04' => [
                 'subject'     => '200 feet of hanging rope for the hanging of multiheaded monster.',
-                'assignee'    => 'user:hubert',
+                'responsible' => 'user:hubert',
                 'crew'        => 'Amy, Bender, Fry, Hermes, Leela, the Professor, Zoidberg',
                 'delivery_to' => 'Sheriff Burley',
                 'delivery_at' => 'Aldrin\'s Gulch Town Jail, Aldrin\'s Gulch, Moon',
@@ -266,7 +266,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
             ],
             '6ACV08' => [
                 'subject'     => 'A statue commemorating the loss of the first Planet Express crew',
-                'assignee'    => 'user:leela',
+                'responsible' => 'user:leela',
                 'crew'        => 'Fry, Bender, Leela, Hermes, Amy, and Zoidberg',
                 'delivery_to' => 'Professor Farnsworth',
                 'delivery_at' => 'Planet Express headquarters',
@@ -291,7 +291,7 @@ class LoadRecordsData extends AbstractFixture implements ContainerAwareInterface
 
             $altr_record->state       = $state_new;
             $altr_record->author      = $this->getReference('user:hubert');
-            $altr_record->responsible = $this->getReference($info['assignee']);
+            $altr_record->responsible = $this->getReference($info['responsible']);
             $altr_record->createdAt   = strtotime($info['date'] . ' 09:00:00');
             $altr_record->changedAt   = strtotime($info['date'] . ' 09:00:00');
 

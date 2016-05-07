@@ -14,12 +14,12 @@ namespace eTraxis\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * State possible assignees.
+ * State responsible groups.
  *
  * @ORM\Table(name="tbl_state_assignees")
  * @ORM\Entity
  */
-class StateAssignee
+class StateResponsibleGroup
 {
     /**
      * @var State State where record can be moved to.
@@ -32,7 +32,7 @@ class StateAssignee
     private $state;
 
     /**
-     * @var Group Group which members can be assigned on this transition.
+     * @var Group Group which members can be assigned during the transition.
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")

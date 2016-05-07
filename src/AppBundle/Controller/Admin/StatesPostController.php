@@ -155,4 +155,44 @@ class StatesPostController extends Controller
 
         return new JsonResponse();
     }
+
+    /**
+     * Adds responsible groups to specified state.
+     *
+     * @Action\Route("/responsibles/add/{id}", name="admin_states_add_responsibles", requirements={"id"="\d+"})
+     *
+     * @param   Request $request
+     * @param   int     $id
+     *
+     * @return  JsonResponse
+     */
+    public function addResponsiblesAction(Request $request, int $id): JsonResponse
+    {
+        $data = $request->request->all();
+
+        $command = new States\AddStateResponsibleGroupsCommand($data, ['id' => $id]);
+        $this->getCommandBus()->handle($command);
+
+        return new JsonResponse();
+    }
+
+    /**
+     * Removes responsible groups to specified state.
+     *
+     * @Action\Route("/responsibles/remove/{id}", name="admin_states_remove_responsibles", requirements={"id"="\d+"})
+     *
+     * @param   Request $request
+     * @param   int     $id
+     *
+     * @return  JsonResponse
+     */
+    public function removeResponsiblesAction(Request $request, int $id): JsonResponse
+    {
+        $data = $request->request->all();
+
+        $command = new States\RemoveStateResponsibleGroupsCommand($data, ['id' => $id]);
+        $this->getCommandBus()->handle($command);
+
+        return new JsonResponse();
+    }
 }

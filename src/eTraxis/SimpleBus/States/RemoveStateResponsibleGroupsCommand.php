@@ -15,12 +15,12 @@ use SimpleBus\MessageTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
- * Removes allowed assignees for specified state.
+ * Removes allowed responsible groups for specified state.
  *
  * @property    int   $id     State ID.
- * @property    int[] $groups Assignees to remove (group IDs).
+ * @property    int[] $groups Responsible groups to remove (group IDs).
  */
-class RemoveStateAssigneesCommand
+class RemoveStateResponsibleGroupsCommand
 {
     use MessageTrait;
 

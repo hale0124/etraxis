@@ -30,12 +30,12 @@ services:
         tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\SetGroupStateTransitionsCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]
 
-    command.state.add_assignees:
-        class: eTraxis\SimpleBus\States\Handler\AddStateAssigneesCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\AddStateAssigneesCommand }]
+    command.state.add_responsible_groups:
+        class: eTraxis\SimpleBus\States\Handler\AddStateResponsibleGroupsCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\AddStateResponsibleGroupsCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]
 
-    command.state.remove_assignees:
-        class: eTraxis\SimpleBus\States\Handler\RemoveStateAssigneesCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\RemoveStateAssigneesCommand }]
+    command.state.remove_responsible_groups:
+        class: eTraxis\SimpleBus\States\Handler\RemoveStateResponsibleGroupsCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\SimpleBus\States\RemoveStateResponsibleGroupsCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]

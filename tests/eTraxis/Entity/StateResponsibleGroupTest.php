@@ -11,14 +11,14 @@
 
 namespace eTraxis\Entity;
 
-class StateAssigneeTest extends \PHPUnit_Framework_TestCase
+class StateResponsibleGroupTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var StateAssignee */
+    /** @var StateResponsibleGroup */
     private $object;
 
     protected function setUp()
     {
-        $this->object = new StateAssignee();
+        $this->object = new StateResponsibleGroup();
     }
 
     public function testState()
