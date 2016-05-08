@@ -23,6 +23,15 @@ var FieldsApp = (function() {
         });
     });
 
+    /**
+     * Reloads current tab to refresh its content.
+     */
+    var reloadTab = function() {
+        var $tabs = $('#tabs-field');
+        var current = $tabs.tabs('option', 'active');
+        $tabs.tabs('load', current);
+    };
+
     return {
 
         /**
@@ -122,6 +131,22 @@ var FieldsApp = (function() {
                     FieldsApp.reload(StatesApp.selected(), function() {
                         FieldsApp.select(id);
                     });
+                    return true;
+                }
+            });
+        },
+
+        /**
+         * Invokes "PCRE" dialog.
+         *
+         * @param {number} id Field ID.
+         */
+        regex: function(id) {
+            eTraxis.modal({
+                url: eTraxis.route('admin_dlg_regex_field', { id: id }),
+                title: 'PCRE',
+                success: function() {
+                    reloadTab();
                     return true;
                 }
             });

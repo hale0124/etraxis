@@ -1,0 +1,17 @@
+{% import 'macro.html.twig' as macro %}
+
+<div class="grid-row">
+    <div class="grid-100">
+        <button type="button" onclick="FieldsApp.regex({{ field.id }})">{{ 'button.edit'|trans }}</button>
+    </div>
+</div>
+
+<div class="grid-row">
+    <div class="grid-100">
+        <fieldset>
+            {{ macro.row('field.regex_check'|trans, field.regex.check) }}
+            {{ macro.row('field.regex_search'|trans, field.regex.search) }}
+            {{ macro.row('field.regex_replace'|trans, field.regex.replace) }}
+        </fieldset>
+    </div>
+</div>

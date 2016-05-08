@@ -1,0 +1,11 @@
+{% form_theme form 'form.html.twig' %}
+
+<div class="dialog">
+    {{ form_start(form) }}
+    <fieldset>
+        {{ form_row(form.check) }}
+        {{ form_row(form.search) }}
+        {{ form_row(form.replace) }}
+    </fieldset>
+    {{ form_end(form) }}
+</div>

@@ -2,5 +2,9 @@
     <ul>
         <li><a href="{{ path('admin_tab_field_details', {'id': field.id}) }}">{{ 'field'|trans }}</a></li>
         <li><a href="{{ path('admin_tab_field_permissions', {'id': field.id}) }}">{{ 'permissions'|trans }}</a></li>
+
+        {% if (field.type in [constant('eTraxis\\Entity\\Field::TYPE_STRING'), constant('eTraxis\\Entity\\Field::TYPE_TEXT')]) %}
+            <li><a href="{{ path('admin_tab_field_regex', {'id': field.id}) }}">PCRE</a></li>
+        {% endif %}
     </ul>
 </div>

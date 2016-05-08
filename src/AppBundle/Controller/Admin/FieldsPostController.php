@@ -117,11 +117,21 @@ class FieldsPostController extends Controller
                 break;
 
             case Field::TYPE_STRING:
-                $command = new Fields\UpdateStringFieldCommand($data + $data['asString'], ['id' => $field->getId()]);
+                $command = new Fields\UpdateStringFieldCommand($data + $data['asString'], [
+                    'id'           => $field->getId(),
+                    'regexCheck'   => $field->getRegex()->getCheck(),
+                    'regexSearch'  => $field->getRegex()->getSearch(),
+                    'regexReplace' => $field->getRegex()->getReplace(),
+                ]);
                 break;
 
             case Field::TYPE_TEXT:
-                $command = new Fields\UpdateTextFieldCommand($data + $data['asText'], ['id' => $field->getId()]);
+                $command = new Fields\UpdateTextFieldCommand($data + $data['asText'], [
+                    'id'           => $field->getId(),
+                    'regexCheck'   => $field->getRegex()->getCheck(),
+                    'regexSearch'  => $field->getRegex()->getSearch(),
+                    'regexReplace' => $field->getRegex()->getReplace(),
+                ]);
                 break;
 
             case Field::TYPE_CHECKBOX:
@@ -147,6 +157,58 @@ class FieldsPostController extends Controller
             default:
                 throw new BadRequestHttpException();
         }
+
+        $this->getCommandBus()->handle($command);
+
+        return new JsonResponse();
+    }
+
+    /**
+     * Processes submitted form when specified field PCRE settings are being edited.
+     *
+     * @Action\Route("/regex/{id}", name="admin_regex_field", requirements={"id"="\d+"})
+     *
+     * @param   Request $request
+     * @param   Field   $field
+     *
+     * @return  JsonResponse
+     */
+    public function regexAction(Request $request, Field $field): JsonResponse
+    {
+        $data = $request->request->get('regex');
+
+        switch ($field->getType()) {
+
+            case Field::TYPE_STRING:
+                $fieldAs = $field->asString();
+                $command = new Fields\UpdateStringFieldCommand($data);
+                break;
+
+            case Field::TYPE_TEXT:
+                $fieldAs = $field->asText();
+                $command = new Fields\UpdateTextFieldCommand($data);
+                break;
+
+            default:
+                throw new BadRequestHttpException();
+        }
+
+        // Common field attributes.
+        $command->id           = $field->getId();
+        $command->name         = $field->getName();
+        $command->description  = $field->getDescription();
+        $command->required     = $field->isRequired();
+        $command->guestAccess  = $field->hasGuestAccess();
+        $command->showInEmails = $field->getShowInEmails();
+
+        // Type-specific field attributes.
+        $command->maxLength    = $fieldAs->getMaxLength();
+        $command->defaultValue = $fieldAs->getDefaultValue();
+
+        // PCRE field attributes.
+        $command->regexCheck   = $data['check']   ?: null;
+        $command->regexSearch  = $data['search']  ?: null;
+        $command->regexReplace = $data['replace'] ?: null;
 
         $this->getCommandBus()->handle($command);
 
