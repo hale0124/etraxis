@@ -22,7 +22,6 @@ class ForgotPasswordCommandTest extends BaseTestCase
 
         /** @var \StdClass $user */
         $user = AltrEgo::create($this->findUser($username));
-        self::assertNotNull($user);
 
         $prevToken   = $user->resetToken;
         $prevExpires = $user->resetTokenExpiresAt;

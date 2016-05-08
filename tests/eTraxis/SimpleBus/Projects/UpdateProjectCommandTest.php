@@ -21,7 +21,6 @@ class UpdateProjectCommandTest extends BaseTestCase
         /** @var Project $project */
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
 
-        self::assertNotNull($project);
         self::assertNotEmpty($project->getDescription());
 
         $command = new UpdateProjectCommand([
@@ -65,8 +64,6 @@ class UpdateProjectCommandTest extends BaseTestCase
     {
         /** @var Project $project */
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
-
-        self::assertNotNull($project);
 
         $command = new UpdateProjectCommand([
             'id'        => $project->getId(),

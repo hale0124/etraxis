@@ -24,8 +24,6 @@ class UsersLockoutTest extends BaseTestCase
     {
         $user = $this->findUser('artem');
 
-        self::assertNotNull($user);
-
         $token = new UsernamePasswordToken(new CurrentUser($user), 'secret', 'etraxis_provider');
 
         $success = new AuthenticationEvent($token);

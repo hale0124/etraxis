@@ -22,8 +22,6 @@ class CreateCheckboxFieldCommandTest extends BaseTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
-        self::assertNotNull($state);
-
         $command = new CreateCheckboxFieldCommand([
             'state'        => $state->getId(),
             'name'         => 'Required',

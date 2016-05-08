@@ -23,8 +23,6 @@ class CreateDecimalFieldCommandTest extends BaseTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
-        self::assertNotNull($state);
-
         $command = new CreateDecimalFieldCommand([
             'state'        => $state->getId(),
             'name'         => 'Price',
@@ -64,8 +62,6 @@ class CreateDecimalFieldCommandTest extends BaseTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
-        self::assertNotNull($state);
-
         $command = new CreateDecimalFieldCommand([
             'state'        => $state->getId(),
             'name'         => 'Month',
@@ -87,8 +83,6 @@ class CreateDecimalFieldCommandTest extends BaseTestCase
     {
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
-
-        self::assertNotNull($state);
 
         $command = new CreateDecimalFieldCommand([
             'state'        => $state->getId(),

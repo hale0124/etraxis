@@ -24,7 +24,6 @@ class UpdateStateCommandTest extends BaseTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
-        self::assertNotNull($state);
         self::assertEquals('Delivered', $state->getName());
         self::assertEquals('D', $state->getAbbreviation());
         self::assertEquals(State::RESPONSIBLE_REMOVE, $state->getResponsible());
@@ -46,7 +45,6 @@ class UpdateStateCommandTest extends BaseTestCase
 
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Completed']);
 
-        self::assertNotNull($state);
         self::assertEquals('Completed', $state->getName());
         self::assertEquals('C', $state->getAbbreviation());
         self::assertEquals(State::RESPONSIBLE_REMOVE, $state->getResponsible());

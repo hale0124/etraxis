@@ -113,11 +113,9 @@ class StateTest extends BaseTestCase
 
         /** @var State $new */
         $new = $repository->findOneBy(['name' => 'New']);
-        self::assertNotNull($new);
 
         /** @var State $delivered */
         $delivered = $repository->findOneBy(['name' => 'Delivered']);
-        self::assertNotNull($delivered);
 
         $expected = [
             $delivered,
@@ -135,15 +133,12 @@ class StateTest extends BaseTestCase
 
         /** @var Group $managers */
         $managers = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
-        self::assertNotNull($managers);
 
         /** @var State $new */
         $new = $repository->findOneBy(['name' => 'New']);
-        self::assertNotNull($new);
 
         /** @var State $delivered */
         $delivered = $repository->findOneBy(['name' => 'Delivered']);
-        self::assertNotNull($delivered);
 
         $expected = [
             $delivered,
@@ -159,7 +154,6 @@ class StateTest extends BaseTestCase
     {
         /** @var Group $crew */
         $crew = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
-        self::assertNotNull($crew);
 
         $expected = [
             $crew,

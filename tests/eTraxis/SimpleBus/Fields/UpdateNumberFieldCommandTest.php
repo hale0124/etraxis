@@ -67,8 +67,6 @@ class UpdateNumberFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Episode']);
 
-        self::assertNotNull($field);
-
         $command = new UpdateNumberFieldCommand([
             'id'           => $field->getId(),
             'name'         => $field->getName(),
@@ -90,8 +88,6 @@ class UpdateNumberFieldCommandTest extends BaseTestCase
     {
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Episode']);
-
-        self::assertNotNull($field);
 
         $command = new UpdateNumberFieldCommand([
             'id'           => $field->getId(),

@@ -18,7 +18,6 @@ class UnlockUserCommandTest extends BaseTestCase
     public function testUnlockUser()
     {
         $user = $this->findUser('artem');
-        self::assertNotNull($user);
 
         $auth_attempts = $this->client->getContainer()->getParameter('security_auth_attempts');
         $lock_time     = $this->client->getContainer()->getParameter('security_lock_time');

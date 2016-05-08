@@ -22,11 +22,9 @@ class SetGroupTemplatePermissionsCommandTest extends BaseTestCase
     {
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
-        self::assertNotNull($template);
 
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
-        self::assertNotNull($group);
 
         /** @var TemplateGroupPermission $permissions */
         $permissions = $this->doctrine->getRepository(TemplateGroupPermission::class)->findOneBy([
@@ -63,11 +61,9 @@ class SetGroupTemplatePermissionsCommandTest extends BaseTestCase
     {
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Futurama']);
-        self::assertNotNull($template);
 
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
-        self::assertNotNull($group);
 
         /** @var TemplateGroupPermission $permissions */
         $permissions = $this->doctrine->getRepository(TemplateGroupPermission::class)->findOneBy([
@@ -119,7 +115,6 @@ class SetGroupTemplatePermissionsCommandTest extends BaseTestCase
     {
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
-        self::assertNotNull($template);
 
         $command = new SetGroupTemplatePermissionsCommand([
             'id'          => $template->getId(),

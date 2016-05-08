@@ -67,8 +67,6 @@ class UpdateDurationFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Running time']);
 
-        self::assertNotNull($field);
-
         $command = new UpdateDurationFieldCommand([
             'id'           => $field->getId(),
             'name'         => $field->getName(),
@@ -90,8 +88,6 @@ class UpdateDurationFieldCommandTest extends BaseTestCase
     {
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Running time']);
-
-        self::assertNotNull($field);
 
         $command = new UpdateDurationFieldCommand([
             'id'           => $field->getId(),

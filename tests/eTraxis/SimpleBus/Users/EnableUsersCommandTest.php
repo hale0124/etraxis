@@ -19,7 +19,6 @@ class EnableUsersCommandTest extends BaseTestCase
     {
         $user = $this->findUser('veins');
 
-        self::assertNotNull($user);
         self::assertTrue($user->isDisabled());
 
         $command = new EnableUsersCommand([

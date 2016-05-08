@@ -22,11 +22,9 @@ class RemoveStateResponsibleGroupsCommandTest extends BaseTestCase
     {
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
-        self::assertNotNull($state);
 
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
-        self::assertNotNull($group);
 
         $responsible = $this->doctrine->getRepository(StateResponsibleGroup::class)->findOneBy([
             'state' => $state,
@@ -56,7 +54,6 @@ class RemoveStateResponsibleGroupsCommandTest extends BaseTestCase
     {
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
-        self::assertNotNull($group);
 
         $command = new RemoveStateResponsibleGroupsCommand([
             'id'     => self::UNKNOWN_ENTITY_ID,

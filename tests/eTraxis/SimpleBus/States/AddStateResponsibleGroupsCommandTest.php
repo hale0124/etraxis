@@ -23,11 +23,9 @@ class AddStateResponsibleGroupsCommandTest extends BaseTestCase
     {
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
-        self::assertNotNull($state);
 
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
-        self::assertNotNull($group);
 
         $responsible = $this->doctrine->getRepository(StateResponsibleGroup::class)->findOneBy([
             'state' => $state,
@@ -95,7 +93,6 @@ class AddStateResponsibleGroupsCommandTest extends BaseTestCase
 
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Produced']);
-        self::assertNotNull($state);
 
         $command = new AddStateResponsibleGroupsCommand([
             'id'     => $state->getId(),
@@ -115,7 +112,6 @@ class AddStateResponsibleGroupsCommandTest extends BaseTestCase
     {
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
-        self::assertNotNull($group);
 
         $command = new AddStateResponsibleGroupsCommand([
             'id'     => self::UNKNOWN_ENTITY_ID,

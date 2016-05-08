@@ -22,11 +22,9 @@ class SetRoleStateTransitionsCommandTest extends BaseTestCase
     {
         /** @var State $state_new */
         $state_new = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
-        self::assertNotNull($state_new);
 
         /** @var State $state_delivered */
         $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
-        self::assertNotNull($state_delivered);
 
         /** @var StateRoleTransition $transition */
         $transition = $this->doctrine->getRepository(StateRoleTransition::class)->findOneBy([
@@ -56,11 +54,9 @@ class SetRoleStateTransitionsCommandTest extends BaseTestCase
     {
         /** @var State $state_new */
         $state_new = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
-        self::assertNotNull($state_new);
 
         /** @var State $state_delivered */
         $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
-        self::assertNotNull($state_delivered);
 
         /** @var StateRoleTransition $transition */
         $transition = $this->doctrine->getRepository(StateRoleTransition::class)->findOneBy([
@@ -94,7 +90,6 @@ class SetRoleStateTransitionsCommandTest extends BaseTestCase
     {
         /** @var State $state_delivered */
         $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
-        self::assertNotNull($state_delivered);
 
         $command = new SetRoleStateTransitionsCommand([
             'id'          => self::UNKNOWN_ENTITY_ID,

@@ -78,8 +78,6 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'U.S. viewers']);
 
-        self::assertNotNull($field);
-
         $command = new UpdateDecimalFieldCommand([
             'id'           => $field->getId(),
             'name'         => $field->getName(),
@@ -101,8 +99,6 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
     {
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'U.S. viewers']);
-
-        self::assertNotNull($field);
 
         $command = new UpdateDecimalFieldCommand([
             'id'           => $field->getId(),

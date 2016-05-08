@@ -29,17 +29,15 @@ class LockUnlockTemplateCommandTest extends BaseTestCase
         $this->loginAs('hubert');
 
         $template = $this->getTemplate();
-        self::assertNotNull($template);
-        $id = $template->getId();
 
         self::assertFalse($this->getTemplate()->isLocked());
 
-        $command = new LockTemplateCommand(['id' => $id]);
+        $command = new LockTemplateCommand(['id' => $template->getId()]);
         $this->command_bus->handle($command);
 
         self::assertTrue($this->getTemplate()->isLocked());
 
-        $command = new UnlockTemplateCommand(['id' => $id]);
+        $command = new UnlockTemplateCommand(['id' => $template->getId()]);
         $this->command_bus->handle($command);
 
         self::assertFalse($this->getTemplate()->isLocked());

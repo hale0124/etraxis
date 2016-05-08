@@ -23,8 +23,6 @@ class CreateStringFieldCommandTest extends BaseTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
-        self::assertNotNull($state);
-
         $command = new CreateStringFieldCommand([
             'state'        => $state->getId(),
             'name'         => 'Client',

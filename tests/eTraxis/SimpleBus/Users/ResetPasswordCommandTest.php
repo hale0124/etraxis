@@ -20,13 +20,8 @@ class ResetPasswordCommandTest extends BaseTestCase
     {
         parent::setUp();
 
-        $username = 'artem';
-
-        $user = $this->findUser($username);
-        self::assertNotNull($user);
-
         $command = new ForgotPasswordCommand([
-            'username' => $username,
+            'username' => 'artem',
             'ip'       => '127.0.0.1',
         ]);
 
@@ -66,15 +61,11 @@ class ResetPasswordCommandTest extends BaseTestCase
         $username = 'einstein';
 
         $user = $this->findUser($username, true);
-        self::assertNotNull($user);
 
         $token = $user->generateResetToken();
 
         $this->doctrine->getManager()->persist($user);
         $this->doctrine->getManager()->flush();
-
-        $user = $this->findUser($username, true);
-        self::assertNotNull($user);
 
         $command = new ResetPasswordCommand([
             'token'    => $token,

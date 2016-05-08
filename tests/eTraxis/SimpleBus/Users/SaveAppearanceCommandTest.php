@@ -20,7 +20,6 @@ class SaveAppearanceCommandTest extends BaseTestCase
     {
         $user = $this->findUser('bender');
 
-        self::assertNotNull($user);
         self::assertEquals('en_US', $user->getSettings()->getLocale());
         self::assertEquals('azure', $user->getSettings()->getTheme());
         self::assertEquals(0, $user->getSettings()->getTimezone());

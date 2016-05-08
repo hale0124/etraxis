@@ -40,7 +40,6 @@ class DeleteProjectCommandTest extends BaseTestCase
 
         /** @var Project $project */
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
-        self::assertNotNull($project);
 
         $command = new DeleteProjectCommand(['id' => $project->getId()]);
         $this->command_bus->handle($command);

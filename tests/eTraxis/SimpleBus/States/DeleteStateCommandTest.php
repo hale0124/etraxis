@@ -57,7 +57,6 @@ class DeleteStateCommandTest extends BaseTestCase
 
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
-        self::assertNotNull($state);
 
         $command = new DeleteStateCommand(['id' => $state->getId()]);
         $this->command_bus->handle($command);

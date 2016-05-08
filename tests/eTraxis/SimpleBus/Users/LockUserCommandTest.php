@@ -19,9 +19,6 @@ class LockUserCommandTest extends BaseTestCase
     {
         $username = 'artem';
 
-        $user = $this->findUser($username);
-        self::assertNotNull($user);
-
         $command = new LockUserCommand([
             'username' => $username,
         ]);

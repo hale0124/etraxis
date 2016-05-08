@@ -35,7 +35,6 @@ class StringValuesRepositoryTest extends BaseTestCase
 
         $value = $repository->findOneBy(['value' => $expected]);
 
-        self::assertNotNull($value);
         self::assertEquals($id1, $value->getId());
         self::assertEquals($expected, $value->getValue());
         self::assertCount($count + 1, $repository->findAll());

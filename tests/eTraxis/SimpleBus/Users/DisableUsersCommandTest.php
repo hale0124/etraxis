@@ -24,12 +24,10 @@ class DisableUsersCommandTest extends BaseTestCase
         $ids = [];
 
         foreach ($usernames as $username) {
-            $user = $this->findUser($username);
-
-            self::assertNotNull($user);
-            self::assertFalse($user->isDisabled());
-
+            $user  = $this->findUser($username);
             $ids[] = $user->getId();
+
+            self::assertFalse($user->isDisabled());
         }
 
         $command = new DisableUsersCommand(['ids' => $ids]);

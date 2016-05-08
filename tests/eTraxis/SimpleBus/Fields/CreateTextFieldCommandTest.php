@@ -23,8 +23,6 @@ class CreateTextFieldCommandTest extends BaseTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
-        self::assertNotNull($state);
-
         $command = new CreateTextFieldCommand([
             'state'        => $state->getId(),
             'name'         => 'Comment',

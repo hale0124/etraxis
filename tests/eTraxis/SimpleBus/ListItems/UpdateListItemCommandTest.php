@@ -28,7 +28,6 @@ class UpdateListItemCommandTest extends BaseTestCase
             'key'   => 1,
         ]);
 
-        self::assertNotNull($item);
         self::assertEquals(1, $item->getKey());
         self::assertEquals('Season 1', $item->getValue());
 

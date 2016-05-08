@@ -22,15 +22,12 @@ class SetGroupStateTransitionsCommandTest extends BaseTestCase
     {
         /** @var State $state_new */
         $state_new = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
-        self::assertNotNull($state_new);
 
         /** @var State $state_delivered */
         $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
-        self::assertNotNull($state_delivered);
 
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
-        self::assertNotNull($group);
 
         /** @var StateGroupTransition $transition */
         $transition = $this->doctrine->getRepository(StateGroupTransition::class)->findOneBy([
@@ -60,15 +57,12 @@ class SetGroupStateTransitionsCommandTest extends BaseTestCase
     {
         /** @var State $state_new */
         $state_new = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
-        self::assertNotNull($state_new);
 
         /** @var State $state_delivered */
         $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
-        self::assertNotNull($state_delivered);
 
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
-        self::assertNotNull($group);
 
         /** @var StateGroupTransition $transition */
         $transition = $this->doctrine->getRepository(StateGroupTransition::class)->findOneBy([
@@ -102,11 +96,9 @@ class SetGroupStateTransitionsCommandTest extends BaseTestCase
     {
         /** @var State $state_delivered */
         $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
-        self::assertNotNull($state_delivered);
 
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
-        self::assertNotNull($group);
 
         $command = new SetGroupStateTransitionsCommand([
             'id'          => self::UNKNOWN_ENTITY_ID,
@@ -125,11 +117,9 @@ class SetGroupStateTransitionsCommandTest extends BaseTestCase
     {
         /** @var State $state_new */
         $state_new = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
-        self::assertNotNull($state_new);
 
         /** @var State $state_delivered */
         $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
-        self::assertNotNull($state_delivered);
 
         $command = new SetGroupStateTransitionsCommand([
             'id'          => $state_new->getId(),

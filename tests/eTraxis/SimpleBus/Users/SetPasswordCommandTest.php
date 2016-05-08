@@ -42,7 +42,6 @@ class SetPasswordCommandTest extends BaseTestCase
     public function testLdap()
     {
         $user = $this->findUser('einstein', true);
-        self::assertNotNull($user);
 
         $command = new SetPasswordCommand([
             'id'       => $user->getId(),

@@ -70,7 +70,6 @@ class DeleteListItemCommandTest extends BaseTestCase
             'field' => $field,
             'key'   => 1,
         ]);
-        self::assertNotNull($item);
 
         $command = new DeleteListItemCommand([
             'field' => $item->getField()->getId(),

@@ -54,12 +54,11 @@ class SetOrderFieldCommandTest extends BaseTestCase
             'removedAt' => 0,
         ]);
 
-        self::assertNotNull($field);
-
         $command = new SetOrderFieldCommand([
             'id'    => $field->getId(),
             'order' => $field->getIndexNumber() - 1,
         ]);
+
         $this->command_bus->handle($command);
 
         self::assertEquals($expected, $this->getFields($field->getState()));
@@ -80,12 +79,11 @@ class SetOrderFieldCommandTest extends BaseTestCase
             'removedAt' => 0,
         ]);
 
-        self::assertNotNull($field);
-
         $command = new SetOrderFieldCommand([
             'id'    => $field->getId(),
             'order' => $field->getIndexNumber() + 1,
         ]);
+
         $this->command_bus->handle($command);
 
         self::assertEquals($expected, $this->getFields($field->getState()));
@@ -106,12 +104,11 @@ class SetOrderFieldCommandTest extends BaseTestCase
             'removedAt' => 0,
         ]);
 
-        self::assertNotNull($field);
-
         $command = new SetOrderFieldCommand([
             'id'    => $field->getId(),
             'order' => 1,
         ]);
+
         $this->command_bus->handle($command);
 
         self::assertEquals($expected, $this->getFields($field->getState()));
@@ -132,12 +129,11 @@ class SetOrderFieldCommandTest extends BaseTestCase
             'removedAt' => 0,
         ]);
 
-        self::assertNotNull($field);
-
         $command = new SetOrderFieldCommand([
             'id'    => $field->getId(),
             'order' => PHP_INT_MAX,
         ]);
+
         $this->command_bus->handle($command);
 
         self::assertEquals($expected, $this->getFields($field->getState()));

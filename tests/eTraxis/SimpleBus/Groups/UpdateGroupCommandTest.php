@@ -21,7 +21,6 @@ class UpdateGroupCommandTest extends BaseTestCase
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Staff']);
 
-        self::assertNotNull($group);
         self::assertNotEmpty($group->getDescription());
 
         $command = new UpdateGroupCommand([
@@ -62,8 +61,6 @@ class UpdateGroupCommandTest extends BaseTestCase
     {
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Staff']);
-
-        self::assertNotNull($group);
 
         $command = new UpdateGroupCommand([
             'id'   => $group->getId(),

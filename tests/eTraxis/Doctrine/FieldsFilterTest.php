@@ -21,7 +21,6 @@ class FieldsFilterTest extends BaseTestCase
     {
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Produced']);
-        self::assertNotNull($state);
 
         self::assertCount(7, $state->getFields());
 

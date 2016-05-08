@@ -67,8 +67,6 @@ class UpdateDateFieldCommandTest extends BaseTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Original air date']);
 
-        self::assertNotNull($field);
-
         $command = new UpdateDateFieldCommand([
             'id'           => $field->getId(),
             'name'         => $field->getName(),
@@ -90,8 +88,6 @@ class UpdateDateFieldCommandTest extends BaseTestCase
     {
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Original air date']);
-
-        self::assertNotNull($field);
 
         $command = new UpdateDateFieldCommand([
             'id'           => $field->getId(),

@@ -130,8 +130,6 @@ class TemplateTest extends BaseTestCase
         /** @var Group $group_global */
         $group_local  = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
         $group_global = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Nimbus']);
-        self::assertNotNull($group_local);
-        self::assertNotNull($group_global);
 
         $repository = $this->doctrine->getManager()->getRepository(Template::class);
 

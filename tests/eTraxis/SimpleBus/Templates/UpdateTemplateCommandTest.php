@@ -23,7 +23,6 @@ class UpdateTemplateCommandTest extends BaseTestCase
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
-        self::assertNotNull($template);
         self::assertEquals('Delivery', $template->getName());
         self::assertEquals('PE', $template->getPrefix());
         self::assertEquals('Delivery task', $template->getDescription());
@@ -49,7 +48,6 @@ class UpdateTemplateCommandTest extends BaseTestCase
 
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Maintenance']);
 
-        self::assertNotNull($template);
         self::assertEquals('Maintenance', $template->getName());
         self::assertEquals('M', $template->getPrefix());
         self::assertEquals('Nimbus technical maintenance', $template->getDescription());
@@ -103,8 +101,6 @@ class UpdateTemplateCommandTest extends BaseTestCase
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
-        self::assertNotNull($template);
-
         $command = new UpdateTemplateCommand([
             'id'          => $template->getId(),
             'name'        => 'Maintenance',
@@ -145,8 +141,6 @@ class UpdateTemplateCommandTest extends BaseTestCase
 
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
-
-        self::assertNotNull($template);
 
         $command = new UpdateTemplateCommand([
             'id'          => $template->getId(),

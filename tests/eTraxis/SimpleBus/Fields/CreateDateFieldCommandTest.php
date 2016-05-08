@@ -22,8 +22,6 @@ class CreateDateFieldCommandTest extends BaseTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
-        self::assertNotNull($state);
-
         $command = new CreateDateFieldCommand([
             'state'        => $state->getId(),
             'name'         => 'Deadline',
@@ -56,8 +54,6 @@ class CreateDateFieldCommandTest extends BaseTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
-        self::assertNotNull($state);
-
         $command = new CreateDateFieldCommand([
             'state'        => $state->getId(),
             'name'         => 'Deadline',
@@ -79,8 +75,6 @@ class CreateDateFieldCommandTest extends BaseTestCase
     {
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
-
-        self::assertNotNull($state);
 
         $command = new CreateDateFieldCommand([
             'state'        => $state->getId(),

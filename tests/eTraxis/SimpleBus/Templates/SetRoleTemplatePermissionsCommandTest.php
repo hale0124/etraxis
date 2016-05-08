@@ -21,8 +21,7 @@ class SetRoleTemplatePermissionsCommandTest extends BaseTestCase
     {
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
-        self::assertNotNull($template);
-        $id = $template->getId();
+        $id       = $template->getId();
 
         self::assertEquals(Template::PERMIT_EDIT_RECORD, $template->getRolePermissions(SystemRole::AUTHOR) & Template::PERMIT_EDIT_RECORD);
         self::assertEquals(0,                            $template->getRolePermissions(SystemRole::AUTHOR) & Template::PERMIT_REOPEN_RECORD);
@@ -58,8 +57,7 @@ class SetRoleTemplatePermissionsCommandTest extends BaseTestCase
     {
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
-        self::assertNotNull($template);
-        $id = $template->getId();
+        $id       = $template->getId();
 
         self::assertEquals(Template::PERMIT_ADD_COMMENT, $template->getRolePermissions(SystemRole::RESPONSIBLE) & Template::PERMIT_ADD_COMMENT);
         self::assertEquals(0,                            $template->getRolePermissions(SystemRole::RESPONSIBLE) & Template::PERMIT_ATTACH_SUBRECORD);
@@ -95,8 +93,7 @@ class SetRoleTemplatePermissionsCommandTest extends BaseTestCase
     {
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
-        self::assertNotNull($template);
-        $id = $template->getId();
+        $id       = $template->getId();
 
         self::assertEquals(0, $template->getRolePermissions(SystemRole::REGISTERED) & Template::PERMIT_VIEW_RECORD);
         self::assertEquals(0, $template->getRolePermissions(SystemRole::REGISTERED) & Template::PERMIT_CREATE_RECORD);

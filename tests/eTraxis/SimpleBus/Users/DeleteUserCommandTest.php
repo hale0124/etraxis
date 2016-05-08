@@ -37,7 +37,6 @@ class DeleteUserCommandTest extends BaseTestCase
         $this->loginAs('scruffy');
 
         $user = $this->findUser('scruffy');
-        self::assertNotNull($user);
 
         $command = new DeleteUserCommand(['id' => $user->getId()]);
         $this->command_bus->handle($command);

@@ -22,7 +22,6 @@ class UpdateUserCommandTest extends BaseTestCase
 
         $user = $this->findUser('bender');
 
-        self::assertNotNull($user);
         self::assertNotEmpty($user->getDescription());
         self::assertFalse($user->isAdmin());
         self::assertFalse($user->isDisabled());
@@ -94,8 +93,6 @@ class UpdateUserCommandTest extends BaseTestCase
         $this->loginAs('hubert');
 
         $user = $this->findUser('hubert');
-
-        self::assertNotNull($user);
 
         $command = new UpdateUserCommand([
             'id'       => $user->getId(),
