@@ -15,7 +15,7 @@ use Dictionary\StaticDictionary;
 use eTraxis\Entity\Template;
 
 /**
- * Static collection of template permissions.
+ * Template permissions.
  */
 class TemplatePermission extends StaticDictionary
 {

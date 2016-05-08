@@ -12,6 +12,7 @@
 namespace eTraxis\Entity;
 
 use AltrEgo\AltrEgo;
+use eTraxis\Dictionary\SystemRole;
 use eTraxis\Tests\BaseTestCase;
 
 class FieldTest extends BaseTestCase
@@ -127,28 +128,54 @@ class FieldTest extends BaseTestCase
         self::assertTrue($this->object->hasGuestAccess());
     }
 
-    public function testRegisteredAccess()
+    public function testAuthorPermission()
     {
         $expected = Field::ACCESS_READ_ONLY;
 
-        $this->object->setRegisteredAccess($expected);
-        self::assertEquals($expected, $this->object->getRegisteredAccess());
+        $this->object->setRolePermission(SystemRole::AUTHOR, $expected);
+        self::assertEquals($expected, $this->object->getRolePermission(SystemRole::AUTHOR));
     }
 
-    public function testAuthorAccess()
+    public function testResponsiblePermission()
     {
         $expected = Field::ACCESS_READ_ONLY;
 
-        $this->object->setAuthorAccess($expected);
-        self::assertEquals($expected, $this->object->getAuthorAccess());
+        $this->object->setRolePermission(SystemRole::RESPONSIBLE, $expected);
+        self::assertEquals($expected, $this->object->getRolePermission(SystemRole::RESPONSIBLE));
     }
 
-    public function testResponsibleAccess()
+    public function testRegisteredPermission()
     {
         $expected = Field::ACCESS_READ_ONLY;
 
-        $this->object->setResponsibleAccess($expected);
-        self::assertEquals($expected, $this->object->getResponsibleAccess());
+        $this->object->setRolePermission(SystemRole::REGISTERED, $expected);
+        self::assertEquals($expected, $this->object->getRolePermission(SystemRole::REGISTERED));
+    }
+
+    public function testUnknownRolePermission()
+    {
+        self::assertEquals(Field::ACCESS_DENIED, $this->object->getRolePermission(PHP_INT_MIN));
+    }
+
+    public function testGetGroupPermission()
+    {
+        $expected = [
+            'Planet Express, Inc.' => Field::ACCESS_DENIED,
+            'Nimbus'               => Field::ACCESS_DENIED,
+            'Managers'             => Field::ACCESS_READ_WRITE,
+            'Staff'                => Field::ACCESS_READ_ONLY,
+            'Crew'                 => Field::ACCESS_DENIED,
+        ];
+
+        /** @var Field $field */
+        $field = $this->doctrine->getManager()->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
+
+        /** @var Group[] $groups */
+        $groups = $this->doctrine->getRepository(Group::class)->findAll();
+
+        foreach ($groups as $group) {
+            self::assertEquals($expected[$group->getName()], $field->getGroupPermission($group));
+        }
     }
 
     public function testShowInEmails()

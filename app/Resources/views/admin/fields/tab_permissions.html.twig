@@ -1,0 +1,49 @@
+<div class="grid-container grid-parent grid-row">
+
+    <div class="grid-50">
+        <fieldset>
+            <legend>{{ 'groups'|trans }}</legend>
+            <select id="group" onchange="FieldsApp.loadPermissions({{ field.id }})" size="20" title="{{ 'groups'|trans }}" class="grid-100 mobile-grid-100">
+
+                {% for role, name in roles %}
+                    {% if loop.first %}
+                        <option value="{{ role }}" selected>{{ name|trans }} ({{ 'role'|trans|lower }})</option>
+                    {% else %}
+                        <option value="{{ role }}">{{ name|trans }} ({{ 'role'|trans|lower }})</option>
+                    {% endif %}
+                {% endfor %}
+
+                {% for group in field.state.template.project.groups %}
+                    {% if loop.first %}
+                        <option disabled></option>
+                    {% endif %}
+                    <option value="{{ group.id }}">{{ group.name }}</option>
+                {% endfor %}
+
+                {% for group in groups %}
+                    {% if loop.first %}
+                        <option disabled></option>
+                    {% endif %}
+                    <option value="{{ group.id }}">{{ group.name }} ({{ 'group.global'|trans|lower }})</option>
+                {% endfor %}
+
+            </select>
+        </fieldset>
+    </div>
+
+    <div class="grid-50">
+        <fieldset>
+            <legend>{{ 'permissions'|trans }}</legend>
+            {% for key, value in permissions %}
+                <div class="grid-100">
+                    <input type="radio" id="{{ value|replace('.', '_') }}" name="permission" value="{{ key }}">
+                    <label for="{{ value|replace('.', '_') }}">{{ value|trans|lower }}</label>
+                </div>
+            {% endfor %}
+        </fieldset>
+        <div class="grid-row">
+            <button type="button" onclick="FieldsApp.savePermissions({{ field.id }})">{{ 'button.save'|trans }}</button>
+        </div>
+    </div>
+
+</div>

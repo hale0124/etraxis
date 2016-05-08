@@ -54,9 +54,9 @@ class TemplateVoterTest extends BaseTestCase
             ->setPrefix('bug')
             ->setLocked(true)
             ->setGuestAccess(false)
-            ->setRolePermissions(SystemRole::REGISTERED, 0)
             ->setRolePermissions(SystemRole::AUTHOR, 0)
             ->setRolePermissions(SystemRole::RESPONSIBLE, 0)
+            ->setRolePermissions(SystemRole::REGISTERED, 0)
         ;
 
         $this->doctrine->getManager()->persist($template);
@@ -115,9 +115,9 @@ class TemplateVoterTest extends BaseTestCase
             ->setPrefix('bug')
             ->setLocked(true)
             ->setGuestAccess(false)
-            ->setRolePermissions(SystemRole::REGISTERED, 0)
             ->setRolePermissions(SystemRole::AUTHOR, 0)
             ->setRolePermissions(SystemRole::RESPONSIBLE, 0)
+            ->setRolePermissions(SystemRole::REGISTERED, 0)
         ;
 
         $this->doctrine->getManager()->persist($template);

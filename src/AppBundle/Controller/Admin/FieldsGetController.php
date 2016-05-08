@@ -11,8 +11,11 @@
 
 namespace AppBundle\Controller\Admin;
 
+use eTraxis\Dictionary\FieldPermission;
 use eTraxis\Dictionary\FieldType;
+use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\Field;
+use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
 use eTraxis\Form\FieldForm;
 use eTraxis\Traits\ContainerTrait;
@@ -88,6 +91,28 @@ class FieldsGetController extends Controller
     }
 
     /**
+     * Tab with field's permissions.
+     *
+     * @Action\Route("/tab/permissions/{id}", name="admin_tab_field_permissions", requirements={"id"="\d+"})
+     *
+     * @param   Field $field
+     *
+     * @return  Response
+     */
+    public function tabPermissionsAction(Field $field): Response
+    {
+        /** @var \eTraxis\Repository\GroupsRepository $repository */
+        $repository = $this->getDoctrine()->getRepository(Group::class);
+
+        return $this->render('admin/fields/tab_permissions.html.twig', [
+            'field'       => $field,
+            'groups'      => $repository->getGlobalGroups(),
+            'roles'       => SystemRole::all(),
+            'permissions' => FieldPermission::all(),
+        ]);
+    }
+
+    /**
      * Renders dialog to create new field.
      *
      * @Action\Route("/new/{id}", name="admin_dlg_new_field", requirements={"id"="\d+"})
@@ -125,5 +150,35 @@ class FieldsGetController extends Controller
         return $this->render('admin/fields/dlg_field.html.twig', [
             'form' => $form->createView(),
         ]);
+    }
+
+    /**
+     * Loads permissions of the specified role for the specified field.
+     *
+     * @Action\Route("/permissions/{id}/{role}", name="admin_fields_load_role_permissions", requirements={"id"="\d+", "role"="\-\d+"})
+     *
+     * @param   Field $field
+     * @param   int   $role
+     *
+     * @return  JsonResponse
+     */
+    public function loadRolePermissionsAction(Field $field, int $role): JsonResponse
+    {
+        return new JsonResponse($field->getRolePermission($role));
+    }
+
+    /**
+     * Loads permissions of the specified group for the specified field.
+     *
+     * @Action\Route("/permissions/{id}/{group}", name="admin_fields_load_group_permissions", requirements={"id"="\d+", "group"="\d+"})
+     *
+     * @param   Field $field
+     * @param   Group $group
+     *
+     * @return  JsonResponse
+     */
+    public function loadGroupPermissionsAction(Field $field, Group $group): JsonResponse
+    {
+        return new JsonResponse($field->getGroupPermission($group));
     }
 }

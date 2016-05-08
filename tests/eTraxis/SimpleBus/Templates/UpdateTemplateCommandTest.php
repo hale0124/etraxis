@@ -92,9 +92,9 @@ class UpdateTemplateCommandTest extends BaseTestCase
             ->setPrefix('M')
             ->setLocked(true)
             ->setGuestAccess(true)
-            ->setRolePermissions(SystemRole::REGISTERED, 0)
             ->setRolePermissions(SystemRole::AUTHOR, 0)
             ->setRolePermissions(SystemRole::RESPONSIBLE, 0)
+            ->setRolePermissions(SystemRole::REGISTERED, 0)
         ;
 
         $this->doctrine->getManager()->persist($template);
@@ -135,9 +135,9 @@ class UpdateTemplateCommandTest extends BaseTestCase
             ->setPrefix('M')
             ->setLocked(true)
             ->setGuestAccess(true)
-            ->setRolePermissions(SystemRole::REGISTERED, 0)
             ->setRolePermissions(SystemRole::AUTHOR, 0)
             ->setRolePermissions(SystemRole::RESPONSIBLE, 0)
+            ->setRolePermissions(SystemRole::REGISTERED, 0)
         ;
 
         $this->doctrine->getManager()->persist($template);

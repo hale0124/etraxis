@@ -15,6 +15,14 @@ var FieldsApp = (function() {
         FieldsApp.select(data);
     });
 
+    // First time initialization.
+    $(function() {
+        $(document).on('tabsload', '#tabs-field', function() {
+            var $tabs = $('#tabs-field');
+            $('#group', $tabs).change();
+        });
+    });
+
     return {
 
         /**
@@ -130,6 +138,43 @@ var FieldsApp = (function() {
                     $('#content').html(null);
                     StatesApp.select(StatesApp.selected());
                 });
+            });
+        },
+
+        /**
+         * Loads permissions for specified field.
+         *
+         * @param {number} id Field ID.
+         */
+        loadPermissions: function(id) {
+            var $tabs = $('#tabs-field');
+            var group = $('#group', $tabs).val();
+
+            var url = (group < 0)
+                ? eTraxis.route('admin_fields_load_role_permissions', { id: id, role: group })
+                : eTraxis.route('admin_fields_load_group_permissions', { id: id, group: group });
+
+            $.get(url, function(data) {
+                $('input[name="permission"][value="' + data + '"]', $tabs).prop('checked', true);
+            });
+        },
+
+        /**
+         * Saves permissions for specified field.
+         *
+         * @param {number} id Field ID.
+         */
+        savePermissions: function(id) {
+            var $tabs = $('#tabs-field');
+            var group = $('#group', $tabs).val();
+            var permission = $('input[name="permission"]:checked', $tabs).val();
+
+            var url = (group < 0)
+                ? eTraxis.route('admin_fields_save_role_permissions', { id: id, role: group })
+                : eTraxis.route('admin_fields_save_group_permissions', { id: id, group: group });
+
+            $.post(url, { permission: permission }, function() {
+                eTraxis.alert(eTraxis.i18n['permissions'], eTraxis.i18n['changes_saved']);
             });
         }
     };

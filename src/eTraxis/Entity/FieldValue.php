@@ -163,7 +163,7 @@ class FieldValue
      *
      * @return  self
      *
-     * @todo Refactor into type-specific functions.
+     * @todo    Refactor into type-specific functions.
      */
     public function setValueId(int $valueId = null)
     {
@@ -177,7 +177,7 @@ class FieldValue
      *
      * @return  int|null
      *
-     * @todo Refactor into type-specific functions.
+     * @todo    Refactor into type-specific functions.
      */
     public function getValueId()
     {

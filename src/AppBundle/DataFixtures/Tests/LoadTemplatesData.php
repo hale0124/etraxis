@@ -94,9 +94,9 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
             ->setDescription('Delivery task')
             ->setLocked(false)
             ->setGuestAccess(false)
-            ->setRolePermissions(SystemRole::REGISTERED, 0)
             ->setRolePermissions(SystemRole::AUTHOR, $author)
             ->setRolePermissions(SystemRole::RESPONSIBLE, $responsible)
+            ->setRolePermissions(SystemRole::REGISTERED, 0)
         ;
 
         $this->addReference('template:delivery', $template);
@@ -136,8 +136,8 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
      */
     protected function loadFuturamaTemplate(ObjectManager $manager)
     {
-        $registered = Template::PERMIT_VIEW_RECORD;
         $author     = Template::PERMIT_EDIT_RECORD | Template::PERMIT_ADD_COMMENT | Template::PERMIT_ADD_FILE | Template::PERMIT_REMOVE_FILE;
+        $registered = Template::PERMIT_VIEW_RECORD;
 
         $template = new Template();
 
@@ -149,9 +149,9 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
             ->setDescription('Futurama episode')
             ->setLocked(false)
             ->setGuestAccess(true)
-            ->setRolePermissions(SystemRole::REGISTERED, $registered)
             ->setRolePermissions(SystemRole::AUTHOR, $author)
             ->setRolePermissions(SystemRole::RESPONSIBLE, 0)
+            ->setRolePermissions(SystemRole::REGISTERED, $registered)
         ;
 
         $this->addReference('template:futurama', $template);

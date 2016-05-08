@@ -12,6 +12,7 @@
 namespace AppBundle\Controller\Admin;
 
 use eTraxis\Entity\Field;
+use eTraxis\Entity\Group;
 use eTraxis\SimpleBus\Fields;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
@@ -164,6 +165,54 @@ class FieldsPostController extends Controller
     public function deleteAction(int $id): JsonResponse
     {
         $command = new Fields\DeleteFieldCommand(['id' => $id]);
+        $this->getCommandBus()->handle($command);
+
+        return new JsonResponse();
+    }
+
+    /**
+     * Saves permissions of the specified role for the specified template.
+     *
+     * @Action\Route("/permissions/{id}/{role}", name="admin_fields_save_role_permissions", requirements={"id"="\d+", "role"="\-\d+"})
+     *
+     * @param   Request $request
+     * @param   int     $id
+     * @param   int     $role
+     *
+     * @return  JsonResponse
+     */
+    public function saveRolePermissionsAction(Request $request, int $id, int $role): JsonResponse
+    {
+        $command = new Fields\SetRoleFieldPermissionCommand([
+            'id'         => $id,
+            'role'       => $role,
+            'permission' => (int) $request->request->get('permission'),
+        ]);
+
+        $this->getCommandBus()->handle($command);
+
+        return new JsonResponse();
+    }
+
+    /**
+     * Saves permissions of the specified group for the specified template.
+     *
+     * @Action\Route("/permissions/{id}/{group}", name="admin_fields_save_group_permissions", requirements={"id"="\d+", "group"="\d+"})
+     *
+     * @param   Request $request
+     * @param   int     $id
+     * @param   Group   $group
+     *
+     * @return  JsonResponse
+     */
+    public function saveGroupPermissionsAction(Request $request, int $id, Group $group): JsonResponse
+    {
+        $command = new Fields\SetGroupFieldPermissionCommand([
+            'id'         => $id,
+            'group'      => $group->getId(),
+            'permission' => (int) $request->request->get('permission'),
+        ]);
+
         $this->getCommandBus()->handle($command);
 
         return new JsonResponse();

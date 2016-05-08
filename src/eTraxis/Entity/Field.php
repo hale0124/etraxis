@@ -47,7 +47,7 @@ class Field extends Entity implements \JsonSerializable
     const TYPE_DATE     = 'date';
     const TYPE_DURATION = 'duration';
 
-    // Field access.
+    // Field permission.
     const ACCESS_DENIED     = 0;
     const ACCESS_READ_ONLY  = 1;
     const ACCESS_READ_WRITE = 2;
@@ -127,25 +127,25 @@ class Field extends Entity implements \JsonSerializable
     private $hasGuestAccess;
 
     /**
-     * @var int Access level for authenticated user.
-     *
-     * @ORM\Column(name="registered_perm", type="integer")
-     */
-    private $registeredAccess;
-
-    /**
-     * @var int Access level for author.
+     * @var int Permission for author.
      *
      * @ORM\Column(name="author_perm", type="integer")
      */
-    private $authorAccess;
+    private $authorPermission;
 
     /**
-     * @var int Access level for current responsible.
+     * @var int Permission for current responsible.
      *
      * @ORM\Column(name="responsible_perm", type="integer")
      */
-    private $responsibleAccess;
+    private $responsiblePermission;
+
+    /**
+     * @var int Permission for authenticated user.
+     *
+     * @ORM\Column(name="registered_perm", type="integer")
+     */
+    private $registeredPermission;
 
     /**
      * @var int Whether to add this field in email notifications.
@@ -394,75 +394,84 @@ class Field extends Entity implements \JsonSerializable
     }
 
     /**
-     * Property setter.
+     * Sets permission of specified system role.
      *
-     * @param   int $registeredAccess
+     * @param   int $role
+     * @param   int $permission
      *
      * @return  self
      */
-    public function setRegisteredAccess(int $registeredAccess)
+    public function setRolePermission(int $role, int $permission)
     {
-        $this->registeredAccess = $registeredAccess;
+        switch ($role) {
+
+            case Dictionary\SystemRole::AUTHOR:
+                $this->authorPermission = $permission;
+                break;
+
+            case Dictionary\SystemRole::RESPONSIBLE:
+                $this->responsiblePermission = $permission;
+                break;
+
+            case Dictionary\SystemRole::REGISTERED:
+                $this->registeredPermission = $permission;
+                break;
+        }
 
         return $this;
     }
 
     /**
-     * Property getter.
+     * Returns permission of specified system role.
+     *
+     * @param   int $role
      *
      * @return  int
      */
-    public function getRegisteredAccess()
+    public function getRolePermission(int $role)
     {
-        return $this->registeredAccess;
+        switch ($role) {
+
+            case Dictionary\SystemRole::AUTHOR:
+                return $this->authorPermission;
+
+            case Dictionary\SystemRole::RESPONSIBLE:
+                return $this->responsiblePermission;
+
+            case Dictionary\SystemRole::REGISTERED:
+                return $this->registeredPermission;
+        }
+
+        return self::ACCESS_DENIED;
     }
 
     /**
-     * Property setter.
+     * Returns permission of specified group.
      *
-     * @param   int $authorAccess
-     *
-     * @return  self
-     */
-    public function setAuthorAccess(int $authorAccess)
-    {
-        $this->authorAccess = $authorAccess;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
+     * @param   Group $group
      *
      * @return  int
-     */
-    public function getAuthorAccess()
-    {
-        return $this->authorAccess;
-    }
-
-    /**
-     * Property setter.
      *
-     * @param   int $responsibleAccess
-     *
-     * @return  self
+     * @todo    Refactor into single database entry.
      */
-    public function setResponsibleAccess(int $responsibleAccess)
+    public function getGroupPermission(Group $group)
     {
-        $this->responsibleAccess = $responsibleAccess;
+        $query = $this->manager->createQueryBuilder();
 
-        return $this;
-    }
+        $query
+            ->select('fgp.permission')
+            ->from(FieldGroupPermission::class, 'fgp')
+            ->where('fgp.field = :field')
+            ->andWhere('fgp.group = :group')
+            ->setParameter('field', $this)
+            ->setParameter('group', $group)
+        ;
 
-    /**
-     * Property getter.
-     *
-     * @return  int
-     */
-    public function getResponsibleAccess()
-    {
-        return $this->responsibleAccess;
+        $result     = $query->getQuery()->getResult();
+        $result[]   = ['permission' => self::ACCESS_DENIED];
+        $permission = max($result);
+
+        return count($result) === 0 ? self::ACCESS_DENIED : $permission['permission'];
     }
 
     /**

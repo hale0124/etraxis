@@ -12,14 +12,15 @@
 namespace eTraxis\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use eTraxis\Dictionary\FieldPermission;
 
 /**
- * Field/Group access level.
+ * Field/Group permission.
  *
  * @ORM\Table(name="tbl_field_perms")
  * @ORM\Entity
  */
-class FieldGroupAccess
+class FieldGroupPermission
 {
     /**
      * @var Field Field.
@@ -42,13 +43,13 @@ class FieldGroupAccess
     private $group;
 
     /**
-     * @var int Access level of the group.
+     * @var int Permission of the group.
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\Column(name="perms", type="integer")
      */
-    private $access;
+    private $permission;
 
     /**
      * Property setter.
@@ -101,13 +102,15 @@ class FieldGroupAccess
     /**
      * Property setter.
      *
-     * @param   int $access
+     * @param   int $permission
      *
      * @return  self
      */
-    public function setAccess(int $access)
+    public function setPermission(int $permission)
     {
-        $this->access = $access;
+        if (FieldPermission::has($permission)) {
+            $this->permission = $permission;
+        }
 
         return $this;
     }
@@ -117,8 +120,8 @@ class FieldGroupAccess
      *
      * @return  int
      */
-    public function getAccess()
+    public function getPermission()
     {
-        return $this->access;
+        return $this->permission;
     }
 }

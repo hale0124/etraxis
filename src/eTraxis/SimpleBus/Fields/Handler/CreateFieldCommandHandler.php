@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Fields\Handler;
 
+use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\State;
 use eTraxis\SimpleBus\Fields\Command\CreateFieldCommandTrait;
@@ -49,9 +50,9 @@ class CreateFieldCommandHandler extends FieldCommandHandler
             ->setRequired($command->required)
             ->setGuestAccess($command->guestAccess)
             ->setShowInEmails($command->showInEmails)
-            ->setRegisteredAccess(Field::ACCESS_DENIED)
-            ->setAuthorAccess(Field::ACCESS_DENIED)
-            ->setResponsibleAccess(Field::ACCESS_DENIED)
+            ->setRolePermission(SystemRole::AUTHOR, Field::ACCESS_DENIED)
+            ->setRolePermission(SystemRole::RESPONSIBLE, Field::ACCESS_DENIED)
+            ->setRolePermission(SystemRole::REGISTERED, Field::ACCESS_DENIED)
         ;
 
         $entity->setState($state);

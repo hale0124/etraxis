@@ -14,9 +14,10 @@ namespace AppBundle\DataFixtures\Tests;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\DecimalValue;
 use eTraxis\Entity\Field;
-use eTraxis\Entity\FieldGroupAccess;
+use eTraxis\Entity\FieldGroupPermission;
 use eTraxis\Entity\ListItem;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -67,9 +68,9 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     'description' => 'Comma-separated list of assigned crew members',
                     'required'    => true,
                     'guest'       => false,
-                    'registered'  => Field::ACCESS_DENIED,
                     'author'      => Field::ACCESS_READ_WRITE,
                     'responsible' => Field::ACCESS_READ_ONLY,
+                    'registered'  => Field::ACCESS_DENIED,
                     'param1'      => 100,
                     'permissions' => [
                         'group:managers' => Field::ACCESS_READ_WRITE,
@@ -82,9 +83,9 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     'description' => 'A person to deliver to',
                     'required'    => true,
                     'guest'       => false,
-                    'registered'  => Field::ACCESS_DENIED,
                     'author'      => Field::ACCESS_READ_WRITE,
                     'responsible' => Field::ACCESS_READ_ONLY,
+                    'registered'  => Field::ACCESS_DENIED,
                     'param1'      => 100,
                     'permissions' => [
                         'group:managers' => Field::ACCESS_READ_WRITE,
@@ -97,9 +98,9 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     'description' => 'A place to deliver at',
                     'required'    => true,
                     'guest'       => false,
-                    'registered'  => Field::ACCESS_DENIED,
                     'author'      => Field::ACCESS_READ_WRITE,
                     'responsible' => Field::ACCESS_READ_ONLY,
+                    'registered'  => Field::ACCESS_DENIED,
                     'param1'      => 100,
                     'permissions' => [
                         'group:managers' => Field::ACCESS_READ_WRITE,
@@ -112,9 +113,9 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     'description' => 'Optional notes to the crew',
                     'required'    => false,
                     'guest'       => false,
-                    'registered'  => Field::ACCESS_DENIED,
                     'author'      => Field::ACCESS_READ_WRITE,
                     'responsible' => Field::ACCESS_READ_ONLY,
+                    'registered'  => Field::ACCESS_DENIED,
                     'param1'      => 1000,
                     'permissions' => [
                         'group:managers' => Field::ACCESS_READ_WRITE,
@@ -129,9 +130,9 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     'description' => 'Optional notes from the crew',
                     'required'    => false,
                     'guest'       => false,
-                    'registered'  => Field::ACCESS_DENIED,
                     'author'      => Field::ACCESS_READ_WRITE,
                     'responsible' => Field::ACCESS_READ_ONLY,
+                    'registered'  => Field::ACCESS_DENIED,
                     'param1'      => 1000,
                     'permissions' => [
                         'group:managers' => Field::ACCESS_READ_WRITE,
@@ -159,9 +160,9 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     ->setIndexNumber($order)
                     ->setRequired($info['required'])
                     ->setGuestAccess($info['guest'])
-                    ->setRegisteredAccess($info['registered'])
-                    ->setAuthorAccess($info['author'])
-                    ->setResponsibleAccess($info['responsible'])
+                    ->setRolePermission(SystemRole::AUTHOR, $info['author'])
+                    ->setRolePermission(SystemRole::RESPONSIBLE, $info['responsible'])
+                    ->setRolePermission(SystemRole::REGISTERED, $info['registered'])
                     ->setShowInEmails(false)
                 ;
 
@@ -183,17 +184,17 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
 
                 $field = $this->getReference($state_ref . ':' . $order);
 
-                foreach ($info['permissions'] as $group_ref => $permissions) {
+                foreach ($info['permissions'] as $group_ref => $permission) {
 
                     $group = $this->getReference($group_ref);
 
-                    $access = new FieldGroupAccess();
+                    $access = new FieldGroupPermission();
 
                     /** @noinspection PhpParamsInspection */
                     $access
                         ->setField($field)
                         ->setGroup($group)
-                        ->setAccess($permissions)
+                        ->setPermission($permission)
                     ;
 
                     $manager->persist($access);
@@ -232,9 +233,9 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     'type'        => Field::TYPE_LIST,
                     'required'    => true,
                     'guest'       => true,
-                    'registered'  => Field::ACCESS_READ_ONLY,
                     'author'      => Field::ACCESS_READ_WRITE,
                     'responsible' => Field::ACCESS_DENIED,
+                    'registered'  => Field::ACCESS_READ_ONLY,
                     'param1'      => null,
                     'param2'      => null,
                 ],
@@ -243,9 +244,9 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     'type'        => Field::TYPE_NUMBER,
                     'required'    => true,
                     'guest'       => true,
-                    'registered'  => Field::ACCESS_READ_ONLY,
                     'author'      => Field::ACCESS_READ_WRITE,
                     'responsible' => Field::ACCESS_DENIED,
+                    'registered'  => Field::ACCESS_READ_ONLY,
                     'param1'      => 1,
                     'param2'      => 100,
                 ],
@@ -254,9 +255,9 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     'type'        => Field::TYPE_STRING,
                     'required'    => true,
                     'guest'       => true,
-                    'registered'  => Field::ACCESS_READ_ONLY,
                     'author'      => Field::ACCESS_READ_WRITE,
                     'responsible' => Field::ACCESS_DENIED,
+                    'registered'  => Field::ACCESS_READ_ONLY,
                     'param1'      => 7,
                     'param2'      => null,
                 ],
@@ -265,9 +266,9 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     'type'        => Field::TYPE_DURATION,
                     'required'    => true,
                     'guest'       => true,
-                    'registered'  => Field::ACCESS_READ_ONLY,
                     'author'      => Field::ACCESS_READ_WRITE,
                     'responsible' => Field::ACCESS_DENIED,
+                    'registered'  => Field::ACCESS_READ_ONLY,
                     'param1'      => 0,
                     'param2'      => 1440,
                 ],
@@ -276,9 +277,9 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     'type'        => Field::TYPE_CHECKBOX,
                     'required'    => true,
                     'guest'       => false,
-                    'registered'  => Field::ACCESS_READ_ONLY,
                     'author'      => Field::ACCESS_READ_WRITE,
                     'responsible' => Field::ACCESS_DENIED,
+                    'registered'  => Field::ACCESS_READ_ONLY,
                     'param1'      => null,
                     'param2'      => null,
                 ],
@@ -287,9 +288,9 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     'type'        => Field::TYPE_TEXT,
                     'required'    => true,
                     'guest'       => true,
-                    'registered'  => Field::ACCESS_READ_ONLY,
                     'author'      => Field::ACCESS_READ_WRITE,
                     'responsible' => Field::ACCESS_DENIED,
+                    'registered'  => Field::ACCESS_READ_ONLY,
                     'param1'      => 2000,
                     'param2'      => null,
                 ],
@@ -298,9 +299,9 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     'type'        => Field::TYPE_RECORD,
                     'required'    => false,
                     'guest'       => true,
-                    'registered'  => Field::ACCESS_READ_ONLY,
                     'author'      => Field::ACCESS_READ_WRITE,
                     'responsible' => Field::ACCESS_DENIED,
+                    'registered'  => Field::ACCESS_READ_ONLY,
                     'param1'      => null,
                     'param2'      => null,
                 ],
@@ -311,9 +312,9 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     'type'        => Field::TYPE_DATE,
                     'required'    => true,
                     'guest'       => true,
-                    'registered'  => Field::ACCESS_READ_ONLY,
                     'author'      => Field::ACCESS_READ_WRITE,
                     'responsible' => Field::ACCESS_DENIED,
+                    'registered'  => Field::ACCESS_READ_ONLY,
                     'param1'      => 0,
                     'param2'      => 7,
                 ],
@@ -322,9 +323,9 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     'type'        => Field::TYPE_DECIMAL,
                     'required'    => false,
                     'guest'       => false,
-                    'registered'  => Field::ACCESS_READ_ONLY,
                     'author'      => Field::ACCESS_READ_WRITE,
                     'responsible' => Field::ACCESS_DENIED,
+                    'registered'  => Field::ACCESS_READ_ONLY,
                     'param1'      => $min_value->getId(),
                     'param2'      => $max_value->getId(),
                 ],
@@ -348,9 +349,9 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     ->setIndexNumber($order)
                     ->setRequired($info['required'])
                     ->setGuestAccess($info['guest'])
-                    ->setRegisteredAccess($info['registered'])
-                    ->setAuthorAccess($info['author'])
-                    ->setResponsibleAccess($info['responsible'])
+                    ->setRolePermission(SystemRole::AUTHOR, $info['author'])
+                    ->setRolePermission(SystemRole::RESPONSIBLE, $info['responsible'])
+                    ->setRolePermission(SystemRole::REGISTERED, $info['registered'])
                     ->setShowInEmails(false)
                 ;
 

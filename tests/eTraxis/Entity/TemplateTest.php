@@ -94,15 +94,6 @@ class TemplateTest extends BaseTestCase
         self::assertTrue($this->object->hasGuestAccess());
     }
 
-    public function testRegisteredPermissions()
-    {
-        $permissions = Template::PERMIT_CREATE_RECORD | Template::PERMIT_ADD_COMMENT;
-        $expected    = Template::PERMIT_CREATE_RECORD | Template::PERMIT_ADD_COMMENT;
-
-        $this->object->setRolePermissions(SystemRole::REGISTERED, $permissions);
-        self::assertEquals($expected, $this->object->getRolePermissions(SystemRole::REGISTERED));
-    }
-
     public function testAuthorPermissions()
     {
         $permissions = Template::PERMIT_CREATE_RECORD | Template::PERMIT_ADD_COMMENT;
@@ -119,6 +110,15 @@ class TemplateTest extends BaseTestCase
 
         $this->object->setRolePermissions(SystemRole::RESPONSIBLE, $permissions);
         self::assertEquals($expected, $this->object->getRolePermissions(SystemRole::RESPONSIBLE));
+    }
+
+    public function testRegisteredPermissions()
+    {
+        $permissions = Template::PERMIT_CREATE_RECORD | Template::PERMIT_ADD_COMMENT;
+        $expected    = Template::PERMIT_CREATE_RECORD | Template::PERMIT_ADD_COMMENT;
+
+        $this->object->setRolePermissions(SystemRole::REGISTERED, $permissions);
+        self::assertEquals($expected, $this->object->getRolePermissions(SystemRole::REGISTERED));
     }
 
     public function testGetGroupPermissions()

@@ -11,14 +11,14 @@
 
 namespace eTraxis\Entity;
 
-class FieldGroupAccessTest extends \PHPUnit_Framework_TestCase
+class FieldGroupPermissionTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var FieldGroupAccess */
+    /** @var FieldGroupPermission */
     private $object;
 
     protected function setUp()
     {
-        $this->object = new FieldGroupAccess();
+        $this->object = new FieldGroupPermission();
     }
 
     public function testField()
@@ -33,11 +33,11 @@ class FieldGroupAccessTest extends \PHPUnit_Framework_TestCase
         self::assertEquals($group, $this->object->getGroup());
     }
 
-    public function testAccess()
+    public function testPermission()
     {
         $expected = Field::ACCESS_READ_ONLY;
 
-        $this->object->setAccess($expected);
-        self::assertEquals($expected, $this->object->getAccess());
+        $this->object->setPermission($expected);
+        self::assertEquals($expected, $this->object->getPermission());
     }
 }

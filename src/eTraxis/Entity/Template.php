@@ -128,13 +128,6 @@ class Template extends Entity implements \JsonSerializable
     private $hasGuestAccess;
 
     /**
-     * @var int Authenticated user permissions.
-     *
-     * @ORM\Column(name="registered_perm", type="integer")
-     */
-    private $registeredPermissions;
-
-    /**
      * @var int Author permissions.
      *
      * @ORM\Column(name="author_perm", type="integer")
@@ -147,6 +140,13 @@ class Template extends Entity implements \JsonSerializable
      * @ORM\Column(name="responsible_perm", type="integer")
      */
     private $responsiblePermissions;
+
+    /**
+     * @var int Authenticated user permissions.
+     *
+     * @ORM\Column(name="registered_perm", type="integer")
+     */
+    private $registeredPermissions;
 
     /**
      * @var ArrayCollection List of template states.

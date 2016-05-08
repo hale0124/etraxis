@@ -11,23 +11,18 @@
 
 namespace eTraxis\Dictionary;
 
-use Dictionary\StaticDictionary;
 use eTraxis\Entity\Field;
 
-/**
- * Field access levels.
- */
-class FieldAccess extends StaticDictionary
+class FieldPermissionTest extends \PHPUnit_Framework_TestCase
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function all()
+    public function testDictionary()
     {
-        return [
-            Field::ACCESS_DENIED     => 'field.permissions.none',
-            Field::ACCESS_READ_ONLY  => 'field.permissions.read_only',
-            Field::ACCESS_READ_WRITE => 'field.permissions.read_write',
+        $expected = [
+            Field::ACCESS_DENIED,
+            Field::ACCESS_READ_ONLY,
+            Field::ACCESS_READ_WRITE,
         ];
+
+        self::assertEquals($expected, FieldPermission::keys());
     }
 }
