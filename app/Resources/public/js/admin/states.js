@@ -23,6 +23,15 @@ var StatesApp = (function() {
         });
     });
 
+    /**
+     * Reloads current tab to refresh its content.
+     */
+    var reloadTab = function() {
+        var $tabs = $('#tabs-state');
+        var current = $tabs.tabs('option', 'active');
+        $tabs.tabs('load', current);
+    };
+
     return {
 
         /**
@@ -195,6 +204,34 @@ var StatesApp = (function() {
         selectAllTransitions: function() {
             var $tabs = $('#tabs-state');
             $('input[type="checkbox"].transitions:not(:disabled)', $tabs).prop('checked', true);
+        },
+
+        /**
+         * Adds selected responsible groups to the state.
+         *
+         * @param {number} id State ID.
+         */
+        addGroups: function(id) {
+            var groups = $('#notResponsibleGroup').val();
+            if (groups) {
+                $.post(eTraxis.route('admin_states_add_responsibles', { id: id }), { groups: groups }, function() {
+                    reloadTab();
+                });
+            }
+        },
+
+        /**
+         * Removes selected responsible groups from the state.
+         *
+         * @param {number} id State ID.
+         */
+        removeGroups: function(id) {
+            var groups = $('#responsibleGroup').val();
+            if (groups) {
+                $.post(eTraxis.route('admin_states_remove_responsibles', { id: id }), { groups: groups }, function() {
+                    reloadTab();
+                });
+            }
         }
     };
 })();
