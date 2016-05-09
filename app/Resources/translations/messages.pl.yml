@@ -179,4 +179,7 @@ field.error.value_range: 'Wartość "%name%" powinna być z przedziału od %min%
 field.permissions.none: brak
 field.permissions.read_only: 'Pozwolenie na odczyt'
 field.permissions.read_write: 'Pozwolenie do zapisu'
-list.items: 'Pozycje listy'
+listitems: 'Pozycje listy'
+listitem.key: 'Item key'
+listitem.value: 'Item value'
+listitem.confirm.delete: 'Are you sure you want delete this item?'

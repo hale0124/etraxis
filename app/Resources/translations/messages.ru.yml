@@ -179,4 +179,7 @@ field.error.value_range: 'Значение поля "%name%" должно леж
 field.permissions.none: нет
 field.permissions.read_only: 'только чтение'
 field.permissions.read_write: 'чтение и запись'
-list.items: 'Элементы списка'
+listitems: 'Элементы списка'
+listitem.key: 'Ключ элемента'
+listitem.value: 'Значение элемента'
+listitem.confirm.delete: 'Вы уверены, что хотите удалить этот элемент?'

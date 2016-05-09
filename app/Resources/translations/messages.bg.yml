@@ -179,4 +179,7 @@ field.error.value_range: 'Стойност от "%name%" трябва да бъ�
 field.permissions.none: няма
 field.permissions.read_only: 'само за четене'
 field.permissions.read_write: 'четене и запис'
-list.items: 'Списък итеми'
+listitems: 'Списък итеми'
+listitem.key: 'Item key'
+listitem.value: 'Item value'
+listitem.confirm.delete: 'Are you sure you want delete this item?'

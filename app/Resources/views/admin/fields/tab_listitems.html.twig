@@ -1,0 +1,21 @@
+{% import 'macro.html.twig' as macro %}
+
+<div class="grid-row">
+    <div class="grid-100">
+        <button type="button" id="listitem-create" onclick="ListItemsApp.create({{ field.id }})">{{ 'button.create'|trans }}</button>
+        <button type="button" id="listitem-edit" onclick="ListItemsApp.edit({{ field.id }})" disabled>{{ 'button.edit'|trans }}</button>
+        <button type="button" id="listitem-delete" onclick="ListItemsApp.delete({{ field.id }})" disabled>{{ 'button.delete'|trans }}</button>
+    </div>
+</div>
+
+<div class="grid-row">
+    <div class="grid-100">
+        <fieldset>
+            <select id="listitems" onchange="ListItemsApp.onSelect()" size="20" title="{{ 'listitems'|trans }}" class="grid-100 mobile-grid-100">
+                {% for item in field.asList.items %}
+                    <option value="{{ item.key }}">[{{ item.key }}] {{ item.value }}</option>
+                {% endfor %}
+            </select>
+        </fieldset>
+    </div>
+</div>

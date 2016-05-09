@@ -25,8 +25,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  *                @ORM\Index(name="ix_lvl_id_val", columns={"field_id", "int_value", "str_value"})
  *            })
  * @ORM\Entity
- * @Assert\UniqueEntity(fields={"field", "key"}, message="list.conflict.key")
- * @Assert\UniqueEntity(fields={"field", "value"}, message="list.conflict.value")
+ * @Assert\UniqueEntity(fields={"field", "key"}, message="listitem.conflict.key")
+ * @Assert\UniqueEntity(fields={"field", "value"}, message="listitem.conflict.value")
  */
 class ListItem
 {

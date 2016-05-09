@@ -179,4 +179,7 @@ field.error.value_range: 'Hodnota "%name%" musí být v rozmezí %min% až %max%
 field.permissions.none: žádný/é
 field.permissions.read_only: 'pouze pro čtení'
 field.permissions.read_write: 'čtení i zápis'
-list.items: 'Položky seznamu'
+listitems: 'Položky seznamu'
+listitem.key: 'Item key'
+listitem.value: 'Item value'
+listitem.confirm.delete: 'Are you sure you want delete this item?'

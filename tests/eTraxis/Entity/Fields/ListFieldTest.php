@@ -53,6 +53,27 @@ class ListFieldTest extends BaseTestCase
         }
     }
 
+    public function testGetItems()
+    {
+        $expected = [
+            '1' => 'Season 1',
+            '2' => 'Season 2',
+            '3' => 'Season 3',
+            '5' => 'Season 5',
+            '4' => 'Season 4',
+            '6' => 'Season 6',
+            '7' => 'Season 7',
+        ];
+
+        $actual = [];
+
+        foreach ($this->object->asList()->getItems() as $item) {
+            $actual[$item->getKey()] = $item->getValue();
+        }
+
+        self::assertEquals($expected, $actual);
+    }
+
     public function testDefaultKey()
     {
         $field = $this->object->asList();

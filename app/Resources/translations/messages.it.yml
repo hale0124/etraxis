@@ -179,4 +179,7 @@ field.error.value_range: 'Il valore "%name%" deve essere compreso tra %min% e %m
 field.permissions.none: nessuno
 field.permissions.read_only: 'sola lettura'
 field.permissions.read_write: 'lettura e scrittura'
-list.items: 'Elementi della lista'
+listitems: 'Elementi della lista'
+listitem.key: 'Item key'
+listitem.value: 'Item value'
+listitem.confirm.delete: 'Are you sure you want delete this item?'

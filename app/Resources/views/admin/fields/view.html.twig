@@ -6,5 +6,9 @@
         {% if (field.type in [constant('eTraxis\\Entity\\Field::TYPE_STRING'), constant('eTraxis\\Entity\\Field::TYPE_TEXT')]) %}
             <li><a href="{{ path('admin_tab_field_regex', {'id': field.id}) }}">PCRE</a></li>
         {% endif %}
+
+        {% if (field.type == constant('eTraxis\\Entity\\Field::TYPE_LIST')) %}
+            <li><a href="{{ path('admin_tab_field_listitems', {'id': field.id}) }}">{{ 'listitems'|trans }}</a></li>
+        {% endif %}
     </ul>
 </div>

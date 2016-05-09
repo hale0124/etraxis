@@ -56,20 +56,23 @@ class CreateListItemCommandHandler
             throw new NotFoundHttpException('Unknown field.');
         }
 
-        $entity = new ListItem();
+        if ($field->getType() === Field::TYPE_LIST) {
 
-        $entity
-            ->setField($field)
-            ->setKey($command->key)
-            ->setValue($command->value)
-        ;
+            $entity = new ListItem();
 
-        $errors = $this->validator->validate($entity);
+            $entity
+                ->setField($field)
+                ->setKey($command->key)
+                ->setValue($command->value)
+            ;
 
-        if (count($errors)) {
-            throw new BadRequestHttpException($errors->get(0)->getMessage());
+            $errors = $this->validator->validate($entity);
+
+            if (count($errors)) {
+                throw new BadRequestHttpException($errors->get(0)->getMessage());
+            }
+
+            $this->manager->persist($entity);
         }
-
-        $this->manager->persist($entity);
     }
 }

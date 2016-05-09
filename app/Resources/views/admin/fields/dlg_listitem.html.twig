@@ -1,0 +1,12 @@
+{% form_theme form 'form.html.twig' %}
+
+<div class="dialog">
+    {{ form_start(form) }}
+    <fieldset>
+        {% if form.key is defined %}
+            {{ form_row(form.key) }}
+        {% endif %}
+        {{ form_row(form.value) }}
+    </fieldset>
+    {{ form_end(form) }}
+</div>

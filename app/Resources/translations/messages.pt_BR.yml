@@ -179,4 +179,7 @@ field.error.value_range: 'O Valor de "%name%" deve estar entre %min% e %max%.'
 field.permissions.none: nenhum
 field.permissions.read_only: 'apenas leitura'
 field.permissions.read_write: 'leitura e escrita'
-list.items: 'Lista de itens'
+listitems: 'Lista de itens'
+listitem.key: 'Item key'
+listitem.value: 'Item value'
+listitem.confirm.delete: 'Are you sure you want delete this item?'

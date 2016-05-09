@@ -130,6 +130,22 @@ class FieldsGetController extends Controller
     }
 
     /**
+     * Tab with field's list items.
+     *
+     * @Action\Route("/tab/listitems/{id}", name="admin_tab_field_listitems", requirements={"id"="\d+"})
+     *
+     * @param   Field $field
+     *
+     * @return  Response
+     */
+    public function tabListItemsAction(Field $field): Response
+    {
+        return $this->render('admin/fields/tab_listitems.html.twig', [
+            'field' => $field,
+        ]);
+    }
+
+    /**
      * Renders dialog to create new field.
      *
      * @Action\Route("/new/{id}", name="admin_dlg_new_field", requirements={"id"="\d+"})

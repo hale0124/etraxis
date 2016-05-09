@@ -179,4 +179,7 @@ field.error.value_range: '"%name%" değeri %min% ile %max% arasında olmalıdır
 field.permissions.none: yok
 field.permissions.read_only: salt-okunur
 field.permissions.read_write: 'okuma ve yazma'
-list.items: 'Ögeleri listele'
+listitems: 'Ögeleri listele'
+listitem.key: 'Item key'
+listitem.value: 'Item value'
+listitem.confirm.delete: 'Are you sure you want delete this item?'

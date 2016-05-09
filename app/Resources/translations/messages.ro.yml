@@ -179,4 +179,7 @@ field.error.value_range: 'Valoarea "%name%" trebuie sa fie in intervalul %min% p
 field.permissions.none: niciunul
 field.permissions.read_only: 'doar afisare'
 field.permissions.read_write: 'afisare si scriere'
-list.items: 'Elementele listei'
+listitems: 'Elementele listei'
+listitem.key: 'Item key'
+listitem.value: 'Item value'
+listitem.confirm.delete: 'Are you sure you want delete this item?'

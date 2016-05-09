@@ -53,6 +53,16 @@ class ListField extends AbstractField
     }
 
     /**
+     * Returns all list items of the field.
+     *
+     * @return  ListItem[]
+     */
+    public function getItems()
+    {
+        return $this->repository->findBy(['field' => $this->field], ['key' => 'ASC']);
+    }
+
+    /**
      * Sets default item of the field by item's key.
      *
      * @param   int|null $key Item's key.

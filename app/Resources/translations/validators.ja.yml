@@ -8,5 +8,5 @@ template.conflict.prefix: 'Template with entered prefix already exists.'
 state.conflict.name: 'State with entered name already exists.'
 state.conflict.abbreviation: 'State with entered abbreviation already exists.'
 field.conflict.name: 入力されたフィールドの名前は既に存在しています。
-list.conflict.key: 'Item with entered key already exists.'
-list.conflict.value: 'Item with entered value already exists.'
+listitem.conflict.key: 'Item with entered key already exists.'
+listitem.conflict.value: 'Item with entered value already exists.'
