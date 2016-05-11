@@ -41,13 +41,13 @@ gulp.task('default', function() {
  * Watchs for changes in eTraxis files and updates affected assets when necessary.
  */
 gulp.task('watch', function() {
-    watch(['app/Resources/public/less/**'], function() {
+    watch(['app/Resources/public/less/*.less', 'app/Resources/public/less/*/**.less'], function() {
         gulp.start('stylesheets:themes');
     });
-    watch(['app/Resources/public/js/*'], function() {
+    watch(['app/Resources/public/js/*.js'], function() {
         gulp.start('javascripts:etraxis:core');
     });
-    watch(['app/Resources/public/js/*/**'], function() {
+    watch(['app/Resources/public/js/*/**.js'], function() {
         gulp.start('javascripts:etraxis:app');
     });
 });
@@ -85,12 +85,7 @@ gulp.task('stylesheets:themes', function() {
 
     var tasks = folders.map(function(folder) {
         return gulp.src('app/Resources/public/less/themes/theme-' + folder + '.less')
-            .pipe(plumber({
-                errorHandler: function(error) {
-                    console.log(error);
-                    this.emit('end');
-                }
-            }))
+            .pipe(plumber())
             .pipe(less())
             .pipe(addsrc.prepend('app/Resources/public/css/' + folder + '/jquery-ui.theme.css'))
             .pipe(gulpif(argv.production, minify()))
@@ -230,6 +225,7 @@ gulp.task('javascripts:etraxis:core', function() {
     ];
 
     return gulp.src(files)
+        .pipe(plumber())
         .pipe(gulpif(argv.production, uglify()))
         .pipe(concat(argv.production ? 'etraxis.min.js' : 'etraxis.js'))
         .pipe(insert.prepend('"use strict";\n'))
@@ -242,6 +238,7 @@ gulp.task('javascripts:etraxis:core', function() {
 gulp.task('javascripts:etraxis:app', function() {
 
     return gulp.src('app/Resources/public/js/*/**')
+        .pipe(plumber())
         .pipe(gulpif(argv.production, uglify()))
         .pipe(insert.prepend('"use strict";\n'))
         .pipe(gulp.dest('web/js/'));
