@@ -8,7 +8,7 @@
  *
  * http://api.jqueryui.com/category/theming/
  *
- * To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Verdana%2C%20Geneva%2C%20sans-serif&fwDefault=normal&fsDefault=1em&cornerRadius=2px&bgColorHeader=%23004966&bgTextureHeader=glass&bgImgOpacityHeader=10&borderColorHeader=%23e8e8e8&fcHeader=%23f8f8f8&iconColorHeader=%23f8f8f8&bgColorContent=%23ffffff&bgTextureContent=flat&bgImgOpacityContent=75&borderColorContent=%23e8e8e8&fcContent=%23404040&iconColorContent=%23404040&bgColorDefault=%23f0f0f0&bgTextureDefault=highlight_soft&bgImgOpacityDefault=80&borderColorDefault=%23e8e8e8&fcDefault=%23004966&iconColorDefault=%23004966&bgColorHover=%23f3e0be&bgTextureHover=highlight_hard&bgImgOpacityHover=80&borderColorHover=%23e5d3b3&fcHover=%23404040&iconColorHover=%23404040&bgColorActive=%23ffffff&bgTextureActive=highlight_hard&bgImgOpacityActive=50&borderColorActive=%23e8e8e8&fcActive=%2300638e&iconColorActive=%2300638e&bgColorHighlight=%23f3e0be&bgTextureHighlight=diagonals_small&bgImgOpacityHighlight=100&borderColorHighlight=%23e5d3b3&fcHighlight=%2300638e&iconColorHighlight=%2300638e&bgColorError=%23ffd1df&bgTextureError=inset_soft&bgImgOpacityError=95&borderColorError=%23d60040&fcError=%23d60040&iconColorError=%23d60040&bgColorOverlay=%23e0e0e0&bgTextureOverlay=hexagon&bgImgOpacityOverlay=90&opacityOverlay=95&bgColorShadow=%23004966&bgTextureShadow=flat&bgImgOpacityShadow=0&opacityShadow=100&thicknessShadow=2px&offsetTopShadow=-2px&offsetLeftShadow=-2px&cornerRadiusShadow=1&ctl=themeroller
+ * To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Verdana%2C%20Geneva%2C%20sans-serif&fsDefault=1em&fwDefault=normal&cornerRadius=2px&bgColorHeader=%23004966&bgTextureHeader=glass&borderColorHeader=%23e8e8e8&fcHeader=%23f8f8f8&iconColorHeader=%23f8f8f8&bgColorContent=%23ffffff&bgTextureContent=flat&borderColorContent=%23e8e8e8&fcContent=%23404040&iconColorContent=%23404040&bgColorDefault=%23f0f0f0&bgTextureDefault=highlight_soft&borderColorDefault=%23e8e8e8&fcDefault=%23004966&iconColorDefault=%23004966&bgColorHover=%23f3e0be&bgTextureHover=highlight_hard&borderColorHover=%23e5d3b3&fcHover=%23404040&iconColorHover=%23404040&bgColorActive=%23ffffff&bgTextureActive=highlight_hard&borderColorActive=%23e8e8e8&fcActive=%2300638e&iconColorActive=%2300638e&bgColorHighlight=%23f3e0be&bgTextureHighlight=diagonals_small&borderColorHighlight=%23e5d3b3&fcHighlight=%2300638e&iconColorHighlight=%2300638e&bgColorError=%23ffd1df&bgTextureError=inset_soft&borderColorError=%23d60040&fcError=%23d60040&iconColorError=%23d60040&bgColorOverlay=%23e0e0e0&bgTextureOverlay=hexagon&bgImgOpacityOverlay=90&opacityOverlay=95&bgColorShadow=%23004966&bgTextureShadow=flat&bgImgOpacityShadow=0&opacityShadow=100&thicknessShadow=2px&offsetTopShadow=-2px&offsetLeftShadow=-2px&cornerRadiusShadow=1&bgImgOpacityHeader=10&bgImgOpacityContent=75&bgImgOpacityDefault=80&bgImgOpacityHover=80&bgImgOpacityActive=50&bgImgOpacityHighlight=100&bgImgOpacityError=95&ctl=themeroller
  */
 
 
@@ -30,7 +30,7 @@
 }
 .ui-widget-content {
 	border: 1px solid #e8e8e8;
-	background: #ffffff url("images/ui-bg_flat_75_ffffff_40x100.png") 50% 50% repeat-x;
+	background: #ffffff;
 	color: #404040;
 }
 .ui-widget-content a {
@@ -403,7 +403,7 @@
 .ui-widget-shadow {
 	margin: -2px 0 0 -2px;
 	padding: 2px;
-	background: #004966 url("images/ui-bg_flat_0_004966_40x100.png") 50% 50% repeat-x;
+	background: #004966;
 	opacity: 1;
 	filter: Alpha(Opacity=100); /* support: IE8 */
 	border-radius: 1;

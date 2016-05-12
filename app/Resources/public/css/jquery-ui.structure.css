@@ -165,6 +165,10 @@
 	right: -5px;
 	top: -5px;
 }
+.ui-sortable-handle {
+	-ms-touch-action: none;
+	touch-action: none;
+}
 .ui-button {
 	display: inline-block;
 	position: relative;
