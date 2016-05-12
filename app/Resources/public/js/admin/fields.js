@@ -46,6 +46,15 @@ var FieldsApp = (function() {
                 $(data).each(function(index, item) {
                     $fields.panel('append', item.id, item.name);
                 });
+                $('.panel-item', $fields).append('<span class="ui-icon ui-icon-triangle-2-n-s right"></span>');
+                $('.panel-body', $fields).sortable({
+                    update: function(event, ui) {
+                        $.post(eTraxis.route('admin_set_field_order', {
+                            id: ui.item.data('id'),
+                            order: ui.item.index() + 1
+                        }));
+                    }
+                });
                 if (typeof callback === 'function') {
                     callback();
                 }

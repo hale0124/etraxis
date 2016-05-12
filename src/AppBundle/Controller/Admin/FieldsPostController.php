@@ -233,6 +233,24 @@ class FieldsPostController extends Controller
     }
 
     /**
+     * Sets order of specified field.
+     *
+     * @Action\Route("/order/{id}/{order}", name="admin_set_field_order", requirements={"id"="\d+", "order"="\d+"})
+     *
+     * @param   int $id    Field ID.
+     * @param   int $order New order.
+     *
+     * @return  JsonResponse
+     */
+    public function orderAction(int $id, int $order): JsonResponse
+    {
+        $command = new Fields\SetOrderFieldCommand(['id' => $id, 'order' => $order]);
+        $this->getCommandBus()->handle($command);
+
+        return new JsonResponse();
+    }
+
+    /**
      * Saves permissions of the specified role for the specified template.
      *
      * @Action\Route("/permissions/{id}/{role}", name="admin_fields_save_role_permissions", requirements={"id"="\d+", "role"="\-\d+"})

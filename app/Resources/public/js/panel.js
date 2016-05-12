@@ -181,7 +181,7 @@
                 .addClass('ui-icon-none')
             ;
 
-            $('.panel-body a[data-id="' + id + '"] span.ui-icon', this.element)
+            $('.panel-body a[data-id="' + id + '"] span.ui-icon-none', this.element)
                 .removeClass('ui-icon-none')
                 .addClass('ui-icon-check')
             ;
