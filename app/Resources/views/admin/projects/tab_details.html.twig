@@ -13,7 +13,7 @@
     <div class="grid-100">
         <fieldset>
             {{ macro.row('project.name'|trans, project.name) }}
-            {{ macro.row('project.start_time'|trans, project.createdAt|date('Y-m-d')) }}
+            {{ macro.row('project.start_time'|trans, project.createdAt|localizeddate('long', 'none', app.user.locale, app.user.timezone)) }}
             {{ macro.row('project.status'|trans, project.suspended ? 'project.suspended'|trans|lower : 'project.active'|trans|lower) }}
             {{ macro.row('description'|trans, project.description) }}
         </fieldset>

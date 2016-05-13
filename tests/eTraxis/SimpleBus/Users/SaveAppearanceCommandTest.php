@@ -22,13 +22,13 @@ class SaveAppearanceCommandTest extends BaseTestCase
 
         self::assertEquals('en_US', $user->getSettings()->getLocale());
         self::assertEquals('azure', $user->getSettings()->getTheme());
-        self::assertEquals(0, $user->getSettings()->getTimezone());
+        self::assertEquals('UTC', $user->getSettings()->getTimezone());
 
         $command = new SaveAppearanceCommand([
             'id'       => $user->getId(),
             'locale'   => 'es',
             'theme'    => 'humanity',
-            'timezone' => 377,
+            'timezone' => 'Asia/Vladivostok',
         ]);
 
         $this->command_bus->handle($command);
@@ -38,7 +38,7 @@ class SaveAppearanceCommandTest extends BaseTestCase
 
         self::assertEquals('es', $user->getSettings()->getLocale());
         self::assertEquals('humanity', $user->getSettings()->getTheme());
-        self::assertEquals(377, $user->getSettings()->getTimezone());
+        self::assertEquals('Asia/Vladivostok', $user->getSettings()->getTimezone());
     }
 
     /**
@@ -55,7 +55,7 @@ class SaveAppearanceCommandTest extends BaseTestCase
             'id'       => self::UNKNOWN_ENTITY_ID,
             'locale'   => static::$kernel->getContainer()->getParameter('locale'),
             'theme'    => static::$kernel->getContainer()->getParameter('theme'),
-            'timezone' => 0,
+            'timezone' => 'UTC',
         ]);
 
         $this->command_bus->handle($command);

@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @property    int    $id       User ID.
  * @property    string $locale   New locale.
  * @property    string $theme    New theme.
- * @property    int    $timezone New timezone.
+ * @property    string $timezone New timezone.
  */
 class SaveAppearanceCommand
 {
@@ -46,7 +46,7 @@ class SaveAppearanceCommand
 
     /**
      * @Assert\NotNull()
-     * @Assert\Choice(callback = {"eTraxis\Dictionary\Timezone", "keys"})
+     * @Assert\Choice(callback = {"eTraxis\Dictionary\Timezone", "values"})
      */
     public $timezone;
 }

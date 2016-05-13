@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @property    string $description New description.
  * @property    string $locale      New locale.
  * @property    string $theme       New theme.
- * @property    int    $timezone    New timezone.
+ * @property    string $timezone    New timezone.
  * @property    bool   $admin       New role (whether has administrator permissions).
  * @property    bool   $disabled    New status.
  */
@@ -77,7 +77,7 @@ class UpdateUserCommand
 
     /**
      * @Assert\NotNull()
-     * @Assert\Choice(callback = {"eTraxis\Dictionary\Timezone", "keys"})
+     * @Assert\Choice(callback = {"eTraxis\Dictionary\Timezone", "values"})
      */
     public $timezone;
 

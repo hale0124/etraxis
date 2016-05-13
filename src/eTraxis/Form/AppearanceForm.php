@@ -48,7 +48,7 @@ class AppearanceForm extends AbstractType
         $builder->add('timezone', ChoiceType::class, [
             'label'                     => 'timezone',
             'required'                  => true,
-            'choices'                   => array_flip(Timezone::all()),
+            'choices'                   => array_combine(Timezone::values(), Timezone::values()),
             'choice_translation_domain' => false,
         ]);
     }

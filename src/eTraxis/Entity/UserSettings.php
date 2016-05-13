@@ -117,15 +117,13 @@ class UserSettings implements \ArrayAccess
     /**
      * Property setter.
      *
-     * @param   int $timezone
+     * @param   string $timezone
      *
      * @return  self
      */
-    public function setTimezone(int $timezone)
+    public function setTimezone(string $timezone)
     {
-        if (Dictionary\Timezone::has($timezone)) {
-            $this->timezone = $timezone;
-        }
+        $this->timezone = Dictionary\Timezone::find($timezone);
 
         return $this;
     }
@@ -133,15 +131,11 @@ class UserSettings implements \ArrayAccess
     /**
      * Property getter.
      *
-     * @return  int
+     * @return  string
      */
     public function getTimezone()
     {
-        if (!Dictionary\Timezone::has($this->timezone)) {
-            $this->timezone = Dictionary\Timezone::FALLBACK;
-        }
-
-        return $this->timezone;
+        return Dictionary\Timezone::get($this->timezone);
     }
 
     /**

@@ -4,6 +4,10 @@ imports:
 
 services:
 
+    twig.extension.intl:
+        class: Twig_Extensions_Extension_Intl
+        tags: [{ name: twig.extension }]
+
     etraxis.provider:
         class: eTraxis\Security\InternalUserProvider
         public: false
@@ -39,12 +43,6 @@ services:
             - "%ldap_user%"
             - "%ldap_password%"
             - "%ldap_tls%"
-
-    localizer:
-        class: eTraxis\Service\Localizer\LocalizerService
-        arguments:
-            - "@security.token_storage"
-            - "%locale%"
 
     etraxis.mailer:
         class: eTraxis\Service\Mailer\MailerService

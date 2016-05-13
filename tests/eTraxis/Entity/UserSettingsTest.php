@@ -12,7 +12,6 @@
 namespace eTraxis\Entity;
 
 use AltrEgo\AltrEgo;
-use eTraxis\Dictionary\Timezone;
 
 class UserSettingsTest extends \PHPUnit_Framework_TestCase
 {
@@ -74,13 +73,8 @@ class UserSettingsTest extends \PHPUnit_Framework_TestCase
 
     public function testTimezone()
     {
-        $timezones = array_flip(Timezone::all());
-        $expected  = $timezones['Pacific/Auckland'];
-
+        $expected = 'Pacific/Auckland';
         $this->object->setTimezone($expected);
-        self::assertEquals($expected, $this->object->getTimezone());
-
-        $this->object->setTimezone(PHP_INT_MAX);
         self::assertEquals($expected, $this->object->getTimezone());
     }
 
@@ -89,7 +83,7 @@ class UserSettingsTest extends \PHPUnit_Framework_TestCase
         /** @var \StdClass $object */
         $object = AltrEgo::create($this->object);
 
-        $expected         = 0;
+        $expected         = 'UTC';
         $object->timezone = PHP_INT_MAX;
 
         self::assertEquals(PHP_INT_MAX, $object->timezone);
