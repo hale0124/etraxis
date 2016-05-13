@@ -48,6 +48,7 @@ var FieldsApp = (function() {
                 });
                 $('.panel-item', $fields).append('<span class="ui-icon ui-icon-triangle-2-n-s right"></span>');
                 $('.panel-body', $fields).sortable({
+                    items: '> a',
                     update: function(event, ui) {
                         $.post(eTraxis.route('admin_set_field_order', {
                             id: ui.item.data('id'),
