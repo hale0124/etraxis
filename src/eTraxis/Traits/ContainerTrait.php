@@ -11,7 +11,6 @@
 
 namespace eTraxis\Traits;
 
-use DataTables\DataTablesInterface;
 use SimpleBus\Message\Bus\MessageBus;
 
 /**
@@ -39,15 +38,5 @@ trait ContainerTrait
     protected function getEventBus(): MessageBus
     {
         return $this->container->get('event_bus');
-    }
-
-    /**
-     * Shortcut to get the DataTables service.
-     *
-     * @return  DataTablesInterface
-     */
-    protected function getDataTables(): DataTablesInterface
-    {
-        return $this->container->get('datatables');
     }
 }

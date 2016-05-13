@@ -57,7 +57,8 @@ class UsersGetController extends Controller
      */
     public function listAction(Request $request): JsonResponse
     {
-        $datatables = $this->getDataTables();
+        /** @var \DataTables\DataTablesInterface $datatables */
+        $datatables = $this->container->get('datatables');
         $results    = $datatables->handle($request, 'eTraxis:User');
 
         return new JsonResponse($results);
@@ -77,7 +78,8 @@ class UsersGetController extends Controller
         $request->query->set('start', 0);
         $request->query->set('length', -1);
 
-        $datatables = $this->getDataTables();
+        /** @var \DataTables\DataTablesInterface $datatables */
+        $datatables = $this->container->get('datatables');
         $results    = $datatables->handle($request, 'eTraxis:User');
 
         $users = array_map(function ($user) {

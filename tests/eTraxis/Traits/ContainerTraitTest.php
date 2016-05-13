@@ -44,9 +44,4 @@ class ContainerTraitTest extends KernelTestCase
     {
         self::assertInstanceOf('\SimpleBus\Message\Bus\MessageBus', $this->object->getEventBus());
     }
-
-    public function testGetDataTables()
-    {
-        self::assertInstanceOf('\DataTables\DataTablesInterface', $this->object->getDataTables());
-    }
 }
