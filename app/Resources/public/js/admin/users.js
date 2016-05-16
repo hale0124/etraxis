@@ -19,7 +19,7 @@ var UsersApp = (function() {
     });
 
     // Click on a user in the list.
-    $table.on('click', 'tbody tr', function() {
+    $table.on('dblclick', 'tbody tr', function() {
         var url = eTraxis.route('admin_view_user', { id: $(this).data('id') });
         window.location.assign(url);
     });
