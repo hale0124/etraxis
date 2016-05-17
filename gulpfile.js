@@ -31,9 +31,23 @@ var argv     = require('yargs').argv;
  */
 gulp.task('default', function() {
     sequence(
-        ['stylesheets:jquery-ui', 'stylesheets:libs', 'stylesheets:themes'],
-        ['javascripts:routes', 'javascripts:datatables', 'javascripts:translations'],
-        ['javascripts:jquery-ui', 'javascripts:libs', 'javascripts:etraxis:core', 'javascripts:etraxis:app', 'javascripts:i18n']
+        // First sequence.
+        [
+            'jquery-ui:stylesheets',    // assemble jQuery UI stylesheets into single "jquery-ui.css" file
+            'jquery-ui:javascripts',    // assemble jQuery UI sources into single "jquery-ui.js" script
+            'datatables:translations',  // convert required DataTables translation (JSON) files into JavaScript files
+            'etraxis:translations',     // convert eTraxis translation YAML files into JavaScript files
+            'etraxis:routes',           // generate a JavaScript file with all existing eTraxis routes
+            'etraxis:themes'            // install jQuery UI themes to "web/css/" folder
+        ],
+        // Second sequence.
+        [
+            'vendor:css',       // install vendor CSS files as one combined "web/css/vendor.min.css" asset
+            'vendor:js',        // install vendor JavaScript files as one combined "web/js/vendor.min.js" asset
+            'etraxis:core',     // install eTraxis core JavaScript files as one combined "web/js/etraxis.min.js" asset
+            'etraxis:app',      // install eTraxis application JavaScript files to "web/js/" folder
+            'etraxis:i18n'      // install all translation JavaScript files to "web/js/" folder
+        ]
     );
 });
 
@@ -42,20 +56,20 @@ gulp.task('default', function() {
  */
 gulp.task('watch', function() {
     watch(['app/Resources/public/less/*.less', 'app/Resources/public/less/*/**.less'], function() {
-        gulp.start('stylesheets:themes');
+        gulp.start('etraxis:themes');
     });
     watch(['app/Resources/public/js/*.js'], function() {
-        gulp.start('javascripts:etraxis:core');
+        gulp.start('etraxis:core');
     });
     watch(['app/Resources/public/js/*/**.js'], function() {
-        gulp.start('javascripts:etraxis:app');
+        gulp.start('etraxis:app');
     });
 });
 
 /**
- * Assembles jQuery UI stylesheets into single "jquery-ui.structure.css" file.
+ * Assembles jQuery UI stylesheets into single "jquery-ui.css" file.
  */
-gulp.task('stylesheets:jquery-ui', function() {
+gulp.task('jquery-ui:stylesheets', function() {
 
     var files = [
         // UI Core
@@ -76,75 +90,44 @@ gulp.task('stylesheets:jquery-ui', function() {
 
     return gulp.src(files)
         .pipe(gulpif(argv.production, minify()))
-        .pipe(concat('jquery-ui.structure.css'))
-        .pipe(gulp.dest('vendor/bower/jquery.ui/themes/base/'));
+        .pipe(concat('jquery-ui.css'))
+        .pipe(gulp.dest('vendor/bower/jquery.ui/themes/'));
 });
 
 /**
- * Installs vendors CSS files as one combined "web/css/libs.min.css" asset.
+ * Assembles jQuery UI sources into single "jquery-ui.js" script.
  */
-gulp.task('stylesheets:libs', function() {
+gulp.task('jquery-ui:javascripts', function() {
 
     var files = [
-        'vendor/bower/normalize.css/normalize.css',
-        'vendor/bower/unsemantic/assets/stylesheets/unsemantic-grid-responsive-no-ie7.css',
-        'vendor/bower/jquery.ui/themes/base/jquery-ui.structure.css',
-        'vendor/bower/datatables/media/css/jquery.dataTables_themeroller.css'
+        // UI Core
+        'vendor/bower/jquery.ui/ui/core.js',
+        'vendor/bower/jquery.ui/ui/widget.js',
+        'vendor/bower/jquery.ui/ui/mouse.js',
+        'vendor/bower/jquery.ui/ui/position.js',
+        // Interactions
+        'vendor/bower/jquery.ui/ui/draggable.js',
+        'vendor/bower/jquery.ui/ui/resizable.js',
+        'vendor/bower/jquery.ui/ui/sortable.js',
+        // Widgets
+        'vendor/bower/jquery.ui/ui/button.js',
+        'vendor/bower/jquery.ui/ui/datepicker.js',
+        'vendor/bower/jquery.ui/ui/dialog.js',
+        'vendor/bower/jquery.ui/ui/menu.js',
+        'vendor/bower/jquery.ui/ui/progressbar.js',
+        'vendor/bower/jquery.ui/ui/tabs.js',
+        'vendor/bower/jquery.ui/ui/tooltip.js'
     ];
 
     return gulp.src(files)
-        .pipe(gulpif(argv.production, minify()))
-        .pipe(gulpif(argv.production, concat('libs.min.css')))
-        .pipe(gulp.dest('web/css/'));
-});
-
-/**
- * Installs jQuery UI themes.
- */
-gulp.task('stylesheets:themes', function() {
-
-    gulp.src('app/Resources/public/css/*/images/*')
-        .pipe(gulp.dest('web/css/'));
-
-    var folders = fs.readdirSync('app/Resources/public/css')
-        .filter(function(file) {
-            return fs.statSync('app/Resources/public/css/' + file).isDirectory();
-        });
-
-    var tasks = folders.map(function(folder) {
-        return gulp.src('app/Resources/public/less/themes/theme-' + folder + '.less')
-            .pipe(plumber())
-            .pipe(less())
-            .pipe(addsrc.prepend('app/Resources/public/css/' + folder + '/jquery-ui.theme.css'))
-            .pipe(gulpif(argv.production, minify()))
-            .pipe(concat(argv.production ? 'etraxis.min.css' : 'etraxis.css'))
-            .pipe(gulp.dest('web/css/' + folder));
-    });
-
-    return merge(tasks);
-});
-
-/**
- * Generates a JavaScript file with all existing routes.
- */
-gulp.task('javascripts:routes', function() {
-
-    var options = {
-        pipeStdout: true
-    };
-
-    return gulp.src('gulpfile.js')
-        .pipe(exec('./bin/console etraxis:routes', options))
-        .pipe(rename(function(path) {
-            path.basename = 'routes';
-        }))
-        .pipe(gulp.dest('vendor/bower/etraxis/'));
+        .pipe(concat('jquery-ui.js'))
+        .pipe(gulp.dest('vendor/bower/jquery.ui/ui/'));
 });
 
 /**
  * Converts required DataTables translation (JSON) files into JavaScript files.
  */
-gulp.task('javascripts:datatables', function() {
+gulp.task('datatables:translations', function() {
 
     var i18n = [
         'vendor/bower/datatables-plugins/i18n/Bulgarian.lang',
@@ -168,7 +151,6 @@ gulp.task('javascripts:datatables', function() {
 
     return gulp.src(i18n)
         .pipe(rename(function(path) {
-
             var i18n = {
                 'Bulgarian': 'bg',
                 'Czech': 'cs',
@@ -201,7 +183,7 @@ gulp.task('javascripts:datatables', function() {
 /**
  * Converts eTraxis translation YAML files into JavaScript files.
  */
-gulp.task('javascripts:translations', function() {
+gulp.task('etraxis:translations', function() {
 
     return gulp.src('app/Resources/translations/messages.*.yml')
         .pipe(yaml({ space: 4 }))
@@ -216,39 +198,72 @@ gulp.task('javascripts:translations', function() {
 });
 
 /**
- * Assembles jQuery UI source files into single "jquery-ui.js" script.
+ * Generates a JavaScript file with all existing eTraxis routes.
  */
-gulp.task('javascripts:jquery-ui', function() {
+gulp.task('etraxis:routes', function() {
 
-    var files = [
-        // UI Core
-        'vendor/bower/jquery.ui/ui/core.js',
-        'vendor/bower/jquery.ui/ui/widget.js',
-        'vendor/bower/jquery.ui/ui/mouse.js',
-        'vendor/bower/jquery.ui/ui/position.js',
-        // Interactions
-        'vendor/bower/jquery.ui/ui/draggable.js',
-        'vendor/bower/jquery.ui/ui/resizable.js',
-        'vendor/bower/jquery.ui/ui/sortable.js',
-        // Widgets
-        'vendor/bower/jquery.ui/ui/button.js',
-        'vendor/bower/jquery.ui/ui/datepicker.js',
-        'vendor/bower/jquery.ui/ui/dialog.js',
-        'vendor/bower/jquery.ui/ui/menu.js',
-        'vendor/bower/jquery.ui/ui/progressbar.js',
-        'vendor/bower/jquery.ui/ui/tabs.js',
-        'vendor/bower/jquery.ui/ui/tooltip.js'
-    ];
+    var options = {
+        pipeStdout: true
+    };
 
-    return gulp.src(files)
-        .pipe(concat('jquery-ui.js'))
-        .pipe(gulp.dest('vendor/bower/jquery.ui/ui/'));
+    return gulp.src('gulpfile.js')
+        .pipe(exec('./bin/console etraxis:routes', options))
+        .pipe(rename(function(path) {
+            path.basename = 'routes';
+        }))
+        .pipe(gulp.dest('vendor/bower/etraxis/'));
 });
 
 /**
- * Installs vendors JavaScript files as one combined "web/js/libs.min.js" asset.
+ * Installs jQuery UI themes to "web/css/" folder.
  */
-gulp.task('javascripts:libs', function() {
+gulp.task('etraxis:themes', function() {
+
+    var folders = fs.readdirSync('app/Resources/public/css')
+        .filter(function(file) {
+            return fs.statSync('app/Resources/public/css/' + file).isDirectory();
+        });
+
+    var tasks = folders.map(function(folder) {
+        return gulp.src('app/Resources/public/less/themes/theme-' + folder + '.less')
+            .pipe(plumber())
+            .pipe(less())
+            .pipe(addsrc.prepend('app/Resources/public/css/' + folder + '/jquery-ui.theme.css'))
+            .pipe(gulpif(argv.production, minify()))
+            .pipe(concat(argv.production ? 'etraxis.min.css' : 'etraxis.css'))
+            .pipe(gulp.dest('web/css/' + folder));
+    });
+
+    tasks.push(
+        gulp.src('app/Resources/public/css/*/images/*')
+            .pipe(gulp.dest('web/css/'))
+    );
+    
+    return merge(tasks);
+});
+
+/**
+ * Installs vendor CSS files as one combined "web/css/vendor.min.css" asset.
+ */
+gulp.task('vendor:css', function() {
+
+    var files = [
+        'vendor/bower/normalize.css/normalize.css',
+        'vendor/bower/unsemantic/assets/stylesheets/unsemantic-grid-responsive-no-ie7.css',
+        'vendor/bower/jquery.ui/themes/jquery-ui.css',
+        'vendor/bower/datatables/media/css/jquery.dataTables_themeroller.css'
+    ];
+
+    return gulp.src(files)
+        .pipe(gulpif(argv.production, minify()))
+        .pipe(gulpif(argv.production, concat('vendor.min.css')))
+        .pipe(gulp.dest('web/css/'));
+});
+
+/**
+ * Installs vendor JavaScript files as one combined "web/js/vendor.min.js" asset.
+ */
+gulp.task('vendor:js', function() {
 
     var files = [
         'vendor/bower/jquery/dist/jquery.js',
@@ -260,14 +275,14 @@ gulp.task('javascripts:libs', function() {
 
     return gulp.src(files)
         .pipe(gulpif(argv.production, uglify()))
-        .pipe(gulpif(argv.production, concat('libs.min.js')))
+        .pipe(gulpif(argv.production, concat('vendor.min.js')))
         .pipe(gulp.dest('web/js/'));
 });
 
 /**
  * Installs eTraxis core JavaScript files as one combined "web/js/etraxis.min.js" asset.
  */
-gulp.task('javascripts:etraxis:core', function() {
+gulp.task('etraxis:core', function() {
 
     var files = [
         // This file must go first as it defines the "eTraxis" object,
@@ -293,9 +308,9 @@ gulp.task('javascripts:etraxis:core', function() {
 /**
  * Installs eTraxis application JavaScript files to "web/js/" folder.
  */
-gulp.task('javascripts:etraxis:app', function() {
+gulp.task('etraxis:app', function() {
 
-    return gulp.src('app/Resources/public/js/*/**')
+    return gulp.src('app/Resources/public/js/*/**.js')
         .pipe(plumber())
         .pipe(gulpif(argv.production, uglify()))
         .pipe(insert.prepend('"use strict";\n'))
@@ -305,7 +320,7 @@ gulp.task('javascripts:etraxis:app', function() {
 /**
  * Installs translation JavaScript files from all vendors (including eTraxis) to "web/js/" folder.
  */
-gulp.task('javascripts:i18n', function() {
+gulp.task('etraxis:i18n', function() {
 
     var i18n = [
         'bg',

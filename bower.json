@@ -1,5 +1,5 @@
 {
-    "name": "etraxis/etraxis",
+    "name": "etraxis",
     "license": "GPL-3.0",
     "dependencies": {
         "normalize.css": "4.1.1",

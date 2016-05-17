@@ -14,11 +14,11 @@
         {% if app.environment == 'dev' %}
             <link rel="stylesheet" href="{{ asset('css/normalize.css')                         }}">
             <link rel="stylesheet" href="{{ asset('css/unsemantic-grid-responsive-no-ie7.css') }}">
-            <link rel="stylesheet" href="{{ asset('css/jquery-ui.structure.css')               }}">
+            <link rel="stylesheet" href="{{ asset('css/jquery-ui.css')                         }}">
             <link rel="stylesheet" href="{{ asset('css/jquery.dataTables_themeroller.css')     }}">
             <link rel="stylesheet" href="{{ asset('css/%s/etraxis.css' | format(app.user ? app.user.theme : theme)) }}">
         {% else %}
-            <link rel="stylesheet" href="{{ asset('css/libs.min.css') }}">
+            <link rel="stylesheet" href="{{ asset('css/vendor.min.css') }}">
             <link rel="stylesheet" href="{{ asset('css/%s/etraxis.min.css' | format(app.user ? app.user.theme : theme)) }}">
         {% endif %}
 
@@ -93,7 +93,7 @@
         <script src="{{ asset('js/etraxis.js')           }}"></script>
         <script src="{{ asset('js/etraxis-%s.js' | format(app.user ? app.user.locale : locale)) }}"></script>
     {% else %}
-        <script src="{{ asset('js/libs.min.js')    }}"></script>
+        <script src="{{ asset('js/vendor.min.js')  }}"></script>
         <script src="{{ asset('js/etraxis.min.js') }}"></script>
         <script src="{{ asset('js/etraxis-%s.min.js' | format(app.user ? app.user.locale : locale)) }}"></script>
     {% endif %}
