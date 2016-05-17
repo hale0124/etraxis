@@ -129,55 +129,46 @@ gulp.task('jquery-ui:javascripts', function() {
  */
 gulp.task('datatables:translations', function() {
 
-    var i18n = [
-        'vendor/bower/datatables-plugins/i18n/Bulgarian.lang',
-        'vendor/bower/datatables-plugins/i18n/Czech.lang',
-        'vendor/bower/datatables-plugins/i18n/Dutch.lang',
-        'vendor/bower/datatables-plugins/i18n/English.lang',
-        'vendor/bower/datatables-plugins/i18n/French.lang',
-        'vendor/bower/datatables-plugins/i18n/German.lang',
-        'vendor/bower/datatables-plugins/i18n/Hungarian.lang',
-        'vendor/bower/datatables-plugins/i18n/Italian.lang',
-        'vendor/bower/datatables-plugins/i18n/Japanese.lang',
-        'vendor/bower/datatables-plugins/i18n/Latvian.lang',
-        'vendor/bower/datatables-plugins/i18n/Polish.lang',
-        'vendor/bower/datatables-plugins/i18n/Portuguese-Brasil.lang',
-        'vendor/bower/datatables-plugins/i18n/Romanian.lang',
-        'vendor/bower/datatables-plugins/i18n/Russian.lang',
-        'vendor/bower/datatables-plugins/i18n/Spanish.lang',
-        'vendor/bower/datatables-plugins/i18n/Swedish.lang',
-        'vendor/bower/datatables-plugins/i18n/Turkish.lang'
-    ];
+    var i18n = {
+        'bg': 'vendor/bower/datatables-plugins/i18n/Bulgarian.lang',
+        'cs': 'vendor/bower/datatables-plugins/i18n/Czech.lang',
+        'nl': 'vendor/bower/datatables-plugins/i18n/Dutch.lang',
+        'en-AU': 'vendor/bower/datatables-plugins/i18n/English.lang',
+        'en-CA': 'vendor/bower/datatables-plugins/i18n/English.lang',
+        'en-GB': 'vendor/bower/datatables-plugins/i18n/English.lang',
+        'en-NZ': 'vendor/bower/datatables-plugins/i18n/English.lang',
+        'en-US': 'vendor/bower/datatables-plugins/i18n/English.lang',
+        'fr': 'vendor/bower/datatables-plugins/i18n/French.lang',
+        'de': 'vendor/bower/datatables-plugins/i18n/German.lang',
+        'hu': 'vendor/bower/datatables-plugins/i18n/Hungarian.lang',
+        'it': 'vendor/bower/datatables-plugins/i18n/Italian.lang',
+        'ja': 'vendor/bower/datatables-plugins/i18n/Japanese.lang',
+        'lv': 'vendor/bower/datatables-plugins/i18n/Latvian.lang',
+        'pl': 'vendor/bower/datatables-plugins/i18n/Polish.lang',
+        'pt-BR': 'vendor/bower/datatables-plugins/i18n/Portuguese-Brasil.lang',
+        'ro': 'vendor/bower/datatables-plugins/i18n/Romanian.lang',
+        'ru': 'vendor/bower/datatables-plugins/i18n/Russian.lang',
+        'es': 'vendor/bower/datatables-plugins/i18n/Spanish.lang',
+        'sv': 'vendor/bower/datatables-plugins/i18n/Swedish.lang',
+        'tr': 'vendor/bower/datatables-plugins/i18n/Turkish.lang'
+    };
 
-    return gulp.src(i18n)
-        .pipe(rename(function(path) {
-            var i18n = {
-                'Bulgarian': 'bg',
-                'Czech': 'cs',
-                'Dutch': 'nl',
-                'English': 'en',
-                'French': 'fr',
-                'German': 'de',
-                'Hungarian': 'hu',
-                'Italian': 'it',
-                'Japanese': 'ja',
-                'Latvian': 'lv',
-                'Polish': 'pl',
-                'Portuguese-Brasil': 'pt-BR',
-                'Romanian': 'ro',
-                'Russian': 'ru',
-                'Spanish': 'es',
-                'Swedish': 'sv',
-                'Turkish': 'tr'
-            };
+    var tasks = [];
 
-            path.basename = 'datatables-' + i18n[path.basename];
-            path.extname = '.js';
-        }))
-        .pipe(strip())
-        .pipe(insert.prepend('var datatables_language = window.datatables_language ||'))
-        .pipe(insert.append(';'))
-        .pipe(gulp.dest('vendor/bower/datatables-plugins/i18n/'));
+    for (var locale in i18n) {
+        if (i18n.hasOwnProperty(locale)) {
+            tasks.push(
+                gulp.src(i18n[locale])
+                    .pipe(rename('datatables-' + locale + '.js'))
+                    .pipe(strip())
+                    .pipe(insert.prepend('var datatables_language = window.datatables_language ||'))
+                    .pipe(insert.append(';'))
+                    .pipe(gulp.dest('vendor/bower/datatables-plugins/i18n/'))
+            );
+        }
+    }
+
+    return merge(tasks);
 });
 
 /**
@@ -350,7 +341,7 @@ gulp.task('etraxis:i18n', function() {
 
         var files = [
             'vendor/bower/jquery.ui/ui/i18n/datepicker-' + (locale.substr(0, 2) == 'en' ? 'en-GB' : locale) + '.js',
-            'vendor/bower/datatables-plugins/i18n/datatables-' + (locale.substr(0, 2) == 'en' ? 'en' : locale) + '.js',
+            'vendor/bower/datatables-plugins/i18n/datatables-' + locale + '.js',
             'vendor/bower/etraxis/i18n/etraxis-' + locale.replace('-', '_') + '.js'
         ];
 
