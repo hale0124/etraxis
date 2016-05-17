@@ -34,6 +34,7 @@ class ScriptHandler
                 'gulp-minify-css',
                 'gulp-plumber',
                 'gulp-rename',
+                'gulp-replace',
                 'gulp-strip-json-comments',
                 'gulp-uglify',
                 'gulp-watch',

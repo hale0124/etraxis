@@ -17,6 +17,7 @@ var less     = require('gulp-less');
 var minify   = require('gulp-minify-css');
 var plumber  = require('gulp-plumber');
 var rename   = require('gulp-rename');
+var replace  = require('gulp-replace');
 var strip    = require('gulp-strip-json-comments');
 var uglify   = require('gulp-uglify');
 var watch    = require('gulp-watch');
@@ -35,6 +36,7 @@ gulp.task('default', function() {
         [
             'jquery-ui:stylesheets',    // assemble jQuery UI stylesheets into single "jquery-ui.css" file
             'jquery-ui:javascripts',    // assemble jQuery UI sources into single "jquery-ui.js" script
+            'datepicker:translations',  // create missing Datepicker translation files
             'datatables:translations',  // convert required DataTables translation (JSON) files into JavaScript files
             'etraxis:translations',     // convert eTraxis translation YAML files into JavaScript files
             'etraxis:routes',           // generate a JavaScript file with all existing eTraxis routes
@@ -122,6 +124,22 @@ gulp.task('jquery-ui:javascripts', function() {
     return gulp.src(files)
         .pipe(concat('jquery-ui.js'))
         .pipe(gulp.dest('vendor/bower/jquery.ui/ui/'));
+});
+
+/**
+ * Creates missing Datepicker translation files.
+ */
+gulp.task('datepicker:translations', function() {
+
+    return gulp.src('vendor/bower/jquery.ui/ui/i18n/datepicker-en-GB.js')
+        // en-CA
+        .pipe(rename('datepicker-en-CA.js'))
+        .pipe(replace('en-GB', 'en-CA'))
+        .pipe(gulp.dest('vendor/bower/jquery.ui/ui/i18n/'))
+        // en-US
+        .pipe(rename('datepicker-en-US.js'))
+        .pipe(replace('en-CA', 'en-US'))
+        .pipe(gulp.dest('vendor/bower/jquery.ui/ui/i18n/'));
 });
 
 /**
@@ -340,7 +358,7 @@ gulp.task('etraxis:i18n', function() {
     i18n.forEach(function(locale) {
 
         var files = [
-            'vendor/bower/jquery.ui/ui/i18n/datepicker-' + (locale.substr(0, 2) == 'en' ? 'en-GB' : locale) + '.js',
+            'vendor/bower/jquery.ui/ui/i18n/datepicker-' + locale + '.js',
             'vendor/bower/datatables-plugins/i18n/datatables-' + locale + '.js',
             'vendor/bower/etraxis/i18n/etraxis-' + locale.replace('-', '_') + '.js'
         ];
