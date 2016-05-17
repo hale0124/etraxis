@@ -31,9 +31,9 @@ var argv     = require('yargs').argv;
  */
 gulp.task('default', function() {
     sequence(
-        ['stylesheets:libs', 'stylesheets:themes'],
+        ['stylesheets:jquery-ui', 'stylesheets:libs', 'stylesheets:themes'],
         ['javascripts:routes', 'javascripts:datatables', 'javascripts:translations'],
-        ['javascripts:libs', 'javascripts:etraxis:core', 'javascripts:etraxis:app', 'javascripts:i18n']
+        ['javascripts:jquery-ui', 'javascripts:libs', 'javascripts:etraxis:core', 'javascripts:etraxis:app', 'javascripts:i18n']
     );
 });
 
@@ -53,6 +53,34 @@ gulp.task('watch', function() {
 });
 
 /**
+ * Assembles jQuery UI stylesheets into single "jquery-ui.structure.css" file.
+ */
+gulp.task('stylesheets:jquery-ui', function() {
+
+    var files = [
+        // UI Core
+        'vendor/bower/jquery.ui/themes/base/core.css',
+        // Interactions
+        'vendor/bower/jquery.ui/themes/base/draggable.css',
+        'vendor/bower/jquery.ui/themes/base/resizable.css',
+        'vendor/bower/jquery.ui/themes/base/sortable.css',
+        // Widgets
+        'vendor/bower/jquery.ui/themes/base/button.css',
+        'vendor/bower/jquery.ui/themes/base/datepicker.css',
+        'vendor/bower/jquery.ui/themes/base/dialog.css',
+        'vendor/bower/jquery.ui/themes/base/menu.css',
+        'vendor/bower/jquery.ui/themes/base/progressbar.css',
+        'vendor/bower/jquery.ui/themes/base/tabs.css',
+        'vendor/bower/jquery.ui/themes/base/tooltip.css'
+    ];
+
+    return gulp.src(files)
+        .pipe(gulpif(argv.production, minify()))
+        .pipe(concat('jquery-ui.structure.css'))
+        .pipe(gulp.dest('vendor/bower/jquery.ui/themes/base/'));
+});
+
+/**
  * Installs vendors CSS files as one combined "web/css/libs.min.css" asset.
  */
 gulp.task('stylesheets:libs', function() {
@@ -60,7 +88,7 @@ gulp.task('stylesheets:libs', function() {
     var files = [
         'vendor/bower/normalize.css/normalize.css',
         'vendor/bower/unsemantic/assets/stylesheets/unsemantic-grid-responsive-no-ie7.css',
-        'app/Resources/public/css/jquery-ui.structure.css',
+        'vendor/bower/jquery.ui/themes/base/jquery-ui.structure.css',
         'vendor/bower/datatables/media/css/jquery.dataTables_themeroller.css'
     ];
 
@@ -188,13 +216,43 @@ gulp.task('javascripts:translations', function() {
 });
 
 /**
+ * Assembles jQuery UI source files into single "jquery-ui.js" script.
+ */
+gulp.task('javascripts:jquery-ui', function() {
+
+    var files = [
+        // UI Core
+        'vendor/bower/jquery.ui/ui/core.js',
+        'vendor/bower/jquery.ui/ui/widget.js',
+        'vendor/bower/jquery.ui/ui/mouse.js',
+        'vendor/bower/jquery.ui/ui/position.js',
+        // Interactions
+        'vendor/bower/jquery.ui/ui/draggable.js',
+        'vendor/bower/jquery.ui/ui/resizable.js',
+        'vendor/bower/jquery.ui/ui/sortable.js',
+        // Widgets
+        'vendor/bower/jquery.ui/ui/button.js',
+        'vendor/bower/jquery.ui/ui/datepicker.js',
+        'vendor/bower/jquery.ui/ui/dialog.js',
+        'vendor/bower/jquery.ui/ui/menu.js',
+        'vendor/bower/jquery.ui/ui/progressbar.js',
+        'vendor/bower/jquery.ui/ui/tabs.js',
+        'vendor/bower/jquery.ui/ui/tooltip.js'
+    ];
+
+    return gulp.src(files)
+        .pipe(concat('jquery-ui.js'))
+        .pipe(gulp.dest('vendor/bower/jquery.ui/ui/'));
+});
+
+/**
  * Installs vendors JavaScript files as one combined "web/js/libs.min.js" asset.
  */
 gulp.task('javascripts:libs', function() {
 
     var files = [
         'vendor/bower/jquery/dist/jquery.js',
-        'app/Resources/public/js/jquery-ui.js',
+        'vendor/bower/jquery.ui/ui/jquery-ui.js',
         'vendor/bower/blockui/jquery.blockUI.js',
         'vendor/bower/jquery-form/jquery.form.js',
         'vendor/bower/datatables/media/js/jquery.dataTables.js'
