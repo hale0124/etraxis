@@ -182,7 +182,7 @@ class ThemesCommand extends ContainerAwareCommand
 
         // Cleanup.
 
-        $rmdir = function ($dir) use (&$rmdir, $output) {
+        $rmdir = function ($dir) use (&$rmdir) {
 
             foreach (scandir($dir) as $entry) {
 
