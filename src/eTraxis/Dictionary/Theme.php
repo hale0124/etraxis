@@ -18,7 +18,14 @@ use Dictionary\StaticDictionary;
  */
 class Theme extends StaticDictionary
 {
-    const FALLBACK = 'azure';
+    const FALLBACK = self::AZURE;
+
+    const ALLBLACKS = 'allblacks';
+    const AZURE     = 'azure';
+    const EMERALD   = 'emerald';
+    const HUMANITY  = 'humanity';
+    const MARS      = 'mars';
+    const NEXADA    = 'nexada';
 
     /**
      * {@inheritdoc}
@@ -26,12 +33,12 @@ class Theme extends StaticDictionary
     public static function all()
     {
         return [
-            'allblacks' => 'All Blacks',
-            'azure'     => 'Azure',
-            'emerald'   => 'Emerald',
-            'humanity'  => 'Humanity',
-            'mars'      => 'Mars',
-            'nexada'    => 'Nexada',
+            self::ALLBLACKS => 'All Blacks',
+            self::AZURE     => 'Azure',
+            self::EMERALD   => 'Emerald',
+            self::HUMANITY  => 'Humanity',
+            self::MARS      => 'Mars',
+            self::NEXADA    => 'Nexada',
         ];
     }
 }

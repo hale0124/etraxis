@@ -15,7 +15,7 @@ class ThemeTest extends \PHPUnit_Framework_TestCase
 {
     public function testDictionary()
     {
-        self::assertContains('azure', Theme::keys());
-        self::assertEquals('Azure', Theme::get('azure'));
+        self::assertContains('allblacks', Theme::keys());
+        self::assertEquals('All Blacks', Theme::get('allblacks'));
     }
 }
