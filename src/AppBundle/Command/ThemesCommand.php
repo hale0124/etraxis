@@ -182,6 +182,8 @@ class ThemesCommand extends ContainerAwareCommand
 
         // Cleanup.
 
+        unlink($zip_file);
+
         $rmdir = function ($dir) use (&$rmdir) {
 
             foreach (scandir($dir) as $entry) {
