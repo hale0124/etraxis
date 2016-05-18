@@ -179,7 +179,7 @@ gulp.task('datatables:translations', function() {
                 gulp.src(i18n[locale])
                     .pipe(rename('datatables-' + locale + '.js'))
                     .pipe(strip())
-                    .pipe(insert.prepend('var datatables_language = window.datatables_language ||'))
+                    .pipe(insert.prepend('var datatables_language = window.datatables_language || {};\ndatatables_language ='))
                     .pipe(insert.append(';'))
                     .pipe(gulp.dest('vendor/bower/datatables-plugins/i18n/'))
             );
