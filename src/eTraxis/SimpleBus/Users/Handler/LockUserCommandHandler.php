@@ -37,8 +37,8 @@ class LockUserCommandHandler
     public function __construct(
         LoggerInterface        $logger,
         EntityManagerInterface $manager,
-        int                    $security_auth_attempts,
-        int                    $security_lock_time)
+        int                    $security_auth_attempts = null,
+        int                    $security_lock_time = null)
     {
         $this->logger                 = $logger;
         $this->manager                = $manager;
