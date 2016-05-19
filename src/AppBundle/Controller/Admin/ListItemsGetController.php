@@ -13,7 +13,6 @@ namespace AppBundle\Controller\Admin;
 
 use eTraxis\Entity\ListItem;
 use eTraxis\Form\ListItemForm;
-use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,8 +25,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class ListItemsGetController extends Controller
 {
-    use ContainerTrait;
-
     /**
      * Renders dialog to create new list item.
      *

@@ -14,7 +14,6 @@ namespace AppBundle\Controller\Admin;
 use eTraxis\Entity\User;
 use eTraxis\Form\UserForm;
 use eTraxis\Service\Export\ExportCsvQuery;
-use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use SimpleBus\ValidationException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -31,8 +30,6 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
  */
 class UsersGetController extends Controller
 {
-    use ContainerTrait;
-
     /**
      * Page with list of users.
      *

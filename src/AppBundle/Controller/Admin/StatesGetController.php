@@ -18,7 +18,6 @@ use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
 use eTraxis\Form\StateForm;
-use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -33,8 +32,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class StatesGetController extends Controller
 {
-    use ContainerTrait;
-
     /**
      * Returns JSON list of states.
      *

@@ -19,7 +19,6 @@ use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
 use eTraxis\Form\FieldForm;
 use eTraxis\Form\RegexForm;
-use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -34,8 +33,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class FieldsGetController extends Controller
 {
-    use ContainerTrait;
-
     /**
      * Returns JSON list of fields.
      *

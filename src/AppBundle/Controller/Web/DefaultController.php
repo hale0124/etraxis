@@ -14,7 +14,6 @@ namespace AppBundle\Controller\Web;
 use eTraxis\Dictionary;
 use eTraxis\Form\ExportCsvForm;
 use eTraxis\Service\Export\ExportCsvQuery;
-use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -26,8 +25,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class DefaultController extends Controller
 {
-    use ContainerTrait;
-
     /**
      * @Action\Route("/", name="homepage")
      * @Action\Method("GET")

@@ -15,7 +15,6 @@ use eTraxis\Entity\Group;
 use eTraxis\Entity\Project;
 use eTraxis\Form\GroupExForm;
 use eTraxis\Form\GroupForm;
-use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -30,8 +29,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class GroupsGetController extends Controller
 {
-    use ContainerTrait;
-
     /**
      * Returns JSON list of groups.
      *

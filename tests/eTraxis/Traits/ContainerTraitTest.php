@@ -12,19 +12,19 @@
 namespace eTraxis\Traits;
 
 use AltrEgo\AltrEgo;
-use AppBundle\Controller\Web\DefaultController;
+use AppBundle\Controller\Web\SecurityController;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class ContainerTraitTest extends KernelTestCase
 {
-    /** @var DefaultController */
+    /** @var SecurityController */
     private $object;
 
     protected function setUp()
     {
         self::bootKernel();
 
-        $this->object = AltrEgo::create(new DefaultController());
+        $this->object = AltrEgo::create(new SecurityController());
         $this->object->setContainer(static::$kernel->getContainer());
     }
 

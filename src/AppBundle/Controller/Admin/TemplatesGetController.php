@@ -17,7 +17,6 @@ use eTraxis\Entity\Group;
 use eTraxis\Entity\Project;
 use eTraxis\Entity\Template;
 use eTraxis\Form\TemplateForm;
-use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -32,8 +31,6 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class TemplatesGetController extends Controller
 {
-    use ContainerTrait;
-
     /**
      * Returns JSON list of templates.
      *
