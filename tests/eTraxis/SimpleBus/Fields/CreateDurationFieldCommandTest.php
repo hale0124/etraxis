@@ -26,7 +26,6 @@ class CreateDurationFieldCommandTest extends BaseTestCase
             'state'        => $state->getId(),
             'name'         => 'Duration',
             'required'     => true,
-            'showInEmails' => false,
             'minValue'     => '0:00',
             'maxValue'     => '168:00',
             'defaultValue' => '48:00',
@@ -54,12 +53,11 @@ class CreateDurationFieldCommandTest extends BaseTestCase
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
         $command = new CreateDurationFieldCommand([
-            'state'        => $state->getId(),
-            'name'         => 'Duration',
-            'required'     => true,
-            'showInEmails' => false,
-            'minValue'     => '168:00',
-            'maxValue'     => '0:00',
+            'state'    => $state->getId(),
+            'name'     => 'Duration',
+            'required' => true,
+            'minValue' => '168:00',
+            'maxValue' => '0:00',
         ]);
 
         $this->command_bus->handle($command);
@@ -78,7 +76,6 @@ class CreateDurationFieldCommandTest extends BaseTestCase
             'state'        => $state->getId(),
             'name'         => 'Duration',
             'required'     => true,
-            'showInEmails' => false,
             'minValue'     => '0:00',
             'maxValue'     => '168:00',
             'defaultValue' => '240:00',

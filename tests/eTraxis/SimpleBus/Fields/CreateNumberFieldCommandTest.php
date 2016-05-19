@@ -26,7 +26,6 @@ class CreateNumberFieldCommandTest extends BaseTestCase
             'state'        => $state->getId(),
             'name'         => 'Month',
             'required'     => true,
-            'showInEmails' => false,
             'minValue'     => 1,
             'maxValue'     => 12,
             'defaultValue' => 2,
@@ -54,12 +53,11 @@ class CreateNumberFieldCommandTest extends BaseTestCase
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
         $command = new CreateNumberFieldCommand([
-            'state'        => $state->getId(),
-            'name'         => 'Month',
-            'required'     => true,
-            'showInEmails' => false,
-            'minValue'     => 12,
-            'maxValue'     => 1,
+            'state'    => $state->getId(),
+            'name'     => 'Month',
+            'required' => true,
+            'minValue' => 12,
+            'maxValue' => 1,
         ]);
 
         $this->command_bus->handle($command);
@@ -78,7 +76,6 @@ class CreateNumberFieldCommandTest extends BaseTestCase
             'state'        => $state->getId(),
             'name'         => 'Month',
             'required'     => true,
-            'showInEmails' => false,
             'minValue'     => 1,
             'maxValue'     => 12,
             'defaultValue' => 13,

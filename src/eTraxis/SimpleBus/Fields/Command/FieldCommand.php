@@ -18,10 +18,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Base command.
  * Contains properties which are common for all commands to create or update a field.
  *
- * @property    string $name         Field name.
- * @property    string $description  Description.
- * @property    bool   $required     Whether the field is required.
- * @property    bool   $showInEmails Whether to show the field in email notifications.
+ * @property    string $name        Field name.
+ * @property    string $description Description.
+ * @property    bool   $required    Whether the field is required.
  */
 class FieldCommand
 {
@@ -42,9 +41,4 @@ class FieldCommand
      * @Assert\NotNull()
      */
     public $required;
-
-    /**
-     * @Assert\NotNull()
-     */
-    public $showInEmails;
 }

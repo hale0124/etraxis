@@ -162,7 +162,6 @@ field.type.record: Záznam
 field.type.date: Datum
 field.type.duration: 'Doba trvání'
 field.required: Povinný
-field.show_in_emails: 'Zobrazit v e-mailu'
 field.default_value: 'Výchozí hodnota'
 field.min_value: 'Min. hodnota'
 field.max_value: 'Max. hodnota'

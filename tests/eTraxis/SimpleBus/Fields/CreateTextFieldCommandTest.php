@@ -27,7 +27,6 @@ class CreateTextFieldCommandTest extends BaseTestCase
             'state'        => $state->getId(),
             'name'         => 'Comment',
             'required'     => true,
-            'showInEmails' => false,
             'maxLength'    => 1000,
             'defaultValue' => 'N/A',
             'regexCheck'   => '(\d{3})-(\d{3})-(\d{4})',

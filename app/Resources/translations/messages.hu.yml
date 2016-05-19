@@ -162,7 +162,6 @@ field.type.record: Rekord
 field.type.date: Dátum
 field.type.duration: Időtartam
 field.required: Kötelező
-field.show_in_emails: 'Értesítőbe bekerüljön'
 field.default_value: 'Alapértelmezett érték'
 field.min_value: 'Min. érték'
 field.max_value: 'Max. érték'

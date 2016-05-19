@@ -161,7 +161,6 @@ field.type.record: Record
 field.type.date: Date
 field.type.duration: Duration
 field.required: 'Required field'
-field.show_in_emails: 'Show in emails'
 field.default_value: 'Default value'
 field.min_value: Min.value
 field.max_value: Max.value

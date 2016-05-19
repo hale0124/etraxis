@@ -25,7 +25,6 @@ class UpdateDurationFieldCommandTest extends BaseTestCase
         self::assertEquals('Running time', $field->getName());
         self::assertNull($field->getDescription());
         self::assertTrue($field->isRequired());
-        self::assertFalse($field->getShowInEmails());
         self::assertEquals(0, $field->getParameters()->getParameter1());
         self::assertEquals(1440, $field->getParameters()->getParameter2());
         self::assertNull($field->getParameters()->getDefaultValue());
@@ -35,7 +34,6 @@ class UpdateDurationFieldCommandTest extends BaseTestCase
             'name'         => 'Episode duration',
             'description'  => 'Running time',
             'required'     => false,
-            'showInEmails' => true,
             'minValue'     => '0:01',
             'maxValue'     => '2:00',
             'defaultValue' => '0:22',
@@ -49,7 +47,6 @@ class UpdateDurationFieldCommandTest extends BaseTestCase
         self::assertEquals('Episode duration', $field->getName());
         self::assertEquals('Running time', $field->getDescription());
         self::assertFalse($field->isRequired());
-        self::assertTrue($field->getShowInEmails());
         self::assertEquals(1, $field->getParameters()->getParameter1());
         self::assertEquals(120, $field->getParameters()->getParameter2());
         self::assertEquals(22, $field->getParameters()->getDefaultValue());
@@ -65,12 +62,11 @@ class UpdateDurationFieldCommandTest extends BaseTestCase
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Running time']);
 
         $command = new UpdateDurationFieldCommand([
-            'id'           => $field->getId(),
-            'name'         => $field->getName(),
-            'required'     => $field->isRequired(),
-            'showInEmails' => $field->getShowInEmails(),
-            'minValue'     => '24:00',
-            'maxValue'     => '0:00',
+            'id'       => $field->getId(),
+            'name'     => $field->getName(),
+            'required' => $field->isRequired(),
+            'minValue' => '24:00',
+            'maxValue' => '0:00',
         ]);
 
         $this->command_bus->handle($command);
@@ -89,7 +85,6 @@ class UpdateDurationFieldCommandTest extends BaseTestCase
             'id'           => $field->getId(),
             'name'         => $field->getName(),
             'required'     => $field->isRequired(),
-            'showInEmails' => $field->getShowInEmails(),
             'minValue'     => '0:00',
             'maxValue'     => '23:59',
             'defaultValue' => '24:00',

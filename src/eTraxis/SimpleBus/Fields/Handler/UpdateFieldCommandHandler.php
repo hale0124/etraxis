@@ -43,7 +43,6 @@ class UpdateFieldCommandHandler extends FieldCommandHandler
             ->setName($command->name)
             ->setDescription($command->description)
             ->setRequired($command->required)
-            ->setShowInEmails($command->showInEmails)
         ;
 
         $errors = $this->validator->validate($entity);

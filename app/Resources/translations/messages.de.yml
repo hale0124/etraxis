@@ -162,7 +162,6 @@ field.type.record: Anfrage
 field.type.date: Datum
 field.type.duration: Bearbeitungsdauer
 field.required: Erforderlich
-field.show_in_emails: 'In E-Mails zeigen'
 field.default_value: Vorgabewert
 field.min_value: 'Min. Wert'
 field.max_value: 'Max. Wert'

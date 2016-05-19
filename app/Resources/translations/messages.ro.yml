@@ -162,7 +162,6 @@ field.type.record: Inregistrare
 field.type.date: Data
 field.type.duration: Durata
 field.required: Obligatoriu
-field.show_in_emails: 'Arata in mesaje'
 field.default_value: 'Valoare implicita'
 field.min_value: 'Valoare minima'
 field.max_value: 'Valoare maxima'

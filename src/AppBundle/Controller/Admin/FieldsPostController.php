@@ -194,11 +194,10 @@ class FieldsPostController extends Controller
         }
 
         // Common field attributes.
-        $command->id           = $field->getId();
-        $command->name         = $field->getName();
-        $command->description  = $field->getDescription();
-        $command->required     = $field->isRequired();
-        $command->showInEmails = $field->getShowInEmails();
+        $command->id          = $field->getId();
+        $command->name        = $field->getName();
+        $command->description = $field->getDescription();
+        $command->required    = $field->isRequired();
 
         // Type-specific field attributes.
         $command->maxLength    = $fieldAs->getMaxLength();

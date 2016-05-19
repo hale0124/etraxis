@@ -23,10 +23,9 @@ class CreateListFieldCommandTest extends BaseTestCase
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
         $command = new CreateListFieldCommand([
-            'state'        => $state->getId(),
-            'name'         => 'Priority',
-            'required'     => true,
-            'showInEmails' => false,
+            'state'    => $state->getId(),
+            'name'     => 'Priority',
+            'required' => true,
         ]);
 
         $this->command_bus->handle($command);

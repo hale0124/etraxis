@@ -37,7 +37,6 @@ class FieldFormTest extends BaseTestCase
         self::assertArrayHasKey('asDuration', $children);
         self::assertArrayHasKey('description', $children);
         self::assertArrayHasKey('required', $children);
-        self::assertArrayHasKey('showInEmails', $children);
     }
 
     public function testNumberForm()
@@ -64,7 +63,6 @@ class FieldFormTest extends BaseTestCase
         self::assertArrayNotHasKey('asDuration', $children);
         self::assertArrayHasKey('description', $children);
         self::assertArrayHasKey('required', $children);
-        self::assertArrayHasKey('showInEmails', $children);
     }
 
     public function testDecimalForm()
@@ -91,7 +89,6 @@ class FieldFormTest extends BaseTestCase
         self::assertArrayNotHasKey('asDuration', $children);
         self::assertArrayHasKey('description', $children);
         self::assertArrayHasKey('required', $children);
-        self::assertArrayHasKey('showInEmails', $children);
     }
 
     public function testStringForm()
@@ -118,7 +115,6 @@ class FieldFormTest extends BaseTestCase
         self::assertArrayNotHasKey('asDuration', $children);
         self::assertArrayHasKey('description', $children);
         self::assertArrayHasKey('required', $children);
-        self::assertArrayHasKey('showInEmails', $children);
     }
 
     public function testTextForm()
@@ -145,7 +141,6 @@ class FieldFormTest extends BaseTestCase
         self::assertArrayNotHasKey('asDuration', $children);
         self::assertArrayHasKey('description', $children);
         self::assertArrayHasKey('required', $children);
-        self::assertArrayHasKey('showInEmails', $children);
     }
 
     public function testCheckboxForm()
@@ -172,7 +167,6 @@ class FieldFormTest extends BaseTestCase
         self::assertArrayNotHasKey('asDuration', $children);
         self::assertArrayHasKey('description', $children);
         self::assertArrayNotHasKey('required', $children);
-        self::assertArrayHasKey('showInEmails', $children);
     }
 
     public function testDateForm()
@@ -199,7 +193,6 @@ class FieldFormTest extends BaseTestCase
         self::assertArrayNotHasKey('asDuration', $children);
         self::assertArrayHasKey('description', $children);
         self::assertArrayHasKey('required', $children);
-        self::assertArrayHasKey('showInEmails', $children);
     }
 
     public function testDurationForm()
@@ -226,6 +219,5 @@ class FieldFormTest extends BaseTestCase
         self::assertArrayHasKey('asDuration', $children);
         self::assertArrayHasKey('description', $children);
         self::assertArrayHasKey('required', $children);
-        self::assertArrayHasKey('showInEmails', $children);
     }
 }

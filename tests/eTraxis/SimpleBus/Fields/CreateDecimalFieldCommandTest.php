@@ -27,7 +27,6 @@ class CreateDecimalFieldCommandTest extends BaseTestCase
             'state'        => $state->getId(),
             'name'         => 'Price',
             'required'     => true,
-            'showInEmails' => false,
             'minValue'     => '0.00',
             'maxValue'     => '100000.00',
             'defaultValue' => '499.95',
@@ -62,12 +61,11 @@ class CreateDecimalFieldCommandTest extends BaseTestCase
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
         $command = new CreateDecimalFieldCommand([
-            'state'        => $state->getId(),
-            'name'         => 'Month',
-            'required'     => true,
-            'showInEmails' => false,
-            'minValue'     => '43.21',
-            'maxValue'     => '12.34',
+            'state'    => $state->getId(),
+            'name'     => 'Month',
+            'required' => true,
+            'minValue' => '43.21',
+            'maxValue' => '12.34',
         ]);
 
         $this->command_bus->handle($command);
@@ -86,7 +84,6 @@ class CreateDecimalFieldCommandTest extends BaseTestCase
             'state'        => $state->getId(),
             'name'         => 'Month',
             'required'     => true,
-            'showInEmails' => false,
             'minValue'     => '1',
             'maxValue'     => '100',
             'defaultValue' => '0.99',

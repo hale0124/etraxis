@@ -162,7 +162,6 @@ field.type.record: Record
 field.type.date: Datum
 field.type.duration: Tijdsduur
 field.required: Vereist
-field.show_in_emails: UL
 field.default_value: Standaardwaarde
 field.min_value: Min.waarde
 field.max_value: Max.waarde

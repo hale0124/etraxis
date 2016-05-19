@@ -24,12 +24,11 @@ class UpdateFieldCommandTest extends BaseTestCase
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
 
         $command = new UpdateStringFieldCommand([
-            'id'           => $field->getId(),
-            'name'         => 'Team',
-            'description'  => 'New description',
-            'required'     => false,
-            'showInEmails' => true,
-            'maxLength'    => $field->asString()->getMaxLength(),
+            'id'          => $field->getId(),
+            'name'        => 'Team',
+            'description' => 'New description',
+            'required'    => false,
+            'maxLength'   => $field->asString()->getMaxLength(),
         ]);
 
         /** @var \Doctrine\ORM\EntityManagerInterface $manager */
@@ -47,7 +46,6 @@ class UpdateFieldCommandTest extends BaseTestCase
         self::assertEquals('Team', $field->getName());
         self::assertEquals('New description', $field->getDescription());
         self::assertFalse($field->isRequired());
-        self::assertTrue($field->getShowInEmails());
     }
 
     /**
@@ -60,11 +58,10 @@ class UpdateFieldCommandTest extends BaseTestCase
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
         $command = new CreateRecordFieldCommand([
-            'state'        => $state->getId(),
-            'name'         => 'Ref ID',
-            'description'  => 'Reference',
-            'required'     => true,
-            'showInEmails' => false,
+            'state'       => $state->getId(),
+            'name'        => 'Ref ID',
+            'description' => 'Reference',
+            'required'    => true,
         ]);
 
         /** @var \Doctrine\ORM\EntityManagerInterface $manager */
@@ -81,11 +78,10 @@ class UpdateFieldCommandTest extends BaseTestCase
     public function testNotFound()
     {
         $command = new UpdateStringFieldCommand([
-            'id'           => self::UNKNOWN_ENTITY_ID,
-            'name'         => 'Team',
-            'description'  => 'New description',
-            'required'     => false,
-            'showInEmails' => true,
+            'id'          => self::UNKNOWN_ENTITY_ID,
+            'name'        => 'Team',
+            'description' => 'New description',
+            'required'    => false,
         ]);
 
         /** @var \Doctrine\ORM\EntityManagerInterface $manager */
@@ -105,11 +101,10 @@ class UpdateFieldCommandTest extends BaseTestCase
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
 
         $command = new UpdateStringFieldCommand([
-            'id'           => $field->getId(),
-            'name'         => 'Notes',
-            'description'  => 'New description',
-            'required'     => false,
-            'showInEmails' => true,
+            'id'          => $field->getId(),
+            'name'        => 'Notes',
+            'description' => 'New description',
+            'required'    => false,
         ]);
 
         /** @var \Doctrine\ORM\EntityManagerInterface $manager */

@@ -32,7 +32,6 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
         self::assertEquals('U.S. viewers', $field->getName());
         self::assertNull($field->getDescription());
         self::assertFalse($field->isRequired());
-        self::assertFalse($field->getShowInEmails());
         self::assertEquals('0.0', $minValue->getValue());
         self::assertEquals('10.0', $maxValue->getValue());
         self::assertNull($field->getParameters()->getDefaultValue());
@@ -42,7 +41,6 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
             'name'         => 'Total U.S. viewers',
             'description'  => '(millions)',
             'required'     => true,
-            'showInEmails' => true,
             'minValue'     => '0.1',
             'maxValue'     => '50.0',
             'defaultValue' => '10.0',
@@ -60,7 +58,6 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
         self::assertEquals('Total U.S. viewers', $field->getName());
         self::assertEquals('(millions)', $field->getDescription());
         self::assertTrue($field->isRequired());
-        self::assertTrue($field->getShowInEmails());
         self::assertEquals('0.1', $minValue->getValue());
         self::assertEquals('50.0', $maxValue->getValue());
         self::assertEquals('10.0', $default->getValue());
@@ -76,12 +73,11 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'U.S. viewers']);
 
         $command = new UpdateDecimalFieldCommand([
-            'id'           => $field->getId(),
-            'name'         => $field->getName(),
-            'required'     => $field->isRequired(),
-            'showInEmails' => $field->getShowInEmails(),
-            'minValue'     => '10.0',
-            'maxValue'     => '0.0',
+            'id'       => $field->getId(),
+            'name'     => $field->getName(),
+            'required' => $field->isRequired(),
+            'minValue' => '10.0',
+            'maxValue' => '0.0',
         ]);
 
         $this->command_bus->handle($command);
@@ -100,7 +96,6 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
             'id'           => $field->getId(),
             'name'         => $field->getName(),
             'required'     => $field->isRequired(),
-            'showInEmails' => $field->getShowInEmails(),
             'minValue'     => '0.00',
             'maxValue'     => '100.00',
             'defaultValue' => '101',

@@ -26,7 +26,6 @@ class CreateCheckboxFieldCommandTest extends BaseTestCase
             'state'        => $state->getId(),
             'name'         => 'Required',
             'required'     => true,
-            'showInEmails' => false,
             'defaultValue' => true,
         ]);
 

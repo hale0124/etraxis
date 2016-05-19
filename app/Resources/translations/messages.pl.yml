@@ -162,7 +162,6 @@ field.type.record: Rekord
 field.type.date: Data
 field.type.duration: Czas
 field.required: Wymagany
-field.show_in_emails: 'Pokaż w e-mailu'
 field.default_value: 'Warość domyślna'
 field.min_value: Min.wartość
 field.max_value: Max.wartość

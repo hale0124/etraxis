@@ -141,13 +141,6 @@ class Field extends Entity implements \JsonSerializable
     private $registeredPermission;
 
     /**
-     * @var int Whether to add this field in email notifications.
-     *
-     * @ORM\Column(name="show_in_emails", type="integer")
-     */
-    private $showInEmails;
-
-    /**
      * @var FieldRegex Perl-compatible regular expression options.
      *
      * @ORM\Embedded(class="FieldRegex")
@@ -441,30 +434,6 @@ class Field extends Entity implements \JsonSerializable
         $permission = max($result);
 
         return count($result) === 0 ? self::ACCESS_DENIED : $permission['permission'];
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   bool $showInEmails
-     *
-     * @return  self
-     */
-    public function setShowInEmails(bool $showInEmails)
-    {
-        $this->showInEmails = $showInEmails ? 1 : 0;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  bool
-     */
-    public function getShowInEmails()
-    {
-        return (bool) $this->showInEmails;
     }
 
     /**

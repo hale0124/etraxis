@@ -162,7 +162,6 @@ field.type.record: Kayıt
 field.type.date: Tarih
 field.type.duration: Süre
 field.required: Gerekli
-field.show_in_emails: 'E-postalarda göster'
 field.default_value: 'Varsayılan değer'
 field.min_value: Min.değer
 field.max_value: Maks.değer

@@ -26,7 +26,6 @@ class UpdateStringFieldCommandTest extends BaseTestCase
         self::assertEquals('Production code', $field->getName());
         self::assertNull($field->getDescription());
         self::assertTrue($field->isRequired());
-        self::assertFalse($field->getShowInEmails());
         self::assertEquals(7, $field->getParameters()->getParameter1());
         self::assertNull($field->getParameters()->getDefaultValue());
         self::assertNull($field->getRegex()->getCheck());
@@ -38,7 +37,6 @@ class UpdateStringFieldCommandTest extends BaseTestCase
             'name'         => 'Code',
             'description'  => '(millions)',
             'required'     => false,
-            'showInEmails' => true,
             'maxLength'    => 6,
             'defaultValue' => '?ACV??',
             'regexCheck'   => '^(\d{1})ACV(\d{2})$',
@@ -56,7 +54,6 @@ class UpdateStringFieldCommandTest extends BaseTestCase
         self::assertEquals('Code', $field->getName());
         self::assertEquals('(millions)', $field->getDescription());
         self::assertFalse($field->isRequired());
-        self::assertTrue($field->getShowInEmails());
         self::assertEquals(6, $field->getParameters()->getParameter1());
         self::assertEquals('?ACV??', $default->getValue());
         self::assertEquals('^(\d{1})ACV(\d{2})$', $field->getRegex()->getCheck());

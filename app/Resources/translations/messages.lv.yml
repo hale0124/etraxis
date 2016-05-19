@@ -162,7 +162,6 @@ field.type.record: Ieraksts
 field.type.date: Datums
 field.type.duration: Ilgums
 field.required: Obligāts
-field.show_in_emails: 'Rādīt e-pastos'
 field.default_value: 'Noklusējuma nozīme'
 field.min_value: Min.lielums
 field.max_value: Max.lielums

@@ -26,7 +26,6 @@ class CreateDateFieldCommandTest extends BaseTestCase
             'state'        => $state->getId(),
             'name'         => 'Deadline',
             'required'     => true,
-            'showInEmails' => false,
             'minValue'     => 1,
             'maxValue'     => 7,
             'defaultValue' => 2,
@@ -54,12 +53,11 @@ class CreateDateFieldCommandTest extends BaseTestCase
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
         $command = new CreateDateFieldCommand([
-            'state'        => $state->getId(),
-            'name'         => 'Deadline',
-            'required'     => true,
-            'showInEmails' => false,
-            'minValue'     => 7,
-            'maxValue'     => 1,
+            'state'    => $state->getId(),
+            'name'     => 'Deadline',
+            'required' => true,
+            'minValue' => 7,
+            'maxValue' => 1,
         ]);
 
         $this->command_bus->handle($command);
@@ -78,7 +76,6 @@ class CreateDateFieldCommandTest extends BaseTestCase
             'state'        => $state->getId(),
             'name'         => 'Deadline',
             'required'     => true,
-            'showInEmails' => false,
             'minValue'     => 1,
             'maxValue'     => 7,
             'defaultValue' => 10,

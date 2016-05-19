@@ -23,10 +23,9 @@ class CreateRecordFieldCommandTest extends BaseTestCase
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
         $command = new CreateRecordFieldCommand([
-            'state'        => $state->getId(),
-            'name'         => 'Related ID',
-            'required'     => true,
-            'showInEmails' => false,
+            'state'    => $state->getId(),
+            'name'     => 'Related ID',
+            'required' => true,
         ]);
 
         $this->command_bus->handle($command);

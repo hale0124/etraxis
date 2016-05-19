@@ -22,8 +22,6 @@
             {% if (field.type != constant('eTraxis\\Entity\\Field::TYPE_CHECKBOX')) %}
                 {{ macro.row('field.required'|trans, field.isRequired ? 'button.yes'|trans|lower : 'button.no'|trans|lower) }}
             {% endif %}
-
-            {{ macro.row('field.show_in_emails'|trans, field.showInEmails ? 'button.yes'|trans|lower : 'button.no'|trans|lower) }}
         </fieldset>
     </div>
 </div>

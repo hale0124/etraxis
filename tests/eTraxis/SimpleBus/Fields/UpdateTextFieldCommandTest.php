@@ -26,7 +26,6 @@ class UpdateTextFieldCommandTest extends BaseTestCase
         self::assertEquals('Plot', $field->getName());
         self::assertNull($field->getDescription());
         self::assertTrue($field->isRequired());
-        self::assertFalse($field->getShowInEmails());
         self::assertEquals(2000, $field->getParameters()->getParameter1());
         self::assertNull($field->getParameters()->getDefaultValue());
         self::assertNull($field->getRegex()->getCheck());
@@ -38,7 +37,6 @@ class UpdateTextFieldCommandTest extends BaseTestCase
             'name'         => 'Story',
             'description'  => 'spoiler!',
             'required'     => false,
-            'showInEmails' => true,
             'maxLength'    => 1000,
             'defaultValue' => 'TBD',
             'regexCheck'   => '^(.+)$',
@@ -56,7 +54,6 @@ class UpdateTextFieldCommandTest extends BaseTestCase
         self::assertEquals('Story', $field->getName());
         self::assertEquals('spoiler!', $field->getDescription());
         self::assertFalse($field->isRequired());
-        self::assertTrue($field->getShowInEmails());
         self::assertEquals(1000, $field->getParameters()->getParameter1());
         self::assertEquals('TBD', $default->getValue());
         self::assertEquals('^(.+)$', $field->getRegex()->getCheck());

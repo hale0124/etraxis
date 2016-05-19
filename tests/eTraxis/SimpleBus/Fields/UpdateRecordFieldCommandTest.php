@@ -25,14 +25,12 @@ class UpdateRecordFieldCommandTest extends BaseTestCase
         self::assertEquals('Delivery', $field->getName());
         self::assertNull($field->getDescription());
         self::assertFalse($field->isRequired());
-        self::assertFalse($field->getShowInEmails());
 
         $command = new UpdateRecordFieldCommand([
-            'id'           => $field->getId(),
-            'name'         => 'Delivery #',
-            'description'  => 'ID of the delivery task',
-            'required'     => true,
-            'showInEmails' => true,
+            'id'          => $field->getId(),
+            'name'        => 'Delivery #',
+            'description' => 'ID of the delivery task',
+            'required'    => true,
         ]);
 
         $this->command_bus->handle($command);
@@ -43,6 +41,5 @@ class UpdateRecordFieldCommandTest extends BaseTestCase
         self::assertEquals('Delivery #', $field->getName());
         self::assertEquals('ID of the delivery task', $field->getDescription());
         self::assertTrue($field->isRequired());
-        self::assertTrue($field->getShowInEmails());
     }
 }

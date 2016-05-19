@@ -86,12 +86,6 @@ class FieldForm extends AbstractType
                 'required' => false,
             ]);
         }
-
-        // Show in emails.
-        $builder->add('showInEmails', CheckboxType::class, [
-            'label'    => 'field.show_in_emails',
-            'required' => false,
-        ]);
     }
 
     /**

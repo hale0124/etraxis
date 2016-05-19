@@ -27,7 +27,6 @@ class CreateStringFieldCommandTest extends BaseTestCase
             'state'        => $state->getId(),
             'name'         => 'Client',
             'required'     => true,
-            'showInEmails' => false,
             'maxLength'    => 100,
             'defaultValue' => 'N/A',
             'regexCheck'   => '(\d{3})-(\d{3})-(\d{4})',

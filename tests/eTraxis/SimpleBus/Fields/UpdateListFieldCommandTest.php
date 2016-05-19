@@ -25,7 +25,6 @@ class UpdateListFieldCommandTest extends BaseTestCase
         self::assertEquals('Season', $field->getName());
         self::assertNull($field->getDescription());
         self::assertTrue($field->isRequired());
-        self::assertFalse($field->getShowInEmails());
         self::assertNull($field->getParameters()->getDefaultValue());
 
         $command = new UpdateListFieldCommand([
@@ -33,7 +32,6 @@ class UpdateListFieldCommandTest extends BaseTestCase
             'name'         => 'Season #',
             'description'  => 'Season number',
             'required'     => false,
-            'showInEmails' => true,
             'defaultValue' => 7,
         ]);
 
@@ -45,7 +43,6 @@ class UpdateListFieldCommandTest extends BaseTestCase
         self::assertEquals('Season #', $field->getName());
         self::assertEquals('Season number', $field->getDescription());
         self::assertFalse($field->isRequired());
-        self::assertTrue($field->getShowInEmails());
         self::assertEquals(7, $field->getParameters()->getDefaultValue());
     }
 
@@ -62,7 +59,6 @@ class UpdateListFieldCommandTest extends BaseTestCase
             'id'           => $field->getId(),
             'name'         => $field->getName(),
             'required'     => $field->isRequired(),
-            'showInEmails' => $field->getShowInEmails(),
             'defaultValue' => 8,
         ]);
 

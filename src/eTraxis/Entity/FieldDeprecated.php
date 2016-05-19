@@ -32,11 +32,17 @@ class FieldDeprecated
     private $addSeparator;
 
     /**
+     * @ORM\Column(name="show_in_emails", type="integer")
+     */
+    private $showInEmails;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->guestAccess  = 0;
         $this->addSeparator = 0;
+        $this->showInEmails = 0;
     }
 }

@@ -162,7 +162,6 @@ field.type.record: Post
 field.type.date: Datum
 field.type.duration: Varaktighet
 field.required: Obligatorisk
-field.show_in_emails: 'Visa i epost'
 field.default_value: Standardvärde
 field.min_value: Min.värde
 field.max_value: Max.värde

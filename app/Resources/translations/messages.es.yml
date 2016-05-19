@@ -162,7 +162,6 @@ field.type.record: Registro
 field.type.date: Fecha
 field.type.duration: Duración
 field.required: Obligatorio
-field.show_in_emails: 'Mostrar en emails'
 field.default_value: 'Valor predeterminado'
 field.min_value: 'Valor Min.'
 field.max_value: 'Valor Max.'

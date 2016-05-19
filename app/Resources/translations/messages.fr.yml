@@ -162,7 +162,6 @@ field.type.record: Enregistrement
 field.type.date: Date
 field.type.duration: Duree
 field.required: Requis
-field.show_in_emails: 'Montrer dans les mails'
 field.default_value: 'Valeur par défaut'
 field.min_value: Minimum
 field.max_value: Maximum

@@ -162,7 +162,6 @@ field.type.record: レコード
 field.type.date: 日付
 field.type.duration: 期間
 field.required: 必須
-field.show_in_emails: Eメール中に表示
 field.default_value: デフォルトの値
 field.min_value: 最小値
 field.max_value: 最大値

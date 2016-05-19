@@ -25,7 +25,6 @@ class UpdateDateFieldCommandTest extends BaseTestCase
         self::assertEquals('Original air date', $field->getName());
         self::assertNull($field->getDescription());
         self::assertTrue($field->isRequired());
-        self::assertFalse($field->getShowInEmails());
         self::assertEquals(0, $field->getParameters()->getParameter1());
         self::assertEquals(7, $field->getParameters()->getParameter2());
         self::assertNull($field->getParameters()->getDefaultValue());
@@ -35,7 +34,6 @@ class UpdateDateFieldCommandTest extends BaseTestCase
             'name'         => 'Release date',
             'description'  => 'Date of the release',
             'required'     => false,
-            'showInEmails' => true,
             'minValue'     => 1,
             'maxValue'     => 14,
             'defaultValue' => 10,
@@ -49,7 +47,6 @@ class UpdateDateFieldCommandTest extends BaseTestCase
         self::assertEquals('Release date', $field->getName());
         self::assertEquals('Date of the release', $field->getDescription());
         self::assertFalse($field->isRequired());
-        self::assertTrue($field->getShowInEmails());
         self::assertEquals(1, $field->getParameters()->getParameter1());
         self::assertEquals(14, $field->getParameters()->getParameter2());
         self::assertEquals(10, $field->getParameters()->getDefaultValue());
@@ -65,12 +62,11 @@ class UpdateDateFieldCommandTest extends BaseTestCase
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Original air date']);
 
         $command = new UpdateDateFieldCommand([
-            'id'           => $field->getId(),
-            'name'         => $field->getName(),
-            'required'     => $field->isRequired(),
-            'showInEmails' => $field->getShowInEmails(),
-            'minValue'     => 7,
-            'maxValue'     => 0,
+            'id'       => $field->getId(),
+            'name'     => $field->getName(),
+            'required' => $field->isRequired(),
+            'minValue' => 7,
+            'maxValue' => 0,
         ]);
 
         $this->command_bus->handle($command);
@@ -89,7 +85,6 @@ class UpdateDateFieldCommandTest extends BaseTestCase
             'id'           => $field->getId(),
             'name'         => $field->getName(),
             'required'     => $field->isRequired(),
-            'showInEmails' => $field->getShowInEmails(),
             'minValue'     => 0,
             'maxValue'     => 7,
             'defaultValue' => 10,

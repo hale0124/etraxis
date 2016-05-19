@@ -162,7 +162,6 @@ field.type.record: Запис
 field.type.date: дата
 field.type.duration: времетраене
 field.required: Изискван
-field.show_in_emails: 'Покажи в мейлит'
 field.default_value: 'Стойност по подразбиране'
 field.min_value: Мин.стойност
 field.max_value: Макс.стойност

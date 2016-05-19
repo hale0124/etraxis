@@ -157,7 +157,6 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     ->setRolePermission(SystemRole::AUTHOR, $info['author'])
                     ->setRolePermission(SystemRole::RESPONSIBLE, $info['responsible'])
                     ->setRolePermission(SystemRole::REGISTERED, $info['registered'])
-                    ->setShowInEmails(false)
                 ;
 
                 $field->getParameters()
@@ -336,7 +335,6 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     ->setRolePermission(SystemRole::AUTHOR, $info['author'])
                     ->setRolePermission(SystemRole::RESPONSIBLE, $info['responsible'])
                     ->setRolePermission(SystemRole::REGISTERED, $info['registered'])
-                    ->setShowInEmails(false)
                 ;
 
                 $field->getParameters()

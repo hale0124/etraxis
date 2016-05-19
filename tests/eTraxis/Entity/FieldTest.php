@@ -169,15 +169,6 @@ class FieldTest extends BaseTestCase
         }
     }
 
-    public function testShowInEmails()
-    {
-        $this->object->setShowInEmails(false);
-        self::assertFalse($this->object->getShowInEmails());
-
-        $this->object->setShowInEmails(true);
-        self::assertTrue($this->object->getShowInEmails());
-    }
-
     public function testRegex()
     {
         self::assertNotNull($this->object->getRegex());

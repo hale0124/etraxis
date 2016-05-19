@@ -24,11 +24,10 @@ class CreateFieldCommandTest extends BaseTestCase
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
         $command = new CreateRecordFieldCommand([
-            'state'        => $state->getId(),
-            'name'         => 'Ref ID',
-            'description'  => 'Reference',
-            'required'     => true,
-            'showInEmails' => false,
+            'state'       => $state->getId(),
+            'name'        => 'Ref ID',
+            'description' => 'Reference',
+            'required'    => true,
         ]);
 
         /** @var \Doctrine\ORM\EntityManagerInterface $manager */
@@ -49,7 +48,6 @@ class CreateFieldCommandTest extends BaseTestCase
         self::assertEquals('Reference', $field->getDescription());
         self::assertEquals(5, $field->getIndexNumber());
         self::assertTrue($field->isRequired());
-        self::assertFalse($field->getShowInEmails());
     }
 
     /**
@@ -62,11 +60,10 @@ class CreateFieldCommandTest extends BaseTestCase
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
 
         $command = new UpdateRecordFieldCommand([
-            'id'           => $field->getId(),
-            'name'         => 'Ref ID',
-            'description'  => 'Reference',
-            'required'     => true,
-            'showInEmails' => false,
+            'id'          => $field->getId(),
+            'name'        => 'Ref ID',
+            'description' => 'Reference',
+            'required'    => true,
         ]);
 
         /** @var \Doctrine\ORM\EntityManagerInterface $manager */
@@ -83,11 +80,10 @@ class CreateFieldCommandTest extends BaseTestCase
     public function testNotFound()
     {
         $command = new CreateRecordFieldCommand([
-            'state'        => self::UNKNOWN_ENTITY_ID,
-            'name'         => 'Ref ID',
-            'description'  => 'Reference',
-            'required'     => true,
-            'showInEmails' => false,
+            'state'       => self::UNKNOWN_ENTITY_ID,
+            'name'        => 'Ref ID',
+            'description' => 'Reference',
+            'required'    => true,
         ]);
 
         /** @var \Doctrine\ORM\EntityManagerInterface $manager */
@@ -107,11 +103,10 @@ class CreateFieldCommandTest extends BaseTestCase
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
         $command = new CreateRecordFieldCommand([
-            'state'        => $state->getId(),
-            'name'         => 'Notes',
-            'description'  => 'Reference',
-            'required'     => true,
-            'showInEmails' => false,
+            'state'       => $state->getId(),
+            'name'        => 'Notes',
+            'description' => 'Reference',
+            'required'    => true,
         ]);
 
         /** @var \Doctrine\ORM\EntityManagerInterface $manager */
