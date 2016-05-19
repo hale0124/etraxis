@@ -91,11 +91,15 @@ class SecurityController extends Controller
                 'ip'       => $request->getClientIp(),
             ]);
 
-            $this->getCommandBus()->handle($command);
+            try {
+                $this->getCommandBus()->handle($command);
+                $this->setNotice($this->container->get('translator')->trans('security.forgot_password.email_sent'));
 
-            $this->setNotice($this->container->get('translator')->trans('security.forgot_password.email_sent'));
-
-            return $this->redirect($this->generateUrl('homepage'));
+                return $this->redirect($this->generateUrl('homepage'));
+            }
+            catch (\Exception $e) {
+                $this->setError($e->getMessage());
+            }
         }
 
         return $this->render('web/security/forgot.html.twig', [
