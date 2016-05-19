@@ -33,7 +33,7 @@ class ForgotPasswordCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Ip()
+     * @Assert\Ip(version="all")
      */
     public $ip;
 }
