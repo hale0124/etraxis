@@ -34,26 +34,26 @@ class CreateUserCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max = "112")
+     * @Assert\Length(max="112")
      * @Assert\Regex(pattern="/^[a-z0-9_\.\-]+$/i", message="user.invalid.username");
      */
     public $username;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max = "64")
+     * @Assert\Length(max="64")
      */
     public $fullname;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max = "50")
+     * @Assert\Length(max="50")
      * @Assert\Email()
      */
     public $email;
 
     /**
-     * @Assert\Length(max = "100")
+     * @Assert\Length(max="100")
      */
     public $description;
 
@@ -64,19 +64,19 @@ class CreateUserCommand
 
     /**
      * @Assert\NotNull()
-     * @Assert\Choice(callback = {"eTraxis\Dictionary\Locale", "keys"})
+     * @Assert\Choice(callback={"eTraxis\Dictionary\Locale", "keys"})
      */
     public $locale;
 
     /**
      * @Assert\NotNull()
-     * @Assert\Choice(callback = {"eTraxis\Dictionary\Theme", "keys"})
+     * @Assert\Choice(callback={"eTraxis\Dictionary\Theme", "keys"})
      */
     public $theme;
 
     /**
      * @Assert\NotNull()
-     * @Assert\Choice(callback = {"eTraxis\Dictionary\Timezone", "values"})
+     * @Assert\Choice(callback={"eTraxis\Dictionary\Timezone", "values"})
      */
     public $timezone;
 

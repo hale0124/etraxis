@@ -38,8 +38,8 @@ class SetGroupStateTransitionsCommand
     public $group;
 
     /**
-     * @Assert\Type(type = "array")
-     * @Assert\Count(min = "0", max = "100")
+     * @Assert\Type(type="array")
+     * @Assert\Count(min="0", max="100")
      * @Assert\All({
      *     @Assert\NotBlank(),
      *     @Assert\Regex("/^\d+$/")

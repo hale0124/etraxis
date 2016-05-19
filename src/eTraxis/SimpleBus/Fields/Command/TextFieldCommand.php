@@ -26,28 +26,28 @@ class TextFieldCommand extends FieldCommand
 {
     /**
      * @Assert\NotBlank()
-     * @Assert\Range(min = "1", max = "4000")
+     * @Assert\Range(min="1", max="4000")
      * @Assert\Regex("/^(\-|\+)?\d+$/")
      */
     public $maxLength;
 
     /**
-     * @Assert\Length(max = "4000")
+     * @Assert\Length(max="4000")
      */
     public $defaultValue;
 
     /**
-     * @Assert\Length(max = "500")
+     * @Assert\Length(max="500")
      */
     public $regexCheck;
 
     /**
-     * @Assert\Length(max = "500")
+     * @Assert\Length(max="500")
      */
     public $regexSearch;
 
     /**
-     * @Assert\Length(max = "500")
+     * @Assert\Length(max="500")
      */
     public $regexReplace;
 }

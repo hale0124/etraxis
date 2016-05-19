@@ -24,7 +24,7 @@ class UpdateListFieldCommand extends Command\ListFieldCommand
 
     /**
      * @Assert\Regex("/^(\-|\+)?\d+$/")
-     * @Assert\GreaterThan(value = "0")
+     * @Assert\GreaterThan(value="0")
      */
     public $defaultValue;
 }

@@ -39,7 +39,7 @@ class SetGroupFieldPermissionCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Choice(callback = {"eTraxis\Dictionary\FieldPermission", "keys"})
+     * @Assert\Choice(callback={"eTraxis\Dictionary\FieldPermission", "keys"})
      */
     public $permission;
 }

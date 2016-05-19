@@ -33,13 +33,13 @@ class UpdateListItemCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Range(min = "1")
+     * @Assert\Range(min="1")
      */
     public $key;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max = "50")
+     * @Assert\Length(max="50")
      */
     public $value;
 }

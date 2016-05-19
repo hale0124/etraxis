@@ -24,20 +24,20 @@ class DateFieldCommand extends FieldCommand
 {
     /**
      * @Assert\NotBlank()
-     * @Assert\Range(min = "-2147483648", max = "2147483647")
+     * @Assert\Range(min="-2147483648", max="2147483647")
      * @Assert\Regex("/^(\-|\+)?\d+$/")
      */
     public $minValue;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Range(min = "-2147483648", max = "2147483647")
+     * @Assert\Range(min="-2147483648", max="2147483647")
      * @Assert\Regex("/^(\-|\+)?\d+$/")
      */
     public $maxValue;
 
     /**
-     * @Assert\Range(min = "-2147483648", max = "2147483647")
+     * @Assert\Range(min="-2147483648", max="2147483647")
      * @Assert\Regex("/^(\-|\+)?\d+$/")
      */
     public $defaultValue;

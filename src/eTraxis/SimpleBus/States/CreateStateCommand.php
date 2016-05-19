@@ -36,25 +36,25 @@ class CreateStateCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max = "50")
+     * @Assert\Length(max="50")
      */
     public $name;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max = "50")
+     * @Assert\Length(max="50")
      */
     public $abbreviation;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Choice(callback = {"eTraxis\Dictionary\StateType", "keys"})
+     * @Assert\Choice(callback={"eTraxis\Dictionary\StateType", "keys"})
      */
     public $type;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Choice(callback = {"eTraxis\Dictionary\StateResponsible", "keys"})
+     * @Assert\Choice(callback={"eTraxis\Dictionary\StateResponsible", "keys"})
      */
     public $responsible;
 

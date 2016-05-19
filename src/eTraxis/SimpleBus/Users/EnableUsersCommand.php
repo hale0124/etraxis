@@ -25,8 +25,8 @@ class EnableUsersCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Type(type = "array")
-     * @Assert\Count(min = "1", max = "100")
+     * @Assert\Type(type="array")
+     * @Assert\Count(min="1", max="100")
      * @Assert\All({
      *     @Assert\NotBlank(),
      *     @Assert\Regex("/^\d+$/")

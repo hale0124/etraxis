@@ -33,13 +33,13 @@ class SetRoleFieldPermissionCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Choice(callback = {"eTraxis\Dictionary\SystemRole", "keys"})
+     * @Assert\Choice(callback={"eTraxis\Dictionary\SystemRole", "keys"})
      */
     public $role;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Choice(callback = {"eTraxis\Dictionary\FieldPermission", "keys"})
+     * @Assert\Choice(callback={"eTraxis\Dictionary\FieldPermission", "keys"})
      */
     public $permission;
 }

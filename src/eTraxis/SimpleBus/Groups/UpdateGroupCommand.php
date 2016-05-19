@@ -33,12 +33,12 @@ class UpdateGroupCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max = "25")
+     * @Assert\Length(max="25")
      */
     public $name;
 
     /**
-     * @Assert\Length(max = "100")
+     * @Assert\Length(max="100")
      */
     public $description;
 }

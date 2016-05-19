@@ -39,7 +39,7 @@ class SetGroupTemplatePermissionsCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Type(type = "int")
+     * @Assert\Type(type="int")
      */
     public $permissions;
 }

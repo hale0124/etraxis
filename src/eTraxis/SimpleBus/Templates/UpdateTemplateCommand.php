@@ -36,28 +36,28 @@ class UpdateTemplateCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max = "50")
+     * @Assert\Length(max="50")
      */
     public $name;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max = "3")
+     * @Assert\Length(max="3")
      */
     public $prefix;
 
     /**
-     * @Assert\Length(max = "100")
+     * @Assert\Length(max="100")
      */
     public $description;
 
     /**
-     * @Assert\Range(min = "1", max = "100")
+     * @Assert\Range(min="1", max="100")
      */
     public $criticalAge;
 
     /**
-     * @Assert\Range(min = "1", max = "100")
+     * @Assert\Range(min="1", max="100")
      */
     public $frozenTime;
 }

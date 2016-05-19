@@ -24,20 +24,20 @@ class NumberFieldCommand extends FieldCommand
 {
     /**
      * @Assert\NotBlank()
-     * @Assert\Range(min = "-1000000000", max = "1000000000")
+     * @Assert\Range(min="-1000000000", max="1000000000")
      * @Assert\Regex("/^(\-|\+)?\d+$/")
      */
     public $minValue;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Range(min = "-1000000000", max = "1000000000")
+     * @Assert\Range(min="-1000000000", max="1000000000")
      * @Assert\Regex("/^(\-|\+)?\d+$/")
      */
     public $maxValue;
 
     /**
-     * @Assert\Range(min = "-1000000000", max = "1000000000")
+     * @Assert\Range(min="-1000000000", max="1000000000")
      * @Assert\Regex("/^(\-|\+)?\d+$/")
      */
     public $defaultValue;

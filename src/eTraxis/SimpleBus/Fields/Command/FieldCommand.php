@@ -28,12 +28,12 @@ class FieldCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max = "50")
+     * @Assert\Length(max="50")
      */
     public $name;
 
     /**
-     * @Assert\Length(max = "1000")
+     * @Assert\Length(max="1000")
      */
     public $description;
 

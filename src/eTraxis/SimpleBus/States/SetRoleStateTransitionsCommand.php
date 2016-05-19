@@ -33,13 +33,13 @@ class SetRoleStateTransitionsCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Choice(callback = {"eTraxis\Dictionary\SystemRole", "keys"})
+     * @Assert\Choice(callback={"eTraxis\Dictionary\SystemRole", "keys"})
      */
     public $role;
 
     /**
-     * @Assert\Type(type = "array")
-     * @Assert\Count(min = "0", max = "100")
+     * @Assert\Type(type="array")
+     * @Assert\Count(min="0", max="100")
      * @Assert\All({
      *     @Assert\NotBlank(),
      *     @Assert\Regex("/^\d+$/")

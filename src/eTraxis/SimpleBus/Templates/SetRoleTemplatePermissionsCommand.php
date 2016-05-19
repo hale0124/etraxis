@@ -33,13 +33,13 @@ class SetRoleTemplatePermissionsCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Choice(callback = {"eTraxis\Dictionary\SystemRole", "keys"})
+     * @Assert\Choice(callback={"eTraxis\Dictionary\SystemRole", "keys"})
      */
     public $role;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Type(type = "int")
+     * @Assert\Type(type="int")
      */
     public $permissions;
 }

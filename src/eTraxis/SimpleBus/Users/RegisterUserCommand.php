@@ -27,20 +27,20 @@ class RegisterUserCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max = "112")
+     * @Assert\Length(max="112")
      * @Assert\Regex(pattern="/^[a-z0-9_\.\-]+$/i", message="user.invalid.username");
      */
     public $username;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max = "64")
+     * @Assert\Length(max="64")
      */
     public $fullname;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max = "50")
+     * @Assert\Length(max="50")
      * @Assert\Email()
      */
     public $email;

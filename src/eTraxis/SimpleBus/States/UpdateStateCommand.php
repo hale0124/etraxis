@@ -35,19 +35,19 @@ class UpdateStateCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max = "50")
+     * @Assert\Length(max="50")
      */
     public $name;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max = "50")
+     * @Assert\Length(max="50")
      */
     public $abbreviation;
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Choice(callback = {"eTraxis\Dictionary\StateResponsible", "keys"})
+     * @Assert\Choice(callback={"eTraxis\Dictionary\StateResponsible", "keys"})
      */
     public $responsible;
 

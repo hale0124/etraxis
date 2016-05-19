@@ -34,19 +34,19 @@ class SaveAppearanceCommand
 
     /**
      * @Assert\NotNull()
-     * @Assert\Choice(callback = {"eTraxis\Dictionary\Locale", "keys"})
+     * @Assert\Choice(callback={"eTraxis\Dictionary\Locale", "keys"})
      */
     public $locale;
 
     /**
      * @Assert\NotNull()
-     * @Assert\Choice(callback = {"eTraxis\Dictionary\Theme", "keys"})
+     * @Assert\Choice(callback={"eTraxis\Dictionary\Theme", "keys"})
      */
     public $theme;
 
     /**
      * @Assert\NotNull()
-     * @Assert\Choice(callback = {"eTraxis\Dictionary\Timezone", "values"})
+     * @Assert\Choice(callback={"eTraxis\Dictionary\Timezone", "values"})
      */
     public $timezone;
 }
