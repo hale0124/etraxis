@@ -28,5 +28,8 @@ security:
                 domain:   ~
 
     access_control:
-        - { path: ^/admin/,    roles: ROLE_ADMIN }
-        - { path: ^/settings/, roles: ROLE_USER  }
+        - { path: ^/admin/, roles: ROLE_ADMIN }
+        - { path: ^/login,  roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/forgot, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/reset/, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/,       roles: ROLE_USER }
