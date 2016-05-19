@@ -110,7 +110,6 @@ template.name: Sjabloonsnaam
 template.prefix: Voorvoegsel
 template.critical_age: 'Kritische leeftijd'
 template.frozen_time: 'Bevroren tijd'
-template.guest_access: 'Gast toegang'
 template.status: Status
 template.active: Actief
 template.locked: Geblokkeerd
@@ -163,7 +162,6 @@ field.type.record: Record
 field.type.date: Datum
 field.type.duration: Tijdsduur
 field.required: Vereist
-field.guest_access: 'Gast toegang'
 field.show_in_emails: UL
 field.default_value: Standaardwaarde
 field.min_value: Min.waarde

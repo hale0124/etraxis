@@ -25,7 +25,6 @@ class UpdateDateFieldCommandTest extends BaseTestCase
         self::assertEquals('Original air date', $field->getName());
         self::assertNull($field->getDescription());
         self::assertTrue($field->isRequired());
-        self::assertTrue($field->hasGuestAccess());
         self::assertFalse($field->getShowInEmails());
         self::assertEquals(0, $field->getParameters()->getParameter1());
         self::assertEquals(7, $field->getParameters()->getParameter2());
@@ -36,7 +35,6 @@ class UpdateDateFieldCommandTest extends BaseTestCase
             'name'         => 'Release date',
             'description'  => 'Date of the release',
             'required'     => false,
-            'guestAccess'  => false,
             'showInEmails' => true,
             'minValue'     => 1,
             'maxValue'     => 14,
@@ -51,7 +49,6 @@ class UpdateDateFieldCommandTest extends BaseTestCase
         self::assertEquals('Release date', $field->getName());
         self::assertEquals('Date of the release', $field->getDescription());
         self::assertFalse($field->isRequired());
-        self::assertFalse($field->hasGuestAccess());
         self::assertTrue($field->getShowInEmails());
         self::assertEquals(1, $field->getParameters()->getParameter1());
         self::assertEquals(14, $field->getParameters()->getParameter2());
@@ -71,7 +68,6 @@ class UpdateDateFieldCommandTest extends BaseTestCase
             'id'           => $field->getId(),
             'name'         => $field->getName(),
             'required'     => $field->isRequired(),
-            'guestAccess'  => $field->hasGuestAccess(),
             'showInEmails' => $field->getShowInEmails(),
             'minValue'     => 7,
             'maxValue'     => 0,
@@ -93,7 +89,6 @@ class UpdateDateFieldCommandTest extends BaseTestCase
             'id'           => $field->getId(),
             'name'         => $field->getName(),
             'required'     => $field->isRequired(),
-            'guestAccess'  => $field->hasGuestAccess(),
             'showInEmails' => $field->getShowInEmails(),
             'minValue'     => 0,
             'maxValue'     => 7,

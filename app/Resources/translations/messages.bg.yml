@@ -110,7 +110,6 @@ template.name: 'Име на темплейт'
 template.prefix: Представка
 template.critical_age: 'Критическа възраст'
 template.frozen_time: 'Замръзено време'
-template.guest_access: 'Достъп за гости'
 template.status: Статус
 template.active: Активен
 template.locked: Заключен
@@ -163,7 +162,6 @@ field.type.record: Запис
 field.type.date: дата
 field.type.duration: времетраене
 field.required: Изискван
-field.guest_access: 'Достъп за гости'
 field.show_in_emails: 'Покажи в мейлит'
 field.default_value: 'Стойност по подразбиране'
 field.min_value: Мин.стойност

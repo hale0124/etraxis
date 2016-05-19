@@ -67,7 +67,6 @@ class CreateTemplateCommandHandler
             ->setFrozenTime($command->frozenTime)
             ->setDescription($command->description)
             ->setLocked(true)
-            ->setGuestAccess($command->guestAccess)
             ->setRolePermissions(SystemRole::AUTHOR, 0)
             ->setRolePermissions(SystemRole::RESPONSIBLE, 0)
             ->setRolePermissions(SystemRole::REGISTERED, 0)

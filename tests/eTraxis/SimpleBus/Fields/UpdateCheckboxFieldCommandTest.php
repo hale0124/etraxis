@@ -25,7 +25,6 @@ class UpdateCheckboxFieldCommandTest extends BaseTestCase
         self::assertEquals('Multipart', $field->getName());
         self::assertNull($field->getDescription());
         self::assertTrue($field->isRequired());
-        self::assertFalse($field->hasGuestAccess());
         self::assertFalse($field->getShowInEmails());
         self::assertNull($field->getParameters()->getDefaultValue());
 
@@ -34,7 +33,6 @@ class UpdateCheckboxFieldCommandTest extends BaseTestCase
             'name'         => 'Is multipart',
             'description'  => 'Whether is multipart',
             'required'     => false,
-            'guestAccess'  => true,
             'showInEmails' => true,
             'defaultValue' => true,
         ]);
@@ -47,7 +45,6 @@ class UpdateCheckboxFieldCommandTest extends BaseTestCase
         self::assertEquals('Is multipart', $field->getName());
         self::assertEquals('Whether is multipart', $field->getDescription());
         self::assertFalse($field->isRequired());
-        self::assertTrue($field->hasGuestAccess());
         self::assertTrue($field->getShowInEmails());
         self::assertTrue($field->asCheckbox()->getDefaultValue());
     }

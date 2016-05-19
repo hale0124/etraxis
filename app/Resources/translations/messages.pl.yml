@@ -110,7 +110,6 @@ template.name: 'Nazwa szablonu'
 template.prefix: Prefix
 template.critical_age: 'Czas krytyczny'
 template.frozen_time: 'Czas zamrożenia'
-template.guest_access: 'Dostęp anonimowy'
 template.status: Status
 template.active: Aktywny
 template.locked: Zablokowany
@@ -163,7 +162,6 @@ field.type.record: Rekord
 field.type.date: Data
 field.type.duration: Czas
 field.required: Wymagany
-field.guest_access: 'Dostęp anonimowy'
 field.show_in_emails: 'Pokaż w e-mailu'
 field.default_value: 'Warość domyślna'
 field.min_value: Min.wartość

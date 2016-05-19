@@ -26,7 +26,6 @@ class CreateListFieldCommandTest extends BaseTestCase
             'state'        => $state->getId(),
             'name'         => 'Priority',
             'required'     => true,
-            'guestAccess'  => false,
             'showInEmails' => false,
         ]);
 

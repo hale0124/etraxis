@@ -110,7 +110,6 @@ template.name: 'Şablon adı'
 template.prefix: 'Ön ek'
 template.critical_age: 'Kritik dönem'
 template.frozen_time: 'Dondurulmuş zaman'
-template.guest_access: 'Konuk erişimi'
 template.status: Durum
 template.active: Aktif
 template.locked: Kilitli
@@ -163,7 +162,6 @@ field.type.record: Kayıt
 field.type.date: Tarih
 field.type.duration: Süre
 field.required: Gerekli
-field.guest_access: 'Konuk erişimi'
 field.show_in_emails: 'E-postalarda göster'
 field.default_value: 'Varsayılan değer'
 field.min_value: Min.değer

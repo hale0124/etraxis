@@ -27,7 +27,6 @@ class CreateStringFieldCommandTest extends BaseTestCase
             'state'        => $state->getId(),
             'name'         => 'Client',
             'required'     => true,
-            'guestAccess'  => false,
             'showInEmails' => false,
             'maxLength'    => 100,
             'defaultValue' => 'N/A',

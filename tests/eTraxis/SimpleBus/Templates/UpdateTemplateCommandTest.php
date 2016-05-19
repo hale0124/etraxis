@@ -28,7 +28,6 @@ class UpdateTemplateCommandTest extends BaseTestCase
         self::assertEquals('Delivery task', $template->getDescription());
         self::assertNull($template->getCriticalAge());
         self::assertNull($template->getFrozenTime());
-        self::assertFalse($template->hasGuestAccess());
 
         $command = new UpdateTemplateCommand([
             'id'          => $template->getId(),
@@ -37,7 +36,6 @@ class UpdateTemplateCommandTest extends BaseTestCase
             'description' => 'Nimbus technical maintenance',
             'criticalAge' => 100,
             'frozenTime'  => 100,
-            'guestAccess' => true,
         ]);
 
         $this->command_bus->handle($command);
@@ -53,7 +51,6 @@ class UpdateTemplateCommandTest extends BaseTestCase
         self::assertEquals('Nimbus technical maintenance', $template->getDescription());
         self::assertEquals(100, $template->getCriticalAge());
         self::assertEquals(100, $template->getFrozenTime());
-        self::assertTrue($template->hasGuestAccess());
     }
 
     /**
@@ -67,7 +64,6 @@ class UpdateTemplateCommandTest extends BaseTestCase
             'name'        => 'Maintenance',
             'prefix'      => 'M',
             'description' => 'Nimbus technical maintenance',
-            'guestAccess' => true,
         ]);
 
         $this->command_bus->handle($command);
@@ -89,7 +85,6 @@ class UpdateTemplateCommandTest extends BaseTestCase
             ->setName('Maintenance')
             ->setPrefix('M')
             ->setLocked(true)
-            ->setGuestAccess(true)
             ->setRolePermissions(SystemRole::AUTHOR, 0)
             ->setRolePermissions(SystemRole::RESPONSIBLE, 0)
             ->setRolePermissions(SystemRole::REGISTERED, 0)
@@ -108,7 +103,6 @@ class UpdateTemplateCommandTest extends BaseTestCase
             'description' => $template->getDescription(),
             'criticalAge' => $template->getCriticalAge(),
             'frozenTime'  => $template->getFrozenTime(),
-            'guestAccess' => $template->hasGuestAccess(),
         ]);
 
         $this->command_bus->handle($command);
@@ -130,7 +124,6 @@ class UpdateTemplateCommandTest extends BaseTestCase
             ->setName('Maintenance')
             ->setPrefix('M')
             ->setLocked(true)
-            ->setGuestAccess(true)
             ->setRolePermissions(SystemRole::AUTHOR, 0)
             ->setRolePermissions(SystemRole::RESPONSIBLE, 0)
             ->setRolePermissions(SystemRole::REGISTERED, 0)
@@ -149,7 +142,6 @@ class UpdateTemplateCommandTest extends BaseTestCase
             'description' => $template->getDescription(),
             'criticalAge' => $template->getCriticalAge(),
             'frozenTime'  => $template->getFrozenTime(),
-            'guestAccess' => $template->hasGuestAccess(),
         ]);
 
         $this->command_bus->handle($command);

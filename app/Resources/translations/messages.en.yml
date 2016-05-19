@@ -109,7 +109,6 @@ template.name: 'Template name'
 template.prefix: Prefix
 template.critical_age: 'Critical age'
 template.frozen_time: 'Frozen time'
-template.guest_access: 'Guest access'
 template.status: Status
 template.active: Active
 template.locked: Locked
@@ -162,7 +161,6 @@ field.type.record: Record
 field.type.date: Date
 field.type.duration: Duration
 field.required: 'Required field'
-field.guest_access: 'Guest access'
 field.show_in_emails: 'Show in emails'
 field.default_value: 'Default value'
 field.min_value: Min.value

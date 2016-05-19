@@ -121,13 +121,6 @@ class Template extends Entity implements \JsonSerializable
     private $isLocked;
 
     /**
-     * @var int Whether a record, created using this template, is accessible for non-authenticated user.
-     *
-     * @ORM\Column(name="guest_access", type="integer")
-     */
-    private $hasGuestAccess;
-
-    /**
      * @var int Author permissions.
      *
      * @ORM\Column(name="author_perm", type="integer")
@@ -165,12 +158,21 @@ class Template extends Entity implements \JsonSerializable
     private $fields;
 
     /**
+     * @var TemplateDeprecated Deprecated features.
+     *
+     * @ORM\Embedded(class="TemplateDeprecated", columnPrefix=false)
+     */
+    private $deprecated;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->states = new ArrayCollection();
         $this->fields = new ArrayCollection();
+
+        $this->deprecated = new TemplateDeprecated();
     }
 
     /**
@@ -349,30 +351,6 @@ class Template extends Entity implements \JsonSerializable
     public function isLocked()
     {
         return (bool) $this->isLocked;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   bool $hasGuestAccess
-     *
-     * @return  self
-     */
-    public function setGuestAccess(bool $hasGuestAccess)
-    {
-        $this->hasGuestAccess = $hasGuestAccess ? 1 : 0;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  bool
-     */
-    public function hasGuestAccess()
-    {
-        return (bool) $this->hasGuestAccess;
     }
 
     /**

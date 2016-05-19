@@ -23,7 +23,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @property    string $description Description.
  * @property    int    $criticalAge Critical age.
  * @property    int    $frozenTime  Frozen time.
- * @property    bool   $guestAccess Whether to grant view access to anonymous.
  */
 class CreateTemplateCommand
 {
@@ -61,9 +60,4 @@ class CreateTemplateCommand
      * @Assert\Range(min = "1", max = "100")
      */
     public $frozenTime;
-
-    /**
-     * @Assert\NotNull()
-     */
-    public $guestAccess;
 }

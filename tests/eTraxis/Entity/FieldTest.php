@@ -119,15 +119,6 @@ class FieldTest extends BaseTestCase
         self::assertTrue($this->object->isRequired());
     }
 
-    public function testHasGuestAccess()
-    {
-        $this->object->setGuestAccess(false);
-        self::assertFalse($this->object->hasGuestAccess());
-
-        $this->object->setGuestAccess(true);
-        self::assertTrue($this->object->hasGuestAccess());
-    }
-
     public function testAuthorPermission()
     {
         $expected = Field::ACCESS_READ_ONLY;

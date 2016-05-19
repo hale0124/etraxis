@@ -21,7 +21,6 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @property    string $name         Field name.
  * @property    string $description  Description.
  * @property    bool   $required     Whether the field is required.
- * @property    bool   $guestAccess  Whether to grant view access to anonymous.
  * @property    bool   $showInEmails Whether to show the field in email notifications.
  */
 class FieldCommand
@@ -43,11 +42,6 @@ class FieldCommand
      * @Assert\NotNull()
      */
     public $required;
-
-    /**
-     * @Assert\NotNull()
-     */
-    public $guestAccess;
 
     /**
      * @Assert\NotNull()

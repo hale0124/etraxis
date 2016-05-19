@@ -110,7 +110,6 @@ template.name: 'Nome do template'
 template.prefix: Prefixo
 template.critical_age: 'Idade crítica'
 template.frozen_time: 'Tempo de congelamento'
-template.guest_access: 'Acesso de convidado'
 template.status: Status
 template.active: Ativo
 template.locked: Travado
@@ -163,7 +162,6 @@ field.type.record: Registro
 field.type.date: Data
 field.type.duration: Duração
 field.required: Obrigatório
-field.guest_access: 'Acesso de convidado'
 field.show_in_emails: 'Visualizar em emails'
 field.default_value: 'Valor padrão'
 field.min_value: Valor.mín

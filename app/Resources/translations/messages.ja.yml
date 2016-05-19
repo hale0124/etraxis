@@ -110,7 +110,6 @@ template.name: テンプレート名
 template.prefix: 接頭辞
 template.critical_age: 必須対応日数
 template.frozen_time: クローズ後編集凍結日数
-template.guest_access: ゲストとしてアクセス
 template.status: 状態
 template.active: アクティブ
 template.locked: ロック済み
@@ -163,7 +162,6 @@ field.type.record: レコード
 field.type.date: 日付
 field.type.duration: 期間
 field.required: 必須
-field.guest_access: ゲストとしてアクセス
 field.show_in_emails: Eメール中に表示
 field.default_value: デフォルトの値
 field.min_value: 最小値

@@ -110,7 +110,6 @@ template.name: 'Название шаблона'
 template.prefix: Префикс
 template.critical_age: 'Критический возраст'
 template.frozen_time: 'Время "заморозки"'
-template.guest_access: 'Гостевой доступ'
 template.status: Состояние
 template.active: Активный
 template.locked: Заблокирован
@@ -163,7 +162,6 @@ field.type.record: Запись
 field.type.date: Дата
 field.type.duration: Продолжительность
 field.required: 'Обязательное поле'
-field.guest_access: 'Гостевой доступ'
 field.show_in_emails: 'Показывать в письмах'
 field.default_value: 'Значение по умолчанию'
 field.min_value: Мин.значение

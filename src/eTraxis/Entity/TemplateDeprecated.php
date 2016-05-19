@@ -14,12 +14,12 @@ namespace eTraxis\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Field's deprecated features.
+ * Template's deprecated features.
  *
  * @deprecated 4.1.0
  * @ORM\Embeddable
  */
-class FieldDeprecated
+class TemplateDeprecated
 {
     /**
      * @ORM\Column(name="guest_access", type="integer")
@@ -27,16 +27,10 @@ class FieldDeprecated
     private $guestAccess;
 
     /**
-     * @ORM\Column(name="add_separator", type="integer")
-     */
-    private $addSeparator;
-
-    /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->guestAccess  = 0;
-        $this->addSeparator = 0;
+        $this->guestAccess = 0;
     }
 }

@@ -48,7 +48,6 @@ class CreateFieldCommandHandler extends FieldCommandHandler
             ->setName($command->name)
             ->setDescription($command->description)
             ->setRequired($command->required)
-            ->setGuestAccess($command->guestAccess)
             ->setShowInEmails($command->showInEmails)
             ->setRolePermission(SystemRole::AUTHOR, Field::ACCESS_DENIED)
             ->setRolePermission(SystemRole::RESPONSIBLE, Field::ACCESS_DENIED)

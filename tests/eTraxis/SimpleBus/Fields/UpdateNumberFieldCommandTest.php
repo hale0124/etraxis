@@ -25,7 +25,6 @@ class UpdateNumberFieldCommandTest extends BaseTestCase
         self::assertEquals('Episode', $field->getName());
         self::assertNull($field->getDescription());
         self::assertTrue($field->isRequired());
-        self::assertTrue($field->hasGuestAccess());
         self::assertFalse($field->getShowInEmails());
         self::assertEquals(1, $field->getParameters()->getParameter1());
         self::assertEquals(100, $field->getParameters()->getParameter2());
@@ -36,7 +35,6 @@ class UpdateNumberFieldCommandTest extends BaseTestCase
             'name'         => 'Episode #',
             'description'  => 'ID of the episode',
             'required'     => false,
-            'guestAccess'  => false,
             'showInEmails' => true,
             'minValue'     => 0,
             'maxValue'     => 50,
@@ -51,7 +49,6 @@ class UpdateNumberFieldCommandTest extends BaseTestCase
         self::assertEquals('Episode #', $field->getName());
         self::assertEquals('ID of the episode', $field->getDescription());
         self::assertFalse($field->isRequired());
-        self::assertFalse($field->hasGuestAccess());
         self::assertTrue($field->getShowInEmails());
         self::assertEquals(0, $field->getParameters()->getParameter1());
         self::assertEquals(50, $field->getParameters()->getParameter2());
@@ -71,7 +68,6 @@ class UpdateNumberFieldCommandTest extends BaseTestCase
             'id'           => $field->getId(),
             'name'         => $field->getName(),
             'required'     => $field->isRequired(),
-            'guestAccess'  => $field->hasGuestAccess(),
             'showInEmails' => $field->getShowInEmails(),
             'minValue'     => 100,
             'maxValue'     => 1,
@@ -93,7 +89,6 @@ class UpdateNumberFieldCommandTest extends BaseTestCase
             'id'           => $field->getId(),
             'name'         => $field->getName(),
             'required'     => $field->isRequired(),
-            'guestAccess'  => $field->hasGuestAccess(),
             'showInEmails' => $field->getShowInEmails(),
             'minValue'     => 1,
             'maxValue'     => 100,

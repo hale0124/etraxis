@@ -34,6 +34,5 @@ class TemplateFormTest extends BaseTestCase
         self::assertEquals($children['criticalAge']->vars['data'], $template->getCriticalAge());
         self::assertEquals($children['frozenTime']->vars['data'], $template->getFrozenTime());
         self::assertEquals($children['description']->vars['data'], $template->getDescription());
-        self::assertEquals($children['guestAccess']->vars['data'], $template->hasGuestAccess());
     }
 }

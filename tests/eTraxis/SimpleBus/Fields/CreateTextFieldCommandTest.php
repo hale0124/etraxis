@@ -27,7 +27,6 @@ class CreateTextFieldCommandTest extends BaseTestCase
             'state'        => $state->getId(),
             'name'         => 'Comment',
             'required'     => true,
-            'guestAccess'  => false,
             'showInEmails' => false,
             'maxLength'    => 1000,
             'defaultValue' => 'N/A',

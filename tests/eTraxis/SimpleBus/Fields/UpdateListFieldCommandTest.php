@@ -25,7 +25,6 @@ class UpdateListFieldCommandTest extends BaseTestCase
         self::assertEquals('Season', $field->getName());
         self::assertNull($field->getDescription());
         self::assertTrue($field->isRequired());
-        self::assertTrue($field->hasGuestAccess());
         self::assertFalse($field->getShowInEmails());
         self::assertNull($field->getParameters()->getDefaultValue());
 
@@ -34,7 +33,6 @@ class UpdateListFieldCommandTest extends BaseTestCase
             'name'         => 'Season #',
             'description'  => 'Season number',
             'required'     => false,
-            'guestAccess'  => false,
             'showInEmails' => true,
             'defaultValue' => 7,
         ]);
@@ -47,7 +45,6 @@ class UpdateListFieldCommandTest extends BaseTestCase
         self::assertEquals('Season #', $field->getName());
         self::assertEquals('Season number', $field->getDescription());
         self::assertFalse($field->isRequired());
-        self::assertFalse($field->hasGuestAccess());
         self::assertTrue($field->getShowInEmails());
         self::assertEquals(7, $field->getParameters()->getDefaultValue());
     }
@@ -65,7 +62,6 @@ class UpdateListFieldCommandTest extends BaseTestCase
             'id'           => $field->getId(),
             'name'         => $field->getName(),
             'required'     => $field->isRequired(),
-            'guestAccess'  => $field->hasGuestAccess(),
             'showInEmails' => $field->getShowInEmails(),
             'defaultValue' => 8,
         ]);

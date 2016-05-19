@@ -30,7 +30,6 @@ class DeleteTemplateCommandTest extends BaseTestCase
             ->setName('Bug report')
             ->setPrefix('bug')
             ->setLocked(true)
-            ->setGuestAccess(false)
             ->setRolePermissions(SystemRole::AUTHOR, 0)
             ->setRolePermissions(SystemRole::RESPONSIBLE, 0)
             ->setRolePermissions(SystemRole::REGISTERED, 0)

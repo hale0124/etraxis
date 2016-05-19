@@ -32,7 +32,6 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
         self::assertEquals('U.S. viewers', $field->getName());
         self::assertNull($field->getDescription());
         self::assertFalse($field->isRequired());
-        self::assertFalse($field->hasGuestAccess());
         self::assertFalse($field->getShowInEmails());
         self::assertEquals('0.0', $minValue->getValue());
         self::assertEquals('10.0', $maxValue->getValue());
@@ -43,7 +42,6 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
             'name'         => 'Total U.S. viewers',
             'description'  => '(millions)',
             'required'     => true,
-            'guestAccess'  => true,
             'showInEmails' => true,
             'minValue'     => '0.1',
             'maxValue'     => '50.0',
@@ -62,7 +60,6 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
         self::assertEquals('Total U.S. viewers', $field->getName());
         self::assertEquals('(millions)', $field->getDescription());
         self::assertTrue($field->isRequired());
-        self::assertTrue($field->hasGuestAccess());
         self::assertTrue($field->getShowInEmails());
         self::assertEquals('0.1', $minValue->getValue());
         self::assertEquals('50.0', $maxValue->getValue());
@@ -82,7 +79,6 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
             'id'           => $field->getId(),
             'name'         => $field->getName(),
             'required'     => $field->isRequired(),
-            'guestAccess'  => $field->hasGuestAccess(),
             'showInEmails' => $field->getShowInEmails(),
             'minValue'     => '10.0',
             'maxValue'     => '0.0',
@@ -104,7 +100,6 @@ class UpdateDecimalFieldCommandTest extends BaseTestCase
             'id'           => $field->getId(),
             'name'         => $field->getName(),
             'required'     => $field->isRequired(),
-            'guestAccess'  => $field->hasGuestAccess(),
             'showInEmails' => $field->getShowInEmails(),
             'minValue'     => '0.00',
             'maxValue'     => '100.00',

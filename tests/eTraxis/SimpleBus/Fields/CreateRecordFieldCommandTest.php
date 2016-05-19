@@ -26,7 +26,6 @@ class CreateRecordFieldCommandTest extends BaseTestCase
             'state'        => $state->getId(),
             'name'         => 'Related ID',
             'required'     => true,
-            'guestAccess'  => false,
             'showInEmails' => false,
         ]);
 

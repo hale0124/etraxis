@@ -28,7 +28,6 @@ class UpdateFieldCommandTest extends BaseTestCase
             'name'         => 'Team',
             'description'  => 'New description',
             'required'     => false,
-            'guestAccess'  => true,
             'showInEmails' => true,
             'maxLength'    => $field->asString()->getMaxLength(),
         ]);
@@ -48,7 +47,6 @@ class UpdateFieldCommandTest extends BaseTestCase
         self::assertEquals('Team', $field->getName());
         self::assertEquals('New description', $field->getDescription());
         self::assertFalse($field->isRequired());
-        self::assertTrue($field->hasGuestAccess());
         self::assertTrue($field->getShowInEmails());
     }
 
@@ -66,7 +64,6 @@ class UpdateFieldCommandTest extends BaseTestCase
             'name'         => 'Ref ID',
             'description'  => 'Reference',
             'required'     => true,
-            'guestAccess'  => false,
             'showInEmails' => false,
         ]);
 
@@ -88,7 +85,6 @@ class UpdateFieldCommandTest extends BaseTestCase
             'name'         => 'Team',
             'description'  => 'New description',
             'required'     => false,
-            'guestAccess'  => true,
             'showInEmails' => true,
         ]);
 
@@ -113,7 +109,6 @@ class UpdateFieldCommandTest extends BaseTestCase
             'name'         => 'Notes',
             'description'  => 'New description',
             'required'     => false,
-            'guestAccess'  => true,
             'showInEmails' => true,
         ]);
 

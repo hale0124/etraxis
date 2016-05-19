@@ -28,7 +28,6 @@ class CreateFieldCommandTest extends BaseTestCase
             'name'         => 'Ref ID',
             'description'  => 'Reference',
             'required'     => true,
-            'guestAccess'  => false,
             'showInEmails' => false,
         ]);
 
@@ -50,7 +49,6 @@ class CreateFieldCommandTest extends BaseTestCase
         self::assertEquals('Reference', $field->getDescription());
         self::assertEquals(5, $field->getIndexNumber());
         self::assertTrue($field->isRequired());
-        self::assertFalse($field->hasGuestAccess());
         self::assertFalse($field->getShowInEmails());
     }
 
@@ -68,7 +66,6 @@ class CreateFieldCommandTest extends BaseTestCase
             'name'         => 'Ref ID',
             'description'  => 'Reference',
             'required'     => true,
-            'guestAccess'  => false,
             'showInEmails' => false,
         ]);
 
@@ -90,7 +87,6 @@ class CreateFieldCommandTest extends BaseTestCase
             'name'         => 'Ref ID',
             'description'  => 'Reference',
             'required'     => true,
-            'guestAccess'  => false,
             'showInEmails' => false,
         ]);
 
@@ -115,7 +111,6 @@ class CreateFieldCommandTest extends BaseTestCase
             'name'         => 'Notes',
             'description'  => 'Reference',
             'required'     => true,
-            'guestAccess'  => false,
             'showInEmails' => false,
         ]);
 

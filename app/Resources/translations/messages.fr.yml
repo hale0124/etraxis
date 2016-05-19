@@ -110,7 +110,6 @@ template.name: 'Nom du modèle'
 template.prefix: Préfixe
 template.critical_age: 'Age critique'
 template.frozen_time: 'Inacitvité (gel)'
-template.guest_access: 'Accès invité'
 template.status: Statut
 template.active: Actif
 template.locked: Verrouillé
@@ -163,7 +162,6 @@ field.type.record: Enregistrement
 field.type.date: Date
 field.type.duration: Duree
 field.required: Requis
-field.guest_access: 'Accès invité'
 field.show_in_emails: 'Montrer dans les mails'
 field.default_value: 'Valeur par défaut'
 field.min_value: Minimum

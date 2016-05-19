@@ -110,7 +110,6 @@ template.name: 'Lekāla nosaukums'
 template.prefix: Priedēklis
 template.critical_age: 'Kritisks vecums'
 template.frozen_time: 'Atlikšanas laiks'
-template.guest_access: 'Viesu piekļuve'
 template.status: Statuss
 template.active: Aktīvs
 template.locked: Bloķēts
@@ -163,7 +162,6 @@ field.type.record: Ieraksts
 field.type.date: Datums
 field.type.duration: Ilgums
 field.required: Obligāts
-field.guest_access: 'Viesu piekļuve'
 field.show_in_emails: 'Rādīt e-pastos'
 field.default_value: 'Noklusējuma nozīme'
 field.min_value: Min.lielums

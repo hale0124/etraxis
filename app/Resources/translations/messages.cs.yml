@@ -110,7 +110,6 @@ template.name: 'Název šablony'
 template.prefix: Prefix
 template.critical_age: 'Kritické stáří'
 template.frozen_time: 'Čas zmrazení'
-template.guest_access: 'Anonymní přístup'
 template.status: Status
 template.active: Aktivní
 template.locked: Uzamčen
@@ -163,7 +162,6 @@ field.type.record: Záznam
 field.type.date: Datum
 field.type.duration: 'Doba trvání'
 field.required: Povinný
-field.guest_access: 'Anonymní přístup'
 field.show_in_emails: 'Zobrazit v e-mailu'
 field.default_value: 'Výchozí hodnota'
 field.min_value: 'Min. hodnota'

@@ -13,7 +13,6 @@ namespace eTraxis\Form;
 
 use eTraxis\Entity\Template;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 
@@ -60,12 +59,6 @@ class TemplateForm extends AbstractType
             'label'    => 'description',
             'required' => false,
             'attr'     => ['maxlength' => Template::MAX_DESCRIPTION],
-        ]);
-
-        // Guest access.
-        $builder->add('guestAccess', CheckboxType::class, [
-            'label'    => 'template.guest_access',
-            'required' => false,
         ]);
     }
 

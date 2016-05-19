@@ -31,7 +31,6 @@ class CreateTemplateCommandTest extends BaseTestCase
         $name        = 'Maintenance';
         $prefix      = 'M';
         $description = 'Nimbus technical maintenance';
-        $guestAccess = true;
 
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => $name]);
@@ -43,7 +42,6 @@ class CreateTemplateCommandTest extends BaseTestCase
             'name'        => $name,
             'prefix'      => $prefix,
             'description' => $description,
-            'guestAccess' => $guestAccess,
         ]);
 
         $this->command_bus->handle($command);
@@ -55,7 +53,6 @@ class CreateTemplateCommandTest extends BaseTestCase
         self::assertEquals($name, $template->getName());
         self::assertEquals($prefix, $template->getPrefix());
         self::assertEquals($description, $template->getDescription());
-        self::assertEquals($guestAccess, $template->hasGuestAccess());
     }
 
     /**
@@ -69,7 +66,6 @@ class CreateTemplateCommandTest extends BaseTestCase
             'name'        => 'Maintenance',
             'prefix'      => 'M',
             'description' => 'Nimbus technical maintenance',
-            'guestAccess' => true,
         ]);
 
         $this->command_bus->handle($command);
@@ -86,7 +82,6 @@ class CreateTemplateCommandTest extends BaseTestCase
             'name'        => 'Delivery',
             'prefix'      => 'M',
             'description' => 'Nimbus technical maintenance',
-            'guestAccess' => true,
         ]);
 
         $this->command_bus->handle($command);
@@ -103,7 +98,6 @@ class CreateTemplateCommandTest extends BaseTestCase
             'name'        => 'Maintenance',
             'prefix'      => 'PE',
             'description' => 'Nimbus technical maintenance',
-            'guestAccess' => true,
         ]);
 
         $this->command_bus->handle($command);

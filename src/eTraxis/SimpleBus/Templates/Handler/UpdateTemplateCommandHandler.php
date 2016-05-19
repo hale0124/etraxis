@@ -61,7 +61,6 @@ class UpdateTemplateCommandHandler
             ->setCriticalAge($command->criticalAge)
             ->setFrozenTime($command->frozenTime)
             ->setDescription($command->description)
-            ->setGuestAccess($command->guestAccess)
         ;
 
         $errors = $this->validator->validate($entity);

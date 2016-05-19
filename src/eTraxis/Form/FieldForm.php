@@ -87,12 +87,6 @@ class FieldForm extends AbstractType
             ]);
         }
 
-        // Guest access.
-        $builder->add('guestAccess', CheckboxType::class, [
-            'label'    => 'field.guest_access',
-            'required' => false,
-        ]);
-
         // Show in emails.
         $builder->add('showInEmails', CheckboxType::class, [
             'label'    => 'field.show_in_emails',

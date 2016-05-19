@@ -110,7 +110,6 @@ template.name: 'Mall namn'
 template.prefix: Prefix
 template.critical_age: 'Kritisk ålder'
 template.frozen_time: 'Fryst tid'
-template.guest_access: 'Gäst åtkomst'
 template.status: Status
 template.active: Aktiv
 template.locked: Låst
@@ -163,7 +162,6 @@ field.type.record: Post
 field.type.date: Datum
 field.type.duration: Varaktighet
 field.required: Obligatorisk
-field.guest_access: 'Gäst åtkomst'
 field.show_in_emails: 'Visa i epost'
 field.default_value: Standardvärde
 field.min_value: Min.värde

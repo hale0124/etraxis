@@ -120,13 +120,6 @@ class Field extends Entity implements \JsonSerializable
     private $isRequired;
 
     /**
-     * @var int Whether the field is accessible for non-authenticated user.
-     *
-     * @ORM\Column(name="guest_access", type="integer")
-     */
-    private $hasGuestAccess;
-
-    /**
      * @var int Permission for author.
      *
      * @ORM\Column(name="author_perm", type="integer")
@@ -367,30 +360,6 @@ class Field extends Entity implements \JsonSerializable
     public function isRequired()
     {
         return (bool) $this->isRequired;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   bool $hasGuestAccess
-     *
-     * @return  self
-     */
-    public function setGuestAccess(bool $hasGuestAccess)
-    {
-        $this->hasGuestAccess = $hasGuestAccess ? 1 : 0;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  bool
-     */
-    public function hasGuestAccess()
-    {
-        return (bool) $this->hasGuestAccess;
     }
 
     /**

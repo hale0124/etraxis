@@ -110,7 +110,6 @@ template.name: 'Numele sablonului'
 template.prefix: Prefix
 template.critical_age: 'Vechimea critica'
 template.frozen_time: 'Timp de suspendare'
-template.guest_access: 'Acces pt vizitatori'
 template.status: Stare
 template.active: Activ
 template.locked: Blocat
@@ -163,7 +162,6 @@ field.type.record: Inregistrare
 field.type.date: Data
 field.type.duration: Durata
 field.required: Obligatoriu
-field.guest_access: 'Acces pt vizitatori'
 field.show_in_emails: 'Arata in mesaje'
 field.default_value: 'Valoare implicita'
 field.min_value: 'Valoare minima'

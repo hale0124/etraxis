@@ -110,7 +110,6 @@ template.name: 'Sablon neve'
 template.prefix: Prefix
 template.critical_age: 'Kritikus határidő'
 template.frozen_time: 'Zárás után meddig módosítható'
-template.guest_access: 'Vendég felhasználó'
 template.status: Állapot
 template.active: Aktív
 template.locked: Zárolt
@@ -163,7 +162,6 @@ field.type.record: Rekord
 field.type.date: Dátum
 field.type.duration: Időtartam
 field.required: Kötelező
-field.guest_access: 'Vendég felhasználó'
 field.show_in_emails: 'Értesítőbe bekerüljön'
 field.default_value: 'Alapértelmezett érték'
 field.min_value: 'Min. érték'

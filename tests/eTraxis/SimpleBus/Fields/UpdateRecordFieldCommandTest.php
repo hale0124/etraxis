@@ -25,7 +25,6 @@ class UpdateRecordFieldCommandTest extends BaseTestCase
         self::assertEquals('Delivery', $field->getName());
         self::assertNull($field->getDescription());
         self::assertFalse($field->isRequired());
-        self::assertTrue($field->hasGuestAccess());
         self::assertFalse($field->getShowInEmails());
 
         $command = new UpdateRecordFieldCommand([
@@ -33,7 +32,6 @@ class UpdateRecordFieldCommandTest extends BaseTestCase
             'name'         => 'Delivery #',
             'description'  => 'ID of the delivery task',
             'required'     => true,
-            'guestAccess'  => false,
             'showInEmails' => true,
         ]);
 
@@ -45,7 +43,6 @@ class UpdateRecordFieldCommandTest extends BaseTestCase
         self::assertEquals('Delivery #', $field->getName());
         self::assertEquals('ID of the delivery task', $field->getDescription());
         self::assertTrue($field->isRequired());
-        self::assertFalse($field->hasGuestAccess());
         self::assertTrue($field->getShowInEmails());
     }
 }

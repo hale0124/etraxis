@@ -37,7 +37,6 @@ class FieldFormTest extends BaseTestCase
         self::assertArrayHasKey('asDuration', $children);
         self::assertArrayHasKey('description', $children);
         self::assertArrayHasKey('required', $children);
-        self::assertArrayHasKey('guestAccess', $children);
         self::assertArrayHasKey('showInEmails', $children);
     }
 
@@ -65,7 +64,6 @@ class FieldFormTest extends BaseTestCase
         self::assertArrayNotHasKey('asDuration', $children);
         self::assertArrayHasKey('description', $children);
         self::assertArrayHasKey('required', $children);
-        self::assertArrayHasKey('guestAccess', $children);
         self::assertArrayHasKey('showInEmails', $children);
     }
 
@@ -93,7 +91,6 @@ class FieldFormTest extends BaseTestCase
         self::assertArrayNotHasKey('asDuration', $children);
         self::assertArrayHasKey('description', $children);
         self::assertArrayHasKey('required', $children);
-        self::assertArrayHasKey('guestAccess', $children);
         self::assertArrayHasKey('showInEmails', $children);
     }
 
@@ -121,7 +118,6 @@ class FieldFormTest extends BaseTestCase
         self::assertArrayNotHasKey('asDuration', $children);
         self::assertArrayHasKey('description', $children);
         self::assertArrayHasKey('required', $children);
-        self::assertArrayHasKey('guestAccess', $children);
         self::assertArrayHasKey('showInEmails', $children);
     }
 
@@ -149,7 +145,6 @@ class FieldFormTest extends BaseTestCase
         self::assertArrayNotHasKey('asDuration', $children);
         self::assertArrayHasKey('description', $children);
         self::assertArrayHasKey('required', $children);
-        self::assertArrayHasKey('guestAccess', $children);
         self::assertArrayHasKey('showInEmails', $children);
     }
 
@@ -177,7 +172,6 @@ class FieldFormTest extends BaseTestCase
         self::assertArrayNotHasKey('asDuration', $children);
         self::assertArrayHasKey('description', $children);
         self::assertArrayNotHasKey('required', $children);
-        self::assertArrayHasKey('guestAccess', $children);
         self::assertArrayHasKey('showInEmails', $children);
     }
 
@@ -205,7 +199,6 @@ class FieldFormTest extends BaseTestCase
         self::assertArrayNotHasKey('asDuration', $children);
         self::assertArrayHasKey('description', $children);
         self::assertArrayHasKey('required', $children);
-        self::assertArrayHasKey('guestAccess', $children);
         self::assertArrayHasKey('showInEmails', $children);
     }
 
@@ -233,7 +226,6 @@ class FieldFormTest extends BaseTestCase
         self::assertArrayHasKey('asDuration', $children);
         self::assertArrayHasKey('description', $children);
         self::assertArrayHasKey('required', $children);
-        self::assertArrayHasKey('guestAccess', $children);
         self::assertArrayHasKey('showInEmails', $children);
     }
 }

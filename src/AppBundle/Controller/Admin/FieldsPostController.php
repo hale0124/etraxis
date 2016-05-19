@@ -198,7 +198,6 @@ class FieldsPostController extends Controller
         $command->name         = $field->getName();
         $command->description  = $field->getDescription();
         $command->required     = $field->isRequired();
-        $command->guestAccess  = $field->hasGuestAccess();
         $command->showInEmails = $field->getShowInEmails();
 
         // Type-specific field attributes.

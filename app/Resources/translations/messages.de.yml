@@ -110,7 +110,6 @@ template.name: 'Name der Anfrageart'
 template.prefix: Präfix
 template.critical_age: 'Kritisches Alter'
 template.frozen_time: 'Einfrieren nach Ende'
-template.guest_access: Gastzugriff
 template.status: Status
 template.active: Aktiv
 template.locked: Gesperrt
@@ -163,7 +162,6 @@ field.type.record: Anfrage
 field.type.date: Datum
 field.type.duration: Bearbeitungsdauer
 field.required: Erforderlich
-field.guest_access: Gastzugriff
 field.show_in_emails: 'In E-Mails zeigen'
 field.default_value: Vorgabewert
 field.min_value: 'Min. Wert'

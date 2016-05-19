@@ -26,7 +26,6 @@ class UpdateStringFieldCommandTest extends BaseTestCase
         self::assertEquals('Production code', $field->getName());
         self::assertNull($field->getDescription());
         self::assertTrue($field->isRequired());
-        self::assertTrue($field->hasGuestAccess());
         self::assertFalse($field->getShowInEmails());
         self::assertEquals(7, $field->getParameters()->getParameter1());
         self::assertNull($field->getParameters()->getDefaultValue());
@@ -39,7 +38,6 @@ class UpdateStringFieldCommandTest extends BaseTestCase
             'name'         => 'Code',
             'description'  => '(millions)',
             'required'     => false,
-            'guestAccess'  => false,
             'showInEmails' => true,
             'maxLength'    => 6,
             'defaultValue' => '?ACV??',
@@ -58,7 +56,6 @@ class UpdateStringFieldCommandTest extends BaseTestCase
         self::assertEquals('Code', $field->getName());
         self::assertEquals('(millions)', $field->getDescription());
         self::assertFalse($field->isRequired());
-        self::assertFalse($field->hasGuestAccess());
         self::assertTrue($field->getShowInEmails());
         self::assertEquals(6, $field->getParameters()->getParameter1());
         self::assertEquals('?ACV??', $default->getValue());

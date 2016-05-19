@@ -110,7 +110,6 @@ template.name: 'Nombre de plantilla'
 template.prefix: Prefijo
 template.critical_age: 'Auto expiración'
 template.frozen_time: 'Tiempo congelado'
-template.guest_access: 'Acceso de invitado'
 template.status: Estado
 template.active: Activo
 template.locked: Bloqueado
@@ -163,7 +162,6 @@ field.type.record: Registro
 field.type.date: Fecha
 field.type.duration: Duración
 field.required: Obligatorio
-field.guest_access: 'Acceso de invitado'
 field.show_in_emails: 'Mostrar en emails'
 field.default_value: 'Valor predeterminado'
 field.min_value: 'Valor Min.'
