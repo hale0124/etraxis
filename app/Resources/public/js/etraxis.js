@@ -12,7 +12,7 @@ var eTraxis = (function() {
 
     // Inject default CSRF token into POST AJAX requests if it's missing there.
     $.ajaxPrefilter(function(options, originalOptions) {
-        if (options.type && options.type.toUpperCase() === 'POST') {
+        if (options.type && options.type.toUpperCase() == 'POST') {
             var $token = $('#__etraxis_token');
             if ($token.length != 0) {
                 if (typeof originalOptions.data === 'undefined') {
@@ -28,7 +28,7 @@ var eTraxis = (function() {
 
     // Show appropriate message to user if AJAX request ends up with '401 Unauthorized' HTTP error.
     $(document).ajaxError(function(e, xhr) {
-        if (xhr.status === 401) {
+        if (xhr.status == 401) {
             eTraxis.unblock();
             eTraxis.alert(eTraxis.i18n['error'], xhr.responseText);
         }

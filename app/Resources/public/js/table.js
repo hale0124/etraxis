@@ -151,12 +151,14 @@ var datatables_language = window.datatables_language || {};
 
             // If filtering row is present.
             if ($('tfoot', this).length != 0) {
-                $('tfoot  td', this).addClass('ui-state-default');
+                $('tfoot td', this).addClass('ui-state-default');
                 $('tfoot select', this).prepend('<option></option>').val(null);
             }
 
             // Call DataTables plugin.
             $table = $(this).dataTable(settings);
+
+            $('input[type="search"]:not([maxlength])', $table.parent()).prop('maxlength', 100);
 
             // In case of "checkboxes" feature...
             if (settings.checkboxes) {
@@ -197,18 +199,20 @@ var datatables_language = window.datatables_language || {};
                 });
 
                 // Simulate checkbox click when clicking on the first column.
-                $table.on('click', 'tbody tr td:first-child', function(e) {
+                $table.on('click dblclick', 'tbody tr td:first-child', function(e) {
                     $('input[type="checkbox"]', this).click();
                     e.stopPropagation();
                 });
             }
 
             // Filter controls.
+            $('tfoot input[type="text"]:not([maxlength])', $table).prop('maxlength', 100);
             $('tfoot input[type="text"], tfoot select', $table)
                 // Restore saved search values.
                 .each(function() {
 
-                    var index = $(this).closest('td').index();
+                    var visibleIndex = $(this).closest('td').index();
+                    var index = $table.api().column.index('fromVisible', visibleIndex);
                     var value = $table.api().column(index).search();
 
                     $(this).val(value);
@@ -218,7 +222,8 @@ var datatables_language = window.datatables_language || {};
                 // Re-draw the table when a filter value is changed.
                 .on('keyup change', function() {
 
-                    var index = $(this).closest('td').index();
+                    var visibleIndex = $(this).closest('td').index();
+                    var index = $table.api().column.index('fromVisible', visibleIndex);
                     var value = $(this).val();
 
                     if (searchValues[index] == value) {
