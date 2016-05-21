@@ -143,8 +143,10 @@ var datatables_language = window.datatables_language || {};
                     targets: 0,
                     orderable: false,
                     searchable: false,
-                    render: function(data) {
-                        return '<input type="checkbox" name="' + settings.checkboxes + '" value="' + data + '">';
+                    render: function(data, type) {
+                        return (type == 'display')
+                            ? '<input type="checkbox" name="' + settings.checkboxes + '" value="' + data + '">'
+                            : data;
                     }
                 });
             }
@@ -296,6 +298,24 @@ var datatables_language = window.datatables_language || {};
                 });
             }
 
+            // Destruct the table.
+            $table.one('destroy.dt', function() {
+                // Unbind all custom handlers.
+                $table.off();
+
+                // In case of "checkboxes" feature remove extra column.
+                if (settings.checkboxes) {
+                    $('thead th:first', this).remove();
+                    $('tfoot td:first', this).remove();
+                }
+
+                // If filtering row is present, revert filter controls to their initial state.
+                if ($('tfoot', this).length != 0) {
+                    $('tfoot td', this).removeClass('ui-state-default');
+                    $('option:first', $('tfoot select', this)).remove();
+                }
+            });
+
             // Before each AJAX request block the table until server response.
             $table.on('preXhr.dt', function(e, settings, data) {
                 drawNumber = data.draw;
@@ -318,7 +338,9 @@ var datatables_language = window.datatables_language || {};
             });
 
             // Block the table while first AJAX request is under progress.
-            tableBlock($table);
+            if (settings.serverSide) {
+                tableBlock($table);
+            }
         });
 
         return $table;
