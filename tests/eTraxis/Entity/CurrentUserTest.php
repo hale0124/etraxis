@@ -22,7 +22,7 @@ class CurrentUserTest extends TransactionalTestCase
     {
         parent::setUp();
 
-        $this->object = $this->doctrine->getManager()->getRepository(User::class)->findOneBy([
+        $this->object = $this->doctrine->getRepository(User::class)->findOneBy([
             'username' => 'artem@eTraxis',
         ]);
     }

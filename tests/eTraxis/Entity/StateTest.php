@@ -23,7 +23,7 @@ class StateTest extends TransactionalTestCase
     {
         parent::setUp();
 
-        $this->object = $this->doctrine->getManager()->getRepository(State::class)->findOneBy([
+        $this->object = $this->doctrine->getRepository(State::class)->findOneBy([
             'name' => 'New',
         ]);
     }
@@ -109,7 +109,7 @@ class StateTest extends TransactionalTestCase
 
     public function testGetRoleTransitions()
     {
-        $repository = $this->doctrine->getManager()->getRepository(State::class);
+        $repository = $this->doctrine->getRepository(State::class);
 
         /** @var State $new */
         $new = $repository->findOneBy(['name' => 'New']);
@@ -129,7 +129,7 @@ class StateTest extends TransactionalTestCase
 
     public function testGetGroupTransitions()
     {
-        $repository = $this->doctrine->getManager()->getRepository(State::class);
+        $repository = $this->doctrine->getRepository(State::class);
 
         /** @var Group $managers */
         $managers = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);

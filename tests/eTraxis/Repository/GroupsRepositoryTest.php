@@ -19,7 +19,7 @@ class GroupsRepositoryTest extends TransactionalTestCase
     public function testGetGlobalGroups()
     {
         /** @var GroupsRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository(Group::class);
+        $repository = $this->doctrine->getRepository(Group::class);
 
         $result = $repository->getGlobalGroups();
 

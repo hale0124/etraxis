@@ -159,7 +159,7 @@ class FieldTest extends TransactionalTestCase
         ];
 
         /** @var Field $field */
-        $field = $this->doctrine->getManager()->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
 
         /** @var Group[] $groups */
         $groups = $this->doctrine->getRepository(Group::class)->findAll();

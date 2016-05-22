@@ -20,7 +20,7 @@ class AddUsersCommandTest extends TransactionalTestCase
     public function testSuccess()
     {
         /** @var \eTraxis\Repository\GroupsRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository(Group::class);
+        $repository = $this->doctrine->getRepository(Group::class);
 
         /** @var Group $group */
         $group = $repository->findOneBy(['name' => 'Staff']);

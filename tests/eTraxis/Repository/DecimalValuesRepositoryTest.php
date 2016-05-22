@@ -21,7 +21,7 @@ class DecimalValuesRepositoryTest extends TransactionalTestCase
         $expected = '3.14159292';
 
         /** @var CustomValuesRepositoryInterface $repository */
-        $repository = $this->doctrine->getManager()->getRepository(DecimalValue::class);
+        $repository = $this->doctrine->getRepository(DecimalValue::class);
 
         $count = count($repository->findAll());
 

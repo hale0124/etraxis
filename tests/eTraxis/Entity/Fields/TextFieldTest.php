@@ -38,7 +38,7 @@ class TextFieldTest extends TransactionalTestCase
      */
     public function testInvalidRepository()
     {
-        new TextField($this->object, $this->doctrine->getManager()->getRepository(Field::class));
+        new TextField($this->object, $this->doctrine->getRepository(Field::class));
     }
 
     public function testSupportedKeys()

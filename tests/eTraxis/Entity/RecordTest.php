@@ -22,7 +22,7 @@ class RecordTest extends TransactionalTestCase
     {
         parent::setUp();
 
-        $this->object = $this->doctrine->getManager()->getRepository(Record::class)->findOneBy([
+        $this->object = $this->doctrine->getRepository(Record::class)->findOneBy([
             'subject' => 'Prizes for the claw crane',
         ]);
     }

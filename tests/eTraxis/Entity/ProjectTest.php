@@ -22,7 +22,7 @@ class ProjectTest extends TransactionalTestCase
     {
         parent::setUp();
 
-        $this->object = $this->doctrine->getManager()->getRepository(Project::class)->findOneBy([
+        $this->object = $this->doctrine->getRepository(Project::class)->findOneBy([
             'name' => 'Planet Express',
         ]);
     }

@@ -23,7 +23,7 @@ class TemplateTest extends TransactionalTestCase
     {
         parent::setUp();
 
-        $this->object = $this->doctrine->getManager()->getRepository(Template::class)->findOneBy([
+        $this->object = $this->doctrine->getRepository(Template::class)->findOneBy([
             'name' => 'Delivery',
         ]);
     }
@@ -122,7 +122,7 @@ class TemplateTest extends TransactionalTestCase
         $group_local  = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
         $group_global = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Nimbus']);
 
-        $repository = $this->doctrine->getManager()->getRepository(Template::class);
+        $repository = $this->doctrine->getRepository(Template::class);
 
         /** @var Template $template */
         $template = $repository->findOneBy(['name' => 'Delivery']);

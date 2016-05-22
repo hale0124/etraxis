@@ -38,7 +38,7 @@ class DecimalFieldTest extends TransactionalTestCase
      */
     public function testInvalidRepository()
     {
-        new DecimalField($this->object, $this->doctrine->getManager()->getRepository(Field::class));
+        new DecimalField($this->object, $this->doctrine->getRepository(Field::class));
     }
 
     public function testSupportedKeys()

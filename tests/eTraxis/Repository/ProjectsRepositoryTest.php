@@ -19,7 +19,7 @@ class ProjectsRepositoryTest extends TransactionalTestCase
     public function testGetProjects()
     {
         /** @var ProjectsRepository $repository */
-        $repository = $this->doctrine->getManager()->getRepository(Project::class);
+        $repository = $this->doctrine->getRepository(Project::class);
 
         $result = $repository->getProjects();
 

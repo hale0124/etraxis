@@ -38,7 +38,7 @@ class StringFieldTest extends TransactionalTestCase
      */
     public function testInvalidRepository()
     {
-        new StringField($this->object, $this->doctrine->getManager()->getRepository(Field::class));
+        new StringField($this->object, $this->doctrine->getRepository(Field::class));
     }
 
     public function testSupportedKeys()

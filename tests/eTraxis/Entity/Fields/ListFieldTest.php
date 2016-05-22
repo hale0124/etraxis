@@ -32,7 +32,7 @@ class ListFieldTest extends TransactionalTestCase
      */
     public function testInvalidRepository()
     {
-        new ListField($this->object, $this->doctrine->getManager()->getRepository(Field::class));
+        new ListField($this->object, $this->doctrine->getRepository(Field::class));
     }
 
     public function testSupportedKeys()

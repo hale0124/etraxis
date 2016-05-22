@@ -21,7 +21,7 @@ class TextValuesRepositoryTest extends TransactionalTestCase
         $expected = 'Artem Rodygin';
 
         /** @var CustomValuesRepositoryInterface $repository */
-        $repository = $this->doctrine->getManager()->getRepository(TextValue::class);
+        $repository = $this->doctrine->getRepository(TextValue::class);
 
         $count = count($repository->findAll());
 

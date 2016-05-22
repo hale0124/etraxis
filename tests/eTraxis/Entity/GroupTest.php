@@ -22,7 +22,7 @@ class GroupTest extends TransactionalTestCase
     {
         parent::setUp();
 
-        $this->object = $this->doctrine->getManager()->getRepository(Group::class)->findOneBy([
+        $this->object = $this->doctrine->getRepository(Group::class)->findOneBy([
             'name' => 'Crew',
         ]);
     }
