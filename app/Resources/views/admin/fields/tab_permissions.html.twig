@@ -36,8 +36,8 @@
             <legend>{{ 'permissions'|trans }}</legend>
             {% for key, value in permissions %}
                 <div class="grid-100">
-                    <input type="radio" id="{{ value|replace('.', '_') }}" name="permission" value="{{ key }}">
-                    <label for="{{ value|replace('.', '_') }}">{{ value|trans|lower }}</label>
+                    <input type="radio" id="{{ value|replace({'.': '_'}) }}" name="permission" value="{{ key }}">
+                    <label for="{{ value|replace({'.': '_'}) }}">{{ value|trans|lower }}</label>
                 </div>
             {% endfor %}
         </fieldset>
