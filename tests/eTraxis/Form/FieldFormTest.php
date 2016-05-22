@@ -12,9 +12,9 @@
 namespace eTraxis\Form;
 
 use eTraxis\Entity\Field;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class FieldFormTest extends BaseTestCase
+class FieldFormTest extends TransactionalTestCase
 {
     public function testNewForm()
     {

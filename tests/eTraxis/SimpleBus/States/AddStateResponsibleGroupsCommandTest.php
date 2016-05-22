@@ -15,9 +15,9 @@ use eTraxis\Entity\Group;
 use eTraxis\Entity\Project;
 use eTraxis\Entity\State;
 use eTraxis\Entity\StateResponsibleGroup;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class AddStateResponsibleGroupsCommandTest extends BaseTestCase
+class AddStateResponsibleGroupsCommandTest extends TransactionalTestCase
 {
     public function testAddResponsibleGroups()
     {

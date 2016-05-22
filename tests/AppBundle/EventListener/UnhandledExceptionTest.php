@@ -11,7 +11,7 @@
 
 namespace AppBundle\EventListener;
 
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 use SimpleBus\ValidationException;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -20,7 +20,7 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-class UnhandledExceptionTest extends BaseTestCase
+class UnhandledExceptionTest extends TransactionalTestCase
 {
     /** @var UnhandledException */
     private $object;

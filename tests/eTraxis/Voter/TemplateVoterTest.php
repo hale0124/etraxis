@@ -15,9 +15,9 @@ use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\Project;
 use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\Templates\LockTemplateCommand;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class TemplateVoterTest extends BaseTestCase
+class TemplateVoterTest extends TransactionalTestCase
 {
     /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker */
     private $security;

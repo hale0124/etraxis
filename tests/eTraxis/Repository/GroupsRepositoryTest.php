@@ -12,9 +12,9 @@
 namespace eTraxis\Repository;
 
 use eTraxis\Entity\Group;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class GroupsRepositoryTest extends BaseTestCase
+class GroupsRepositoryTest extends TransactionalTestCase
 {
     public function testGetGlobalGroups()
     {

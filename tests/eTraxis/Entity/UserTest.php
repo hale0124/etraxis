@@ -12,9 +12,9 @@
 namespace eTraxis\Entity;
 
 use AltrEgo\AltrEgo;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class UserTest extends BaseTestCase
+class UserTest extends TransactionalTestCase
 {
     /** @var User */
     private $object;

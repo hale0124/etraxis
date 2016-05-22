@@ -13,9 +13,9 @@ namespace eTraxis\SimpleBus\Templates;
 
 use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\Template;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class SetRoleTemplatePermissionsCommandTest extends BaseTestCase
+class SetRoleTemplatePermissionsCommandTest extends TransactionalTestCase
 {
     public function testAuthorPermissions()
     {

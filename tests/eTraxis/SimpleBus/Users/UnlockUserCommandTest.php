@@ -11,9 +11,9 @@
 
 namespace eTraxis\SimpleBus\Users;
 
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class UnlockUserCommandTest extends BaseTestCase
+class UnlockUserCommandTest extends TransactionalTestCase
 {
     public function testUnlockUser()
     {

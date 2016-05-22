@@ -11,11 +11,11 @@
 
 namespace AppBundle\Command;
 
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class UuidCommandTest extends BaseTestCase
+class UuidCommandTest extends TransactionalTestCase
 {
     public function testUuid()
     {

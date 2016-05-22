@@ -13,9 +13,9 @@ namespace eTraxis\SimpleBus\Fields;
 
 use eTraxis\Entity\Field;
 use eTraxis\Entity\State;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class SetOrderFieldCommandTest extends BaseTestCase
+class SetOrderFieldCommandTest extends TransactionalTestCase
 {
     /**
      * @param   State $state

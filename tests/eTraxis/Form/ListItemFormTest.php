@@ -12,9 +12,9 @@
 namespace eTraxis\Form;
 
 use eTraxis\Entity\ListItem;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class ListItemFormTest extends BaseTestCase
+class ListItemFormTest extends TransactionalTestCase
 {
     public function testNewForm()
     {

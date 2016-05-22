@@ -12,9 +12,9 @@
 namespace eTraxis\SimpleBus\Templates;
 
 use eTraxis\Entity\Template;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class LockUnlockTemplateCommandTest extends BaseTestCase
+class LockUnlockTemplateCommandTest extends TransactionalTestCase
 {
     /**
      * @return  \eTraxis\Entity\Template

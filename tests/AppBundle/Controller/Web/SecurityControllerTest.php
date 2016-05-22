@@ -12,12 +12,12 @@
 namespace AppBundle\Controller\Web;
 
 use eTraxis\Entity\User;
-use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use eTraxis\Tests\ControllerTestCase;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class SecurityControllerTest extends WebTestCase
+class SecurityControllerTest extends ControllerTestCase
 {
     private function isAuthenticated(Crawler $crawler)
     {
@@ -44,11 +44,9 @@ class SecurityControllerTest extends WebTestCase
 
     public function testLogin()
     {
-        $client = static::createClient();
+        $crawler = $this->client->request(Request::METHOD_GET, '/login');
 
-        $crawler = $client->request(Request::METHOD_GET, '/login');
-
-        self::assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
+        self::assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
         self::assertTrue($this->isLoginPage($crawler));
         self::assertFalse($this->isAuthenticated($crawler));
 
@@ -57,10 +55,10 @@ class SecurityControllerTest extends WebTestCase
             '_password' => 'wrong',
         ]);
 
-        $client->submit($form);
-        $crawler = $client->followRedirect();
+        $this->client->submit($form);
+        $crawler = $this->client->followRedirect();
 
-        self::assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
+        self::assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
         self::assertTrue($this->isLoginPage($crawler));
         self::assertFalse($this->isAuthenticated($crawler));
 
@@ -69,25 +67,25 @@ class SecurityControllerTest extends WebTestCase
             '_password' => 'secret',
         ]);
 
-        $client->submit($form);
-        $crawler = $client->followRedirect();
+        $this->client->submit($form);
+        $crawler = $this->client->followRedirect();
 
-        self::assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
+        self::assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
         self::assertFalse($this->isLoginPage($crawler));
         self::assertTrue($this->isAuthenticated($crawler));
 
-        $client->request(Request::METHOD_GET, '/login');
+        $this->client->request(Request::METHOD_GET, '/login');
 
-        self::assertEquals(Response::HTTP_FOUND, $client->getResponse()->getStatusCode());
+        self::assertEquals(Response::HTTP_FOUND, $this->client->getResponse()->getStatusCode());
 
-        $crawler = $client->followRedirect();
+        $crawler = $this->client->followRedirect();
 
-        self::assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
+        self::assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
         self::assertFalse($this->isLoginPage($crawler));
         self::assertTrue($this->isAuthenticated($crawler));
 
         /** @var \Doctrine\ORM\EntityManagerInterface $manager */
-        $manager = $client->getContainer()->get('doctrine')->getManager();
+        $manager = $this->client->getContainer()->get('doctrine')->getManager();
 
         /** @var User $user */
         $user = $manager->getRepository(User::class)->findOneBy(['username' => 'artem@eTraxis']);

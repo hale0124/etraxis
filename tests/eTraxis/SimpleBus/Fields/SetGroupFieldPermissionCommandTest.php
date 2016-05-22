@@ -13,9 +13,9 @@ namespace eTraxis\SimpleBus\Fields;
 
 use eTraxis\Entity\Field;
 use eTraxis\Entity\Group;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class SetGroupFieldPermissionCommandTest extends BaseTestCase
+class SetGroupFieldPermissionCommandTest extends TransactionalTestCase
 {
     public function testExistingGroupPermissions()
     {

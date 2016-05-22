@@ -12,9 +12,9 @@
 namespace eTraxis\SimpleBus\Users;
 
 use AltrEgo\AltrEgo;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class ResetPasswordCommandTest extends BaseTestCase
+class ResetPasswordCommandTest extends TransactionalTestCase
 {
     protected function setUp()
     {

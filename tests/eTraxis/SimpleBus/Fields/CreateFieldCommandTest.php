@@ -14,9 +14,9 @@ namespace eTraxis\SimpleBus\Fields;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\State;
 use eTraxis\SimpleBus\Fields\Handler\CreateFieldCommandHandler;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class CreateFieldCommandTest extends BaseTestCase
+class CreateFieldCommandTest extends TransactionalTestCase
 {
     public function testSuccess()
     {

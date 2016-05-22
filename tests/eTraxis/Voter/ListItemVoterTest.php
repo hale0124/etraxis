@@ -12,9 +12,9 @@
 namespace eTraxis\Voter;
 
 use eTraxis\Entity\ListItem;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class ListItemVoterTest extends BaseTestCase
+class ListItemVoterTest extends TransactionalTestCase
 {
     /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker */
     private $security;

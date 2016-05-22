@@ -14,9 +14,9 @@ namespace eTraxis\SimpleBus\States;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
 use eTraxis\Entity\StateResponsibleGroup;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class RemoveStateResponsibleGroupsCommandTest extends BaseTestCase
+class RemoveStateResponsibleGroupsCommandTest extends TransactionalTestCase
 {
     public function testRemoveResponsibleGroups()
     {

@@ -15,20 +15,14 @@ use eTraxis\Entity\CurrentUser;
 use eTraxis\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
+use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
- * Extended base test case with every test wrapped into database transaction.
+ * Base test case with container shortcuts and security helpers.
  */
-class BaseTestCase extends WebTestCase
+class ControllerTestCase extends WebTestCase
 {
-    /**
-     * Maximum value of signed 32-bits integer which can be used as an ID of non-existing entity.
-     * The "PHP_INT_MAX" cannot be used as it causes "value 9223372036854775807 is out of range for type integer"
-     * SQL driver error for PostgreSQL on 64-bits platforms.
-     */
-    const UNKNOWN_ENTITY_ID = 0x7FFFFFFF;
-
     /** @var \Symfony\Bundle\FrameworkBundle\Client */
     protected $client;
 
@@ -47,20 +41,14 @@ class BaseTestCase extends WebTestCase
     /** @var \Symfony\Component\Translation\TranslatorInterface */
     protected $translator;
 
-    /** @var \Symfony\Bridge\Doctrine\RegistryInterface */
-    protected $doctrine;
-
     /** @var \SimpleBus\Message\Bus\MessageBus */
     protected $command_bus;
 
     /** @var \SimpleBus\Message\Bus\MessageBus */
     protected $event_bus;
 
-    /** @var \DataTables\DataTablesInterface */
-    protected $datatables;
-
     /**
-     * Begins new transaction.
+     * Prepares shortcuts for most popular container services.
      */
     protected function setUp()
     {
@@ -71,26 +59,57 @@ class BaseTestCase extends WebTestCase
         $this->session     = $this->client->getContainer()->get('session');
         $this->validator   = $this->client->getContainer()->get('validator');
         $this->translator  = $this->client->getContainer()->get('translator');
-        $this->doctrine    = $this->client->getContainer()->get('doctrine');
         $this->command_bus = $this->client->getContainer()->get('command_bus');
         $this->event_bus   = $this->client->getContainer()->get('event_bus');
-        $this->datatables  = $this->client->getContainer()->get('datatables');
-
-        /** @var \Doctrine\ORM\EntityManagerInterface $manager */
-        $manager = $this->doctrine->getManager();
-        $manager->beginTransaction();
     }
 
     /**
-     * Rolls back current transaction.
+     * Makes request to specified URI.
+     *
+     * @param   string $method
+     * @param   string $uri
+     * @param   bool   $isXmlHttpRequest
      */
-    protected function tearDown()
+    protected function makeRequest(string $method, string $uri, bool $isXmlHttpRequest = false)
     {
-        /** @var \Doctrine\ORM\EntityManagerInterface $manager */
-        $manager = $this->doctrine->getManager();
-        $manager->rollback();
+        $headers = $isXmlHttpRequest ? ['HTTP_X-Requested-With' => 'XMLHttpRequest'] : [];
 
-        parent::tearDown();
+        $this->client->request($method, $uri, [], [], $headers);
+    }
+
+    /**
+     * Asserts that HTTP status code of the last request equals to the specified one.
+     *
+     * @param   int $statusCode
+     */
+    protected function assertStatusCode(int $statusCode)
+    {
+        self::assertEquals($statusCode, $this->client->getResponse()->getStatusCode());
+    }
+
+    /**
+     * Asserts that "Location" HTTP header of the last request equals to the specified one.
+     *
+     * @param   string $location
+     */
+    protected function assertLocationHeader(string $location)
+    {
+        self::assertEquals($location, $this->client->getResponse()->headers->get('Location'));
+    }
+
+    /**
+     * Asserts that user was redirected to the login page after the last request.
+     */
+    protected function assertLoginPage()
+    {
+        $urls = [
+            $this->router->generate('login', [], UrlGeneratorInterface::ABSOLUTE_PATH),
+            $this->router->generate('login', [], UrlGeneratorInterface::ABSOLUTE_URL),
+        ];
+
+        $response = $this->client->getResponse();
+
+        self::assertTrue($response->isRedirection() && in_array($response->headers->get('Location'), $urls));
     }
 
     /**
@@ -103,7 +122,10 @@ class BaseTestCase extends WebTestCase
      */
     protected function findUser(string $username, bool $ldap = false)
     {
-        return $this->doctrine->getRepository(User::class)->findOneBy([
+        /** @var \Symfony\Bridge\Doctrine\RegistryInterface $doctrine */
+        $doctrine = $this->client->getContainer()->get('doctrine');
+
+        return $doctrine->getRepository(User::class)->findOneBy([
             'username' => $ldap ? $username : $username . '@eTraxis',
             'isLdap'   => $ldap ? 1 : 0,
         ]);

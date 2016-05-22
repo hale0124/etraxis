@@ -12,9 +12,9 @@
 namespace eTraxis\SimpleBus\Projects;
 
 use eTraxis\Entity\Project;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class DeleteProjectCommandTest extends BaseTestCase
+class DeleteProjectCommandTest extends TransactionalTestCase
 {
     public function testSuccess()
     {

@@ -11,14 +11,14 @@
 
 namespace AppBundle\EventListener;
 
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-class UnauthorizedAjaxRequestTest extends BaseTestCase
+class UnauthorizedAjaxRequestTest extends TransactionalTestCase
 {
     /** @var \Symfony\Component\HttpFoundation\RequestStack */
     protected $request_stack;

@@ -12,12 +12,12 @@
 namespace eTraxis\Security\Authenticator;
 
 use eTraxis\Entity\CurrentUser;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
-class LdapAuthenticatorTest extends BaseTestCase
+class LdapAuthenticatorTest extends TransactionalTestCase
 {
     /** @var LdapAuthenticator */
     private $object;

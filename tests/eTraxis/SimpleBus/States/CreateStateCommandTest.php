@@ -13,9 +13,9 @@ namespace eTraxis\SimpleBus\States;
 
 use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class CreateStateCommandTest extends BaseTestCase
+class CreateStateCommandTest extends TransactionalTestCase
 {
     /**
      * @return  \eTraxis\Entity\Template

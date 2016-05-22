@@ -12,9 +12,9 @@
 namespace eTraxis\Entity;
 
 use eTraxis\Dictionary\SystemRole;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class TemplateTest extends BaseTestCase
+class TemplateTest extends TransactionalTestCase
 {
     /** @var Template */
     private $object;

@@ -13,9 +13,9 @@ namespace eTraxis\SimpleBus\Groups;
 
 use eTraxis\Entity\Group;
 use eTraxis\Entity\Project;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class CreateGroupCommandTest extends BaseTestCase
+class CreateGroupCommandTest extends TransactionalTestCase
 {
     public function testSuccess()
     {

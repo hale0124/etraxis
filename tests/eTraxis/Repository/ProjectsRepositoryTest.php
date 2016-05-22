@@ -12,9 +12,9 @@
 namespace eTraxis\Repository;
 
 use eTraxis\Entity\Project;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class ProjectsRepositoryTest extends BaseTestCase
+class ProjectsRepositoryTest extends TransactionalTestCase
 {
     public function testGetProjects()
     {

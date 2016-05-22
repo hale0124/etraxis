@@ -13,9 +13,9 @@ namespace eTraxis\SimpleBus\Fields;
 
 use eTraxis\Entity\Field;
 use eTraxis\Entity\State;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class CreateRecordFieldCommandTest extends BaseTestCase
+class CreateRecordFieldCommandTest extends TransactionalTestCase
 {
     public function testSuccess()
     {

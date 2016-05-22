@@ -12,9 +12,9 @@
 namespace eTraxis\Repository;
 
 use eTraxis\Entity\DecimalValue;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class DecimalValuesRepositoryTest extends BaseTestCase
+class DecimalValuesRepositoryTest extends TransactionalTestCase
 {
     public function testNewValue()
     {

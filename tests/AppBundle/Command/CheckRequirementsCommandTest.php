@@ -12,11 +12,11 @@
 namespace AppBundle\Command;
 
 use eTraxis\Dictionary\DatabasePlatform;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Tester\CommandTester;
 
-class CheckRequirementsCommandTest extends BaseTestCase
+class CheckRequirementsCommandTest extends TransactionalTestCase
 {
     public function testOK()
     {

@@ -11,12 +11,12 @@
 
 namespace eTraxis\Service;
 
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
 /**
  * "http://www.forumsys.com/tutorials/integration-how-to/ldap/online-ldap-test-server".
  */
-class LdapServiceTest extends BaseTestCase
+class LdapServiceTest extends TransactionalTestCase
 {
     /** @var Ldap\LdapService */
     private $object;

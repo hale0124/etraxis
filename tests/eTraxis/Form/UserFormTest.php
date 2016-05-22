@@ -11,9 +11,9 @@
 
 namespace eTraxis\Form;
 
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class UserFormTest extends BaseTestCase
+class UserFormTest extends TransactionalTestCase
 {
     public function testForm()
     {

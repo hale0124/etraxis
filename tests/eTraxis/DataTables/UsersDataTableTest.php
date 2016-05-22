@@ -12,11 +12,21 @@
 namespace eTraxis\DataTables;
 
 use eTraxis\Entity\User;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 use Symfony\Component\HttpFoundation\Request;
 
-class UsersDataTableTest extends BaseTestCase
+class UsersDataTableTest extends TransactionalTestCase
 {
+    /** @var \DataTables\DataTablesInterface */
+    protected $datatables;
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $this->datatables = $this->client->getContainer()->get('datatables');
+    }
+
     public function testBasic()
     {
         $users = $this->doctrine->getRepository(User::class)->findAll();

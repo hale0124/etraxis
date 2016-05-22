@@ -13,9 +13,9 @@ namespace eTraxis\SimpleBus\Fields;
 
 use eTraxis\Entity\Field;
 use eTraxis\Entity\StringValue;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class UpdateStringFieldCommandTest extends BaseTestCase
+class UpdateStringFieldCommandTest extends TransactionalTestCase
 {
     public function testSuccess()
     {

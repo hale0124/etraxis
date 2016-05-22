@@ -12,14 +12,14 @@
 namespace AppBundle\EventListener;
 
 use eTraxis\Entity\CurrentUser;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
-class StickyLocaleTest extends BaseTestCase
+class StickyLocaleTest extends TransactionalTestCase
 {
     /** @var \Symfony\Component\HttpFoundation\RequestStack */
     protected $request_stack;

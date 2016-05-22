@@ -14,9 +14,9 @@ namespace eTraxis\SimpleBus\States;
 use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\State;
 use eTraxis\Entity\StateRoleTransition;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class SetRoleStateTransitionsCommandTest extends BaseTestCase
+class SetRoleStateTransitionsCommandTest extends TransactionalTestCase
 {
     public function testAddRoleTransitions()
     {

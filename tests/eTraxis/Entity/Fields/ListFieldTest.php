@@ -13,9 +13,9 @@ namespace eTraxis\Entity\Fields;
 
 use eTraxis\Entity\Field;
 use eTraxis\Entity\ListItem;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class ListFieldTest extends BaseTestCase
+class ListFieldTest extends TransactionalTestCase
 {
     /** @var Field */
     private $object;

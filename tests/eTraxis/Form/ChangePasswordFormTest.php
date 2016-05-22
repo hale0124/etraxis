@@ -11,9 +11,9 @@
 
 namespace eTraxis\Form;
 
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class ChangePasswordFormTest extends BaseTestCase
+class ChangePasswordFormTest extends TransactionalTestCase
 {
     public function testForm()
     {

@@ -11,9 +11,9 @@
 
 namespace eTraxis\SimpleBus\Users;
 
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class SetPasswordCommandTest extends BaseTestCase
+class SetPasswordCommandTest extends TransactionalTestCase
 {
     public function testSuccess()
     {

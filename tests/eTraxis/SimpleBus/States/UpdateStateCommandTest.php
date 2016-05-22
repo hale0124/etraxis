@@ -12,9 +12,9 @@
 namespace eTraxis\SimpleBus\States;
 
 use eTraxis\Entity\State;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class UpdateStateCommandTest extends BaseTestCase
+class UpdateStateCommandTest extends TransactionalTestCase
 {
     public function testSuccess()
     {

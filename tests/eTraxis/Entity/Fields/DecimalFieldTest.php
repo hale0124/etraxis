@@ -13,9 +13,9 @@ namespace eTraxis\Entity\Fields;
 
 use eTraxis\Entity\DecimalValue;
 use eTraxis\Entity\Field;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class DecimalFieldTest extends BaseTestCase
+class DecimalFieldTest extends TransactionalTestCase
 {
     /** @var Field */
     private $object;

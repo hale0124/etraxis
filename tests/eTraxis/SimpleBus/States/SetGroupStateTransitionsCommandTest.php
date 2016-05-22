@@ -14,9 +14,9 @@ namespace eTraxis\SimpleBus\States;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
 use eTraxis\Entity\StateGroupTransition;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class SetGroupStateTransitionsCommandTest extends BaseTestCase
+class SetGroupStateTransitionsCommandTest extends TransactionalTestCase
 {
     public function testAddGroupTransitions()
     {

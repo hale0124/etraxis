@@ -11,9 +11,9 @@
 
 namespace eTraxis\Security;
 
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class InternalPasswordEncoderTest extends BaseTestCase
+class InternalPasswordEncoderTest extends TransactionalTestCase
 {
     /** @var InternalPasswordEncoder */
     private $object;

@@ -13,10 +13,10 @@ namespace eTraxis\Voter;
 
 use AltrEgo\AltrEgo;
 use eTraxis\Entity\User;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 
-class UserVoterTest extends BaseTestCase
+class UserVoterTest extends TransactionalTestCase
 {
     /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker */
     private $security;

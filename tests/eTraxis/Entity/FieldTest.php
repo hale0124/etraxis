@@ -13,9 +13,9 @@ namespace eTraxis\Entity;
 
 use AltrEgo\AltrEgo;
 use eTraxis\Dictionary\SystemRole;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class FieldTest extends BaseTestCase
+class FieldTest extends TransactionalTestCase
 {
     /** @var Field */
     private $object;

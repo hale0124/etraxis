@@ -11,9 +11,9 @@
 
 namespace eTraxis\Form;
 
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class ExportCsvFormTest extends BaseTestCase
+class ExportCsvFormTest extends TransactionalTestCase
 {
     public function testForm()
     {

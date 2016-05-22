@@ -14,9 +14,9 @@ namespace eTraxis\SimpleBus\Templates;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\Template;
 use eTraxis\Entity\TemplateGroupPermission;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class SetGroupTemplatePermissionsCommandTest extends BaseTestCase
+class SetGroupTemplatePermissionsCommandTest extends TransactionalTestCase
 {
     public function testExistingGroupPermissions()
     {

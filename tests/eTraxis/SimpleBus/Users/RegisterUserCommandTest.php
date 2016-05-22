@@ -12,9 +12,9 @@
 namespace eTraxis\SimpleBus\Users;
 
 use eTraxis\Entity\User;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class RegisterUserCommandTest extends BaseTestCase
+class RegisterUserCommandTest extends TransactionalTestCase
 {
     public function testRegisterUser()
     {

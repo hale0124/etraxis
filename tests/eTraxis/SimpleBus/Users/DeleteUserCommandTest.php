@@ -11,9 +11,9 @@
 
 namespace eTraxis\SimpleBus\Users;
 
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class DeleteUserCommandTest extends BaseTestCase
+class DeleteUserCommandTest extends TransactionalTestCase
 {
     public function testSuccess()
     {

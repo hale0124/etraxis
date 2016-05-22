@@ -12,9 +12,9 @@
 namespace eTraxis\Repository;
 
 use eTraxis\Entity\TextValue;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class TextValuesRepositoryTest extends BaseTestCase
+class TextValuesRepositoryTest extends TransactionalTestCase
 {
     public function testNewValue()
     {

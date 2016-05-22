@@ -14,9 +14,9 @@ namespace eTraxis\Entity;
 use AltrEgo\AltrEgo;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class EntityListenerTest extends BaseTestCase
+class EntityListenerTest extends TransactionalTestCase
 {
     public function testPostLoad()
     {

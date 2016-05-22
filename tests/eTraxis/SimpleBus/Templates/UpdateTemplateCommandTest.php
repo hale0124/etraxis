@@ -14,9 +14,9 @@ namespace eTraxis\SimpleBus\Templates;
 use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\Project;
 use eTraxis\Entity\Template;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class UpdateTemplateCommandTest extends BaseTestCase
+class UpdateTemplateCommandTest extends TransactionalTestCase
 {
     public function testSuccess()
     {

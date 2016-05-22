@@ -13,10 +13,10 @@ namespace eTraxis\Security;
 
 use eTraxis\Entity\CurrentUser;
 use eTraxis\Entity\User;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 use Symfony\Component\Security\Core\User\User as SymfonyUser;
 
-class InternalUserProviderTest extends BaseTestCase
+class InternalUserProviderTest extends TransactionalTestCase
 {
     /** @var InternalUserProvider */
     private $object;

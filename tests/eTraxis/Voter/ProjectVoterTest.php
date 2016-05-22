@@ -12,9 +12,9 @@
 namespace eTraxis\Voter;
 
 use eTraxis\Entity\Project;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class ProjectVoterTest extends BaseTestCase
+class ProjectVoterTest extends TransactionalTestCase
 {
     /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker */
     private $security;

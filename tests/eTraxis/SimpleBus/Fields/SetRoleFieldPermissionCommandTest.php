@@ -13,9 +13,9 @@ namespace eTraxis\SimpleBus\Fields;
 
 use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\Field;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class SetRoleFieldPermissionCommandTest extends BaseTestCase
+class SetRoleFieldPermissionCommandTest extends TransactionalTestCase
 {
     public function testAuthorPermissions()
     {

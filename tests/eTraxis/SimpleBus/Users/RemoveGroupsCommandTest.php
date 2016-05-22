@@ -12,9 +12,9 @@
 namespace eTraxis\SimpleBus\Users;
 
 use eTraxis\Entity\Group;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class RemoveGroupsCommandTest extends BaseTestCase
+class RemoveGroupsCommandTest extends TransactionalTestCase
 {
     public function testSuccess()
     {

@@ -11,9 +11,9 @@
 
 namespace eTraxis\Entity;
 
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class GroupTest extends BaseTestCase
+class GroupTest extends TransactionalTestCase
 {
     /** @var Group */
     private $object;

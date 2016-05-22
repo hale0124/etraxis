@@ -12,13 +12,13 @@
 namespace AppBundle\EventListener;
 
 use eTraxis\Entity\CurrentUser;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Event\AuthenticationEvent;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
-class UsersLockoutTest extends BaseTestCase
+class UsersLockoutTest extends TransactionalTestCase
 {
     public function testSuccess()
     {

@@ -11,13 +11,13 @@
 
 namespace AppBundle\EventListener;
 
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseEvent;
 use Symfony\Component\HttpKernel\HttpKernelInterface;
 
-class CsrfTokenTest extends BaseTestCase
+class CsrfTokenTest extends TransactionalTestCase
 {
     /** @var \Symfony\Component\Security\Csrf\CsrfTokenManagerInterface */
     protected $tokens;

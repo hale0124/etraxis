@@ -13,9 +13,9 @@ namespace eTraxis\SimpleBus\Templates;
 
 use eTraxis\Entity\Project;
 use eTraxis\Entity\Template;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class CreateTemplateCommandTest extends BaseTestCase
+class CreateTemplateCommandTest extends TransactionalTestCase
 {
     /**
      * @return  \eTraxis\Entity\Project

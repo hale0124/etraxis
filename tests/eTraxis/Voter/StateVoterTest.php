@@ -13,9 +13,9 @@ namespace eTraxis\Voter;
 
 use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class StateVoterTest extends BaseTestCase
+class StateVoterTest extends TransactionalTestCase
 {
     /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker */
     private $security;

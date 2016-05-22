@@ -12,9 +12,9 @@
 namespace eTraxis\SimpleBus\Users;
 
 use eTraxis\Entity\User;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class SaveAppearanceCommandTest extends BaseTestCase
+class SaveAppearanceCommandTest extends TransactionalTestCase
 {
     public function testSuccess()
     {

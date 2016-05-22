@@ -12,9 +12,9 @@
 namespace eTraxis\SimpleBus\Projects;
 
 use eTraxis\Entity\Project;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class UpdateProjectCommandTest extends BaseTestCase
+class UpdateProjectCommandTest extends TransactionalTestCase
 {
     public function testSuccess()
     {

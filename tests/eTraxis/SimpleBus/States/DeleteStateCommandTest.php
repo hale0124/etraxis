@@ -13,9 +13,9 @@ namespace eTraxis\SimpleBus\States;
 
 use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class DeleteStateCommandTest extends BaseTestCase
+class DeleteStateCommandTest extends TransactionalTestCase
 {
     public function testSuccess()
     {

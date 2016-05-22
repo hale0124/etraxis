@@ -13,9 +13,9 @@ namespace eTraxis\Doctrine;
 
 use eTraxis\Entity\Field;
 use eTraxis\Entity\State;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class FieldsFilterTest extends BaseTestCase
+class FieldsFilterTest extends TransactionalTestCase
 {
     public function testFields()
     {

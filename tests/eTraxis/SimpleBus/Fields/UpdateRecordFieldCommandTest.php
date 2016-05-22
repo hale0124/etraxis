@@ -12,9 +12,9 @@
 namespace eTraxis\SimpleBus\Fields;
 
 use eTraxis\Entity\Field;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class UpdateRecordFieldCommandTest extends BaseTestCase
+class UpdateRecordFieldCommandTest extends TransactionalTestCase
 {
     public function testSuccess()
     {

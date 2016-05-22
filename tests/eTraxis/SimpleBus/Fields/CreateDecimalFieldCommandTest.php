@@ -14,9 +14,9 @@ namespace eTraxis\SimpleBus\Fields;
 use eTraxis\Entity\DecimalValue;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\State;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class CreateDecimalFieldCommandTest extends BaseTestCase
+class CreateDecimalFieldCommandTest extends TransactionalTestCase
 {
     public function testSuccess()
     {

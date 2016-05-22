@@ -13,9 +13,9 @@ namespace eTraxis\SimpleBus\ListItems;
 
 use eTraxis\Entity\Field;
 use eTraxis\Entity\ListItem;
-use eTraxis\Tests\BaseTestCase;
+use eTraxis\Tests\TransactionalTestCase;
 
-class DeleteListItemCommandTest extends BaseTestCase
+class DeleteListItemCommandTest extends TransactionalTestCase
 {
     public function testSuccess()
     {
