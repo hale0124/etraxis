@@ -14,6 +14,8 @@ namespace AppBundle\Controller\Web;
 use eTraxis\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\DomCrawler\Crawler;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class SecurityControllerTest extends WebTestCase
 {
@@ -44,9 +46,9 @@ class SecurityControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/login');
+        $crawler = $client->request(Request::METHOD_GET, '/login');
 
-        self::assertEquals(200, $client->getResponse()->getStatusCode());
+        self::assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
         self::assertTrue($this->isLoginPage($crawler));
         self::assertFalse($this->isAuthenticated($crawler));
 
@@ -58,7 +60,7 @@ class SecurityControllerTest extends WebTestCase
         $client->submit($form);
         $crawler = $client->followRedirect();
 
-        self::assertEquals(200, $client->getResponse()->getStatusCode());
+        self::assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
         self::assertTrue($this->isLoginPage($crawler));
         self::assertFalse($this->isAuthenticated($crawler));
 
@@ -70,17 +72,17 @@ class SecurityControllerTest extends WebTestCase
         $client->submit($form);
         $crawler = $client->followRedirect();
 
-        self::assertEquals(200, $client->getResponse()->getStatusCode());
+        self::assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
         self::assertFalse($this->isLoginPage($crawler));
         self::assertTrue($this->isAuthenticated($crawler));
 
-        $client->request('GET', '/login');
+        $client->request(Request::METHOD_GET, '/login');
 
-        self::assertEquals(302, $client->getResponse()->getStatusCode());
+        self::assertEquals(Response::HTTP_FOUND, $client->getResponse()->getStatusCode());
 
         $crawler = $client->followRedirect();
 
-        self::assertEquals(200, $client->getResponse()->getStatusCode());
+        self::assertEquals(Response::HTTP_OK, $client->getResponse()->getStatusCode());
         self::assertFalse($this->isLoginPage($crawler));
         self::assertTrue($this->isAuthenticated($crawler));
 

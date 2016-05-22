@@ -18,7 +18,7 @@ use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 
 /**
- * Basic test case with database transactions, users authentication, and access to kernel.
+ * Extended base test case with every test wrapped into database transaction.
  */
 class BaseTestCase extends WebTestCase
 {
@@ -126,7 +126,7 @@ class BaseTestCase extends WebTestCase
             $token = new UsernamePasswordToken($current, null, 'etraxis_provider', $current->getRoles());
             $this->client->getContainer()->get('security.token_storage')->setToken($token);
 
-            $this->session->set('_security_default', serialize($token));
+            $this->session->set('_security_main', serialize($token));
             $this->session->save();
 
             $cookie = new Cookie($this->session->getName(), $this->session->getId());
