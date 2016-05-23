@@ -75,7 +75,7 @@ class SettingsController extends Controller
         try {
             $data = $request->request->get('appearance');
 
-            $command = new Users\SaveAppearanceCommand($data, ['id' => $this->getUser()->getId()]);
+            $command = new Users\SaveAppearanceCommand($data ?? [], ['id' => $this->getUser()->getId()]);
             $this->getCommandBus()->handle($command);
 
             $this->get('session')->set('_locale', $command->locale);
