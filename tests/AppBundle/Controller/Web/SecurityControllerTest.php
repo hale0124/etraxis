@@ -42,6 +42,132 @@ class SecurityControllerTest extends ControllerTestCase
             count($crawler->filter('input[type="submit"]')) === 1;
     }
 
+    public function testLoginAction()
+    {
+        $uri = $this->router->generate('login');
+
+        $this->makeRequest(Request::METHOD_GET, $uri);
+        $this->assertStatusCode(Response::HTTP_OK);
+
+        $this->makeRequest(Request::METHOD_POST, $uri);
+        $this->assertStatusCode(Response::HTTP_OK);
+
+        $this->loginAs('fry');
+
+        $this->makeRequest(Request::METHOD_GET, $uri);
+        $this->assertStatusCode(Response::HTTP_FOUND);
+        $this->assertLocationHeader($this->router->generate('homepage'));
+
+        $this->makeRequest(Request::METHOD_POST, $uri);
+        $this->assertStatusCode(Response::HTTP_FOUND);
+        $this->assertLocationHeader($this->router->generate('homepage'));
+
+        $this->loginAs('hubert');
+
+        $this->makeRequest(Request::METHOD_GET, $uri);
+        $this->assertStatusCode(Response::HTTP_FOUND);
+        $this->assertLocationHeader($this->router->generate('homepage'));
+
+        $this->makeRequest(Request::METHOD_POST, $uri);
+        $this->assertStatusCode(Response::HTTP_FOUND);
+        $this->assertLocationHeader($this->router->generate('homepage'));
+    }
+
+    public function testForgotPasswordAction()
+    {
+        $uri = $this->router->generate('forgot_password');
+
+        $this->makeRequest(Request::METHOD_GET, $uri);
+        $this->assertStatusCode(Response::HTTP_OK);
+
+        $this->makeRequest(Request::METHOD_POST, $uri);
+        $this->assertStatusCode(Response::HTTP_OK);
+
+        $this->loginAs('fry');
+
+        $this->makeRequest(Request::METHOD_GET, $uri);
+        $this->assertStatusCode(Response::HTTP_FOUND);
+        $this->assertLocationHeader($this->router->generate('homepage'));
+
+        $this->makeRequest(Request::METHOD_POST, $uri);
+        $this->assertStatusCode(Response::HTTP_FOUND);
+        $this->assertLocationHeader($this->router->generate('homepage'));
+
+        $this->loginAs('hubert');
+
+        $this->makeRequest(Request::METHOD_GET, $uri);
+        $this->assertStatusCode(Response::HTTP_FOUND);
+        $this->assertLocationHeader($this->router->generate('homepage'));
+
+        $this->makeRequest(Request::METHOD_POST, $uri);
+        $this->assertStatusCode(Response::HTTP_FOUND);
+        $this->assertLocationHeader($this->router->generate('homepage'));
+    }
+
+    public function testResetPasswordAction()
+    {
+        $uri = $this->router->generate('reset_password', [
+            'token' => 'cbda95b3a78f4bd7a83c954544497a64',
+        ]);
+
+        $this->makeRequest(Request::METHOD_GET, $uri);
+        $this->assertStatusCode(Response::HTTP_OK);
+
+        $this->makeRequest(Request::METHOD_POST, $uri);
+        $this->assertStatusCode(Response::HTTP_OK);
+
+        $this->loginAs('fry');
+
+        $this->makeRequest(Request::METHOD_GET, $uri);
+        $this->assertStatusCode(Response::HTTP_FOUND);
+        $this->assertLocationHeader($this->router->generate('homepage'));
+
+        $this->makeRequest(Request::METHOD_POST, $uri);
+        $this->assertStatusCode(Response::HTTP_FOUND);
+        $this->assertLocationHeader($this->router->generate('homepage'));
+
+        $this->loginAs('hubert');
+
+        $this->makeRequest(Request::METHOD_GET, $uri);
+        $this->assertStatusCode(Response::HTTP_FOUND);
+        $this->assertLocationHeader($this->router->generate('homepage'));
+
+        $this->makeRequest(Request::METHOD_POST, $uri);
+        $this->assertStatusCode(Response::HTTP_FOUND);
+        $this->assertLocationHeader($this->router->generate('homepage'));
+    }
+
+    public function testSetExpiredPasswordAction()
+    {
+        $uri = $this->router->generate('set_expired_password');
+
+        $this->makeRequest(Request::METHOD_GET, $uri);
+        $this->assertLoginPage();
+
+        $this->makeRequest(Request::METHOD_POST, $uri);
+        $this->assertLoginPage();
+
+        $this->loginAs('fry');
+
+        $this->makeRequest(Request::METHOD_GET, $uri);
+        $this->assertStatusCode(Response::HTTP_FOUND);
+        $this->assertLocationHeader($this->router->generate('homepage'));
+
+        $this->makeRequest(Request::METHOD_POST, $uri);
+        $this->assertStatusCode(Response::HTTP_FOUND);
+        $this->assertLocationHeader($this->router->generate('homepage'));
+
+        $this->loginAs('hubert');
+
+        $this->makeRequest(Request::METHOD_GET, $uri);
+        $this->assertStatusCode(Response::HTTP_FOUND);
+        $this->assertLocationHeader($this->router->generate('homepage'));
+
+        $this->makeRequest(Request::METHOD_POST, $uri);
+        $this->assertStatusCode(Response::HTTP_FOUND);
+        $this->assertLocationHeader($this->router->generate('homepage'));
+    }
+
     public function testLogin()
     {
         $crawler = $this->client->request(Request::METHOD_GET, '/login');
