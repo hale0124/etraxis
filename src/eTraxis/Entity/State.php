@@ -98,7 +98,7 @@ class State extends Entity implements \JsonSerializable
      * @var State Next state by default.
      *
      * @ORM\ManyToOne(targetEntity="State")
-     * @ORM\JoinColumn(name="next_state_id", referencedColumnName="state_id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="next_state_id", referencedColumnName="state_id", onDelete="SET NULL")
      */
     private $nextState;
 
