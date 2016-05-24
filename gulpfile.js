@@ -216,7 +216,7 @@ gulp.task('etraxis:routes', function() {
     };
 
     return gulp.src('gulpfile.js')
-        .pipe(exec('./bin/console etraxis:routes', options))
+        .pipe(exec('php ./bin/console etraxis:routes', options))
         .pipe(rename(function(path) {
             path.basename = 'routes';
         }))
