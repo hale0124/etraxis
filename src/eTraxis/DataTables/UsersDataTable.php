@@ -181,7 +181,7 @@ class UsersDataTable implements DataTableHandlerInterface
             $query->setMaxResults($request->length);
         }
 
-        /** @var \eTraxis\Entity\User[] $entities */
+        /** @var User[] $entities */
         $entities = $query->getQuery()->getResult();
 
         foreach ($entities as $entity) {

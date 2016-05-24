@@ -2,12 +2,12 @@
 
 {% block menu %}
 
-    {% if is_granted('ROLE_ADMIN') %}
-    <a href="{{ path('admin') }}">{{ 'administration'|trans }}</a>
-    {% endif %}
-
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
     <a href="{{ path('settings') }}">{{ 'settings'|trans }}</a>
+    {% endif %}
+
+    {% if is_granted('ROLE_ADMIN') %}
+    <a href="{{ path('admin') }}">{{ 'administration'|trans }}</a>
     {% endif %}
 
 {% endblock %}
