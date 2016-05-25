@@ -118,17 +118,6 @@ class CheckRequirementsCommand extends ContainerAwareCommand
                 $extensions[] = 'pdo_pgsql';
                 break;
 
-            // Microsoft SQL Server
-            case 'pdo_sqlsrv':
-                $extensions[] = 'sqlsrv';
-                $extensions[] = 'pdo_sqlsrv';
-                break;
-
-            // Oracle
-            case 'oci8':
-                $extensions[] = 'oci8';
-                break;
-
             default:
                 $output->writeln(sprintf('<error>ERROR: unsupported database driver (%s).</error>', $database_driver));
                 $output->writeln('');

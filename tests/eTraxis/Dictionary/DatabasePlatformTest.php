@@ -18,8 +18,6 @@ class DatabasePlatformTest extends \PHPUnit_Framework_TestCase
         $expected = [
             DatabasePlatform::MYSQL,
             DatabasePlatform::POSTGRESQL,
-            DatabasePlatform::MSSQL,
-            DatabasePlatform::ORACLE,
         ];
 
         self::assertEquals($expected, DatabasePlatform::keys());

@@ -14,7 +14,7 @@ namespace eTraxis\Doctrine;
 use Doctrine\ORM\Query\SqlWalker;
 
 /**
- * PostgreSQL and Oracle treat NULLs as greatest values.
+ * PostgreSQL treats NULLs as greatest values.
  * This walker is to workaround it.
  */
 class SortableNullsWalker extends SqlWalker

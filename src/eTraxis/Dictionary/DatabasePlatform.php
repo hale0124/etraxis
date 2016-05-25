@@ -20,8 +20,6 @@ class DatabasePlatform extends StaticDictionary
 {
     const MYSQL      = 'mysql';
     const POSTGRESQL = 'postgresql';
-    const MSSQL      = 'mssql';
-    const ORACLE     = 'oracle';
 
     /**
      * {@inheritdoc}
@@ -31,8 +29,6 @@ class DatabasePlatform extends StaticDictionary
         return [
             self::MYSQL      => 'MySQL',
             self::POSTGRESQL => 'PostgreSQL',
-            self::MSSQL      => 'Microsoft SQL Server',
-            self::ORACLE     => 'Oracle',
         ];
     }
 }

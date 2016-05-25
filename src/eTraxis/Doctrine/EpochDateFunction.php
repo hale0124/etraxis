@@ -36,8 +36,6 @@ class EpochDateFunction extends FunctionNode
         $sql = [
             DatabasePlatform::MYSQL      => 'DATE(FROM_UNIXTIME(%s))',
             DatabasePlatform::POSTGRESQL => "TO_CHAR(TO_TIMESTAMP(%s), 'YYYY-MM-DD')",
-            DatabasePlatform::MSSQL      => "CONVERT(DATE, DATEADD(SECOND, %s, '19700101'))",
-            DatabasePlatform::ORACLE     => "TO_CHAR(TO_DATE('1970-01-01', 'YYYY-MM-DD') + NUMTODSINTERVAL(%s, 'SECOND'), 'YYYY-MM-DD')",
         ];
 
         $platform = $sqlWalker->getConnection()->getDatabasePlatform()->getName();

@@ -1,9 +1,0 @@
-parameters:
-
-    database_driver:        pdo_sqlsrv
-    database_host:          localhost
-    database_port:          ~
-    database_name:          xe
-    database_user:          ~
-    database_password:      ~
-    database_charset:       UTF8

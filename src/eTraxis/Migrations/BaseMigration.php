@@ -86,24 +86,6 @@ abstract class BaseMigration extends AbstractMigration
 
                 break;
 
-            case DatabasePlatform::MSSQL:
-
-                $this->abortIf(
-                    !($this instanceof MssqlMigrationInterface),
-                    'Microsoft SQL Server platform is not supported yet.'
-                );
-
-                break;
-
-            case DatabasePlatform::ORACLE:
-
-                $this->abortIf(
-                    !($this instanceof OracleMigrationInterface),
-                    'Oracle platform is not supported yet.'
-                );
-
-                break;
-
             default:
 
                 $this->abortIf(true, "Unknown database platform: {$platform}.");

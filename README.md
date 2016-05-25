@@ -14,7 +14,7 @@ eTraxis can be used for tracking almost anything, but the most popular cases are
 
 * Custom workflow templates
 * Flexible permissions management
-* MySQL, PostgreSQL, MSSQL and Oracle support
+* MySQL and PostgreSQL support
 * Active Directory (LDAP) support
 * OS independence
 * Localization ability (a lot of different translations are already available)

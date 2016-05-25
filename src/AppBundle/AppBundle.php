@@ -27,8 +27,8 @@ class AppBundle extends Bundle
         /** @var \Doctrine\ORM\EntityManagerInterface $manager */
         $manager = $this->container->get('doctrine.orm.entity_manager');
 
-        // PostgreSQL and Oracle treat NULLs as greatest values.
-        if (in_array($this->container->getParameter('database_driver'), ['pdo_pgsql', 'oci8'])) {
+        // PostgreSQL treats NULLs as greatest values.
+        if ($this->container->getParameter('database_driver') === 'pdo_pgsql') {
 
             $manager->getConfiguration()->setDefaultQueryHint(
                 Query::HINT_CUSTOM_OUTPUT_WALKER,

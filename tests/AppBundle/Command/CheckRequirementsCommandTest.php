@@ -47,15 +47,6 @@ class CheckRequirementsCommandTest extends TransactionalTestCase
                 $extensions[] = 'pgsql      OK';
                 $extensions[] = 'pdo_pgsql  OK';
                 break;
-
-            case DatabasePlatform::MSSQL:
-                $extensions[] = 'sqlsrv     OK';
-                $extensions[] = 'pdo_sqlsrv OK';
-                break;
-
-            case DatabasePlatform::ORACLE:
-                $extensions[] = 'oci8       OK';
-                break;
         }
 
         sort($extensions, SORT_STRING | SORT_FLAG_CASE);
