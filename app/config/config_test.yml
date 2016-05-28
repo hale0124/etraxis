@@ -2,7 +2,7 @@ imports:
     - { resource: config_dev.yml }
 
 parameters:
-    database_name:          xe
+    database_name:          etraxis_test
     locale:                 en_US
     security_auth_attempts: 2
     security_lock_time:     30
