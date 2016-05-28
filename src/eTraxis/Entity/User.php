@@ -156,6 +156,14 @@ class User extends Entity implements \JsonSerializable
     private $groups;
 
     /**
+     * @var View Current view.
+     *
+     * @ORM\OneToOne(targetEntity="View")
+     * @ORM\JoinColumn(name="view_id", referencedColumnName="view_id", onDelete="SET NULL")
+     */
+    public $view;
+
+    /**
      * @var UserSettings User settings.
      *
      * @ORM\Embedded(class="UserSettings", columnPrefix=false)

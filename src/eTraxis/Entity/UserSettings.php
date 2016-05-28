@@ -43,14 +43,6 @@ class UserSettings implements \ArrayAccess
     private $timezone;
 
     /**
-     * @var View Current view.
-     *
-     * @ORM\OneToOne(targetEntity="View")
-     * @ORM\JoinColumn(name="view_id", referencedColumnName="view_id")
-     */
-    public $view;
-
-    /**
      * Constructor.
      */
     public function __construct()
