@@ -1506,12 +1506,31 @@ class LoadFuturamaRecordsData extends AbstractFixture implements ContainerAwareI
             /** @noinspection PhpUndefinedFieldInspection */
             AltrEgo::create($event2)->createdAt = $record->getCreatedAt();
 
+            $read = $this->container->get('doctrine')->getRepository(LastRead::class)->findOneBy([
+                'record' => $record,
+                'user'   => $event->getUser(),
+            ]);
+
+            if (!$read) {
+
+                $read = new LastRead();
+
+                $read
+                    ->setRecord($record)
+                    ->setUser($event->getUser())
+                ;
+            }
+
+            /** @noinspection PhpUndefinedFieldInspection */
+            AltrEgo::create($read)->readAt = $event2->getCreatedAt();
+
             $manager->persist($record);
             $manager->persist($event);
             $manager->persist($event2);
-            $manager->flush();
+            $manager->persist($read);
 
-            $decimal_value_id = null;
+            /** @var DecimalValue $decimal_value */
+            $decimal_value = null;
 
             if ($info['viewers']) {
 
@@ -1525,10 +1544,7 @@ class LoadFuturamaRecordsData extends AbstractFixture implements ContainerAwareI
                     $decimal_value->setValue($info['viewers']);
                     $this->addReference($reference, $decimal_value);
                     $manager->persist($decimal_value);
-                    $manager->flush();
                 }
-
-                $decimal_value_id = $decimal_value->getId();
             }
 
             $string_value = new StringValue();
@@ -1549,7 +1565,7 @@ class LoadFuturamaRecordsData extends AbstractFixture implements ContainerAwareI
                 'state:produced:5' => $info['multipart'],
                 'state:produced:6' => $text_value->getId(),
                 'state:released:1' => strtotime($info['date']),
-                'state:released:2' => $decimal_value_id,
+                'state:released:2' => $decimal_value === null ? null : $decimal_value->getId(),
             ];
 
             foreach ($fields as $field_ref => $field_value) {
@@ -1569,27 +1585,6 @@ class LoadFuturamaRecordsData extends AbstractFixture implements ContainerAwareI
 
                 $manager->persist($value);
             }
-
-            $read = $this->container->get('doctrine')->getRepository(LastRead::class)->findOneBy([
-                'record' => $record,
-                'user'   => $event->getUser(),
-            ]);
-
-            if (!$read) {
-
-                $read = new LastRead();
-
-                $read
-                    ->setRecord($record)
-                    ->setUser($event->getUser())
-                ;
-            }
-
-            /** @noinspection PhpUndefinedFieldInspection */
-            AltrEgo::create($read)->readAt = $event2->getCreatedAt();
-
-            $manager->persist($read);
-            $manager->flush();
         }
     }
 }
