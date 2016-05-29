@@ -48,6 +48,7 @@ var TemplatesApp = (function() {
          * Clears and hides the panel.
          */
         reset: function() {
+            StatesApp.reset();
             $templates.panel('clear').hide();
         },
 

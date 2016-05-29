@@ -57,6 +57,7 @@ var StatesApp = (function() {
          * Clears and hides the panel.
          */
         reset: function() {
+            FieldsApp.reset();
             $states.panel('clear').hide();
         },
 
