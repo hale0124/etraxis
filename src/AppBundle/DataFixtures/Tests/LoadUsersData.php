@@ -54,6 +54,8 @@ class LoadUsersData extends AbstractFixture implements ContainerAwareInterface, 
 
         $data = [
 
+            // Assorted users.
+
             'artem' => [
                 'fullname'    => 'Artem Rodygin',
                 'email'       => 'artem@example.com',
@@ -71,6 +73,8 @@ class LoadUsersData extends AbstractFixture implements ContainerAwareInterface, 
                 'is_disabled' => false,
                 'is_ldap'     => true,
             ],
+
+            // Futurama users.
 
             'hubert' => [
                 'fullname'    => 'Hubert J. Farnsworth',

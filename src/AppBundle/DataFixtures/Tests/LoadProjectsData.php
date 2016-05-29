@@ -46,6 +46,17 @@ class LoadProjectsData extends AbstractFixture implements ContainerAwareInterfac
      */
     public function load(ObjectManager $manager)
     {
+        $this->loadEtraxisProjects($manager);
+        $this->loadFuturamaProject($manager);
+    }
+
+    /**
+     * Loads set of eTraxis projects.
+     *
+     * @param   ObjectManager $manager
+     */
+    protected function loadEtraxisProjects(ObjectManager $manager)
+    {
         $projects = [
             'eTraxis 1.0' => '2006-12-22',
             'eTraxis 2.0' => '2009-12-04',
@@ -67,6 +78,16 @@ class LoadProjectsData extends AbstractFixture implements ContainerAwareInterfac
             $manager->persist($project);
         }
 
+        $manager->flush();
+    }
+
+    /**
+     * Loads Futurama project.
+     *
+     * @param   ObjectManager $manager
+     */
+    public function loadFuturamaProject(ObjectManager $manager)
+    {
         $groups = [
             'managers' => 'Company management',
             'staff'    => 'Company employees',
