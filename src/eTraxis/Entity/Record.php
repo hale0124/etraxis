@@ -211,6 +211,26 @@ class Record
     }
 
     /**
+     * Property getter.
+     *
+     * @return  int
+     */
+    public function getChangedAt()
+    {
+        return $this->changedAt;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  int
+     */
+    public function getClosedAt()
+    {
+        return $this->closedAt;
+    }
+
+    /**
      * Get record history.
      *
      * @return  Event[]

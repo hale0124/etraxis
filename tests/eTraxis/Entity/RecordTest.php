@@ -61,6 +61,16 @@ class RecordTest extends TransactionalTestCase
         self::assertEquals('1999-04-04', date('Y-m-d', $this->object->getCreatedAt()));
     }
 
+    public function testChangedAt()
+    {
+        self::assertEquals('1999-04-04', date('Y-m-d', $this->object->getChangedAt()));
+    }
+
+    public function testClosedAt()
+    {
+        self::assertEquals('1999-04-04', date('Y-m-d', $this->object->getClosedAt()));
+    }
+
     public function testHistory()
     {
         self::assertCount(3, $this->object->getHistory());

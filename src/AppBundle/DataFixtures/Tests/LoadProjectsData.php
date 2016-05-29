@@ -48,6 +48,7 @@ class LoadProjectsData extends AbstractFixture implements ContainerAwareInterfac
     {
         $this->loadEtraxisProjects($manager);
         $this->loadFuturamaProject($manager);
+        $this->loadPhpFigProject($manager);
     }
 
     /**
@@ -148,6 +149,68 @@ class LoadProjectsData extends AbstractFixture implements ContainerAwareInterfac
         }
 
         $this->addReference('project:planetexpress', $project);
+
+        $manager->persist($project);
+        $manager->flush();
+    }
+
+    /**
+     * Loads "PHP-FIG" project.
+     *
+     * @param   ObjectManager $manager
+     */
+    public function loadPhpFigProject(ObjectManager $manager)
+    {
+        $groups = [
+            'members' => 'Voting members',
+        ];
+
+        $members = [
+            'members' => [
+                'mwop',
+                'pmjones',
+                'seldaek',
+                'mvriel',
+                'Crell',
+                'lsmith',
+                'moufmouf',
+                'korvinszanto',
+                'manchuck',
+            ],
+        ];
+
+        $project = new Project();
+
+        $project
+            ->setName('PHP-FIG')
+            ->setDescription('PHP Framework Interop Group')
+            ->setSuspended(false)
+        ;
+
+        /** @noinspection PhpUndefinedFieldInspection */
+        AltrEgo::create($project)->createdAt = strtotime('2009-05-23');
+
+        foreach ($groups as $name => $description) {
+
+            $group = new Group();
+
+            $group
+                ->setProject($project)
+                ->setName(ucwords($name))
+                ->setDescription($description)
+            ;
+
+            foreach ($members[$name] as $member) {
+                /** @noinspection PhpParamsInspection */
+                $group->addMember($this->getReference('user:' . $member));
+            }
+
+            $this->addReference('group:fig:' . $name, $group);
+
+            $manager->persist($group);
+        }
+
+        $this->addReference('project:phpfig', $project);
 
         $manager->persist($project);
         $manager->flush();

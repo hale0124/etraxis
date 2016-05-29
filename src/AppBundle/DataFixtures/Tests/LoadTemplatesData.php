@@ -48,6 +48,7 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
     {
         $this->loadDeliveryTemplate($manager);
         $this->loadFuturamaTemplate($manager);
+        $this->loadPhpPsrTemplate($manager);
     }
 
     /**
@@ -155,6 +156,46 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
         $this->addReference('template:futurama', $template);
 
         $manager->persist($template);
+        $manager->flush();
+    }
+
+    /**
+     * Loads "PSR" template for "PHP-FIG" project.
+     *
+     * @param   ObjectManager $manager
+     */
+    protected function loadPhpPsrTemplate(ObjectManager $manager)
+    {
+        $author     = Template::PERMIT_EDIT_RECORD | Template::PERMIT_ADD_COMMENT | Template::PERMIT_ADD_FILE | Template::PERMIT_REMOVE_FILE;
+        $registered = Template::PERMIT_VIEW_RECORD;
+
+        $template = new Template();
+
+        /** @noinspection PhpParamsInspection */
+        $template
+            ->setProject($this->getReference('project:phpfig'))
+            ->setName('PSR')
+            ->setPrefix('fig')
+            ->setDescription('PHP Standard Recommendation')
+            ->setLocked(false)
+            ->setRolePermissions(SystemRole::AUTHOR, $author)
+            ->setRolePermissions(SystemRole::RESPONSIBLE, 0)
+            ->setRolePermissions(SystemRole::REGISTERED, $registered)
+        ;
+
+        $this->addReference('template:phppsr', $template);
+
+        $permission = new TemplateGroupPermission();
+
+        /** @noinspection PhpParamsInspection */
+        $permission
+            ->setTemplate($template)
+            ->setGroup($this->getReference('group:fig:members'))
+            ->setPermission(Template::PERMIT_VIEW_RECORD | Template::PERMIT_CREATE_RECORD | Template::PERMIT_ADD_COMMENT)
+        ;
+
+        $manager->persist($template);
+        $manager->persist($permission);
         $manager->flush();
     }
 }

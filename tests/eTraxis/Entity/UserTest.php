@@ -198,6 +198,7 @@ class UserTest extends TransactionalTestCase
 
         $expected = [
             'Nimbus',
+            'Members',
             'Staff',
         ];
 

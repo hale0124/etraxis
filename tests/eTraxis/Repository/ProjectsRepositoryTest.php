@@ -31,6 +31,7 @@ class ProjectsRepositoryTest extends TransactionalTestCase
             'eTraxis 1.0',
             'eTraxis 2.0',
             'eTraxis 3.0',
+            'PHP-FIG',
             'Planet Express',
         ];
 

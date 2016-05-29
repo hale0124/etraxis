@@ -77,13 +77,13 @@ class GroupTest extends TransactionalTestCase
     public function testNonMembers()
     {
         $user = $this->findUser('artem');
-        self::assertCount(9, $this->object->getNonMembers());
+        self::assertCount(18, $this->object->getNonMembers());
 
         $this->object->addMember($user);
-        self::assertCount(8, $this->object->getNonMembers());
+        self::assertCount(17, $this->object->getNonMembers());
 
         $this->object->removeMember($user);
-        self::assertCount(9, $this->object->getNonMembers());
+        self::assertCount(18, $this->object->getNonMembers());
     }
 
     public function testJsonSerialize()

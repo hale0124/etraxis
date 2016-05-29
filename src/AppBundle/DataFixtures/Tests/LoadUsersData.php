@@ -195,6 +195,96 @@ class LoadUsersData extends AbstractFixture implements ContainerAwareInterface, 
                 'is_disabled' => true,
                 'is_ldap'     => false,
             ],
+
+            // PHP-FIG users.
+
+            'mwop' => [
+                'fullname'    => 'Matthew Weier O\'Phinney',
+                'email'       => 'mwop@example.com',
+                'password'    => 'secret',
+                'description' => 'Zend Framework 2',
+                'is_admin'    => false,
+                'is_disabled' => false,
+                'is_ldap'     => false,
+            ],
+
+            'pmjones' => [
+                'fullname'    => 'Paul M. Jones',
+                'email'       => 'pmjones@example.com',
+                'password'    => 'secret',
+                'description' => 'Aura Project and Solar Framework',
+                'is_admin'    => false,
+                'is_disabled' => false,
+                'is_ldap'     => false,
+            ],
+
+            'seldaek' => [
+                'fullname'    => 'Jordi Boggiano',
+                'email'       => 'seldaek@example.com',
+                'password'    => 'secret',
+                'description' => 'Composer',
+                'is_admin'    => false,
+                'is_disabled' => false,
+                'is_ldap'     => false,
+            ],
+
+            'mvriel' => [
+                'fullname'    => 'Mike van Riel',
+                'email'       => 'mvriel@example.com',
+                'password'    => 'secret',
+                'description' => 'phpDocumentor',
+                'is_admin'    => false,
+                'is_disabled' => false,
+                'is_ldap'     => false,
+            ],
+
+            'Crell' => [
+                'fullname'    => 'Larry Garfield',
+                'email'       => 'Crell@example.com',
+                'password'    => 'secret',
+                'description' => 'Drupal',
+                'is_admin'    => false,
+                'is_disabled' => false,
+                'is_ldap'     => false,
+            ],
+
+            'lsmith' => [
+                'fullname'    => 'Lukas Kahwe Smith',
+                'email'       => 'lsmith@example.com',
+                'password'    => 'secret',
+                'description' => 'Jackalope',
+                'is_admin'    => false,
+                'is_disabled' => false,
+                'is_ldap'     => false,
+            ],
+
+            'moufmouf' => [
+                'fullname'    => 'David Négrier',
+                'email'       => 'moufmouf@example.com',
+                'password'    => 'secret',
+                'is_admin'    => false,
+                'is_disabled' => false,
+                'is_ldap'     => false,
+            ],
+
+            'korvinszanto' => [
+                'fullname'    => 'Korvin Szanto',
+                'email'       => 'korvinszanto@example.com',
+                'password'    => 'secret',
+                'description' => 'concrete5',
+                'is_admin'    => false,
+                'is_disabled' => false,
+                'is_ldap'     => false,
+            ],
+
+            'manchuck' => [
+                'fullname'    => 'Chuck Reeves',
+                'email'       => 'manchuck@example.com',
+                'password'    => 'secret',
+                'is_admin'    => false,
+                'is_disabled' => false,
+                'is_ldap'     => false,
+            ],
         ];
 
         foreach ($data as $username => $row) {

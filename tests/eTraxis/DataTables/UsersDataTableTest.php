@@ -51,7 +51,7 @@ class UsersDataTableTest extends TransactionalTestCase
 
     public function testSearch()
     {
-        $total    = 14;
+        $total    = 23;
         $expected = 8;
 
         $request = new Request([
@@ -201,7 +201,7 @@ class UsersDataTableTest extends TransactionalTestCase
 
     public function testFilterByPermissionsUser()
     {
-        $expected = 12;
+        $expected = 21;
 
         $request = new Request([
             'draw'    => random_int(1, PHP_INT_MAX),
@@ -253,7 +253,7 @@ class UsersDataTableTest extends TransactionalTestCase
 
     public function testFilterByAuthenticationEtraxis()
     {
-        $expected = 13;
+        $expected = 22;
 
         $request = new Request([
             'draw'    => random_int(1, PHP_INT_MAX),
@@ -276,6 +276,7 @@ class UsersDataTableTest extends TransactionalTestCase
     public function testFilterByDescription()
     {
         $expected = [
+            'mvriel',
             'scruffy',
             'veins',
             'zoidberg',
@@ -343,30 +344,31 @@ class UsersDataTableTest extends TransactionalTestCase
     public function testOrder()
     {
         $expected = [
-            'zoidberg',
-            'francine',
-            'scruffy',
-            'hermes',
-            'kif',
-            'hubert',
-            'veins',
-            'bender',
-            'amy',
-            'fry',
-            'leela',
-            'zapp',
-            'einstein',
-            'artem',
+            'David Négrier'             => null,
+            'Chuck Reeves'              => null,
+            'Artem Rodygin'             => null,
+            'Albert Einstein'           => null,
+            'Paul M. Jones'             => 'Aura Project and Solar Framework',
+            'Zapp Brannigan'            => 'Captain',
+            'Jordi Boggiano'            => 'Composer',
+            'Korvin Szanto'             => 'concrete5',
+            'Turanga Leela'             => 'Delivery Crew',
+            'Philip J. Fry'             => 'Delivery Crew',
+            'Dr. Amy Wong'              => 'Delivery Crew',
+            'Bender Bending Rodriguez'  => 'Delivery Crew',
+            'Dr. Veins McGee'           => 'Doctor',
+            'Larry Garfield'            => 'Drupal',
+            'Hubert J. Farnsworth'      => 'Founder / Owner',
         ];
 
         $request = new Request([
             'draw'    => random_int(1, PHP_INT_MAX),
             'start'   => 0,
-            'length'  => -1,
+            'length'  => 15,
             'search'  => ['value' => null, 'regex' => 'false'],
             'order'   => [
-                ['column' => UsersDataTable::COLUMN_DESCRIPTION, 'dir' => 'desc'],
-                ['column' => UsersDataTable::COLUMN_FULLNAME,    'dir' => 'asc'],
+                ['column' => UsersDataTable::COLUMN_DESCRIPTION, 'dir' => 'asc'],
+                ['column' => UsersDataTable::COLUMN_FULLNAME,    'dir' => 'desc'],
             ],
             'columns' => [],
         ]);
@@ -376,7 +378,10 @@ class UsersDataTableTest extends TransactionalTestCase
         $actual = [];
 
         foreach ($results['data'] as $user) {
-            $actual[] = $user[UsersDataTable::COLUMN_USERNAME];
+            $fullname    = $user[UsersDataTable::COLUMN_FULLNAME];
+            $description = $user[UsersDataTable::COLUMN_DESCRIPTION];
+
+            $actual[$fullname] = $description;
         }
 
         self::assertEquals($expected, $actual);
@@ -384,17 +389,16 @@ class UsersDataTableTest extends TransactionalTestCase
 
     public function testPagination()
     {
-        // 2nd page
+        // 3nd (last) page
         $expected = [
-            'leela',
-            'zapp',
-            'einstein',
-            'artem',
+            'Artem Rodygin',
+            'Chuck Reeves',
+            'David Négrier',
         ];
 
         $request = new Request([
             'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 10,
+            'start'   => 20,
             'length'  => 10,
             'search'  => ['value' => null, 'regex' => 'false'],
             'order'   => [
@@ -409,10 +413,10 @@ class UsersDataTableTest extends TransactionalTestCase
         $actual = [];
 
         foreach ($results['data'] as $user) {
-            $actual[] = $user[UsersDataTable::COLUMN_USERNAME];
+            $actual[] = $user[UsersDataTable::COLUMN_FULLNAME];
         }
 
         self::assertEquals($expected, $actual);
-        self::assertEquals(14, $results['recordsTotal']);
+        self::assertEquals(23, $results['recordsTotal']);
     }
 }

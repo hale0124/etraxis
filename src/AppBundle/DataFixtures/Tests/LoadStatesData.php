@@ -50,6 +50,7 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
     {
         $this->loadDeliveryStates($manager);
         $this->loadFuturamaStates($manager);
+        $this->loadPhpPsrStates($manager);
     }
 
     /**
@@ -164,6 +165,76 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
         ;
 
         $manager->persist($transition);
+        $manager->flush();
+    }
+
+    /**
+     * Loads states of "PSR" template.
+     *
+     * @param   ObjectManager $manager
+     */
+    protected function loadPhpPsrStates(ObjectManager $manager)
+    {
+        $state_draft      = new State();
+        $state_accepted   = new State();
+        $state_deprecated = new State();
+
+        /** @noinspection PhpParamsInspection */
+        $state_draft
+            ->setTemplate($this->getReference('template:phppsr'))
+            ->setName('Draft')
+            ->setAbbreviation('D')
+            ->setType(State::TYPE_INITIAL)
+            ->setResponsible(State::RESPONSIBLE_REMOVE)
+            ->setNextState($state_accepted)
+        ;
+
+        /** @noinspection PhpParamsInspection */
+        $state_accepted
+            ->setTemplate($this->getReference('template:phppsr'))
+            ->setName('Accepted')
+            ->setAbbreviation('A')
+            ->setType(State::TYPE_INTERIM)
+            ->setResponsible(State::RESPONSIBLE_REMOVE)
+        ;
+
+        /** @noinspection PhpParamsInspection */
+        $state_deprecated
+            ->setTemplate($this->getReference('template:phppsr'))
+            ->setName('Deprecated')
+            ->setAbbreviation('X')
+            ->setType(State::TYPE_FINAL)
+            ->setResponsible(State::RESPONSIBLE_REMOVE)
+        ;
+
+        $this->addReference('state:psr:draft', $state_draft);
+        $this->addReference('state:psr:accepted', $state_accepted);
+        $this->addReference('state:psr:deprecated', $state_deprecated);
+
+        $manager->persist($state_draft);
+        $manager->persist($state_accepted);
+        $manager->persist($state_deprecated);
+        $manager->flush();
+
+        $transition1 = new StateGroupTransition();
+        $transition2 = new StateGroupTransition();
+
+        /** @noinspection PhpParamsInspection */
+        $transition1
+            ->setFromState($state_draft)
+            ->setToState($state_accepted)
+            ->setGroup($this->getReference('group:fig:members'))
+        ;
+
+        /** @noinspection PhpParamsInspection */
+        $transition2
+            ->setFromState($state_accepted)
+            ->setToState($state_deprecated)
+            ->setGroup($this->getReference('group:fig:members'))
+        ;
+
+        $manager->persist($transition1);
+        $manager->persist($transition2);
         $manager->flush();
     }
 }

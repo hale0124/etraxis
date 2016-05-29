@@ -48,9 +48,24 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
      */
     public function load(ObjectManager $manager)
     {
+        $this->loadCommonFields($manager);
         $this->loadDeliveryFields($manager);
         $this->loadFuturamaFields($manager);
-        $this->loadOtherFields($manager);
+        $this->loadPhpPsrFields($manager);
+    }
+
+    /**
+     * Loads assorted fields not related to any project.
+     *
+     * @param   ObjectManager $manager
+     */
+    protected function loadCommonFields(ObjectManager $manager)
+    {
+        $pi = new DecimalValue();
+        $pi->setValue('3.1415926535');
+
+        $manager->persist($pi);
+        $manager->flush();
     }
 
     /**
@@ -372,16 +387,77 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
     }
 
     /**
-     * Loads assorted fields not related to any project.
+     * Loads fields of "PSR" template.
      *
      * @param   ObjectManager $manager
      */
-    protected function loadOtherFields(ObjectManager $manager)
+    protected function loadPhpPsrFields(ObjectManager $manager)
     {
-        $pi = new DecimalValue();
-        $pi->setValue('3.1415926535');
+        $fields = [
+            1 => [
+                'name'     => 'PSR ID',
+                'type'     => Field::TYPE_STRING,
+                'required' => true,
+                'param1'   => 2,
+                'param2'   => null,
+            ],
+            2 => [
+                'name'     => 'Description',
+                'type'     => Field::TYPE_TEXT,
+                'required' => false,
+                'param1'   => 2000,
+                'param2'   => null,
+            ],
+        ];
 
-        $manager->persist($pi);
+        /** @var \eTraxis\Entity\State $state */
+        $state = $this->getReference('state:psr:draft');
+
+        foreach ($fields as $order => $info) {
+
+            $field = new Field();
+
+            $field
+                ->setState($state)
+                ->setName($info['name'])
+                ->setType($info['type'])
+                ->setDescription(null)
+                ->setIndexNumber($order)
+                ->setRequired($info['required'])
+                ->setRolePermission(SystemRole::AUTHOR, Field::ACCESS_READ_WRITE)
+                ->setRolePermission(SystemRole::RESPONSIBLE, Field::ACCESS_DENIED)
+                ->setRolePermission(SystemRole::REGISTERED, Field::ACCESS_DENIED)
+            ;
+
+            $field->getParameters()
+                ->setParameter1($info['param1'])
+                ->setParameter2($info['param2'])
+            ;
+
+            $permission = new FieldGroupPermission();
+
+            /** @noinspection PhpParamsInspection */
+            $permission
+                ->setField($field)
+                ->setGroup($this->getReference('group:fig:members'))
+                ->setPermission(Field::ACCESS_READ_ONLY)
+            ;
+
+            $this->addReference('state:psr:draft:' . $order, $field);
+
+            $manager->persist($field);
+            $manager->persist($permission);
+        }
+
+        /** @var Field $field */
+        $field = $this->getReference('state:psr:draft:1');
+
+        $field->getRegex()
+            ->setCheck('(\\d+)')
+            ->setSearch('(\\d+)')
+            ->setReplace('PSR-$1')
+        ;
+
         $manager->flush();
     }
 }

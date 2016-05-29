@@ -153,6 +153,7 @@ class FieldTest extends TransactionalTestCase
         $expected = [
             'Planet Express, Inc.' => Field::ACCESS_DENIED,
             'Nimbus'               => Field::ACCESS_DENIED,
+            'Members'              => Field::ACCESS_DENIED,
             'Managers'             => Field::ACCESS_READ_WRITE,
             'Staff'                => Field::ACCESS_READ_ONLY,
             'Crew'                 => Field::ACCESS_DENIED,
