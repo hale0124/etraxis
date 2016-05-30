@@ -70,7 +70,7 @@ class SetGroupStateTransitionsCommandHandler
             $query = $this->manager->createQuery('
                 DELETE eTraxis:StateGroupTransition t
                 WHERE t.fromState = :state
-                AND t.group = :group
+                  AND t.group = :group
             ');
 
             $query->execute([

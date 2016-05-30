@@ -62,7 +62,7 @@ class SetRoleStateTransitionsCommandHandler
             $query = $this->manager->createQuery('
                 DELETE eTraxis:StateRoleTransition t
                 WHERE t.fromState = :state
-                AND t.role = :role
+                  AND t.role = :role
             ');
 
             $query->execute([

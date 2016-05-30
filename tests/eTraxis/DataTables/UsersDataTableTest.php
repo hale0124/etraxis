@@ -389,7 +389,7 @@ class UsersDataTableTest extends TransactionalTestCase
 
     public function testPagination()
     {
-        // 3nd (last) page
+        // 3rd (last) page
         $expected = [
             'Artem Rodygin',
             'Chuck Reeves',

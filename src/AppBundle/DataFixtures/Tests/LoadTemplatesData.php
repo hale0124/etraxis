@@ -166,8 +166,7 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
      */
     protected function loadPhpPsrTemplate(ObjectManager $manager)
     {
-        $author     = Template::PERMIT_EDIT_RECORD | Template::PERMIT_ADD_COMMENT | Template::PERMIT_ADD_FILE | Template::PERMIT_REMOVE_FILE;
-        $registered = Template::PERMIT_VIEW_RECORD;
+        $author = Template::PERMIT_EDIT_RECORD | Template::PERMIT_ADD_COMMENT | Template::PERMIT_ADD_FILE | Template::PERMIT_REMOVE_FILE;
 
         $template = new Template();
 
@@ -180,7 +179,7 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
             ->setLocked(false)
             ->setRolePermissions(SystemRole::AUTHOR, $author)
             ->setRolePermissions(SystemRole::RESPONSIBLE, 0)
-            ->setRolePermissions(SystemRole::REGISTERED, $registered)
+            ->setRolePermissions(SystemRole::REGISTERED, 0)
         ;
 
         $this->addReference('template:phppsr', $template);

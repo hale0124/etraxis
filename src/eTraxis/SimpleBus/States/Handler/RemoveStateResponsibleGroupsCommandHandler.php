@@ -61,7 +61,7 @@ class RemoveStateResponsibleGroupsCommandHandler
             $query = $this->manager->createQuery('
                 DELETE eTraxis:StateResponsibleGroup srg
                 WHERE srg.state = :state
-                AND srg.group IN (:groups)
+                  AND srg.group IN (:groups)
             ');
 
             $query->execute([
