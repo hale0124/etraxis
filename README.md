@@ -48,5 +48,5 @@ composer.phar install
 ```bash
 gulp
 ./vendor/bin/php-cs-fixer fix
-./vendor/bin/phpunit --coverage-html=var/coverage
+phpunit --coverage-html=var/coverage
 ```
