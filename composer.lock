@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5bbb5f03fc252f2e34772abe56fa94b6",
-    "content-hash": "efcea445cd77e87e802f2786dd9abad8",
+    "hash": "e94906a5f0d92940afb29bb0d70922ea",
+    "content-hash": "40dec320abcae424ba990b4f049704d5",
     "packages": [
         {
             "name": "arodygin/datatables-bundle",
@@ -2801,7 +2801,7 @@
     ],
     "packages-dev": [
         {
-            "name": "fabpot/php-cs-fixer",
+            "name": "friendsofphp/php-cs-fixer",
             "version": "v1.11.3",
             "source": {
                 "type": "git",
@@ -2852,7 +2852,6 @@
                 }
             ],
             "description": "A tool to automatically fix PHP code style",
-            "abandoned": "friendsofphp/php-cs-fixer",
             "time": "2016-05-26 23:49:24"
         },
         {

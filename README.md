@@ -38,7 +38,7 @@ Also there is a "[Support Forum](https://forum.etraxis.com/)" available.
 ### Install
 
 ```bash
-composer.phar install
+composer install
 ./bin/console doctrine:database:create
 ./bin/console doctrine:schema:create
 ```
@@ -47,6 +47,6 @@ composer.phar install
 
 ```bash
 gulp
-./vendor/bin/php-cs-fixer fix
 phpunit --coverage-html=var/coverage
+./vendor/bin/php-cs-fixer fix
 ```
