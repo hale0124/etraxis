@@ -1440,21 +1440,21 @@
         },
         {
             "name": "ocramius/proxy-manager",
-            "version": "2.0.1",
+            "version": "2.0.2",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Ocramius/ProxyManager.git",
-                "reference": "6c89b7bd6039d8047b1473e2074cb56baa4bc15d"
+                "reference": "001e730968f17cb36816ad68914994341d16e029"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Ocramius/ProxyManager/zipball/6c89b7bd6039d8047b1473e2074cb56baa4bc15d",
-                "reference": "6c89b7bd6039d8047b1473e2074cb56baa4bc15d",
+                "url": "https://api.github.com/repos/Ocramius/ProxyManager/zipball/001e730968f17cb36816ad68914994341d16e029",
+                "reference": "001e730968f17cb36816ad68914994341d16e029",
                 "shasum": ""
             },
             "require": {
                 "ocramius/package-versions": "^1.0",
-                "php": "~7.0",
+                "php": "7.0.0 - 7.0.5 || ^7.0.7",
                 "zendframework/zend-code": "~3.0"
             },
             "require-dev": {
@@ -1500,7 +1500,7 @@
                 "proxy pattern",
                 "service proxies"
             ],
-            "time": "2016-02-08 13:50:05"
+            "time": "2016-05-27 01:59:56"
         },
         {
             "name": "paragonie/random_compat",
@@ -2632,16 +2632,16 @@
         },
         {
             "name": "twig/twig",
-            "version": "v1.24.0",
+            "version": "v1.24.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/twigphp/Twig.git",
-                "reference": "3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8"
+                "reference": "3566d311a92aae4deec6e48682dc5a4528c4a512"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8",
-                "reference": "3e5aa30ebfbafd5951fb1b01e338e1800ce7e0e8",
+                "url": "https://api.github.com/repos/twigphp/Twig/zipball/3566d311a92aae4deec6e48682dc5a4528c4a512",
+                "reference": "3566d311a92aae4deec6e48682dc5a4528c4a512",
                 "shasum": ""
             },
             "require": {
@@ -2689,7 +2689,7 @@
             "keywords": [
                 "templating"
             ],
-            "time": "2016-01-25 21:22:18"
+            "time": "2016-05-30 09:11:59"
         },
         {
             "name": "zendframework/zend-code",
@@ -2802,16 +2802,16 @@
     "packages-dev": [
         {
             "name": "fabpot/php-cs-fixer",
-            "version": "v1.11.2",
+            "version": "v1.11.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/FriendsOfPHP/PHP-CS-Fixer.git",
-                "reference": "41f70154642ec0f9ea9ea9c290943f3b5dfa76fc"
+                "reference": "b0a383d856d884d6b16e15892f507ecf89f8dbd2"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/41f70154642ec0f9ea9ea9c290943f3b5dfa76fc",
-                "reference": "41f70154642ec0f9ea9ea9c290943f3b5dfa76fc",
+                "url": "https://api.github.com/repos/FriendsOfPHP/PHP-CS-Fixer/zipball/b0a383d856d884d6b16e15892f507ecf89f8dbd2",
+                "reference": "b0a383d856d884d6b16e15892f507ecf89f8dbd2",
                 "shasum": ""
             },
             "require": {
@@ -2853,7 +2853,7 @@
             ],
             "description": "A tool to automatically fix PHP code style",
             "abandoned": "friendsofphp/php-cs-fixer",
-            "time": "2016-02-26 07:37:29"
+            "time": "2016-05-26 23:49:24"
         },
         {
             "name": "leedavis81/altr-ego",
