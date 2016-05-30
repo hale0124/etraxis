@@ -136,6 +136,11 @@ class TemplateTest extends TransactionalTestCase
         self::assertCount(2, $this->object->getStates());
     }
 
+    public function testToString()
+    {
+        self::assertEquals('Delivery', (string) $this->object);
+    }
+
     public function testJsonSerialize()
     {
         $expected = [

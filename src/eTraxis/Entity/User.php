@@ -572,6 +572,14 @@ class User extends Entity implements \JsonSerializable
     /**
      * {@inheritdoc}
      */
+    public function __toString()
+    {
+        return $this->getFullname();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize()
     {
         return [

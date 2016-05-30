@@ -181,6 +181,11 @@ class StateTest extends TransactionalTestCase
         self::assertEmpty($this->object->getNotResponsibleGroups());
     }
 
+    public function testToString()
+    {
+        self::assertEquals('New', (string) $this->object);
+    }
+
     public function testJsonSerialize()
     {
         $expected = [

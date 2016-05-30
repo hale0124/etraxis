@@ -195,6 +195,16 @@ class FieldTest extends TransactionalTestCase
         self::assertInstanceOf(Fields\DurationField::class, $this->object->asDuration());
     }
 
+    public function testToString()
+    {
+        $expected = 'Crew';
+
+        /** @var Field $field */
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => $expected]);
+
+        self::assertEquals($expected, (string) $field);
+    }
+
     public function testJsonSerialize()
     {
         $expected = [

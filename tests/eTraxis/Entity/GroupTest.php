@@ -86,6 +86,11 @@ class GroupTest extends TransactionalTestCase
         self::assertCount(18, $this->object->getNonMembers());
     }
 
+    public function testToString()
+    {
+        self::assertEquals('Crew', (string) $this->object);
+    }
+
     public function testJsonSerialize()
     {
         $expected = [

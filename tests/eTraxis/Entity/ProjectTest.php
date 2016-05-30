@@ -73,6 +73,11 @@ class ProjectTest extends TransactionalTestCase
         self::assertCount(2, $this->object->getTemplates());
     }
 
+    public function testToString()
+    {
+        self::assertEquals('Planet Express', (string) $this->object);
+    }
+
     public function testJsonSerialize()
     {
         $expected = [

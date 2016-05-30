@@ -211,6 +211,11 @@ class UserTest extends TransactionalTestCase
         self::assertInstanceOf(UserSettings::class, $this->object->getSettings());
     }
 
+    public function testToString()
+    {
+        self::assertEquals('Hubert J. Farnsworth', (string) $this->object);
+    }
+
     public function testJsonSerialize()
     {
         $expected = [

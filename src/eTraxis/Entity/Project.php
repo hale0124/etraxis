@@ -214,6 +214,14 @@ class Project implements \JsonSerializable
     /**
      * {@inheritdoc}
      */
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
+    /**
+     * {@inheritdoc}
+     */
     public function jsonSerialize()
     {
         return [
