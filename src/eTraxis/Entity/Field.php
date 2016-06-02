@@ -155,13 +155,6 @@ class Field extends Entity implements \JsonSerializable
     private $parameters;
 
     /**
-     * @var FieldDeprecated Deprecated features.
-     *
-     * @ORM\Embedded(class="FieldDeprecated", columnPrefix=false)
-     */
-    private $deprecated;
-
-    /**
      * Constructor.
      */
     public function __construct()
@@ -170,7 +163,6 @@ class Field extends Entity implements \JsonSerializable
 
         $this->regex      = new FieldRegex();
         $this->parameters = new FieldParameters();
-        $this->deprecated = new FieldDeprecated();
     }
 
     /**

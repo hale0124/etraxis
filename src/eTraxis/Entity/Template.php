@@ -158,21 +158,12 @@ class Template extends Entity implements \JsonSerializable
     private $fields;
 
     /**
-     * @var TemplateDeprecated Deprecated features.
-     *
-     * @ORM\Embedded(class="TemplateDeprecated", columnPrefix=false)
-     */
-    private $deprecated;
-
-    /**
      * Constructor.
      */
     public function __construct()
     {
         $this->states = new ArrayCollection();
         $this->fields = new ArrayCollection();
-
-        $this->deprecated = new TemplateDeprecated();
     }
 
     /**

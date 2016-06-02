@@ -112,14 +112,6 @@ class Record
     private $watchers;
 
     /**
-     * @var ArrayCollection List of subrecords.
-     *
-     * @ORM\OneToMany(targetEntity="Child", mappedBy="parent")
-     * @ORM\OrderBy({"child" = "ASC"})
-     */
-    private $children;
-
-    /**
      * Constructor.
      */
     public function __construct()
@@ -133,7 +125,6 @@ class Record
 
         $this->history  = new ArrayCollection();
         $this->watchers = new ArrayCollection();
-        $this->children = new ArrayCollection();
     }
 
     /**
@@ -276,43 +267,5 @@ class Record
     public function getWatchers()
     {
         return $this->watchers->toArray();
-    }
-
-    /**
-     * Add subrecord.
-     *
-     * @param   Child $child
-     *
-     * @return  self
-     */
-    public function addChild(Child $child)
-    {
-        $this->children[] = $child;
-
-        return $this;
-    }
-
-    /**
-     * Remove subrecord.
-     *
-     * @param   Child $child
-     *
-     * @return  self
-     */
-    public function removeChild(Child $child)
-    {
-        $this->children->removeElement($child);
-
-        return $this;
-    }
-
-    /**
-     * Get list of subrecords.
-     *
-     * @return  Child[]
-     */
-    public function getChildren()
-    {
-        return $this->children->toArray();
     }
 }

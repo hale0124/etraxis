@@ -156,26 +156,11 @@ class User extends Entity implements \JsonSerializable
     private $groups;
 
     /**
-     * @var View Current view.
-     *
-     * @ORM\OneToOne(targetEntity="View")
-     * @ORM\JoinColumn(name="view_id", referencedColumnName="view_id", onDelete="SET NULL")
-     */
-    public $view;
-
-    /**
      * @var UserSettings User settings.
      *
      * @ORM\Embedded(class="UserSettings", columnPrefix=false)
      */
     private $settings;
-
-    /**
-     * @var UserDeprecated Deprecated features.
-     *
-     * @ORM\Embedded(class="UserDeprecated", columnPrefix=false)
-     */
-    private $deprecated;
 
     /**
      * Constructor.
@@ -193,9 +178,8 @@ class User extends Entity implements \JsonSerializable
         $this->isDisabled = 0;
         $this->isLdap     = 0;
 
-        $this->groups     = new ArrayCollection();
-        $this->settings   = new UserSettings();
-        $this->deprecated = new UserDeprecated();
+        $this->groups   = new ArrayCollection();
+        $this->settings = new UserSettings();
     }
 
     /**

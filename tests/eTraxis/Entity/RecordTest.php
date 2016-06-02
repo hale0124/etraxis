@@ -86,15 +86,4 @@ class RecordTest extends TransactionalTestCase
         $this->object->removeWatcher($watcher);
         self::assertCount(0, $this->object->getWatchers());
     }
-
-    public function testChildren()
-    {
-        self::assertCount(0, $this->object->getChildren());
-
-        $this->object->addChild($child = new Child());
-        self::assertCount(1, $this->object->getChildren());
-
-        $this->object->removeChild($child);
-        self::assertCount(0, $this->object->getChildren());
-    }
 }
