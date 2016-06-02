@@ -35,6 +35,9 @@ class TransactionalTestCase extends ControllerTestCase
 
         $this->doctrine = $this->client->getContainer()->get('doctrine');
 
+        // Workaround for PhpUnit bug.
+        date_default_timezone_set(ini_get('date.timezone'));
+
         /** @var \Doctrine\ORM\EntityManagerInterface $manager */
         $manager = $this->doctrine->getManager();
         $manager->beginTransaction();
