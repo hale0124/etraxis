@@ -81,9 +81,9 @@ class FieldsPostControllerTest extends ControllerTestCase
         $this->assertStatusCode(Response::HTTP_BAD_REQUEST);
     }
 
-    public function testRegexAction()
+    public function testPcreAction()
     {
-        $uri = $this->router->generate('admin_regex_field', [
+        $uri = $this->router->generate('admin_pcre_field', [
             'id' => 0,
         ]);
 

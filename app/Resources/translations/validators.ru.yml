@@ -8,5 +8,5 @@ template.conflict.prefix: 'Шаблон с таким префиксом уже 
 state.conflict.name: 'Состояние с таким названием уже существует.'
 state.conflict.abbreviation: 'Состояние с такой аббревиатурой уже существует.'
 field.conflict.name: 'Поле с таким названием уже существует.'
-listitem.conflict.key: 'Элемент с таким ключом уже существует.'
 listitem.conflict.value: 'Элемент с таким значением уже существует.'
+listitem.conflict.text: 'Элемент с таким текстом уже существует.'

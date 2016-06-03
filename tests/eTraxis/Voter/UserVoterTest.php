@@ -65,16 +65,16 @@ class UserVoterTest extends TransactionalTestCase
         /** @var \StdClass $hubert2 */
         $hubert2 = AltrEgo::create($hubert);
 
-        $hubert2->passwordSetAt = time() - 86400 * 2;
+        $hubert2->passwordExpiresAt = time() - 60;
 
         /** @var \Doctrine\ORM\EntityManagerInterface $manager */
         $manager = $this->doctrine->getManager();
 
-        $voter = new UserVoter($manager, 3);
-        self::assertEquals(UserVoter::ACCESS_DENIED, $voter->vote($token, $hubert, [User::SET_EXPIRED_PASSWORD]));
-
         $voter = new UserVoter($manager, 1);
         self::assertEquals(UserVoter::ACCESS_GRANTED, $voter->vote($token, $hubert, [User::SET_EXPIRED_PASSWORD]));
+
+        $voter = new UserVoter($manager);
+        self::assertEquals(UserVoter::ACCESS_DENIED, $voter->vote($token, $hubert, [User::SET_EXPIRED_PASSWORD]));
     }
 
     public function testDelete()

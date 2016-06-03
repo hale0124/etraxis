@@ -12,29 +12,28 @@
 namespace eTraxis\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use eTraxis\Dictionary\FieldType;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 
 /**
  * List item.
  *
- * @ORM\Table(name="tbl_list_values",
+ * @ORM\Table(name="list_items",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_list_values", columns={"field_id", "str_value"})
- *            },
- *            indexes={
- *                @ORM\Index(name="ix_lvl_id_val", columns={"field_id", "int_value", "str_value"})
+ *                @ORM\UniqueConstraint(name="ix_list_items_value", columns={"field_id", "item_value"}),
+ *                @ORM\UniqueConstraint(name="ix_list_items_text", columns={"field_id", "item_text"})
  *            })
  * @ORM\Entity
- * @Assert\UniqueEntity(fields={"field", "key"}, message="listitem.conflict.key")
  * @Assert\UniqueEntity(fields={"field", "value"}, message="listitem.conflict.value")
+ * @Assert\UniqueEntity(fields={"field", "text"}, message="listitem.conflict.text")
  */
 class ListItem
 {
     // Constraints.
-    const MAX_VALUE = 50;
+    const MAX_TEXT = 50;
 
     // Actions.
-    const DELETE = 'list_item.delete';
+    const DELETE = 'listitem.delete';
 
     /**
      * @var Field Field.
@@ -42,25 +41,25 @@ class ListItem
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="Field")
-     * @ORM\JoinColumn(name="field_id", referencedColumnName="field_id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="field_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $field;
 
     /**
-     * @var int Key of the item.
+     * @var int Value of the item.
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\Column(name="int_value", type="integer")
-     */
-    private $key;
-
-    /**
-     * @var string String value of the item.
-     *
-     * @ORM\Column(name="str_value", type="string", length=50)
+     * @ORM\Column(name="item_value", type="integer")
      */
     private $value;
+
+    /**
+     * @var string Text of the item.
+     *
+     * @ORM\Column(name="item_text", type="string", length=50)
+     */
+    private $text;
 
     /**
      * Property setter.
@@ -71,7 +70,7 @@ class ListItem
      */
     public function setField(Field $field)
     {
-        if ($field->getType() === Field::TYPE_LIST) {
+        if ($field->getType() === FieldType::LIST) {
             $this->field = $field;
         }
 
@@ -91,35 +90,11 @@ class ListItem
     /**
      * Property setter.
      *
-     * @param   int $key
+     * @param   int $value
      *
      * @return  self
      */
-    public function setKey(int $key)
-    {
-        $this->key = $key;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  int
-     */
-    public function getKey()
-    {
-        return $this->key;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   string $value
-     *
-     * @return  self
-     */
-    public function setValue(string $value)
+    public function setValue(int $value)
     {
         $this->value = $value;
 
@@ -129,10 +104,34 @@ class ListItem
     /**
      * Property getter.
      *
-     * @return  string
+     * @return  int
      */
     public function getValue()
     {
         return $this->value;
+    }
+
+    /**
+     * Property setter.
+     *
+     * @param   string $text
+     *
+     * @return  self
+     */
+    public function setText(string $text)
+    {
+        $this->text = $text;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  string
+     */
+    public function getText()
+    {
+        return $this->text;
     }
 }

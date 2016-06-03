@@ -33,7 +33,7 @@ class FieldParameters
      *          "date"     - minimum of range of allowed values (amount of days since current date; negative value shifts to the past)
      *          "duration" - minimum of range of allowed values (amount of minutes from 0:00 till 999999:59)
      *
-     * @ORM\Column(name="param1", type="integer", nullable=true)
+     * @ORM\Column(name="parameter1", type="integer", nullable=true)
      */
     private $parameter1;
 
@@ -50,36 +50,26 @@ class FieldParameters
      *          "date"     - maximum of range of allowed values (amount of days since current date; negative value shifts to the past)
      *          "duration" - maximum of range of allowed values (amount of minutes from 0:00 till 999999:59)
      *
-     * @ORM\Column(name="param2", type="integer", nullable=true)
+     * @ORM\Column(name="parameter2", type="integer", nullable=true)
      */
     private $parameter2;
 
     /**
      * @var int Default value of the field. Depends on field type as following:
      *
-     *          "number"   - default integer value (from -1000000000 till +1000000000)
-     *          "decimal"  - default decimal value (foreign key to "decimal_values" table)
-     *          "string"   - default string value (foreign key to "string_values" table)
-     *          "text"     - default string value (foreign key to "text_values" table)
-     *          "checkbox" - default state of checkbox (0 - unchecked, 1 - checked)
-     *          "list"     - integer value of default list item (see "list_values" table)
+     *          "number"   - see "FieldValue::$value" for explanation
+     *          "decimal"  - see "FieldValue::$value" for explanation
+     *          "string"   - see "FieldValue::$value" for explanation
+     *          "text"     - see "FieldValue::$value" for explanation
+     *          "checkbox" - see "FieldValue::$value" for explanation
+     *          "list"     - see "FieldValue::$value" for explanation
      *          "record"   - NULL (not used)
      *          "date"     - default date value (amount of days since current date; negative value shifts to the past)
-     *          "duration" - default duration value (amount of minutes from 0:00 till 999999:59)
+     *          "duration" - see "FieldValue::$value" for explanation
      *
-     * @ORM\Column(name="value_id", type="integer", nullable=true)
+     * @ORM\Column(name="default_value", type="integer", nullable=true)
      */
     private $defaultValue;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->parameter1   = null;
-        $this->parameter2   = null;
-        $this->defaultValue = null;
-    }
 
     /**
      * Property setter.

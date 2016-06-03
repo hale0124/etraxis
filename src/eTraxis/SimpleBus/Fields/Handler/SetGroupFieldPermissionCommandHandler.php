@@ -13,7 +13,6 @@ namespace eTraxis\SimpleBus\Fields\Handler;
 
 use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Field;
-use eTraxis\Entity\FieldGroupPermission;
 use eTraxis\Entity\Group;
 use eTraxis\SimpleBus\Fields\SetGroupFieldPermissionCommand;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -41,15 +40,13 @@ class SetGroupFieldPermissionCommandHandler
      * @param   SetGroupFieldPermissionCommand $command
      *
      * @throws  NotFoundHttpException
-     *
-     * @todo    Refactor into single database entry.
      */
     public function handle(SetGroupFieldPermissionCommand $command)
     {
         /** @var Field $field */
         $field = $this->manager->getRepository(Field::class)->findOneBy([
             'id'        => $command->id,
-            'removedAt' => 0,
+            'removedAt' => null,
         ]);
 
         if (!$field) {
@@ -63,41 +60,8 @@ class SetGroupFieldPermissionCommandHandler
             throw new NotFoundHttpException('Unknown group.');
         }
 
-        $query = $this->manager->createQuery('
-            DELETE eTraxis:FieldGroupPermission fgp
-            WHERE fgp.field = :field
-              AND fgp.group = :group
-        ');
+        $field->setGroupPermission($group, $command->permission);
 
-        $query->execute([
-            'field' => $field,
-            'group' => $group,
-        ]);
-
-        if ($command->permission === Field::ACCESS_READ_ONLY || $command->permission === Field::ACCESS_READ_WRITE) {
-
-            $entity = new FieldGroupPermission();
-
-            $entity
-                ->setField($field)
-                ->setGroup($group)
-                ->setPermission(Field::ACCESS_READ_ONLY)
-            ;
-
-            $this->manager->persist($entity);
-        }
-
-        if ($command->permission === Field::ACCESS_READ_WRITE) {
-
-            $entity = new FieldGroupPermission();
-
-            $entity
-                ->setField($field)
-                ->setGroup($group)
-                ->setPermission(Field::ACCESS_READ_WRITE)
-            ;
-
-            $this->manager->persist($entity);
-        }
+        $this->manager->persist($field);
     }
 }

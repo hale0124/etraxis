@@ -16,9 +16,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Decimal value.
  *
- * @ORM\Table(name="tbl_float_values",
+ * @ORM\Table(name="decimal_values",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_float_values", columns={"float_value"})
+ *                @ORM\UniqueConstraint(name="ix_decimal_values", columns={"value"})
  *            })
  * @ORM\Entity(repositoryClass="eTraxis\Repository\DecimalValuesRepository")
  */
@@ -29,14 +29,14 @@ class DecimalValue
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="value_id", type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
     /**
      * @var string Decimal value.
      *
-     * @ORM\Column(name="float_value", type="decimal", precision=20, scale=10)
+     * @ORM\Column(name="value", type="decimal", precision=20, scale=10)
      */
     private $value;
 

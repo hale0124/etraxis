@@ -11,7 +11,6 @@
 
 namespace eTraxis\Voter;
 
-use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\Project;
 use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\Templates\LockTemplateCommand;
@@ -53,9 +52,6 @@ class TemplateVoterTest extends TransactionalTestCase
             ->setName('Bug report')
             ->setPrefix('bug')
             ->setLocked(true)
-            ->setRolePermissions(SystemRole::AUTHOR, 0)
-            ->setRolePermissions(SystemRole::RESPONSIBLE, 0)
-            ->setRolePermissions(SystemRole::REGISTERED, 0)
         ;
 
         $this->doctrine->getManager()->persist($template);
@@ -113,9 +109,6 @@ class TemplateVoterTest extends TransactionalTestCase
             ->setName('Bug report')
             ->setPrefix('bug')
             ->setLocked(true)
-            ->setRolePermissions(SystemRole::AUTHOR, 0)
-            ->setRolePermissions(SystemRole::RESPONSIBLE, 0)
-            ->setRolePermissions(SystemRole::REGISTERED, 0)
         ;
 
         $this->doctrine->getManager()->persist($template);

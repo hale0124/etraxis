@@ -135,9 +135,9 @@ class FieldsGetControllerTest extends ControllerTestCase
         $this->assertStatusCode(Response::HTTP_OK);
     }
 
-    public function testTabRegexAction()
+    public function testTabPcreAction()
     {
-        $uri = $this->router->generate('admin_tab_field_regex', [
+        $uri = $this->router->generate('admin_tab_field_pcre', [
             'id' => $this->field->getId(),
         ]);
 
@@ -227,9 +227,9 @@ class FieldsGetControllerTest extends ControllerTestCase
         $this->assertStatusCode(Response::HTTP_OK);
     }
 
-    public function testRegexAction()
+    public function testPcreAction()
     {
-        $uri = $this->router->generate('admin_dlg_regex_field', [
+        $uri = $this->router->generate('admin_dlg_pcre_field', [
             'id' => $this->field->getId(),
         ]);
 

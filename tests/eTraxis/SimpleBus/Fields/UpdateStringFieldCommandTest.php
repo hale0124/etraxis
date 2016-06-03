@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\StringValue;
 use eTraxis\Tests\TransactionalTestCase;
@@ -22,15 +23,15 @@ class UpdateStringFieldCommandTest extends TransactionalTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Production code']);
 
-        self::assertEquals(Field::TYPE_STRING, $field->getType());
+        self::assertEquals(FieldType::STRING, $field->getType());
         self::assertEquals('Production code', $field->getName());
         self::assertNull($field->getDescription());
         self::assertTrue($field->isRequired());
         self::assertEquals(7, $field->getParameters()->getParameter1());
         self::assertNull($field->getParameters()->getDefaultValue());
-        self::assertNull($field->getRegex()->getCheck());
-        self::assertNull($field->getRegex()->getSearch());
-        self::assertNull($field->getRegex()->getReplace());
+        self::assertNull($field->getPCRE()->getCheck());
+        self::assertNull($field->getPCRE()->getSearch());
+        self::assertNull($field->getPCRE()->getReplace());
 
         $command = new UpdateStringFieldCommand([
             'id'           => $field->getId(),
@@ -39,9 +40,9 @@ class UpdateStringFieldCommandTest extends TransactionalTestCase
             'required'     => false,
             'maxLength'    => 6,
             'defaultValue' => '?ACV??',
-            'regexCheck'   => '^(\d{1})ACV(\d{2})$',
-            'regexSearch'  => '^(\d{1})ACV(\d{2})$',
-            'regexReplace' => 'Season $1, Episode $2',
+            'pcreCheck'    => '^(\d{1})ACV(\d{2})$',
+            'pcreSearch'   => '^(\d{1})ACV(\d{2})$',
+            'pcreReplace'  => 'Season $1, Episode $2',
         ]);
 
         $this->command_bus->handle($command);
@@ -50,14 +51,14 @@ class UpdateStringFieldCommandTest extends TransactionalTestCase
 
         $default = $this->doctrine->getRepository(StringValue::class)->find($field->getParameters()->getDefaultValue());
 
-        self::assertEquals(Field::TYPE_STRING, $field->getType());
+        self::assertEquals(FieldType::STRING, $field->getType());
         self::assertEquals('Code', $field->getName());
         self::assertEquals('(millions)', $field->getDescription());
         self::assertFalse($field->isRequired());
         self::assertEquals(6, $field->getParameters()->getParameter1());
         self::assertEquals('?ACV??', $default->getValue());
-        self::assertEquals('^(\d{1})ACV(\d{2})$', $field->getRegex()->getCheck());
-        self::assertEquals('^(\d{1})ACV(\d{2})$', $field->getRegex()->getSearch());
-        self::assertEquals('Season $1, Episode $2', $field->getRegex()->getReplace());
+        self::assertEquals('^(\d{1})ACV(\d{2})$', $field->getPCRE()->getCheck());
+        self::assertEquals('^(\d{1})ACV(\d{2})$', $field->getPCRE()->getSearch());
+        self::assertEquals('Season $1, Episode $2', $field->getPCRE()->getReplace());
     }
 }

@@ -11,16 +11,14 @@
 
 namespace eTraxis\Dictionary;
 
-use eTraxis\Entity\State;
-
 class StateResponsibleTest extends \PHPUnit_Framework_TestCase
 {
     public function testDictionary()
     {
         $expected = [
-            State::RESPONSIBLE_KEEP,
-            State::RESPONSIBLE_ASSIGN,
-            State::RESPONSIBLE_REMOVE,
+            StateResponsible::KEEP,
+            StateResponsible::ASSIGN,
+            StateResponsible::REMOVE,
         ];
 
         self::assertEquals($expected, StateResponsible::keys());

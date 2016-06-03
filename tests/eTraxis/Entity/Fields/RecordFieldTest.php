@@ -11,6 +11,7 @@
 
 namespace eTraxis\Entity\Fields;
 
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\Field;
 
 class RecordFieldTest extends \PHPUnit_Framework_TestCase
@@ -23,7 +24,7 @@ class RecordFieldTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->object = new Field();
-        $this->object->setType(Field::TYPE_RECORD);
+        $this->object->setType(FieldType::RECORD);
     }
 
     public function testSupportedKeys()

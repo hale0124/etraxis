@@ -11,9 +11,9 @@
 
 namespace eTraxis\SimpleBus\Templates;
 
+use eTraxis\Dictionary\TemplatePermission;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\Template;
-use eTraxis\Entity\TemplateGroupPermission;
 use eTraxis\Tests\TransactionalTestCase;
 
 class SetGroupTemplatePermissionsCommandTest extends TransactionalTestCase
@@ -26,35 +26,27 @@ class SetGroupTemplatePermissionsCommandTest extends TransactionalTestCase
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
 
-        /** @var TemplateGroupPermission $permissions */
-        $permissions = $this->doctrine->getRepository(TemplateGroupPermission::class)->findOneBy([
-            'group'    => $group,
-            'template' => $template,
-        ]);
-        self::assertNotNull($permissions);
-
-        self::assertEquals(Template::PERMIT_ADD_FILE,    $permissions->getPermission() & Template::PERMIT_ADD_FILE);
-        self::assertEquals(Template::PERMIT_REMOVE_FILE, $permissions->getPermission() & Template::PERMIT_REMOVE_FILE);
-        self::assertEquals(0,                            $permissions->getPermission() & Template::PERMIT_ATTACH_SUBRECORD);
-        self::assertEquals(0,                            $permissions->getPermission() & Template::PERMIT_DETACH_SUBRECORD);
+        self::assertTrue(in_array(TemplatePermission::ATTACH_FILES, $template->getGroupPermissions($group)));
+        self::assertTrue(in_array(TemplatePermission::DELETE_FILES, $template->getGroupPermissions($group)));
+        self::assertFalse(in_array(TemplatePermission::ATTACH_SUBRECORDS, $template->getGroupPermissions($group)));
+        self::assertFalse(in_array(TemplatePermission::DETACH_SUBRECORDS, $template->getGroupPermissions($group)));
 
         $command = new SetGroupTemplatePermissionsCommand([
             'id'          => $template->getId(),
             'group'       => $group->getId(),
-            'permissions' => Template::PERMIT_ATTACH_SUBRECORD | Template::PERMIT_DETACH_SUBRECORD,
+            'permissions' => [
+                TemplatePermission::ATTACH_FILES,
+                TemplatePermission::ATTACH_SUBRECORDS,
+                TemplatePermission::DETACH_SUBRECORDS,
+            ],
         ]);
 
         $this->command_bus->handle($command);
 
-        $permissions = $this->doctrine->getRepository(TemplateGroupPermission::class)->findOneBy([
-            'group'    => $group,
-            'template' => $template,
-        ]);
-
-        self::assertEquals(0,                                 $permissions->getPermission() & Template::PERMIT_ADD_FILE);
-        self::assertEquals(0,                                 $permissions->getPermission() & Template::PERMIT_REMOVE_FILE);
-        self::assertEquals(Template::PERMIT_ATTACH_SUBRECORD, $permissions->getPermission() & Template::PERMIT_ATTACH_SUBRECORD);
-        self::assertEquals(Template::PERMIT_DETACH_SUBRECORD, $permissions->getPermission() & Template::PERMIT_DETACH_SUBRECORD);
+        self::assertTrue(in_array(TemplatePermission::ATTACH_FILES, $template->getGroupPermissions($group)));
+        self::assertFalse(in_array(TemplatePermission::DELETE_FILES, $template->getGroupPermissions($group)));
+        self::assertTrue(in_array(TemplatePermission::ATTACH_SUBRECORDS, $template->getGroupPermissions($group)));
+        self::assertTrue(in_array(TemplatePermission::DETACH_SUBRECORDS, $template->getGroupPermissions($group)));
     }
 
     public function testNewGroupPermissions()
@@ -65,28 +57,19 @@ class SetGroupTemplatePermissionsCommandTest extends TransactionalTestCase
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
 
-        /** @var TemplateGroupPermission $permissions */
-        $permissions = $this->doctrine->getRepository(TemplateGroupPermission::class)->findOneBy([
-            'group'    => $group,
-            'template' => $template,
-        ]);
-        self::assertNull($permissions);
+        self::assertEmpty($template->getGroupPermissions($group));
 
         $command = new SetGroupTemplatePermissionsCommand([
             'id'          => $template->getId(),
             'group'       => $group->getId(),
-            'permissions' => Template::PERMIT_VIEW_RECORD,
+            'permissions' => [TemplatePermission::VIEW_RECORDS],
         ]);
 
         $this->command_bus->handle($command);
 
-        $permissions = $this->doctrine->getRepository(TemplateGroupPermission::class)->findOneBy([
-            'group'    => $group,
-            'template' => $template,
-        ]);
-        self::assertNotNull($permissions);
+        $this->doctrine->getManager()->refresh($template);
 
-        self::assertEquals(Template::PERMIT_VIEW_RECORD, $permissions->getPermission() & Template::PERMIT_VIEW_RECORD);
+        self::assertEquals([TemplatePermission::VIEW_RECORDS], $template->getGroupPermissions($group));
     }
 
     /**
@@ -101,7 +84,7 @@ class SetGroupTemplatePermissionsCommandTest extends TransactionalTestCase
         $command = new SetGroupTemplatePermissionsCommand([
             'id'          => self::UNKNOWN_ENTITY_ID,
             'group'       => $group->getId(),
-            'permissions' => Template::PERMIT_VIEW_RECORD,
+            'permissions' => [TemplatePermission::VIEW_RECORDS],
         ]);
 
         $this->command_bus->handle($command);
@@ -119,7 +102,7 @@ class SetGroupTemplatePermissionsCommandTest extends TransactionalTestCase
         $command = new SetGroupTemplatePermissionsCommand([
             'id'          => $template->getId(),
             'group'       => self::UNKNOWN_ENTITY_ID,
-            'permissions' => Template::PERMIT_VIEW_RECORD,
+            'permissions' => [TemplatePermission::VIEW_RECORDS],
         ]);
 
         $this->command_bus->handle($command);

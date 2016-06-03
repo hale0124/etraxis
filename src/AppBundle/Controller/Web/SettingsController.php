@@ -111,7 +111,7 @@ class SettingsController extends Controller
 
         try {
 
-            if ($user->isLdap()) {
+            if ($user->isExternalAccount()) {
                 throw new BadRequestHttpException($this->container->get('translator')->trans('password.cant_change'));
             }
 

@@ -11,13 +11,13 @@
 
 namespace AppBundle\DataFixtures\Tests;
 
-use AltrEgo\AltrEgo;
+use AppBundle\DataFixtures\AltrEgoTrait;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use eTraxis\Dictionary\EventType;
 use eTraxis\Entity\DecimalValue;
 use eTraxis\Entity\Event;
-use eTraxis\Entity\Field;
 use eTraxis\Entity\FieldValue;
 use eTraxis\Entity\LastRead;
 use eTraxis\Entity\Record;
@@ -28,6 +28,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class LoadFuturamaRecordsData extends AbstractFixture implements ContainerAwareInterface, OrderedFixtureInterface
 {
+    use AltrEgoTrait;
+
     /** @var ContainerInterface */
     private $container;
 
@@ -1470,11 +1472,9 @@ class LoadFuturamaRecordsData extends AbstractFixture implements ContainerAwareI
 
             $record = new Record();
 
-            /** @noinspection PhpParamsInspection */
             $record->setSubject($info['subject']);
 
-            /** @var \StdClass $altr_record */
-            $altr_record = AltrEgo::create($record);
+            $altr_record = $this->ego($record);
 
             $altr_record->state     = $state_released;
             $altr_record->author    = $this->getReference('user:artem');
@@ -1484,45 +1484,35 @@ class LoadFuturamaRecordsData extends AbstractFixture implements ContainerAwareI
 
             $event = new Event();
 
-            $event
-                ->setRecord($record)
-                ->setUser($record->getAuthor())
-                ->setType(Event::RECORD_CREATED)
-                ->setParameter($state_produced->getId())
-            ;
-
-            /** @noinspection PhpUndefinedFieldInspection */
-            AltrEgo::create($event)->createdAt = $record->getCreatedAt();
+            $this->ego($event)->record    = $record;
+            $this->ego($event)->user      = $record->getAuthor();
+            $this->ego($event)->type      = EventType::RECORD_CREATED;
+            $this->ego($event)->createdAt = $record->getCreatedAt();
+            $this->ego($event)->parameter = $state_produced->getId();
 
             $event2 = new Event();
 
-            $event2
-                ->setRecord($record)
-                ->setUser($record->getAuthor())
-                ->setType(Event::STATE_CHANGED)
-                ->setParameter($state_released->getId())
-            ;
-
-            /** @noinspection PhpUndefinedFieldInspection */
-            AltrEgo::create($event2)->createdAt = $record->getCreatedAt();
+            $this->ego($event2)->record    = $record;
+            $this->ego($event2)->user      = $record->getAuthor();
+            $this->ego($event2)->type      = EventType::STATE_CHANGED;
+            $this->ego($event2)->createdAt = $record->getCreatedAt();
+            $this->ego($event2)->parameter = $state_released->getId();
 
             $read = $this->container->get('doctrine')->getRepository(LastRead::class)->findOneBy([
                 'record' => $record,
-                'user'   => $event->getUser(),
+                'user'   => $this->ego($event)->user,
             ]);
 
             if (!$read) {
 
                 $read = new LastRead();
 
-                $read
-                    ->setRecord($record)
-                    ->setUser($event->getUser())
-                ;
+                $this->ego($read)->record = $record;
+                $this->ego($read)->user   = $record->getAuthor();
+                $this->ego($read)->readAt = $record->getCreatedAt();
             }
 
-            /** @noinspection PhpUndefinedFieldInspection */
-            AltrEgo::create($read)->readAt = $event2->getCreatedAt();
+            $this->ego($read)->readAt = $this->ego($event2)->createdAt;
 
             $manager->persist($record);
             $manager->persist($event);
@@ -1570,18 +1560,12 @@ class LoadFuturamaRecordsData extends AbstractFixture implements ContainerAwareI
 
             foreach ($fields as $field_ref => $field_value) {
 
-                /** @var Field $field */
-                $field = $this->getReference($field_ref);
-
                 $value = new FieldValue();
 
-                /** @noinspection PhpParamsInspection */
-                $value
-                    ->setEvent(strpos($field_ref, 'state:produced') !== false ? $event : $event2)
-                    ->setField($field)
-                    ->setCurrent(true)
-                    ->setValueId($field_value)
-                ;
+                $this->ego($value)->event     = strpos($field_ref, 'state:produced') !== false ? $event : $event2;
+                $this->ego($value)->field     = $this->getReference($field_ref);
+                $this->ego($value)->isCurrent = true;
+                $this->ego($value)->value     = $field_value;
 
                 $manager->persist($value);
             }

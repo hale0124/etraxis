@@ -12,22 +12,25 @@
 namespace eTraxis\Dictionary;
 
 use Dictionary\StaticDictionary;
-use eTraxis\Entity\State;
 
 /**
  * State types.
  */
 class StateType extends StaticDictionary
 {
+    const INITIAL = 'initial';
+    const INTERIM = 'interim';
+    const FINAL   = 'final';
+
     /**
      * {@inheritdoc}
      */
     public static function all()
     {
         return [
-            State::TYPE_INITIAL => 'state.type.initial',
-            State::TYPE_INTERIM => 'state.type.interim',
-            State::TYPE_FINAL   => 'state.type.final',
+            self::INITIAL => 'state.type.initial',
+            self::INTERIM => 'state.type.interim',
+            self::FINAL   => 'state.type.final',
         ];
     }
 }

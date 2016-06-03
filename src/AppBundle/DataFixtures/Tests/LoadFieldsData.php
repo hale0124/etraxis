@@ -14,10 +14,11 @@ namespace AppBundle\DataFixtures\Tests;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use eTraxis\Dictionary\FieldPermission;
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\DecimalValue;
 use eTraxis\Entity\Field;
-use eTraxis\Entity\FieldGroupPermission;
 use eTraxis\Entity\ListItem;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
@@ -79,75 +80,60 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
             'state:new' => [
                 1 => [
                     'name'        => 'Crew',
-                    'type'        => Field::TYPE_STRING,
+                    'type'        => FieldType::STRING,
                     'description' => 'Comma-separated list of assigned crew members',
                     'required'    => true,
-                    'author'      => Field::ACCESS_READ_WRITE,
-                    'responsible' => Field::ACCESS_READ_ONLY,
-                    'registered'  => Field::ACCESS_DENIED,
                     'param1'      => 100,
                     'permissions' => [
-                        'group:managers' => Field::ACCESS_READ_WRITE,
-                        'group:staff'    => Field::ACCESS_READ_ONLY,
+                        'group:managers' => FieldPermission::READ_WRITE,
+                        'group:staff'    => FieldPermission::READ_ONLY,
                     ],
                 ],
                 2 => [
                     'name'        => 'Delivery to',
-                    'type'        => Field::TYPE_STRING,
+                    'type'        => FieldType::STRING,
                     'description' => 'A person to deliver to',
                     'required'    => true,
-                    'author'      => Field::ACCESS_READ_WRITE,
-                    'responsible' => Field::ACCESS_READ_ONLY,
-                    'registered'  => Field::ACCESS_DENIED,
                     'param1'      => 100,
                     'permissions' => [
-                        'group:managers' => Field::ACCESS_READ_WRITE,
-                        'group:staff'    => Field::ACCESS_READ_ONLY,
+                        'group:managers' => FieldPermission::READ_WRITE,
+                        'group:staff'    => FieldPermission::READ_ONLY,
                     ],
                 ],
                 3 => [
                     'name'        => 'Delivery at',
-                    'type'        => Field::TYPE_STRING,
+                    'type'        => FieldType::STRING,
                     'description' => 'A place to deliver at',
                     'required'    => true,
-                    'author'      => Field::ACCESS_READ_WRITE,
-                    'responsible' => Field::ACCESS_READ_ONLY,
-                    'registered'  => Field::ACCESS_DENIED,
                     'param1'      => 100,
                     'permissions' => [
-                        'group:managers' => Field::ACCESS_READ_WRITE,
-                        'group:staff'    => Field::ACCESS_READ_ONLY,
+                        'group:managers' => FieldPermission::READ_WRITE,
+                        'group:staff'    => FieldPermission::READ_ONLY,
                     ],
                 ],
                 4 => [
                     'name'        => 'Notes',
-                    'type'        => Field::TYPE_TEXT,
+                    'type'        => FieldType::TEXT,
                     'description' => 'Optional notes to the crew',
                     'required'    => false,
-                    'author'      => Field::ACCESS_READ_WRITE,
-                    'responsible' => Field::ACCESS_READ_ONLY,
-                    'registered'  => Field::ACCESS_DENIED,
                     'param1'      => 1000,
                     'permissions' => [
-                        'group:managers' => Field::ACCESS_READ_WRITE,
-                        'group:staff'    => Field::ACCESS_READ_ONLY,
+                        'group:managers' => FieldPermission::READ_WRITE,
+                        'group:staff'    => FieldPermission::READ_ONLY,
                     ],
                 ],
             ],
             'state:delivered' => [
                 1 => [
                     'name'        => 'Notes',
-                    'type'        => Field::TYPE_TEXT,
+                    'type'        => FieldType::TEXT,
                     'description' => 'Optional notes from the crew',
                     'required'    => false,
-                    'author'      => Field::ACCESS_READ_WRITE,
-                    'responsible' => Field::ACCESS_READ_ONLY,
-                    'registered'  => Field::ACCESS_DENIED,
                     'param1'      => 1000,
                     'permissions' => [
-                        'group:managers' => Field::ACCESS_READ_WRITE,
-                        'group:staff'    => Field::ACCESS_READ_ONLY,
-                        'group:crew'     => Field::ACCESS_READ_WRITE,
+                        'group:managers' => FieldPermission::READ_WRITE,
+                        'group:staff'    => FieldPermission::READ_ONLY,
+                        'group:crew'     => FieldPermission::READ_WRITE,
                     ],
                 ],
             ],
@@ -155,23 +141,23 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
 
         foreach ($fields as $state_ref => $state_fields) {
 
+            /** @var \eTraxis\Entity\State $state */
             $state = $this->getReference($state_ref);
 
             foreach ($state_fields as $order => $info) {
 
                 $field = new Field();
 
-                /** @noinspection PhpParamsInspection */
                 $field
                     ->setState($state)
                     ->setName($info['name'])
                     ->setType($info['type'])
                     ->setDescription($info['description'])
-                    ->setIndexNumber($order)
+                    ->setOrder($order)
                     ->setRequired($info['required'])
-                    ->setRolePermission(SystemRole::AUTHOR, $info['author'])
-                    ->setRolePermission(SystemRole::RESPONSIBLE, $info['responsible'])
-                    ->setRolePermission(SystemRole::REGISTERED, $info['registered'])
+                    ->setRolePermission(SystemRole::ANYONE, FieldPermission::NONE)
+                    ->setRolePermission(SystemRole::AUTHOR, FieldPermission::READ_WRITE)
+                    ->setRolePermission(SystemRole::RESPONSIBLE, FieldPermission::READ_ONLY)
                 ;
 
                 $field->getParameters()
@@ -180,33 +166,13 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
 
                 $this->addReference($state_ref . ':' . $order, $field);
 
-                $manager->persist($field);
-            }
-        }
-
-        $manager->flush();
-
-        foreach ($fields as $state_ref => $state_fields) {
-
-            foreach ($state_fields as $order => $info) {
-
-                $field = $this->getReference($state_ref . ':' . $order);
-
                 foreach ($info['permissions'] as $group_ref => $permission) {
-
+                    /** @var \eTraxis\Entity\Group $group */
                     $group = $this->getReference($group_ref);
-
-                    $access = new FieldGroupPermission();
-
-                    /** @noinspection PhpParamsInspection */
-                    $access
-                        ->setField($field)
-                        ->setGroup($group)
-                        ->setPermission($permission)
-                    ;
-
-                    $manager->persist($access);
+                    $field->setGroupPermission($group, $permission);
                 }
+
+                $manager->persist($field);
             }
         }
 
@@ -238,71 +204,50 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
             'state:produced' => [
                 1 => [
                     'name'        => 'Season',
-                    'type'        => Field::TYPE_LIST,
+                    'type'        => FieldType::LIST,
                     'required'    => true,
-                    'author'      => Field::ACCESS_READ_WRITE,
-                    'responsible' => Field::ACCESS_DENIED,
-                    'registered'  => Field::ACCESS_READ_ONLY,
                     'param1'      => null,
                     'param2'      => null,
                 ],
                 2 => [
                     'name'        => 'Episode',
-                    'type'        => Field::TYPE_NUMBER,
+                    'type'        => FieldType::NUMBER,
                     'required'    => true,
-                    'author'      => Field::ACCESS_READ_WRITE,
-                    'responsible' => Field::ACCESS_DENIED,
-                    'registered'  => Field::ACCESS_READ_ONLY,
                     'param1'      => 1,
                     'param2'      => 100,
                 ],
                 3 => [
                     'name'        => 'Production code',
-                    'type'        => Field::TYPE_STRING,
+                    'type'        => FieldType::STRING,
                     'required'    => true,
-                    'author'      => Field::ACCESS_READ_WRITE,
-                    'responsible' => Field::ACCESS_DENIED,
-                    'registered'  => Field::ACCESS_READ_ONLY,
                     'param1'      => 7,
                     'param2'      => null,
                 ],
                 4 => [
                     'name'        => 'Running time',
-                    'type'        => Field::TYPE_DURATION,
+                    'type'        => FieldType::DURATION,
                     'required'    => true,
-                    'author'      => Field::ACCESS_READ_WRITE,
-                    'responsible' => Field::ACCESS_DENIED,
-                    'registered'  => Field::ACCESS_READ_ONLY,
                     'param1'      => 0,
                     'param2'      => 1440,
                 ],
                 5 => [
                     'name'        => 'Multipart',
-                    'type'        => Field::TYPE_CHECKBOX,
+                    'type'        => FieldType::CHECKBOX,
                     'required'    => true,
-                    'author'      => Field::ACCESS_READ_WRITE,
-                    'responsible' => Field::ACCESS_DENIED,
-                    'registered'  => Field::ACCESS_READ_ONLY,
                     'param1'      => null,
                     'param2'      => null,
                 ],
                 6 => [
                     'name'        => 'Plot',
-                    'type'        => Field::TYPE_TEXT,
+                    'type'        => FieldType::TEXT,
                     'required'    => true,
-                    'author'      => Field::ACCESS_READ_WRITE,
-                    'responsible' => Field::ACCESS_DENIED,
-                    'registered'  => Field::ACCESS_READ_ONLY,
                     'param1'      => 2000,
                     'param2'      => null,
                 ],
                 7 => [
                     'name'        => 'Delivery',
-                    'type'        => Field::TYPE_RECORD,
+                    'type'        => FieldType::RECORD,
                     'required'    => false,
-                    'author'      => Field::ACCESS_READ_WRITE,
-                    'responsible' => Field::ACCESS_DENIED,
-                    'registered'  => Field::ACCESS_READ_ONLY,
                     'param1'      => null,
                     'param2'      => null,
                 ],
@@ -310,21 +255,15 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
             'state:released' => [
                 1 => [
                     'name'        => 'Original air date',
-                    'type'        => Field::TYPE_DATE,
+                    'type'        => FieldType::DATE,
                     'required'    => true,
-                    'author'      => Field::ACCESS_READ_WRITE,
-                    'responsible' => Field::ACCESS_DENIED,
-                    'registered'  => Field::ACCESS_READ_ONLY,
                     'param1'      => 0,
                     'param2'      => 7,
                 ],
                 2 => [
                     'name'        => 'U.S. viewers',
-                    'type'        => Field::TYPE_DECIMAL,
+                    'type'        => FieldType::DECIMAL,
                     'required'    => false,
-                    'author'      => Field::ACCESS_READ_WRITE,
-                    'responsible' => Field::ACCESS_DENIED,
-                    'registered'  => Field::ACCESS_READ_ONLY,
                     'param1'      => $min_value->getId(),
                     'param2'      => $max_value->getId(),
                 ],
@@ -333,23 +272,23 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
 
         foreach ($fields as $state_ref => $state_fields) {
 
+            /** @var \eTraxis\Entity\State $state */
             $state = $this->getReference($state_ref);
 
             foreach ($state_fields as $order => $info) {
 
                 $field = new Field();
 
-                /** @noinspection PhpParamsInspection */
                 $field
                     ->setState($state)
                     ->setName($info['name'])
                     ->setType($info['type'])
                     ->setDescription(null)
-                    ->setIndexNumber($order)
+                    ->setOrder($order)
                     ->setRequired($info['required'])
-                    ->setRolePermission(SystemRole::AUTHOR, $info['author'])
-                    ->setRolePermission(SystemRole::RESPONSIBLE, $info['responsible'])
-                    ->setRolePermission(SystemRole::REGISTERED, $info['registered'])
+                    ->setRolePermission(SystemRole::ANYONE, FieldPermission::READ_ONLY)
+                    ->setRolePermission(SystemRole::AUTHOR, FieldPermission::READ_WRITE)
+                    ->setRolePermission(SystemRole::RESPONSIBLE, FieldPermission::NONE)
                 ;
 
                 $field->getParameters()
@@ -374,8 +313,8 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
 
             $value
                 ->setField($field)
-                ->setKey($i)
-                ->setValue('Season ' . $i)
+                ->setValue($i)
+                ->setText('Season ' . $i)
             ;
 
             $this->addReference('value:list:' . $i, $value);
@@ -396,14 +335,14 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
         $fields = [
             1 => [
                 'name'     => 'PSR ID',
-                'type'     => Field::TYPE_STRING,
+                'type'     => FieldType::STRING,
                 'required' => true,
                 'param1'   => 2,
                 'param2'   => null,
             ],
             2 => [
                 'name'     => 'Description',
-                'type'     => Field::TYPE_TEXT,
+                'type'     => FieldType::TEXT,
                 'required' => false,
                 'param1'   => 2000,
                 'param2'   => null,
@@ -412,6 +351,9 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
 
         /** @var \eTraxis\Entity\State $state */
         $state = $this->getReference('state:psr:draft');
+
+        /** @var \eTraxis\Entity\Group $members */
+        $members = $this->getReference('group:fig:members');
 
         foreach ($fields as $order => $info) {
 
@@ -422,11 +364,12 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                 ->setName($info['name'])
                 ->setType($info['type'])
                 ->setDescription(null)
-                ->setIndexNumber($order)
+                ->setOrder($order)
                 ->setRequired($info['required'])
-                ->setRolePermission(SystemRole::AUTHOR, Field::ACCESS_READ_WRITE)
-                ->setRolePermission(SystemRole::RESPONSIBLE, Field::ACCESS_DENIED)
-                ->setRolePermission(SystemRole::REGISTERED, Field::ACCESS_DENIED)
+                ->setRolePermission(SystemRole::ANYONE, FieldPermission::NONE)
+                ->setRolePermission(SystemRole::AUTHOR, FieldPermission::READ_WRITE)
+                ->setRolePermission(SystemRole::RESPONSIBLE, FieldPermission::NONE)
+                ->setGroupPermission($members, FieldPermission::READ_ONLY)
             ;
 
             $field->getParameters()
@@ -434,25 +377,15 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                 ->setParameter2($info['param2'])
             ;
 
-            $permission = new FieldGroupPermission();
-
-            /** @noinspection PhpParamsInspection */
-            $permission
-                ->setField($field)
-                ->setGroup($this->getReference('group:fig:members'))
-                ->setPermission(Field::ACCESS_READ_ONLY)
-            ;
-
             $this->addReference('state:psr:draft:' . $order, $field);
 
             $manager->persist($field);
-            $manager->persist($permission);
         }
 
         /** @var Field $field */
         $field = $this->getReference('state:psr:draft:1');
 
-        $field->getRegex()
+        $field->getPCRE()
             ->setCheck('(\\d+)')
             ->setSearch('(\\d+)')
             ->setReplace('PSR-$1')

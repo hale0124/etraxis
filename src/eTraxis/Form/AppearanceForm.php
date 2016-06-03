@@ -11,9 +11,7 @@
 
 namespace eTraxis\Form;
 
-use eTraxis\Dictionary\Locale;
-use eTraxis\Dictionary\Theme;
-use eTraxis\Dictionary\Timezone;
+use eTraxis\Dictionary;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -32,7 +30,7 @@ class AppearanceForm extends AbstractType
         $builder->add('locale', ChoiceType::class, [
             'label'                     => 'language',
             'required'                  => true,
-            'choices'                   => array_flip(Locale::all()),
+            'choices'                   => array_flip(Dictionary\Locale::all()),
             'choice_translation_domain' => false,
         ]);
 
@@ -40,7 +38,7 @@ class AppearanceForm extends AbstractType
         $builder->add('theme', ChoiceType::class, [
             'label'                     => 'theme',
             'required'                  => true,
-            'choices'                   => array_flip(Theme::all()),
+            'choices'                   => array_flip(Dictionary\Theme::all()),
             'choice_translation_domain' => false,
         ]);
 
@@ -48,7 +46,7 @@ class AppearanceForm extends AbstractType
         $builder->add('timezone', ChoiceType::class, [
             'label'                     => 'timezone',
             'required'                  => true,
-            'choices'                   => array_combine(Timezone::values(), Timezone::values()),
+            'choices'                   => Dictionary\Timezone::all(),
             'choice_translation_domain' => false,
         ]);
     }

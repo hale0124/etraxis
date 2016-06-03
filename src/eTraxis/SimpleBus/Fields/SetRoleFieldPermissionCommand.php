@@ -17,9 +17,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Sets permission of specified role to specified field.
  *
- * @property    int $id         Field ID.
- * @property    int $role       System role.
- * @property    int $permission Permission.
+ * @property    int    $id         Field ID.
+ * @property    string $role       System role.
+ * @property    string $permission Permission.
  */
 class SetRoleFieldPermissionCommand
 {

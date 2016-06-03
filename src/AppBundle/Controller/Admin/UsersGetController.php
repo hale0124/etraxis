@@ -181,10 +181,10 @@ class UsersGetController extends Controller
         $settings = [
             'locale'   => $this->getParameter('locale'),
             'theme'    => $this->getParameter('theme'),
-            'timezone' => 0,
+            'timezone' => $this->getUser()->getTimezone(),
         ];
 
-        $form = $this->createForm(UserForm::class, ['settings' => $settings], [
+        $form = $this->createForm(UserForm::class, $settings, [
             'action' => $this->generateUrl('admin_new_user'),
         ]);
 

@@ -54,9 +54,9 @@ permissions: Права
 role: Роля
 role.administrator: Администратор
 role.user: Потребител
+role.any: 'Any user'
 role.author: Автор
 role.responsible: Отговорен
-role.registered: Регистриран
 description: Описание
 language: Език
 theme: Тема
@@ -122,13 +122,13 @@ template.permission.resume_records: 'Resume records'
 template.permission.reassign_records: 'Reassign records'
 template.permission.reopen_records: 'Reopen records'
 template.permission.add_comments: 'Add comments'
-template.permission.add_files: 'Add files'
-template.permission.remove_files: 'Remove files'
 template.permission.private_comments: 'Add/read private comments'
-template.permission.send_reminders: 'Send reminders'
-template.permission.delete_records: 'Delete records'
+template.permission.attach_files: 'Attach files'
+template.permission.delete_files: 'Delete files'
 template.permission.attach_subrecords: 'Attach subrecords'
 template.permission.detach_subrecords: 'Detach subrecords'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_records: 'Delete records'
 state: Условие
 states: Условия
 state.new: 'Ново условие'
@@ -166,9 +166,9 @@ field.default_value: 'Стойност по подразбиране'
 field.min_value: Мин.стойност
 field.max_value: Макс.стойност
 field.max_length: Макс.дължина
-field.regex_check: 'PCRE за проверяване на стойностите на полетата'
-field.regex_search: 'Потърси PCRE за трансформиране на стойностите на полетата'
-field.regex_replace: 'Замести PCRE за трансформиране на стойностите на полетата'
+field.pcre_check: 'PCRE за проверяване на стойностите на полетата'
+field.pcre_search: 'Потърси PCRE за трансформиране на стойностите на полетата'
+field.pcre_replace: 'Замести PCRE за трансформиране на стойностите на полетата'
 field.confirm.delete: 'Сигурен ли сте че искате да изтриете това поле?'
 field.error.min_max_values: 'Mаксималната стойност трябва да е по-голяма от минималната.'
 field.error.default_value: 'Стойностите по подразбиране трябва да са в порядъка на %min% до %max%.'
@@ -177,6 +177,6 @@ field.permissions.none: няма
 field.permissions.read_only: 'само за четене'
 field.permissions.read_write: 'четене и запис'
 listitems: 'Списък итеми'
-listitem.key: 'Item key'
 listitem.value: 'Item value'
+listitem.text: 'Item text'
 listitem.confirm.delete: 'Are you sure you want delete this item?'

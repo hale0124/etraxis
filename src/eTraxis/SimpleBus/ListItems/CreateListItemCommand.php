@@ -18,8 +18,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Creates new list item.
  *
  * @property    int    $field ID of the item's field.
- * @property    int    $key   Item key.
- * @property    string $value Item value.
+ * @property    int    $value Item value.
+ * @property    string $text  Item text.
  */
 class CreateListItemCommand
 {
@@ -35,11 +35,11 @@ class CreateListItemCommand
      * @Assert\NotBlank()
      * @Assert\Range(min="1")
      */
-    public $key;
+    public $value;
 
     /**
      * @Assert\NotBlank()
      * @Assert\Length(max="50")
      */
-    public $value;
+    public $text;
 }

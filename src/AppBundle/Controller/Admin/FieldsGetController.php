@@ -18,7 +18,7 @@ use eTraxis\Entity\Field;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
 use eTraxis\Form\FieldForm;
-use eTraxis\Form\RegexForm;
+use eTraxis\Form\PCREForm;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -113,15 +113,15 @@ class FieldsGetController extends Controller
     /**
      * Tab with field's PCRE settings.
      *
-     * @Action\Route("/tab/regex/{id}", name="admin_tab_field_regex", requirements={"id"="\d+"})
+     * @Action\Route("/tab/pcre/{id}", name="admin_tab_field_pcre", requirements={"id"="\d+"})
      *
      * @param   Field $field
      *
      * @return  Response
      */
-    public function tabRegexAction(Field $field): Response
+    public function tabPcreAction(Field $field): Response
     {
-        return $this->render('admin/fields/tab_regex.html.twig', [
+        return $this->render('admin/fields/tab_pcre.html.twig', [
             'field' => $field,
         ]);
     }
@@ -185,19 +185,19 @@ class FieldsGetController extends Controller
     /**
      * Renders dialog to edit PCRE settings.
      *
-     * @Action\Route("/regex/{id}", name="admin_dlg_regex_field", requirements={"id"="\d+"})
+     * @Action\Route("/pcre/{id}", name="admin_dlg_pcre_field", requirements={"id"="\d+"})
      *
      * @param   Field $field
      *
      * @return  Response
      */
-    public function regexAction(Field $field): Response
+    public function pcreAction(Field $field): Response
     {
-        $form = $this->createForm(RegexForm::class, $field->getRegex(), [
-            'action' => $this->generateUrl('admin_regex_field', ['id' => $field->getId()]),
+        $form = $this->createForm(PCREForm::class, $field->getPCRE(), [
+            'action' => $this->generateUrl('admin_pcre_field', ['id' => $field->getId()]),
         ]);
 
-        return $this->render('admin/fields/dlg_regex.html.twig', [
+        return $this->render('admin/fields/dlg_pcre.html.twig', [
             'form' => $form->createView(),
         ]);
     }
@@ -205,14 +205,14 @@ class FieldsGetController extends Controller
     /**
      * Loads permissions of the specified role for the specified field.
      *
-     * @Action\Route("/permissions/{id}/{role}", name="admin_fields_load_role_permissions", requirements={"id"="\d+", "role"="\-\d+"})
+     * @Action\Route("/permissions/{id}/{role}", name="admin_fields_load_role_permissions", requirements={"id"="\d+", "role"="\D+"})
      *
-     * @param   Field $field
-     * @param   int   $role
+     * @param   Field  $field
+     * @param   string $role
      *
      * @return  JsonResponse
      */
-    public function loadRolePermissionsAction(Field $field, int $role): JsonResponse
+    public function loadRolePermissionsAction(Field $field, string $role): JsonResponse
     {
         return new JsonResponse($field->getRolePermission($role));
     }

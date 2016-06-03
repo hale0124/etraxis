@@ -59,8 +59,8 @@ class ListItemsPostControllerTest extends ControllerTestCase
     public function testEditAction()
     {
         $uri = $this->router->generate('admin_edit_listitem', [
-            'id'  => $this->field->getId(),
-            'key' => 0,
+            'id'    => $this->field->getId(),
+            'value' => 0,
         ]);
 
         $this->makeRequest(Request::METHOD_GET, $uri, true);
@@ -83,8 +83,8 @@ class ListItemsPostControllerTest extends ControllerTestCase
     public function testDeleteAction()
     {
         $uri = $this->router->generate('admin_delete_listitem', [
-            'id'  => $this->field->getId(),
-            'key' => 0,
+            'id'    => $this->field->getId(),
+            'value' => 0,
         ]);
 
         $this->makeRequest(Request::METHOD_GET, $uri, true);

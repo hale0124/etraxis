@@ -16,10 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Last reading time of record.
  *
- * @ORM\Table(name="tbl_reads",
- *            indexes={
- *                @ORM\Index(name="ix_rds_comb", columns={"record_id", "account_id", "read_time"})
- *            })
+ * @ORM\Table(name="last_reads")
  * @ORM\Entity
  */
 class LastRead
@@ -30,7 +27,7 @@ class LastRead
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="Record")
-     * @ORM\JoinColumn(name="record_id", referencedColumnName="record_id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="record_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $record;
 
@@ -40,50 +37,14 @@ class LastRead
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="account_id", referencedColumnName="account_id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $user;
 
     /**
-     * @var int Unix Epoch timestamp when the record has been read by this user last time.
+     * @var int Unix Epoch timestamp when the record has been opened by this user last time.
      *
-     * @ORM\Column(name="read_time", type="integer")
+     * @ORM\Column(name="read_at", type="integer")
      */
     private $readAt;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->readAt = time();
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   Record $record
-     *
-     * @return  self
-     */
-    public function setRecord(Record $record)
-    {
-        $this->record = $record;
-
-        return $this;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   User $user
-     *
-     * @return  self
-     */
-    public function setUser(User $user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
 }

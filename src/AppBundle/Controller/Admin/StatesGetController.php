@@ -169,14 +169,14 @@ class StatesGetController extends Controller
     /**
      * Loads transitions of the specified role for the specified state.
      *
-     * @Action\Route("/transitions/{id}/{role}", name="admin_states_load_role_transitions", requirements={"id"="\d+", "role"="\-\d+"})
+     * @Action\Route("/transitions/{id}/{role}", name="admin_states_load_role_transitions", requirements={"id"="\d+", "role"="\D+"})
      *
-     * @param   State $state
-     * @param   int   $role
+     * @param   State  $state
+     * @param   string $role
      *
      * @return  JsonResponse
      */
-    public function loadRoleTransitionsAction(State $state, int $role): JsonResponse
+    public function loadRoleTransitionsAction(State $state, string $role): JsonResponse
     {
         return new JsonResponse($state->getRoleTransitions($role));
     }

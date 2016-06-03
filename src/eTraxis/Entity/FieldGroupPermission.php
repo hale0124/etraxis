@@ -17,7 +17,7 @@ use eTraxis\Dictionary\FieldPermission;
 /**
  * Field/Group permission.
  *
- * @ORM\Table(name="tbl_field_perms")
+ * @ORM\Table(name="field_group_permissions")
  * @ORM\Entity
  */
 class FieldGroupPermission
@@ -27,8 +27,8 @@ class FieldGroupPermission
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\ManyToOne(targetEntity="Field")
-     * @ORM\JoinColumn(name="field_id", referencedColumnName="field_id", onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="Field", inversedBy="groupPermissions")
+     * @ORM\JoinColumn(name="field_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $field;
 
@@ -38,16 +38,16 @@ class FieldGroupPermission
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="Group")
-     * @ORM\JoinColumn(name="group_id", referencedColumnName="group_id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="group_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $group;
 
     /**
-     * @var int Permission of the group.
+     * @var string Permission of the group.
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\Column(name="perms", type="integer")
+     * @ORM\Column(name="permission", type="string", length=20)
      */
     private $permission;
 
@@ -102,11 +102,11 @@ class FieldGroupPermission
     /**
      * Property setter.
      *
-     * @param   int $permission
+     * @param   string $permission
      *
      * @return  self
      */
-    public function setPermission(int $permission)
+    public function setPermission(string $permission)
     {
         if (FieldPermission::has($permission)) {
             $this->permission = $permission;
@@ -118,7 +118,7 @@ class FieldGroupPermission
     /**
      * Property getter.
      *
-     * @return  int
+     * @return  string
      */
     public function getPermission()
     {

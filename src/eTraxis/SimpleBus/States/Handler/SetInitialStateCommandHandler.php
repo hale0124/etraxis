@@ -12,6 +12,7 @@
 namespace eTraxis\SimpleBus\States\Handler;
 
 use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Dictionary\StateType;
 use eTraxis\Entity\State;
 use eTraxis\SimpleBus\States\SetInitialStateCommand;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
@@ -57,8 +58,8 @@ class SetInitialStateCommandHandler
 
         $query->execute([
             'template' => $entity->getTemplate(),
-            'initial'  => State::TYPE_INITIAL,
-            'interim'  => State::TYPE_INTERIM,
+            'initial'  => StateType::INITIAL,
+            'interim'  => StateType::INTERIM,
         ]);
 
         $query = $this->manager->createQuery('
@@ -69,7 +70,7 @@ class SetInitialStateCommandHandler
 
         $query->execute([
             'id'      => $command->id,
-            'initial' => State::TYPE_INITIAL,
+            'initial' => StateType::INITIAL,
         ]);
     }
 }

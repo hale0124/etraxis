@@ -37,7 +37,7 @@ class ListFieldTest extends TransactionalTestCase
 
     public function testSupportedKeys()
     {
-        $expected = ['defaultKey', 'defaultValue'];
+        $expected = ['defaultValue', 'defaultText'];
 
         $field = $this->object->asList();
 
@@ -68,28 +68,10 @@ class ListFieldTest extends TransactionalTestCase
         $actual = [];
 
         foreach ($this->object->asList()->getItems() as $item) {
-            $actual[$item->getKey()] = $item->getValue();
+            $actual[$item->getValue()] = $item->getText();
         }
 
         self::assertEquals($expected, $actual);
-    }
-
-    public function testDefaultKey()
-    {
-        $field = $this->object->asList();
-
-        /** @var ListItem $item */
-        $item = $this->doctrine->getRepository(ListItem::class)->findOneBy(['key' => 3]);
-
-        $field->setDefaultKey($item->getKey());
-        self::assertEquals($item->getKey(), $field->getDefaultKey());
-        self::assertEquals($item->getValue(), $field->getDefaultValue());
-        self::assertEquals($item->getKey(), $this->object->getParameters()->getDefaultValue());
-
-        $field->setDefaultKey(null);
-        self::assertNull($field->getDefaultKey());
-        self::assertNull($field->getDefaultValue());
-        self::assertNull($this->object->getParameters()->getDefaultValue());
     }
 
     public function testDefaultValue()
@@ -97,16 +79,34 @@ class ListFieldTest extends TransactionalTestCase
         $field = $this->object->asList();
 
         /** @var ListItem $item */
-        $item = $this->doctrine->getRepository(ListItem::class)->findOneBy(['key' => 3]);
+        $item = $this->doctrine->getRepository(ListItem::class)->findOneBy(['value' => 3]);
 
         $field->setDefaultValue($item->getValue());
-        self::assertEquals($item->getKey(), $field->getDefaultKey());
         self::assertEquals($item->getValue(), $field->getDefaultValue());
-        self::assertEquals($item->getKey(), $this->object->getParameters()->getDefaultValue());
+        self::assertEquals($item->getText(), $field->getDefaultText());
+        self::assertEquals($item->getValue(), $this->object->getParameters()->getDefaultValue());
 
         $field->setDefaultValue(null);
-        self::assertNull($field->getDefaultKey());
         self::assertNull($field->getDefaultValue());
+        self::assertNull($field->getDefaultText());
+        self::assertNull($this->object->getParameters()->getDefaultValue());
+    }
+
+    public function testDefaultText()
+    {
+        $field = $this->object->asList();
+
+        /** @var ListItem $item */
+        $item = $this->doctrine->getRepository(ListItem::class)->findOneBy(['value' => 3]);
+
+        $field->setDefaultValue($item->getValue());
+        self::assertEquals($item->getValue(), $field->getDefaultValue());
+        self::assertEquals($item->getText(), $field->getDefaultText());
+        self::assertEquals($item->getValue(), $this->object->getParameters()->getDefaultValue());
+
+        $field->setDefaultValue(null);
+        self::assertNull($field->getDefaultValue());
+        self::assertNull($field->getDefaultText());
         self::assertNull($this->object->getParameters()->getDefaultValue());
     }
 }

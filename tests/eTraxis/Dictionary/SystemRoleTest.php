@@ -16,9 +16,9 @@ class SystemRoleTest extends \PHPUnit_Framework_TestCase
     public function testDictionary()
     {
         $expected = [
+            SystemRole::ANYONE,
             SystemRole::AUTHOR,
             SystemRole::RESPONSIBLE,
-            SystemRole::REGISTERED,
         ];
 
         self::assertEquals($expected, SystemRole::keys());

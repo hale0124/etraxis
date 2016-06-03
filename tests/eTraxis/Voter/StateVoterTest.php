@@ -11,6 +11,8 @@
 
 namespace eTraxis\Voter;
 
+use eTraxis\Dictionary\StateResponsible;
+use eTraxis\Dictionary\StateType;
 use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
 use eTraxis\Tests\TransactionalTestCase;
@@ -50,8 +52,8 @@ class StateVoterTest extends TransactionalTestCase
             ->setTemplate($template)
             ->setName('Cancelled')
             ->setAbbreviation('C')
-            ->setType(State::TYPE_FINAL)
-            ->setResponsible(State::RESPONSIBLE_REMOVE)
+            ->setType(StateType::FINAL)
+            ->setResponsible(StateResponsible::REMOVE)
         ;
 
         $this->doctrine->getManager()->persist($state);
@@ -83,8 +85,8 @@ class StateVoterTest extends TransactionalTestCase
             ->setTemplate($template)
             ->setName('On the way')
             ->setAbbreviation('O')
-            ->setType(State::TYPE_INTERIM)
-            ->setResponsible(State::RESPONSIBLE_KEEP)
+            ->setType(StateType::INTERIM)
+            ->setResponsible(StateResponsible::KEEP)
         ;
 
         $this->doctrine->getManager()->persist($state);

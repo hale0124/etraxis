@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\Field;
 use eTraxis\Tests\TransactionalTestCase;
 
@@ -21,7 +22,7 @@ class UpdateDurationFieldCommandTest extends TransactionalTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Running time']);
 
-        self::assertEquals(Field::TYPE_DURATION, $field->getType());
+        self::assertEquals(FieldType::DURATION, $field->getType());
         self::assertEquals('Running time', $field->getName());
         self::assertNull($field->getDescription());
         self::assertTrue($field->isRequired());
@@ -43,7 +44,7 @@ class UpdateDurationFieldCommandTest extends TransactionalTestCase
 
         $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 
-        self::assertEquals(Field::TYPE_DURATION, $field->getType());
+        self::assertEquals(FieldType::DURATION, $field->getType());
         self::assertEquals('Episode duration', $field->getName());
         self::assertEquals('Running time', $field->getDescription());
         self::assertFalse($field->isRequired());

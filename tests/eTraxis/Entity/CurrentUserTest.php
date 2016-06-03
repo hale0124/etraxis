@@ -11,6 +11,7 @@
 
 namespace eTraxis\Entity;
 
+use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Tests\TransactionalTestCase;
 
 class CurrentUserTest extends TransactionalTestCase
@@ -23,7 +24,7 @@ class CurrentUserTest extends TransactionalTestCase
         parent::setUp();
 
         $this->object = $this->doctrine->getRepository(User::class)->findOneBy([
-            'username' => 'artem@eTraxis',
+            'username' => 'artem',
         ]);
     }
 
@@ -34,6 +35,17 @@ class CurrentUserTest extends TransactionalTestCase
         self::assertEquals($this->object->getId(), $user->getId());
     }
 
+    public function testExternalAccount()
+    {
+        $this->object->setProvider(AuthenticationProvider::LDAP);
+        $user = new CurrentUser($this->object);
+        self::assertTrue($user->isExternalAccount());
+
+        $this->object->setProvider(AuthenticationProvider::ETRAXIS);
+        $user = new CurrentUser($this->object);
+        self::assertFalse($user->isExternalAccount());
+    }
+
     public function testFullname()
     {
         $user = new CurrentUser($this->object);
@@ -41,36 +53,25 @@ class CurrentUserTest extends TransactionalTestCase
         self::assertEquals($this->object->getFullname(), $user->getFullname());
     }
 
-    public function testIsLdap()
-    {
-        $this->object->setLdap(true);
-        $user = new CurrentUser($this->object);
-        self::assertTrue($user->isLdap());
-
-        $this->object->setLdap(false);
-        $user = new CurrentUser($this->object);
-        self::assertFalse($user->isLdap());
-    }
-
     public function testLocale()
     {
         $user = new CurrentUser($this->object);
 
-        self::assertEquals($this->object->getSettings()->getLocale(), $user->getLocale());
+        self::assertEquals($this->object->getLocale(), $user->getLocale());
     }
 
     public function testTheme()
     {
         $user = new CurrentUser($this->object);
 
-        self::assertEquals($this->object->getSettings()->getTheme(), $user->getTheme());
+        self::assertEquals($this->object->getTheme(), $user->getTheme());
     }
 
     public function testTimezone()
     {
         $user = new CurrentUser($this->object);
 
-        self::assertEquals($this->object->getSettings()->getTimezone(), $user->getTimezone());
+        self::assertEquals($this->object->getTimezone(), $user->getTimezone());
     }
 
     public function testRolesAsAdmin()

@@ -12,22 +12,25 @@
 namespace eTraxis\Dictionary;
 
 use Dictionary\StaticDictionary;
-use eTraxis\Entity\State;
 
 /**
  * State responsibility values.
  */
 class StateResponsible extends StaticDictionary
 {
+    const KEEP   = 'keep';
+    const ASSIGN = 'assign';
+    const REMOVE = 'remove';
+
     /**
      * {@inheritdoc}
      */
     public static function all()
     {
         return [
-            State::RESPONSIBLE_KEEP   => 'state.responsible.keep',
-            State::RESPONSIBLE_ASSIGN => 'state.responsible.assign',
-            State::RESPONSIBLE_REMOVE => 'state.responsible.remove',
+            self::KEEP   => 'state.responsible.keep',
+            self::ASSIGN => 'state.responsible.assign',
+            self::REMOVE => 'state.responsible.remove',
         ];
     }
 }

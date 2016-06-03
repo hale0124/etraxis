@@ -54,9 +54,9 @@ permissions: Behörigheter
 role: Roll
 role.administrator: Administratör
 role.user: Användare
+role.any: 'Any user'
 role.author: Upphovsman
 role.responsible: Ansvarig
-role.registered: Registrerad
 description: Beskrivning
 language: Språk
 theme: Tema
@@ -122,13 +122,13 @@ template.permission.resume_records: 'Resume records'
 template.permission.reassign_records: 'Reassign records'
 template.permission.reopen_records: 'Reopen records'
 template.permission.add_comments: 'Add comments'
-template.permission.add_files: 'Add files'
-template.permission.remove_files: 'Remove files'
 template.permission.private_comments: 'Add/read private comments'
-template.permission.send_reminders: 'Send reminders'
-template.permission.delete_records: 'Delete records'
+template.permission.attach_files: 'Attach files'
+template.permission.delete_files: 'Delete files'
 template.permission.attach_subrecords: 'Attach subrecords'
 template.permission.detach_subrecords: 'Detach subrecords'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_records: 'Delete records'
 state: Status
 states: Status
 state.new: 'Ny status'
@@ -166,9 +166,9 @@ field.default_value: Standardvärde
 field.min_value: Min.värde
 field.max_value: Max.värde
 field.max_length: Max.längd
-field.regex_check: 'PCRE för att kontrollera fältvärden'
-field.regex_search: 'Sök PCRE för att omvandla fältvärden'
-field.regex_replace: 'Ersätt PCRE för att omvandla fältvärden'
+field.pcre_check: 'PCRE för att kontrollera fältvärden'
+field.pcre_search: 'Sök PCRE för att omvandla fältvärden'
+field.pcre_replace: 'Ersätt PCRE för att omvandla fältvärden'
 field.confirm.delete: 'Är du säker på att du vill ta bort detta fältet?'
 field.error.min_max_values: 'Högsta värdet bör vara större än minimum en.'
 field.error.default_value: 'Standardvärdet bör vara i intervallet från %min% till %max%.'
@@ -177,6 +177,6 @@ field.permissions.none: inga
 field.permissions.read_only: skrivskyddad
 field.permissions.read_write: 'läsa och skriva'
 listitems: Listobjekt
-listitem.key: 'Item key'
 listitem.value: 'Item value'
+listitem.text: 'Item text'
 listitem.confirm.delete: 'Are you sure you want delete this item?'

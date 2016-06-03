@@ -54,9 +54,9 @@ permissions: Permisiuni
 role: Rolul
 role.administrator: Administrator
 role.user: Utilizator
+role.any: 'Any user'
 role.author: Autor
 role.responsible: Responsabil
-role.registered: Inregistrat
 description: Descriere
 language: Limba
 theme: Tema
@@ -122,13 +122,13 @@ template.permission.resume_records: 'Resume records'
 template.permission.reassign_records: 'Reassign records'
 template.permission.reopen_records: 'Reopen records'
 template.permission.add_comments: 'Add comments'
-template.permission.add_files: 'Add files'
-template.permission.remove_files: 'Remove files'
 template.permission.private_comments: 'Add/read private comments'
-template.permission.send_reminders: 'Send reminders'
-template.permission.delete_records: 'Delete records'
+template.permission.attach_files: 'Attach files'
+template.permission.delete_files: 'Delete files'
 template.permission.attach_subrecords: 'Attach subrecords'
 template.permission.detach_subrecords: 'Detach subrecords'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_records: 'Delete records'
 state: Stare
 states: Stare
 state.new: 'Stare nou'
@@ -166,9 +166,9 @@ field.default_value: 'Valoare implicita'
 field.min_value: 'Valoare minima'
 field.max_value: 'Valoare maxima'
 field.max_length: 'Lungime maxima'
-field.regex_check: 'PCRE to check field values'
-field.regex_search: 'Search PCRE to transform field values'
-field.regex_replace: 'Replace PCRE to transform field values'
+field.pcre_check: 'PCRE to check field values'
+field.pcre_search: 'Search PCRE to transform field values'
+field.pcre_replace: 'Replace PCRE to transform field values'
 field.confirm.delete: 'Sunteti sigur ca doriti sa stergeti acest camp?'
 field.error.min_max_values: 'Valoarea maxima trebuie sa fie mai mare decat cea minima.'
 field.error.default_value: 'Valoarea implicita trebuie sa fie in intervalul %min% la %max%.'
@@ -177,6 +177,6 @@ field.permissions.none: niciunul
 field.permissions.read_only: 'doar afisare'
 field.permissions.read_write: 'afisare si scriere'
 listitems: 'Elementele listei'
-listitem.key: 'Item key'
 listitem.value: 'Item value'
+listitem.text: 'Item text'
 listitem.confirm.delete: 'Are you sure you want delete this item?'

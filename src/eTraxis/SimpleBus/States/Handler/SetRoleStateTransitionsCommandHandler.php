@@ -12,8 +12,8 @@
 namespace eTraxis\SimpleBus\States\Handler;
 
 use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Dictionary\StateType;
 use eTraxis\Entity\State;
-use eTraxis\Entity\StateRoleTransition;
 use eTraxis\SimpleBus\States\SetRoleStateTransitionsCommand;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -51,7 +51,7 @@ class SetRoleStateTransitionsCommandHandler
         }
 
         // Transitions are not applicable for final states.
-        if ($state->getType() !== State::TYPE_FINAL) {
+        if ($state->getType() !== StateType::FINAL) {
 
             /** @var State[] $transitions */
             $transitions = $this->manager->getRepository(State::class)->findBy([
@@ -59,29 +59,9 @@ class SetRoleStateTransitionsCommandHandler
                 'id'       => $command->transitions,
             ]);
 
-            $query = $this->manager->createQuery('
-                DELETE eTraxis:StateRoleTransition t
-                WHERE t.fromState = :state
-                  AND t.role = :role
-            ');
+            $state->setRoleTransitions($command->role, $transitions);
 
-            $query->execute([
-                'state' => $state,
-                'role'  => $command->role,
-            ]);
-
-            foreach ($transitions as $transition) {
-
-                $entity = new StateRoleTransition();
-
-                $entity
-                    ->setFromState($state)
-                    ->setToState($transition)
-                    ->setRole($command->role)
-                ;
-
-                $this->manager->persist($entity);
-            }
+            $this->manager->persist($state);
         }
     }
 }

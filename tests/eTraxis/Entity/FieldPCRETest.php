@@ -11,31 +11,31 @@
 
 namespace eTraxis\Entity;
 
-class FieldRegexTest extends \PHPUnit_Framework_TestCase
+class FieldPCRETest extends \PHPUnit_Framework_TestCase
 {
-    /** @var FieldRegex */
+    /** @var FieldPCRE */
     private $object;
 
     protected function setUp()
     {
-        $this->object = new FieldRegex();
+        $this->object = new FieldPCRE();
     }
 
-    public function testRegexCheck()
+    public function testCheck()
     {
         $expected = 'PCRE';
         $this->object->setCheck($expected);
         self::assertEquals($expected, $this->object->getCheck());
     }
 
-    public function testRegexSearch()
+    public function testSearch()
     {
         $expected = 'PCRE';
         $this->object->setSearch($expected);
         self::assertEquals($expected, $this->object->getSearch());
     }
 
-    public function testRegexReplace()
+    public function testReplace()
     {
         $expected = 'PCRE';
         $this->object->setReplace($expected);

@@ -12,6 +12,7 @@
 namespace eTraxis\SimpleBus\States\Handler;
 
 use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Dictionary\StateResponsible;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
 use eTraxis\SimpleBus\States\RemoveStateResponsibleGroupsCommand;
@@ -51,23 +52,16 @@ class RemoveStateResponsibleGroupsCommandHandler
         }
 
         // Responsible groups are applicable for assignable states only.
-        if ($state->getResponsible() === State::RESPONSIBLE_ASSIGN) {
+        if ($state->getResponsible() === StateResponsible::ASSIGN) {
 
             /** @var Group[] $groups */
             $groups = $this->manager->getRepository(Group::class)->findBy([
                 'id' => $command->groups,
             ]);
 
-            $query = $this->manager->createQuery('
-                DELETE eTraxis:StateResponsibleGroup srg
-                WHERE srg.state = :state
-                  AND srg.group IN (:groups)
-            ');
+            $state->removeResponsibleGroups($groups);
 
-            $query->execute([
-                'state'  => $state,
-                'groups' => $groups,
-            ]);
+            $this->manager->persist($state);
         }
     }
 }

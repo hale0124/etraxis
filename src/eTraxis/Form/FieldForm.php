@@ -45,30 +45,30 @@ class FieldForm extends AbstractType
                 'label'    => 'field.type',
                 'required' => true,
                 'choices'  => array_flip(FieldType::all()),
-                'data'     => Field::TYPE_STRING,
+                'data'     => FieldType::STRING,
             ]);
         }
 
         // Type-specific inputs.
-        if (!is_object($field) || $field->getType() === Field::TYPE_NUMBER) {
+        if (!is_object($field) || $field->getType() === FieldType::NUMBER) {
             $builder->add('asNumber', Fields\NumberFieldType::class);
         }
-        if (!is_object($field) || $field->getType() === Field::TYPE_DECIMAL) {
+        if (!is_object($field) || $field->getType() === FieldType::DECIMAL) {
             $builder->add('asDecimal', Fields\DecimalFieldType::class);
         }
-        if (!is_object($field) || $field->getType() === Field::TYPE_STRING) {
+        if (!is_object($field) || $field->getType() === FieldType::STRING) {
             $builder->add('asString', Fields\StringFieldType::class);
         }
-        if (!is_object($field) || $field->getType() === Field::TYPE_TEXT) {
+        if (!is_object($field) || $field->getType() === FieldType::TEXT) {
             $builder->add('asText', Fields\TextFieldType::class);
         }
-        if (!is_object($field) || $field->getType() === Field::TYPE_CHECKBOX) {
+        if (!is_object($field) || $field->getType() === FieldType::CHECKBOX) {
             $builder->add('asCheckbox', Fields\CheckboxFieldType::class);
         }
-        if (!is_object($field) || $field->getType() === Field::TYPE_DATE) {
+        if (!is_object($field) || $field->getType() === FieldType::DATE) {
             $builder->add('asDate', Fields\DateFieldType::class);
         }
-        if (!is_object($field) || $field->getType() === Field::TYPE_DURATION) {
+        if (!is_object($field) || $field->getType() === FieldType::DURATION) {
             $builder->add('asDuration', Fields\DurationFieldType::class);
         }
 
@@ -80,7 +80,7 @@ class FieldForm extends AbstractType
         ]);
 
         // Required.
-        if (!is_object($field) || $field->getType() !== Field::TYPE_CHECKBOX) {
+        if (!is_object($field) || $field->getType() !== FieldType::CHECKBOX) {
             $builder->add('required', CheckboxType::class, [
                 'label'    => 'field.required',
                 'required' => false,

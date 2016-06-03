@@ -12,6 +12,7 @@
 namespace eTraxis\Entity;
 
 use AltrEgo\AltrEgo;
+use eTraxis\Dictionary\EventType;
 
 class EventTest extends \PHPUnit_Framework_TestCase
 {
@@ -47,7 +48,7 @@ class EventTest extends \PHPUnit_Framework_TestCase
 
     public function testType()
     {
-        $expected = Event::RECORD_CREATED;
+        $expected = EventType::RECORD_CREATED;
         $this->object->setType($expected);
         self::assertEquals($expected, $this->object->getType());
     }
@@ -55,12 +56,5 @@ class EventTest extends \PHPUnit_Framework_TestCase
     public function testCreatedAt()
     {
         self::assertLessThanOrEqual(1, time() - $this->object->getCreatedAt());
-    }
-
-    public function testParameter()
-    {
-        $expected = random_int(1, PHP_INT_MAX);
-        $this->object->setParameter($expected);
-        self::assertEquals($expected, $this->object->getParameter());
     }
 }

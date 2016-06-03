@@ -3,10 +3,10 @@
 <div class="dialog">
     {{ form_start(form) }}
     <fieldset>
-        {% if form.key is defined %}
-            {{ form_row(form.key) }}
+        {% if form.value is defined %}
+            {{ form_row(form.value) }}
         {% endif %}
-        {{ form_row(form.value) }}
+        {{ form_row(form.text) }}
     </fieldset>
     {{ form_end(form) }}
 </div>

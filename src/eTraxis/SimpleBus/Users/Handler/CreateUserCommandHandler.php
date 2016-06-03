@@ -12,6 +12,7 @@
 namespace eTraxis\SimpleBus\Users\Handler;
 
 use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Users\CreateUserCommand;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -64,17 +65,14 @@ class CreateUserCommandHandler
         $entity = new User();
 
         $entity
+            ->setProvider(AuthenticationProvider::ETRAXIS)
             ->setUsername($command->username)
             ->setFullname($command->fullname)
             ->setEmail($command->email)
             ->setDescription($command->description)
-            ->setPassword($encoded)
             ->setAdmin($command->admin)
             ->setDisabled($command->disabled)
-            ->setLdap(false)
-        ;
-
-        $entity->getSettings()
+            ->setPassword($encoded)
             ->setLocale($command->locale)
             ->setTheme($command->theme)
             ->setTimezone($command->timezone)

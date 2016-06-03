@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\State;
 use eTraxis\Tests\TransactionalTestCase;
@@ -37,7 +38,7 @@ class CreateNumberFieldCommandTest extends TransactionalTestCase
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => $command->name]);
 
         self::assertInstanceOf(Field::class, $field);
-        self::assertEquals(Field::TYPE_NUMBER, $field->getType());
+        self::assertEquals(FieldType::NUMBER, $field->getType());
         self::assertEquals(1, $field->getParameters()->getParameter1());
         self::assertEquals(12, $field->getParameters()->getParameter2());
         self::assertEquals(2, $field->getParameters()->getDefaultValue());

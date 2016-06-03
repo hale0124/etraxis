@@ -17,9 +17,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Sets permission of specified group to specified field.
  *
- * @property    int $id         Field ID.
- * @property    int $group      Group ID.
- * @property    int $permission Permission.
+ * @property    int    $id         Field ID.
+ * @property    int    $group      Group ID.
+ * @property    string $permission Permission.
  */
 class SetGroupFieldPermissionCommand
 {

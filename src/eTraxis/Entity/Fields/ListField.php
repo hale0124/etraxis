@@ -49,7 +49,7 @@ class ListField extends AbstractField
      */
     protected function getSupportedKeys()
     {
-        return ['defaultKey', 'defaultValue'];
+        return ['defaultValue', 'defaultText'];
     }
 
     /**
@@ -59,52 +59,17 @@ class ListField extends AbstractField
      */
     public function getItems()
     {
-        return $this->repository->findBy(['field' => $this->field], ['key' => 'ASC']);
-    }
-
-    /**
-     * Sets default item of the field by item's key.
-     *
-     * @param   int|null $key Item's key.
-     *
-     * @return  self
-     */
-    public function setDefaultKey(int $key = null)
-    {
-        if ($key !== null) {
-
-            /** @var ListItem $item */
-            $item = $this->repository->findOneBy([
-                'field' => $this->field,
-                'key'   => $key,
-            ]);
-
-            $key = ($item ? $item->getKey() : null);
-        }
-
-        $this->field->getParameters()->setDefaultValue($key);
-
-        return $this;
-    }
-
-    /**
-     * Returns default item's key of the field.
-     *
-     * @return  int|null Item's key.
-     */
-    public function getDefaultKey()
-    {
-        return $this->field->getParameters()->getDefaultValue();
+        return $this->repository->findBy(['field' => $this->field], ['value' => 'ASC']);
     }
 
     /**
      * Sets default item of the field by item's value.
      *
-     * @param   string|null $value Item's value.
+     * @param   int|null $value Item's value.
      *
      * @return  self
      */
-    public function setDefaultValue(string $value = null)
+    public function setDefaultValue(int $value = null)
     {
         if ($value !== null) {
 
@@ -114,7 +79,42 @@ class ListField extends AbstractField
                 'value' => $value,
             ]);
 
-            $key = ($item ? $item->getKey() : null);
+            $value = ($item ? $item->getValue() : null);
+        }
+
+        $this->field->getParameters()->setDefaultValue($value);
+
+        return $this;
+    }
+
+    /**
+     * Returns default item's value of the field.
+     *
+     * @return  int|null Item's value.
+     */
+    public function getDefaultValue()
+    {
+        return $this->field->getParameters()->getDefaultValue();
+    }
+
+    /**
+     * Sets default item of the field by item's text.
+     *
+     * @param   string|null $text Item's text.
+     *
+     * @return  self
+     */
+    public function setDefaultText(string $text = null)
+    {
+        if ($text !== null) {
+
+            /** @var ListItem $item */
+            $item = $this->repository->findOneBy([
+                'field' => $this->field,
+                'text'  => $text,
+            ]);
+
+            $key = ($item ? $item->getValue() : null);
         }
         else {
             $key = null;
@@ -126,24 +126,24 @@ class ListField extends AbstractField
     }
 
     /**
-     * Returns default item's value of the field.
+     * Returns default item's text of the field.
      *
-     * @return  string|null Item's value.
+     * @return  string|null Item's text.
      */
-    public function getDefaultValue()
+    public function getDefaultText()
     {
-        $key = $this->field->getParameters()->getDefaultValue();
+        $value = $this->field->getParameters()->getDefaultValue();
 
-        if ($key === null) {
+        if ($value === null) {
             return null;
         }
 
         /** @var ListItem $item */
         $item = $this->repository->findOneBy([
             'field' => $this->field,
-            'key'   => $key,
+            'value' => $value,
         ]);
 
-        return $item ? $item->getValue() : null;
+        return $item ? $item->getText() : null;
     }
 }

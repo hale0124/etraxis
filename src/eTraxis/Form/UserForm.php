@@ -37,7 +37,7 @@ class UserForm extends AbstractType
         $builder->add('username', TextType::class, [
             'label'    => 'user.username',
             'required' => true,
-            'disabled' => is_object($user) && $user->isLdap(),
+            'disabled' => is_object($user) && $user->isExternalAccount(),
             'attr'     => ['maxlength' => User::MAX_USERNAME],
         ]);
 
@@ -45,7 +45,7 @@ class UserForm extends AbstractType
         $builder->add('fullname', TextType::class, [
             'label'    => 'user.fullname',
             'required' => true,
-            'disabled' => is_object($user) && $user->isLdap(),
+            'disabled' => is_object($user) && $user->isExternalAccount(),
             'attr'     => ['maxlength' => User::MAX_FULLNAME],
         ]);
 
@@ -53,7 +53,7 @@ class UserForm extends AbstractType
         $builder->add('email', EmailType::class, [
             'label'    => 'user.email',
             'required' => true,
-            'disabled' => is_object($user) && $user->isLdap(),
+            'disabled' => is_object($user) && $user->isExternalAccount(),
             'attr'     => ['maxlength' => User::MAX_EMAIL],
         ]);
 
@@ -64,8 +64,8 @@ class UserForm extends AbstractType
             'attr'     => ['maxlength' => User::MAX_DESCRIPTION],
         ]);
 
-        // Cannot manage passwords of LDAP accounts.
-        if (!is_object($user) || !$user->isLdap()) {
+        // Cannot manage passwords of external accounts.
+        if (!is_object($user) || !$user->isExternalAccount()) {
 
             // Password.
             $builder->add('password', PasswordType::class, [
@@ -85,7 +85,9 @@ class UserForm extends AbstractType
         }
 
         // Settings.
-        $builder->add('settings', AppearanceForm::class);
+        $builder->add('settings', AppearanceForm::class, [
+            'inherit_data' => true,
+        ]);
 
         // Administrator.
         $builder->add('admin', CheckboxType::class, [

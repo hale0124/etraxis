@@ -12,34 +12,49 @@
 namespace eTraxis\Dictionary;
 
 use Dictionary\StaticDictionary;
-use eTraxis\Entity\Template;
 
 /**
  * Template permissions.
  */
 class TemplatePermission extends StaticDictionary
 {
+    const VIEW_RECORDS      = 'record.view';
+    const CREATE_RECORDS    = 'record.create';
+    const EDIT_RECORDS      = 'record.edit';
+    const POSTPONE_RECORDS  = 'record.postpone';
+    const RESUME_RECORDS    = 'record.resume';
+    const REASSIGN_RECORDS  = 'record.reassign';
+    const REOPEN_RECORDS    = 'record.reopen';
+    const ADD_COMMENTS      = 'comment.add';
+    const PRIVATE_COMMENTS  = 'comment.private';
+    const ATTACH_FILES      = 'file.attach';
+    const DELETE_FILES      = 'file.delete';
+    const ATTACH_SUBRECORDS = 'subrecord.attach';
+    const DETACH_SUBRECORDS = 'subrecord.detach';
+    const SEND_REMINDERS    = 'reminder.send';
+    const DELETE_RECORDS    = 'record.delete';
+
     /**
      * {@inheritdoc}
      */
     public static function all()
     {
         return [
-            Template::PERMIT_VIEW_RECORD      => 'template.permission.view_records',
-            Template::PERMIT_CREATE_RECORD    => 'template.permission.create_records',
-            Template::PERMIT_EDIT_RECORD      => 'template.permission.edit_records',
-            Template::PERMIT_POSTPONE_RECORD  => 'template.permission.postpone_records',
-            Template::PERMIT_RESUME_RECORD    => 'template.permission.resume_records',
-            Template::PERMIT_REASSIGN_RECORD  => 'template.permission.reassign_records',
-            Template::PERMIT_REOPEN_RECORD    => 'template.permission.reopen_records',
-            Template::PERMIT_ADD_COMMENT      => 'template.permission.add_comments',
-            Template::PERMIT_ADD_FILE         => 'template.permission.add_files',
-            Template::PERMIT_REMOVE_FILE      => 'template.permission.remove_files',
-            Template::PERMIT_PRIVATE_COMMENT  => 'template.permission.private_comments',
-            Template::PERMIT_SEND_REMINDER    => 'template.permission.send_reminders',
-            Template::PERMIT_DELETE_RECORD    => 'template.permission.delete_records',
-            Template::PERMIT_ATTACH_SUBRECORD => 'template.permission.attach_subrecords',
-            Template::PERMIT_DETACH_SUBRECORD => 'template.permission.detach_subrecords',
+            self::VIEW_RECORDS      => 'template.permission.view_records',
+            self::CREATE_RECORDS    => 'template.permission.create_records',
+            self::EDIT_RECORDS      => 'template.permission.edit_records',
+            self::POSTPONE_RECORDS  => 'template.permission.postpone_records',
+            self::RESUME_RECORDS    => 'template.permission.resume_records',
+            self::REASSIGN_RECORDS  => 'template.permission.reassign_records',
+            self::REOPEN_RECORDS    => 'template.permission.reopen_records',
+            self::ADD_COMMENTS      => 'template.permission.add_comments',
+            self::PRIVATE_COMMENTS  => 'template.permission.private_comments',
+            self::ATTACH_FILES      => 'template.permission.attach_files',
+            self::DELETE_FILES      => 'template.permission.delete_files',
+            self::ATTACH_SUBRECORDS => 'template.permission.attach_subrecords',
+            self::DETACH_SUBRECORDS => 'template.permission.detach_subrecords',
+            self::SEND_REMINDERS    => 'template.permission.send_reminders',
+            self::DELETE_RECORDS    => 'template.permission.delete_records',
         ];
     }
 }

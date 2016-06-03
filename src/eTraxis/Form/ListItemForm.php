@@ -29,21 +29,21 @@ class ListItemForm extends AbstractType
         /** @var ListItem $data */
         $data = $builder->getData();
 
-        // Cannot change key of existing list item.
+        // Cannot change value of existing list item.
         if (!is_object($data)) {
-            // Item's key.
-            $builder->add('key', TextType::class, [
-                'label'    => 'listitem.key',
+            // Item's value.
+            $builder->add('value', TextType::class, [
+                'label'    => 'listitem.value',
                 'required' => true,
                 'attr'     => ['maxlength' => strlen(PHP_INT_MAX)],
             ]);
         }
 
-        // Item's value.
-        $builder->add('value', TextType::class, [
-            'label'    => 'listitem.value',
+        // Item's text.
+        $builder->add('text', TextType::class, [
+            'label'    => 'listitem.text',
             'required' => true,
-            'attr'     => ['maxlength' => ListItem::MAX_VALUE],
+            'attr'     => ['maxlength' => ListItem::MAX_TEXT],
         ]);
     }
 

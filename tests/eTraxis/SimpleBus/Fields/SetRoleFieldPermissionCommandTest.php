@@ -11,31 +11,47 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
+use eTraxis\Dictionary\FieldPermission;
 use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\Field;
 use eTraxis\Tests\TransactionalTestCase;
 
 class SetRoleFieldPermissionCommandTest extends TransactionalTestCase
 {
+    public function testAnyonePermissions()
+    {
+        /** @var Field $field */
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
+
+        self::assertEquals(FieldPermission::NONE, $field->getRolePermission(SystemRole::ANYONE));
+
+        $command = new SetRoleFieldPermissionCommand([
+            'id'         => $field->getId(),
+            'role'       => SystemRole::ANYONE,
+            'permission' => FieldPermission::READ_ONLY,
+        ]);
+
+        $this->command_bus->handle($command);
+
+        self::assertEquals(FieldPermission::READ_ONLY, $field->getRolePermission(SystemRole::ANYONE));
+    }
+
     public function testAuthorPermissions()
     {
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
 
-        self::assertEquals(Field::ACCESS_READ_WRITE, $field->getRolePermission(SystemRole::AUTHOR));
+        self::assertEquals(FieldPermission::READ_WRITE, $field->getRolePermission(SystemRole::AUTHOR));
 
         $command = new SetRoleFieldPermissionCommand([
             'id'         => $field->getId(),
             'role'       => SystemRole::AUTHOR,
-            'permission' => Field::ACCESS_READ_ONLY,
+            'permission' => FieldPermission::READ_ONLY,
         ]);
 
         $this->command_bus->handle($command);
 
-        /** @var Field $field */
-        $field = $this->doctrine->getRepository(Field::class)->find($command->id);
-
-        self::assertEquals(Field::ACCESS_READ_ONLY, $field->getRolePermission(SystemRole::AUTHOR));
+        self::assertEquals(FieldPermission::READ_ONLY, $field->getRolePermission(SystemRole::AUTHOR));
     }
 
     public function testResponsiblePermissions()
@@ -43,41 +59,17 @@ class SetRoleFieldPermissionCommandTest extends TransactionalTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
 
-        self::assertEquals(Field::ACCESS_READ_ONLY, $field->getRolePermission(SystemRole::RESPONSIBLE));
+        self::assertEquals(FieldPermission::READ_ONLY, $field->getRolePermission(SystemRole::RESPONSIBLE));
 
         $command = new SetRoleFieldPermissionCommand([
             'id'         => $field->getId(),
             'role'       => SystemRole::RESPONSIBLE,
-            'permission' => Field::ACCESS_READ_WRITE,
+            'permission' => FieldPermission::READ_WRITE,
         ]);
 
         $this->command_bus->handle($command);
 
-        /** @var Field $field */
-        $field = $this->doctrine->getRepository(Field::class)->find($command->id);
-
-        self::assertEquals(Field::ACCESS_READ_WRITE, $field->getRolePermission(SystemRole::RESPONSIBLE));
-    }
-
-    public function testRegisteredPermissions()
-    {
-        /** @var Field $field */
-        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
-
-        self::assertEquals(Field::ACCESS_DENIED, $field->getRolePermission(SystemRole::REGISTERED));
-
-        $command = new SetRoleFieldPermissionCommand([
-            'id'         => $field->getId(),
-            'role'       => SystemRole::REGISTERED,
-            'permission' => Field::ACCESS_READ_ONLY,
-        ]);
-
-        $this->command_bus->handle($command);
-
-        /** @var Field $field */
-        $field = $this->doctrine->getRepository(Field::class)->find($command->id);
-
-        self::assertEquals(Field::ACCESS_READ_ONLY, $field->getRolePermission(SystemRole::REGISTERED));
+        self::assertEquals(FieldPermission::READ_WRITE, $field->getRolePermission(SystemRole::RESPONSIBLE));
     }
 
     /**
@@ -88,8 +80,8 @@ class SetRoleFieldPermissionCommandTest extends TransactionalTestCase
     {
         $command = new SetRoleFieldPermissionCommand([
             'id'         => self::UNKNOWN_ENTITY_ID,
-            'role'       => SystemRole::REGISTERED,
-            'permission' => Field::ACCESS_READ_WRITE,
+            'role'       => SystemRole::ANYONE,
+            'permission' => FieldPermission::READ_WRITE,
         ]);
 
         $this->command_bus->handle($command);

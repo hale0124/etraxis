@@ -12,6 +12,7 @@
 namespace eTraxis\Entity;
 
 use AltrEgo\AltrEgo;
+use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Tests\TransactionalTestCase;
 
 class UserTest extends TransactionalTestCase
@@ -24,7 +25,7 @@ class UserTest extends TransactionalTestCase
         parent::setUp();
 
         $this->object = $this->doctrine->getRepository(User::class)->findOneBy([
-            'username' => 'hubert@eTraxis',
+            'username' => 'hubert',
         ]);
     }
 
@@ -33,6 +34,20 @@ class UserTest extends TransactionalTestCase
         $user = new User();
         self::assertNull($user->getId());
         self::assertNotNull($this->object->getId());
+    }
+
+    public function testProvider()
+    {
+        self::assertEquals(AuthenticationProvider::ETRAXIS, $this->object->getProvider());
+        self::assertFalse($this->object->isExternalAccount());
+
+        /** @var User $einstein */
+        $einstein = $this->doctrine->getRepository(User::class)->findOneBy([
+            'username' => 'einstein',
+        ]);
+
+        self::assertEquals(AuthenticationProvider::LDAP, $einstein->getProvider());
+        self::assertTrue($einstein->isExternalAccount());
     }
 
     public function testUsername()
@@ -63,24 +78,48 @@ class UserTest extends TransactionalTestCase
         self::assertEquals($expected, $this->object->getDescription());
     }
 
+    public function testIsAdmin()
+    {
+        $this->object->setAdmin(false);
+        self::assertFalse($this->object->isAdmin());
+
+        $this->object->setAdmin(true);
+        self::assertTrue($this->object->isAdmin());
+    }
+
+    public function testIsDisabled()
+    {
+        $this->object->setDisabled(false);
+        self::assertFalse($this->object->isDisabled());
+
+        $this->object->setDisabled(true);
+        self::assertTrue($this->object->isDisabled());
+    }
+
     public function testPassword()
     {
         /** @var \StdClass $object */
         $object = AltrEgo::create($this->object);
 
-        $expected = 'Password';
-        self::assertGreaterThan(1, time() - $object->passwordSetAt);
-        $this->object->setPassword($expected);
-        self::assertEquals($expected, $this->object->getPassword());
-        self::assertLessThanOrEqual(1, time() - $object->passwordSetAt);
+        $this->object->setPassword('Password1', 1);
+        self::assertEquals('Password1', $this->object->getPassword());
+        self::assertGreaterThan(0, $object->passwordExpiresAt - time());
+
+        $this->object->setPassword('Password2');
+        self::assertEquals('Password2', $this->object->getPassword());
+        self::assertNull($object->passwordExpiresAt);
     }
 
     public function testIsPasswordExpired()
     {
-        $this->object->setPassword('secret');
+        $this->object->setPassword('secret', 1);
+        self::assertFalse($this->object->isPasswordExpired());
 
-        self::assertFalse($this->object->isPasswordExpired(1));
-        self::assertTrue($this->object->isPasswordExpired(0));
+        $this->object->setPassword('secret', 0);
+        self::assertTrue($this->object->isPasswordExpired());
+
+        $this->object->setPassword('secret');
+        self::assertFalse($this->object->isPasswordExpired());
     }
 
     public function testResetToken()
@@ -135,40 +174,25 @@ class UserTest extends TransactionalTestCase
         self::assertFalse($this->object->isLocked());
     }
 
-    public function testIsAdmin()
+    public function testLocale()
     {
-        $this->object->setAdmin(false);
-        self::assertFalse($this->object->isAdmin());
-
-        $this->object->setAdmin(true);
-        self::assertTrue($this->object->isAdmin());
+        $expected = 'ru';
+        $this->object->setLocale($expected);
+        self::assertEquals($expected, $this->object->getLocale());
     }
 
-    public function testIsDisabled()
+    public function testTheme()
     {
-        $this->object->setDisabled(false);
-        self::assertFalse($this->object->isDisabled());
-
-        $this->object->setDisabled(true);
-        self::assertTrue($this->object->isDisabled());
+        $expected = 'emerald';
+        $this->object->setTheme($expected);
+        self::assertEquals($expected, $this->object->getTheme());
     }
 
-    public function testIsLdap()
+    public function testTimezone()
     {
-        $this->object->setLdap(false);
-        self::assertFalse($this->object->isLdap());
-
-        $this->object->setLdap(true);
-        self::assertTrue($this->object->isLdap());
-    }
-
-    public function testGetAuthenticationSource()
-    {
-        $this->object->setLdap(false);
-        self::assertEquals(User::AUTH_INTERNAL, $this->object->getAuthenticationSource());
-
-        $this->object->setLdap(true);
-        self::assertEquals(User::AUTH_LDAP, $this->object->getAuthenticationSource());
+        $expected = 'Pacific/Auckland';
+        $this->object->setTimezone($expected);
+        self::assertEquals($expected, $this->object->getTimezone());
     }
 
     public function testGroups()
@@ -205,12 +229,6 @@ class UserTest extends TransactionalTestCase
         self::assertEquals($expected, $groups);
     }
 
-    public function testSettings()
-    {
-        self::assertNotNull($this->object->getSettings());
-        self::assertInstanceOf(UserSettings::class, $this->object->getSettings());
-    }
-
     public function testToString()
     {
         self::assertEquals('Hubert J. Farnsworth', (string) $this->object);
@@ -220,16 +238,16 @@ class UserTest extends TransactionalTestCase
     {
         $expected = [
             'id'          => $this->object->getId(),
+            'provider'    => $this->object->getProvider(),
             'username'    => $this->object->getUsername(),
             'fullname'    => $this->object->getFullname(),
             'email'       => $this->object->getEmail(),
             'description' => $this->object->getDescription(),
             'isAdmin'     => $this->object->isAdmin(),
             'isDisabled'  => $this->object->isDisabled(),
-            'isLdap'      => $this->object->isLdap(),
-            'locale'      => $this->object->getSettings()->getLocale(),
-            'theme'       => $this->object->getSettings()->getTheme(),
-            'timezone'    => $this->object->getSettings()->getTimezone(),
+            'locale'      => $this->object->getLocale(),
+            'theme'       => $this->object->getTheme(),
+            'timezone'    => $this->object->getTimezone(),
         ];
 
         self::assertEquals($expected, $this->object->jsonSerialize());

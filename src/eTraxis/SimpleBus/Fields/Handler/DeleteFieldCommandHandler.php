@@ -45,14 +45,14 @@ class DeleteFieldCommandHandler
         /** @var Field $entity */
         $entity = $this->manager->getRepository(Field::class)->findOneBy([
             'id'        => $command->id,
-            'removedAt' => 0,
+            'removedAt' => null,
         ]);
 
         if (!$entity) {
             throw new NotFoundHttpException('Unknown field.');
         }
 
-        $old_order = $entity->getIndexNumber();
+        $old_order = $entity->getOrder();
 
         $entity->remove();
 
@@ -62,8 +62,8 @@ class DeleteFieldCommandHandler
         $fields = $entity->getState()->getFields();
 
         foreach ($fields as $field) {
-            if ($field->getIndexNumber() > $old_order) {
-                $field->setIndexNumber($field->getIndexNumber() - 1);
+            if ($field->getOrder() > $old_order) {
+                $field->setOrder($field->getOrder() - 1);
                 $this->manager->persist($field);
             }
         }

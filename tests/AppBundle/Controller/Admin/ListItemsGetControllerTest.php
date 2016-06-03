@@ -37,8 +37,8 @@ class ListItemsGetControllerTest extends ControllerTestCase
         ]);
 
         $this->item = $doctrine->getRepository(ListItem::class)->findOneBy([
-            'key'   => '1',
-            'value' => 'Season 1',
+            'value' => '1',
+            'text'  => 'Season 1',
         ]);
     }
 
@@ -68,8 +68,8 @@ class ListItemsGetControllerTest extends ControllerTestCase
     public function testEditAction()
     {
         $uri = $this->router->generate('admin_dlg_edit_listitem', [
-            'id'  => $this->field->getId(),
-            'key' => $this->item->getKey(),
+            'id'    => $this->field->getId(),
+            'value' => $this->item->getValue(),
         ]);
 
         $this->makeRequest(Request::METHOD_GET, $uri, true);

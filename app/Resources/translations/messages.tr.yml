@@ -54,9 +54,9 @@ permissions: İzinler
 role: Rol
 role.administrator: Yönetici
 role.user: Kullanıcı
+role.any: 'Any user'
 role.author: Yazar
 role.responsible: Sorumlu
-role.registered: Kayıtlı
 description: Yorum
 language: Dil
 theme: Tema
@@ -122,13 +122,13 @@ template.permission.resume_records: 'Resume records'
 template.permission.reassign_records: 'Reassign records'
 template.permission.reopen_records: 'Reopen records'
 template.permission.add_comments: 'Add comments'
-template.permission.add_files: 'Add files'
-template.permission.remove_files: 'Remove files'
 template.permission.private_comments: 'Add/read private comments'
-template.permission.send_reminders: 'Send reminders'
-template.permission.delete_records: 'Delete records'
+template.permission.attach_files: 'Attach files'
+template.permission.delete_files: 'Delete files'
 template.permission.attach_subrecords: 'Attach subrecords'
 template.permission.detach_subrecords: 'Detach subrecords'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_records: 'Delete records'
 state: Durum
 states: Durumlar
 state.new: 'Yeni durum'
@@ -166,9 +166,9 @@ field.default_value: 'Varsayılan değer'
 field.min_value: Min.değer
 field.max_value: Maks.değer
 field.max_length: Maks.uzunluk
-field.regex_check: 'Alan değerlerini denetleyecek PCRE'
-field.regex_search: 'Alan değerlerini dönüştürecek PCRE ara'
-field.regex_replace: 'Alan değerlerini dönüştürecek PCRE değiştir'
+field.pcre_check: 'Alan değerlerini denetleyecek PCRE'
+field.pcre_search: 'Alan değerlerini dönüştürecek PCRE ara'
+field.pcre_replace: 'Alan değerlerini dönüştürecek PCRE değiştir'
 field.confirm.delete: 'Bu alanı silmek istediğinizden emin misiniz?'
 field.error.min_max_values: 'En yüksek değer, en düşük değerden daha büyük olmalıdır.'
 field.error.default_value: 'Varsayılan değer, %min% ile %max% arasında olmalıdır.'
@@ -177,6 +177,6 @@ field.permissions.none: yok
 field.permissions.read_only: salt-okunur
 field.permissions.read_write: 'okuma ve yazma'
 listitems: 'Ögeleri listele'
-listitem.key: 'Item key'
 listitem.value: 'Item value'
+listitem.text: 'Item text'
 listitem.confirm.delete: 'Are you sure you want delete this item?'

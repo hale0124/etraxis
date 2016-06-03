@@ -59,7 +59,7 @@ class ResetPasswordCommandHandler
         /** @var User $user */
         if ($user = $repository->findOneBy(['resetToken' => $command->token])) {
 
-            if ($user->isLdap()) {
+            if ($user->isExternalAccount()) {
                 throw new BadRequestHttpException($this->translator->trans('password.cant_change'));
             }
 

@@ -58,7 +58,7 @@ class DeleteListItemCommandHandler
 
         $entity = $this->manager->getRepository(ListItem::class)->findOneBy([
             'field' => $field,
-            'key'   => $command->key,
+            'value' => $command->value,
         ]);
 
         if (!$entity) {

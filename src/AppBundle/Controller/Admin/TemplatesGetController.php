@@ -152,14 +152,14 @@ class TemplatesGetController extends Controller
     /**
      * Loads permissions of the specified role for the specified template.
      *
-     * @Action\Route("/permissions/{id}/{role}", name="admin_templates_load_role_permissions", requirements={"id"="\d+", "role"="\-\d+"})
+     * @Action\Route("/permissions/{id}/{role}", name="admin_templates_load_role_permissions", requirements={"id"="\d+", "role"="\D+"})
      *
      * @param   Template $template
-     * @param   int      $role
+     * @param   string   $role
      *
      * @return  JsonResponse
      */
-    public function loadRolePermissionsAction(Template $template, int $role): JsonResponse
+    public function loadRolePermissionsAction(Template $template, string $role): JsonResponse
     {
         return new JsonResponse($template->getRolePermissions($role));
     }

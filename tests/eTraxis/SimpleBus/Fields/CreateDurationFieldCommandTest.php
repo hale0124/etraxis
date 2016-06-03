@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\State;
 use eTraxis\Tests\TransactionalTestCase;
@@ -37,7 +38,7 @@ class CreateDurationFieldCommandTest extends TransactionalTestCase
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => $command->name]);
 
         self::assertInstanceOf(Field::class, $field);
-        self::assertEquals(Field::TYPE_DURATION, $field->getType());
+        self::assertEquals(FieldType::DURATION, $field->getType());
         self::assertEquals(0, $field->getParameters()->getParameter1());
         self::assertEquals(10080, $field->getParameters()->getParameter2());
         self::assertEquals(2880, $field->getParameters()->getDefaultValue());

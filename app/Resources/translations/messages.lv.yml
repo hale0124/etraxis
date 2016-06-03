@@ -54,9 +54,9 @@ permissions: Atļaujas
 role: Loma
 role.administrator: Administrators
 role.user: Lietotājs
+role.any: 'Any user'
 role.author: Autors
 role.responsible: Atbildīgais
-role.registered: Reģistrēta
 description: Apraksts
 language: Valoda
 theme: Motīvs
@@ -122,13 +122,13 @@ template.permission.resume_records: 'Resume records'
 template.permission.reassign_records: 'Reassign records'
 template.permission.reopen_records: 'Reopen records'
 template.permission.add_comments: 'Add comments'
-template.permission.add_files: 'Add files'
-template.permission.remove_files: 'Remove files'
 template.permission.private_comments: 'Add/read private comments'
-template.permission.send_reminders: 'Send reminders'
-template.permission.delete_records: 'Delete records'
+template.permission.attach_files: 'Attach files'
+template.permission.delete_files: 'Delete files'
 template.permission.attach_subrecords: 'Attach subrecords'
 template.permission.detach_subrecords: 'Detach subrecords'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_records: 'Delete records'
 state: Stāvoklis
 states: Stāvokļi
 state.new: 'Jauns stāvoklis'
@@ -166,9 +166,9 @@ field.default_value: 'Noklusējuma nozīme'
 field.min_value: Min.lielums
 field.max_value: Max.lielums
 field.max_length: Max.garums
-field.regex_check: 'PCRE lauku vērtību pārbaudei'
-field.regex_search: 'Meklēt PCRE lauku vērtību mainīšanai'
-field.regex_replace: 'Pārvietot PCRE lauku vērtību mainīšana'
+field.pcre_check: 'PCRE lauku vērtību pārbaudei'
+field.pcre_search: 'Meklēt PCRE lauku vērtību mainīšanai'
+field.pcre_replace: 'Pārvietot PCRE lauku vērtību mainīšana'
 field.confirm.delete: 'Vai tiešām vēlaties dzēst šo atribūtu?'
 field.error.min_max_values: 'Maksimālajam lielumam jābūt lielākam par minimālo.'
 field.error.default_value: 'Noklusējuma nozīmei jąbūt no %min% līdz %max% apgabalā.'
@@ -177,6 +177,6 @@ field.permissions.none: nav
 field.permissions.read_only: 'tikai nolasīšanai'
 field.permissions.read_write: 'lasīt un rakstīt'
 listitems: 'Saraksta elementi'
-listitem.key: 'Item key'
 listitem.value: 'Item value'
+listitem.text: 'Item text'
 listitem.confirm.delete: 'Are you sure you want delete this item?'

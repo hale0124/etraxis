@@ -34,13 +34,24 @@ class GroupTest extends TransactionalTestCase
         self::assertNotNull($this->object->getId());
     }
 
-    public function testProject()
+    public function testProjectOnNew()
     {
-        $this->object->setProject($project = new Project());
-        self::assertEquals($project, $this->object->getProject());
+        $group = new Group();
 
+        $group->setProject($project = new Project());
+        self::assertEquals($project, $group->getProject());
+
+        $group->setProject();
+        self::assertNull($group->getProject());
+    }
+
+    /**
+     * @expectedException \RuntimeException
+     * @expectedExceptionMessage Can't change project of existing group.
+     */
+    public function testProjectOnExisting()
+    {
         $this->object->setProject();
-        self::assertNull($this->object->getProject());
     }
 
     public function testName()

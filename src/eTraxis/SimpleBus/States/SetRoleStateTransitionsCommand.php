@@ -17,9 +17,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Sets specified transitions from specified state.
  *
- * @property    int   $id          State ID.
- * @property    int   $role        System role.
- * @property    int[] $transitions Transitions (state IDs).
+ * @property    int    $id          State ID.
+ * @property    string $role        System role.
+ * @property    int[]  $transitions Transitions (state IDs).
  */
 class SetRoleStateTransitionsCommand
 {

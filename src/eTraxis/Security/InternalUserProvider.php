@@ -12,6 +12,7 @@
 namespace eTraxis\Security;
 
 use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Entity\CurrentUser;
 use eTraxis\Entity\User;
 use Psr\Log\LoggerInterface;
@@ -47,8 +48,8 @@ class InternalUserProvider implements UserProviderInterface
     {
         /** @var User $user */
         $user = $this->manager->getRepository(User::class)->findOneBy([
-            'username' => $username . '@eTraxis',
-            'isLdap'   => 0,
+            'provider' => AuthenticationProvider::ETRAXIS,
+            'username' => $username,
         ]);
 
         if ($user) {
@@ -58,8 +59,8 @@ class InternalUserProvider implements UserProviderInterface
         }
 
         $user = $this->manager->getRepository(User::class)->findOneBy([
+            'provider' => AuthenticationProvider::LDAP,
             'username' => $username,
-            'isLdap'   => 1,
         ]);
 
         if (!$user) {

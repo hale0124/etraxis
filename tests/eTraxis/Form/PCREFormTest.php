@@ -13,14 +13,14 @@ namespace eTraxis\Form;
 
 use eTraxis\Tests\TransactionalTestCase;
 
-class RegexFormTest extends TransactionalTestCase
+class PCREFormTest extends TransactionalTestCase
 {
     public function testForm()
     {
         /** @var \Symfony\Component\Form\FormFactoryInterface $factory */
         $factory = $this->client->getContainer()->get('form.factory');
 
-        $form = $factory->create(RegexForm::class);
+        $form = $factory->create(PCREForm::class);
         $view = $form->createView();
 
         $children = $view->children;

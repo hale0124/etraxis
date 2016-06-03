@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * State responsible groups.
  *
- * @ORM\Table(name="tbl_state_assignees")
+ * @ORM\Table(name="state_responsibles")
  * @ORM\Entity
  */
 class StateResponsibleGroup
@@ -26,8 +26,8 @@ class StateResponsibleGroup
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\ManyToOne(targetEntity="State")
-     * @ORM\JoinColumn(name="state_id", referencedColumnName="state_id", onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="State", inversedBy="responsibleGroups")
+     * @ORM\JoinColumn(name="state_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $state;
 
@@ -37,7 +37,7 @@ class StateResponsibleGroup
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="Group")
-     * @ORM\JoinColumn(name="group_id", referencedColumnName="group_id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="group_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $group;
 

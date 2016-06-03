@@ -13,7 +13,7 @@
         <fieldset>
             <select id="listitems" onchange="ListItemsApp.onSelect()" size="20" title="{{ 'listitems'|trans }}" class="grid-100 mobile-grid-100">
                 {% for item in field.asList.items %}
-                    <option value="{{ item.key }}">[{{ item.key }}] {{ item.value }}</option>
+                    <option value="{{ item.value }}">[{{ item.value }}] {{ item.text }}</option>
                 {% endfor %}
             </select>
         </fieldset>

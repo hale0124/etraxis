@@ -160,19 +160,24 @@ var TemplatesApp = (function() {
             var $tabs = $('#tabs-template');
             var group = $('#group', $tabs).val();
 
-            var url = (group < 0)
+            var url = isNaN(parseInt(group))
                 ? eTraxis.route('admin_templates_load_role_permissions', { id: id, role: group })
                 : eTraxis.route('admin_templates_load_group_permissions', { id: id, group: group });
 
             $.get(url, function(data) {
 
-                $('#template_permission_view_records, #template_permission_create_records', $tabs).disable(
-                    group == -1 || group == -2
-                );
+                if (group == 'author' || group == 'responsible') {
+                    $('#template_permission_view_records', $tabs).disable(true).prop('checked', true);
+                    $('#template_permission_create_records', $tabs).disable(true).prop('checked', false);
+                }
+                else {
+                    $('#template_permission_view_records, #template_permission_create_records', $tabs).disable(false);
+                }
 
-                $('input[type="checkbox"].permissions:disabled', $tabs).prop('checked', false);
-                $('input[type="checkbox"].permissions:not(:disabled)', $tabs).each(function() {
-                    $(this).prop('checked', (data & $(this).val()) != 0);
+                $('input[type="checkbox"].permissions:not(:disabled)', $tabs).prop('checked', false);
+
+                $(data).each(function(index, item) {
+                    $('input[type="checkbox"][value="' + item + '"].permissions:not(:disabled)', $tabs).prop('checked', true);
                 });
             });
         },
@@ -185,13 +190,13 @@ var TemplatesApp = (function() {
         savePermissions: function(id) {
             var $tabs = $('#tabs-template');
             var group = $('#group', $tabs).val();
-            var permissions = 0;
+            var permissions = [];
 
             $('input[type="checkbox"].permissions:checked', $tabs).each(function() {
-                permissions |= $(this).val();
+                permissions.push($(this).val());
             });
 
-            var url = (group < 0)
+            var url = isNaN(parseInt(group))
                 ? eTraxis.route('admin_templates_save_role_permissions', { id: id, role: group })
                 : eTraxis.route('admin_templates_save_group_permissions', { id: id, group: group });
 

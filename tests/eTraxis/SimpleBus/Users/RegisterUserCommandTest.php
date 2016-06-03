@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Users;
 
+use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Entity\User;
 use eTraxis\Tests\TransactionalTestCase;
 
@@ -24,7 +25,7 @@ class RegisterUserCommandTest extends TransactionalTestCase
         $locale   = static::$kernel->getContainer()->getParameter('locale');
         $theme    = static::$kernel->getContainer()->getParameter('theme');
 
-        $user = $this->findUser($username, true);
+        $user = $this->findUser($username, AuthenticationProvider::LDAP);
 
         self::assertNull($user);
 
@@ -37,7 +38,7 @@ class RegisterUserCommandTest extends TransactionalTestCase
 
         $this->command_bus->handle($command);
 
-        $user = $this->findUser($username, true);
+        $user = $this->findUser($username, AuthenticationProvider::LDAP);
 
         $id = $user->getId();
 
@@ -45,9 +46,9 @@ class RegisterUserCommandTest extends TransactionalTestCase
         self::assertEquals($username, $user->getUsername());
         self::assertEquals($fullname, $user->getFullname());
         self::assertEquals($email, $user->getEmail());
-        self::assertEquals($locale, $user->getSettings()->getLocale());
-        self::assertEquals($theme, $user->getSettings()->getTheme());
-        self::assertTrue($user->isLdap());
+        self::assertEquals($locale, $user->getLocale());
+        self::assertEquals($theme, $user->getTheme());
+        self::assertTrue($user->isExternalAccount());
 
         // second time
         $command = new RegisterUserCommand([
@@ -58,16 +59,16 @@ class RegisterUserCommandTest extends TransactionalTestCase
 
         $this->command_bus->handle($command);
 
-        $user = $this->findUser($username, true);
+        $user = $this->findUser($username, AuthenticationProvider::LDAP);
 
         self::assertInstanceOf(User::class, $user);
         self::assertEquals($id, $user->getId());
         self::assertEquals($username, $user->getUsername());
         self::assertEquals($fullname, $user->getFullname());
         self::assertEquals($email, $user->getEmail());
-        self::assertEquals($locale, $user->getSettings()->getLocale());
-        self::assertEquals($theme, $user->getSettings()->getTheme());
-        self::assertTrue($user->isLdap());
+        self::assertEquals($locale, $user->getLocale());
+        self::assertEquals($theme, $user->getTheme());
+        self::assertTrue($user->isExternalAccount());
     }
 
     /**

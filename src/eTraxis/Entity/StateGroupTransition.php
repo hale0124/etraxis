@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * State/Group transition.
  *
- * @ORM\Table(name="tbl_group_trans")
+ * @ORM\Table(name="state_group_transitions")
  * @ORM\Entity
  */
 class StateGroupTransition
@@ -26,8 +26,8 @@ class StateGroupTransition
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\ManyToOne(targetEntity="State")
-     * @ORM\JoinColumn(name="state_id_from", referencedColumnName="state_id", onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="State", inversedBy="groupTransitions")
+     * @ORM\JoinColumn(name="state_id_from", referencedColumnName="id", onDelete="CASCADE")
      */
     private $fromState;
 
@@ -37,7 +37,7 @@ class StateGroupTransition
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="State")
-     * @ORM\JoinColumn(name="state_id_to", referencedColumnName="state_id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="state_id_to", referencedColumnName="id", onDelete="CASCADE")
      */
     private $toState;
 
@@ -47,7 +47,7 @@ class StateGroupTransition
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="Group")
-     * @ORM\JoinColumn(name="group_id", referencedColumnName="group_id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="group_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $group;
 

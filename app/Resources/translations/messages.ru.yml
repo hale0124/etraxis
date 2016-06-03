@@ -54,9 +54,9 @@ permissions: 'Права доступа'
 role: Роль
 role.administrator: Администратор
 role.user: Пользователь
+role.any: 'Любой пользователь'
 role.author: Автор
 role.responsible: Ответственный
-role.registered: Зарегистрированный
 description: Описание
 language: Язык
 theme: 'Тема оформления'
@@ -122,13 +122,13 @@ template.permission.resume_records: 'Возобновление записей'
 template.permission.reassign_records: 'Переназначение записей'
 template.permission.reopen_records: 'Повторное открытие записей'
 template.permission.add_comments: 'Добавление комментариев'
-template.permission.add_files: 'Добавление файлов'
-template.permission.remove_files: 'Удаление файлов'
 template.permission.private_comments: 'Добавление/чтение приватных комментариев'
-template.permission.send_reminders: 'Рассылка напоминаний'
-template.permission.delete_records: 'Удаление записей'
+template.permission.attach_files: 'Добавление файлов'
+template.permission.delete_files: 'Удаление файлов'
 template.permission.attach_subrecords: 'Прикрепление подзаписей'
 template.permission.detach_subrecords: 'Открепление подзаписей'
+template.permission.send_reminders: 'Рассылка напоминаний'
+template.permission.delete_records: 'Удаление записей'
 state: Состояние
 states: Состояния
 state.new: 'Новое состояние'
@@ -166,9 +166,9 @@ field.default_value: 'Значение по умолчанию'
 field.min_value: Мин.значение
 field.max_value: Макс.значение
 field.max_length: Макс.длина
-field.regex_check: 'PCRE для проверки значений'
-field.regex_search: 'PCRE-поиск для модификации значений'
-field.regex_replace: 'PCRE-замена для модификации значений'
+field.pcre_check: 'PCRE для проверки значений'
+field.pcre_search: 'PCRE-поиск для модификации значений'
+field.pcre_replace: 'PCRE-замена для модификации значений'
 field.confirm.delete: 'Вы уверены, что хотите удалить этот атрибут?'
 field.error.min_max_values: 'Максимальное значение должно быть больше минимального.'
 field.error.default_value: 'Значение по умолчанию должно лежать в диапазоне от %min% до %max%.'
@@ -177,6 +177,6 @@ field.permissions.none: нет
 field.permissions.read_only: 'только чтение'
 field.permissions.read_write: 'чтение и запись'
 listitems: 'Элементы списка'
-listitem.key: 'Ключ элемента'
 listitem.value: 'Значение элемента'
+listitem.text: 'Текст элемента'
 listitem.confirm.delete: 'Вы уверены, что хотите удалить этот элемент?'

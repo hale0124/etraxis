@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\Field;
 use eTraxis\Tests\TransactionalTestCase;
 
@@ -21,7 +22,7 @@ class UpdateNumberFieldCommandTest extends TransactionalTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Episode']);
 
-        self::assertEquals(Field::TYPE_NUMBER, $field->getType());
+        self::assertEquals(FieldType::NUMBER, $field->getType());
         self::assertEquals('Episode', $field->getName());
         self::assertNull($field->getDescription());
         self::assertTrue($field->isRequired());
@@ -43,7 +44,7 @@ class UpdateNumberFieldCommandTest extends TransactionalTestCase
 
         $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 
-        self::assertEquals(Field::TYPE_NUMBER, $field->getType());
+        self::assertEquals(FieldType::NUMBER, $field->getType());
         self::assertEquals('Episode #', $field->getName());
         self::assertEquals('ID of the episode', $field->getDescription());
         self::assertFalse($field->isRequired());

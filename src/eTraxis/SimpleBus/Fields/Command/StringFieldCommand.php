@@ -18,9 +18,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  *
  * @property    int    $maxLength    Maximum allowed length of field values.
  * @property    string $defaultValue Default value of the field.
- * @property    string $regexCheck   Perl-compatible regular expression which values of the field must conform to.
- * @property    string $regexSearch  Perl-compatible regular expression to modify values of the field before display them (search for).
- * @property    string $regexReplace Perl-compatible regular expression to modify values of the field before display them (replace with).
+ * @property    string $pcreCheck    Perl-compatible regular expression which values of the field must conform to.
+ * @property    string $pcreSearch   Perl-compatible regular expression to modify values of the field before display them (search for).
+ * @property    string $pcreReplace  Perl-compatible regular expression to modify values of the field before display them (replace with).
  */
 class StringFieldCommand extends FieldCommand
 {
@@ -39,15 +39,15 @@ class StringFieldCommand extends FieldCommand
     /**
      * @Assert\Length(max="500")
      */
-    public $regexCheck;
+    public $pcreCheck;
 
     /**
      * @Assert\Length(max="500")
      */
-    public $regexSearch;
+    public $pcreSearch;
 
     /**
      * @Assert\Length(max="500")
      */
-    public $regexReplace;
+    public $pcreReplace;
 }

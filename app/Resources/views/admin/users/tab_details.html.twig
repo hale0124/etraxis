@@ -34,7 +34,7 @@
             {% else %}
                 {{ macro.row('user.status'|trans, user.disabled ? 'user.disabled'|trans|lower : 'user.enabled'|trans|lower) }}
             {% endif %}
-            {{ macro.row('security.authentication'|trans, user.authenticationSource) }}
+            {{ macro.row('security.authentication'|trans, user.provider) }}
         </fieldset>
     </div>
 </div>

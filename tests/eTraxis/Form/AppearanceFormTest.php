@@ -22,13 +22,13 @@ class AppearanceFormTest extends TransactionalTestCase
         /** @var \Symfony\Component\Form\FormFactoryInterface $factory */
         $factory = $this->client->getContainer()->get('form.factory');
 
-        $form = $factory->create(AppearanceForm::class, $user->getSettings());
+        $form = $factory->create(AppearanceForm::class, $user);
         $view = $form->createView();
 
         $children = $view->children;
 
-        self::assertEquals($children['locale']->vars['data'], $user->getSettings()->getLocale());
-        self::assertEquals($children['theme']->vars['data'], $user->getSettings()->getTheme());
-        self::assertEquals($children['timezone']->vars['data'], $user->getSettings()->getTimezone());
+        self::assertEquals($children['locale']->vars['data'], $user->getLocale());
+        self::assertEquals($children['theme']->vars['data'], $user->getTheme());
+        self::assertEquals($children['timezone']->vars['data'], $user->getTimezone());
     }
 }

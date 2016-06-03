@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\DecimalValue;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\State;
@@ -45,7 +46,7 @@ class CreateDecimalFieldCommandTest extends TransactionalTestCase
         $default  = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameters()->getDefaultValue());
 
         self::assertInstanceOf(Field::class, $field);
-        self::assertEquals(Field::TYPE_DECIMAL, $field->getType());
+        self::assertEquals(FieldType::DECIMAL, $field->getType());
         self::assertEquals('0.00', $minValue->getValue());
         self::assertEquals('100000.0', $maxValue->getValue());
         self::assertEquals('499.95', $default->getValue());

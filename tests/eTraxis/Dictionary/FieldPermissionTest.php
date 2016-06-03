@@ -11,16 +11,14 @@
 
 namespace eTraxis\Dictionary;
 
-use eTraxis\Entity\Field;
-
 class FieldPermissionTest extends \PHPUnit_Framework_TestCase
 {
     public function testDictionary()
     {
         $expected = [
-            Field::ACCESS_DENIED,
-            Field::ACCESS_READ_ONLY,
-            Field::ACCESS_READ_WRITE,
+            FieldPermission::NONE,
+            FieldPermission::READ_ONLY,
+            FieldPermission::READ_WRITE,
         ];
 
         self::assertEquals($expected, FieldPermission::keys());

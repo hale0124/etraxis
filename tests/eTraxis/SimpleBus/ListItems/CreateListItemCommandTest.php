@@ -29,13 +29,13 @@ class CreateListItemCommandTest extends TransactionalTestCase
     {
         /** @var Field $field */
         $field = $this->getField();
-        $key   = 8;
-        $value = 'Season 8';
+        $value = 8;
+        $text  = 'Season 8';
 
         $command = new CreateListItemCommand([
             'field' => $field->getId(),
-            'key'   => $key,
             'value' => $value,
+            'text'  => $text,
         ]);
 
         $this->command_bus->handle($command);
@@ -43,13 +43,13 @@ class CreateListItemCommandTest extends TransactionalTestCase
         /** @var ListItem $item */
         $item = $this->doctrine->getRepository(ListItem::class)->findOneBy([
             'field' => $field,
-            'key'   => $key,
+            'value' => $value,
         ]);
 
         self::assertInstanceOf(ListItem::class, $item);
         self::assertEquals($field->getId(), $item->getField()->getId());
-        self::assertEquals($key, $item->getKey());
         self::assertEquals($value, $item->getValue());
+        self::assertEquals($text, $item->getText());
     }
 
     /**
@@ -60,23 +60,8 @@ class CreateListItemCommandTest extends TransactionalTestCase
     {
         $command = new CreateListItemCommand([
             'field' => self::UNKNOWN_ENTITY_ID,
-            'key'   => 8,
-            'value' => 'Season 8',
-        ]);
-
-        $this->command_bus->handle($command);
-    }
-
-    /**
-     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
-     * @expectedExceptionMessage Item with entered key already exists.
-     */
-    public function testKeyConflict()
-    {
-        $command = new CreateListItemCommand([
-            'field' => $this->getField()->getId(),
-            'key'   => 1,
-            'value' => 'Season 8',
+            'value' => 8,
+            'text'  => 'Season 8',
         ]);
 
         $this->command_bus->handle($command);
@@ -86,12 +71,27 @@ class CreateListItemCommandTest extends TransactionalTestCase
      * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
      * @expectedExceptionMessage Item with entered value already exists.
      */
+    public function testKeyConflict()
+    {
+        $command = new CreateListItemCommand([
+            'field' => $this->getField()->getId(),
+            'value' => 1,
+            'text'  => 'Season 8',
+        ]);
+
+        $this->command_bus->handle($command);
+    }
+
+    /**
+     * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
+     * @expectedExceptionMessage Item with entered text already exists.
+     */
     public function testValueConflict()
     {
         $command = new CreateListItemCommand([
             'field' => $this->getField()->getId(),
-            'key'   => 8,
-            'value' => 'Season 1',
+            'value' => 8,
+            'text'  => 'Season 1',
         ]);
 
         $this->command_bus->handle($command);

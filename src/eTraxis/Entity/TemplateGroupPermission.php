@@ -12,65 +12,44 @@
 namespace eTraxis\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use eTraxis\Dictionary\TemplatePermission;
 
 /**
  * Template/Group permission.
  *
- * @ORM\Table(name="tbl_group_perms")
+ * @ORM\Table(name="template_group_permissions")
  * @ORM\Entity
  */
 class TemplateGroupPermission
 {
+    /**
+     * @var Template Template.
+     *
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="NONE")
+     * @ORM\ManyToOne(targetEntity="Template", inversedBy="groupPermissions")
+     * @ORM\JoinColumn(name="template_id", referencedColumnName="id", onDelete="CASCADE")
+     */
+    private $template;
+
     /**
      * @var Group Group.
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="Group")
-     * @ORM\JoinColumn(name="group_id", referencedColumnName="group_id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="group_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $group;
 
     /**
-     * @var Template Template.
+     * @var string Permission granted to the group for this template.
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\ManyToOne(targetEntity="Template")
-     * @ORM\JoinColumn(name="template_id", referencedColumnName="template_id", onDelete="CASCADE")
-     */
-    private $template;
-
-    /**
-     * @var int Permission granted to the group for this template.
-     *
-     * @ORM\Column(name="perms", type="integer")
+     * @ORM\Column(name="permission", type="string", length=20)
      */
     private $permission;
-
-    /**
-     * Property setter.
-     *
-     * @param   Group $group
-     *
-     * @return  self
-     */
-    public function setGroup(Group $group)
-    {
-        $this->group = $group;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  Group
-     */
-    public function getGroup()
-    {
-        return $this->group;
-    }
 
     /**
      * Property setter.
@@ -99,13 +78,13 @@ class TemplateGroupPermission
     /**
      * Property setter.
      *
-     * @param   int $permission
+     * @param   Group $group
      *
      * @return  self
      */
-    public function setPermission(int $permission)
+    public function setGroup(Group $group)
     {
-        $this->permission = $permission;
+        $this->group = $group;
 
         return $this;
     }
@@ -113,7 +92,33 @@ class TemplateGroupPermission
     /**
      * Property getter.
      *
-     * @return  int
+     * @return  Group
+     */
+    public function getGroup()
+    {
+        return $this->group;
+    }
+
+    /**
+     * Property setter.
+     *
+     * @param   string $permission
+     *
+     * @return  self
+     */
+    public function setPermission(string $permission)
+    {
+        if (TemplatePermission::has($permission)) {
+            $this->permission = $permission;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  string
      */
     public function getPermission()
     {

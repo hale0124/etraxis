@@ -12,9 +12,9 @@
 namespace eTraxis\SimpleBus\States\Handler;
 
 use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Dictionary\StateResponsible;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
-use eTraxis\Entity\StateResponsibleGroup;
 use eTraxis\SimpleBus\States\AddStateResponsibleGroupsCommand;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -52,36 +52,16 @@ class AddStateResponsibleGroupsCommandHandler
         }
 
         // Responsible groups are applicable for assignable states only.
-        if ($state->getResponsible() === State::RESPONSIBLE_ASSIGN) {
-
-            $project      = $state->getTemplate()->getProject();
-            $responsibles = $state->getResponsibleGroups();
+        if ($state->getResponsible() === StateResponsible::ASSIGN) {
 
             /** @var Group[] $groups */
             $groups = $this->manager->getRepository(Group::class)->findBy([
                 'id' => $command->groups,
             ]);
 
-            foreach ($groups as $group) {
+            $state->addResponsibleGroups($groups);
 
-                // Skip already present group.
-                if (in_array($group, $responsibles)) {
-                    continue;
-                }
-
-                // Group must be global or belong to the same project.
-                if ($group->getProject() === null || $group->getProject() === $project) {
-
-                    $entity = new StateResponsibleGroup();
-
-                    $entity
-                        ->setState($state)
-                        ->setGroup($group)
-                    ;
-
-                    $this->manager->persist($entity);
-                }
-            }
+            $this->manager->persist($state);
         }
     }
 }

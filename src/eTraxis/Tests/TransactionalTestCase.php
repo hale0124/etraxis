@@ -54,4 +54,18 @@ class TransactionalTestCase extends ControllerTestCase
 
         parent::tearDown();
     }
+
+    /**
+     * Asserts that specified arrays contain same set of values (no matter keys and order).
+     *
+     * @param   array $expected
+     * @param   array $actual
+     */
+    public static function assertArraysByValues(array $expected, array $actual)
+    {
+        sort($expected);
+        sort($actual);
+
+        self::assertEquals($expected, $actual);
+    }
 }

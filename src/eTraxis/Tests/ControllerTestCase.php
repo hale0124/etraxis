@@ -11,6 +11,7 @@
 
 namespace eTraxis\Tests;
 
+use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Entity\CurrentUser;
 use eTraxis\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
@@ -116,18 +117,18 @@ class ControllerTestCase extends WebTestCase
      * Finds specified user.
      *
      * @param   string $username Login.
-     * @param   bool   $ldap     Whether it's a LDAP user.
+     * @param   string $provider Authentication provider.
      *
      * @return  User|null Found user.
      */
-    protected function findUser(string $username, bool $ldap = false)
+    protected function findUser(string $username, string $provider = AuthenticationProvider::ETRAXIS)
     {
         /** @var \Symfony\Bridge\Doctrine\RegistryInterface $doctrine */
         $doctrine = $this->client->getContainer()->get('doctrine');
 
         return $doctrine->getRepository(User::class)->findOneBy([
-            'username' => $ldap ? $username : $username . '@eTraxis',
-            'isLdap'   => $ldap ? 1 : 0,
+            'username' => $username,
+            'provider' => $provider,
         ]);
     }
 
@@ -135,13 +136,13 @@ class ControllerTestCase extends WebTestCase
      * Emulates authentication of specified user.
      *
      * @param   string $username Login.
-     * @param   bool   $ldap     Whether it's a LDAP user.
+     * @param   string $provider Authentication provider.
      *
      * @return  bool Whether user was authenticated.
      */
-    protected function loginAs(string $username, bool $ldap = false)
+    protected function loginAs(string $username, string $provider = AuthenticationProvider::ETRAXIS)
     {
-        if ($user = $this->findUser($username, $ldap)) {
+        if ($user = $this->findUser($username, $provider)) {
 
             $current = new CurrentUser($user);
 

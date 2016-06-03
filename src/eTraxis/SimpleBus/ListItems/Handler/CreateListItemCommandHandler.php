@@ -12,6 +12,7 @@
 namespace eTraxis\SimpleBus\ListItems\Handler;
 
 use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\ListItem;
 use eTraxis\SimpleBus\ListItems\CreateListItemCommand;
@@ -56,14 +57,14 @@ class CreateListItemCommandHandler
             throw new NotFoundHttpException('Unknown field.');
         }
 
-        if ($field->getType() === Field::TYPE_LIST) {
+        if ($field->getType() === FieldType::LIST) {
 
             $entity = new ListItem();
 
             $entity
                 ->setField($field)
-                ->setKey($command->key)
                 ->setValue($command->value)
+                ->setText($command->text)
             ;
 
             $errors = $this->validator->validate($entity);

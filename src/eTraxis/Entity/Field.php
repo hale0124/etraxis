@@ -11,6 +11,7 @@
 
 namespace eTraxis\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use eTraxis\Dictionary;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
@@ -18,14 +19,14 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 /**
  * Field.
  *
- * @ORM\Table(name="tbl_fields",
+ * @ORM\Table(name="fields",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_fields_name", columns={"state_id", "field_name", "removal_time"}),
- *                @ORM\UniqueConstraint(name="ix_fields_order", columns={"state_id", "field_order", "removal_time"})
+ *                @ORM\UniqueConstraint(name="ix_fields_name", columns={"state_id", "name", "removed_at"}),
+ *                @ORM\UniqueConstraint(name="ix_fields_order", columns={"state_id", "field_order", "removed_at"})
  *            })
  * @ORM\Entity
  * @ORM\EntityListeners({"eTraxis\Entity\EntityListener"})
- * @Assert\UniqueEntity(fields={"template", "state", "name", "removedAt"}, message="field.conflict.name", ignoreNull=false)
+ * @Assert\UniqueEntity(fields={"state", "name", "removedAt"}, message="field.conflict.name", ignoreNull=false)
  */
 class Field extends Entity implements \JsonSerializable
 {
@@ -36,58 +37,34 @@ class Field extends Entity implements \JsonSerializable
     // Actions.
     const DELETE = 'field.delete';
 
-    // Field type.
-    const TYPE_NUMBER   = 'number';
-    const TYPE_DECIMAL  = 'decimal';
-    const TYPE_STRING   = 'string';
-    const TYPE_TEXT     = 'text';
-    const TYPE_CHECKBOX = 'checkbox';
-    const TYPE_LIST     = 'list';
-    const TYPE_RECORD   = 'record';
-    const TYPE_DATE     = 'date';
-    const TYPE_DURATION = 'duration';
-
-    // Field permission.
-    const ACCESS_DENIED     = 0;
-    const ACCESS_READ_ONLY  = 1;
-    const ACCESS_READ_WRITE = 2;
-
     /**
      * @var int Unique ID.
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="field_id", type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
-
-    /**
-     * @var Template Template of the field.
-     *
-     * @ORM\ManyToOne(targetEntity="Template", inversedBy="fields")
-     * @ORM\JoinColumn(name="template_id", nullable=false, referencedColumnName="template_id", onDelete="CASCADE")
-     */
-    private $template;
 
     /**
      * @var State State of the field (NULL in case of global field).
      *
      * @ORM\ManyToOne(targetEntity="State", inversedBy="fields")
-     * @ORM\JoinColumn(name="state_id", referencedColumnName="state_id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="state_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $state;
 
     /**
      * @var string Name of the field.
      *
-     * @ORM\Column(name="field_name", type="string", length=50)
+     * @ORM\Column(name="name", type="string", length=50)
      */
     private $name;
 
     /**
-     * @var int Type of the field.
+     * @var string Type of the field.
      *
-     * @ORM\Column(name="field_type", type="integer")
+     * @ORM\Column(name="type", type="string", length=10)
      */
     private $type;
 
@@ -103,49 +80,28 @@ class Field extends Entity implements \JsonSerializable
      *
      * @ORM\Column(name="field_order", type="integer")
      */
-    private $indexNumber;
+    private $order;
 
     /**
-     * @var int Unix Epoch timestamp when the field has been removed from its template ("0" while field is present).
+     * @var int Unix Epoch timestamp when the field has been removed ("NULL" while field is present).
      *
-     * @ORM\Column(name="removal_time", type="integer")
+     * @ORM\Column(name="removed_at", type="integer", nullable=true)
      */
     private $removedAt;
 
     /**
-     * @var int Whether the field is required.
+     * @var bool Whether the field is required.
      *
-     * @ORM\Column(name="is_required", type="integer")
+     * @ORM\Column(name="is_required", type="boolean")
      */
     private $isRequired;
 
     /**
-     * @var int Permission for author.
+     * @var FieldPCRE Perl-compatible regular expression options.
      *
-     * @ORM\Column(name="author_perm", type="integer")
+     * @ORM\Embedded(class="FieldPCRE")
      */
-    private $authorPermission;
-
-    /**
-     * @var int Permission for current responsible.
-     *
-     * @ORM\Column(name="responsible_perm", type="integer")
-     */
-    private $responsiblePermission;
-
-    /**
-     * @var int Permission for authenticated user.
-     *
-     * @ORM\Column(name="registered_perm", type="integer")
-     */
-    private $registeredPermission;
-
-    /**
-     * @var FieldRegex Perl-compatible regular expression options.
-     *
-     * @ORM\Embedded(class="FieldRegex")
-     */
-    private $regex;
+    private $pcre;
 
     /**
      * @var FieldParameters Field type-specific parameters.
@@ -155,14 +111,29 @@ class Field extends Entity implements \JsonSerializable
     private $parameters;
 
     /**
+     * @var ArrayCollection List of role permissions.
+     *
+     * @ORM\OneToMany(targetEntity="FieldRolePermission", mappedBy="field", cascade={"persist"})
+     */
+    private $rolePermissions;
+
+    /**
+     * @var ArrayCollection List of group permissions.
+     *
+     * @ORM\OneToMany(targetEntity="FieldGroupPermission", mappedBy="field", cascade={"persist"})
+     */
+    private $groupPermissions;
+
+    /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->removedAt = 0;
-
-        $this->regex      = new FieldRegex();
+        $this->pcre       = new FieldPCRE();
         $this->parameters = new FieldParameters();
+
+        $this->rolePermissions  = new ArrayCollection();
+        $this->groupPermissions = new ArrayCollection();
     }
 
     /**
@@ -184,8 +155,7 @@ class Field extends Entity implements \JsonSerializable
      */
     public function setState(State $state)
     {
-        $this->state    = $state;
-        $this->template = $state->getTemplate();
+        $this->state = $state;
 
         return $this;
     }
@@ -233,10 +203,8 @@ class Field extends Entity implements \JsonSerializable
      */
     public function setType(string $type)
     {
-        $types = array_flip(Dictionary\LegacyFieldType::all());
-
-        if (array_key_exists($type, $types)) {
-            $this->type = $types[$type];
+        if (Dictionary\FieldType::has($type)) {
+            $this->type = $type;
         }
 
         return $this;
@@ -249,7 +217,7 @@ class Field extends Entity implements \JsonSerializable
      */
     public function getType()
     {
-        return Dictionary\LegacyFieldType::get($this->type);
+        return $this->type;
     }
 
     /**
@@ -279,13 +247,13 @@ class Field extends Entity implements \JsonSerializable
     /**
      * Property setter.
      *
-     * @param   int $indexNumber
+     * @param   int $order
      *
      * @return  self
      */
-    public function setIndexNumber(int $indexNumber)
+    public function setOrder(int $order)
     {
-        $this->indexNumber = $indexNumber;
+        $this->order = $order;
 
         return $this;
     }
@@ -295,9 +263,9 @@ class Field extends Entity implements \JsonSerializable
      *
      * @return  int
      */
-    public function getIndexNumber()
+    public function getOrder()
     {
-        return $this->indexNumber;
+        return $this->order;
     }
 
     /**
@@ -307,8 +275,8 @@ class Field extends Entity implements \JsonSerializable
      */
     public function remove()
     {
-        $this->removedAt   = time();
-        $this->indexNumber = 0;
+        $this->removedAt = time();
+        $this->order     = 0;
 
         return $this;
     }
@@ -320,7 +288,7 @@ class Field extends Entity implements \JsonSerializable
      */
     public function isRemoved()
     {
-        return $this->removedAt !== 0;
+        return $this->removedAt !== null;
     }
 
     /**
@@ -332,7 +300,7 @@ class Field extends Entity implements \JsonSerializable
      */
     public function setRequired(bool $isRequired)
     {
-        $this->isRequired = $isRequired ? 1 : 0;
+        $this->isRequired = $isRequired;
 
         return $this;
     }
@@ -344,98 +312,17 @@ class Field extends Entity implements \JsonSerializable
      */
     public function isRequired()
     {
-        return (bool) $this->isRequired;
-    }
-
-    /**
-     * Sets permission of specified system role.
-     *
-     * @param   int $role
-     * @param   int $permission
-     *
-     * @return  self
-     */
-    public function setRolePermission(int $role, int $permission)
-    {
-        switch ($role) {
-
-            case Dictionary\SystemRole::AUTHOR:
-                $this->authorPermission = $permission;
-                break;
-
-            case Dictionary\SystemRole::RESPONSIBLE:
-                $this->responsiblePermission = $permission;
-                break;
-
-            case Dictionary\SystemRole::REGISTERED:
-                $this->registeredPermission = $permission;
-                break;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Returns permission of specified system role.
-     *
-     * @param   int $role
-     *
-     * @return  int
-     */
-    public function getRolePermission(int $role)
-    {
-        switch ($role) {
-
-            case Dictionary\SystemRole::AUTHOR:
-                return $this->authorPermission;
-
-            case Dictionary\SystemRole::RESPONSIBLE:
-                return $this->responsiblePermission;
-
-            case Dictionary\SystemRole::REGISTERED:
-                return $this->registeredPermission;
-        }
-
-        return self::ACCESS_DENIED;
-    }
-
-    /**
-     * Returns permission of specified group.
-     *
-     * @param   Group $group
-     *
-     * @return  int
-     *
-     * @todo    Refactor into single database entry.
-     */
-    public function getGroupPermission(Group $group)
-    {
-        $query = $this->manager->createQueryBuilder();
-
-        $query
-            ->select('fgp.permission')
-            ->from(FieldGroupPermission::class, 'fgp')
-            ->where('fgp.field = :field')
-            ->andWhere('fgp.group = :group')
-            ->setParameter('field', $this)
-            ->setParameter('group', $group)
-        ;
-
-        $result     = $query->getQuery()->getResult();
-        $result[]   = ['permission' => self::ACCESS_DENIED];
-        $permission = max($result);
-
-        return count($result) === 0 ? self::ACCESS_DENIED : $permission['permission'];
+        return $this->isRequired;
     }
 
     /**
      * Property getter.
      *
-     * @return  FieldRegex
+     * @return  FieldPCRE
      */
-    public function getRegex()
+    public function getPCRE()
     {
-        return $this->regex;
+        return $this->pcre;
     }
 
     /**
@@ -446,6 +333,192 @@ class Field extends Entity implements \JsonSerializable
     public function getParameters()
     {
         return $this->parameters;
+    }
+
+    /**
+     * Sets permission of specified system role.
+     *
+     * @param   string $role
+     * @param   string $permission
+     *
+     * @return  self
+     */
+    public function setRolePermission(string $role, string $permission)
+    {
+        if (Dictionary\FieldPermission::has($permission)) {
+
+            // Filter all permissions by the role.
+            $permissions = $this->rolePermissions->filter(function (FieldRolePermission $permission) use ($role) {
+                return $permission->getRole() === $role;
+            });
+
+            // Retrieve the permission part.
+            $current = $permissions->map(function (FieldRolePermission $permission) {
+                return $permission->getPermission();
+            });
+
+            $desired = [];
+
+            if ($permission === Dictionary\FieldPermission::READ_ONLY) {
+                $desired[] = Dictionary\FieldPermission::READ_ONLY;
+            }
+
+            if ($permission === Dictionary\FieldPermission::READ_WRITE) {
+                $desired[] = Dictionary\FieldPermission::READ_ONLY;
+                $desired[] = Dictionary\FieldPermission::READ_WRITE;
+            }
+
+            $toAdd = array_unique(array_diff($desired, $current->toArray()));
+
+            // Remove extra transitions.
+            foreach ($this->rolePermissions as $key => $item) {
+                /** @var FieldRolePermission $item */
+                if ($item->getRole() === $role) {
+                    if (!in_array($item->getPermission(), $desired)) {
+                        $this->rolePermissions->remove($key);
+                    }
+                }
+            }
+
+            // Grant required transitions.
+            foreach ($toAdd as $item) {
+
+                $element = new FieldRolePermission();
+
+                $element
+                    ->setField($this)
+                    ->setRole($role)
+                    ->setPermission($item)
+                ;
+
+                $this->rolePermissions->add($element);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns permission of specified system role.
+     *
+     * @param   string $role
+     *
+     * @return  string
+     */
+    public function getRolePermission(string $role)
+    {
+        // Filter all permissions by the role.
+        $permissions = $this->rolePermissions->filter(function (FieldRolePermission $permission) use ($role) {
+            return $permission->getRole() === $role;
+        });
+
+        // Retrieve the permission part.
+        $filtered = $permissions->map(function (FieldRolePermission $permission) {
+            return $permission->getPermission();
+        });
+
+        if ($filtered->contains(Dictionary\FieldPermission::READ_WRITE)) {
+            return Dictionary\FieldPermission::READ_WRITE;
+        }
+
+        if ($filtered->contains(Dictionary\FieldPermission::READ_ONLY)) {
+            return Dictionary\FieldPermission::READ_ONLY;
+        }
+
+        return Dictionary\FieldPermission::NONE;
+    }
+
+    /**
+     * Sets permission of specified group.
+     *
+     * @param   Group  $group
+     * @param   string $permission
+     *
+     * @return  self
+     */
+    public function setGroupPermission(Group $group, string $permission)
+    {
+        if (Dictionary\FieldPermission::has($permission)) {
+
+            // Filter all permissions by the group.
+            $permissions = $this->groupPermissions->filter(function (FieldGroupPermission $permission) use ($group) {
+                return $permission->getGroup() === $group;
+            });
+
+            // Retrieve the permission part.
+            $current = $permissions->map(function (FieldGroupPermission $permission) {
+                return $permission->getPermission();
+            });
+
+            $desired = [];
+
+            if ($permission === Dictionary\FieldPermission::READ_ONLY) {
+                $desired[] = Dictionary\FieldPermission::READ_ONLY;
+            }
+
+            if ($permission === Dictionary\FieldPermission::READ_WRITE) {
+                $desired[] = Dictionary\FieldPermission::READ_ONLY;
+                $desired[] = Dictionary\FieldPermission::READ_WRITE;
+            }
+
+            $toAdd = array_unique(array_diff($desired, $current->toArray()));
+
+            // Remove extra transitions.
+            foreach ($this->groupPermissions as $key => $item) {
+                /** @var FieldGroupPermission $item */
+                if ($item->getGroup() === $group) {
+                    if (!in_array($item->getPermission(), $desired)) {
+                        $this->groupPermissions->remove($key);
+                    }
+                }
+            }
+
+            // Grant required transitions.
+            foreach ($toAdd as $item) {
+
+                $element = new FieldGroupPermission();
+
+                $element
+                    ->setField($this)
+                    ->setGroup($group)
+                    ->setPermission($item)
+                ;
+
+                $this->groupPermissions->add($element);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns permission of specified group.
+     *
+     * @param   Group $group
+     *
+     * @return  string
+     */
+    public function getGroupPermission(Group $group)
+    {
+        // Filter all permissions by the group.
+        $permissions = $this->groupPermissions->filter(function (FieldGroupPermission $permission) use ($group) {
+            return $permission->getGroup() === $group;
+        });
+
+        // Retrieve the permission part.
+        $filtered = $permissions->map(function (FieldGroupPermission $permission) {
+            return $permission->getPermission();
+        });
+
+        if ($filtered->contains(Dictionary\FieldPermission::READ_WRITE)) {
+            return Dictionary\FieldPermission::READ_WRITE;
+        }
+
+        if ($filtered->contains(Dictionary\FieldPermission::READ_ONLY)) {
+            return Dictionary\FieldPermission::READ_ONLY;
+        }
+
+        return Dictionary\FieldPermission::NONE;
     }
 
     /**

@@ -2,11 +2,11 @@
     <ul>
         <li><a href="{{ path('admin_tab_state_details', {'id': state.id}) }}">{{ 'state'|trans }}</a></li>
 
-        {% if (state.type != constant('eTraxis\\Entity\\State::TYPE_FINAL')) %}
+        {% if (state.type != constant('eTraxis\\Dictionary\\StateType::FINAL')) %}
             <li><a href="{{ path('admin_tab_state_transitions', {'id': state.id}) }}">{{ 'state.transitions'|trans }}</a></li>
         {% endif %}
 
-        {% if (state.responsible == constant('eTraxis\\Entity\\State::RESPONSIBLE_ASSIGN')) %}
+        {% if (state.responsible == constant('eTraxis\\Dictionary\\StateResponsible::ASSIGN')) %}
             <li><a href="{{ path('admin_tab_state_responsibles', {'id': state.id}) }}">{{ 'state.responsibles'|trans }}</a></li>
         {% endif %}
     </ul>

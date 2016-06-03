@@ -11,6 +11,7 @@
 
 namespace eTraxis\Entity\Fields;
 
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\TextValue;
 use eTraxis\Tests\TransactionalTestCase;
@@ -29,7 +30,7 @@ class TextFieldTest extends TransactionalTestCase
         /** @noinspection PhpParamsInspection */
         $this->object
             ->setEntityManager($this->doctrine->getManager())
-            ->setType(Field::TYPE_TEXT)
+            ->setType(FieldType::TEXT)
         ;
     }
 

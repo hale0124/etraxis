@@ -11,6 +11,7 @@
 
 namespace eTraxis\Entity\Fields;
 
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\Field;
 
 class AbstractFieldTest extends \PHPUnit_Framework_TestCase
@@ -23,7 +24,7 @@ class AbstractFieldTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->object = new Field();
-        $this->object->setType(Field::TYPE_NUMBER)->asNumber()
+        $this->object->setType(FieldType::NUMBER)->asNumber()
             ->setMinValue(NumberField::MIN_VALUE)
             ->setMaxValue(NumberField::MAX_VALUE)
         ;

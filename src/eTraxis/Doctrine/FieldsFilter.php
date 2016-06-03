@@ -29,6 +29,6 @@ class FieldsFilter extends SQLFilter
             return '';
         }
 
-        return $targetTableAlias . '.removal_time = 0';
+        return $targetTableAlias . '.removed_at IS NULL';
     }
 }

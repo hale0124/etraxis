@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Attachment.
  *
- * @ORM\Table(name="tbl_attachments",
+ * @ORM\Table(name="attachments",
  *            uniqueConstraints={
  *                @ORM\UniqueConstraint(name="ix_attachments", columns={"event_id"})
  *            })
@@ -26,14 +26,14 @@ class Attachment
 {
     // Constraints.
     const MAX_NAME = 100;
-    const MAX_TYPE = 100;
+    const MAX_TYPE = 255;
 
     /**
      * @var int Unique ID.
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="attachment_id", type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
@@ -41,35 +41,35 @@ class Attachment
      * @var Event Event.
      *
      * @ORM\ManyToOne(targetEntity="Event")
-     * @ORM\JoinColumn(name="event_id", nullable=false, referencedColumnName="event_id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="event_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
     private $event;
 
     /**
      * @var string Attachment name.
      *
-     * @ORM\Column(name="attachment_name", type="string", length=100)
+     * @ORM\Column(name="file_name", type="string", length=100)
      */
     private $name;
 
     /**
-     * @var string Attachment type.
-     *
-     * @ORM\Column(name="attachment_type", type="string", length=100)
-     */
-    private $type;
-
-    /**
      * @var int Attachment size.
      *
-     * @ORM\Column(name="attachment_size", type="integer")
+     * @ORM\Column(name="file_size", type="integer")
      */
     private $size;
 
     /**
-     * @var int Whether attachment is removed.
+     * @var string Attachment MIME type.
      *
-     * @ORM\Column(name="is_removed", type="integer")
+     * @ORM\Column(name="mime_type", type="string", length=255)
      */
-    private $isRemoved;
+    private $type;
+
+    /**
+     * @var bool Whether attachment was deleted.
+     *
+     * @ORM\Column(name="is_deleted", type="boolean")
+     */
+    private $isDeleted;
 }

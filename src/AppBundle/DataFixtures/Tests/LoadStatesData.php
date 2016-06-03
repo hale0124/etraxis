@@ -14,11 +14,10 @@ namespace AppBundle\DataFixtures\Tests;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use eTraxis\Dictionary\StateResponsible;
+use eTraxis\Dictionary\StateType;
 use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\State;
-use eTraxis\Entity\StateGroupTransition;
-use eTraxis\Entity\StateResponsibleGroup;
-use eTraxis\Entity\StateRoleTransition;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -60,6 +59,9 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
      */
     protected function loadDeliveryStates(ObjectManager $manager)
     {
+        /** @var \eTraxis\Entity\Group $crew */
+        $crew = $this->getReference('group:crew');
+
         $state_new       = new State();
         $state_delivered = new State();
 
@@ -68,9 +70,10 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
             ->setTemplate($this->getReference('template:delivery'))
             ->setName('New')
             ->setAbbreviation('N')
-            ->setType(State::TYPE_INITIAL)
-            ->setResponsible(State::RESPONSIBLE_ASSIGN)
+            ->setType(StateType::INITIAL)
+            ->setResponsible(StateResponsible::ASSIGN)
             ->setNextState($state_delivered)
+            ->addResponsibleGroups([$crew])
         ;
 
         /** @noinspection PhpParamsInspection */
@@ -78,45 +81,21 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
             ->setTemplate($this->getReference('template:delivery'))
             ->setName('Delivered')
             ->setAbbreviation('D')
-            ->setType(State::TYPE_FINAL)
-            ->setResponsible(State::RESPONSIBLE_REMOVE)
+            ->setType(StateType::FINAL)
+            ->setResponsible(StateResponsible::REMOVE)
         ;
 
         $this->addReference('state:new', $state_new);
         $this->addReference('state:delivered', $state_delivered);
 
+        /** @var \eTraxis\Entity\Group $managers */
+        $managers = $this->getReference('group:managers');
+
+        $state_new->setRoleTransitions(SystemRole::RESPONSIBLE, [$state_delivered]);
+        $state_new->setGroupTransitions($managers, [$state_delivered]);
+
         $manager->persist($state_new);
         $manager->persist($state_delivered);
-        $manager->flush();
-
-        $responsible = new StateResponsibleGroup();
-
-        /** @noinspection PhpParamsInspection */
-        $responsible
-            ->setState($state_new)
-            ->setGroup($this->getReference('group:crew'))
-        ;
-
-        $group_transition = new StateGroupTransition();
-
-        /** @noinspection PhpParamsInspection */
-        $group_transition
-            ->setFromState($state_new)
-            ->setToState($state_delivered)
-            ->setGroup($this->getReference('group:managers'))
-        ;
-
-        $role_transition = new StateRoleTransition();
-
-        $role_transition
-            ->setFromState($state_new)
-            ->setToState($state_delivered)
-            ->setRole(SystemRole::RESPONSIBLE)
-        ;
-
-        $manager->persist($responsible);
-        $manager->persist($group_transition);
-        $manager->persist($role_transition);
         $manager->flush();
     }
 
@@ -135,8 +114,8 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
             ->setTemplate($this->getReference('template:futurama'))
             ->setName('Produced')
             ->setAbbreviation('P')
-            ->setType(State::TYPE_INITIAL)
-            ->setResponsible(State::RESPONSIBLE_KEEP)
+            ->setType(StateType::INITIAL)
+            ->setResponsible(StateResponsible::KEEP)
             ->setNextState($state_released)
         ;
 
@@ -145,26 +124,17 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
             ->setTemplate($this->getReference('template:futurama'))
             ->setName('Released')
             ->setAbbreviation('R')
-            ->setType(State::TYPE_FINAL)
-            ->setResponsible(State::RESPONSIBLE_REMOVE)
+            ->setType(StateType::FINAL)
+            ->setResponsible(StateResponsible::REMOVE)
         ;
 
         $this->addReference('state:produced', $state_produced);
         $this->addReference('state:released', $state_released);
 
+        $state_produced->setRoleTransitions(SystemRole::AUTHOR, [$state_released]);
+
         $manager->persist($state_produced);
         $manager->persist($state_released);
-        $manager->flush();
-
-        $transition = new StateRoleTransition();
-
-        $transition
-            ->setFromState($state_produced)
-            ->setToState($state_released)
-            ->setRole(SystemRole::AUTHOR)
-        ;
-
-        $manager->persist($transition);
         $manager->flush();
     }
 
@@ -184,8 +154,8 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
             ->setTemplate($this->getReference('template:phppsr'))
             ->setName('Draft')
             ->setAbbreviation('D')
-            ->setType(State::TYPE_INITIAL)
-            ->setResponsible(State::RESPONSIBLE_REMOVE)
+            ->setType(StateType::INITIAL)
+            ->setResponsible(StateResponsible::REMOVE)
             ->setNextState($state_accepted)
         ;
 
@@ -194,8 +164,8 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
             ->setTemplate($this->getReference('template:phppsr'))
             ->setName('Accepted')
             ->setAbbreviation('A')
-            ->setType(State::TYPE_INTERIM)
-            ->setResponsible(State::RESPONSIBLE_REMOVE)
+            ->setType(StateType::INTERIM)
+            ->setResponsible(StateResponsible::REMOVE)
         ;
 
         /** @noinspection PhpParamsInspection */
@@ -203,38 +173,23 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
             ->setTemplate($this->getReference('template:phppsr'))
             ->setName('Deprecated')
             ->setAbbreviation('X')
-            ->setType(State::TYPE_FINAL)
-            ->setResponsible(State::RESPONSIBLE_REMOVE)
+            ->setType(StateType::FINAL)
+            ->setResponsible(StateResponsible::REMOVE)
         ;
 
         $this->addReference('state:psr:draft', $state_draft);
         $this->addReference('state:psr:accepted', $state_accepted);
         $this->addReference('state:psr:deprecated', $state_deprecated);
 
+        /** @var \eTraxis\Entity\Group $members */
+        $members = $this->getReference('group:fig:members');
+
+        $state_draft->setGroupTransitions($members, [$state_accepted]);
+        $state_accepted->setGroupTransitions($members, [$state_deprecated]);
+
         $manager->persist($state_draft);
         $manager->persist($state_accepted);
         $manager->persist($state_deprecated);
-        $manager->flush();
-
-        $transition1 = new StateGroupTransition();
-        $transition2 = new StateGroupTransition();
-
-        /** @noinspection PhpParamsInspection */
-        $transition1
-            ->setFromState($state_draft)
-            ->setToState($state_accepted)
-            ->setGroup($this->getReference('group:fig:members'))
-        ;
-
-        /** @noinspection PhpParamsInspection */
-        $transition2
-            ->setFromState($state_accepted)
-            ->setToState($state_deprecated)
-            ->setGroup($this->getReference('group:fig:members'))
-        ;
-
-        $manager->persist($transition1);
-        $manager->persist($transition2);
         $manager->flush();
     }
 }

@@ -40,5 +40,7 @@ class StateRoleTransitionTest extends \PHPUnit_Framework_TestCase
         $expected = SystemRole::AUTHOR;
         $this->object->setRole($expected);
         self::assertEquals($expected, $this->object->getRole());
+        $this->object->setRole('wtf');
+        self::assertEquals($expected, $this->object->getRole());
     }
 }

@@ -11,6 +11,8 @@
 
 namespace eTraxis\SimpleBus\States;
 
+use eTraxis\Dictionary\StateResponsible;
+use eTraxis\Dictionary\StateType;
 use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
 use eTraxis\Tests\TransactionalTestCase;
@@ -31,8 +33,8 @@ class CreateStateCommandTest extends TransactionalTestCase
         $template     = $this->getTemplate();
         $name         = 'Started';
         $abbreviation = 'S';
-        $type         = State::TYPE_INTERIM;
-        $responsible  = State::RESPONSIBLE_KEEP;
+        $type         = StateType::INTERIM;
+        $responsible  = StateResponsible::KEEP;
         $nextState    = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
         /** @var State $state */
@@ -74,7 +76,7 @@ class CreateStateCommandTest extends TransactionalTestCase
 
         /** @var State $initial */
         $initial = $repository->findOneBy(['name' => 'New']);
-        self::assertEquals(State::TYPE_INITIAL, $initial->getType());
+        self::assertEquals(StateType::INITIAL, $initial->getType());
 
         /** @var State $state */
         $state = $repository->findOneBy(['name' => $name]);
@@ -85,8 +87,8 @@ class CreateStateCommandTest extends TransactionalTestCase
             'template'     => $template->getId(),
             'name'         => $name,
             'abbreviation' => $abbreviation,
-            'type'         => State::TYPE_INITIAL,
-            'responsible'  => State::RESPONSIBLE_KEEP,
+            'type'         => StateType::INITIAL,
+            'responsible'  => StateResponsible::KEEP,
         ]);
 
         $this->command_bus->handle($command);
@@ -97,14 +99,14 @@ class CreateStateCommandTest extends TransactionalTestCase
         self::assertEquals($template->getId(), $state->getTemplate()->getId());
         self::assertEquals($name, $state->getName());
         self::assertEquals($abbreviation, $state->getAbbreviation());
-        self::assertEquals(State::TYPE_INITIAL, $state->getType());
+        self::assertEquals(StateType::INITIAL, $state->getType());
 
         $query = $repository->createQueryBuilder('s')
             ->select('COUNT(s.id)')
             ->where('s.template = :template')
             ->andWhere('s.type = :initial')
             ->setParameter('template', $template)
-            ->setParameter('initial', State::TYPE_INITIAL)
+            ->setParameter('initial', StateType::INITIAL)
         ;
 
         $count = $query->getQuery()->getSingleScalarResult();
@@ -121,8 +123,8 @@ class CreateStateCommandTest extends TransactionalTestCase
             'template'     => self::UNKNOWN_ENTITY_ID,
             'name'         => 'Started',
             'abbreviation' => 'S',
-            'type'         => State::TYPE_INTERIM,
-            'responsible'  => State::RESPONSIBLE_KEEP,
+            'type'         => StateType::INTERIM,
+            'responsible'  => StateResponsible::KEEP,
         ]);
 
         $this->command_bus->handle($command);
@@ -138,8 +140,8 @@ class CreateStateCommandTest extends TransactionalTestCase
             'template'     => $this->getTemplate()->getId(),
             'name'         => 'Started',
             'abbreviation' => 'S',
-            'type'         => State::TYPE_INTERIM,
-            'responsible'  => State::RESPONSIBLE_KEEP,
+            'type'         => StateType::INTERIM,
+            'responsible'  => StateResponsible::KEEP,
             'nextState'    => self::UNKNOWN_ENTITY_ID,
         ]);
 
@@ -156,8 +158,8 @@ class CreateStateCommandTest extends TransactionalTestCase
             'template'     => $this->getTemplate()->getId(),
             'name'         => 'Delivered',
             'abbreviation' => 'S',
-            'type'         => State::TYPE_INTERIM,
-            'responsible'  => State::RESPONSIBLE_KEEP,
+            'type'         => StateType::INTERIM,
+            'responsible'  => StateResponsible::KEEP,
         ]);
 
         $this->command_bus->handle($command);
@@ -173,8 +175,8 @@ class CreateStateCommandTest extends TransactionalTestCase
             'template'     => $this->getTemplate()->getId(),
             'name'         => 'Started',
             'abbreviation' => 'D',
-            'type'         => State::TYPE_INTERIM,
-            'responsible'  => State::RESPONSIBLE_KEEP,
+            'type'         => StateType::INTERIM,
+            'responsible'  => StateResponsible::KEEP,
         ]);
 
         $this->command_bus->handle($command);

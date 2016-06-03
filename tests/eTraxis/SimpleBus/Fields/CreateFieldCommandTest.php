@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\State;
 use eTraxis\SimpleBus\Fields\Handler\CreateFieldCommandHandler;
@@ -42,11 +43,11 @@ class CreateFieldCommandTest extends TransactionalTestCase
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => $command->name]);
 
         self::assertInstanceOf(Field::class, $field);
-        self::assertEquals(Field::TYPE_RECORD, $field->getType());
+        self::assertEquals(FieldType::RECORD, $field->getType());
         self::assertEquals($state, $field->getState());
         self::assertEquals('Ref ID', $field->getName());
         self::assertEquals('Reference', $field->getDescription());
-        self::assertEquals(5, $field->getIndexNumber());
+        self::assertEquals(5, $field->getOrder());
         self::assertTrue($field->isRequired());
     }
 

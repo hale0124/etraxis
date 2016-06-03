@@ -15,8 +15,8 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use eTraxis\Dictionary\SystemRole;
+use eTraxis\Dictionary\TemplatePermission;
 use eTraxis\Entity\Template;
-use eTraxis\Entity\TemplateGroupPermission;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -58,30 +58,41 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
      */
     protected function loadDeliveryTemplate(ObjectManager $manager)
     {
-        $author      = Template::PERMIT_EDIT_RECORD | Template::PERMIT_ADD_COMMENT | Template::PERMIT_ADD_FILE | Template::PERMIT_REMOVE_FILE;
-        $responsible = Template::PERMIT_ADD_COMMENT | Template::PERMIT_ADD_FILE;
+        $author = [
+            TemplatePermission::VIEW_RECORDS,
+            TemplatePermission::EDIT_RECORDS,
+            TemplatePermission::ADD_COMMENTS,
+            TemplatePermission::ATTACH_FILES,
+            TemplatePermission::DELETE_FILES,
+        ];
+
+        $responsible = [
+            TemplatePermission::VIEW_RECORDS,
+            TemplatePermission::ADD_COMMENTS,
+            TemplatePermission::ATTACH_FILES,
+        ];
 
         $permissions = [
             'group:managers' => [
-                Template::PERMIT_VIEW_RECORD,
-                Template::PERMIT_CREATE_RECORD,
-                Template::PERMIT_EDIT_RECORD,
-                Template::PERMIT_POSTPONE_RECORD,
-                Template::PERMIT_RESUME_RECORD,
-                Template::PERMIT_REASSIGN_RECORD,
-                Template::PERMIT_REOPEN_RECORD,
-                Template::PERMIT_ADD_COMMENT,
-                Template::PERMIT_PRIVATE_COMMENT,
-                Template::PERMIT_ADD_FILE,
-                Template::PERMIT_REMOVE_FILE,
-                Template::PERMIT_SEND_REMINDER,
+                TemplatePermission::VIEW_RECORDS,
+                TemplatePermission::CREATE_RECORDS,
+                TemplatePermission::EDIT_RECORDS,
+                TemplatePermission::POSTPONE_RECORDS,
+                TemplatePermission::RESUME_RECORDS,
+                TemplatePermission::REASSIGN_RECORDS,
+                TemplatePermission::REOPEN_RECORDS,
+                TemplatePermission::ADD_COMMENTS,
+                TemplatePermission::PRIVATE_COMMENTS,
+                TemplatePermission::ATTACH_FILES,
+                TemplatePermission::DELETE_FILES,
+                TemplatePermission::SEND_REMINDERS,
             ],
             'group:staff' => [
-                Template::PERMIT_VIEW_RECORD,
+                TemplatePermission::VIEW_RECORDS,
             ],
             'group:crew' => [
-                Template::PERMIT_VIEW_RECORD,
-                Template::PERMIT_ADD_COMMENT,
+                TemplatePermission::VIEW_RECORDS,
+                TemplatePermission::ADD_COMMENTS,
             ],
         ];
 
@@ -96,36 +107,17 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
             ->setLocked(false)
             ->setRolePermissions(SystemRole::AUTHOR, $author)
             ->setRolePermissions(SystemRole::RESPONSIBLE, $responsible)
-            ->setRolePermissions(SystemRole::REGISTERED, 0)
         ;
 
         $this->addReference('template:delivery', $template);
 
-        $manager->persist($template);
-        $manager->flush();
-
-        foreach ($permissions as $group_ref => $permits) {
-
-            $flags = 0;
-
-            foreach ($permits as $permit) {
-                $flags |= $permit;
-            }
-
+        foreach ($permissions as $group_ref => $group_permissions) {
+            /** @var \eTraxis\Entity\Group $group */
             $group = $this->getReference($group_ref);
-
-            $permission = new TemplateGroupPermission();
-
-            /** @noinspection PhpParamsInspection */
-            $permission
-                ->setGroup($group)
-                ->setTemplate($template)
-                ->setPermission($flags)
-            ;
-
-            $manager->persist($permission);
+            $template->setGroupPermissions($group, $group_permissions);
         }
 
+        $manager->persist($template);
         $manager->flush();
     }
 
@@ -136,8 +128,17 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
      */
     protected function loadFuturamaTemplate(ObjectManager $manager)
     {
-        $author     = Template::PERMIT_EDIT_RECORD | Template::PERMIT_ADD_COMMENT | Template::PERMIT_ADD_FILE | Template::PERMIT_REMOVE_FILE;
-        $registered = Template::PERMIT_VIEW_RECORD;
+        $anyone = [
+            TemplatePermission::VIEW_RECORDS,
+        ];
+
+        $author = [
+            TemplatePermission::VIEW_RECORDS,
+            TemplatePermission::EDIT_RECORDS,
+            TemplatePermission::ADD_COMMENTS,
+            TemplatePermission::ATTACH_FILES,
+            TemplatePermission::DELETE_FILES,
+        ];
 
         $template = new Template();
 
@@ -148,9 +149,8 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
             ->setPrefix('F')
             ->setDescription('Futurama episode')
             ->setLocked(false)
+            ->setRolePermissions(SystemRole::ANYONE, $anyone)
             ->setRolePermissions(SystemRole::AUTHOR, $author)
-            ->setRolePermissions(SystemRole::RESPONSIBLE, 0)
-            ->setRolePermissions(SystemRole::REGISTERED, $registered)
         ;
 
         $this->addReference('template:futurama', $template);
@@ -166,7 +166,22 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
      */
     protected function loadPhpPsrTemplate(ObjectManager $manager)
     {
-        $author = Template::PERMIT_EDIT_RECORD | Template::PERMIT_ADD_COMMENT | Template::PERMIT_ADD_FILE | Template::PERMIT_REMOVE_FILE;
+        $author = [
+            TemplatePermission::VIEW_RECORDS,
+            TemplatePermission::EDIT_RECORDS,
+            TemplatePermission::ADD_COMMENTS,
+            TemplatePermission::ATTACH_FILES,
+            TemplatePermission::DELETE_FILES,
+        ];
+
+        $members = [
+            TemplatePermission::VIEW_RECORDS,
+            TemplatePermission::CREATE_RECORDS,
+            TemplatePermission::ADD_COMMENTS,
+        ];
+
+        /** @var \eTraxis\Entity\Group $group */
+        $group = $this->getReference('group:fig:members');
 
         $template = new Template();
 
@@ -178,23 +193,12 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
             ->setDescription('PHP Standard Recommendation')
             ->setLocked(false)
             ->setRolePermissions(SystemRole::AUTHOR, $author)
-            ->setRolePermissions(SystemRole::RESPONSIBLE, 0)
-            ->setRolePermissions(SystemRole::REGISTERED, 0)
+            ->setGroupPermissions($group, $members)
         ;
 
         $this->addReference('template:phppsr', $template);
 
-        $permission = new TemplateGroupPermission();
-
-        /** @noinspection PhpParamsInspection */
-        $permission
-            ->setTemplate($template)
-            ->setGroup($this->getReference('group:fig:members'))
-            ->setPermission(Template::PERMIT_VIEW_RECORD | Template::PERMIT_CREATE_RECORD | Template::PERMIT_ADD_COMMENT)
-        ;
-
         $manager->persist($template);
-        $manager->persist($permission);
         $manager->flush();
     }
 }

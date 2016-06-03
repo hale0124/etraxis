@@ -151,9 +151,9 @@ var FieldsApp = (function() {
          *
          * @param {number} id Field ID.
          */
-        regex: function(id) {
+        pcre: function(id) {
             eTraxis.modal({
-                url: eTraxis.route('admin_dlg_regex_field', { id: id }),
+                url: eTraxis.route('admin_dlg_pcre_field', { id: id }),
                 title: 'PCRE',
                 success: function() {
                     reloadTab();
@@ -185,7 +185,7 @@ var FieldsApp = (function() {
             var $tabs = $('#tabs-field');
             var group = $('#group', $tabs).val();
 
-            var url = (group < 0)
+            var url = isNaN(parseInt(group))
                 ? eTraxis.route('admin_fields_load_role_permissions', { id: id, role: group })
                 : eTraxis.route('admin_fields_load_group_permissions', { id: id, group: group });
 
@@ -204,7 +204,7 @@ var FieldsApp = (function() {
             var group = $('#group', $tabs).val();
             var permission = $('input[name="permission"]:checked', $tabs).val();
 
-            var url = (group < 0)
+            var url = isNaN(parseInt(group))
                 ? eTraxis.route('admin_fields_save_role_permissions', { id: id, role: group })
                 : eTraxis.route('admin_fields_save_group_permissions', { id: id, group: group });
 

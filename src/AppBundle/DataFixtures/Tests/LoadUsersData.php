@@ -11,10 +11,11 @@
 
 namespace AppBundle\DataFixtures\Tests;
 
-use AltrEgo\AltrEgo;
+use AppBundle\DataFixtures\AltrEgoTrait;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Entity\User;
 use eTraxis\Security\InternalPasswordEncoder;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
@@ -22,6 +23,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class LoadUsersData extends AbstractFixture implements ContainerAwareInterface, OrderedFixtureInterface
 {
+    use AltrEgoTrait;
+
     /** @var ContainerInterface */
     private $container;
 
@@ -57,21 +60,18 @@ class LoadUsersData extends AbstractFixture implements ContainerAwareInterface, 
             // Assorted users.
 
             'artem' => [
-                'fullname'    => 'Artem Rodygin',
-                'email'       => 'artem@example.com',
-                'password'    => 'secret',
-                'is_admin'    => true,
-                'is_disabled' => false,
-                'is_ldap'     => false,
+                'fullname'   => 'Artem Rodygin',
+                'email'      => 'artem@example.com',
+                'isAdmin'    => true,
+                'isDisabled' => false,
             ],
 
             'einstein' => [
-                'fullname'    => 'Albert Einstein',
-                'email'       => 'einstein@ldap.forumsys.com',
-                'password'    => 'secret',
-                'is_admin'    => false,
-                'is_disabled' => false,
-                'is_ldap'     => true,
+                'provider'   => AuthenticationProvider::LDAP,
+                'fullname'   => 'Albert Einstein',
+                'email'      => 'einstein@ldap.forumsys.com',
+                'isAdmin'    => false,
+                'isDisabled' => false,
             ],
 
             // Futurama users.
@@ -79,121 +79,98 @@ class LoadUsersData extends AbstractFixture implements ContainerAwareInterface, 
             'hubert' => [
                 'fullname'    => 'Hubert J. Farnsworth',
                 'email'       => 'hubert@planetexpress.com',
-                'password'    => 'secret',
                 'description' => 'Founder / Owner',
-                'is_admin'    => true,
-                'is_disabled' => false,
-                'is_ldap'     => false,
+                'isAdmin'     => true,
+                'isDisabled'  => false,
             ],
 
             'fry' => [
                 'fullname'    => 'Philip J. Fry',
                 'email'       => 'fry@planetexpress.com',
-                'password'    => 'secret',
                 'description' => 'Delivery Crew',
-                'is_admin'    => false,
-                'is_disabled' => false,
-                'is_ldap'     => false,
+                'isAdmin'     => false,
+                'isDisabled'  => false,
             ],
 
             'bender' => [
                 'fullname'    => 'Bender Bending Rodriguez',
                 'email'       => 'bender@planetexpress.com',
-                'password'    => 'secret',
                 'description' => 'Delivery Crew',
-                'is_admin'    => false,
-                'is_disabled' => false,
-                'is_ldap'     => false,
+                'isAdmin'     => false,
+                'isDisabled'  => false,
             ],
 
             'leela' => [
                 'fullname'    => 'Turanga Leela',
                 'email'       => 'leela@planetexpress.com',
-                'password'    => 'secret',
                 'description' => 'Delivery Crew',
-                'is_admin'    => false,
-                'is_disabled' => false,
-                'is_ldap'     => false,
+                'isAdmin'     => false,
+                'isDisabled'  => false,
             ],
 
             'amy' => [
                 'fullname'    => 'Dr. Amy Wong',
                 'email'       => 'amy@planetexpress.com',
-                'password'    => 'secret',
                 'description' => 'Delivery Crew',
-                'is_admin'    => false,
-                'is_disabled' => false,
-                'is_ldap'     => false,
+                'isAdmin'     => false,
+                'isDisabled'  => false,
             ],
 
             'zoidberg' => [
                 'fullname'    => 'Dr. John A. Zoidberg',
                 'email'       => 'zoidberg@planetexpress.com',
-                'password'    => 'secret',
                 'description' => 'Staff Doctor',
-                'is_admin'    => false,
-                'is_disabled' => false,
-                'is_ldap'     => false,
+                'isAdmin'     => false,
+                'isDisabled'  => false,
             ],
 
             'hermes' => [
                 'fullname'    => 'Hermes Conrad',
                 'email'       => 'hermes@planetexpress.com',
-                'password'    => 'secret',
                 'description' => 'Grade 36 Bureaucrat',
-                'is_admin'    => false,
-                'is_disabled' => false,
-                'is_ldap'     => false,
+                'isAdmin'     => false,
+                'isDisabled'  => false,
             ],
 
             'scruffy' => [
                 'fullname'    => 'Scruffy',
                 'email'       => 'scruffy@planetexpress.com',
-                'password'    => 'secret',
                 'description' => 'Janitor',
-                'is_admin'    => false,
-                'is_disabled' => false,
-                'is_ldap'     => false,
+                'isAdmin'     => false,
+                'isDisabled'  => false,
             ],
 
             'zapp' => [
                 'fullname'    => 'Zapp Brannigan',
                 'email'       => 'captain@nimbus.com',
-                'password'    => 'secret',
                 'description' => 'Captain',
-                'is_admin'    => false,
-                'is_disabled' => false,
-                'is_ldap'     => false,
+                'isAdmin'     => false,
+                'isDisabled'  => false,
+                'lockedUntil' => 0x7FFFFFFF,
             ],
 
             'kif' => [
                 'fullname'    => 'Kif Kroker',
                 'email'       => 'kif@nimbus.com',
-                'password'    => 'secret',
                 'description' => 'Fourth Lieutenant ',
-                'is_admin'    => false,
-                'is_disabled' => false,
-                'is_ldap'     => false,
+                'isAdmin'     => false,
+                'isDisabled'  => false,
             ],
 
             'veins' => [
                 'fullname'    => 'Dr. Veins McGee',
                 'email'       => 'veins@nimbus.com',
-                'password'    => 'secret',
                 'description' => 'Doctor',
-                'is_admin'    => false,
-                'is_disabled' => true,
-                'is_ldap'     => false,
+                'isAdmin'     => false,
+                'isDisabled'  => true,
             ],
 
             'francine' => [
                 'fullname'    => 'Francine',
                 'email'       => 'francine@nimbus.com',
-                'password'    => 'secret',
                 'description' => 'Officer',
-                'is_admin'    => false,
-                'is_disabled' => true,
-                'is_ldap'     => false,
+                'isAdmin'     => false,
+                'isDisabled'  => true,
             ],
 
             // PHP-FIG users.
@@ -201,89 +178,71 @@ class LoadUsersData extends AbstractFixture implements ContainerAwareInterface, 
             'mwop' => [
                 'fullname'    => 'Matthew Weier O\'Phinney',
                 'email'       => 'mwop@example.com',
-                'password'    => 'secret',
                 'description' => 'Zend Framework 2',
-                'is_admin'    => false,
-                'is_disabled' => false,
-                'is_ldap'     => false,
+                'isAdmin'     => false,
+                'isDisabled'  => false,
             ],
 
             'pmjones' => [
                 'fullname'    => 'Paul M. Jones',
                 'email'       => 'pmjones@example.com',
-                'password'    => 'secret',
                 'description' => 'Aura Project and Solar Framework',
-                'is_admin'    => false,
-                'is_disabled' => false,
-                'is_ldap'     => false,
+                'isAdmin'     => false,
+                'isDisabled'  => false,
             ],
 
             'seldaek' => [
                 'fullname'    => 'Jordi Boggiano',
                 'email'       => 'seldaek@example.com',
-                'password'    => 'secret',
                 'description' => 'Composer',
-                'is_admin'    => false,
-                'is_disabled' => false,
-                'is_ldap'     => false,
+                'isAdmin'     => false,
+                'isDisabled'  => false,
             ],
 
             'mvriel' => [
                 'fullname'    => 'Mike van Riel',
                 'email'       => 'mvriel@example.com',
-                'password'    => 'secret',
                 'description' => 'phpDocumentor',
-                'is_admin'    => false,
-                'is_disabled' => false,
-                'is_ldap'     => false,
+                'isAdmin'     => false,
+                'isDisabled'  => false,
             ],
 
             'Crell' => [
                 'fullname'    => 'Larry Garfield',
                 'email'       => 'Crell@example.com',
-                'password'    => 'secret',
                 'description' => 'Drupal',
-                'is_admin'    => false,
-                'is_disabled' => false,
-                'is_ldap'     => false,
+                'isAdmin'     => false,
+                'isDisabled'  => false,
             ],
 
             'lsmith' => [
                 'fullname'    => 'Lukas Kahwe Smith',
                 'email'       => 'lsmith@example.com',
-                'password'    => 'secret',
                 'description' => 'Jackalope',
-                'is_admin'    => false,
-                'is_disabled' => false,
-                'is_ldap'     => false,
+                'isAdmin'     => false,
+                'isDisabled'  => false,
             ],
 
             'moufmouf' => [
-                'fullname'    => 'David Négrier',
-                'email'       => 'moufmouf@example.com',
-                'password'    => 'secret',
-                'is_admin'    => false,
-                'is_disabled' => false,
-                'is_ldap'     => false,
+                'fullname'   => 'David Négrier',
+                'email'      => 'moufmouf@example.com',
+                'isAdmin'    => false,
+                'isDisabled' => false,
             ],
 
             'korvinszanto' => [
                 'fullname'    => 'Korvin Szanto',
                 'email'       => 'korvinszanto@example.com',
-                'password'    => 'secret',
                 'description' => 'concrete5',
-                'is_admin'    => false,
-                'is_disabled' => false,
-                'is_ldap'     => false,
+                'isAdmin'     => false,
+                'isDisabled'  => false,
             ],
 
             'manchuck' => [
-                'fullname'    => 'Chuck Reeves',
-                'email'       => 'manchuck@example.com',
-                'password'    => 'secret',
-                'is_admin'    => false,
-                'is_disabled' => false,
-                'is_ldap'     => false,
+                'fullname'   => 'Chuck Reeves',
+                'email'      => 'manchuck@example.com',
+                'isAdmin'    => false,
+                'isDisabled' => false,
             ],
         ];
 
@@ -291,29 +250,14 @@ class LoadUsersData extends AbstractFixture implements ContainerAwareInterface, 
 
             $user = new User();
 
-            $user
-                ->setUsername($username)
-                ->setFullname($row['fullname'])
-                ->setEmail($row['email'])
-                ->setPassword($encoder->encodePassword($row['password']))
-                ->setAdmin($row['is_admin'])
-                ->setDisabled($row['is_disabled'])
-                ->setLdap($row['is_ldap'])
-            ;
+            $object = $this->ego($user);
 
-            $user->getSettings()
-                ->setLocale($this->container->getParameter('locale'))
-                ->setTheme($this->container->getParameter('theme'))
-            ;
+            $object->provider = AuthenticationProvider::ETRAXIS;
+            $object->username = $username;
+            $object->password = $encoder->encodePassword('secret');
 
-            if (array_key_exists('description', $row)) {
-                $user->setDescription($row['description']);
-            }
-
-            // Make Zapp locked out.
-            if ($username === 'zapp') {
-                /** @noinspection PhpUndefinedFieldInspection */
-                AltrEgo::create($user)->lockedUntil = 0x7FFFFFFF;
+            foreach ($row as $property => $value) {
+                $object->$property = $value;
             }
 
             $this->addReference('user:' . $username, $user);

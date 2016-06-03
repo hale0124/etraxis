@@ -12,6 +12,7 @@
 namespace eTraxis\Entity;
 
 use eTraxis\Dictionary\SystemRole;
+use eTraxis\Dictionary\TemplatePermission;
 use eTraxis\Tests\TransactionalTestCase;
 
 class TemplateTest extends TransactionalTestCase
@@ -85,55 +86,87 @@ class TemplateTest extends TransactionalTestCase
         self::assertTrue($this->object->isLocked());
     }
 
-    public function testAuthorPermissions()
-    {
-        $permissions = Template::PERMIT_CREATE_RECORD | Template::PERMIT_ADD_COMMENT;
-        $expected    = Template::PERMIT_VIEW_RECORD | Template::PERMIT_ADD_COMMENT;
-
-        $this->object->setRolePermissions(SystemRole::AUTHOR, $permissions);
-        self::assertEquals($expected, $this->object->getRolePermissions(SystemRole::AUTHOR));
-    }
-
-    public function testResponsiblePermissions()
-    {
-        $permissions = Template::PERMIT_CREATE_RECORD | Template::PERMIT_ADD_COMMENT;
-        $expected    = Template::PERMIT_VIEW_RECORD | Template::PERMIT_ADD_COMMENT;
-
-        $this->object->setRolePermissions(SystemRole::RESPONSIBLE, $permissions);
-        self::assertEquals($expected, $this->object->getRolePermissions(SystemRole::RESPONSIBLE));
-    }
-
-    public function testRegisteredPermissions()
-    {
-        $permissions = Template::PERMIT_CREATE_RECORD | Template::PERMIT_ADD_COMMENT;
-        $expected    = Template::PERMIT_CREATE_RECORD | Template::PERMIT_ADD_COMMENT;
-
-        $this->object->setRolePermissions(SystemRole::REGISTERED, $permissions);
-        self::assertEquals($expected, $this->object->getRolePermissions(SystemRole::REGISTERED));
-    }
-
-    public function testGetGroupPermissions()
-    {
-        $local  = Template::PERMIT_VIEW_RECORD | Template::PERMIT_ADD_COMMENT;
-        $global = 0;
-
-        /** @var Group $group_local */
-        /** @var Group $group_global */
-        $group_local  = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
-        $group_global = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Nimbus']);
-
-        $repository = $this->doctrine->getRepository(Template::class);
-
-        /** @var Template $template */
-        $template = $repository->findOneBy(['name' => 'Delivery']);
-
-        self::assertEquals($local,  $template->getGroupPermissions($group_local));
-        self::assertEquals($global, $template->getGroupPermissions($group_global));
-    }
-
     public function testStates()
     {
         self::assertCount(2, $this->object->getStates());
+    }
+
+    public function testAnyoneRolePermissions()
+    {
+        $permissions = [
+            TemplatePermission::CREATE_RECORDS,
+            TemplatePermission::ADD_COMMENTS,
+            'wtf',
+        ];
+
+        $expected = [
+            TemplatePermission::CREATE_RECORDS,
+            TemplatePermission::ADD_COMMENTS,
+        ];
+
+        $this->object->setRolePermissions(SystemRole::ANYONE, $permissions);
+        self::assertArraysByValues($expected, $this->object->getRolePermissions(SystemRole::ANYONE));
+    }
+
+    public function testAuthorRolePermissions()
+    {
+        $permissions = [
+            TemplatePermission::CREATE_RECORDS,
+            TemplatePermission::ADD_COMMENTS,
+        ];
+
+        $expected = [
+            TemplatePermission::VIEW_RECORDS,
+            TemplatePermission::ADD_COMMENTS,
+        ];
+
+        $this->object->setRolePermissions(SystemRole::AUTHOR, $permissions);
+        self::assertArraysByValues($expected, $this->object->getRolePermissions(SystemRole::AUTHOR));
+    }
+
+    public function testResponsibleRolePermissions()
+    {
+        $permissions = [
+            TemplatePermission::CREATE_RECORDS,
+            TemplatePermission::ADD_COMMENTS,
+        ];
+
+        $expected = [
+            TemplatePermission::VIEW_RECORDS,
+            TemplatePermission::ADD_COMMENTS,
+        ];
+
+        $this->object->setRolePermissions(SystemRole::RESPONSIBLE, $permissions);
+        self::assertArraysByValues($expected, $this->object->getRolePermissions(SystemRole::RESPONSIBLE));
+    }
+
+    public function testGroupPermissions()
+    {
+        $default = [
+            TemplatePermission::VIEW_RECORDS,
+            TemplatePermission::ADD_COMMENTS,
+        ];
+
+        $permissions = [
+            TemplatePermission::VIEW_RECORDS,
+            TemplatePermission::ATTACH_FILES,
+            TemplatePermission::DELETE_FILES,
+            'wtf',
+        ];
+
+        $expected = [
+            TemplatePermission::VIEW_RECORDS,
+            TemplatePermission::ATTACH_FILES,
+            TemplatePermission::DELETE_FILES,
+        ];
+
+        /** @var Group $group */
+        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
+
+        self::assertArraysByValues($default, $this->object->getGroupPermissions($group));
+
+        $this->object->setGroupPermissions($group, $permissions);
+        self::assertArraysByValues($expected, $this->object->getGroupPermissions($group));
     }
 
     public function testToString()

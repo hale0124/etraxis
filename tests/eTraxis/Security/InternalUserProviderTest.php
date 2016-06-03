@@ -37,7 +37,7 @@ class InternalUserProviderTest extends TransactionalTestCase
 
         self::assertInstanceOf(CurrentUser::class, $result);
         self::assertEquals('Artem Rodygin', $result->getFullname());
-        self::assertFalse($result->isLdap());
+        self::assertFalse($result->isExternalAccount());
     }
 
     public function testLoadLdapUserByUsername()
@@ -46,7 +46,7 @@ class InternalUserProviderTest extends TransactionalTestCase
 
         self::assertInstanceOf(CurrentUser::class, $result);
         self::assertEquals('Albert Einstein', $result->getFullname());
-        self::assertTrue($result->isLdap());
+        self::assertTrue($result->isExternalAccount());
     }
 
     /**

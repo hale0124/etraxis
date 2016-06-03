@@ -12,6 +12,8 @@
 namespace eTraxis\SimpleBus\States\Handler;
 
 use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Dictionary\StateResponsible;
+use eTraxis\Dictionary\StateType;
 use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\States\CreateStateCommand;
@@ -63,7 +65,7 @@ class CreateStateCommandHandler
             ->setName($command->name)
             ->setAbbreviation($command->abbreviation)
             ->setType($command->type)
-            ->setResponsible($command->type === State::TYPE_FINAL ? State::RESPONSIBLE_REMOVE : $command->responsible)
+            ->setResponsible($command->type === StateType::FINAL ? StateResponsible::REMOVE : $command->responsible)
         ;
 
         if ($command->nextState) {
@@ -84,7 +86,7 @@ class CreateStateCommandHandler
             throw new BadRequestHttpException($errors->get(0)->getMessage());
         }
 
-        if ($command->type === State::TYPE_INITIAL) {
+        if ($command->type === StateType::INITIAL) {
 
             $query = $this->manager->createQuery('
                 UPDATE eTraxis:State s
@@ -94,8 +96,8 @@ class CreateStateCommandHandler
 
             $query->execute([
                 'template' => $template,
-                'initial'  => State::TYPE_INITIAL,
-                'interim'  => State::TYPE_INTERIM,
+                'initial'  => StateType::INITIAL,
+                'interim'  => StateType::INTERIM,
             ]);
         }
 

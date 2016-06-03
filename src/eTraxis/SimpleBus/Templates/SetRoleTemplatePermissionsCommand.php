@@ -17,9 +17,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Sets permissions of specified role to specified template.
  *
- * @property    int $id          Template ID.
- * @property    int $role        System role.
- * @property    int $permissions Permissions.
+ * @property    int      $id          Template ID.
+ * @property    string   $role        System role.
+ * @property    string[] $permissions Permissions.
  */
 class SetRoleTemplatePermissionsCommand
 {
@@ -38,8 +38,11 @@ class SetRoleTemplatePermissionsCommand
     public $role;
 
     /**
-     * @Assert\NotBlank()
-     * @Assert\Type(type="int")
+     * @Assert\Type(type="array")
+     * @Assert\All({
+     *     @Assert\NotBlank(),
+     *     @Assert\Choice(callback={"eTraxis\Dictionary\TemplatePermission", "keys"})
+     * })
      */
     public $permissions;
 }

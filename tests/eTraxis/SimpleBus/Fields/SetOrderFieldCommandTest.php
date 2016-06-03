@@ -27,8 +27,8 @@ class SetOrderFieldCommandTest extends TransactionalTestCase
         /** @var Field[] $fields */
         $fields = $this->doctrine->getRepository(Field::class)->findBy([
             'state'     => $state,
-            'removedAt' => 0,
-        ], ['indexNumber' => 'ASC']);
+            'removedAt' => null,
+        ], ['order' => 'ASC']);
 
         $result = [];
 
@@ -51,12 +51,12 @@ class SetOrderFieldCommandTest extends TransactionalTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy([
             'name'      => 'Delivery at',
-            'removedAt' => 0,
+            'removedAt' => null,
         ]);
 
         $command = new SetOrderFieldCommand([
             'id'    => $field->getId(),
-            'order' => $field->getIndexNumber() - 1,
+            'order' => $field->getOrder() - 1,
         ]);
 
         $this->command_bus->handle($command);
@@ -76,12 +76,12 @@ class SetOrderFieldCommandTest extends TransactionalTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy([
             'name'      => 'Delivery to',
-            'removedAt' => 0,
+            'removedAt' => null,
         ]);
 
         $command = new SetOrderFieldCommand([
             'id'    => $field->getId(),
-            'order' => $field->getIndexNumber() + 1,
+            'order' => $field->getOrder() + 1,
         ]);
 
         $this->command_bus->handle($command);
@@ -101,7 +101,7 @@ class SetOrderFieldCommandTest extends TransactionalTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy([
             'name'      => 'Delivery at',
-            'removedAt' => 0,
+            'removedAt' => null,
         ]);
 
         $command = new SetOrderFieldCommand([
@@ -126,7 +126,7 @@ class SetOrderFieldCommandTest extends TransactionalTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy([
             'name'      => 'Delivery to',
-            'removedAt' => 0,
+            'removedAt' => null,
         ]);
 
         $command = new SetOrderFieldCommand([

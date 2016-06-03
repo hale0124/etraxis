@@ -12,6 +12,8 @@
 namespace eTraxis\Entity;
 
 use AltrEgo\AltrEgo;
+use eTraxis\Dictionary\FieldPermission;
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Dictionary\SystemRole;
 use eTraxis\Tests\TransactionalTestCase;
 
@@ -57,31 +59,31 @@ class FieldTest extends TransactionalTestCase
     {
         self::assertNull($this->object->getType());
 
-        $this->object->setType(Field::TYPE_NUMBER);
+        $this->object->setType(FieldType::NUMBER);
         self::assertEquals('number', $this->object->getType());
 
-        $this->object->setType(Field::TYPE_DECIMAL);
+        $this->object->setType(FieldType::DECIMAL);
         self::assertEquals('decimal', $this->object->getType());
 
-        $this->object->setType(Field::TYPE_STRING);
+        $this->object->setType(FieldType::STRING);
         self::assertEquals('string', $this->object->getType());
 
-        $this->object->setType(Field::TYPE_TEXT);
+        $this->object->setType(FieldType::TEXT);
         self::assertEquals('text', $this->object->getType());
 
-        $this->object->setType(Field::TYPE_CHECKBOX);
+        $this->object->setType(FieldType::CHECKBOX);
         self::assertEquals('checkbox', $this->object->getType());
 
-        $this->object->setType(Field::TYPE_LIST);
+        $this->object->setType(FieldType::LIST);
         self::assertEquals('list', $this->object->getType());
 
-        $this->object->setType(Field::TYPE_RECORD);
+        $this->object->setType(FieldType::RECORD);
         self::assertEquals('record', $this->object->getType());
 
-        $this->object->setType(Field::TYPE_DATE);
+        $this->object->setType(FieldType::DATE);
         self::assertEquals('date', $this->object->getType());
 
-        $this->object->setType(Field::TYPE_DURATION);
+        $this->object->setType(FieldType::DURATION);
         self::assertEquals('duration', $this->object->getType());
 
         $this->object->setType('unknown');
@@ -95,11 +97,11 @@ class FieldTest extends TransactionalTestCase
         self::assertEquals($expected, $this->object->getDescription());
     }
 
-    public function testIndexNumber()
+    public function testOrder()
     {
         $expected = random_int(1, PHP_INT_MAX);
-        $this->object->setIndexNumber($expected);
-        self::assertEquals($expected, $this->object->getIndexNumber());
+        $this->object->setOrder($expected);
+        self::assertEquals($expected, $this->object->getOrder());
     }
 
     public function testRemove()
@@ -119,44 +121,64 @@ class FieldTest extends TransactionalTestCase
         self::assertTrue($this->object->isRequired());
     }
 
-    public function testAuthorPermission()
+    public function testPCRE()
     {
-        $expected = Field::ACCESS_READ_ONLY;
+        self::assertNotNull($this->object->getPCRE());
+        self::assertInstanceOf(FieldPCRE::class, $this->object->getPCRE());
+    }
+
+    public function testParameters()
+    {
+        self::assertNotNull($this->object->getParameters());
+        self::assertInstanceOf(FieldParameters::class, $this->object->getParameters());
+    }
+
+    public function testAnyoneRolePermission()
+    {
+        $expected = FieldPermission::READ_ONLY;
+
+        $this->object->setRolePermission(SystemRole::ANYONE, $expected);
+        self::assertEquals($expected, $this->object->getRolePermission(SystemRole::ANYONE));
+    }
+
+    public function testAuthorRolePermission()
+    {
+        $expected = FieldPermission::READ_ONLY;
 
         $this->object->setRolePermission(SystemRole::AUTHOR, $expected);
         self::assertEquals($expected, $this->object->getRolePermission(SystemRole::AUTHOR));
     }
 
-    public function testResponsiblePermission()
+    public function testResponsibleRolePermission()
     {
-        $expected = Field::ACCESS_READ_ONLY;
+        $expected = FieldPermission::READ_ONLY;
 
         $this->object->setRolePermission(SystemRole::RESPONSIBLE, $expected);
         self::assertEquals($expected, $this->object->getRolePermission(SystemRole::RESPONSIBLE));
     }
 
-    public function testRegisteredPermission()
-    {
-        $expected = Field::ACCESS_READ_ONLY;
-
-        $this->object->setRolePermission(SystemRole::REGISTERED, $expected);
-        self::assertEquals($expected, $this->object->getRolePermission(SystemRole::REGISTERED));
-    }
-
     public function testUnknownRolePermission()
     {
-        self::assertEquals(Field::ACCESS_DENIED, $this->object->getRolePermission(PHP_INT_MIN));
+        self::assertEquals(FieldPermission::NONE, $this->object->getRolePermission('wtf'));
+    }
+
+    public function testSetGroupPermission()
+    {
+        $expected = FieldPermission::READ_ONLY;
+
+        $this->object->setGroupPermission($group = new Group(), $expected);
+        self::assertEquals($expected, $this->object->getGroupPermission($group));
     }
 
     public function testGetGroupPermission()
     {
         $expected = [
-            'Planet Express, Inc.' => Field::ACCESS_DENIED,
-            'Nimbus'               => Field::ACCESS_DENIED,
-            'Members'              => Field::ACCESS_DENIED,
-            'Managers'             => Field::ACCESS_READ_WRITE,
-            'Staff'                => Field::ACCESS_READ_ONLY,
-            'Crew'                 => Field::ACCESS_DENIED,
+            'Planet Express, Inc.' => FieldPermission::NONE,
+            'Nimbus'               => FieldPermission::NONE,
+            'Members'              => FieldPermission::NONE,
+            'Managers'             => FieldPermission::READ_WRITE,
+            'Staff'                => FieldPermission::READ_ONLY,
+            'Crew'                 => FieldPermission::NONE,
         ];
 
         /** @var Field $field */
@@ -168,18 +190,6 @@ class FieldTest extends TransactionalTestCase
         foreach ($groups as $group) {
             self::assertEquals($expected[$group->getName()], $field->getGroupPermission($group));
         }
-    }
-
-    public function testRegex()
-    {
-        self::assertNotNull($this->object->getRegex());
-        self::assertInstanceOf(FieldRegex::class, $this->object->getRegex());
-    }
-
-    public function testParameters()
-    {
-        self::assertNotNull($this->object->getParameters());
-        self::assertInstanceOf(FieldParameters::class, $this->object->getParameters());
     }
 
     public function testFacades()

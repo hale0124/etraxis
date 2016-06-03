@@ -15,6 +15,7 @@ use DataTables\DataTableHandlerInterface;
 use DataTables\DataTableQuery;
 use DataTables\DataTableResults;
 use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Entity\User;
 use Symfony\Component\Translation\TranslatorInterface;
 
@@ -127,11 +128,11 @@ class UsersDataTable implements DataTableHandlerInterface
 
                 case self::COLUMN_AUTHENTICATION:
 
-                    if ($value === 'etraxis') {
-                        $query->andWhere('u.isLdap = 0');
-                    }
-                    elseif ($value === 'ldap') {
-                        $query->andWhere('u.isLdap <> 0');
+                    if (AuthenticationProvider::has($value)) {
+                        $query
+                            ->andWhere('u.provider = :provider')
+                            ->setParameter('provider', $value)
+                        ;
                     }
 
                     break;
@@ -167,7 +168,7 @@ class UsersDataTable implements DataTableHandlerInterface
                 self::COLUMN_FULLNAME       => 'u.fullname',
                 self::COLUMN_EMAIL          => 'u.email',
                 self::COLUMN_PERMISSIONS    => 'u.isAdmin',
-                self::COLUMN_AUTHENTICATION => 'u.isLdap',
+                self::COLUMN_AUTHENTICATION => 'u.provider',
                 self::COLUMN_DESCRIPTION    => 'u.description',
             ];
 
@@ -202,7 +203,7 @@ class UsersDataTable implements DataTableHandlerInterface
                 $entity->getFullname(),
                 $entity->getEmail(),
                 $this->translator->trans($entity->isAdmin() ? 'role.administrator' : 'role.user'),
-                $entity->getAuthenticationSource(),
+                AuthenticationProvider::get($entity->getProvider()),
                 $entity->getDescription(),
                 'DT_RowAttr'  => ['data-id' => $entity->getId()],
                 'DT_RowClass' => $color,

@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * Deletes specified list item.
  *
  * @property    int $field ID of the item's field.
- * @property    int $key   Item key.
+ * @property    int $value Item value.
  */
 class DeleteListItemCommand
 {
@@ -34,5 +34,5 @@ class DeleteListItemCommand
      * @Assert\NotBlank()
      * @Assert\Range(min="1")
      */
-    public $key;
+    public $value;
 }

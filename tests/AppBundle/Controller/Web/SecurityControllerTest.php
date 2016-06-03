@@ -214,7 +214,7 @@ class SecurityControllerTest extends ControllerTestCase
         $manager = $this->client->getContainer()->get('doctrine')->getManager();
 
         /** @var User $user */
-        $user = $manager->getRepository(User::class)->findOneBy(['username' => 'artem@eTraxis']);
+        $user = $manager->getRepository(User::class)->findOneBy(['username' => 'artem']);
         $user->unlock();
 
         $manager->persist($user);

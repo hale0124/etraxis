@@ -12,6 +12,8 @@
 namespace eTraxis\Voter;
 
 use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Dictionary\EventType;
+use eTraxis\Dictionary\StateType;
 use eTraxis\Entity\Event;
 use eTraxis\Entity\State;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -87,7 +89,7 @@ class StateVoter extends Voter
             ->where('e.parameter = :id')
             ->andWhere('e.type IN (:types)')
             ->setParameter('id', $subject->getId())
-            ->setParameter('types', [Event::RECORD_CREATED, Event::RECORD_REOPENED, Event::STATE_CHANGED])
+            ->setParameter('types', [EventType::RECORD_CREATED, EventType::RECORD_REOPENED, EventType::STATE_CHANGED])
         ;
 
         $count = (int) $query->getQuery()->getSingleScalarResult();
@@ -105,6 +107,6 @@ class StateVoter extends Voter
      */
     protected function isInitialGranted(State $subject): bool
     {
-        return $subject->getType() === State::TYPE_INTERIM;
+        return $subject->getType() === StateType::INTERIM;
     }
 }

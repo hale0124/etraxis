@@ -11,6 +11,8 @@
 
 namespace eTraxis\Entity;
 
+use eTraxis\Dictionary\StateResponsible;
+use eTraxis\Dictionary\StateType;
 use eTraxis\Dictionary\SystemRole;
 use eTraxis\Tests\TransactionalTestCase;
 
@@ -57,20 +59,20 @@ class StateTest extends TransactionalTestCase
 
     public function testType()
     {
-        $expected = State::TYPE_INTERIM;
+        $expected = StateType::INTERIM;
         $this->object->setType($expected);
         self::assertEquals($expected, $this->object->getType());
-        self::assertEquals(State::RESPONSIBLE_ASSIGN, $this->object->getResponsible());
+        self::assertEquals(StateResponsible::ASSIGN, $this->object->getResponsible());
 
-        $expected = State::TYPE_FINAL;
+        $expected = StateType::FINAL;
         $this->object->setType($expected);
         self::assertEquals($expected, $this->object->getType());
-        self::assertEquals(State::RESPONSIBLE_REMOVE, $this->object->getResponsible());
+        self::assertEquals(StateResponsible::REMOVE, $this->object->getResponsible());
     }
 
     public function testResponsible()
     {
-        $expected = State::RESPONSIBLE_KEEP;
+        $expected = StateResponsible::KEEP;
         self::assertNotEquals($expected, $this->object->getResponsible());
         $this->object->setResponsible($expected);
         self::assertEquals($expected, $this->object->getResponsible());
@@ -78,10 +80,10 @@ class StateTest extends TransactionalTestCase
 
     public function testResponsibleOnFinal()
     {
-        $expected = State::RESPONSIBLE_KEEP;
+        $expected = StateResponsible::KEEP;
         self::assertNotEquals($expected, $this->object->getResponsible());
 
-        $this->object->setType(State::TYPE_FINAL);
+        $this->object->setType(StateType::FINAL);
         $this->object->setResponsible($expected);
         self::assertNotEquals($expected, $this->object->getResponsible());
     }
@@ -96,7 +98,7 @@ class StateTest extends TransactionalTestCase
         $this->object->setNextState($state);
         self::assertEquals($state, $this->object->getNextState());
 
-        $this->object->setType(State::TYPE_FINAL);
+        $this->object->setType(StateType::FINAL);
         self::assertNull($this->object->getNextState());
         $this->object->setNextState($state);
         self::assertNull($this->object->getNextState());
@@ -107,61 +109,74 @@ class StateTest extends TransactionalTestCase
         self::assertCount(4, $this->object->getFields());
     }
 
-    public function testGetRoleTransitions()
+    public function testRoleTransitions()
     {
-        $repository = $this->doctrine->getRepository(State::class);
-
-        /** @var State $new */
-        $new = $repository->findOneBy(['name' => 'New']);
-
         /** @var State $delivered */
-        $delivered = $repository->findOneBy(['name' => 'Delivered']);
+        $delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
         $expected = [
             $delivered,
         ];
 
-        self::assertEquals($expected, $new->getRoleTransitions(SystemRole::RESPONSIBLE));
+        self::assertArraysByValues($expected, $this->object->getRoleTransitions(SystemRole::RESPONSIBLE));
 
-        $new->setType(State::TYPE_FINAL);
-        self::assertEmpty($new->getRoleTransitions(SystemRole::RESPONSIBLE));
+        $this->object->setRoleTransitions(SystemRole::RESPONSIBLE, [$this->object]);
+        self::assertArraysByValues([$this->object], $this->object->getRoleTransitions(SystemRole::RESPONSIBLE));
+
+        $this->object->setType(StateType::FINAL);
+        self::assertEmpty($this->object->getRoleTransitions(SystemRole::RESPONSIBLE));
     }
 
-    public function testGetGroupTransitions()
+    public function testGroupTransitions()
     {
-        $repository = $this->doctrine->getRepository(State::class);
-
         /** @var Group $managers */
         $managers = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
 
-        /** @var State $new */
-        $new = $repository->findOneBy(['name' => 'New']);
-
         /** @var State $delivered */
-        $delivered = $repository->findOneBy(['name' => 'Delivered']);
+        $delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
         $expected = [
             $delivered,
         ];
 
-        self::assertEquals($expected, $new->getGroupTransitions($managers));
+        self::assertArraysByValues($expected, $this->object->getGroupTransitions($managers));
 
-        $new->setType(State::TYPE_FINAL);
-        self::assertEmpty($new->getGroupTransitions($managers));
+        $this->object->setGroupTransitions($managers, [$this->object]);
+        self::assertArraysByValues([$this->object], $this->object->getGroupTransitions($managers));
+
+        $this->object->setType(StateType::FINAL);
+        self::assertEmpty($this->object->getGroupTransitions($managers));
     }
 
-    public function testGetResponsibleGroups()
+    public function testAddResponsibleGroups()
     {
         /** @var Group $crew */
         $crew = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
 
-        $expected = [
-            $crew,
-        ];
+        /** @var Group $managers */
+        $managers = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
 
-        self::assertEquals($expected, $this->object->getResponsibleGroups());
+        self::assertArraysByValues([$crew], $this->object->getResponsibleGroups());
 
-        $this->object->setType(State::TYPE_FINAL);
+        $this->object->addResponsibleGroups([$crew, $managers]);
+
+        self::assertArraysByValues([$crew, $managers], $this->object->getResponsibleGroups());
+
+        $this->object->setType(StateType::FINAL);
+        self::assertEmpty($this->object->getResponsibleGroups());
+    }
+
+    public function testRemoveResponsibleGroups()
+    {
+        /** @var Group $crew */
+        $crew = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
+
+        /** @var Group $managers */
+        $managers = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
+
+        self::assertArraysByValues([$crew], $this->object->getResponsibleGroups());
+
+        $this->object->removeResponsibleGroups([$crew, $managers]);
         self::assertEmpty($this->object->getResponsibleGroups());
     }
 
@@ -175,9 +190,9 @@ class StateTest extends TransactionalTestCase
             return $group1->getName() <=> $group2->getName();
         });
 
-        self::assertEquals($expected, $this->object->getNotResponsibleGroups());
+        self::assertArraysByValues($expected, $this->object->getNotResponsibleGroups());
 
-        $this->object->setType(State::TYPE_FINAL);
+        $this->object->setType(StateType::FINAL);
         self::assertEmpty($this->object->getNotResponsibleGroups());
     }
 

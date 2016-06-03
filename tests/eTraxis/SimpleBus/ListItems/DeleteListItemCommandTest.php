@@ -26,8 +26,8 @@ class DeleteListItemCommandTest extends TransactionalTestCase
 
         $item
             ->setField($field)
-            ->setKey(8)
-            ->setValue('Season 8')
+            ->setValue(8)
+            ->setText('Season 8')
         ;
 
         $this->doctrine->getManager()->persist($item);
@@ -38,19 +38,19 @@ class DeleteListItemCommandTest extends TransactionalTestCase
         /** @var ListItem $item */
         $item = $this->doctrine->getRepository(ListItem::class)->findOneBy([
             'field' => $item->getField(),
-            'key'   => $item->getKey(),
+            'value' => $item->getValue(),
         ]);
         self::assertNotNull($item);
 
         $command = new DeleteListItemCommand([
             'field' => $item->getField()->getId(),
-            'key'   => $item->getKey(),
+            'value' => $item->getValue(),
         ]);
         $this->command_bus->handle($command);
 
         $item = $this->doctrine->getRepository(ListItem::class)->findOneBy([
             'field' => $item->getField(),
-            'key'   => $item->getKey(),
+            'value' => $item->getValue(),
         ]);
         self::assertNull($item);
     }
@@ -68,12 +68,12 @@ class DeleteListItemCommandTest extends TransactionalTestCase
         /** @var ListItem $item */
         $item = $this->doctrine->getRepository(ListItem::class)->findOneBy([
             'field' => $field,
-            'key'   => 1,
+            'value' => 1,
         ]);
 
         $command = new DeleteListItemCommand([
             'field' => $item->getField()->getId(),
-            'key'   => $item->getKey(),
+            'value' => $item->getValue(),
         ]);
         $this->command_bus->handle($command);
     }
@@ -88,7 +88,7 @@ class DeleteListItemCommandTest extends TransactionalTestCase
 
         $command = new DeleteListItemCommand([
             'field' => self::UNKNOWN_ENTITY_ID,
-            'key'   => self::UNKNOWN_ENTITY_ID,
+            'value' => self::UNKNOWN_ENTITY_ID,
         ]);
         $this->command_bus->handle($command);
     }
@@ -97,7 +97,7 @@ class DeleteListItemCommandTest extends TransactionalTestCase
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @expectedExceptionMessage Unknown list item.
      */
-    public function testNotFoundByKey()
+    public function testNotFoundByValue()
     {
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Season']);
@@ -106,7 +106,7 @@ class DeleteListItemCommandTest extends TransactionalTestCase
 
         $command = new DeleteListItemCommand([
             'field' => $field->getId(),
-            'key'   => self::UNKNOWN_ENTITY_ID,
+            'value' => self::UNKNOWN_ENTITY_ID,
         ]);
         $this->command_bus->handle($command);
     }

@@ -12,30 +12,25 @@
 namespace eTraxis\Dictionary;
 
 use Dictionary\StaticDictionary;
-use eTraxis\Entity\Field;
 
 /**
- * Legacy field types.
- *
- * @deprecated 4.1.0 A stub for compatibility btw 3.6 and 4.0.
+ * Authentication providers.
  */
-class LegacyFieldType extends StaticDictionary
+class AuthenticationProvider extends StaticDictionary
 {
+    const FALLBACK = self::ETRAXIS;
+
+    const ETRAXIS = 'etraxis';
+    const LDAP    = 'ldap';
+
     /**
      * {@inheritdoc}
      */
     public static function all()
     {
         return [
-            1 => Field::TYPE_NUMBER,
-            2 => Field::TYPE_STRING,
-            3 => Field::TYPE_TEXT,
-            4 => Field::TYPE_CHECKBOX,
-            5 => Field::TYPE_LIST,
-            6 => Field::TYPE_RECORD,
-            7 => Field::TYPE_DATE,
-            8 => Field::TYPE_DURATION,
-            9 => Field::TYPE_DECIMAL,
+            self::ETRAXIS => 'eTraxis',
+            self::LDAP    => 'LDAP',
         ];
     }
 }

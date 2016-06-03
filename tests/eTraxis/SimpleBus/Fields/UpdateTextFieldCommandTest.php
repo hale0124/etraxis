@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\TextValue;
 use eTraxis\Tests\TransactionalTestCase;
@@ -22,15 +23,15 @@ class UpdateTextFieldCommandTest extends TransactionalTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Plot']);
 
-        self::assertEquals(Field::TYPE_TEXT, $field->getType());
+        self::assertEquals(FieldType::TEXT, $field->getType());
         self::assertEquals('Plot', $field->getName());
         self::assertNull($field->getDescription());
         self::assertTrue($field->isRequired());
         self::assertEquals(2000, $field->getParameters()->getParameter1());
         self::assertNull($field->getParameters()->getDefaultValue());
-        self::assertNull($field->getRegex()->getCheck());
-        self::assertNull($field->getRegex()->getSearch());
-        self::assertNull($field->getRegex()->getReplace());
+        self::assertNull($field->getPCRE()->getCheck());
+        self::assertNull($field->getPCRE()->getSearch());
+        self::assertNull($field->getPCRE()->getReplace());
 
         $command = new UpdateTextFieldCommand([
             'id'           => $field->getId(),
@@ -39,9 +40,9 @@ class UpdateTextFieldCommandTest extends TransactionalTestCase
             'required'     => false,
             'maxLength'    => 1000,
             'defaultValue' => 'TBD',
-            'regexCheck'   => '^(.+)$',
-            'regexSearch'  => '^(.+)$',
-            'regexReplace' => '$1',
+            'pcreCheck'    => '^(.+)$',
+            'pcreSearch'   => '^(.+)$',
+            'pcreReplace'  => '$1',
         ]);
 
         $this->command_bus->handle($command);
@@ -50,14 +51,14 @@ class UpdateTextFieldCommandTest extends TransactionalTestCase
 
         $default = $this->doctrine->getRepository(TextValue::class)->find($field->getParameters()->getDefaultValue());
 
-        self::assertEquals(Field::TYPE_TEXT, $field->getType());
+        self::assertEquals(FieldType::TEXT, $field->getType());
         self::assertEquals('Story', $field->getName());
         self::assertEquals('spoiler!', $field->getDescription());
         self::assertFalse($field->isRequired());
         self::assertEquals(1000, $field->getParameters()->getParameter1());
         self::assertEquals('TBD', $default->getValue());
-        self::assertEquals('^(.+)$', $field->getRegex()->getCheck());
-        self::assertEquals('^(.+)$', $field->getRegex()->getSearch());
-        self::assertEquals('$1', $field->getRegex()->getReplace());
+        self::assertEquals('^(.+)$', $field->getPCRE()->getCheck());
+        self::assertEquals('^(.+)$', $field->getPCRE()->getSearch());
+        self::assertEquals('$1', $field->getPCRE()->getReplace());
     }
 }

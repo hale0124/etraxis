@@ -45,7 +45,7 @@ class SetOrderFieldCommandHandler
         /** @var Field $entity */
         $entity = $this->manager->getRepository(Field::class)->findOneBy([
             'id'        => $command->id,
-            'removedAt' => 0,
+            'removedAt' => null,
         ]);
 
         if (!$entity) {
@@ -60,7 +60,7 @@ class SetOrderFieldCommandHandler
             $command->order = $count;
         }
 
-        $old_order = $entity->getIndexNumber();
+        $old_order = $entity->getOrder();
 
         $this->setOrder($entity, 0);
 
@@ -90,7 +90,7 @@ class SetOrderFieldCommandHandler
     {
         $query = $this->manager->createQuery('
             UPDATE eTraxis:Field f
-            SET f.indexNumber = :order
+            SET f.order = :order
             WHERE f.id = :field
         ');
 

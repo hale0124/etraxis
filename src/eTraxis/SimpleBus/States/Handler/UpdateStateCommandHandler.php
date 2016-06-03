@@ -12,6 +12,8 @@
 namespace eTraxis\SimpleBus\States\Handler;
 
 use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Dictionary\StateResponsible;
+use eTraxis\Dictionary\StateType;
 use eTraxis\Entity\State;
 use eTraxis\SimpleBus\States\UpdateStateCommand;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
@@ -58,7 +60,7 @@ class UpdateStateCommandHandler
         $entity
             ->setName($command->name)
             ->setAbbreviation($command->abbreviation)
-            ->setResponsible($entity->getType() === State::TYPE_FINAL ? State::RESPONSIBLE_REMOVE : $command->responsible)
+            ->setResponsible($entity->getType() === StateType::FINAL ? StateResponsible::REMOVE : $command->responsible)
         ;
 
         if ($command->nextState) {

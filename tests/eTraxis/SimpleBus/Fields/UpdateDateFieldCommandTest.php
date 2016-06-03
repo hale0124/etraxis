@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\Field;
 use eTraxis\Tests\TransactionalTestCase;
 
@@ -21,7 +22,7 @@ class UpdateDateFieldCommandTest extends TransactionalTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Original air date']);
 
-        self::assertEquals(Field::TYPE_DATE, $field->getType());
+        self::assertEquals(FieldType::DATE, $field->getType());
         self::assertEquals('Original air date', $field->getName());
         self::assertNull($field->getDescription());
         self::assertTrue($field->isRequired());
@@ -43,7 +44,7 @@ class UpdateDateFieldCommandTest extends TransactionalTestCase
 
         $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 
-        self::assertEquals(Field::TYPE_DATE, $field->getType());
+        self::assertEquals(FieldType::DATE, $field->getType());
         self::assertEquals('Release date', $field->getName());
         self::assertEquals('Date of the release', $field->getDescription());
         self::assertFalse($field->isRequired());

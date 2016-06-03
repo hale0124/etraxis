@@ -14,14 +14,14 @@ namespace eTraxis\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Field embedded "regex" options.
+ * Field embedded "PCRE" options.
  *
  * @ORM\Embeddable
  */
-class FieldRegex
+class FieldPCRE
 {
     // Constraints.
-    const MAX_REGEX = 500;
+    const MAX_PCRE = 500;
 
     /**
      * @var string Perl-compatible regular expression which values of the field must conform to.
@@ -43,16 +43,6 @@ class FieldRegex
      * @ORM\Column(name="replace", type="string", length=500, nullable=true)
      */
     private $replace;
-
-    /**
-     * Constructor.
-     */
-    public function __construct()
-    {
-        $this->check   = null;
-        $this->search  = null;
-        $this->replace = null;
-    }
 
     /**
      * Property setter.

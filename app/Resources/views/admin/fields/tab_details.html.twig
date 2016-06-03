@@ -19,7 +19,7 @@
 
             {{ macro.row('description'|trans, field.description) }}
 
-            {% if (field.type != constant('eTraxis\\Entity\\Field::TYPE_CHECKBOX')) %}
+            {% if (field.type != constant('eTraxis\\Dictionary\\FieldType::CHECKBOX')) %}
                 {{ macro.row('field.required'|trans, field.isRequired ? 'button.yes'|trans|lower : 'button.no'|trans|lower) }}
             {% endif %}
         </fieldset>

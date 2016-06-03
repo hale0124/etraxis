@@ -11,22 +11,20 @@
 
 namespace eTraxis\Dictionary;
 
-use eTraxis\Entity\Field;
-
 class FieldTypeTest extends \PHPUnit_Framework_TestCase
 {
     public function testDictionary()
     {
         $expected = [
-            Field::TYPE_NUMBER,
-            Field::TYPE_DECIMAL,
-            Field::TYPE_STRING,
-            Field::TYPE_TEXT,
-            Field::TYPE_CHECKBOX,
-            Field::TYPE_LIST,
-            Field::TYPE_RECORD,
-            Field::TYPE_DATE,
-            Field::TYPE_DURATION,
+            FieldType::NUMBER,
+            FieldType::DECIMAL,
+            FieldType::STRING,
+            FieldType::TEXT,
+            FieldType::CHECKBOX,
+            FieldType::LIST,
+            FieldType::RECORD,
+            FieldType::DATE,
+            FieldType::DURATION,
         ];
 
         self::assertEquals($expected, FieldType::keys());

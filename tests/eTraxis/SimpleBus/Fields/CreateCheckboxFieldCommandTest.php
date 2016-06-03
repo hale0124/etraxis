@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\State;
 use eTraxis\Tests\TransactionalTestCase;
@@ -35,7 +36,7 @@ class CreateCheckboxFieldCommandTest extends TransactionalTestCase
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => $command->name]);
 
         self::assertInstanceOf(Field::class, $field);
-        self::assertEquals(Field::TYPE_CHECKBOX, $field->getType());
+        self::assertEquals(FieldType::CHECKBOX, $field->getType());
         self::assertNull($field->getParameters()->getParameter1());
         self::assertNull($field->getParameters()->getParameter2());
         self::assertTrue($field->asCheckbox()->getDefaultValue());

@@ -18,9 +18,9 @@ use Dictionary\StaticDictionary;
  */
 class SystemRole extends StaticDictionary
 {
-    const AUTHOR      = -1;  // creator of the record
-    const RESPONSIBLE = -2;  // user assigned on the record
-    const REGISTERED  = -3;  // any authenticated user
+    const ANYONE      = 'anyone';       // any authenticated user
+    const AUTHOR      = 'author';       // creator of the record
+    const RESPONSIBLE = 'responsible';  // user assigned to the record
 
     /**
      * {@inheritdoc}
@@ -28,9 +28,9 @@ class SystemRole extends StaticDictionary
     public static function all()
     {
         return [
+            self::ANYONE      => 'role.any',
             self::AUTHOR      => 'role.author',
             self::RESPONSIBLE => 'role.responsible',
-            self::REGISTERED  => 'role.registered',
         ];
     }
 }

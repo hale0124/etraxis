@@ -12,6 +12,7 @@
 namespace eTraxis\SimpleBus\Fields\Handler;
 
 use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\ListItem;
 use eTraxis\SimpleBus\Fields\Command;
@@ -94,7 +95,7 @@ abstract class FieldCommandHandler
             }
         }
 
-        $entity->setType(Field::TYPE_NUMBER);
+        $entity->setType(FieldType::NUMBER);
 
         $entity->asNumber()
             ->setMinValue($command->minValue)
@@ -134,7 +135,7 @@ abstract class FieldCommandHandler
             }
         }
 
-        $entity->setType(Field::TYPE_DECIMAL);
+        $entity->setType(FieldType::DECIMAL);
 
         $entity->asDecimal()
             ->setMinValue($command->minValue)
@@ -155,12 +156,12 @@ abstract class FieldCommandHandler
      */
     protected function handleString(Field $entity, Command\StringFieldCommand $command): Field
     {
-        $entity->setType(Field::TYPE_STRING);
+        $entity->setType(FieldType::STRING);
 
-        $entity->getRegex()
-            ->setCheck($command->regexCheck)
-            ->setSearch($command->regexSearch)
-            ->setReplace($command->regexReplace)
+        $entity->getPCRE()
+            ->setCheck($command->pcreCheck)
+            ->setSearch($command->pcreSearch)
+            ->setReplace($command->pcreReplace)
         ;
 
         $entity->asString()
@@ -181,12 +182,12 @@ abstract class FieldCommandHandler
      */
     protected function handleText(Field $entity, Command\TextFieldCommand $command): Field
     {
-        $entity->setType(Field::TYPE_TEXT);
+        $entity->setType(FieldType::TEXT);
 
-        $entity->getRegex()
-            ->setCheck($command->regexCheck)
-            ->setSearch($command->regexSearch)
-            ->setReplace($command->regexReplace)
+        $entity->getPCRE()
+            ->setCheck($command->pcreCheck)
+            ->setSearch($command->pcreSearch)
+            ->setReplace($command->pcreReplace)
         ;
 
         $entity->asText()
@@ -207,7 +208,7 @@ abstract class FieldCommandHandler
      */
     protected function handleCheckbox(Field $entity, Command\CheckboxFieldCommand $command): Field
     {
-        $entity->setType(Field::TYPE_CHECKBOX);
+        $entity->setType(FieldType::CHECKBOX);
 
         $entity->asCheckbox()->setDefaultValue($command->defaultValue);
 
@@ -226,7 +227,7 @@ abstract class FieldCommandHandler
      */
     protected function handleList(Field $entity, Command\ListFieldCommand $command): Field
     {
-        $entity->setType(Field::TYPE_LIST);
+        $entity->setType(FieldType::LIST);
 
         if (in_array(Command\UpdateFieldCommandTrait::class, class_uses($command))) {
 
@@ -236,7 +237,7 @@ abstract class FieldCommandHandler
                 /** @var ListItem $item */
                 $item = $this->manager->getRepository(ListItem::class)->findOneBy([
                     'field' => $entity,
-                    'key'   => $command->defaultValue,
+                    'value' => $command->defaultValue,
                 ]);
 
                 if (!$item) {
@@ -259,7 +260,7 @@ abstract class FieldCommandHandler
      */
     protected function handleRecord(Field $entity): Field
     {
-        return $entity->setType(Field::TYPE_RECORD);
+        return $entity->setType(FieldType::RECORD);
     }
 
     /**
@@ -291,7 +292,7 @@ abstract class FieldCommandHandler
             }
         }
 
-        $entity->setType(Field::TYPE_DATE);
+        $entity->setType(FieldType::DATE);
 
         $entity->asDate()
             ->setMinValue($command->minValue)
@@ -349,7 +350,7 @@ abstract class FieldCommandHandler
             }
         }
 
-        $entity->setType(Field::TYPE_DURATION);
+        $entity->setType(FieldType::DURATION);
 
         $entity->asDuration()
             ->setMinValue($command->minValue)

@@ -11,16 +11,14 @@
 
 namespace eTraxis\Dictionary;
 
-use eTraxis\Entity\State;
-
 class StateTypeTest extends \PHPUnit_Framework_TestCase
 {
     public function testDictionary()
     {
         $expected = [
-            State::TYPE_INITIAL,
-            State::TYPE_INTERIM,
-            State::TYPE_FINAL,
+            StateType::INITIAL,
+            StateType::INTERIM,
+            StateType::FINAL,
         ];
 
         self::assertEquals($expected, StateType::keys());

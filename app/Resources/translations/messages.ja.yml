@@ -54,9 +54,9 @@ permissions: 権限
 role: ロール
 role.administrator: システム管理者
 role.user: ユーザー
+role.any: 'Any user'
 role.author: 起票者
 role.responsible: 対応者
-role.registered: 登録済み
 description: 説明
 language: 言語
 theme: テーマ
@@ -122,13 +122,13 @@ template.permission.resume_records: 'Resume records'
 template.permission.reassign_records: 'Reassign records'
 template.permission.reopen_records: 'Reopen records'
 template.permission.add_comments: 'Add comments'
-template.permission.add_files: 'Add files'
-template.permission.remove_files: 'Remove files'
 template.permission.private_comments: 'Add/read private comments'
-template.permission.send_reminders: 'Send reminders'
-template.permission.delete_records: 'Delete records'
+template.permission.attach_files: 'Attach files'
+template.permission.delete_files: 'Delete files'
 template.permission.attach_subrecords: 'Attach subrecords'
 template.permission.detach_subrecords: 'Detach subrecords'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_records: 'Delete records'
 state: 状態
 states: ステータス
 state.new: 新規ステータス
@@ -166,9 +166,9 @@ field.default_value: デフォルトの値
 field.min_value: 最小値
 field.max_value: 最大値
 field.max_length: 最大文字長
-field.regex_check: perl互換正規表現でフィールドの値をチェックする
-field.regex_search: 変換するフィールドの値を検索する際のperl互換正規表現
-field.regex_replace: フィールドの値を変換する際のperl互換正規表現
+field.pcre_check: perl互換正規表現でフィールドの値をチェックする
+field.pcre_search: 変換するフィールドの値を検索する際のperl互換正規表現
+field.pcre_replace: フィールドの値を変換する際のperl互換正規表現
 field.confirm.delete: フィールドを削除してよろしいですか？
 field.error.min_max_values: 最大値は最小値よりも大きい必要があります。
 field.error.default_value: 'デフォルトの値は %min% から %max% の範囲で指定できます。'
@@ -177,6 +177,6 @@ field.permissions.none: なし
 field.permissions.read_only: 読み取り権限
 field.permissions.read_write: 書き込み権限
 listitems: リストのアイテム
-listitem.key: 'Item key'
 listitem.value: 'Item value'
+listitem.text: 'Item text'
 listitem.confirm.delete: 'Are you sure you want delete this item?'

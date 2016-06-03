@@ -12,44 +12,28 @@
 namespace eTraxis\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use eTraxis\Dictionary\EventType;
 
 /**
  * Record events (history).
  *
- * @ORM\Table(name="tbl_events",
+ * @ORM\Table(name="events",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_events", columns={"record_id", "originator_id", "event_type", "event_time", "event_param"})
+ *                @ORM\UniqueConstraint(name="ix_events", columns={"record_id", "user_id", "type", "created_at", "parameter"})
  *            },
  *            indexes={
- *                @ORM\Index(name="ix_record", columns={"record_id"}),
- *                @ORM\Index(name="ix_evts_comb", columns={"event_id", "record_id"})
+ *                @ORM\Index(name="ix_record", columns={"record_id"})
  *            })
  * @ORM\Entity
  */
 class Event
 {
-    // Event types.
-    const RECORD_CREATED     = 1;
-    const RECORD_ASSIGNED    = 2;
-    const RECORD_MODIFIED    = 3;
-    const STATE_CHANGED      = 4;
-    const RECORD_POSTPONED   = 5;
-    const RECORD_RESUMED     = 6;
-    const COMMENT_ADDED      = 7;
-    const FILE_ADDED         = 8;
-    const FILE_REMOVED       = 9;
-    const RECORD_CLONED      = 10;
-    const SUBRECORD_ATTACHED = 11;
-    const SUBRECORD_DETACHED = 12;
-    const PRIVATE_COMMENT    = 13;
-    const RECORD_REOPENED    = 14;
-
     /**
      * @var int Unique ID.
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="event_id", type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
@@ -57,7 +41,7 @@ class Event
      * @var Record Record.
      *
      * @ORM\ManyToOne(targetEntity="Record", inversedBy="history")
-     * @ORM\JoinColumn(name="record_id", nullable=false, referencedColumnName="record_id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="record_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
     private $record;
 
@@ -65,43 +49,43 @@ class Event
      * @var User User who raised the event.
      *
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="originator_id", nullable=false, referencedColumnName="account_id")
+     * @ORM\JoinColumn(name="user_id", nullable=false, referencedColumnName="id")
      */
     private $user;
 
     /**
-     * @var int Type of the event.
+     * @var string Type of the event.
      *
-     * @ORM\Column(name="event_type", type="integer")
+     * @ORM\Column(name="type", type="string", length=20)
      */
     private $type;
 
     /**
      * @var int Unix Epoch timestamp when the event has been registered.
      *
-     * @ORM\Column(name="event_time", type="integer")
+     * @ORM\Column(name="created_at", type="integer")
      */
     private $createdAt;
 
     /**
      * @var int Parameter of the event. Depends on event type as following:
      *
-     *          "created"             - ID of first (initial) state of the created record
-     *          "modified"            - NULL (not used)
-     *          "assigned"            - ID of the user, the record has been assigned to
-     *          "postponed"           - Unix Epoch timestamp, when the record should be automatically resumed
-     *          "resumed"             - NULL (not used)
-     *          "reopened"            - ID of new state of the reopened record
-     *          "cloned"              - ID of the original record
-     *          "state-changed"       - ID of the state, the record has been changed to
-     *          "commented"           - NULL (not used)
-     *          "commented-privately" - NULL (not used)
-     *          "file-added"          - NULL (not used)
-     *          "file-removed"        - NULL (not used)
-     *          "child-attached"      - ID of the attached record
-     *          "child-detached"      - ID of the detached record
+     *          RECORD_CREATED     - ID of first (initial) state of the created record
+     *          RECORD_EDITED      - NULL (not used)
+     *          RECORD_ASSIGNED    - ID of the user, the record has been assigned to
+     *          STATE_CHANGED      - ID of the state, the record has been changed to
+     *          RECORD_POSTPONED   - Unix Epoch timestamp, when the record should be automatically resumed
+     *          RECORD_RESUMED     - NULL (not used)
+     *          RECORD_CLONED      - ID of the original record
+     *          RECORD_REOPENED    - ID of new state of the reopened record
+     *          PUBLIC_COMMENT     - NULL (not used)
+     *          PRIVATE_COMMENT    - NULL (not used)
+     *          FILE_ATTACHED      - NULL (not used)
+     *          FILE_DELETED       - NULL (not used)
+     *          SUBRECORD_ATTACHED - ID of the attached record
+     *          SUBRECORD_DETACHED - ID of the detached record
      *
-     * @ORM\Column(name="event_param", type="integer", nullable=true)
+     * @ORM\Column(name="parameter", type="integer", nullable=true)
      */
     private $parameter;
 
@@ -174,13 +158,15 @@ class Event
     /**
      * Property setter.
      *
-     * @param   int $type
+     * @param   string $type
      *
      * @return  self
      */
-    public function setType(int $type)
+    public function setType(string $type)
     {
-        $this->type = $type;
+        if (EventType::has($type)) {
+            $this->type = $type;
+        }
 
         return $this;
     }
@@ -188,7 +174,7 @@ class Event
     /**
      * Property getter.
      *
-     * @return  int
+     * @return  string
      */
     public function getType()
     {
@@ -203,29 +189,5 @@ class Event
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   int|null $parameter
-     *
-     * @return  self
-     */
-    public function setParameter(int $parameter = null)
-    {
-        $this->parameter = $parameter;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  int|null
-     */
-    public function getParameter()
-    {
-        return $this->parameter;
     }
 }

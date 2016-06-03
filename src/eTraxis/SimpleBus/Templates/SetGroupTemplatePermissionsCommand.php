@@ -17,9 +17,9 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Sets permissions of specified group to specified template.
  *
- * @property    int $id          Template ID.
- * @property    int $group       Group ID.
- * @property    int $permissions Permissions.
+ * @property    int      $id          Template ID.
+ * @property    int      $group       Group ID.
+ * @property    string[] $permissions Permissions.
  */
 class SetGroupTemplatePermissionsCommand
 {
@@ -38,8 +38,11 @@ class SetGroupTemplatePermissionsCommand
     public $group;
 
     /**
-     * @Assert\NotBlank()
-     * @Assert\Type(type="int")
+     * @Assert\Type(type="array")
+     * @Assert\All({
+     *     @Assert\NotBlank(),
+     *     @Assert\Choice(callback={"eTraxis\Dictionary\TemplatePermission", "keys"})
+     * })
      */
     public $permissions;
 }

@@ -53,9 +53,9 @@ permissions: Permissions
 role: Role
 role.administrator: Administrator
 role.user: User
+role.any: 'Any user'
 role.author: Author
 role.responsible: Responsible
-role.registered: Registered
 description: Description
 language: Language
 theme: Theme
@@ -121,13 +121,13 @@ template.permission.resume_records: 'Resume records'
 template.permission.reassign_records: 'Reassign records'
 template.permission.reopen_records: 'Reopen records'
 template.permission.add_comments: 'Add comments'
-template.permission.add_files: 'Add files'
-template.permission.remove_files: 'Remove files'
 template.permission.private_comments: 'Add/read private comments'
-template.permission.send_reminders: 'Send reminders'
-template.permission.delete_records: 'Delete records'
+template.permission.attach_files: 'Attach files'
+template.permission.delete_files: 'Delete files'
 template.permission.attach_subrecords: 'Attach subrecords'
 template.permission.detach_subrecords: 'Detach subrecords'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_records: 'Delete records'
 state: State
 states: States
 state.new: 'New state'
@@ -165,9 +165,9 @@ field.default_value: 'Default value'
 field.min_value: Min.value
 field.max_value: Max.value
 field.max_length: Max.length
-field.regex_check: 'PCRE to check field values'
-field.regex_search: 'Search PCRE to transform field values'
-field.regex_replace: 'Replace PCRE to transform field values'
+field.pcre_check: 'PCRE to check field values'
+field.pcre_search: 'Search PCRE to transform field values'
+field.pcre_replace: 'Replace PCRE to transform field values'
 field.confirm.delete: 'Are you sure you want delete this field?'
 field.error.min_max_values: 'Maximum value should be greater then minimum one.'
 field.error.default_value: 'Default value should be in range from %min% to %max%.'
@@ -176,6 +176,6 @@ field.permissions.none: none
 field.permissions.read_only: read-only
 field.permissions.read_write: 'read and write'
 listitems: 'List items'
-listitem.key: 'Item key'
 listitem.value: 'Item value'
+listitem.text: 'Item text'
 listitem.confirm.delete: 'Are you sure you want delete this item?'

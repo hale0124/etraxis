@@ -18,9 +18,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 /**
  * Project.
  *
- * @ORM\Table(name="tbl_projects",
+ * @ORM\Table(name="projects",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_projects", columns={"project_name"})
+ *                @ORM\UniqueConstraint(name="ix_projects_name", columns={"name"})
  *            })
  * @ORM\Entity(repositoryClass="eTraxis\Repository\ProjectsRepository")
  * @Assert\UniqueEntity(fields={"name"}, message="project.conflict.name")
@@ -39,14 +39,14 @@ class Project implements \JsonSerializable
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="project_id", type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
     /**
      * @var string Name of the project.
      *
-     * @ORM\Column(name="project_name", type="string", length=25)
+     * @ORM\Column(name="name", type="string", length=25)
      */
     private $name;
 
@@ -60,15 +60,15 @@ class Project implements \JsonSerializable
     /**
      * @var int Unix Epoch timestamp when the project has been registered.
      *
-     * @ORM\Column(name="start_time", type="integer")
+     * @ORM\Column(name="created_at", type="integer")
      */
     private $createdAt;
 
     /**
-     * @var int Whether the project is suspended.
-     *          When project is suspended, its records are read-only, and new records cannot be created.
+     * @var bool Whether the project is suspended.
+     *           When project is suspended, its records are read-only, and new records cannot be created.
      *
-     * @ORM\Column(name="is_suspended", type="integer")
+     * @ORM\Column(name="is_suspended", type="boolean")
      */
     private $isSuspended;
 
@@ -176,7 +176,7 @@ class Project implements \JsonSerializable
      */
     public function setSuspended(bool $isSuspended)
     {
-        $this->isSuspended = $isSuspended ? 1 : 0;
+        $this->isSuspended = $isSuspended;
 
         return $this;
     }
@@ -188,7 +188,7 @@ class Project implements \JsonSerializable
      */
     public function isSuspended()
     {
-        return (bool) $this->isSuspended;
+        return $this->isSuspended;
     }
 
     /**

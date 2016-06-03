@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\State;
 use eTraxis\Tests\TransactionalTestCase;
@@ -34,7 +35,7 @@ class CreateListFieldCommandTest extends TransactionalTestCase
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => $command->name]);
 
         self::assertInstanceOf(Field::class, $field);
-        self::assertEquals(Field::TYPE_LIST, $field->getType());
+        self::assertEquals(FieldType::LIST, $field->getType());
         self::assertNull($field->getParameters()->getParameter1());
         self::assertNull($field->getParameters()->getParameter2());
         self::assertNull($field->getParameters()->getDefaultValue());

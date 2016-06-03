@@ -11,6 +11,7 @@
 
 namespace eTraxis\Tests;
 
+use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -60,6 +61,6 @@ class ControllerTestCaseTest extends ControllerTestCase
     {
         self::assertFalse($this->loginAs('unknown'));
         self::assertTrue($this->loginAs('artem'));
-        self::assertTrue($this->loginAs('einstein', true));
+        self::assertTrue($this->loginAs('einstein', AuthenticationProvider::LDAP));
     }
 }

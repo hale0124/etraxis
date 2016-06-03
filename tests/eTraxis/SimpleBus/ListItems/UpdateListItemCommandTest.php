@@ -25,16 +25,16 @@ class UpdateListItemCommandTest extends TransactionalTestCase
         /** @var ListItem $item */
         $item = $this->doctrine->getRepository(ListItem::class)->findOneBy([
             'field' => $field,
-            'key'   => 1,
+            'value' => 1,
         ]);
 
-        self::assertEquals(1, $item->getKey());
-        self::assertEquals('Season 1', $item->getValue());
+        self::assertEquals(1, $item->getValue());
+        self::assertEquals('Season 1', $item->getText());
 
         $command = new UpdateListItemCommand([
             'field' => $field->getId(),
-            'key'   => $item->getKey(),
-            'value' => 'Season 0',
+            'value' => $item->getValue(),
+            'text'  => 'Season 0',
         ]);
 
         $this->command_bus->handle($command);
@@ -42,10 +42,10 @@ class UpdateListItemCommandTest extends TransactionalTestCase
         /** @var ListItem $item */
         $item = $this->doctrine->getRepository(ListItem::class)->findOneBy([
             'field' => $field,
-            'key'   => 1,
+            'value' => 1,
         ]);
 
-        self::assertEquals('Season 0', $item->getValue());
+        self::assertEquals('Season 0', $item->getText());
     }
 
     /**
@@ -56,8 +56,8 @@ class UpdateListItemCommandTest extends TransactionalTestCase
     {
         $command = new UpdateListItemCommand([
             'field' => self::UNKNOWN_ENTITY_ID,
-            'key'   => 1,
-            'value' => 'Season 0',
+            'value' => 1,
+            'text'  => 'Season 0',
         ]);
 
         $this->command_bus->handle($command);
@@ -67,15 +67,15 @@ class UpdateListItemCommandTest extends TransactionalTestCase
      * @expectedException \Symfony\Component\HttpKernel\Exception\NotFoundHttpException
      * @expectedExceptionMessage Unknown list item.
      */
-    public function testUnknownItemByKey()
+    public function testUnknownItemByValue()
     {
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Season']);
 
         $command = new UpdateListItemCommand([
             'field' => $field->getId(),
-            'key'   => 8,
-            'value' => 'Season 8',
+            'value' => 8,
+            'text'  => 'Season 8',
         ]);
 
         $this->command_bus->handle($command);
@@ -83,17 +83,17 @@ class UpdateListItemCommandTest extends TransactionalTestCase
 
     /**
      * @expectedException \Symfony\Component\HttpKernel\Exception\BadRequestHttpException
-     * @expectedExceptionMessage Item with entered value already exists.
+     * @expectedExceptionMessage Item with entered text already exists.
      */
-    public function testValueConflict()
+    public function testTextConflict()
     {
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Season']);
 
         $command = new UpdateListItemCommand([
             'field' => $field->getId(),
-            'key'   => 1,
-            'value' => 'Season 2',
+            'value' => 1,
+            'text'  => 'Season 2',
         ]);
 
         $this->command_bus->handle($command);

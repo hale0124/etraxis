@@ -13,15 +13,16 @@ namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use eTraxis\Dictionary;
 use Ramsey\Uuid\Uuid;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 
 /**
  * User.
  *
- * @ORM\Table(name="tbl_accounts",
+ * @ORM\Table(name="users",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_accounts", columns={"username"})
+ *                @ORM\UniqueConstraint(name="ix_users_username", columns={"provider", "username"})
  *            })
  * @ORM\Entity
  * @ORM\EntityListeners({"eTraxis\Entity\EntityListener"})
@@ -29,14 +30,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  */
 class User extends Entity implements \JsonSerializable
 {
-    // Authentication source.
-    const AUTH_INTERNAL = 'eTraxis';
-    const AUTH_LDAP     = 'LDAP';
-
     // Constraints.
-    const MAX_USERNAME    = 100;
+    const MAX_USERNAME    = 64;
     const MAX_FULLNAME    = 64;
-    const MAX_EMAIL       = 50;
+    const MAX_EMAIL       = 320;
     const MAX_DESCRIPTION = 100;
 
     // Actions.
@@ -51,14 +48,21 @@ class User extends Entity implements \JsonSerializable
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="account_id", type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
     /**
+     * @var string Authentication provider.
+     *
+     * @ORM\Column(name="provider", type="string", length=20)
+     */
+    private $provider;
+
+    /**
      * @var string User's login.
      *
-     * @ORM\Column(name="username", type="string", length=112)
+     * @ORM\Column(name="username", type="string", length=64)
      */
     private $username;
 
@@ -72,7 +76,7 @@ class User extends Entity implements \JsonSerializable
     /**
      * @var string Email address.
      *
-     * @ORM\Column(name="email", type="string", length=50)
+     * @ORM\Column(name="email", type="string", length=320)
      */
     private $email;
 
@@ -84,37 +88,51 @@ class User extends Entity implements \JsonSerializable
     private $description;
 
     /**
+     * @var bool Whether user has administration privileges.
+     *
+     * @ORM\Column(name="is_admin", type="boolean")
+     */
+    private $isAdmin;
+
+    /**
+     * @var bool Whether user is disabled by administrator.
+     *
+     * @ORM\Column(name="is_disabled", type="boolean")
+     */
+    private $isDisabled;
+
+    /**
      * @var string Password hash.
      *
-     * @ORM\Column(name="passwd", type="string", length=32, nullable=true)
+     * @ORM\Column(name="password", type="string", length=32, nullable=true)
      */
     private $password;
 
     /**
-     * @var int Unix Epoch timestamp when the password was changed last time.
+     * @var int Unix Epoch timestamp when the password expires.
      *
-     * @ORM\Column(name="passwd_expire", type="integer")
+     * @ORM\Column(name="password_expires", type="integer", nullable=true)
      */
-    private $passwordSetAt;
+    private $passwordExpiresAt;
 
     /**
-     * @var string Hash for password reset.
+     * @var string Token for password reset.
      *
-     * @ORM\Column(name="auth_token", type="string", length=32, nullable=true)
+     * @ORM\Column(name="reset_token", type="string", length=32, nullable=true)
      */
     private $resetToken;
 
     /**
      * @var int Unix Epoch timestamp when the password reset token expires.
      *
-     * @ORM\Column(name="token_expire", type="integer")
+     * @ORM\Column(name="reset_token_expires", type="integer", nullable=true)
      */
     private $resetTokenExpiresAt;
 
     /**
      * @var int Number of consecutive unsuccessful attempts to authenticate.
      *
-     * @ORM\Column(name="locks_count", type="integer")
+     * @ORM\Column(name="auth_attempts", type="integer", nullable=true)
      */
     private $authAttempts;
 
@@ -122,30 +140,16 @@ class User extends Entity implements \JsonSerializable
      * @var int Unix Epoch timestamp which the account is locked till.
      *          If in the past, the account is considered as not locked.
      *
-     * @ORM\Column(name="lock_time", type="integer")
+     * @ORM\Column(name="locked_until", type="integer", nullable=true)
      */
     private $lockedUntil;
 
     /**
-     * @var int Whether user has administration privileges.
+     * @var array User's settings.
      *
-     * @ORM\Column(name="is_admin", type="integer")
+     * @ORM\Column(name="settings", type="json_array", nullable=true)
      */
-    private $isAdmin;
-
-    /**
-     * @var int Whether user is disabled by administrator.
-     *
-     * @ORM\Column(name="is_disabled", type="integer")
-     */
-    private $isDisabled;
-
-    /**
-     * @var int Whether account is internal (FALSE), or from LDAP server (TRUE).
-     *
-     * @ORM\Column(name="is_ldapuser", type="integer")
-     */
-    private $isLdap;
+    private $settings;
 
     /**
      * @var ArrayCollection List of groups the user is member of.
@@ -156,30 +160,11 @@ class User extends Entity implements \JsonSerializable
     private $groups;
 
     /**
-     * @var UserSettings User settings.
-     *
-     * @ORM\Embedded(class="UserSettings", columnPrefix=false)
-     */
-    private $settings;
-
-    /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->password            = null;
-        $this->passwordSetAt       = 0;
-        $this->resetToken          = null;
-        $this->resetTokenExpiresAt = 0;
-        $this->authAttempts        = 0;
-        $this->lockedUntil         = 0;
-
-        $this->isAdmin    = 0;
-        $this->isDisabled = 0;
-        $this->isLdap     = 0;
-
-        $this->groups   = new ArrayCollection();
-        $this->settings = new UserSettings();
+        $this->groups = new ArrayCollection();
     }
 
     /**
@@ -195,6 +180,42 @@ class User extends Entity implements \JsonSerializable
     /**
      * Property setter.
      *
+     * @param   string $provider
+     *
+     * @return  self
+     */
+    public function setProvider(string $provider)
+    {
+        if (Dictionary\AuthenticationProvider::has($provider)) {
+            $this->provider = $provider;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  string
+     */
+    public function getProvider()
+    {
+        return $this->provider;
+    }
+
+    /**
+     * Returns TRUE, if this account is from external source (LDAP, OAuth, etc).
+     *
+     * @return  bool
+     */
+    public function isExternalAccount()
+    {
+        return $this->provider !== Dictionary\AuthenticationProvider::ETRAXIS;
+    }
+
+    /**
+     * Property setter.
+     *
      * @param   string $username
      *
      * @return  self
@@ -202,10 +223,6 @@ class User extends Entity implements \JsonSerializable
     public function setUsername(string $username)
     {
         $this->username = $username;
-
-        if (!$this->isLdap) {
-            $this->username .= '@eTraxis';
-        }
 
         return $this;
     }
@@ -217,7 +234,7 @@ class User extends Entity implements \JsonSerializable
      */
     public function getUsername()
     {
-        return str_replace('@eTraxis', null, $this->username);
+        return $this->username;
     }
 
     /**
@@ -295,16 +312,13 @@ class User extends Entity implements \JsonSerializable
     /**
      * Property setter.
      *
-     * @param   string|null $password
+     * @param   bool $isAdmin
      *
      * @return  self
      */
-    public function setPassword(string $password = null)
+    public function setAdmin(bool $isAdmin)
     {
-        if (!$this->isLdap) {
-            $this->password      = $password;
-            $this->passwordSetAt = time();
-        }
+        $this->isAdmin = $isAdmin;
 
         return $this;
     }
@@ -312,25 +326,73 @@ class User extends Entity implements \JsonSerializable
     /**
      * Property getter.
      *
+     * @return  bool
+     */
+    public function isAdmin()
+    {
+        return $this->isAdmin;
+    }
+
+    /**
+     * Property setter.
+     *
+     * @param   bool $isDisabled
+     *
+     * @return  self
+     */
+    public function setDisabled(bool $isDisabled)
+    {
+        $this->isDisabled = $isDisabled;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  bool
+     */
+    public function isDisabled()
+    {
+        return $this->isDisabled;
+    }
+
+    /**
+     * Sets user's password.
+     *
+     * @param   string $password Password hash.
+     * @param   int    $days     Number of days a password is valid for (NULL for no expiration).
+     *
+     * @return  self
+     */
+    public function setPassword(string $password = null, int $days = null)
+    {
+        if (!$this->isExternalAccount()) {
+            $this->password          = $password;
+            $this->passwordExpiresAt = ($days === null) ? null : time() + $days * 86400;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns user's password.
+     *
      * @return  string|null
      */
     public function getPassword()
     {
-        return $this->password;
+        return $this->isExternalAccount() ? null : $this->password;
     }
 
     /**
      * Checks whether user's password is expired.
      *
-     * @param   int $days Number of days a password is valid for.
-     *
      * @return  bool
      */
-    public function isPasswordExpired(int $days)
+    public function isPasswordExpired()
     {
-        $expires = $this->passwordSetAt + $days * 86400;
-
-        return $expires <= time();
+        return !$this->isExternalAccount() && $this->passwordExpiresAt !== null && $this->passwordExpiresAt <= time();
     }
 
     /**
@@ -354,7 +416,7 @@ class User extends Entity implements \JsonSerializable
     public function clearResetToken()
     {
         $this->resetToken          = null;
-        $this->resetTokenExpiresAt = 0;
+        $this->resetTokenExpiresAt = null;
 
         return $this;
     }
@@ -366,7 +428,7 @@ class User extends Entity implements \JsonSerializable
      */
     public function isResetTokenExpired()
     {
-        return $this->resetTokenExpiresAt <= time();
+        return $this->resetTokenExpiresAt === null || $this->resetTokenExpiresAt <= time();
     }
 
     /**
@@ -379,12 +441,12 @@ class User extends Entity implements \JsonSerializable
      */
     public function lock(int $max_auth_attempts, int $lock_time)
     {
-        if (!$this->isLdap) {
+        if (!$this->isLocked()) {
 
             $this->authAttempts++;
 
             if ($this->authAttempts >= $max_auth_attempts) {
-                $this->authAttempts = 0;
+                $this->authAttempts = null;
                 $this->lockedUntil  = time() + $lock_time * 60;
 
                 return true;
@@ -399,8 +461,8 @@ class User extends Entity implements \JsonSerializable
      */
     public function unlock()
     {
-        $this->authAttempts = 0;
-        $this->lockedUntil  = 0;
+        $this->authAttempts = null;
+        $this->lockedUntil  = null;
     }
 
     /**
@@ -410,99 +472,85 @@ class User extends Entity implements \JsonSerializable
      */
     public function isLocked()
     {
-        return $this->lockedUntil >= time();
+        return !$this->isExternalAccount() && $this->lockedUntil !== null && $this->lockedUntil >= time();
     }
 
     /**
-     * Property setter.
+     * Sets user's locale.
      *
-     * @param   bool $isAdmin
+     * @param   string $locale
      *
      * @return  self
      */
-    public function setAdmin(bool $isAdmin)
+    public function setLocale(string $locale)
     {
-        $this->isAdmin = $isAdmin ? 1 : 0;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  bool
-     */
-    public function isAdmin()
-    {
-        return (bool) $this->isAdmin;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   bool $isDisabled
-     *
-     * @return  self
-     */
-    public function setDisabled(bool $isDisabled)
-    {
-        $this->isDisabled = $isDisabled ? 1 : 0;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  bool
-     */
-    public function isDisabled()
-    {
-        return (bool) $this->isDisabled;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   bool $isLdap
-     *
-     * @return  self
-     */
-    public function setLdap(bool $isLdap)
-    {
-        $this->isLdap = $isLdap ? 1 : 0;
-
-        $this->username = str_replace('@eTraxis', null, $this->username);
-
-        if ($isLdap) {
-            $this->password      = null;
-            $this->passwordSetAt = 0;
-        }
-        else {
-            $this->username .= '@eTraxis';
+        if (Dictionary\Locale::has($locale)) {
+            $this->settings['locale'] = $locale;
         }
 
         return $this;
     }
 
     /**
-     * Property getter.
-     *
-     * @return  bool
-     */
-    public function isLdap()
-    {
-        return (bool) $this->isLdap;
-    }
-
-    /**
-     * Returns authentication source of the user.
+     * Retrieves user's locale.
      *
      * @return  string
      */
-    public function getAuthenticationSource()
+    public function getLocale()
     {
-        return $this->isLdap ? self::AUTH_LDAP : self::AUTH_INTERNAL;
+        return $this->settings['locale'] ?? Dictionary\Locale::FALLBACK;
+    }
+
+    /**
+     * Sets user's theme.
+     *
+     * @param   string $theme
+     *
+     * @return  self
+     */
+    public function setTheme(string $theme)
+    {
+        if (Dictionary\Theme::has($theme)) {
+            $this->settings['theme'] = $theme;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Retrieves user's theme.
+     *
+     * @return  string
+     */
+    public function getTheme()
+    {
+        return $this->settings['theme'] ?? Dictionary\Theme::FALLBACK;
+    }
+
+    /**
+     * Sets user's timezone.
+     *
+     * @param   string $timezone
+     *
+     * @return  self
+     */
+    public function setTimezone(string $timezone)
+    {
+        if (Dictionary\Timezone::has($timezone)) {
+            $this->settings['timezone'] = $timezone;
+        }
+
+        return $this;
+    }
+
+    /**
+     * Retrieves user's timezone.
+     *
+     * @return  string
+     */
+    public function getTimezone()
+    {
+        return $this->settings['timezone'] ?? Dictionary\Timezone::FALLBACK;
     }
 
     /**
@@ -544,16 +592,6 @@ class User extends Entity implements \JsonSerializable
     }
 
     /**
-     * Property getter.
-     *
-     * @return  UserSettings
-     */
-    public function getSettings()
-    {
-        return $this->settings;
-    }
-
-    /**
      * {@inheritdoc}
      */
     public function __toString()
@@ -568,16 +606,16 @@ class User extends Entity implements \JsonSerializable
     {
         return [
             'id'          => $this->getId(),
+            'provider'    => $this->getProvider(),
             'username'    => $this->getUsername(),
             'fullname'    => $this->getFullname(),
             'email'       => $this->getEmail(),
             'description' => $this->getDescription(),
             'isAdmin'     => $this->isAdmin(),
             'isDisabled'  => $this->isDisabled(),
-            'isLdap'      => $this->isLdap(),
-            'locale'      => $this->getSettings()->getLocale(),
-            'theme'       => $this->getSettings()->getTheme(),
-            'timezone'    => $this->getSettings()->getTimezone(),
+            'locale'      => $this->getLocale(),
+            'theme'       => $this->getTheme(),
+            'timezone'    => $this->getTimezone(),
         ];
     }
 }

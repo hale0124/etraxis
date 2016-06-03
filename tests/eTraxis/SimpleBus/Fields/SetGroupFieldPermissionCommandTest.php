@@ -11,13 +11,14 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
+use eTraxis\Dictionary\FieldPermission;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\Group;
 use eTraxis\Tests\TransactionalTestCase;
 
 class SetGroupFieldPermissionCommandTest extends TransactionalTestCase
 {
-    public function testExistingGroupPermissions()
+    public function testExtendGroupPermissions()
     {
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
@@ -25,44 +26,38 @@ class SetGroupFieldPermissionCommandTest extends TransactionalTestCase
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Staff']);
 
-        self::assertEquals(Field::ACCESS_READ_ONLY, $field->getGroupPermission($group));
+        self::assertEquals(FieldPermission::READ_ONLY, $field->getGroupPermission($group));
 
         $command = new SetGroupFieldPermissionCommand([
             'id'         => $field->getId(),
             'group'      => $group->getId(),
-            'permission' => Field::ACCESS_READ_WRITE,
+            'permission' => FieldPermission::READ_WRITE,
         ]);
 
         $this->command_bus->handle($command);
 
-        /** @var Field $field */
-        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
-
-        self::assertEquals(Field::ACCESS_READ_WRITE, $field->getGroupPermission($group));
+        self::assertEquals(FieldPermission::READ_WRITE, $field->getGroupPermission($group));
     }
 
-    public function testNewGroupPermissions()
+    public function testRestrictGroupPermissions()
     {
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
 
         /** @var Group $group */
-        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Nimbus']);
+        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
 
-        self::assertEquals(Field::ACCESS_DENIED, $field->getGroupPermission($group));
+        self::assertEquals(FieldPermission::READ_WRITE, $field->getGroupPermission($group));
 
         $command = new SetGroupFieldPermissionCommand([
             'id'         => $field->getId(),
             'group'      => $group->getId(),
-            'permission' => Field::ACCESS_READ_WRITE,
+            'permission' => FieldPermission::READ_ONLY,
         ]);
 
         $this->command_bus->handle($command);
 
-        /** @var Field $field */
-        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
-
-        self::assertEquals(Field::ACCESS_READ_WRITE, $field->getGroupPermission($group));
+        self::assertEquals(FieldPermission::READ_ONLY, $field->getGroupPermission($group));
     }
 
     /**
@@ -77,7 +72,7 @@ class SetGroupFieldPermissionCommandTest extends TransactionalTestCase
         $command = new SetGroupFieldPermissionCommand([
             'id'         => self::UNKNOWN_ENTITY_ID,
             'group'      => $group->getId(),
-            'permission' => Field::ACCESS_READ_WRITE,
+            'permission' => FieldPermission::READ_WRITE,
         ]);
 
         $this->command_bus->handle($command);
@@ -95,7 +90,7 @@ class SetGroupFieldPermissionCommandTest extends TransactionalTestCase
         $command = new SetGroupFieldPermissionCommand([
             'id'         => $field->getId(),
             'group'      => self::UNKNOWN_ENTITY_ID,
-            'permission' => Field::ACCESS_READ_WRITE,
+            'permission' => FieldPermission::READ_WRITE,
         ]);
 
         $this->command_bus->handle($command);

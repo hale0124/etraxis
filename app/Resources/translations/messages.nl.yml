@@ -54,9 +54,9 @@ permissions: Permissies
 role: Rol
 role.administrator: Beheerder
 role.user: Gebruiker
+role.any: 'Any user'
 role.author: Auteur
 role.responsible: Verantwoordelijkheid
-role.registered: Geregistreerd
 description: Beschrijving
 language: Taal
 theme: Thema
@@ -122,13 +122,13 @@ template.permission.resume_records: 'Resume records'
 template.permission.reassign_records: 'Reassign records'
 template.permission.reopen_records: 'Reopen records'
 template.permission.add_comments: 'Add comments'
-template.permission.add_files: 'Add files'
-template.permission.remove_files: 'Remove files'
 template.permission.private_comments: 'Add/read private comments'
-template.permission.send_reminders: 'Send reminders'
-template.permission.delete_records: 'Delete records'
+template.permission.attach_files: 'Attach files'
+template.permission.delete_files: 'Delete files'
 template.permission.attach_subrecords: 'Attach subrecords'
 template.permission.detach_subrecords: 'Detach subrecords'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_records: 'Delete records'
 state: Status
 states: Statussen
 state.new: 'Nieuwe status'
@@ -166,9 +166,9 @@ field.default_value: Standaardwaarde
 field.min_value: Min.waarde
 field.max_value: Max.waarde
 field.max_length: Max.grootte
-field.regex_check: 'PCRE om veldwaarden te controleren'
-field.regex_search: 'Doorzoek PCRE om veldwaarden om te zetten'
-field.regex_replace: 'Vervang PCRE om veldwaarden om te zetten'
+field.pcre_check: 'PCRE om veldwaarden te controleren'
+field.pcre_search: 'Doorzoek PCRE om veldwaarden om te zetten'
+field.pcre_replace: 'Vervang PCRE om veldwaarden om te zetten'
 field.confirm.delete: 'Ben je zeker dat je dit veld wilt verwijderen?'
 field.error.min_max_values: 'Maximum waarde moet groter dan minimum waarde zijn.'
 field.error.default_value: 'Standaardwaarde moet in het bereik %min% tot %max% liggen.'
@@ -177,6 +177,6 @@ field.permissions.none: geen
 field.permissions.read_only: 'alleen lezen'
 field.permissions.read_write: 'lezen en schrijven'
 listitems: Oplijsten
-listitem.key: 'Item key'
 listitem.value: 'Item value'
+listitem.text: 'Item text'
 listitem.confirm.delete: 'Are you sure you want delete this item?'

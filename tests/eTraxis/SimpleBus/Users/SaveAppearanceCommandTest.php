@@ -20,9 +20,9 @@ class SaveAppearanceCommandTest extends TransactionalTestCase
     {
         $user = $this->findUser('bender');
 
-        self::assertEquals('en_US', $user->getSettings()->getLocale());
-        self::assertEquals('azure', $user->getSettings()->getTheme());
-        self::assertEquals('UTC', $user->getSettings()->getTimezone());
+        self::assertEquals('en_US', $user->getLocale());
+        self::assertEquals('azure', $user->getTheme());
+        self::assertEquals('UTC', $user->getTimezone());
 
         $command = new SaveAppearanceCommand([
             'id'       => $user->getId(),
@@ -36,9 +36,9 @@ class SaveAppearanceCommandTest extends TransactionalTestCase
         /** @var User $user */
         $user = $this->doctrine->getRepository(User::class)->find($user->getId());
 
-        self::assertEquals('es', $user->getSettings()->getLocale());
-        self::assertEquals('humanity', $user->getSettings()->getTheme());
-        self::assertEquals('Asia/Vladivostok', $user->getSettings()->getTimezone());
+        self::assertEquals('es', $user->getLocale());
+        self::assertEquals('humanity', $user->getTheme());
+        self::assertEquals('Asia/Vladivostok', $user->getTimezone());
     }
 
     /**

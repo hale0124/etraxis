@@ -54,9 +54,9 @@ permissions: Permissions
 role: Rôle
 role.administrator: Administrateur
 role.user: Utilisateur
+role.any: 'Any user'
 role.author: Auteur
 role.responsible: Responsable
-role.registered: Inscrit
 description: Description
 language: Langue
 theme: Thème
@@ -122,13 +122,13 @@ template.permission.resume_records: 'Resume records'
 template.permission.reassign_records: 'Reassign records'
 template.permission.reopen_records: 'Reopen records'
 template.permission.add_comments: 'Add comments'
-template.permission.add_files: 'Add files'
-template.permission.remove_files: 'Remove files'
 template.permission.private_comments: 'Add/read private comments'
-template.permission.send_reminders: 'Send reminders'
-template.permission.delete_records: 'Delete records'
+template.permission.attach_files: 'Attach files'
+template.permission.delete_files: 'Delete files'
 template.permission.attach_subrecords: 'Attach subrecords'
 template.permission.detach_subrecords: 'Detach subrecords'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_records: 'Delete records'
 state: Etat
 states: Etats
 state.new: 'Nouvel état'
@@ -166,9 +166,9 @@ field.default_value: 'Valeur par défaut'
 field.min_value: Minimum
 field.max_value: Maximum
 field.max_length: 'Longueur maxi'
-field.regex_check: 'PCRE pour contrôler les champs'
-field.regex_search: 'PCRE recherché pour transformer les champs'
-field.regex_replace: 'PCRE remplacé pour transformer les champs'
+field.pcre_check: 'PCRE pour contrôler les champs'
+field.pcre_search: 'PCRE recherché pour transformer les champs'
+field.pcre_replace: 'PCRE remplacé pour transformer les champs'
 field.confirm.delete: 'Etes-vous sur de vouloir effacer ce champ?'
 field.error.min_max_values: 'Le maximum doit être superieur au minimum.'
 field.error.default_value: 'La valeur par défaut doit être comprise entre %min% et %max%.'
@@ -177,6 +177,6 @@ field.permissions.none: aucun
 field.permissions.read_only: 'lecture seule'
 field.permissions.read_write: 'lecture et écriture'
 listitems: 'Éléments de liste'
-listitem.key: 'Item key'
 listitem.value: 'Item value'
+listitem.text: 'Item text'
 listitem.confirm.delete: 'Are you sure you want delete this item?'

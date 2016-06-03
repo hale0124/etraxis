@@ -8,5 +8,5 @@ template.conflict.prefix: 'Un modello con lo stesso prefisso è già utilizzato.
 state.conflict.name: 'Uno stato con lo stesso nome è già utilizzato.'
 state.conflict.abbreviation: 'Uno stato con lo stesso abbreviazione è già utilizzato.'
 field.conflict.name: 'Nome campo già utilizzato.'
-listitem.conflict.key: 'Item with entered key already exists.'
 listitem.conflict.value: 'Item with entered value already exists.'
+listitem.conflict.text: 'Item with entered text already exists.'

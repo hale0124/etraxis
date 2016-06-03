@@ -11,6 +11,8 @@
 
 namespace eTraxis\SimpleBus\States;
 
+use eTraxis\Dictionary\StateResponsible;
+use eTraxis\Dictionary\StateType;
 use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
 use eTraxis\Tests\TransactionalTestCase;
@@ -28,8 +30,8 @@ class DeleteStateCommandTest extends TransactionalTestCase
             ->setTemplate($template)
             ->setName('Cancelled')
             ->setAbbreviation('C')
-            ->setType(State::TYPE_FINAL)
-            ->setResponsible(State::RESPONSIBLE_REMOVE)
+            ->setType(StateType::FINAL)
+            ->setResponsible(StateResponsible::REMOVE)
         ;
 
         $this->doctrine->getManager()->persist($state);

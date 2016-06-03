@@ -70,9 +70,6 @@ class UpdateUserCommandHandler
             ->setFullname($command->fullname)
             ->setEmail($command->email)
             ->setDescription($command->description)
-        ;
-
-        $entity->getSettings()
             ->setLocale($command->locale)
             ->setTheme($command->theme)
             ->setTimezone($command->timezone)

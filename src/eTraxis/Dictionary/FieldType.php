@@ -12,28 +12,37 @@
 namespace eTraxis\Dictionary;
 
 use Dictionary\StaticDictionary;
-use eTraxis\Entity\Field;
 
 /**
  * Field types.
  */
 class FieldType extends StaticDictionary
 {
+    const NUMBER   = 'number';
+    const DECIMAL  = 'decimal';
+    const STRING   = 'string';
+    const TEXT     = 'text';
+    const CHECKBOX = 'checkbox';
+    const LIST     = 'list';
+    const RECORD   = 'record';
+    const DATE     = 'date';
+    const DURATION = 'duration';
+
     /**
      * {@inheritdoc}
      */
     public static function all()
     {
         return [
-            Field::TYPE_NUMBER   => 'field.type.number',
-            Field::TYPE_DECIMAL  => 'field.type.decimal',
-            Field::TYPE_STRING   => 'field.type.string',
-            Field::TYPE_TEXT     => 'field.type.text',
-            Field::TYPE_CHECKBOX => 'field.type.checkbox',
-            Field::TYPE_LIST     => 'field.type.list',
-            Field::TYPE_RECORD   => 'field.type.record',
-            Field::TYPE_DATE     => 'field.type.date',
-            Field::TYPE_DURATION => 'field.type.duration',
+            self::NUMBER   => 'field.type.number',
+            self::DECIMAL  => 'field.type.decimal',
+            self::STRING   => 'field.type.string',
+            self::TEXT     => 'field.type.text',
+            self::CHECKBOX => 'field.type.checkbox',
+            self::LIST     => 'field.type.list',
+            self::RECORD   => 'field.type.record',
+            self::DATE     => 'field.type.date',
+            self::DURATION => 'field.type.duration',
         ];
     }
 }

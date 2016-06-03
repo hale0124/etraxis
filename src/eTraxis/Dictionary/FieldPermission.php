@@ -12,22 +12,27 @@
 namespace eTraxis\Dictionary;
 
 use Dictionary\StaticDictionary;
-use eTraxis\Entity\Field;
 
 /**
  * Field permissions.
  */
 class FieldPermission extends StaticDictionary
 {
+    const FALLBACK = self::NONE;
+
+    const NONE       = 'none';
+    const READ_ONLY  = 'read';
+    const READ_WRITE = 'write';
+
     /**
      * {@inheritdoc}
      */
     public static function all()
     {
         return [
-            Field::ACCESS_DENIED     => 'field.permissions.none',
-            Field::ACCESS_READ_ONLY  => 'field.permissions.read_only',
-            Field::ACCESS_READ_WRITE => 'field.permissions.read_write',
+            self::NONE       => 'field.permissions.none',
+            self::READ_ONLY  => 'field.permissions.read_only',
+            self::READ_WRITE => 'field.permissions.read_write',
         ];
     }
 }

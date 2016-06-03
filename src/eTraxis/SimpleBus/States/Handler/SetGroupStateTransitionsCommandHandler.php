@@ -12,9 +12,9 @@
 namespace eTraxis\SimpleBus\States\Handler;
 
 use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Dictionary\StateType;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
-use eTraxis\Entity\StateGroupTransition;
 use eTraxis\SimpleBus\States\SetGroupStateTransitionsCommand;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -52,7 +52,7 @@ class SetGroupStateTransitionsCommandHandler
         }
 
         // Transitions are not applicable for final states.
-        if ($state->getType() !== State::TYPE_FINAL) {
+        if ($state->getType() !== StateType::FINAL) {
 
             /** @var Group $group */
             $group = $this->manager->find(Group::class, $command->group);
@@ -67,29 +67,9 @@ class SetGroupStateTransitionsCommandHandler
                 'id'       => $command->transitions,
             ]);
 
-            $query = $this->manager->createQuery('
-                DELETE eTraxis:StateGroupTransition t
-                WHERE t.fromState = :state
-                  AND t.group = :group
-            ');
+            $state->setGroupTransitions($group, $transitions);
 
-            $query->execute([
-                'state' => $state,
-                'group' => $group,
-            ]);
-
-            foreach ($transitions as $transition) {
-
-                $entity = new StateGroupTransition();
-
-                $entity
-                    ->setFromState($state)
-                    ->setToState($transition)
-                    ->setGroup($group)
-                ;
-
-                $this->manager->persist($entity);
-            }
+            $this->manager->persist($state);
         }
     }
 }

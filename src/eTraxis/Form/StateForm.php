@@ -59,12 +59,12 @@ class StateForm extends AbstractType
                 'label'    => 'state.type',
                 'required' => true,
                 'choices'  => array_flip(StateType::all()),
-                'data'     => State::TYPE_INTERIM,
+                'data'     => StateType::INTERIM,
             ]);
         }
 
         // Responsible.
-        if (is_object($state) && $state->getType() === State::TYPE_FINAL) {
+        if (is_object($state) && $state->getType() === StateType::FINAL) {
             // Cannot change "Responsible" for existing final state.
             $builder->add('responsible', HiddenType::class, [
                 'required' => true,

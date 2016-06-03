@@ -16,9 +16,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Text value.
  *
- * @ORM\Table(name="tbl_text_values",
+ * @ORM\Table(name="text_values",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_text_values", columns={"value_token"})
+ *                @ORM\UniqueConstraint(name="ix_text_values", columns={"token"})
  *            })
  * @ORM\Entity(repositoryClass="eTraxis\Repository\TextValuesRepository")
  */
@@ -29,21 +29,21 @@ class TextValue
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="value_id", type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
     /**
      * @var string Value token.
      *
-     * @ORM\Column(name="value_token", type="string", length=32)
+     * @ORM\Column(name="token", type="string", length=32)
      */
     private $token;
 
     /**
      * @var string Text value.
      *
-     * @ORM\Column(name="text_value", type="text")
+     * @ORM\Column(name="value", type="text")
      */
     private $value;
 

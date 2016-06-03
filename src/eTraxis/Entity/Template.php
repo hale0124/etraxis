@@ -14,15 +14,16 @@ namespace eTraxis\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use eTraxis\Dictionary\SystemRole;
+use eTraxis\Dictionary\TemplatePermission;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 
 /**
  * Template.
  *
- * @ORM\Table(name="tbl_templates",
+ * @ORM\Table(name="templates",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_templates_name", columns={"project_id", "template_name"}),
- *                @ORM\UniqueConstraint(name="ix_templates_prefix", columns={"project_id", "template_prefix"})
+ *                @ORM\UniqueConstraint(name="ix_templates_name", columns={"project_id", "name"}),
+ *                @ORM\UniqueConstraint(name="ix_templates_prefix", columns={"project_id", "prefix"})
  *            })
  * @ORM\Entity
  * @ORM\EntityListeners({"eTraxis\Entity\EntityListener"})
@@ -41,29 +42,12 @@ class Template extends Entity implements \JsonSerializable
     const LOCK   = 'template.lock';
     const UNLOCK = 'template.unlock';
 
-    // Template access permissions.
-    const PERMIT_CREATE_RECORD    = 0x0001;
-    const PERMIT_EDIT_RECORD      = 0x0002;
-    const PERMIT_POSTPONE_RECORD  = 0x0004;
-    const PERMIT_RESUME_RECORD    = 0x0008;
-    const PERMIT_REASSIGN_RECORD  = 0x0010;
-    const PERMIT_REOPEN_RECORD    = 0x0020;
-    const PERMIT_ADD_COMMENT      = 0x0040;
-    const PERMIT_ADD_FILE         = 0x0080;
-    const PERMIT_REMOVE_FILE      = 0x0100;
-    const PERMIT_PRIVATE_COMMENT  = 0x0200;
-    const PERMIT_SEND_REMINDER    = 0x0400;
-    const PERMIT_DELETE_RECORD    = 0x0800;
-    const PERMIT_ATTACH_SUBRECORD = 0x1000;
-    const PERMIT_DETACH_SUBRECORD = 0x2000;
-    const PERMIT_VIEW_RECORD      = 0x40000000;
-
     /**
      * @var int Unique ID.
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="template_id", type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
@@ -71,21 +55,21 @@ class Template extends Entity implements \JsonSerializable
      * @var Project Project of the template.
      *
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="templates")
-     * @ORM\JoinColumn(name="project_id", nullable=false, referencedColumnName="project_id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="project_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
     private $project;
 
     /**
      * @var string Name of the template.
      *
-     * @ORM\Column(name="template_name", type="string", length=50)
+     * @ORM\Column(name="name", type="string", length=50)
      */
     private $name;
 
     /**
      * @var string Prefix of the template (used as a prefix in ID of records, created using this template).
      *
-     * @ORM\Column(name="template_prefix", type="string", length=3)
+     * @ORM\Column(name="prefix", type="string", length=3)
      */
     private $prefix;
 
@@ -114,32 +98,11 @@ class Template extends Entity implements \JsonSerializable
     private $description;
 
     /**
-     * @var int Whether the template is locked for edition.
+     * @var bool Whether the template is locked for edition.
      *
-     * @ORM\Column(name="is_locked", type="integer")
+     * @ORM\Column(name="is_locked", type="boolean")
      */
     private $isLocked;
-
-    /**
-     * @var int Author permissions.
-     *
-     * @ORM\Column(name="author_perm", type="integer")
-     */
-    private $authorPermissions;
-
-    /**
-     * @var int Current responsible permissions.
-     *
-     * @ORM\Column(name="responsible_perm", type="integer")
-     */
-    private $responsiblePermissions;
-
-    /**
-     * @var int Authenticated user permissions.
-     *
-     * @ORM\Column(name="registered_perm", type="integer")
-     */
-    private $registeredPermissions;
 
     /**
      * @var ArrayCollection List of template states.
@@ -150,20 +113,27 @@ class Template extends Entity implements \JsonSerializable
     private $states;
 
     /**
-     * @var ArrayCollection List of template fields.
+     * @var ArrayCollection List of role permissions.
      *
-     * @ORM\OneToMany(targetEntity="Field", mappedBy="template")
-     * @ORM\OrderBy({"indexNumber" = "ASC"})
+     * @ORM\OneToMany(targetEntity="TemplateRolePermission", mappedBy="template", cascade={"persist"})
      */
-    private $fields;
+    private $rolePermissions;
+
+    /**
+     * @var ArrayCollection List of group permissions.
+     *
+     * @ORM\OneToMany(targetEntity="TemplateGroupPermission", mappedBy="template", cascade={"persist"})
+     */
+    private $groupPermissions;
 
     /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->states = new ArrayCollection();
-        $this->fields = new ArrayCollection();
+        $this->states           = new ArrayCollection();
+        $this->rolePermissions  = new ArrayCollection();
+        $this->groupPermissions = new ArrayCollection();
     }
 
     /**
@@ -329,7 +299,7 @@ class Template extends Entity implements \JsonSerializable
      */
     public function setLocked(bool $isLocked)
     {
-        $this->isLocked = $isLocked ? 1 : 0;
+        $this->isLocked = $isLocked;
 
         return $this;
     }
@@ -341,97 +311,7 @@ class Template extends Entity implements \JsonSerializable
      */
     public function isLocked()
     {
-        return (bool) $this->isLocked;
-    }
-
-    /**
-     * Sets permissions of specified system role.
-     *
-     * @param   int $role
-     * @param   int $permissions
-     *
-     * @return  self
-     */
-    public function setRolePermissions(int $role, int $permissions)
-    {
-        switch ($role) {
-
-            case SystemRole::AUTHOR:
-                $permissions |= self::PERMIT_VIEW_RECORD;
-                $permissions &= ~self::PERMIT_CREATE_RECORD;
-                $this->authorPermissions = $permissions;
-                break;
-
-            case SystemRole::RESPONSIBLE:
-                $permissions |= self::PERMIT_VIEW_RECORD;
-                $permissions &= ~self::PERMIT_CREATE_RECORD;
-                $this->responsiblePermissions = $permissions;
-                break;
-
-            case SystemRole::REGISTERED:
-                $this->registeredPermissions = $permissions;
-                break;
-        }
-
-        return $this;
-    }
-
-    /**
-     * Returns permissions of specified system role.
-     *
-     * @param   int $role
-     *
-     * @return  int
-     */
-    public function getRolePermissions(int $role)
-    {
-        $permissions = 0;
-
-        switch ($role) {
-
-            case SystemRole::AUTHOR:
-                $permissions = $this->authorPermissions;
-                $permissions |= self::PERMIT_VIEW_RECORD;
-                $permissions &= ~self::PERMIT_CREATE_RECORD;
-                break;
-
-            case SystemRole::RESPONSIBLE:
-                $permissions = $this->responsiblePermissions;
-                $permissions |= self::PERMIT_VIEW_RECORD;
-                $permissions &= ~self::PERMIT_CREATE_RECORD;
-                break;
-
-            case SystemRole::REGISTERED:
-                $permissions = $this->registeredPermissions;
-                break;
-        }
-
-        return $permissions;
-    }
-
-    /**
-     * Returns permissions of specified group.
-     *
-     * @param   Group $group
-     *
-     * @return  int
-     */
-    public function getGroupPermissions(Group $group)
-    {
-        $query = $this->manager->createQueryBuilder();
-
-        $query
-            ->select('tgp.permission')
-            ->from(TemplateGroupPermission::class, 'tgp')
-            ->where('tgp.template = :template')
-            ->andWhere('tgp.group = :group')
-            ->setParameter('template', $this)
-            ->setParameter('group', $group)
-        ;
-
-        $result = $query->getQuery()->getOneOrNullResult();
-
-        return $result['permission'] ?? 0;
+        return $this->isLocked;
     }
 
     /**
@@ -442,6 +322,149 @@ class Template extends Entity implements \JsonSerializable
     public function getStates()
     {
         return $this->states->toArray();
+    }
+
+    /**
+     * Sets permissions of specified role.
+     *
+     * @param   string   $role
+     * @param   string[] $permissions
+     *
+     * @return  self
+     */
+    public function setRolePermissions(string $role, array $permissions)
+    {
+        $isSpecialRole = in_array($role, [SystemRole::AUTHOR, SystemRole::RESPONSIBLE]);
+
+        // "Author" and "Responsible" roles are always granted to view their records.
+        if ($isSpecialRole && !in_array(TemplatePermission::VIEW_RECORDS, $permissions)) {
+            $permissions[] = TemplatePermission::VIEW_RECORDS;
+        }
+
+        $toAdd = array_unique(array_diff($permissions, $this->getRolePermissions($role)));
+
+        // Remove extra permissions.
+        foreach ($this->rolePermissions as $key => $permission) {
+            /** @var TemplateRolePermission $permission */
+            if ($permission->getRole() === $role) {
+                if (!in_array($permission->getPermission(), $permissions)) {
+                    $this->rolePermissions->remove($key);
+                }
+            }
+        }
+
+        // Grant required permissions.
+        foreach ($toAdd as $permission) {
+
+            if (!TemplatePermission::has($permission)) {
+                continue;
+            }
+
+            // "Author" and "Responsible" roles can't create their records (as their records already exist).
+            if ($isSpecialRole && $permission === TemplatePermission::CREATE_RECORDS)
+            {
+                continue;
+            }
+
+            $element = new TemplateRolePermission();
+
+            $element
+                ->setTemplate($this)
+                ->setRole($role)
+                ->setPermission($permission)
+            ;
+
+            $this->rolePermissions->add($element);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns permissions of specified role.
+     *
+     * @param   string $role
+     *
+     * @return  string[]
+     */
+    public function getRolePermissions(string $role)
+    {
+        // Filter all permissions by the role.
+        $permissions = $this->rolePermissions->filter(function (TemplateRolePermission $permission) use ($role) {
+            return $permission->getRole() === $role;
+        });
+
+        // Retrieve the permission part.
+        $filtered = $permissions->map(function (TemplateRolePermission $permission) {
+            return $permission->getPermission();
+        });
+
+        return array_values($filtered->toArray());
+    }
+
+    /**
+     * Sets permissions of specified group.
+     *
+     * @param   Group    $group
+     * @param   string[] $permissions
+     *
+     * @return  self
+     */
+    public function setGroupPermissions(Group $group, array $permissions)
+    {
+        $toAdd = array_unique(array_diff($permissions, $this->getGroupPermissions($group)));
+
+        // Remove extra permissions.
+        foreach ($this->groupPermissions as $key => $permission) {
+            /** @var TemplateGroupPermission $permission */
+            if ($permission->getGroup() === $group) {
+                if (!in_array($permission->getPermission(), $permissions)) {
+                    $this->groupPermissions->remove($key);
+                }
+            }
+        }
+
+        // Grant required permissions.
+        foreach ($toAdd as $permission) {
+
+            if (!TemplatePermission::has($permission)) {
+                continue;
+            }
+
+            $element = new TemplateGroupPermission();
+
+            $element
+                ->setTemplate($this)
+                ->setGroup($group)
+                ->setPermission($permission)
+            ;
+
+            $this->groupPermissions->add($element);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns permissions of specified group.
+     *
+     * @param   Group $group
+     *
+     * @return  string[]
+     */
+    public function getGroupPermissions(Group $group)
+    {
+        // Filter all permissions by the group.
+        $permissions = $this->groupPermissions->filter(function (TemplateGroupPermission $permission) use ($group) {
+            return $permission->getGroup() === $group;
+        });
+
+        // Retrieve the permission part.
+        $filtered = $permissions->map(function (TemplateGroupPermission $permission) {
+            return $permission->getPermission();
+        });
+
+        return array_values($filtered->toArray());
     }
 
     /**

@@ -26,14 +26,14 @@ class ListItemFormTest extends TransactionalTestCase
 
         $children = $view->children;
 
-        self::assertArrayHasKey('key', $children);
         self::assertArrayHasKey('value', $children);
+        self::assertArrayHasKey('text', $children);
     }
 
     public function testEditForm()
     {
         /** @var ListItem $item */
-        $item = $this->doctrine->getRepository(ListItem::class)->findOneBy(['value' => 'Season 1']);
+        $item = $this->doctrine->getRepository(ListItem::class)->findOneBy(['text' => 'Season 1']);
 
         /** @var \Symfony\Component\Form\FormFactoryInterface $factory */
         $factory = $this->client->getContainer()->get('form.factory');
@@ -43,8 +43,8 @@ class ListItemFormTest extends TransactionalTestCase
 
         $children = $view->children;
 
-        self::assertArrayNotHasKey('key', $children);
-        self::assertArrayHasKey('value', $children);
-        self::assertEquals($children['value']->vars['data'], $item->getValue());
+        self::assertArrayNotHasKey('value', $children);
+        self::assertArrayHasKey('text', $children);
+        self::assertEquals($children['text']->vars['data'], $item->getText());
     }
 }

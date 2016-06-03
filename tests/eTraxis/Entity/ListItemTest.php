@@ -11,6 +11,8 @@
 
 namespace eTraxis\Entity;
 
+use eTraxis\Dictionary\FieldType;
+
 class ListItemTest extends \PHPUnit_Framework_TestCase
 {
     /** @var ListItem */
@@ -24,7 +26,7 @@ class ListItemTest extends \PHPUnit_Framework_TestCase
     public function testFieldValid()
     {
         $field = new Field();
-        $field->setType(Field::TYPE_LIST);
+        $field->setType(FieldType::LIST);
         $this->object->setField($field);
         self::assertEquals($field, $this->object->getField());
     }
@@ -32,22 +34,22 @@ class ListItemTest extends \PHPUnit_Framework_TestCase
     public function testFieldInvalid()
     {
         $field = new Field();
-        $field->setType(Field::TYPE_STRING);
+        $field->setType(FieldType::STRING);
         $this->object->setField($field);
         self::assertNotEquals($field, $this->object->getField());
     }
 
-    public function testKey()
-    {
-        $expected = random_int(1, PHP_INT_MAX);
-        $this->object->setKey($expected);
-        self::assertEquals($expected, $this->object->getKey());
-    }
-
     public function testValue()
     {
-        $expected = str_pad('_', 50, '_');
+        $expected = random_int(1, PHP_INT_MAX);
         $this->object->setValue($expected);
         self::assertEquals($expected, $this->object->getValue());
+    }
+
+    public function testText()
+    {
+        $expected = str_pad('_', 50, '_');
+        $this->object->setText($expected);
+        self::assertEquals($expected, $this->object->getText());
     }
 }

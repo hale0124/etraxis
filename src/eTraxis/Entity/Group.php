@@ -18,9 +18,9 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 /**
  * Group.
  *
- * @ORM\Table(name="tbl_groups",
+ * @ORM\Table(name="groups",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_groups", columns={"project_id", "group_name"})
+ *                @ORM\UniqueConstraint(name="ix_groups", columns={"project_id", "name"})
  *            })
  * @ORM\Entity(repositoryClass="eTraxis\Repository\GroupsRepository")
  * @ORM\EntityListeners({"eTraxis\Entity\EntityListener"})
@@ -37,7 +37,7 @@ class Group extends Entity implements \JsonSerializable
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="group_id", type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
@@ -45,14 +45,14 @@ class Group extends Entity implements \JsonSerializable
      * @var Project Project of the group (NULL if the group is global).
      *
      * @ORM\ManyToOne(targetEntity="Project", inversedBy="groups")
-     * @ORM\JoinColumn(name="project_id", referencedColumnName="project_id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="project_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $project;
 
     /**
      * @var string Name of the group.
      *
-     * @ORM\Column(name="group_name", type="string", length=25)
+     * @ORM\Column(name="name", type="string", length=25)
      */
     private $name;
 
@@ -67,9 +67,9 @@ class Group extends Entity implements \JsonSerializable
      * @var ArrayCollection List of members.
      *
      * @ORM\ManyToMany(targetEntity="User", inversedBy="groups")
-     * @ORM\JoinTable(name="tbl_membership",
-     *                joinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="group_id")},
-     *                inverseJoinColumns={@ORM\JoinColumn(name="account_id", referencedColumnName="account_id")})
+     * @ORM\JoinTable(name="membership",
+     *                joinColumns={@ORM\JoinColumn(name="group_id", referencedColumnName="id")},
+     *                inverseJoinColumns={@ORM\JoinColumn(name="user_id", referencedColumnName="id")})
      * @ORM\OrderBy({"fullname" = "ASC", "username" = "ASC"})
      */
     private $members;
@@ -95,12 +95,16 @@ class Group extends Entity implements \JsonSerializable
     /**
      * Property setter.
      *
-     * @param   Project $project
+     * @param   Project|null $project
      *
      * @return  self
      */
     public function setProject(Project $project = null)
     {
+        if ($this->id !== null) {
+            throw new \RuntimeException('Can\'t change project of existing group.');
+        }
+
         $this->project = $project;
 
         return $this;
@@ -109,7 +113,7 @@ class Group extends Entity implements \JsonSerializable
     /**
      * Property getter.
      *
-     * @return  Project
+     * @return  Project|null
      */
     public function getProject()
     {
@@ -253,7 +257,7 @@ class Group extends Entity implements \JsonSerializable
     {
         return [
             'id'          => $this->getId(),
-            'project'     => $this->project ? $this->project->getId() : null,
+            'project'     => $this->isGlobal() ? null : $this->getProject()->getId(),
             'name'        => $this->getName(),
             'description' => $this->getDescription(),
         ];

@@ -59,7 +59,7 @@ class SetPasswordCommandHandler
 
         if ($entity) {
 
-            if ($entity->isLdap()) {
+            if ($entity->isExternalAccount()) {
                 throw new BadRequestHttpException($this->translator->trans('password.cant_change'));
             }
 

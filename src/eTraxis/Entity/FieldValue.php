@@ -12,17 +12,11 @@
 namespace eTraxis\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use eTraxis\Dictionary;
 
 /**
  * Field value.
  *
- * @ORM\Table(name="tbl_field_values",
- *            indexes={
- *                @ORM\Index(name="ix_value",     columns={"value_id"}),
- *                @ORM\Index(name="ix_fva_comb",  columns={"value_id", "field_type", "is_latest", "event_id"}),
- *                @ORM\Index(name="ix_fva_comb2", columns={"field_id", "value_id", "is_latest", "event_id"})
- *            })
+ * @ORM\Table(name="field_values")
  * @ORM\Entity
  */
 class FieldValue
@@ -33,7 +27,7 @@ class FieldValue
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="Event")
-     * @ORM\JoinColumn(name="event_id", referencedColumnName="event_id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="event_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $event;
 
@@ -43,20 +37,14 @@ class FieldValue
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="Field")
-     * @ORM\JoinColumn(name="field_id", referencedColumnName="field_id")
+     * @ORM\JoinColumn(name="field_id", referencedColumnName="id")
      */
     private $field;
 
     /**
-     * @deprecated 4.1.0
-     * @ORM\Column(name="field_type", type="integer")
-     */
-    private $type;
-
-    /**
-     * @var int Whether this value is current one for this field of the record.
+     * @var bool Whether this value is current one for this field of the record.
      *
-     * @ORM\Column(name="is_latest", type="integer")
+     * @ORM\Column(name="is_current", type="boolean")
      */
     private $isCurrent;
 
@@ -64,123 +52,16 @@ class FieldValue
      * @var int Value of the field. Depends on field type as following:
      *
      *          "number"   - integer value (from -1000000000 till +1000000000)
-     *          "decimal"  - decimal value (foreign key to "decimal_values" table)
-     *          "string"   - string value (foreign key to "string_values" table)
-     *          "text"     - string value (foreign key to "text_values" table)
+     *          "decimal"  - decimal value (foreign key to "DecimalValue" entity)
+     *          "string"   - string value (foreign key to "StringValue" entity)
+     *          "text"     - string value (foreign key to "TextValue" entity)
      *          "checkbox" - state of checkbox (0 - unchecked, 1 - checked)
-     *          "list"     - integer value of list item (see "list_values" table)
+     *          "list"     - integer value of list item (see "ListItem" entity)
      *          "record"   - record ID
      *          "date"     - date value (Unix Epoch timestamp)
      *          "duration" - duration value (amount of minutes from 0:00 till 999999:59)
      *
-     * @ORM\Column(name="value_id", type="integer", nullable=true)
+     * @ORM\Column(name="value", type="integer", nullable=true)
      */
-    private $valueId;
-
-    /**
-     * Property setter.
-     *
-     * @param   Event $event
-     *
-     * @return  self
-     */
-    public function setEvent(Event $event)
-    {
-        $this->event = $event;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  Event
-     */
-    public function getEvent()
-    {
-        return $this->event;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   Field $field
-     *
-     * @return  self
-     */
-    public function setField(Field $field)
-    {
-        $this->field = $field;
-
-        $type  = $field->getType();
-        $types = array_flip(Dictionary\LegacyFieldType::all());
-
-        if (array_key_exists($type, $types)) {
-            $this->type = $types[$type];
-        }
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  Field
-     */
-    public function getField()
-    {
-        return $this->field;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   bool $isCurrent
-     *
-     * @return  self
-     */
-    public function setCurrent(bool $isCurrent)
-    {
-        $this->isCurrent = $isCurrent ? 1 : 0;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  bool
-     */
-    public function isCurrent()
-    {
-        return (bool) $this->isCurrent;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   int|null $valueId
-     *
-     * @return  self
-     *
-     * @todo    Refactor into type-specific functions.
-     */
-    public function setValueId(int $valueId = null)
-    {
-        $this->valueId = $valueId;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  int|null
-     *
-     * @todo    Refactor into type-specific functions.
-     */
-    public function getValueId()
-    {
-        return $this->valueId;
-    }
+    private $value;
 }

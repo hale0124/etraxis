@@ -19,10 +19,10 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 /**
  * State.
  *
- * @ORM\Table(name="tbl_states",
+ * @ORM\Table(name="states",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_states_name", columns={"template_id", "state_name"}),
- *                @ORM\UniqueConstraint(name="ix_states_abbr", columns={"template_id", "state_abbr"})
+ *                @ORM\UniqueConstraint(name="ix_states_name", columns={"template_id", "name"}),
+ *                @ORM\UniqueConstraint(name="ix_states_abbreviation", columns={"template_id", "abbreviation"})
  *            })
  * @ORM\Entity
  * @ORM\EntityListeners({"eTraxis\Entity\EntityListener"})
@@ -33,28 +33,18 @@ class State extends Entity implements \JsonSerializable
 {
     // Constraints.
     const MAX_NAME         = 50;
-    const MAX_ABBREVIATION = 50;
+    const MAX_ABBREVIATION = 3;
 
     // Actions.
     const DELETE  = 'state.delete';
     const INITIAL = 'state.initial';
-
-    // State types.
-    const TYPE_INITIAL = 1;
-    const TYPE_INTERIM = 2;
-    const TYPE_FINAL   = 3;
-
-    // State responsibility management.
-    const RESPONSIBLE_KEEP   = 1;
-    const RESPONSIBLE_ASSIGN = 2;
-    const RESPONSIBLE_REMOVE = 3;
 
     /**
      * @var int Unique ID.
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="state_id", type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
@@ -62,35 +52,35 @@ class State extends Entity implements \JsonSerializable
      * @var Template Template of the state.
      *
      * @ORM\ManyToOne(targetEntity="Template", inversedBy="states")
-     * @ORM\JoinColumn(name="template_id", nullable=false, referencedColumnName="template_id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="template_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
     private $template;
 
     /**
      * @var string Name of the state.
      *
-     * @ORM\Column(name="state_name", type="string", length=50)
+     * @ORM\Column(name="name", type="string", length=50)
      */
     private $name;
 
     /**
      * @var string Abbreviation of the state (used in list of records as a short-cut).
      *
-     * @ORM\Column(name="state_abbr", type="string", length=50)
+     * @ORM\Column(name="abbreviation", type="string", length=3)
      */
     private $abbreviation;
 
     /**
-     * @var int Type of the state.
+     * @var string Type of the state.
      *
-     * @ORM\Column(name="state_type", type="integer")
+     * @ORM\Column(name="type", type="string", length=10)
      */
     private $type;
 
     /**
-     * @var int Type of responsibility management.
+     * @var string Type of responsibility management.
      *
-     * @ORM\Column(name="responsible", type="integer")
+     * @ORM\Column(name="responsible", type="string", length=10)
      */
     private $responsible;
 
@@ -98,7 +88,7 @@ class State extends Entity implements \JsonSerializable
      * @var State Next state by default.
      *
      * @ORM\ManyToOne(targetEntity="State")
-     * @ORM\JoinColumn(name="next_state_id", referencedColumnName="state_id", onDelete="SET NULL")
+     * @ORM\JoinColumn(name="next_state_id", referencedColumnName="id", onDelete="SET NULL")
      */
     private $nextState;
 
@@ -106,16 +96,40 @@ class State extends Entity implements \JsonSerializable
      * @var ArrayCollection List of state fields.
      *
      * @ORM\OneToMany(targetEntity="Field", mappedBy="state")
-     * @ORM\OrderBy({"indexNumber" = "ASC"})
+     * @ORM\OrderBy({"order" = "ASC"})
      */
     private $fields;
+
+    /**
+     * @var ArrayCollection List of role transitions.
+     *
+     * @ORM\OneToMany(targetEntity="StateRoleTransition", mappedBy="fromState", cascade={"persist"})
+     */
+    private $roleTransitions;
+
+    /**
+     * @var ArrayCollection List of group transitions.
+     *
+     * @ORM\OneToMany(targetEntity="StateGroupTransition", mappedBy="fromState", cascade={"persist"})
+     */
+    private $groupTransitions;
+
+    /**
+     * @var ArrayCollection List of responsible group.
+     *
+     * @ORM\OneToMany(targetEntity="StateResponsibleGroup", mappedBy="state", cascade={"persist"})
+     */
+    private $responsibleGroups;
 
     /**
      * Constructor.
      */
     public function __construct()
     {
-        $this->fields = new ArrayCollection();
+        $this->fields            = new ArrayCollection();
+        $this->roleTransitions   = new ArrayCollection();
+        $this->groupTransitions  = new ArrayCollection();
+        $this->responsibleGroups = new ArrayCollection();
     }
 
     /**
@@ -203,18 +217,18 @@ class State extends Entity implements \JsonSerializable
     /**
      * Property setter.
      *
-     * @param   int $type
+     * @param   string $type
      *
      * @return  self
      */
-    public function setType(int $type)
+    public function setType(string $type)
     {
         if (Dictionary\StateType::has($type)) {
             $this->type = $type;
 
             // Final states cannot be assigned.
-            if ($type === self::TYPE_FINAL) {
-                $this->responsible = self::RESPONSIBLE_REMOVE;
+            if ($type === Dictionary\StateType::FINAL) {
+                $this->responsible = Dictionary\StateResponsible::REMOVE;
                 $this->nextState   = null;
             }
         }
@@ -225,7 +239,7 @@ class State extends Entity implements \JsonSerializable
     /**
      * Property getter.
      *
-     * @return  int
+     * @return  string
      */
     public function getType()
     {
@@ -235,14 +249,14 @@ class State extends Entity implements \JsonSerializable
     /**
      * Property setter.
      *
-     * @param   int $responsible
+     * @param   string $responsible
      *
      * @return  self
      */
-    public function setResponsible(int $responsible)
+    public function setResponsible(string $responsible)
     {
         // Final states cannot be assigned.
-        if ($this->type === self::TYPE_FINAL) {
+        if ($this->type === Dictionary\StateType::FINAL) {
             return $this;
         }
 
@@ -256,13 +270,13 @@ class State extends Entity implements \JsonSerializable
     /**
      * Property getter.
      *
-     * @return  int
+     * @return  string
      */
     public function getResponsible()
     {
         // Final states cannot be assigned.
-        if ($this->type === self::TYPE_FINAL) {
-            return self::RESPONSIBLE_REMOVE;
+        if ($this->type === Dictionary\StateType::FINAL) {
+            return Dictionary\StateResponsible::REMOVE;
         }
 
         return $this->responsible;
@@ -278,7 +292,7 @@ class State extends Entity implements \JsonSerializable
     public function setNextState(State $state = null)
     {
         // Final states cannot have a next one.
-        if ($this->type === self::TYPE_FINAL) {
+        if ($this->type === Dictionary\StateType::FINAL) {
             return $this;
         }
 
@@ -299,7 +313,7 @@ class State extends Entity implements \JsonSerializable
      */
     public function getNextState()
     {
-        return $this->type === self::TYPE_FINAL ? null : $this->nextState;
+        return $this->type === Dictionary\StateType::FINAL ? null : $this->nextState;
     }
 
     /**
@@ -313,73 +327,181 @@ class State extends Entity implements \JsonSerializable
     }
 
     /**
-     * Returns transitions available to specified system role.
+     * Sets transitions of specified role.
      *
-     * @param   int $role
+     * @param   string  $role
+     * @param   State[] $states
      *
-     * @return  State[] List of states.
+     * @return  self
      */
-    public function getRoleTransitions(int $role)
+    public function setRoleTransitions(string $role, array $states)
     {
-        // Transitions are not applicable for final states.
-        if ($this->type === self::TYPE_FINAL) {
-            return [];
+        /** @var State[] $toAdd */
+        $toAdd = array_unique(array_diff($states, $this->getRoleTransitions($role)));
+
+        // Remove extra transitions.
+        foreach ($this->roleTransitions as $key => $transition) {
+            /** @var StateRoleTransition $transition */
+            if ($transition->getRole() === $role) {
+                if (!in_array($transition->getToState(), $states)) {
+                    $this->roleTransitions->remove($key);
+                }
+            }
         }
 
-        $query = $this->manager->createQueryBuilder();
+        // Grant required transitions.
+        foreach ($toAdd as $state) {
 
-        $query
-            ->select('tr')
-            ->from(StateRoleTransition::class, 'tr')
-            ->where('tr.fromState = :state')
-            ->andWhere('tr.role = :role')
-            ->setParameter('state', $this)
-            ->setParameter('role', $role)
-        ;
+            $transition = new StateRoleTransition();
 
-        $results = [];
+            $transition
+                ->setFromState($this)
+                ->setToState($state)
+                ->setRole($role)
+            ;
 
-        /** @var StateRoleTransition $result */
-        foreach ($query->getQuery()->getResult() as $result) {
-            $results[] = $result->getToState();
+            $this->roleTransitions->add($transition);
         }
 
-        return $results;
+        return $this;
     }
 
     /**
-     * Returns transitions available to specified group.
+     * Returns transitions of specified role.
+     *
+     * @param   string $role
+     *
+     * @return  State[]
+     */
+    public function getRoleTransitions(string $role)
+    {
+        // Transitions are not applicable for final states.
+        if ($this->type === Dictionary\StateType::FINAL) {
+            return [];
+        }
+
+        // Filter all transitions by the role.
+        $transitions = $this->roleTransitions->filter(function (StateRoleTransition $transition) use ($role) {
+            return $transition->getRole() === $role;
+        });
+
+        // Retrieve the destination state.
+        $filtered = $transitions->map(function (StateRoleTransition $transition) {
+            return $transition->getToState();
+        });
+
+        return array_values($filtered->toArray());
+    }
+
+    /**
+     * Sets transitions of specified group.
+     *
+     * @param   Group   $group
+     * @param   State[] $states
+     *
+     * @return  self
+     */
+    public function setGroupTransitions(Group $group, array $states)
+    {
+        /** @var State[] $toAdd */
+        $toAdd = array_unique(array_diff($states, $this->getGroupTransitions($group)));
+
+        // Remove extra transitions.
+        foreach ($this->groupTransitions as $key => $transition) {
+            /** @var StateGroupTransition $transition */
+            if ($transition->getGroup() === $group) {
+                if (!in_array($transition->getToState(), $states)) {
+                    $this->groupTransitions->remove($key);
+                }
+            }
+        }
+
+        // Grant required transitions.
+        foreach ($toAdd as $state) {
+
+            $transition = new StateGroupTransition();
+
+            $transition
+                ->setFromState($this)
+                ->setToState($state)
+                ->setGroup($group)
+            ;
+
+            $this->groupTransitions->add($transition);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Returns transitions of specified group.
      *
      * @param   Group $group
      *
-     * @return  State[] List of states.
+     * @return  State[]
      */
     public function getGroupTransitions(Group $group)
     {
         // Transitions are not applicable for final states.
-        if ($this->type === self::TYPE_FINAL) {
+        if ($this->type === Dictionary\StateType::FINAL) {
             return [];
         }
 
-        $query = $this->manager->createQueryBuilder();
+        // Filter all transitions by the group.
+        $transitions = $this->groupTransitions->filter(function (StateGroupTransition $transition) use ($group) {
+            return $transition->getGroup() === $group;
+        });
 
-        $query
-            ->select('tr')
-            ->from(StateGroupTransition::class, 'tr')
-            ->where('tr.fromState = :state')
-            ->andWhere('tr.group = :group')
-            ->setParameter('state', $this)
-            ->setParameter('group', $group)
-        ;
+        // Retrieve the destination state.
+        $filtered = $transitions->map(function (StateGroupTransition $transition) {
+            return $transition->getToState();
+        });
 
-        $results = [];
+        return array_values($filtered->toArray());
+    }
 
-        /** @var StateGroupTransition $result */
-        foreach ($query->getQuery()->getResult() as $result) {
-            $results[] = $result->getToState();
+    /**
+     * Adds specified responsible groups.
+     *
+     * @param   Group[] $groups
+     *
+     * @return  self
+     */
+    public function addResponsibleGroups(array $groups)
+    {
+        $current = $this->responsibleGroups->map(function (StateResponsibleGroup $responsibleGroup) {
+            return $responsibleGroup->getGroup();
+        });
+
+        $toAdd = array_diff($groups, $current->toArray());
+
+        foreach ($toAdd as $group) {
+
+            $responsibleGroup = new StateResponsibleGroup();
+
+            $responsibleGroup->setState($this);
+            $responsibleGroup->setGroup($group);
+
+            $this->responsibleGroups->add($responsibleGroup);
         }
 
-        return $results;
+        return $this;
+    }
+
+    /**
+     * Removes specified responsible groups.
+     *
+     * @param   Group[] $groups
+     *
+     * @return  self
+     */
+    public function removeResponsibleGroups(array $groups)
+    {
+        $this->responsibleGroups = $this->responsibleGroups->filter(function (StateResponsibleGroup $responsibleGroup) use ($groups) {
+            return !in_array($responsibleGroup->getGroup(), $groups);
+        });
+
+        return $this;
     }
 
     /**
@@ -390,30 +512,13 @@ class State extends Entity implements \JsonSerializable
     public function getResponsibleGroups()
     {
         // Responsible groups are applicable for assignable states only.
-        if ($this->responsible !== self::RESPONSIBLE_ASSIGN) {
+        if ($this->responsible !== Dictionary\StateResponsible::ASSIGN) {
             return [];
         }
 
-        $query = $this->manager->createQueryBuilder();
-
-        $query
-            ->select('srg')
-            ->addSelect('g')
-            ->from(StateResponsibleGroup::class, 'srg')
-            ->leftJoin('srg.group', 'g')
-            ->where('srg.state = :state')
-            ->orderBy('g.name')
-            ->setParameter('state', $this)
-        ;
-
-        $results = [];
-
-        /** @var StateResponsibleGroup $result */
-        foreach ($query->getQuery()->getResult() as $result) {
-            $results[] = $result->getGroup();
-        }
-
-        return $results;
+        return array_map(function (StateResponsibleGroup $group) {
+            return $group->getGroup();
+        }, $this->responsibleGroups->toArray());
     }
 
     /**
@@ -424,11 +529,9 @@ class State extends Entity implements \JsonSerializable
     public function getNotResponsibleGroups()
     {
         // Responsible groups are applicable for assignable states only.
-        if ($this->responsible !== self::RESPONSIBLE_ASSIGN) {
+        if ($this->responsible !== Dictionary\StateResponsible::ASSIGN) {
             return [];
         }
-
-        $groups = $this->getResponsibleGroups();
 
         $query = $this->manager->createQueryBuilder();
 
@@ -438,7 +541,7 @@ class State extends Entity implements \JsonSerializable
             ->orderBy('g.name')
         ;
 
-        if (count($groups) > 0) {
+        if (count($this->responsibleGroups) > 0) {
             $query
                 ->where($query->expr()->notIn('g.id', ':groups'))
                 ->setParameter('groups', $this->getResponsibleGroups())

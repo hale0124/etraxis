@@ -44,8 +44,13 @@ var StatesApp = (function() {
             FieldsApp.reset();
             $states.panel('clear').show();
             $.getJSON(eTraxis.route('admin_states_list', { id: id }), function(data) {
+                var types = {
+                    'initial': 1,
+                    'interim': 2,
+                    'final': 3
+                };
                 $(data).each(function(index, item) {
-                    $states.panel('append', item.id, item.name, false, item.type);
+                    $states.panel('append', item.id, item.name, false, types[item.type]);
                 });
                 if (typeof callback === 'function') {
                     callback();
@@ -162,7 +167,7 @@ var StatesApp = (function() {
             var $tabs = $('#tabs-state');
             var group = $('#group', $tabs).val();
 
-            var url = (group < 0)
+            var url = isNaN(parseInt(group))
                 ? eTraxis.route('admin_states_load_role_transitions', { id: id, role: group })
                 : eTraxis.route('admin_states_load_group_transitions', { id: id, group: group });
 
@@ -190,7 +195,7 @@ var StatesApp = (function() {
                 transitions.push($(this).val());
             });
 
-            var url = (group < 0)
+            var url = isNaN(parseInt(group))
                 ? eTraxis.route('admin_states_save_role_transitions', { id: id, role: group })
                 : eTraxis.route('admin_states_save_group_transitions', { id: id, group: group });
 

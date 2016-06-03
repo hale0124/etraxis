@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\Field;
 use eTraxis\Tests\TransactionalTestCase;
 
@@ -21,7 +22,7 @@ class UpdateCheckboxFieldCommandTest extends TransactionalTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Multipart']);
 
-        self::assertEquals(Field::TYPE_CHECKBOX, $field->getType());
+        self::assertEquals(FieldType::CHECKBOX, $field->getType());
         self::assertEquals('Multipart', $field->getName());
         self::assertNull($field->getDescription());
         self::assertTrue($field->isRequired());
@@ -39,7 +40,7 @@ class UpdateCheckboxFieldCommandTest extends TransactionalTestCase
 
         $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 
-        self::assertEquals(Field::TYPE_CHECKBOX, $field->getType());
+        self::assertEquals(FieldType::CHECKBOX, $field->getType());
         self::assertEquals('Is multipart', $field->getName());
         self::assertEquals('Whether is multipart', $field->getDescription());
         self::assertFalse($field->isRequired());

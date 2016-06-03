@@ -14,7 +14,6 @@ namespace eTraxis\SimpleBus\Templates\Handler;
 use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\Template;
-use eTraxis\Entity\TemplateGroupPermission;
 use eTraxis\SimpleBus\Templates\SetGroupTemplatePermissionsCommand;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -58,21 +57,8 @@ class SetGroupTemplatePermissionsCommandHandler
             throw new NotFoundHttpException('Unknown group.');
         }
 
-        /** @var TemplateGroupPermission $entity */
-        $entity = $this->manager->getRepository(TemplateGroupPermission::class)->findOneBy([
-            'group'    => $group,
-            'template' => $template,
-        ]);
+        $template->setGroupPermissions($group, $command->permissions ?: []);
 
-        if (!$entity) {
-            $entity = new TemplateGroupPermission();
-
-            $entity->setGroup($group);
-            $entity->setTemplate($template);
-        }
-
-        $entity->setPermission($command->permissions);
-
-        $this->manager->persist($entity);
+        $this->manager->persist($template);
     }
 }

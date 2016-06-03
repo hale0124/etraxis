@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Record watcher.
  *
- * @ORM\Table(name="tbl_record_subscribes")
+ * @ORM\Table(name="watchers")
  * @ORM\Entity
  */
 class Watcher
@@ -27,7 +27,7 @@ class Watcher
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="Record", inversedBy="watchers")
-     * @ORM\JoinColumn(name="record_id", referencedColumnName="record_id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="record_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $record;
 
@@ -37,7 +37,7 @@ class Watcher
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="account_id", referencedColumnName="account_id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="watcher_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $watcher;
 
@@ -47,7 +47,7 @@ class Watcher
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="subscribed_by", referencedColumnName="account_id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="initiator_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private $initiator;
 }

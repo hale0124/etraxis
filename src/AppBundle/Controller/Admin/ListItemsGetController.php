@@ -48,8 +48,8 @@ class ListItemsGetController extends Controller
     /**
      * Renders dialog to edit specified list item.
      *
-     * @Action\Route("/edit/{id}/{key}", name="admin_dlg_edit_listitem", requirements={"id"="\d+", "key"="\d+"})
-     * @Action\ParamConverter("item", options={"mapping": {"field": "id", "key": "key"}})
+     * @Action\Route("/edit/{id}/{value}", name="admin_dlg_edit_listitem", requirements={"id"="\d+", "value"="\d+"})
+     * @Action\ParamConverter("item", options={"mapping": {"field": "id", "value": "value"}})
      *
      * @param   ListItem $item
      *
@@ -59,8 +59,8 @@ class ListItemsGetController extends Controller
     {
         $form = $this->createForm(ListItemForm::class, $item, [
             'action' => $this->generateUrl('admin_edit_listitem', [
-                'id'  => $item->getField()->getId(),
-                'key' => $item->getKey(),
+                'id'    => $item->getField()->getId(),
+                'value' => $item->getValue(),
             ]),
         ]);
 

@@ -11,6 +11,8 @@
 
 namespace eTraxis\Entity;
 
+use eTraxis\Dictionary\TemplatePermission;
+
 class TemplateGroupPermissionTest extends \PHPUnit_Framework_TestCase
 {
     /** @var TemplateGroupPermission */
@@ -21,22 +23,24 @@ class TemplateGroupPermissionTest extends \PHPUnit_Framework_TestCase
         $this->object = new TemplateGroupPermission();
     }
 
-    public function testGroup()
-    {
-        $this->object->setGroup($group = new Group());
-        self::assertEquals($group, $this->object->getGroup());
-    }
-
     public function testTemplate()
     {
         $this->object->setTemplate($template = new Template());
         self::assertEquals($template, $this->object->getTemplate());
     }
 
+    public function testGroup()
+    {
+        $this->object->setGroup($group = new Group());
+        self::assertEquals($group, $this->object->getGroup());
+    }
+
     public function testPermission()
     {
-        $expected = Template::PERMIT_CREATE_RECORD;
+        $expected = TemplatePermission::CREATE_RECORDS;
         $this->object->setPermission($expected);
+        self::assertEquals($expected, $this->object->getPermission());
+        $this->object->setPermission('wtf');
         self::assertEquals($expected, $this->object->getPermission());
     }
 }

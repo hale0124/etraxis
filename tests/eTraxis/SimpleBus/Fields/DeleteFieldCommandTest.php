@@ -21,7 +21,7 @@ class DeleteFieldCommandTest extends TransactionalTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy([
             'name'      => 'Crew',
-            'removedAt' => 0,
+            'removedAt' => null,
         ]);
 
         self::assertNotNull($field);
@@ -31,7 +31,7 @@ class DeleteFieldCommandTest extends TransactionalTestCase
 
         $field = $this->doctrine->getRepository(Field::class)->findOneBy([
             'name'      => 'Crew',
-            'removedAt' => 0,
+            'removedAt' => null,
         ]);
 
         self::assertNull($field);
@@ -48,10 +48,10 @@ class DeleteFieldCommandTest extends TransactionalTestCase
         $field3 = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Delivery at', 'state' => $field1->getState()]);
         $field4 = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Notes',       'state' => $field1->getState()]);
 
-        self::assertEquals(1, $field1->getIndexNumber());
-        self::assertEquals(2, $field2->getIndexNumber());
-        self::assertEquals(3, $field3->getIndexNumber());
-        self::assertEquals(4, $field4->getIndexNumber());
+        self::assertEquals(1, $field1->getOrder());
+        self::assertEquals(2, $field2->getOrder());
+        self::assertEquals(3, $field3->getOrder());
+        self::assertEquals(4, $field4->getOrder());
 
         $command = new DeleteFieldCommand(['id' => $field2->getId()]);
         $this->command_bus->handle($command);
@@ -61,10 +61,10 @@ class DeleteFieldCommandTest extends TransactionalTestCase
         $field3 = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Delivery at', 'state' => $field1->getState()]);
         $field4 = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Notes',       'state' => $field1->getState()]);
 
-        self::assertEquals(1, $field1->getIndexNumber());
+        self::assertEquals(1, $field1->getOrder());
         self::assertNull($field2);
-        self::assertEquals(2, $field3->getIndexNumber());
-        self::assertEquals(3, $field4->getIndexNumber());
+        self::assertEquals(2, $field3->getOrder());
+        self::assertEquals(3, $field4->getOrder());
     }
 
     /**

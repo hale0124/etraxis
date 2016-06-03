@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Record change.
  *
- * @ORM\Table(name="tbl_changes",
+ * @ORM\Table(name="changes",
  *            uniqueConstraints={
  *                @ORM\UniqueConstraint(name="ix_changes", columns={"event_id", "field_id"})
  *            })
@@ -29,7 +29,7 @@ class Change
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="change_id", type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
@@ -37,29 +37,29 @@ class Change
      * @var Event Changing event.
      *
      * @ORM\ManyToOne(targetEntity="Event")
-     * @ORM\JoinColumn(name="event_id", nullable=false, referencedColumnName="event_id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="event_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
     private $event;
 
     /**
-     * @var Field Changed field.
+     * @var Field Changed field. NULL means record's subject.
      *
      * @ORM\ManyToOne(targetEntity="Field")
-     * @ORM\JoinColumn(name="field_id", referencedColumnName="field_id")
+     * @ORM\JoinColumn(name="field_id", referencedColumnName="id")
      */
     private $field;
 
     /**
-     * @var int Old value ID.
+     * @var int Old value of the field. Depends on field type (see "FieldValue::$value" for explanation).
      *
-     * @ORM\Column(name="old_value_id", type="integer", nullable=true)
+     * @ORM\Column(name="old_value", type="integer", nullable=true)
      */
-    private $oldValueId;
+    private $oldValue;
 
     /**
-     * @var int New value ID.
+     * @var int New value of the field. Depends on field type (see "FieldValue::$value" for explanation).
      *
-     * @ORM\Column(name="new_value_id", type="integer", nullable=true)
+     * @ORM\Column(name="new_value", type="integer", nullable=true)
      */
-    private $newValueId;
+    private $newValue;
 }

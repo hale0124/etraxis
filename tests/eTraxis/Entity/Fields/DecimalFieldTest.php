@@ -11,6 +11,7 @@
 
 namespace eTraxis\Entity\Fields;
 
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\DecimalValue;
 use eTraxis\Entity\Field;
 use eTraxis\Tests\TransactionalTestCase;
@@ -29,7 +30,7 @@ class DecimalFieldTest extends TransactionalTestCase
         /** @noinspection PhpParamsInspection */
         $this->object
             ->setEntityManager($this->doctrine->getManager())
-            ->setType(Field::TYPE_DECIMAL)
+            ->setType(FieldType::DECIMAL)
         ;
     }
 

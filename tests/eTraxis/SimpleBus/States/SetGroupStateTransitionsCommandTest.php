@@ -13,79 +13,69 @@ namespace eTraxis\SimpleBus\States;
 
 use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
-use eTraxis\Entity\StateGroupTransition;
 use eTraxis\Tests\TransactionalTestCase;
 
 class SetGroupStateTransitionsCommandTest extends TransactionalTestCase
 {
+    /** @var State */
+    private $draft;
+
+    /** @var State */
+    private $accepted;
+
+    /** @var State */
+    private $deprecated;
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        $repository = $this->doctrine->getRepository(State::class);
+
+        $this->draft      = $repository->findOneBy(['name' => 'Draft']);
+        $this->accepted   = $repository->findOneBy(['name' => 'Accepted']);
+        $this->deprecated = $repository->findOneBy(['name' => 'Deprecated']);
+    }
+
     public function testAddGroupTransitions()
     {
-        /** @var State $state_new */
-        $state_new = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
-
-        /** @var State $state_delivered */
-        $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
-
         /** @var Group $group */
-        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
+        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Members']);
 
-        /** @var StateGroupTransition $transition */
-        $transition = $this->doctrine->getRepository(StateGroupTransition::class)->findOneBy([
-            'fromState' => $state_new,
-            'toState'   => $state_delivered,
-            'group'     => $group,
-        ]);
-        self::assertNull($transition);
+        self::assertArraysByValues([$this->accepted], $this->draft->getGroupTransitions($group));
 
         $command = new SetGroupStateTransitionsCommand([
-            'id'          => $state_new->getId(),
+            'id'          => $this->draft->getId(),
             'group'       => $group->getId(),
-            'transitions' => [$state_delivered->getId()],
+            'transitions' => [
+                $this->accepted->getId(),
+                $this->deprecated->getId(),
+            ],
         ]);
 
         $this->command_bus->handle($command);
 
-        $transition = $this->doctrine->getRepository(StateGroupTransition::class)->findOneBy([
-            'fromState' => $state_new,
-            'toState'   => $state_delivered,
-            'group'     => $group,
-        ]);
-        self::assertNotNull($transition);
+        self::assertArraysByValues([$this->accepted, $this->deprecated], $this->draft->getGroupTransitions($group));
     }
 
     public function testRemoveGroupTransitions()
     {
-        /** @var State $state_new */
-        $state_new = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
-
-        /** @var State $state_delivered */
-        $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
-
         /** @var Group $group */
-        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
+        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Members']);
 
-        /** @var StateGroupTransition $transition */
-        $transition = $this->doctrine->getRepository(StateGroupTransition::class)->findOneBy([
-            'fromState' => $state_new,
-            'toState'   => $state_delivered,
-            'group'     => $group,
-        ]);
-        self::assertNotNull($transition);
+        self::assertArraysByValues([$this->accepted], $this->draft->getGroupTransitions($group));
 
         $command = new SetGroupStateTransitionsCommand([
-            'id'          => $state_new->getId(),
+            'id'          => $this->draft->getId(),
             'group'       => $group->getId(),
-            'transitions' => [],
+            'transitions' => [
+                $this->deprecated->getId(),
+            ],
         ]);
 
         $this->command_bus->handle($command);
 
-        $transition = $this->doctrine->getRepository(StateGroupTransition::class)->findOneBy([
-            'fromState' => $state_new,
-            'toState'   => $state_delivered,
-            'group'     => $group,
-        ]);
-        self::assertNull($transition);
+        self::assertArraysByValues([$this->deprecated], $this->draft->getGroupTransitions($group));
     }
 
     /**
@@ -94,16 +84,15 @@ class SetGroupStateTransitionsCommandTest extends TransactionalTestCase
      */
     public function testNotFoundState()
     {
-        /** @var State $state_delivered */
-        $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
-
         /** @var Group $group */
-        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
+        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Members']);
 
         $command = new SetGroupStateTransitionsCommand([
             'id'          => self::UNKNOWN_ENTITY_ID,
             'group'       => $group->getId(),
-            'transitions' => [$state_delivered->getId()],
+            'transitions' => [
+                $this->accepted->getId(),
+            ],
         ]);
 
         $this->command_bus->handle($command);
@@ -115,16 +104,12 @@ class SetGroupStateTransitionsCommandTest extends TransactionalTestCase
      */
     public function testNotFoundGroup()
     {
-        /** @var State $state_new */
-        $state_new = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
-
-        /** @var State $state_delivered */
-        $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
-
         $command = new SetGroupStateTransitionsCommand([
-            'id'          => $state_new->getId(),
+            'id'          => $this->draft->getId(),
             'group'       => self::UNKNOWN_ENTITY_ID,
-            'transitions' => [$state_delivered->getId()],
+            'transitions' => [
+                $this->accepted->getId(),
+            ],
         ]);
 
         $this->command_bus->handle($command);

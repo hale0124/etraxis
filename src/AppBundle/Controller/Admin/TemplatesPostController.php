@@ -123,20 +123,20 @@ class TemplatesPostController extends Controller
     /**
      * Saves permissions of the specified role for the specified template.
      *
-     * @Action\Route("/permissions/{id}/{role}", name="admin_templates_save_role_permissions", requirements={"id"="\d+", "role"="\-\d+"})
+     * @Action\Route("/permissions/{id}/{role}", name="admin_templates_save_role_permissions", requirements={"id"="\d+", "role"="\D+"})
      *
      * @param   Request $request
      * @param   int     $id
-     * @param   int     $role
+     * @param   string  $role
      *
      * @return  JsonResponse
      */
-    public function saveRolePermissionsAction(Request $request, int $id, int $role): JsonResponse
+    public function saveRolePermissionsAction(Request $request, int $id, string $role): JsonResponse
     {
         $command = new Templates\SetRoleTemplatePermissionsCommand([
             'id'          => $id,
             'role'        => $role,
-            'permissions' => (int) $request->request->get('permissions'),
+            'permissions' => $request->request->get('permissions'),
         ]);
 
         $this->getCommandBus()->handle($command);
@@ -160,7 +160,7 @@ class TemplatesPostController extends Controller
         $command = new Templates\SetGroupTemplatePermissionsCommand([
             'id'          => $id,
             'group'       => $group->getId(),
-            'permissions' => (int) $request->request->get('permissions'),
+            'permissions' => $request->request->get('permissions'),
         ]);
 
         $this->getCommandBus()->handle($command);

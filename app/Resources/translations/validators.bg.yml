@@ -8,5 +8,5 @@ template.conflict.prefix: 'Вече същестува темплейт с въ�
 state.conflict.name: 'Вече съществува услови с въведеното име.'
 state.conflict.abbreviation: 'Вече съществува услови с въведеното съкращение.'
 field.conflict.name: 'Вече съществува поле с въведеното име.'
-listitem.conflict.key: 'Item with entered key already exists.'
 listitem.conflict.value: 'Item with entered value already exists.'
+listitem.conflict.text: 'Item with entered text already exists.'

@@ -17,9 +17,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Record.
  *
- * @ORM\Table(name="tbl_records",
+ * @ORM\Table(name="records",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_records", columns={"creator_id", "creation_time"})
+ *                @ORM\UniqueConstraint(name="ix_records", columns={"author_id", "created_at"})
  *            })
  * @ORM\Entity
  */
@@ -33,7 +33,7 @@ class Record
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="record_id", type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
@@ -48,7 +48,7 @@ class Record
      * @var State Current state of the record.
      *
      * @ORM\ManyToOne(targetEntity="State")
-     * @ORM\JoinColumn(name="state_id", nullable=false, referencedColumnName="state_id")
+     * @ORM\JoinColumn(name="state_id", nullable=false, referencedColumnName="id")
      */
     private $state;
 
@@ -56,7 +56,7 @@ class Record
      * @var User Author of the the record.
      *
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="creator_id", nullable=false, referencedColumnName="account_id")
+     * @ORM\JoinColumn(name="author_id", nullable=false, referencedColumnName="id")
      */
     private $author;
 
@@ -64,42 +64,42 @@ class Record
      * @var User Current responsible of the record.
      *
      * @ORM\ManyToOne(targetEntity="User")
-     * @ORM\JoinColumn(name="responsible_id", referencedColumnName="account_id")
+     * @ORM\JoinColumn(name="responsible_id", referencedColumnName="id")
      */
     private $responsible;
 
     /**
      * @var int Unix Epoch timestamp when the record was created.
      *
-     * @ORM\Column(name="creation_time", type="integer")
+     * @ORM\Column(name="created_at", type="integer")
      */
     private $createdAt;
 
     /**
      * @var int Unix Epoch timestamp when the record was changed last time.
      *
-     * @ORM\Column(name="change_time", type="integer")
+     * @ORM\Column(name="changed_at", type="integer")
      */
     private $changedAt;
 
     /**
      * @var int Unix Epoch timestamp when the record was closed.
      *
-     * @ORM\Column(name="closure_time", type="integer", nullable=true)
+     * @ORM\Column(name="closed_at", type="integer", nullable=true)
      */
     private $closedAt;
 
     /**
      * @var int Unix Epoch timestamp when the postponed record will be resumed back.
      *
-     * @ORM\Column(name="postpone_time", type="integer")
+     * @ORM\Column(name="resumed_at", type="integer")
      */
     private $resumedAt;
 
     /**
      * @var ArrayCollection List of record events.
      *
-     * @ORM\OneToMany(targetEntity="Event", mappedBy="record")
+     * @ORM\OneToMany(targetEntity="Event", mappedBy="record", cascade={"persist"})
      * @ORM\OrderBy({"createdAt" = "ASC"})
      */
     private $history;
@@ -116,11 +116,8 @@ class Record
      */
     public function __construct()
     {
-        $this->responsible = null;
-
         $this->createdAt = time();
         $this->changedAt = time();
-        $this->closedAt  = null;
         $this->resumedAt = 0;
 
         $this->history  = new ArrayCollection();

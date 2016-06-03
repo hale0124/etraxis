@@ -26,7 +26,7 @@
             {{ form_end(appearance_form) }}
         </div>
 
-        {% if not app.user.ldap %}
+        {% if not app.user.isExternalAccount %}
 
         <div class="grid-50 mobile-grid-100 mobile-grid-row">
             {{ form_start(password_form) }}

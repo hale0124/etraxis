@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Users;
 
+use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Tests\TransactionalTestCase;
 
 class SetPasswordCommandTest extends TransactionalTestCase
@@ -41,7 +42,7 @@ class SetPasswordCommandTest extends TransactionalTestCase
      */
     public function testLdap()
     {
-        $user = $this->findUser('einstein', true);
+        $user = $this->findUser('einstein', AuthenticationProvider::LDAP);
 
         $command = new SetPasswordCommand([
             'id'       => $user->getId(),

@@ -54,9 +54,9 @@ permissions: Permessi
 role: Ruolo
 role.administrator: Amministratore
 role.user: Utente
+role.any: 'Any user'
 role.author: Autore
 role.responsible: Responsabile
-role.registered: Registrato
 description: Descrizione
 language: Lingua
 theme: Tema
@@ -122,13 +122,13 @@ template.permission.resume_records: 'Resume records'
 template.permission.reassign_records: 'Reassign records'
 template.permission.reopen_records: 'Reopen records'
 template.permission.add_comments: 'Add comments'
-template.permission.add_files: 'Add files'
-template.permission.remove_files: 'Remove files'
 template.permission.private_comments: 'Add/read private comments'
-template.permission.send_reminders: 'Send reminders'
-template.permission.delete_records: 'Delete records'
+template.permission.attach_files: 'Attach files'
+template.permission.delete_files: 'Delete files'
 template.permission.attach_subrecords: 'Attach subrecords'
 template.permission.detach_subrecords: 'Detach subrecords'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_records: 'Delete records'
 state: Stato
 states: Stati
 state.new: 'Nuovo stato'
@@ -166,9 +166,9 @@ field.default_value: 'Valore predefinito'
 field.min_value: 'Valore Min.'
 field.max_value: 'Valore Max.'
 field.max_length: 'Lunghezza Max.'
-field.regex_check: 'PCRE di verifica della validità del campo'
-field.regex_search: 'PCRE di ricerca per modificare il valore'
-field.regex_replace: 'PCRE di sostituzione per modificare il valore'
+field.pcre_check: 'PCRE di verifica della validità del campo'
+field.pcre_search: 'PCRE di ricerca per modificare il valore'
+field.pcre_replace: 'PCRE di sostituzione per modificare il valore'
 field.confirm.delete: 'Eliminare questo campo?'
 field.error.min_max_values: 'Il valore massimo deve essere maggiore del valore minimo.'
 field.error.default_value: 'Il valore predefinito deve essere compreso tra %min% e %max%.'
@@ -177,6 +177,6 @@ field.permissions.none: nessuno
 field.permissions.read_only: 'sola lettura'
 field.permissions.read_write: 'lettura e scrittura'
 listitems: 'Elementi della lista'
-listitem.key: 'Item key'
 listitem.value: 'Item value'
+listitem.text: 'Item text'
 listitem.confirm.delete: 'Are you sure you want delete this item?'

@@ -51,19 +51,19 @@ class ListItemsPostController extends Controller
     /**
      * Processes submitted form when specified list item is being edited.
      *
-     * @Action\Route("/edit/{id}/{key}", name="admin_edit_listitem", requirements={"id"="\d+", "key"="\d+"})
+     * @Action\Route("/edit/{id}/{value}", name="admin_edit_listitem", requirements={"id"="\d+", "value"="\d+"})
      *
      * @param   Request $request
-     * @param   int     $id  Field ID.
-     * @param   int     $key Item key.
+     * @param   int     $id    Field ID.
+     * @param   int     $value Item value.
      *
      * @return  JsonResponse
      */
-    public function editAction(Request $request, int $id, int $key): JsonResponse
+    public function editAction(Request $request, int $id, int $value): JsonResponse
     {
         $data = $request->request->get('listitem');
 
-        $command = new ListItems\UpdateListItemCommand($data, ['field' => $id, 'key' => $key]);
+        $command = new ListItems\UpdateListItemCommand($data, ['field' => $id, 'value' => $value]);
         $this->getCommandBus()->handle($command);
 
         return new JsonResponse();
@@ -72,16 +72,16 @@ class ListItemsPostController extends Controller
     /**
      * Deletes specified list item.
      *
-     * @Action\Route("/delete/{id}/{key}", name="admin_delete_listitem", requirements={"id"="\d+", "key"="\d+"})
+     * @Action\Route("/delete/{id}/{value}", name="admin_delete_listitem", requirements={"id"="\d+", "value"="\d+"})
      *
-     * @param   int $id  Field ID.
-     * @param   int $key Item key.
+     * @param   int $id    Field ID.
+     * @param   int $value Item value.
      *
      * @return  JsonResponse
      */
-    public function deleteAction(int $id, int $key): JsonResponse
+    public function deleteAction(int $id, int $value): JsonResponse
     {
-        $command = new ListItems\DeleteListItemCommand(['field' => $id, 'key' => $key]);
+        $command = new ListItems\DeleteListItemCommand(['field' => $id, 'value' => $value]);
         $this->getCommandBus()->handle($command);
 
         return new JsonResponse();

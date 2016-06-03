@@ -71,12 +71,12 @@ class LoadGroupsData extends AbstractFixture implements ContainerAwareInterface,
             ],
         ];
 
-        foreach ($data as $groupname => $row) {
+        foreach ($data as $name => $row) {
 
             $group = new Group();
 
             $group
-                ->setName($groupname)
+                ->setName($name)
                 ->setDescription($row['description'])
             ;
 

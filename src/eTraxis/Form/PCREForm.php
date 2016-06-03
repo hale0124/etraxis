@@ -11,7 +11,7 @@
 
 namespace eTraxis\Form;
 
-use eTraxis\Entity\FieldRegex;
+use eTraxis\Entity\FieldPCRE;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -19,7 +19,7 @@ use Symfony\Component\Form\FormBuilderInterface;
 /**
  * PCRE form.
  */
-class RegexForm extends AbstractType
+class PCREForm extends AbstractType
 {
     /**
      * {@inheritdoc}
@@ -28,23 +28,23 @@ class RegexForm extends AbstractType
     {
         // PCRE to check field values.
         $builder->add('check', TextType::class, [
-            'label'    => 'field.regex_check',
+            'label'    => 'field.pcre_check',
             'required' => false,
-            'attr'     => ['maxlength' => FieldRegex::MAX_REGEX],
+            'attr'     => ['maxlength' => FieldPCRE::MAX_PCRE],
         ]);
 
         // Search PCRE to transform field values.
         $builder->add('search', TextType::class, [
-            'label'    => 'field.regex_search',
+            'label'    => 'field.pcre_search',
             'required' => false,
-            'attr'     => ['maxlength' => FieldRegex::MAX_REGEX],
+            'attr'     => ['maxlength' => FieldPCRE::MAX_PCRE],
         ]);
 
         // Replace PCRE to transform field values.
         $builder->add('replace', TextType::class, [
-            'label'    => 'field.regex_replace',
+            'label'    => 'field.pcre_replace',
             'required' => false,
-            'attr'     => ['maxlength' => FieldRegex::MAX_REGEX],
+            'attr'     => ['maxlength' => FieldPCRE::MAX_PCRE],
         ]);
     }
 
@@ -53,6 +53,6 @@ class RegexForm extends AbstractType
      */
     public function getBlockPrefix()
     {
-        return 'regex';
+        return 'pcre';
     }
 }

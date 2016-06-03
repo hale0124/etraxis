@@ -72,7 +72,7 @@ class UsersPostController extends Controller
 
         $data = $request->request->get('user');
 
-        if ($user->isLdap()) {
+        if ($user->isExternalAccount()) {
             $data['username'] = $user->getUsername();
             $data['fullname'] = $user->getFullname();
             $data['email']    = $user->getEmail();
@@ -85,7 +85,7 @@ class UsersPostController extends Controller
             $this->get('session')->set('_locale', $command->locale);
         }
 
-        if (!$user->isLdap() && $data['password']) {
+        if (!$user->isExternalAccount() && $data['password']) {
 
             if ($data['password'] !== $data['confirmation']) {
                 throw new BadRequestHttpException($this->container->get('translator')->trans('passwords.dont_match'));

@@ -12,6 +12,7 @@
 namespace eTraxis\Voter;
 
 use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Dictionary\StateType;
 use eTraxis\Entity\Record;
 use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
@@ -132,7 +133,7 @@ class TemplateVoter extends Voter
             ->where('s.template = :template')
             ->andWhere('s.type = :type')
             ->setParameter('template', $subject)
-            ->setParameter('type', State::TYPE_INITIAL)
+            ->setParameter('type', StateType::INITIAL)
         ;
 
         $count = (int) $query->getQuery()->getSingleScalarResult();

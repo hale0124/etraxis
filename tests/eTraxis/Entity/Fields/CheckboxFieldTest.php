@@ -11,6 +11,7 @@
 
 namespace eTraxis\Entity\Fields;
 
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\Field;
 
 class CheckboxFieldTest extends \PHPUnit_Framework_TestCase
@@ -23,7 +24,7 @@ class CheckboxFieldTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->object = new Field();
-        $this->object->setType(Field::TYPE_CHECKBOX);
+        $this->object->setType(FieldType::CHECKBOX);
     }
 
     public function testSupportedKeys()

@@ -11,6 +11,7 @@
 
 namespace eTraxis\Entity\Fields;
 
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\Field;
 
 class DurationFieldTest extends \PHPUnit_Framework_TestCase
@@ -23,7 +24,7 @@ class DurationFieldTest extends \PHPUnit_Framework_TestCase
         parent::setUp();
 
         $this->object = new Field();
-        $this->object->setType(Field::TYPE_DURATION);
+        $this->object->setType(FieldType::DURATION);
     }
 
     public function testSupportedKeys()

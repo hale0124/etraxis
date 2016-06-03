@@ -22,10 +22,8 @@ class CurrentUser implements AdvancedUserInterface
     const ROLE_ADMIN = 'ROLE_ADMIN';
     const ROLE_USER  = 'ROLE_USER';
 
-    // Data from corresponding "User" entity.
-    private $password;
-    private $isLocked;
-    private $data;
+    // Serialized "User" entity (JSON).
+    private $user;
 
     /**
      * Constructor.
@@ -34,69 +32,71 @@ class CurrentUser implements AdvancedUserInterface
      */
     public function __construct(User $user)
     {
-        $this->password = $user->getPassword();
-        $this->isLocked = $user->isLocked();
-        $this->data     = $user->jsonSerialize();
+        $this->user = $user->jsonSerialize();
+
+        $this->user['isExternalAccount'] = $user->isExternalAccount();
+        $this->user['isLocked']          = $user->isLocked();
+        $this->user['password']          = $user->getPassword();
     }
 
     /**
-     * Property getter.
+     * Proxy getter.
      *
      * @return  int
      */
     public function getId()
     {
-        return $this->data['id'];
+        return $this->user['id'];
     }
 
     /**
-     * Property getter.
+     * Proxy getter.
+     *
+     * @return  bool
+     */
+    public function isExternalAccount()
+    {
+        return $this->user['isExternalAccount'];
+    }
+
+    /**
+     * Proxy getter.
      *
      * @return  string
      */
     public function getFullname()
     {
-        return $this->data['fullname'];
+        return $this->user['fullname'];
     }
 
     /**
-     * Property getter.
-     *
-     * @return  bool
-     */
-    public function isLdap()
-    {
-        return $this->data['isLdap'];
-    }
-
-    /**
-     * Property getter.
+     * Proxy getter.
      *
      * @return  string
      */
     public function getLocale()
     {
-        return $this->data['locale'];
+        return $this->user['locale'];
     }
 
     /**
-     * Property getter.
+     * Proxy getter.
      *
      * @return  string
      */
     public function getTheme()
     {
-        return $this->data['theme'];
+        return $this->user['theme'];
     }
 
     /**
-     * Property getter.
+     * Proxy getter.
      *
-     * @return  int
+     * @return  string
      */
     public function getTimezone()
     {
-        return $this->data['timezone'];
+        return $this->user['timezone'];
     }
 
     /**
@@ -106,7 +106,7 @@ class CurrentUser implements AdvancedUserInterface
     {
         $roles = [self::ROLE_USER];
 
-        if ($this->data['isAdmin']) {
+        if ($this->user['isAdmin']) {
             $roles[] = self::ROLE_ADMIN;
         }
 
@@ -118,7 +118,7 @@ class CurrentUser implements AdvancedUserInterface
      */
     public function getPassword()
     {
-        return $this->password;
+        return $this->user['password'];
     }
 
     /**
@@ -133,7 +133,7 @@ class CurrentUser implements AdvancedUserInterface
      */
     public function getUsername()
     {
-        return $this->data['username'];
+        return $this->user['username'];
     }
 
     /**
@@ -141,7 +141,7 @@ class CurrentUser implements AdvancedUserInterface
      */
     public function eraseCredentials()
     {
-        $this->password = null;
+        $this->user['password'] = null;
     }
 
     /**
@@ -157,7 +157,7 @@ class CurrentUser implements AdvancedUserInterface
      */
     public function isAccountNonLocked()
     {
-        return !$this->isLocked;
+        return !$this->user['isLocked'];
     }
 
     /**
@@ -173,6 +173,6 @@ class CurrentUser implements AdvancedUserInterface
      */
     public function isEnabled()
     {
-        return !$this->data['isDisabled'];
+        return !$this->user['isDisabled'];
     }
 }

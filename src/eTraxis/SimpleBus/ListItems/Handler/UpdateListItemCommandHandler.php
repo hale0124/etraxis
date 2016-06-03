@@ -59,14 +59,14 @@ class UpdateListItemCommandHandler
         /** @var ListItem $entity */
         $entity = $this->manager->getRepository(ListItem::class)->findOneBy([
             'field' => $field,
-            'key'   => $command->key,
+            'value' => $command->value,
         ]);
 
         if (!$entity) {
             throw new NotFoundHttpException('Unknown list item.');
         }
 
-        $entity->setValue($command->value);
+        $entity->setText($command->text);
 
         $errors = $this->validator->validate($entity);
 

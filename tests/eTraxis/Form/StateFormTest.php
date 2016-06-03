@@ -11,6 +11,7 @@
 
 namespace eTraxis\Form;
 
+use eTraxis\Dictionary\StateType;
 use eTraxis\Entity\State;
 use eTraxis\Tests\TransactionalTestCase;
 
@@ -28,7 +29,7 @@ class StateFormTest extends TransactionalTestCase
 
         self::assertEmpty($children['name']->vars['data']);
         self::assertEmpty($children['abbreviation']->vars['data']);
-        self::assertEquals($children['type']->vars['data'], State::TYPE_INTERIM);
+        self::assertEquals($children['type']->vars['data'], StateType::INTERIM);
         self::assertEmpty($children['responsible']->vars['data']);
     }
 

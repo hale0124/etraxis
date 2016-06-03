@@ -25,9 +25,9 @@ class UpdateUserCommandTest extends TransactionalTestCase
         self::assertNotEmpty($user->getDescription());
         self::assertFalse($user->isAdmin());
         self::assertFalse($user->isDisabled());
-        self::assertEquals('en_US', $user->getSettings()->getLocale());
-        self::assertEquals('azure', $user->getSettings()->getTheme());
-        self::assertEquals('UTC', $user->getSettings()->getTimezone());
+        self::assertEquals('en_US', $user->getLocale());
+        self::assertEquals('azure', $user->getTheme());
+        self::assertEquals('UTC', $user->getTimezone());
 
         $command = new UpdateUserCommand([
             'id'       => $user->getId(),
@@ -52,9 +52,9 @@ class UpdateUserCommandTest extends TransactionalTestCase
         self::assertEmpty($user->getDescription());
         self::assertTrue($user->isAdmin());
         self::assertTrue($user->isDisabled());
-        self::assertEquals('es', $user->getSettings()->getLocale());
-        self::assertEquals('humanity', $user->getSettings()->getTheme());
-        self::assertEquals('Asia/Vladivostok', $user->getSettings()->getTimezone());
+        self::assertEquals('es', $user->getLocale());
+        self::assertEquals('humanity', $user->getTheme());
+        self::assertEquals('Asia/Vladivostok', $user->getTimezone());
     }
 
     /**

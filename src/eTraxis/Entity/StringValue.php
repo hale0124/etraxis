@@ -16,12 +16,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * String value.
  *
- * @ORM\Table(name="tbl_string_values",
+ * @ORM\Table(name="string_values",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_string_values", columns={"value_token"})
- *            },
- *            indexes={
- *                @ORM\Index(name="ix_svl_id_val", columns={"value_id", "string_value"})
+ *                @ORM\UniqueConstraint(name="ix_string_values", columns={"token"})
  *            })
  * @ORM\Entity(repositoryClass="eTraxis\Repository\StringValuesRepository")
  */
@@ -32,21 +29,21 @@ class StringValue
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="value_id", type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
     /**
      * @var string Value token.
      *
-     * @ORM\Column(name="value_token", type="string", length=32)
+     * @ORM\Column(name="token", type="string", length=32)
      */
     private $token;
 
     /**
      * @var string String value.
      *
-     * @ORM\Column(name="string_value", type="string", length=250)
+     * @ORM\Column(name="value", type="string", length=250)
      */
     private $value;
 

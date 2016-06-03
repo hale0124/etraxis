@@ -54,9 +54,9 @@ permissions: Permissões
 role: Papel
 role.administrator: Administrador
 role.user: Usuário
+role.any: 'Any user'
 role.author: Autor
 role.responsible: Responsável
-role.registered: Registrado
 description: Descrição
 language: Língua
 theme: Tema
@@ -122,13 +122,13 @@ template.permission.resume_records: 'Resume records'
 template.permission.reassign_records: 'Reassign records'
 template.permission.reopen_records: 'Reopen records'
 template.permission.add_comments: 'Add comments'
-template.permission.add_files: 'Add files'
-template.permission.remove_files: 'Remove files'
 template.permission.private_comments: 'Add/read private comments'
-template.permission.send_reminders: 'Send reminders'
-template.permission.delete_records: 'Delete records'
+template.permission.attach_files: 'Attach files'
+template.permission.delete_files: 'Delete files'
 template.permission.attach_subrecords: 'Attach subrecords'
 template.permission.detach_subrecords: 'Detach subrecords'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_records: 'Delete records'
 state: Estado
 states: Estados
 state.new: 'Novo estado'
@@ -166,9 +166,9 @@ field.default_value: 'Valor padrão'
 field.min_value: Valor.mín
 field.max_value: Valor.máx
 field.max_length: Tamanho.máx
-field.regex_check: 'PCRE para checar valores do campo'
-field.regex_search: 'Procurar PCRE para transformar valores do campo'
-field.regex_replace: 'Substituir PCRE para transformar valores do campo'
+field.pcre_check: 'PCRE para checar valores do campo'
+field.pcre_search: 'Procurar PCRE para transformar valores do campo'
+field.pcre_replace: 'Substituir PCRE para transformar valores do campo'
 field.confirm.delete: 'Tem certeza que quer apagar este campo?'
 field.error.min_max_values: 'O valor máximo deve ser maior do que o mínimo.'
 field.error.default_value: 'O valor padrão deve conter valores entre %min% e %max%.'
@@ -177,6 +177,6 @@ field.permissions.none: nenhum
 field.permissions.read_only: 'apenas leitura'
 field.permissions.read_write: 'leitura e escrita'
 listitems: 'Lista de itens'
-listitem.key: 'Item key'
 listitem.value: 'Item value'
+listitem.text: 'Item text'
 listitem.confirm.delete: 'Are you sure you want delete this item?'

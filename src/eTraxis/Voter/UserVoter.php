@@ -12,6 +12,7 @@
 namespace eTraxis\Voter;
 
 use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Dictionary\EventType;
 use eTraxis\Entity\CurrentUser;
 use eTraxis\Entity\Event;
 use eTraxis\Entity\User;
@@ -101,7 +102,7 @@ class UserVoter extends Voter
             return false;
         }
 
-        return $subject->isPasswordExpired($this->password_expiration);
+        return $subject->isPasswordExpired();
     }
 
     /**
@@ -140,7 +141,7 @@ class UserVoter extends Voter
             ->from(Event::class, 'e')
             ->where('e.type = :type')
             ->andWhere('e.parameter = :id')
-            ->setParameter('type', Event::RECORD_ASSIGNED)
+            ->setParameter('type', EventType::RECORD_ASSIGNED)
             ->setParameter('id', $subject->getId())
         ;
 

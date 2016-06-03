@@ -49,7 +49,7 @@ class SetRoleTemplatePermissionsCommandHandler
             throw new NotFoundHttpException('Unknown template.');
         }
 
-        $template->setRolePermissions($command->role, $command->permissions);
+        $template->setRolePermissions($command->role, $command->permissions ?: []);
 
         $this->manager->persist($template);
     }

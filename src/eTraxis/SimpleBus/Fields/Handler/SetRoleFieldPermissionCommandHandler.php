@@ -45,7 +45,7 @@ class SetRoleFieldPermissionCommandHandler
         /** @var Field $field */
         $field = $this->manager->getRepository(Field::class)->findOneBy([
             'id'        => $command->id,
-            'removedAt' => 0,
+            'removedAt' => null,
         ]);
 
         if (!$field) {

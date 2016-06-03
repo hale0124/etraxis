@@ -31,7 +31,7 @@ class ListItemVoterTest extends TransactionalTestCase
         $this->loginAs('hubert');
 
         /** @var ListItem $item */
-        $item = $this->doctrine->getRepository(ListItem::class)->findOneBy(['value' => 'Season 1']);
+        $item = $this->doctrine->getRepository(ListItem::class)->findOneBy(['text' => 'Season 1']);
 
         self::assertFalse($this->security->isGranted('UNKNOWN', $item));
     }
@@ -41,20 +41,20 @@ class ListItemVoterTest extends TransactionalTestCase
         $this->loginAs('hubert');
 
         /** @var ListItem $used */
-        $used = $this->doctrine->getRepository(ListItem::class)->findOneBy(['value' => 'Season 1']);
+        $used = $this->doctrine->getRepository(ListItem::class)->findOneBy(['text' => 'Season 1']);
 
         $item = new ListItem();
 
         $item
             ->setField($used->getField())
-            ->setKey(8)
-            ->setValue('Season 8')
+            ->setValue(8)
+            ->setText('Season 8')
         ;
 
         $this->doctrine->getManager()->persist($item);
         $this->doctrine->getManager()->flush();
 
-        $unused = $this->doctrine->getRepository(ListItem::class)->findOneBy(['value' => 'Season 8']);
+        $unused = $this->doctrine->getRepository(ListItem::class)->findOneBy(['text' => 'Season 8']);
 
         self::assertInstanceOf(ListItem::class, $used);
         self::assertInstanceOf(ListItem::class, $unused);

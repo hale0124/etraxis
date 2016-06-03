@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * Comment.
  *
- * @ORM\Table(name="tbl_comments",
+ * @ORM\Table(name="comments",
  *            uniqueConstraints={
  *                @ORM\UniqueConstraint(name="ix_comments", columns={"event_id"})
  *            })
@@ -29,7 +29,7 @@ class Comment
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="AUTO")
-     * @ORM\Column(name="comment_id", type="integer")
+     * @ORM\Column(name="id", type="integer")
      */
     private $id;
 
@@ -37,21 +37,21 @@ class Comment
      * @var Event Event.
      *
      * @ORM\ManyToOne(targetEntity="Event")
-     * @ORM\JoinColumn(name="event_id", nullable=false, referencedColumnName="event_id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="event_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
     private $event;
 
     /**
-     * @var int Whether comment is private.
+     * @var string Text of the comment.
      *
-     * @ORM\Column(name="is_confidential", type="integer")
+     * @ORM\Column(name="comment_text", type="text")
      */
-    private $isPrivate;
+    private $text;
 
     /**
-     * @var string Comment body.
+     * @var bool Whether comment is private.
      *
-     * @ORM\Column(name="comment_body", type="text")
+     * @ORM\Column(name="is_private", type="boolean")
      */
-    private $comment;
+    private $isPrivate;
 }

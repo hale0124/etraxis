@@ -12,6 +12,7 @@
 namespace eTraxis\SimpleBus\Users;
 
 use AltrEgo\AltrEgo;
+use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Tests\TransactionalTestCase;
 
 class ResetPasswordCommandTest extends TransactionalTestCase
@@ -60,7 +61,7 @@ class ResetPasswordCommandTest extends TransactionalTestCase
     {
         $username = 'einstein';
 
-        $user = $this->findUser($username, true);
+        $user = $this->findUser($username, AuthenticationProvider::LDAP);
 
         $token = $user->generateResetToken();
 

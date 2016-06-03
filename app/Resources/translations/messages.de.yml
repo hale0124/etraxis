@@ -54,9 +54,9 @@ permissions: Berechtigungen
 role: Rolle
 role.administrator: Administrator
 role.user: Benutzer
+role.any: 'Any user'
 role.author: Verfasser(in)
 role.responsible: Bearbeiter(in)
-role.registered: Registriert
 description: Beschreibung
 language: Sprache
 theme: Aussehen
@@ -122,13 +122,13 @@ template.permission.resume_records: 'Resume records'
 template.permission.reassign_records: 'Reassign records'
 template.permission.reopen_records: 'Reopen records'
 template.permission.add_comments: 'Add comments'
-template.permission.add_files: 'Add files'
-template.permission.remove_files: 'Remove files'
 template.permission.private_comments: 'Add/read private comments'
-template.permission.send_reminders: 'Send reminders'
-template.permission.delete_records: 'Delete records'
+template.permission.attach_files: 'Attach files'
+template.permission.delete_files: 'Delete files'
 template.permission.attach_subrecords: 'Attach subrecords'
 template.permission.detach_subrecords: 'Detach subrecords'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_records: 'Delete records'
 state: Status
 states: Status
 state.new: 'Neuer Status'
@@ -166,9 +166,9 @@ field.default_value: Vorgabewert
 field.min_value: 'Min. Wert'
 field.max_value: 'Max. Wert'
 field.max_length: 'Max. Länge'
-field.regex_check: 'Erlaubte Werte als regulärer Ausdruck (PCRE)'
-field.regex_search: 'Suchmuster (PCRE) zum Umwandeln von Zusatzinformationen'
-field.regex_replace: 'Ersetzungsmuster (PCRE) zum Umwandeln von Zusatzinformationen'
+field.pcre_check: 'Erlaubte Werte als regulärer Ausdruck (PCRE)'
+field.pcre_search: 'Suchmuster (PCRE) zum Umwandeln von Zusatzinformationen'
+field.pcre_replace: 'Ersetzungsmuster (PCRE) zum Umwandeln von Zusatzinformationen'
 field.confirm.delete: 'Möchten Sie diesen Zusatz wirklich löschen?'
 field.error.min_max_values: 'Das Maximum muss größer als das Minimum sein.'
 field.error.default_value: 'Der vorgegebene Wert muss im Bereich von %min% bis %max% liegen.'
@@ -177,6 +177,6 @@ field.permissions.none: keiner
 field.permissions.read_only: 'nur lesen'
 field.permissions.read_write: 'lesen und schreiben'
 listitems: Listeneinträge
-listitem.key: 'Item key'
 listitem.value: 'Item value'
+listitem.text: 'Item text'
 listitem.confirm.delete: 'Are you sure you want delete this item?'

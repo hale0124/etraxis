@@ -12,9 +12,7 @@
 namespace eTraxis\SimpleBus\States;
 
 use eTraxis\Entity\Group;
-use eTraxis\Entity\Project;
 use eTraxis\Entity\State;
-use eTraxis\Entity\StateResponsibleGroup;
 use eTraxis\Tests\TransactionalTestCase;
 
 class AddStateResponsibleGroupsCommandTest extends TransactionalTestCase
@@ -24,40 +22,13 @@ class AddStateResponsibleGroupsCommandTest extends TransactionalTestCase
         /** @var State $state */
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
 
-        /** @var Group $group */
-        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
-
-        $responsible = $this->doctrine->getRepository(StateResponsibleGroup::class)->findOneBy([
-            'state' => $state,
-            'group' => $group,
-        ]);
-        self::assertNull($responsible);
-
-        $command = new AddStateResponsibleGroupsCommand([
-            'id'     => $state->getId(),
-            'groups' => [$group->getId()],
-        ]);
-
-        $this->command_bus->handle($command);
-
-        $responsible = $this->doctrine->getRepository(StateResponsibleGroup::class)->findOneBy([
-            'state' => $state,
-            'group' => $group,
-        ]);
-        self::assertNotNull($responsible);
-    }
-
-    public function testExistingResponsibleGroups()
-    {
-        /** @var State $state */
-        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
-        self::assertCount(1, $state->getResponsibleGroups());
-
         /** @var Group $crew */
         $crew = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
 
         /** @var Group $managers */
         $managers = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
+
+        self::assertArraysByValues([$crew], $state->getResponsibleGroups());
 
         $command = new AddStateResponsibleGroupsCommand([
             'id'     => $state->getId(),
@@ -69,39 +40,7 @@ class AddStateResponsibleGroupsCommandTest extends TransactionalTestCase
 
         $this->command_bus->handle($command);
 
-        /** @var State $state */
-        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
-        self::assertCount(2, $state->getResponsibleGroups());
-    }
-
-    public function testEmptyResponsibleGroups()
-    {
-        /** @var Project $project */
-        $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'eTraxis 1.0']);
-
-        $group = new Group();
-
-        $group
-            ->setProject($project)
-            ->setName('Developers')
-        ;
-
-        $this->doctrine->getManager()->persist($group);
-        $this->doctrine->getManager()->flush();
-
-        $total = count($this->doctrine->getRepository(StateResponsibleGroup::class)->findAll());
-
-        /** @var State $state */
-        $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Produced']);
-
-        $command = new AddStateResponsibleGroupsCommand([
-            'id'     => $state->getId(),
-            'groups' => [$group->getId()],
-        ]);
-
-        $this->command_bus->handle($command);
-
-        self::assertCount($total, $this->doctrine->getRepository(StateResponsibleGroup::class)->findAll());
+        self::assertArraysByValues([$crew, $managers], $state->getResponsibleGroups());
     }
 
     /**

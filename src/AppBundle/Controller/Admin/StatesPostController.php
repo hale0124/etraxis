@@ -11,8 +11,8 @@
 
 namespace AppBundle\Controller\Admin;
 
+use eTraxis\Dictionary\StateResponsible;
 use eTraxis\Entity\Group;
-use eTraxis\Entity\State;
 use eTraxis\SimpleBus\States;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
@@ -45,7 +45,7 @@ class StatesPostController extends Controller
         $data = $request->request->get('state');
 
         if (!array_key_exists('responsible', $data)) {
-            $data['responsible'] = State::RESPONSIBLE_KEEP;
+            $data['responsible'] = StateResponsible::KEEP;
         }
 
         $command = new States\CreateStateCommand($data, ['template' => $id]);
@@ -111,15 +111,15 @@ class StatesPostController extends Controller
     /**
      * Saves transitions of the specified role for the specified state.
      *
-     * @Action\Route("/transitions/{id}/{role}", name="admin_states_save_role_transitions", requirements={"id"="\d+", "role"="\-\d+"})
+     * @Action\Route("/transitions/{id}/{role}", name="admin_states_save_role_transitions", requirements={"id"="\d+", "role"="\D+"})
      *
      * @param   Request $request
      * @param   int     $id
-     * @param   int     $role
+     * @param   string  $role
      *
      * @return  JsonResponse
      */
-    public function saveRoleTransitionsAction(Request $request, int $id, int $role): JsonResponse
+    public function saveRoleTransitionsAction(Request $request, int $id, string $role): JsonResponse
     {
         $command = new States\SetRoleStateTransitionsCommand([
             'id'          => $id,

@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\States;
 
+use eTraxis\Dictionary\StateResponsible;
 use eTraxis\Entity\State;
 use eTraxis\Tests\TransactionalTestCase;
 
@@ -26,14 +27,14 @@ class UpdateStateCommandTest extends TransactionalTestCase
 
         self::assertEquals('Delivered', $state->getName());
         self::assertEquals('D', $state->getAbbreviation());
-        self::assertEquals(State::RESPONSIBLE_REMOVE, $state->getResponsible());
+        self::assertEquals(StateResponsible::REMOVE, $state->getResponsible());
         self::assertNull($state->getNextState());
 
         $command = new UpdateStateCommand([
             'id'           => $state->getId(),
             'name'         => 'Completed',
             'abbreviation' => 'C',
-            'responsible'  => State::RESPONSIBLE_KEEP,
+            'responsible'  => StateResponsible::KEEP,
             'nextState'    => $nextState->getId(),
         ]);
 
@@ -47,7 +48,7 @@ class UpdateStateCommandTest extends TransactionalTestCase
 
         self::assertEquals('Completed', $state->getName());
         self::assertEquals('C', $state->getAbbreviation());
-        self::assertEquals(State::RESPONSIBLE_REMOVE, $state->getResponsible());
+        self::assertEquals(StateResponsible::REMOVE, $state->getResponsible());
         self::assertNull($state->getNextState());
     }
 
@@ -61,7 +62,7 @@ class UpdateStateCommandTest extends TransactionalTestCase
             'id'           => self::UNKNOWN_ENTITY_ID,
             'name'         => 'Completed',
             'abbreviation' => 'C',
-            'responsible'  => State::RESPONSIBLE_KEEP,
+            'responsible'  => StateResponsible::KEEP,
         ]);
 
         $this->command_bus->handle($command);
@@ -80,7 +81,7 @@ class UpdateStateCommandTest extends TransactionalTestCase
             'id'           => $state->getId(),
             'name'         => 'Completed',
             'abbreviation' => 'C',
-            'responsible'  => State::RESPONSIBLE_KEEP,
+            'responsible'  => StateResponsible::KEEP,
             'nextState'    => self::UNKNOWN_ENTITY_ID,
         ]);
 
@@ -100,7 +101,7 @@ class UpdateStateCommandTest extends TransactionalTestCase
             'id'           => $state->getId(),
             'name'         => 'New',
             'abbreviation' => 'D',
-            'responsible'  => State::RESPONSIBLE_REMOVE,
+            'responsible'  => StateResponsible::REMOVE,
         ]);
 
         $this->command_bus->handle($command);
@@ -119,7 +120,7 @@ class UpdateStateCommandTest extends TransactionalTestCase
             'id'           => $state->getId(),
             'name'         => 'Delivered',
             'abbreviation' => 'N',
-            'responsible'  => State::RESPONSIBLE_REMOVE,
+            'responsible'  => StateResponsible::REMOVE,
         ]);
 
         $this->command_bus->handle($command);

@@ -11,6 +11,7 @@
 
 namespace eTraxis\SimpleBus\Fields;
 
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\DecimalValue;
 use eTraxis\Entity\Field;
 use eTraxis\Tests\TransactionalTestCase;
@@ -28,7 +29,7 @@ class UpdateDecimalFieldCommandTest extends TransactionalTestCase
         $minValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameters()->getParameter1());
         $maxValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameters()->getParameter2());
 
-        self::assertEquals(Field::TYPE_DECIMAL, $field->getType());
+        self::assertEquals(FieldType::DECIMAL, $field->getType());
         self::assertEquals('U.S. viewers', $field->getName());
         self::assertNull($field->getDescription());
         self::assertFalse($field->isRequired());
@@ -54,7 +55,7 @@ class UpdateDecimalFieldCommandTest extends TransactionalTestCase
         $maxValue = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameters()->getParameter2());
         $default  = $this->doctrine->getRepository(DecimalValue::class)->find($field->getParameters()->getDefaultValue());
 
-        self::assertEquals(Field::TYPE_DECIMAL, $field->getType());
+        self::assertEquals(FieldType::DECIMAL, $field->getType());
         self::assertEquals('Total U.S. viewers', $field->getName());
         self::assertEquals('(millions)', $field->getDescription());
         self::assertTrue($field->isRequired());

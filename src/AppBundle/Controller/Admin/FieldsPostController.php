@@ -11,6 +11,7 @@
 
 namespace AppBundle\Controller\Admin;
 
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\Group;
 use eTraxis\SimpleBus\Fields;
@@ -47,39 +48,39 @@ class FieldsPostController extends Controller
 
         switch ($data['type']) {
 
-            case Field::TYPE_NUMBER:
+            case FieldType::NUMBER:
                 $command = new Fields\CreateNumberFieldCommand($data + $data['asNumber'], ['state' => $id]);
                 break;
 
-            case Field::TYPE_DECIMAL:
+            case FieldType::DECIMAL:
                 $command = new Fields\CreateDecimalFieldCommand($data + $data['asDecimal'], ['state' => $id]);
                 break;
 
-            case Field::TYPE_STRING:
+            case FieldType::STRING:
                 $command = new Fields\CreateStringFieldCommand($data + $data['asString'], ['state' => $id]);
                 break;
 
-            case Field::TYPE_TEXT:
+            case FieldType::TEXT:
                 $command = new Fields\CreateTextFieldCommand($data + $data['asText'], ['state' => $id]);
                 break;
 
-            case Field::TYPE_CHECKBOX:
+            case FieldType::CHECKBOX:
                 $command = new Fields\CreateCheckboxFieldCommand($data + $data['asCheckbox'], ['state' => $id]);
                 break;
 
-            case Field::TYPE_LIST:
+            case FieldType::LIST:
                 $command = new Fields\CreateListFieldCommand($data, ['state' => $id]);
                 break;
 
-            case Field::TYPE_RECORD:
+            case FieldType::RECORD:
                 $command = new Fields\CreateRecordFieldCommand($data, ['state' => $id]);
                 break;
 
-            case Field::TYPE_DATE:
+            case FieldType::DATE:
                 $command = new Fields\CreateDateFieldCommand($data + $data['asDate'], ['state' => $id]);
                 break;
 
-            case Field::TYPE_DURATION:
+            case FieldType::DURATION:
                 $command = new Fields\CreateDurationFieldCommand($data + $data['asDuration'], ['state' => $id]);
                 break;
 
@@ -108,49 +109,49 @@ class FieldsPostController extends Controller
 
         switch ($field->getType()) {
 
-            case Field::TYPE_NUMBER:
+            case FieldType::NUMBER:
                 $command = new Fields\UpdateNumberFieldCommand($data + $data['asNumber'], ['id' => $field->getId()]);
                 break;
 
-            case Field::TYPE_DECIMAL:
+            case FieldType::DECIMAL:
                 $command = new Fields\UpdateDecimalFieldCommand($data + $data['asDecimal'], ['id' => $field->getId()]);
                 break;
 
-            case Field::TYPE_STRING:
+            case FieldType::STRING:
                 $command = new Fields\UpdateStringFieldCommand($data + $data['asString'], [
-                    'id'           => $field->getId(),
-                    'regexCheck'   => $field->getRegex()->getCheck(),
-                    'regexSearch'  => $field->getRegex()->getSearch(),
-                    'regexReplace' => $field->getRegex()->getReplace(),
+                    'id'          => $field->getId(),
+                    'pcreCheck'   => $field->getPCRE()->getCheck(),
+                    'pcreSearch'  => $field->getPCRE()->getSearch(),
+                    'pcreReplace' => $field->getPCRE()->getReplace(),
                 ]);
                 break;
 
-            case Field::TYPE_TEXT:
+            case FieldType::TEXT:
                 $command = new Fields\UpdateTextFieldCommand($data + $data['asText'], [
-                    'id'           => $field->getId(),
-                    'regexCheck'   => $field->getRegex()->getCheck(),
-                    'regexSearch'  => $field->getRegex()->getSearch(),
-                    'regexReplace' => $field->getRegex()->getReplace(),
+                    'id'          => $field->getId(),
+                    'pcreCheck'   => $field->getPCRE()->getCheck(),
+                    'pcreSearch'  => $field->getPCRE()->getSearch(),
+                    'pcreReplace' => $field->getPCRE()->getReplace(),
                 ]);
                 break;
 
-            case Field::TYPE_CHECKBOX:
+            case FieldType::CHECKBOX:
                 $command = new Fields\UpdateCheckboxFieldCommand($data + $data['asCheckbox'], ['id' => $field->getId(), 'required' => false]);
                 break;
 
-            case Field::TYPE_LIST:
+            case FieldType::LIST:
                 $command = new Fields\UpdateListFieldCommand($data, ['id' => $field->getId()]);
                 break;
 
-            case Field::TYPE_RECORD:
+            case FieldType::RECORD:
                 $command = new Fields\UpdateRecordFieldCommand($data, ['id' => $field->getId()]);
                 break;
 
-            case Field::TYPE_DATE:
+            case FieldType::DATE:
                 $command = new Fields\UpdateDateFieldCommand($data + $data['asDate'], ['id' => $field->getId()]);
                 break;
 
-            case Field::TYPE_DURATION:
+            case FieldType::DURATION:
                 $command = new Fields\UpdateDurationFieldCommand($data + $data['asDuration'], ['id' => $field->getId()]);
                 break;
 
@@ -166,25 +167,25 @@ class FieldsPostController extends Controller
     /**
      * Processes submitted form when specified field PCRE settings are being edited.
      *
-     * @Action\Route("/regex/{id}", name="admin_regex_field", requirements={"id"="\d+"})
+     * @Action\Route("/pcre/{id}", name="admin_pcre_field", requirements={"id"="\d+"})
      *
      * @param   Request $request
      * @param   Field   $field
      *
      * @return  JsonResponse
      */
-    public function regexAction(Request $request, Field $field): JsonResponse
+    public function pcreAction(Request $request, Field $field): JsonResponse
     {
-        $data = $request->request->get('regex');
+        $data = $request->request->get('pcre');
 
         switch ($field->getType()) {
 
-            case Field::TYPE_STRING:
+            case FieldType::STRING:
                 $fieldAs = $field->asString();
                 $command = new Fields\UpdateStringFieldCommand($data);
                 break;
 
-            case Field::TYPE_TEXT:
+            case FieldType::TEXT:
                 $fieldAs = $field->asText();
                 $command = new Fields\UpdateTextFieldCommand($data);
                 break;
@@ -204,9 +205,9 @@ class FieldsPostController extends Controller
         $command->defaultValue = $fieldAs->getDefaultValue();
 
         // PCRE field attributes.
-        $command->regexCheck   = $data['check']   ?: null;
-        $command->regexSearch  = $data['search']  ?: null;
-        $command->regexReplace = $data['replace'] ?: null;
+        $command->pcreCheck   = $data['check']   ?: null;
+        $command->pcreSearch  = $data['search']  ?: null;
+        $command->pcreReplace = $data['replace'] ?: null;
 
         $this->getCommandBus()->handle($command);
 
@@ -251,20 +252,20 @@ class FieldsPostController extends Controller
     /**
      * Saves permissions of the specified role for the specified template.
      *
-     * @Action\Route("/permissions/{id}/{role}", name="admin_fields_save_role_permissions", requirements={"id"="\d+", "role"="\-\d+"})
+     * @Action\Route("/permissions/{id}/{role}", name="admin_fields_save_role_permissions", requirements={"id"="\d+", "role"="\D+"})
      *
      * @param   Request $request
      * @param   int     $id
-     * @param   int     $role
+     * @param   string  $role
      *
      * @return  JsonResponse
      */
-    public function saveRolePermissionsAction(Request $request, int $id, int $role): JsonResponse
+    public function saveRolePermissionsAction(Request $request, int $id, string $role): JsonResponse
     {
         $command = new Fields\SetRoleFieldPermissionCommand([
             'id'         => $id,
             'role'       => $role,
-            'permission' => (int) $request->request->get('permission'),
+            'permission' => $request->request->get('permission'),
         ]);
 
         $this->getCommandBus()->handle($command);
@@ -288,10 +289,10 @@ class FieldsPostController extends Controller
         $command = new Fields\SetGroupFieldPermissionCommand([
             'id'         => $id,
             'group'      => $group->getId(),
-            'permission' => (int) $request->request->get('permission'),
+            'permission' => $request->request->get('permission'),
         ]);
 
-        $this->getCommandBus()->handle($command);
+          $this->getCommandBus()->handle($command);
 
         return new JsonResponse();
     }

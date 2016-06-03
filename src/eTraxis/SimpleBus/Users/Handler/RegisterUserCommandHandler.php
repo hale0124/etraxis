@@ -12,6 +12,7 @@
 namespace eTraxis\SimpleBus\Users\Handler;
 
 use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Users\RegisterUserCommand;
 use Psr\Log\LoggerInterface;
@@ -54,8 +55,8 @@ class RegisterUserCommandHandler
 
         /** @var User $user */
         $user = $repository->findOneBy([
+            'provider' => AuthenticationProvider::LDAP,
             'username' => $command->username,
-            'isLdap'   => 1,
         ]);
 
         // The account already exists - update display name and email.
@@ -76,16 +77,12 @@ class RegisterUserCommandHandler
             $user = new User();
 
             $user
+                ->setProvider(AuthenticationProvider::LDAP)
                 ->setUsername($command->username)
                 ->setFullname($command->fullname)
                 ->setEmail($command->email)
-                ->setPassword(null)
                 ->setAdmin(false)
                 ->setDisabled(false)
-                ->setLdap(true)
-            ;
-
-            $user->getSettings()
                 ->setLocale($this->locale)
                 ->setTheme($this->theme)
             ;

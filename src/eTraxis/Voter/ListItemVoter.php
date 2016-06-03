@@ -81,9 +81,9 @@ class ListItemVoter extends Voter
             ->select('COUNT(v.event)')
             ->from(FieldValue::class, 'v')
             ->where('v.field = :field')
-            ->andWhere('v.valueId = :value')
+            ->andWhere('v.value = :value')
             ->setParameter('field', $subject->getField())
-            ->setParameter('value', $subject->getKey())
+            ->setParameter('value', $subject->getValue())
         ;
 
         $count = (int) $query->getQuery()->getSingleScalarResult();

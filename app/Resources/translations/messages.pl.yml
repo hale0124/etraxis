@@ -54,9 +54,9 @@ permissions: Uprawnienia
 role: Role
 role.administrator: Administrator
 role.user: Użytkownik
+role.any: 'Any user'
 role.author: Autor
 role.responsible: Odpowiedzialny
-role.registered: Zarejestrowany
 description: Opis
 language: Języki
 theme: Motyw
@@ -122,13 +122,13 @@ template.permission.resume_records: 'Resume records'
 template.permission.reassign_records: 'Reassign records'
 template.permission.reopen_records: 'Reopen records'
 template.permission.add_comments: 'Add comments'
-template.permission.add_files: 'Add files'
-template.permission.remove_files: 'Remove files'
 template.permission.private_comments: 'Add/read private comments'
-template.permission.send_reminders: 'Send reminders'
-template.permission.delete_records: 'Delete records'
+template.permission.attach_files: 'Attach files'
+template.permission.delete_files: 'Delete files'
 template.permission.attach_subrecords: 'Attach subrecords'
 template.permission.detach_subrecords: 'Detach subrecords'
+template.permission.send_reminders: 'Send reminders'
+template.permission.delete_records: 'Delete records'
 state: Stan
 states: Stany
 state.new: 'Nowy stan'
@@ -166,9 +166,9 @@ field.default_value: 'Warość domyślna'
 field.min_value: Min.wartość
 field.max_value: Max.wartość
 field.max_length: Max.długość
-field.regex_check: 'PCRE do sprawdzenia wartości pola'
-field.regex_search: 'PCRE do przeszukiwania wartości pola'
-field.regex_replace: 'PCRE do zastąpienia wartości pola'
+field.pcre_check: 'PCRE do sprawdzenia wartości pola'
+field.pcre_search: 'PCRE do przeszukiwania wartości pola'
+field.pcre_replace: 'PCRE do zastąpienia wartości pola'
 field.confirm.delete: 'Czy jesteś pewien, że chesz usunąć wybrane pole?'
 field.error.min_max_values: 'Wartość maksymalna powinna być większa od wartości minimalnej.'
 field.error.default_value: 'Wartość domyślna powinna być z przedziału od %min% do %max%.'
@@ -177,6 +177,6 @@ field.permissions.none: brak
 field.permissions.read_only: 'Pozwolenie na odczyt'
 field.permissions.read_write: 'Pozwolenie do zapisu'
 listitems: 'Pozycje listy'
-listitem.key: 'Item key'
 listitem.value: 'Item value'
+listitem.text: 'Item text'
 listitem.confirm.delete: 'Are you sure you want delete this item?'

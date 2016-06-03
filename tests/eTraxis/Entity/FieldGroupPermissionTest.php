@@ -11,6 +11,8 @@
 
 namespace eTraxis\Entity;
 
+use eTraxis\Dictionary\FieldPermission;
+
 class FieldGroupPermissionTest extends \PHPUnit_Framework_TestCase
 {
     /** @var FieldGroupPermission */
@@ -35,7 +37,7 @@ class FieldGroupPermissionTest extends \PHPUnit_Framework_TestCase
 
     public function testPermission()
     {
-        $expected = Field::ACCESS_READ_ONLY;
+        $expected = FieldPermission::READ_ONLY;
 
         $this->object->setPermission($expected);
         self::assertEquals($expected, $this->object->getPermission());

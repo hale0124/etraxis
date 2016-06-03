@@ -13,73 +13,70 @@ namespace eTraxis\SimpleBus\States;
 
 use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\State;
-use eTraxis\Entity\StateRoleTransition;
 use eTraxis\Tests\TransactionalTestCase;
 
 class SetRoleStateTransitionsCommandTest extends TransactionalTestCase
 {
-    public function testAddRoleTransitions()
+    /** @var State */
+    private $draft;
+
+    /** @var State */
+    private $accepted;
+
+    /** @var State */
+    private $deprecated;
+
+    protected function setUp()
     {
-        /** @var State $state_new */
-        $state_new = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
+        parent::setUp();
 
-        /** @var State $state_delivered */
-        $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
+        $repository = $this->doctrine->getRepository(State::class);
 
-        /** @var StateRoleTransition $transition */
-        $transition = $this->doctrine->getRepository(StateRoleTransition::class)->findOneBy([
-            'fromState' => $state_new,
-            'toState'   => $state_delivered,
-            'role'      => SystemRole::AUTHOR,
-        ]);
-        self::assertNull($transition);
-
-        $command = new SetRoleStateTransitionsCommand([
-            'id'          => $state_new->getId(),
-            'role'        => SystemRole::AUTHOR,
-            'transitions' => [$state_delivered->getId()],
-        ]);
-
-        $this->command_bus->handle($command);
-
-        $transition = $this->doctrine->getRepository(StateRoleTransition::class)->findOneBy([
-            'fromState' => $state_new,
-            'toState'   => $state_delivered,
-            'role'      => SystemRole::AUTHOR,
-        ]);
-        self::assertNotNull($transition);
+        $this->draft      = $repository->findOneBy(['name' => 'Draft']);
+        $this->accepted   = $repository->findOneBy(['name' => 'Accepted']);
+        $this->deprecated = $repository->findOneBy(['name' => 'Deprecated']);
     }
 
-    public function testRemoveRoleTransitions()
+    public function testRoleTransitions()
     {
-        /** @var State $state_new */
-        $state_new = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
-
-        /** @var State $state_delivered */
-        $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
-
-        /** @var StateRoleTransition $transition */
-        $transition = $this->doctrine->getRepository(StateRoleTransition::class)->findOneBy([
-            'fromState' => $state_new,
-            'toState'   => $state_delivered,
-            'role'      => SystemRole::RESPONSIBLE,
-        ]);
-        self::assertNotNull($transition);
+        self::assertEmpty($this->draft->getRoleTransitions(SystemRole::AUTHOR));
 
         $command = new SetRoleStateTransitionsCommand([
-            'id'          => $state_new->getId(),
-            'role'        => SystemRole::RESPONSIBLE,
-            'transitions' => [],
+            'id'          => $this->draft->getId(),
+            'role'        => SystemRole::AUTHOR,
+            'transitions' => [
+                $this->accepted->getId(),
+            ],
         ]);
 
         $this->command_bus->handle($command);
 
-        $transition = $this->doctrine->getRepository(StateRoleTransition::class)->findOneBy([
-            'fromState' => $state_new,
-            'toState'   => $state_delivered,
-            'role'      => SystemRole::RESPONSIBLE,
+        self::assertArraysByValues([$this->accepted], $this->draft->getRoleTransitions(SystemRole::AUTHOR));
+
+        $command = new SetRoleStateTransitionsCommand([
+            'id'          => $this->draft->getId(),
+            'role'        => SystemRole::AUTHOR,
+            'transitions' => [
+                $this->accepted->getId(),
+                $this->deprecated->getId(),
+            ],
         ]);
-        self::assertNull($transition);
+
+        $this->command_bus->handle($command);
+
+        self::assertArraysByValues([$this->accepted, $this->deprecated], $this->draft->getRoleTransitions(SystemRole::AUTHOR));
+
+        $command = new SetRoleStateTransitionsCommand([
+            'id'          => $this->draft->getId(),
+            'role'        => SystemRole::AUTHOR,
+            'transitions' => [
+                $this->deprecated->getId(),
+            ],
+        ]);
+
+        $this->command_bus->handle($command);
+
+        self::assertArraysByValues([$this->deprecated], $this->draft->getRoleTransitions(SystemRole::AUTHOR));
     }
 
     /**
@@ -88,13 +85,10 @@ class SetRoleStateTransitionsCommandTest extends TransactionalTestCase
      */
     public function testNotFoundState()
     {
-        /** @var State $state_delivered */
-        $state_delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
-
         $command = new SetRoleStateTransitionsCommand([
             'id'          => self::UNKNOWN_ENTITY_ID,
             'role'        => SystemRole::RESPONSIBLE,
-            'transitions' => [$state_delivered->getId()],
+            'transitions' => [$this->accepted->getId()],
         ]);
 
         $this->command_bus->handle($command);

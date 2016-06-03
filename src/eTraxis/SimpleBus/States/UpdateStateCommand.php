@@ -41,7 +41,7 @@ class UpdateStateCommand
 
     /**
      * @Assert\NotBlank()
-     * @Assert\Length(max="50")
+     * @Assert\Length(max="3")
      */
     public $abbreviation;
 

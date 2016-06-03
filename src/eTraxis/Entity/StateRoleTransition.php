@@ -12,11 +12,12 @@
 namespace eTraxis\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use eTraxis\Dictionary\SystemRole;
 
 /**
  * State/Role transition.
  *
- * @ORM\Table(name="tbl_role_trans")
+ * @ORM\Table(name="state_role_transitions")
  * @ORM\Entity
  */
 class StateRoleTransition
@@ -26,8 +27,8 @@ class StateRoleTransition
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\ManyToOne(targetEntity="State")
-     * @ORM\JoinColumn(name="state_id_from", referencedColumnName="state_id", onDelete="CASCADE")
+     * @ORM\ManyToOne(targetEntity="State", inversedBy="roleTransitions")
+     * @ORM\JoinColumn(name="state_id_from", referencedColumnName="id", onDelete="CASCADE")
      */
     private $fromState;
 
@@ -37,16 +38,16 @@ class StateRoleTransition
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
      * @ORM\ManyToOne(targetEntity="State")
-     * @ORM\JoinColumn(name="state_id_to", referencedColumnName="state_id", onDelete="CASCADE")
+     * @ORM\JoinColumn(name="state_id_to", referencedColumnName="id", onDelete="CASCADE")
      */
     private $toState;
 
     /**
-     * @var int System role which is allowed to make this transition.
+     * @var string System role which is allowed to make this transition.
      *
      * @ORM\Id
      * @ORM\GeneratedValue(strategy="NONE")
-     * @ORM\Column(name="role", type="integer")
+     * @ORM\Column(name="role", type="string", length=20)
      */
     private $role;
 
@@ -101,13 +102,15 @@ class StateRoleTransition
     /**
      * Property setter.
      *
-     * @param   int $role
+     * @param   string $role
      *
      * @return  self
      */
-    public function setRole(int $role)
+    public function setRole(string $role)
     {
-        $this->role = $role;
+        if (SystemRole::has($role)) {
+            $this->role = $role;
+        }
 
         return $this;
     }
@@ -115,7 +118,7 @@ class StateRoleTransition
     /**
      * Property getter.
      *
-     * @return  int
+     * @return  string
      */
     public function getRole()
     {

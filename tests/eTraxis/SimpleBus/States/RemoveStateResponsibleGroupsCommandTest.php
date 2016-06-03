@@ -13,7 +13,6 @@ namespace eTraxis\SimpleBus\States;
 
 use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
-use eTraxis\Entity\StateResponsibleGroup;
 use eTraxis\Tests\TransactionalTestCase;
 
 class RemoveStateResponsibleGroupsCommandTest extends TransactionalTestCase
@@ -26,11 +25,7 @@ class RemoveStateResponsibleGroupsCommandTest extends TransactionalTestCase
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
 
-        $responsible = $this->doctrine->getRepository(StateResponsibleGroup::class)->findOneBy([
-            'state' => $state,
-            'group' => $group,
-        ]);
-        self::assertNotNull($responsible);
+        self::assertArraysByValues([$group], $state->getResponsibleGroups());
 
         $command = new RemoveStateResponsibleGroupsCommand([
             'id'     => $state->getId(),
@@ -39,11 +34,7 @@ class RemoveStateResponsibleGroupsCommandTest extends TransactionalTestCase
 
         $this->command_bus->handle($command);
 
-        $responsible = $this->doctrine->getRepository(StateResponsibleGroup::class)->findOneBy([
-            'state' => $state,
-            'group' => $group,
-        ]);
-        self::assertNull($responsible);
+        self::assertEmpty($state->getResponsibleGroups());
     }
 
     /**
