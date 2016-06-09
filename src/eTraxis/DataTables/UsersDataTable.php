@@ -117,12 +117,10 @@ class UsersDataTable implements DataTableHandlerInterface
 
                 case self::COLUMN_PERMISSIONS:
 
-                    if ($value === 'admin') {
-                        $query->andWhere('u.isAdmin <> 0');
-                    }
-                    elseif ($value === 'user') {
-                        $query->andWhere('u.isAdmin = 0');
-                    }
+                    $query
+                        ->andWhere('u.isAdmin = :isAdmin')
+                        ->setParameter('isAdmin', $value === 'admin')
+                    ;
 
                     break;
 
