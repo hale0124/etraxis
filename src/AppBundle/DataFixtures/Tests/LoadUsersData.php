@@ -248,11 +248,10 @@ class LoadUsersData extends AbstractFixture implements ContainerAwareInterface, 
 
         foreach ($data as $username => $row) {
 
-            $user = new User();
+            $user = new User(AuthenticationProvider::ETRAXIS);
 
             $object = $this->ego($user);
 
-            $object->provider = AuthenticationProvider::ETRAXIS;
             $object->username = $username;
             $object->password = $encoder->encodePassword('secret');
 

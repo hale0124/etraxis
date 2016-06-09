@@ -22,10 +22,9 @@ class DeleteListItemCommandTest extends TransactionalTestCase
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Season']);
 
-        $item = new ListItem();
+        $item = new ListItem($field);
 
         $item
-            ->setField($field)
             ->setValue(8)
             ->setText('Season 8')
         ;

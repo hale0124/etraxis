@@ -12,15 +12,32 @@
 namespace eTraxis\Entity;
 
 use AltrEgo\AltrEgo;
+use eTraxis\Tests\TransactionalTestCase;
 
-class TextValueTest extends \PHPUnit_Framework_TestCase
+class TextValueTest extends TransactionalTestCase
 {
     /** @var TextValue */
     private $object;
 
     protected function setUp()
     {
-        $this->object = new TextValue();
+        parent::setUp();
+
+        $this->object = $this->doctrine->getRepository(TextValue::class)->findOneBy([
+            'token' => 'b638cc32b8362077f29b02b60d972381',
+        ]);
+    }
+
+    public function testConstruct()
+    {
+        $expected = str_pad(null, 4000, '_');
+        $value    = new TextValue($expected);
+
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($value);
+
+        self::assertEquals(md5($expected), $object->token);
+        self::assertEquals($expected, $value->getValue());
     }
 
     public function testId()
@@ -35,12 +52,7 @@ class TextValueTest extends \PHPUnit_Framework_TestCase
 
     public function testValue()
     {
-        /** @var \StdClass $object */
-        $object = AltrEgo::create($this->object);
-
-        $expected = str_pad('_', 4000, '_');
-        $this->object->setValue($expected);
-        self::assertEquals(md5($expected), $object->token);
+        $expected = 'Delivery failed due to the comet running out of ice.';
         self::assertEquals($expected, $this->object->getValue());
     }
 }

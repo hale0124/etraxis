@@ -62,19 +62,15 @@ class ListItem
     private $text;
 
     /**
-     * Property setter.
+     * Adds new item to specified field of "List" type.
      *
      * @param   Field $field
-     *
-     * @return  self
      */
-    public function setField(Field $field)
+    public function __construct(Field $field)
     {
         if ($field->getType() === FieldType::LIST) {
             $this->field = $field;
         }
-
-        return $this;
     }
 
     /**

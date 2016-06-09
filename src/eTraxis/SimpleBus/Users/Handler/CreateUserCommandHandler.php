@@ -62,10 +62,9 @@ class CreateUserCommandHandler
             throw new BadRequestHttpException($e->getMessage());
         }
 
-        $entity = new User();
+        $entity = new User(AuthenticationProvider::ETRAXIS);
 
         $entity
-            ->setProvider(AuthenticationProvider::ETRAXIS)
             ->setUsername($command->username)
             ->setFullname($command->fullname)
             ->setEmail($command->email)

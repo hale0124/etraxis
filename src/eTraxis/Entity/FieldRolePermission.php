@@ -52,17 +52,23 @@ class FieldRolePermission
     private $permission;
 
     /**
-     * Property setter.
+     * Constructor.
      *
-     * @param   Field $field
-     *
-     * @return  self
+     * @param   Field  $field
+     * @param   string $role
+     * @param   string $permission
      */
-    public function setField(Field $field)
+    public function __construct(Field $field, string $role, string $permission)
     {
         $this->field = $field;
 
-        return $this;
+        if (SystemRole::has($role)) {
+            $this->role = $role;
+        }
+
+        if (FieldPermission::has($permission)) {
+            $this->permission = $permission;
+        }
     }
 
     /**
@@ -76,22 +82,6 @@ class FieldRolePermission
     }
 
     /**
-     * Property setter.
-     *
-     * @param   string $role
-     *
-     * @return  self
-     */
-    public function setRole(string $role)
-    {
-        if (SystemRole::has($role)) {
-            $this->role = $role;
-        }
-
-        return $this;
-    }
-
-    /**
      * Property getter.
      *
      * @return  string
@@ -99,22 +89,6 @@ class FieldRolePermission
     public function getRole()
     {
         return $this->role;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   string $permission
-     *
-     * @return  self
-     */
-    public function setPermission(string $permission)
-    {
-        if (FieldPermission::has($permission)) {
-            $this->permission = $permission;
-        }
-
-        return $this;
     }
 
     /**

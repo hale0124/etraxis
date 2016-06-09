@@ -52,17 +52,20 @@ class TemplateGroupPermission
     private $permission;
 
     /**
-     * Property setter.
+     * Constructor.
      *
      * @param   Template $template
-     *
-     * @return  self
+     * @param   Group    $group
+     * @param   string   $permission
      */
-    public function setTemplate(Template $template)
+    public function __construct(Template $template, Group $group, string $permission)
     {
         $this->template = $template;
+        $this->group    = $group;
 
-        return $this;
+        if (TemplatePermission::has($permission)) {
+            $this->permission = $permission;
+        }
     }
 
     /**
@@ -76,20 +79,6 @@ class TemplateGroupPermission
     }
 
     /**
-     * Property setter.
-     *
-     * @param   Group $group
-     *
-     * @return  self
-     */
-    public function setGroup(Group $group)
-    {
-        $this->group = $group;
-
-        return $this;
-    }
-
-    /**
      * Property getter.
      *
      * @return  Group
@@ -97,22 +86,6 @@ class TemplateGroupPermission
     public function getGroup()
     {
         return $this->group;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   string $permission
-     *
-     * @return  self
-     */
-    public function setPermission(string $permission)
-    {
-        if (TemplatePermission::has($permission)) {
-            $this->permission = $permission;
-        }
-
-        return $this;
     }
 
     /**

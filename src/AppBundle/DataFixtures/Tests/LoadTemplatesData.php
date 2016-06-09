@@ -96,11 +96,10 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
             ],
         ];
 
-        $template = new Template();
-
         /** @noinspection PhpParamsInspection */
+        $template = new Template($this->getReference('project:planetexpress'));
+
         $template
-            ->setProject($this->getReference('project:planetexpress'))
             ->setName('Delivery')
             ->setPrefix('PE')
             ->setDescription('Delivery task')
@@ -140,11 +139,10 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
             TemplatePermission::DELETE_FILES,
         ];
 
-        $template = new Template();
-
         /** @noinspection PhpParamsInspection */
+        $template = new Template($this->getReference('project:planetexpress'));
+
         $template
-            ->setProject($this->getReference('project:planetexpress'))
             ->setName('Futurama')
             ->setPrefix('F')
             ->setDescription('Futurama episode')
@@ -183,11 +181,10 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
         /** @var \eTraxis\Entity\Group $group */
         $group = $this->getReference('group:fig:members');
 
-        $template = new Template();
-
         /** @noinspection PhpParamsInspection */
+        $template = new Template($this->getReference('project:phpfig'));
+
         $template
-            ->setProject($this->getReference('project:phpfig'))
             ->setName('PSR')
             ->setPrefix('fig')
             ->setDescription('PHP Standard Recommendation')

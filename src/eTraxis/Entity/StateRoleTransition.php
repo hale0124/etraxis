@@ -52,17 +52,20 @@ class StateRoleTransition
     private $role;
 
     /**
-     * Property setter.
+     * Constructor.
      *
-     * @param   State $fromState
-     *
-     * @return  self
+     * @param   State  $fromState
+     * @param   State  $toState
+     * @param   string $role
      */
-    public function setFromState(State $fromState)
+    public function __construct(State $fromState, State $toState, string $role)
     {
         $this->fromState = $fromState;
+        $this->toState   = $toState;
 
-        return $this;
+        if (SystemRole::has($role)) {
+            $this->role = $role;
+        }
     }
 
     /**
@@ -76,20 +79,6 @@ class StateRoleTransition
     }
 
     /**
-     * Property setter.
-     *
-     * @param   State $toState
-     *
-     * @return  self
-     */
-    public function setToState(State $toState)
-    {
-        $this->toState = $toState;
-
-        return $this;
-    }
-
-    /**
      * Property getter.
      *
      * @return  State
@@ -97,22 +86,6 @@ class StateRoleTransition
     public function getToState()
     {
         return $this->toState;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   string $role
-     *
-     * @return  self
-     */
-    public function setRole(string $role)
-    {
-        if (SystemRole::has($role)) {
-            $this->role = $role;
-        }
-
-        return $this;
     }
 
     /**

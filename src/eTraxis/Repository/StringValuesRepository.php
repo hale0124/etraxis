@@ -30,8 +30,7 @@ class StringValuesRepository extends EntityRepository implements CustomValuesRep
         // If entity doesn't exist yet, save it.
         if ($entity === null) {
 
-            $entity = new StringValue();
-            $entity->setValue($value);
+            $entity = new StringValue($value);
 
             $em = $this->getEntityManager();
 

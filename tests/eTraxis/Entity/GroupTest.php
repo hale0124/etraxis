@@ -27,6 +27,15 @@ class GroupTest extends TransactionalTestCase
         ]);
     }
 
+    public function testConstruct()
+    {
+        $group = new Group($project = new Project());
+        self::assertEquals($project, $group->getProject());
+
+        $group = new Group();
+        self::assertNull($group->getProject());
+    }
+
     public function testId()
     {
         $group = new Group();
@@ -34,24 +43,10 @@ class GroupTest extends TransactionalTestCase
         self::assertNotNull($this->object->getId());
     }
 
-    public function testProjectOnNew()
+    public function testProject()
     {
-        $group = new Group();
-
-        $group->setProject($project = new Project());
-        self::assertEquals($project, $group->getProject());
-
-        $group->setProject();
-        self::assertNull($group->getProject());
-    }
-
-    /**
-     * @expectedException \RuntimeException
-     * @expectedExceptionMessage Can't change project of existing group.
-     */
-    public function testProjectOnExisting()
-    {
-        $this->object->setProject();
+        $expected = 'Planet Express';
+        self::assertEquals($expected, $this->object->getProject()->getName());
     }
 
     public function testName()

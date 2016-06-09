@@ -11,6 +11,7 @@
 
 namespace eTraxis\Security;
 
+use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Entity\CurrentUser;
 use eTraxis\Entity\User;
 use eTraxis\Tests\TransactionalTestCase;
@@ -59,7 +60,7 @@ class InternalUserProviderTest extends TransactionalTestCase
 
     public function testRefreshUser()
     {
-        $user = new User();
+        $user = new User(AuthenticationProvider::ETRAXIS);
 
         $user->setUsername('artem');
 

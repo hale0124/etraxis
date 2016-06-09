@@ -12,7 +12,11 @@
 namespace eTraxis\Entity\Fields;
 
 use eTraxis\Dictionary\FieldType;
+use eTraxis\Dictionary\StateType;
 use eTraxis\Entity\Field;
+use eTraxis\Entity\Project;
+use eTraxis\Entity\State;
+use eTraxis\Entity\Template;
 
 class CheckboxFieldTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,8 +27,9 @@ class CheckboxFieldTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->object = new Field();
-        $this->object->setType(FieldType::CHECKBOX);
+        $state = new State(new Template(new Project()), StateType::INTERIM);
+
+        $this->object = new Field($state, FieldType::CHECKBOX);
     }
 
     public function testSupportedKeys()

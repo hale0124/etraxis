@@ -160,10 +160,16 @@ class User extends Entity implements \JsonSerializable
     private $groups;
 
     /**
-     * Constructor.
+     * Creates new account with specified authentication provider.
+     *
+     * @param   string $provider
      */
-    public function __construct()
+    public function __construct(string $provider)
     {
+        if (Dictionary\AuthenticationProvider::has($provider)) {
+            $this->provider = $provider;
+        }
+
         $this->groups = new ArrayCollection();
     }
 
@@ -175,22 +181,6 @@ class User extends Entity implements \JsonSerializable
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   string $provider
-     *
-     * @return  self
-     */
-    public function setProvider(string $provider)
-    {
-        if (Dictionary\AuthenticationProvider::has($provider)) {
-            $this->provider = $provider;
-        }
-
-        return $this;
     }
 
     /**

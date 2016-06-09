@@ -46,13 +46,11 @@ class StateVoterTest extends TransactionalTestCase
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
-        $state = new State();
+        $state = new State($template, StateType::FINAL);
 
         $state
-            ->setTemplate($template)
             ->setName('Cancelled')
             ->setAbbreviation('C')
-            ->setType(StateType::FINAL)
             ->setResponsible(StateResponsible::REMOVE)
         ;
 
@@ -79,13 +77,11 @@ class StateVoterTest extends TransactionalTestCase
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
-        $state = new State();
+        $state = new State($template, StateType::INTERIM);
 
         $state
-            ->setTemplate($template)
             ->setName('On the way')
             ->setAbbreviation('O')
-            ->setType(StateType::INTERIM)
             ->setResponsible(StateResponsible::KEEP)
         ;
 

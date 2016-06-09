@@ -15,32 +15,17 @@ use eTraxis\Dictionary\TemplatePermission;
 
 class TemplateGroupPermissionTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var TemplateGroupPermission */
-    private $object;
-
-    protected function setUp()
+    public function testConstruct()
     {
-        $this->object = new TemplateGroupPermission();
-    }
+        $project    = new Project();
+        $template   = new Template($project);
+        $group      = new Group();
+        $permission = TemplatePermission::CREATE_RECORDS;
 
-    public function testTemplate()
-    {
-        $this->object->setTemplate($template = new Template());
-        self::assertEquals($template, $this->object->getTemplate());
-    }
+        $object = new TemplateGroupPermission($template, $group, $permission);
 
-    public function testGroup()
-    {
-        $this->object->setGroup($group = new Group());
-        self::assertEquals($group, $this->object->getGroup());
-    }
-
-    public function testPermission()
-    {
-        $expected = TemplatePermission::CREATE_RECORDS;
-        $this->object->setPermission($expected);
-        self::assertEquals($expected, $this->object->getPermission());
-        $this->object->setPermission('wtf');
-        self::assertEquals($expected, $this->object->getPermission());
+        self::assertEquals($template, $object->getTemplate());
+        self::assertEquals($group, $object->getGroup());
+        self::assertEquals($permission, $object->getPermission());
     }
 }

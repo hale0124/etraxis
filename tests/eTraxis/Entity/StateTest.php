@@ -11,6 +11,7 @@
 
 namespace eTraxis\Entity;
 
+use AltrEgo\AltrEgo;
 use eTraxis\Dictionary\StateResponsible;
 use eTraxis\Dictionary\StateType;
 use eTraxis\Dictionary\SystemRole;
@@ -30,17 +31,30 @@ class StateTest extends TransactionalTestCase
         ]);
     }
 
+    public function testConstruct()
+    {
+        $template = $this->object->getTemplate();
+
+        $state = new State($template, StateType::INTERIM);
+        self::assertEquals($template, $state->getTemplate());
+        self::assertNull($state->getResponsible());
+
+        $state = new State($template, StateType::FINAL);
+        self::assertEquals($template, $state->getTemplate());
+        self::assertEquals(StateResponsible::REMOVE, $state->getResponsible());
+    }
+
     public function testId()
     {
-        $state = new State();
+        $state = new State($this->object->getTemplate(), StateType::INTERIM);
         self::assertNull($state->getId());
         self::assertNotNull($this->object->getId());
     }
 
     public function testTemplate()
     {
-        $this->object->setTemplate($template = new Template());
-        self::assertEquals($template, $this->object->getTemplate());
+        $expected = 'Delivery';
+        self::assertEquals($expected, $this->object->getTemplate()->getName());
     }
 
     public function testName()
@@ -59,15 +73,8 @@ class StateTest extends TransactionalTestCase
 
     public function testType()
     {
-        $expected = StateType::INTERIM;
-        $this->object->setType($expected);
+        $expected = StateType::INITIAL;
         self::assertEquals($expected, $this->object->getType());
-        self::assertEquals(StateResponsible::ASSIGN, $this->object->getResponsible());
-
-        $expected = StateType::FINAL;
-        $this->object->setType($expected);
-        self::assertEquals($expected, $this->object->getType());
-        self::assertEquals(StateResponsible::REMOVE, $this->object->getResponsible());
     }
 
     public function testResponsible()
@@ -83,22 +90,30 @@ class StateTest extends TransactionalTestCase
         $expected = StateResponsible::KEEP;
         self::assertNotEquals($expected, $this->object->getResponsible());
 
-        $this->object->setType(StateType::FINAL);
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
+
+        $object->type = StateType::FINAL;
         $this->object->setResponsible($expected);
         self::assertNotEquals($expected, $this->object->getResponsible());
     }
 
     public function testNextState()
     {
-        $state = new State();
+        $project = $this->object->getTemplate()->getProject();
+
+        $state = new State(new Template($project), StateType::INTERIM);
         $this->object->setNextState($state);
         self::assertNotEquals($state, $this->object->getNextState());
 
-        $state->setTemplate($this->object->getTemplate());
+        $state = new State($this->object->getTemplate(), StateType::INTERIM);
         $this->object->setNextState($state);
         self::assertEquals($state, $this->object->getNextState());
 
-        $this->object->setType(StateType::FINAL);
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
+
+        $object->type = StateType::FINAL;
         self::assertNull($this->object->getNextState());
         $this->object->setNextState($state);
         self::assertNull($this->object->getNextState());
@@ -123,7 +138,10 @@ class StateTest extends TransactionalTestCase
         $this->object->setRoleTransitions(SystemRole::RESPONSIBLE, [$this->object]);
         self::assertArraysByValues([$this->object], $this->object->getRoleTransitions(SystemRole::RESPONSIBLE));
 
-        $this->object->setType(StateType::FINAL);
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
+
+        $object->type = StateType::FINAL;
         self::assertEmpty($this->object->getRoleTransitions(SystemRole::RESPONSIBLE));
     }
 
@@ -144,7 +162,10 @@ class StateTest extends TransactionalTestCase
         $this->object->setGroupTransitions($managers, [$this->object]);
         self::assertArraysByValues([$this->object], $this->object->getGroupTransitions($managers));
 
-        $this->object->setType(StateType::FINAL);
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($this->object);
+
+        $object->type = StateType::FINAL;
         self::assertEmpty($this->object->getGroupTransitions($managers));
     }
 
@@ -162,7 +183,7 @@ class StateTest extends TransactionalTestCase
 
         self::assertArraysByValues([$crew, $managers], $this->object->getResponsibleGroups());
 
-        $this->object->setType(StateType::FINAL);
+        $this->object->setResponsible(StateResponsible::REMOVE);
         self::assertEmpty($this->object->getResponsibleGroups());
     }
 
@@ -192,7 +213,7 @@ class StateTest extends TransactionalTestCase
 
         self::assertArraysByValues($expected, $this->object->getNotResponsibleGroups());
 
-        $this->object->setType(StateType::FINAL);
+        $this->object->setResponsible(StateResponsible::REMOVE);
         self::assertEmpty($this->object->getNotResponsibleGroups());
     }
 

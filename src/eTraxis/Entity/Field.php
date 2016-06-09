@@ -125,10 +125,19 @@ class Field extends Entity implements \JsonSerializable
     private $groupPermissions;
 
     /**
-     * Constructor.
+     * Creates new field for the specified state.
+     *
+     * @param   State  $state
+     * @param   string $type
      */
-    public function __construct()
+    public function __construct(State $state, string $type)
     {
+        $this->state = $state;
+
+        if (Dictionary\FieldType::has($type)) {
+            $this->type = $type;
+        }
+
         $this->pcre       = new FieldPCRE();
         $this->parameters = new FieldParameters();
 
@@ -144,20 +153,6 @@ class Field extends Entity implements \JsonSerializable
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   State $state
-     *
-     * @return  self
-     */
-    public function setState(State $state)
-    {
-        $this->state = $state;
-
-        return $this;
     }
 
     /**
@@ -192,22 +187,6 @@ class Field extends Entity implements \JsonSerializable
     public function getName()
     {
         return $this->name;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   string $type
-     *
-     * @return  self
-     */
-    public function setType(string $type)
-    {
-        if (Dictionary\FieldType::has($type)) {
-            $this->type = $type;
-        }
-
-        return $this;
     }
 
     /**
@@ -383,15 +362,7 @@ class Field extends Entity implements \JsonSerializable
 
             // Grant required transitions.
             foreach ($toAdd as $item) {
-
-                $element = new FieldRolePermission();
-
-                $element
-                    ->setField($this)
-                    ->setRole($role)
-                    ->setPermission($item)
-                ;
-
+                $element = new FieldRolePermission($this, $role, $item);
                 $this->rolePermissions->add($element);
             }
         }
@@ -477,15 +448,7 @@ class Field extends Entity implements \JsonSerializable
 
             // Grant required transitions.
             foreach ($toAdd as $item) {
-
-                $element = new FieldGroupPermission();
-
-                $element
-                    ->setField($this)
-                    ->setGroup($group)
-                    ->setPermission($item)
-                ;
-
+                $element = new FieldGroupPermission($this, $group, $item);
                 $this->groupPermissions->add($element);
             }
         }

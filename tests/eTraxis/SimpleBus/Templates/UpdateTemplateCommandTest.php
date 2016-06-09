@@ -77,10 +77,9 @@ class UpdateTemplateCommandTest extends TransactionalTestCase
         /** @var Project $project */
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
 
-        $template = new Template();
+        $template = new Template($project);
 
         $template
-            ->setProject($project)
             ->setName('Maintenance')
             ->setPrefix('M')
             ->setLocked(true)
@@ -113,10 +112,9 @@ class UpdateTemplateCommandTest extends TransactionalTestCase
         /** @var Project $project */
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
 
-        $template = new Template();
+        $template = new Template($project);
 
         $template
-            ->setProject($project)
             ->setName('Maintenance')
             ->setPrefix('M')
             ->setLocked(true)

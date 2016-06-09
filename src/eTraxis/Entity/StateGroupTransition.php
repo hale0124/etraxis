@@ -52,17 +52,17 @@ class StateGroupTransition
     private $group;
 
     /**
-     * Property setter.
+     * Constructor.
      *
      * @param   State $fromState
-     *
-     * @return  self
+     * @param   State $toState
+     * @param   Group $group
      */
-    public function setFromState(State $fromState)
+    public function __construct(State $fromState, State $toState, Group $group)
     {
         $this->fromState = $fromState;
-
-        return $this;
+        $this->toState   = $toState;
+        $this->group     = $group;
     }
 
     /**
@@ -76,20 +76,6 @@ class StateGroupTransition
     }
 
     /**
-     * Property setter.
-     *
-     * @param   State $toState
-     *
-     * @return  self
-     */
-    public function setToState(State $toState)
-    {
-        $this->toState = $toState;
-
-        return $this;
-    }
-
-    /**
      * Property getter.
      *
      * @return  State
@@ -97,20 +83,6 @@ class StateGroupTransition
     public function getToState()
     {
         return $this->toState;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   Group $group
-     *
-     * @return  self
-     */
-    public function setGroup(Group $group)
-    {
-        $this->group = $group;
-
-        return $this;
     }
 
     /**

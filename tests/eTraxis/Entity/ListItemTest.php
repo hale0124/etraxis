@@ -11,32 +11,32 @@
 
 namespace eTraxis\Entity;
 
-use eTraxis\Dictionary\FieldType;
+use eTraxis\Tests\TransactionalTestCase;
 
-class ListItemTest extends \PHPUnit_Framework_TestCase
+class ListItemTest extends TransactionalTestCase
 {
     /** @var ListItem */
     private $object;
 
     protected function setUp()
     {
-        $this->object = new ListItem();
+        parent::setUp();
+
+        $this->object = $this->doctrine->getRepository(ListItem::class)->findOneBy([
+            'text' => 'Season 1',
+        ]);
     }
 
-    public function testFieldValid()
+    public function testConstruct()
     {
-        $field = new Field();
-        $field->setType(FieldType::LIST);
-        $this->object->setField($field);
-        self::assertEquals($field, $this->object->getField());
+        $item = new ListItem($this->object->getField());
+        self::assertEquals($this->object->getField(), $item->getField());
     }
 
-    public function testFieldInvalid()
+    public function testField()
     {
-        $field = new Field();
-        $field->setType(FieldType::STRING);
-        $this->object->setField($field);
-        self::assertNotEquals($field, $this->object->getField());
+        $expected = 'Season';
+        self::assertEquals($expected, $this->object->getField()->getName());
     }
 
     public function testValue()

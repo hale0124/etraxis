@@ -12,34 +12,22 @@
 namespace eTraxis\Entity;
 
 use eTraxis\Dictionary\FieldPermission;
+use eTraxis\Dictionary\FieldType;
+use eTraxis\Dictionary\StateType;
 
 class FieldGroupPermissionTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var FieldGroupPermission */
-    private $object;
-
-    protected function setUp()
+    public function testConstruct()
     {
-        $this->object = new FieldGroupPermission();
-    }
+        $state      = new State(new Template(new Project()), StateType::INTERIM);
+        $field      = new Field($state, FieldType::STRING);
+        $group      = new Group();
+        $permission = FieldPermission::READ_ONLY;
 
-    public function testField()
-    {
-        $this->object->setField($field = new Field());
-        self::assertEquals($field, $this->object->getField());
-    }
+        $object = new FieldGroupPermission($field, $group, $permission);
 
-    public function testGroup()
-    {
-        $this->object->setGroup($group = new Group());
-        self::assertEquals($group, $this->object->getGroup());
-    }
-
-    public function testPermission()
-    {
-        $expected = FieldPermission::READ_ONLY;
-
-        $this->object->setPermission($expected);
-        self::assertEquals($expected, $this->object->getPermission());
+        self::assertEquals($field, $object->getField());
+        self::assertEquals($group, $object->getGroup());
+        self::assertEquals($permission, $object->getPermission());
     }
 }

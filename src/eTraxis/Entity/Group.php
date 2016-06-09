@@ -75,10 +75,14 @@ class Group extends Entity implements \JsonSerializable
     private $members;
 
     /**
-     * Constructor.
+     * Creates new group in the specified project (NULL creates a global group).
+     *
+     * @param   Project|null $project
      */
-    public function __construct()
+    public function __construct(Project $project = null)
     {
+        $this->project = $project;
+
         $this->members = new ArrayCollection();
     }
 
@@ -90,24 +94,6 @@ class Group extends Entity implements \JsonSerializable
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   Project|null $project
-     *
-     * @return  self
-     */
-    public function setProject(Project $project = null)
-    {
-        if ($this->id !== null) {
-            throw new \RuntimeException('Can\'t change project of existing group.');
-        }
-
-        $this->project = $project;
-
-        return $this;
     }
 
     /**

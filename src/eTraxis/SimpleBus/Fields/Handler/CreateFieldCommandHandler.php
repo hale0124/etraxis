@@ -40,7 +40,7 @@ class CreateFieldCommandHandler extends FieldCommandHandler
             throw new NotFoundHttpException('Unknown state.');
         }
 
-        $entity = new Field();
+        $entity = new Field($state, self::TYPES[get_parent_class($command)] ?? null);
 
         $entity
             ->setEntityManager($this->manager)
@@ -49,7 +49,6 @@ class CreateFieldCommandHandler extends FieldCommandHandler
             ->setRequired($command->required)
         ;
 
-        $entity->setState($state);
         $entity->setOrder(count($state->getFields()) + 1);
 
         $errors = $this->validator->validate($entity);

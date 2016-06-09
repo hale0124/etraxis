@@ -45,10 +45,9 @@ class TemplateVoterTest extends TransactionalTestCase
         /** @var Project $project */
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
 
-        $template = new Template();
+        $template = new Template($project);
 
         $template
-            ->setProject($project)
             ->setName('Bug report')
             ->setPrefix('bug')
             ->setLocked(true)
@@ -102,10 +101,9 @@ class TemplateVoterTest extends TransactionalTestCase
         /** @var Project $project */
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
 
-        $template = new Template();
+        $template = new Template($project);
 
         $template
-            ->setProject($project)
             ->setName('Bug report')
             ->setPrefix('bug')
             ->setLocked(true)

@@ -58,13 +58,11 @@ class CreateStateCommandHandler
             throw new NotFoundHttpException('Unknown template.');
         }
 
-        $entity = new State();
+        $entity = new State($template, $command->type);
 
         $entity
-            ->setTemplate($template)
             ->setName($command->name)
             ->setAbbreviation($command->abbreviation)
-            ->setType($command->type)
             ->setResponsible($command->type === StateType::FINAL ? StateResponsible::REMOVE : $command->responsible)
         ;
 

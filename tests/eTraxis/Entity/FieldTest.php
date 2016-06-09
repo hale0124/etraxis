@@ -13,7 +13,6 @@ namespace eTraxis\Entity;
 
 use AltrEgo\AltrEgo;
 use eTraxis\Dictionary\FieldPermission;
-use eTraxis\Dictionary\FieldType;
 use eTraxis\Dictionary\SystemRole;
 use eTraxis\Tests\TransactionalTestCase;
 
@@ -26,10 +25,9 @@ class FieldTest extends TransactionalTestCase
     {
         parent::setUp();
 
-        $this->object = new Field();
-
-        /** @noinspection PhpParamsInspection */
-        $this->object->setEntityManager($this->doctrine->getManager());
+        $this->object = $this->doctrine->getRepository(Field::class)->findOneBy([
+            'name' => 'Crew',
+        ]);
     }
 
     public function testId()
@@ -44,8 +42,8 @@ class FieldTest extends TransactionalTestCase
 
     public function testState()
     {
-        $this->object->setState($state = new State());
-        self::assertEquals($state, $this->object->getState());
+        $expected = 'New';
+        self::assertEquals($expected, $this->object->getState()->getName());
     }
 
     public function testName()
@@ -57,37 +55,7 @@ class FieldTest extends TransactionalTestCase
 
     public function testType()
     {
-        self::assertNull($this->object->getType());
-
-        $this->object->setType(FieldType::NUMBER);
-        self::assertEquals('number', $this->object->getType());
-
-        $this->object->setType(FieldType::DECIMAL);
-        self::assertEquals('decimal', $this->object->getType());
-
-        $this->object->setType(FieldType::STRING);
         self::assertEquals('string', $this->object->getType());
-
-        $this->object->setType(FieldType::TEXT);
-        self::assertEquals('text', $this->object->getType());
-
-        $this->object->setType(FieldType::CHECKBOX);
-        self::assertEquals('checkbox', $this->object->getType());
-
-        $this->object->setType(FieldType::LIST);
-        self::assertEquals('list', $this->object->getType());
-
-        $this->object->setType(FieldType::RECORD);
-        self::assertEquals('record', $this->object->getType());
-
-        $this->object->setType(FieldType::DATE);
-        self::assertEquals('date', $this->object->getType());
-
-        $this->object->setType(FieldType::DURATION);
-        self::assertEquals('duration', $this->object->getType());
-
-        $this->object->setType('unknown');
-        self::assertEquals('duration', $this->object->getType());
     }
 
     public function testDescription()
@@ -181,14 +149,11 @@ class FieldTest extends TransactionalTestCase
             'Crew'                 => FieldPermission::NONE,
         ];
 
-        /** @var Field $field */
-        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
-
         /** @var Group[] $groups */
         $groups = $this->doctrine->getRepository(Group::class)->findAll();
 
         foreach ($groups as $group) {
-            self::assertEquals($expected[$group->getName()], $field->getGroupPermission($group));
+            self::assertEquals($expected[$group->getName()], $this->object->getGroupPermission($group));
         }
     }
 
@@ -207,27 +172,21 @@ class FieldTest extends TransactionalTestCase
 
     public function testToString()
     {
-        /** @var Field $field */
-        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
-
-        self::assertRegExp('/^field\#(\d+)$/', (string) $field);
+        self::assertRegExp('/^field\#(\d+)$/', (string) $this->object);
     }
 
     public function testJsonSerialize()
     {
-        /** @var Field $field */
-        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
-
         $expected = [
-            'id'          => $field->getId(),
-            'state'       => $field->getState()->getId(),
-            'name'        => $field->getName(),
-            'type'        => $field->getType(),
-            'description' => $field->getDescription(),
-            'order'       => $field->getOrder(),
-            'isRequired'  => $field->isRequired(),
+            'id'          => $this->object->getId(),
+            'state'       => $this->object->getState()->getId(),
+            'name'        => $this->object->getName(),
+            'type'        => $this->object->getType(),
+            'description' => $this->object->getDescription(),
+            'order'       => $this->object->getOrder(),
+            'isRequired'  => $this->object->isRequired(),
         ];
 
-        self::assertEquals($expected, $field->jsonSerialize());
+        self::assertEquals($expected, $this->object->jsonSerialize());
     }
 }

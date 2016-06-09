@@ -62,8 +62,7 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
      */
     protected function loadCommonFields(ObjectManager $manager)
     {
-        $pi = new DecimalValue();
-        $pi->setValue('3.1415926535');
+        $pi = new DecimalValue('3.1415926535');
 
         $manager->persist($pi);
         $manager->flush();
@@ -146,12 +145,10 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
 
             foreach ($state_fields as $order => $info) {
 
-                $field = new Field();
+                $field = new Field($state, $info['type']);
 
                 $field
-                    ->setState($state)
                     ->setName($info['name'])
-                    ->setType($info['type'])
                     ->setDescription($info['description'])
                     ->setOrder($order)
                     ->setRequired($info['required'])
@@ -186,11 +183,8 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
      */
     protected function loadFuturamaFields(ObjectManager $manager)
     {
-        $min_value = new DecimalValue();
-        $max_value = new DecimalValue();
-
-        $min_value->setValue('0.0');
-        $max_value->setValue('10.0');
+        $min_value = new DecimalValue('0.0');
+        $max_value = new DecimalValue('10.0');
 
         $this->addReference('value:decimal:min', $min_value);
         $this->addReference('value:decimal:max', $max_value);
@@ -277,12 +271,10 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
 
             foreach ($state_fields as $order => $info) {
 
-                $field = new Field();
+                $field = new Field($state, $info['type']);
 
                 $field
-                    ->setState($state)
                     ->setName($info['name'])
-                    ->setType($info['type'])
                     ->setDescription(null)
                     ->setOrder($order)
                     ->setRequired($info['required'])
@@ -309,10 +301,9 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
 
         for ($i = 1; $i <= 7; $i++) {
 
-            $value = new ListItem();
+            $value = new ListItem($field);
 
             $value
-                ->setField($field)
                 ->setValue($i)
                 ->setText('Season ' . $i)
             ;
@@ -357,12 +348,10 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
 
         foreach ($fields as $order => $info) {
 
-            $field = new Field();
+            $field = new Field($state, $info['type']);
 
             $field
-                ->setState($state)
                 ->setName($info['name'])
-                ->setType($info['type'])
                 ->setDescription(null)
                 ->setOrder($order)
                 ->setRequired($info['required'])

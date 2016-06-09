@@ -52,17 +52,23 @@ class TemplateRolePermission
     private $permission;
 
     /**
-     * Property setter.
+     * Constructor.
      *
      * @param   Template $template
-     *
-     * @return  self
+     * @param   string   $role
+     * @param   string   $permission
      */
-    public function setTemplate(Template $template)
+    public function __construct(Template $template, string $role, string $permission)
     {
         $this->template = $template;
 
-        return $this;
+        if (SystemRole::has($role)) {
+            $this->role = $role;
+        }
+
+        if (TemplatePermission::has($permission)) {
+            $this->permission = $permission;
+        }
     }
 
     /**
@@ -76,22 +82,6 @@ class TemplateRolePermission
     }
 
     /**
-     * Property setter.
-     *
-     * @param   string $role
-     *
-     * @return  self
-     */
-    public function setRole(string $role)
-    {
-        if (SystemRole::has($role)) {
-            $this->role = $role;
-        }
-
-        return $this;
-    }
-
-    /**
      * Property getter.
      *
      * @return  string
@@ -99,22 +89,6 @@ class TemplateRolePermission
     public function getRole()
     {
         return $this->role;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   string $permission
-     *
-     * @return  self
-     */
-    public function setPermission(string $permission)
-    {
-        if (TemplatePermission::has($permission)) {
-            $this->permission = $permission;
-        }
-
-        return $this;
     }
 
     /**

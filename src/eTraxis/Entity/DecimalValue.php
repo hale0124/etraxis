@@ -41,6 +41,16 @@ class DecimalValue
     private $value;
 
     /**
+     * Creates new decimal value.
+     *
+     * @param   string $value String representation of the value.
+     */
+    public function __construct(string $value)
+    {
+        $this->value = $value;
+    }
+
+    /**
      * Property getter.
      *
      * @return  int
@@ -48,20 +58,6 @@ class DecimalValue
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   string $value
-     *
-     * @return  self
-     */
-    public function setValue(string $value)
-    {
-        $this->value = $value;
-
-        return $this;
     }
 
     /**

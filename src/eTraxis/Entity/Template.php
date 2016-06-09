@@ -13,8 +13,7 @@ namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
-use eTraxis\Dictionary\SystemRole;
-use eTraxis\Dictionary\TemplatePermission;
+use eTraxis\Dictionary;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 
 /**
@@ -127,10 +126,14 @@ class Template extends Entity implements \JsonSerializable
     private $groupPermissions;
 
     /**
-     * Constructor.
+     * Creates new template in the specified project.
+     *
+     * @param   Project $project
      */
-    public function __construct()
+    public function __construct(Project $project)
     {
+        $this->project = $project;
+
         $this->states           = new ArrayCollection();
         $this->rolePermissions  = new ArrayCollection();
         $this->groupPermissions = new ArrayCollection();
@@ -144,20 +147,6 @@ class Template extends Entity implements \JsonSerializable
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   Project $project
-     *
-     * @return  self
-     */
-    public function setProject(Project $project)
-    {
-        $this->project = $project;
-
-        return $this;
     }
 
     /**
@@ -325,6 +314,20 @@ class Template extends Entity implements \JsonSerializable
     }
 
     /**
+     * Get initial state.
+     *
+     * @return  State|null
+     */
+    public function getInitialState()
+    {
+        $states = $this->states->filter(function (State $state) {
+            return $state->getType() === Dictionary\StateType::INITIAL;
+        });
+
+        return count($states) === 0 ? null : $states->first();
+    }
+
+    /**
      * Sets permissions of specified role.
      *
      * @param   string   $role
@@ -334,11 +337,11 @@ class Template extends Entity implements \JsonSerializable
      */
     public function setRolePermissions(string $role, array $permissions)
     {
-        $isSpecialRole = in_array($role, [SystemRole::AUTHOR, SystemRole::RESPONSIBLE]);
+        $isSpecialRole = in_array($role, [Dictionary\SystemRole::AUTHOR, Dictionary\SystemRole::RESPONSIBLE]);
 
         // "Author" and "Responsible" roles are always granted to view their records.
-        if ($isSpecialRole && !in_array(TemplatePermission::VIEW_RECORDS, $permissions)) {
-            $permissions[] = TemplatePermission::VIEW_RECORDS;
+        if ($isSpecialRole && !in_array(Dictionary\TemplatePermission::VIEW_RECORDS, $permissions)) {
+            $permissions[] = Dictionary\TemplatePermission::VIEW_RECORDS;
         }
 
         $toAdd = array_unique(array_diff($permissions, $this->getRolePermissions($role)));
@@ -357,24 +360,17 @@ class Template extends Entity implements \JsonSerializable
         // Grant required permissions.
         foreach ($toAdd as $permission) {
 
-            if (!TemplatePermission::has($permission)) {
+            if (!Dictionary\TemplatePermission::has($permission)) {
                 continue;
             }
 
             // "Author" and "Responsible" roles can't create their records (as their records already exist).
-            if ($isSpecialRole && $permission === TemplatePermission::CREATE_RECORDS)
+            if ($isSpecialRole && $permission === Dictionary\TemplatePermission::CREATE_RECORDS)
             {
                 continue;
             }
 
-            $element = new TemplateRolePermission();
-
-            $element
-                ->setTemplate($this)
-                ->setRole($role)
-                ->setPermission($permission)
-            ;
-
+            $element = new TemplateRolePermission($this, $role, $permission);
             $this->rolePermissions->add($element);
         }
 
@@ -429,18 +425,11 @@ class Template extends Entity implements \JsonSerializable
         // Grant required permissions.
         foreach ($toAdd as $permission) {
 
-            if (!TemplatePermission::has($permission)) {
+            if (!Dictionary\TemplatePermission::has($permission)) {
                 continue;
             }
 
-            $element = new TemplateGroupPermission();
-
-            $element
-                ->setTemplate($this)
-                ->setGroup($group)
-                ->setPermission($permission)
-            ;
-
+            $element = new TemplateGroupPermission($this, $group, $permission);
             $this->groupPermissions->add($element);
         }
 

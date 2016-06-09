@@ -11,25 +11,20 @@
 
 namespace eTraxis\Entity;
 
+use eTraxis\Dictionary\StateType;
+
 class StateResponsibleGroupTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var StateResponsibleGroup */
-    private $object;
-
-    protected function setUp()
+    public function testConstruct()
     {
-        $this->object = new StateResponsibleGroup();
-    }
+        $template = new Template(new Project());
 
-    public function testState()
-    {
-        $this->object->setState($state = new State());
-        self::assertEquals($state, $this->object->getState());
-    }
+        $state = new State($template, StateType::INTERIM);
+        $group = new Group();
 
-    public function testGroup()
-    {
-        $this->object->setGroup($group = new Group());
-        self::assertEquals($group, $this->object->getGroup());
+        $object = new StateResponsibleGroup($state, $group);
+
+        self::assertEquals($state, $object->getState());
+        self::assertEquals($group, $object->getGroup());
     }
 }

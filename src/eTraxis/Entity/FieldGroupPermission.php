@@ -52,17 +52,20 @@ class FieldGroupPermission
     private $permission;
 
     /**
-     * Property setter.
+     * Constructor.
      *
-     * @param   Field $field
-     *
-     * @return  self
+     * @param   Field  $field
+     * @param   Group  $group
+     * @param   string $permission
      */
-    public function setField(Field $field)
+    public function __construct(Field $field, Group $group, string $permission)
     {
         $this->field = $field;
+        $this->group = $group;
 
-        return $this;
+        if (FieldPermission::has($permission)) {
+            $this->permission = $permission;
+        }
     }
 
     /**
@@ -76,20 +79,6 @@ class FieldGroupPermission
     }
 
     /**
-     * Property setter.
-     *
-     * @param   Group $group
-     *
-     * @return  self
-     */
-    public function setGroup(Group $group)
-    {
-        $this->group = $group;
-
-        return $this;
-    }
-
-    /**
      * Property getter.
      *
      * @return  Group
@@ -97,22 +86,6 @@ class FieldGroupPermission
     public function getGroup()
     {
         return $this->group;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   string $permission
-     *
-     * @return  self
-     */
-    public function setPermission(string $permission)
-    {
-        if (FieldPermission::has($permission)) {
-            $this->permission = $permission;
-        }
-
-        return $this;
     }
 
     /**

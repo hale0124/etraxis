@@ -62,26 +62,23 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
         /** @var \eTraxis\Entity\Group $crew */
         $crew = $this->getReference('group:crew');
 
-        $state_new       = new State();
-        $state_delivered = new State();
+        /** @var \eTraxis\Entity\Template $template */
+        $template = $this->getReference('template:delivery');
 
-        /** @noinspection PhpParamsInspection */
+        $state_new       = new State($template, StateType::INITIAL);
+        $state_delivered = new State($template, StateType::FINAL);
+
         $state_new
-            ->setTemplate($this->getReference('template:delivery'))
             ->setName('New')
             ->setAbbreviation('N')
-            ->setType(StateType::INITIAL)
             ->setResponsible(StateResponsible::ASSIGN)
             ->setNextState($state_delivered)
             ->addResponsibleGroups([$crew])
         ;
 
-        /** @noinspection PhpParamsInspection */
         $state_delivered
-            ->setTemplate($this->getReference('template:delivery'))
             ->setName('Delivered')
             ->setAbbreviation('D')
-            ->setType(StateType::FINAL)
             ->setResponsible(StateResponsible::REMOVE)
         ;
 
@@ -106,25 +103,22 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
      */
     protected function loadFuturamaStates(ObjectManager $manager)
     {
-        $state_produced = new State();
-        $state_released = new State();
+        /** @var \eTraxis\Entity\Template $template */
+        $template = $this->getReference('template:futurama');
 
-        /** @noinspection PhpParamsInspection */
+        $state_produced = new State($template, StateType::INITIAL);
+        $state_released = new State($template, StateType::FINAL);
+
         $state_produced
-            ->setTemplate($this->getReference('template:futurama'))
             ->setName('Produced')
             ->setAbbreviation('P')
-            ->setType(StateType::INITIAL)
             ->setResponsible(StateResponsible::KEEP)
             ->setNextState($state_released)
         ;
 
-        /** @noinspection PhpParamsInspection */
         $state_released
-            ->setTemplate($this->getReference('template:futurama'))
             ->setName('Released')
             ->setAbbreviation('R')
-            ->setType(StateType::FINAL)
             ->setResponsible(StateResponsible::REMOVE)
         ;
 
@@ -145,35 +139,29 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
      */
     protected function loadPhpPsrStates(ObjectManager $manager)
     {
-        $state_draft      = new State();
-        $state_accepted   = new State();
-        $state_deprecated = new State();
+        /** @var \eTraxis\Entity\Template $template */
+        $template = $this->getReference('template:phppsr');
 
-        /** @noinspection PhpParamsInspection */
+        $state_draft      = new State($template, StateType::INITIAL);
+        $state_accepted   = new State($template, StateType::INTERIM);
+        $state_deprecated = new State($template, StateType::FINAL);
+
         $state_draft
-            ->setTemplate($this->getReference('template:phppsr'))
             ->setName('Draft')
             ->setAbbreviation('D')
-            ->setType(StateType::INITIAL)
             ->setResponsible(StateResponsible::REMOVE)
             ->setNextState($state_accepted)
         ;
 
-        /** @noinspection PhpParamsInspection */
         $state_accepted
-            ->setTemplate($this->getReference('template:phppsr'))
             ->setName('Accepted')
             ->setAbbreviation('A')
-            ->setType(StateType::INTERIM)
             ->setResponsible(StateResponsible::REMOVE)
         ;
 
-        /** @noinspection PhpParamsInspection */
         $state_deprecated
-            ->setTemplate($this->getReference('template:phppsr'))
             ->setName('Deprecated')
             ->setAbbreviation('X')
-            ->setType(StateType::FINAL)
             ->setResponsible(StateResponsible::REMOVE)
         ;
 

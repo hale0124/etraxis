@@ -1470,7 +1470,10 @@ class LoadFuturamaRecordsData extends AbstractFixture implements ContainerAwareI
 
         foreach ($records as $code => $info) {
 
-            $record = new Record();
+            $class = new \ReflectionClass(Record::class);
+
+            /** @var Record $record */
+            $record = $class->newInstanceWithoutConstructor();
 
             $record->setSubject($info['subject']);
 
@@ -1482,21 +1485,22 @@ class LoadFuturamaRecordsData extends AbstractFixture implements ContainerAwareI
             $altr_record->changedAt = strtotime($info['date'] . ' 09:00:01');
             $altr_record->closedAt  = strtotime($info['date'] . ' 09:00:01');
 
-            $event = new Event();
+            $event = new Event(
+                $record,
+                $record->getAuthor(),
+                EventType::RECORD_CREATED,
+                $state_produced->getId()
+            );
 
-            $this->ego($event)->record    = $record;
-            $this->ego($event)->user      = $record->getAuthor();
-            $this->ego($event)->type      = EventType::RECORD_CREATED;
-            $this->ego($event)->createdAt = $record->getCreatedAt();
-            $this->ego($event)->parameter = $state_produced->getId();
+            $event2 = new Event(
+                $record,
+                $record->getAuthor(),
+                EventType::STATE_CHANGED,
+                $state_released->getId()
+            );
 
-            $event2 = new Event();
-
-            $this->ego($event2)->record    = $record;
-            $this->ego($event2)->user      = $record->getAuthor();
-            $this->ego($event2)->type      = EventType::STATE_CHANGED;
-            $this->ego($event2)->createdAt = $record->getCreatedAt();
-            $this->ego($event2)->parameter = $state_released->getId();
+            $this->ego($event)->createdAt  = $record->getCreatedAt();
+            $this->ego($event2)->createdAt = $record->getChangedAt();
 
             $read = $this->container->get('doctrine')->getRepository(LastRead::class)->findOneBy([
                 'record' => $record,
@@ -1509,7 +1513,6 @@ class LoadFuturamaRecordsData extends AbstractFixture implements ContainerAwareI
 
                 $this->ego($read)->record = $record;
                 $this->ego($read)->user   = $record->getAuthor();
-                $this->ego($read)->readAt = $record->getCreatedAt();
             }
 
             $this->ego($read)->readAt = $this->ego($event2)->createdAt;
@@ -1530,18 +1533,14 @@ class LoadFuturamaRecordsData extends AbstractFixture implements ContainerAwareI
                     $decimal_value = $this->getReference($reference);
                 }
                 else {
-                    $decimal_value = new DecimalValue();
-                    $decimal_value->setValue($info['viewers']);
+                    $decimal_value = new DecimalValue($info['viewers']);
                     $this->addReference($reference, $decimal_value);
                     $manager->persist($decimal_value);
                 }
             }
 
-            $string_value = new StringValue();
-            $string_value->setValue($code);
-
-            $text_value = new TextValue();
-            $text_value->setValue($info['plot']);
+            $string_value = new StringValue($code);
+            $text_value   = new TextValue($info['plot']);
 
             $manager->persist($string_value);
             $manager->persist($text_value);

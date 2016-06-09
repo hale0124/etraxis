@@ -49,12 +49,7 @@ class CreateGroupCommandHandler
      */
     public function handle(CreateGroupCommand $command)
     {
-        $entity = new Group();
-
-        $entity
-            ->setName($command->name)
-            ->setDescription($command->description)
-        ;
+        $project = null;
 
         if ($command->project) {
 
@@ -64,9 +59,14 @@ class CreateGroupCommandHandler
             if (!$project) {
                 throw new NotFoundHttpException('Unknown project.');
             }
-
-            $entity->setProject($project);
         }
+
+        $entity = new Group($project);
+
+        $entity
+            ->setName($command->name)
+            ->setDescription($command->description)
+        ;
 
         $errors = $this->validator->validate($entity);
 

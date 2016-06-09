@@ -16,35 +16,17 @@ use eTraxis\Dictionary\TemplatePermission;
 
 class TemplateRolePermissionTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var TemplateRolePermission */
-    private $object;
-
-    protected function setUp()
+    public function testConstruct()
     {
-        $this->object = new TemplateRolePermission();
-    }
+        $project    = new Project();
+        $template   = new Template($project);
+        $role       = SystemRole::AUTHOR;
+        $permission = TemplatePermission::CREATE_RECORDS;
 
-    public function testTemplate()
-    {
-        $this->object->setTemplate($template = new Template());
-        self::assertEquals($template, $this->object->getTemplate());
-    }
+        $object = new TemplateRolePermission($template, $role, $permission);
 
-    public function testRole()
-    {
-        $expected = SystemRole::AUTHOR;
-        $this->object->setRole($expected);
-        self::assertEquals($expected, $this->object->getRole());
-        $this->object->setRole('wtf');
-        self::assertEquals($expected, $this->object->getRole());
-    }
-
-    public function testPermission()
-    {
-        $expected = TemplatePermission::CREATE_RECORDS;
-        $this->object->setPermission($expected);
-        self::assertEquals($expected, $this->object->getPermission());
-        $this->object->setPermission('wtf');
-        self::assertEquals($expected, $this->object->getPermission());
+        self::assertEquals($template, $object->getTemplate());
+        self::assertEquals($role, $object->getRole());
+        self::assertEquals($permission, $object->getPermission());
     }
 }

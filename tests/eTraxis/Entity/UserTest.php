@@ -31,7 +31,7 @@ class UserTest extends TransactionalTestCase
 
     public function testId()
     {
-        $user = new User();
+        $user = new User(AuthenticationProvider::FALLBACK);
         self::assertNull($user->getId());
         self::assertNotNull($this->object->getId());
     }

@@ -29,7 +29,7 @@ class RecordTest extends TransactionalTestCase
 
     public function testId()
     {
-        $record = new Record();
+        $record = new Record($this->object->getAuthor(), $this->object->getTemplate());
         self::assertNull($record->getId());
         self::assertNotNull($this->object->getId());
     }
@@ -39,6 +39,16 @@ class RecordTest extends TransactionalTestCase
         $expected = 'Subject';
         $this->object->setSubject($expected);
         self::assertEquals($expected, $this->object->getSubject());
+    }
+
+    public function testProject()
+    {
+        self::assertEquals('Planet Express', $this->object->getProject()->getName());
+    }
+
+    public function testTemplate()
+    {
+        self::assertEquals('Delivery', $this->object->getTemplate()->getName());
     }
 
     public function testState()
@@ -69,6 +79,28 @@ class RecordTest extends TransactionalTestCase
     public function testClosedAt()
     {
         self::assertEquals('1999-04-04', date('Y-m-d', $this->object->getClosedAt()));
+    }
+
+    public function testIsClosed()
+    {
+        self::assertTrue($this->object->isClosed());
+
+        $this->object = $this->doctrine->getRepository(Record::class)->findOneBy([
+            'subject' => 'PHPDoc Standard',
+        ]);
+
+        self::assertFalse($this->object->isClosed());
+    }
+
+    public function testIsPostponed()
+    {
+        self::assertFalse($this->object->isPostponed());
+
+        $this->object = $this->doctrine->getRepository(Record::class)->findOneBy([
+            'subject' => 'PHPDoc Standard',
+        ]);
+
+        self::assertTrue($this->object->isPostponed());
     }
 
     public function testHistory()

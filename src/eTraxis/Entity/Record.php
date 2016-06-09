@@ -13,6 +13,7 @@ namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use eTraxis\Dictionary\EventType;
 
 /**
  * Record.
@@ -92,7 +93,7 @@ class Record
     /**
      * @var int Unix Epoch timestamp when the postponed record will be resumed back.
      *
-     * @ORM\Column(name="resumed_at", type="integer")
+     * @ORM\Column(name="resumed_at", type="integer", nullable=true)
      */
     private $resumedAt;
 
@@ -112,16 +113,24 @@ class Record
     private $watchers;
 
     /**
-     * Constructor.
+     * Creates new record.
+     *
+     * @param   User     $author   Author of the record.
+     * @param   Template $template Template to use for creation.
      */
-    public function __construct()
+    public function __construct(User $author, Template $template)
     {
-        $this->createdAt = time();
-        $this->changedAt = time();
-        $this->resumedAt = 0;
+        $this->state  = $template->getInitialState();
+        $this->author = $author;
 
         $this->history  = new ArrayCollection();
         $this->watchers = new ArrayCollection();
+
+        $event = new Event($this, $this->author, EventType::RECORD_CREATED, $this->state->getId());
+        $this->history->add($event);
+
+        $this->createdAt = $event->getCreatedAt();
+        $this->changedAt = $event->getCreatedAt();
     }
 
     /**
@@ -156,6 +165,26 @@ class Record
     public function getSubject()
     {
         return $this->subject;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  Project
+     */
+    public function getProject()
+    {
+        return $this->state->getTemplate()->getProject();
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  Template
+     */
+    public function getTemplate()
+    {
+        return $this->state->getTemplate();
     }
 
     /**
@@ -216,6 +245,26 @@ class Record
     public function getClosedAt()
     {
         return $this->closedAt;
+    }
+
+    /**
+     * Checks whether the record is closed.
+     *
+     * @return  bool
+     */
+    public function isClosed()
+    {
+        return $this->closedAt !== null;
+    }
+
+    /**
+     * Checks whether the record is postponed.
+     *
+     * @return  bool
+     */
+    public function isPostponed()
+    {
+        return $this->resumedAt > time();
     }
 
     /**

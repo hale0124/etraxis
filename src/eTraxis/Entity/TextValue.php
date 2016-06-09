@@ -48,6 +48,17 @@ class TextValue
     private $value;
 
     /**
+     * Creates new text value.
+     *
+     * @param   string $value
+     */
+    public function __construct(string $value)
+    {
+        $this->token = md5($value);
+        $this->value = $value;
+    }
+
+    /**
      * Property getter.
      *
      * @return  int
@@ -55,21 +66,6 @@ class TextValue
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   string $value
-     *
-     * @return  self
-     */
-    public function setValue(string $value)
-    {
-        $this->token = md5($value);
-        $this->value = $value;
-
-        return $this;
     }
 
     /**

@@ -43,10 +43,9 @@ class ListItemVoterTest extends TransactionalTestCase
         /** @var ListItem $used */
         $used = $this->doctrine->getRepository(ListItem::class)->findOneBy(['text' => 'Season 1']);
 
-        $item = new ListItem();
+        $item = new ListItem($used->getField());
 
         $item
-            ->setField($used->getField())
             ->setValue(8)
             ->setText('Season 8')
         ;

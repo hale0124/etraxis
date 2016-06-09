@@ -56,10 +56,9 @@ class CreateTemplateCommandHandler
             throw new NotFoundHttpException('Unknown project.');
         }
 
-        $entity = new Template();
+        $entity = new Template($project);
 
         $entity
-            ->setProject($project)
             ->setName($command->name)
             ->setPrefix($command->prefix)
             ->setCriticalAge($command->criticalAge)

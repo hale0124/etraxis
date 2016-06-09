@@ -89,7 +89,7 @@ class Project implements \JsonSerializable
     private $templates;
 
     /**
-     * Constructor.
+     * Creates new project.
      */
     public function __construct()
     {

@@ -13,15 +13,23 @@ namespace eTraxis\Entity;
 
 use AltrEgo\AltrEgo;
 use eTraxis\Dictionary\EventType;
+use eTraxis\Tests\TransactionalTestCase;
 
-class EventTest extends \PHPUnit_Framework_TestCase
+class EventTest extends TransactionalTestCase
 {
     /** @var Event */
     private $object;
 
     protected function setUp()
     {
-        $this->object = new Event();
+        parent::setUp();
+
+        /** @var Record $record */
+        $record = $this->doctrine->getRepository(Record::class)->findOneBy([
+            'subject' => 'Prizes for the claw crane',
+        ]);
+
+        $this->object = new Event($record, $this->findUser('hubert'), EventType::PUBLIC_COMMENT);
     }
 
     public function testId()
@@ -36,20 +44,19 @@ class EventTest extends \PHPUnit_Framework_TestCase
 
     public function testRecord()
     {
-        $this->object->setRecord($record = new Record());
-        self::assertEquals($record, $this->object->getRecord());
+        $expected = 'Prizes for the claw crane';
+        self::assertEquals($expected, $this->object->getRecord()->getSubject());
     }
 
     public function testUser()
     {
-        $this->object->setUser($user = new User());
-        self::assertEquals($user, $this->object->getUser());
+        $expected = 'Hubert J. Farnsworth';
+        self::assertEquals($expected, $this->object->getUser()->getFullname());
     }
 
     public function testType()
     {
-        $expected = EventType::RECORD_CREATED;
-        $this->object->setType($expected);
+        $expected = EventType::PUBLIC_COMMENT;
         self::assertEquals($expected, $this->object->getType());
     }
 

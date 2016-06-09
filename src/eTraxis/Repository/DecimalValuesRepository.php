@@ -30,8 +30,7 @@ class DecimalValuesRepository extends EntityRepository implements CustomValuesRe
         // If entity doesn't exist yet, save it.
         if ($entity === null) {
 
-            $entity = new DecimalValue();
-            $entity->setValue($value);
+            $entity = new DecimalValue($value);
 
             $em = $this->getEntityManager();
 

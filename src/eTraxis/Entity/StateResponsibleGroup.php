@@ -42,17 +42,15 @@ class StateResponsibleGroup
     private $group;
 
     /**
-     * Property setter.
+     * Constructor.
      *
      * @param   State $state
-     *
-     * @return  self
+     * @param   Group $group
      */
-    public function setState(State $state)
+    public function __construct(State $state, Group $group)
     {
         $this->state = $state;
-
-        return $this;
+        $this->group = $group;
     }
 
     /**
@@ -63,20 +61,6 @@ class StateResponsibleGroup
     public function getState()
     {
         return $this->state;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   Group $group
-     *
-     * @return  self
-     */
-    public function setGroup(Group $group)
-    {
-        $this->group = $group;
-
-        return $this;
     }
 
     /**

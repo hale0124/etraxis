@@ -74,10 +74,9 @@ class RegisterUserCommandHandler
 
             $this->logger->info('Register LDAP account.', [$command->username, $command->fullname, $command->email]);
 
-            $user = new User();
+            $user = new User(AuthenticationProvider::LDAP);
 
             $user
-                ->setProvider(AuthenticationProvider::LDAP)
                 ->setUsername($command->username)
                 ->setFullname($command->fullname)
                 ->setEmail($command->email)

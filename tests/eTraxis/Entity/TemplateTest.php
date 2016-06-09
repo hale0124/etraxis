@@ -29,17 +29,23 @@ class TemplateTest extends TransactionalTestCase
         ]);
     }
 
+    public function testConstruct()
+    {
+        $template = new Template($project = new Project());
+        self::assertEquals($project, $template->getProject());
+    }
+
     public function testId()
     {
-        $template = new Template();
+        $template = new Template($this->object->getProject());
         self::assertNull($template->getId());
         self::assertNotNull($this->object->getId());
     }
 
     public function testProject()
     {
-        $this->object->setProject($project = new Project());
-        self::assertEquals($project, $this->object->getProject());
+        $expected = 'Planet Express';
+        self::assertEquals($expected, $this->object->getProject()->getName());
     }
 
     public function testName()
@@ -84,6 +90,11 @@ class TemplateTest extends TransactionalTestCase
 
         $this->object->setLocked(true);
         self::assertTrue($this->object->isLocked());
+    }
+
+    public function testInitialState()
+    {
+        self::assertEquals('New', $this->object->getInitialState()->getName());
     }
 
     public function testStates()

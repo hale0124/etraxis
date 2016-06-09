@@ -91,9 +91,22 @@ class Event
 
     /**
      * Constructor.
+     *
+     * @param   Record $record
+     * @param   User   $user
+     * @param   string $type
+     * @param   int    $parameter
      */
-    public function __construct()
+    public function __construct(Record $record, User $user, string $type, int $parameter = null)
     {
+        $this->record    = $record;
+        $this->user      = $user;
+        $this->parameter = $parameter;
+
+        if (EventType::has($type)) {
+            $this->type = $type;
+        }
+
         $this->createdAt = time();
     }
 
@@ -108,20 +121,6 @@ class Event
     }
 
     /**
-     * Property setter.
-     *
-     * @param   Record $record
-     *
-     * @return  self
-     */
-    public function setRecord(Record $record)
-    {
-        $this->record = $record;
-
-        return $this;
-    }
-
-    /**
      * Property getter.
      *
      * @return  Record
@@ -132,20 +131,6 @@ class Event
     }
 
     /**
-     * Property setter.
-     *
-     * @param   User $user
-     *
-     * @return  self
-     */
-    public function setUser(User $user)
-    {
-        $this->user = $user;
-
-        return $this;
-    }
-
-    /**
      * Property getter.
      *
      * @return  User
@@ -153,22 +138,6 @@ class Event
     public function getUser()
     {
         return $this->user;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   string $type
-     *
-     * @return  self
-     */
-    public function setType(string $type)
-    {
-        if (EventType::has($type)) {
-            $this->type = $type;
-        }
-
-        return $this;
     }
 
     /**

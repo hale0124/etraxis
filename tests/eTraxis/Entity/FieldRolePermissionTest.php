@@ -12,37 +12,23 @@
 namespace eTraxis\Entity;
 
 use eTraxis\Dictionary\FieldPermission;
+use eTraxis\Dictionary\FieldType;
+use eTraxis\Dictionary\StateType;
 use eTraxis\Dictionary\SystemRole;
 
 class FieldRolePermissionTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var FieldRolePermission */
-    private $object;
-
-    protected function setUp()
+    public function testConstruct()
     {
-        $this->object = new FieldRolePermission();
-    }
+        $state      = new State(new Template(new Project()), StateType::INTERIM);
+        $field      = new Field($state, FieldType::STRING);
+        $role       = SystemRole::AUTHOR;
+        $permission = FieldPermission::READ_ONLY;
 
-    public function testField()
-    {
-        $this->object->setField($field = new Field());
-        self::assertEquals($field, $this->object->getField());
-    }
+        $object = new FieldRolePermission($field, $role, $permission);
 
-    public function testRole()
-    {
-        $expected = SystemRole::AUTHOR;
-
-        $this->object->setRole($expected);
-        self::assertEquals($expected, $this->object->getRole());
-    }
-
-    public function testPermission()
-    {
-        $expected = FieldPermission::READ_ONLY;
-
-        $this->object->setPermission($expected);
-        self::assertEquals($expected, $this->object->getPermission());
+        self::assertEquals($field, $object->getField());
+        self::assertEquals($role, $object->getRole());
+        self::assertEquals($permission, $object->getPermission());
     }
 }

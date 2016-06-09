@@ -30,8 +30,7 @@ class TextValuesRepository extends EntityRepository implements CustomValuesRepos
         // If entity doesn't exist yet, save it.
         if ($entity === null) {
 
-            $entity = new TextValue();
-            $entity->setValue($value);
+            $entity = new TextValue($value);
 
             $em = $this->getEntityManager();
 

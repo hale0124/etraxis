@@ -12,15 +12,32 @@
 namespace eTraxis\Entity;
 
 use AltrEgo\AltrEgo;
+use eTraxis\Tests\TransactionalTestCase;
 
-class StringValueTest extends \PHPUnit_Framework_TestCase
+class StringValueTest extends TransactionalTestCase
 {
     /** @var StringValue */
     private $object;
 
     protected function setUp()
     {
-        $this->object = new StringValue();
+        parent::setUp();
+
+        $this->object = $this->doctrine->getRepository(StringValue::class)->findOneBy([
+            'token' => '38bed8299c0637cfa4412f8ba3e9a50f',
+        ]);
+    }
+
+    public function testConstruct()
+    {
+        $expected = str_pad(null, 150, '_');
+        $value    = new StringValue($expected);
+
+        /** @var \StdClass $object */
+        $object = AltrEgo::create($value);
+
+        self::assertEquals(md5($expected), $object->token);
+        self::assertEquals($expected, $value->getValue());
     }
 
     public function testId()
@@ -35,12 +52,7 @@ class StringValueTest extends \PHPUnit_Framework_TestCase
 
     public function testValue()
     {
-        /** @var \StdClass $object */
-        $object = AltrEgo::create($this->object);
-
-        $expected = str_pad('_', 150, '_');
-        $this->object->setValue($expected);
-        self::assertEquals(md5($expected), $object->token);
+        $expected = 'Luna Park, Moon';
         self::assertEquals($expected, $this->object->getValue());
     }
 }

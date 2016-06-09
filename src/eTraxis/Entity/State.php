@@ -122,10 +122,24 @@ class State extends Entity implements \JsonSerializable
     private $responsibleGroups;
 
     /**
-     * Constructor.
+     * Creates new state in the specified template.
+     *
+     * @param   Template $template
+     * @param   string   $type
      */
-    public function __construct()
+    public function __construct(Template $template, string $type)
     {
+        $this->template = $template;
+
+        if (Dictionary\StateType::has($type)) {
+            $this->type = $type;
+        }
+
+        // Final states cannot be assigned.
+        if ($type === Dictionary\StateType::FINAL) {
+            $this->responsible = Dictionary\StateResponsible::REMOVE;
+        }
+
         $this->fields            = new ArrayCollection();
         $this->roleTransitions   = new ArrayCollection();
         $this->groupTransitions  = new ArrayCollection();
@@ -140,20 +154,6 @@ class State extends Entity implements \JsonSerializable
     public function getId()
     {
         return $this->id;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   Template $template
-     *
-     * @return  self
-     */
-    public function setTemplate(Template $template)
-    {
-        $this->template = $template;
-
-        return $this;
     }
 
     /**
@@ -212,28 +212,6 @@ class State extends Entity implements \JsonSerializable
     public function getAbbreviation()
     {
         return $this->abbreviation;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   string $type
-     *
-     * @return  self
-     */
-    public function setType(string $type)
-    {
-        if (Dictionary\StateType::has($type)) {
-            $this->type = $type;
-
-            // Final states cannot be assigned.
-            if ($type === Dictionary\StateType::FINAL) {
-                $this->responsible = Dictionary\StateResponsible::REMOVE;
-                $this->nextState   = null;
-            }
-        }
-
-        return $this;
     }
 
     /**
@@ -352,15 +330,7 @@ class State extends Entity implements \JsonSerializable
 
         // Grant required transitions.
         foreach ($toAdd as $state) {
-
-            $transition = new StateRoleTransition();
-
-            $transition
-                ->setFromState($this)
-                ->setToState($state)
-                ->setRole($role)
-            ;
-
+            $transition = new StateRoleTransition($this, $state, $role);
             $this->roleTransitions->add($transition);
         }
 
@@ -420,15 +390,7 @@ class State extends Entity implements \JsonSerializable
 
         // Grant required transitions.
         foreach ($toAdd as $state) {
-
-            $transition = new StateGroupTransition();
-
-            $transition
-                ->setFromState($this)
-                ->setToState($state)
-                ->setGroup($group)
-            ;
-
+            $transition = new StateGroupTransition($this, $state, $group);
             $this->groupTransitions->add($transition);
         }
 
@@ -478,12 +440,7 @@ class State extends Entity implements \JsonSerializable
         $toAdd = array_diff($groups, $current->toArray());
 
         foreach ($toAdd as $group) {
-
-            $responsibleGroup = new StateResponsibleGroup();
-
-            $responsibleGroup->setState($this);
-            $responsibleGroup->setGroup($group);
-
+            $responsibleGroup = new StateResponsibleGroup($this, $group);
             $this->responsibleGroups->add($responsibleGroup);
         }
 

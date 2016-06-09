@@ -130,10 +130,9 @@ class LoadProjectsData extends AbstractFixture implements ContainerAwareInterfac
 
         foreach ($groups as $name => $description) {
 
-            $group = new Group();
+            $group = new Group($project);
 
             $group
-                ->setProject($project)
                 ->setName(ucwords($name))
                 ->setDescription($description)
             ;
@@ -191,10 +190,9 @@ class LoadProjectsData extends AbstractFixture implements ContainerAwareInterfac
 
         foreach ($groups as $name => $description) {
 
-            $group = new Group();
+            $group = new Group($project);
 
             $group
-                ->setProject($project)
                 ->setName(ucwords($name))
                 ->setDescription($description)
             ;

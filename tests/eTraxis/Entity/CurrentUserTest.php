@@ -11,7 +11,6 @@
 
 namespace eTraxis\Entity;
 
-use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Tests\TransactionalTestCase;
 
 class CurrentUserTest extends TransactionalTestCase
@@ -37,13 +36,16 @@ class CurrentUserTest extends TransactionalTestCase
 
     public function testExternalAccount()
     {
-        $this->object->setProvider(AuthenticationProvider::LDAP);
-        $user = new CurrentUser($this->object);
-        self::assertTrue($user->isExternalAccount());
-
-        $this->object->setProvider(AuthenticationProvider::ETRAXIS);
         $user = new CurrentUser($this->object);
         self::assertFalse($user->isExternalAccount());
+
+        /** @var User $einstein */
+        $einstein = $this->doctrine->getRepository(User::class)->findOneBy([
+            'username' => 'einstein',
+        ]);
+
+        $user = new CurrentUser($einstein);
+        self::assertTrue($user->isExternalAccount());
     }
 
     public function testFullname()

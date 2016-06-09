@@ -26,6 +26,18 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
  */
 abstract class FieldCommandHandler
 {
+    const TYPES = [
+        Command\NumberFieldCommand::class   => FieldType::NUMBER,
+        Command\DecimalFieldCommand::class  => FieldType::DECIMAL,
+        Command\StringFieldCommand::class   => FieldType::STRING,
+        Command\TextFieldCommand::class     => FieldType::TEXT,
+        Command\CheckboxFieldCommand::class => FieldType::CHECKBOX,
+        Command\ListFieldCommand::class     => FieldType::LIST,
+        Command\RecordFieldCommand::class   => FieldType::RECORD,
+        Command\DateFieldCommand::class     => FieldType::DATE,
+        Command\DurationFieldCommand::class => FieldType::DURATION,
+    ];
+
     const HANDLERS = [
         Command\NumberFieldCommand::class   => 'handleNumber',
         Command\DecimalFieldCommand::class  => 'handleDecimal',
@@ -95,8 +107,6 @@ abstract class FieldCommandHandler
             }
         }
 
-        $entity->setType(FieldType::NUMBER);
-
         $entity->asNumber()
             ->setMinValue($command->minValue)
             ->setMaxValue($command->maxValue)
@@ -135,8 +145,6 @@ abstract class FieldCommandHandler
             }
         }
 
-        $entity->setType(FieldType::DECIMAL);
-
         $entity->asDecimal()
             ->setMinValue($command->minValue)
             ->setMaxValue($command->maxValue)
@@ -156,8 +164,6 @@ abstract class FieldCommandHandler
      */
     protected function handleString(Field $entity, Command\StringFieldCommand $command): Field
     {
-        $entity->setType(FieldType::STRING);
-
         $entity->getPCRE()
             ->setCheck($command->pcreCheck)
             ->setSearch($command->pcreSearch)
@@ -182,8 +188,6 @@ abstract class FieldCommandHandler
      */
     protected function handleText(Field $entity, Command\TextFieldCommand $command): Field
     {
-        $entity->setType(FieldType::TEXT);
-
         $entity->getPCRE()
             ->setCheck($command->pcreCheck)
             ->setSearch($command->pcreSearch)
@@ -208,8 +212,6 @@ abstract class FieldCommandHandler
      */
     protected function handleCheckbox(Field $entity, Command\CheckboxFieldCommand $command): Field
     {
-        $entity->setType(FieldType::CHECKBOX);
-
         $entity->asCheckbox()->setDefaultValue($command->defaultValue);
 
         return $entity;
@@ -227,8 +229,6 @@ abstract class FieldCommandHandler
      */
     protected function handleList(Field $entity, Command\ListFieldCommand $command): Field
     {
-        $entity->setType(FieldType::LIST);
-
         if (in_array(Command\UpdateFieldCommandTrait::class, class_uses($command))) {
 
             /** @var \eTraxis\SimpleBus\Fields\UpdateListFieldCommand $command */
@@ -260,7 +260,7 @@ abstract class FieldCommandHandler
      */
     protected function handleRecord(Field $entity): Field
     {
-        return $entity->setType(FieldType::RECORD);
+        return $entity;
     }
 
     /**
@@ -291,8 +291,6 @@ abstract class FieldCommandHandler
                 throw new ValidationException([$error]);
             }
         }
-
-        $entity->setType(FieldType::DATE);
 
         $entity->asDate()
             ->setMinValue($command->minValue)
@@ -349,8 +347,6 @@ abstract class FieldCommandHandler
                 throw new ValidationException([$error]);
             }
         }
-
-        $entity->setType(FieldType::DURATION);
 
         $entity->asDuration()
             ->setMinValue($command->minValue)

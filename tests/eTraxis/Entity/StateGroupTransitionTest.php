@@ -11,31 +11,25 @@
 
 namespace eTraxis\Entity;
 
+use eTraxis\Dictionary\StateType;
+
 class StateGroupTransitionTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var StateGroupTransition */
-    private $object;
-
-    protected function setUp()
+    public function testConstruct()
     {
-        $this->object = new StateGroupTransition();
-    }
+        $template = new Template(new Project());
 
-    public function testFromState()
-    {
-        $this->object->setFromState($state = new State());
-        self::assertEquals($state, $this->object->getFromState());
-    }
+        $from  = new State($template, StateType::INTERIM);
+        $to    = new State($template, StateType::INTERIM);
+        $group = new Group();
 
-    public function testToState()
-    {
-        $this->object->setToState($state = new State());
-        self::assertEquals($state, $this->object->getToState());
-    }
+        $from->setName('From');
+        $to->setName('To');
 
-    public function testGroup()
-    {
-        $this->object->setGroup($group = new Group());
-        self::assertEquals($group, $this->object->getGroup());
+        $object = new StateGroupTransition($from, $to, $group);
+
+        self::assertEquals($from, $object->getFromState());
+        self::assertEquals($to, $object->getToState());
+        self::assertEquals($group, $object->getGroup());
     }
 }

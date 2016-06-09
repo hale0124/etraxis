@@ -59,10 +59,9 @@ class CreateListItemCommandHandler
 
         if ($field->getType() === FieldType::LIST) {
 
-            $entity = new ListItem();
+            $entity = new ListItem($field);
 
             $entity
-                ->setField($field)
                 ->setValue($command->value)
                 ->setText($command->text)
             ;

@@ -12,7 +12,11 @@
 namespace eTraxis\Entity\Fields;
 
 use eTraxis\Dictionary\FieldType;
+use eTraxis\Dictionary\StateType;
 use eTraxis\Entity\Field;
+use eTraxis\Entity\Project;
+use eTraxis\Entity\State;
+use eTraxis\Entity\Template;
 
 class AbstractFieldTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,8 +27,10 @@ class AbstractFieldTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $this->object = new Field();
-        $this->object->setType(FieldType::NUMBER)->asNumber()
+        $state = new State(new Template(new Project()), StateType::INTERIM);
+
+        $this->object = new Field($state, FieldType::NUMBER);
+        $this->object->asNumber()
             ->setMinValue(NumberField::MIN_VALUE)
             ->setMaxValue(NumberField::MAX_VALUE)
         ;

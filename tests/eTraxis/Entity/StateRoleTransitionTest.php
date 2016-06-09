@@ -11,36 +11,26 @@
 
 namespace eTraxis\Entity;
 
+use eTraxis\Dictionary\StateType;
 use eTraxis\Dictionary\SystemRole;
 
 class StateRoleTransitionTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var StateRoleTransition */
-    private $object;
-
-    protected function setUp()
+    public function testConstruct()
     {
-        $this->object = new StateRoleTransition();
-    }
+        $template = new Template(new Project());
 
-    public function testFromState()
-    {
-        $this->object->setFromState($state = new State());
-        self::assertEquals($state, $this->object->getFromState());
-    }
+        $from = new State($template, StateType::INTERIM);
+        $to   = new State($template, StateType::INTERIM);
+        $role = SystemRole::AUTHOR;
 
-    public function testToState()
-    {
-        $this->object->setToState($state = new State());
-        self::assertEquals($state, $this->object->getToState());
-    }
+        $from->setName('From');
+        $to->setName('To');
 
-    public function testRole()
-    {
-        $expected = SystemRole::AUTHOR;
-        $this->object->setRole($expected);
-        self::assertEquals($expected, $this->object->getRole());
-        $this->object->setRole('wtf');
-        self::assertEquals($expected, $this->object->getRole());
+        $object = new StateRoleTransition($from, $to, $role);
+
+        self::assertEquals($from, $object->getFromState());
+        self::assertEquals($to, $object->getToState());
+        self::assertEquals($role, $object->getRole());
     }
 }

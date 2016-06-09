@@ -271,7 +271,10 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
 
         foreach ($records as $info) {
 
-            $record = new Record();
+            $class = new \ReflectionClass(Record::class);
+
+            /** @var Record $record */
+            $record = $class->newInstanceWithoutConstructor();
 
             $record->setSubject($info['subject']);
 
@@ -283,21 +286,22 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
             $altr_record->createdAt   = strtotime($info['date'] . ' 09:00:00');
             $altr_record->changedAt   = strtotime($info['date'] . ' 09:00:00');
 
-            $event = new Event();
+            $event = new Event(
+                $record,
+                $record->getAuthor(),
+                EventType::RECORD_CREATED,
+                $state_new->getId()
+            );
 
-            $this->ego($event)->record    = $record;
-            $this->ego($event)->user      = $record->getAuthor();
-            $this->ego($event)->type      = EventType::RECORD_CREATED;
-            $this->ego($event)->createdAt = $record->getCreatedAt();
-            $this->ego($event)->parameter = $state_new->getId();
+            $event2 = new Event(
+                $record,
+                $record->getAuthor(),
+                EventType::RECORD_ASSIGNED,
+                $record->getResponsible()->getId()
+            );
 
-            $event2 = new Event();
-
-            $this->ego($event2)->record    = $record;
-            $this->ego($event2)->user      = $record->getAuthor();
-            $this->ego($event2)->type      = EventType::RECORD_ASSIGNED;
+            $this->ego($event)->createdAt  = $record->getCreatedAt();
             $this->ego($event2)->createdAt = $record->getCreatedAt();
-            $this->ego($event2)->parameter = $record->getResponsible()->getId();
 
             $manager->persist($record);
             $manager->persist($event);
@@ -319,8 +323,7 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
 
                 if (!$value) {
 
-                    $value = new StringValue();
-                    $value->setValue($values[$i]);
+                    $value = new StringValue($values[$i]);
 
                     $manager->persist($value);
                     $manager->flush();
@@ -344,8 +347,7 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
 
             if ($info['notes']) {
 
-                $value = new TextValue();
-                $value->setValue($info['notes']);
+                $value = new TextValue($info['notes']);
 
                 $manager->persist($value);
                 $manager->flush();
@@ -364,13 +366,14 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
 
             if ($info['date'] < '2010-01-01') {
 
-                $event = new Event();
+                $event = new Event(
+                    $record,
+                    $record->getResponsible(),
+                    EventType::STATE_CHANGED,
+                    $state_delivered->getId()
+                );
 
-                $this->ego($event)->record    = $record;
-                $this->ego($event)->user      = $record->getResponsible();
-                $this->ego($event)->type      = EventType::STATE_CHANGED;
                 $this->ego($event)->createdAt = strtotime($info['date'] . ' 17:00:00');
-                $this->ego($event)->parameter = $state_delivered->getId();
 
                 $manager->persist($event);
                 $manager->flush();
@@ -383,8 +386,7 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
 
                 if ($info['notes2']) {
 
-                    $value = new TextValue();
-                    $value->setValue($info['notes2']);
+                    $value = new TextValue($info['notes2']);
 
                     $manager->persist($value);
                     $manager->flush();
