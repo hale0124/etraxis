@@ -484,6 +484,7 @@ class Template extends Entity implements \JsonSerializable
     {
         return [
             'id'          => $this->getId(),
+            'project'     => $this->getProject()->getId(),
             'name'        => $this->getName(),
             'prefix'      => $this->getPrefix(),
             'criticalAge' => $this->getCriticalAge(),

@@ -572,6 +572,7 @@ class State extends Entity implements \JsonSerializable
     {
         return [
             'id'           => $this->getId(),
+            'template'     => $this->getTemplate()->getId(),
             'name'         => $this->getName(),
             'abbreviation' => $this->getAbbreviation(),
             'type'         => $this->getType(),

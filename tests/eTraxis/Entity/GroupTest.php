@@ -105,12 +105,12 @@ class GroupTest extends TransactionalTestCase
     public function testJsonSerialize()
     {
         $expected = [
-            'id',
-            'project',
-            'name',
-            'description',
+            'id'          => $this->object->getId(),
+            'project'     => $this->object->getProject()->getId(),
+            'name'        => $this->object->getName(),
+            'description' => $this->object->getDescription(),
         ];
 
-        self::assertEquals($expected, array_keys($this->object->jsonSerialize()));
+        self::assertEquals($expected, $this->object->jsonSerialize());
     }
 }

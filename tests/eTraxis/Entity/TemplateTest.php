@@ -178,6 +178,7 @@ class TemplateTest extends TransactionalTestCase
     {
         $expected = [
             'id'          => $this->object->getId(),
+            'project'     => $this->object->getProject()->getId(),
             'name'        => $this->object->getName(),
             'prefix'      => $this->object->getPrefix(),
             'criticalAge' => $this->object->getCriticalAge(),

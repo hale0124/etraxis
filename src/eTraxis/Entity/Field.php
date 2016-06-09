@@ -628,9 +628,11 @@ class Field extends Entity implements \JsonSerializable
     {
         return [
             'id'          => $this->getId(),
+            'state'       => $this->getState()->getId(),
             'name'        => $this->getName(),
             'type'        => $this->getType(),
             'description' => $this->getDescription(),
+            'order'       => $this->getOrder(),
             'isRequired'  => $this->isRequired(),
         ];
     }

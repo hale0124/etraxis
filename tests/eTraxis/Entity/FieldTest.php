@@ -215,14 +215,19 @@ class FieldTest extends TransactionalTestCase
 
     public function testJsonSerialize()
     {
+        /** @var Field $field */
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
+
         $expected = [
-            'id',
-            'name',
-            'type',
-            'description',
-            'isRequired',
+            'id'          => $field->getId(),
+            'state'       => $field->getState()->getId(),
+            'name'        => $field->getName(),
+            'type'        => $field->getType(),
+            'description' => $field->getDescription(),
+            'order'       => $field->getOrder(),
+            'isRequired'  => $field->isRequired(),
         ];
 
-        self::assertEquals($expected, array_keys($this->object->jsonSerialize()));
+        self::assertEquals($expected, $field->jsonSerialize());
     }
 }

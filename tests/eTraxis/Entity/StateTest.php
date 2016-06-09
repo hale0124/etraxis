@@ -205,6 +205,7 @@ class StateTest extends TransactionalTestCase
     {
         $expected = [
             'id'           => $this->object->getId(),
+            'template'     => $this->object->getTemplate()->getId(),
             'name'         => $this->object->getName(),
             'abbreviation' => $this->object->getAbbreviation(),
             'type'         => $this->object->getType(),
