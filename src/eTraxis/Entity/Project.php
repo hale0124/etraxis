@@ -75,7 +75,7 @@ class Project implements \JsonSerializable
     /**
      * @var ArrayCollection List of project groups.
      *
-     * @ORM\OneToMany(targetEntity="Group", mappedBy="project")
+     * @ORM\OneToMany(targetEntity="Group", mappedBy="project", cascade={"remove"})
      * @ORM\OrderBy({"name" = "ASC"})
      */
     private $groups;
