@@ -216,7 +216,7 @@ class Project implements \JsonSerializable
      */
     public function __toString()
     {
-        return $this->getName();
+        return 'project#' . $this->id;
     }
 
     /**

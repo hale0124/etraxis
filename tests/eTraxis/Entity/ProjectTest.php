@@ -75,7 +75,7 @@ class ProjectTest extends TransactionalTestCase
 
     public function testToString()
     {
-        self::assertEquals('Planet Express', (string) $this->object);
+        self::assertRegExp('/^project\#(\d+)$/', (string) $this->object);
     }
 
     public function testJsonSerialize()

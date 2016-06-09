@@ -198,7 +198,7 @@ class StateTest extends TransactionalTestCase
 
     public function testToString()
     {
-        self::assertEquals('New', (string) $this->object);
+        self::assertRegExp('/^state\#(\d+)$/', (string) $this->object);
     }
 
     public function testJsonSerialize()

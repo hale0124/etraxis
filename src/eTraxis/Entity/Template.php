@@ -474,7 +474,7 @@ class Template extends Entity implements \JsonSerializable
      */
     public function __toString()
     {
-        return $this->getName();
+        return 'template#' . $this->id;
     }
 
     /**

@@ -171,7 +171,7 @@ class TemplateTest extends TransactionalTestCase
 
     public function testToString()
     {
-        self::assertEquals('Delivery', (string) $this->object);
+        self::assertRegExp('/^template\#(\d+)$/', (string) $this->object);
     }
 
     public function testJsonSerialize()

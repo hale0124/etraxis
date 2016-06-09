@@ -99,7 +99,7 @@ class GroupTest extends TransactionalTestCase
 
     public function testToString()
     {
-        self::assertEquals('Crew', (string) $this->object);
+        self::assertRegExp('/^group\#(\d+)$/', (string) $this->object);
     }
 
     public function testJsonSerialize()

@@ -247,7 +247,7 @@ class Group extends Entity implements \JsonSerializable
      */
     public function __toString()
     {
-        return $this->getName();
+        return 'group#' . $this->id;
     }
 
     /**

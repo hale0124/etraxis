@@ -596,7 +596,7 @@ class User extends Entity implements \JsonSerializable
      */
     public function __toString()
     {
-        return $this->getFullname();
+        return 'user#' . $this->id;
     }
 
     /**

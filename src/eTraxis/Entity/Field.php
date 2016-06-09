@@ -618,7 +618,7 @@ class Field extends Entity implements \JsonSerializable
      */
     public function __toString()
     {
-        return $this->getName();
+        return 'field#' . $this->id;
     }
 
     /**

@@ -562,7 +562,7 @@ class State extends Entity implements \JsonSerializable
      */
     public function __toString()
     {
-        return $this->getName();
+        return 'state#' . $this->id;
     }
 
     /**

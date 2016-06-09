@@ -207,12 +207,10 @@ class FieldTest extends TransactionalTestCase
 
     public function testToString()
     {
-        $expected = 'Crew';
-
         /** @var Field $field */
-        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => $expected]);
+        $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
 
-        self::assertEquals($expected, (string) $field);
+        self::assertRegExp('/^field\#(\d+)$/', (string) $field);
     }
 
     public function testJsonSerialize()

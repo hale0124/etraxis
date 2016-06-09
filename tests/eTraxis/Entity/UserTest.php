@@ -231,7 +231,7 @@ class UserTest extends TransactionalTestCase
 
     public function testToString()
     {
-        self::assertEquals('Hubert J. Farnsworth', (string) $this->object);
+        self::assertRegExp('/^user\#(\d+)$/', (string) $this->object);
     }
 
     public function testJsonSerialize()
