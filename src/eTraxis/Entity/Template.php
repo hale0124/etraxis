@@ -349,6 +349,7 @@ class Template extends Entity implements \JsonSerializable
             if ($permission->getRole() === $role) {
                 if (!in_array($permission->getPermission(), $permissions)) {
                     $this->rolePermissions->remove($key);
+                    $this->manager->remove($permission);
                 }
             }
         }
@@ -420,6 +421,7 @@ class Template extends Entity implements \JsonSerializable
             if ($permission->getGroup() === $group) {
                 if (!in_array($permission->getPermission(), $permissions)) {
                     $this->groupPermissions->remove($key);
+                    $this->manager->remove($permission);
                 }
             }
         }

@@ -376,6 +376,7 @@ class Field extends Entity implements \JsonSerializable
                 if ($item->getRole() === $role) {
                     if (!in_array($item->getPermission(), $desired)) {
                         $this->rolePermissions->remove($key);
+                        $this->manager->remove($item);
                     }
                 }
             }
@@ -469,6 +470,7 @@ class Field extends Entity implements \JsonSerializable
                 if ($item->getGroup() === $group) {
                     if (!in_array($item->getPermission(), $desired)) {
                         $this->groupPermissions->remove($key);
+                        $this->manager->remove($item);
                     }
                 }
             }

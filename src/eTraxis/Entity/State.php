@@ -345,6 +345,7 @@ class State extends Entity implements \JsonSerializable
             if ($transition->getRole() === $role) {
                 if (!in_array($transition->getToState(), $states)) {
                     $this->roleTransitions->remove($key);
+                    $this->manager->remove($transition);
                 }
             }
         }
@@ -412,6 +413,7 @@ class State extends Entity implements \JsonSerializable
             if ($transition->getGroup() === $group) {
                 if (!in_array($transition->getToState(), $states)) {
                     $this->groupTransitions->remove($key);
+                    $this->manager->remove($transition);
                 }
             }
         }
@@ -497,9 +499,13 @@ class State extends Entity implements \JsonSerializable
      */
     public function removeResponsibleGroups(array $groups)
     {
-        $this->responsibleGroups = $this->responsibleGroups->filter(function (StateResponsibleGroup $responsibleGroup) use ($groups) {
-            return !in_array($responsibleGroup->getGroup(), $groups);
-        });
+        foreach ($this->responsibleGroups as $key => $group) {
+            /** @var StateResponsibleGroup $group */
+            if (in_array($group->getGroup(), $groups)) {
+                $this->responsibleGroups->remove($key);
+                $this->manager->remove($group);
+            }
+        }
 
         return $this;
     }
