@@ -34,7 +34,8 @@
             {% else %}
                 {{ macro.row('user.status'|trans, user.disabled ? 'user.disabled'|trans|lower : 'user.enabled'|trans|lower) }}
             {% endif %}
-            {{ macro.row('security.authentication'|trans, user.provider) }}
+            {{ macro.row('security.authentication'|trans, providers[user.provider]) }}
+            {{ macro.row('timezone'|trans, user.timezone) }}
         </fieldset>
     </div>
 </div>

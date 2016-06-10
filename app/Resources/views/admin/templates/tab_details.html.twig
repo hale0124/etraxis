@@ -8,6 +8,8 @@
         {% endif %}
         {% if can.unlock %}
             <button type="button" onclick="TemplatesApp.unlock({{ template.id }})">{{ 'button.unlock'|trans }}</button>
+        {% elseif template.locked %}
+            <button type="button" disabled>{{ 'button.unlock'|trans }}</button>
         {% endif %}
         {% if can.delete %}
             <button type="button" onclick="TemplatesApp.delete({{ template.id }})">{{ 'button.delete'|trans }}</button>

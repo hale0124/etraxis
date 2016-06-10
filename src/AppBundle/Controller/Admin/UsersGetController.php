@@ -11,6 +11,7 @@
 
 namespace AppBundle\Controller\Admin;
 
+use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Entity\User;
 use eTraxis\Form\UserForm;
 use eTraxis\Service\Export\ExportCsvQuery;
@@ -143,8 +144,9 @@ class UsersGetController extends Controller
         $authChecker = $this->get('security.authorization_checker');
 
         return $this->render('admin/users/tab_details.html.twig', [
-            'user' => $user,
-            'can'  => [
+            'user'      => $user,
+            'providers' => AuthenticationProvider::all(),
+            'can'       => [
                 'delete'  => $authChecker->isGranted(User::DELETE, $user),
                 'disable' => $authChecker->isGranted(User::DISABLE, $user),
                 'enable'  => $authChecker->isGranted(User::ENABLE, $user),
