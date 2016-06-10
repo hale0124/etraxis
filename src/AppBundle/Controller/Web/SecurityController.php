@@ -11,7 +11,6 @@
 
 namespace AppBundle\Controller\Web;
 
-use eTraxis\Entity\User;
 use eTraxis\Form\ForgotPasswordForm;
 use eTraxis\Form\ResetPasswordForm;
 use eTraxis\SimpleBus\Users\ForgotPasswordCommand;
@@ -19,6 +18,7 @@ use eTraxis\SimpleBus\Users\ResetPasswordCommand;
 use eTraxis\SimpleBus\Users\SetPasswordCommand;
 use eTraxis\Traits\ContainerTrait;
 use eTraxis\Traits\FlashBagTrait;
+use eTraxis\Voter\UserVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
@@ -184,7 +184,7 @@ class SecurityController extends Controller
         /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
         $authChecker = $this->get('security.authorization_checker');
 
-        if (!$authChecker->isGranted(User::SET_EXPIRED_PASSWORD, $this->getUser())) {
+        if (!$authChecker->isGranted(UserVoter::SET_EXPIRED_PASSWORD, $this->getUser())) {
             return $this->redirect($this->generateUrl('homepage'));
         }
 

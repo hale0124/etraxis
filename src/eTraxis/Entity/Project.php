@@ -31,9 +31,6 @@ class Project implements \JsonSerializable
     const MAX_NAME        = 25;
     const MAX_DESCRIPTION = 100;
 
-    // Actions.
-    const DELETE = 'project.delete';
-
     /**
      * @var int Unique ID.
      *

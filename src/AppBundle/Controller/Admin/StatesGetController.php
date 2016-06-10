@@ -18,6 +18,7 @@ use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
 use eTraxis\Form\StateForm;
+use eTraxis\Voter\StateVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -83,8 +84,8 @@ class StatesGetController extends Controller
             'types'        => StateType::all(),
             'responsibles' => StateResponsible::all(),
             'can'          => [
-                'delete'  => $authChecker->isGranted(State::DELETE, $state),
-                'initial' => $authChecker->isGranted(State::INITIAL, $state),
+                'delete'  => $authChecker->isGranted(StateVoter::DELETE, $state),
+                'initial' => $authChecker->isGranted(StateVoter::INITIAL, $state),
             ],
         ]);
     }

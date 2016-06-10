@@ -32,9 +32,6 @@ class ListItem
     // Constraints.
     const MAX_TEXT = 50;
 
-    // Actions.
-    const DELETE = 'listitem.delete';
-
     /**
      * @var Field Field.
      *

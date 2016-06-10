@@ -14,6 +14,7 @@ namespace eTraxis\SimpleBus\Users\Handler;
 use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\User;
 use eTraxis\SimpleBus\Users\DeleteUserCommand;
+use eTraxis\Voter\UserVoter;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -55,7 +56,7 @@ class DeleteUserCommandHandler
             throw new NotFoundHttpException('Unknown user.');
         }
 
-        if (!$this->security->isGranted(User::DELETE, $entity)) {
+        if (!$this->security->isGranted(UserVoter::DELETE, $entity)) {
             throw new AccessDeniedHttpException();
         }
 

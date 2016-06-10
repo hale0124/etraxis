@@ -14,6 +14,7 @@ namespace eTraxis\SimpleBus\States\Handler;
 use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\State;
 use eTraxis\SimpleBus\States\DeleteStateCommand;
+use eTraxis\Voter\StateVoter;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -54,7 +55,7 @@ class DeleteStateCommandHandler
             throw new NotFoundHttpException('Unknown state.');
         }
 
-        if (!$this->security->isGranted(State::DELETE, $entity)) {
+        if (!$this->security->isGranted(StateVoter::DELETE, $entity)) {
             throw new AccessDeniedHttpException();
         }
 

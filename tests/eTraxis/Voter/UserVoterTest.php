@@ -47,7 +47,7 @@ class UserVoterTest extends TransactionalTestCase
         $voter = new UserVoter($manager);
         $token = new AnonymousToken('', 'anon.');
 
-        self::assertEquals(UserVoter::ACCESS_DENIED, $voter->vote($token, $scruffy, [User::DELETE, User::DISABLE]));
+        self::assertEquals(UserVoter::ACCESS_DENIED, $voter->vote($token, $scruffy, [UserVoter::DELETE, UserVoter::DISABLE]));
     }
 
     public function testSetExpiredPassword()
@@ -60,7 +60,7 @@ class UserVoterTest extends TransactionalTestCase
 
         $hubert = $this->findUser('hubert');
 
-        self::assertFalse($this->security->isGranted(User::SET_EXPIRED_PASSWORD, $hubert));
+        self::assertFalse($this->security->isGranted(UserVoter::SET_EXPIRED_PASSWORD, $hubert));
 
         /** @var \StdClass $hubert2 */
         $hubert2 = AltrEgo::create($hubert);
@@ -71,10 +71,10 @@ class UserVoterTest extends TransactionalTestCase
         $manager = $this->doctrine->getManager();
 
         $voter = new UserVoter($manager, 1);
-        self::assertEquals(UserVoter::ACCESS_GRANTED, $voter->vote($token, $hubert, [User::SET_EXPIRED_PASSWORD]));
+        self::assertEquals(UserVoter::ACCESS_GRANTED, $voter->vote($token, $hubert, [UserVoter::SET_EXPIRED_PASSWORD]));
 
         $voter = new UserVoter($manager);
-        self::assertEquals(UserVoter::ACCESS_DENIED, $voter->vote($token, $hubert, [User::SET_EXPIRED_PASSWORD]));
+        self::assertEquals(UserVoter::ACCESS_DENIED, $voter->vote($token, $hubert, [UserVoter::SET_EXPIRED_PASSWORD]));
     }
 
     public function testDelete()
@@ -89,9 +89,9 @@ class UserVoterTest extends TransactionalTestCase
         self::assertInstanceOf(User::class, $leela);
         self::assertInstanceOf(User::class, $scruffy);
 
-        self::assertFalse($this->security->isGranted(User::DELETE, $hubert));
-        self::assertFalse($this->security->isGranted(User::DELETE, $leela));
-        self::assertTrue($this->security->isGranted(User::DELETE, $scruffy));
+        self::assertFalse($this->security->isGranted(UserVoter::DELETE, $hubert));
+        self::assertFalse($this->security->isGranted(UserVoter::DELETE, $leela));
+        self::assertTrue($this->security->isGranted(UserVoter::DELETE, $scruffy));
     }
 
     public function testDisable()
@@ -106,9 +106,9 @@ class UserVoterTest extends TransactionalTestCase
         self::assertInstanceOf(User::class, $francine);
         self::assertInstanceOf(User::class, $scruffy);
 
-        self::assertFalse($this->security->isGranted(User::DISABLE, $hubert));
-        self::assertFalse($this->security->isGranted(User::DISABLE, $francine));
-        self::assertTrue($this->security->isGranted(User::DISABLE, $scruffy));
+        self::assertFalse($this->security->isGranted(UserVoter::DISABLE, $hubert));
+        self::assertFalse($this->security->isGranted(UserVoter::DISABLE, $francine));
+        self::assertTrue($this->security->isGranted(UserVoter::DISABLE, $scruffy));
     }
 
     public function testEnable()
@@ -121,8 +121,8 @@ class UserVoterTest extends TransactionalTestCase
         self::assertInstanceOf(User::class, $hubert);
         self::assertInstanceOf(User::class, $francine);
 
-        self::assertFalse($this->security->isGranted(User::ENABLE, $hubert));
-        self::assertTrue($this->security->isGranted(User::ENABLE, $francine));
+        self::assertFalse($this->security->isGranted(UserVoter::ENABLE, $hubert));
+        self::assertTrue($this->security->isGranted(UserVoter::ENABLE, $francine));
     }
 
     public function testUnlock()
@@ -140,7 +140,7 @@ class UserVoterTest extends TransactionalTestCase
 
         do {} while(!$bender->lock($auth_attempts, $lock_time));
 
-        self::assertTrue($this->security->isGranted(User::UNLOCK, $bender));
-        self::assertFalse($this->security->isGranted(User::UNLOCK, $hubert));
+        self::assertTrue($this->security->isGranted(UserVoter::UNLOCK, $bender));
+        self::assertFalse($this->security->isGranted(UserVoter::UNLOCK, $hubert));
     }
 }

@@ -19,6 +19,7 @@ use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
 use eTraxis\Form\FieldForm;
 use eTraxis\Form\PCREForm;
+use eTraxis\Voter\FieldVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -83,7 +84,7 @@ class FieldsGetController extends Controller
             'field' => $field,
             'types' => FieldType::all(),
             'can'   => [
-                'delete' => $authChecker->isGranted(Field::DELETE, $field),
+                'delete' => $authChecker->isGranted(FieldVoter::DELETE, $field),
             ],
         ]);
     }

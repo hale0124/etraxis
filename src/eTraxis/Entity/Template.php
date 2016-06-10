@@ -36,11 +36,6 @@ class Template extends Entity implements \JsonSerializable
     const MAX_PREFIX      = 3;
     const MAX_DESCRIPTION = 100;
 
-    // Actions.
-    const DELETE = 'template.delete';
-    const LOCK   = 'template.lock';
-    const UNLOCK = 'template.unlock';
-
     /**
      * @var int Unique ID.
      *

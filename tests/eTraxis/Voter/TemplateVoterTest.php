@@ -65,8 +65,8 @@ class TemplateVoterTest extends TransactionalTestCase
         self::assertInstanceOf(Template::class, $template);
         self::assertInstanceOf(Template::class, $empty);
 
-        self::assertFalse($this->security->isGranted(Template::DELETE, $template));
-        self::assertTrue($this->security->isGranted(Template::DELETE, $empty));
+        self::assertFalse($this->security->isGranted(TemplateVoter::DELETE, $template));
+        self::assertTrue($this->security->isGranted(TemplateVoter::DELETE, $empty));
     }
 
     public function testLockUnlock()
@@ -83,15 +83,15 @@ class TemplateVoterTest extends TransactionalTestCase
         $delivery = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
         self::assertTrue($delivery->isLocked());
-        self::assertFalse($this->security->isGranted(Template::LOCK, $delivery));
-        self::assertTrue($this->security->isGranted(Template::UNLOCK, $delivery));
+        self::assertFalse($this->security->isGranted(TemplateVoter::LOCK, $delivery));
+        self::assertTrue($this->security->isGranted(TemplateVoter::UNLOCK, $delivery));
 
         /** @var Template $futurama */
         $futurama = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Futurama']);
 
         self::assertFalse($futurama->isLocked());
-        self::assertTrue($this->security->isGranted(Template::LOCK, $futurama));
-        self::assertFalse($this->security->isGranted(Template::UNLOCK, $futurama));
+        self::assertTrue($this->security->isGranted(TemplateVoter::LOCK, $futurama));
+        self::assertFalse($this->security->isGranted(TemplateVoter::UNLOCK, $futurama));
     }
 
     public function testUnlockNoInitialState()
@@ -116,6 +116,6 @@ class TemplateVoterTest extends TransactionalTestCase
         $empty = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Bug report']);
 
         self::assertTrue($empty->isLocked());
-        self::assertFalse($this->security->isGranted(Template::UNLOCK, $empty));
+        self::assertFalse($this->security->isGranted(TemplateVoter::UNLOCK, $empty));
     }
 }

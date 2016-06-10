@@ -34,9 +34,6 @@ class Field extends Entity implements \JsonSerializable
     const MAX_NAME        = 50;
     const MAX_DESCRIPTION = 1000;
 
-    // Actions.
-    const DELETE = 'field.delete';
-
     /**
      * @var int Unique ID.
      *

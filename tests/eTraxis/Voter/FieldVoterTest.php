@@ -54,7 +54,7 @@ class FieldVoterTest extends TransactionalTestCase
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
         self::assertTrue($template->isLocked());
-        self::assertTrue($this->security->isGranted(Field::DELETE, $field));
+        self::assertTrue($this->security->isGranted(FieldVoter::DELETE, $field));
     }
 
     public function testDeleteUnlocked()
@@ -68,6 +68,6 @@ class FieldVoterTest extends TransactionalTestCase
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
         self::assertFalse($template->isLocked());
-        self::assertFalse($this->security->isGranted(Field::DELETE, $field));
+        self::assertFalse($this->security->isGranted(FieldVoter::DELETE, $field));
     }
 }

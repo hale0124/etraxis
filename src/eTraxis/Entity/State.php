@@ -35,10 +35,6 @@ class State extends Entity implements \JsonSerializable
     const MAX_NAME         = 50;
     const MAX_ABBREVIATION = 3;
 
-    // Actions.
-    const DELETE  = 'state.delete';
-    const INITIAL = 'state.initial';
-
     /**
      * @var int Unique ID.
      *

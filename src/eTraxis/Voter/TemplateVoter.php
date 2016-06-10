@@ -24,6 +24,10 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  */
 class TemplateVoter extends Voter
 {
+    const DELETE = 'template.delete';
+    const LOCK   = 'template.lock';
+    const UNLOCK = 'template.unlock';
+
     protected $manager;
 
     /**
@@ -42,9 +46,9 @@ class TemplateVoter extends Voter
     protected function supports($attribute, $subject)
     {
         $attributes = [
-            Template::DELETE,
-            Template::LOCK,
-            Template::UNLOCK,
+            self::DELETE,
+            self::LOCK,
+            self::UNLOCK,
         ];
 
         if (in_array($attribute, $attributes)) {
@@ -63,13 +67,13 @@ class TemplateVoter extends Voter
         /** @var Template $subject */
         switch ($attribute) {
 
-            case Template::DELETE:
+            case self::DELETE:
                 return $this->isDeleteGranted($subject);
 
-            case Template::LOCK:
+            case self::LOCK:
                 return $this->isLockGranted($subject);
 
-            case Template::UNLOCK:
+            case self::UNLOCK:
                 return $this->isUnlockGranted($subject);
 
             default:

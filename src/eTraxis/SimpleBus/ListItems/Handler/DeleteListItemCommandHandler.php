@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\ListItem;
 use eTraxis\SimpleBus\ListItems\DeleteListItemCommand;
+use eTraxis\Voter\ListItemVoter;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -65,7 +66,7 @@ class DeleteListItemCommandHandler
             throw new NotFoundHttpException('Unknown list item.');
         }
 
-        if (!$this->security->isGranted(ListItem::DELETE, $entity)) {
+        if (!$this->security->isGranted(ListItemVoter::DELETE, $entity)) {
             throw new AccessDeniedHttpException();
         }
 

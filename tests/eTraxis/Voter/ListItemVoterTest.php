@@ -58,7 +58,7 @@ class ListItemVoterTest extends TransactionalTestCase
         self::assertInstanceOf(ListItem::class, $used);
         self::assertInstanceOf(ListItem::class, $unused);
 
-        self::assertFalse($this->security->isGranted(ListItem::DELETE, $used));
-        self::assertTrue($this->security->isGranted(ListItem::DELETE, $unused));
+        self::assertFalse($this->security->isGranted(ListItemVoter::DELETE, $used));
+        self::assertTrue($this->security->isGranted(ListItemVoter::DELETE, $unused));
     }
 }

@@ -22,6 +22,8 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  */
 class ProjectVoter extends Voter
 {
+    const DELETE = 'project.delete';
+
     protected $manager;
 
     /**
@@ -40,7 +42,7 @@ class ProjectVoter extends Voter
     protected function supports($attribute, $subject)
     {
         $attributes = [
-            Project::DELETE,
+            self::DELETE,
         ];
 
         if (in_array($attribute, $attributes)) {
@@ -59,7 +61,7 @@ class ProjectVoter extends Voter
         /** @var Project $subject */
         switch ($attribute) {
 
-            case Project::DELETE:
+            case self::DELETE:
                 return $this->isDeleteGranted($subject);
 
             default:

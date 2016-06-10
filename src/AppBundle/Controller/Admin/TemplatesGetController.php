@@ -17,6 +17,7 @@ use eTraxis\Entity\Group;
 use eTraxis\Entity\Project;
 use eTraxis\Entity\Template;
 use eTraxis\Form\TemplateForm;
+use eTraxis\Voter\TemplateVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -80,9 +81,9 @@ class TemplatesGetController extends Controller
         return $this->render('admin/templates/tab_details.html.twig', [
             'template' => $template,
             'can'      => [
-                'delete' => $authChecker->isGranted(Template::DELETE, $template),
-                'lock'   => $authChecker->isGranted(Template::LOCK, $template),
-                'unlock' => $authChecker->isGranted(Template::UNLOCK, $template),
+                'delete' => $authChecker->isGranted(TemplateVoter::DELETE, $template),
+                'lock'   => $authChecker->isGranted(TemplateVoter::LOCK, $template),
+                'unlock' => $authChecker->isGranted(TemplateVoter::UNLOCK, $template),
             ],
         ]);
     }

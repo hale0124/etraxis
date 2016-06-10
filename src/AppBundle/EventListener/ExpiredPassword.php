@@ -11,7 +11,7 @@
 
 namespace AppBundle\EventListener;
 
-use eTraxis\Entity\User;
+use eTraxis\Voter\UserVoter;
 use Symfony\Bundle\FrameworkBundle\Routing\Router;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpKernel\Event\FilterControllerEvent;
@@ -85,7 +85,7 @@ class ExpiredPassword
         }
 
         // Redirect to "Set expired password" page.
-        if ($this->authorization_checker->isGranted(User::SET_EXPIRED_PASSWORD, $this->token_storage->getToken()->getUser())) {
+        if ($this->authorization_checker->isGranted(UserVoter::SET_EXPIRED_PASSWORD, $this->token_storage->getToken()->getUser())) {
 
             $url = $this->router->generate('set_expired_password');
 

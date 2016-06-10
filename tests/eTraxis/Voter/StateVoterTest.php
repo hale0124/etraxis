@@ -66,8 +66,8 @@ class StateVoterTest extends TransactionalTestCase
         self::assertInstanceOf(State::class, $state);
         self::assertInstanceOf(State::class, $empty);
 
-        self::assertFalse($this->security->isGranted(State::DELETE, $state));
-        self::assertTrue($this->security->isGranted(State::DELETE, $empty));
+        self::assertFalse($this->security->isGranted(StateVoter::DELETE, $state));
+        self::assertTrue($this->security->isGranted(StateVoter::DELETE, $empty));
     }
 
     public function testInitial()
@@ -101,8 +101,8 @@ class StateVoterTest extends TransactionalTestCase
         self::assertInstanceOf(State::class, $interim);
         self::assertInstanceOf(State::class, $final);
 
-        self::assertFalse($this->security->isGranted(State::INITIAL, $initial));
-        self::assertTrue($this->security->isGranted(State::INITIAL, $interim));
-        self::assertFalse($this->security->isGranted(State::INITIAL, $final));
+        self::assertFalse($this->security->isGranted(StateVoter::INITIAL, $initial));
+        self::assertTrue($this->security->isGranted(StateVoter::INITIAL, $interim));
+        self::assertFalse($this->security->isGranted(StateVoter::INITIAL, $final));
     }
 }

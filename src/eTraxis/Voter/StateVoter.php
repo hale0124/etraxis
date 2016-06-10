@@ -24,6 +24,9 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  */
 class StateVoter extends Voter
 {
+    const DELETE  = 'state.delete';
+    const INITIAL = 'state.initial';
+
     protected $manager;
 
     /**
@@ -42,8 +45,8 @@ class StateVoter extends Voter
     protected function supports($attribute, $subject)
     {
         $attributes = [
-            State::DELETE,
-            State::INITIAL,
+            self::DELETE,
+            self::INITIAL,
         ];
 
         if (in_array($attribute, $attributes)) {
@@ -62,10 +65,10 @@ class StateVoter extends Voter
         /** @var State $subject */
         switch ($attribute) {
 
-            case State::DELETE:
+            case self::DELETE:
                 return $this->isDeleteGranted($subject);
 
-            case State::INITIAL:
+            case self::INITIAL:
                 return $this->isInitialGranted($subject);
 
             default:

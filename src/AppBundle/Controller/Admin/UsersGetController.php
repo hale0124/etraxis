@@ -15,6 +15,7 @@ use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Entity\User;
 use eTraxis\Form\UserForm;
 use eTraxis\Service\Export\ExportCsvQuery;
+use eTraxis\Voter\UserVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use SimpleBus\ValidationException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -147,10 +148,10 @@ class UsersGetController extends Controller
             'user'      => $user,
             'providers' => AuthenticationProvider::all(),
             'can'       => [
-                'delete'  => $authChecker->isGranted(User::DELETE, $user),
-                'disable' => $authChecker->isGranted(User::DISABLE, $user),
-                'enable'  => $authChecker->isGranted(User::ENABLE, $user),
-                'unlock'  => $authChecker->isGranted(User::UNLOCK, $user),
+                'delete'  => $authChecker->isGranted(UserVoter::DELETE, $user),
+                'disable' => $authChecker->isGranted(UserVoter::DISABLE, $user),
+                'enable'  => $authChecker->isGranted(UserVoter::ENABLE, $user),
+                'unlock'  => $authChecker->isGranted(UserVoter::UNLOCK, $user),
             ],
         ]);
     }

@@ -24,6 +24,12 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  */
 class UserVoter extends Voter
 {
+    const SET_EXPIRED_PASSWORD = 'user.set_expired_password';
+    const DELETE               = 'user.delete';
+    const DISABLE              = 'user.disable';
+    const ENABLE               = 'user.enable';
+    const UNLOCK               = 'user.unlock';
+
     protected $manager;
     protected $password_expiration;
 
@@ -45,11 +51,11 @@ class UserVoter extends Voter
     protected function supports($attribute, $subject)
     {
         $attributes = [
-            User::SET_EXPIRED_PASSWORD,
-            User::DELETE,
-            User::DISABLE,
-            User::ENABLE,
-            User::UNLOCK,
+            self::SET_EXPIRED_PASSWORD,
+            self::DELETE,
+            self::DISABLE,
+            self::ENABLE,
+            self::UNLOCK,
         ];
 
         if (in_array($attribute, $attributes)) {
@@ -68,19 +74,19 @@ class UserVoter extends Voter
         /** @var User $subject */
         switch ($attribute) {
 
-            case User::SET_EXPIRED_PASSWORD:
+            case self::SET_EXPIRED_PASSWORD:
                 return $this->isSetExpiredPasswordGranted($subject);
 
-            case User::DELETE:
+            case self::DELETE:
                 return $this->isDeleteGranted($subject, $token->getUser());
 
-            case User::DISABLE:
+            case self::DISABLE:
                 return $this->isDisableGranted($subject, $token->getUser());
 
-            case User::ENABLE:
+            case self::ENABLE:
                 return $this->isEnableGranted($subject);
 
-            case User::UNLOCK:
+            case self::UNLOCK:
                 return $this->isUnlockGranted($subject);
 
             default:

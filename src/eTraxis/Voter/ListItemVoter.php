@@ -22,6 +22,8 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  */
 class ListItemVoter extends Voter
 {
+    const DELETE = 'listitem.delete';
+
     protected $manager;
 
     /**
@@ -40,7 +42,7 @@ class ListItemVoter extends Voter
     protected function supports($attribute, $subject)
     {
         $attributes = [
-            ListItem::DELETE,
+            self::DELETE,
         ];
 
         if (in_array($attribute, $attributes)) {
@@ -59,7 +61,7 @@ class ListItemVoter extends Voter
         /** @var ListItem $subject */
         switch ($attribute) {
 
-            case ListItem::DELETE:
+            case self::DELETE:
                 return $this->isDeleteGranted($subject);
 
             default:

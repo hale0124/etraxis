@@ -20,13 +20,15 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  */
 class FieldVoter extends Voter
 {
+    const DELETE = 'field.delete';
+
     /**
      * {@inheritdoc}
      */
     protected function supports($attribute, $subject)
     {
         $attributes = [
-            Field::DELETE,
+            self::DELETE,
         ];
 
         if (in_array($attribute, $attributes)) {
@@ -45,7 +47,7 @@ class FieldVoter extends Voter
         /** @var Field $subject */
         switch ($attribute) {
 
-            case Field::DELETE:
+            case self::DELETE:
                 return $this->isDeleteGranted($subject);
 
             default:

@@ -49,7 +49,7 @@ class ProjectVoterTest extends TransactionalTestCase
         self::assertInstanceOf(Project::class, $project);
         self::assertInstanceOf(Project::class, $empty);
 
-        self::assertFalse($this->security->isGranted(Project::DELETE, $project));
-        self::assertTrue($this->security->isGranted(Project::DELETE, $empty));
+        self::assertFalse($this->security->isGranted(ProjectVoter::DELETE, $project));
+        self::assertTrue($this->security->isGranted(ProjectVoter::DELETE, $empty));
     }
 }

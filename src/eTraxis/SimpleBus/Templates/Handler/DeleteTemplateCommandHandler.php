@@ -14,6 +14,7 @@ namespace eTraxis\SimpleBus\Templates\Handler;
 use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\Template;
 use eTraxis\SimpleBus\Templates\DeleteTemplateCommand;
+use eTraxis\Voter\TemplateVoter;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -54,7 +55,7 @@ class DeleteTemplateCommandHandler
             throw new NotFoundHttpException('Unknown template.');
         }
 
-        if (!$this->security->isGranted(Template::DELETE, $entity)) {
+        if (!$this->security->isGranted(TemplateVoter::DELETE, $entity)) {
             throw new AccessDeniedHttpException();
         }
 
