@@ -132,7 +132,7 @@ class State extends Entity implements \JsonSerializable
         }
 
         // Final states cannot be assigned.
-        if ($type === Dictionary\StateType::FINAL) {
+        if ($type === Dictionary\StateType::IS_FINAL) {
             $this->responsible = Dictionary\StateResponsible::REMOVE;
         }
 
@@ -230,7 +230,7 @@ class State extends Entity implements \JsonSerializable
     public function setResponsible(string $responsible)
     {
         // Final states cannot be assigned.
-        if ($this->type === Dictionary\StateType::FINAL) {
+        if ($this->type === Dictionary\StateType::IS_FINAL) {
             return $this;
         }
 
@@ -249,7 +249,7 @@ class State extends Entity implements \JsonSerializable
     public function getResponsible()
     {
         // Final states cannot be assigned.
-        if ($this->type === Dictionary\StateType::FINAL) {
+        if ($this->type === Dictionary\StateType::IS_FINAL) {
             return Dictionary\StateResponsible::REMOVE;
         }
 
@@ -266,7 +266,7 @@ class State extends Entity implements \JsonSerializable
     public function setNextState(State $state = null)
     {
         // Final states cannot have a next one.
-        if ($this->type === Dictionary\StateType::FINAL) {
+        if ($this->type === Dictionary\StateType::IS_FINAL) {
             return $this;
         }
 
@@ -287,7 +287,7 @@ class State extends Entity implements \JsonSerializable
      */
     public function getNextState()
     {
-        return $this->type === Dictionary\StateType::FINAL ? null : $this->nextState;
+        return $this->type === Dictionary\StateType::IS_FINAL ? null : $this->nextState;
     }
 
     /**
@@ -343,7 +343,7 @@ class State extends Entity implements \JsonSerializable
     public function getRoleTransitions(string $role)
     {
         // Transitions are not applicable for final states.
-        if ($this->type === Dictionary\StateType::FINAL) {
+        if ($this->type === Dictionary\StateType::IS_FINAL) {
             return [];
         }
 
@@ -403,7 +403,7 @@ class State extends Entity implements \JsonSerializable
     public function getGroupTransitions(Group $group)
     {
         // Transitions are not applicable for final states.
-        if ($this->type === Dictionary\StateType::FINAL) {
+        if ($this->type === Dictionary\StateType::IS_FINAL) {
             return [];
         }
 

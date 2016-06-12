@@ -19,7 +19,7 @@ class StateResponsibleGroupTest extends \PHPUnit_Framework_TestCase
     {
         $template = new Template(new Project());
 
-        $state = new State($template, StateType::INTERIM);
+        $state = new State($template, StateType::IS_INTERIM);
         $group = new Group();
 
         $object = new StateResponsibleGroup($state, $group);

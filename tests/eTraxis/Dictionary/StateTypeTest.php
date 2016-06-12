@@ -16,9 +16,9 @@ class StateTypeTest extends \PHPUnit_Framework_TestCase
     public function testDictionary()
     {
         $expected = [
-            StateType::INITIAL,
-            StateType::INTERIM,
-            StateType::FINAL,
+            StateType::IS_INITIAL,
+            StateType::IS_INTERIM,
+            StateType::IS_FINAL,
         ];
 
         self::assertEquals($expected, StateType::keys());

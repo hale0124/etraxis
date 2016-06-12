@@ -29,7 +29,7 @@ class DecimalFieldTest extends TransactionalTestCase
     {
         parent::setUp();
 
-        $state = new State(new Template(new Project()), StateType::INTERIM);
+        $state = new State(new Template(new Project()), StateType::IS_INTERIM);
 
         $this->object = new Field($state, FieldType::DECIMAL);
 

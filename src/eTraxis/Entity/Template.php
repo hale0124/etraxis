@@ -316,7 +316,7 @@ class Template extends Entity implements \JsonSerializable
     public function getInitialState()
     {
         $states = $this->states->filter(function (State $state) {
-            return $state->getType() === Dictionary\StateType::INITIAL;
+            return $state->getType() === Dictionary\StateType::IS_INITIAL;
         });
 
         return count($states) === 0 ? null : $states->first();

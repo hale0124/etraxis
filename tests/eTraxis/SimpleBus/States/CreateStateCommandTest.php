@@ -33,7 +33,7 @@ class CreateStateCommandTest extends TransactionalTestCase
         $template     = $this->getTemplate();
         $name         = 'Started';
         $abbreviation = 'S';
-        $type         = StateType::INTERIM;
+        $type         = StateType::IS_INTERIM;
         $responsible  = StateResponsible::KEEP;
         $nextState    = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
@@ -76,7 +76,7 @@ class CreateStateCommandTest extends TransactionalTestCase
 
         /** @var State $initial */
         $initial = $repository->findOneBy(['name' => 'New']);
-        self::assertEquals(StateType::INITIAL, $initial->getType());
+        self::assertEquals(StateType::IS_INITIAL, $initial->getType());
 
         /** @var State $state */
         $state = $repository->findOneBy(['name' => $name]);
@@ -87,7 +87,7 @@ class CreateStateCommandTest extends TransactionalTestCase
             'template'     => $template->getId(),
             'name'         => $name,
             'abbreviation' => $abbreviation,
-            'type'         => StateType::INITIAL,
+            'type'         => StateType::IS_INITIAL,
             'responsible'  => StateResponsible::KEEP,
         ]);
 
@@ -99,14 +99,14 @@ class CreateStateCommandTest extends TransactionalTestCase
         self::assertEquals($template->getId(), $state->getTemplate()->getId());
         self::assertEquals($name, $state->getName());
         self::assertEquals($abbreviation, $state->getAbbreviation());
-        self::assertEquals(StateType::INITIAL, $state->getType());
+        self::assertEquals(StateType::IS_INITIAL, $state->getType());
 
         $query = $repository->createQueryBuilder('s')
             ->select('COUNT(s.id)')
             ->where('s.template = :template')
             ->andWhere('s.type = :initial')
             ->setParameter('template', $template)
-            ->setParameter('initial', StateType::INITIAL)
+            ->setParameter('initial', StateType::IS_INITIAL)
         ;
 
         $count = $query->getQuery()->getSingleScalarResult();
@@ -123,7 +123,7 @@ class CreateStateCommandTest extends TransactionalTestCase
             'template'     => self::UNKNOWN_ENTITY_ID,
             'name'         => 'Started',
             'abbreviation' => 'S',
-            'type'         => StateType::INTERIM,
+            'type'         => StateType::IS_INTERIM,
             'responsible'  => StateResponsible::KEEP,
         ]);
 
@@ -140,7 +140,7 @@ class CreateStateCommandTest extends TransactionalTestCase
             'template'     => $this->getTemplate()->getId(),
             'name'         => 'Started',
             'abbreviation' => 'S',
-            'type'         => StateType::INTERIM,
+            'type'         => StateType::IS_INTERIM,
             'responsible'  => StateResponsible::KEEP,
             'nextState'    => self::UNKNOWN_ENTITY_ID,
         ]);
@@ -158,7 +158,7 @@ class CreateStateCommandTest extends TransactionalTestCase
             'template'     => $this->getTemplate()->getId(),
             'name'         => 'Delivered',
             'abbreviation' => 'S',
-            'type'         => StateType::INTERIM,
+            'type'         => StateType::IS_INTERIM,
             'responsible'  => StateResponsible::KEEP,
         ]);
 
@@ -175,7 +175,7 @@ class CreateStateCommandTest extends TransactionalTestCase
             'template'     => $this->getTemplate()->getId(),
             'name'         => 'Started',
             'abbreviation' => 'D',
-            'type'         => StateType::INTERIM,
+            'type'         => StateType::IS_INTERIM,
             'responsible'  => StateResponsible::KEEP,
         ]);
 

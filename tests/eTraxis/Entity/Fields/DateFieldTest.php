@@ -27,7 +27,7 @@ class DateFieldTest extends \PHPUnit_Framework_TestCase
     {
         parent::setUp();
 
-        $state = new State(new Template(new Project()), StateType::INTERIM);
+        $state = new State(new Template(new Project()), StateType::IS_INTERIM);
 
         $this->object = new Field($state, FieldType::DATE);
     }

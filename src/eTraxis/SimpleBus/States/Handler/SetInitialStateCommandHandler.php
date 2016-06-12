@@ -58,8 +58,8 @@ class SetInitialStateCommandHandler
 
         $query->execute([
             'template' => $entity->getTemplate(),
-            'initial'  => StateType::INITIAL,
-            'interim'  => StateType::INTERIM,
+            'initial'  => StateType::IS_INITIAL,
+            'interim'  => StateType::IS_INTERIM,
         ]);
 
         $query = $this->manager->createQuery('
@@ -70,7 +70,7 @@ class SetInitialStateCommandHandler
 
         $query->execute([
             'id'      => $command->id,
-            'initial' => StateType::INITIAL,
+            'initial' => StateType::IS_INITIAL,
         ]);
     }
 }

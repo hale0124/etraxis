@@ -52,7 +52,7 @@ class SetGroupStateTransitionsCommandHandler
         }
 
         // Transitions are not applicable for final states.
-        if ($state->getType() !== StateType::FINAL) {
+        if ($state->getType() !== StateType::IS_FINAL) {
 
             /** @var Group $group */
             $group = $this->manager->find(Group::class, $command->group);

@@ -20,7 +20,7 @@ class FieldRolePermissionTest extends \PHPUnit_Framework_TestCase
 {
     public function testConstruct()
     {
-        $state      = new State(new Template(new Project()), StateType::INTERIM);
+        $state      = new State(new Template(new Project()), StateType::IS_INTERIM);
         $field      = new Field($state, FieldType::STRING);
         $role       = SystemRole::AUTHOR;
         $permission = FieldPermission::READ_ONLY;

@@ -51,7 +51,7 @@ class SetRoleStateTransitionsCommandHandler
         }
 
         // Transitions are not applicable for final states.
-        if ($state->getType() !== StateType::FINAL) {
+        if ($state->getType() !== StateType::IS_FINAL) {
 
             /** @var State[] $transitions */
             $transitions = $this->manager->getRepository(State::class)->findBy([

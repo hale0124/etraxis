@@ -18,9 +18,9 @@ use Dictionary\StaticDictionary;
  */
 class StateType extends StaticDictionary
 {
-    const INITIAL = 'initial';
-    const INTERIM = 'interim';
-    const FINAL   = 'final';
+    const IS_INITIAL = 'initial';
+    const IS_INTERIM = 'interim';
+    const IS_FINAL   = 'final';
 
     /**
      * {@inheritdoc}
@@ -28,9 +28,9 @@ class StateType extends StaticDictionary
     public static function all()
     {
         return [
-            self::INITIAL => 'state.type.initial',
-            self::INTERIM => 'state.type.interim',
-            self::FINAL   => 'state.type.final',
+            self::IS_INITIAL => 'state.type.initial',
+            self::IS_INTERIM => 'state.type.interim',
+            self::IS_FINAL   => 'state.type.final',
         ];
     }
 }

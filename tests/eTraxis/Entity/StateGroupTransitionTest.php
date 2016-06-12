@@ -19,8 +19,8 @@ class StateGroupTransitionTest extends \PHPUnit_Framework_TestCase
     {
         $template = new Template(new Project());
 
-        $from  = new State($template, StateType::INTERIM);
-        $to    = new State($template, StateType::INTERIM);
+        $from  = new State($template, StateType::IS_INTERIM);
+        $to    = new State($template, StateType::IS_INTERIM);
         $group = new Group();
 
         $from->setName('From');

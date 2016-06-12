@@ -110,6 +110,6 @@ class StateVoter extends Voter
      */
     protected function isInitialGranted(State $subject): bool
     {
-        return $subject->getType() === StateType::INTERIM;
+        return $subject->getType() === StateType::IS_INTERIM;
     }
 }

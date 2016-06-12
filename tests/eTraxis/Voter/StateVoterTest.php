@@ -46,7 +46,7 @@ class StateVoterTest extends TransactionalTestCase
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
-        $state = new State($template, StateType::FINAL);
+        $state = new State($template, StateType::IS_FINAL);
 
         $state
             ->setName('Cancelled')
@@ -77,7 +77,7 @@ class StateVoterTest extends TransactionalTestCase
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
-        $state = new State($template, StateType::INTERIM);
+        $state = new State($template, StateType::IS_INTERIM);
 
         $state
             ->setName('On the way')

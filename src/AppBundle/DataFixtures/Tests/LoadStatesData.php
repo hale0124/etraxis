@@ -65,8 +65,8 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
         /** @var \eTraxis\Entity\Template $template */
         $template = $this->getReference('template:delivery');
 
-        $state_new       = new State($template, StateType::INITIAL);
-        $state_delivered = new State($template, StateType::FINAL);
+        $state_new       = new State($template, StateType::IS_INITIAL);
+        $state_delivered = new State($template, StateType::IS_FINAL);
 
         $state_new
             ->setName('New')
@@ -106,8 +106,8 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
         /** @var \eTraxis\Entity\Template $template */
         $template = $this->getReference('template:futurama');
 
-        $state_produced = new State($template, StateType::INITIAL);
-        $state_released = new State($template, StateType::FINAL);
+        $state_produced = new State($template, StateType::IS_INITIAL);
+        $state_released = new State($template, StateType::IS_FINAL);
 
         $state_produced
             ->setName('Produced')
@@ -142,9 +142,9 @@ class LoadStatesData extends AbstractFixture implements ContainerAwareInterface,
         /** @var \eTraxis\Entity\Template $template */
         $template = $this->getReference('template:phppsr');
 
-        $state_draft      = new State($template, StateType::INITIAL);
-        $state_accepted   = new State($template, StateType::INTERIM);
-        $state_deprecated = new State($template, StateType::FINAL);
+        $state_draft      = new State($template, StateType::IS_INITIAL);
+        $state_accepted   = new State($template, StateType::IS_INTERIM);
+        $state_deprecated = new State($template, StateType::IS_FINAL);
 
         $state_draft
             ->setName('Draft')

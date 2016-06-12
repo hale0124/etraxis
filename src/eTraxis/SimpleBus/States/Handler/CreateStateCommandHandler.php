@@ -63,7 +63,7 @@ class CreateStateCommandHandler
         $entity
             ->setName($command->name)
             ->setAbbreviation($command->abbreviation)
-            ->setResponsible($command->type === StateType::FINAL ? StateResponsible::REMOVE : $command->responsible)
+            ->setResponsible($command->type === StateType::IS_FINAL ? StateResponsible::REMOVE : $command->responsible)
         ;
 
         if ($command->nextState) {
@@ -84,7 +84,7 @@ class CreateStateCommandHandler
             throw new BadRequestHttpException($errors->get(0)->getMessage());
         }
 
-        if ($command->type === StateType::INITIAL) {
+        if ($command->type === StateType::IS_INITIAL) {
 
             $query = $this->manager->createQuery('
                 UPDATE eTraxis:State s
@@ -94,8 +94,8 @@ class CreateStateCommandHandler
 
             $query->execute([
                 'template' => $template,
-                'initial'  => StateType::INITIAL,
-                'interim'  => StateType::INTERIM,
+                'initial'  => StateType::IS_INITIAL,
+                'interim'  => StateType::IS_INTERIM,
             ]);
         }
 

@@ -25,8 +25,8 @@ class SetInitialStateCommandTest extends TransactionalTestCase
         /** @var State $delivered */
         $delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
-        self::assertEquals(StateType::INITIAL, $new->getType());
-        self::assertNotEquals(StateType::INITIAL, $delivered->getType());
+        self::assertEquals(StateType::IS_INITIAL, $new->getType());
+        self::assertNotEquals(StateType::IS_INITIAL, $delivered->getType());
 
         $command = new SetInitialStateCommand(['id' => $delivered->getId()]);
         $this->command_bus->handle($command);
@@ -36,8 +36,8 @@ class SetInitialStateCommandTest extends TransactionalTestCase
         $new       = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'New']);
         $delivered = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
-        self::assertNotEquals(StateType::INITIAL, $new->getType());
-        self::assertEquals(StateType::INITIAL, $delivered->getType());
+        self::assertNotEquals(StateType::IS_INITIAL, $new->getType());
+        self::assertEquals(StateType::IS_INITIAL, $delivered->getType());
     }
 
     /**

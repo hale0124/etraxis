@@ -29,7 +29,7 @@ class StateFormTest extends TransactionalTestCase
 
         self::assertEmpty($children['name']->vars['data']);
         self::assertEmpty($children['abbreviation']->vars['data']);
-        self::assertEquals($children['type']->vars['data'], StateType::INTERIM);
+        self::assertEquals($children['type']->vars['data'], StateType::IS_INTERIM);
         self::assertEmpty($children['responsible']->vars['data']);
     }
 

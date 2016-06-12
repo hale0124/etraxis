@@ -24,7 +24,7 @@ class DeleteStateCommandTest extends TransactionalTestCase
         /** @var Template $template */
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
-        $state = new State($template, StateType::FINAL);
+        $state = new State($template, StateType::IS_FINAL);
 
         $state
             ->setName('Cancelled')

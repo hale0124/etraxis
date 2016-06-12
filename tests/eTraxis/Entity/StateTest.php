@@ -35,18 +35,18 @@ class StateTest extends TransactionalTestCase
     {
         $template = $this->object->getTemplate();
 
-        $state = new State($template, StateType::INTERIM);
+        $state = new State($template, StateType::IS_INTERIM);
         self::assertEquals($template, $state->getTemplate());
         self::assertNull($state->getResponsible());
 
-        $state = new State($template, StateType::FINAL);
+        $state = new State($template, StateType::IS_FINAL);
         self::assertEquals($template, $state->getTemplate());
         self::assertEquals(StateResponsible::REMOVE, $state->getResponsible());
     }
 
     public function testId()
     {
-        $state = new State($this->object->getTemplate(), StateType::INTERIM);
+        $state = new State($this->object->getTemplate(), StateType::IS_INTERIM);
         self::assertNull($state->getId());
         self::assertNotNull($this->object->getId());
     }
@@ -73,7 +73,7 @@ class StateTest extends TransactionalTestCase
 
     public function testType()
     {
-        $expected = StateType::INITIAL;
+        $expected = StateType::IS_INITIAL;
         self::assertEquals($expected, $this->object->getType());
     }
 
@@ -93,7 +93,7 @@ class StateTest extends TransactionalTestCase
         /** @var \StdClass $object */
         $object = AltrEgo::create($this->object);
 
-        $object->type = StateType::FINAL;
+        $object->type = StateType::IS_FINAL;
         $this->object->setResponsible($expected);
         self::assertNotEquals($expected, $this->object->getResponsible());
     }
@@ -102,18 +102,18 @@ class StateTest extends TransactionalTestCase
     {
         $project = $this->object->getTemplate()->getProject();
 
-        $state = new State(new Template($project), StateType::INTERIM);
+        $state = new State(new Template($project), StateType::IS_INTERIM);
         $this->object->setNextState($state);
         self::assertNotEquals($state, $this->object->getNextState());
 
-        $state = new State($this->object->getTemplate(), StateType::INTERIM);
+        $state = new State($this->object->getTemplate(), StateType::IS_INTERIM);
         $this->object->setNextState($state);
         self::assertEquals($state, $this->object->getNextState());
 
         /** @var \StdClass $object */
         $object = AltrEgo::create($this->object);
 
-        $object->type = StateType::FINAL;
+        $object->type = StateType::IS_FINAL;
         self::assertNull($this->object->getNextState());
         $this->object->setNextState($state);
         self::assertNull($this->object->getNextState());
@@ -141,7 +141,7 @@ class StateTest extends TransactionalTestCase
         /** @var \StdClass $object */
         $object = AltrEgo::create($this->object);
 
-        $object->type = StateType::FINAL;
+        $object->type = StateType::IS_FINAL;
         self::assertEmpty($this->object->getRoleTransitions(SystemRole::RESPONSIBLE));
     }
 
@@ -165,7 +165,7 @@ class StateTest extends TransactionalTestCase
         /** @var \StdClass $object */
         $object = AltrEgo::create($this->object);
 
-        $object->type = StateType::FINAL;
+        $object->type = StateType::IS_FINAL;
         self::assertEmpty($this->object->getGroupTransitions($managers));
     }
 

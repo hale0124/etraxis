@@ -137,7 +137,7 @@ class TemplateVoter extends Voter
             ->where('s.template = :template')
             ->andWhere('s.type = :type')
             ->setParameter('template', $subject)
-            ->setParameter('type', StateType::INITIAL)
+            ->setParameter('type', StateType::IS_INITIAL)
         ;
 
         $count = (int) $query->getQuery()->getSingleScalarResult();
