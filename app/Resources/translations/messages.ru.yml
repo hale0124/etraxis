@@ -180,3 +180,7 @@ listitems: 'Элементы списка'
 listitem.value: 'Значение элемента'
 listitem.text: 'Текст элемента'
 listitem.confirm.delete: 'Вы уверены, что хотите удалить этот элемент?'
+records: Записи
+record.id: ID
+record.subject: Тема
+record.age: Возраст

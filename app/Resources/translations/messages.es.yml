@@ -1,5 +1,5 @@
 # This file is auto-generated using Crowdin.
-button.ok: OK
+button.ok: Ok
 button.cancel: Cancelar
 button.yes: Si
 button.no: 'No'
@@ -180,3 +180,7 @@ listitems: 'Lista de ítems'
 listitem.value: 'Item value'
 listitem.text: 'Item text'
 listitem.confirm.delete: 'Are you sure you want delete this item?'
+records: Registros
+record.id: ID
+record.subject: Asunto
+record.age: Edad

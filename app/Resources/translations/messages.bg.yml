@@ -1,5 +1,5 @@
 # This file is auto-generated using Crowdin.
-button.ok: OK
+button.ok: ОК
 button.cancel: Откажи
 button.yes: Да
 button.no: Не
@@ -72,14 +72,14 @@ security.forgot_password.email_sent: 'Изпратен ви е e-mail с инс�
 security.change_password: 'Промяна на парола'
 security.password_expired: 'Вашата парола е с изтекъл срок или администраторът изисква да я смените.'
 key.tab: Tab
-key.space: Space
+key.space: Интервал
 key.comma: Запетая
-key.colon: Colon
+key.colon: Двоеточие
 key.semicolon: 'Точка и запетая'
 key.vertical_line: 'Vertical line'
 file: Файл
 size: Големина
-delimiter: Delimiter
+delimiter: Разделител
 encoding: Шифриране
 line_endings: 'Завършване на ред'
 group: Група
@@ -180,3 +180,7 @@ listitems: 'Списък итеми'
 listitem.value: 'Item value'
 listitem.text: 'Item text'
 listitem.confirm.delete: 'Are you sure you want delete this item?'
+records: Записи
+record.id: ID
+record.subject: Тема
+record.age: Възраст

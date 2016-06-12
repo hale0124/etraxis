@@ -180,3 +180,7 @@ listitems: 'Saraksta elementi'
 listitem.value: 'Item value'
 listitem.text: 'Item text'
 listitem.confirm.delete: 'Are you sure you want delete this item?'
+records: Ieraksti
+record.id: ID
+record.subject: Temats
+record.age: Vecums

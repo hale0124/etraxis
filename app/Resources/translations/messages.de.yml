@@ -73,9 +73,9 @@ security.change_password: 'Kennwort ändern'
 security.password_expired: 'Your password has expired or the administrator requires you to change it.'
 key.tab: Tab
 key.space: Space
-key.comma: Comma
+key.comma: Komma
 key.colon: Colon
-key.semicolon: Semicolon
+key.semicolon: Semikolon
 key.vertical_line: 'Vertical line'
 file: Datei
 size: Größe
@@ -180,3 +180,7 @@ listitems: Listeneinträge
 listitem.value: 'Item value'
 listitem.text: 'Item text'
 listitem.confirm.delete: 'Are you sure you want delete this item?'
+records: Anfragen
+record.id: ID
+record.subject: Betreff
+record.age: Alter
