@@ -18,7 +18,7 @@
             {{ macro.row('state.name'|trans, state.name) }}
             {{ macro.row('state.abbreviation'|trans, state.abbreviation) }}
             {{ macro.row('state.type'|trans, types[state.type]|trans|lower) }}
-            {% if (state.type != constant('eTraxis\\Dictionary\\StateType::FINAL')) %}
+            {% if (state.type != constant('eTraxis\\Dictionary\\StateType::IS_FINAL')) %}
                 {{ macro.row('state.responsible'|trans, responsibles[state.responsible]|trans|lower) }}
             {% endif %}
         </fieldset>
