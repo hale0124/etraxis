@@ -170,6 +170,9 @@ class SecurityControllerTest extends ControllerTestCase
 
     public function testLogin()
     {
+        $this->client->followRedirects(true);
+        $this->client->setMaxRedirects(2);
+
         $crawler = $this->client->request(Request::METHOD_GET, '/login');
 
         self::assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
@@ -181,8 +184,7 @@ class SecurityControllerTest extends ControllerTestCase
             '_password' => 'wrong',
         ]);
 
-        $this->client->submit($form);
-        $crawler = $this->client->followRedirect();
+        $crawler = $this->client->submit($form);
 
         self::assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
         self::assertTrue($this->isLoginPage($crawler));
@@ -193,18 +195,13 @@ class SecurityControllerTest extends ControllerTestCase
             '_password' => 'secret',
         ]);
 
-        $this->client->submit($form);
-        $crawler = $this->client->followRedirect();
+        $crawler = $this->client->submit($form);
 
         self::assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
         self::assertFalse($this->isLoginPage($crawler));
         self::assertTrue($this->isAuthenticated($crawler));
 
-        $this->client->request(Request::METHOD_GET, '/login');
-
-        self::assertEquals(Response::HTTP_FOUND, $this->client->getResponse()->getStatusCode());
-
-        $crawler = $this->client->followRedirect();
+        $crawler = $this->client->request(Request::METHOD_GET, '/login');
 
         self::assertEquals(Response::HTTP_OK, $this->client->getResponse()->getStatusCode());
         self::assertFalse($this->isLoginPage($crawler));

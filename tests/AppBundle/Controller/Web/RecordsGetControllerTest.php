@@ -15,11 +15,11 @@ use eTraxis\Tests\ControllerTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
-class DefaultControllerTest extends ControllerTestCase
+class RecordsGetControllerTest extends ControllerTestCase
 {
     public function testIndexAction()
     {
-        $uri = $this->router->generate('homepage');
+        $uri = $this->router->generate('web_records');
 
         $this->makeRequest(Request::METHOD_GET, $uri);
         $this->assertLoginPage();
@@ -30,19 +30,17 @@ class DefaultControllerTest extends ControllerTestCase
         $this->loginAs('fry');
 
         $this->makeRequest(Request::METHOD_GET, $uri);
-        $this->assertStatusCode(Response::HTTP_FOUND);
-        $this->assertLocationHeader($this->router->generate('web_records'));
+        $this->assertStatusCode(Response::HTTP_OK);
 
         $this->loginAs('hubert');
 
         $this->makeRequest(Request::METHOD_GET, $uri);
-        $this->assertStatusCode(Response::HTTP_FOUND);
-        $this->assertLocationHeader($this->router->generate('web_records'));
+        $this->assertStatusCode(Response::HTTP_OK);
     }
 
-    public function testDlgExportAction()
+    public function testListAction()
     {
-        $uri = $this->router->generate('dlg_export');
+        $uri = $this->router->generate('web_records_list');
 
         $this->makeRequest(Request::METHOD_GET, $uri, true);
         $this->assertStatusCode(Response::HTTP_UNAUTHORIZED);
@@ -53,32 +51,11 @@ class DefaultControllerTest extends ControllerTestCase
         $this->loginAs('fry');
 
         $this->makeRequest(Request::METHOD_GET, $uri, true);
-        $this->assertStatusCode(Response::HTTP_OK);
-
-        $this->loginAs('hubert');
-
-        $this->makeRequest(Request::METHOD_GET, $uri, true);
-        $this->assertStatusCode(Response::HTTP_OK);
-    }
-
-    public function testExportAction()
-    {
-        $uri = $this->router->generate('export');
-
-        $this->makeRequest(Request::METHOD_GET, $uri, true);
-        $this->assertStatusCode(Response::HTTP_METHOD_NOT_ALLOWED);
-
-        $this->makeRequest(Request::METHOD_POST, $uri, true);
-        $this->assertStatusCode(Response::HTTP_UNAUTHORIZED);
-
-        $this->loginAs('fry');
-
-        $this->makeRequest(Request::METHOD_POST, $uri, true);
         $this->assertStatusCode(Response::HTTP_BAD_REQUEST);
 
         $this->loginAs('hubert');
 
-        $this->makeRequest(Request::METHOD_POST, $uri, true);
+        $this->makeRequest(Request::METHOD_GET, $uri, true);
         $this->assertStatusCode(Response::HTTP_BAD_REQUEST);
     }
 }

@@ -2,6 +2,8 @@
 
 {% block menu %}
 
+    <a href="{{ path('web_records') }}">{{ 'records'|trans }}</a>
+
     {% if is_granted('IS_AUTHENTICATED_REMEMBERED') %}
     <a href="{{ path('settings') }}">{{ 'settings'|trans }}</a>
     {% endif %}

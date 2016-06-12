@@ -1,0 +1,7 @@
+# Keep repositories sorted alphabetically.
+services:
+
+    etraxis.repository.templates:
+        class: Doctrine\ORM\EntityRepository
+        factory: [ "@doctrine.orm.default_entity_manager", "getRepository" ]
+        arguments: [ eTraxis\Entity\Template ]

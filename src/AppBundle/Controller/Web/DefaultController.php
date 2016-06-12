@@ -31,7 +31,7 @@ class DefaultController extends Controller
      */
     public function indexAction(): Response
     {
-        return $this->render('web/base.html.twig');
+        return $this->redirect($this->generateUrl('web_records'));
     }
 
     /**

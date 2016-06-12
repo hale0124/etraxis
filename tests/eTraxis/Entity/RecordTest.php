@@ -34,6 +34,12 @@ class RecordTest extends TransactionalTestCase
         self::assertNotNull($this->object->getId());
     }
 
+    public function testRecordId()
+    {
+        $expected = sprintf('PE-%d', $this->object->getId());
+        self::assertEquals($expected, $this->object->getRecordId());
+    }
+
     public function testSubject()
     {
         $expected = 'Subject';
@@ -79,6 +85,24 @@ class RecordTest extends TransactionalTestCase
     public function testClosedAt()
     {
         self::assertEquals('1999-04-04', date('Y-m-d', $this->object->getClosedAt()));
+    }
+
+    public function testAge()
+    {
+        self::assertEquals(1, $this->object->getAge());
+    }
+
+    public function testIsOverdue()
+    {
+        /** @var Record $opened */
+        $opened = $this->doctrine->getRepository(Record::class)->findOneBy([
+            'subject' => 'e-Waste',
+        ]);
+
+        self::assertFalse($opened->isOverdue());
+
+        $opened->getTemplate()->setCriticalAge(1);
+        self::assertTrue($opened->isOverdue());
     }
 
     public function testIsClosed()

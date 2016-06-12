@@ -144,6 +144,16 @@ class Record
     }
 
     /**
+     * Returns formatted record ID.
+     *
+     * @return  string
+     */
+    public function getRecordId()
+    {
+        return $this->state->getTemplate()->getPrefix() . '-' . $this->id;
+    }
+
+    /**
      * Property setter.
      *
      * @param   string $subject
@@ -245,6 +255,30 @@ class Record
     public function getClosedAt()
     {
         return $this->closedAt;
+    }
+
+    /**
+     * Returns record's age in number of days.
+     *
+     * @return  int
+     */
+    public function getAge()
+    {
+        $age = ($this->closedAt ?: time()) - $this->createdAt;
+
+        return intdiv($age, 86400) + 1;
+    }
+
+    /**
+     * Returns whether the record is overdue (older than critical age of its template).
+     *
+     * @return  bool
+     */
+    public function isOverdue()
+    {
+        $criticalAge = $this->state->getTemplate()->getCriticalAge() ?: PHP_INT_MAX;
+
+        return $this->getAge() > $criticalAge;
     }
 
     /**

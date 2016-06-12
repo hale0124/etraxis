@@ -1,0 +1,40 @@
+{% extends 'web/base.html.twig' %}
+
+{% block content %}
+
+    <div class="grid-row">
+        <div class="grid-100">
+            <table id="records" class="cell-border hover" data-src="{{ path('web_records_list') }}">
+                <thead>
+                    <tr>
+                        <th>{{ 'record.id'|trans }}</th>
+                        <th>{{ 'project'|trans }}</th>
+                        <th>{{ 'state'|trans }}</th>
+                        <th>{{ 'record.subject'|trans }}</th>
+                        <th>{{ 'role.author'|trans }}</th>
+                        <th>{{ 'role.responsible'|trans }}</th>
+                        <th>{{ 'record.age'|trans }}</th>
+                    </tr>
+                </thead>
+                <tfoot>
+                    <tr>
+                        <td><input type="text" title="{{ 'record.id'|trans }}"></td>
+                        <td><input type="text" title="{{ 'project'|trans }}"></td>
+                        <td><input type="text" title="{{ 'state'|trans }}"></td>
+                        <td><input type="text" title="{{ 'record.subject'|trans }}"></td>
+                        <td><input type="text" title="{{ 'role.author'|trans }}"></td>
+                        <td><input type="text" title="{{ 'role.responsible'|trans }}"></td>
+                        <td><input type="text" title="{{ 'record.age'|trans }}"></td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script src="{{ asset('js/web/records.js') }}"></script>
+
+{% endblock %}
