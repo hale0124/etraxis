@@ -68,6 +68,7 @@ doctrine:
         dql:
             string_functions:
                 EPOCH_DATE: eTraxis\Doctrine\EpochDateFunction
+                INTDIV:     eTraxis\Doctrine\IntDivFunction
         filters:
             filter.fields:
                 class:   eTraxis\Doctrine\FieldsFilter
