@@ -13,5 +13,20 @@ var RecordsApp = (function() {
     });
 
     return {
+
+        /**
+         * Invokes "Export as CSV" dialog.
+         */
+        export: function() {
+            eTraxis.modal({
+                url: eTraxis.route('dlg_export'),
+                title: eTraxis.i18n['button.export'],
+                success: function() {
+                    var params = $('form').serialize() + '&' + $.param($table.api().ajax.params());
+                    window.location.assign(eTraxis.route('web_records_csv') + '?' + params);
+                    return true;
+                }
+            });
+        }
     };
 })();

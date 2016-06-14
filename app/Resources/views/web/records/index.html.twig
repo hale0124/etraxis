@@ -4,6 +4,12 @@
 
     <div class="grid-row">
         <div class="grid-100">
+            <button type="button" onclick="RecordsApp.export()">{{ 'button.export'|trans }}</button>
+        </div>
+    </div>
+
+    <div class="grid-row">
+        <div class="grid-100">
             <table id="records" class="cell-border hover" data-src="{{ path('web_records_list') }}">
                 <thead>
                     <tr>

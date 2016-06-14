@@ -32,6 +32,11 @@ class ExportService implements ExportInterface
             $tail      = LineEnding::get($query->tail);
 
             $callback = function ($item) use ($delimiter) {
+
+                if ($item === '&mdash;') {
+                    $item = null;
+                }
+
                 $count = 0;
                 $item  = str_replace('"', '""', $item, $count);
                 $pos   = mb_strpos($item, $delimiter);

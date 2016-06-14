@@ -58,4 +58,25 @@ class RecordsGetControllerTest extends ControllerTestCase
         $this->makeRequest(Request::METHOD_GET, $uri, true);
         $this->assertStatusCode(Response::HTTP_BAD_REQUEST);
     }
+
+    public function testCsvAction()
+    {
+        $uri = $this->router->generate('web_records_csv');
+
+        $this->makeRequest(Request::METHOD_GET, $uri);
+        $this->assertLoginPage();
+
+        $this->makeRequest(Request::METHOD_POST, $uri);
+        $this->assertStatusCode(Response::HTTP_METHOD_NOT_ALLOWED);
+
+        $this->loginAs('fry');
+
+        $this->makeRequest(Request::METHOD_GET, $uri);
+        $this->assertStatusCode(Response::HTTP_BAD_REQUEST);
+
+        $this->loginAs('hubert');
+
+        $this->makeRequest(Request::METHOD_GET, $uri);
+        $this->assertStatusCode(Response::HTTP_BAD_REQUEST);
+    }
 }

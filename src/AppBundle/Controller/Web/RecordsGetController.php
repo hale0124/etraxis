@@ -11,11 +11,14 @@
 
 namespace AppBundle\Controller\Web;
 
+use eTraxis\Service\Export\ExportCsvQuery;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
+use SimpleBus\ValidationException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
  * Records "GET" controller.
@@ -54,5 +57,55 @@ class RecordsGetController extends Controller
         $results    = $datatables->handle($request, 'eTraxis:Record');
 
         return new JsonResponse($results);
+    }
+
+    /**
+     * Exports list of records as CSV file.
+     *
+     * @Action\Route("/csv", name="web_records_csv", condition="")
+     *
+     * @param   Request $request
+     *
+     * @return  StreamedResponse
+     */
+    public function csvAction(Request $request): StreamedResponse
+    {
+        $request->query->set('start', 0);
+        $request->query->set('length', -1);
+
+        /** @var \DataTables\DataTablesInterface $datatables */
+        $datatables = $this->container->get('datatables');
+        $results    = $datatables->handle($request, 'eTraxis:Record');
+
+        $records = array_map(function ($record) {
+            return array_slice($record, 1, 7);
+        }, $results['data']);
+
+        /** @var \Symfony\Component\Translation\TranslatorInterface $translator */
+        $translator = $this->container->get('translator');
+
+        array_unshift($records, [
+            $translator->trans('record.id'),
+            $translator->trans('project'),
+            $translator->trans('state'),
+            $translator->trans('record.subject'),
+            $translator->trans('role.author'),
+            $translator->trans('role.responsible'),
+            $translator->trans('record.age'),
+        ]);
+
+        $query = new ExportCsvQuery($request->query->get('export'));
+
+        /** @var \Symfony\Component\Validator\ConstraintViolationInterface[] $violations */
+        $violations = $this->get('validator')->validate($query);
+
+        if (count($violations)) {
+            throw new ValidationException($violations);
+        }
+
+        /** @var \eTraxis\Service\Export\ExportInterface $export */
+        $export = $this->get('etraxis.export');
+
+        return $export->exportCsv($query, $records);
     }
 }
