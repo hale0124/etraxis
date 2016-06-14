@@ -51,15 +51,15 @@ class FieldValue
     /**
      * @var int Value of the field. Depends on field type as following:
      *
-     *          "number"   - integer value (from -1000000000 till +1000000000)
-     *          "decimal"  - decimal value (foreign key to "DecimalValue" entity)
-     *          "string"   - string value (foreign key to "StringValue" entity)
-     *          "text"     - string value (foreign key to "TextValue" entity)
-     *          "checkbox" - state of checkbox (0 - unchecked, 1 - checked)
-     *          "list"     - integer value of list item (see "ListItem" entity)
-     *          "record"   - record ID
-     *          "date"     - date value (Unix Epoch timestamp)
-     *          "duration" - duration value (amount of minutes from 0:00 till 999999:59)
+     *      NUMBER   - integer value (from -1000000000 till +1000000000)
+     *      DECIMAL  - decimal value (foreign key to "DecimalValue" entity)
+     *      STRING   - string value (foreign key to "StringValue" entity)
+     *      TEXT     - string value (foreign key to "TextValue" entity)
+     *      CHECKBOX - state of checkbox (0 - unchecked, 1 - checked)
+     *      LIST     - integer value of list item (see "ListItem" entity)
+     *      RECORD   - record ID
+     *      DATE     - date value (Unix Epoch timestamp)
+     *      DURATION - duration value (amount of minutes from 0:00 till 999999:59)
      *
      * @ORM\Column(name="value", type="integer", nullable=true)
      */

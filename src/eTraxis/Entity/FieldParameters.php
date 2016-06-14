@@ -23,15 +23,15 @@ class FieldParameters
     /**
      * @var int First parameter of the field. Depends on field type as following:
      *
-     *          "number"   - minimum of range of allowed values (from -1000000000 till +1000000000)
-     *          "decimal"  - minimum of range of allowed values (foreign key to "decimal_values" table)
-     *          "string"   - maximum allowed length of values (up to 250)
-     *          "text"     - maximum allowed length of values (up to 4000)
-     *          "checkbox" - NULL (not used)
-     *          "list"     - NULL (not used)
-     *          "record"   - NULL (not used)
-     *          "date"     - minimum of range of allowed values (amount of days since current date; negative value shifts to the past)
-     *          "duration" - minimum of range of allowed values (amount of minutes from 0:00 till 999999:59)
+     *      NUMBER   - minimum of range of allowed values (from -1000000000 till +1000000000)
+     *      DECIMAL  - minimum of range of allowed values (foreign key to "decimal_values" table)
+     *      STRING   - maximum allowed length of values (up to 250)
+     *      TEXT     - maximum allowed length of values (up to 4000)
+     *      CHECKBOX - NULL (not used)
+     *      LIST     - NULL (not used)
+     *      RECORD   - NULL (not used)
+     *      DATE     - minimum of range of allowed values (amount of days since current date; negative value shifts to the past)
+     *      DURATION - minimum of range of allowed values (amount of minutes from 0:00 till 999999:59)
      *
      * @ORM\Column(name="parameter1", type="integer", nullable=true)
      */
@@ -40,15 +40,15 @@ class FieldParameters
     /**
      * @var int Second parameter of the field. Depends on field type as following:
      *
-     *          "number"   - maximum of range of allowed values (from -1000000000 till +1000000000)
-     *          "decimal"  - maximum of range of allowed values (foreign key to "decimal_values" table)
-     *          "string"   - NULL (not used)
-     *          "text"     - NULL (not used)
-     *          "checkbox" - NULL (not used)
-     *          "list"     - NULL (not used)
-     *          "record"   - NULL (not used)
-     *          "date"     - maximum of range of allowed values (amount of days since current date; negative value shifts to the past)
-     *          "duration" - maximum of range of allowed values (amount of minutes from 0:00 till 999999:59)
+     *      NUMBER   - maximum of range of allowed values (from -1000000000 till +1000000000)
+     *      DECIMAL  - maximum of range of allowed values (foreign key to "decimal_values" table)
+     *      STRING   - NULL (not used)
+     *      TEXT     - NULL (not used)
+     *      CHECKBOX - NULL (not used)
+     *      LIST     - NULL (not used)
+     *      RECORD   - NULL (not used)
+     *      DATE     - maximum of range of allowed values (amount of days since current date; negative value shifts to the past)
+     *      DURATION - maximum of range of allowed values (amount of minutes from 0:00 till 999999:59)
      *
      * @ORM\Column(name="parameter2", type="integer", nullable=true)
      */
@@ -57,15 +57,15 @@ class FieldParameters
     /**
      * @var int Default value of the field. Depends on field type as following:
      *
-     *          "number"   - see "FieldValue::$value" for explanation
-     *          "decimal"  - see "FieldValue::$value" for explanation
-     *          "string"   - see "FieldValue::$value" for explanation
-     *          "text"     - see "FieldValue::$value" for explanation
-     *          "checkbox" - see "FieldValue::$value" for explanation
-     *          "list"     - see "FieldValue::$value" for explanation
-     *          "record"   - NULL (not used)
-     *          "date"     - default date value (amount of days since current date; negative value shifts to the past)
-     *          "duration" - see "FieldValue::$value" for explanation
+     *      NUMBER   - see "FieldValue::$value" for explanation
+     *      DECIMAL  - see "FieldValue::$value" for explanation
+     *      STRING   - see "FieldValue::$value" for explanation
+     *      TEXT     - see "FieldValue::$value" for explanation
+     *      CHECKBOX - see "FieldValue::$value" for explanation
+     *      LIST     - see "FieldValue::$value" for explanation
+     *      RECORD   - NULL (not used)
+     *      DATE     - default date value (amount of days since current date; negative value shifts to the past)
+     *      DURATION - see "FieldValue::$value" for explanation
      *
      * @ORM\Column(name="default_value", type="integer", nullable=true)
      */

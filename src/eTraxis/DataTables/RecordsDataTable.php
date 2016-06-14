@@ -143,7 +143,7 @@ class RecordsDataTable implements DataTableHandlerInterface
             $inComments = $query->execute(['search' => $search]);
 
             // Merge resulted IDs and append them to the base query.
-            $records = array_map(function($item) {
+            $records = array_map(function ($item) {
                 return $item['id'];
             }, array_merge($inSubjects, $inComments));
 

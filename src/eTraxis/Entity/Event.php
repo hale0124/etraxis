@@ -70,20 +70,20 @@ class Event
     /**
      * @var int Parameter of the event. Depends on event type as following:
      *
-     *          RECORD_CREATED     - ID of first (initial) state of the created record
-     *          RECORD_EDITED      - NULL (not used)
-     *          RECORD_ASSIGNED    - ID of the user, the record has been assigned to
-     *          STATE_CHANGED      - ID of the state, the record has been changed to
-     *          RECORD_POSTPONED   - Unix Epoch timestamp, when the record should be automatically resumed
-     *          RECORD_RESUMED     - NULL (not used)
-     *          RECORD_CLONED      - ID of the original record
-     *          RECORD_REOPENED    - ID of new state of the reopened record
-     *          PUBLIC_COMMENT     - NULL (not used)
-     *          PRIVATE_COMMENT    - NULL (not used)
-     *          FILE_ATTACHED      - NULL (not used)
-     *          FILE_DELETED       - NULL (not used)
-     *          SUBRECORD_ATTACHED - ID of the attached record
-     *          SUBRECORD_DETACHED - ID of the detached record
+     *      RECORD_CREATED     - ID of first (initial) state of the created record
+     *      RECORD_EDITED      - NULL (not used)
+     *      RECORD_ASSIGNED    - ID of the user, the record has been assigned to
+     *      STATE_CHANGED      - ID of the state, the record has been changed to
+     *      RECORD_POSTPONED   - Unix Epoch timestamp, when the record should be automatically resumed
+     *      RECORD_RESUMED     - NULL (not used)
+     *      RECORD_CLONED      - ID of the original record
+     *      RECORD_REOPENED    - ID of new state of the reopened record
+     *      PUBLIC_COMMENT     - NULL (not used)
+     *      PRIVATE_COMMENT    - NULL (not used)
+     *      FILE_ATTACHED      - NULL (not used)
+     *      FILE_DELETED       - NULL (not used)
+     *      SUBRECORD_ATTACHED - ID of the attached record
+     *      SUBRECORD_DETACHED - ID of the detached record
      *
      * @ORM\Column(name="parameter", type="integer", nullable=true)
      */

@@ -61,17 +61,19 @@ class RecordsDataTableTest extends TransactionalTestCase
         $this->loginAs('mwop');
 
         $total    = 143;
-        $filtered = 1;
+        $filtered = 3;
 
         $expected = [
-            ['Planet Express', 'R', 'Artem Rodygin',  '&mdash;', 'The Devil\'s Hands Are Idle Playthings'],
+            ['Planet Express', 'R', 'Artem Rodygin',     '&mdash;', 'I Second That Emotion'],
+            ['PHP-FIG',        'D', 'Lukas Kahwe Smith', '&mdash;', 'Security Advisories'],
+            ['PHP-FIG',        'D', 'Lukas Kahwe Smith', '&mdash;', 'Security Reporting Process'],
         ];
 
         $request = new Request([
             'draw'    => random_int(1, PHP_INT_MAX),
             'start'   => 0,
             'length'  => -1,
-            'search'  => ['value' => 'dEv', 'regex' => 'false'],
+            'search'  => ['value' => 'sEc', 'regex' => 'false'],
             'order'   => [],
             'columns' => [],
         ]);
