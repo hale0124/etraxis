@@ -1,0 +1,9 @@
+parameters:
+
+    database_driver:        pdo_pgsql
+    database_host:          pgsql
+    database_port:          ~
+    database_name:          etraxis
+    database_user:          postgres
+    database_password:      ~
+    database_charset:       UTF8

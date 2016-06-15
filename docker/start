@@ -1,0 +1,8 @@
+#!/bin/bash
+
+/var/www/etraxis-master/bin/console --env=prod --no-interaction doctrine:database:drop --force
+/var/www/etraxis-master/bin/console --env=prod --no-interaction doctrine:database:create
+/var/www/etraxis-master/bin/console --env=prod --no-interaction doctrine:schema:create
+/var/www/etraxis-master/bin/console --env=prod --no-interaction doctrine:fixtures:load --fixtures=src/AppBundle/DataFixtures/Tests
+
+/var/www/etraxis-master/bin/console --env=prod server:run --quiet 0.0.0.0
