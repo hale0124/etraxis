@@ -19,6 +19,8 @@ button.import: Importeer
 button.expand: Uitbreiden
 button.collapse: Ineenstorting
 button.select_all: 'Selecteer alles'
+button.mark_as_read: 'Als gelezen markeren'
+button.mark_as_unread: 'Als ongelezen markeren'
 error: Fout
 error.not_found: 'De pagina die u probeerde te benaderen bestaat niet of is verwijderd.'
 error.not_authorized: 'Het is u niet toegestaan deze pagina te raadplegen.'

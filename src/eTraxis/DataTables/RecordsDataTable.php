@@ -89,6 +89,7 @@ class RecordsDataTable implements DataTableHandlerInterface
             'record.closedAt',
             'record.resumedAt',
             'COALESCE(record.closedAt - record.createdAt, :today - record.createdAt) AS age',
+            'lastRead.readAt',
         ];
 
         // List of tables joined to the primary one.
@@ -98,6 +99,7 @@ class RecordsDataTable implements DataTableHandlerInterface
             'INNER JOIN template.project project',
             'INNER JOIN record.author author',
             'LEFT JOIN record.responsible responsible',
+            'LEFT JOIN eTraxis:LastRead lastRead WITH lastRead.record = record AND lastRead.user = :user',
         ];
 
         // The "WHERE" section of the query.
@@ -278,19 +280,22 @@ class RecordsDataTable implements DataTableHandlerInterface
 
         foreach ($rows as $row) {
 
+            $row_class = [];
+
             $age = intdiv($row['age'], 86400) + 1;
 
             if ($row['closedAt'] !== null) {
-                $color = 'gray';
-            }
-            elseif ($age > $row['criticalAge']) {
-                $color = 'red';
+                $row_class[] = 'gray';
             }
             elseif ($row['resumedAt'] > $today) {
-                $color = 'blue';
+                $row_class[] = 'blue';
             }
-            else {
-                $color = null;
+            elseif ($age > $row['criticalAge']) {
+                $row_class[] = 'red';
+            }
+
+            if ($row['readAt'] < $row['changedAt']) {
+                $row_class[] = 'unread';
             }
 
             $results->data[] = [
@@ -303,7 +308,7 @@ class RecordsDataTable implements DataTableHandlerInterface
                 $row['responsibleFullname'] ?: '&mdash;',
                 $age,
                 'DT_RowAttr'  => ['data-id' => $row['id']],
-                'DT_RowClass' => $color,
+                'DT_RowClass' => implode(' ', $row_class),
             ];
         }
 

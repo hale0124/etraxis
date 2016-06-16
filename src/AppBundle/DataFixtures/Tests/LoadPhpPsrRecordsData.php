@@ -322,10 +322,8 @@ class LoadPhpPsrRecordsData extends AbstractFixture implements ContainerAwareInt
                 $manager->persist($record);
             }
 
-            $read = new LastRead();
+            $read = new LastRead($record, $record->getAuthor());
 
-            $this->ego($read)->record = $record;
-            $this->ego($read)->user   = $record->getAuthor();
             $this->ego($read)->readAt = $record->getChangedAt();
 
             $manager->persist($read);

@@ -19,6 +19,8 @@ button.import: Импорт
 button.expand: Развернуть
 button.collapse: Свернуть
 button.select_all: 'Выбрать все'
+button.mark_as_read: 'Отметить как прочитанные'
+button.mark_as_unread: 'Отметить как непрочитанные'
 error: Ошибка
 error.not_found: 'Страница, к которой Вы обратились, не существует или была удалена.'
 error.not_authorized: 'Нет доступа к запрашиваемой странице.'

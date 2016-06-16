@@ -19,6 +19,8 @@ button.import: Importera
 button.expand: Expandera
 button.collapse: Kollaps
 button.select_all: 'Markera alla'
+button.mark_as_read: 'Markera som läst'
+button.mark_as_unread: 'Markera som oläst'
 error: Fel
 error.not_found: 'Sidan du försökte komma åt existerar inte eller är borttagen.'
 error.not_authorized: 'Du saknar behörighet att komma åt den här sidan.'

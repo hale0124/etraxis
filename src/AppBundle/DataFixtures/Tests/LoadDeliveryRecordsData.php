@@ -355,10 +355,8 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
                 $this->ego($field)->value = $value->getId();
             }
 
-            $read = new LastRead();
+            $read = new LastRead($record, $record->getAuthor());
 
-            $this->ego($read)->record = $record;
-            $this->ego($read)->user   = $record->getAuthor();
             $this->ego($read)->readAt = $record->getCreatedAt();
 
             $manager->persist($field);
@@ -405,11 +403,7 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
                 ]);
 
                 if (!$read) {
-
-                    $read = new LastRead();
-
-                    $this->ego($read)->record = $record;
-                    $this->ego($read)->user   = $this->ego($event)->user;
+                    $read = new LastRead($record, $this->ego($event)->user);
                 }
 
                 $this->ego($read)->readAt = $this->ego($event)->createdAt;

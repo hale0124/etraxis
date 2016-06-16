@@ -19,6 +19,8 @@ button.import: Importer
 button.expand: Développez
 button.collapse: 'L''effondrement'
 button.select_all: 'Tout sélectionner'
+button.mark_as_read: 'Marquer comme lu'
+button.mark_as_unread: 'Marquer Non-lu'
 error: Erreur
 error.not_found: 'La page à laquelle vous souhaitez accéder n''existe pas ou a été supprimée.'
 error.not_authorized: 'Vous n''êtes pas autorisé à accéder à cette page.'

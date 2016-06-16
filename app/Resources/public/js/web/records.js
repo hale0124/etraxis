@@ -12,7 +12,49 @@ var RecordsApp = (function() {
         checkboxes: 'records'
     });
 
+    // Some buttons are disabled if no checkbox is ticked.
+    $table.on('checkbox.click', function(e, data) {
+        $('#btn-read').disable(data.count == 0);
+        $('#btn-unread').disable(data.count == 0);
+    });
+
     return {
+
+        /**
+         * Marks selected records as read.
+         */
+        read: function() {
+
+            var ids = [];
+
+            $('input[name="records"]:checked', $table).each(function() {
+                ids.push($(this).val());
+            });
+
+            if (ids.length) {
+                $.post(eTraxis.route('web_read_records'), { records: ids }, function() {
+                    $table.api().draw(false);
+                });
+            }
+        },
+
+        /**
+         * Marks selected records as unread.
+         */
+        unread: function() {
+
+            var ids = [];
+
+            $('input[name="records"]:checked', $table).each(function() {
+                ids.push($(this).val());
+            });
+
+            if (ids.length) {
+                $.post(eTraxis.route('web_unread_records'), { records: ids }, function() {
+                    $table.api().draw(false);
+                });
+            }
+        },
 
         /**
          * Invokes "Export as CSV" dialog.

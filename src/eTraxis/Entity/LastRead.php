@@ -47,4 +47,17 @@ class LastRead
      * @ORM\Column(name="read_at", type="integer")
      */
     private $readAt;
+
+    /**
+     * Constructor.
+     *
+     * @param   Record $record
+     * @param   User   $user
+     */
+    public function __construct(Record $record, User $user)
+    {
+        $this->record = $record;
+        $this->user   = $user;
+        $this->readAt = time();
+    }
 }

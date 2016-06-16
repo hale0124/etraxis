@@ -1508,11 +1508,7 @@ class LoadFuturamaRecordsData extends AbstractFixture implements ContainerAwareI
             ]);
 
             if (!$read) {
-
-                $read = new LastRead();
-
-                $this->ego($read)->record = $record;
-                $this->ego($read)->user   = $record->getAuthor();
+                $read = new LastRead($record, $record->getAuthor());
             }
 
             $this->ego($read)->readAt = $this->ego($event2)->createdAt;

@@ -19,6 +19,8 @@ button.import: Importa
 button.expand: Espandi
 button.collapse: Crollo
 button.select_all: 'Seleziona tutto'
+button.mark_as_read: 'Segna come letto'
+button.mark_as_unread: 'Segna come non letto'
 error: Errore
 error.not_found: 'La pagina desiderata non esiste o è stata rimossa.'
 error.not_authorized: 'Non sei autorizzato ad accedere a questa pagina.'

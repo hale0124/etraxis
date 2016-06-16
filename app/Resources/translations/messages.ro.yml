@@ -19,6 +19,8 @@ button.import: Importa
 button.expand: Extinde
 button.collapse: Restrînge
 button.select_all: 'Selecteaza toate'
+button.mark_as_read: 'Marcheaza ca citite'
+button.mark_as_unread: 'Marcheaza ca necitit'
 error: Eroare
 error.not_found: 'Pagina pe care doriți să o accesați nu există sau a fost ștearsă.'
 error.not_authorized: 'Nu sunteți autorizat sa accesați această pagină.'

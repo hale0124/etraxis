@@ -18,6 +18,8 @@ button.import: Import
 button.expand: Expand
 button.collapse: Collapse
 button.select_all: 'Select all'
+button.mark_as_read: 'Mark as read'
+button.mark_as_unread: 'Mark as unread'
 error: Error
 error.not_found: 'The page you were trying to access doesn''t exist or has been removed.'
 error.not_authorized: 'You are not authorized to access this page.'

@@ -19,6 +19,8 @@ button.import: Importovat
 button.expand: Rozšíření
 button.collapse: Kolaps
 button.select_all: 'Vybrat vše'
+button.mark_as_read: 'Označit jako přečtené'
+button.mark_as_unread: 'Označit jako nepřečtené'
 error: Chyba
 error.not_found: 'Stránka, kterou se snažíte zobrazit, neexistuje nebo byla smazána.'
 error.not_authorized: 'Nemáte dostatečná práva pro zobrazení této stránky.'

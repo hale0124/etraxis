@@ -19,6 +19,8 @@ button.import: 'İçe Aktar'
 button.expand: Genişletin
 button.collapse: Çöküş
 button.select_all: 'Tümünü seç'
+button.mark_as_read: 'Okundu olarak işaretle'
+button.mark_as_unread: 'Okunmadı olarak işaretle'
 error: Hata
 error.not_found: 'Erişmek istediğiniz sayfa mevcut değil ya da kaldırılmış.'
 error.not_authorized: 'Bu sayfaya erişme yetkiniz yok.'

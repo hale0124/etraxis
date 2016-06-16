@@ -19,6 +19,8 @@ button.import: Importálás
 button.expand: Bővíteni
 button.collapse: Összeomlás
 button.select_all: 'Mind kijelölése'
+button.mark_as_read: 'Megjelölés olvasottként'
+button.mark_as_unread: 'Megjelölés olvasatlanként'
 error: Hiba
 error.not_found: 'Az oldal, amit meg szeretne nézni nem található, vagy átkerült egy másik helyre.'
 error.not_authorized: 'Nincs hozzáférési engedélye ehhez az oldalhoz.'

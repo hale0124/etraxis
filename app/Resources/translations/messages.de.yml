@@ -19,6 +19,8 @@ button.import: Importieren
 button.expand: Erweitern
 button.collapse: Zusammenbruch
 button.select_all: 'Alles auswählen'
+button.mark_as_read: 'Als gelesen markieren'
+button.mark_as_unread: 'Als ungelesen markieren'
 error: Fehler
 error.not_found: 'Anhang existiert nicht oder ist gelöscht worden.'
 error.not_authorized: 'Sie sind nicht berechtigt, auf diese Seite zuzugreifen.'

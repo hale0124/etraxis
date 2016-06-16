@@ -4,6 +4,10 @@
 
     <div class="grid-row">
         <div class="grid-100">
+            <span class="buttonset">
+                <button type="button" id="btn-read" onclick="RecordsApp.read()" disabled="disabled">{{ 'button.mark_as_read'|trans }}</button>
+                <button type="button" id="btn-unread" onclick="RecordsApp.unread()" disabled="disabled">{{ 'button.mark_as_unread'|trans }}</button>
+            </span>
             <button type="button" onclick="RecordsApp.export()">{{ 'button.export'|trans }}</button>
         </div>
     </div>

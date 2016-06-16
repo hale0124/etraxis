@@ -19,6 +19,8 @@ button.import: Import
 button.expand: Rozwiń
 button.collapse: Zwiń
 button.select_all: 'Zaznacz wszystko'
+button.mark_as_read: 'Oznacz jako przeczytane'
+button.mark_as_unread: 'Oznacz jako nieprzeczytane'
 error: Błąd
 error.not_found: 'Strona do której próbujesz się dostać nie istnieje lub została usunięta.'
 error.not_authorized: 'Nie posiadasz autoryzacji do oglądania tej strony.'

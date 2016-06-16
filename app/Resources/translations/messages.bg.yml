@@ -19,6 +19,8 @@ button.import: Внасям
 button.expand: Разширяване
 button.collapse: Свий
 button.select_all: 'Избери всичко'
+button.mark_as_read: 'Маркирай като прочетено'
+button.mark_as_unread: 'Маркирай като непрочетено'
 error: Грешка
 error.not_found: 'Несъществуваща или преместена страница.'
 error.not_authorized: 'Нямате право на достъп до тази страница.'

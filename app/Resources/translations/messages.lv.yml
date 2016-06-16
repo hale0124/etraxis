@@ -19,6 +19,8 @@ button.import: Imports
 button.expand: Izvērsiet
 button.collapse: Sabrukums
 button.select_all: 'Atlasīt visu'
+button.mark_as_read: 'Atzīmēt kā izlasītos'
+button.mark_as_unread: 'Atzīmēt kā neizlasītu'
 error: Kļūda
 error.not_found: 'Lapa, ko Jūs mēģināt atvērt, neeksistē vai ir pārvietota.'
 error.not_authorized: 'Jums nav tiesību piekļūt šai lapai.'

@@ -19,6 +19,8 @@ button.import: インポート
 button.expand: 拡大
 button.collapse: 崩壊
 button.select_all: 全て選択
+button.mark_as_read: 全て既読にする
+button.mark_as_unread: 既読にマーク
 error: エラー
 error.not_found: アクセスしようとしたページは存在しないか削除されています。
 error.not_authorized: このページのアクセスは許可されていません。
