@@ -13,6 +13,7 @@ namespace eTraxis\Entity;
 
 use AltrEgo\AltrEgo;
 use eTraxis\Dictionary\FieldPermission;
+use eTraxis\Dictionary\FieldType;
 use eTraxis\Dictionary\SystemRole;
 use eTraxis\Tests\TransactionalTestCase;
 
@@ -28,6 +29,14 @@ class FieldTest extends TransactionalTestCase
         $this->object = $this->doctrine->getRepository(Field::class)->findOneBy([
             'name' => 'Crew',
         ]);
+    }
+
+    public function testConstruct()
+    {
+        $state = $this->object->getState();
+
+        $field = new Field($state, FieldType::STRING);
+        self::assertEquals($state, $field->getState());
     }
 
     public function testId()
@@ -103,24 +112,27 @@ class FieldTest extends TransactionalTestCase
 
     public function testAnyoneRolePermission()
     {
-        $expected = FieldPermission::READ_ONLY;
+        self::assertEquals(FieldPermission::NONE, $this->object->getRolePermission(SystemRole::ANYONE));
 
+        $expected = FieldPermission::READ_ONLY;
         $this->object->setRolePermission(SystemRole::ANYONE, $expected);
         self::assertEquals($expected, $this->object->getRolePermission(SystemRole::ANYONE));
     }
 
     public function testAuthorRolePermission()
     {
-        $expected = FieldPermission::READ_ONLY;
+        self::assertEquals(FieldPermission::READ_WRITE, $this->object->getRolePermission(SystemRole::AUTHOR));
 
+        $expected = FieldPermission::READ_ONLY;
         $this->object->setRolePermission(SystemRole::AUTHOR, $expected);
         self::assertEquals($expected, $this->object->getRolePermission(SystemRole::AUTHOR));
     }
 
     public function testResponsibleRolePermission()
     {
-        $expected = FieldPermission::READ_ONLY;
+        self::assertEquals(FieldPermission::READ_ONLY, $this->object->getRolePermission(SystemRole::RESPONSIBLE));
 
+        $expected = FieldPermission::READ_WRITE;
         $this->object->setRolePermission(SystemRole::RESPONSIBLE, $expected);
         self::assertEquals($expected, $this->object->getRolePermission(SystemRole::RESPONSIBLE));
     }
@@ -130,11 +142,25 @@ class FieldTest extends TransactionalTestCase
         self::assertEquals(FieldPermission::NONE, $this->object->getRolePermission('wtf'));
     }
 
-    public function testSetGroupPermission()
+    public function testSetGroupReadPermission()
     {
-        $expected = FieldPermission::READ_ONLY;
+        /** @var Group $group */
+        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
+        self::assertEquals(FieldPermission::READ_WRITE, $this->object->getGroupPermission($group));
 
-        $this->object->setGroupPermission($group = new Group(), $expected);
+        $expected = FieldPermission::READ_ONLY;
+        $this->object->setGroupPermission($group, $expected);
+        self::assertEquals($expected, $this->object->getGroupPermission($group));
+    }
+
+    public function testSetGroupWritePermission()
+    {
+        /** @var Group $group */
+        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Staff']);
+        self::assertEquals(FieldPermission::READ_ONLY, $this->object->getGroupPermission($group));
+
+        $expected = FieldPermission::READ_WRITE;
+        $this->object->setGroupPermission($group, $expected);
         self::assertEquals($expected, $this->object->getGroupPermission($group));
     }
 

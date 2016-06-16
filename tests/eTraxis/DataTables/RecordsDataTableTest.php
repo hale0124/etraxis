@@ -380,6 +380,7 @@ class RecordsDataTableTest extends TransactionalTestCase
             'search'  => ['value' => null, 'regex' => 'false'],
             'order'   => [],
             'columns' => [
+                ['data' => RecordsDataTable::COLUMN_ID,      'search' => ['value' => '',          'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
                 ['data' => RecordsDataTable::COLUMN_SUBJECT, 'search' => ['value' => 'intERfACe', 'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
                 ['data' => RecordsDataTable::COLUMN_AUTHOR,  'search' => ['value' => 'lArRY',     'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
             ],

@@ -57,7 +57,7 @@ class ExportServiceTest extends \PHPUnit_Framework_TestCase
     public function test2()
     {
         $data = [
-            ['euclid', 'Euclid', null],
+            ['euclid', 'Euclid', '&mdash;'],
             ['euler', 'Leonhard Euler', 1707],
             ['gauss', 'Carl Friedrich Gauss', 1777],
             ['riemann', 'Bernhard Riemann', 1826],

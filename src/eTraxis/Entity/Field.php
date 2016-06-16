@@ -346,7 +346,7 @@ class Field extends Entity implements \JsonSerializable
 
             $toAdd = array_unique(array_diff($desired, $current->toArray()));
 
-            // Remove extra transitions.
+            // Remove extra permissions.
             foreach ($this->rolePermissions as $key => $item) {
                 /** @var FieldRolePermission $item */
                 if ($item->getRole() === $role) {
@@ -357,7 +357,7 @@ class Field extends Entity implements \JsonSerializable
                 }
             }
 
-            // Grant required transitions.
+            // Grant required permissions.
             foreach ($toAdd as $item) {
                 $element = new FieldRolePermission($this, $role, $item);
                 $this->rolePermissions->add($element);
@@ -432,7 +432,7 @@ class Field extends Entity implements \JsonSerializable
 
             $toAdd = array_unique(array_diff($desired, $current->toArray()));
 
-            // Remove extra transitions.
+            // Remove extra permissions.
             foreach ($this->groupPermissions as $key => $item) {
                 /** @var FieldGroupPermission $item */
                 if ($item->getGroup() === $group) {
@@ -443,7 +443,7 @@ class Field extends Entity implements \JsonSerializable
                 }
             }
 
-            // Grant required transitions.
+            // Grant required permissions.
             foreach ($toAdd as $item) {
                 $element = new FieldGroupPermission($this, $group, $item);
                 $this->groupPermissions->add($element);
