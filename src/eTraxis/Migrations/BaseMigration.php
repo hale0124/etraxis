@@ -28,6 +28,26 @@ abstract class BaseMigration extends AbstractMigration
     abstract public function getVersion();
 
     /**
+     * Checks whether current database platform is MySQL.
+     *
+     * @return  bool
+     */
+    public function isMysql()
+    {
+        return DatabasePlatform::MYSQL === $this->connection->getDatabasePlatform()->getName();
+    }
+
+    /**
+     * Checks whether current database platform is PostgreSQL.
+     *
+     * @return  bool
+     */
+    public function isPostgresql()
+    {
+        return DatabasePlatform::POSTGRESQL === $this->connection->getDatabasePlatform()->getName();
+    }
+
+    /**
      * {@inheritdoc}
      */
     final public function getDescription()
@@ -38,59 +58,26 @@ abstract class BaseMigration extends AbstractMigration
     /**
      * {@inheritdoc}
      */
-    final public function up(Schema $schema)
+    public function preUp(Schema $schema)
     {
-        $platform = $this->checkDatabasePlatform();
-        $up       = $platform . 'Up';
-        $this->$up($schema);
+        $platform = $this->connection->getDatabasePlatform()->getName();
+
+        $this->abortIf(
+            !DatabasePlatform::has($platform),
+            'Unsupported database platform - ' . $platform
+        );
     }
 
     /**
      * {@inheritdoc}
      */
-    final public function down(Schema $schema)
-    {
-        $platform = $this->checkDatabasePlatform();
-        $down     = $platform . 'Down';
-        $this->$down($schema);
-    }
-
-    /**
-     * Checks whether current database platform is supported.
-     *
-     * @throws  \Doctrine\DBAL\Migrations\AbortMigrationException
-     *
-     * @return  string Current database platform.
-     */
-    protected function checkDatabasePlatform()
+    public function preDown(Schema $schema)
     {
         $platform = $this->connection->getDatabasePlatform()->getName();
 
-        switch ($platform) {
-
-            case DatabasePlatform::MYSQL:
-
-                $this->abortIf(
-                    !($this instanceof MysqlMigrationInterface),
-                    'MySQL platform is not supported yet.'
-                );
-
-                break;
-
-            case DatabasePlatform::POSTGRESQL:
-
-                $this->abortIf(
-                    !($this instanceof PostgresqlMigrationInterface),
-                    'PostgreSQL platform is not supported yet.'
-                );
-
-                break;
-
-            default:
-
-                $this->abortIf(true, "Unknown database platform: {$platform}.");
-        }
-
-        return $platform;
+        $this->abortIf(
+            !DatabasePlatform::has($platform),
+            'Unsupported database platform - ' . $platform
+        );
     }
 }

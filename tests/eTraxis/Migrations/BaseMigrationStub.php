@@ -11,6 +11,8 @@
 
 namespace eTraxis\Migrations;
 
+use Doctrine\DBAL\Schema\Schema;
+
 class BaseMigrationStub extends BaseMigration
 {
     public function __construct($driver = 'unsupported')
@@ -21,5 +23,15 @@ class BaseMigrationStub extends BaseMigration
     public function getVersion()
     {
         return '4.0.x';
+    }
+
+    public function up(Schema $schema)
+    {
+        echo 'migrating up';
+    }
+
+    public function down(Schema $schema)
+    {
+        echo 'migrating down';
     }
 }

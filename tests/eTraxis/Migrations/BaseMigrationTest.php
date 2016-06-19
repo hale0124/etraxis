@@ -12,6 +12,7 @@
 namespace eTraxis\Migrations;
 
 use Doctrine\DBAL\Schema\Schema;
+use eTraxis\Dictionary\DatabasePlatform;
 
 class BaseMigrationTest extends \PHPUnit_Framework_TestCase
 {
@@ -23,83 +24,61 @@ class BaseMigrationTest extends \PHPUnit_Framework_TestCase
         self::assertEquals($expected, $migration->getDescription());
     }
 
-    public function testMysqlUpSuccess()
+    public function testUpSuccess()
     {
         $schema    = new Schema();
-        $migration = new MysqlMigrationStub();
+        $migration = new BaseMigrationStub(DatabasePlatform::MYSQL);
 
-        $this->expectOutputString('mysql up');
+        $this->expectOutputString('migrating up');
+        $migration->preUp($schema);
         $migration->up($schema);
     }
 
-    public function testMysqlDownSuccess()
+    public function testIsMysql()
+    {
+        $migration = new BaseMigrationStub(DatabasePlatform::MYSQL);
+
+        self::assertTrue($migration->isMysql());
+    }
+
+    public function testIsPostgresql()
+    {
+        $migration = new BaseMigrationStub(DatabasePlatform::POSTGRESQL);
+
+        self::assertTrue($migration->isPostgresql());
+    }
+
+    public function testDownSuccess()
     {
         $schema    = new Schema();
-        $migration = new MysqlMigrationStub();
+        $migration = new BaseMigrationStub(DatabasePlatform::MYSQL);
 
-        $this->expectOutputString('mysql down');
+        $this->expectOutputString('migrating down');
+        $migration->preDown($schema);
         $migration->down($schema);
     }
 
     /**
      * @expectedException \Doctrine\DBAL\Migrations\AbortMigrationException
      */
-    public function testMysqlUpFailure()
+    public function testUpFailure()
     {
         $schema    = new Schema();
         $migration = new BaseMigrationStub();
 
+        $migration->preUp($schema);
         $migration->up($schema);
     }
 
     /**
      * @expectedException \Doctrine\DBAL\Migrations\AbortMigrationException
      */
-    public function testMysqlDownFailure()
+    public function testDownFailure()
     {
         $schema    = new Schema();
         $migration = new BaseMigrationStub();
 
-        $migration->down($schema);
-    }
-
-    public function testPostgresqlUpSuccess()
-    {
-        $schema    = new Schema();
-        $migration = new PostgresqlMigrationStub();
-
-        $this->expectOutputString('postgresql up');
-        $migration->up($schema);
-    }
-
-    public function testPostgresqlDownSuccess()
-    {
-        $schema    = new Schema();
-        $migration = new PostgresqlMigrationStub();
-
-        $this->expectOutputString('postgresql down');
-        $migration->down($schema);
-    }
-
-    /**
-     * @expectedException \Doctrine\DBAL\Migrations\AbortMigrationException
-     */
-    public function testPostgresqlUpFailure()
-    {
-        $schema    = new Schema();
-        $migration = new BaseMigrationStub();
-
-        $migration->up($schema);
-    }
-
-    /**
-     * @expectedException \Doctrine\DBAL\Migrations\AbortMigrationException
-     */
-    public function testPostgresqlDownFailure()
-    {
-        $schema    = new Schema();
-        $migration = new BaseMigrationStub();
-
+        $migration->preDown($schema);
         $migration->down($schema);
     }
 }
