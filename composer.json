@@ -61,7 +61,6 @@
             "eTraxis\\": "tests/eTraxis/"
         }
     },
-    "minimum-stability": "stable",
     "scripts": {
         "post-install-cmd": [
             "Incenteev\\ParameterHandler\\ScriptHandler::buildParameters",

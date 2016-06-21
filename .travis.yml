@@ -7,8 +7,6 @@ env:
     - DB=mysql
     - DB=pgsql
 
-sudo: false
-
 before_install:
     - echo 'extension = ldap.so' >> ~/.phpenv/versions/$(phpenv version-name)/etc/php.ini
 

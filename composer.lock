@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "aec7ee833c36e3ef6d9196a9f9c42c3b",
-    "content-hash": "ce7205cfd979d08f29c042762e74ca78",
+    "hash": "5969b030e5ddcc37409308d75c0c8fd8",
+    "content-hash": "30a24c3a078d0251862e1b66329056d4",
     "packages": [
         {
             "name": "arodygin/datatables-bundle",
