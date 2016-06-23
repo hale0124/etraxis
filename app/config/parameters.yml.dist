@@ -20,11 +20,11 @@ parameters:
     mailfrom_name:          "eTraxis"
 
     ldap_host:              ~
-    ldap_port:              ~
+    ldap_port:              389
+    ldap_encryption:        none
+    ldap_basedn:            dc=example,dc=com
     ldap_user:              ~
     ldap_password:          ~
-    ldap_tls:               false
-    ldap_basedn:            DC=example,DC=com
 
     locale:                 en_US
     theme:                  azure

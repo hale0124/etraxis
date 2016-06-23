@@ -13,12 +13,13 @@ namespace eTraxis\Security;
 
 use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Entity\User;
-use eTraxis\Service\Ldap\LdapInterface;
 use eTraxis\SimpleBus\Users\RegisterUserCommand;
 use SimpleBus\Message\Bus\MessageBus;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\Ldap\Exception\ConnectionException;
+use Symfony\Component\Ldap\LdapInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
@@ -36,6 +37,8 @@ class LdapAuthenticator extends AbstractGuardAuthenticator
     protected $command_bus;
     protected $ldap;
     protected $basedn;
+    protected $user;
+    protected $password;
 
     /**
      * Dependency Injection constructor.
@@ -45,19 +48,25 @@ class LdapAuthenticator extends AbstractGuardAuthenticator
      * @param   MessageBus       $command_bus
      * @param   LdapInterface    $ldap
      * @param   string           $basedn
+     * @param   string           $user
+     * @param   string           $password
      */
     public function __construct(
         RouterInterface  $router,
         SessionInterface $session,
         MessageBus       $command_bus,
         LdapInterface    $ldap,
-        string           $basedn)
+        string           $basedn,
+        string           $user = null,
+        string           $password = null)
     {
         $this->router      = $router;
         $this->session     = $session;
         $this->command_bus = $command_bus;
         $this->ldap        = $ldap;
         $this->basedn      = $basedn;
+        $this->user        = $user;
+        $this->password    = $password;
     }
 
     /**
@@ -95,19 +104,38 @@ class LdapAuthenticator extends AbstractGuardAuthenticator
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        $entry = $this->ldap->find($this->basedn, $credentials['username'], ['cn', 'mail']);
+        try {
+            if ($this->user) {
+                $this->ldap->bind($this->user, $this->password);
+            }
 
-        if ($entry === false) {
+            $query   = $this->ldap->query($this->basedn, "(uid={$credentials['username']})", ['filter' => ['cn', 'mail']]);
+            $entries = $query->execute();
+
+            if (count($entries) === 0) {
+                return null;
+            }
+
+            $entry = $entries[0];
+
+            $fullnames = $entry->getAttribute('cn');
+            $emails    = $entry->getAttribute('mail');
+
+            if (!$fullnames || !$emails) {
+                return null;
+            }
+
+            $user = new User(AuthenticationProvider::LDAP);
+
+            $user->setUsername($credentials['username']);
+            $user->setFullname($fullnames[0]);
+            $user->setEmail($emails[0]);
+
+            return new CurrentUser($user);
+        }
+        catch (ConnectionException $exception) {
             return null;
         }
-
-        $user = new User(AuthenticationProvider::LDAP);
-
-        $user->setUsername($credentials['username']);
-        $user->setFullname($entry['cn']);
-        $user->setEmail($entry['mail']);
-
-        return new CurrentUser($user);
     }
 
     /**
@@ -115,7 +143,14 @@ class LdapAuthenticator extends AbstractGuardAuthenticator
      */
     public function checkCredentials($credentials, UserInterface $user)
     {
-        return $this->ldap->authenticate($this->basedn, $credentials['username'], $credentials['password']);
+        try {
+            $this->ldap->bind("uid={$credentials['username']},{$this->basedn}", $credentials['password']);
+        }
+        catch (ConnectionException $exception) {
+            return false;
+        }
+
+        return true;
     }
 
     /**

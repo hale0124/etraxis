@@ -31,8 +31,10 @@ class LdapAuthenticatorTest extends TransactionalTestCase
             $this->router,
             $this->session,
             $this->command_bus,
-            new LdapServiceStub(),
-            'DC=example,DC=com'
+            new LdapStub(),
+            'dc=example,dc=com',
+            'cn=admin,dc=example,dc=com',
+            'secret'
         );
     }
 
@@ -77,7 +79,7 @@ class LdapAuthenticatorTest extends TransactionalTestCase
         self::assertNull($this->object->getCredentials(new Request()));
     }
 
-    public function testGetUserSuccess()
+    public function testGetUser()
     {
         /** @var \Symfony\Component\Security\Core\User\UserProviderInterface $provider */
         $provider = $this->client->getContainer()->get('etraxis.provider');
@@ -90,13 +92,49 @@ class LdapAuthenticatorTest extends TransactionalTestCase
         self::assertInstanceOf(CurrentUser::class, $user);
     }
 
-    public function testGetUserFailure()
+    public function testGetUnknownUser()
     {
         /** @var \Symfony\Component\Security\Core\User\UserProviderInterface $provider */
         $provider = $this->client->getContainer()->get('etraxis.provider');
 
         $user = $this->object->getUser([
             'username' => 'unknown',
+            'password' => 'password',
+        ], $provider);
+
+        self::assertNull($user);
+    }
+
+    public function testGetIncompleteUser()
+    {
+        /** @var \Symfony\Component\Security\Core\User\UserProviderInterface $provider */
+        $provider = $this->client->getContainer()->get('etraxis.provider');
+
+        $user = $this->object->getUser([
+            'username' => 'artem',
+            'password' => 'password',
+        ], $provider);
+
+        self::assertNull($user);
+    }
+
+    public function testGetUserInvalidAdmin()
+    {
+        $ldap = new LdapAuthenticator(
+            $this->router,
+            $this->session,
+            $this->command_bus,
+            new LdapStub(),
+            'dc=example,dc=com',
+            'cn=admin,dc=example,dc=com',
+            'wrong'
+        );
+
+        /** @var \Symfony\Component\Security\Core\User\UserProviderInterface $provider */
+        $provider = $this->client->getContainer()->get('etraxis.provider');
+
+        $user = $ldap->getUser([
+            'username' => 'einstein',
             'password' => 'password',
         ], $provider);
 

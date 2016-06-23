@@ -30,17 +30,16 @@ services:
             - "@command_bus"
             - "@ldap"
             - "%ldap_basedn%"
-
-    ldap:
-        class: eTraxis\Service\Ldap\LdapService
-        public: false
-        arguments:
-            - "@logger"
-            - "%ldap_host%"
-            - "%ldap_port%"
             - "%ldap_user%"
             - "%ldap_password%"
-            - "%ldap_tls%"
+
+    ldap:
+        class: Symfony\Component\Ldap\Ldap
+        public: false
+        factory: [ Symfony\Component\Ldap\Ldap, create ]
+        arguments:
+            - ext_ldap
+            - { host: "%ldap_host%", port: "%ldap_port%", encryption: "%ldap_encryption%" }
 
     etraxis.mailer:
         class: eTraxis\Service\Mailer\MailerService
