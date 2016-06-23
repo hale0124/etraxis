@@ -9,11 +9,10 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Security\Authenticator;
+namespace eTraxis\Security;
 
 use eTraxis\Service\Ldap\LdapInterface;
 use eTraxis\SimpleBus\Users\RegisterUserCommand;
-use Psr\Log\LoggerInterface;
 use SimpleBus\Message\Bus\MessageBus;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -23,13 +22,15 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
+use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 
 /**
  * LDAP authenticator.
  */
-class LdapAuthenticator extends AbstractAuthenticator
+class LdapAuthenticator extends AbstractGuardAuthenticator
 {
-    protected $logger;
+    protected $router;
+    protected $session;
     protected $command_bus;
     protected $ldap;
     protected $basedn;
@@ -39,7 +40,6 @@ class LdapAuthenticator extends AbstractAuthenticator
      *
      * @param   RouterInterface  $router
      * @param   SessionInterface $session
-     * @param   LoggerInterface  $logger
      * @param   MessageBus       $command_bus
      * @param   LdapInterface    $ldap
      * @param   string           $basedn
@@ -47,17 +47,30 @@ class LdapAuthenticator extends AbstractAuthenticator
     public function __construct(
         RouterInterface  $router,
         SessionInterface $session,
-        LoggerInterface  $logger,
         MessageBus       $command_bus,
         LdapInterface    $ldap,
         string           $basedn)
     {
-        parent::__construct($router, $session);
-
-        $this->logger      = $logger;
+        $this->router      = $router;
+        $this->session     = $session;
         $this->command_bus = $command_bus;
         $this->ldap        = $ldap;
         $this->basedn      = $basedn;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function start(Request $request, AuthenticationException $authException = null)
+    {
+        if ($request->isXmlHttpRequest()) {
+            $this->session->remove('_security.main.target_path');
+        }
+        else {
+            $this->session->set('_security.main.target_path', $request->getRequestUri());
+        }
+
+        return new RedirectResponse($this->router->generate('login'));
     }
 
     /**
@@ -117,6 +130,17 @@ class LdapAuthenticator extends AbstractAuthenticator
             $this->command_bus->handle($command);
         }
 
-        return new RedirectResponse($this->getOriginalUrl());
+        // An URL the user was trying to reach before authentication.
+        $originalUrl = $this->session->get('_security.main.target_path', $this->router->generate('homepage'));
+
+        return new RedirectResponse($originalUrl);
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function supportsRememberMe()
+    {
+        return true;
     }
 }

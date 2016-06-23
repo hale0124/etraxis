@@ -12,8 +12,8 @@
 namespace eTraxis\Tests;
 
 use eTraxis\Dictionary\AuthenticationProvider;
-use eTraxis\Entity\CurrentUser;
 use eTraxis\Entity\User;
+use eTraxis\Security\CurrentUser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\BrowserKit\Cookie;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;

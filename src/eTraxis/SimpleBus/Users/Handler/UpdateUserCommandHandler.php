@@ -55,7 +55,7 @@ class UpdateUserCommandHandler
      */
     public function handle(UpdateUserCommand $command)
     {
-        /** @var \eTraxis\Entity\CurrentUser $user */
+        /** @var \eTraxis\Security\CurrentUser $user */
         $user = $this->token_storage->getToken()->getUser();
 
         /** @var User $entity */

@@ -12,7 +12,6 @@ services:
         class: eTraxis\Security\InternalUserProvider
         public: false
         arguments:
-            - "@logger"
             - "@doctrine.orm.entity_manager"
 
     etraxis.encoder:
@@ -23,12 +22,11 @@ services:
             - "%password_min_length%"
 
     etraxis.authenticator.ldap:
-        class: eTraxis\Security\Authenticator\LdapAuthenticator
+        class: eTraxis\Security\LdapAuthenticator
         public: false
         arguments:
             - "@router"
             - "@session"
-            - "@logger"
             - "@command_bus"
             - "@ldap"
             - "%ldap_basedn%"

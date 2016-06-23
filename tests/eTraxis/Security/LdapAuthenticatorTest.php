@@ -9,9 +9,8 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Security\Authenticator;
+namespace eTraxis\Security;
 
-use eTraxis\Entity\CurrentUser;
 use eTraxis\Tests\TransactionalTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -29,7 +28,6 @@ class LdapAuthenticatorTest extends TransactionalTestCase
         $this->object = new LdapAuthenticator(
             $this->router,
             $this->session,
-            $this->logger,
             $this->command_bus,
             new LdapServiceStub(),
             'DC=example,DC=com'

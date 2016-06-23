@@ -13,9 +13,9 @@ namespace eTraxis\Voter;
 
 use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Dictionary\EventType;
-use eTraxis\Entity\CurrentUser;
 use eTraxis\Entity\Event;
 use eTraxis\Entity\User;
+use eTraxis\Security\CurrentUser;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 

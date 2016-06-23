@@ -9,8 +9,9 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Entity;
+namespace eTraxis\Security;
 
+use eTraxis\Entity\User;
 use eTraxis\Tests\TransactionalTestCase;
 
 class CurrentUserTest extends TransactionalTestCase

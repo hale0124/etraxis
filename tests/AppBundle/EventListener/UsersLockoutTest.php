@@ -11,7 +11,7 @@
 
 namespace AppBundle\EventListener;
 
-use eTraxis\Entity\CurrentUser;
+use eTraxis\Security\CurrentUser;
 use eTraxis\Tests\TransactionalTestCase;
 use Symfony\Component\Security\Core\Authentication\Token\UsernamePasswordToken;
 use Symfony\Component\Security\Core\Event\AuthenticationEvent;

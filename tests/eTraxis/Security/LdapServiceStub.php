@@ -9,7 +9,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Security\Authenticator;
+namespace eTraxis\Security;
 
 use eTraxis\Service\Ldap\LdapInterface;
 

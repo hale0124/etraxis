@@ -13,9 +13,7 @@ namespace eTraxis\Security;
 
 use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Dictionary\AuthenticationProvider;
-use eTraxis\Entity\CurrentUser;
 use eTraxis\Entity\User;
-use Psr\Log\LoggerInterface;
 use Symfony\Component\Security\Core\Exception\UnsupportedUserException;
 use Symfony\Component\Security\Core\Exception\UsernameNotFoundException;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -26,18 +24,15 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
  */
 class InternalUserProvider implements UserProviderInterface
 {
-    protected $logger;
     protected $manager;
 
     /**
      * Dependency Injection constructor.
      *
-     * @param   LoggerInterface        $logger
      * @param   EntityManagerInterface $manager
      */
-    public function __construct(LoggerInterface $logger, EntityManagerInterface $manager)
+    public function __construct(EntityManagerInterface $manager)
     {
-        $this->logger  = $logger;
         $this->manager = $manager;
     }
 
@@ -53,8 +48,6 @@ class InternalUserProvider implements UserProviderInterface
         ]);
 
         if ($user) {
-            $this->logger->info('eTraxis account is found.', [$username]);
-
             return new CurrentUser($user);
         }
 
@@ -66,8 +59,6 @@ class InternalUserProvider implements UserProviderInterface
         if (!$user) {
             throw new UsernameNotFoundException();
         }
-
-        $this->logger->info('LDAP account is found.', [$username]);
 
         $user->setPassword(null);
 

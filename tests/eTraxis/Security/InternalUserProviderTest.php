@@ -12,7 +12,6 @@
 namespace eTraxis\Security;
 
 use eTraxis\Dictionary\AuthenticationProvider;
-use eTraxis\Entity\CurrentUser;
 use eTraxis\Entity\User;
 use eTraxis\Tests\TransactionalTestCase;
 use Symfony\Component\Security\Core\User\User as SymfonyUser;
@@ -29,7 +28,7 @@ class InternalUserProviderTest extends TransactionalTestCase
         /** @var \Doctrine\ORM\EntityManagerInterface $manager */
         $manager = $this->doctrine->getManager();
 
-        $this->object = new InternalUserProvider($this->logger, $manager);
+        $this->object = new InternalUserProvider($manager);
     }
 
     public function testLoadInternalUserByUsername()

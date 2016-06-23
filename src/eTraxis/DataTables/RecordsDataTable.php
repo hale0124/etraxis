@@ -59,7 +59,7 @@ class RecordsDataTable implements DataTableHandlerInterface
      */
     public function handle(DataTableQuery $request): DataTableResults
     {
-        /** @var \eTraxis\Entity\CurrentUser $user */
+        /** @var \eTraxis\Security\CurrentUser $user */
         $user = $this->token_storage->getToken()->getUser();
 
         $results = new DataTableResults();

@@ -9,8 +9,9 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Entity;
+namespace eTraxis\Security;
 
+use eTraxis\Entity\User;
 use Symfony\Component\Security\Core\User\AdvancedUserInterface;
 
 /**
