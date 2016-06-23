@@ -11,6 +11,8 @@
 
 namespace eTraxis\Security;
 
+use eTraxis\Dictionary\AuthenticationProvider;
+use eTraxis\Entity\User;
 use eTraxis\Tests\TransactionalTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -88,41 +90,41 @@ class LdapAuthenticatorTest extends TransactionalTestCase
         self::assertInstanceOf(CurrentUser::class, $user);
     }
 
-    /**
-     * @expectedException \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
-     */
     public function testGetUserFailure()
     {
         /** @var \Symfony\Component\Security\Core\User\UserProviderInterface $provider */
         $provider = $this->client->getContainer()->get('etraxis.provider');
 
-        $this->object->getUser([
+        $user = $this->object->getUser([
             'username' => 'unknown',
             'password' => 'password',
         ], $provider);
+
+        self::assertNull($user);
     }
 
     public function testCheckCredentials()
     {
-        /** @var \Symfony\Component\Security\Core\User\UserProviderInterface $provider */
-        $provider = $this->client->getContainer()->get('etraxis.provider');
-
-        $user = $provider->loadUserByUsername('einstein');
+        /** @var User $user */
+        $user = $this->doctrine->getRepository(User::class)->findOneBy([
+            'provider' => AuthenticationProvider::LDAP,
+            'username' => 'einstein',
+        ]);
 
         self::assertTrue($this->object->checkCredentials([
             'username' => 'einstein',
             'password' => 'password',
-        ], $user));
+        ], new CurrentUser($user)));
 
         self::assertFalse($this->object->checkCredentials([
             'username' => 'einstein',
             'password' => 'wrong',
-        ], $user));
+        ], new CurrentUser($user)));
 
         self::assertFalse($this->object->checkCredentials([
             'username' => 'unknown',
             'password' => 'password',
-        ], $user));
+        ], new CurrentUser($user)));
     }
 
     public function testOnAuthenticationFailure()
@@ -132,15 +134,16 @@ class LdapAuthenticatorTest extends TransactionalTestCase
 
     public function testOnAuthenticationSuccess()
     {
-        /** @var \Symfony\Component\Security\Core\User\UserProviderInterface $provider */
-        $provider = $this->client->getContainer()->get('etraxis.provider');
-
-        $user = $provider->loadUserByUsername('einstein');
+        /** @var User $user */
+        $user = $this->doctrine->getRepository(User::class)->findOneBy([
+            'provider' => AuthenticationProvider::LDAP,
+            'username' => 'einstein',
+        ]);
 
         $response = $this->object->onAuthenticationSuccess(
             new Request(),
-            $this->object->createAuthenticatedToken($user, 'main'),
-            'etraxis.provider'
+            $this->object->createAuthenticatedToken(new CurrentUser($user), 'main'),
+            'main'
         );
 
         self::assertInstanceOf(Response::class, $response);

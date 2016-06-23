@@ -75,6 +75,16 @@ class CurrentUser implements AdvancedUserInterface
      *
      * @return  string
      */
+    public function getEmail()
+    {
+        return $this->user['email'];
+    }
+
+    /**
+     * Proxy getter.
+     *
+     * @return  string
+     */
     public function getLocale()
     {
         return $this->user['locale'];

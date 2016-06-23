@@ -47,20 +47,9 @@ class InternalUserProvider implements UserProviderInterface
             'username' => $username,
         ]);
 
-        if ($user) {
-            return new CurrentUser($user);
-        }
-
-        $user = $this->manager->getRepository(User::class)->findOneBy([
-            'provider' => AuthenticationProvider::LDAP,
-            'username' => $username,
-        ]);
-
         if (!$user) {
             throw new UsernameNotFoundException();
         }
-
-        $user->setPassword(null);
 
         return new CurrentUser($user);
     }
@@ -74,7 +63,16 @@ class InternalUserProvider implements UserProviderInterface
             throw new UnsupportedUserException();
         }
 
-        return $this->loadUserByUsername($user->getUsername());
+        /** @var User $user */
+        $user = $this->manager->getRepository(User::class)->findOneBy([
+            'username' => $user->getUsername(),
+        ]);
+
+        if (!$user) {
+            throw new UsernameNotFoundException();
+        }
+
+        return new CurrentUser($user);
     }
 
     /**

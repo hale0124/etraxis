@@ -11,6 +11,8 @@
 
 namespace eTraxis\Security;
 
+use eTraxis\Dictionary\AuthenticationProvider;
+use eTraxis\Entity\User;
 use eTraxis\Service\Ldap\LdapInterface;
 use eTraxis\SimpleBus\Users\RegisterUserCommand;
 use SimpleBus\Message\Bus\MessageBus;
@@ -93,7 +95,19 @@ class LdapAuthenticator extends AbstractGuardAuthenticator
      */
     public function getUser($credentials, UserProviderInterface $userProvider)
     {
-        return $userProvider->loadUserByUsername($credentials['username']);
+        $entry = $this->ldap->find($this->basedn, $credentials['username'], ['cn', 'mail']);
+
+        if ($entry === false) {
+            return null;
+        }
+
+        $user = new User(AuthenticationProvider::LDAP);
+
+        $user->setUsername($credentials['username']);
+        $user->setFullname($entry['cn']);
+        $user->setEmail($entry['mail']);
+
+        return new CurrentUser($user);
     }
 
     /**
@@ -117,18 +131,17 @@ class LdapAuthenticator extends AbstractGuardAuthenticator
      */
     public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey)
     {
-        $entry = $this->ldap->find($this->basedn, $token->getUsername(), ['cn', 'mail']);
+        /** @var CurrentUser $user */
+        $user = $token->getUser();
 
-        if ($entry) {
+        // Save user info in database.
+        $command = new RegisterUserCommand([
+            'username' => $user->getUsername(),
+            'fullname' => $user->getFullname(),
+            'email'    => $user->getEmail(),
+        ]);
 
-            $command = new RegisterUserCommand([
-                'username' => $token->getUsername(),
-                'fullname' => $entry['cn'],
-                'email'    => $entry['mail'],
-            ]);
-
-            $this->command_bus->handle($command);
-        }
+        $this->command_bus->handle($command);
 
         // An URL the user was trying to reach before authentication.
         $originalUrl = $this->session->get('_security.main.target_path', $this->router->generate('homepage'));

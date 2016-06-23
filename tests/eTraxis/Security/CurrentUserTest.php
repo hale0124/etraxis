@@ -56,6 +56,13 @@ class CurrentUserTest extends TransactionalTestCase
         self::assertEquals($this->object->getFullname(), $user->getFullname());
     }
 
+    public function testEmail()
+    {
+        $user = new CurrentUser($this->object);
+
+        self::assertEquals($this->object->getEmail(), $user->getEmail());
+    }
+
     public function testLocale()
     {
         $user = new CurrentUser($this->object);

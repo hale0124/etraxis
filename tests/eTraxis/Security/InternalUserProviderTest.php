@@ -40,24 +40,23 @@ class InternalUserProviderTest extends TransactionalTestCase
         self::assertFalse($result->isExternalAccount());
     }
 
+    /**
+     * @expectedException \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
+     */
     public function testLoadLdapUserByUsername()
     {
-        $result = $this->object->loadUserByUsername('einstein');
-
-        self::assertInstanceOf(CurrentUser::class, $result);
-        self::assertEquals('Albert Einstein', $result->getFullname());
-        self::assertTrue($result->isExternalAccount());
+        $this->object->loadUserByUsername('einstein');
     }
 
     /**
      * @expectedException \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
      */
-    public function testUsernameNotFoundException()
+    public function testLoadUnknownUserByUsername()
     {
         $this->object->loadUserByUsername('user404');
     }
 
-    public function testRefreshUser()
+    public function testRefreshInternalUser()
     {
         $user = new User(AuthenticationProvider::ETRAXIS);
 
@@ -67,6 +66,32 @@ class InternalUserProviderTest extends TransactionalTestCase
 
         self::assertInstanceOf(CurrentUser::class, $result);
         self::assertEquals('Artem Rodygin', $result->getFullname());
+        self::assertFalse($result->isExternalAccount());
+    }
+
+    public function testRefreshLdapUser()
+    {
+        $user = new User(AuthenticationProvider::LDAP);
+
+        $user->setUsername('einstein');
+
+        $result = $this->object->refreshUser(new CurrentUser($user));
+
+        self::assertInstanceOf(CurrentUser::class, $result);
+        self::assertEquals('Albert Einstein', $result->getFullname());
+        self::assertTrue($result->isExternalAccount());
+    }
+
+    /**
+     * @expectedException \Symfony\Component\Security\Core\Exception\UsernameNotFoundException
+     */
+    public function testRefreshUnknownUser()
+    {
+        $user = new User(AuthenticationProvider::ETRAXIS);
+
+        $user->setUsername('user404');
+
+        $this->object->refreshUser(new CurrentUser($user));
     }
 
     /**
