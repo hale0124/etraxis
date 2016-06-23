@@ -36,10 +36,11 @@ services:
     ldap:
         class: Symfony\Component\Ldap\Ldap
         public: false
-        factory: [ Symfony\Component\Ldap\Ldap, create ]
+        factory: [ eTraxis\Security\LdapAuthenticator, connect ]
         arguments:
-            - ext_ldap
-            - { host: "%ldap_host%", port: "%ldap_port%", encryption: "%ldap_encryption%" }
+            - "%ldap_host%"
+            - "%ldap_port%"
+            - "%ldap_encryption%"
 
     etraxis.mailer:
         class: eTraxis\Service\Mailer\MailerService

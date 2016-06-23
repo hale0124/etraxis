@@ -16,6 +16,7 @@ use eTraxis\Entity\User;
 use eTraxis\Tests\TransactionalTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Ldap\LdapInterface;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 
 class LdapAuthenticatorTest extends TransactionalTestCase
@@ -141,6 +142,21 @@ class LdapAuthenticatorTest extends TransactionalTestCase
         self::assertNull($user);
     }
 
+    public function testGetUserUnconfigured()
+    {
+        $ldap = new LdapAuthenticator($this->router, $this->session, $this->command_bus);
+
+        /** @var \Symfony\Component\Security\Core\User\UserProviderInterface $provider */
+        $provider = $this->client->getContainer()->get('etraxis.provider');
+
+        $user = $ldap->getUser([
+            'username' => 'einstein',
+            'password' => 'password',
+        ], $provider);
+
+        self::assertNull($user);
+    }
+
     public function testCheckCredentials()
     {
         /** @var User $user */
@@ -161,6 +177,22 @@ class LdapAuthenticatorTest extends TransactionalTestCase
 
         self::assertFalse($this->object->checkCredentials([
             'username' => 'unknown',
+            'password' => 'password',
+        ], new CurrentUser($user)));
+    }
+
+    public function testCheckCredentialsUnconfigured()
+    {
+        $ldap = new LdapAuthenticator($this->router, $this->session, $this->command_bus);
+
+        /** @var User $user */
+        $user = $this->doctrine->getRepository(User::class)->findOneBy([
+            'provider' => AuthenticationProvider::LDAP,
+            'username' => 'einstein',
+        ]);
+
+        self::assertFalse($ldap->checkCredentials([
+            'username' => 'einstein',
             'password' => 'password',
         ], new CurrentUser($user)));
     }
@@ -190,5 +222,19 @@ class LdapAuthenticatorTest extends TransactionalTestCase
     public function testSupportsRememberMe()
     {
         self::assertTrue($this->object->supportsRememberMe());
+    }
+
+    public function testConnect()
+    {
+        $ldap = LdapAuthenticator::connect('example.com');
+
+        self::assertInstanceOf(LdapInterface::class, $ldap);
+    }
+
+    public function testConnectUnconfigured()
+    {
+        $ldap = LdapAuthenticator::connect();
+
+        self::assertNull($ldap);
     }
 }

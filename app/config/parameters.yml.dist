@@ -20,8 +20,8 @@ parameters:
     mailfrom_name:          "eTraxis"
 
     ldap_host:              ~
-    ldap_port:              389
-    ldap_encryption:        none
+    ldap_port:              ~
+    ldap_encryption:        ~
     ldap_basedn:            dc=example,dc=com
     ldap_user:              ~
     ldap_password:          ~
