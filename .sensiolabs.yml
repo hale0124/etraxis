@@ -8,6 +8,10 @@ rules:
     php.duplicated_code:
         enabled: false
 
+    # Do not check for this as we really need the "boot" method to register a custom SQL walker.
+    symfony.bundle_boot_method_should_be_empty:
+        enabled: false
+
     # We have a lot of POST actions which respond with JSON and should not redirect anywhere.
     symfony.controller.missing_redirect_after_post:
         enabled: false
@@ -17,6 +21,10 @@ rules:
         enabled: true
         max_count: 20
         threshold: 5
+
+    # We need to inject some Entities with the manager.
+    symfony.dependency_injection.no_entity_manager_as_parameter:
+        enabled: false
 
     # The violation is false positive:
     # 1. There is no point to require all forms to be in "Form/Type" instead of just "Form".
@@ -28,7 +36,6 @@ rules:
     symfony.form.form_type_not_in_type_form_folder:
         enabled: false
 
-    # Increase "max_depth" from default 5.
+    # Do not check for Twig templates complexity as it gives false positives in some cases.
     twig.template_too_complex:
-        enabled: true
-        max_depth: 7
+        enabled: false
