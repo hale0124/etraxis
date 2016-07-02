@@ -11,13 +11,15 @@
 
 namespace eTraxis\Voter;
 
-use AltrEgo\AltrEgo;
 use eTraxis\Entity\User;
 use eTraxis\Tests\TransactionalTestCase;
+use eTraxis\Traits\ReflectionTrait;
 use Symfony\Component\Security\Core\Authentication\Token\AnonymousToken;
 
 class UserVoterTest extends TransactionalTestCase
 {
+    use ReflectionTrait;
+
     /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker */
     private $security;
 
@@ -62,10 +64,7 @@ class UserVoterTest extends TransactionalTestCase
 
         self::assertFalse($this->security->isGranted(UserVoter::SET_EXPIRED_PASSWORD, $hubert));
 
-        /** @var \StdClass $hubert2 */
-        $hubert2 = AltrEgo::create($hubert);
-
-        $hubert2->passwordExpiresAt = time() - 60;
+        $this->setProperty($hubert, 'passwordExpiresAt', time() - 60);
 
         /** @var \Doctrine\ORM\EntityManagerInterface $manager */
         $manager = $this->doctrine->getManager();

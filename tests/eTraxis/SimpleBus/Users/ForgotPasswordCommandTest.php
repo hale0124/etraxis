@@ -11,20 +11,21 @@
 
 namespace eTraxis\SimpleBus\Users;
 
-use AltrEgo\AltrEgo;
 use eTraxis\Tests\TransactionalTestCase;
+use eTraxis\Traits\ReflectionTrait;
 
 class ForgotPasswordCommandTest extends TransactionalTestCase
 {
+    use ReflectionTrait;
+
     public function testSuccess()
     {
         $username = 'artem';
 
-        /** @var \StdClass $user */
-        $user = AltrEgo::create($this->findUser($username));
+        $user = $this->findUser($username);
 
-        $prevToken   = $user->resetToken;
-        $prevExpires = $user->resetTokenExpiresAt;
+        $prevToken   = $this->getProperty($user, 'resetToken');
+        $prevExpires = $this->getProperty($user, 'resetTokenExpiresAt');
 
         /** @var \eTraxis\Entity\User $user */
         self::assertTrue($user->isResetTokenExpired());
@@ -36,11 +37,10 @@ class ForgotPasswordCommandTest extends TransactionalTestCase
 
         $this->command_bus->handle($command);
 
-        /** @var \StdClass $user */
-        $user = AltrEgo::create($this->findUser($username));
+        $user = $this->findUser($username);
 
-        self::assertNotEquals($prevToken, $user->resetToken);
-        self::assertNotEquals($prevExpires, $user->resetTokenExpiresAt);
+        self::assertNotEquals($prevToken, $this->getProperty($user, 'resetToken'));
+        self::assertNotEquals($prevExpires, $this->getProperty($user, 'resetTokenExpiresAt'));
 
         /** @var \eTraxis\Entity\User $user */
         self::assertFalse($user->isResetTokenExpired());

@@ -11,14 +11,16 @@
 
 namespace eTraxis\Entity;
 
-use AltrEgo\AltrEgo;
 use eTraxis\Dictionary\FieldPermission;
 use eTraxis\Dictionary\FieldType;
 use eTraxis\Dictionary\SystemRole;
 use eTraxis\Tests\TransactionalTestCase;
+use eTraxis\Traits\ReflectionTrait;
 
 class FieldTest extends TransactionalTestCase
 {
+    use ReflectionTrait;
+
     /** @var Field */
     private $object;
 
@@ -41,11 +43,8 @@ class FieldTest extends TransactionalTestCase
 
     public function testId()
     {
-        /** @var \StdClass $object */
-        $object = AltrEgo::create($this->object);
-
-        $expected   = random_int(1, PHP_INT_MAX);
-        $object->id = $expected;
+        $expected = random_int(1, PHP_INT_MAX);
+        $this->setProperty($this->object, 'id', $expected);
         self::assertEquals($expected, $this->object->getId());
     }
 

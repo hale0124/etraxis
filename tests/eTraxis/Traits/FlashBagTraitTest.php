@@ -11,12 +11,13 @@
 
 namespace eTraxis\Traits;
 
-use AltrEgo\AltrEgo;
 use AppBundle\Controller\Web\SecurityController;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class FlashBagTraitTest extends KernelTestCase
 {
+    use ReflectionTrait;
+
     /** @var SecurityController */
     private $object;
 
@@ -24,8 +25,8 @@ class FlashBagTraitTest extends KernelTestCase
     {
         self::bootKernel();
 
-        $this->object = AltrEgo::create(new SecurityController());
-        $this->object->setContainer(static::$kernel->getContainer());
+        $this->object = new SecurityController();
+        $this->callMethod($this->object, 'setContainer', [static::$kernel->getContainer()]);
     }
 
     protected function tearDown()
@@ -37,11 +38,13 @@ class FlashBagTraitTest extends KernelTestCase
 
     public function testSetNotice()
     {
+        $container = $this->getProperty($this->object, 'container');
+
         /** @var \Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface $flashBag */
-        $flashBag = $this->object->container->get('session')->getFlashBag();
+        $flashBag = $this->callMethod($container->get('session'), 'getFlashBag');
         $flashBag->clear();
 
-        $this->object->setNotice('Information');
+        $this->callMethod($this->object, 'setNotice', ['Information']);
 
         self::assertTrue($flashBag->has('notice'));
         self::assertCount(1, $flashBag->get('notice'));
@@ -50,11 +53,13 @@ class FlashBagTraitTest extends KernelTestCase
 
     public function testSetError()
     {
+        $container = $this->getProperty($this->object, 'container');
+
         /** @var \Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface $flashBag */
-        $flashBag = $this->object->container->get('session')->getFlashBag();
+        $flashBag = $this->callMethod($container->get('session'), 'getFlashBag');
         $flashBag->clear();
 
-        $this->object->setError('Error');
+        $this->callMethod($this->object, 'setError', ['Error']);
 
         self::assertTrue($flashBag->has('error'));
         self::assertCount(1, $flashBag->get('error'));

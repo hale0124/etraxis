@@ -11,12 +11,13 @@
 
 namespace eTraxis\Traits;
 
-use AltrEgo\AltrEgo;
 use AppBundle\Controller\Web\SecurityController;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class ContainerTraitTest extends KernelTestCase
 {
+    use ReflectionTrait;
+
     /** @var SecurityController */
     private $object;
 
@@ -24,8 +25,8 @@ class ContainerTraitTest extends KernelTestCase
     {
         self::bootKernel();
 
-        $this->object = AltrEgo::create(new SecurityController());
-        $this->object->setContainer(static::$kernel->getContainer());
+        $this->object = new SecurityController();
+        $this->callMethod($this->object, 'setContainer', [static::$kernel->getContainer()]);
     }
 
     protected function tearDown()
@@ -37,11 +38,13 @@ class ContainerTraitTest extends KernelTestCase
 
     public function testGetCommandBus()
     {
-        self::assertInstanceOf('\SimpleBus\Message\Bus\MessageBus', $this->object->getCommandBus());
+        $object = $this->callMethod($this->object, 'getCommandBus');
+        self::assertInstanceOf('\SimpleBus\Message\Bus\MessageBus', $object);
     }
 
     public function testGetEventBus()
     {
-        self::assertInstanceOf('\SimpleBus\Message\Bus\MessageBus', $this->object->getEventBus());
+        $object = $this->callMethod($this->object, 'getEventBus');
+        self::assertInstanceOf('\SimpleBus\Message\Bus\MessageBus', $object);
     }
 }

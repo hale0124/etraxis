@@ -11,12 +11,14 @@
 
 namespace eTraxis\SimpleBus\Users;
 
-use AltrEgo\AltrEgo;
 use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Tests\TransactionalTestCase;
+use eTraxis\Traits\ReflectionTrait;
 
 class ResetPasswordCommandTest extends TransactionalTestCase
 {
+    use ReflectionTrait;
+
     protected function setUp()
     {
         parent::setUp();
@@ -35,13 +37,10 @@ class ResetPasswordCommandTest extends TransactionalTestCase
 
         $user = $this->findUser('artem');
 
-        /** @var \StdClass $user2 */
-        $user2 = AltrEgo::create($user);
-
         self::assertNotEquals($expected, $user->getPassword());
 
         $command = new ResetPasswordCommand([
-            'token'    => $user2->resetToken,
+            'token'    => $this->getProperty($user, 'resetToken'),
             'password' => 'legacy',
         ]);
 
@@ -50,7 +49,7 @@ class ResetPasswordCommandTest extends TransactionalTestCase
         $user = $this->findUser('artem');
 
         self::assertEquals($expected, $user->getPassword());
-        self::assertNull($user2->resetToken);
+        self::assertNull($this->getProperty($user, 'resetToken'));
     }
 
     /**
@@ -82,11 +81,10 @@ class ResetPasswordCommandTest extends TransactionalTestCase
      */
     public function testTooShort()
     {
-        /** @var \StdClass $user */
-        $user = AltrEgo::create($this->findUser('artem'));
+        $user = $this->findUser('artem');
 
         $command = new ResetPasswordCommand([
-            'token'    => $user->resetToken,
+            'token'    => $this->getProperty($user, 'resetToken'),
             'password' => 'short',
         ]);
 

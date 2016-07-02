@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "5969b030e5ddcc37409308d75c0c8fd8",
-    "content-hash": "30a24c3a078d0251862e1b66329056d4",
+    "hash": "b4103a5c63581960d93a6c9c51e83240",
+    "content-hash": "c2ad535d88a202b63b49a5c096b57889",
     "packages": [
         {
             "name": "arodygin/datatables-bundle",
@@ -2957,52 +2957,6 @@
             ],
             "description": "A tool to automatically fix PHP code style",
             "time": "2016-06-07 07:51:27"
-        },
-        {
-            "name": "leedavis81/altr-ego",
-            "version": "v1.0.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/leedavis81/altr-ego.git",
-                "reference": "179befa2e54371b29314d339d7eb24031598212f"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/leedavis81/altr-ego/zipball/179befa2e54371b29314d339d7eb24031598212f",
-                "reference": "179befa2e54371b29314d339d7eb24031598212f",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.3.3"
-            },
-            "require-dev": {
-                "phpunit/phpunit": "3.7.*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-0": {
-                    "AltrEgo": "library/",
-                    "AltrEgoTest": "tests/"
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Lee Davis",
-                    "email": "leedavis81@hotmail.com",
-                    "homepage": "http://leedavis81.github.io",
-                    "role": "Developer"
-                }
-            ],
-            "description": "Access an objects protected / private properties and methods",
-            "keywords": [
-                "break scope",
-                "php"
-            ],
-            "time": "2013-07-25 17:43:38"
         },
         {
             "name": "sebastian/diff",

@@ -11,12 +11,14 @@
 
 namespace eTraxis\Entity;
 
-use AltrEgo\AltrEgo;
 use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Tests\TransactionalTestCase;
+use eTraxis\Traits\ReflectionTrait;
 
 class UserTest extends TransactionalTestCase
 {
+    use ReflectionTrait;
+
     /** @var User */
     private $object;
 
@@ -98,16 +100,13 @@ class UserTest extends TransactionalTestCase
 
     public function testPassword()
     {
-        /** @var \StdClass $object */
-        $object = AltrEgo::create($this->object);
-
         $this->object->setPassword('Password1', 1);
         self::assertEquals('Password1', $this->object->getPassword());
-        self::assertGreaterThan(0, $object->passwordExpiresAt - time());
+        self::assertGreaterThan(0, $this->getProperty($this->object, 'passwordExpiresAt') - time());
 
         $this->object->setPassword('Password2');
         self::assertEquals('Password2', $this->object->getPassword());
-        self::assertNull($object->passwordExpiresAt);
+        self::assertNull($this->getProperty($this->object, 'passwordExpiresAt'));
     }
 
     public function testIsPasswordExpired()
@@ -124,27 +123,22 @@ class UserTest extends TransactionalTestCase
 
     public function testResetToken()
     {
-        /** @var \StdClass $object */
-        $object = AltrEgo::create($this->object);
-
         $this->object->generateResetToken();
-        self::assertNotNull($object->resetToken);
-        self::assertNotEquals(0, $object->resetTokenExpiresAt);
+        self::assertNotNull($this->getProperty($this->object, 'resetToken'));
+        self::assertNotEquals(0, $this->getProperty($this->object, 'resetTokenExpiresAt'));
 
         $this->object->clearResetToken();
-        self::assertNull($object->resetToken);
-        self::assertEquals(0, $object->resetTokenExpiresAt);
+        self::assertNull($this->getProperty($this->object, 'resetToken'));
+        self::assertEquals(0, $this->getProperty($this->object, 'resetTokenExpiresAt'));
     }
 
     public function testIsResetTokenExpired()
     {
-        /** @var \StdClass $object */
-        $object = AltrEgo::create($this->object);
-
         $this->object->generateResetToken();
         self::assertFalse($this->object->isResetTokenExpired());
 
-        $object->resetTokenExpiresAt -= 7200;
+        $timestamp = $this->getProperty($this->object, 'resetTokenExpiresAt');
+        $this->setProperty($this->object, 'resetTokenExpiresAt', $timestamp - 7200);
         self::assertTrue($this->object->isResetTokenExpired());
     }
 
@@ -162,15 +156,12 @@ class UserTest extends TransactionalTestCase
 
     public function testIsLocked()
     {
-        /** @var \StdClass $object */
-        $object = AltrEgo::create($this->object);
-
         self::assertFalse($this->object->isLocked());
 
-        $object->lockedUntil = time() + 5;
+        $this->setProperty($this->object, 'lockedUntil', time() + 5);
         self::assertTrue($this->object->isLocked());
 
-        $object->lockedUntil = time() - 1;
+        $this->setProperty($this->object, 'lockedUntil', time() - 1);
         self::assertFalse($this->object->isLocked());
     }
 

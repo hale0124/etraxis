@@ -11,19 +11,19 @@
 
 namespace AppBundle\DataFixtures\Tests;
 
-use AppBundle\DataFixtures\AltrEgoTrait;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Entity\User;
 use eTraxis\Security\InternalPasswordEncoder;
+use eTraxis\Traits\ReflectionTrait;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class LoadUsersData extends AbstractFixture implements ContainerAwareInterface, OrderedFixtureInterface
 {
-    use AltrEgoTrait;
+    use ReflectionTrait;
 
     /** @var ContainerInterface */
     private $container;
@@ -250,13 +250,11 @@ class LoadUsersData extends AbstractFixture implements ContainerAwareInterface, 
 
             $user = new User(AuthenticationProvider::ETRAXIS);
 
-            $object = $this->ego($user);
-
-            $object->username = $username;
-            $object->password = $encoder->encodePassword('secret');
+            $this->setProperty($user, 'username', $username);
+            $this->setProperty($user, 'password', $encoder->encodePassword('secret'));
 
             foreach ($row as $property => $value) {
-                $object->$property = $value;
+                $this->setProperty($user, $property, $value);
             }
 
             $this->addReference('user:' . $username, $user);

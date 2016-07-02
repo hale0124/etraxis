@@ -11,11 +11,13 @@
 
 namespace eTraxis\Entity;
 
-use AltrEgo\AltrEgo;
 use eTraxis\Tests\TransactionalTestCase;
+use eTraxis\Traits\ReflectionTrait;
 
 class LastReadTest extends TransactionalTestCase
 {
+    use ReflectionTrait;
+
     public function testConstruct()
     {
         /** @var Record $record */
@@ -24,11 +26,8 @@ class LastReadTest extends TransactionalTestCase
 
         $lastRead = new LastRead($record, $user);
 
-        /** @var \StdClass $object */
-        $object = AltrEgo::create($lastRead);
-
-        self::assertEquals($record, $object->record);
-        self::assertEquals($user, $object->user);
-        self::assertLessThanOrEqual(1, time() - $object->readAt);
+        self::assertEquals($record, $this->getProperty($lastRead, 'record'));
+        self::assertEquals($user, $this->getProperty($lastRead, 'user'));
+        self::assertLessThanOrEqual(1, time() - $this->getProperty($lastRead, 'readAt'));
     }
 }

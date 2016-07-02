@@ -11,11 +11,13 @@
 
 namespace eTraxis\Entity;
 
-use AltrEgo\AltrEgo;
 use eTraxis\Tests\TransactionalTestCase;
+use eTraxis\Traits\ReflectionTrait;
 
 class StringValueTest extends TransactionalTestCase
 {
+    use ReflectionTrait;
+
     /** @var StringValue */
     private $object;
 
@@ -33,20 +35,14 @@ class StringValueTest extends TransactionalTestCase
         $expected = str_pad(null, 150, '_');
         $value    = new StringValue($expected);
 
-        /** @var \StdClass $object */
-        $object = AltrEgo::create($value);
-
-        self::assertEquals(md5($expected), $object->token);
+        self::assertEquals(md5($expected), $this->getProperty($value, 'token'));
         self::assertEquals($expected, $value->getValue());
     }
 
     public function testId()
     {
-        /** @var \StdClass $object */
-        $object = AltrEgo::create($this->object);
-
-        $expected   = random_int(1, PHP_INT_MAX);
-        $object->id = $expected;
+        $expected = random_int(1, PHP_INT_MAX);
+        $this->setProperty($this->object, 'id', $expected);
         self::assertEquals($expected, $this->object->getId());
     }
 

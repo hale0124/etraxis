@@ -11,7 +11,6 @@
 
 namespace AppBundle\DataFixtures\Tests;
 
-use AppBundle\DataFixtures\AltrEgoTrait;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -22,12 +21,13 @@ use eTraxis\Entity\LastRead;
 use eTraxis\Entity\Record;
 use eTraxis\Entity\StringValue;
 use eTraxis\Entity\TextValue;
+use eTraxis\Traits\ReflectionTrait;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareInterface, OrderedFixtureInterface
 {
-    use AltrEgoTrait;
+    use ReflectionTrait;
 
     /** @var ContainerInterface */
     private $container;
@@ -278,13 +278,11 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
 
             $record->setSubject($info['subject']);
 
-            $altr_record = $this->ego($record);
-
-            $altr_record->state       = $state_new;
-            $altr_record->author      = $this->getReference('user:hubert');
-            $altr_record->responsible = $this->getReference($info['responsible']);
-            $altr_record->createdAt   = strtotime($info['date'] . ' 09:00:00');
-            $altr_record->changedAt   = strtotime($info['date'] . ' 09:00:00');
+            $this->setProperty($record, 'state', $state_new);
+            $this->setProperty($record, 'author', $this->getReference('user:hubert'));
+            $this->setProperty($record, 'responsible', $this->getReference($info['responsible']));
+            $this->setProperty($record, 'createdAt', strtotime($info['date'] . ' 09:00:00'));
+            $this->setProperty($record, 'changedAt', strtotime($info['date'] . ' 09:00:00'));
 
             $event = new Event(
                 $record,
@@ -300,8 +298,8 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
                 $record->getResponsible()->getId()
             );
 
-            $this->ego($event)->createdAt  = $record->getCreatedAt();
-            $this->ego($event2)->createdAt = $record->getCreatedAt();
+            $this->setProperty($event, 'createdAt', $record->getCreatedAt());
+            $this->setProperty($event2, 'createdAt', $record->getCreatedAt());
 
             $manager->persist($record);
             $manager->persist($event);
@@ -331,19 +329,19 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
 
                 $field = new FieldValue();
 
-                $this->ego($field)->event     = $event;
-                $this->ego($field)->field     = $this->getReference('state:new:' . $i);
-                $this->ego($field)->isCurrent = true;
-                $this->ego($field)->value     = $value->getId();
+                $this->setProperty($field, 'event', $event);
+                $this->setProperty($field, 'field', $this->getReference('state:new:' . $i));
+                $this->setProperty($field, 'isCurrent', true);
+                $this->setProperty($field, 'value', $value->getId());
 
                 $manager->persist($field);
             }
 
             $field = new FieldValue();
 
-            $this->ego($field)->event     = $event;
-            $this->ego($field)->field     = $this->getReference('state:new:4');
-            $this->ego($field)->isCurrent = true;
+            $this->setProperty($field, 'event', $event);
+            $this->setProperty($field, 'field', $this->getReference('state:new:4'));
+            $this->setProperty($field, 'isCurrent', true);
 
             if ($info['notes']) {
 
@@ -352,12 +350,12 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
                 $manager->persist($value);
                 $manager->flush();
 
-                $this->ego($field)->value = $value->getId();
+                $this->setProperty($field, 'value', $value->getId());
             }
 
             $read = new LastRead($record, $record->getAuthor());
 
-            $this->ego($read)->readAt = $record->getCreatedAt();
+            $this->setProperty($read, 'readAt', $record->getCreatedAt());
 
             $manager->persist($field);
             $manager->persist($read);
@@ -371,16 +369,16 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
                     $state_delivered->getId()
                 );
 
-                $this->ego($event)->createdAt = strtotime($info['date'] . ' 17:00:00');
+                $this->setProperty($event, 'createdAt', strtotime($info['date'] . ' 17:00:00'));
 
                 $manager->persist($event);
                 $manager->flush();
 
                 $field = new FieldValue();
 
-                $this->ego($field)->event     = $event;
-                $this->ego($field)->field     = $this->getReference('state:delivered:1');
-                $this->ego($field)->isCurrent = true;
+                $this->setProperty($field, 'event', $event);
+                $this->setProperty($field, 'field', $this->getReference('state:delivered:1'));
+                $this->setProperty($field, 'isCurrent', true);
 
                 if ($info['notes2']) {
 
@@ -389,24 +387,24 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
                     $manager->persist($value);
                     $manager->flush();
 
-                    $this->ego($field)->value = $value->getId();
+                    $this->setProperty($field, 'value', $value->getId());
                 }
 
-                $altr_record->changedAt   = $this->ego($event)->createdAt;
-                $altr_record->closedAt    = $this->ego($event)->createdAt;
-                $altr_record->state       = $state_delivered;
-                $altr_record->responsible = null;
+                $this->setProperty($record, 'changedAt', $this->getProperty($event, 'createdAt'));
+                $this->setProperty($record, 'closedAt', $this->getProperty($event, 'createdAt'));
+                $this->setProperty($record, 'state', $state_delivered);
+                $this->setProperty($record, 'responsible', null);
 
                 $read = $this->container->get('doctrine')->getRepository(LastRead::class)->findOneBy([
                     'record' => $record,
-                    'user'   => $this->ego($event)->user,
+                    'user'   => $this->getProperty($event, 'user'),
                 ]);
 
                 if (!$read) {
-                    $read = new LastRead($record, $this->ego($event)->user);
+                    $read = new LastRead($record, $this->getProperty($event, 'user'));
                 }
 
-                $this->ego($read)->readAt = $this->ego($event)->createdAt;
+                $this->setProperty($read, 'readAt', $this->getProperty($event, 'createdAt'));
 
                 $manager->persist($field);
                 $manager->persist($record);

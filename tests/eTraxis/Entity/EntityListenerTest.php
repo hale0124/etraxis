@@ -11,27 +11,26 @@
 
 namespace eTraxis\Entity;
 
-use AltrEgo\AltrEgo;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use eTraxis\Tests\TransactionalTestCase;
+use eTraxis\Traits\ReflectionTrait;
 
 class EntityListenerTest extends TransactionalTestCase
 {
+    use ReflectionTrait;
+
     public function testPostLoad()
     {
         $listener = new EntityListener();
 
         $entity = new Entity();
 
-        /** @var \StdClass $object */
-        $object = AltrEgo::create($entity);
-
         $event = new LifecycleEventArgs($entity, $this->doctrine->getManager());
 
-        self::assertNull($object->manager);
+        self::assertNull($this->getProperty($entity, 'manager'));
         $listener->postLoad($entity, $event);
-        self::assertNotNull($object->manager);
-        self::assertInstanceOf(EntityManagerInterface::class, $object->manager);
+        self::assertNotNull($this->getProperty($entity, 'manager'));
+        self::assertInstanceOf(EntityManagerInterface::class, $this->getProperty($entity, 'manager'));
     }
 }

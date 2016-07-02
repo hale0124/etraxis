@@ -11,18 +11,18 @@
 
 namespace AppBundle\DataFixtures\Tests;
 
-use AppBundle\DataFixtures\AltrEgoTrait;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use eTraxis\Entity\Group;
 use eTraxis\Entity\Project;
+use eTraxis\Traits\ReflectionTrait;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class LoadProjectsData extends AbstractFixture implements ContainerAwareInterface, OrderedFixtureInterface
 {
-    use AltrEgoTrait;
+    use ReflectionTrait;
 
     /** @var ContainerInterface */
     private $container;
@@ -75,7 +75,7 @@ class LoadProjectsData extends AbstractFixture implements ContainerAwareInterfac
                 ->setSuspended(true)
             ;
 
-            $this->ego($project)->createdAt = strtotime($date);
+            $this->setProperty($project, 'createdAt', strtotime($date));
 
             $manager->persist($project);
         }
@@ -126,7 +126,7 @@ class LoadProjectsData extends AbstractFixture implements ContainerAwareInterfac
             ->setSuspended(false)
         ;
 
-        $this->ego($project)->createdAt = strtotime('1999-03-28');
+        $this->setProperty($project, 'createdAt', strtotime('1999-03-28'));
 
         foreach ($groups as $name => $description) {
 
@@ -186,7 +186,7 @@ class LoadProjectsData extends AbstractFixture implements ContainerAwareInterfac
             ->setSuspended(false)
         ;
 
-        $this->ego($project)->createdAt = strtotime('2009-05-23');
+        $this->setProperty($project, 'createdAt', strtotime('2009-05-23'));
 
         foreach ($groups as $name => $description) {
 

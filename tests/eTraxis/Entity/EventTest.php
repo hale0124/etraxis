@@ -11,12 +11,14 @@
 
 namespace eTraxis\Entity;
 
-use AltrEgo\AltrEgo;
 use eTraxis\Dictionary\EventType;
 use eTraxis\Tests\TransactionalTestCase;
+use eTraxis\Traits\ReflectionTrait;
 
 class EventTest extends TransactionalTestCase
 {
+    use ReflectionTrait;
+
     /** @var Event */
     private $object;
 
@@ -34,11 +36,8 @@ class EventTest extends TransactionalTestCase
 
     public function testId()
     {
-        /** @var \StdClass $object */
-        $object = AltrEgo::create($this->object);
-
-        $expected   = random_int(1, PHP_INT_MAX);
-        $object->id = $expected;
+        $expected = random_int(1, PHP_INT_MAX);
+        $this->setProperty($this->object, 'id', $expected);
         self::assertEquals($expected, $this->object->getId());
     }
 

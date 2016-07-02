@@ -11,11 +11,13 @@
 
 namespace eTraxis\Entity;
 
-use AltrEgo\AltrEgo;
 use eTraxis\Tests\TransactionalTestCase;
+use eTraxis\Traits\ReflectionTrait;
 
 class DecimalValueTest extends TransactionalTestCase
 {
+    use ReflectionTrait;
+
     /** @var DecimalValue */
     private $object;
 
@@ -32,16 +34,14 @@ class DecimalValueTest extends TransactionalTestCase
     {
         $expected = '1234567890.0987654321';
         $value    = new DecimalValue($expected);
+
         self::assertEquals($expected, $value->getValue());
     }
 
     public function testId()
     {
-        /** @var \StdClass $object */
-        $object = AltrEgo::create($this->object);
-
-        $expected   = random_int(1, PHP_INT_MAX);
-        $object->id = $expected;
+        $expected = random_int(1, PHP_INT_MAX);
+        $this->setProperty($this->object, 'id', $expected);
         self::assertEquals($expected, $this->object->getId());
     }
 

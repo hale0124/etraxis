@@ -11,7 +11,6 @@
 
 namespace AppBundle\DataFixtures\Tests;
 
-use AppBundle\DataFixtures\AltrEgoTrait;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -23,12 +22,13 @@ use eTraxis\Entity\LastRead;
 use eTraxis\Entity\Record;
 use eTraxis\Entity\StringValue;
 use eTraxis\Entity\TextValue;
+use eTraxis\Traits\ReflectionTrait;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class LoadFuturamaRecordsData extends AbstractFixture implements ContainerAwareInterface, OrderedFixtureInterface
 {
-    use AltrEgoTrait;
+    use ReflectionTrait;
 
     /** @var ContainerInterface */
     private $container;
@@ -1477,13 +1477,11 @@ class LoadFuturamaRecordsData extends AbstractFixture implements ContainerAwareI
 
             $record->setSubject($info['subject']);
 
-            $altr_record = $this->ego($record);
-
-            $altr_record->state     = $state_released;
-            $altr_record->author    = $this->getReference('user:artem');
-            $altr_record->createdAt = strtotime($info['date'] . ' 09:00:00');
-            $altr_record->changedAt = strtotime($info['date'] . ' 09:00:01');
-            $altr_record->closedAt  = strtotime($info['date'] . ' 09:00:01');
+            $this->setProperty($record, 'state', $state_released);
+            $this->setProperty($record, 'author', $this->getReference('user:artem'));
+            $this->setProperty($record, 'createdAt', strtotime($info['date'] . ' 09:00:00'));
+            $this->setProperty($record, 'changedAt', strtotime($info['date'] . ' 09:00:01'));
+            $this->setProperty($record, 'closedAt', strtotime($info['date'] . ' 09:00:01'));
 
             $event = new Event(
                 $record,
@@ -1499,19 +1497,19 @@ class LoadFuturamaRecordsData extends AbstractFixture implements ContainerAwareI
                 $state_released->getId()
             );
 
-            $this->ego($event)->createdAt  = $record->getCreatedAt();
-            $this->ego($event2)->createdAt = $record->getChangedAt();
+            $this->setProperty($event, 'createdAt', $record->getCreatedAt());
+            $this->setProperty($event2, 'createdAt', $record->getChangedAt());
 
             $read = $this->container->get('doctrine')->getRepository(LastRead::class)->findOneBy([
                 'record' => $record,
-                'user'   => $this->ego($event)->user,
+                'user'   => $this->getProperty($event, 'user'),
             ]);
 
             if (!$read) {
                 $read = new LastRead($record, $record->getAuthor());
             }
 
-            $this->ego($read)->readAt = $this->ego($event2)->createdAt;
+            $this->setProperty($read, 'readAt', $this->getProperty($event2, 'createdAt'));
 
             $manager->persist($record);
             $manager->persist($event);
@@ -1557,10 +1555,10 @@ class LoadFuturamaRecordsData extends AbstractFixture implements ContainerAwareI
 
                 $value = new FieldValue();
 
-                $this->ego($value)->event     = strpos($field_ref, 'state:produced') !== false ? $event : $event2;
-                $this->ego($value)->field     = $this->getReference($field_ref);
-                $this->ego($value)->isCurrent = true;
-                $this->ego($value)->value     = $field_value;
+                $this->setProperty($value, 'event', strpos($field_ref, 'state:produced') !== false ? $event : $event2);
+                $this->setProperty($value, 'field', $this->getReference($field_ref));
+                $this->setProperty($value, 'isCurrent', true);
+                $this->setProperty($value, 'value', $field_value);
 
                 $manager->persist($value);
             }

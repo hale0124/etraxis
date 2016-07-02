@@ -11,7 +11,6 @@
 
 namespace AppBundle\DataFixtures\Tests;
 
-use AppBundle\DataFixtures\AltrEgoTrait;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -22,12 +21,13 @@ use eTraxis\Entity\LastRead;
 use eTraxis\Entity\Record;
 use eTraxis\Entity\StringValue;
 use eTraxis\Entity\TextValue;
+use eTraxis\Traits\ReflectionTrait;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class LoadPhpPsrRecordsData extends AbstractFixture implements ContainerAwareInterface, OrderedFixtureInterface
 {
-    use AltrEgoTrait;
+    use ReflectionTrait;
 
     /** @var ContainerInterface */
     private $container;
@@ -215,12 +215,10 @@ class LoadPhpPsrRecordsData extends AbstractFixture implements ContainerAwareInt
 
             $record->setSubject($info['subject']);
 
-            $altr_record = $this->ego($record);
-
-            $altr_record->state     = $state_draft;
-            $altr_record->author    = $this->getReference($info['author']);
-            $altr_record->createdAt = strtotime($info['draft']);
-            $altr_record->changedAt = strtotime($info['draft']);
+            $this->setProperty($record, 'state', $state_draft);
+            $this->setProperty($record, 'author', $this->getReference($info['author']));
+            $this->setProperty($record, 'createdAt', strtotime($info['draft']));
+            $this->setProperty($record, 'changedAt', strtotime($info['draft']));
 
             $event = new Event(
                 $record,
@@ -229,7 +227,7 @@ class LoadPhpPsrRecordsData extends AbstractFixture implements ContainerAwareInt
                 $state_draft->getId()
             );
 
-            $this->ego($event)->createdAt = $record->getCreatedAt();
+            $this->setProperty($event, 'createdAt', $record->getCreatedAt());
 
             $psrId = new StringValue($id);
 
@@ -241,16 +239,16 @@ class LoadPhpPsrRecordsData extends AbstractFixture implements ContainerAwareInt
 
             $field1 = new FieldValue();
 
-            $this->ego($field1)->event     = $event;
-            $this->ego($field1)->field     = $this->getReference('state:psr:draft:1');
-            $this->ego($field1)->isCurrent = true;
-            $this->ego($field1)->value     = $psrId->getId();
+            $this->setProperty($field1, 'event', $event);
+            $this->setProperty($field1, 'field', $this->getReference('state:psr:draft:1'));
+            $this->setProperty($field1, 'isCurrent', true);
+            $this->setProperty($field1, 'value', $psrId->getId());
 
             $field2 = new FieldValue();
 
-            $this->ego($field2)->event     = $event;
-            $this->ego($field2)->field     = $this->getReference('state:psr:draft:2');
-            $this->ego($field2)->isCurrent = true;
+            $this->setProperty($field2, 'event', $event);
+            $this->setProperty($field2, 'field', $this->getReference('state:psr:draft:2'));
+            $this->setProperty($field2, 'isCurrent', true);
 
             if ($info['description']) {
 
@@ -259,7 +257,7 @@ class LoadPhpPsrRecordsData extends AbstractFixture implements ContainerAwareInt
                 $manager->persist($description);
                 $manager->flush();
 
-                $this->ego($field2)->value = $description->getId();
+                $this->setProperty($field2, 'value', $description->getId());
             }
 
             $manager->persist($field2);
@@ -273,12 +271,12 @@ class LoadPhpPsrRecordsData extends AbstractFixture implements ContainerAwareInt
                     $state_accepted->getId()
                 );
 
-                $this->ego($event)->createdAt = strtotime($info['accepted']);
+                $this->setProperty($event, 'createdAt', strtotime($info['accepted']));
 
                 $manager->persist($event);
 
-                $altr_record->changedAt = $this->ego($event)->createdAt;
-                $altr_record->state     = $state_accepted;
+                $this->setProperty($record, 'changedAt', $this->getProperty($event, 'createdAt'));
+                $this->setProperty($record, 'state', $state_accepted);
 
                 $manager->persist($record);
             }
@@ -292,13 +290,13 @@ class LoadPhpPsrRecordsData extends AbstractFixture implements ContainerAwareInt
                     $state_deprecated->getId()
                 );
 
-                $this->ego($event)->createdAt = strtotime($info['deprecated']);
+                $this->setProperty($event, 'createdAt', strtotime($info['deprecated']));
 
                 $manager->persist($event);
 
-                $altr_record->changedAt = $this->ego($event)->createdAt;
-                $altr_record->closedAt  = $this->ego($event)->createdAt;
-                $altr_record->state     = $state_deprecated;
+                $this->setProperty($record, 'changedAt', $this->getProperty($event, 'createdAt'));
+                $this->setProperty($record, 'closedAt', $this->getProperty($event, 'createdAt'));
+                $this->setProperty($record, 'state', $state_deprecated);
 
                 $manager->persist($record);
             }
@@ -312,19 +310,19 @@ class LoadPhpPsrRecordsData extends AbstractFixture implements ContainerAwareInt
                     time() + 86400
                 );
 
-                $this->ego($event)->createdAt = strtotime($info['postponed']);
+                $this->setProperty($event, 'createdAt', strtotime($info['postponed']));
 
                 $manager->persist($event);
 
-                $altr_record->changedAt = $this->ego($event)->createdAt;
-                $altr_record->resumedAt = $this->ego($event)->parameter;
+                $this->setProperty($record, 'changedAt', $this->getProperty($event, 'createdAt'));
+                $this->setProperty($record, 'resumedAt', $this->getProperty($event, 'parameter'));
 
                 $manager->persist($record);
             }
 
             $read = new LastRead($record, $record->getAuthor());
 
-            $this->ego($read)->readAt = $record->getChangedAt();
+            $this->setProperty($read, 'readAt', $record->getChangedAt());
 
             $manager->persist($read);
         }
