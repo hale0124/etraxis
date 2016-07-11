@@ -64,7 +64,7 @@ class UserVoterTest extends TransactionalTestCase
 
         self::assertFalse($this->security->isGranted(UserVoter::SET_EXPIRED_PASSWORD, $hubert));
 
-        $this->setProperty($hubert, 'passwordExpiresAt', time() - 60);
+        $this->setProperty($hubert, 'passwordTimestamp', time() - 86500);
 
         /** @var \Doctrine\ORM\EntityManagerInterface $manager */
         $manager = $this->doctrine->getManager();

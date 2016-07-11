@@ -103,12 +103,7 @@ class UserVoter extends Voter
      */
     protected function isSetExpiredPasswordGranted(User $subject): bool
     {
-        // Deny if passwords do not expire at all.
-        if ($this->password_expiration === null) {
-            return false;
-        }
-
-        return $subject->isPasswordExpired();
+        return $subject->isPasswordExpired($this->password_expiration);
     }
 
     /**

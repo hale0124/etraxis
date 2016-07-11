@@ -100,24 +100,19 @@ class UserTest extends TransactionalTestCase
 
     public function testPassword()
     {
-        $this->object->setPassword('Password1', 1);
+        $this->object->setPassword('Password1');
         self::assertEquals('Password1', $this->object->getPassword());
-        self::assertGreaterThan(0, $this->getProperty($this->object, 'passwordExpiresAt') - time());
-
-        $this->object->setPassword('Password2');
-        self::assertEquals('Password2', $this->object->getPassword());
-        self::assertNull($this->getProperty($this->object, 'passwordExpiresAt'));
+        self::assertLessThan(1, $this->getProperty($this->object, 'passwordTimestamp') - time());
     }
 
     public function testIsPasswordExpired()
     {
-        $this->object->setPassword('secret', 1);
-        self::assertFalse($this->object->isPasswordExpired());
-
-        $this->object->setPassword('secret', 0);
-        self::assertTrue($this->object->isPasswordExpired());
-
         $this->object->setPassword('secret');
+        $this->setProperty($this->object, 'passwordTimestamp', time() - 86500);
+
+        self::assertFalse($this->object->isPasswordExpired(2));
+        self::assertTrue($this->object->isPasswordExpired(1));
+        self::assertFalse($this->object->isPasswordExpired(0));
         self::assertFalse($this->object->isPasswordExpired());
     }
 

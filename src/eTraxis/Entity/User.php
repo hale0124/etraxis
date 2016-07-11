@@ -102,11 +102,11 @@ class User extends Entity implements \JsonSerializable
     private $password;
 
     /**
-     * @var int Unix Epoch timestamp when the password expires.
+     * @var int Unix Epoch timestamp when the password was set last time.
      *
-     * @ORM\Column(name="password_expires", type="integer", nullable=true)
+     * @ORM\Column(name="password_timestamp", type="integer", nullable=true)
      */
-    private $passwordExpiresAt;
+    private $passwordTimestamp;
 
     /**
      * @var string Token for password reset.
@@ -344,15 +344,14 @@ class User extends Entity implements \JsonSerializable
      * Sets user's password.
      *
      * @param   string $password Password hash.
-     * @param   int    $days     Number of days a password is valid for (NULL for no expiration).
      *
      * @return  self
      */
-    public function setPassword(string $password = null, int $days = null)
+    public function setPassword(string $password = null)
     {
         if (!$this->isExternalAccount()) {
             $this->password          = $password;
-            $this->passwordExpiresAt = ($days === null) ? null : time() + $days * 86400;
+            $this->passwordTimestamp = time();
         }
 
         return $this;
@@ -371,11 +370,15 @@ class User extends Entity implements \JsonSerializable
     /**
      * Checks whether user's password is expired.
      *
+     * @param   int $days Number of days a password is valid for (NULL for no expiration).
+     *
      * @return  bool
      */
-    public function isPasswordExpired()
+    public function isPasswordExpired(int $days = null)
     {
-        return !$this->isExternalAccount() && $this->passwordExpiresAt !== null && $this->passwordExpiresAt <= time();
+        $expiresAt = $this->passwordTimestamp + $days * 86400;
+
+        return !$this->isExternalAccount() && $days && $expiresAt <= time();
     }
 
     /**
