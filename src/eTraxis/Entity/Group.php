@@ -20,7 +20,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="groups",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_groups", columns={"project_id", "name"})
+ *                @ORM\UniqueConstraint(columns={"project_id", "name"})
  *            })
  * @ORM\Entity(repositoryClass="eTraxis\Repository\GroupsRepository")
  * @ORM\EntityListeners({"eTraxis\Entity\EntityListener"})

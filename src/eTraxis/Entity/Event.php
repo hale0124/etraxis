@@ -19,10 +19,10 @@ use eTraxis\Dictionary\EventType;
  *
  * @ORM\Table(name="events",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_events", columns={"record_id", "user_id", "type", "created_at", "parameter"})
+ *                @ORM\UniqueConstraint(columns={"record_id", "user_id", "type", "created_at", "parameter"})
  *            },
  *            indexes={
- *                @ORM\Index(name="ix_record", columns={"record_id"})
+ *                @ORM\Index(columns={"record_id"})
  *            })
  * @ORM\Entity
  */

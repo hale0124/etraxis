@@ -20,7 +20,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="projects",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_projects_name", columns={"name"})
+ *                @ORM\UniqueConstraint(columns={"name"})
  *            })
  * @ORM\Entity(repositoryClass="eTraxis\Repository\ProjectsRepository")
  * @Assert\UniqueEntity(fields={"name"}, message="project.conflict.name")

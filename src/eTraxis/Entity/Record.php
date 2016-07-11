@@ -20,7 +20,7 @@ use eTraxis\Dictionary\EventType;
  *
  * @ORM\Table(name="records",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_records", columns={"author_id", "created_at"})
+ *                @ORM\UniqueConstraint(columns={"author_id", "created_at"})
  *            })
  * @ORM\Entity
  */

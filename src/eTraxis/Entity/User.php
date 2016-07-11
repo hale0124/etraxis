@@ -22,7 +22,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="users",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_users_username", columns={"provider", "username"})
+ *                @ORM\UniqueConstraint(columns={"provider", "username"})
  *            })
  * @ORM\Entity
  * @ORM\EntityListeners({"eTraxis\Entity\EntityListener"})

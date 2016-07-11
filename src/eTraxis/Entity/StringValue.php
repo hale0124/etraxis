@@ -18,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="string_values",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_string_values", columns={"token"})
+ *                @ORM\UniqueConstraint(columns={"token"})
  *            })
  * @ORM\Entity(repositoryClass="eTraxis\Repository\StringValuesRepository")
  */

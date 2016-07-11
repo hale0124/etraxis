@@ -18,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="comments",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_comments", columns={"event_id"})
+ *                @ORM\UniqueConstraint(columns={"event_id"})
  *            })
  * @ORM\Entity
  */

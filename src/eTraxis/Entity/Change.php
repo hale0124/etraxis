@@ -18,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="changes",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_changes", columns={"event_id", "field_id"})
+ *                @ORM\UniqueConstraint(columns={"event_id", "field_id"})
  *            })
  * @ORM\Entity
  */

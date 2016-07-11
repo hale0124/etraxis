@@ -18,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="attachments",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_attachments", columns={"event_id"})
+ *                @ORM\UniqueConstraint(columns={"event_id"})
  *            })
  * @ORM\Entity
  */

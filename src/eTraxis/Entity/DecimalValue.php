@@ -18,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Table(name="decimal_values",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_decimal_values", columns={"value"})
+ *                @ORM\UniqueConstraint(columns={"value"})
  *            })
  * @ORM\Entity(repositoryClass="eTraxis\Repository\DecimalValuesRepository")
  */

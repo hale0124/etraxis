@@ -20,8 +20,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="list_items",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_list_items_value", columns={"field_id", "item_value"}),
- *                @ORM\UniqueConstraint(name="ix_list_items_text", columns={"field_id", "item_text"})
+ *                @ORM\UniqueConstraint(columns={"field_id", "item_value"}),
+ *                @ORM\UniqueConstraint(columns={"field_id", "item_text"})
  *            })
  * @ORM\Entity
  * @Assert\UniqueEntity(fields={"field", "value"}, message="listitem.conflict.value")

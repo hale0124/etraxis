@@ -21,8 +21,8 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  *
  * @ORM\Table(name="fields",
  *            uniqueConstraints={
- *                @ORM\UniqueConstraint(name="ix_fields_name", columns={"state_id", "name", "removed_at"}),
- *                @ORM\UniqueConstraint(name="ix_fields_order", columns={"state_id", "field_order", "removed_at"})
+ *                @ORM\UniqueConstraint(columns={"state_id", "name", "removed_at"}),
+ *                @ORM\UniqueConstraint(columns={"state_id", "field_order", "removed_at"})
  *            })
  * @ORM\Entity
  * @ORM\EntityListeners({"eTraxis\Entity\EntityListener"})
