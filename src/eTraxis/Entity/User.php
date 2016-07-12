@@ -97,7 +97,7 @@ class User extends Entity implements \JsonSerializable
     /**
      * @var string Password hash.
      *
-     * @ORM\Column(name="password", type="string", length=32, nullable=true)
+     * @ORM\Column(name="password", type="string", length=60, nullable=true)
      */
     private $password;
 
