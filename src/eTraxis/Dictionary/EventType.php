@@ -20,7 +20,7 @@ class EventType extends StaticDictionary
 {
     const RECORD_CREATED     = 'record.created';
     const RECORD_EDITED      = 'record.edited';
-    const RECORD_ASSIGNED    = 'record.asigned';
+    const RECORD_ASSIGNED    = 'record.assigned';
     const STATE_CHANGED      = 'state.changed';
     const RECORD_POSTPONED   = 'record.postponed';
     const RECORD_RESUMED     = 'record.resumed';
