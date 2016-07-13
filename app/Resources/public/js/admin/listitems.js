@@ -10,12 +10,12 @@ var ListItemsApp = (function() {
     /**
      * Reloads current tab to refresh its content.
      */
-    var reloadTab = function(key) {
+    var reloadTab = function(value) {
         var $tabs = $('#tabs-field');
         var current = $tabs.tabs('option', 'active');
-        if (key !== undefined) {
+        if (value !== undefined) {
             $tabs.one('tabsload', function() {
-                $('#listitems').val(key).change();
+                $('#listitems').val(value).change();
             });
         }
         $tabs.tabs('load', current);
@@ -27,8 +27,8 @@ var ListItemsApp = (function() {
          * Called when a list item was selected.
          */
         onSelect: function() {
-            var key = $('#listitems').val();
-            $('#listitem-edit, #listitem-delete').disable(key === null);
+            var value = $('#listitems').val();
+            $('#listitem-edit, #listitem-delete').disable(value === null);
         },
 
         /**
@@ -40,7 +40,7 @@ var ListItemsApp = (function() {
             eTraxis.modal({
                 url: eTraxis.route('admin_dlg_new_listitem', { id: id }),
                 open: function() {
-                    var $dialog = $('#listitem_key').closest('.ui-dialog');
+                    var $dialog = $('#listitem_value').closest('.ui-dialog');
                     $('.ui-dialog-titlebar', $dialog).remove();
                 },
                 success: function() {
@@ -56,15 +56,15 @@ var ListItemsApp = (function() {
          * @param {number} id Field ID.
          */
         edit: function(id) {
-            var key = $('#listitems').val();
+            var value = $('#listitems').val();
             eTraxis.modal({
-                url: eTraxis.route('admin_dlg_edit_listitem', { id: id, key: key }),
+                url: eTraxis.route('admin_dlg_edit_listitem', { id: id, value: value }),
                 open: function() {
-                    var $dialog = $('#listitem_value').closest('.ui-dialog');
+                    var $dialog = $('#listitem_text').closest('.ui-dialog');
                     $('.ui-dialog-titlebar', $dialog).remove();
                 },
                 success: function() {
-                    reloadTab(key);
+                    reloadTab(value);
                     return true;
                 }
             });
@@ -76,9 +76,9 @@ var ListItemsApp = (function() {
          * @param {number} id Field ID.
          */
         delete: function(id) {
-            var key = $('#listitems').val();
+            var value = $('#listitems').val();
             eTraxis.confirm(eTraxis.i18n['button.delete'], eTraxis.i18n['listitem.confirm.delete'], function() {
-                $.post(eTraxis.route('admin_delete_listitem', { id: id, key: key }), function() {
+                $.post(eTraxis.route('admin_delete_listitem', { id: id, value: value }), function() {
                     reloadTab();
                 });
             });
