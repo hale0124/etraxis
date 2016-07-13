@@ -33,7 +33,7 @@ class Template extends Entity implements \JsonSerializable
 {
     // Constraints.
     const MAX_NAME        = 50;
-    const MAX_PREFIX      = 3;
+    const MAX_PREFIX      = 5;
     const MAX_DESCRIPTION = 100;
 
     /**

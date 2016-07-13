@@ -33,7 +33,7 @@ class State extends Entity implements \JsonSerializable
 {
     // Constraints.
     const MAX_NAME         = 50;
-    const MAX_ABBREVIATION = 3;
+    const MAX_ABBREVIATION = 5;
 
     /**
      * @var int Unique ID.

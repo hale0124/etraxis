@@ -15,6 +15,7 @@ use Doctrine\DBAL\Schema\Schema;
 use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Dictionary\FieldPermission;
 use eTraxis\Dictionary\Legacy;
+use eTraxis\Dictionary\SystemRole;
 use eTraxis\Migrations\BaseMigration;
 
 /**
@@ -214,7 +215,7 @@ class Version20160619120000 extends BaseMigration
     protected function migrateStates()
     {
         $sql = 'INSERT INTO states (id, template_id, name, abbreviation, type, responsible) '
-             . 'SELECT state_id, template_id, state_name, state_abbr, state_type, responsible '
+             . 'SELECT state_id, template_id, state_name, SUBSTR(state_abbr FROM 1 FOR 5), state_type, responsible '
              . 'FROM tbl_states ORDER by state_id;';
 
         $this->addSql($sql);
@@ -278,12 +279,9 @@ class Version20160619120000 extends BaseMigration
 
         $this->addSql($sql);
 
-        foreach (Legacy\SystemRole::all() as $old => $new) {
-            $this->addSql('UPDATE state_role_transitions SET role = :new WHERE role = :old;', [
-                'old' => $old,
-                'new' => $new,
-            ]);
-        }
+        $this->addSql('UPDATE state_role_transitions SET role = :new WHERE role = :old;', ['old' => -1, 'new' => SystemRole::AUTHOR]);
+        $this->addSql('UPDATE state_role_transitions SET role = :new WHERE role = :old;', ['old' => -2, 'new' => SystemRole::RESPONSIBLE]);
+        $this->addSql('UPDATE state_role_transitions SET role = :new WHERE role = :old;', ['old' => -3, 'new' => SystemRole::ANYONE]);
     }
 
     /**
@@ -296,6 +294,8 @@ class Version20160619120000 extends BaseMigration
              . 'FROM tbl_fields ORDER by field_id;';
 
         $this->addSql($sql);
+
+        $this->addSql('UPDATE fields SET removed_at = NULL WHERE removed_at = 0;');
 
         foreach (Legacy\FieldType::all() as $old => $new) {
             $this->addSql('UPDATE fields SET type = :new WHERE type = :old;', [
