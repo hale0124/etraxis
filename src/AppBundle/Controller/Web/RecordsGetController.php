@@ -13,6 +13,7 @@ namespace AppBundle\Controller\Web;
 
 use eTraxis\Entity\Record;
 use eTraxis\Service\Export\ExportCsvQuery;
+use eTraxis\SimpleBus\Records\MarkRecordsAsReadCommand;
 use eTraxis\Traits\ContainerTrait;
 use eTraxis\Voter\RecordVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
@@ -129,6 +130,13 @@ class RecordsGetController extends Controller
         if (!$this->isGranted(RecordVoter::VIEW, $record)) {
             throw $this->createAccessDeniedException();
         }
+
+        $command = new MarkRecordsAsReadCommand([
+            'user'    => $this->getUser()->getId(),
+            'records' => [$record->getId()],
+        ]);
+
+        $this->getCommandBus()->handle($command);
 
         return $this->render('web/records/view.html.twig', [
             'record' => $record,
