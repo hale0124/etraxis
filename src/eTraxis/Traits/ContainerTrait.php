@@ -21,6 +21,22 @@ use SimpleBus\Message\Bus\MessageBus;
 trait ContainerTrait
 {
     /**
+     * Checks if the attributes are granted against the current authentication token and optionally supplied object.
+     *
+     * @param   mixed $attributes
+     * @param   mixed $object
+     *
+     * @return  bool
+     */
+    protected function isGranted($attributes, $object = null)
+    {
+        /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
+        $authChecker = $this->container->get('security.authorization_checker');
+
+        return $authChecker->isGranted($attributes, $object);
+    }
+
+    /**
      * Shortcut to get the Command Bus service.
      *
      * @return  MessageBus

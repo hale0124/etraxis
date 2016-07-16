@@ -13,6 +13,7 @@ namespace AppBundle\Controller\Admin;
 
 use eTraxis\Entity\Project;
 use eTraxis\Form\ProjectForm;
+use eTraxis\Traits\ContainerTrait;
 use eTraxis\Voter\ProjectVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -28,6 +29,8 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class ProjectsGetController extends Controller
 {
+    use ContainerTrait;
+
     /**
      * Page with list of projects.
      *
@@ -84,13 +87,10 @@ class ProjectsGetController extends Controller
      */
     public function tabDetailsAction(Project $project): Response
     {
-        /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
-        $authChecker = $this->get('security.authorization_checker');
-
         return $this->render('admin/projects/tab_details.html.twig', [
             'project' => $project,
             'can'     => [
-                'delete' => $authChecker->isGranted(ProjectVoter::DELETE, $project),
+                'delete' => $this->isGranted(ProjectVoter::DELETE, $project),
             ],
         ]);
     }

@@ -17,6 +17,7 @@ use eTraxis\Entity\Group;
 use eTraxis\Entity\Project;
 use eTraxis\Entity\Template;
 use eTraxis\Form\TemplateForm;
+use eTraxis\Traits\ContainerTrait;
 use eTraxis\Voter\TemplateVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -32,6 +33,8 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class TemplatesGetController extends Controller
 {
+    use ContainerTrait;
+
     /**
      * Returns JSON list of templates.
      *
@@ -75,15 +78,12 @@ class TemplatesGetController extends Controller
      */
     public function tabDetailsAction(Template $template): Response
     {
-        /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
-        $authChecker = $this->get('security.authorization_checker');
-
         return $this->render('admin/templates/tab_details.html.twig', [
             'template' => $template,
             'can'      => [
-                'delete' => $authChecker->isGranted(TemplateVoter::DELETE, $template),
-                'lock'   => $authChecker->isGranted(TemplateVoter::LOCK, $template),
-                'unlock' => $authChecker->isGranted(TemplateVoter::UNLOCK, $template),
+                'delete' => $this->isGranted(TemplateVoter::DELETE, $template),
+                'lock'   => $this->isGranted(TemplateVoter::LOCK, $template),
+                'unlock' => $this->isGranted(TemplateVoter::UNLOCK, $template),
             ],
         ]);
     }

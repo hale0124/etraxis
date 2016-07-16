@@ -43,10 +43,7 @@ class SecurityController extends Controller
      */
     public function loginAction(): Response
     {
-        /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker $security */
-        $security = $this->container->get('security.authorization_checker');
-
-        if ($security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirect($this->generateUrl('homepage'));
         }
 
@@ -74,10 +71,7 @@ class SecurityController extends Controller
      */
     public function forgotPasswordAction(Request $request): Response
     {
-        /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker $security */
-        $security = $this->container->get('security.authorization_checker');
-
-        if ($security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirect($this->generateUrl('homepage'));
         }
 
@@ -120,10 +114,7 @@ class SecurityController extends Controller
      */
     public function resetPasswordAction(Request $request, string $token): Response
     {
-        /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker $security */
-        $security = $this->container->get('security.authorization_checker');
-
-        if ($security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if ($this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirect($this->generateUrl('homepage'));
         }
 
@@ -174,17 +165,11 @@ class SecurityController extends Controller
      */
     public function setExpiredPasswordAction(Request $request): Response
     {
-        /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationChecker $security */
-        $security = $this->container->get('security.authorization_checker');
-
-        if (!$security->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
+        if (!$this->isGranted('IS_AUTHENTICATED_REMEMBERED')) {
             return $this->redirect($this->generateUrl('login'));
         }
 
-        /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
-        $authChecker = $this->get('security.authorization_checker');
-
-        if (!$authChecker->isGranted(UserVoter::SET_EXPIRED_PASSWORD, $this->getUser())) {
+        if (!$this->isGranted(UserVoter::SET_EXPIRED_PASSWORD, $this->getUser())) {
             return $this->redirect($this->generateUrl('homepage'));
         }
 

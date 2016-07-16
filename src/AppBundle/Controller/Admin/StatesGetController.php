@@ -18,6 +18,7 @@ use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
 use eTraxis\Entity\Template;
 use eTraxis\Form\StateForm;
+use eTraxis\Traits\ContainerTrait;
 use eTraxis\Voter\StateVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -33,6 +34,8 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class StatesGetController extends Controller
 {
+    use ContainerTrait;
+
     /**
      * Returns JSON list of states.
      *
@@ -76,16 +79,13 @@ class StatesGetController extends Controller
      */
     public function tabDetailsAction(State $state): Response
     {
-        /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
-        $authChecker = $this->get('security.authorization_checker');
-
         return $this->render('admin/states/tab_details.html.twig', [
             'state'        => $state,
             'types'        => StateType::all(),
             'responsibles' => StateResponsible::all(),
             'can'          => [
-                'delete'  => $authChecker->isGranted(StateVoter::DELETE, $state),
-                'initial' => $authChecker->isGranted(StateVoter::INITIAL, $state),
+                'delete'  => $this->isGranted(StateVoter::DELETE, $state),
+                'initial' => $this->isGranted(StateVoter::INITIAL, $state),
             ],
         ]);
     }

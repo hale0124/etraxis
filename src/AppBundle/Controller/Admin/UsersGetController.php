@@ -15,6 +15,7 @@ use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Entity\User;
 use eTraxis\Form\UserForm;
 use eTraxis\Service\Export\ExportCsvQuery;
+use eTraxis\Traits\ContainerTrait;
 use eTraxis\Voter\UserVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use SimpleBus\ValidationException;
@@ -32,6 +33,8 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
  */
 class UsersGetController extends Controller
 {
+    use ContainerTrait;
+
     /**
      * Page with list of users.
      *
@@ -141,17 +144,14 @@ class UsersGetController extends Controller
      */
     public function tabDetailsAction(User $user): Response
     {
-        /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
-        $authChecker = $this->get('security.authorization_checker');
-
         return $this->render('admin/users/tab_details.html.twig', [
             'user'      => $user,
             'providers' => AuthenticationProvider::all(),
             'can'       => [
-                'delete'  => $authChecker->isGranted(UserVoter::DELETE, $user),
-                'disable' => $authChecker->isGranted(UserVoter::DISABLE, $user),
-                'enable'  => $authChecker->isGranted(UserVoter::ENABLE, $user),
-                'unlock'  => $authChecker->isGranted(UserVoter::UNLOCK, $user),
+                'delete'  => $this->isGranted(UserVoter::DELETE, $user),
+                'disable' => $this->isGranted(UserVoter::DISABLE, $user),
+                'enable'  => $this->isGranted(UserVoter::ENABLE, $user),
+                'unlock'  => $this->isGranted(UserVoter::UNLOCK, $user),
             ],
         ]);
     }

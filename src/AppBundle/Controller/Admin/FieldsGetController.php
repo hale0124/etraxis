@@ -19,6 +19,7 @@ use eTraxis\Entity\Group;
 use eTraxis\Entity\State;
 use eTraxis\Form\FieldForm;
 use eTraxis\Form\PCREForm;
+use eTraxis\Traits\ContainerTrait;
 use eTraxis\Voter\FieldVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -34,6 +35,8 @@ use Symfony\Component\HttpFoundation\Response;
  */
 class FieldsGetController extends Controller
 {
+    use ContainerTrait;
+
     /**
      * Returns JSON list of fields.
      *
@@ -77,14 +80,11 @@ class FieldsGetController extends Controller
      */
     public function tabDetailsAction(Field $field): Response
     {
-        /** @var \Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface $authChecker */
-        $authChecker = $this->get('security.authorization_checker');
-
         return $this->render(sprintf('admin/fields/tab_details_%s.html.twig', $field->getType()), [
             'field' => $field,
             'types' => FieldType::all(),
             'can'   => [
-                'delete' => $authChecker->isGranted(FieldVoter::DELETE, $field),
+                'delete' => $this->isGranted(FieldVoter::DELETE, $field),
             ],
         ]);
     }
