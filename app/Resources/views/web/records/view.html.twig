@@ -1,0 +1,21 @@
+{% extends 'web/base.html.twig' %}
+
+{% block content %}
+
+    <div class="grid-row">
+        <div class="grid-100">
+            <div class="tabs" id="tabs-record" data-tab="{{ tab }}">
+                <ul>
+                    <li><a href="{{ path('web_tab_record_details', {'id': record.id}) }}">{{ record.recordId }}</a></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+{% endblock %}
+
+{% block scripts %}
+
+    <script src="{{ asset('js/web/record.js') }}"></script>
+
+{% endblock %}

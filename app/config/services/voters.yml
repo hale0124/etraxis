@@ -18,6 +18,12 @@ services:
         tags: [{ name: security.voter }]
         arguments: [ "@doctrine.orm.entity_manager" ]
 
+    etraxis.voter.record:
+        class: eTraxis\Voter\RecordVoter
+        public: false
+        tags: [{ name: security.voter }]
+        arguments: [ "@doctrine.orm.entity_manager" ]
+
     etraxis.voter.state:
         class: eTraxis\Voter\StateVoter
         public: false

@@ -11,7 +11,10 @@
 
 namespace AppBundle\Controller\Web;
 
+use eTraxis\Entity\Record;
 use eTraxis\Service\Export\ExportCsvQuery;
+use eTraxis\Traits\ContainerTrait;
+use eTraxis\Voter\RecordVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use SimpleBus\ValidationException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -28,6 +31,8 @@ use Symfony\Component\HttpFoundation\StreamedResponse;
  */
 class RecordsGetController extends Controller
 {
+    use ContainerTrait;
+
     /**
      * Page with list of records.
      *
@@ -107,5 +112,47 @@ class RecordsGetController extends Controller
         $export = $this->get('etraxis.export');
 
         return $export->exportCsv($query, $records);
+    }
+
+    /**
+     * Shows specified record.
+     *
+     * @Action\Route("/{id}", name="web_view_record", condition="", requirements={"id"="\d+"})
+     *
+     * @param   Request $request
+     * @param   Record  $record
+     *
+     * @return  Response
+     */
+    public function viewAction(Request $request, Record $record): Response
+    {
+        if (!$this->isGranted(RecordVoter::VIEW, $record)) {
+            throw $this->createAccessDeniedException();
+        }
+
+        return $this->render('web/records/view.html.twig', [
+            'record' => $record,
+            'tab'    => $request->get('tab', 0),
+        ]);
+    }
+
+    /**
+     * Tab with record's details.
+     *
+     * @Action\Route("/tab/details/{id}", name="web_tab_record_details", requirements={"id"="\d+"})
+     *
+     * @param   Record $record
+     *
+     * @return  Response
+     */
+    public function tabDetailsAction(Record $record): Response
+    {
+        if (!$this->isGranted(RecordVoter::VIEW, $record)) {
+            throw $this->createAccessDeniedException();
+        }
+
+        return $this->render('web/records/tab_details.html.twig', [
+            'record' => $record,
+        ]);
     }
 }

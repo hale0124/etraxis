@@ -1,0 +1,26 @@
+{% import 'macro.html.twig' as macro %}
+
+<div class="grid-row">
+    <div class="grid-100">
+        <button type="button" onclick="RecordApp.back()">{{ 'button.back'|trans }}</button>
+    </div>
+</div>
+
+<div class="grid-row">
+    <div class="grid-50 mobile-grid-100">
+        <fieldset>
+            <legend>{{ record.recordId }}</legend>
+            {{ macro.row('record.subject'|trans, record.subject) }}
+            {{ macro.row('state'|trans, record.state.name) }}
+            {{ macro.row('role.responsible'|trans, record.responsible ? record.responsible.fullname : null) }}
+            {{ macro.row('role.author'|trans, record.author.fullname) }}
+            {{ macro.row('record.age'|trans, record.age) }}
+            {{ macro.row('project'|trans, record.project.name) }}
+            {{ macro.row('template'|trans, record.template.name) }}
+        </fieldset>
+    </div>
+    <div class="grid-50 mobile-grid-100">
+    </div>
+</div>
+
+<div class="clear"></div>

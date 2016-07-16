@@ -9,13 +9,29 @@ var RecordsApp = (function() {
 
     // Initialize records list.
     var $table = $('#records').table({
-        checkboxes: 'records'
+        checkboxes: 'records',
+        columnDefs: [
+            {
+                targets: [1, 2, 3, 5, 6, 7],
+                className: 'nowrap'
+            },
+            {
+                targets: 4,
+                width: '100%'
+            }
+        ]
     });
 
     // Some buttons are disabled if no checkbox is ticked.
     $table.on('checkbox.click', function(e, data) {
         $('#btn-read').disable(data.count == 0);
         $('#btn-unread').disable(data.count == 0);
+    });
+
+    // Click on a record in the list.
+    $table.on('click', 'tbody tr', function(e) {
+        var url = eTraxis.route('web_view_record', { id: $(this).data('id') });
+        window.open(url, e.ctrlKey ? '_blank' : '_parent');
     });
 
     return {

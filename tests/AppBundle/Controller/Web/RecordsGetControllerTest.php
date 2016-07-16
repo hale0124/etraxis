@@ -11,12 +11,29 @@
 
 namespace AppBundle\Controller\Web;
 
+use eTraxis\Entity\Record;
 use eTraxis\Tests\ControllerTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 
 class RecordsGetControllerTest extends ControllerTestCase
 {
+    /** @var Record */
+    private $record;
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        /** @var \Symfony\Bridge\Doctrine\RegistryInterface $doctrine */
+        $doctrine = $this->client->getContainer()->get('doctrine');
+
+        $this->record = $doctrine->getRepository(Record::class)->findOneBy([
+            'subject'  => 'Autoloading Standard',
+            'closedAt' => strtotime('2014-10-08 13:04 GMT+13'),
+        ]);
+    }
+
     public function testIndexAction()
     {
         $uri = $this->router->generate('web_records');
@@ -78,5 +95,51 @@ class RecordsGetControllerTest extends ControllerTestCase
 
         $this->makeRequest(Request::METHOD_GET, $uri);
         $this->assertStatusCode(Response::HTTP_BAD_REQUEST);
+    }
+
+    public function testViewAction()
+    {
+        $uri = $this->router->generate('web_view_record', [
+            'id' => $this->record->getId(),
+        ]);
+
+        $this->makeRequest(Request::METHOD_GET, $uri);
+        $this->assertLoginPage();
+
+        $this->makeRequest(Request::METHOD_POST, $uri);
+        $this->assertStatusCode(Response::HTTP_METHOD_NOT_ALLOWED);
+
+        $this->loginAs('hubert');
+
+        $this->makeRequest(Request::METHOD_GET, $uri);
+        $this->assertStatusCode(Response::HTTP_FORBIDDEN);
+
+        $this->loginAs('mwop');
+
+        $this->makeRequest(Request::METHOD_GET, $uri);
+        $this->assertStatusCode(Response::HTTP_OK);
+    }
+
+    public function testTabDetailsAction()
+    {
+        $uri = $this->router->generate('web_tab_record_details', [
+            'id' => $this->record->getId(),
+        ]);
+
+        $this->makeRequest(Request::METHOD_GET, $uri, true);
+        $this->assertStatusCode(Response::HTTP_UNAUTHORIZED);
+
+        $this->makeRequest(Request::METHOD_POST, $uri, true);
+        $this->assertStatusCode(Response::HTTP_METHOD_NOT_ALLOWED);
+
+        $this->loginAs('hubert');
+
+        $this->makeRequest(Request::METHOD_GET, $uri, true);
+        $this->assertStatusCode(Response::HTTP_FORBIDDEN);
+
+        $this->loginAs('mwop');
+
+        $this->makeRequest(Request::METHOD_GET, $uri, true);
+        $this->assertStatusCode(Response::HTTP_OK);
     }
 }
