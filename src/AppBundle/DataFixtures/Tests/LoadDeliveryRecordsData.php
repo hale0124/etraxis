@@ -269,7 +269,7 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
         $state_new       = $this->getReference('state:new');
         $state_delivered = $this->getReference('state:delivered');
 
-        foreach ($records as $info) {
+        foreach ($records as $reference => $info) {
 
             $class = new \ReflectionClass(Record::class);
 
@@ -410,6 +410,8 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
                 $manager->persist($record);
                 $manager->persist($read);
             }
+
+            $this->addReference($reference, $record);
         }
 
         $manager->flush();

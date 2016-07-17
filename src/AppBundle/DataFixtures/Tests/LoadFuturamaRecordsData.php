@@ -1547,6 +1547,7 @@ class LoadFuturamaRecordsData extends AbstractFixture implements ContainerAwareI
                 'state:produced:4' => $info['duration'],
                 'state:produced:5' => $info['multipart'],
                 'state:produced:6' => $text_value->getId(),
+                'state:produced:7' => $info['delivery'] === null ? null : $this->getReference($info['delivery'])->getId(),
                 'state:released:1' => strtotime($info['date']),
                 'state:released:2' => $decimal_value === null ? null : $decimal_value->getId(),
             ];
@@ -1563,5 +1564,7 @@ class LoadFuturamaRecordsData extends AbstractFixture implements ContainerAwareI
                 $manager->persist($value);
             }
         }
+
+        $manager->flush();
     }
 }
