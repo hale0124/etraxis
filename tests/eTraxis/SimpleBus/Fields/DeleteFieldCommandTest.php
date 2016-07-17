@@ -53,6 +53,8 @@ class DeleteFieldCommandTest extends TransactionalTestCase
         self::assertEquals(3, $field3->getOrder());
         self::assertEquals(4, $field4->getOrder());
 
+        self::assertFalse($field2->isRemoved());
+
         $command = new DeleteFieldCommand(['id' => $field2->getId()]);
         $this->command_bus->handle($command);
 
@@ -62,9 +64,11 @@ class DeleteFieldCommandTest extends TransactionalTestCase
         $field4 = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Notes',       'state' => $field1->getState()]);
 
         self::assertEquals(1, $field1->getOrder());
-        self::assertNull($field2);
+        self::assertEquals(0, $field2->getOrder());
         self::assertEquals(2, $field3->getOrder());
         self::assertEquals(3, $field4->getOrder());
+
+        self::assertTrue($field2->isRemoved());
     }
 
     /**
