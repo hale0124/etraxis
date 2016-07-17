@@ -11,7 +11,6 @@
 
 namespace eTraxis\Voter;
 
-use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Entity\Record;
 use eTraxis\Tests\TransactionalTestCase;
 use eTraxis\Traits\ReflectionTrait;
