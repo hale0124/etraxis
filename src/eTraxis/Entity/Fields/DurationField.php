@@ -37,7 +37,7 @@ class DurationField extends AbstractField
      */
     public function setMinValue(string $value)
     {
-        $duration = $this->str2int($value);
+        $duration = self::str2int($value);
 
         if ($duration < self::MIN_VALUE) {
             $duration = self::MIN_VALUE;
@@ -59,7 +59,7 @@ class DurationField extends AbstractField
      */
     public function getMinValue()
     {
-        return $this->int2str($this->field->getParameters()->getParameter1());
+        return self::int2str($this->field->getParameters()->getParameter1());
     }
 
     /**
@@ -71,7 +71,7 @@ class DurationField extends AbstractField
      */
     public function setMaxValue(string $value)
     {
-        $duration = $this->str2int($value);
+        $duration = self::str2int($value);
 
         if ($duration < self::MIN_VALUE) {
             $duration = self::MIN_VALUE;
@@ -93,7 +93,7 @@ class DurationField extends AbstractField
      */
     public function getMaxValue()
     {
-        return $this->int2str($this->field->getParameters()->getParameter2());
+        return self::int2str($this->field->getParameters()->getParameter2());
     }
 
     /**
@@ -105,7 +105,7 @@ class DurationField extends AbstractField
      */
     public function setDefaultValue(string $value = null)
     {
-        $this->field->getParameters()->setDefaultValue($this->str2int($value));
+        $this->field->getParameters()->setDefaultValue(self::str2int($value));
 
         return $this;
     }
@@ -117,7 +117,7 @@ class DurationField extends AbstractField
      */
     public function getDefaultValue()
     {
-        return $this->int2str($this->field->getParameters()->getDefaultValue());
+        return self::int2str($this->field->getParameters()->getDefaultValue());
     }
 
     /**
@@ -127,7 +127,7 @@ class DurationField extends AbstractField
      *
      * @return  string|null String representation (e.g. for 127 it will be "2:07").
      */
-    protected function int2str(int $value = null)
+    public static function int2str(int $value = null)
     {
         if ($value === null) {
             return null;
@@ -151,7 +151,7 @@ class DurationField extends AbstractField
      *
      * @return  int|null Number of minutes (e.g. 127 for "2:07").
      */
-    protected function str2int(string $value = null)
+    public static function str2int(string $value = null)
     {
         if ($value === null) {
             return null;

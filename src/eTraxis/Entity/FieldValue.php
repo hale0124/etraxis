@@ -12,6 +12,7 @@
 namespace eTraxis\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use eTraxis\Dictionary\FieldType;
 
 /**
  * Field value.
@@ -64,4 +65,48 @@ class FieldValue
      * @ORM\Column(name="value", type="integer", nullable=true)
      */
     private $value;
+
+    /**
+     * Property getter.
+     *
+     * @return  Event
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  Field
+     */
+    public function getField()
+    {
+        return $this->field;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  bool
+     */
+    public function isCurrent()
+    {
+        return $this->isCurrent;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  mixed
+     */
+    public function getValue()
+    {
+        if ($this->field->getType() === FieldType::DURATION) {
+            return Fields\DurationField::int2str($this->value);
+        }
+
+        return $this->value;
+    }
 }
