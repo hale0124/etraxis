@@ -11,8 +11,8 @@
 
 namespace AppBundle\EventListener;
 
+use eTraxis\SimpleBus\Middleware\ValidationException;
 use Psr\Log\LoggerInterface;
-use SimpleBus\ValidationException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
@@ -48,8 +48,8 @@ class UnhandledException
         if ($request->isXmlHttpRequest()) {
 
             if ($exception instanceof ValidationException) {
-                $this->logger->error('Validation exception', $exception->getMessages());
-                $response = new JsonResponse($exception->getMessages(), $exception->getStatusCode());
+                $this->logger->error('Validation exception', $exception->toArray());
+                $response = new JsonResponse($exception->toArray(), $exception->getStatusCode());
             }
             elseif ($exception instanceof HttpException) {
                 $message = $exception->getMessage() ?: Response::$statusTexts[$exception->getStatusCode()];

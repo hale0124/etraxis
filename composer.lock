@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "b4103a5c63581960d93a6c9c51e83240",
-    "content-hash": "c2ad535d88a202b63b49a5c096b57889",
+    "hash": "d8574d340e1807fdcd75fcba40b7e44f",
+    "content-hash": "7de288e373f12e32573848c3b1da4625",
     "packages": [
         {
             "name": "arodygin/datatables-bundle",
@@ -95,55 +95,6 @@
                 "dictionary"
             ],
             "time": "2016-05-31 01:21:51"
-        },
-        {
-            "name": "arodygin/simplebus-bundle",
-            "version": "1.0.4",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/arodygin/SimpleBusExtraBundle.git",
-                "reference": "b281258948f560912e09b901a89d11cbc652b4e5"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/arodygin/SimpleBusExtraBundle/zipball/b281258948f560912e09b901a89d11cbc652b4e5",
-                "reference": "b281258948f560912e09b901a89d11cbc652b4e5",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=5.5",
-                "simple-bus/symfony-bridge": "^4.1",
-                "symfony/config": "^2.8|^3.0",
-                "symfony/dependency-injection": "^2.8|^3.0",
-                "symfony/http-kernel": "^2.8|^3.0",
-                "symfony/validator": "^2.8|^3.0"
-            },
-            "require-dev": {
-                "doctrine/annotations": "^1.2",
-                "friendsofphp/php-cs-fixer": "^1.11",
-                "symfony/browser-kit": "^2.8|^3.0",
-                "symfony/framework-bundle": "^2.8|^3.0"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "SimpleBus\\": [
-                        "src/",
-                        "tests/"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "SimpleBus Symfony bundle",
-            "homepage": "https://github.com/arodygin/SimpleBusExtraBundle",
-            "keywords": [
-                "SimpleBus",
-                "commandbus"
-            ],
-            "time": "2016-05-31 00:42:54"
         },
         {
             "name": "beberlei/assert",
@@ -1978,16 +1929,16 @@
         },
         {
             "name": "simple-bus/symfony-bridge",
-            "version": "v4.1.3",
+            "version": "v4.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/SimpleBus/SymfonyBridge.git",
-                "reference": "aaead1b08eb604ef9b2b1256a12ef0d033571c86"
+                "reference": "9e485c78793cbe6e357d17d154998cc4974fc389"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/SimpleBus/SymfonyBridge/zipball/aaead1b08eb604ef9b2b1256a12ef0d033571c86",
-                "reference": "aaead1b08eb604ef9b2b1256a12ef0d033571c86",
+                "url": "https://api.github.com/repos/SimpleBus/SymfonyBridge/zipball/9e485c78793cbe6e357d17d154998cc4974fc389",
+                "reference": "9e485c78793cbe6e357d17d154998cc4974fc389",
                 "shasum": ""
             },
             "require": {
@@ -2038,7 +1989,7 @@
                 "event bus",
                 "symfony"
             ],
-            "time": "2015-11-25 22:21:13"
+            "time": "2016-07-16 17:45:36"
         },
         {
             "name": "swiftmailer/swiftmailer",

@@ -9,31 +9,21 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\SimpleBus\Fields;
+namespace eTraxis\Traits;
 
-use eTraxis\Traits\MessageTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
-/**
- * Sets new order for specified field.
- *
- * @property    int $id    Field ID.
- * @property    int $order Field order.
- */
-class SetOrderFieldCommand
+class MessageStub
 {
     use MessageTrait;
 
     /**
-     * @Assert\NotBlank()
-     * @Assert\Regex("/^\d+$/")
+     * @Assert\Range(min = "1", max = "100")
      */
-    public $id;
+    public $property = 1;
 
     /**
-     * @Assert\NotBlank()
-     * @Assert\Range(min="1")
-     * @Assert\Regex("/^\d+$/")
+     * @Assert\Length(max = "10")
      */
-    public $order;
+    public $name;
 }

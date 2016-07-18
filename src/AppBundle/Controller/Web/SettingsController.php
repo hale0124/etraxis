@@ -13,11 +13,11 @@ namespace AppBundle\Controller\Web;
 
 use eTraxis\Form\AppearanceForm;
 use eTraxis\Form\ChangePasswordForm;
+use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\SimpleBus\Users;
 use eTraxis\Traits\ContainerTrait;
 use eTraxis\Traits\FlashBagTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
-use SimpleBus\ValidationException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -83,7 +83,7 @@ class SettingsController extends Controller
             $this->setNotice($this->container->get('translator')->trans('changes_saved', [], null, $command->locale));
         }
         catch (ValidationException $e) {
-            foreach ($e->getMessages() as $message) {
+            foreach ($e as $message) {
                 $this->setError($message);
             }
         }
@@ -141,7 +141,7 @@ class SettingsController extends Controller
             $this->setError($this->container->get('translator')->trans('password.wrong'));
         }
         catch (ValidationException $e) {
-            foreach ($e->getMessages() as $message) {
+            foreach ($e as $message) {
                 $this->setError($message);
             }
         }

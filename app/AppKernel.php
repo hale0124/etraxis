@@ -20,7 +20,6 @@ class AppKernel extends Kernel
             new SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle(),
             new SimpleBus\SymfonyBridge\SimpleBusEventBusBundle(),
             new SimpleBus\SymfonyBridge\DoctrineOrmBridgeBundle(),
-            new SimpleBus\SimpleBusExtraBundle(),
             new DataTables\DataTablesBundle(),
             new AppBundle\AppBundle(),
         ];

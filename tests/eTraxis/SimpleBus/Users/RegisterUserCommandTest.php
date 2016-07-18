@@ -72,7 +72,7 @@ class RegisterUserCommandTest extends TransactionalTestCase
     }
 
     /**
-     * @expectedException \SimpleBus\ValidationException
+     * @expectedException \eTraxis\SimpleBus\Middleware\ValidationException
      * @expectedExceptionMessage This value should not be blank.
      */
     public function testBadRequest()

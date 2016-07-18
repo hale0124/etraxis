@@ -13,11 +13,11 @@ namespace AppBundle\Controller\Web;
 
 use eTraxis\Entity\Record;
 use eTraxis\Service\Export\ExportCsvQuery;
+use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\SimpleBus\Records\MarkRecordsAsReadCommand;
 use eTraxis\Traits\ContainerTrait;
 use eTraxis\Voter\RecordVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
-use SimpleBus\ValidationException;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;

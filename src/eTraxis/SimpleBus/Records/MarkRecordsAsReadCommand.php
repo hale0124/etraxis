@@ -11,7 +11,7 @@
 
 namespace eTraxis\SimpleBus\Records;
 
-use SimpleBus\MessageTrait;
+use eTraxis\Traits\MessageTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
