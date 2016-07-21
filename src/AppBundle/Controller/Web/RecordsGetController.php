@@ -127,9 +127,7 @@ class RecordsGetController extends Controller
      */
     public function viewAction(Request $request, Record $record): Response
     {
-        if (!$this->isGranted(RecordVoter::VIEW, $record)) {
-            throw $this->createAccessDeniedException();
-        }
+        $this->denyAccessUnlessGranted(RecordVoter::VIEW, $record);
 
         $command = new MarkRecordsAsReadCommand([
             'user'    => $this->getUser()->getId(),
@@ -155,9 +153,7 @@ class RecordsGetController extends Controller
      */
     public function tabDetailsAction(Record $record): Response
     {
-        if (!$this->isGranted(RecordVoter::VIEW, $record)) {
-            throw $this->createAccessDeniedException();
-        }
+        $this->denyAccessUnlessGranted(RecordVoter::VIEW, $record);
 
         return $this->render('web/records/tab_details.html.twig', [
             'record' => $record,
