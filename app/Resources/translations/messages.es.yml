@@ -186,3 +186,4 @@ records: Registros
 record.id: ID
 record.subject: Asunto
 record.age: Edad
+record.no_fields: 'Sin campos.'

@@ -186,3 +186,4 @@ records: レコード
 record.id: ID
 record.subject: タイトル
 record.age: 必須対応日数
+record.no_fields: フィールド無し

@@ -1,0 +1,42 @@
+{% for state in record.allStates %}
+    <fieldset>
+        <legend>{{ state.name }}</legend>
+
+        {% set fields = record.fieldsByState(state, app.user) %}
+
+        {% if fields|length == 0 %}
+            <div class="grid-container grid-parent grid-row">
+                <div class="grid-100">
+                    <p>{{ 'record.no_fields'|trans }}</p>
+                </div>
+            </div>
+        {% endif %}
+
+        {% for field in fields %}
+            {% set value = record.fieldValue(field, app.user) %}
+
+            {% if value is null %}
+                {{ macro.row(field.name, null) }}
+            {% elseif field.type == constant('eTraxis\\Dictionary\\FieldType::NUMBER') %}
+                {{ macro.row(field.name, value|localizednumber('decimal', 'default', app.user.locale)) }}
+            {% elseif field.type == constant('eTraxis\\Dictionary\\FieldType::DECIMAL') %}
+                {{ macro.row(field.name, value|localizednumber('decimal', 'default', app.user.locale)) }}
+            {% elseif field.type == constant('eTraxis\\Dictionary\\FieldType::STRING') %}
+                {{ macro.row(field.name, value) }}
+            {% elseif field.type == constant('eTraxis\\Dictionary\\FieldType::TEXT') %}
+                {{ macro.row(field.name, value) }}
+            {% elseif field.type == constant('eTraxis\\Dictionary\\FieldType::CHECKBOX') %}
+                {{ macro.row(field.name, value ? 'button.yes'|trans|lower : 'button.no'|trans|lower) }}
+            {% elseif field.type == constant('eTraxis\\Dictionary\\FieldType::LIST') %}
+                {{ macro.row(field.name, value) }}
+            {% elseif field.type == constant('eTraxis\\Dictionary\\FieldType::RECORD') %}
+                {{ macro.row(field.name, value) }}
+            {% elseif field.type == constant('eTraxis\\Dictionary\\FieldType::DATE') %}
+                {{ macro.row(field.name, value|localizeddate('long', 'none', app.user.locale, app.user.timezone)) }}
+            {% elseif field.type == constant('eTraxis\\Dictionary\\FieldType::DURATION') %}
+                {{ macro.row(field.name, value) }}
+            {% endif %}
+        {% endfor %}
+
+    </fieldset>
+{% endfor %}

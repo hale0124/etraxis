@@ -186,3 +186,4 @@ records: Records
 record.id: ID
 record.subject: Oggetto
 record.age: Età
+record.no_fields: 'Nessun campo.'

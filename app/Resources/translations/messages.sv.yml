@@ -186,3 +186,4 @@ records: Poster
 record.id: ID
 record.subject: Ämne
 record.age: Ålder
+record.no_fields: 'Inga fält.'

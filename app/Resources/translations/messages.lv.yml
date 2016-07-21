@@ -186,3 +186,4 @@ records: Ieraksti
 record.id: ID
 record.subject: Temats
 record.age: Vecums
+record.no_fields: 'Nav atribūtu.'

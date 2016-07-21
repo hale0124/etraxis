@@ -185,3 +185,4 @@ records: Records
 record.id: ID
 record.subject: Subject
 record.age: Age
+record.no_fields: 'No fields.'

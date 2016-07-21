@@ -246,7 +246,7 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
             ],
             '6ACV04' => [
                 'subject'     => '200 feet of hanging rope for the hanging of multiheaded monster.',
-                'responsible' => 'user:hubert',
+                'responsible' => 'user:artem',
                 'crew'        => 'Amy, Bender, Fry, Hermes, Leela, the Professor, Zoidberg',
                 'delivery_to' => 'Sheriff Burley',
                 'delivery_at' => 'Aldrin\'s Gulch Town Jail, Aldrin\'s Gulch, Moon',
@@ -256,6 +256,7 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
             ],
             '6ACV08' => [
                 'subject'     => 'A statue commemorating the loss of the first Planet Express crew',
+                'author'      => 'user:pmjones',
                 'responsible' => 'user:leela',
                 'crew'        => 'Fry, Bender, Leela, Hermes, Amy, and Zoidberg',
                 'delivery_to' => 'Professor Farnsworth',
@@ -279,7 +280,7 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
             $record->setSubject($info['subject']);
 
             $this->setProperty($record, 'state', $state_new);
-            $this->setProperty($record, 'author', $this->getReference('user:hubert'));
+            $this->setProperty($record, 'author', $this->getReference($info['author'] ?? 'user:hubert'));
             $this->setProperty($record, 'responsible', $this->getReference($info['responsible']));
             $this->setProperty($record, 'createdAt', strtotime($info['date'] . ' 09:00:00'));
             $this->setProperty($record, 'changedAt', strtotime($info['date'] . ' 09:00:00'));

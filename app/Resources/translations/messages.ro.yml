@@ -186,3 +186,4 @@ records: Inregistrari
 record.id: ID
 record.subject: Subiect
 record.age: 'Vechime (zile)'
+record.no_fields: 'Nr campuri.'

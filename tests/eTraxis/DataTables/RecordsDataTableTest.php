@@ -29,9 +29,11 @@ class RecordsDataTableTest extends TransactionalTestCase
     public function testBasic()
     {
         $expected_by_user = [
-            'artem'  => 128,    // all "Futurama" records.
-            'hubert' => 149,    // 128 "Futurama" + 21 "Delivery" records
-            'mwop'   => 143,    // 128 "Futurama" + 15 "PSR" records
+            'kif'     => 128,   // all "Futurama" records
+            'artem'   => 129,   // all "Futurama" records + 1 assigned "Delivery" record
+            'hubert'  => 149,   // 128 "Futurama" + 21 "Delivery" records
+            'mwop'    => 143,   // 128 "Futurama" + 15 "PSR" records
+            'pmjones' => 144,   // 128 "Futurama" + 15 "PSR" records + 1 created "Delivery" record
         ];
 
         $request = new Request([
@@ -287,7 +289,7 @@ class RecordsDataTableTest extends TransactionalTestCase
         $expected = [
             ['Planet Express', 'N', 'Hubert J. Farnsworth', 'Turanga Leela', 'e-Waste'],
             ['Planet Express', 'N', 'Hubert J. Farnsworth', 'Turanga Leela', 'New clamps for Francis X. Clampazzo.'],
-            ['Planet Express', 'N', 'Hubert J. Farnsworth', 'Turanga Leela', 'A statue commemorating the loss of the first Planet Express crew'],
+            ['Planet Express', 'N', 'Paul M. Jones', 'Turanga Leela', 'A statue commemorating the loss of the first Planet Express crew'],
         ];
 
         $request = new Request([

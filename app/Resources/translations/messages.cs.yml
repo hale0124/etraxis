@@ -186,3 +186,4 @@ records: Záznamy
 record.id: ID
 record.subject: Předmět
 record.age: Stáří
+record.no_fields: 'Žádná pole.'

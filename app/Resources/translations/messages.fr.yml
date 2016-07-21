@@ -186,3 +186,4 @@ records: Enregistrements
 record.id: ID
 record.subject: Sujet
 record.age: Âge
+record.no_fields: 'Pas de champs.'

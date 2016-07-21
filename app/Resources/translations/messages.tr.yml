@@ -186,3 +186,4 @@ records: Kayıtlar
 record.id: ID
 record.subject: Konu
 record.age: Dönem
+record.no_fields: 'Alan yok.'

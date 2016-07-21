@@ -186,3 +186,4 @@ records: Rekordok
 record.id: ID
 record.subject: Tárgy
 record.age: Kor
+record.no_fields: 'Nincsenek mezők.'

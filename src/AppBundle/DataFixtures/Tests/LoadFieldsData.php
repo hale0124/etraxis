@@ -94,6 +94,7 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     'description' => 'A person to deliver to',
                     'required'    => true,
                     'param1'      => 100,
+                    'author'      => FieldPermission::NONE,
                     'permissions' => [
                         'group:managers' => FieldPermission::READ_WRITE,
                         'group:staff'    => FieldPermission::READ_ONLY,
@@ -105,6 +106,7 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     'description' => 'A place to deliver at',
                     'required'    => true,
                     'param1'      => 100,
+                    'responsible' => FieldPermission::NONE,
                     'permissions' => [
                         'group:managers' => FieldPermission::READ_WRITE,
                         'group:staff'    => FieldPermission::READ_ONLY,
@@ -118,7 +120,7 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     'param1'      => 1000,
                     'permissions' => [
                         'group:managers' => FieldPermission::READ_WRITE,
-                        'group:staff'    => FieldPermission::READ_ONLY,
+                        'group:crew'     => FieldPermission::READ_ONLY,
                     ],
                 ],
             ],
@@ -131,7 +133,6 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     'param1'      => 1000,
                     'permissions' => [
                         'group:managers' => FieldPermission::READ_WRITE,
-                        'group:staff'    => FieldPermission::READ_ONLY,
                         'group:crew'     => FieldPermission::READ_WRITE,
                     ],
                 ],
@@ -153,8 +154,8 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     ->setOrder($order)
                     ->setRequired($info['required'])
                     ->setRolePermission(SystemRole::ANYONE, FieldPermission::NONE)
-                    ->setRolePermission(SystemRole::AUTHOR, FieldPermission::READ_WRITE)
-                    ->setRolePermission(SystemRole::RESPONSIBLE, FieldPermission::READ_ONLY)
+                    ->setRolePermission(SystemRole::AUTHOR, $info['author'] ?? FieldPermission::READ_WRITE)
+                    ->setRolePermission(SystemRole::RESPONSIBLE, $info['responsible'] ?? FieldPermission::READ_ONLY)
                 ;
 
                 $field->getParameters()

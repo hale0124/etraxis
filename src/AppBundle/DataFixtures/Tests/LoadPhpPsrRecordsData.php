@@ -229,7 +229,7 @@ class LoadPhpPsrRecordsData extends AbstractFixture implements ContainerAwareInt
 
             $this->setProperty($event, 'createdAt', $record->getCreatedAt());
 
-            $psrId = new StringValue($id);
+            $psrId = new StringValue('PSR-' . $id);
 
             $manager->persist($record);
             $manager->persist($event);
@@ -260,6 +260,7 @@ class LoadPhpPsrRecordsData extends AbstractFixture implements ContainerAwareInt
                 $this->setProperty($field2, 'value', $description->getId());
             }
 
+            $manager->persist($field1);
             $manager->persist($field2);
 
             if ($info['accepted'] !== null) {

@@ -24,6 +24,10 @@ class FieldPermission extends StaticDictionary
     const READ_ONLY  = 'read';
     const READ_WRITE = 'write';
 
+    // Aliases.
+    const READ  = self::READ_ONLY;
+    const WRITE = self::READ_WRITE;
+
     /**
      * {@inheritdoc}
      */
