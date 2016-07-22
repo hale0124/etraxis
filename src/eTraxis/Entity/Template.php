@@ -14,6 +14,7 @@ namespace eTraxis\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use eTraxis\Dictionary;
+use eTraxis\Security\CurrentUser;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
 
 /**
@@ -119,6 +120,16 @@ class Template extends Entity implements \JsonSerializable
      * @ORM\OneToMany(targetEntity="TemplateGroupPermission", mappedBy="template", cascade={"persist"})
      */
     private $groupPermissions;
+
+    /**
+     * @var string[] List of permissions granted to current user.
+     */
+    private $userPermissions;
+
+    /**
+     * @var int ID of the current user.
+     */
+    private $currentUser;
 
     /**
      * Creates new template in the specified project.
@@ -451,6 +462,60 @@ class Template extends Entity implements \JsonSerializable
         });
 
         return array_values($filtered->toArray());
+    }
+
+    /**
+     * Checks whether specified role is granted for specified permission.
+     *
+     * @param   string $role
+     * @param   string $permission
+     *
+     * @return  bool
+     */
+    public function isRoleGranted(string $role, string $permission)
+    {
+        $filtered = $this->rolePermissions->filter(function (TemplateRolePermission $rolePermission) use ($role, $permission) {
+            return $rolePermission->getRole() === $role && $rolePermission->getPermission() === $permission;
+        });
+
+        return count($filtered) !== 0;
+    }
+
+    /**
+     * Checks whether current user is granted for specified permission (as a member of at least one of allowed groups).
+     *
+     * @param   CurrentUser $user
+     * @param   string      $permission
+     *
+     * @return  bool
+     */
+    public function isUserGranted(CurrentUser $user, string $permission)
+    {
+        if ($this->currentUser !== $user->getId()) {
+
+            $this->currentUser = $user->getId();
+
+            $builder = $this->manager->createQueryBuilder();
+
+            $query = $builder
+                ->select('groupPermission')
+                ->from(TemplateGroupPermission::class, 'groupPermission')
+                ->leftJoin('groupPermission.group', 'group')
+                ->where('groupPermission.template = :template')
+                ->andWhere($builder->expr()->isMemberOf(':user', 'group.members'))
+            ;
+
+            $query->setParameters([
+                'template' => $this,
+                'user'     => $user->getId(),
+            ]);
+
+            $this->userPermissions = array_map(function (TemplateGroupPermission $permission) {
+                return $permission->getPermission();
+            }, $query->getQuery()->getResult());
+        }
+
+        return in_array($permission, $this->userPermissions);
     }
 
     /**

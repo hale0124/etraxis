@@ -97,40 +97,11 @@ class RecordVoter extends Voter
         }
 
         // Check whether anyone is granted to view the record.
-        $dql = 'SELECT COUNT(state.id)
-                FROM eTraxis:TemplateRolePermission permission
-                  INNER JOIN eTraxis:Template template WITH template = permission.template
-                  INNER JOIN eTraxis:State state WITH template = state.template
-                WHERE permission.role = :role
-                  AND state.id = :state';
-
-        $count = (int) $this->manager->createQuery($dql)
-            ->setParameter('role', SystemRole::ANYONE)
-            ->setParameter('state', $subject->getState()->getId())
-            ->getSingleScalarResult()
-        ;
-
-        if ($count !== 0) {
+        if ($subject->getTemplate()->isRoleGranted(SystemRole::ANYONE, TemplatePermission::VIEW_RECORDS)) {
             return true;
         }
 
         // Check whether current user belongs to any group which is granted to view the record.
-        $dql = 'SELECT COUNT(state.id)
-                FROM eTraxis:TemplateGroupPermission permission
-                  INNER JOIN eTraxis:Template template WITH template = permission.template
-                  INNER JOIN eTraxis:State state WITH template = state.template
-                  INNER JOIN eTraxis:Group user_group WITH user_group = permission.group
-                WHERE permission.permission = :permission
-                  AND state.id = :state
-                  AND :user MEMBER OF user_group.members';
-
-        $count = (int) $this->manager->createQuery($dql)
-            ->setParameter('permission', TemplatePermission::VIEW_RECORDS)
-            ->setParameter('state', $subject->getState()->getId())
-            ->setParameter('user', $user->getId())
-            ->getSingleScalarResult()
-        ;
-
-        return $count !== 0;
+        return $subject->getTemplate()->isUserGranted($user, TemplatePermission::VIEW_RECORDS);
     }
 }

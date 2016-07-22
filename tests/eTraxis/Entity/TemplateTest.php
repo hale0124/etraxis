@@ -13,6 +13,7 @@ namespace eTraxis\Entity;
 
 use eTraxis\Dictionary\SystemRole;
 use eTraxis\Dictionary\TemplatePermission;
+use eTraxis\Security\CurrentUser;
 use eTraxis\Tests\TransactionalTestCase;
 
 class TemplateTest extends TransactionalTestCase
@@ -178,6 +179,25 @@ class TemplateTest extends TransactionalTestCase
 
         $this->object->setGroupPermissions($group, $permissions);
         self::assertArraysByValues($expected, $this->object->getGroupPermissions($group));
+    }
+
+    public function testIsRoleGranted()
+    {
+        self::assertFalse($this->object->isRoleGranted(SystemRole::ANYONE, TemplatePermission::VIEW_RECORDS));
+
+        self::assertTrue($this->object->isRoleGranted(SystemRole::AUTHOR, TemplatePermission::VIEW_RECORDS));
+        self::assertFalse($this->object->isRoleGranted(SystemRole::AUTHOR, TemplatePermission::DELETE_RECORDS));
+
+        self::assertTrue($this->object->isRoleGranted(SystemRole::RESPONSIBLE, TemplatePermission::VIEW_RECORDS));
+        self::assertFalse($this->object->isRoleGranted(SystemRole::RESPONSIBLE, TemplatePermission::DELETE_RECORDS));
+    }
+
+    public function testIsGroupGranted()
+    {
+        $user = new CurrentUser($this->findUser('fry'));
+
+        self::assertTrue($this->object->isUserGranted($user, TemplatePermission::ADD_COMMENTS));
+        self::assertFalse($this->object->isUserGranted($user, TemplatePermission::PRIVATE_COMMENTS));
     }
 
     public function testToString()

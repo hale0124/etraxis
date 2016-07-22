@@ -115,19 +115,14 @@ class Record extends Entity
     private $watchers;
 
     /**
-     * @var int ID of the user which the caches below have been prepared on behalf of.
-     */
-    private $cacheOwner;
-
-    /**
      * @var FieldValue[] Current values of all fields.
-     *                   Contains only fields which "cache owner" (see above) is allowed to read.
+     *                   Contains only fields which the current user is allowed to read.
      */
     private $fieldValues = [];
 
     /**
      * @var array Scalar values of all fields.
-     *            Contains only fields which "cache owner" (see above) is allowed to read.
+     *            Contains only fields which the current user is allowed to read.
      */
     private $cacheFieldValues = [];
 
@@ -154,6 +149,11 @@ class Record extends Entity
      *            WARNING: contains all fields no matter whether the current user is allowed to see them.
      */
     private $cacheListValues = [];
+
+    /**
+     * @var int ID of the current user.
+     */
+    private $currentUser;
 
     /**
      * Creates new record.
@@ -183,9 +183,9 @@ class Record extends Entity
      */
     protected function initFieldValuesCache(int $user)
     {
-        if ($this->cacheOwner !== $user) {
+        if ($this->currentUser !== $user) {
 
-            $this->cacheOwner = $user;
+            $this->currentUser = $user;
 
             $this->cacheFieldValues   = [];
             $this->cacheDecimalValues = [];
