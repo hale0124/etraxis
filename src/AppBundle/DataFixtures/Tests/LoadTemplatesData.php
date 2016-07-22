@@ -62,6 +62,7 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
             TemplatePermission::VIEW_RECORDS,
             TemplatePermission::EDIT_RECORDS,
             TemplatePermission::ADD_COMMENTS,
+            TemplatePermission::PRIVATE_COMMENTS,
             TemplatePermission::ATTACH_FILES,
             TemplatePermission::DELETE_FILES,
         ];
@@ -69,6 +70,7 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
         $responsible = [
             TemplatePermission::VIEW_RECORDS,
             TemplatePermission::ADD_COMMENTS,
+            TemplatePermission::PRIVATE_COMMENTS,
             TemplatePermission::ATTACH_FILES,
         ];
 
@@ -93,6 +95,7 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
             'group:crew' => [
                 TemplatePermission::VIEW_RECORDS,
                 TemplatePermission::ADD_COMMENTS,
+                TemplatePermission::PRIVATE_COMMENTS,
             ],
         ];
 

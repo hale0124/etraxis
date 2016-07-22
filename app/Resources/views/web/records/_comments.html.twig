@@ -1,0 +1,11 @@
+{% for comment in record.comments(is_granted(constant('eTraxis\\Voter\\RecordVoter::PRIVATE_COMMENTS'), record)) %}
+    <fieldset class="{{ comment.isPrivate ? 'private' : '' }}">
+        {% set timestamp = comment.event.createdAt|localizeddate('medium', 'short', app.user.locale, app.user.timezone) %}
+        <legend>{{ timestamp ~ ', ' ~ comment.event.user.fullname }}</legend>
+        <div class="grid-container grid-parent grid-row">
+            <div class="grid-100">
+                <p>{{ comment.text|nl2br }}</p>
+            </div>
+        </div>
+    </fieldset>
+{% endfor %}

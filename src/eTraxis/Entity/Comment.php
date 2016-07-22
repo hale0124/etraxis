@@ -12,6 +12,7 @@
 namespace eTraxis\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use eTraxis\Dictionary\EventType;
 
 /**
  * Comment.
@@ -54,4 +55,60 @@ class Comment
      * @ORM\Column(name="is_private", type="boolean")
      */
     private $isPrivate;
+
+    /**
+     * Creates new comment in specified record.
+     *
+     * @param   Record $record    Target record.
+     * @param   User   $user      Author of the comment.
+     * @param   string $text      Text of the comment.
+     * @param   bool   $isPrivate Whether comment is private.
+     */
+    public function __construct(Record $record, User $user, string $text, bool $isPrivate = false)
+    {
+        $this->event = new Event($record, $user, $isPrivate ? EventType::PRIVATE_COMMENT : EventType::PUBLIC_COMMENT);
+
+        $this->text      = $text;
+        $this->isPrivate = $isPrivate;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  Event
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  string
+     */
+    public function getText()
+    {
+        return $this->text;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  bool
+     */
+    public function isPrivate()
+    {
+        return $this->isPrivate;
+    }
 }

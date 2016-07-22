@@ -24,7 +24,8 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  */
 class RecordVoter extends Voter
 {
-    const VIEW = 'record.view';
+    const VIEW             = 'record.view';
+    const PRIVATE_COMMENTS = 'record.private_comments';
 
     protected $manager;
 
@@ -45,6 +46,7 @@ class RecordVoter extends Voter
     {
         $attributes = [
             self::VIEW,
+            self::PRIVATE_COMMENTS,
         ];
 
         if (in_array($attribute, $attributes)) {
@@ -70,6 +72,9 @@ class RecordVoter extends Voter
 
             case self::VIEW:
                 return $this->isViewGranted($subject, $token->getUser());
+
+            case self::PRIVATE_COMMENTS:
+                return $this->isPrivateCommentsGranted($subject, $token->getUser());
 
             default:
                 return false;
@@ -103,5 +108,38 @@ class RecordVoter extends Voter
 
         // Check whether current user belongs to any group which is granted to view the record.
         return $subject->getTemplate()->isUserGranted($user, TemplatePermission::VIEW_RECORDS);
+    }
+
+    /**
+     * Checks whether user can read and post private comments in the specified record.
+     *
+     * @param   Record      $subject Record.
+     * @param   CurrentUser $user    Current user.
+     *
+     * @return  bool
+     */
+    protected function isPrivateCommentsGranted(Record $subject, CurrentUser $user): bool
+    {
+        // Check whether anyone is granted to read and post private comments.
+        if ($subject->getTemplate()->isRoleGranted(SystemRole::ANYONE, TemplatePermission::PRIVATE_COMMENTS)) {
+            return true;
+        }
+
+        // Check whether author is granted to read and post private comments.
+        if ($subject->getAuthor()->getId() === $user->getId()) {
+            if ($subject->getTemplate()->isRoleGranted(SystemRole::AUTHOR, TemplatePermission::PRIVATE_COMMENTS)) {
+                return true;
+            }
+        }
+
+        // Check whether responsible is granted to read and post private comments.
+        if ($subject->getResponsible() && $subject->getResponsible()->getId() === $user->getId()) {
+            if ($subject->getTemplate()->isRoleGranted(SystemRole::RESPONSIBLE, TemplatePermission::PRIVATE_COMMENTS)) {
+                return true;
+            }
+        }
+
+        // Check whether current user belongs to any group which is granted to read and post private comments.
+        return $subject->getTemplate()->isUserGranted($user, TemplatePermission::PRIVATE_COMMENTS);
     }
 }

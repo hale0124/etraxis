@@ -693,4 +693,34 @@ class Record extends Entity
 
         return $value;
     }
+
+    /**
+     * Returns all record's comments.
+     *
+     * @param   bool $showPrivate Whether to include private comments, too.
+     *
+     * @return  Comment[]
+     */
+    public function getComments(bool $showPrivate = false)
+    {
+        $query = $this->manager->createQueryBuilder()
+            ->select('comment')
+            ->addSelect('event')
+            ->from(Comment::class, 'comment')
+            ->innerJoin('comment.event', 'event')
+            ->where('event.record = :record')
+            ->orderBy('event.createdAt')
+        ;
+
+        $query->setParameters([
+            'record' => $this->id,
+        ]);
+
+        if (!$showPrivate) {
+            $query->andWhere('comment.isPrivate = :private');
+            $query->setParameter('private', false);
+        }
+
+        return $query->getQuery()->getResult();
+    }
 }

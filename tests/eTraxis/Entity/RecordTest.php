@@ -337,4 +337,16 @@ class RecordTest extends TransactionalTestCase
         self::assertNotNull($record->getFieldValue($field, new CurrentUser($this->findUser('fry'))));
         self::assertNull($record->getFieldValue($field, new CurrentUser($this->findUser('zoidberg'))));
     }
+
+    public function testGetComments()
+    {
+        /** @var Record $record */
+        $record = $this->doctrine->getRepository(Record::class)->findOneBy([
+            'subject' => '200 feet of hanging rope for the hanging of multiheaded monster.',
+        ]);
+
+        self::assertCount(2, $record->getComments());
+        self::assertCount(3, $record->getComments(true));
+        self::assertCount(2, $record->getComments(false));
+    }
 }

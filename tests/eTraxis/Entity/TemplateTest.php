@@ -157,6 +157,7 @@ class TemplateTest extends TransactionalTestCase
         $default = [
             TemplatePermission::VIEW_RECORDS,
             TemplatePermission::ADD_COMMENTS,
+            TemplatePermission::PRIVATE_COMMENTS,
         ];
 
         $permissions = [
@@ -197,7 +198,7 @@ class TemplateTest extends TransactionalTestCase
         $user = new CurrentUser($this->findUser('fry'));
 
         self::assertTrue($this->object->isUserGranted($user, TemplatePermission::ADD_COMMENTS));
-        self::assertFalse($this->object->isUserGranted($user, TemplatePermission::PRIVATE_COMMENTS));
+        self::assertFalse($this->object->isUserGranted($user, TemplatePermission::REASSIGN_RECORDS));
     }
 
     public function testToString()

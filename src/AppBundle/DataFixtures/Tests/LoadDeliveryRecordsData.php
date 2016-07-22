@@ -15,6 +15,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use eTraxis\Dictionary\EventType;
+use eTraxis\Entity\Comment;
 use eTraxis\Entity\Event;
 use eTraxis\Entity\FieldValue;
 use eTraxis\Entity\LastRead;
@@ -253,6 +254,26 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
                 'notes'       => null,
                 'date'        => '2011-07-14',
                 'notes2'      => null,
+                'comments'    => [
+                    [
+                        'user'    => 'user:hubert',
+                        'time'    => '2011-07-14 08:35:14',
+                        'private' => false,
+                        'text'    => 'Good news, everyone! Our next delivery isn\'t to some dangerous, outer-space planet. It\'s to Earth!',
+                    ],
+                    [
+                        'user'    => 'user:fry',
+                        'time'    => '2011-07-14 08:35:17',
+                        'private' => true,
+                        'text'    => 'Earth is dangerous. I fell off my chair there once.',
+                    ],
+                    [
+                        'user'    => 'user:leela',
+                        'time'    => '2011-07-14 08:35:21',
+                        'private' => false,
+                        'text'    => 'We won\'t even have to leave New New York! The package is going to Long Long Island.',
+                    ],
+                ],
             ],
             '6ACV15' => [
                 'subject'     => 'A statue commemorating the loss of the first Planet Express crew',
@@ -264,6 +285,20 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
                 'notes'       => null,
                 'date'        => '2011-08-04',
                 'notes2'      => null,
+                'comments'    => [
+                    [
+                        'user'    => 'user:leela',
+                        'time'    => '2011-08-04 09:12:31',
+                        'private' => false,
+                        'text'    => 'Where\'s the Professor?',
+                    ],
+                    [
+                        'user'    => 'user:bender',
+                        'time'    => '2011-08-04 09:12:34',
+                        'private' => true,
+                        'text'    => 'Eh, probably dead. Already dissolving in a bathtub if we\'re lucky.',
+                    ],
+                ],
             ],
         ];
 
@@ -360,6 +395,25 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
 
             $manager->persist($field);
             $manager->persist($read);
+
+            if (array_key_exists('comments', $info)) {
+
+                foreach ($info['comments'] as $meta) {
+
+                    /** @noinspection PhpParamsInspection */
+                    $comment = new Comment(
+                        $record,
+                        $this->getReference($meta['user']),
+                        $meta['text'],
+                        $meta['private']
+                    );
+
+                    $this->setProperty($comment->getEvent(), 'createdAt', strtotime($meta['time']));
+
+                    $manager->persist($comment->getEvent());
+                    $manager->persist($comment);
+                }
+            }
 
             if ($info['date'] < '2010-01-01') {
 
