@@ -302,19 +302,19 @@ class RecordTest extends TransactionalTestCase
 
         $expected = [
             'Season'            => 'Season 6',
-            'Episode'           => 1,
-            'Production code'   => '6ACV01',
+            'Episode'           => 3,
+            'Production code'   => '6ACV03',
             'Running time'      => '0:22',
             'Multipart'         => false,
-            'Plot'              => 'Fry finds his body covered in severe burns but cannot remember why. Professor Farnsworth reveals that the wormhole the Planet Express crew flew through to escape Zapp Brannigan led them back to Earth, where both ships crashed and killed everyone else. Farnsworth uses a birthing machine and resurrects everyone except Leela, who emerges in a supposedly irreversible coma. Devastated, Fry creates a robot replica of Leela with all her memories uploaded into it to continue their newfound relationship. However, the real Leela reawakens from her coma and gets into a fight with the robot Leela over Fry. Fry refuses to shoot either Leela when given the choice and accidentally shoots himself instead, and is revealed to be a robot as well. Farnsworth explains that the real Fry died protecting Leela in the crash and could not be resurrected in the then-incomplete birthing machine, so Leela made a robot replica of him that malfunctioned, killing her and leaving the robot Fry\'s body burned. Suddenly, the real Fry emerges from the birthing machine as it turns out the process was merely delayed for him. The robot Fry and Leela become a couple since they are already in love with each other, as do the real Fry and Leela, and the Planet Express crew celebrate their complete return.',
+            'Plot'              => 'Everyone in New New York buys the latest, state of the art eyePhone, a device developed by Mom which is implanted in a person\'s eye that allows users to record videos and post them online. Fry and Bender challenge each other to see who can gain one million followers on their Twitcher accounts, with the loser having to dive into a pool of goat vomit and diarrhea. With Bender in the lead, Fry resorts to posting an embarrassing video of Leela revealing she has a singing boil on her rear named Susan, gaining him enough followers to end the bet with a tie. However, Leela is humiliated, so Fry posts a video of himself diving into the pool out of guilt, which everyone watches and causes them to forget about the video of Leela. Fry and Leela reconcile, completely unaware that Mom has infected all of Fry and Bender\'s followers with a virus that turns them into mindless zombies to make them buy more eyePhones.',
             'Delivery'          => $delivery->getId(),
-            'Original air date' => strtotime('2010-06-24'),
-            'U.S. viewers'      => '2.92',
+            'Original air date' => strtotime('2010-07-01'),
+            'U.S. viewers'      => '2.16',
         ];
 
         /** @var Record $record */
         $record = $this->doctrine->getRepository(Record::class)->findOneBy([
-            'subject' => 'Rebirth',
+            'subject' => 'Attack of the Killer App',
         ]);
 
         foreach ($record->getAllStates() as $state) {
