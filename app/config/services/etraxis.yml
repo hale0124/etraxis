@@ -1,0 +1,14 @@
+# Keep services sorted alphabetically.
+services:
+
+    etraxis.export:
+        class: eTraxis\Service\Export\ExportService
+
+    etraxis.mailer:
+        class: eTraxis\Service\Mailer\MailerService
+        arguments:
+            - "@logger"
+            - "@twig"
+            - "@mailer"
+            - "%mailfrom_address%"
+            - "%mailfrom_name%"

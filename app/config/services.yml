@@ -4,10 +4,6 @@ imports:
 
 services:
 
-    twig.extension.intl:
-        class: Twig_Extensions_Extension_Intl
-        tags: [{ name: twig.extension }]
-
     etraxis.provider:
         class: eTraxis\Security\InternalUserProvider
         public: false
@@ -41,15 +37,3 @@ services:
             - "%ldap_host%"
             - "%ldap_port%"
             - "%ldap_encryption%"
-
-    etraxis.mailer:
-        class: eTraxis\Service\Mailer\MailerService
-        arguments:
-            - "@logger"
-            - "@twig"
-            - "@mailer"
-            - "%mailfrom_address%"
-            - "%mailfrom_name%"
-
-    etraxis.export:
-        class: eTraxis\Service\Export\ExportService

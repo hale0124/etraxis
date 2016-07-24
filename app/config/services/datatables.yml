@@ -4,9 +4,14 @@ services:
     etraxis.datatable.records:
         class: eTraxis\DataTables\RecordsDataTable
         tags: [{ name: datatable, id: eTraxis:Record }]
-        arguments: [ "@doctrine.orm.entity_manager", "@security.token_storage", "@etraxis.repository.templates" ]
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@security.token_storage"
+            - "@etraxis.repository.templates"
 
     etraxis.datatable.users:
         class: eTraxis\DataTables\UsersDataTable
         tags: [{ name: datatable, id: eTraxis:User }]
-        arguments: [ "@doctrine.orm.entity_manager", "@translator" ]
+        arguments:
+            - "@doctrine.orm.entity_manager"
+            - "@translator"
