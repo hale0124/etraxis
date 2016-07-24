@@ -50,11 +50,11 @@ class RecordsDataTableTest extends TransactionalTestCase
             $this->loginAs($user);
             $results = $this->datatables->handle($request, 'eTraxis:Record');
 
-            self::assertNotEmpty($results['data']);
+            self::assertNotEmpty($results->data);
 
-            self::assertEquals($expected, $results['recordsTotal']);
-            self::assertEquals($expected, $results['recordsFiltered']);
-            self::assertCount($expected, $results['data']);
+            self::assertEquals($expected, $results->recordsTotal);
+            self::assertEquals($expected, $results->recordsFiltered);
+            self::assertCount($expected, $results->data);
         }
     }
 
@@ -84,7 +84,7 @@ class RecordsDataTableTest extends TransactionalTestCase
 
         $actual = [];
 
-        foreach ($results['data'] as $user) {
+        foreach ($results->data as $user) {
             $actual[] = [
                 $user[RecordsDataTable::COLUMN_PROJECT],
                 $user[RecordsDataTable::COLUMN_STATE],
@@ -94,8 +94,8 @@ class RecordsDataTableTest extends TransactionalTestCase
             ];
         }
 
-        self::assertEquals($total, $results['recordsTotal']);
-        self::assertEquals($filtered, $results['recordsFiltered']);
+        self::assertEquals($total, $results->recordsTotal);
+        self::assertEquals($filtered, $results->recordsFiltered);
         self::assertEquals($expected, $actual);
     }
 
@@ -119,8 +119,8 @@ class RecordsDataTableTest extends TransactionalTestCase
 
         $results = $this->datatables->handle($request, 'eTraxis:Record');
 
-        self::assertEquals($total, $results['recordsTotal']);
-        self::assertEquals($filtered, $results['recordsFiltered']);
+        self::assertEquals($total, $results->recordsTotal);
+        self::assertEquals($filtered, $results->recordsFiltered);
     }
 
     public function testFilterByProject()
@@ -143,8 +143,8 @@ class RecordsDataTableTest extends TransactionalTestCase
 
         $results = $this->datatables->handle($request, 'eTraxis:Record');
 
-        self::assertEquals($total, $results['recordsTotal']);
-        self::assertEquals($filtered, $results['recordsFiltered']);
+        self::assertEquals($total, $results->recordsTotal);
+        self::assertEquals($filtered, $results->recordsFiltered);
     }
 
     public function testFilterByState()
@@ -178,7 +178,7 @@ class RecordsDataTableTest extends TransactionalTestCase
 
         $actual = [];
 
-        foreach ($results['data'] as $user) {
+        foreach ($results->data as $user) {
             $actual[] = [
                 $user[RecordsDataTable::COLUMN_PROJECT],
                 $user[RecordsDataTable::COLUMN_STATE],
@@ -188,8 +188,8 @@ class RecordsDataTableTest extends TransactionalTestCase
             ];
         }
 
-        self::assertEquals($total, $results['recordsTotal']);
-        self::assertEquals($filtered, $results['recordsFiltered']);
+        self::assertEquals($total, $results->recordsTotal);
+        self::assertEquals($filtered, $results->recordsFiltered);
         self::assertEquals($expected, $actual);
     }
 
@@ -221,7 +221,7 @@ class RecordsDataTableTest extends TransactionalTestCase
 
         $actual = [];
 
-        foreach ($results['data'] as $user) {
+        foreach ($results->data as $user) {
             $actual[] = [
                 $user[RecordsDataTable::COLUMN_PROJECT],
                 $user[RecordsDataTable::COLUMN_STATE],
@@ -231,8 +231,8 @@ class RecordsDataTableTest extends TransactionalTestCase
             ];
         }
 
-        self::assertEquals($total, $results['recordsTotal']);
-        self::assertEquals($filtered, $results['recordsFiltered']);
+        self::assertEquals($total, $results->recordsTotal);
+        self::assertEquals($filtered, $results->recordsFiltered);
         self::assertEquals($expected, $actual);
     }
 
@@ -264,7 +264,7 @@ class RecordsDataTableTest extends TransactionalTestCase
 
         $actual = [];
 
-        foreach ($results['data'] as $user) {
+        foreach ($results->data as $user) {
             $actual[] = [
                 $user[RecordsDataTable::COLUMN_PROJECT],
                 $user[RecordsDataTable::COLUMN_STATE],
@@ -274,8 +274,8 @@ class RecordsDataTableTest extends TransactionalTestCase
             ];
         }
 
-        self::assertEquals($total, $results['recordsTotal']);
-        self::assertEquals($filtered, $results['recordsFiltered']);
+        self::assertEquals($total, $results->recordsTotal);
+        self::assertEquals($filtered, $results->recordsFiltered);
         self::assertEquals($expected, $actual);
     }
 
@@ -307,7 +307,7 @@ class RecordsDataTableTest extends TransactionalTestCase
 
         $actual = [];
 
-        foreach ($results['data'] as $user) {
+        foreach ($results->data as $user) {
             $actual[] = [
                 $user[RecordsDataTable::COLUMN_PROJECT],
                 $user[RecordsDataTable::COLUMN_STATE],
@@ -317,8 +317,8 @@ class RecordsDataTableTest extends TransactionalTestCase
             ];
         }
 
-        self::assertEquals($total, $results['recordsTotal']);
-        self::assertEquals($filtered, $results['recordsFiltered']);
+        self::assertEquals($total, $results->recordsTotal);
+        self::assertEquals($filtered, $results->recordsFiltered);
         self::assertEquals($expected, $actual);
     }
 
@@ -348,7 +348,7 @@ class RecordsDataTableTest extends TransactionalTestCase
 
         $actual = [];
 
-        foreach ($results['data'] as $user) {
+        foreach ($results->data as $user) {
             $actual[] = [
                 $user[RecordsDataTable::COLUMN_PROJECT],
                 $user[RecordsDataTable::COLUMN_STATE],
@@ -358,8 +358,8 @@ class RecordsDataTableTest extends TransactionalTestCase
             ];
         }
 
-        self::assertEquals($total, $results['recordsTotal']);
-        self::assertEquals($filtered, $results['recordsFiltered']);
+        self::assertEquals($total, $results->recordsTotal);
+        self::assertEquals($filtered, $results->recordsFiltered);
         self::assertEquals($expected, $actual);
     }
 
@@ -392,7 +392,7 @@ class RecordsDataTableTest extends TransactionalTestCase
 
         $actual = [];
 
-        foreach ($results['data'] as $user) {
+        foreach ($results->data as $user) {
             $actual[] = [
                 $user[RecordsDataTable::COLUMN_PROJECT],
                 $user[RecordsDataTable::COLUMN_STATE],
@@ -402,8 +402,8 @@ class RecordsDataTableTest extends TransactionalTestCase
             ];
         }
 
-        self::assertEquals($total, $results['recordsTotal']);
-        self::assertEquals($filtered, $results['recordsFiltered']);
+        self::assertEquals($total, $results->recordsTotal);
+        self::assertEquals($filtered, $results->recordsFiltered);
         self::assertEquals($expected, $actual);
     }
 
@@ -442,7 +442,7 @@ class RecordsDataTableTest extends TransactionalTestCase
 
         $actual = [];
 
-        foreach ($results['data'] as $record) {
+        foreach ($results->data as $record) {
             $subject = $record[RecordsDataTable::COLUMN_SUBJECT];
             $author  = $record[RecordsDataTable::COLUMN_AUTHOR];
 
@@ -485,7 +485,7 @@ class RecordsDataTableTest extends TransactionalTestCase
 
         $actual = [];
 
-        foreach ($results['data'] as $record) {
+        foreach ($results->data as $record) {
             $subject = $record[RecordsDataTable::COLUMN_SUBJECT];
             $author  = $record[RecordsDataTable::COLUMN_AUTHOR];
 
@@ -493,7 +493,7 @@ class RecordsDataTableTest extends TransactionalTestCase
         }
 
         self::assertEquals($expected, $actual);
-        self::assertEquals(143, $results['recordsTotal']);
-        self::assertEquals(15, $results['recordsFiltered']);
+        self::assertEquals(143, $results->recordsTotal);
+        self::assertEquals(15, $results->recordsFiltered);
     }
 }

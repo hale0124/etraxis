@@ -42,11 +42,11 @@ class UsersDataTableTest extends TransactionalTestCase
 
         $results = $this->datatables->handle($request, 'eTraxis:User');
 
-        self::assertNotEmpty($results['data']);
+        self::assertNotEmpty($results->data);
 
-        self::assertCount($results['recordsTotal'], $users);
-        self::assertCount($results['recordsFiltered'], $users);
-        self::assertEquals(count($users), count($results['data']));
+        self::assertCount($results->recordsTotal, $users);
+        self::assertCount($results->recordsFiltered, $users);
+        self::assertEquals(count($users), count($results->data));
     }
 
     public function testSearch()
@@ -65,9 +65,9 @@ class UsersDataTableTest extends TransactionalTestCase
 
         $results = $this->datatables->handle($request, 'eTraxis:User');
 
-        self::assertEquals($total, $results['recordsTotal']);
-        self::assertEquals($expected, $results['recordsFiltered']);
-        self::assertCount($expected, $results['data']);
+        self::assertEquals($total, $results->recordsTotal);
+        self::assertEquals($expected, $results->recordsFiltered);
+        self::assertCount($expected, $results->data);
     }
 
     public function testFilterByUsername()
@@ -96,7 +96,7 @@ class UsersDataTableTest extends TransactionalTestCase
 
         $actual = [];
 
-        foreach ($results['data'] as $user) {
+        foreach ($results->data as $user) {
             $actual[] = $user[UsersDataTable::COLUMN_USERNAME];
         }
 
@@ -128,7 +128,7 @@ class UsersDataTableTest extends TransactionalTestCase
 
         $actual = [];
 
-        foreach ($results['data'] as $user) {
+        foreach ($results->data as $user) {
             $actual[] = $user[UsersDataTable::COLUMN_USERNAME];
         }
 
@@ -161,7 +161,7 @@ class UsersDataTableTest extends TransactionalTestCase
 
         $actual = [];
 
-        foreach ($results['data'] as $user) {
+        foreach ($results->data as $user) {
             $actual[] = $user[UsersDataTable::COLUMN_USERNAME];
         }
 
@@ -192,7 +192,7 @@ class UsersDataTableTest extends TransactionalTestCase
 
         $actual = [];
 
-        foreach ($results['data'] as $user) {
+        foreach ($results->data as $user) {
             $actual[] = $user[UsersDataTable::COLUMN_USERNAME];
         }
 
@@ -218,7 +218,7 @@ class UsersDataTableTest extends TransactionalTestCase
 
         $results = $this->datatables->handle($request, 'eTraxis:User');
 
-        self::assertCount($expected, $results['data']);
+        self::assertCount($expected, $results->data);
     }
 
     public function testFilterByAuthenticationLdap()
@@ -244,7 +244,7 @@ class UsersDataTableTest extends TransactionalTestCase
 
         $actual = [];
 
-        foreach ($results['data'] as $user) {
+        foreach ($results->data as $user) {
             $actual[] = $user[UsersDataTable::COLUMN_USERNAME];
         }
 
@@ -270,7 +270,7 @@ class UsersDataTableTest extends TransactionalTestCase
 
         $results = $this->datatables->handle($request, 'eTraxis:User');
 
-        self::assertCount($expected, $results['data']);
+        self::assertCount($expected, $results->data);
     }
 
     public function testFilterByDescription()
@@ -299,7 +299,7 @@ class UsersDataTableTest extends TransactionalTestCase
 
         $actual = [];
 
-        foreach ($results['data'] as $user) {
+        foreach ($results->data as $user) {
             $actual[] = $user[UsersDataTable::COLUMN_USERNAME];
         }
 
@@ -334,7 +334,7 @@ class UsersDataTableTest extends TransactionalTestCase
 
         $actual = [];
 
-        foreach ($results['data'] as $user) {
+        foreach ($results->data as $user) {
             $actual[] = $user[UsersDataTable::COLUMN_USERNAME];
         }
 
@@ -377,7 +377,7 @@ class UsersDataTableTest extends TransactionalTestCase
 
         $actual = [];
 
-        foreach ($results['data'] as $user) {
+        foreach ($results->data as $user) {
             $fullname    = $user[UsersDataTable::COLUMN_FULLNAME];
             $description = $user[UsersDataTable::COLUMN_DESCRIPTION];
 
@@ -412,11 +412,11 @@ class UsersDataTableTest extends TransactionalTestCase
 
         $actual = [];
 
-        foreach ($results['data'] as $user) {
+        foreach ($results->data as $user) {
             $actual[] = $user[UsersDataTable::COLUMN_FULLNAME];
         }
 
         self::assertEquals($expected, $actual);
-        self::assertEquals(23, $results['recordsTotal']);
+        self::assertEquals(23, $results->recordsTotal);
     }
 }

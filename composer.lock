@@ -4,21 +4,21 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "d8574d340e1807fdcd75fcba40b7e44f",
-    "content-hash": "7de288e373f12e32573848c3b1da4625",
+    "hash": "1fc013bd6af2fd28081e3bf77c3b9c2b",
+    "content-hash": "403137b2d4cc1e09e553977c96ac497e",
     "packages": [
         {
             "name": "arodygin/datatables-bundle",
-            "version": "2.0.2",
+            "version": "2.1.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/arodygin/DataTablesBundle.git",
-                "reference": "96d292926d23c43666519ae23db30787f75e0998"
+                "reference": "37f225da7e2b92196b71035840c950a811530d2e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arodygin/DataTablesBundle/zipball/96d292926d23c43666519ae23db30787f75e0998",
-                "reference": "96d292926d23c43666519ae23db30787f75e0998",
+                "url": "https://api.github.com/repos/arodygin/DataTablesBundle/zipball/37f225da7e2b92196b71035840c950a811530d2e",
+                "reference": "37f225da7e2b92196b71035840c950a811530d2e",
                 "shasum": ""
             },
             "require": {
@@ -57,7 +57,7 @@
                 "datatable",
                 "datatables"
             ],
-            "time": "2016-05-31 00:38:05"
+            "time": "2016-07-24 09:41:16"
         },
         {
             "name": "arodygin/php-dictionary",
