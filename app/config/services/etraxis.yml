@@ -1,6 +1,9 @@
 # Keep services sorted alphabetically.
 services:
 
+    etraxis.bbcode:
+        class: eTraxis\Service\BBCode\BBCodeService
+
     etraxis.export:
         class: eTraxis\Service\Export\ExportService
 
