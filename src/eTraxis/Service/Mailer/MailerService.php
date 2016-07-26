@@ -11,6 +11,7 @@
 
 namespace eTraxis\Service\Mailer;
 
+use eTraxis\Service\MailerInterface;
 use Psr\Log\LoggerInterface;
 use Swift_Mailer;
 use Twig_Environment;

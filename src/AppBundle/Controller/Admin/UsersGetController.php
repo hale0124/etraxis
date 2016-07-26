@@ -109,7 +109,7 @@ class UsersGetController extends Controller
             throw new ValidationException($violations);
         }
 
-        /** @var \eTraxis\Service\Export\ExportInterface $export */
+        /** @var \eTraxis\Service\ExportInterface $export */
         $export = $this->get('etraxis.export');
 
         return $export->exportCsv($query, $users);

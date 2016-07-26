@@ -12,6 +12,7 @@
 namespace eTraxis\Service\BBCode;
 
 use eTraxis\Dictionary\BBCodeMode;
+use eTraxis\Service\BBCodeInterface;
 
 /**
  * BBCode parser service.

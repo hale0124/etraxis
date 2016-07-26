@@ -9,7 +9,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Service\BBCode;
+namespace eTraxis\Service;
 
 /**
  * BBCode parser interface.

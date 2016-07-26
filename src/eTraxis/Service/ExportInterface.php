@@ -9,8 +9,9 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Service\Export;
+namespace eTraxis\Service;
 
+use eTraxis\Service\Export\ExportCsvQuery;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**

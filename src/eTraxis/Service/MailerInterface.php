@@ -9,7 +9,7 @@
 //
 //----------------------------------------------------------------------
 
-namespace eTraxis\Service\Mailer;
+namespace eTraxis\Service;
 
 /**
  * Mailer interface.

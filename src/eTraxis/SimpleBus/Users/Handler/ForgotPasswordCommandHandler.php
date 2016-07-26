@@ -14,7 +14,7 @@ namespace eTraxis\SimpleBus\Users\Handler;
 use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Entity\User;
-use eTraxis\Service\Mailer\MailerInterface;
+use eTraxis\Service\MailerInterface;
 use eTraxis\SimpleBus\Users\ForgotPasswordCommand;
 
 /**

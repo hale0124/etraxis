@@ -13,6 +13,7 @@ namespace eTraxis\Service\Export;
 
 use eTraxis\Dictionary\CsvDelimiter;
 use eTraxis\Dictionary\LineEnding;
+use eTraxis\Service\ExportInterface;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 

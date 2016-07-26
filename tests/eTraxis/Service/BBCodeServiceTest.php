@@ -15,7 +15,7 @@ use eTraxis\Dictionary\BBCodeMode;
 
 class BBCodeServiceTest extends \PHPUnit_Framework_TestCase
 {
-    /** @var BBCode\BBCodeInterface */
+    /** @var BBCodeInterface */
     protected $bbcode;
 
     protected function setUp()
