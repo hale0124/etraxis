@@ -7,6 +7,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@security.token_storage"
+            - "@etraxis.bbcode"
             - "@etraxis.repository.templates"
 
     etraxis.datatable.users:

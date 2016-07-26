@@ -22,9 +22,9 @@
             {% elseif field.type == 'decimal' %}
                 {{ macro.row(field.name, value|localizednumber('decimal', 'default', app.user.locale)) }}
             {% elseif field.type == 'string' %}
-                {{ macro.row(field.name, value) }}
+                {{ macro.row(field.name, value, 'inline') }}
             {% elseif field.type == 'text' %}
-                {{ macro.row(field.name, value) }}
+                {{ macro.row(field.name, value, 'all') }}
             {% elseif field.type == 'checkbox' %}
                 {{ macro.row(field.name, value ? 'button.yes'|trans|lower : 'button.no'|trans|lower) }}
             {% elseif field.type == 'list' %}

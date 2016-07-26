@@ -15,7 +15,9 @@ use DataTables\DataTableHandlerInterface;
 use DataTables\DataTableQuery;
 use DataTables\DataTableResults;
 use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Dictionary\BBCodeMode;
 use eTraxis\Repository\TemplatesRepository;
+use eTraxis\Service\BBCodeInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
@@ -34,6 +36,7 @@ class RecordsDataTable implements DataTableHandlerInterface
 
     protected $manager;
     protected $token_storage;
+    protected $bbcode;
     protected $templates_repository;
 
     /**
@@ -41,16 +44,19 @@ class RecordsDataTable implements DataTableHandlerInterface
      *
      * @param   EntityManagerInterface $manager
      * @param   TokenStorageInterface  $token_storage
+     * @param   BBCodeInterface        $bbcode
      * @param   TemplatesRepository    $templates_repository
      */
     public function __construct(
         EntityManagerInterface $manager,
         TokenStorageInterface  $token_storage,
+        BBCodeInterface        $bbcode,
         TemplatesRepository    $templates_repository
     )
     {
         $this->manager              = $manager;
         $this->token_storage        = $token_storage;
+        $this->bbcode               = $bbcode;
         $this->templates_repository = $templates_repository;
     }
 
@@ -303,7 +309,7 @@ class RecordsDataTable implements DataTableHandlerInterface
                 sprintf('%s-%d', $row['templatePrefix'], $row['id']),
                 $row['projectName'],
                 $row['stateAbbreviation'],
-                $row['subject'],
+                $this->bbcode->bbcode($row['subject'], BBCodeMode::STRIP),
                 $row['authorFullname'],
                 $row['responsibleFullname'] ?: '&mdash;',
                 $age,

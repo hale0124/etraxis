@@ -10,7 +10,7 @@
     <div class="grid-50 mobile-grid-100">
         <fieldset>
             <legend>{{ record.recordId }}</legend>
-            {{ macro.row('record.subject'|trans, record.subject) }}
+            {{ macro.row('record.subject'|trans, record.subject, 'inline') }}
             {{ macro.row('state'|trans, record.state.name) }}
             {{ macro.row('role.responsible'|trans, record.responsible ? record.responsible.fullname : null) }}
             {{ macro.row('role.author'|trans, record.author.fullname) }}
