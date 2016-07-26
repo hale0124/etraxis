@@ -159,7 +159,7 @@ class BBCodeService implements BBCodeInterface
                             else {
                                 // Add missing closing tag.
                                 $close_tag = preg_replace('!(\!\(\\\\\[/(.*)\\\]\)\!isu)!isu', '[/$2]', $k);
-                                $str = $close_tag . $str;
+                                $str       = $close_tag . $str;
                             }
                         }
 
@@ -191,7 +191,7 @@ class BBCodeService implements BBCodeInterface
 
             // Add missing closing tag.
             $close_tag = preg_replace('!(\!\(\\\\\[/(.*)\\\]\)\!isu)!isu', '[/$2]', $k);
-            $text[] = $close_tag;
+            $text[]    = $close_tag;
         }
 
         // Merge the array into solid block of text.

@@ -1,6 +1,12 @@
 # Keep extensions sorted alphabetically.
 services:
 
+    twig.extension.bbcode:
+        class: eTraxis\Twig\BBCodeExtension
+        public: false
+        tags: [{ name: twig.extension }]
+        arguments: [ "@etraxis.bbcode" ]
+
     twig.extension.intl:
         class: Twig_Extensions_Extension_Intl
         public: false
