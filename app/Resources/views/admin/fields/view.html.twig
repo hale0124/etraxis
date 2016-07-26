@@ -3,11 +3,11 @@
         <li><a href="{{ path('admin_tab_field_details', {'id': field.id}) }}">{{ 'field'|trans }}</a></li>
         <li><a href="{{ path('admin_tab_field_permissions', {'id': field.id}) }}">{{ 'permissions'|trans }}</a></li>
 
-        {% if (field.type in [constant('eTraxis\\Dictionary\\FieldType::STRING'), constant('eTraxis\\Dictionary\\FieldType::TEXT')]) %}
+        {% if (field.type in ['string', 'text']) %}
             <li><a href="{{ path('admin_tab_field_pcre', {'id': field.id}) }}">PCRE</a></li>
         {% endif %}
 
-        {% if (field.type == constant('eTraxis\\Dictionary\\FieldType::LIST')) %}
+        {% if (field.type == 'list') %}
             <li><a href="{{ path('admin_tab_field_listitems', {'id': field.id}) }}">{{ 'listitems'|trans }}</a></li>
         {% endif %}
     </ul>

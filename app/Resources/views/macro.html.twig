@@ -1,10 +1,14 @@
 {% macro row(label, value) %}
     <div class="grid-container grid-parent grid-row">
-        <div class="grid-25"><p class="caption">{{ label }}:</p></div>
-        {% if value is null %}
-        <div class="grid-75"><p>&mdash;</p></div>
-        {% else %}
-        <div class="grid-75"><p>{{ value|nl2br }}</p></div>
-        {% endif %}
+        <div class="grid-25">
+            <p class="caption">
+                {{ label ~ ':' }}
+            </p>
+        </div>
+        <div class="grid-75">
+            <p>
+                {{ value is null ? '&mdash;' : value|nl2br }}
+            </p>
+        </div>
     </div>
 {% endmacro %}

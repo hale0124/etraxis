@@ -17,23 +17,23 @@
 
             {% if value is null %}
                 {{ macro.row(field.name, null) }}
-            {% elseif field.type == constant('eTraxis\\Dictionary\\FieldType::NUMBER') %}
+            {% elseif field.type == 'number' %}
                 {{ macro.row(field.name, value|localizednumber('decimal', 'default', app.user.locale)) }}
-            {% elseif field.type == constant('eTraxis\\Dictionary\\FieldType::DECIMAL') %}
+            {% elseif field.type == 'decimal' %}
                 {{ macro.row(field.name, value|localizednumber('decimal', 'default', app.user.locale)) }}
-            {% elseif field.type == constant('eTraxis\\Dictionary\\FieldType::STRING') %}
+            {% elseif field.type == 'string' %}
                 {{ macro.row(field.name, value) }}
-            {% elseif field.type == constant('eTraxis\\Dictionary\\FieldType::TEXT') %}
+            {% elseif field.type == 'text' %}
                 {{ macro.row(field.name, value) }}
-            {% elseif field.type == constant('eTraxis\\Dictionary\\FieldType::CHECKBOX') %}
+            {% elseif field.type == 'checkbox' %}
                 {{ macro.row(field.name, value ? 'button.yes'|trans|lower : 'button.no'|trans|lower) }}
-            {% elseif field.type == constant('eTraxis\\Dictionary\\FieldType::LIST') %}
+            {% elseif field.type == 'list' %}
                 {{ macro.row(field.name, value) }}
-            {% elseif field.type == constant('eTraxis\\Dictionary\\FieldType::RECORD') %}
+            {% elseif field.type == 'record' %}
                 {{ macro.row(field.name, value) }}
-            {% elseif field.type == constant('eTraxis\\Dictionary\\FieldType::DATE') %}
+            {% elseif field.type == 'date' %}
                 {{ macro.row(field.name, value|localizeddate('long', 'none', app.user.locale, app.user.timezone)) }}
-            {% elseif field.type == constant('eTraxis\\Dictionary\\FieldType::DURATION') %}
+            {% elseif field.type == 'duration' %}
                 {{ macro.row(field.name, value) }}
             {% endif %}
         {% endfor %}
