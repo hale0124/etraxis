@@ -674,11 +674,13 @@ class Record extends Entity
                 case Dictionary\FieldType::STRING:
                     $this->initStringValuesCache();
                     $value = $this->cacheStringValues[$field->getId()] ?? null;
+                    $value = $field->getPCRE()->transform($value);
                     break;
 
                 case Dictionary\FieldType::TEXT:
                     $this->initTextValuesCache();
                     $value = $this->cacheTextValues[$field->getId()] ?? null;
+                    $value = $field->getPCRE()->transform($value);
                     break;
 
                 case Dictionary\FieldType::LIST:

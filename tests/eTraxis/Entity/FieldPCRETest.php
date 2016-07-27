@@ -41,4 +41,55 @@ class FieldPCRETest extends \PHPUnit_Framework_TestCase
         $this->object->setReplace($expected);
         self::assertEquals($expected, $this->object->getReplace());
     }
+
+    public function testValidate()
+    {
+        $this->object->setCheck('(\d{3})-(\d{3})-(\d{4})');
+
+        self::assertTrue($this->object->validate('123-456-7890'));
+        self::assertFalse($this->object->validate('123-456-789'));
+        self::assertFalse($this->object->validate('abc-def-ghij'));
+        self::assertFalse($this->object->validate(''));
+        self::assertFalse($this->object->validate(null));
+    }
+
+    public function testTransform()
+    {
+        $expected = [
+            '123-456-7890' => '(123) 456-7890',
+            '123-456-789'  => '123-456-789',
+            'abc-def-ghij' => 'abc-def-ghij',
+            ''             => '',
+            null           => null,
+        ];
+
+        $this->object->setSearch('(\d{3})-(\d{3})-(\d{4})');
+        $this->object->setReplace('($1) $2-$3');
+
+        foreach ($expected as $from => $to) {
+            self::assertEquals($to, $this->object->transform($from));
+        }
+    }
+
+    public function testTransform1()
+    {
+        $expected = '123-456-7890';
+
+        $this->object->setSearch('(\d{3})-(\d{3})-(\d{4})');
+        self::assertEquals($expected, $this->object->transform($expected));
+
+        $this->object->setReplace('($1) $2-$3');
+        self::assertNotEquals($expected, $this->object->transform($expected));
+    }
+
+    public function testTransform2()
+    {
+        $expected = '123-456-7890';
+
+        $this->object->setReplace('($1) $2-$3');
+        self::assertEquals($expected, $this->object->transform($expected));
+
+        $this->object->setSearch('(\d{3})-(\d{3})-(\d{4})');
+        self::assertNotEquals($expected, $this->object->transform($expected));
+    }
 }

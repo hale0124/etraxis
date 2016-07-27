@@ -115,4 +115,32 @@ class FieldPCRE
     {
         return $this->replace;
     }
+
+    /**
+     * Checks whether specified value conforms to current PCRE configuration.
+     *
+     * @param   string $value
+     *
+     * @return  bool
+     */
+    public function validate($value)
+    {
+        return preg_match("/{$this->check}/isu", $value) === 1;
+    }
+
+    /**
+     * Updates specified value in accordance with current PCRE configuration.
+     *
+     * @param   string $value
+     *
+     * @return  string
+     */
+    public function transform($value)
+    {
+        if (strlen($this->search) === 0 || strlen($this->replace) === 0) {
+            return $value;
+        }
+
+        return preg_replace("/{$this->search}/isu", $this->replace, $value);
+    }
 }
