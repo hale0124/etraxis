@@ -1,5 +1,5 @@
 /*!
- *  Copyright (C) 2012-2015 Artem Rodygin
+ *  Copyright (C) 2012-2016 Artem Rodygin
  *
  *  You should have received a copy of the GNU General Public License
  *  along with the file. If not, see <http://www.gnu.org/licenses/>.
@@ -32,24 +32,27 @@ var datatables_language = window.datatables_language || {};
                 tableOnly: false,
                 contextMenu: false,
                 contextMenuCallback: null,
-
                 columnDefs: [],
-
-                ajax: {
-                    url: $(this).data('src'),
-                    error: function(xhr) {
-                        tableUnblock($table);
-                        eTraxis.alert(eTraxis.i18n['error'], xhr.responseText);
-                    }
-                },
-
+                ajax: null,
                 language: datatables_language
             };
 
             var settings = $.extend(true, defaults, options);
 
+            // Retrieve data endpoint in case of server-side processing.
+            if (settings.serverSide) {
+                settings.ajax = {
+                    url: $(this).data('src'),
+                    error: function(xhr) {
+                        tableUnblock($table);
+                        eTraxis.alert(eTraxis.i18n['error'], xhr.responseText);
+                    }
+                };
+            }
+
             // Disable header and footer.
             if (settings.tableOnly) {
+                settings.paging = false;
                 settings.dom = 't';
             }
 
