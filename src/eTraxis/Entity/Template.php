@@ -310,7 +310,7 @@ class Template extends Entity implements \JsonSerializable
     }
 
     /**
-     * Get list of template states.
+     * Returns list of template states.
      *
      * @return  State[]
      */
@@ -320,7 +320,7 @@ class Template extends Entity implements \JsonSerializable
     }
 
     /**
-     * Get initial state.
+     * Returns initial state.
      *
      * @return  State|null
      */

@@ -189,7 +189,7 @@ class Project implements \JsonSerializable
     }
 
     /**
-     * Get list of project groups.
+     * Returns list of project groups.
      *
      * @return  Group[]
      */
@@ -199,7 +199,7 @@ class Project implements \JsonSerializable
     }
 
     /**
-     * Get list of project templates.
+     * Returns list of project templates.
      *
      * @return  Template[]
      */

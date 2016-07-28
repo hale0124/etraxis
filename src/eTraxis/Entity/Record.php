@@ -543,7 +543,7 @@ class Record extends Entity
     }
 
     /**
-     * Get record history.
+     * Returns record history.
      *
      * @return  Event[]
      */
@@ -553,7 +553,7 @@ class Record extends Entity
     }
 
     /**
-     * Add watcher.
+     * Adds watcher.
      *
      * @param   Watcher $watcher
      *
@@ -567,7 +567,7 @@ class Record extends Entity
     }
 
     /**
-     * Remove watcher.
+     * Removes watcher.
      *
      * @param   Watcher $watcher
      *
@@ -581,7 +581,7 @@ class Record extends Entity
     }
 
     /**
-     * Get list of record watchers.
+     * Returns list of record watchers.
      *
      * @return  Watcher[]
      */

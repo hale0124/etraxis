@@ -1,4 +1,6 @@
-{% for comment in record.comments(is_granted(constant('eTraxis\\Voter\\RecordVoter::PRIVATE_COMMENTS'), record)) %}
+{% set showPrivate = is_granted(constant('eTraxis\\Voter\\RecordVoter::PRIVATE_COMMENTS'), record) %}
+
+{% for comment in record.comments(showPrivate) %}
     <fieldset class="{{ comment.isPrivate ? 'private' : '' }}">
         {% set timestamp = comment.event.createdAt|localizeddate('medium', 'short', app.user.locale, app.user.timezone) %}
         <legend>{{ timestamp ~ ', ' ~ comment.event.user.fullname }}</legend>

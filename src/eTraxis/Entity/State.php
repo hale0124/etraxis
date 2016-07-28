@@ -291,7 +291,7 @@ class State extends Entity implements \JsonSerializable
     }
 
     /**
-     * Get list of state fields.
+     * Returns list of state fields.
      *
      * @return  Field[]
      */
