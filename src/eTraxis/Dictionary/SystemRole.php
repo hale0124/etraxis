@@ -22,15 +22,9 @@ class SystemRole extends StaticDictionary
     const AUTHOR      = 'author';       // creator of the record
     const RESPONSIBLE = 'responsible';  // user assigned to the record
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function all()
-    {
-        return [
-            self::ANYONE      => 'role.any',
-            self::AUTHOR      => 'role.author',
-            self::RESPONSIBLE => 'role.responsible',
-        ];
-    }
+    protected static $dictionary = [
+        self::ANYONE      => 'role.any',
+        self::AUTHOR      => 'role.author',
+        self::RESPONSIBLE => 'role.responsible',
+    ];
 }

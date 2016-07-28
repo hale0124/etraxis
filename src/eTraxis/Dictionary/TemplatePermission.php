@@ -34,27 +34,21 @@ class TemplatePermission extends StaticDictionary
     const SEND_REMINDERS    = 'reminder.send';
     const DELETE_RECORDS    = 'record.delete';
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function all()
-    {
-        return [
-            self::VIEW_RECORDS      => 'template.permission.view_records',
-            self::CREATE_RECORDS    => 'template.permission.create_records',
-            self::EDIT_RECORDS      => 'template.permission.edit_records',
-            self::POSTPONE_RECORDS  => 'template.permission.postpone_records',
-            self::RESUME_RECORDS    => 'template.permission.resume_records',
-            self::REASSIGN_RECORDS  => 'template.permission.reassign_records',
-            self::REOPEN_RECORDS    => 'template.permission.reopen_records',
-            self::ADD_COMMENTS      => 'template.permission.add_comments',
-            self::PRIVATE_COMMENTS  => 'template.permission.private_comments',
-            self::ATTACH_FILES      => 'template.permission.attach_files',
-            self::DELETE_FILES      => 'template.permission.delete_files',
-            self::ATTACH_SUBRECORDS => 'template.permission.attach_subrecords',
-            self::DETACH_SUBRECORDS => 'template.permission.detach_subrecords',
-            self::SEND_REMINDERS    => 'template.permission.send_reminders',
-            self::DELETE_RECORDS    => 'template.permission.delete_records',
-        ];
-    }
+    protected static $dictionary = [
+        self::VIEW_RECORDS      => 'template.permission.view_records',
+        self::CREATE_RECORDS    => 'template.permission.create_records',
+        self::EDIT_RECORDS      => 'template.permission.edit_records',
+        self::POSTPONE_RECORDS  => 'template.permission.postpone_records',
+        self::RESUME_RECORDS    => 'template.permission.resume_records',
+        self::REASSIGN_RECORDS  => 'template.permission.reassign_records',
+        self::REOPEN_RECORDS    => 'template.permission.reopen_records',
+        self::ADD_COMMENTS      => 'template.permission.add_comments',
+        self::PRIVATE_COMMENTS  => 'template.permission.private_comments',
+        self::ATTACH_FILES      => 'template.permission.attach_files',
+        self::DELETE_FILES      => 'template.permission.delete_files',
+        self::ATTACH_SUBRECORDS => 'template.permission.attach_subrecords',
+        self::DETACH_SUBRECORDS => 'template.permission.detach_subrecords',
+        self::SEND_REMINDERS    => 'template.permission.send_reminders',
+        self::DELETE_RECORDS    => 'template.permission.delete_records',
+    ];
 }

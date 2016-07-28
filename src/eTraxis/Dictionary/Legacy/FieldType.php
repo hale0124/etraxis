@@ -18,21 +18,15 @@ use Dictionary\StaticDictionary;
  */
 class FieldType extends StaticDictionary
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function all()
-    {
-        return [
-            1 => 'number',
-            2 => 'string',
-            3 => 'text',
-            4 => 'checkbox',
-            5 => 'list',
-            6 => 'record',
-            7 => 'date',
-            8 => 'duration',
-            9 => 'decimal',
-        ];
-    }
+    protected static $dictionary = [
+        1 => 'number',
+        2 => 'string',
+        3 => 'text',
+        4 => 'checkbox',
+        5 => 'list',
+        6 => 'record',
+        7 => 'date',
+        8 => 'duration',
+        9 => 'decimal',
+    ];
 }

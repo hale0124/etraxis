@@ -24,17 +24,11 @@ class LineEnding extends StaticDictionary
     const UNIX      = 2;
     const MACINTOSH = 3;
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function all()
-    {
-        return [
-            self::WINDOWS   => 'Windows',
-            self::UNIX      => 'Unix',
-            self::MACINTOSH => 'Macintosh',
-        ];
-    }
+    protected static $dictionary = [
+        self::WINDOWS   => 'Windows',
+        self::UNIX      => 'Unix',
+        self::MACINTOSH => 'Macintosh',
+    ];
 
     /**
      * {@inheritdoc}

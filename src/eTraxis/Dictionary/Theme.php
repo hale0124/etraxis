@@ -27,18 +27,12 @@ class Theme extends StaticDictionary
     const MARS      = 'mars';
     const NEXADA    = 'nexada';
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function all()
-    {
-        return [
-            self::ALLBLACKS => 'All Blacks',
-            self::AZURE     => 'Azure',
-            self::EMERALD   => 'Emerald',
-            self::HUMANITY  => 'Humanity',
-            self::MARS      => 'Mars',
-            self::NEXADA    => 'Nexada',
-        ];
-    }
+    protected static $dictionary = [
+        self::ALLBLACKS => 'All Blacks',
+        self::AZURE     => 'Azure',
+        self::EMERALD   => 'Emerald',
+        self::HUMANITY  => 'Humanity',
+        self::MARS      => 'Mars',
+        self::NEXADA    => 'Nexada',
+    ];
 }

@@ -22,15 +22,9 @@ class StateType extends StaticDictionary
     const IS_INTERIM = 'interim';
     const IS_FINAL   = 'final';
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function all()
-    {
-        return [
-            self::IS_INITIAL => 'state.type.initial',
-            self::IS_INTERIM => 'state.type.interim',
-            self::IS_FINAL   => 'state.type.final',
-        ];
-    }
+    protected static $dictionary = [
+        self::IS_INITIAL => 'state.type.initial',
+        self::IS_INTERIM => 'state.type.interim',
+        self::IS_FINAL   => 'state.type.final',
+    ];
 }

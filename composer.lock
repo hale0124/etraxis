@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "1fc013bd6af2fd28081e3bf77c3b9c2b",
-    "content-hash": "403137b2d4cc1e09e553977c96ac497e",
+    "hash": "d8eb67453e308afe191a130da4a37c03",
+    "content-hash": "beb26676ebe7d40d510583ae681f4a8b",
     "packages": [
         {
             "name": "arodygin/datatables-bundle",
@@ -61,16 +61,16 @@
         },
         {
             "name": "arodygin/php-dictionary",
-            "version": "1.0.3",
+            "version": "1.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/arodygin/php-dictionary.git",
-                "reference": "f6a4dfef7bda5c8818fa095ff5a3ae85aa685657"
+                "reference": "f594080a85dc4656dab8c4af0d08e3fa6cdca82e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arodygin/php-dictionary/zipball/f6a4dfef7bda5c8818fa095ff5a3ae85aa685657",
-                "reference": "f6a4dfef7bda5c8818fa095ff5a3ae85aa685657",
+                "url": "https://api.github.com/repos/arodygin/php-dictionary/zipball/f594080a85dc4656dab8c4af0d08e3fa6cdca82e",
+                "reference": "f594080a85dc4656dab8c4af0d08e3fa6cdca82e",
                 "shasum": ""
             },
             "require": {
@@ -94,7 +94,7 @@
             "keywords": [
                 "dictionary"
             ],
-            "time": "2016-05-31 01:21:51"
+            "time": "2016-07-28 23:22:00"
         },
         {
             "name": "beberlei/assert",

@@ -23,14 +23,8 @@ class AuthenticationProvider extends StaticDictionary
     const ETRAXIS = 'etraxis';
     const LDAP    = 'ldap';
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function all()
-    {
-        return [
-            self::ETRAXIS => 'eTraxis',
-            self::LDAP    => 'LDAP',
-        ];
-    }
+    protected static $dictionary = [
+        self::ETRAXIS => 'eTraxis',
+        self::LDAP    => 'LDAP',
+    ];
 }

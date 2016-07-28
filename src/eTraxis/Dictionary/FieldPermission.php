@@ -28,15 +28,9 @@ class FieldPermission extends StaticDictionary
     const READ  = self::READ_ONLY;
     const WRITE = self::READ_WRITE;
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function all()
-    {
-        return [
-            self::NONE       => 'field.permissions.none',
-            self::READ_ONLY  => 'field.permissions.read_only',
-            self::READ_WRITE => 'field.permissions.read_write',
-        ];
-    }
+    protected static $dictionary = [
+        self::NONE       => 'field.permissions.none',
+        self::READ_ONLY  => 'field.permissions.read_only',
+        self::READ_WRITE => 'field.permissions.read_write',
+    ];
 }

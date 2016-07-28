@@ -27,20 +27,14 @@ class CsvDelimiter extends StaticDictionary
     const SEMICOLON     = 5;
     const VERTICAL_LINE = 6;
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function all()
-    {
-        return [
-            self::TAB           => 'key.tab',
-            self::SPACE         => 'key.space',
-            self::COMMA         => 'key.comma',
-            self::COLON         => 'key.colon',
-            self::SEMICOLON     => 'key.semicolon',
-            self::VERTICAL_LINE => 'key.vertical_line',
-        ];
-    }
+    protected static $dictionary = [
+        self::TAB           => 'key.tab',
+        self::SPACE         => 'key.space',
+        self::COMMA         => 'key.comma',
+        self::COLON         => 'key.colon',
+        self::SEMICOLON     => 'key.semicolon',
+        self::VERTICAL_LINE => 'key.vertical_line',
+    ];
 
     /**
      * {@inheritdoc}

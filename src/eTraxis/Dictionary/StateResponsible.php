@@ -22,15 +22,9 @@ class StateResponsible extends StaticDictionary
     const ASSIGN = 'assign';
     const REMOVE = 'remove';
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function all()
-    {
-        return [
-            self::KEEP   => 'state.responsible.keep',
-            self::ASSIGN => 'state.responsible.assign',
-            self::REMOVE => 'state.responsible.remove',
-        ];
-    }
+    protected static $dictionary = [
+        self::KEEP   => 'state.responsible.keep',
+        self::ASSIGN => 'state.responsible.assign',
+        self::REMOVE => 'state.responsible.remove',
+    ];
 }

@@ -20,33 +20,27 @@ class Locale extends StaticDictionary
 {
     const FALLBACK = 1000;
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function all()
-    {
-        return [
-            1000 => 'en_US',
-            1001 => 'en_GB',
-            1002 => 'en_CA',
-            1003 => 'en_AU',
-            1004 => 'en_NZ',
-            1010 => 'fr',
-            1020 => 'de',
-            1030 => 'it',
-            1040 => 'es',
-            1080 => 'pt_BR',
-            1090 => 'nl',
-            2020 => 'sv',
-            2050 => 'lv',
-            3000 => 'ru',
-            3030 => 'pl',
-            3040 => 'cs',
-            3060 => 'hu',
-            3130 => 'bg',
-            3140 => 'ro',
-            5000 => 'ja',
-            6000 => 'tr',
-        ];
-    }
+    protected static $dictionary = [
+        1000 => 'en_US',
+        1001 => 'en_GB',
+        1002 => 'en_CA',
+        1003 => 'en_AU',
+        1004 => 'en_NZ',
+        1010 => 'fr',
+        1020 => 'de',
+        1030 => 'it',
+        1040 => 'es',
+        1080 => 'pt_BR',
+        1090 => 'nl',
+        2020 => 'sv',
+        2050 => 'lv',
+        3000 => 'ru',
+        3030 => 'pl',
+        3040 => 'cs',
+        3060 => 'hu',
+        3130 => 'bg',
+        3140 => 'ro',
+        5000 => 'ja',
+        6000 => 'tr',
+    ];
 }

@@ -18,26 +18,20 @@ use Dictionary\StaticDictionary;
  */
 class EventType extends StaticDictionary
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function all()
-    {
-        return [
-            1  => 'record.created',
-            2  => 'record.assigned',
-            3  => 'record.edited',
-            4  => 'state.changed',
-            5  => 'record.postponed',
-            6  => 'record.resumed',
-            7  => 'comment.public',
-            8  => 'file.attached',
-            9  => 'file.deleted',
-            10 => 'record.cloned',
-            11 => 'subrecord.attached',
-            12 => 'subrecord.detached',
-            13 => 'comment.private',
-            14 => 'record.reopened',
-        ];
-    }
+    protected static $dictionary = [
+        1  => 'record.created',
+        2  => 'record.assigned',
+        3  => 'record.edited',
+        4  => 'state.changed',
+        5  => 'record.postponed',
+        6  => 'record.resumed',
+        7  => 'comment.public',
+        8  => 'file.attached',
+        9  => 'file.deleted',
+        10 => 'record.cloned',
+        11 => 'subrecord.attached',
+        12 => 'subrecord.detached',
+        13 => 'comment.private',
+        14 => 'record.reopened',
+    ];
 }

@@ -21,14 +21,8 @@ class DatabasePlatform extends StaticDictionary
     const MYSQL      = 'mysql';
     const POSTGRESQL = 'postgresql';
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function all()
-    {
-        return [
-            self::MYSQL      => 'MySQL',
-            self::POSTGRESQL => 'PostgreSQL',
-        ];
-    }
+    protected static $dictionary = [
+        self::MYSQL      => 'MySQL',
+        self::POSTGRESQL => 'PostgreSQL',
+    ];
 }

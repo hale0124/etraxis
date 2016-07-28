@@ -28,21 +28,15 @@ class FieldType extends StaticDictionary
     const DATE     = 'date';
     const DURATION = 'duration';
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function all()
-    {
-        return [
-            self::NUMBER   => 'field.type.number',
-            self::DECIMAL  => 'field.type.decimal',
-            self::STRING   => 'field.type.string',
-            self::TEXT     => 'field.type.text',
-            self::CHECKBOX => 'field.type.checkbox',
-            self::LIST     => 'field.type.list',
-            self::RECORD   => 'field.type.record',
-            self::DATE     => 'field.type.date',
-            self::DURATION => 'field.type.duration',
-        ];
-    }
+    protected static $dictionary = [
+        self::NUMBER   => 'field.type.number',
+        self::DECIMAL  => 'field.type.decimal',
+        self::STRING   => 'field.type.string',
+        self::TEXT     => 'field.type.text',
+        self::CHECKBOX => 'field.type.checkbox',
+        self::LIST     => 'field.type.list',
+        self::RECORD   => 'field.type.record',
+        self::DATE     => 'field.type.date',
+        self::DURATION => 'field.type.duration',
+    ];
 }

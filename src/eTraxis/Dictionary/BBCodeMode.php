@@ -24,15 +24,9 @@ class BBCodeMode extends StaticDictionary
     const INLINE = 'inline';    // Only "inline" tags (b, i, u, s, sub, sup, color, url, mail) will be processed, others will be stripped.
     const ALL    = 'all';       // All tags will be processed.
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function all()
-    {
-        return [
-            self::STRIP  => 'bbcode_strip.xsl',
-            self::INLINE => 'bbcode_inline.xsl',
-            self::ALL    => 'bbcode_all.xsl',
-        ];
-    }
+    protected static $dictionary = [
+        self::STRIP  => 'bbcode_strip.xsl',
+        self::INLINE => 'bbcode_inline.xsl',
+        self::ALL    => 'bbcode_all.xsl',
+    ];
 }

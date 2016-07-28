@@ -18,15 +18,9 @@ use Dictionary\StaticDictionary;
  */
 class StateType extends StaticDictionary
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function all()
-    {
-        return [
-            1 => 'initial',
-            2 => 'interim',
-            3 => 'final',
-        ];
-    }
+    protected static $dictionary = [
+        1 => 'initial',
+        2 => 'interim',
+        3 => 'final',
+    ];
 }

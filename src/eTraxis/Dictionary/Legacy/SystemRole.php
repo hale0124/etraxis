@@ -18,15 +18,9 @@ use Dictionary\StaticDictionary;
  */
 class SystemRole extends StaticDictionary
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function all()
-    {
-        return [
-            'registered_perm'  => 'anyone',
-            'author_perm'      => 'author',
-            'responsible_perm' => 'responsible',
-        ];
-    }
+    protected static $dictionary = [
+        'registered_perm'  => 'anyone',
+        'author_perm'      => 'author',
+        'responsible_perm' => 'responsible',
+    ];
 }

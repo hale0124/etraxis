@@ -15,8 +15,8 @@ class TimezoneTest extends \PHPUnit_Framework_TestCase
 {
     public function testDictionary()
     {
-        self::assertContains('UTC', Timezone::all());
-        self::assertContains('Asia/Vladivostok', Timezone::all());
-        self::assertContains('Pacific/Auckland', Timezone::all());
+        self::assertTrue(Timezone::has('UTC'));
+        self::assertTrue(Timezone::has('Asia/Vladivostok'));
+        self::assertTrue(Timezone::has('Pacific/Auckland'));
     }
 }

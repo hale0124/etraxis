@@ -20,33 +20,27 @@ class Locale extends StaticDictionary
 {
     const FALLBACK = 'en_US';
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function all()
-    {
-        return [
-            'bg'    => 'Български',
-            'cs'    => 'Čeština',
-            'de'    => 'Deutsch',
-            'en_AU' => 'English (Australia)',
-            'en_CA' => 'English (Canada)',
-            'en_NZ' => 'English (New Zealand)',
-            'en_GB' => 'English (United Kingdom)',
-            'en_US' => 'English (United States)',
-            'es'    => 'Español',
-            'fr'    => 'Français',
-            'hu'    => 'Magyar',
-            'it'    => 'Italiano',
-            'ja'    => '日本語',
-            'lv'    => 'Latviešu',
-            'nl'    => 'Nederlands',
-            'pl'    => 'Polski',
-            'pt_BR' => 'Português do Brasil',
-            'ro'    => 'Română',
-            'ru'    => 'Русский',
-            'sv'    => 'Svenska',
-            'tr'    => 'Türkçe',
-        ];
-    }
+    protected static $dictionary = [
+        'bg'    => 'Български',
+        'cs'    => 'Čeština',
+        'de'    => 'Deutsch',
+        'en_AU' => 'English (Australia)',
+        'en_CA' => 'English (Canada)',
+        'en_NZ' => 'English (New Zealand)',
+        'en_GB' => 'English (United Kingdom)',
+        'en_US' => 'English (United States)',
+        'es'    => 'Español',
+        'fr'    => 'Français',
+        'hu'    => 'Magyar',
+        'it'    => 'Italiano',
+        'ja'    => '日本語',
+        'lv'    => 'Latviešu',
+        'nl'    => 'Nederlands',
+        'pl'    => 'Polski',
+        'pt_BR' => 'Português do Brasil',
+        'ro'    => 'Română',
+        'ru'    => 'Русский',
+        'sv'    => 'Svenska',
+        'tr'    => 'Türkçe',
+    ];
 }

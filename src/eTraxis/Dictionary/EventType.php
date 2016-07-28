@@ -33,26 +33,20 @@ class EventType extends StaticDictionary
     const SUBRECORD_ATTACHED = 'subrecord.attached';
     const SUBRECORD_DETACHED = 'subrecord.detached';
 
-    /**
-     * {@inheritdoc}
-     */
-    public static function all()
-    {
-        return [
-            self::RECORD_CREATED     => 'event.record_created',
-            self::RECORD_EDITED      => 'event.record_edited',
-            self::RECORD_ASSIGNED    => 'event.record_assigned',
-            self::STATE_CHANGED      => 'event.state_changed',
-            self::RECORD_POSTPONED   => 'event.record_postponed',
-            self::RECORD_RESUMED     => 'event.record_resumed',
-            self::RECORD_CLONED      => 'event.record_cloned',
-            self::RECORD_REOPENED    => 'event.record_reopened',
-            self::PUBLIC_COMMENT     => 'event.comment_public',
-            self::PRIVATE_COMMENT    => 'event.comment_private',
-            self::FILE_ATTACHED      => 'event.file_attached',
-            self::FILE_DELETED       => 'event.file_deleted',
-            self::SUBRECORD_ATTACHED => 'event.subrecord_attached',
-            self::SUBRECORD_DETACHED => 'event.subrecord_detached',
-        ];
-    }
+    protected static $dictionary = [
+        self::RECORD_CREATED     => 'event.record_created',
+        self::RECORD_EDITED      => 'event.record_edited',
+        self::RECORD_ASSIGNED    => 'event.record_assigned',
+        self::STATE_CHANGED      => 'event.state_changed',
+        self::RECORD_POSTPONED   => 'event.record_postponed',
+        self::RECORD_RESUMED     => 'event.record_resumed',
+        self::RECORD_CLONED      => 'event.record_cloned',
+        self::RECORD_REOPENED    => 'event.record_reopened',
+        self::PUBLIC_COMMENT     => 'event.comment_public',
+        self::PRIVATE_COMMENT    => 'event.comment_private',
+        self::FILE_ATTACHED      => 'event.file_attached',
+        self::FILE_DELETED       => 'event.file_deleted',
+        self::SUBRECORD_ATTACHED => 'event.subrecord_attached',
+        self::SUBRECORD_DETACHED => 'event.subrecord_detached',
+    ];
 }

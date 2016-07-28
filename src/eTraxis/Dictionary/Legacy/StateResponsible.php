@@ -18,15 +18,9 @@ use Dictionary\StaticDictionary;
  */
 class StateResponsible extends StaticDictionary
 {
-    /**
-     * {@inheritdoc}
-     */
-    public static function all()
-    {
-        return [
-            1 => 'keep',
-            2 => 'assign',
-            3 => 'remove',
-        ];
-    }
+    protected static $dictionary = [
+        1 => 'keep',
+        2 => 'assign',
+        3 => 'remove',
+    ];
 }
