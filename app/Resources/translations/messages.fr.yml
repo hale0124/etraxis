@@ -63,6 +63,7 @@ description: Description
 language: Langue
 theme: Thème
 timezone: 'Fuseau horaire'
+timestamp: Timestamp
 user.confirm.delete: 'Etes-vous sur de vouloir effacer ce compte?'
 password.too_short: 'Le mot de passe doit comporter au moins %length% caracteres.'
 passwords.dont_match: 'Les mots de passe ne correspondent pas.'
@@ -189,3 +190,17 @@ record.id: ID
 record.subject: Sujet
 record.age: Âge
 record.no_fields: 'Pas de champs.'
+record.history: Historique
+event.record_created: 'Enregistrement créé en état "%value%".'
+event.record_edited: 'Enregistrement modifié.'
+event.record_assigned: 'Enregistrement affecté le %value%.'
+event.state_changed: 'Etat changé en "%value%".'
+event.record_postponed: 'Enregistrement ajourné au %value%.'
+event.record_resumed: 'Enregistrement repris.'
+event.record_cloned: 'Duplication de "%value%".'
+event.record_reopened: 'L''enregistrement est rouvert dans l''état "%value%".'
+event.comment_added: 'Commentaire ajoute.'
+event.file_attached: 'Fichier "%value%" attaché.'
+event.file_deleted: 'Fichier "%value%" enlevé.'
+event.subrecord_attached: 'Subrecord "%value%" ajoute.'
+event.subrecord_detached: 'Subrecord "%value%" enleve.'

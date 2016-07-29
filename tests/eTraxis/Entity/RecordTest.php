@@ -130,7 +130,41 @@ class RecordTest extends TransactionalTestCase
 
     public function testHistory()
     {
-        self::assertCount(3, $this->object->getHistory());
+        /** @var Record $record */
+        $record = $this->doctrine->getRepository(Record::class)->findOneBy([
+            'subject' => '200 feet of hanging rope for the hanging of multiheaded monster.',
+        ]);
+
+        self::assertCount(4, $record->getHistory());
+        self::assertCount(5, $record->getHistory(true));
+        self::assertCount(4, $record->getHistory(false));
+    }
+
+    public function testHistoryUsersAndStates()
+    {
+        /** @var Record $record */
+        $record = $this->doctrine->getRepository(Record::class)->findOneBy([
+            'subject' => '200 feet of hanging rope for the hanging of multiheaded monster.',
+        ]);
+
+        $history = $record->getHistory();
+
+        self::assertEquals('New', $history[0]->getValue());
+        self::assertEquals('Artem Rodygin', $history[1]->getValue());
+    }
+
+    public function testHistoryAttachments()
+    {
+        /** @var Record $record */
+        $record = $this->doctrine->getRepository(Record::class)->findOneBy([
+            'subject'  => 'Autoloading Standard',
+            'closedAt' => null,
+        ]);
+
+        $history = $record->getHistory();
+
+        self::assertEquals('example.php', $history[3]->getValue());
+        self::assertEquals('Meta Document.pdf', $history[4]->getValue());
     }
 
     public function testWatchers()

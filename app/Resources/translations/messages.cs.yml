@@ -63,6 +63,7 @@ description: Popis
 language: Jazyk
 theme: Vzhled
 timezone: 'Časová zóna'
+timestamp: 'Datum vzniku'
 user.confirm.delete: 'Jste si jisti, že chcete smazat tento účet?'
 password.too_short: 'Heslo musí být dlouhé alespoň %length% znaků.'
 passwords.dont_match: 'Hesla se neshodují.'
@@ -189,3 +190,17 @@ record.id: ID
 record.subject: Předmět
 record.age: Stáří
 record.no_fields: 'Žádná pole.'
+record.history: Historie
+event.record_created: 'Záznam je vytvořen ve stavu "%value%".'
+event.record_edited: 'Záznam je upraven.'
+event.record_assigned: 'Záznam je přiřazen uživateli %value%.'
+event.state_changed: 'Stav je změněn na "%value%".'
+event.record_postponed: 'Záznam je odložen do %value%.'
+event.record_resumed: 'Záznam je obnoven.'
+event.record_cloned: 'Záznam je kopií "%value%".'
+event.record_reopened: 'Záznam je znovu otevřen ve stavu "%value%".'
+event.comment_added: 'Komentář je přidán.'
+event.file_attached: 'Soubor "%value%" je přiložen.'
+event.file_deleted: 'Soubor "%value%" je odstraněn.'
+event.subrecord_attached: 'Podřízený záznam "%value%" byl přidán.'
+event.subrecord_detached: 'Podřízený záznam "%value%" byl odstraněn.'

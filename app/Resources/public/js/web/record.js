@@ -16,7 +16,31 @@ var RecordApp = (function() {
         $tabs.tabs('load', current);
     };
 
+    // Initializes current tab after it's been loaded.
+    $('#tabs-record').on('tabsload', function(e, ui) {
+        var init = $(ui.tab).data('init');
+        if (typeof init !== 'undefined') {
+            eval(init);
+        }
+    });
+
     return {
+
+        /**
+         * Initializes the first tab.
+         */
+        initDetails: function() {
+        },
+
+        /**
+         * Initializes the "History" tab.
+         */
+        initHistory: function() {
+            $('#history').table({
+                serverSide: false,
+                tableOnly: true
+            });
+        },
 
         /**
          * Redirects back to records list.

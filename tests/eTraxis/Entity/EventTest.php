@@ -63,4 +63,26 @@ class EventTest extends TransactionalTestCase
     {
         self::assertLessThanOrEqual(1, time() - $this->object->getCreatedAt());
     }
+
+    public function testParameter()
+    {
+        /** @var Record $record */
+        $record = $this->doctrine->getRepository(Record::class)->findOneBy([
+            'subject' => '200 feet of hanging rope for the hanging of multiheaded monster.',
+        ]);
+
+        $events = $record->getHistory();
+
+        self::assertNotNull(reset($events)->getParameter());
+        self::assertNotNull(next($events)->getParameter());
+        self::assertNull(next($events)->getParameter());
+        self::assertNull(next($events)->getParameter());
+    }
+
+    public function testValue()
+    {
+        $expected = 'Value';
+        $this->object->setValue($expected);
+        self::assertEquals($expected, $this->object->getValue());
+    }
 }

@@ -63,6 +63,7 @@ description: Descrizione
 language: Lingua
 theme: Tema
 timezone: 'Fuso Orario'
+timestamp: Timestamp
 user.confirm.delete: 'Eliminare questo account?'
 password.too_short: 'La password deve essere almeno lunga %length% caratteri.'
 passwords.dont_match: 'Le password non coincidono.'
@@ -189,3 +190,17 @@ record.id: ID
 record.subject: Oggetto
 record.age: Età
 record.no_fields: 'Nessun campo.'
+record.history: Storia
+event.record_created: 'Il record è stato creato nello stato "%value%".'
+event.record_edited: 'Il record è stato modificato.'
+event.record_assigned: 'Il record è stato assegnato a %value%.'
+event.state_changed: 'Lo stato è stato cambiato in "%value%".'
+event.record_postponed: 'Il record è stato posposto fino al %value%.'
+event.record_resumed: 'Il record è stato ripreso.'
+event.record_cloned: 'Il record è stato clonato da "%value%".'
+event.record_reopened: 'Il record è stato riaperto nello stato "%value%".'
+event.comment_added: 'Il commento è stato aggiunto.'
+event.file_attached: 'Il file "%value%" è stato allegato.'
+event.file_deleted: 'Il file "%value%" è stato rimosso.'
+event.subrecord_attached: 'Il subrecord "%value%" è stato aggiunto.'
+event.subrecord_detached: 'Il subrecord "%value%" è stato rimosso.'

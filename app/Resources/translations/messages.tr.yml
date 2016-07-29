@@ -63,6 +63,7 @@ description: Yorum
 language: Dil
 theme: Tema
 timezone: 'Saat dilimi'
+timestamp: 'Tarih bilgisi'
 user.confirm.delete: 'Bu hesabı silmek istediğinizden emin misiniz?'
 password.too_short: 'Parola en az %length% karakter uzunluğunda olmalıdır.'
 passwords.dont_match: 'Parolalar uyuşmuyor.'
@@ -189,3 +190,17 @@ record.id: ID
 record.subject: Konu
 record.age: Dönem
 record.no_fields: 'Alan yok.'
+record.history: Geçmiş
+event.record_created: 'Kayıt, "%value%" durumunda oluşturuldu.'
+event.record_edited: 'Kayıt değiştirildi.'
+event.record_assigned: 'Kayıt, atandı: %value%.'
+event.state_changed: 'Durum, "%value%" olarak değiştirildi.'
+event.record_postponed: 'Kayıt, %value% tarihine ertelendi.'
+event.record_resumed: 'Kayıt devam ettirildi.'
+event.record_cloned: 'Kayıt, "%value%"den klonlanmış.'
+event.record_reopened: 'Kayıt, "%value%" durumunda yeniden açıldı.'
+event.comment_added: 'Yorum eklendi.'
+event.file_attached: '"%value%" dosyası eklendi.'
+event.file_deleted: '"%value%" dosyası kaldırıldı.'
+event.subrecord_attached: '"%value%" alt kaydı eklendi.'
+event.subrecord_detached: '"%value%" alt kaydı kaldırıldı.'

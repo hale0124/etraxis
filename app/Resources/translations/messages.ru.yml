@@ -63,6 +63,7 @@ description: Описание
 language: Язык
 theme: 'Тема оформления'
 timezone: 'Часовой пояс'
+timestamp: Время
 user.confirm.delete: 'Вы уверены, что хотите удалить эту учетную запись?'
 password.too_short: 'Пароль должен содержать как минимум %length% символов.'
 passwords.dont_match: 'Пароли не совпадают.'
@@ -189,3 +190,17 @@ record.id: ID
 record.subject: Тема
 record.age: Возраст
 record.no_fields: 'Нет атрибутов.'
+record.history: История
+event.record_created: 'Запись создана в состоянии "%value%".'
+event.record_edited: 'Запись отредактирована.'
+event.record_assigned: 'Запись назначена на %value%.'
+event.state_changed: 'Состояние изменено на "%value%".'
+event.record_postponed: 'Запись отложена до %value%.'
+event.record_resumed: 'Запись возобновлена.'
+event.record_cloned: 'Запись склонирована из "%value%".'
+event.record_reopened: 'Запись повторно открыта в состоянии "%value%".'
+event.comment_added: 'Добавлен комментарий.'
+event.file_attached: 'Файл "%value%" прикреплен.'
+event.file_deleted: 'Файл "%value%" удален.'
+event.subrecord_attached: 'Добавлена подзапись "%value%".'
+event.subrecord_detached: 'Удалена подзапись "%value%".'

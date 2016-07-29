@@ -63,6 +63,7 @@ description: 説明
 language: 言語
 theme: テーマ
 timezone: タイムゾーン
+timestamp: タイムスタンプ
 user.confirm.delete: アカウントを削除してよろしいですか？
 password.too_short: 'パスワードは最低 %length% 文字以上である必要があります。'
 passwords.dont_match: パスワードが一致しません。
@@ -189,3 +190,17 @@ record.id: ID
 record.subject: タイトル
 record.age: 必須対応日数
 record.no_fields: フィールド無し
+record.history: 履歴
+event.record_created: 'レコードは "%value%" のステータスで作成されました。'
+event.record_edited: レコードが変更されました。
+event.record_assigned: 'レコードは %value% にアサインされました。'
+event.state_changed: 'スタータスは "%value%" に変更されました。'
+event.record_postponed: 'レコードは %value% まで中断されます。'
+event.record_resumed: レコードが再開されました。
+event.record_cloned: 'レコードは "%value%" からコピーされました。'
+event.record_reopened: 'レコードは "%value%" の状態で再オープンされました。'
+event.comment_added: コメントが追加されました。
+event.file_attached: 'ファイル "%value%" が添付されました。'
+event.file_deleted: 'ファイル "%value%" が削除されました。'
+event.subrecord_attached: 'サブレコード "%value%" が追加されました。'
+event.subrecord_detached: 'サブレコード "%value%" が削除されました。'

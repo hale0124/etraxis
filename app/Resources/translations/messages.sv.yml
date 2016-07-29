@@ -63,6 +63,7 @@ description: Beskrivning
 language: Språk
 theme: Tema
 timezone: Tidszon
+timestamp: Tidsstämpel
 user.confirm.delete: 'Är du säker på att du vill ta bort detta kontot?'
 password.too_short: 'Lösenord ska vara minst %length% tecken långt.'
 passwords.dont_match: 'Lösenorden matchar inte.'
@@ -189,3 +190,17 @@ record.id: ID
 record.subject: Ämne
 record.age: Ålder
 record.no_fields: 'Inga fält.'
+record.history: Historia
+event.record_created: 'Posten är skapad med status "%value%".'
+event.record_edited: 'Posten är ändrad.'
+event.record_assigned: 'Posten är tilldelad till %value%.'
+event.state_changed: 'Status är ändrad till "%value%".'
+event.record_postponed: 'Posten är uppskjuten till %value%.'
+event.record_resumed: 'Posten är återupptagen.'
+event.record_cloned: 'Posten ar klonad från "%value%".'
+event.record_reopened: 'Posten öppnas igen med status "%value%".'
+event.comment_added: 'Kommentar lades till.'
+event.file_attached: 'Filen "%value%" är bifogad.'
+event.file_deleted: 'Filen "%value%" är borttagen.'
+event.subrecord_attached: 'Underpost "%value%" är tilllagd.'
+event.subrecord_detached: 'Underpost "%value%" är borttagen.'

@@ -63,6 +63,7 @@ description: Beschrijving
 language: Taal
 theme: Thema
 timezone: UL
+timestamp: Tijd
 user.confirm.delete: 'Ben je zeker dat je deze account wilt verwijderen?'
 password.too_short: 'Wachtwoord moet tenminste %length% tekens bevatten.'
 passwords.dont_match: 'Wachtwoorden stemmen niet overeen.'
@@ -189,3 +190,17 @@ record.id: ID
 record.subject: Onderwerp
 record.age: Leeftijd
 record.no_fields: 'Geen velden.'
+record.history: Geschiedenis
+event.record_created: 'Record is aangemaakt in "%value%" status.'
+event.record_edited: 'Record is bewerkt.'
+event.record_assigned: 'Record is toegewezen aan %value%.'
+event.state_changed: 'Status is gewijzigd naar "%value%".'
+event.record_postponed: 'Record is uitgesteld tot %value%.'
+event.record_resumed: 'Record is hervat.'
+event.record_cloned: 'Record is gekopieerd van "%value%".'
+event.record_reopened: UL
+event.comment_added: 'Reactie is toegevoegd.'
+event.file_attached: 'Bestand "%value%" is bijgevoegd.'
+event.file_deleted: 'Bestand "%value%" is verwijderd.'
+event.subrecord_attached: 'Subrecord "%value%" is toegevoegd.'
+event.subrecord_detached: 'Subrecord "%value%" is verwijderd.'

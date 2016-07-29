@@ -11,6 +11,7 @@
 
 namespace AppBundle\Controller\Web;
 
+use eTraxis\Dictionary\EventType;
 use eTraxis\Entity\Record;
 use eTraxis\Service\Export\ExportCsvQuery;
 use eTraxis\SimpleBus\Middleware\ValidationException;
@@ -157,6 +158,25 @@ class RecordsGetController extends Controller
 
         return $this->render('web/records/tab_details.html.twig', [
             'record' => $record,
+        ]);
+    }
+
+    /**
+     * Tab with record's history.
+     *
+     * @Action\Route("/tab/history/{id}", name="web_tab_record_history", requirements={"id"="\d+"})
+     *
+     * @param   Record $record
+     *
+     * @return  Response
+     */
+    public function tabHistoryAction(Record $record): Response
+    {
+        $this->denyAccessUnlessGranted(RecordVoter::VIEW, $record);
+
+        return $this->render('web/records/tab_history.html.twig', [
+            'record' => $record,
+            'types'  => EventType::all(),
         ]);
     }
 }

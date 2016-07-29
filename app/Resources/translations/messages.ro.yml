@@ -63,6 +63,7 @@ description: Descriere
 language: Limba
 theme: Tema
 timezone: 'Fus orar'
+timestamp: Data
 user.confirm.delete: 'Sunteti sigur ca doriti sa stergeti acest cont?'
 password.too_short: 'Parola trebuie sa aiba cel putin %length% caractere.'
 passwords.dont_match: 'Parola nu este identica.'
@@ -189,3 +190,17 @@ record.id: ID
 record.subject: Subiect
 record.age: 'Vechime (zile)'
 record.no_fields: 'Nr campuri.'
+record.history: Istoric
+event.record_created: 'Inregistrarea e creata cu starea "%value%".'
+event.record_edited: 'Inregistrarea e modificata.'
+event.record_assigned: 'Inregistrarea e asignata lui %value%.'
+event.state_changed: 'Starea e schimbata la "%value%".'
+event.record_postponed: 'Inregistrarea e amanata pana la %value%.'
+event.record_resumed: 'Inregistrarea a fost reluata.'
+event.record_cloned: 'Inregistrarea este clonata din "%value%".'
+event.record_reopened: 'Tichetul este redeschis in starea %value%.'
+event.comment_added: 'Comentariul este adaugat.'
+event.file_attached: 'Fisierul "%value%" este atasat.'
+event.file_deleted: 'Fisierul "%value%" este sters.'
+event.subrecord_attached: 'Inregistrarea fiu "%value%" este adaugata.'
+event.subrecord_detached: 'Inregistrarea fiu "%value%" este stearsa.'

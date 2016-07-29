@@ -63,6 +63,7 @@ description: Description
 language: Language
 theme: Theme
 timezone: Timezone
+timestamp: Timestamp
 user.confirm.delete: 'Are you sure you want delete this account?'
 password.too_short: 'Password should be at least %length% characters length.'
 passwords.dont_match: 'Passwords do not match.'
@@ -189,3 +190,17 @@ record.id: ID
 record.subject: Subject
 record.age: Age
 record.no_fields: 'No fields.'
+record.history: History
+event.record_created: 'Record is created in state "%value%".'
+event.record_edited: 'Record is edited.'
+event.record_assigned: 'Record is assigned to %value%.'
+event.state_changed: 'State is changed to "%value%".'
+event.record_postponed: 'Record is postponed till %value%.'
+event.record_resumed: 'Record is resumed.'
+event.record_cloned: 'Record is cloned from "%value%".'
+event.record_reopened: 'Record is reopened in state "%value%".'
+event.comment_added: 'Comment is added.'
+event.file_attached: 'File "%value%" is attached.'
+event.file_deleted: 'File "%value%" is deleted.'
+event.subrecord_attached: 'Subrecord "%value%" is added.'
+event.subrecord_detached: 'Subrecord "%value%" is removed.'

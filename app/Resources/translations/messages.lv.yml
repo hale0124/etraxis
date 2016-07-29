@@ -63,6 +63,7 @@ description: Apraksts
 language: Valoda
 theme: Motīvs
 timezone: 'Laika zona'
+timestamp: Laiks
 user.confirm.delete: 'Vai tiešām vēlaties dzēst šo kontu?'
 password.too_short: 'Parolei jāsatur vismaz %length% simbolu.'
 passwords.dont_match: 'Paroles nesakrīt.'
@@ -189,3 +190,17 @@ record.id: ID
 record.subject: Temats
 record.age: Vecums
 record.no_fields: 'Nav atribūtu.'
+record.history: Vēsture
+event.record_created: 'Ieraksts ir izveidots "%value%" stāvoklī'
+event.record_edited: 'Ieraksts ir mainīts'
+event.record_assigned: 'Ieraksts adresēts uz %value%.'
+event.state_changed: 'Stāvoklis ir mainīts uz "%value%"'
+event.record_postponed: 'Ieraksts ir atlikts līdz "%value%"'
+event.record_resumed: 'Ieraksts ir atsākts'
+event.record_cloned: 'Ieraksts klonēts no "%value%".'
+event.record_reopened: 'Ieraksts tika atvērts no jauna “%value%” stāvoklī.'
+event.comment_added: 'Komentārs tika pievienots.'
+event.file_attached: 'Fails "%value%" tika pievienots'
+event.file_deleted: 'Fails "%value%" tika dzēsts'
+event.subrecord_attached: 'Pievienots "%value%" pēctecis.'
+event.subrecord_detached: 'Novākts „%value%” pēctecis.'

@@ -63,6 +63,7 @@ description: Beschreibung
 language: Sprache
 theme: Aussehen
 timezone: Zeitzone
+timestamp: Zeitmarke
 user.confirm.delete: 'Möchten Sie dieses Konto wirklich löschen?'
 password.too_short: 'Das Passwort muss mindestens %length% Zeichen lang sein.'
 passwords.dont_match: 'Die Passwörter stimmen nicht überein.'
@@ -189,3 +190,17 @@ record.id: ID
 record.subject: Betreff
 record.age: Alter
 record.no_fields: 'Keine Zusätze.'
+record.history: Historie
+event.record_created: 'Die Anfrage wird im Status "%value%" erstellt.'
+event.record_edited: 'Die Anfrage wird geändert.'
+event.record_assigned: 'Die Anfrage wird %value% zugewiesen.'
+event.state_changed: 'Der Status wechselt nach "%value%".'
+event.record_postponed: 'Die Anfrage wird bis zum %value% verzögert.'
+event.record_resumed: 'Die Anfrage wird wiederaufgenommen.'
+event.record_cloned: 'Anfrage wird geklont von "%value%".'
+event.record_reopened: 'Anfrage wurde im Status "%value%" wiedereröffnet.'
+event.comment_added: 'Kommentar hinzugefügt.'
+event.file_attached: 'Datei "%value%" wird angehangen.'
+event.file_deleted: 'Datei "%value%" wird entfernt.'
+event.subrecord_attached: 'Unteranfrage wird "%value%" hinzugefügt.'
+event.subrecord_detached: 'Unteranfrage wird von "%value%" entfernt.'

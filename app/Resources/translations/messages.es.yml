@@ -63,6 +63,7 @@ description: Descripción
 language: Idioma
 theme: Tema
 timezone: 'Zona horaria'
+timestamp: 'Fecha y Hora'
 user.confirm.delete: '¿Está seguro de eliminar esta cuenta?'
 password.too_short: 'La contraseña debe tener una logintud mínima de %length% caracteres.'
 passwords.dont_match: 'Las contraseñas no coinciden.'
@@ -189,3 +190,17 @@ record.id: ID
 record.subject: Asunto
 record.age: Edad
 record.no_fields: 'Sin campos.'
+record.history: Historial
+event.record_created: 'Registro creado con el estado "%value%".'
+event.record_edited: 'Se modificó el registro.'
+event.record_assigned: 'Se asignó el registro a %value%.'
+event.state_changed: 'Se cambió el estado a "%value%".'
+event.record_postponed: 'Se aplazó el registro hasta el %value%.'
+event.record_resumed: 'Se reanudó el registro.'
+event.record_cloned: 'El registro fue clonado desde "%value%".'
+event.record_reopened: 'El registro fue reabierto en el estado de "%value%".'
+event.comment_added: 'Se añadió un comentario.'
+event.file_attached: 'Se adjuntó el archivo "%value%".'
+event.file_deleted: 'El archivo "%value%" fue eliminado.'
+event.subrecord_attached: 'El subregistro "%value%" fue añadido.'
+event.subrecord_detached: 'El subregistro "%value%" fue eliminado.'

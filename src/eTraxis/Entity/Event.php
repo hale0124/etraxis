@@ -90,6 +90,11 @@ class Event
     private $parameter;
 
     /**
+     * @var string User-friendly parameter's value (state name instead of state ID, etc).
+     */
+    private $value;
+
+    /**
      * Constructor.
      *
      * @param   Record $record
@@ -158,5 +163,39 @@ class Event
     public function getCreatedAt()
     {
         return $this->createdAt;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  int
+     */
+    public function getParameter()
+    {
+        return $this->parameter;
+    }
+
+    /**
+     * Property setter.
+     *
+     * @param   string $value
+     *
+     * @return  self
+     */
+    public function setValue(string $value = null)
+    {
+        $this->value = $value;
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  string
+     */
+    public function getValue()
+    {
+        return $this->value;
     }
 }

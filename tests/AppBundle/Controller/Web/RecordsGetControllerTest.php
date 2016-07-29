@@ -142,4 +142,27 @@ class RecordsGetControllerTest extends ControllerTestCase
         $this->makeRequest(Request::METHOD_GET, $uri, true);
         $this->assertStatusCode(Response::HTTP_OK);
     }
+
+    public function testTabHistoryAction()
+    {
+        $uri = $this->router->generate('web_tab_record_history', [
+            'id' => $this->record->getId(),
+        ]);
+
+        $this->makeRequest(Request::METHOD_GET, $uri, true);
+        $this->assertStatusCode(Response::HTTP_UNAUTHORIZED);
+
+        $this->makeRequest(Request::METHOD_POST, $uri, true);
+        $this->assertStatusCode(Response::HTTP_METHOD_NOT_ALLOWED);
+
+        $this->loginAs('hubert');
+
+        $this->makeRequest(Request::METHOD_GET, $uri, true);
+        $this->assertStatusCode(Response::HTTP_FORBIDDEN);
+
+        $this->loginAs('mwop');
+
+        $this->makeRequest(Request::METHOD_GET, $uri, true);
+        $this->assertStatusCode(Response::HTTP_OK);
+    }
 }

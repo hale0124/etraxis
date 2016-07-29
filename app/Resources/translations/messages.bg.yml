@@ -63,6 +63,7 @@ description: Описание
 language: Език
 theme: Тема
 timezone: 'Времева зона'
+timestamp: Таймстемп
 user.confirm.delete: 'Сигурен ли сте че искате да изтриете този акаунт?'
 password.too_short: 'Паролата трябва да е най-малко с %length% символ дължина.'
 passwords.dont_match: 'Паролите не са еднакви.'
@@ -189,3 +190,17 @@ record.id: ID
 record.subject: Тема
 record.age: Възраст
 record.no_fields: 'Няма полета.'
+record.history: История
+event.record_created: 'Записът е създаден по условие "%value%".'
+event.record_edited: 'Записът е променен.'
+event.record_assigned: 'Записът е определен на %value%.'
+event.state_changed: 'Условието е променено на "%value%".'
+event.record_postponed: 'Записът е отложен до %value%.'
+event.record_resumed: 'Записът е въстанове.'
+event.record_cloned: 'Записът е клониран от "%value%".'
+event.record_reopened: 'Записът е възобновен в състояние "%value%".'
+event.comment_added: 'Коментарът е добавен.'
+event.file_attached: 'Файл "%value%" е прикрепен.'
+event.file_deleted: 'Файл "%value%" е премахнат.'
+event.subrecord_attached: 'Подзапис "%value%" е добавен.'
+event.subrecord_detached: 'Подзапис "%value%" е премахнат.'

@@ -6,7 +6,8 @@
         <div class="grid-100">
             <div class="tabs" id="tabs-record" data-tab="{{ tab }}">
                 <ul>
-                    <li><a href="{{ path('web_tab_record_details', {'id': record.id}) }}">{{ record.recordId }}</a></li>
+                    <li data-init="RecordApp.initDetails()"><a href="{{ path('web_tab_record_details', {'id': record.id}) }}">{{ record.recordId }}</a></li>
+                    <li data-init="RecordApp.initHistory()"><a href="{{ path('web_tab_record_history', {'id': record.id}) }}">{{ 'record.history'|trans }}</a></li>
                 </ul>
             </div>
         </div>

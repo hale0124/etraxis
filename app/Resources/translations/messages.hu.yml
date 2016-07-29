@@ -63,6 +63,7 @@ description: Leírás
 language: Nyelv
 theme: Téma
 timezone: Időzóna
+timestamp: Időpont
 user.confirm.delete: 'Biztos törölni szeretné a felhasználót?'
 password.too_short: 'A jelszónak legalább %length% hosszúságúnak kell lennie.'
 passwords.dont_match: 'A jelszavak nem egyeznek.'
@@ -189,3 +190,17 @@ record.id: ID
 record.subject: Tárgy
 record.age: Kor
 record.no_fields: 'Nincsenek mezők.'
+record.history: Eseménynapló
+event.record_created: 'Rekord létrehozva a következő állapottal: "%value%".'
+event.record_edited: 'Rekord módosítva.'
+event.record_assigned: 'A rekord új felelőse: %value%.'
+event.state_changed: 'A rekord állapota megváltozott: "%value%".'
+event.record_postponed: 'A rekord végrehajtása elhalasztva eddig: %value%.'
+event.record_resumed: 'A rekord folytatva.'
+event.record_cloned: 'A rekord a következő másolata: "%value%".'
+event.record_reopened: 'A rekordot újra megnyitották a következő állapotban: “%value%”.'
+event.comment_added: 'Hozzászólás beküldve.'
+event.file_attached: 'A(z) "%value%" csatolva.'
+event.file_deleted: 'A(z) "%value%" nevű fájl törölve.'
+event.subrecord_attached: 'A(z) "%value%" alrekord létrehozva.'
+event.subrecord_detached: 'A(z) "%value%" alrekord törölve.'
