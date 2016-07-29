@@ -80,6 +80,8 @@ key.colon: Colon
 key.semicolon: Semicolon
 key.vertical_line: 'Vertical line'
 file: Dosya
+files: Dosyalar
+kb: KB
 size: Boyut
 delimiter: Sınırlayıcı
 encoding: Kodlama

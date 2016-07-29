@@ -725,4 +725,28 @@ class Record extends Entity
 
         return $query->getQuery()->getResult();
     }
+
+    /**
+     * Returns all record's attachments (except deleted).
+     *
+     * @return  Attachment[]
+     */
+    public function getAttachments()
+    {
+        $query = $this->manager->createQueryBuilder()
+            ->select('attachment')
+            ->addSelect('event')
+            ->from(Attachment::class, 'attachment')
+            ->innerJoin('attachment.event', 'event')
+            ->where('event.record = :record')
+            ->andWhere('attachment.isDeleted = false')
+            ->orderBy('attachment.name')
+        ;
+
+        $query->setParameters([
+            'record' => $this->id,
+        ]);
+
+        return $query->getQuery()->getResult();
+    }
 }

@@ -80,6 +80,8 @@ key.colon: Colon
 key.semicolon: Semicolon
 key.vertical_line: 'Vertical line'
 file: Soubor
+files: Soubory
+kb: KB
 size: Velikost
 delimiter: Oddělovač
 encoding: Kódování

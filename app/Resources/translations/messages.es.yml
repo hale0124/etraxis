@@ -80,6 +80,8 @@ key.colon: Colon
 key.semicolon: 'Punto y Coma'
 key.vertical_line: 'Vertical line'
 file: Fichero
+files: Ficheros
+kb: KB
 size: Tamaño
 delimiter: Delimitador
 encoding: Codificación

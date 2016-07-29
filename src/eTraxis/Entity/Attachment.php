@@ -12,6 +12,8 @@
 namespace eTraxis\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use eTraxis\Dictionary\EventType;
+use eTraxis\Dictionary\MimeType;
 
 /**
  * Attachment.
@@ -72,4 +74,94 @@ class Attachment
      * @ORM\Column(name="is_deleted", type="boolean")
      */
     private $isDeleted;
+
+    /**
+     * Attaches new file to specified record.
+     *
+     * @param   Record $record    Target record.
+     * @param   User   $user      User attaching the file.
+     * @param   string $name      File name.
+     * @param   int    $size      File size.
+     * @param   string $type      MIME type.
+     */
+    public function __construct(Record $record, User $user, string $name, int $size, string $type)
+    {
+        $this->event = new Event($record, $user, EventType::FILE_ATTACHED);
+
+        $this->name = $name;
+        $this->size = $size;
+        $this->type = $type;
+
+        $this->isDeleted = false;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  Event
+     */
+    public function getEvent()
+    {
+        return $this->event;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  string
+     */
+    public function getName()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  int
+     */
+    public function getSize()
+    {
+        return $this->size;
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  string
+     */
+    public function getType()
+    {
+        return $this->type;
+    }
+
+    /**
+     * Returns name of image file which corresponds to attachment's MIME type.
+     *
+     * @return  string
+     */
+    public function getMimeImage()
+    {
+        return MimeType::get($this->type);
+    }
+
+    /**
+     * Property getter.
+     *
+     * @return  bool
+     */
+    public function isDeleted()
+    {
+        return $this->isDeleted;
+    }
 }

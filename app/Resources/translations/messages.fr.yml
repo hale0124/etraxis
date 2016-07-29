@@ -80,6 +80,8 @@ key.colon: Colon
 key.semicolon: 'Point virgule'
 key.vertical_line: 'Vertical line'
 file: Fichier
+files: Fichiers
+kb: ko
 size: Taille
 delimiter: Délimiteur
 encoding: Codage

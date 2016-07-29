@@ -80,6 +80,8 @@ key.colon: Colon
 key.semicolon: Semicolon
 key.vertical_line: 'Vertical line'
 file: Arquivo
+files: Arquivos
+kb: KB
 size: Tamanho
 delimiter: Delimitador
 encoding: Codificação

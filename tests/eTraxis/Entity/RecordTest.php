@@ -349,4 +349,15 @@ class RecordTest extends TransactionalTestCase
         self::assertCount(3, $record->getComments(true));
         self::assertCount(2, $record->getComments(false));
     }
+
+    public function testGetAttachments()
+    {
+        /** @var Record $record */
+        $record = $this->doctrine->getRepository(Record::class)->findOneBy([
+            'subject'  => 'Autoloading Standard',
+            'closedAt' => null,
+        ]);
+
+        self::assertCount(1, $record->getAttachments());
+    }
 }

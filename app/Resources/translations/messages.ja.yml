@@ -80,6 +80,8 @@ key.colon: Colon
 key.semicolon: セミコロン
 key.vertical_line: 'Vertical line'
 file: ファイル
+files: ファイル
+kb: KB
 size: サイズ
 delimiter: 区切り文字
 encoding: 出力時のエンコード

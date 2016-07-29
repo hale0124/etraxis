@@ -80,6 +80,8 @@ key.colon: Colon
 key.semicolon: Semicolon
 key.vertical_line: 'Vertical line'
 file: Fișier
+files: Fișierele
+kb: KB
 size: Mărime
 delimiter: Delimitator
 encoding: Codare

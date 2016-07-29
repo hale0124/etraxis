@@ -81,7 +81,7 @@ class Event
      *      PUBLIC_COMMENT     - NULL (not used)
      *      PRIVATE_COMMENT    - NULL (not used)
      *      FILE_ATTACHED      - NULL (not used)
-     *      FILE_DELETED       - NULL (not used)
+     *      FILE_DELETED       - ID of the deleted attachment
      *      SUBRECORD_ATTACHED - ID of the attached record
      *      SUBRECORD_DETACHED - ID of the detached record
      *

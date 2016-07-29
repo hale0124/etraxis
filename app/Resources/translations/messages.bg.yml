@@ -80,6 +80,8 @@ key.colon: Двоеточие
 key.semicolon: 'Точка и запетая'
 key.vertical_line: 'Vertical line'
 file: Файл
+files: Файлове
+kb: KB
 size: Големина
 delimiter: Разделител
 encoding: Шифриране

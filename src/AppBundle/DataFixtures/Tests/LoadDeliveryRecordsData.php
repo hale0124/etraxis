@@ -257,19 +257,19 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
                 'comments'    => [
                     [
                         'user'    => 'user:hubert',
-                        'time'    => '2011-07-14 08:35:14',
+                        'time'    => '2011-07-14 09:35:14',
                         'private' => false,
                         'text'    => 'Good news, everyone! Our next delivery isn\'t to some dangerous, outer-space planet. It\'s to Earth!',
                     ],
                     [
                         'user'    => 'user:fry',
-                        'time'    => '2011-07-14 08:35:17',
+                        'time'    => '2011-07-14 09:35:17',
                         'private' => true,
                         'text'    => 'Earth is dangerous. I fell off my chair there once.',
                     ],
                     [
                         'user'    => 'user:leela',
-                        'time'    => '2011-07-14 08:35:21',
+                        'time'    => '2011-07-14 09:35:21',
                         'private' => false,
                         'text'    => 'We won\'t even have to leave New New York! The package is going to Long Long Island.',
                     ],

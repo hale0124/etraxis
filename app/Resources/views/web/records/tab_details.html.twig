@@ -18,6 +18,7 @@
             {{ macro.row('project'|trans, record.project.name) }}
             {{ macro.row('template'|trans, record.template.name) }}
         </fieldset>
+        {% include 'web/records/_attachments.html.twig' with { 'record': record } %}
         {% include 'web/records/_states.html.twig' with { 'record': record } %}
     </div>
     <div class="grid-50 mobile-grid-100">

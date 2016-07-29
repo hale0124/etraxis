@@ -15,6 +15,7 @@ use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
 use eTraxis\Dictionary\EventType;
+use eTraxis\Entity\Attachment;
 use eTraxis\Entity\Event;
 use eTraxis\Entity\FieldValue;
 use eTraxis\Entity\LastRead;
@@ -100,6 +101,24 @@ class LoadPhpPsrRecordsData extends AbstractFixture implements ContainerAwareInt
                 'deprecated'  => null,
                 'postponed'   => null,
                 'description' => 'This PSR describes a specification for [url=http://php.net/autoload]autoloading[/url] classes from file paths. It is fully interoperable, and can be used in addition to any other autoloading specification, including PSR-0. This PSR also describes where to place files that will be autoloaded according to the specification.',
+                'attachments' => [
+                    '2013-12-05 00:21 GMT+13' => [
+                        'new'  => true,
+                        'name' => 'Meta Document.pdf',
+                        'size' => 6645,
+                        'type' => 'application/pdf',
+                    ],
+                    '2014-10-16 08:59 GMT+13' => [
+                        'new'  => true,
+                        'name' => 'example.php',
+                        'size' => 5891,
+                        'type' => 'application/x-httpd-php-source',
+                    ],
+                    '2015-06-11 02:18 GMT+13' => [
+                        'new'  => false,
+                        'name' => 'Meta Document.pdf',
+                    ],
+                ],
             ],
             5 => [
                 'subject'     => 'PHPDoc Standard',
@@ -319,6 +338,43 @@ class LoadPhpPsrRecordsData extends AbstractFixture implements ContainerAwareInt
                 $this->setProperty($record, 'resumedAt', $this->getProperty($event, 'parameter'));
 
                 $manager->persist($record);
+            }
+
+            if (array_key_exists('attachments', $info)) {
+
+                foreach ($info['attachments'] as $timestamp => $meta) {
+
+                    if ($meta['new']) {
+
+                        $attachment = new Attachment(
+                            $record,
+                            $record->getAuthor(),
+                            $meta['name'],
+                            $meta['size'],
+                            $meta['type']
+                        );
+
+                        $this->setProperty($attachment->getEvent(), 'createdAt', strtotime($timestamp));
+
+                        $manager->persist($attachment->getEvent());
+                        $manager->persist($attachment);
+
+                        $manager->flush();
+
+                        $this->setReference('attachment:' . $meta['name'], $attachment);
+                    }
+                    else {
+
+                        $attachment = $this->getReference('attachment:' . $meta['name']);
+                        $event      = new Event($record, $record->getAuthor(), EventType::FILE_DELETED, $attachment->getId());
+
+                        $this->setProperty($attachment, 'isDeleted', true);
+                        $this->setProperty($event, 'createdAt', strtotime($timestamp));
+
+                        $manager->persist($attachment);
+                        $manager->persist($event);
+                    }
+                }
             }
 
             $read = new LastRead($record, $record->getAuthor());

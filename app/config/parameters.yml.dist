@@ -19,6 +19,9 @@ parameters:
     mailfrom_address:       noreply@example.com
     mailfrom_name:          "eTraxis"
 
+    files_path:             ~
+    files_max_size:         ~
+
     ldap_host:              ~
     ldap_port:              ~
     ldap_encryption:        ~

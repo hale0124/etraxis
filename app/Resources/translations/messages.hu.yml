@@ -80,6 +80,8 @@ key.colon: Colon
 key.semicolon: Semicolon
 key.vertical_line: 'Vertical line'
 file: Fájl
+files: Fájlok
+kb: KB
 size: Méret
 delimiter: Mezőelválasztó
 encoding: Karakterkódolás

@@ -80,6 +80,8 @@ key.colon: Colon
 key.semicolon: Semicolon
 key.vertical_line: 'Vertical line'
 file: Bestand
+files: Bestanden
+kb: KB
 size: Grootte
 delimiter: Begrenzer
 encoding: Encodering
