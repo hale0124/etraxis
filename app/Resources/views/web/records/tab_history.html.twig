@@ -22,7 +22,7 @@
                     <tr>
                         <td data-order="{{ event.createdAt }}">{{ event.createdAt|localizeddate('medium', 'short', app.user.locale, app.user.timezone) }}</td>
                         <td>{{ event.user.fullname }}</td>
-                        <td>{{ types[event.type]|trans({'%value%': event.value}) }}</td>
+                        <td>{{ types[event.type]|trans({'%value%': event.parameter}) }}</td>
                     </tr>
                 {% endfor %}
             </tbody>

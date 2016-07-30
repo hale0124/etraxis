@@ -40,7 +40,7 @@ class Event
     /**
      * @var Record Record.
      *
-     * @ORM\ManyToOne(targetEntity="Record", inversedBy="history")
+     * @ORM\ManyToOne(targetEntity="Record", inversedBy="events")
      * @ORM\JoinColumn(name="record_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
     private $record;
@@ -88,11 +88,6 @@ class Event
      * @ORM\Column(name="parameter", type="integer", nullable=true)
      */
     private $parameter;
-
-    /**
-     * @var string User-friendly parameter's value (state name instead of state ID, etc).
-     */
-    private $value;
 
     /**
      * Constructor.
@@ -173,29 +168,5 @@ class Event
     public function getParameter()
     {
         return $this->parameter;
-    }
-
-    /**
-     * Property setter.
-     *
-     * @param   string $value
-     *
-     * @return  self
-     */
-    public function setValue(string $value = null)
-    {
-        $this->value = $value;
-
-        return $this;
-    }
-
-    /**
-     * Property getter.
-     *
-     * @return  string
-     */
-    public function getValue()
-    {
-        return $this->value;
     }
 }

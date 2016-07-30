@@ -14,6 +14,8 @@ namespace eTraxis\Entity;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use eTraxis\Dictionary;
+use eTraxis\Entity\Record\RecordEvent;
+use eTraxis\Entity\Record\RecordHistory;
 use eTraxis\Security\CurrentUser;
 
 /**
@@ -100,12 +102,12 @@ class Record extends Entity
     private $resumedAt;
 
     /**
-     * @var ArrayCollection|Event[] List of record events.
+     * @var ArrayCollection List of record events.
      *
      * @ORM\OneToMany(targetEntity="Event", mappedBy="record", cascade={"persist"})
      * @ORM\OrderBy({"createdAt" = "ASC", "id" = "ASC"})
      */
-    private $history;
+    private $events;
 
     /**
      * @var ArrayCollection List of state fields.
@@ -166,11 +168,11 @@ class Record extends Entity
         $this->state  = $template->getInitialState();
         $this->author = $author;
 
-        $this->history  = new ArrayCollection();
+        $this->events   = new ArrayCollection();
         $this->watchers = new ArrayCollection();
 
         $event = new Event($this, $this->author, Dictionary\EventType::RECORD_CREATED, $this->state->getId());
-        $this->history->add($event);
+        $this->events->add($event);
 
         $this->createdAt = $event->getCreatedAt();
         $this->changedAt = $event->getCreatedAt();
@@ -543,162 +545,19 @@ class Record extends Entity
     }
 
     /**
-     * Returns all users mentioned in the record's history.
-     *
-     * @return  User[]
-     */
-    protected function getHistoryUsers()
-    {
-        $ids = [];
-
-        foreach ($this->history as $event) {
-            if ($event->getType() === Dictionary\EventType::RECORD_ASSIGNED) {
-                $ids[] = $event->getParameter();
-            }
-        }
-
-        /** @var User[] $users */
-        $users = $this->manager->getRepository(User::class)->findBy(['id' => $ids], ['id' => 'ASC']);
-
-        $result = [];
-
-        foreach ($users as $user) {
-            $result[$user->getId()] = $user;
-        }
-
-        return $result;
-    }
-
-    /**
-     * Returns all states mentioned in the record's history.
-     *
-     * @return  State[]
-     */
-    protected function getHistoryStates()
-    {
-        $ids = [];
-
-        foreach ($this->history as $event) {
-            if ($event->getType() === Dictionary\EventType::RECORD_CREATED ||
-                $event->getType() === Dictionary\EventType::RECORD_REOPENED ||
-                $event->getType() === Dictionary\EventType::STATE_CHANGED)
-            {
-                $ids[] = $event->getParameter();
-            }
-        }
-
-        /** @var State[] $states */
-        $states = $this->manager->getRepository(State::class)->findBy(['id' => $ids], ['id' => 'ASC']);
-
-        $result = [];
-
-        foreach ($states as $state) {
-            $result[$state->getId()] = $state;
-        }
-
-        return $result;
-    }
-
-    /**
-     * Returns all attachments mentioned in the record's history.
-     *
-     * @return  Attachment[]
-     */
-    protected function getHistoryAttachedFiles()
-    {
-        $ids = [];
-
-        foreach ($this->history as $event) {
-            if ($event->getType() === Dictionary\EventType::FILE_ATTACHED) {
-                $ids[] = $event->getId();
-            }
-        }
-
-        /** @var Attachment[] $attachments */
-        $attachments = $this->manager->getRepository(Attachment::class)->findBy(['event' => $ids], ['event' => 'ASC']);
-
-        $result = [];
-
-        foreach ($attachments as $attachment) {
-            $result[$attachment->getEvent()->getId()] = $attachment;
-        }
-
-        return $result;
-    }
-
-    /**
-     * Returns all deleted attachments mentioned in the record's history.
-     *
-     * @return  Attachment[]
-     */
-    protected function getHistoryDeletedFiles()
-    {
-        $ids = [];
-
-        foreach ($this->history as $event) {
-            if ($event->getType() === Dictionary\EventType::FILE_DELETED) {
-                $ids[] = $event->getParameter();
-            }
-        }
-
-        $result = [];
-
-        /** @var Attachment[] $attachments */
-        $attachments = $this->manager->getRepository(Attachment::class)->findBy(['id' => $ids], ['id' => 'ASC']);
-
-        foreach ($attachments as $attachment) {
-            $result[$attachment->getId()] = $attachment;
-        }
-
-        return $result;
-    }
-
-    /**
      * Returns record history.
      *
      * @param   bool $showPrivate Whether to mention private comments, too.
      *
-     * @return  Event[]
+     * @return  RecordHistory|RecordEvent[]
      */
     public function getHistory(bool $showPrivate = false)
     {
-        /** @var ArrayCollection|Event[] $filtered */
-        $filtered = $this->history->filter(function (Event $event) use ($showPrivate) {
+        $events = $this->events->filter(function (Event $event) use ($showPrivate) {
             return $showPrivate || $event->getType() !== Dictionary\EventType::PRIVATE_COMMENT;
         });
 
-        $users    = $this->getHistoryUsers();
-        $states   = $this->getHistoryStates();
-        $attached = $this->getHistoryAttachedFiles();
-        $deleted  = $this->getHistoryDeletedFiles();
-
-        foreach ($filtered as $event) {
-
-            if ($event->getType() === Dictionary\EventType::RECORD_ASSIGNED) {
-                $user = $users[$event->getParameter()];
-                $event->setValue($user->getFullname());
-            }
-
-            if ($event->getType() === Dictionary\EventType::RECORD_CREATED ||
-                $event->getType() === Dictionary\EventType::RECORD_REOPENED ||
-                $event->getType() === Dictionary\EventType::STATE_CHANGED)
-            {
-                $state = $states[$event->getParameter()];
-                $event->setValue($state->getName());
-            }
-
-            if ($event->getType() === Dictionary\EventType::FILE_ATTACHED) {
-                $attachment = $attached[$event->getId()];
-                $event->setValue($attachment->getName());
-            }
-
-            if ($event->getType() === Dictionary\EventType::FILE_DELETED) {
-                $attachment = $deleted[$event->getParameter()];
-                $event->setValue($attachment->getName());
-            }
-        }
-
-        return $filtered->toArray();
+        return new RecordHistory($events, $this->manager);
     }
 
     /**

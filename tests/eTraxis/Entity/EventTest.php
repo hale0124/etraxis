@@ -78,11 +78,4 @@ class EventTest extends TransactionalTestCase
         self::assertNull(next($events)->getParameter());
         self::assertNull(next($events)->getParameter());
     }
-
-    public function testValue()
-    {
-        $expected = 'Value';
-        $this->object->setValue($expected);
-        self::assertEquals($expected, $this->object->getValue());
-    }
 }
