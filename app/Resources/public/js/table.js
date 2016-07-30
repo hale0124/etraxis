@@ -39,6 +39,13 @@ var datatables_language = window.datatables_language || {};
 
             var settings = $.extend(true, defaults, options);
 
+            // Strip HTML from user data to avoid XSS vulnerabilities.
+            $.extend(true, $.fn.dataTable.defaults, {
+                column: {
+                    render: $.fn.dataTable.render.text()
+                }
+            });
+
             // Retrieve data endpoint in case of server-side processing.
             if (settings.serverSide) {
                 settings.ajax = {
