@@ -197,6 +197,9 @@ class BBCodeService implements BBCodeInterface
         // Merge the array into solid block of text.
         $text = implode(null, $text);
 
+        // Encode existing HTML special characters.
+        $text = htmlspecialchars($text, ENT_COMPAT);
+
         // Convert BBCode tags into XML ones.
         $text = preg_replace(array_keys(self::$bbcode2xml), array_values(self::$bbcode2xml), $text);
         $text = '<bbcode>' . $text . '</bbcode>';
@@ -220,6 +223,9 @@ class BBCodeService implements BBCodeInterface
         foreach ($root->childNodes as $node) {
             $text .= $dom->saveXML($node);
         }
+
+        // Decode back all existing HTML special characters, encoded before.
+        $text = htmlspecialchars_decode($text, ENT_COMPAT);
 
         return $text;
     }
