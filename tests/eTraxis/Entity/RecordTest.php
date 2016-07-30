@@ -151,198 +151,41 @@ class RecordTest extends TransactionalTestCase
         self::assertCount(0, $this->object->getWatchers());
     }
 
-    public function testGetAllStates1()
+    public function testGetStates1()
     {
-        $expected = [
-            'Draft',
-        ];
-
         /** @var Record $record */
         $record = $this->doctrine->getRepository(Record::class)->findOneBy([
             'subject' => 'PHPDoc Standard',
         ]);
 
-        $actual = [];
+        $user = new CurrentUser($this->findUser('mwop'));
 
-        foreach ($record->getAllStates() as $state) {
-            $actual[] = $state->getName();
-        }
-
-        self::assertEquals($expected, $actual);
+        self::assertCount(1, $record->getStates($user));
     }
 
-    public function testGetAllStates2()
+    public function testGetStates2()
     {
-        $expected = [
-            'Draft',
-            'Accepted',
-        ];
-
         /** @var Record $record */
         $record = $this->doctrine->getRepository(Record::class)->findOneBy([
             'subject' => 'Basic Coding Standard',
         ]);
 
-        $actual = [];
+        $user = new CurrentUser($this->findUser('mwop'));
 
-        foreach ($record->getAllStates() as $state) {
-            $actual[] = $state->getName();
-        }
-
-        self::assertEquals($expected, $actual);
+        self::assertCount(2, $record->getStates($user));
     }
 
-    public function testGetAllStates3()
+    public function testGetStates3()
     {
-        $expected = [
-            'Draft',
-            'Accepted',
-            'Deprecated',
-        ];
-
         /** @var Record $record */
         $record = $this->doctrine->getRepository(Record::class)->findOneBy([
             'subject'  => 'Autoloading Standard',
             'closedAt' => strtotime('2014-10-08 13:04 GMT+13'),
         ]);
 
-        $actual = [];
-
-        foreach ($record->getAllStates() as $state) {
-            $actual[] = $state->getName();
-        }
-
-        self::assertEquals($expected, $actual);
-    }
-
-    public function testGetFieldsByState()
-    {
         $user = new CurrentUser($this->findUser('mwop'));
 
-        /** @var Record $record */
-        $record = $this->doctrine->getRepository(Record::class)->findOneBy([
-            'subject' => 'Basic Coding Standard',
-        ]);
-
-        $states = $record->getAllStates();
-
-        self::assertCount(2, $record->getFieldsByState($states[0], $user));
-        self::assertCount(0, $record->getFieldsByState($states[1], $user));
-
-        $fields = $record->getFieldsByState($states[0], $user);
-        self::assertEquals('PSR ID', reset($fields)->getName());
-    }
-
-    public function testGetFieldsByStateRestricted()
-    {
-        $states = $this->object->getAllStates();
-
-        $user = new CurrentUser($this->findUser('fry'));
-
-        self::assertCount(4, $this->object->getFieldsByState($states[0], $user));
-        self::assertCount(1, $this->object->getFieldsByState($states[1], $user));
-
-        $user = new CurrentUser($this->findUser('zoidberg'));
-
-        self::assertCount(3, $this->object->getFieldsByState($states[0], $user));
-        self::assertCount(0, $this->object->getFieldsByState($states[1], $user));
-    }
-
-    public function testGetFieldsByStateAuthor()
-    {
-        $expected = [
-            'Crew',
-            'Delivery at',
-            'Notes',
-        ];
-
-        /** @var Record $record */
-        $record = $this->doctrine->getRepository(Record::class)->findOneBy([
-            'subject' => 'A statue commemorating the loss of the first Planet Express crew',
-        ]);
-
-        $user = new CurrentUser($this->findUser('pmjones'));
-
-        $states = $record->getAllStates();
-        $fields = $record->getFieldsByState(reset($states), $user);
-
-        self::assertCount(3, $fields);
-
-        foreach ($fields as $i => $field) {
-            self::assertEquals($expected[$i], $field->getName());
-        }
-    }
-
-    public function testGetFieldsByStateResponsible()
-    {
-        $expected = [
-            'Crew',
-            'Delivery to',
-            'Notes',
-        ];
-
-        /** @var Record $record */
-        $record = $this->doctrine->getRepository(Record::class)->findOneBy([
-            'subject' => '200 feet of hanging rope for the hanging of multiheaded monster.',
-        ]);
-
-        $user = new CurrentUser($this->findUser('artem'));
-
-        $states = $record->getAllStates();
-        $fields = $record->getFieldsByState(reset($states), $user);
-
-        self::assertCount(3, $fields);
-
-        foreach ($fields as $i => $field) {
-            self::assertEquals($expected[$i], $field->getName());
-        }
-    }
-
-    public function testGetFieldValue()
-    {
-        $user = new CurrentUser($this->findUser('mwop'));
-
-        /** @var Record $delivery */
-        $delivery = $this->doctrine->getRepository(Record::class)->findOneBy([
-            'subject' => 'e-Waste',
-        ]);
-
-        $expected = [
-            'Season'            => 'Season 6',
-            'Episode'           => 3,
-            'Production code'   => '6ACV03',
-            'Running time'      => '0:22',
-            'Multipart'         => false,
-            'Plot'              => 'Everyone in New New York buys the latest, state of the art eyePhone, a device developed by Mom which is implanted in a person\'s eye that allows users to record videos and post them online. Fry and Bender challenge each other to see who can gain one million followers on their Twitcher accounts, with the loser having to dive into a pool of goat vomit and diarrhea. With Bender in the lead, Fry resorts to posting an embarrassing video of Leela revealing she has a singing boil on her rear named Susan, gaining him enough followers to end the bet with a tie. However, Leela is humiliated, so Fry posts a video of himself diving into the pool out of guilt, which everyone watches and causes them to forget about the video of Leela. Fry and Leela reconcile, completely unaware that Mom has infected all of Fry and Bender\'s followers with a virus that turns them into mindless zombies to make them buy more eyePhones.',
-            'Delivery'          => $delivery->getId(),
-            'Original air date' => strtotime('2010-07-01'),
-            'U.S. viewers'      => '2.16',
-        ];
-
-        /** @var Record $record */
-        $record = $this->doctrine->getRepository(Record::class)->findOneBy([
-            'subject' => 'Attack of the Killer App',
-        ]);
-
-        foreach ($record->getAllStates() as $state) {
-            foreach ($state->getFields() as $field) {
-                self::assertEquals($expected[$field->getName()], $record->getFieldValue($field, $user));
-            }
-        }
-    }
-
-    public function testGetFieldValueRestricted()
-    {
-        /** @var Record $record */
-        $record = $this->doctrine->getRepository(Record::class)->findOneBy([
-            'subject' => 'Ceremonial oversized Scissors',
-        ]);
-
-        $fields = $record->getState()->getFields();
-        $field  = reset($fields);
-
-        self::assertNotNull($record->getFieldValue($field, new CurrentUser($this->findUser('fry'))));
-        self::assertNull($record->getFieldValue($field, new CurrentUser($this->findUser('zoidberg'))));
+        self::assertCount(3, $record->getStates($user));
     }
 
     public function testGetComments()
