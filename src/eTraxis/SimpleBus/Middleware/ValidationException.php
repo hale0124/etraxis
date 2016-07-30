@@ -19,66 +19,26 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
  * All validation errors are available as a hash-array (keys are names of items being validated).
  * Contains HTTP status code and can be used in HTTP Response object.
  */
-class ValidationException extends BadRequestHttpException implements \Countable, \Iterator
+class ValidationException extends BadRequestHttpException implements \IteratorAggregate
 {
-    protected $messages = [];
+    protected $iterator;
 
     /**
      * {@inheritdoc}
      */
     public function __construct(array $messages, int $code = 0, \Exception $previous = null)
     {
-        $this->messages = $messages;
+        parent::__construct(reset($messages) ?: null, $previous, $code);
 
-        parent::__construct(reset($this->messages) ?: null, $previous, $code);
+        $this->iterator = new \ArrayIterator($messages);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function count()
+    public function getIterator()
     {
-        return count($this->messages);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function current()
-    {
-        return current($this->messages);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function next()
-    {
-        next($this->messages);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function key()
-    {
-        return key($this->messages);
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function valid()
-    {
-        return key($this->messages) !== null;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function rewind()
-    {
-        reset($this->messages);
+        return $this->iterator;
     }
 
     /**
@@ -88,6 +48,6 @@ class ValidationException extends BadRequestHttpException implements \Countable,
      */
     public function toArray()
     {
-        return $this->messages;
+        return $this->iterator->getArrayCopy();
     }
 }
