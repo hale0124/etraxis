@@ -44,6 +44,7 @@ gulp.task('default', function() {
         ],
         // Second sequence.
         [
+            'vendor:fonts',     // install vendor fonts
             'vendor:css',       // install vendor CSS files as one combined "web/css/vendor.min.css" asset
             'vendor:js',        // install vendor JavaScript files as one combined "web/js/vendor.min.js" asset
             'etraxis:core',     // install eTraxis core JavaScript files as one combined "web/js/etraxis.min.js" asset
@@ -252,12 +253,26 @@ gulp.task('etraxis:themes', function() {
 });
 
 /**
+ * Installs vendor fonts.
+ */
+gulp.task('vendor:fonts', function() {
+
+    var files = [
+        'vendor/bower/fontawesome/fonts/*'
+    ];
+
+    return gulp.src(files)
+        .pipe(gulp.dest('web/fonts/'));
+});
+
+/**
  * Installs vendor CSS files as one combined "web/css/vendor.min.css" asset.
  */
 gulp.task('vendor:css', function() {
 
     var files = [
         'vendor/bower/normalize.css/normalize.css',
+        'vendor/bower/fontawesome/css/font-awesome.css',
         'vendor/bower/unsemantic/assets/stylesheets/unsemantic-grid-responsive-no-ie7.css',
         'vendor/bower/jquery.ui/themes/jquery-ui.css',
         'vendor/bower/datatables/media/css/jquery.dataTables_themeroller.css'
