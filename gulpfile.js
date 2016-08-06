@@ -248,7 +248,7 @@ gulp.task('etraxis:themes', function() {
         gulp.src('app/Resources/public/css/*/images/*')
             .pipe(gulp.dest('web/css/'))
     );
-    
+
     return merge(tasks);
 });
 
