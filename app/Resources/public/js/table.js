@@ -107,7 +107,7 @@ var datatables_language = window.datatables_language || {};
                 // If response is not received for a long, re-block with visible overlay.
                 blockTimer = setTimeout(function() {
                     $table.closest('.dataTables_wrapper').block({
-                        message: eTraxis.i18n['please_wait'],
+                        message: '<span class="fa fa-spinner fa-pulse"></span>' + eTraxis.i18n['please_wait'],
                         title: null,
                         theme: true,
                         themedCSS: {

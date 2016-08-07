@@ -59,7 +59,7 @@ var eTraxis = (function() {
             $.blockUI({
                 theme: true,
                 title: null,
-                message: message ? message : eTraxis.i18n['please_wait'],
+                message: '<span class="fa fa-spinner fa-pulse"></span>' + (message ? message : eTraxis.i18n['please_wait']),
                 themedCSS: {
                     padding: '10px'
                 }
