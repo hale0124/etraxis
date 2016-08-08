@@ -11,10 +11,14 @@
 
 namespace eTraxis\DataTables;
 
+use DataTables\Column;
 use DataTables\DataTableHandlerInterface;
 use DataTables\DataTableQuery;
 use DataTables\DataTableResults;
+use DataTables\Order;
+use DataTables\Search;
 use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\QueryBuilder;
 use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Entity\User;
 use Symfony\Component\Translation\TranslatorInterface;
@@ -56,93 +60,18 @@ class UsersDataTable implements DataTableHandlerInterface
 
         $query = $this->manager->createQueryBuilder();
 
-        $query
-            ->select('u')
-            ->from(User::class, 'u')
-        ;
+        $query->select('u');
+        $query->from(User::class, 'u');
 
         // Search.
         if ($request->search->value) {
-
-            $conditions = [
-                'LOWER(u.username) LIKE :search',
-                'LOWER(u.fullname) LIKE :search',
-                'LOWER(u.email) LIKE :search',
-                'LOWER(u.description) LIKE :search',
-            ];
-
-            $query
-                ->where('(' . implode(' OR ', $conditions) . ')')
-                ->setParameter('search', mb_strtolower("%{$request->search->value}%"))
-            ;
+            $this->querySearch($query, $request->search);
         }
 
         // Filter by columns.
         foreach ($request->columns as $column) {
-
-            if (!$column->search->value) {
-                continue;
-            }
-
-            $value = mb_strtolower($column->search->value);
-
-            switch ($column->data) {
-
-                case self::COLUMN_USERNAME:
-
-                    $query
-                        ->andWhere('LOWER(u.username) LIKE :username')
-                        ->setParameter('username', "%{$value}%")
-                    ;
-
-                    break;
-
-                case self::COLUMN_FULLNAME:
-
-                    $query
-                        ->andWhere('LOWER(u.fullname) LIKE :fullname')
-                        ->setParameter('fullname', "%{$value}%")
-                    ;
-
-                    break;
-
-                case self::COLUMN_EMAIL:
-
-                    $query
-                        ->andWhere('LOWER(u.email) LIKE :email')
-                        ->setParameter('email', "%{$value}%")
-                    ;
-
-                    break;
-
-                case self::COLUMN_PERMISSIONS:
-
-                    $query
-                        ->andWhere('u.isAdmin = :isAdmin')
-                        ->setParameter('isAdmin', $value === 'admin')
-                    ;
-
-                    break;
-
-                case self::COLUMN_AUTHENTICATION:
-
-                    if (AuthenticationProvider::has($value)) {
-                        $query
-                            ->andWhere('u.provider = :provider')
-                            ->setParameter('provider', $value)
-                        ;
-                    }
-
-                    break;
-
-                case self::COLUMN_DESCRIPTION:
-
-                    $query
-                        ->andWhere('LOWER(u.description) LIKE :description')
-                        ->setParameter('description', "%{$value}%")
-                    ;
-
-                    break;
+            if ($column->search->value) {
+                $this->queryFilter($query, $column);
             }
         }
 
@@ -159,18 +88,7 @@ class UsersDataTable implements DataTableHandlerInterface
 
         // Order.
         foreach ($request->order as $order) {
-
-            $map = [
-                self::COLUMN_ID             => 'u.id',
-                self::COLUMN_USERNAME       => 'u.username',
-                self::COLUMN_FULLNAME       => 'u.fullname',
-                self::COLUMN_EMAIL          => 'u.email',
-                self::COLUMN_PERMISSIONS    => 'u.isAdmin',
-                self::COLUMN_AUTHENTICATION => 'u.provider',
-                self::COLUMN_DESCRIPTION    => 'u.description',
-            ];
-
-            $query->addOrderBy($map[$order->column], $order->dir);
+            $query = $this->queryOrder($query, $order);
         }
 
         // Pagination.
@@ -180,34 +98,161 @@ class UsersDataTable implements DataTableHandlerInterface
             $query->setMaxResults($request->length);
         }
 
-        /** @var User[] $entities */
-        $entities = $query->getQuery()->getResult();
-
-        foreach ($entities as $entity) {
-
-            if ($entity->isLocked()) {
-                $color = 'red';
-            }
-            elseif ($entity->isDisabled()) {
-                $color = 'gray';
-            }
-            else {
-                $color = null;
-            }
-
-            $results->data[] = [
-                $entity->getId(),
-                $entity->getUsername(),
-                $entity->getFullname(),
-                $entity->getEmail(),
-                $this->translator->trans($entity->isAdmin() ? 'role.administrator' : 'role.user'),
-                AuthenticationProvider::get($entity->getProvider()),
-                $entity->getDescription(),
-                'DT_RowAttr'  => ['data-id' => $entity->getId()],
-                'DT_RowClass' => $color,
-            ];
-        }
+        // Execute query.
+        $results->data = array_map([$this, 'doctrine2datatable'], $query->getQuery()->getResult());
 
         return $results;
+    }
+
+    /**
+     * Alters query in accordance with the specified search.
+     *
+     * @param   QueryBuilder $query
+     * @param   Search       $search
+     *
+     * @return  QueryBuilder
+     */
+    protected function querySearch(QueryBuilder $query, Search $search)
+    {
+        $conditions = [
+            'LOWER(u.username) LIKE :search',
+            'LOWER(u.fullname) LIKE :search',
+            'LOWER(u.email) LIKE :search',
+            'LOWER(u.description) LIKE :search',
+        ];
+
+        return $query
+            ->where('(' . implode(' OR ', $conditions) . ')')
+            ->setParameter('search', mb_strtolower("%{$search->value}%"))
+        ;
+    }
+
+    /**
+     * Alters query to filter by the specified column.
+     *
+     * @param   QueryBuilder $query
+     * @param   Column       $column
+     *
+     * @return  QueryBuilder
+     */
+    protected function queryFilter(QueryBuilder $query, Column $column)
+    {
+        $value = mb_strtolower($column->search->value);
+
+        switch ($column->data) {
+
+            case self::COLUMN_USERNAME:
+
+                $query
+                    ->andWhere('LOWER(u.username) LIKE :username')
+                    ->setParameter('username', "%{$value}%")
+                ;
+
+                break;
+
+            case self::COLUMN_FULLNAME:
+
+                $query
+                    ->andWhere('LOWER(u.fullname) LIKE :fullname')
+                    ->setParameter('fullname', "%{$value}%")
+                ;
+
+                break;
+
+            case self::COLUMN_EMAIL:
+
+                $query
+                    ->andWhere('LOWER(u.email) LIKE :email')
+                    ->setParameter('email', "%{$value}%")
+                ;
+
+                break;
+
+            case self::COLUMN_PERMISSIONS:
+
+                $query
+                    ->andWhere('u.isAdmin = :isAdmin')
+                    ->setParameter('isAdmin', $value === 'admin')
+                ;
+
+                break;
+
+            case self::COLUMN_AUTHENTICATION:
+
+                if (AuthenticationProvider::has($value)) {
+                    $query
+                        ->andWhere('u.provider = :provider')
+                        ->setParameter('provider', $value)
+                    ;
+                }
+
+                break;
+
+            case self::COLUMN_DESCRIPTION:
+
+                $query
+                    ->andWhere('LOWER(u.description) LIKE :description')
+                    ->setParameter('description', "%{$value}%")
+                ;
+
+                break;
+        }
+
+        return $query;
+    }
+
+    /**
+     * Alters query in accordance with the specified sorting.
+     *
+     * @param   QueryBuilder $query
+     * @param   Order        $order
+     *
+     * @return  QueryBuilder
+     */
+    protected function queryOrder(QueryBuilder $query, Order $order)
+    {
+        $map = [
+            self::COLUMN_ID             => 'u.id',
+            self::COLUMN_USERNAME       => 'u.username',
+            self::COLUMN_FULLNAME       => 'u.fullname',
+            self::COLUMN_EMAIL          => 'u.email',
+            self::COLUMN_PERMISSIONS    => 'u.isAdmin',
+            self::COLUMN_AUTHENTICATION => 'u.provider',
+            self::COLUMN_DESCRIPTION    => 'u.description',
+        ];
+
+        return $query->addOrderBy($map[$order->column], $order->dir);
+    }
+
+    /**
+     * Converts an entry returned from the database to DataTables representation.
+     *
+     * @param   User $user
+     *
+     * @return  array
+     */
+    protected function doctrine2datatable(User $user)
+    {
+        if ($user->isLocked()) {
+            $color = 'red';
+        }
+        elseif ($user->isDisabled()) {
+            $color = 'gray';
+        }
+        else {
+            $color = null;
+        }
+
+        return [
+            $user->getId(),
+            $user->getUsername(),
+            $user->getFullname(),
+            $user->getEmail(),
+            $this->translator->trans($user->isAdmin() ? 'role.administrator' : 'role.user'),
+            AuthenticationProvider::get($user->getProvider()),
+            $user->getDescription(),
+            'DT_RowAttr'  => ['data-id' => $user->getId()],
+            'DT_RowClass' => $color,
+        ];
     }
 }

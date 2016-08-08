@@ -11,9 +11,12 @@
 
 namespace eTraxis\DataTables;
 
+use DataTables\Column;
 use DataTables\DataTableHandlerInterface;
 use DataTables\DataTableQuery;
 use DataTables\DataTableResults;
+use DataTables\Order;
+use DataTables\Search;
 use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Dictionary\BBCodeMode;
 use eTraxis\Repository\TemplatesRepository;
@@ -38,6 +41,24 @@ class RecordsDataTable implements DataTableHandlerInterface
     protected $token_storage;
     protected $bbcode;
     protected $templates_repository;
+
+    /** @var int The today's midnight (Unix Epoch timestamp). */
+    protected $today;
+
+    /** @var array Query parameters. */
+    protected $parameters;
+
+    /** @var array The "SELECT" section of the query. */
+    protected $clause_select;
+
+    /** @var array List of tables joined to the primary one. */
+    protected $clause_join;
+
+    /** @var array The "WHERE" section of the query. */
+    protected $clause_where;
+
+    /** @var array The "ORDER BY" section of the query. */
+    protected $clause_order;
 
     /**
      * Dependency Injection constructor.
@@ -71,17 +92,17 @@ class RecordsDataTable implements DataTableHandlerInterface
         $results = new DataTableResults();
 
         // Get the midnight of today.
-        $date  = getdate();
-        $today = mktime(0, 0, 0, $date['mon'], $date['mday'], $date['year']);
+        $date        = getdate();
+        $this->today = mktime(0, 0, 0, $date['mon'], $date['mday'], $date['year']);
 
         // Query parameters.
-        $parameters = [
+        $this->parameters = [
             'user'      => $user->getId(),
             'templates' => $this->templates_repository->getTemplates($user->getId()),
         ];
 
         // The "SELECT" section of the query.
-        $clause_select = [
+        $this->clause_select = [
             'record.id',
             'project.name AS projectName',
             'template.prefix AS templatePrefix',
@@ -99,7 +120,7 @@ class RecordsDataTable implements DataTableHandlerInterface
         ];
 
         // List of tables joined to the primary one.
-        $clause_join = [
+        $this->clause_join = [
             'INNER JOIN record.state state',
             'INNER JOIN state.template template',
             'INNER JOIN template.project project',
@@ -109,166 +130,55 @@ class RecordsDataTable implements DataTableHandlerInterface
         ];
 
         // The "WHERE" section of the query.
-        $clause_where = [
+        $this->clause_where = [
             'record.author = :user OR record.responsible = :user OR template.id IN (:templates)',
         ];
 
         // The "ORDER BY" section of the query.
-        $clause_order = [];
+        $this->clause_order = [];
 
         // Total number of entries.
         $dql = sprintf('SELECT COUNT(record.id) FROM eTraxis:Record record %s WHERE (%s)',
-            implode(' ', $clause_join),
-            implode(') AND (', $clause_where)
+            implode(' ', $this->clause_join),
+            implode(') AND (', $this->clause_where)
         );
 
-        $results->recordsTotal = $this->manager->createQuery($dql)->setParameters($parameters)->getSingleScalarResult();
+        $results->recordsTotal = $this->manager->createQuery($dql)->setParameters($this->parameters)->getSingleScalarResult();
 
         // Search.
         if ($request->search->value) {
-
-            $search = mb_strtolower("%{$request->search->value}%");
-
-            // Get list of records which subjects contain the searched value.
-            $query = $this->manager->createQuery('
-                SELECT record.id
-                FROM eTraxis:Record record
-                WHERE LOWER(record.subject) LIKE :search
-            ');
-
-            $inSubjects = $query->execute(['search' => $search]);
-
-            // Get list of records which comments contain the searched value.
-            $query = $this->manager->createQuery('
-                SELECT record.id
-                FROM eTraxis:Comment comment
-                  INNER JOIN comment.event event
-                  INNER JOIN event.record record
-                WHERE LOWER(comment.text) LIKE :search
-                  AND comment.isPrivate = FALSE
-            ');
-
-            $inComments = $query->execute(['search' => $search]);
-
-            // Merge resulted IDs and append them to the base query.
-            $records = array_map(function ($item) {
-                return $item['id'];
-            }, array_merge($inSubjects, $inComments));
-
-            $parameters['records'] = array_unique($records);
-
-            $clause_where[] = 'record.id IN (:records)';
+            $this->querySearch($request->search);
         }
 
         // Filter by columns.
         foreach ($request->columns as $column) {
-
-            if (!$column->search->value) {
-                continue;
-            }
-
-            $value = mb_strtolower($column->search->value);
-
-            switch ($column->data) {
-
-                case self::COLUMN_RECORD_ID:
-
-                    $parameters['filter_id'] = "%{$value}%";
-
-                    $clause_where[] = 'CONCAT(LOWER(template.prefix), \'-\', record.id) LIKE :filter_id';
-
-                    break;
-
-                case self::COLUMN_PROJECT:
-
-                    $parameters['filter_project'] = "%{$value}%";
-
-                    $clause_where[] = 'LOWER(project.name) LIKE :filter_project';
-
-                    break;
-
-                case self::COLUMN_STATE:
-
-                    $parameters['filter_state'] = "%{$value}%";
-
-                    $clause_where[] = 'LOWER(state.abbreviation) LIKE :filter_state';
-
-                    break;
-
-                case self::COLUMN_SUBJECT:
-
-                    $parameters['filter_subject'] = "%{$value}%";
-
-                    $clause_where[] = 'LOWER(record.subject) LIKE :filter_subject';
-
-                    break;
-
-                case self::COLUMN_AUTHOR:
-
-                    $parameters['filter_author'] = "%{$value}%";
-
-                    $clause_where[] = 'LOWER(author.fullname) LIKE :filter_author';
-
-                    break;
-
-                case self::COLUMN_RESPONSIBLE:
-
-                    $parameters['filter_responsible'] = "%{$value}%";
-
-                    $clause_where[] = 'LOWER(responsible.fullname) LIKE :filter_responsible';
-
-                    break;
-
-                case self::COLUMN_AGE:
-
-                    $parameters['today']      = $today;
-                    $parameters['filter_age'] = ((int) $value) - 1;
-
-                    $clause_where[] = 'INTDIV(COALESCE(record.closedAt - record.createdAt, :today - record.createdAt), 86400) = :filter_age';
-
-                    break;
+            if ($column->search->value) {
+                $this->queryFilter($column);
             }
         }
 
         // Filtered number of entries.
         $dql = sprintf('SELECT COUNT(record.id) FROM eTraxis:Record record %s WHERE (%s)',
-            implode(' ', $clause_join),
-            implode(') AND (', $clause_where)
+            implode(' ', $this->clause_join),
+            implode(') AND (', $this->clause_where)
         );
 
-        $results->recordsFiltered = $this->manager->createQuery($dql)->setParameters($parameters)->getSingleScalarResult();
+        $results->recordsFiltered = $this->manager->createQuery($dql)->setParameters($this->parameters)->getSingleScalarResult();
 
         // Order.
         foreach ($request->order as $order) {
-
-            $map = [
-                self::COLUMN_ID          => 'record.id',
-                self::COLUMN_RECORD_ID   => 'record.id',
-                self::COLUMN_PROJECT     => 'projectName',
-                self::COLUMN_STATE       => 'stateAbbreviation',
-                self::COLUMN_SUBJECT     => 'record.subject',
-                self::COLUMN_AUTHOR      => 'authorFullname',
-                self::COLUMN_RESPONSIBLE => 'responsibleFullname',
-                self::COLUMN_AGE         => 'age',
-            ];
-
-            $dir = [
-                'asc'  => 'ASC',
-                'desc' => 'DESC',
-            ];
-
-            $clause_order[] = sprintf('%s %s', $map[$order->column] ?? 'record.id', $dir[$order->dir] ?? 'ASC');
+            $this->queryOrder($order);
         }
 
         // Default order.
-        $clause_order[] = 'record.id ASC';
+        $this->clause_order[] = 'record.id ASC';
 
         // Base query.
         $dql = sprintf('SELECT %s FROM eTraxis:Record record %s WHERE (%s) ORDER BY %s',
-            implode(', ', $clause_select),
-            implode(' ', $clause_join),
-            implode(') AND (', $clause_where),
-            implode(', ', $clause_order)
+            implode(', ', $this->clause_select),
+            implode(' ', $this->clause_join),
+            implode(') AND (', $this->clause_where),
+            implode(', ', $this->clause_order)
         );
 
         $query = $this->manager->createQuery($dql);
@@ -280,44 +190,187 @@ class RecordsDataTable implements DataTableHandlerInterface
             $query->setMaxResults($request->length);
         }
 
-        $parameters['today'] = $today;
+        $this->parameters['today'] = $this->today;
 
-        $rows = $query->execute($parameters);
-
-        foreach ($rows as $row) {
-
-            $row_class = [];
-
-            $age = intdiv($row['age'], 86400) + 1;
-
-            if ($row['closedAt'] !== null) {
-                $row_class[] = 'gray';
-            }
-            elseif ($row['resumedAt'] > $today) {
-                $row_class[] = 'blue';
-            }
-            elseif ($age > $row['criticalAge']) {
-                $row_class[] = 'red';
-            }
-
-            if ($row['readAt'] < $row['changedAt']) {
-                $row_class[] = 'unread';
-            }
-
-            $results->data[] = [
-                $row['id'],
-                sprintf('%s-%d', $row['templatePrefix'], $row['id']),
-                $row['projectName'],
-                $row['stateAbbreviation'],
-                $this->bbcode->bbcode($row['subject'], BBCodeMode::STRIP),
-                $row['authorFullname'],
-                $row['responsibleFullname'] ?: '&mdash;',
-                $age,
-                'DT_RowAttr'  => ['data-id' => $row['id']],
-                'DT_RowClass' => implode(' ', $row_class),
-            ];
-        }
+        $results->data = array_map([$this, 'doctrine2datatable'], $query->execute($this->parameters));
 
         return $results;
+    }
+
+    /**
+     * Alters query in accordance with the specified search.
+     *
+     * @param   Search $search
+     */
+    protected function querySearch(Search $search)
+    {
+        $search = mb_strtolower("%{$search->value}%");
+
+        // Get list of records which subjects contain the searched value.
+        $query = $this->manager->createQuery('
+            SELECT record.id
+            FROM eTraxis:Record record
+            WHERE LOWER(record.subject) LIKE :search
+        ');
+
+        $inSubjects = $query->execute(['search' => $search]);
+
+        // Get list of records which comments contain the searched value.
+        $query = $this->manager->createQuery('
+            SELECT record.id
+            FROM eTraxis:Comment comment
+              INNER JOIN comment.event event
+              INNER JOIN event.record record
+            WHERE LOWER(comment.text) LIKE :search
+              AND comment.isPrivate = FALSE
+        ');
+
+        $inComments = $query->execute(['search' => $search]);
+
+        // Merge resulted IDs and append them to the base query.
+        $records = array_map(function ($item) {
+            return $item['id'];
+        }, array_merge($inSubjects, $inComments));
+
+        $this->parameters['records'] = array_unique($records);
+
+        $this->clause_where[] = 'record.id IN (:records)';
+    }
+
+    /**
+     * Alters query to filter by the specified column.
+     *
+     * @param   Column $column
+     */
+    protected function queryFilter(Column $column)
+    {
+        $value = mb_strtolower($column->search->value);
+
+        switch ($column->data) {
+
+            case self::COLUMN_RECORD_ID:
+
+                $this->parameters['filter_id'] = "%{$value}%";
+
+                $this->clause_where[] = 'CONCAT(LOWER(template.prefix), \'-\', record.id) LIKE :filter_id';
+
+                break;
+
+            case self::COLUMN_PROJECT:
+
+                $this->parameters['filter_project'] = "%{$value}%";
+
+                $this->clause_where[] = 'LOWER(project.name) LIKE :filter_project';
+
+                break;
+
+            case self::COLUMN_STATE:
+
+                $this->parameters['filter_state'] = "%{$value}%";
+
+                $this->clause_where[] = 'LOWER(state.abbreviation) LIKE :filter_state';
+
+                break;
+
+            case self::COLUMN_SUBJECT:
+
+                $this->parameters['filter_subject'] = "%{$value}%";
+
+                $this->clause_where[] = 'LOWER(record.subject) LIKE :filter_subject';
+
+                break;
+
+            case self::COLUMN_AUTHOR:
+
+                $this->parameters['filter_author'] = "%{$value}%";
+
+                $this->clause_where[] = 'LOWER(author.fullname) LIKE :filter_author';
+
+                break;
+
+            case self::COLUMN_RESPONSIBLE:
+
+                $this->parameters['filter_responsible'] = "%{$value}%";
+
+                $this->clause_where[] = 'LOWER(responsible.fullname) LIKE :filter_responsible';
+
+                break;
+
+            case self::COLUMN_AGE:
+
+                $this->parameters['today']      = $this->today;
+                $this->parameters['filter_age'] = ((int) $value) - 1;
+
+                $this->clause_where[] = 'INTDIV(COALESCE(record.closedAt - record.createdAt, :today - record.createdAt), 86400) = :filter_age';
+
+                break;
+        }
+    }
+
+    /**
+     * Alters query in accordance with the specified sorting.
+     *
+     * @param   Order $order
+     */
+    protected function queryOrder(Order $order)
+    {
+        $map = [
+            self::COLUMN_ID          => 'record.id',
+            self::COLUMN_RECORD_ID   => 'record.id',
+            self::COLUMN_PROJECT     => 'projectName',
+            self::COLUMN_STATE       => 'stateAbbreviation',
+            self::COLUMN_SUBJECT     => 'record.subject',
+            self::COLUMN_AUTHOR      => 'authorFullname',
+            self::COLUMN_RESPONSIBLE => 'responsibleFullname',
+            self::COLUMN_AGE         => 'age',
+        ];
+
+        $dir = [
+            'asc'  => 'ASC',
+            'desc' => 'DESC',
+        ];
+
+        $this->clause_order[] = sprintf('%s %s', $map[$order->column] ?? 'record.id', $dir[$order->dir] ?? 'ASC');
+    }
+
+    /**
+     * Converts an entry returned from the database to DataTables representation.
+     *
+     * @param   array $data
+     *
+     * @return  array
+     */
+    protected function doctrine2datatable(array $data)
+    {
+        $row_class = [];
+
+        $age = intdiv($data['age'], 86400) + 1;
+
+        if ($data['closedAt'] !== null) {
+            $row_class[] = 'gray';
+        }
+        elseif ($data['resumedAt'] > $this->today) {
+            $row_class[] = 'blue';
+        }
+        elseif ($age > $data['criticalAge']) {
+            $row_class[] = 'red';
+        }
+
+        if ($data['readAt'] < $data['changedAt']) {
+            $row_class[] = 'unread';
+        }
+
+        return [
+            $data['id'],
+            sprintf('%s-%d', $data['templatePrefix'], $data['id']),
+            $data['projectName'],
+            $data['stateAbbreviation'],
+            $this->bbcode->bbcode($data['subject'], BBCodeMode::STRIP),
+            $data['authorFullname'],
+            $data['responsibleFullname'] ?: '&mdash;',
+            $age,
+            'DT_RowAttr'  => ['data-id' => $data['id']],
+            'DT_RowClass' => implode(' ', $row_class),
+        ];
     }
 }
