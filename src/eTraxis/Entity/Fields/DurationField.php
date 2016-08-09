@@ -11,6 +11,8 @@
 
 namespace eTraxis\Entity\Fields;
 
+use eTraxis\Constant\Seconds;
+
 /**
  * Duration field.
  */
@@ -141,7 +143,7 @@ class DurationField extends AbstractField
             $value = self::MAX_VALUE;
         }
 
-        return intdiv($value, 60) . ':' . str_pad($value % 60, 2, '0', STR_PAD_LEFT);
+        return intdiv($value, Seconds::ONE_MINUTE) . ':' . str_pad($value % Seconds::ONE_MINUTE, 2, '0', STR_PAD_LEFT);
     }
 
     /**
@@ -164,6 +166,6 @@ class DurationField extends AbstractField
 
         list($hh, $mm) = explode(':', $value);
 
-        return $hh * 60 + $mm;
+        return $hh * Seconds::ONE_MINUTE + $mm;
     }
 }

@@ -13,6 +13,7 @@ namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use eTraxis\Constant\Seconds;
 use eTraxis\Dictionary;
 use eTraxis\Entity\Record\RecordEvent;
 use eTraxis\Entity\Record\RecordHistory;
@@ -272,7 +273,7 @@ class Record extends Entity
     {
         $age = ($this->closedAt ?: time()) - $this->createdAt;
 
-        return intdiv($age, 86400) + 1;
+        return intdiv($age, Seconds::ONE_DAY) + 1;
     }
 
     /**

@@ -13,6 +13,7 @@ namespace eTraxis\Entity;
 
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use eTraxis\Constant\Seconds;
 use eTraxis\Dictionary;
 use Ramsey\Uuid\Uuid;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
@@ -376,7 +377,7 @@ class User extends Entity implements \JsonSerializable
      */
     public function isPasswordExpired(int $days = null)
     {
-        $expiresAt = $this->passwordTimestamp + $days * 86400;
+        $expiresAt = $this->passwordTimestamp + $days * Seconds::ONE_DAY;
 
         return !$this->isExternalAccount() && $days && $expiresAt <= time();
     }
@@ -389,7 +390,7 @@ class User extends Entity implements \JsonSerializable
     public function generateResetToken()
     {
         $this->resetToken          = Uuid::uuid4()->getHex();
-        $this->resetTokenExpiresAt = time() + 7200; // 2 hours expiration
+        $this->resetTokenExpiresAt = time() + Seconds::TWO_HOURS;
 
         return $this->resetToken;
     }
@@ -433,7 +434,7 @@ class User extends Entity implements \JsonSerializable
 
             if ($this->authAttempts >= $max_auth_attempts) {
                 $this->authAttempts = null;
-                $this->lockedUntil  = time() + $lock_time * 60;
+                $this->lockedUntil  = time() + $lock_time * Seconds::ONE_MINUTE;
 
                 return true;
             }

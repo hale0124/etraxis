@@ -14,6 +14,7 @@ namespace AppBundle\DataFixtures\Tests;
 use Doctrine\Common\DataFixtures\AbstractFixture;
 use Doctrine\Common\DataFixtures\OrderedFixtureInterface;
 use Doctrine\Common\Persistence\ObjectManager;
+use eTraxis\Constant\Seconds;
 use eTraxis\Dictionary\EventType;
 use eTraxis\Entity\Attachment;
 use eTraxis\Entity\Event;
@@ -327,7 +328,7 @@ class LoadPhpPsrRecordsData extends AbstractFixture implements ContainerAwareInt
                     $record,
                     $record->getAuthor(),
                     EventType::RECORD_POSTPONED,
-                    time() + 86400
+                    time() + Seconds::ONE_DAY
                 );
 
                 $this->setProperty($event, 'createdAt', strtotime($info['postponed']));

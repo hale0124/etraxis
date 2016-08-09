@@ -18,6 +18,7 @@ use DataTables\DataTableResults;
 use DataTables\Order;
 use DataTables\Search;
 use Doctrine\ORM\EntityManagerInterface;
+use eTraxis\Constant\Seconds;
 use eTraxis\Dictionary\BBCodeMode;
 use eTraxis\Repository\TemplatesRepository;
 use eTraxis\Service\BBCodeInterface;
@@ -101,7 +102,7 @@ class RecordsDataTable implements DataTableHandlerInterface
         if (!$item->isHit() || !$item->get()->isHit($request)) {
 
             $item->set($this->doQuery($request));
-            $item->expiresAfter(30);
+            $item->expiresAfter(Seconds::FIVE_MINUTES);
 
             $this->cache->save($item);
         }
@@ -370,7 +371,7 @@ class RecordsDataTable implements DataTableHandlerInterface
     {
         $row_class = [];
 
-        $age = intdiv($data['age'], 86400) + 1;
+        $age = intdiv($data['age'], Seconds::ONE_DAY) + 1;
 
         if ($data['closedAt'] !== null) {
             $row_class[] = 'gray';
