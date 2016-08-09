@@ -21,6 +21,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Dictionary\BBCodeMode;
 use eTraxis\Repository\TemplatesRepository;
 use eTraxis\Service\BBCodeInterface;
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
@@ -39,6 +40,7 @@ class RecordsDataTable implements DataTableHandlerInterface
 
     protected $manager;
     protected $token_storage;
+    protected $cache;
     protected $bbcode;
     protected $templates_repository;
 
@@ -65,18 +67,21 @@ class RecordsDataTable implements DataTableHandlerInterface
      *
      * @param   EntityManagerInterface $manager
      * @param   TokenStorageInterface  $token_storage
+     * @param   CacheItemPoolInterface $cache
      * @param   BBCodeInterface        $bbcode
      * @param   TemplatesRepository    $templates_repository
      */
     public function __construct(
         EntityManagerInterface $manager,
         TokenStorageInterface  $token_storage,
+        CacheItemPoolInterface $cache,
         BBCodeInterface        $bbcode,
         TemplatesRepository    $templates_repository
     )
     {
         $this->manager              = $manager;
         $this->token_storage        = $token_storage;
+        $this->cache                = $cache;
         $this->bbcode               = $bbcode;
         $this->templates_repository = $templates_repository;
     }
@@ -89,7 +94,42 @@ class RecordsDataTable implements DataTableHandlerInterface
         /** @var \eTraxis\Security\CurrentUser $user */
         $user = $this->token_storage->getToken()->getUser();
 
+        $key = sprintf('%s+%s', get_class($this), $user->getId());
+
+        $item = $this->cache->getItem(md5($key));
+
+        if (!$item->isHit() || !$item->get()->isHit($request)) {
+
+            $item->set($this->doQuery($request));
+            $item->expiresAfter(30);
+
+            $this->cache->save($item);
+        }
+
+        /** @var DataTableCachedResults $cached */
+        $cached = $item->get();
+
         $results = new DataTableResults();
+
+        $results->recordsTotal    = $cached->total;
+        $results->recordsFiltered = count($cached->data);
+
+        $results->data = array_slice($cached->data, $request->start, $request->length === -1 ? null : $request->length);
+
+        return $results;
+    }
+
+    /**
+     * Processes specified DataTables query.
+     *
+     * @param   DataTableQuery $request
+     *
+     * @return  DataTableCachedResults
+     */
+    protected function doQuery(DataTableQuery $request): DataTableCachedResults
+    {
+        /** @var \eTraxis\Security\CurrentUser $user */
+        $user = $this->token_storage->getToken()->getUser();
 
         // Get the midnight of today.
         $date        = getdate();
@@ -143,7 +183,7 @@ class RecordsDataTable implements DataTableHandlerInterface
             implode(') AND (', $this->clause_where)
         );
 
-        $results->recordsTotal = $this->manager->createQuery($dql)->setParameters($this->parameters)->getSingleScalarResult();
+        $total = $this->manager->createQuery($dql)->setParameters($this->parameters)->getSingleScalarResult();
 
         // Search.
         if ($request->search->value) {
@@ -156,14 +196,6 @@ class RecordsDataTable implements DataTableHandlerInterface
                 $this->queryFilter($column);
             }
         }
-
-        // Filtered number of entries.
-        $dql = sprintf('SELECT COUNT(record.id) FROM eTraxis:Record record %s WHERE (%s)',
-            implode(' ', $this->clause_join),
-            implode(') AND (', $this->clause_where)
-        );
-
-        $results->recordsFiltered = $this->manager->createQuery($dql)->setParameters($this->parameters)->getSingleScalarResult();
 
         // Order.
         foreach ($request->order as $order) {
@@ -183,18 +215,11 @@ class RecordsDataTable implements DataTableHandlerInterface
 
         $query = $this->manager->createQuery($dql);
 
-        // Pagination.
-        $query->setFirstResult($request->start);
-
-        if ($request->length >= 0) {
-            $query->setMaxResults($request->length);
-        }
-
         $this->parameters['today'] = $this->today;
 
-        $results->data = array_map([$this, 'doctrine2datatable'], $query->execute($this->parameters));
+        $records = array_map([$this, 'doctrine2datatable'], $query->execute($this->parameters));
 
-        return $results;
+        return new DataTableCachedResults($request, $total, $records);
     }
 
     /**
@@ -369,8 +394,8 @@ class RecordsDataTable implements DataTableHandlerInterface
             $data['authorFullname'],
             $data['responsibleFullname'] ?: '&mdash;',
             $age,
-            'DT_RowAttr'  => ['data-id' => $data['id']],
-            'DT_RowClass' => implode(' ', $row_class),
+            DataTableResults::DT_ROW_ATTR  => ['data-id' => $data['id']],
+            DataTableResults::DT_ROW_CLASS => implode(' ', $row_class),
         ];
     }
 }

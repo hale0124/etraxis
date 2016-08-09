@@ -251,8 +251,8 @@ class UsersDataTable implements DataTableHandlerInterface
             $this->translator->trans($user->isAdmin() ? 'role.administrator' : 'role.user'),
             AuthenticationProvider::get($user->getProvider()),
             $user->getDescription(),
-            'DT_RowAttr'  => ['data-id' => $user->getId()],
-            'DT_RowClass' => $color,
+            DataTableResults::DT_ROW_ATTR  => ['data-id' => $user->getId()],
+            DataTableResults::DT_ROW_CLASS => $color,
         ];
     }
 }

@@ -9,16 +9,16 @@
     "packages": [
         {
             "name": "arodygin/datatables-bundle",
-            "version": "2.1.0",
+            "version": "2.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/arodygin/DataTablesBundle.git",
-                "reference": "37f225da7e2b92196b71035840c950a811530d2e"
+                "reference": "776e9c9ad63fc5e49795a775ba7ebde41999eb16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/arodygin/DataTablesBundle/zipball/37f225da7e2b92196b71035840c950a811530d2e",
-                "reference": "37f225da7e2b92196b71035840c950a811530d2e",
+                "url": "https://api.github.com/repos/arodygin/DataTablesBundle/zipball/776e9c9ad63fc5e49795a775ba7ebde41999eb16",
+                "reference": "776e9c9ad63fc5e49795a775ba7ebde41999eb16",
                 "shasum": ""
             },
             "require": {
@@ -57,7 +57,7 @@
                 "datatable",
                 "datatables"
             ],
-            "time": "2016-07-24 09:41:16"
+            "time": "2016-08-09 04:04:59"
         },
         {
             "name": "arodygin/php-dictionary",
@@ -1509,16 +1509,16 @@
         },
         {
             "name": "psr/cache",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/php-fig/cache.git",
-                "reference": "9e66031f41fbbdda45ee11e93c45d480ccba3eb3"
+                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/php-fig/cache/zipball/9e66031f41fbbdda45ee11e93c45d480ccba3eb3",
-                "reference": "9e66031f41fbbdda45ee11e93c45d480ccba3eb3",
+                "url": "https://api.github.com/repos/php-fig/cache/zipball/d11b50ad223250cf17b86e38383413f5a6764bf8",
+                "reference": "d11b50ad223250cf17b86e38383413f5a6764bf8",
                 "shasum": ""
             },
             "require": {
@@ -1551,7 +1551,7 @@
                 "psr",
                 "psr-6"
             ],
-            "time": "2015-12-11 02:52:07"
+            "time": "2016-08-06 20:24:11"
         },
         {
             "name": "psr/log",
