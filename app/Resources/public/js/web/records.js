@@ -10,6 +10,16 @@ var RecordsApp = (function() {
     // Initialize records list.
     var $table = $('#records').table({
         checkboxes: 'records',
+        columns: [
+            { data: 'id' },
+            { data: 'record' },
+            { data: 'project' },
+            { data: 'state' },
+            { data: 'subject' },
+            { data: 'author' },
+            { data: 'responsible' },
+            { data: 'age' }
+        ],
         columnDefs: [
             {
                 targets: [1, 2, 3, 5, 6, 7],

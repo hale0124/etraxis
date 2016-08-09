@@ -41,8 +41,19 @@ class RecordsDataTableTest extends TransactionalTestCase
             'start'   => 0,
             'length'  => -1,
             'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [],
-            'columns' => [],
+            'order'   => [
+                ['column' => 0, 'dir' => 'asc'],
+            ],
+            'columns' => [
+                ['data' => RecordsDataTable::COLUMN_ID,          'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'false', 'orderable' => 'false'],
+                ['data' => RecordsDataTable::COLUMN_RECORD_ID,   'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_PROJECT,     'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_STATE,       'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_SUBJECT,     'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AUTHOR,      'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_RESPONSIBLE, 'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AGE,         'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+            ],
         ]);
 
         foreach ($expected_by_user as $user => $expected) {
@@ -76,8 +87,19 @@ class RecordsDataTableTest extends TransactionalTestCase
             'start'   => 0,
             'length'  => -1,
             'search'  => ['value' => 'sEc', 'regex' => 'false'],
-            'order'   => [],
-            'columns' => [],
+            'order'   => [
+                ['column' => 0, 'dir' => 'asc'],
+            ],
+            'columns' => [
+                ['data' => RecordsDataTable::COLUMN_ID,          'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'false', 'orderable' => 'false'],
+                ['data' => RecordsDataTable::COLUMN_RECORD_ID,   'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_PROJECT,     'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_STATE,       'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_SUBJECT,     'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AUTHOR,      'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_RESPONSIBLE, 'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AGE,         'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+            ],
         ]);
 
         $results = $this->datatables->handle($request, 'eTraxis:Record');
@@ -111,9 +133,18 @@ class RecordsDataTableTest extends TransactionalTestCase
             'start'   => 0,
             'length'  => -1,
             'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [],
+            'order'   => [
+                ['column' => 0, 'dir' => 'asc'],
+            ],
             'columns' => [
-                ['data' => RecordsDataTable::COLUMN_RECORD_ID, 'search' => ['value' => 'FiG', 'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_ID,          'search' => ['value' => null,  'regex' => 'false'], 'name' => '', 'searchable' => 'false', 'orderable' => 'false'],
+                ['data' => RecordsDataTable::COLUMN_RECORD_ID,   'search' => ['value' => 'FiG', 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_PROJECT,     'search' => ['value' => null,  'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_STATE,       'search' => ['value' => null,  'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_SUBJECT,     'search' => ['value' => null,  'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AUTHOR,      'search' => ['value' => null,  'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_RESPONSIBLE, 'search' => ['value' => null,  'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AGE,         'search' => ['value' => null,  'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
             ],
         ]);
 
@@ -135,9 +166,18 @@ class RecordsDataTableTest extends TransactionalTestCase
             'start'   => 0,
             'length'  => -1,
             'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [],
+            'order'   => [
+                ['column' => 0, 'dir' => 'asc'],
+            ],
             'columns' => [
-                ['data' => RecordsDataTable::COLUMN_PROJECT, 'search' => ['value' => 'eXPreSs', 'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_ID,          'search' => ['value' => null,      'regex' => 'false'], 'name' => '', 'searchable' => 'false', 'orderable' => 'false'],
+                ['data' => RecordsDataTable::COLUMN_RECORD_ID,   'search' => ['value' => null,      'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_PROJECT,     'search' => ['value' => 'eXPreSs', 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_STATE,       'search' => ['value' => null,      'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_SUBJECT,     'search' => ['value' => null,      'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AUTHOR,      'search' => ['value' => null,      'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_RESPONSIBLE, 'search' => ['value' => null,      'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AGE,         'search' => ['value' => null,      'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
             ],
         ]);
 
@@ -168,9 +208,18 @@ class RecordsDataTableTest extends TransactionalTestCase
             'start'   => 0,
             'length'  => -1,
             'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [],
+            'order'   => [
+                ['column' => 0, 'dir' => 'asc'],
+            ],
             'columns' => [
-                ['data' => RecordsDataTable::COLUMN_STATE, 'search' => ['value' => 'a', 'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_ID,          'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'false', 'orderable' => 'false'],
+                ['data' => RecordsDataTable::COLUMN_RECORD_ID,   'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_PROJECT,     'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_STATE,       'search' => ['value' => 'a',  'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_SUBJECT,     'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AUTHOR,      'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_RESPONSIBLE, 'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AGE,         'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
             ],
         ]);
 
@@ -211,9 +260,18 @@ class RecordsDataTableTest extends TransactionalTestCase
             'start'   => 0,
             'length'  => -1,
             'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [],
+            'order'   => [
+                ['column' => 0, 'dir' => 'asc'],
+            ],
             'columns' => [
-                ['data' => RecordsDataTable::COLUMN_SUBJECT, 'search' => ['value' => 'sec', 'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_ID,          'search' => ['value' => null,  'regex' => 'false'], 'name' => '', 'searchable' => 'false', 'orderable' => 'false'],
+                ['data' => RecordsDataTable::COLUMN_RECORD_ID,   'search' => ['value' => null,  'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_PROJECT,     'search' => ['value' => null,  'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_STATE,       'search' => ['value' => null,  'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_SUBJECT,     'search' => ['value' => 'sec', 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AUTHOR,      'search' => ['value' => null,  'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_RESPONSIBLE, 'search' => ['value' => null,  'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AGE,         'search' => ['value' => null,  'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
             ],
         ]);
 
@@ -254,9 +312,18 @@ class RecordsDataTableTest extends TransactionalTestCase
             'start'   => 0,
             'length'  => -1,
             'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [],
+            'order'   => [
+                ['column' => 0, 'dir' => 'asc'],
+            ],
             'columns' => [
-                ['data' => RecordsDataTable::COLUMN_AUTHOR, 'search' => ['value' => 'gARfiEld', 'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_ID,          'search' => ['value' => null,       'regex' => 'false'], 'name' => '', 'searchable' => 'false', 'orderable' => 'false'],
+                ['data' => RecordsDataTable::COLUMN_RECORD_ID,   'search' => ['value' => null,       'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_PROJECT,     'search' => ['value' => null,       'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_STATE,       'search' => ['value' => null,       'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_SUBJECT,     'search' => ['value' => null,       'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AUTHOR,      'search' => ['value' => 'gARfiEld', 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_RESPONSIBLE, 'search' => ['value' => null,       'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AGE,         'search' => ['value' => null,       'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
             ],
         ]);
 
@@ -297,9 +364,18 @@ class RecordsDataTableTest extends TransactionalTestCase
             'start'   => 0,
             'length'  => -1,
             'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [],
+            'order'   => [
+                ['column' => 0, 'dir' => 'asc'],
+            ],
             'columns' => [
-                ['data' => RecordsDataTable::COLUMN_RESPONSIBLE, 'search' => ['value' => 'leELa', 'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_ID,          'search' => ['value' => null,    'regex' => 'false'], 'name' => '', 'searchable' => 'false', 'orderable' => 'false'],
+                ['data' => RecordsDataTable::COLUMN_RECORD_ID,   'search' => ['value' => null,    'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_PROJECT,     'search' => ['value' => null,    'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_STATE,       'search' => ['value' => null,    'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_SUBJECT,     'search' => ['value' => null,    'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AUTHOR,      'search' => ['value' => null,    'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_RESPONSIBLE, 'search' => ['value' => 'leELa', 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AGE,         'search' => ['value' => null,    'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
             ],
         ]);
 
@@ -338,9 +414,18 @@ class RecordsDataTableTest extends TransactionalTestCase
             'start'   => 0,
             'length'  => -1,
             'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [],
+            'order'   => [
+                ['column' => 0, 'dir' => 'asc'],
+            ],
             'columns' => [
-                ['data' => RecordsDataTable::COLUMN_AGE, 'search' => ['value' => '1433', 'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_ID,          'search' => ['value' => null,   'regex' => 'false'], 'name' => '', 'searchable' => 'false', 'orderable' => 'false'],
+                ['data' => RecordsDataTable::COLUMN_RECORD_ID,   'search' => ['value' => null,   'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_PROJECT,     'search' => ['value' => null,   'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_STATE,       'search' => ['value' => null,   'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_SUBJECT,     'search' => ['value' => null,   'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AUTHOR,      'search' => ['value' => null,   'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_RESPONSIBLE, 'search' => ['value' => null,   'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AGE,         'search' => ['value' => '1433', 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
             ],
         ]);
 
@@ -380,11 +465,18 @@ class RecordsDataTableTest extends TransactionalTestCase
             'start'   => 0,
             'length'  => -1,
             'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [],
+            'order'   => [
+                ['column' => 0, 'dir' => 'asc'],
+            ],
             'columns' => [
-                ['data' => RecordsDataTable::COLUMN_ID,      'search' => ['value' => '',          'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
-                ['data' => RecordsDataTable::COLUMN_SUBJECT, 'search' => ['value' => 'intERfACe', 'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
-                ['data' => RecordsDataTable::COLUMN_AUTHOR,  'search' => ['value' => 'lArRY',     'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_ID,          'search' => ['value' => '',          'regex' => 'false'], 'name' => '', 'searchable' => 'false', 'orderable' => 'false'],
+                ['data' => RecordsDataTable::COLUMN_RECORD_ID,   'search' => ['value' => null,        'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_PROJECT,     'search' => ['value' => null,        'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_STATE,       'search' => ['value' => null,        'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_SUBJECT,     'search' => ['value' => 'intERfACe', 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AUTHOR,      'search' => ['value' => 'lArRY',     'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_RESPONSIBLE, 'search' => ['value' => null,        'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AGE,         'search' => ['value' => null,        'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
             ],
         ]);
 
@@ -432,10 +524,19 @@ class RecordsDataTableTest extends TransactionalTestCase
             'length'  => 10,
             'search'  => ['value' => null, 'regex' => 'false'],
             'order'   => [
-                ['column' => RecordsDataTable::COLUMN_STATE,  'dir' => 'asc'],
-                ['column' => RecordsDataTable::COLUMN_AUTHOR, 'dir' => 'desc'],
+                ['column' => 3, 'dir' => 'asc'],    // State
+                ['column' => 5, 'dir' => 'desc'],   // Author
             ],
-            'columns' => [],
+            'columns' => [
+                ['data' => RecordsDataTable::COLUMN_ID,          'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'false', 'orderable' => 'false'],
+                ['data' => RecordsDataTable::COLUMN_RECORD_ID,   'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_PROJECT,     'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_STATE,       'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_SUBJECT,     'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AUTHOR,      'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_RESPONSIBLE, 'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AGE,         'search' => ['value' => null, 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+            ],
         ]);
 
         $results = $this->datatables->handle($request, 'eTraxis:Record');
@@ -473,11 +574,18 @@ class RecordsDataTableTest extends TransactionalTestCase
             'length'  => 10,
             'search'  => ['value' => null, 'regex' => 'false'],
             'order'   => [
-                ['column' => RecordsDataTable::COLUMN_STATE,  'dir' => 'asc'],
-                ['column' => RecordsDataTable::COLUMN_AUTHOR, 'dir' => 'desc'],
+                ['column' => 3, 'dir' => 'asc'],    // State
+                ['column' => 5, 'dir' => 'desc'],   // Author
             ],
             'columns' => [
-                ['data' => RecordsDataTable::COLUMN_RECORD_ID, 'search' => ['value' => 'fig', 'regex' => 'false'], 'name' => '', 'searchable' => 'true', 'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_ID,          'search' => ['value' => null,  'regex' => 'false'], 'name' => '', 'searchable' => 'false', 'orderable' => 'false'],
+                ['data' => RecordsDataTable::COLUMN_RECORD_ID,   'search' => ['value' => 'fig', 'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_PROJECT,     'search' => ['value' => null,  'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_STATE,       'search' => ['value' => null,  'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_SUBJECT,     'search' => ['value' => null,  'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AUTHOR,      'search' => ['value' => null,  'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_RESPONSIBLE, 'search' => ['value' => null,  'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
+                ['data' => RecordsDataTable::COLUMN_AGE,         'search' => ['value' => null,  'regex' => 'false'], 'name' => '', 'searchable' => 'true',  'orderable' => 'true'],
             ],
         ]);
 

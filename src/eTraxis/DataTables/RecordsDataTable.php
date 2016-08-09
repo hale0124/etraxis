@@ -29,14 +29,14 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
  */
 class RecordsDataTable implements DataTableHandlerInterface
 {
-    const COLUMN_ID          = 0;
-    const COLUMN_RECORD_ID   = 1;
-    const COLUMN_PROJECT     = 2;
-    const COLUMN_STATE       = 3;
-    const COLUMN_SUBJECT     = 4;
-    const COLUMN_AUTHOR      = 5;
-    const COLUMN_RESPONSIBLE = 6;
-    const COLUMN_AGE         = 7;
+    const COLUMN_ID          = 'id';
+    const COLUMN_RECORD_ID   = 'record';
+    const COLUMN_PROJECT     = 'project';
+    const COLUMN_STATE       = 'state';
+    const COLUMN_SUBJECT     = 'subject';
+    const COLUMN_AUTHOR      = 'author';
+    const COLUMN_RESPONSIBLE = 'responsible';
+    const COLUMN_AGE         = 'age';
 
     protected $manager;
     protected $token_storage;
@@ -199,7 +199,7 @@ class RecordsDataTable implements DataTableHandlerInterface
 
         // Order.
         foreach ($request->order as $order) {
-            $this->queryOrder($order);
+            $this->queryOrder($order, $request->columns[$order->column]);
         }
 
         // Default order.
@@ -335,9 +335,10 @@ class RecordsDataTable implements DataTableHandlerInterface
     /**
      * Alters query in accordance with the specified sorting.
      *
-     * @param   Order $order
+     * @param   Order  $order
+     * @param   Column $column
      */
-    protected function queryOrder(Order $order)
+    protected function queryOrder(Order $order, Column $column)
     {
         $map = [
             self::COLUMN_ID          => 'record.id',
@@ -355,7 +356,7 @@ class RecordsDataTable implements DataTableHandlerInterface
             'desc' => 'DESC',
         ];
 
-        $this->clause_order[] = sprintf('%s %s', $map[$order->column] ?? 'record.id', $dir[$order->dir] ?? 'ASC');
+        $this->clause_order[] = sprintf('%s %s', $map[$column->data] ?? 'record.id', $dir[$order->dir] ?? 'ASC');
     }
 
     /**
@@ -386,14 +387,14 @@ class RecordsDataTable implements DataTableHandlerInterface
         }
 
         return [
-            $data['id'],
-            sprintf('%s-%d', $data['templatePrefix'], $data['id']),
-            $data['projectName'],
-            $data['stateAbbreviation'],
-            $this->bbcode->bbcode($data['subject'], BBCodeMode::STRIP),
-            $data['authorFullname'],
-            $data['responsibleFullname'] ?: '&mdash;',
-            $age,
+            self::COLUMN_ID                => $data['id'],
+            self::COLUMN_RECORD_ID         => sprintf('%s-%d', $data['templatePrefix'], $data['id']),
+            self::COLUMN_PROJECT           => $data['projectName'],
+            self::COLUMN_STATE             => $data['stateAbbreviation'],
+            self::COLUMN_SUBJECT           => $this->bbcode->bbcode($data['subject'], BBCodeMode::STRIP),
+            self::COLUMN_AUTHOR            => $data['authorFullname'],
+            self::COLUMN_RESPONSIBLE       => $data['responsibleFullname'] ?: '&mdash;',
+            self::COLUMN_AGE               => $age,
             DataTableResults::DT_ROW_ATTR  => ['data-id' => $data['id']],
             DataTableResults::DT_ROW_CLASS => implode(' ', $row_class),
         ];

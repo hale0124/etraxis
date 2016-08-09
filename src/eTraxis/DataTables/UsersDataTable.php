@@ -244,13 +244,13 @@ class UsersDataTable implements DataTableHandlerInterface
         }
 
         return [
-            $user->getId(),
-            $user->getUsername(),
-            $user->getFullname(),
-            $user->getEmail(),
-            $this->translator->trans($user->isAdmin() ? 'role.administrator' : 'role.user'),
-            AuthenticationProvider::get($user->getProvider()),
-            $user->getDescription(),
+            self::COLUMN_ID                => $user->getId(),
+            self::COLUMN_USERNAME          => $user->getUsername(),
+            self::COLUMN_FULLNAME          => $user->getFullname(),
+            self::COLUMN_EMAIL             => $user->getEmail(),
+            self::COLUMN_PERMISSIONS       => $this->translator->trans($user->isAdmin() ? 'role.administrator' : 'role.user'),
+            self::COLUMN_AUTHENTICATION    => AuthenticationProvider::get($user->getProvider()),
+            self::COLUMN_DESCRIPTION       => $user->getDescription(),
             DataTableResults::DT_ROW_ATTR  => ['data-id' => $user->getId()],
             DataTableResults::DT_ROW_CLASS => $color,
         ];
