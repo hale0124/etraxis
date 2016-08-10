@@ -15,6 +15,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\LastRead;
 use eTraxis\Entity\Record;
 use eTraxis\Entity\User;
+use eTraxis\Service\RecordsCacheInterface;
 use eTraxis\SimpleBus\Records\MarkRecordsAsReadCommand;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -24,15 +25,18 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class MarkRecordsAsReadCommandHandler
 {
     protected $manager;
+    protected $cache;
 
     /**
      * Dependency Injection constructor.
      *
      * @param   EntityManagerInterface $manager
+     * @param   RecordsCacheInterface  $cache
      */
-    public function __construct(EntityManagerInterface $manager)
+    public function __construct(EntityManagerInterface $manager, RecordsCacheInterface $cache)
     {
         $this->manager = $manager;
+        $this->cache   = $cache;
     }
 
     /**
@@ -78,5 +82,7 @@ class MarkRecordsAsReadCommandHandler
             $lastRead = new LastRead($record, $user);
             $this->manager->persist($lastRead);
         }
+
+        $this->cache->markRecordsAsRead($command->user, $command->records);
     }
 }

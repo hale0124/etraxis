@@ -12,6 +12,7 @@
 namespace eTraxis\Service\RecordsCache;
 
 use DataTables\DataTableQuery;
+use DataTables\DataTableResults;
 use eTraxis\Constant\Seconds;
 use eTraxis\DataTables\DataTableCachedResults;
 use eTraxis\DataTables\RecordsDataTable;
@@ -77,6 +78,70 @@ class RecordsCacheService implements RecordsCacheInterface
     public function deleteRecords(int $user)
     {
         $this->cache->deleteItem($this->getKey($user));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function markRecordsAsRead(int $user, array $ids)
+    {
+        $key  = $this->getKey($user);
+        $item = $this->cache->getItem($key);
+
+        if ($item->isHit()) {
+
+            /** @var DataTableCachedResults $records */
+            $records = $item->get();
+
+            array_walk($records->data, function (array &$record) use ($ids) {
+
+                if (in_array($record[RecordsDataTable::COLUMN_ID] ?? null, $ids)) {
+                    $row_class = $record[DataTableResults::DT_ROW_CLASS];
+                    $row_class = str_replace('unread', null, $row_class);
+                    $row_class = preg_replace('/\s+/', ' ', $row_class);
+
+                    $record[DataTableResults::DT_ROW_CLASS] = trim($row_class);
+                }
+            });
+
+            $item->set($records);
+            $item->expiresAfter(Seconds::FIVE_MINUTES);
+
+            $this->cache->save($item);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function markRecordsAsUnread(int $user, array $ids)
+    {
+        $key  = $this->getKey($user);
+        $item = $this->cache->getItem($key);
+
+        if ($item->isHit()) {
+
+            /** @var DataTableCachedResults $records */
+            $records = $item->get();
+
+            array_walk($records->data, function (array &$record) use ($ids) {
+
+                if (in_array($record[RecordsDataTable::COLUMN_ID] ?? null, $ids)) {
+                    $row_class = $record[DataTableResults::DT_ROW_CLASS];
+
+                    if (strpos($row_class, 'unread') === false) {
+                        $row_class .= ' unread';
+                    }
+
+                    $record[DataTableResults::DT_ROW_CLASS] = trim($row_class);
+                }
+            });
+
+            $item->set($records);
+            $item->expiresAfter(Seconds::FIVE_MINUTES);
+
+            $this->cache->save($item);
+        }
     }
 
     /**

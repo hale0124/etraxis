@@ -13,6 +13,7 @@ namespace eTraxis\SimpleBus\Records\Handler;
 
 use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\Entity\User;
+use eTraxis\Service\RecordsCacheInterface;
 use eTraxis\SimpleBus\Records\MarkRecordsAsUnreadCommand;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
@@ -22,15 +23,18 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class MarkRecordsAsUnreadCommandHandler
 {
     protected $manager;
+    protected $cache;
 
     /**
      * Dependency Injection constructor.
      *
      * @param   EntityManagerInterface $manager
+     * @param   RecordsCacheInterface  $cache
      */
-    public function __construct(EntityManagerInterface $manager)
+    public function __construct(EntityManagerInterface $manager, RecordsCacheInterface $cache)
     {
         $this->manager = $manager;
+        $this->cache   = $cache;
     }
 
     /**
@@ -59,5 +63,7 @@ class MarkRecordsAsUnreadCommandHandler
             'user'    => $command->user,
             'records' => $command->records,
         ]);
+
+        $this->cache->markRecordsAsUnread($command->user, $command->records);
     }
 }

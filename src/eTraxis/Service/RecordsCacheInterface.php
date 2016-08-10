@@ -44,4 +44,20 @@ interface RecordsCacheInterface
      * @param   int $user
      */
     public function deleteRecords(int $user);
+
+    /**
+     * Marks specified cached records as read.
+     *
+     * @param   int   $user
+     * @param   int[] $ids
+     */
+    public function markRecordsAsRead(int $user, array $ids);
+
+    /**
+     * Marks specified cached records as unread.
+     *
+     * @param   int   $user
+     * @param   int[] $ids
+     */
+    public function markRecordsAsUnread(int $user, array $ids);
 }
