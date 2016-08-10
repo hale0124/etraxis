@@ -2,7 +2,7 @@
 
 {% if attachments|length != 0 %}
     <fieldset>
-        <legend>{{ 'files'|trans }}</legend>
+        <legend>{{ 'files'|trans }} ({{ attachments|length }})</legend>
         {% for attachment in attachments %}
             <div class="grid-container grid-parent grid-row">
                 <div class="grid-100">
