@@ -2,7 +2,7 @@
 
 <div class="grid-row">
     <div class="grid-100">
-        <button type="button" onclick="RecordApp.back()">{{ 'button.back'|trans }}</button>
+        {% include 'web/records/_buttons.html.twig' with { 'record': record, 'previous': previous, 'next': next } %}
     </div>
 </div>
 

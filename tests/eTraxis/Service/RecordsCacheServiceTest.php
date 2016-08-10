@@ -128,6 +128,38 @@ class RecordsCacheServiceTest extends KernelTestCase
         self::assertFalse($records);
     }
 
+    public function testPrevious()
+    {
+        $data = [
+            [RecordsDataTable::COLUMN_ID => 15],
+            [RecordsDataTable::COLUMN_ID => 8],
+            [RecordsDataTable::COLUMN_ID => 29],
+        ];
+
+        $this->cache->saveRecords($this->user, new DataTableCachedResults($this->query, count($data), $data));
+
+        self::assertFalse($this->cache->getPrevious($this->user, 15));
+        self::assertEquals(15, $this->cache->getPrevious($this->user, 8));
+        self::assertEquals(8, $this->cache->getPrevious($this->user, 29));
+        self::assertFalse($this->cache->getPrevious($this->user, 23));
+    }
+
+    public function testNext()
+    {
+        $data = [
+            [RecordsDataTable::COLUMN_ID => 15],
+            [RecordsDataTable::COLUMN_ID => 8],
+            [RecordsDataTable::COLUMN_ID => 29],
+        ];
+
+        $this->cache->saveRecords($this->user, new DataTableCachedResults($this->query, count($data), $data));
+
+        self::assertEquals(8, $this->cache->getNext($this->user, 15));
+        self::assertEquals(29, $this->cache->getNext($this->user, 8));
+        self::assertFalse($this->cache->getNext($this->user, 29));
+        self::assertFalse($this->cache->getNext($this->user, 23));
+    }
+
     public function testMarkRecordsAsRead()
     {
         $data = [
@@ -145,7 +177,7 @@ class RecordsCacheServiceTest extends KernelTestCase
             ],
         ];
 
-        $this->cache->saveRecords($this->user, new DataTableCachedResults($this->query, 3, $data));
+        $this->cache->saveRecords($this->user, new DataTableCachedResults($this->query, count($data), $data));
         $this->cache->markRecordsAsRead($this->user, []);
 
         $records = $this->cache->getRecords($this->user, $this->query);
@@ -153,7 +185,7 @@ class RecordsCacheServiceTest extends KernelTestCase
         self::assertEquals('blue unread', $records->data[1][DataTableResults::DT_ROW_CLASS]);
         self::assertEquals('unread',      $records->data[2][DataTableResults::DT_ROW_CLASS]);
 
-        $this->cache->saveRecords($this->user, new DataTableCachedResults($this->query, 3, $data));
+        $this->cache->saveRecords($this->user, new DataTableCachedResults($this->query, count($data), $data));
         $this->cache->markRecordsAsRead($this->user, [1, 3]);
 
         $records = $this->cache->getRecords($this->user, $this->query);
@@ -161,7 +193,7 @@ class RecordsCacheServiceTest extends KernelTestCase
         self::assertEquals('blue unread', $records->data[1][DataTableResults::DT_ROW_CLASS]);
         self::assertEquals('',            $records->data[2][DataTableResults::DT_ROW_CLASS]);
 
-        $this->cache->saveRecords($this->user, new DataTableCachedResults($this->query, 3, $data));
+        $this->cache->saveRecords($this->user, new DataTableCachedResults($this->query, count($data), $data));
         $this->cache->markRecordsAsRead($this->user, [1, 2, 3]);
 
         $records = $this->cache->getRecords($this->user, $this->query);
@@ -191,7 +223,7 @@ class RecordsCacheServiceTest extends KernelTestCase
             ],
         ];
 
-        $this->cache->saveRecords($this->user, new DataTableCachedResults($this->query, 3, $data));
+        $this->cache->saveRecords($this->user, new DataTableCachedResults($this->query, count($data), $data));
         $this->cache->markRecordsAsUnread($this->user, []);
 
         $records = $this->cache->getRecords($this->user, $this->query);
@@ -200,7 +232,7 @@ class RecordsCacheServiceTest extends KernelTestCase
         self::assertEquals('gray',        $records->data[2][DataTableResults::DT_ROW_CLASS]);
         self::assertEquals('unread',      $records->data[3][DataTableResults::DT_ROW_CLASS]);
 
-        $this->cache->saveRecords($this->user, new DataTableCachedResults($this->query, 3, $data));
+        $this->cache->saveRecords($this->user, new DataTableCachedResults($this->query, count($data), $data));
         $this->cache->markRecordsAsUnread($this->user, [2, 3]);
 
         $records = $this->cache->getRecords($this->user, $this->query);
@@ -209,7 +241,7 @@ class RecordsCacheServiceTest extends KernelTestCase
         self::assertEquals('gray unread', $records->data[2][DataTableResults::DT_ROW_CLASS]);
         self::assertEquals('unread',      $records->data[3][DataTableResults::DT_ROW_CLASS]);
 
-        $this->cache->saveRecords($this->user, new DataTableCachedResults($this->query, 3, $data));
+        $this->cache->saveRecords($this->user, new DataTableCachedResults($this->query, count($data), $data));
         $this->cache->markRecordsAsUnread($this->user, [1, 2, 3, 4]);
 
         $records = $this->cache->getRecords($this->user, $this->query);

@@ -24,6 +24,9 @@ use Psr\Cache\CacheItemPoolInterface;
  */
 class RecordsCacheService implements RecordsCacheInterface
 {
+    const SUFFIX_RESULTS = 'results';
+    const SUFFIX_IDS     = 'ids';
+
     protected $cache;
 
     /**
@@ -41,13 +44,25 @@ class RecordsCacheService implements RecordsCacheInterface
      */
     public function saveRecords(int $user, DataTableCachedResults $records)
     {
-        $key  = $this->getKey($user);
+        $key  = $this->getKey($user, self::SUFFIX_RESULTS);
         $item = $this->cache->getItem($key);
 
         $item->set($records);
         $item->expiresAfter(Seconds::FIVE_MINUTES);
 
-        $this->cache->save($item);
+        $this->cache->saveDeferred($item);
+
+        $ids = array_map(function ($record) {
+            return $record[RecordsDataTable::COLUMN_ID];
+        }, $records->data);
+
+        $key  = $this->getKey($user, self::SUFFIX_IDS);
+        $item = $this->cache->getItem($key);
+
+        $item->set($ids);
+
+        $this->cache->saveDeferred($item);
+        $this->cache->commit();
     }
 
     /**
@@ -55,7 +70,7 @@ class RecordsCacheService implements RecordsCacheInterface
      */
     public function getRecords(int $user, DataTableQuery $request)
     {
-        $key  = $this->getKey($user);
+        $key  = $this->getKey($user, self::SUFFIX_RESULTS);
         $item = $this->cache->getItem($key);
 
         if (!$item->isHit()) {
@@ -77,7 +92,54 @@ class RecordsCacheService implements RecordsCacheInterface
      */
     public function deleteRecords(int $user)
     {
-        $this->cache->deleteItem($this->getKey($user));
+        $this->cache->deleteItem($this->getKey($user, self::SUFFIX_RESULTS));
+        $this->cache->deleteItem($this->getKey($user, self::SUFFIX_IDS));
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getPrevious(int $user, int $id)
+    {
+        $key  = $this->getKey($user, self::SUFFIX_IDS);
+        $item = $this->cache->getItem($key);
+
+        if ($item->isHit()) {
+
+            /** @var int[] $ids */
+            $ids = $item->get();
+
+            $index = array_search($id, $ids);
+
+            if ($index !== false) {
+                return $ids[$index - 1] ?? false;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function getNext(int $user, int $id)
+    {
+        $key  = $this->getKey($user, self::SUFFIX_IDS);
+        $item = $this->cache->getItem($key);
+
+        if ($item->isHit()) {
+
+            /** @var int[] $ids */
+            $ids = $item->get();
+
+            $index = array_search($id, $ids);
+
+            if ($index !== false) {
+                return $ids[$index + 1] ?? false;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -85,7 +147,7 @@ class RecordsCacheService implements RecordsCacheInterface
      */
     public function markRecordsAsRead(int $user, array $ids)
     {
-        $key  = $this->getKey($user);
+        $key  = $this->getKey($user, self::SUFFIX_RESULTS);
         $item = $this->cache->getItem($key);
 
         if ($item->isHit()) {
@@ -116,7 +178,7 @@ class RecordsCacheService implements RecordsCacheInterface
      */
     public function markRecordsAsUnread(int $user, array $ids)
     {
-        $key  = $this->getKey($user);
+        $key  = $this->getKey($user, self::SUFFIX_RESULTS);
         $item = $this->cache->getItem($key);
 
         if ($item->isHit()) {
@@ -147,13 +209,14 @@ class RecordsCacheService implements RecordsCacheInterface
     /**
      * Returns cache item key for specified user.
      *
-     * @param   int $user
+     * @param   int    $user
+     * @param   string $suffix
      *
      * @return  string
      */
-    protected function getKey(int $user)
+    protected function getKey(int $user, string $suffix)
     {
-        $key = sprintf('%s+%d', RecordsDataTable::class, $user);
+        $key = sprintf('%s+%d+%s', RecordsDataTable::class, $user, $suffix);
 
         return md5($key);
     }

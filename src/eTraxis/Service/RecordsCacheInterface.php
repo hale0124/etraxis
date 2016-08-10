@@ -46,6 +46,26 @@ interface RecordsCacheInterface
     public function deleteRecords(int $user);
 
     /**
+     * Returns ID of the record previous to the specified one.
+     *
+     * @param   int $user
+     * @param   int $id
+     *
+     * @return  int|false
+     */
+    public function getPrevious(int $user, int $id);
+
+    /**
+     * Returns ID of the record next to the specified one.
+     *
+     * @param   int $user
+     * @param   int $id
+     *
+     * @return  int|false
+     */
+    public function getNext(int $user, int $id);
+
+    /**
      * Marks specified cached records as read.
      *
      * @param   int   $user

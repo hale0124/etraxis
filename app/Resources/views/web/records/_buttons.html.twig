@@ -1,0 +1,23 @@
+<button type="button" onclick="RecordApp.back()">{{ 'button.back'|trans }}</button>
+
+<span class="buttonset">
+    {% if previous %}
+        <a href="{{ url('web_view_record', { 'id': previous }) }}" class="button">
+            <span class="fa fa-arrow-up"></span>
+        </a>
+    {% else %}
+        <button type="button" disabled>
+            <span class="fa fa-arrow-up"></span>
+        </button>
+    {% endif %}
+
+    {% if next %}
+        <a href="{{ url('web_view_record', { 'id': next }) }}" class="button">
+            <span class="fa fa-arrow-down"></span>
+        </a>
+    {% else %}
+        <button type="button" disabled>
+            <span class="fa fa-arrow-down"></span>
+        </button>
+    {% endif %}
+</span>

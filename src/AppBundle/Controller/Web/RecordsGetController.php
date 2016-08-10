@@ -156,8 +156,16 @@ class RecordsGetController extends Controller
     {
         $this->denyAccessUnlessGranted(RecordVoter::VIEW, $record);
 
+        /** @var \eTraxis\Security\CurrentUser $user */
+        $user = $this->getUser();
+
+        /** @var \eTraxis\Service\RecordsCache\RecordsCacheService $cache */
+        $cache = $this->container->get('etraxis.records_cache');
+
         return $this->render('web/records/tab_details.html.twig', [
-            'record' => $record,
+            'record'   => $record,
+            'previous' => $cache->getPrevious($user->getId(), $record->getId()),
+            'next'     => $cache->getNext($user->getId(), $record->getId()),
         ]);
     }
 
