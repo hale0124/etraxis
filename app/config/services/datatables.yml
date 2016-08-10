@@ -7,7 +7,7 @@ services:
         arguments:
             - "@doctrine.orm.entity_manager"
             - "@security.token_storage"
-            - "@cache.app"
+            - "@etraxis.records_cache"
             - "@etraxis.bbcode"
             - "@etraxis.repository.templates"
 

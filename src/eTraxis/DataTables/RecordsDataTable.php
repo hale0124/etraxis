@@ -22,7 +22,7 @@ use eTraxis\Constant\Seconds;
 use eTraxis\Dictionary\BBCodeMode;
 use eTraxis\Repository\TemplatesRepository;
 use eTraxis\Service\BBCodeInterface;
-use Psr\Cache\CacheItemPoolInterface;
+use eTraxis\Service\RecordsCacheInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
@@ -68,14 +68,14 @@ class RecordsDataTable implements DataTableHandlerInterface
      *
      * @param   EntityManagerInterface $manager
      * @param   TokenStorageInterface  $token_storage
-     * @param   CacheItemPoolInterface $cache
+     * @param   RecordsCacheInterface  $cache
      * @param   BBCodeInterface        $bbcode
      * @param   TemplatesRepository    $templates_repository
      */
     public function __construct(
         EntityManagerInterface $manager,
         TokenStorageInterface  $token_storage,
-        CacheItemPoolInterface $cache,
+        RecordsCacheInterface  $cache,
         BBCodeInterface        $bbcode,
         TemplatesRepository    $templates_repository
     )
@@ -95,20 +95,12 @@ class RecordsDataTable implements DataTableHandlerInterface
         /** @var \eTraxis\Security\CurrentUser $user */
         $user = $this->token_storage->getToken()->getUser();
 
-        $key = sprintf('%s+%s', get_class($this), $user->getId());
+        $cached = $this->cache->getRecords($user->getId(), $request);
 
-        $item = $this->cache->getItem(md5($key));
-
-        if (!$item->isHit() || !$item->get()->isHit($request)) {
-
-            $item->set($this->doQuery($request));
-            $item->expiresAfter(Seconds::FIVE_MINUTES);
-
-            $this->cache->save($item);
+        if ($cached === false) {
+            $cached = $this->doQuery($request);
+            $this->cache->saveRecords($user->getId(), $cached);
         }
-
-        /** @var DataTableCachedResults $cached */
-        $cached = $item->get();
 
         $results = new DataTableResults();
 

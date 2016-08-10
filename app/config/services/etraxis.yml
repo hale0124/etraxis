@@ -15,3 +15,8 @@ services:
             - "@mailer"
             - "%mailfrom_address%"
             - "%mailfrom_name%"
+
+    etraxis.records_cache:
+        class: eTraxis\Service\RecordsCache\RecordsCacheService
+        arguments:
+            - "@cache.app"
