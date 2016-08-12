@@ -1,15 +1,13 @@
 {% import 'macro.html.twig' as macro %}
 
-<div class="grid-row">
-    <div class="grid-100">
-        {% include 'web/records/_buttons.html.twig' with { 'record': record, 'previous': previous, 'next': next } %}
-    </div>
+<div class="grid-row grid-100">
+    {% include 'web/records/_buttons.html.twig' with { 'record': record, 'previous': previous, 'next': next } %}
 </div>
 
-<div class="grid-row">
-    <div class="grid-50 mobile-grid-100">
-        <fieldset>
-            <legend>{{ record.recordId }}</legend>
+<div class="grid-50 mobile-grid-100">
+    <div class="grid-100 grid-parent grid-row">
+        <div class="fieldset">
+            <div class="legend">{{ record.recordId }}</div>
             {{ macro.row('record.subject'|trans, record.subject, 'inline') }}
             {{ macro.row('state'|trans, record.state.name) }}
             {{ macro.row('role.responsible'|trans, record.responsible ? record.responsible.fullname : null) }}
@@ -17,13 +15,14 @@
             {{ macro.row('record.age'|trans, record.age) }}
             {{ macro.row('project'|trans, record.project.name) }}
             {{ macro.row('template'|trans, record.template.name) }}
-        </fieldset>
-        {% include 'web/records/_attachments.html.twig' with { 'record': record } %}
-        {% include 'web/records/_states.html.twig' with { 'record': record } %}
+        </div>
     </div>
-    <div class="grid-50 mobile-grid-100">
-        {% include 'web/records/_comments.html.twig' with { 'record': record } %}
-    </div>
+    {% include 'web/records/_attachments.html.twig' with { 'record': record } %}
+    {% include 'web/records/_states.html.twig' with { 'record': record } %}
+</div>
+
+<div class="grid-50 mobile-grid-100">
+    {% include 'web/records/_comments.html.twig' with { 'record': record } %}
 </div>
 
 <div class="clear"></div>

@@ -42,29 +42,43 @@
 }
 
 fieldset {
-    margin: 0 0 10px 0;
+    margin: 5px 0;
+    padding: 10px;
+}
+
+.fieldset {
+    margin: 2px 0;
     padding: 10px;
 }
 
 @media (min-width: 768px) {
-    .dialog fieldset {
+    .dialog fieldset,
+    .dialog .fieldset {
         min-width: 500px;
     }
 }
 
-legend {
+legend,
+.legend {
     margin: 0 5px;
     padding: 0 5px;
 }
 
-p.caption {
-    text-align: left;
+.legend {
+    clear: both;
+    float: left;
+    margin-top: -20px;
 }
 
 @media (max-width: 767px) {
-    p.caption {
+    .label {
         font-weight: bold;
     }
+}
+
+.value {
+    overflow-x: auto;
+    word-break: break-word;
 }
 
 p.field-error {

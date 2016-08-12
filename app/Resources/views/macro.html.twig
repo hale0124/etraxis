@@ -1,14 +1,10 @@
 {% macro row(label, value, mode) %}
-    <div class="grid-container grid-parent grid-row">
-        <div class="grid-25">
-            <p class="caption">
-                {{ label ~ ':' }}
-            </p>
+    <div class="grid-parent grid-row clearfix">
+        <div class="grid-25 label">
+            {{ label ~ ':' }}
         </div>
-        <div class="grid-75">
-            <p>
-                {{ value is null ? '&mdash;' : value | bbcode(mode|default('strip')) | nl2br }}
-            </p>
+        <div class="grid-75 value">
+            {{ value is null ? '&mdash;' : value | bbcode(mode|default('strip')) | nl2br }}
         </div>
     </div>
 {% endmacro %}

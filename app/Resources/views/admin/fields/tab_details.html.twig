@@ -1,27 +1,23 @@
 {% import 'macro.html.twig' as macro %}
 
-<div class="grid-row">
-    <div class="grid-100">
-        <button type="button" onclick="FieldsApp.edit({{ field.id }})">{{ 'button.edit'|trans }}</button>
-        {% if can.delete %}
-            <button type="button" onclick="FieldsApp.delete({{ field.id }})">{{ 'button.delete'|trans }}</button>
-        {% endif %}
-    </div>
+<div class="grid-100 grid-row">
+    <button type="button" onclick="FieldsApp.edit({{ field.id }})">{{ 'button.edit'|trans }}</button>
+    {% if can.delete %}
+        <button type="button" onclick="FieldsApp.delete({{ field.id }})">{{ 'button.delete'|trans }}</button>
+    {% endif %}
 </div>
 
-<div class="grid-row">
-    <div class="grid-100">
-        <fieldset>
-            {{ macro.row('field.name'|trans, field.name) }}
-            {{ macro.row('field.type'|trans, types[field.type]|trans|lower) }}
+<div class="grid-100 grid-row">
+    <div class="fieldset">
+        {{ macro.row('field.name'|trans, field.name) }}
+        {{ macro.row('field.type'|trans, types[field.type]|trans|lower) }}
 
-            {% block details %}{% endblock %}
+        {% block details %}{% endblock %}
 
-            {{ macro.row('description'|trans, field.description) }}
+        {{ macro.row('description'|trans, field.description) }}
 
-            {% if (field.type != 'checkbox') %}
-                {{ macro.row('field.required'|trans, field.isRequired ? 'button.yes'|trans|lower : 'button.no'|trans|lower) }}
-            {% endif %}
-        </fieldset>
+        {% if (field.type != 'checkbox') %}
+            {{ macro.row('field.required'|trans, field.isRequired ? 'button.yes'|trans|lower : 'button.no'|trans|lower) }}
+        {% endif %}
     </div>
 </div>

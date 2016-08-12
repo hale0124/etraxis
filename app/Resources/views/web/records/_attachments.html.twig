@@ -1,21 +1,19 @@
 {% set attachments = record.attachments %}
 
 {% if attachments|length != 0 %}
-    <fieldset>
-        <legend>{{ 'files'|trans }} ({{ attachments|length }})</legend>
+    <div class="fieldset">
+        <div class="legend">{{ 'files'|trans }} ({{ attachments|length }})</div>
         {% for attachment in attachments %}
-            <div class="grid-container grid-parent grid-row">
-                <div class="grid-100">
-                    <img class="left" width="48" height="48" src="{{ asset('images/mimetypes/' ~ attachment.mimeImage) }}">
-                    <p class="attachment-name">
-                        {{ attachment.name ~ ' (%.02f %s)'|format(attachment.size / 1024, 'kb'|trans) }}
-                    </p>
-                    <p class="attachment-time">
-                        {% set timestamp = attachment.event.createdAt|localizeddate('medium', 'short', app.user.locale, app.user.timezone) %}
-                        {{ timestamp ~ ', ' ~ attachment.event.user.fullname }}
-                    </p>
-                </div>
+            <div class="grid-100 grid-row">
+                <img class="left" width="48" height="48" src="{{ asset('images/mimetypes/' ~ attachment.mimeImage) }}">
+                <p class="attachment-name">
+                    {{ attachment.name ~ ' (%.02f %s)'|format(attachment.size / 1024, 'kb'|trans) }}
+                </p>
+                <p class="attachment-time">
+                    {% set timestamp = attachment.event.createdAt|localizeddate('medium', 'short', app.user.locale, app.user.timezone) %}
+                    {{ timestamp ~ ', ' ~ attachment.event.user.fullname }}
+                </p>
             </div>
         {% endfor %}
-    </fieldset>
+    </div>
 {% endif %}

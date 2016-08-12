@@ -2,41 +2,39 @@
 
 {% block content %}
 
-    <div class="grid-row">
-        <div class="grid-50 prefix-25 mobile-grid-100">
+    <div class="grid-50 prefix-25 mobile-grid-100 grid-row clearfix">
 
-            {{ form_start(form) }}
-            <fieldset>
-                <legend>{{ 'security.change_password'|trans }}</legend>
+        {{ form_start(form) }}
+        <fieldset>
+            <legend>{{ 'security.change_password'|trans }}</legend>
 
-                <div class="grid-container grid-parent grid-row">
-                    <div class="grid-33">
-                        {{ form_label(form.password) }}:
-                    </div>
-                    <div class="grid-66">
-                        {{ form_widget(form.password, { attr: { class: 'grid-100 mobile-grid-100', placeholder: 'field.required' } }) }}
-                    </div>
+            <div class="grid-row clearfix">
+                <div class="grid-33">
+                    {{ form_label(form.password) }}:
                 </div>
-
-                <div class="grid-container grid-parent grid-row">
-                    <div class="grid-33">
-                        {{ form_label(form.confirmation) }}:
-                    </div>
-                    <div class="grid-66">
-                        {{ form_widget(form.confirmation, { attr: { class: 'grid-100 mobile-grid-100', placeholder: 'field.required' } }) }}
-                    </div>
+                <div class="grid-66">
+                    {{ form_widget(form.password, { attr: { class: 'grid-100 mobile-grid-100', placeholder: 'field.required' } }) }}
                 </div>
+            </div>
 
-                <div class="grid-container grid-parent grid-row">
-                    <div class="grid-66 prefix-33">
-                        <input type="submit" value="{{ 'button.ok'|trans }}">
-                    </div>
+            <div class="grid-row clearfix">
+                <div class="grid-33">
+                    {{ form_label(form.confirmation) }}:
                 </div>
+                <div class="grid-66">
+                    {{ form_widget(form.confirmation, { attr: { class: 'grid-100 mobile-grid-100', placeholder: 'field.required' } }) }}
+                </div>
+            </div>
 
-            </fieldset>
-            {{ form_end(form) }}
+            <div class="grid-row clearfix">
+                <div class="grid-66 prefix-33">
+                    <input type="submit" value="{{ 'button.ok'|trans }}">
+                </div>
+            </div>
 
-        </div>
+        </fieldset>
+        {{ form_end(form) }}
+
     </div>
 
 {% endblock %}

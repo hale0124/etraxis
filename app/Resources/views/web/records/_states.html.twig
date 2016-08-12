@@ -1,38 +1,38 @@
 {% for state in record.states(app.user) %}
-    <fieldset>
-        <legend>{{ state.name }}</legend>
+    <div class="grid-100 grid-parent grid-row">
+        <div class="fieldset">
+            <div class="legend">{{ state.name }}</div>
 
-        {% if state.fields|length == 0 %}
-            <div class="grid-container grid-parent grid-row">
-                <div class="grid-100">
+            {% if state.fields|length == 0 %}
+                <div class="grid-100 grid-row">
                     <p>{{ 'record.no_fields'|trans }}</p>
                 </div>
-            </div>
-        {% endif %}
-
-        {% for field in state.fields %}
-            {% if field.value is null %}
-                {{ macro.row(field.name, null) }}
-            {% elseif field.type == 'number' %}
-                {{ macro.row(field.name, field.value|localizednumber('decimal', 'default', app.user.locale)) }}
-            {% elseif field.type == 'decimal' %}
-                {{ macro.row(field.name, field.value|localizednumber('decimal', 'default', app.user.locale)) }}
-            {% elseif field.type == 'string' %}
-                {{ macro.row(field.name, field.value, 'inline') }}
-            {% elseif field.type == 'text' %}
-                {{ macro.row(field.name, field.value, 'all') }}
-            {% elseif field.type == 'checkbox' %}
-                {{ macro.row(field.name, field.value ? 'button.yes'|trans|lower : 'button.no'|trans|lower) }}
-            {% elseif field.type == 'list' %}
-                {{ macro.row(field.name, field.value) }}
-            {% elseif field.type == 'record' %}
-                {{ macro.row(field.name, field.value) }}
-            {% elseif field.type == 'date' %}
-                {{ macro.row(field.name, field.value|localizeddate('long', 'none', app.user.locale, app.user.timezone)) }}
-            {% elseif field.type == 'duration' %}
-                {{ macro.row(field.name, field.value) }}
             {% endif %}
-        {% endfor %}
 
-    </fieldset>
+            {% for field in state.fields %}
+                {% if field.value is null %}
+                    {{ macro.row(field.name, null) }}
+                {% elseif field.type == 'number' %}
+                    {{ macro.row(field.name, field.value|localizednumber('decimal', 'default', app.user.locale)) }}
+                {% elseif field.type == 'decimal' %}
+                    {{ macro.row(field.name, field.value|localizednumber('decimal', 'default', app.user.locale)) }}
+                {% elseif field.type == 'string' %}
+                    {{ macro.row(field.name, field.value, 'inline') }}
+                {% elseif field.type == 'text' %}
+                    {{ macro.row(field.name, field.value, 'all') }}
+                {% elseif field.type == 'checkbox' %}
+                    {{ macro.row(field.name, field.value ? 'button.yes'|trans|lower : 'button.no'|trans|lower) }}
+                {% elseif field.type == 'list' %}
+                    {{ macro.row(field.name, field.value) }}
+                {% elseif field.type == 'record' %}
+                    {{ macro.row(field.name, field.value) }}
+                {% elseif field.type == 'date' %}
+                    {{ macro.row(field.name, field.value|localizeddate('long', 'none', app.user.locale, app.user.timezone)) }}
+                {% elseif field.type == 'duration' %}
+                    {{ macro.row(field.name, field.value) }}
+                {% endif %}
+            {% endfor %}
+
+        </div>
+    </div>
 {% endfor %}

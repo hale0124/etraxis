@@ -1,17 +1,13 @@
 {% import 'macro.html.twig' as macro %}
 
-<div class="grid-row">
-    <div class="grid-100">
-        <button type="button" onclick="FieldsApp.pcre({{ field.id }})">{{ 'button.edit'|trans }}</button>
-    </div>
+<div class="grid-100 grid-row">
+    <button type="button" onclick="FieldsApp.pcre({{ field.id }})">{{ 'button.edit'|trans }}</button>
 </div>
 
-<div class="grid-row">
-    <div class="grid-100">
-        <fieldset>
-            {{ macro.row('field.pcre_check'|trans, field.pcre.check) }}
-            {{ macro.row('field.pcre_search'|trans, field.pcre.search) }}
-            {{ macro.row('field.pcre_replace'|trans, field.pcre.replace) }}
-        </fieldset>
+<div class="grid-100 grid-row">
+    <div class="fieldset">
+        {{ macro.row('field.pcre_check'|trans, field.pcre.check) }}
+        {{ macro.row('field.pcre_search'|trans, field.pcre.search) }}
+        {{ macro.row('field.pcre_replace'|trans, field.pcre.replace) }}
     </div>
 </div>

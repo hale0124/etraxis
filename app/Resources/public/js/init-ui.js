@@ -18,6 +18,7 @@
 
             // Add default classes.
             $('fieldset', this).addClass('ui-corner-all');
+            $('.fieldset', this).addClass('ui-widget-content ui-corner-all');
             $('input[type=text]', this).addClass('ui-widget-content ui-corner-all');
             $('input[type=email]', this).addClass('ui-widget-content ui-corner-all');
             $('input[type=password]', this).addClass('ui-widget-content ui-corner-all');

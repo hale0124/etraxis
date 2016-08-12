@@ -1,26 +1,22 @@
 {% import 'macro.html.twig' as macro %}
 
-<div class="grid-row">
-    <div class="grid-100">
-        <button type="button" onclick="StatesApp.edit({{ state.id }})">{{ 'button.edit'|trans }}</button>
-        {% if can.delete %}
-            <button type="button" onclick="StatesApp.delete({{ state.id }})">{{ 'button.delete'|trans }}</button>
-        {% endif %}
-        {% if can.initial %}
-            <button type="button" onclick="StatesApp.initial({{ state.id }})">{{ 'state.make_initial'|trans }}</button>
-        {% endif %}
-    </div>
+<div class="grid-100 grid-row">
+    <button type="button" onclick="StatesApp.edit({{ state.id }})">{{ 'button.edit'|trans }}</button>
+    {% if can.delete %}
+        <button type="button" onclick="StatesApp.delete({{ state.id }})">{{ 'button.delete'|trans }}</button>
+    {% endif %}
+    {% if can.initial %}
+        <button type="button" onclick="StatesApp.initial({{ state.id }})">{{ 'state.make_initial'|trans }}</button>
+    {% endif %}
 </div>
 
-<div class="grid-row">
-    <div class="grid-100">
-        <fieldset>
-            {{ macro.row('state.name'|trans, state.name) }}
-            {{ macro.row('state.abbreviation'|trans, state.abbreviation) }}
-            {{ macro.row('state.type'|trans, types[state.type]|trans|lower) }}
-            {% if (state.type != 'final') %}
-                {{ macro.row('state.responsible'|trans, responsibles[state.responsible]|trans|lower) }}
-            {% endif %}
-        </fieldset>
+<div class="grid-100 grid-row">
+    <div class="fieldset">
+        {{ macro.row('state.name'|trans, state.name) }}
+        {{ macro.row('state.abbreviation'|trans, state.abbreviation) }}
+        {{ macro.row('state.type'|trans, types[state.type]|trans|lower) }}
+        {% if (state.type != 'final') %}
+            {{ macro.row('state.responsible'|trans, responsibles[state.responsible]|trans|lower) }}
+        {% endif %}
     </div>
 </div>

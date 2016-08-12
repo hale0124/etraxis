@@ -1,13 +1,13 @@
 {% set showPrivate = is_granted(constant('eTraxis\\Voter\\RecordVoter::PRIVATE_COMMENTS'), record) %}
 
 {% for comment in record.comments(showPrivate) %}
-    <fieldset class="{{ comment.isPrivate ? 'private' : '' }}">
-        {% set timestamp = comment.event.createdAt|localizeddate('medium', 'short', app.user.locale, app.user.timezone) %}
-        <legend>{{ timestamp ~ ', ' ~ comment.event.user.fullname }}</legend>
-        <div class="grid-container grid-parent grid-row">
-            <div class="grid-100">
-                <p>{{ comment.text|bbcode|nl2br }}</p>
+    <div class="grid-100 grid-parent grid-row">
+        <div class="fieldset {{ comment.isPrivate ? 'private' : '' }}">
+            {% set timestamp = comment.event.createdAt|localizeddate('medium', 'short', app.user.locale, app.user.timezone) %}
+            <div class="legend">{{ timestamp ~ ', ' ~ comment.event.user.fullname }}</div>
+            <div class="grid-100 grid-row value">
+                {{ comment.text|bbcode|nl2br }}
             </div>
         </div>
-    </fieldset>
+    </div>
 {% endfor %}

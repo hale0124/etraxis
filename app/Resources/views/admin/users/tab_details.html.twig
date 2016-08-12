@@ -1,41 +1,37 @@
 {% import 'macro.html.twig' as macro %}
 
-<div class="grid-row">
-    <div class="grid-100">
-        <button type="button" onclick="UserApp.back()">{{ 'button.back'|trans }}</button>
-        <button type="button" onclick="UserApp.edit({{ user.id }})">{{ 'button.edit'|trans }}</button>
-        {% if can.delete %}
-            <button type="button" onclick="UserApp.delete({{ user.id }})">{{ 'button.delete'|trans }}</button>
+<div class="grid-100 grid-row">
+    <button type="button" onclick="UserApp.back()">{{ 'button.back'|trans }}</button>
+    <button type="button" onclick="UserApp.edit({{ user.id }})">{{ 'button.edit'|trans }}</button>
+    {% if can.delete %}
+        <button type="button" onclick="UserApp.delete({{ user.id }})">{{ 'button.delete'|trans }}</button>
+    {% endif %}
+    <span class="buttonset">
+        {% if can.disable %}
+            <button type="button" onclick="UserApp.disable({{ user.id }})">{{ 'button.disable'|trans }}</button>
         {% endif %}
-        <span class="buttonset">
-            {% if can.disable %}
-                <button type="button" onclick="UserApp.disable({{ user.id }})">{{ 'button.disable'|trans }}</button>
-            {% endif %}
-            {% if can.enable %}
-                <button type="button" onclick="UserApp.enable({{ user.id }})">{{ 'button.enable'|trans }}</button>
-            {% endif %}
-            {% if can.unlock %}
-                <button type="button" onclick="UserApp.unlock({{ user.id }})">{{ 'button.unlock'|trans }}</button>
-            {% endif %}
-        </span>
-    </div>
+        {% if can.enable %}
+            <button type="button" onclick="UserApp.enable({{ user.id }})">{{ 'button.enable'|trans }}</button>
+        {% endif %}
+        {% if can.unlock %}
+            <button type="button" onclick="UserApp.unlock({{ user.id }})">{{ 'button.unlock'|trans }}</button>
+        {% endif %}
+    </span>
 </div>
 
-<div class="grid-row">
-    <div class="grid-100">
-        <fieldset id="user-details" data-name="{{ user.fullname }}">
-            {{ macro.row('user.username'|trans, user.username) }}
-            {{ macro.row('user.fullname'|trans, user.fullname) }}
-            {{ macro.row('user.email'|trans, user.email) }}
-            {{ macro.row('description'|trans, user.description) }}
-            {{ macro.row('permissions'|trans, user.admin ? 'role.administrator'|trans|lower : 'role.user'|trans|lower) }}
-            {% if user.locked %}
-                {{ macro.row('user.status'|trans, 'user.locked'|trans|lower) }}
-            {% else %}
-                {{ macro.row('user.status'|trans, user.disabled ? 'user.disabled'|trans|lower : 'user.enabled'|trans|lower) }}
-            {% endif %}
-            {{ macro.row('security.authentication'|trans, providers[user.provider]) }}
-            {{ macro.row('timezone'|trans, user.timezone) }}
-        </fieldset>
+<div class="grid-100 grid-row">
+    <div class="fieldset" id="user-details" data-name="{{ user.fullname }}">
+        {{ macro.row('user.username'|trans, user.username) }}
+        {{ macro.row('user.fullname'|trans, user.fullname) }}
+        {{ macro.row('user.email'|trans, user.email) }}
+        {{ macro.row('description'|trans, user.description) }}
+        {{ macro.row('permissions'|trans, user.admin ? 'role.administrator'|trans|lower : 'role.user'|trans|lower) }}
+        {% if user.locked %}
+            {{ macro.row('user.status'|trans, 'user.locked'|trans|lower) }}
+        {% else %}
+            {{ macro.row('user.status'|trans, user.disabled ? 'user.disabled'|trans|lower : 'user.enabled'|trans|lower) }}
+        {% endif %}
+        {{ macro.row('security.authentication'|trans, providers[user.provider]) }}
+        {{ macro.row('timezone'|trans, user.timezone) }}
     </div>
 </div>

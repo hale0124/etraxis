@@ -1,23 +1,19 @@
 {% import 'macro.html.twig' as macro %}
 
-<div class="grid-row">
-    <div class="grid-100">
-        <button type="button" onclick="GroupsApp.edit({{ group.id }})">{{ 'button.edit'|trans }}</button>
-        <button type="button" onclick="GroupsApp.delete({{ group.id }})">{{ 'button.delete'|trans }}</button>
-    </div>
+<div class="grid-100 grid-row">
+    <button type="button" onclick="GroupsApp.edit({{ group.id }})">{{ 'button.edit'|trans }}</button>
+    <button type="button" onclick="GroupsApp.delete({{ group.id }})">{{ 'button.delete'|trans }}</button>
 </div>
 
-<div class="grid-row">
-    <div class="grid-100">
-        <fieldset>
-            {{ macro.row('group.name'|trans, group.name) }}
-            {% if group.global %}
-                {{ macro.row('group.type'|trans, 'group.global'|trans|lower) }}
-            {% else %}
-                {{ macro.row('group.type'|trans, 'group.local'|trans|lower) }}
-                {{ macro.row('project'|trans, group.project.name) }}
-            {% endif %}
-            {{ macro.row('description'|trans, group.description) }}
-        </fieldset>
+<div class="grid-100 grid-row">
+    <div class="fieldset">
+        {{ macro.row('group.name'|trans, group.name) }}
+        {% if group.global %}
+            {{ macro.row('group.type'|trans, 'group.global'|trans|lower) }}
+        {% else %}
+            {{ macro.row('group.type'|trans, 'group.local'|trans|lower) }}
+            {{ macro.row('project'|trans, group.project.name) }}
+        {% endif %}
+        {{ macro.row('description'|trans, group.description) }}
     </div>
 </div>

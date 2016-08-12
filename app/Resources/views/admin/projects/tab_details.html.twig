@@ -1,21 +1,21 @@
 {% import 'macro.html.twig' as macro %}
 
-<div class="grid-row">
-    <div class="grid-100">
-        <button type="button" onclick="ProjectsApp.edit({{ project.id }})">{{ 'button.edit'|trans }}</button>
-        {% if can.delete %}
-            <button type="button" onclick="ProjectsApp.delete({{ project.id }})">{{ 'button.delete'|trans }}</button>
-        {% endif %}
+<div class="grid-100 grid-row">
+    <button type="button" onclick="ProjectsApp.edit({{ project.id }})">{{ 'button.edit'|trans }}</button>
+    {% if can.delete %}
+        <button type="button" onclick="ProjectsApp.delete({{ project.id }})">{{ 'button.delete'|trans }}</button>
+    {% endif %}
+</div>
+
+{% for i in 1..2 %}
+
+<div class="grid-100 grid-row">
+    <div class="fieldset">
+        {{ macro.row('project.name'|trans, project.name) }}
+        {{ macro.row('project.start_time'|trans, project.createdAt|localizeddate('long', 'none', app.user.locale, app.user.timezone)) }}
+        {{ macro.row('project.status'|trans, project.suspended ? 'project.suspended'|trans|lower : 'project.active'|trans|lower) }}
+        {{ macro.row('description'|trans, project.description) }}
     </div>
 </div>
 
-<div class="grid-row">
-    <div class="grid-100">
-        <fieldset>
-            {{ macro.row('project.name'|trans, project.name) }}
-            {{ macro.row('project.start_time'|trans, project.createdAt|localizeddate('long', 'none', app.user.locale, app.user.timezone)) }}
-            {{ macro.row('project.status'|trans, project.suspended ? 'project.suspended'|trans|lower : 'project.active'|trans|lower) }}
-            {{ macro.row('description'|trans, project.description) }}
-        </fieldset>
-    </div>
-</div>
+{% endfor %}

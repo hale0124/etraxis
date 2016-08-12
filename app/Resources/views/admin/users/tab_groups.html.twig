@@ -1,4 +1,4 @@
-<div class="flex-container grid-container grid-parent grid-row">
+<div class="flex-container grid-row clearfix">
 
     <div class="grid-45">
         <fieldset>
@@ -16,11 +16,11 @@
     </div>
 
     <div class="grid-10 text-center">
-        <button type="button" class="grid-row grid-100" onclick="UserApp.addToGroup({{ user.id }})">
+        <button type="button" class="grid-100 grid-row" onclick="UserApp.addToGroup({{ user.id }})">
             <span class="hide-on-mobile fa fa-arrow-right"></span>
             <span class="hide-on-desktop fa fa-arrow-down"></span>
         </button>
-        <button type="button" class="grid-row grid-100" onclick="UserApp.removeFromGroup({{ user.id }})">
+        <button type="button" class="grid-100 grid-row" onclick="UserApp.removeFromGroup({{ user.id }})">
             <span class="hide-on-mobile fa fa-arrow-left"></span>
             <span class="hide-on-desktop fa fa-arrow-up"></span>
         </button>

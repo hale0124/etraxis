@@ -1,31 +1,27 @@
 {% import 'macro.html.twig' as macro %}
 
-<div class="grid-row">
-    <div class="grid-100">
-        <button type="button" onclick="TemplatesApp.edit({{ template.id }})">{{ 'button.edit'|trans }}</button>
-        {% if can.lock %}
-            <button type="button" onclick="TemplatesApp.lock({{ template.id }})">{{ 'button.lock'|trans }}</button>
-        {% endif %}
-        {% if can.unlock %}
-            <button type="button" onclick="TemplatesApp.unlock({{ template.id }})">{{ 'button.unlock'|trans }}</button>
-        {% elseif template.locked %}
-            <button type="button" disabled>{{ 'button.unlock'|trans }}</button>
-        {% endif %}
-        {% if can.delete %}
-            <button type="button" onclick="TemplatesApp.delete({{ template.id }})">{{ 'button.delete'|trans }}</button>
-        {% endif %}
-    </div>
+<div class="grid-100 grid-row">
+    <button type="button" onclick="TemplatesApp.edit({{ template.id }})">{{ 'button.edit'|trans }}</button>
+    {% if can.lock %}
+        <button type="button" onclick="TemplatesApp.lock({{ template.id }})">{{ 'button.lock'|trans }}</button>
+    {% endif %}
+    {% if can.unlock %}
+        <button type="button" onclick="TemplatesApp.unlock({{ template.id }})">{{ 'button.unlock'|trans }}</button>
+    {% elseif template.locked %}
+        <button type="button" disabled>{{ 'button.unlock'|trans }}</button>
+    {% endif %}
+    {% if can.delete %}
+        <button type="button" onclick="TemplatesApp.delete({{ template.id }})">{{ 'button.delete'|trans }}</button>
+    {% endif %}
 </div>
 
-<div class="grid-row">
-    <div class="grid-100">
-        <fieldset>
-            {{ macro.row('template.name'|trans, template.name) }}
-            {{ macro.row('template.prefix'|trans, template.prefix) }}
-            {{ macro.row('template.critical_age'|trans, template.criticalAge) }}
-            {{ macro.row('template.frozen_time'|trans, template.frozenTime) }}
-            {{ macro.row('description'|trans, template.description) }}
-            {{ macro.row('template.status'|trans, template.locked ? 'template.locked'|trans|lower : 'template.active'|trans|lower) }}
-        </fieldset>
+<div class="grid-100 grid-row">
+    <div class="fieldset">
+        {{ macro.row('template.name'|trans, template.name) }}
+        {{ macro.row('template.prefix'|trans, template.prefix) }}
+        {{ macro.row('template.critical_age'|trans, template.criticalAge) }}
+        {{ macro.row('template.frozen_time'|trans, template.frozenTime) }}
+        {{ macro.row('description'|trans, template.description) }}
+        {{ macro.row('template.status'|trans, template.locked ? 'template.locked'|trans|lower : 'template.active'|trans|lower) }}
     </div>
 </div>

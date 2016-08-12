@@ -52,11 +52,18 @@ p a {
 
 /* Input controls */
 
-fieldset.private {
-    border-color: #ff6247;
+.fieldset {
 
-    legend {
-        color: #ff6247;
+    .legend {
+        background-color: #000;
+    }
+
+    &.private {
+        border-color: #ff6247;
+
+        .legend {
+            color: #ff6247;
+        }
     }
 }
 

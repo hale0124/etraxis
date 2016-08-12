@@ -2,52 +2,48 @@
 
 {% block content %}
 
-    <div class="grid-row">
-        <div class="grid-100">
-            <button type="button" onclick="UsersApp.create()">{{ 'button.create'|trans }}</button>
-            <span class="buttonset">
-                <button type="button" id="btn-disable" onclick="UsersApp.disable()" disabled="disabled">{{ 'button.disable'|trans }}</button>
-                <button type="button" id="btn-enable" onclick="UsersApp.enable()" disabled="disabled">{{ 'button.enable'|trans }}</button>
-            </span>
-            <button type="button" onclick="UsersApp.export()">{{ 'button.export'|trans }}</button>
-        </div>
+    <div class="grid-100 grid-row">
+        <button type="button" onclick="UsersApp.create()">{{ 'button.create'|trans }}</button>
+        <span class="buttonset">
+            <button type="button" id="btn-disable" onclick="UsersApp.disable()" disabled="disabled">{{ 'button.disable'|trans }}</button>
+            <button type="button" id="btn-enable" onclick="UsersApp.enable()" disabled="disabled">{{ 'button.enable'|trans }}</button>
+        </span>
+        <button type="button" onclick="UsersApp.export()">{{ 'button.export'|trans }}</button>
     </div>
 
-    <div class="grid-row">
-        <div class="grid-100">
-            <table id="users" class="cell-border hover" data-src="{{ path('admin_users_list') }}">
-                <thead>
-                    <tr>
-                        <th>{{ 'user.username'|trans }}</th>
-                        <th>{{ 'user.fullname'|trans }}</th>
-                        <th>{{ 'user.email'|trans }}</th>
-                        <th>{{ 'permissions'|trans }}</th>
-                        <th>{{ 'security.authentication'|trans }}</th>
-                        <th>{{ 'description'|trans }}</th>
-                    </tr>
-                </thead>
-                <tfoot>
-                    <tr>
-                        <td><input type="text" title="{{ 'user.username'|trans }}"></td>
-                        <td><input type="text" title="{{ 'user.fullname'|trans }}"></td>
-                        <td><input type="text" title="{{ 'user.email'|trans }}"></td>
-                        <td>
-                            <select title="{{ 'permissions'|trans }}">
-                                <option value="admin">{{ 'role.administrator'|trans }}</option>
-                                <option value="user">{{ 'role.user'|trans }}</option>
-                            </select>
-                        </td>
-                        <td>
-                            <select title="{{ 'security.authentication'|trans }}">
-                                <option value="etraxis">eTraxis</option>
-                                <option value="ldap">LDAP</option>
-                            </select>
-                        </td>
-                        <td><input type="text" title="{{ 'description'|trans }}"></td>
-                    </tr>
-                </tfoot>
-            </table>
-        </div>
+    <div class="grid-100 grid-row">
+        <table id="users" class="cell-border hover" data-src="{{ path('admin_users_list') }}">
+            <thead>
+                <tr>
+                    <th>{{ 'user.username'|trans }}</th>
+                    <th>{{ 'user.fullname'|trans }}</th>
+                    <th>{{ 'user.email'|trans }}</th>
+                    <th>{{ 'permissions'|trans }}</th>
+                    <th>{{ 'security.authentication'|trans }}</th>
+                    <th>{{ 'description'|trans }}</th>
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <td><input type="text" title="{{ 'user.username'|trans }}"></td>
+                    <td><input type="text" title="{{ 'user.fullname'|trans }}"></td>
+                    <td><input type="text" title="{{ 'user.email'|trans }}"></td>
+                    <td>
+                        <select title="{{ 'permissions'|trans }}">
+                            <option value="admin">{{ 'role.administrator'|trans }}</option>
+                            <option value="user">{{ 'role.user'|trans }}</option>
+                        </select>
+                    </td>
+                    <td>
+                        <select title="{{ 'security.authentication'|trans }}">
+                            <option value="etraxis">eTraxis</option>
+                            <option value="ldap">LDAP</option>
+                        </select>
+                    </td>
+                    <td><input type="text" title="{{ 'description'|trans }}"></td>
+                </tr>
+            </tfoot>
+        </table>
     </div>
 
 {% endblock %}

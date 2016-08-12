@@ -1,31 +1,29 @@
 {% set showPrivate = is_granted(constant('eTraxis\\Voter\\RecordVoter::PRIVATE_COMMENTS'), record) %}
 
-<div class="grid-row">
-    <div class="grid-100">
-        <table id="history" class="cell-border">
-            <thead>
+<div class="grid-100 grid-row">
+    <table id="history" class="cell-border">
+        <thead>
+            <tr>
+                <th>{{ 'timestamp'|trans }}</th>
+                <th>{{ 'user.username'|trans }}</th>
+                <th>{{ 'description'|trans }}</th>
+            </tr>
+        </thead>
+        <tfoot>
+            <tr>
+                <td><input type="text" title="{{ 'timestamp'|trans }}"></td>
+                <td><input type="text" title="{{ 'user.username'|trans }}"></td>
+                <td><input type="text" title="{{ 'description'|trans }}"></td>
+            </tr>
+        </tfoot>
+        <tbody>
+            {% for event in record.history(showPrivate) %}
                 <tr>
-                    <th>{{ 'timestamp'|trans }}</th>
-                    <th>{{ 'user.username'|trans }}</th>
-                    <th>{{ 'description'|trans }}</th>
+                    <td data-order="{{ event.createdAt }}">{{ event.createdAt|localizeddate('medium', 'short', app.user.locale, app.user.timezone) }}</td>
+                    <td>{{ event.user.fullname }}</td>
+                    <td>{{ types[event.type]|trans({'%value%': event.parameter}) }}</td>
                 </tr>
-            </thead>
-            <tfoot>
-                <tr>
-                    <td><input type="text" title="{{ 'timestamp'|trans }}"></td>
-                    <td><input type="text" title="{{ 'user.username'|trans }}"></td>
-                    <td><input type="text" title="{{ 'description'|trans }}"></td>
-                </tr>
-            </tfoot>
-            <tbody>
-                {% for event in record.history(showPrivate) %}
-                    <tr>
-                        <td data-order="{{ event.createdAt }}">{{ event.createdAt|localizeddate('medium', 'short', app.user.locale, app.user.timezone) }}</td>
-                        <td>{{ event.user.fullname }}</td>
-                        <td>{{ types[event.type]|trans({'%value%': event.parameter}) }}</td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
-    </div>
+            {% endfor %}
+        </tbody>
+    </table>
 </div>

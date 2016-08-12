@@ -1,4 +1,4 @@
-<div class="flex-container grid-container grid-parent grid-row">
+<div class="flex-container grid-row clearfix">
 
     <div class="grid-45">
         <fieldset>
@@ -16,11 +16,11 @@
     </div>
 
     <div class="grid-10 text-center">
-        <button type="button" class="grid-row grid-100" onclick="StatesApp.addGroups({{ state.id }})">
+        <button type="button" class="grid-100 grid-row" onclick="StatesApp.addGroups({{ state.id }})">
             <span class="hide-on-mobile">&gt;&gt;</span>
             <span class="hide-on-desktop ui-icon ui-icon-arrowthick-1-s"></span>
         </button>
-        <button type="button" class="grid-row grid-100" onclick="StatesApp.removeGroups({{ state.id }})">
+        <button type="button" class="grid-100 grid-row" onclick="StatesApp.removeGroups({{ state.id }})">
             <span class="hide-on-mobile">&lt;&lt;</span>
             <span class="hide-on-desktop ui-icon ui-icon-arrowthick-1-n">&lt;&lt;</span>
         </button>
