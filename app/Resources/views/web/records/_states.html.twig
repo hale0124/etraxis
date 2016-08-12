@@ -19,7 +19,16 @@
                 {% elseif field.type == 'string' %}
                     {{ macro.row(field.name, field.value, 'inline') }}
                 {% elseif field.type == 'text' %}
-                    {{ macro.row(field.name, field.value, 'all') }}
+                    {% if field.value|length <= 500 %}
+                        {{ macro.row(field.name, field.value, 'all') }}
+                    {% else %}
+                        <div class="grid-100 grid-row label">
+                            {{ field.name ~ ':' }}
+                        </div>
+                        <div class="grid-100 value huge">
+                            {{ field.value is null ? '&mdash;' : field.value | bbcode('all') | nl2br }}
+                        </div>
+                    {% endif %}
                 {% elseif field.type == 'checkbox' %}
                     {{ macro.row(field.name, field.value ? 'button.yes'|trans|lower : 'button.no'|trans|lower) }}
                 {% elseif field.type == 'list' %}
