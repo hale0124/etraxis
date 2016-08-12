@@ -297,7 +297,11 @@ class State extends Entity implements \JsonSerializable
      */
     public function getFields()
     {
-        return $this->fields->toArray();
+        $fields = $this->fields->filter(function (Field $field) {
+            return !$field->isRemoved();
+        })->toArray();
+
+        return array_values($fields);
     }
 
     /**

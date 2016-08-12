@@ -20,11 +20,14 @@ use eTraxis\Dictionary\SystemRole;
 use eTraxis\Entity\DecimalValue;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\ListItem;
+use eTraxis\Traits\ReflectionTrait;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface, OrderedFixtureInterface
 {
+    use ReflectionTrait;
+
     /** @var ContainerInterface */
     private $container;
 
@@ -82,6 +85,18 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     'type'        => FieldType::STRING,
                     'description' => 'Comma-separated list of assigned crew members',
                     'required'    => true,
+                    'param1'      => 100,
+                    'permissions' => [
+                        'group:managers' => FieldPermission::READ_WRITE,
+                        'group:staff'    => FieldPermission::READ_ONLY,
+                    ],
+                ],
+                0 => [
+                    'name'        => 'Package',
+                    'type'        => FieldType::STRING,
+                    'description' => 'A package description',
+                    'required'    => true,
+                    'removed'     => '1999-03-28',
                     'param1'      => 100,
                     'permissions' => [
                         'group:managers' => FieldPermission::READ_WRITE,
@@ -157,6 +172,10 @@ class LoadFieldsData extends AbstractFixture implements ContainerAwareInterface,
                     ->setRolePermission(SystemRole::AUTHOR, $info['author'] ?? FieldPermission::READ_WRITE)
                     ->setRolePermission(SystemRole::RESPONSIBLE, $info['responsible'] ?? FieldPermission::READ_ONLY)
                 ;
+
+                if ($info['removed'] ?? false) {
+                    $this->setProperty($field, 'removedAt', strtotime($info['removed']));
+                }
 
                 $field->getParameters()
                     ->setParameter1($info['param1'])
