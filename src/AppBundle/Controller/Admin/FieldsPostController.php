@@ -205,8 +205,8 @@ class FieldsPostController extends Controller
         $command->defaultValue = $fieldAs->getDefaultValue();
 
         // PCRE field attributes.
-        $command->pcreCheck   = $data['check']   ?: null;
-        $command->pcreSearch  = $data['search']  ?: null;
+        $command->pcreCheck   = $data['check'] ?: null;
+        $command->pcreSearch  = $data['search'] ?: null;
         $command->pcreReplace = $data['replace'] ?: null;
 
         $this->getCommandBus()->handle($command);
