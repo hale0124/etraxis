@@ -1,5 +1,5 @@
 /*!
- * jQuery UI CSS Framework 1.11.4
+ * jQuery UI CSS Framework 1.12.0
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -8,7 +8,7 @@
  *
  * http://api.jqueryui.com/category/theming/
  *
- * To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Verdana%2C%20Geneva%2C%20sans-serif&fsDefault=1em&fwDefault=normal&cornerRadius=2px&bgColorHeader=%23004966&bgTextureHeader=glass&borderColorHeader=%23e8e8e8&fcHeader=%23f8f8f8&iconColorHeader=%23f8f8f8&bgColorContent=%23ffffff&bgTextureContent=flat&borderColorContent=%23e8e8e8&fcContent=%23404040&iconColorContent=%23404040&bgColorDefault=%23f0f0f0&bgTextureDefault=highlight_soft&borderColorDefault=%23e8e8e8&fcDefault=%23004966&iconColorDefault=%23004966&bgColorHover=%23f3e0be&bgTextureHover=highlight_hard&borderColorHover=%23e5d3b3&fcHover=%23404040&iconColorHover=%23404040&bgColorActive=%23ffffff&bgTextureActive=highlight_hard&borderColorActive=%23e8e8e8&fcActive=%2300638e&iconColorActive=%2300638e&bgColorHighlight=%23f3e0be&bgTextureHighlight=diagonals_small&borderColorHighlight=%23e5d3b3&fcHighlight=%2300638e&iconColorHighlight=%2300638e&bgColorError=%23ffd1df&bgTextureError=inset_soft&borderColorError=%23d60040&fcError=%23d60040&iconColorError=%23d60040&bgColorOverlay=%23e0e0e0&bgTextureOverlay=hexagon&bgImgOpacityOverlay=90&opacityOverlay=95&bgColorShadow=%23004966&bgTextureShadow=flat&bgImgOpacityShadow=0&opacityShadow=100&thicknessShadow=2px&offsetTopShadow=-2px&offsetLeftShadow=-2px&cornerRadiusShadow=1&bgImgOpacityHeader=10&bgImgOpacityContent=75&bgImgOpacityDefault=80&bgImgOpacityHover=80&bgImgOpacityActive=50&bgImgOpacityHighlight=100&bgImgOpacityError=95&ctl=themeroller
+ * To view and modify this theme, visit http://jqueryui.com/themeroller/?scope=&folderName=custom-theme&ctl=themeroller&bgImgOpacityError=95&bgImgOpacityHighlight=100&bgImgOpacityActive=50&bgImgOpacityHover=80&bgImgOpacityDefault=80&bgImgOpacityContent=75&bgImgOpacityHeader=10&cornerRadiusShadow=1&offsetLeftShadow=-2px&offsetTopShadow=-2px&thicknessShadow=2px&opacityShadow=100&bgImgOpacityShadow=0&bgTextureShadow=flat&bgColorShadow=%23004966&opacityOverlay=95&bgImgOpacityOverlay=90&bgTextureOverlay=hexagon&bgColorOverlay=%23e0e0e0&iconColorError=%23d60040&fcError=%23d60040&borderColorError=%23d60040&bgTextureError=inset_soft&bgColorError=%23ffd1df&iconColorHighlight=%2300638e&fcHighlight=%2300638e&borderColorHighlight=%23e5d3b3&bgTextureHighlight=diagonals_small&bgColorHighlight=%23f3e0be&iconColorActive=%2300638e&fcActive=%2300638e&borderColorActive=%23e8e8e8&bgTextureActive=highlight_hard&bgColorActive=%23ffffff&iconColorHover=%23404040&fcHover=%23404040&borderColorHover=%23e5d3b3&bgTextureHover=highlight_hard&bgColorHover=%23f3e0be&iconColorDefault=%23004966&fcDefault=%23004966&borderColorDefault=%23e8e8e8&bgTextureDefault=highlight_soft&bgColorDefault=%23f0f0f0&iconColorContent=%23404040&fcContent=%23404040&borderColorContent=%23e8e8e8&bgTextureContent=flat&bgColorContent=%23ffffff&iconColorHeader=%23f8f8f8&fcHeader=%23f8f8f8&borderColorHeader=%23e8e8e8&bgTextureHeader=glass&bgColorHeader=%23004966&cornerRadius=2px&fwDefault=normal&fsDefault=1em&ffDefault=Verdana%2C%20Geneva%2C%20sans-serif
  */
 
 
@@ -27,6 +27,9 @@
 .ui-widget button {
 	font-family: Verdana, Geneva, sans-serif;
 	font-size: 1em;
+}
+.ui-widget.ui-widget-content {
+	border: 1px solid #e8e8e8;
 }
 .ui-widget-content {
 	border: 1px solid #e8e8e8;
@@ -50,7 +53,13 @@
 ----------------------------------*/
 .ui-state-default,
 .ui-widget-content .ui-state-default,
-.ui-widget-header .ui-state-default {
+.ui-widget-header .ui-state-default,
+.ui-button,
+
+/* We use html here because we need a greater specificity to make sure disabled
+works properly when clicked or hovered */
+html .ui-button.ui-state-disabled:hover,
+html .ui-button.ui-state-disabled:active {
 	border: 1px solid #e8e8e8;
 	background: #f0f0f0 url("images/ui-bg_highlight-soft_80_f0f0f0_1x100.png") 50% 50% repeat-x;
 	font-weight: normal;
@@ -58,7 +67,11 @@
 }
 .ui-state-default a,
 .ui-state-default a:link,
-.ui-state-default a:visited {
+.ui-state-default a:visited,
+a.ui-button,
+a:link.ui-button,
+a:visited.ui-button,
+.ui-button {
 	color: #004966;
 	text-decoration: none;
 }
@@ -67,7 +80,9 @@
 .ui-widget-header .ui-state-hover,
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
-.ui-widget-header .ui-state-focus {
+.ui-widget-header .ui-state-focus,
+.ui-button:hover,
+.ui-button:focus {
 	border: 1px solid #e5d3b3;
 	background: #f3e0be url("images/ui-bg_highlight-hard_80_f3e0be_1x100.png") 50% 50% repeat-x;
 	font-weight: normal;
@@ -80,17 +95,31 @@
 .ui-state-focus a,
 .ui-state-focus a:hover,
 .ui-state-focus a:link,
-.ui-state-focus a:visited {
+.ui-state-focus a:visited,
+a.ui-button:hover,
+a.ui-button:focus {
 	color: #404040;
 	text-decoration: none;
 }
+
+.ui-visual-focus {
+	box-shadow: 0 0 3px 1px rgb(94, 158, 214);
+}
 .ui-state-active,
 .ui-widget-content .ui-state-active,
-.ui-widget-header .ui-state-active {
+.ui-widget-header .ui-state-active,
+a.ui-button:active,
+.ui-button:active,
+.ui-button.ui-state-active:hover {
 	border: 1px solid #e8e8e8;
 	background: #ffffff url("images/ui-bg_highlight-hard_50_ffffff_1x100.png") 50% 50% repeat-x;
 	font-weight: normal;
 	color: #00638e;
+}
+.ui-icon-background,
+.ui-state-active .ui-icon-background {
+	border: #e8e8e8;
+	background-color: #00638e;
 }
 .ui-state-active a,
 .ui-state-active a:link,
@@ -107,6 +136,10 @@
 	border: 1px solid #e5d3b3;
 	background: #f3e0be url("images/ui-bg_diagonals-small_100_f3e0be_40x40.png") 50% 50% repeat;
 	color: #00638e;
+}
+.ui-state-checked {
+	border: 1px solid #e5d3b3;
+	background: #f3e0be;
 }
 .ui-state-highlight a,
 .ui-widget-content .ui-state-highlight a,
@@ -168,17 +201,22 @@
 .ui-widget-header .ui-icon {
 	background-image: url("images/ui-icons_f8f8f8_256x240.png");
 }
-.ui-state-default .ui-icon {
+.ui-button .ui-icon {
 	background-image: url("images/ui-icons_004966_256x240.png");
 }
 .ui-state-hover .ui-icon,
-.ui-state-focus .ui-icon {
+.ui-state-focus .ui-icon,
+.ui-button:hover .ui-icon,
+.ui-button:focus .ui-icon,
+.ui-state-default .ui-icon {
 	background-image: url("images/ui-icons_404040_256x240.png");
 }
-.ui-state-active .ui-icon {
+.ui-state-active .ui-icon,
+.ui-button:active .ui-icon {
 	background-image: url("images/ui-icons_00638e_256x240.png");
 }
-.ui-state-highlight .ui-icon {
+.ui-state-highlight .ui-icon,
+.ui-button .ui-state-highlight.ui-icon {
 	background-image: url("images/ui-icons_00638e_256x240.png");
 }
 .ui-state-error .ui-icon,
@@ -188,21 +226,21 @@
 
 /* positioning */
 .ui-icon-blank { background-position: 16px 16px; }
-.ui-icon-carat-1-n { background-position: 0 0; }
-.ui-icon-carat-1-ne { background-position: -16px 0; }
-.ui-icon-carat-1-e { background-position: -32px 0; }
-.ui-icon-carat-1-se { background-position: -48px 0; }
-.ui-icon-carat-1-s { background-position: -64px 0; }
-.ui-icon-carat-1-sw { background-position: -80px 0; }
-.ui-icon-carat-1-w { background-position: -96px 0; }
-.ui-icon-carat-1-nw { background-position: -112px 0; }
-.ui-icon-carat-2-n-s { background-position: -128px 0; }
-.ui-icon-carat-2-e-w { background-position: -144px 0; }
+.ui-icon-caret-1-n { background-position: 0 0; }
+.ui-icon-caret-1-ne { background-position: -16px 0; }
+.ui-icon-caret-1-e { background-position: -32px 0; }
+.ui-icon-caret-1-se { background-position: -48px 0; }
+.ui-icon-caret-1-s { background-position: -65px 0; }
+.ui-icon-caret-1-sw { background-position: -80px 0; }
+.ui-icon-caret-1-w { background-position: -96px 0; }
+.ui-icon-caret-1-nw { background-position: -112px 0; }
+.ui-icon-caret-2-n-s { background-position: -128px 0; }
+.ui-icon-caret-2-e-w { background-position: -144px 0; }
 .ui-icon-triangle-1-n { background-position: 0 -16px; }
 .ui-icon-triangle-1-ne { background-position: -16px -16px; }
 .ui-icon-triangle-1-e { background-position: -32px -16px; }
 .ui-icon-triangle-1-se { background-position: -48px -16px; }
-.ui-icon-triangle-1-s { background-position: -64px -16px; }
+.ui-icon-triangle-1-s { background-position: -65px -16px; }
 .ui-icon-triangle-1-sw { background-position: -80px -16px; }
 .ui-icon-triangle-1-w { background-position: -96px -16px; }
 .ui-icon-triangle-1-nw { background-position: -112px -16px; }
@@ -212,7 +250,7 @@
 .ui-icon-arrow-1-ne { background-position: -16px -32px; }
 .ui-icon-arrow-1-e { background-position: -32px -32px; }
 .ui-icon-arrow-1-se { background-position: -48px -32px; }
-.ui-icon-arrow-1-s { background-position: -64px -32px; }
+.ui-icon-arrow-1-s { background-position: -65px -32px; }
 .ui-icon-arrow-1-sw { background-position: -80px -32px; }
 .ui-icon-arrow-1-w { background-position: -96px -32px; }
 .ui-icon-arrow-1-nw { background-position: -112px -32px; }
@@ -224,7 +262,7 @@
 .ui-icon-arrowstop-1-e { background-position: -208px -32px; }
 .ui-icon-arrowstop-1-s { background-position: -224px -32px; }
 .ui-icon-arrowstop-1-w { background-position: -240px -32px; }
-.ui-icon-arrowthick-1-n { background-position: 0 -48px; }
+.ui-icon-arrowthick-1-n { background-position: 1px -48px; }
 .ui-icon-arrowthick-1-ne { background-position: -16px -48px; }
 .ui-icon-arrowthick-1-e { background-position: -32px -48px; }
 .ui-icon-arrowthick-1-se { background-position: -48px -48px; }
@@ -401,10 +439,6 @@
 	filter: Alpha(Opacity=95); /* support: IE8 */
 }
 .ui-widget-shadow {
-	margin: -2px 0 0 -2px;
-	padding: 2px;
-	background: #004966;
-	opacity: 1;
-	filter: Alpha(Opacity=100); /* support: IE8 */
-	border-radius: 1;
+	-webkit-box-shadow: -2px -2px 2px #004966;
+	box-shadow: -2px -2px 2px #004966;
 }
