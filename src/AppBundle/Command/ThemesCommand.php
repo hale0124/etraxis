@@ -107,22 +107,32 @@ class ThemesCommand extends ContainerAwareCommand
 
         $components = [
             // UI Core
-            'Core',
-            'Widget',
-            'Mouse',
-            'Position',
+            'widget',
+            'position',
+            'data',
+            'disable-selection',
+            'focusable',
+            'form-reset-mixin',
+            'keycode',
+            'labels',
+            'scroll-parent',
+            'tabbable',
+            'unique-id',
             // Interactions
-            'Draggable',
-            'Resizable',
-            'Sortable',
+            'widgets/draggable',
+            'widgets/resizable',
+            'widgets/sortable',
             // Widgets
-            'Button',
-            'Datepicker',
-            'Dialog',
-            'Menu',
-            'Progressbar',
-            'Tabs',
-            'Tooltip',
+            'widgets/button',
+            'widgets/checkboxradio',
+            'widgets/controlgroup',
+            'widgets/datepicker',
+            'widgets/dialog',
+            'widgets/menu',
+            'widgets/mouse',
+            'widgets/progressbar',
+            'widgets/tabs',
+            'widgets/tooltip',
         ];
 
         $query = [

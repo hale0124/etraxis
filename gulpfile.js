@@ -83,6 +83,8 @@ gulp.task('jquery-ui:stylesheets', function() {
         'vendor/bower/jquery.ui/themes/base/sortable.css',
         // Widgets
         'vendor/bower/jquery.ui/themes/base/button.css',
+        'vendor/bower/jquery.ui/themes/base/controlgroup.css',
+        'vendor/bower/jquery.ui/themes/base/checkboxradio.css',
         'vendor/bower/jquery.ui/themes/base/datepicker.css',
         'vendor/bower/jquery.ui/themes/base/dialog.css',
         'vendor/bower/jquery.ui/themes/base/menu.css',
@@ -104,22 +106,39 @@ gulp.task('jquery-ui:javascripts', function() {
 
     var files = [
         // UI Core
-        'vendor/bower/jquery.ui/ui/core.js',
+        'vendor/bower/jquery.ui/ui/version.js',
         'vendor/bower/jquery.ui/ui/widget.js',
-        'vendor/bower/jquery.ui/ui/mouse.js',
         'vendor/bower/jquery.ui/ui/position.js',
+        'vendor/bower/jquery.ui/ui/data.js',
+        'vendor/bower/jquery.ui/ui/disable-selection.js',
+        'vendor/bower/jquery.ui/ui/focusable.js',
+        'vendor/bower/jquery.ui/ui/form.js',
+        'vendor/bower/jquery.ui/ui/form-reset-mixin.js',
+        'vendor/bower/jquery.ui/ui/keycode.js',
+        'vendor/bower/jquery.ui/ui/escape-selector.js',
+        'vendor/bower/jquery.ui/ui/labels.js',
+        'vendor/bower/jquery.ui/ui/scroll-parent.js',
+        'vendor/bower/jquery.ui/ui/tabbable.js',
+        'vendor/bower/jquery.ui/ui/unique-id.js',
+        'vendor/bower/jquery.ui/ui/ie.js',
+        'vendor/bower/jquery.ui/ui/widgets/mouse.js',
+        'vendor/bower/jquery.ui/ui/plugin.js',
+        'vendor/bower/jquery.ui/ui/safe-active-element.js',
+        'vendor/bower/jquery.ui/ui/safe-blur.js',
         // Interactions
-        'vendor/bower/jquery.ui/ui/draggable.js',
-        'vendor/bower/jquery.ui/ui/resizable.js',
-        'vendor/bower/jquery.ui/ui/sortable.js',
+        'vendor/bower/jquery.ui/ui/widgets/draggable.js',
+        'vendor/bower/jquery.ui/ui/widgets/resizable.js',
+        'vendor/bower/jquery.ui/ui/widgets/sortable.js',
         // Widgets
-        'vendor/bower/jquery.ui/ui/button.js',
-        'vendor/bower/jquery.ui/ui/datepicker.js',
-        'vendor/bower/jquery.ui/ui/dialog.js',
-        'vendor/bower/jquery.ui/ui/menu.js',
-        'vendor/bower/jquery.ui/ui/progressbar.js',
-        'vendor/bower/jquery.ui/ui/tabs.js',
-        'vendor/bower/jquery.ui/ui/tooltip.js'
+        'vendor/bower/jquery.ui/ui/widgets/controlgroup.js',
+        'vendor/bower/jquery.ui/ui/widgets/checkboxradio.js',
+        'vendor/bower/jquery.ui/ui/widgets/button.js',
+        'vendor/bower/jquery.ui/ui/widgets/datepicker.js',
+        'vendor/bower/jquery.ui/ui/widgets/dialog.js',
+        'vendor/bower/jquery.ui/ui/widgets/menu.js',
+        'vendor/bower/jquery.ui/ui/widgets/progressbar.js',
+        'vendor/bower/jquery.ui/ui/widgets/tabs.js',
+        'vendor/bower/jquery.ui/ui/widgets/tooltip.js'
     ];
 
     return gulp.src(files)
