@@ -7,8 +7,6 @@
     {% endif %}
 </div>
 
-{% for i in 1..2 %}
-
 <div class="grid-100 grid-row">
     <div class="fieldset">
         {{ macro.row('project.name'|trans, project.name) }}
@@ -17,5 +15,3 @@
         {{ macro.row('description'|trans, project.description) }}
     </div>
 </div>
-
-{% endfor %}
