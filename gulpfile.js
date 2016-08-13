@@ -9,12 +9,12 @@
 
 var gulp     = require('gulp');
 var addsrc   = require('gulp-add-src');
+var cleancss = require('gulp-clean-css');
 var concat   = require('gulp-concat');
 var exec     = require('gulp-exec');
 var gulpif   = require('gulp-if');
 var insert   = require('gulp-insert');
 var less     = require('gulp-less');
-var minify   = require('gulp-minify-css');
 var plumber  = require('gulp-plumber');
 var rename   = require('gulp-rename');
 var replace  = require('gulp-replace');
@@ -92,7 +92,7 @@ gulp.task('jquery-ui:stylesheets', function() {
     ];
 
     return gulp.src(files)
-        .pipe(gulpif(argv.production, minify()))
+        .pipe(gulpif(argv.production, cleancss()))
         .pipe(concat('jquery-ui.css'))
         .pipe(gulp.dest('vendor/bower/jquery.ui/themes/'));
 });
@@ -239,7 +239,7 @@ gulp.task('etraxis:themes', function() {
             .pipe(plumber())
             .pipe(less())
             .pipe(addsrc.prepend('app/Resources/public/css/' + folder + '/jquery-ui.theme.css'))
-            .pipe(gulpif(argv.production, minify()))
+            .pipe(gulpif(argv.production, cleancss()))
             .pipe(concat(argv.production ? 'etraxis.min.css' : 'etraxis.css'))
             .pipe(gulp.dest('web/css/' + folder));
     });
@@ -279,7 +279,7 @@ gulp.task('vendor:css', function() {
     ];
 
     return gulp.src(files)
-        .pipe(gulpif(argv.production, minify()))
+        .pipe(gulpif(argv.production, cleancss()))
         .pipe(gulpif(argv.production, concat('vendor.min.css')))
         .pipe(gulp.dest('web/css/'));
 });

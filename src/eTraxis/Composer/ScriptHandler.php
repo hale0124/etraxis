@@ -26,12 +26,12 @@ class ScriptHandler
             $modules = [
                 'gulp',
                 'gulp-add-src',
+                'gulp-clean-css',
                 'gulp-concat',
                 'gulp-exec',
                 'gulp-if',
                 'gulp-insert',
                 'gulp-less',
-                'gulp-minify-css',
                 'gulp-plumber',
                 'gulp-rename',
                 'gulp-replace',
