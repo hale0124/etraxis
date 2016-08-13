@@ -86,7 +86,7 @@ class RecordsGetController extends Controller
 
         $records = array_map(function ($record) {
             return array_slice($record, 1, 7);
-        }, $results['data']);
+        }, $results->data);
 
         /** @var \Symfony\Component\Translation\TranslatorInterface $translator */
         $translator = $this->container->get('translator');

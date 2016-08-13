@@ -86,7 +86,7 @@ class UsersGetController extends Controller
 
         $users = array_map(function ($user) {
             return array_slice($user, 1, 6);
-        }, $results['data']);
+        }, $results->data);
 
         /** @var \Symfony\Component\Translation\TranslatorInterface $translator */
         $translator = $this->container->get('translator');
