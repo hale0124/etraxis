@@ -11,7 +11,7 @@
 
 namespace eTraxis\CommandBus\States;
 
-use eTraxis\Traits\MessageTrait;
+use eTraxis\Traits\CommandTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class UpdateStateCommand
 {
-    use MessageTrait;
+    use CommandTrait;
 
     /**
      * @Assert\NotBlank()

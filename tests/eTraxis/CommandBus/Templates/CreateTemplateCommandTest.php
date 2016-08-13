@@ -44,7 +44,7 @@ class CreateTemplateCommandTest extends TransactionalTestCase
             'description' => $description,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => $name]);
 
@@ -68,7 +68,7 @@ class CreateTemplateCommandTest extends TransactionalTestCase
             'description' => 'Nimbus technical maintenance',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -84,7 +84,7 @@ class CreateTemplateCommandTest extends TransactionalTestCase
             'description' => 'Nimbus technical maintenance',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -100,6 +100,6 @@ class CreateTemplateCommandTest extends TransactionalTestCase
             'description' => 'Nimbus technical maintenance',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

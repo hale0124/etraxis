@@ -31,7 +31,7 @@ class SetRoleFieldPermissionCommandTest extends TransactionalTestCase
             'permission' => FieldPermission::READ_ONLY,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         self::assertEquals(FieldPermission::READ_ONLY, $field->getRolePermission(SystemRole::ANYONE));
     }
@@ -49,7 +49,7 @@ class SetRoleFieldPermissionCommandTest extends TransactionalTestCase
             'permission' => FieldPermission::READ_ONLY,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         self::assertEquals(FieldPermission::READ_ONLY, $field->getRolePermission(SystemRole::AUTHOR));
     }
@@ -67,7 +67,7 @@ class SetRoleFieldPermissionCommandTest extends TransactionalTestCase
             'permission' => FieldPermission::READ_WRITE,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         self::assertEquals(FieldPermission::READ_WRITE, $field->getRolePermission(SystemRole::RESPONSIBLE));
     }
@@ -84,6 +84,6 @@ class SetRoleFieldPermissionCommandTest extends TransactionalTestCase
             'permission' => FieldPermission::READ_WRITE,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

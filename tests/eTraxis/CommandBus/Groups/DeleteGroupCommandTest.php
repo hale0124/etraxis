@@ -23,7 +23,7 @@ class DeleteGroupCommandTest extends TransactionalTestCase
         self::assertNotNull($group);
 
         $command = new DeleteGroupCommand(['id' => $group->getId()]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Staff']);
         self::assertNull($group);
@@ -36,6 +36,6 @@ class DeleteGroupCommandTest extends TransactionalTestCase
     public function testNotFound()
     {
         $command = new DeleteGroupCommand(['id' => self::UNKNOWN_ENTITY_ID]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

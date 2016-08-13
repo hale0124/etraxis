@@ -37,7 +37,7 @@ class SetRoleTemplatePermissionsCommandTest extends TransactionalTestCase
             ],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $template = $this->doctrine->getRepository(Template::class)->find($id);
 
@@ -54,7 +54,7 @@ class SetRoleTemplatePermissionsCommandTest extends TransactionalTestCase
             ],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $template = $this->doctrine->getRepository(Template::class)->find($id);
 
@@ -82,7 +82,7 @@ class SetRoleTemplatePermissionsCommandTest extends TransactionalTestCase
             ],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $template = $this->doctrine->getRepository(Template::class)->find($id);
 
@@ -110,7 +110,7 @@ class SetRoleTemplatePermissionsCommandTest extends TransactionalTestCase
             ],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $template = $this->doctrine->getRepository(Template::class)->find($id);
 
@@ -131,6 +131,6 @@ class SetRoleTemplatePermissionsCommandTest extends TransactionalTestCase
             'permissions' => [TemplatePermission::VIEW_RECORDS],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

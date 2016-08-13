@@ -40,7 +40,7 @@ class UpdateDateFieldCommandTest extends TransactionalTestCase
             'defaultValue' => 10,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 
@@ -70,7 +70,7 @@ class UpdateDateFieldCommandTest extends TransactionalTestCase
             'maxValue' => 0,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -91,6 +91,6 @@ class UpdateDateFieldCommandTest extends TransactionalTestCase
             'defaultValue' => 10,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

@@ -53,7 +53,7 @@ class SetGroupStateTransitionsCommandTest extends TransactionalTestCase
             ],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         self::assertArraysByValues([$this->accepted, $this->deprecated], $this->draft->getGroupTransitions($group));
     }
@@ -73,7 +73,7 @@ class SetGroupStateTransitionsCommandTest extends TransactionalTestCase
             ],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         self::assertArraysByValues([$this->deprecated], $this->draft->getGroupTransitions($group));
     }
@@ -95,7 +95,7 @@ class SetGroupStateTransitionsCommandTest extends TransactionalTestCase
             ],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -112,6 +112,6 @@ class SetGroupStateTransitionsCommandTest extends TransactionalTestCase
             ],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

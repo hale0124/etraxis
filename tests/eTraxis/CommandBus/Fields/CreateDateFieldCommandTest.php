@@ -32,7 +32,7 @@ class CreateDateFieldCommandTest extends TransactionalTestCase
             'defaultValue' => 2,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => $command->name]);
@@ -61,7 +61,7 @@ class CreateDateFieldCommandTest extends TransactionalTestCase
             'maxValue' => 1,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -82,6 +82,6 @@ class CreateDateFieldCommandTest extends TransactionalTestCase
             'defaultValue' => 10,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

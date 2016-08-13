@@ -40,7 +40,7 @@ class UpdateDurationFieldCommandTest extends TransactionalTestCase
             'defaultValue' => '0:22',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 
@@ -70,7 +70,7 @@ class UpdateDurationFieldCommandTest extends TransactionalTestCase
             'maxValue' => '0:00',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -91,6 +91,6 @@ class UpdateDurationFieldCommandTest extends TransactionalTestCase
             'defaultValue' => '24:00',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

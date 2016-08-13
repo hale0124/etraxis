@@ -24,13 +24,13 @@ class LockUserCommandTest extends TransactionalTestCase
         ]);
 
         // first time
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $user = $this->findUser($username);
         self::assertFalse($user->isLocked());
 
         // second time
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $user = $this->findUser($username);
         self::assertTrue($user->isLocked());

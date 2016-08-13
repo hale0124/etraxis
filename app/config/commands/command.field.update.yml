@@ -7,36 +7,36 @@ services:
 
     command.field.update.number:
         parent: command.field.update.abstract
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Fields\UpdateNumberFieldCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Fields\UpdateNumberFieldCommand }]
 
     command.field.update.decimal:
         parent: command.field.update.abstract
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Fields\UpdateDecimalFieldCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Fields\UpdateDecimalFieldCommand }]
 
     command.field.update.string:
         parent: command.field.update.abstract
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Fields\UpdateStringFieldCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Fields\UpdateStringFieldCommand }]
 
     command.field.update.text:
         parent: command.field.update.abstract
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Fields\UpdateTextFieldCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Fields\UpdateTextFieldCommand }]
 
     command.field.update.checkbox:
         parent: command.field.update.abstract
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Fields\UpdateCheckboxFieldCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Fields\UpdateCheckboxFieldCommand }]
 
     command.field.update.record:
         parent: command.field.update.abstract
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Fields\UpdateRecordFieldCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Fields\UpdateRecordFieldCommand }]
 
     command.field.update.list:
         parent: command.field.update.abstract
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Fields\UpdateListFieldCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Fields\UpdateListFieldCommand }]
 
     command.field.update.date:
         parent: command.field.update.abstract
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Fields\UpdateDateFieldCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Fields\UpdateDateFieldCommand }]
 
     command.field.update.duration:
         parent: command.field.update.abstract
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Fields\UpdateDurationFieldCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Fields\UpdateDurationFieldCommand }]

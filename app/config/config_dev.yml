@@ -32,9 +32,3 @@ monolog:
 
 swiftmailer:
     delivery_addresses: "%delivery_addresses%"
-
-command_bus:
-    logging: ~
-
-event_bus:
-    logging: ~

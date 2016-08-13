@@ -41,7 +41,7 @@ class SetGroupTemplatePermissionsCommandTest extends TransactionalTestCase
             ],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         self::assertTrue(in_array(TemplatePermission::ATTACH_FILES, $template->getGroupPermissions($group)));
         self::assertFalse(in_array(TemplatePermission::DELETE_FILES, $template->getGroupPermissions($group)));
@@ -65,7 +65,7 @@ class SetGroupTemplatePermissionsCommandTest extends TransactionalTestCase
             'permissions' => [TemplatePermission::VIEW_RECORDS],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $this->doctrine->getManager()->refresh($template);
 
@@ -87,7 +87,7 @@ class SetGroupTemplatePermissionsCommandTest extends TransactionalTestCase
             'permissions' => [TemplatePermission::VIEW_RECORDS],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -105,6 +105,6 @@ class SetGroupTemplatePermissionsCommandTest extends TransactionalTestCase
             'permissions' => [TemplatePermission::VIEW_RECORDS],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

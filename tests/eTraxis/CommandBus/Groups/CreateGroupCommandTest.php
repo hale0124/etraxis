@@ -32,7 +32,7 @@ class CreateGroupCommandTest extends TransactionalTestCase
             'description' => $description,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => $name]);
@@ -53,7 +53,7 @@ class CreateGroupCommandTest extends TransactionalTestCase
             'project' => self::UNKNOWN_ENTITY_ID,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -66,7 +66,7 @@ class CreateGroupCommandTest extends TransactionalTestCase
             'name' => 'Nimbus',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -83,6 +83,6 @@ class CreateGroupCommandTest extends TransactionalTestCase
             'project' => $project->getId(),
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

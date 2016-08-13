@@ -29,7 +29,7 @@ class CreateRecordFieldCommandTest extends TransactionalTestCase
             'required' => true,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => $command->name]);

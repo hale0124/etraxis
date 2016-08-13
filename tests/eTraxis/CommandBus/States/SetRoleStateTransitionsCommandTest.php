@@ -49,7 +49,7 @@ class SetRoleStateTransitionsCommandTest extends TransactionalTestCase
             ],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         self::assertArraysByValues([$this->accepted], $this->draft->getRoleTransitions(SystemRole::AUTHOR));
 
@@ -62,7 +62,7 @@ class SetRoleStateTransitionsCommandTest extends TransactionalTestCase
             ],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         self::assertArraysByValues([$this->accepted, $this->deprecated], $this->draft->getRoleTransitions(SystemRole::AUTHOR));
 
@@ -74,7 +74,7 @@ class SetRoleStateTransitionsCommandTest extends TransactionalTestCase
             ],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         self::assertArraysByValues([$this->deprecated], $this->draft->getRoleTransitions(SystemRole::AUTHOR));
     }
@@ -91,6 +91,6 @@ class SetRoleStateTransitionsCommandTest extends TransactionalTestCase
             'transitions' => [$this->accepted->getId()],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

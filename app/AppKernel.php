@@ -17,9 +17,7 @@ class AppKernel extends Kernel
             new Doctrine\Bundle\FixturesBundle\DoctrineFixturesBundle(),
             new Doctrine\Bundle\MigrationsBundle\DoctrineMigrationsBundle(),
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
-            new SimpleBus\SymfonyBridge\SimpleBusCommandBusBundle(),
-            new SimpleBus\SymfonyBridge\SimpleBusEventBusBundle(),
-            new SimpleBus\SymfonyBridge\DoctrineOrmBridgeBundle(),
+            new League\Tactician\Bundle\TacticianBundle(),
             new DataTables\DataTablesBundle(),
             new AppBundle\AppBundle(),
         ];

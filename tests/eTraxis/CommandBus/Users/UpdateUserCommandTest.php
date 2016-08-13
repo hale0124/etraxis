@@ -41,7 +41,7 @@ class UpdateUserCommandTest extends TransactionalTestCase
             'timezone' => 'Asia/Vladivostok',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         /** @var User $user */
         $user = $this->doctrine->getRepository(User::class)->find($user->getId());
@@ -81,7 +81,7 @@ class UpdateUserCommandTest extends TransactionalTestCase
             'timezone' => 'UTC',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -106,6 +106,6 @@ class UpdateUserCommandTest extends TransactionalTestCase
             'timezone' => 'UTC',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

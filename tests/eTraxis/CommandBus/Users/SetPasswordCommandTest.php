@@ -29,7 +29,7 @@ class SetPasswordCommandTest extends TransactionalTestCase
             'password' => 'legacy',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $user = $this->findUser('artem');
 
@@ -49,7 +49,7 @@ class SetPasswordCommandTest extends TransactionalTestCase
             'password' => 'legacy',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -65,6 +65,6 @@ class SetPasswordCommandTest extends TransactionalTestCase
             'password' => 'short',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

@@ -38,7 +38,7 @@ class AddStateResponsibleGroupsCommandTest extends TransactionalTestCase
             ],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         self::assertArraysByValues([$crew, $managers], $state->getResponsibleGroups());
     }
@@ -57,6 +57,6 @@ class AddStateResponsibleGroupsCommandTest extends TransactionalTestCase
             'groups' => [$group->getId()],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

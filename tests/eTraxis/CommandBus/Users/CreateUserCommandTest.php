@@ -44,7 +44,7 @@ class CreateUserCommandTest extends TransactionalTestCase
             'timezone'    => 'Asia/Vladivostok',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $user = $this->findUser($username);
 
@@ -80,7 +80,7 @@ class CreateUserCommandTest extends TransactionalTestCase
             'timezone' => 'UTC',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -101,6 +101,6 @@ class CreateUserCommandTest extends TransactionalTestCase
             'timezone' => 'UTC',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

@@ -29,7 +29,7 @@ class SetInitialStateCommandTest extends TransactionalTestCase
         self::assertNotEquals(StateType::IS_INITIAL, $delivered->getType());
 
         $command = new SetInitialStateCommand(['id' => $delivered->getId()]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $this->doctrine->getManager()->clear();
 
@@ -47,6 +47,6 @@ class SetInitialStateCommandTest extends TransactionalTestCase
     public function testNotFound()
     {
         $command = new SetInitialStateCommand(['id' => self::UNKNOWN_ENTITY_ID]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

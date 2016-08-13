@@ -11,13 +11,13 @@
 
 namespace eTraxis\CommandBus\Middleware;
 
+use League\Tactician\Middleware;
 use Psr\Log\LoggerInterface;
-use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
 
 /**
- * Middleware to calculate message processing time.
+ * Middleware to calculate command processing time.
  */
-class TimingMiddleware implements MessageBusMiddleware
+class TimingMiddleware implements Middleware
 {
     protected $logger;
 
@@ -34,14 +34,16 @@ class TimingMiddleware implements MessageBusMiddleware
     /**
      * {@inheritdoc}
      */
-    public function handle($message, callable $next)
+    public function execute($command, callable $next)
     {
         $start = microtime(true);
 
-        $next($message);
+        $value = $next($command);
 
         $stop = microtime(true);
 
-        $this->logger->debug('Message processing time', [$stop - $start]);
+        $this->logger->debug('Command processing time', [$stop - $start]);
+
+        return $value;
     }
 }

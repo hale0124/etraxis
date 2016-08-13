@@ -40,7 +40,7 @@ class DeleteTemplateCommandTest extends TransactionalTestCase
         self::assertNotNull($template);
 
         $command = new DeleteTemplateCommand(['id' => $template->getId()]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Bug report']);
         self::assertNull($template);
@@ -57,7 +57,7 @@ class DeleteTemplateCommandTest extends TransactionalTestCase
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
         $command = new DeleteTemplateCommand(['id' => $template->getId()]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -69,6 +69,6 @@ class DeleteTemplateCommandTest extends TransactionalTestCase
         $this->loginAs('hubert');
 
         $command = new DeleteTemplateCommand(['id' => self::UNKNOWN_ENTITY_ID]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

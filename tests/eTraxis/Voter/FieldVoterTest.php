@@ -49,7 +49,7 @@ class FieldVoterTest extends TransactionalTestCase
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
         $command = new LockTemplateCommand(['id' => $template->getId()]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 

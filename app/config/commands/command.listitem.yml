@@ -2,15 +2,15 @@ services:
 
     command.listitem.create:
         class: eTraxis\CommandBus\ListItems\Handler\CreateListItemCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\ListItems\CreateListItemCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\ListItems\CreateListItemCommand }]
         arguments: [ "@validator", "@doctrine.orm.entity_manager" ]
 
     command.listitem.update:
         class: eTraxis\CommandBus\ListItems\Handler\UpdateListItemCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\ListItems\UpdateListItemCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\ListItems\UpdateListItemCommand }]
         arguments: [ "@validator", "@doctrine.orm.entity_manager" ]
 
     command.listitem.delete:
         class: eTraxis\CommandBus\ListItems\Handler\DeleteListItemCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\ListItems\DeleteListItemCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\ListItems\DeleteListItemCommand }]
         arguments: [ "@doctrine.orm.entity_manager", "@security.authorization_checker" ]

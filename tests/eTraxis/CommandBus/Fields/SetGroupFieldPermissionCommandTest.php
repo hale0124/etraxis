@@ -34,7 +34,7 @@ class SetGroupFieldPermissionCommandTest extends TransactionalTestCase
             'permission' => FieldPermission::READ_WRITE,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         self::assertEquals(FieldPermission::READ_WRITE, $field->getGroupPermission($group));
     }
@@ -55,7 +55,7 @@ class SetGroupFieldPermissionCommandTest extends TransactionalTestCase
             'permission' => FieldPermission::READ_ONLY,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         self::assertEquals(FieldPermission::READ_ONLY, $field->getGroupPermission($group));
     }
@@ -75,7 +75,7 @@ class SetGroupFieldPermissionCommandTest extends TransactionalTestCase
             'permission' => FieldPermission::READ_WRITE,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -93,6 +93,6 @@ class SetGroupFieldPermissionCommandTest extends TransactionalTestCase
             'permission' => FieldPermission::READ_WRITE,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

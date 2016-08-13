@@ -36,7 +36,7 @@ class RegisterUserCommandTest extends TransactionalTestCase
             'email'    => $email,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $user = $this->findUser($username, AuthenticationProvider::LDAP);
 
@@ -57,7 +57,7 @@ class RegisterUserCommandTest extends TransactionalTestCase
             'email'    => $email,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $user = $this->findUser($username, AuthenticationProvider::LDAP);
 
@@ -79,6 +79,6 @@ class RegisterUserCommandTest extends TransactionalTestCase
     {
         $command = new RegisterUserCommand();
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

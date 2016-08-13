@@ -39,12 +39,6 @@ class ContainerTraitTest extends KernelTestCase
     public function testGetCommandBus()
     {
         $object = $this->callMethod($this->object, 'getCommandBus');
-        self::assertInstanceOf('\SimpleBus\Message\Bus\MessageBus', $object);
-    }
-
-    public function testGetEventBus()
-    {
-        $object = $this->callMethod($this->object, 'getEventBus');
-        self::assertInstanceOf('\SimpleBus\Message\Bus\MessageBus', $object);
+        self::assertInstanceOf('\League\Tactician\CommandBus', $object);
     }
 }

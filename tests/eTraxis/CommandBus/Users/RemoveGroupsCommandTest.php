@@ -35,7 +35,7 @@ class RemoveGroupsCommandTest extends TransactionalTestCase
             }, $groups),
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
         $this->doctrine->getManager()->refresh($user);
 
         $groups = $user->getGroups();
@@ -56,7 +56,7 @@ class RemoveGroupsCommandTest extends TransactionalTestCase
             'groups' => [1, 2, 3],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -72,6 +72,6 @@ class RemoveGroupsCommandTest extends TransactionalTestCase
             'groups' => [],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

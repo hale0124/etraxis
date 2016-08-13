@@ -59,7 +59,7 @@ class SetOrderFieldCommandTest extends TransactionalTestCase
             'order' => $field->getOrder() - 1,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         self::assertEquals($expected, $this->getFields($field->getState()));
     }
@@ -84,7 +84,7 @@ class SetOrderFieldCommandTest extends TransactionalTestCase
             'order' => $field->getOrder() + 1,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         self::assertEquals($expected, $this->getFields($field->getState()));
     }
@@ -109,7 +109,7 @@ class SetOrderFieldCommandTest extends TransactionalTestCase
             'order' => 1,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         self::assertEquals($expected, $this->getFields($field->getState()));
     }
@@ -134,7 +134,7 @@ class SetOrderFieldCommandTest extends TransactionalTestCase
             'order' => PHP_INT_MAX,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         self::assertEquals($expected, $this->getFields($field->getState()));
     }
@@ -150,6 +150,6 @@ class SetOrderFieldCommandTest extends TransactionalTestCase
             'order' => 1,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

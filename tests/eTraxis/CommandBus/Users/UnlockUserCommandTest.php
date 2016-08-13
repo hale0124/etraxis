@@ -27,7 +27,7 @@ class UnlockUserCommandTest extends TransactionalTestCase
         self::assertTrue($user->isLocked());
 
         $command = new UnlockUserCommand(['id' => $user->getId()]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         self::assertFalse($user->isLocked());
     }

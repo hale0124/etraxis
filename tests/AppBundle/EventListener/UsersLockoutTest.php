@@ -28,7 +28,7 @@ class UsersLockoutTest extends TransactionalTestCase
 
         $success = new AuthenticationEvent($token);
 
-        $object = new UsersLockout($this->logger, $this->command_bus);
+        $object = new UsersLockout($this->logger, $this->commandbus);
 
         $object->onSuccess($success);
         self::assertFalse($this->findUser('artem')->isLocked());
@@ -40,7 +40,7 @@ class UsersLockoutTest extends TransactionalTestCase
 
         $failure = new AuthenticationFailureEvent($token, new AuthenticationException());
 
-        $object = new UsersLockout($this->logger, $this->command_bus);
+        $object = new UsersLockout($this->logger, $this->commandbus);
 
         $object->onFailure($failure);
         self::assertFalse($this->findUser('artem')->isLocked());

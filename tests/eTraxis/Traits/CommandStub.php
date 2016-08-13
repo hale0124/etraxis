@@ -13,9 +13,9 @@ namespace eTraxis\Traits;
 
 use Symfony\Component\Validator\Constraints as Assert;
 
-class MessageStub
+class CommandStub
 {
-    use MessageTrait;
+    use CommandTrait;
 
     /**
      * @Assert\Range(min = "1", max = "100")

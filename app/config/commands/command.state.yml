@@ -2,40 +2,40 @@ services:
 
     command.state.create:
         class: eTraxis\CommandBus\States\Handler\CreateStateCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\States\CreateStateCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\States\CreateStateCommand }]
         arguments: [ "@validator", "@doctrine.orm.entity_manager" ]
 
     command.state.update:
         class: eTraxis\CommandBus\States\Handler\UpdateStateCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\States\UpdateStateCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\States\UpdateStateCommand }]
         arguments: [ "@validator", "@doctrine.orm.entity_manager" ]
 
     command.state.delete:
         class: eTraxis\CommandBus\States\Handler\DeleteStateCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\States\DeleteStateCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\States\DeleteStateCommand }]
         arguments: [ "@doctrine.orm.entity_manager", "@security.authorization_checker" ]
 
     command.state.set_initial:
         class: eTraxis\CommandBus\States\Handler\SetInitialStateCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\States\SetInitialStateCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\States\SetInitialStateCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]
 
     command.state.set_role_transitions:
         class: eTraxis\CommandBus\States\Handler\SetRoleStateTransitionsCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\States\SetRoleStateTransitionsCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\States\SetRoleStateTransitionsCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]
 
     command.state.set_group_transitions:
         class: eTraxis\CommandBus\States\Handler\SetGroupStateTransitionsCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\States\SetGroupStateTransitionsCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\States\SetGroupStateTransitionsCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]
 
     command.state.add_responsible_groups:
         class: eTraxis\CommandBus\States\Handler\AddStateResponsibleGroupsCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\States\AddStateResponsibleGroupsCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\States\AddStateResponsibleGroupsCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]
 
     command.state.remove_responsible_groups:
         class: eTraxis\CommandBus\States\Handler\RemoveStateResponsibleGroupsCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\States\RemoveStateResponsibleGroupsCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\States\RemoveStateResponsibleGroupsCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]

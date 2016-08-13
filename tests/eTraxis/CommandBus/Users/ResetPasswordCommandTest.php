@@ -28,7 +28,7 @@ class ResetPasswordCommandTest extends TransactionalTestCase
             'ip'       => '127.0.0.1',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     public function testSuccess()
@@ -44,7 +44,7 @@ class ResetPasswordCommandTest extends TransactionalTestCase
             'password' => 'legacy',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $user = $this->findUser('artem');
 
@@ -72,7 +72,7 @@ class ResetPasswordCommandTest extends TransactionalTestCase
             'password' => 'legacy',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -88,6 +88,6 @@ class ResetPasswordCommandTest extends TransactionalTestCase
             'password' => 'short',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

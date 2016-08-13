@@ -11,7 +11,7 @@
 
 namespace eTraxis\CommandBus\Fields\Command;
 
-use eTraxis\Traits\MessageTrait;
+use eTraxis\Traits\CommandTrait;
 use Symfony\Component\Validator\Constraints as Assert;
 
 /**
@@ -24,7 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  */
 class FieldCommand
 {
-    use MessageTrait;
+    use CommandTrait;
 
     /**
      * @Assert\NotBlank()

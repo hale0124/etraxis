@@ -40,7 +40,7 @@ class RemoveUsersCommandTest extends TransactionalTestCase
             }, $members),
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $members = $group->getMembers();
         $others  = $group->getNonMembers();
@@ -60,7 +60,7 @@ class RemoveUsersCommandTest extends TransactionalTestCase
             'users' => [1, 2, 3],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -77,6 +77,6 @@ class RemoveUsersCommandTest extends TransactionalTestCase
             'users' => [],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

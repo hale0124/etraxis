@@ -11,25 +11,25 @@
 
 namespace eTraxis\Traits;
 
-class MessageTraitTest extends \PHPUnit_Framework_TestCase
+class CommandTraitTest extends \PHPUnit_Framework_TestCase
 {
     public function testDefault()
     {
-        $object = new MessageStub();
+        $object = new CommandStub();
 
         self::assertEquals(1, $object->property);
     }
 
     public function testInitialization()
     {
-        $object = new MessageStub(['property' => 2]);
+        $object = new CommandStub(['property' => 2]);
 
         self::assertEquals(2, $object->property);
     }
 
     public function testInitializationExtra()
     {
-        $object = new MessageStub(['property' => 2], ['property' => 3]);
+        $object = new CommandStub(['property' => 2], ['property' => 3]);
 
         self::assertEquals(3, $object->property);
     }

@@ -30,7 +30,7 @@ class UpdateProjectCommandTest extends TransactionalTestCase
             'suspended'   => true,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         /** @var Project $project */
         $project = $this->doctrine->getRepository(Project::class)->find($project->getId());
@@ -53,7 +53,7 @@ class UpdateProjectCommandTest extends TransactionalTestCase
             'suspended'   => true,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -71,6 +71,6 @@ class UpdateProjectCommandTest extends TransactionalTestCase
             'suspended' => true,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

@@ -35,7 +35,7 @@ class ForgotPasswordCommandTest extends TransactionalTestCase
             'ip'       => '127.0.0.1',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $user = $this->findUser($username);
 

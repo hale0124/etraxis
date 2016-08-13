@@ -12,9 +12,9 @@
 namespace eTraxis\Traits;
 
 /**
- * A trait for SimpleBus message object.
+ * A trait for CommandBus command object.
  */
-trait MessageTrait
+trait CommandTrait
 {
     /**
      * Initializes object properties with values from provided arrays.

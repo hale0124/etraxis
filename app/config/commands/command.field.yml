@@ -2,20 +2,20 @@ services:
 
     command.field.delete:
         class: eTraxis\CommandBus\Fields\Handler\DeleteFieldCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Fields\DeleteFieldCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Fields\DeleteFieldCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]
 
     command.field.set_order:
         class: eTraxis\CommandBus\Fields\Handler\SetOrderFieldCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Fields\SetOrderFieldCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Fields\SetOrderFieldCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]
 
     command.field.set_role_permission:
         class: eTraxis\CommandBus\Fields\Handler\SetRoleFieldPermissionCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Fields\SetRoleFieldPermissionCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Fields\SetRoleFieldPermissionCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]
 
     command.field.set_group_permission:
         class: eTraxis\CommandBus\Fields\Handler\SetGroupFieldPermissionCommandHandler
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Fields\SetGroupFieldPermissionCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Fields\SetGroupFieldPermissionCommand }]
         arguments: [ "@doctrine.orm.entity_manager" ]

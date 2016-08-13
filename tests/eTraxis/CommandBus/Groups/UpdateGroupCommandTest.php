@@ -29,7 +29,7 @@ class UpdateGroupCommandTest extends TransactionalTestCase
             'description' => 'Mechanical beings',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         /** @var Group $group */
         $group = $this->doctrine->getRepository(Group::class)->find($group->getId());
@@ -50,7 +50,7 @@ class UpdateGroupCommandTest extends TransactionalTestCase
             'description' => 'Mechanical beings',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -67,6 +67,6 @@ class UpdateGroupCommandTest extends TransactionalTestCase
             'name' => 'Crew',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

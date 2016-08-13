@@ -12,34 +12,34 @@
 namespace eTraxis\CommandBus\Middleware;
 
 use eTraxis\Tests\ControllerTestCase;
-use eTraxis\Traits\MessageStub;
+use eTraxis\Traits\CommandStub;
 
 class ValidationMiddlewareTest extends ControllerTestCase
 {
     public function testSuccess()
     {
-        $message = new MessageStub([
+        $command = new CommandStub([
             'property' => 10,
         ]);
 
         $this->expectOutputString('This point must be reached.');
 
         $middleware = new ValidationMiddleware($this->validator);
-        $middleware->handle($message, function () {
+        $middleware->execute($command, function () {
             echo 'This point must be reached.';
         });
     }
 
     public function testFailure()
     {
-        $message = new MessageStub([
+        $command = new CommandStub([
             'property' => 0,
             'name'     => str_repeat('*', 100),
         ]);
 
         try {
             $middleware = new ValidationMiddleware($this->validator);
-            $middleware->handle($message, function () {
+            $middleware->execute($command, function () {
                 self::fail('This point should not be reached.');
             });
         }

@@ -23,7 +23,7 @@ services:
         arguments:
             - "@router"
             - "@session"
-            - "@command_bus"
+            - "@tactician.commandbus"
             - "@ldap"
             - "%ldap_basedn%"
             - "%ldap_user%"

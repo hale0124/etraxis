@@ -51,7 +51,7 @@ class CreateStateCommandTest extends TransactionalTestCase
             'nextState'    => $nextState->getId(),
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => $name]);
 
@@ -91,7 +91,7 @@ class CreateStateCommandTest extends TransactionalTestCase
             'responsible'  => StateResponsible::KEEP,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $state = $repository->findOneBy(['name' => $name]);
 
@@ -127,7 +127,7 @@ class CreateStateCommandTest extends TransactionalTestCase
             'responsible'  => StateResponsible::KEEP,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -145,7 +145,7 @@ class CreateStateCommandTest extends TransactionalTestCase
             'nextState'    => self::UNKNOWN_ENTITY_ID,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -162,7 +162,7 @@ class CreateStateCommandTest extends TransactionalTestCase
             'responsible'  => StateResponsible::KEEP,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -179,6 +179,6 @@ class CreateStateCommandTest extends TransactionalTestCase
             'responsible'  => StateResponsible::KEEP,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

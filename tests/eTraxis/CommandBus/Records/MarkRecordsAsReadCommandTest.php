@@ -36,7 +36,7 @@ class MarkRecordsAsReadCommandTest extends TransactionalTestCase
             'records' => [$record->getId()],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $result = $this->doctrine->getRepository(LastRead::class)->findBy([
             'record' => $record,
@@ -60,6 +60,6 @@ class MarkRecordsAsReadCommandTest extends TransactionalTestCase
             'records' => [$record->getId()],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

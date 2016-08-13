@@ -25,7 +25,7 @@ class EnableUsersCommandTest extends TransactionalTestCase
             'ids' => [$user->getId()],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $this->doctrine->getManager()->clear();
 

@@ -32,7 +32,7 @@ class RemoveStateResponsibleGroupsCommandTest extends TransactionalTestCase
             'groups' => [$group->getId()],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         self::assertEmpty($state->getResponsibleGroups());
     }
@@ -51,6 +51,6 @@ class RemoveStateResponsibleGroupsCommandTest extends TransactionalTestCase
             'groups' => [$group->getId()],
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

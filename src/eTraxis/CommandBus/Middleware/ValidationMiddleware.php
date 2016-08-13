@@ -11,13 +11,13 @@
 
 namespace eTraxis\CommandBus\Middleware;
 
-use SimpleBus\Message\Bus\Middleware\MessageBusMiddleware;
+use League\Tactician\Middleware;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
- * Middleware to validate a message before handle it.
+ * Middleware to validate a command before handle it.
  */
-class ValidationMiddleware implements MessageBusMiddleware
+class ValidationMiddleware implements Middleware
 {
     protected $validator;
 
@@ -34,13 +34,11 @@ class ValidationMiddleware implements MessageBusMiddleware
     /**
      * {@inheritdoc}
      *
-     * @param   mixed $message
-     *
      * @throws  ValidationException
      */
-    public function handle($message, callable $next)
+    public function execute($command, callable $next)
     {
-        $violations = $this->validator->validate($message);
+        $violations = $this->validator->validate($command);
 
         if (count($violations)) {
 
@@ -54,6 +52,6 @@ class ValidationMiddleware implements MessageBusMiddleware
             throw new ValidationException($errors);
         }
 
-        $next($message);
+        return $next($command);
     }
 }

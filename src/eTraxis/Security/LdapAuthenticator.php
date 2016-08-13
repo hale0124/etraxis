@@ -14,7 +14,7 @@ namespace eTraxis\Security;
 use eTraxis\CommandBus\Users\RegisterUserCommand;
 use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Entity\User;
-use SimpleBus\Message\Bus\MessageBus;
+use League\Tactician\CommandBus;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -35,7 +35,7 @@ class LdapAuthenticator extends AbstractGuardAuthenticator
 {
     protected $router;
     protected $session;
-    protected $command_bus;
+    protected $commandbus;
     protected $ldap;
     protected $basedn;
     protected $user;
@@ -46,7 +46,7 @@ class LdapAuthenticator extends AbstractGuardAuthenticator
      *
      * @param   RouterInterface  $router
      * @param   SessionInterface $session
-     * @param   MessageBus       $command_bus
+     * @param   CommandBus       $commandbus
      * @param   LdapInterface    $ldap
      * @param   string           $basedn
      * @param   string           $user
@@ -55,19 +55,19 @@ class LdapAuthenticator extends AbstractGuardAuthenticator
     public function __construct(
         RouterInterface  $router,
         SessionInterface $session,
-        MessageBus       $command_bus,
+        CommandBus       $commandbus,
         LdapInterface    $ldap = null,
         string           $basedn = null,
         string           $user = null,
         string           $password = null)
     {
-        $this->router      = $router;
-        $this->session     = $session;
-        $this->command_bus = $command_bus;
-        $this->ldap        = $ldap;
-        $this->basedn      = $basedn;
-        $this->user        = $user;
-        $this->password    = $password;
+        $this->router     = $router;
+        $this->session    = $session;
+        $this->commandbus = $commandbus;
+        $this->ldap       = $ldap;
+        $this->basedn     = $basedn;
+        $this->user       = $user;
+        $this->password   = $password;
     }
 
     /**
@@ -185,7 +185,7 @@ class LdapAuthenticator extends AbstractGuardAuthenticator
             'email'    => $user->getEmail(),
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         // An URL the user was trying to reach before authentication.
         $originalUrl = $this->session->get('_security.main.target_path', $this->router->generate('homepage'));

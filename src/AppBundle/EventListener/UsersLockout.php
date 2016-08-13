@@ -14,8 +14,8 @@ namespace AppBundle\EventListener;
 use eTraxis\CommandBus\Users\LockUserCommand;
 use eTraxis\CommandBus\Users\UnlockUserCommand;
 use eTraxis\Entity\User;
+use League\Tactician\CommandBus;
 use Psr\Log\LoggerInterface;
-use SimpleBus\Message\Bus\MessageBus;
 use Symfony\Component\Security\Core\Event\AuthenticationEvent;
 use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
 
@@ -25,18 +25,18 @@ use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
 class UsersLockout
 {
     protected $logger;
-    protected $command_bus;
+    protected $commandbus;
 
     /**
      * Dependency Injection constructor.
      *
      * @param   LoggerInterface $logger
-     * @param   MessageBus      $command_bus
+     * @param   CommandBus      $commandbus
      */
-    public function __construct(LoggerInterface $logger, MessageBus $command_bus)
+    public function __construct(LoggerInterface $logger, CommandBus $commandbus)
     {
-        $this->logger      = $logger;
-        $this->command_bus = $command_bus;
+        $this->logger     = $logger;
+        $this->commandbus = $commandbus;
     }
 
     /**
@@ -58,7 +58,7 @@ class UsersLockout
                 'id' => $user->getId(),
             ]);
 
-            $this->command_bus->handle($command);
+            $this->commandbus->handle($command);
         }
     }
 
@@ -79,7 +79,7 @@ class UsersLockout
                 'username' => $token->getUsername(),
             ]);
 
-            $this->command_bus->handle($command);
+            $this->commandbus->handle($command);
         }
     }
 }

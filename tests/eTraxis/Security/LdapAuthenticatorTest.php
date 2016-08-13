@@ -31,7 +31,7 @@ class LdapAuthenticatorTest extends TransactionalTestCase
         $this->object = new LdapAuthenticator(
             $this->router,
             $this->session,
-            $this->command_bus,
+            $this->commandbus,
             new LdapStub(),
             'dc=example,dc=com',
             'cn=admin,dc=example,dc=com',
@@ -124,7 +124,7 @@ class LdapAuthenticatorTest extends TransactionalTestCase
         $ldap = new LdapAuthenticator(
             $this->router,
             $this->session,
-            $this->command_bus,
+            $this->commandbus,
             new LdapStub(),
             'dc=example,dc=com',
             'cn=admin,dc=example,dc=com',
@@ -144,7 +144,7 @@ class LdapAuthenticatorTest extends TransactionalTestCase
 
     public function testGetUserUnconfigured()
     {
-        $ldap = new LdapAuthenticator($this->router, $this->session, $this->command_bus);
+        $ldap = new LdapAuthenticator($this->router, $this->session, $this->commandbus);
 
         /** @var \Symfony\Component\Security\Core\User\UserProviderInterface $provider */
         $provider = $this->client->getContainer()->get('etraxis.provider');
@@ -183,7 +183,7 @@ class LdapAuthenticatorTest extends TransactionalTestCase
 
     public function testCheckCredentialsUnconfigured()
     {
-        $ldap = new LdapAuthenticator($this->router, $this->session, $this->command_bus);
+        $ldap = new LdapAuthenticator($this->router, $this->session, $this->commandbus);
 
         /** @var User $user */
         $user = $this->doctrine->getRepository(User::class)->findOneBy([

@@ -14,7 +14,7 @@ namespace eTraxis\CommandBus\Middleware;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 /**
- * Exception raised during last message validation.
+ * Exception raised during last command validation.
  *
  * All validation errors are available as a hash-array (keys are names of items being validated).
  * Contains HTTP status code and can be used in HTTP Response object.

@@ -27,7 +27,7 @@ class DeleteFieldCommandTest extends TransactionalTestCase
         self::assertNotNull($field);
 
         $command = new DeleteFieldCommand(['id' => $field->getId()]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $field = $this->doctrine->getRepository(Field::class)->findOneBy([
             'name'      => 'Crew',
@@ -56,7 +56,7 @@ class DeleteFieldCommandTest extends TransactionalTestCase
         self::assertFalse($field2->isRemoved());
 
         $command = new DeleteFieldCommand(['id' => $field2->getId()]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $field1 = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Crew']);
         $field2 = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => 'Delivery to', 'state' => $field1->getState()]);
@@ -78,6 +78,6 @@ class DeleteFieldCommandTest extends TransactionalTestCase
     public function testNotFound()
     {
         $command = new DeleteFieldCommand(['id' => self::UNKNOWN_ENTITY_ID]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

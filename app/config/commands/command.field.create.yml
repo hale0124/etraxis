@@ -7,36 +7,36 @@ services:
 
     command.field.create.number:
         parent: command.field.create.abstract
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Fields\CreateNumberFieldCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Fields\CreateNumberFieldCommand }]
 
     command.field.create.decimal:
         parent: command.field.create.abstract
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Fields\CreateDecimalFieldCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Fields\CreateDecimalFieldCommand }]
 
     command.field.create.string:
         parent: command.field.create.abstract
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Fields\CreateStringFieldCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Fields\CreateStringFieldCommand }]
 
     command.field.create.text:
         parent: command.field.create.abstract
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Fields\CreateTextFieldCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Fields\CreateTextFieldCommand }]
 
     command.field.create.checkbox:
         parent: command.field.create.abstract
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Fields\CreateCheckboxFieldCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Fields\CreateCheckboxFieldCommand }]
 
     command.field.create.list:
         parent: command.field.create.abstract
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Fields\CreateListFieldCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Fields\CreateListFieldCommand }]
 
     command.field.create.record:
         parent: command.field.create.abstract
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Fields\CreateRecordFieldCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Fields\CreateRecordFieldCommand }]
 
     command.field.create.date:
         parent: command.field.create.abstract
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Fields\CreateDateFieldCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Fields\CreateDateFieldCommand }]
 
     command.field.create.duration:
         parent: command.field.create.abstract
-        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Fields\CreateDurationFieldCommand }]
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Fields\CreateDurationFieldCommand }]

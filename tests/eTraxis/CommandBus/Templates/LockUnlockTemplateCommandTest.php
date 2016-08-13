@@ -33,12 +33,12 @@ class LockUnlockTemplateCommandTest extends TransactionalTestCase
         self::assertFalse($this->getTemplate()->isLocked());
 
         $command = new LockTemplateCommand(['id' => $template->getId()]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         self::assertTrue($this->getTemplate()->isLocked());
 
         $command = new UnlockTemplateCommand(['id' => $template->getId()]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         self::assertFalse($this->getTemplate()->isLocked());
     }
@@ -52,7 +52,7 @@ class LockUnlockTemplateCommandTest extends TransactionalTestCase
         $this->loginAs('hubert');
 
         $command = new LockTemplateCommand(['id' => self::UNKNOWN_ENTITY_ID]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -64,6 +64,6 @@ class LockUnlockTemplateCommandTest extends TransactionalTestCase
         $this->loginAs('hubert');
 
         $command = new UnlockTemplateCommand(['id' => self::UNKNOWN_ENTITY_ID]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

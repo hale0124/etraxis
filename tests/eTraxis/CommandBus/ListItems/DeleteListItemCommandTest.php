@@ -45,7 +45,7 @@ class DeleteListItemCommandTest extends TransactionalTestCase
             'field' => $item->getField()->getId(),
             'value' => $item->getValue(),
         ]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $item = $this->doctrine->getRepository(ListItem::class)->findOneBy([
             'field' => $item->getField(),
@@ -74,7 +74,7 @@ class DeleteListItemCommandTest extends TransactionalTestCase
             'field' => $item->getField()->getId(),
             'value' => $item->getValue(),
         ]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -89,7 +89,7 @@ class DeleteListItemCommandTest extends TransactionalTestCase
             'field' => self::UNKNOWN_ENTITY_ID,
             'value' => self::UNKNOWN_ENTITY_ID,
         ]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -107,6 +107,6 @@ class DeleteListItemCommandTest extends TransactionalTestCase
             'field' => $field->getId(),
             'value' => self::UNKNOWN_ENTITY_ID,
         ]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

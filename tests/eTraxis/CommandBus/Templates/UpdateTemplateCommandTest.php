@@ -37,7 +37,7 @@ class UpdateTemplateCommandTest extends TransactionalTestCase
             'frozenTime'  => 100,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
@@ -65,7 +65,7 @@ class UpdateTemplateCommandTest extends TransactionalTestCase
             'description' => 'Nimbus technical maintenance',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -100,7 +100,7 @@ class UpdateTemplateCommandTest extends TransactionalTestCase
             'frozenTime'  => $template->getFrozenTime(),
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -135,6 +135,6 @@ class UpdateTemplateCommandTest extends TransactionalTestCase
             'frozenTime'  => $template->getFrozenTime(),
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

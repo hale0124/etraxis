@@ -47,7 +47,7 @@ class UpdateDecimalFieldCommandTest extends TransactionalTestCase
             'defaultValue' => '10.0',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 
@@ -81,7 +81,7 @@ class UpdateDecimalFieldCommandTest extends TransactionalTestCase
             'maxValue' => '0.0',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -102,6 +102,6 @@ class UpdateDecimalFieldCommandTest extends TransactionalTestCase
             'defaultValue' => '101',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

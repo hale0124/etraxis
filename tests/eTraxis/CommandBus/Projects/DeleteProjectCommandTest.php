@@ -25,7 +25,7 @@ class DeleteProjectCommandTest extends TransactionalTestCase
         self::assertNotNull($project);
 
         $command = new DeleteProjectCommand(['id' => $project->getId()]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'eTraxis 1.0']);
         self::assertNull($project);
@@ -42,7 +42,7 @@ class DeleteProjectCommandTest extends TransactionalTestCase
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => 'Planet Express']);
 
         $command = new DeleteProjectCommand(['id' => $project->getId()]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -54,6 +54,6 @@ class DeleteProjectCommandTest extends TransactionalTestCase
         $this->loginAs('hubert');
 
         $command = new DeleteProjectCommand(['id' => self::UNKNOWN_ENTITY_ID]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

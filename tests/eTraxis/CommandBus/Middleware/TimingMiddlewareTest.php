@@ -18,12 +18,12 @@ class TimingMiddlewareTest extends \PHPUnit_Framework_TestCase
     public function testTiming()
     {
         $logger  = new Logger();
-        $message = new \stdClass();
+        $command = new \stdClass();
 
         $middleware = new TimingMiddleware($logger);
-        $middleware->handle($message, function () {
+        $middleware->execute($command, function () {
         });
 
-        self::assertContains('Message processing time', $logger->getLogs('debug'));
+        self::assertContains('Command processing time', $logger->getLogs('debug'));
     }
 }

@@ -32,7 +32,7 @@ class CreateDurationFieldCommandTest extends TransactionalTestCase
             'defaultValue' => '48:00',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         /** @var Field $field */
         $field = $this->doctrine->getRepository(Field::class)->findOneBy(['name' => $command->name]);
@@ -61,7 +61,7 @@ class CreateDurationFieldCommandTest extends TransactionalTestCase
             'maxValue' => '0:00',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -82,6 +82,6 @@ class CreateDurationFieldCommandTest extends TransactionalTestCase
             'defaultValue' => '240:00',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

@@ -34,7 +34,7 @@ class UpdateRecordFieldCommandTest extends TransactionalTestCase
             'required'    => true,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 

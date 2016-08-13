@@ -23,7 +23,7 @@ class DeleteUserCommandTest extends TransactionalTestCase
         self::assertNotNull($user);
 
         $command = new DeleteUserCommand(['id' => $user->getId()]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $user = $this->findUser('scruffy');
         self::assertNull($user);
@@ -39,7 +39,7 @@ class DeleteUserCommandTest extends TransactionalTestCase
         $user = $this->findUser('scruffy');
 
         $command = new DeleteUserCommand(['id' => $user->getId()]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -51,6 +51,6 @@ class DeleteUserCommandTest extends TransactionalTestCase
         $this->loginAs('hubert');
 
         $command = new DeleteUserCommand(['id' => self::UNKNOWN_ENTITY_ID]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

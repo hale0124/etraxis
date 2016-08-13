@@ -32,7 +32,7 @@ class CreateProjectCommandTest extends TransactionalTestCase
             'suspended'   => true,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         /** @var Project $project */
         $project = $this->doctrine->getRepository(Project::class)->findOneBy(['name' => $name]);
@@ -54,6 +54,6 @@ class CreateProjectCommandTest extends TransactionalTestCase
             'suspended' => false,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

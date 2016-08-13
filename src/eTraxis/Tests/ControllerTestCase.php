@@ -42,11 +42,8 @@ class ControllerTestCase extends WebTestCase
     /** @var \Symfony\Component\Translation\TranslatorInterface */
     protected $translator;
 
-    /** @var \SimpleBus\Message\Bus\MessageBus */
-    protected $command_bus;
-
-    /** @var \SimpleBus\Message\Bus\MessageBus */
-    protected $event_bus;
+    /** @var \League\Tactician\CommandBus */
+    protected $commandbus;
 
     /**
      * Prepares shortcuts for most popular container services.
@@ -55,13 +52,12 @@ class ControllerTestCase extends WebTestCase
     {
         $this->client = static::createClient();
 
-        $this->logger      = $this->client->getContainer()->get('logger');
-        $this->router      = $this->client->getContainer()->get('router');
-        $this->session     = $this->client->getContainer()->get('session');
-        $this->validator   = $this->client->getContainer()->get('validator');
-        $this->translator  = $this->client->getContainer()->get('translator');
-        $this->command_bus = $this->client->getContainer()->get('command_bus');
-        $this->event_bus   = $this->client->getContainer()->get('event_bus');
+        $this->logger     = $this->client->getContainer()->get('logger');
+        $this->router     = $this->client->getContainer()->get('router');
+        $this->session    = $this->client->getContainer()->get('session');
+        $this->validator  = $this->client->getContainer()->get('validator');
+        $this->translator = $this->client->getContainer()->get('translator');
+        $this->commandbus = $this->client->getContainer()->get('tactician.commandbus');
     }
 
     /**

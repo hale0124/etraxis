@@ -32,7 +32,7 @@ class DisableUsersCommandTest extends TransactionalTestCase
 
         $command = new DisableUsersCommand(['ids' => $ids]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $this->doctrine->getManager()->clear();
 

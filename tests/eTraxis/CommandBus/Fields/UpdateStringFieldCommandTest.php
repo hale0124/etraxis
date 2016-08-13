@@ -45,7 +45,7 @@ class UpdateStringFieldCommandTest extends TransactionalTestCase
             'pcreReplace'  => 'Season $1, Episode $2',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $field = $this->doctrine->getRepository(Field::class)->find($field->getId());
 

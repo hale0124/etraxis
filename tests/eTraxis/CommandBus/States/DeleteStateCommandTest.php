@@ -42,7 +42,7 @@ class DeleteStateCommandTest extends TransactionalTestCase
         self::assertNotNull($state);
 
         $command = new DeleteStateCommand(['id' => $state->getId()]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Cancelled']);
         self::assertNull($state);
@@ -59,7 +59,7 @@ class DeleteStateCommandTest extends TransactionalTestCase
         $state = $this->doctrine->getRepository(State::class)->findOneBy(['name' => 'Delivered']);
 
         $command = new DeleteStateCommand(['id' => $state->getId()]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -71,6 +71,6 @@ class DeleteStateCommandTest extends TransactionalTestCase
         $this->loginAs('hubert');
 
         $command = new DeleteStateCommand(['id' => self::UNKNOWN_ENTITY_ID]);
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }

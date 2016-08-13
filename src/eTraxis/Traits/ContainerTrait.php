@@ -11,7 +11,7 @@
 
 namespace eTraxis\Traits;
 
-use SimpleBus\Message\Bus\MessageBus;
+use League\Tactician\CommandBus;
 
 /**
  * A trait to extend standard controller class.
@@ -39,20 +39,10 @@ trait ContainerTrait
     /**
      * Shortcut to get the Command Bus service.
      *
-     * @return  MessageBus
+     * @return  CommandBus
      */
-    protected function getCommandBus(): MessageBus
+    protected function getCommandBus(): CommandBus
     {
-        return $this->container->get('command_bus');
-    }
-
-    /**
-     * Shortcut to get the Event Bus service.
-     *
-     * @return  MessageBus
-     */
-    protected function getEventBus(): MessageBus
-    {
-        return $this->container->get('event_bus');
+        return $this->container->get('tactician.commandbus');
     }
 }

@@ -38,7 +38,7 @@ class CreateListItemCommandTest extends TransactionalTestCase
             'text'  => $text,
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
 
         /** @var ListItem $item */
         $item = $this->doctrine->getRepository(ListItem::class)->findOneBy([
@@ -64,7 +64,7 @@ class CreateListItemCommandTest extends TransactionalTestCase
             'text'  => 'Season 8',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -79,7 +79,7 @@ class CreateListItemCommandTest extends TransactionalTestCase
             'text'  => 'Season 8',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 
     /**
@@ -94,6 +94,6 @@ class CreateListItemCommandTest extends TransactionalTestCase
             'text'  => 'Season 1',
         ]);
 
-        $this->command_bus->handle($command);
+        $this->commandbus->handle($command);
     }
 }
