@@ -11,9 +11,9 @@
 
 namespace eTraxis\Security;
 
+use eTraxis\CommandBus\Users\RegisterUserCommand;
 use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Entity\User;
-use eTraxis\SimpleBus\Users\RegisterUserCommand;
 use SimpleBus\Message\Bus\MessageBus;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;

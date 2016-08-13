@@ -11,11 +11,11 @@
 
 namespace AppBundle\Controller\Web;
 
+use eTraxis\CommandBus\Users\ForgotPasswordCommand;
+use eTraxis\CommandBus\Users\ResetPasswordCommand;
+use eTraxis\CommandBus\Users\SetPasswordCommand;
 use eTraxis\Form\ForgotPasswordForm;
 use eTraxis\Form\ResetPasswordForm;
-use eTraxis\SimpleBus\Users\ForgotPasswordCommand;
-use eTraxis\SimpleBus\Users\ResetPasswordCommand;
-use eTraxis\SimpleBus\Users\SetPasswordCommand;
 use eTraxis\Traits\ContainerTrait;
 use eTraxis\Traits\FlashBagTrait;
 use eTraxis\Voter\UserVoter;

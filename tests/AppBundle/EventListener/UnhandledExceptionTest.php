@@ -11,7 +11,7 @@
 
 namespace AppBundle\EventListener;
 
-use eTraxis\SimpleBus\Middleware\ValidationException;
+use eTraxis\CommandBus\Middleware\ValidationException;
 use eTraxis\Tests\TransactionalTestCase;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;

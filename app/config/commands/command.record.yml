@@ -1,0 +1,11 @@
+services:
+
+    command.records.mark_as_read:
+        class: eTraxis\CommandBus\Records\Handler\MarkRecordsAsReadCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Records\MarkRecordsAsReadCommand }]
+        arguments: [ "@doctrine.orm.entity_manager", "@etraxis.records_cache" ]
+
+    command.records.mark_as_unread:
+        class: eTraxis\CommandBus\Records\Handler\MarkRecordsAsUnreadCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Records\MarkRecordsAsUnreadCommand }]
+        arguments: [ "@doctrine.orm.entity_manager", "@etraxis.records_cache" ]

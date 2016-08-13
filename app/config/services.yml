@@ -1,6 +1,6 @@
 imports:
     - { resource: services/ }
-    - { resource: simplebus/ }
+    - { resource: commands/ }
 
 services:
 

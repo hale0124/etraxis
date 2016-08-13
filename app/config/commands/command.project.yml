@@ -1,0 +1,16 @@
+services:
+
+    command.project.create:
+        class: eTraxis\CommandBus\Projects\Handler\CreateProjectCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Projects\CreateProjectCommand }]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager" ]
+
+    command.project.update:
+        class: eTraxis\CommandBus\Projects\Handler\UpdateProjectCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Projects\UpdateProjectCommand }]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager" ]
+
+    command.project.delete:
+        class: eTraxis\CommandBus\Projects\Handler\DeleteProjectCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Projects\DeleteProjectCommand }]
+        arguments: [ "@doctrine.orm.entity_manager", "@security.authorization_checker" ]

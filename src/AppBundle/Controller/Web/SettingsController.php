@@ -11,10 +11,10 @@
 
 namespace AppBundle\Controller\Web;
 
+use eTraxis\CommandBus\Middleware\ValidationException;
+use eTraxis\CommandBus\Users;
 use eTraxis\Form\AppearanceForm;
 use eTraxis\Form\ChangePasswordForm;
-use eTraxis\SimpleBus\Middleware\ValidationException;
-use eTraxis\SimpleBus\Users;
 use eTraxis\Traits\ContainerTrait;
 use eTraxis\Traits\FlashBagTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;

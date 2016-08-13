@@ -11,11 +11,11 @@
 
 namespace AppBundle\Controller\Admin;
 
+use eTraxis\CommandBus\Middleware\ValidationException;
 use eTraxis\Dictionary\AuthenticationProvider;
 use eTraxis\Entity\User;
 use eTraxis\Form\UserForm;
 use eTraxis\Service\Export\ExportCsvQuery;
-use eTraxis\SimpleBus\Middleware\ValidationException;
 use eTraxis\Traits\ContainerTrait;
 use eTraxis\Voter\UserVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;

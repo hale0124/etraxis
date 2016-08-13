@@ -11,9 +11,9 @@
 
 namespace eTraxis\Voter;
 
+use eTraxis\CommandBus\Templates\LockTemplateCommand;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\Template;
-use eTraxis\SimpleBus\Templates\LockTemplateCommand;
 use eTraxis\Tests\TransactionalTestCase;
 
 class FieldVoterTest extends TransactionalTestCase

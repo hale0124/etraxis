@@ -11,9 +11,9 @@
 
 namespace AppBundle\Controller\Admin;
 
+use eTraxis\CommandBus\States;
 use eTraxis\Dictionary\StateResponsible;
 use eTraxis\Entity\Group;
-use eTraxis\SimpleBus\States;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

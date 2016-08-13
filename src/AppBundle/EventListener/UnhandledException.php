@@ -11,7 +11,7 @@
 
 namespace AppBundle\EventListener;
 
-use eTraxis\SimpleBus\Middleware\ValidationException;
+use eTraxis\CommandBus\Middleware\ValidationException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;

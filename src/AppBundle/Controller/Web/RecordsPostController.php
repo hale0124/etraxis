@@ -11,7 +11,7 @@
 
 namespace AppBundle\Controller\Web;
 
-use eTraxis\SimpleBus\Records;
+use eTraxis\CommandBus\Records;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

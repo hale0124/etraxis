@@ -11,8 +11,8 @@
 
 namespace AppBundle\Controller\Admin;
 
+use eTraxis\CommandBus\Templates;
 use eTraxis\Entity\Group;
-use eTraxis\SimpleBus\Templates;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

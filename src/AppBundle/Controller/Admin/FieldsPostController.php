@@ -11,10 +11,10 @@
 
 namespace AppBundle\Controller\Admin;
 
+use eTraxis\CommandBus\Fields;
 use eTraxis\Dictionary\FieldType;
 use eTraxis\Entity\Field;
 use eTraxis\Entity\Group;
-use eTraxis\SimpleBus\Fields;
 use eTraxis\Traits\ContainerTrait;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;

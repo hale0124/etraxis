@@ -1,0 +1,20 @@
+# Keep middlewares sorted descending by priority.
+services:
+
+    middleware.timing:
+        class: eTraxis\CommandBus\Middleware\TimingMiddleware
+        public: false
+        tags:
+            - { name: command_bus_middleware, priority: 999 }
+            - { name: event_bus_middleware,   priority: 999 }
+        arguments:
+            - "@logger"
+
+    middleware.validation:
+        class: eTraxis\CommandBus\Middleware\ValidationMiddleware
+        public: false
+        tags:
+            - { name: command_bus_middleware, priority: 0 }
+            - { name: event_bus_middleware,   priority: 0 }
+        arguments:
+            - "@validator"

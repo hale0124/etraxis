@@ -11,11 +11,11 @@
 
 namespace AppBundle\Controller\Web;
 
+use eTraxis\CommandBus\Middleware\ValidationException;
+use eTraxis\CommandBus\Records\MarkRecordsAsReadCommand;
 use eTraxis\Dictionary\EventType;
 use eTraxis\Entity\Record;
 use eTraxis\Service\Export\ExportCsvQuery;
-use eTraxis\SimpleBus\Middleware\ValidationException;
-use eTraxis\SimpleBus\Records\MarkRecordsAsReadCommand;
 use eTraxis\Traits\ContainerTrait;
 use eTraxis\Voter\RecordVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;

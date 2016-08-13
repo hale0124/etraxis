@@ -1,0 +1,36 @@
+services:
+
+    command.template.create:
+        class: eTraxis\CommandBus\Templates\Handler\CreateTemplateCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Templates\CreateTemplateCommand }]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager" ]
+
+    command.template.update:
+        class: eTraxis\CommandBus\Templates\Handler\UpdateTemplateCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Templates\UpdateTemplateCommand }]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager" ]
+
+    command.template.delete:
+        class: eTraxis\CommandBus\Templates\Handler\DeleteTemplateCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Templates\DeleteTemplateCommand }]
+        arguments: [ "@doctrine.orm.entity_manager", "@security.authorization_checker" ]
+
+    command.template.lock:
+        class: eTraxis\CommandBus\Templates\Handler\LockTemplateCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Templates\LockTemplateCommand }]
+        arguments: [ "@doctrine.orm.entity_manager" ]
+
+    command.template.unlock:
+        class: eTraxis\CommandBus\Templates\Handler\UnlockTemplateCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Templates\UnlockTemplateCommand }]
+        arguments: [ "@doctrine.orm.entity_manager" ]
+
+    command.template.set_role_permissions:
+        class: eTraxis\CommandBus\Templates\Handler\SetRoleTemplatePermissionsCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Templates\SetRoleTemplatePermissionsCommand }]
+        arguments: [ "@doctrine.orm.entity_manager" ]
+
+    command.template.set_group_permissions:
+        class: eTraxis\CommandBus\Templates\Handler\SetGroupTemplatePermissionsCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Templates\SetGroupTemplatePermissionsCommand }]
+        arguments: [ "@doctrine.orm.entity_manager" ]

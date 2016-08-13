@@ -1,0 +1,26 @@
+services:
+
+    command.group.create:
+        class: eTraxis\CommandBus\Groups\Handler\CreateGroupCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Groups\CreateGroupCommand }]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager" ]
+
+    command.group.update:
+        class: eTraxis\CommandBus\Groups\Handler\UpdateGroupCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Groups\UpdateGroupCommand }]
+        arguments: [ "@validator", "@doctrine.orm.entity_manager" ]
+
+    command.group.delete:
+        class: eTraxis\CommandBus\Groups\Handler\DeleteGroupCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Groups\DeleteGroupCommand }]
+        arguments: [ "@doctrine.orm.entity_manager" ]
+
+    command.groups.add_users:
+        class: eTraxis\CommandBus\Groups\Handler\AddUsersCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Groups\AddUsersCommand }]
+        arguments: [ "@doctrine.orm.entity_manager" ]
+
+    command.groups.remove_users:
+        class: eTraxis\CommandBus\Groups\Handler\RemoveUsersCommandHandler
+        tags: [{ name: command_handler, handles: eTraxis\CommandBus\Groups\RemoveUsersCommand }]
+        arguments: [ "@doctrine.orm.entity_manager" ]
