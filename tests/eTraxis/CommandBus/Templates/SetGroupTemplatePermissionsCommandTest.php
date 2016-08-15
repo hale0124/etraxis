@@ -24,10 +24,10 @@ class SetGroupTemplatePermissionsCommandTest extends TransactionalTestCase
         $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
 
         /** @var Group $group */
-        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Managers']);
+        $group = $this->doctrine->getRepository(Group::class)->findOneBy(['name' => 'Crew']);
 
-        self::assertTrue(in_array(TemplatePermission::ATTACH_FILES, $template->getGroupPermissions($group)));
-        self::assertTrue(in_array(TemplatePermission::DELETE_FILES, $template->getGroupPermissions($group)));
+        self::assertTrue(in_array(TemplatePermission::ADD_COMMENTS, $template->getGroupPermissions($group)));
+        self::assertTrue(in_array(TemplatePermission::PRIVATE_COMMENTS, $template->getGroupPermissions($group)));
         self::assertFalse(in_array(TemplatePermission::ATTACH_SUBRECORDS, $template->getGroupPermissions($group)));
         self::assertFalse(in_array(TemplatePermission::DETACH_SUBRECORDS, $template->getGroupPermissions($group)));
 
@@ -35,7 +35,7 @@ class SetGroupTemplatePermissionsCommandTest extends TransactionalTestCase
             'id'          => $template->getId(),
             'group'       => $group->getId(),
             'permissions' => [
-                TemplatePermission::ATTACH_FILES,
+                TemplatePermission::ADD_COMMENTS,
                 TemplatePermission::ATTACH_SUBRECORDS,
                 TemplatePermission::DETACH_SUBRECORDS,
             ],
@@ -43,8 +43,8 @@ class SetGroupTemplatePermissionsCommandTest extends TransactionalTestCase
 
         $this->commandbus->handle($command);
 
-        self::assertTrue(in_array(TemplatePermission::ATTACH_FILES, $template->getGroupPermissions($group)));
-        self::assertFalse(in_array(TemplatePermission::DELETE_FILES, $template->getGroupPermissions($group)));
+        self::assertTrue(in_array(TemplatePermission::ADD_COMMENTS, $template->getGroupPermissions($group)));
+        self::assertFalse(in_array(TemplatePermission::PRIVATE_COMMENTS, $template->getGroupPermissions($group)));
         self::assertTrue(in_array(TemplatePermission::ATTACH_SUBRECORDS, $template->getGroupPermissions($group)));
         self::assertTrue(in_array(TemplatePermission::DETACH_SUBRECORDS, $template->getGroupPermissions($group)));
     }

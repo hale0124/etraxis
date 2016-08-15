@@ -120,6 +120,11 @@ class RecordVoter extends Voter
      */
     protected function isPrivateCommentsGranted(Record $subject, CurrentUser $user): bool
     {
+        // Check whether the record is frozen.
+        if ($subject->isFrozen()) {
+            return false;
+        }
+
         // Check whether anyone is granted to read and post private comments.
         if ($subject->getTemplate()->isRoleGranted(SystemRole::ANYONE, TemplatePermission::PRIVATE_COMMENTS)) {
             return true;

@@ -59,54 +59,84 @@ class RecordVoterTest extends TransactionalTestCase
     {
         $this->loginAs('mwop');
 
-        /** @var Record $record */
-        $record = $this->doctrine->getRepository(Record::class)->findOneBy(['subject' => 'Space Pilot 3000']);
+        /** @var Record $granted */
+        $granted = $this->doctrine->getRepository(Record::class)->findOneBy([
+            'subject' => 'Space Pilot 3000',
+        ]);
 
-        self::assertTrue($this->security->isGranted(RecordVoter::VIEW, $record));
+        /** @var Record $forbidden */
+        $forbidden = $this->doctrine->getRepository(Record::class)->findOneBy([
+            'subject' => '200 feet of hanging rope for the hanging of multiheaded monster.',
+        ]);
+
+        self::assertTrue($this->security->isGranted(RecordVoter::VIEW, $granted));
+        self::assertFalse($this->security->isGranted(RecordVoter::VIEW, $forbidden));
     }
 
     public function testViewByAuthor()
     {
-        $this->loginAs('hubert');
+        $this->loginAs('pmjones');
 
-        /** @var Record $record */
-        $record = $this->doctrine->getRepository(Record::class)->findOneBy(['subject' => 'e-Waste']);
+        /** @var Record $granted */
+        $granted = $this->doctrine->getRepository(Record::class)->findOneBy([
+            'subject' => 'A statue commemorating the loss of the first Planet Express crew',
+        ]);
 
-        self::assertTrue($this->security->isGranted(RecordVoter::VIEW, $record));
+        /** @var Record $forbidden */
+        $forbidden = $this->doctrine->getRepository(Record::class)->findOneBy([
+            'subject' => '200 feet of hanging rope for the hanging of multiheaded monster.',
+        ]);
+
+        self::assertTrue($this->security->isGranted(RecordVoter::VIEW, $granted));
+        self::assertFalse($this->security->isGranted(RecordVoter::VIEW, $forbidden));
     }
 
     public function testViewByResponsible()
     {
-        $this->loginAs('leela');
+        $this->loginAs('artem');
 
-        /** @var Record $record */
-        $record = $this->doctrine->getRepository(Record::class)->findOneBy(['subject' => 'e-Waste']);
+        /** @var Record $granted */
+        $granted = $this->doctrine->getRepository(Record::class)->findOneBy([
+            'subject' => '200 feet of hanging rope for the hanging of multiheaded monster.',
+        ]);
 
-        self::assertTrue($this->security->isGranted(RecordVoter::VIEW, $record));
+        /** @var Record $forbidden */
+        $forbidden = $this->doctrine->getRepository(Record::class)->findOneBy([
+            'subject' => 'A statue commemorating the loss of the first Planet Express crew',
+        ]);
+
+        self::assertTrue($this->security->isGranted(RecordVoter::VIEW, $granted));
+        self::assertFalse($this->security->isGranted(RecordVoter::VIEW, $forbidden));
     }
 
     public function testViewByGroup()
     {
-        $this->loginAs('hubert');
+        /** @var Record $record */
+        $record = $this->doctrine->getRepository(Record::class)->findOneBy(['subject' => 'Prizes for the claw crane']);
 
-        /** @var Record $granted */
-        $granted = $this->doctrine->getRepository(Record::class)->findOneBy(['subject' => 'Prizes for the claw crane']);
+        $this->loginAs('hermes');
+        self::assertTrue($this->security->isGranted(RecordVoter::VIEW, $record));
 
-        /** @var Record $forbidden */
-        $forbidden = $this->doctrine->getRepository(Record::class)->findOneBy(['subject' => 'Basic Coding Standard']);
-
-        self::assertTrue($this->security->isGranted(RecordVoter::VIEW, $granted));
-        self::assertFalse($this->security->isGranted(RecordVoter::VIEW, $forbidden));
+        $this->loginAs('zoidberg');
+        self::assertFalse($this->security->isGranted(RecordVoter::VIEW, $record));
     }
 
     public function testPrivateCommentsByAnyone()
     {
         $this->loginAs('mwop');
 
-        /** @var Record $record */
-        $record = $this->doctrine->getRepository(Record::class)->findOneBy(['subject' => 'Prizes for the claw crane']);
+        /** @var Record $granted */
+        $granted = $this->doctrine->getRepository(Record::class)->findOneBy([
+            'subject' => 'Space Pilot 3000',
+        ]);
 
-        self::assertFalse($this->security->isGranted(RecordVoter::PRIVATE_COMMENTS, $record));
+        /** @var Record $forbidden */
+        $forbidden = $this->doctrine->getRepository(Record::class)->findOneBy([
+            'subject' => '200 feet of hanging rope for the hanging of multiheaded monster.',
+        ]);
+
+        self::assertTrue($this->security->isGranted(RecordVoter::PRIVATE_COMMENTS, $granted));
+        self::assertFalse($this->security->isGranted(RecordVoter::PRIVATE_COMMENTS, $forbidden));
     }
 
     public function testPrivateCommentsByAuthor()
@@ -148,12 +178,21 @@ class RecordVoterTest extends TransactionalTestCase
     public function testPrivateCommentsByGroup()
     {
         /** @var Record $record */
-        $record = $this->doctrine->getRepository(Record::class)->findOneBy(['subject' => 'Prizes for the claw crane']);
+        $record = $this->doctrine->getRepository(Record::class)->findOneBy(['subject' => 'e-Waste']);
 
-        $this->loginAs('fry');
+        $this->loginAs('hermes');
         self::assertTrue($this->security->isGranted(RecordVoter::PRIVATE_COMMENTS, $record));
 
         $this->loginAs('zoidberg');
+        self::assertFalse($this->security->isGranted(RecordVoter::PRIVATE_COMMENTS, $record));
+    }
+
+    public function testPrivateCommentsFrozen()
+    {
+        /** @var Record $record */
+        $record = $this->doctrine->getRepository(Record::class)->findOneBy(['subject' => 'Prizes for the claw crane']);
+
+        $this->loginAs('hermes');
         self::assertFalse($this->security->isGranted(RecordVoter::PRIVATE_COMMENTS, $record));
     }
 }

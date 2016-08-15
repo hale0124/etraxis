@@ -26,7 +26,7 @@ class UpdateTemplateCommandTest extends TransactionalTestCase
         self::assertEquals('PE', $template->getPrefix());
         self::assertEquals('Delivery task', $template->getDescription());
         self::assertNull($template->getCriticalAge());
-        self::assertNull($template->getFrozenTime());
+        self::assertEquals(7, $template->getFrozenTime());
 
         $command = new UpdateTemplateCommand([
             'id'          => $template->getId(),

@@ -60,18 +60,38 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
     {
         $author = [
             TemplatePermission::VIEW_RECORDS,
+            TemplatePermission::CREATE_RECORDS,
             TemplatePermission::EDIT_RECORDS,
+            TemplatePermission::POSTPONE_RECORDS,
+            TemplatePermission::RESUME_RECORDS,
+            TemplatePermission::REASSIGN_RECORDS,
+            TemplatePermission::REOPEN_RECORDS,
             TemplatePermission::ADD_COMMENTS,
             TemplatePermission::PRIVATE_COMMENTS,
             TemplatePermission::ATTACH_FILES,
             TemplatePermission::DELETE_FILES,
+            TemplatePermission::ATTACH_SUBRECORDS,
+            TemplatePermission::DETACH_SUBRECORDS,
+            TemplatePermission::SEND_REMINDERS,
+            TemplatePermission::DELETE_RECORDS,
         ];
 
         $responsible = [
             TemplatePermission::VIEW_RECORDS,
+            TemplatePermission::CREATE_RECORDS,
+            TemplatePermission::EDIT_RECORDS,
+            TemplatePermission::POSTPONE_RECORDS,
+            TemplatePermission::RESUME_RECORDS,
+            TemplatePermission::REASSIGN_RECORDS,
+            TemplatePermission::REOPEN_RECORDS,
             TemplatePermission::ADD_COMMENTS,
             TemplatePermission::PRIVATE_COMMENTS,
             TemplatePermission::ATTACH_FILES,
+            TemplatePermission::DELETE_FILES,
+            TemplatePermission::ATTACH_SUBRECORDS,
+            TemplatePermission::DETACH_SUBRECORDS,
+            TemplatePermission::SEND_REMINDERS,
+            TemplatePermission::DELETE_RECORDS,
         ];
 
         $permissions = [
@@ -87,10 +107,10 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
                 TemplatePermission::PRIVATE_COMMENTS,
                 TemplatePermission::ATTACH_FILES,
                 TemplatePermission::DELETE_FILES,
+                TemplatePermission::ATTACH_SUBRECORDS,
+                TemplatePermission::DETACH_SUBRECORDS,
                 TemplatePermission::SEND_REMINDERS,
-            ],
-            'group:staff' => [
-                TemplatePermission::VIEW_RECORDS,
+                TemplatePermission::DELETE_RECORDS,
             ],
             'group:crew' => [
                 TemplatePermission::VIEW_RECORDS,
@@ -105,6 +125,7 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
         $template
             ->setName('Delivery')
             ->setPrefix('PE')
+            ->setFrozenTime(7)
             ->setDescription('Delivery task')
             ->setLocked(false)
             ->setRolePermissions(SystemRole::AUTHOR, $author)
@@ -132,14 +153,20 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
     {
         $anyone = [
             TemplatePermission::VIEW_RECORDS,
-        ];
-
-        $author = [
-            TemplatePermission::VIEW_RECORDS,
+            TemplatePermission::CREATE_RECORDS,
             TemplatePermission::EDIT_RECORDS,
+            TemplatePermission::POSTPONE_RECORDS,
+            TemplatePermission::RESUME_RECORDS,
+            TemplatePermission::REASSIGN_RECORDS,
+            TemplatePermission::REOPEN_RECORDS,
             TemplatePermission::ADD_COMMENTS,
+            TemplatePermission::PRIVATE_COMMENTS,
             TemplatePermission::ATTACH_FILES,
             TemplatePermission::DELETE_FILES,
+            TemplatePermission::ATTACH_SUBRECORDS,
+            TemplatePermission::DETACH_SUBRECORDS,
+            TemplatePermission::SEND_REMINDERS,
+            TemplatePermission::DELETE_RECORDS,
         ];
 
         /** @noinspection PhpParamsInspection */
@@ -151,7 +178,6 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
             ->setDescription('Futurama episode')
             ->setLocked(false)
             ->setRolePermissions(SystemRole::ANYONE, $anyone)
-            ->setRolePermissions(SystemRole::AUTHOR, $author)
         ;
 
         $this->addReference('template:futurama', $template);
@@ -175,6 +201,13 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
             TemplatePermission::DELETE_FILES,
         ];
 
+        $responsible = [
+            TemplatePermission::VIEW_RECORDS,
+            TemplatePermission::ADD_COMMENTS,
+            TemplatePermission::PRIVATE_COMMENTS,
+            TemplatePermission::ATTACH_FILES,
+        ];
+
         $members = [
             TemplatePermission::VIEW_RECORDS,
             TemplatePermission::CREATE_RECORDS,
@@ -193,6 +226,7 @@ class LoadTemplatesData extends AbstractFixture implements ContainerAwareInterfa
             ->setDescription('PHP Standard Recommendation')
             ->setLocked(false)
             ->setRolePermissions(SystemRole::AUTHOR, $author)
+            ->setRolePermissions(SystemRole::RESPONSIBLE, $responsible)
             ->setGroupPermissions($group, $members)
         ;
 

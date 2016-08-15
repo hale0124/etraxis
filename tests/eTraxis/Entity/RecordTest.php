@@ -128,6 +128,23 @@ class RecordTest extends TransactionalTestCase
         self::assertTrue($this->object->isPostponed());
     }
 
+    public function testIsFrozen()
+    {
+        self::assertTrue($this->object->isFrozen());
+
+        $this->object = $this->doctrine->getRepository(Record::class)->findOneBy([
+            'subject' => 'e-Waste',
+        ]);
+
+        self::assertFalse($this->object->isFrozen());
+
+        $this->object = $this->doctrine->getRepository(Record::class)->findOneBy([
+            'subject' => 'Space Pilot 3000',
+        ]);
+
+        self::assertFalse($this->object->isFrozen());
+    }
+
     public function testHistory()
     {
         /** @var Record $record */

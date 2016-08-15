@@ -185,12 +185,8 @@ class TemplateTest extends TransactionalTestCase
     public function testIsRoleGranted()
     {
         self::assertFalse($this->object->isRoleGranted(SystemRole::ANYONE, TemplatePermission::VIEW_RECORDS));
-
         self::assertTrue($this->object->isRoleGranted(SystemRole::AUTHOR, TemplatePermission::VIEW_RECORDS));
-        self::assertFalse($this->object->isRoleGranted(SystemRole::AUTHOR, TemplatePermission::DELETE_RECORDS));
-
         self::assertTrue($this->object->isRoleGranted(SystemRole::RESPONSIBLE, TemplatePermission::VIEW_RECORDS));
-        self::assertFalse($this->object->isRoleGranted(SystemRole::RESPONSIBLE, TemplatePermission::DELETE_RECORDS));
     }
 
     public function testIsGroupGranted()

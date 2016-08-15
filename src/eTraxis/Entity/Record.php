@@ -309,6 +309,21 @@ class Record extends Entity
     }
 
     /**
+     * Checks whether the record is frozen.
+     *
+     * @return  bool
+     */
+    public function isFrozen()
+    {
+        $frozenTime = $this->getTemplate()->getFrozenTime();
+
+        return
+            $this->closedAt !== null &&
+            $frozenTime !== null &&
+            $this->closedAt + $frozenTime * Seconds::ONE_DAY <= time();
+    }
+
+    /**
      * Returns record history.
      *
      * @param   bool $showPrivate Whether to mention private comments, too.

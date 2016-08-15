@@ -66,7 +66,7 @@ class SetRoleTemplatePermissionsCommandTest extends TransactionalTestCase
     public function testAuthorPermissions()
     {
         /** @var Template $template */
-        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'PSR']);
         $id       = $template->getId();
 
         self::assertTrue(in_array(TemplatePermission::EDIT_RECORDS, $template->getRolePermissions(SystemRole::AUTHOR)));
@@ -94,18 +94,18 @@ class SetRoleTemplatePermissionsCommandTest extends TransactionalTestCase
     public function testResponsiblePermissions()
     {
         /** @var Template $template */
-        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'Delivery']);
+        $template = $this->doctrine->getRepository(Template::class)->findOneBy(['name' => 'PSR']);
         $id       = $template->getId();
 
         self::assertTrue(in_array(TemplatePermission::ADD_COMMENTS, $template->getRolePermissions(SystemRole::RESPONSIBLE)));
-        self::assertTrue(in_array(TemplatePermission::ATTACH_FILES, $template->getRolePermissions(SystemRole::RESPONSIBLE)));
+        self::assertTrue(in_array(TemplatePermission::PRIVATE_COMMENTS, $template->getRolePermissions(SystemRole::RESPONSIBLE)));
         self::assertFalse(in_array(TemplatePermission::ATTACH_SUBRECORDS, $template->getRolePermissions(SystemRole::RESPONSIBLE)));
 
         $command = new SetRoleTemplatePermissionsCommand([
             'id'          => $id,
             'role'        => SystemRole::RESPONSIBLE,
             'permissions' => [
-                TemplatePermission::ATTACH_FILES,
+                TemplatePermission::PRIVATE_COMMENTS,
                 TemplatePermission::ATTACH_SUBRECORDS,
             ],
         ]);
@@ -115,7 +115,7 @@ class SetRoleTemplatePermissionsCommandTest extends TransactionalTestCase
         $template = $this->doctrine->getRepository(Template::class)->find($id);
 
         self::assertFalse(in_array(TemplatePermission::ADD_COMMENTS, $template->getRolePermissions(SystemRole::RESPONSIBLE)));
-        self::assertTrue(in_array(TemplatePermission::ATTACH_FILES, $template->getRolePermissions(SystemRole::RESPONSIBLE)));
+        self::assertTrue(in_array(TemplatePermission::PRIVATE_COMMENTS, $template->getRolePermissions(SystemRole::RESPONSIBLE)));
         self::assertTrue(in_array(TemplatePermission::ATTACH_SUBRECORDS, $template->getRolePermissions(SystemRole::RESPONSIBLE)));
     }
 
