@@ -25,6 +25,9 @@ use eTraxis\Dictionary\EventType;
  */
 class Comment
 {
+    // Constraints.
+    const MAX_TEXT = 4000;
+
     /**
      * @var int Unique ID.
      *
@@ -37,7 +40,7 @@ class Comment
     /**
      * @var Event Event.
      *
-     * @ORM\ManyToOne(targetEntity="Event")
+     * @ORM\ManyToOne(targetEntity="Event", cascade="persist")
      * @ORM\JoinColumn(name="event_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
     private $event;

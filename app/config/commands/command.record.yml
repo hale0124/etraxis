@@ -9,3 +9,8 @@ services:
         class: eTraxis\CommandBus\Records\Handler\MarkRecordsAsUnreadCommandHandler
         tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Records\MarkRecordsAsUnreadCommand }]
         arguments: [ "@doctrine.orm.entity_manager", "@etraxis.records_cache" ]
+
+    command.records.add_comment:
+        class: eTraxis\CommandBus\Records\Handler\AddCommentCommandHandler
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Records\AddCommentCommand }]
+        arguments: [ "@doctrine.orm.entity_manager", "@security.authorization_checker", "@security.token_storage" ]

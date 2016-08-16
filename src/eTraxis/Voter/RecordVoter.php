@@ -25,6 +25,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 class RecordVoter extends Voter
 {
     const VIEW             = 'record.view';
+    const PUBLIC_COMMENTS  = 'record.public_comments';
     const PRIVATE_COMMENTS = 'record.private_comments';
 
     protected $manager;
@@ -46,6 +47,7 @@ class RecordVoter extends Voter
     {
         $attributes = [
             self::VIEW,
+            self::PUBLIC_COMMENTS,
             self::PRIVATE_COMMENTS,
         ];
 
@@ -72,6 +74,9 @@ class RecordVoter extends Voter
 
             case self::VIEW:
                 return $this->isViewGranted($subject, $token->getUser());
+
+            case self::PUBLIC_COMMENTS:
+                return $this->isPublicCommentsGranted($subject, $token->getUser());
 
             case self::PRIVATE_COMMENTS:
                 return $this->isPrivateCommentsGranted($subject, $token->getUser());
@@ -108,6 +113,44 @@ class RecordVoter extends Voter
 
         // Check whether current user belongs to any group which is granted to view the record.
         return $subject->getTemplate()->isUserGranted($user, TemplatePermission::VIEW_RECORDS);
+    }
+
+    /**
+     * Checks whether user can read and post regular comments in the specified record.
+     *
+     * @param   Record      $subject Record.
+     * @param   CurrentUser $user    Current user.
+     *
+     * @return  bool
+     */
+    protected function isPublicCommentsGranted(Record $subject, CurrentUser $user): bool
+    {
+        // Check whether the record is frozen.
+        if ($subject->isFrozen()) {
+            return false;
+        }
+
+        // Check whether anyone is granted to read and post regular comments.
+        if ($subject->getTemplate()->isRoleGranted(SystemRole::ANYONE, TemplatePermission::ADD_COMMENTS)) {
+            return true;
+        }
+
+        // Check whether author is granted to read and post regular comments.
+        if ($subject->getAuthor()->getId() === $user->getId()) {
+            if ($subject->getTemplate()->isRoleGranted(SystemRole::AUTHOR, TemplatePermission::ADD_COMMENTS)) {
+                return true;
+            }
+        }
+
+        // Check whether responsible is granted to read and post regular comments.
+        if ($subject->getResponsible() && $subject->getResponsible()->getId() === $user->getId()) {
+            if ($subject->getTemplate()->isRoleGranted(SystemRole::RESPONSIBLE, TemplatePermission::ADD_COMMENTS)) {
+                return true;
+            }
+        }
+
+        // Check whether current user belongs to any group which is granted to read and post regular comments.
+        return $subject->getTemplate()->isUserGranted($user, TemplatePermission::ADD_COMMENTS);
     }
 
     /**
