@@ -234,6 +234,7 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
                 'notes'       => null,
                 'date'        => '2010-09-02',
                 'notes2'      => null,
+                'postponed'   => true,
             ],
             '6ACV13' => [
                 'subject'     => 'New clamps for Francis X. Clampazzo.',
@@ -336,6 +337,10 @@ class LoadDeliveryRecordsData extends AbstractFixture implements ContainerAwareI
 
             $this->setProperty($event, 'createdAt', $record->getCreatedAt());
             $this->setProperty($event2, 'createdAt', $record->getCreatedAt());
+
+            if ($info['postponed'] ?? false) {
+                $this->setProperty($record, 'resumedAt', 0x7FFFFFFF);
+            }
 
             $manager->persist($record);
             $manager->persist($event);

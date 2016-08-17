@@ -74,7 +74,7 @@ class AddCommentCommandHandler
             throw new NotFoundHttpException('Unknown record.');
         }
 
-        if (!$this->security->isGranted($command->private ? RecordVoter::PRIVATE_COMMENTS : RecordVoter::PUBLIC_COMMENTS, $record)) {
+        if (!$this->security->isGranted($command->private ? RecordVoter::PRIVATE_COMMENT : RecordVoter::PUBLIC_COMMENT, $record)) {
             throw new AccessDeniedHttpException();
         }
 
