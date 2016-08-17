@@ -93,6 +93,17 @@ class RecordTest extends TransactionalTestCase
         self::assertEquals(1, $this->object->getAge());
     }
 
+    public function testIsAssigned()
+    {
+        /** @var Record $assigned */
+        $assigned = $this->doctrine->getRepository(Record::class)->findOneBy([
+            'subject' => 'e-Waste',
+        ]);
+
+        self::assertTrue($assigned->isAssigned());
+        self::assertFalse($this->object->isAssigned());
+    }
+
     public function testIsOverdue()
     {
         /** @var Record $opened */

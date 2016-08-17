@@ -24,9 +24,19 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  */
 class RecordVoter extends Voter
 {
-    const VIEW            = 'record.view';
-    const PUBLIC_COMMENT  = 'record.public_comment';
-    const PRIVATE_COMMENT = 'record.private_comment';
+    const VIEW             = 'record.view';
+    const EDIT             = 'record.edit';
+    const DELETE           = 'record.delete';
+    const REASSIGN         = 'record.reassign';
+    const REOPEN           = 'record.reopen';
+    const POSTPONE         = 'record.postpone';
+    const RESUME           = 'record.resume';
+    const PUBLIC_COMMENT   = 'record.public_comment';
+    const PRIVATE_COMMENT  = 'record.private_comment';
+    const ATTACH_FILE      = 'record.attach_file';
+    const DELETE_FILE      = 'record.delete_file';
+    const ATTACH_SUBRECORD = 'record.attach_subrecord';
+    const DETACH_SUBRECORD = 'record.detach_subrecord';
 
     protected $manager;
 
@@ -47,8 +57,18 @@ class RecordVoter extends Voter
     {
         $attributes = [
             self::VIEW,
+            self::EDIT,
+            self::DELETE,
+            self::REASSIGN,
+            self::REOPEN,
+            self::POSTPONE,
+            self::RESUME,
             self::PUBLIC_COMMENT,
             self::PRIVATE_COMMENT,
+            self::ATTACH_FILE,
+            self::DELETE_FILE,
+            self::ATTACH_SUBRECORD,
+            self::DETACH_SUBRECORD,
         ];
 
         if (in_array($attribute, $attributes)) {
@@ -75,11 +95,41 @@ class RecordVoter extends Voter
             case self::VIEW:
                 return $this->isViewGranted($subject, $token->getUser());
 
+            case self::EDIT:
+                return $this->isEditGranted($subject, $token->getUser());
+
+            case self::DELETE:
+                return $this->isDeleteGranted($subject, $token->getUser());
+
+            case self::REASSIGN:
+                return $this->isReassignGranted($subject, $token->getUser());
+
+            case self::REOPEN:
+                return $this->isReopenGranted($subject, $token->getUser());
+
+            case self::POSTPONE:
+                return $this->isPostponeGranted($subject, $token->getUser());
+
+            case self::RESUME:
+                return $this->isResumeGranted($subject, $token->getUser());
+
             case self::PUBLIC_COMMENT:
                 return $this->isPublicCommentsGranted($subject, $token->getUser());
 
             case self::PRIVATE_COMMENT:
                 return $this->isPrivateCommentsGranted($subject, $token->getUser());
+
+            case self::ATTACH_FILE:
+                return $this->isAttachFileGranted($subject, $token->getUser());
+
+            case self::DELETE_FILE:
+                return $this->isDeleteFileGranted($subject, $token->getUser());
+
+            case self::ATTACH_SUBRECORD:
+                return $this->isAttachSubrecordGranted($subject, $token->getUser());
+
+            case self::DETACH_SUBRECORD:
+                return $this->isDetachSubrecordGranted($subject, $token->getUser());
 
             default:
                 return false;
@@ -125,7 +175,7 @@ class RecordVoter extends Voter
         }
 
         // Check whether responsible is granted specified permission.
-        if ($subject->getResponsible() && $subject->getResponsible()->getId() === $user->getId()) {
+        if ($subject->isAssigned() && $subject->getResponsible()->getId() === $user->getId()) {
             if ($subject->getTemplate()->isRoleGranted(SystemRole::RESPONSIBLE, $permission)) {
                 return true;
             }
@@ -136,7 +186,7 @@ class RecordVoter extends Voter
     }
 
     /**
-     * Checks whether specified record can be viewed.
+     * Checks whether user can view the specified record.
      *
      * @param   Record      $subject Record.
      * @param   CurrentUser $user    Current user.
@@ -151,7 +201,7 @@ class RecordVoter extends Voter
         }
 
         // Responsible always has view access.
-        if ($subject->getResponsible() && $subject->getResponsible()->getId() === $user->getId()) {
+        if ($subject->isAssigned() && $subject->getResponsible()->getId() === $user->getId()) {
             return true;
         }
 
@@ -162,6 +212,129 @@ class RecordVoter extends Voter
 
         // Check whether current user belongs to any group which is granted to view the record.
         return $subject->getTemplate()->isUserGranted($user, TemplatePermission::VIEW_RECORDS);
+    }
+
+    /**
+     * Checks whether user can edit the specified record.
+     *
+     * @param   Record      $subject Record.
+     * @param   CurrentUser $user    Current user.
+     *
+     * @return  bool
+     */
+    protected function isEditGranted(Record $subject, CurrentUser $user): bool
+    {
+        // Check whether the record is postponed.
+        if ($subject->isPostponed()) {
+            return false;
+        }
+
+        return $this->isPermissionGranted($subject, $user, TemplatePermission::EDIT_RECORDS);
+    }
+
+    /**
+     * Checks whether user can delete the specified record.
+     *
+     * @param   Record      $subject Record.
+     * @param   CurrentUser $user    Current user.
+     *
+     * @return  bool
+     */
+    protected function isDeleteGranted(Record $subject, CurrentUser $user): bool
+    {
+        // Check whether the record is postponed.
+        if ($subject->isPostponed()) {
+            return false;
+        }
+
+        return $this->isPermissionGranted($subject, $user, TemplatePermission::DELETE_RECORDS);
+    }
+
+    /**
+     * Checks whether user can reassign the specified record.
+     *
+     * @param   Record      $subject Record.
+     * @param   CurrentUser $user    Current user.
+     *
+     * @return  bool
+     */
+    protected function isReassignGranted(Record $subject, CurrentUser $user): bool
+    {
+        // Check whether the record is not assigned.
+        if (!$subject->isAssigned()) {
+            return false;
+        }
+
+        // Check whether the record is postponed.
+        if ($subject->isPostponed()) {
+            return false;
+        }
+
+        return $this->isPermissionGranted($subject, $user, TemplatePermission::REASSIGN_RECORDS);
+    }
+
+    /**
+     * Checks whether user can reopen the specified record.
+     *
+     * @param   Record      $subject Record.
+     * @param   CurrentUser $user    Current user.
+     *
+     * @return  bool
+     */
+    protected function isReopenGranted(Record $subject, CurrentUser $user): bool
+    {
+        // Check whether the record is opened.
+        if (!$subject->isClosed()) {
+            return false;
+        }
+
+        return $this->isPermissionGranted($subject, $user, TemplatePermission::REOPEN_RECORDS);
+    }
+
+    /**
+     * Checks whether user can postpone the specified record.
+     *
+     * @param   Record      $subject Record.
+     * @param   CurrentUser $user    Current user.
+     *
+     * @return  bool
+     */
+    protected function isPostponeGranted(Record $subject, CurrentUser $user): bool
+    {
+        // Check whether the record is closed.
+        if ($subject->isClosed()) {
+            return false;
+        }
+
+        // Check whether the record is postponed.
+        if ($subject->isPostponed()) {
+            return false;
+        }
+
+        return $this->isPermissionGranted($subject, $user, TemplatePermission::POSTPONE_RECORDS);
+    }
+
+    /**
+     * Checks whether user can resume the specified record.
+     *
+     * @param   Record      $subject Record.
+     * @param   CurrentUser $user    Current user.
+     *
+     * @return  bool
+     */
+    protected function isResumeGranted(Record $subject, CurrentUser $user): bool
+    {
+        // Check whether the record is closed.
+        if ($subject->isClosed()) {
+            return false;
+        }
+
+        // Check whether the record is not postponed.
+        if (!$subject->isPostponed()) {
+            return false;
+        }
+
+        return $this->isPermissionGranted($subject, $user, TemplatePermission::RESUME_RECORDS);
     }
 
     /**
@@ -188,5 +361,67 @@ class RecordVoter extends Voter
     protected function isPrivateCommentsGranted(Record $subject, CurrentUser $user): bool
     {
         return $this->isPermissionGranted($subject, $user, TemplatePermission::PRIVATE_COMMENTS);
+    }
+
+    /**
+     * Checks whether user can attach files to the specified record.
+     *
+     * @param   Record      $subject Record.
+     * @param   CurrentUser $user    Current user.
+     *
+     * @return  bool
+     */
+    protected function isAttachFileGranted(Record $subject, CurrentUser $user): bool
+    {
+        return $this->isPermissionGranted($subject, $user, TemplatePermission::ATTACH_FILES);
+    }
+
+    /**
+     * Checks whether user can delete files of the specified record.
+     *
+     * @param   Record      $subject Record.
+     * @param   CurrentUser $user    Current user.
+     *
+     * @return  bool
+     */
+    protected function isDeleteFileGranted(Record $subject, CurrentUser $user): bool
+    {
+        return $this->isPermissionGranted($subject, $user, TemplatePermission::DELETE_FILES);
+    }
+
+    /**
+     * Checks whether user can attach subrecords to the specified record.
+     *
+     * @param   Record      $subject Record.
+     * @param   CurrentUser $user    Current user.
+     *
+     * @return  bool
+     */
+    protected function isAttachSubrecordGranted(Record $subject, CurrentUser $user): bool
+    {
+        // Check whether the record is postponed.
+        if ($subject->isPostponed()) {
+            return false;
+        }
+
+        return $this->isPermissionGranted($subject, $user, TemplatePermission::ATTACH_SUBRECORDS);
+    }
+
+    /**
+     * Checks whether user can detach subrecords from the specified record.
+     *
+     * @param   Record      $subject Record.
+     * @param   CurrentUser $user    Current user.
+     *
+     * @return  bool
+     */
+    protected function isDetachSubrecordGranted(Record $subject, CurrentUser $user): bool
+    {
+        // Check whether the record is postponed.
+        if ($subject->isPostponed()) {
+            return false;
+        }
+
+        return $this->isPermissionGranted($subject, $user, TemplatePermission::DETACH_SUBRECORDS);
     }
 }

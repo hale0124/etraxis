@@ -58,8 +58,18 @@ class RecordVoterTest extends TransactionalTestCase
         ]);
 
         self::assertEquals(RecordVoter::ACCESS_DENIED, $voter->vote($token, $record, [RecordVoter::VIEW]));
+        self::assertEquals(RecordVoter::ACCESS_DENIED, $voter->vote($token, $record, [RecordVoter::EDIT]));
+        self::assertEquals(RecordVoter::ACCESS_DENIED, $voter->vote($token, $record, [RecordVoter::DELETE]));
+        self::assertEquals(RecordVoter::ACCESS_DENIED, $voter->vote($token, $record, [RecordVoter::REASSIGN]));
+        self::assertEquals(RecordVoter::ACCESS_DENIED, $voter->vote($token, $record, [RecordVoter::REOPEN]));
+        self::assertEquals(RecordVoter::ACCESS_DENIED, $voter->vote($token, $record, [RecordVoter::POSTPONE]));
+        self::assertEquals(RecordVoter::ACCESS_DENIED, $voter->vote($token, $record, [RecordVoter::RESUME]));
         self::assertEquals(RecordVoter::ACCESS_DENIED, $voter->vote($token, $record, [RecordVoter::PUBLIC_COMMENT]));
         self::assertEquals(RecordVoter::ACCESS_DENIED, $voter->vote($token, $record, [RecordVoter::PRIVATE_COMMENT]));
+        self::assertEquals(RecordVoter::ACCESS_DENIED, $voter->vote($token, $record, [RecordVoter::ATTACH_FILE]));
+        self::assertEquals(RecordVoter::ACCESS_DENIED, $voter->vote($token, $record, [RecordVoter::DELETE_FILE]));
+        self::assertEquals(RecordVoter::ACCESS_DENIED, $voter->vote($token, $record, [RecordVoter::ATTACH_SUBRECORD]));
+        self::assertEquals(RecordVoter::ACCESS_DENIED, $voter->vote($token, $record, [RecordVoter::DETACH_SUBRECORD]));
     }
 
     public function testByAnyone()
@@ -72,8 +82,18 @@ class RecordVoterTest extends TransactionalTestCase
         ]);
 
         self::assertTrue($this->security->isGranted(RecordVoter::VIEW, $granted));
+        self::assertTrue($this->security->isGranted(RecordVoter::EDIT, $granted));
+        self::assertTrue($this->security->isGranted(RecordVoter::DELETE, $granted));
+        self::assertFalse($this->security->isGranted(RecordVoter::REASSIGN, $granted));
+        self::assertTrue($this->security->isGranted(RecordVoter::REOPEN, $granted));
+        self::assertFalse($this->security->isGranted(RecordVoter::POSTPONE, $granted));
+        self::assertFalse($this->security->isGranted(RecordVoter::RESUME, $granted));
         self::assertTrue($this->security->isGranted(RecordVoter::PUBLIC_COMMENT, $granted));
         self::assertTrue($this->security->isGranted(RecordVoter::PRIVATE_COMMENT, $granted));
+        self::assertTrue($this->security->isGranted(RecordVoter::ATTACH_FILE, $granted));
+        self::assertTrue($this->security->isGranted(RecordVoter::DELETE_FILE, $granted));
+        self::assertTrue($this->security->isGranted(RecordVoter::ATTACH_SUBRECORD, $granted));
+        self::assertTrue($this->security->isGranted(RecordVoter::DETACH_SUBRECORD, $granted));
 
         /** @var Record $forbidden */
         $forbidden = $this->doctrine->getRepository(Record::class)->findOneBy([
@@ -81,8 +101,18 @@ class RecordVoterTest extends TransactionalTestCase
         ]);
 
         self::assertFalse($this->security->isGranted(RecordVoter::VIEW, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::EDIT, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::DELETE, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::REASSIGN, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::REOPEN, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::POSTPONE, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::RESUME, $forbidden));
         self::assertFalse($this->security->isGranted(RecordVoter::PUBLIC_COMMENT, $forbidden));
         self::assertFalse($this->security->isGranted(RecordVoter::PRIVATE_COMMENT, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::ATTACH_FILE, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::DELETE_FILE, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::ATTACH_SUBRECORD, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::DETACH_SUBRECORD, $forbidden));
     }
 
     public function testByAuthor()
@@ -95,8 +125,18 @@ class RecordVoterTest extends TransactionalTestCase
         ]);
 
         self::assertTrue($this->security->isGranted(RecordVoter::VIEW, $granted));
+        self::assertTrue($this->security->isGranted(RecordVoter::EDIT, $granted));
+        self::assertTrue($this->security->isGranted(RecordVoter::DELETE, $granted));
+        self::assertTrue($this->security->isGranted(RecordVoter::REASSIGN, $granted));
+        self::assertFalse($this->security->isGranted(RecordVoter::REOPEN, $granted));
+        self::assertTrue($this->security->isGranted(RecordVoter::POSTPONE, $granted));
+        self::assertFalse($this->security->isGranted(RecordVoter::RESUME, $granted));
         self::assertTrue($this->security->isGranted(RecordVoter::PUBLIC_COMMENT, $granted));
         self::assertTrue($this->security->isGranted(RecordVoter::PRIVATE_COMMENT, $granted));
+        self::assertTrue($this->security->isGranted(RecordVoter::ATTACH_FILE, $granted));
+        self::assertTrue($this->security->isGranted(RecordVoter::DELETE_FILE, $granted));
+        self::assertTrue($this->security->isGranted(RecordVoter::ATTACH_SUBRECORD, $granted));
+        self::assertTrue($this->security->isGranted(RecordVoter::DETACH_SUBRECORD, $granted));
 
         /** @var Record $forbidden */
         $forbidden = $this->doctrine->getRepository(Record::class)->findOneBy([
@@ -104,8 +144,18 @@ class RecordVoterTest extends TransactionalTestCase
         ]);
 
         self::assertFalse($this->security->isGranted(RecordVoter::VIEW, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::EDIT, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::DELETE, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::REASSIGN, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::REOPEN, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::POSTPONE, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::RESUME, $forbidden));
         self::assertFalse($this->security->isGranted(RecordVoter::PUBLIC_COMMENT, $forbidden));
         self::assertFalse($this->security->isGranted(RecordVoter::PRIVATE_COMMENT, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::ATTACH_FILE, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::DELETE_FILE, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::ATTACH_SUBRECORD, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::DETACH_SUBRECORD, $forbidden));
     }
 
     public function testByResponsible()
@@ -118,8 +168,18 @@ class RecordVoterTest extends TransactionalTestCase
         ]);
 
         self::assertTrue($this->security->isGranted(RecordVoter::VIEW, $granted));
+        self::assertTrue($this->security->isGranted(RecordVoter::EDIT, $granted));
+        self::assertTrue($this->security->isGranted(RecordVoter::DELETE, $granted));
+        self::assertTrue($this->security->isGranted(RecordVoter::REASSIGN, $granted));
+        self::assertFalse($this->security->isGranted(RecordVoter::REOPEN, $granted));
+        self::assertTrue($this->security->isGranted(RecordVoter::POSTPONE, $granted));
+        self::assertFalse($this->security->isGranted(RecordVoter::RESUME, $granted));
         self::assertTrue($this->security->isGranted(RecordVoter::PUBLIC_COMMENT, $granted));
         self::assertTrue($this->security->isGranted(RecordVoter::PRIVATE_COMMENT, $granted));
+        self::assertTrue($this->security->isGranted(RecordVoter::ATTACH_FILE, $granted));
+        self::assertTrue($this->security->isGranted(RecordVoter::DELETE_FILE, $granted));
+        self::assertTrue($this->security->isGranted(RecordVoter::ATTACH_SUBRECORD, $granted));
+        self::assertTrue($this->security->isGranted(RecordVoter::DETACH_SUBRECORD, $granted));
 
         /** @var Record $forbidden */
         $forbidden = $this->doctrine->getRepository(Record::class)->findOneBy([
@@ -127,8 +187,18 @@ class RecordVoterTest extends TransactionalTestCase
         ]);
 
         self::assertFalse($this->security->isGranted(RecordVoter::VIEW, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::EDIT, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::DELETE, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::REASSIGN, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::REOPEN, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::POSTPONE, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::RESUME, $forbidden));
         self::assertFalse($this->security->isGranted(RecordVoter::PUBLIC_COMMENT, $forbidden));
         self::assertFalse($this->security->isGranted(RecordVoter::PRIVATE_COMMENT, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::ATTACH_FILE, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::DELETE_FILE, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::ATTACH_SUBRECORD, $forbidden));
+        self::assertFalse($this->security->isGranted(RecordVoter::DETACH_SUBRECORD, $forbidden));
     }
 
     public function testByGroup()
@@ -141,14 +211,34 @@ class RecordVoterTest extends TransactionalTestCase
         $this->loginAs('hermes');
 
         self::assertTrue($this->security->isGranted(RecordVoter::VIEW, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::EDIT, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::DELETE, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::REASSIGN, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::REOPEN, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::POSTPONE, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::RESUME, $record));
         self::assertTrue($this->security->isGranted(RecordVoter::PUBLIC_COMMENT, $record));
         self::assertTrue($this->security->isGranted(RecordVoter::PRIVATE_COMMENT, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::ATTACH_FILE, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::DELETE_FILE, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::ATTACH_SUBRECORD, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::DETACH_SUBRECORD, $record));
 
         $this->loginAs('zoidberg');
 
         self::assertFalse($this->security->isGranted(RecordVoter::VIEW, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::EDIT, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::DELETE, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::REASSIGN, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::REOPEN, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::POSTPONE, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::RESUME, $record));
         self::assertFalse($this->security->isGranted(RecordVoter::PUBLIC_COMMENT, $record));
         self::assertFalse($this->security->isGranted(RecordVoter::PRIVATE_COMMENT, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::ATTACH_FILE, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::DELETE_FILE, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::ATTACH_SUBRECORD, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::DETACH_SUBRECORD, $record));
     }
 
     public function testPostponedRecord()
@@ -161,8 +251,18 @@ class RecordVoterTest extends TransactionalTestCase
         $this->loginAs('hermes');
 
         self::assertTrue($this->security->isGranted(RecordVoter::VIEW, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::EDIT, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::DELETE, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::REASSIGN, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::REOPEN, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::POSTPONE, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::RESUME, $record));
         self::assertTrue($this->security->isGranted(RecordVoter::PUBLIC_COMMENT, $record));
         self::assertTrue($this->security->isGranted(RecordVoter::PRIVATE_COMMENT, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::ATTACH_FILE, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::DELETE_FILE, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::ATTACH_SUBRECORD, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::DETACH_SUBRECORD, $record));
     }
 
     public function testFrozenRecord()
@@ -175,15 +275,35 @@ class RecordVoterTest extends TransactionalTestCase
         $this->loginAs('hermes');
 
         self::assertTrue($this->security->isGranted(RecordVoter::VIEW, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::EDIT, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::DELETE, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::REASSIGN, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::REOPEN, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::POSTPONE, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::RESUME, $record));
         self::assertFalse($this->security->isGranted(RecordVoter::PUBLIC_COMMENT, $record));
         self::assertFalse($this->security->isGranted(RecordVoter::PRIVATE_COMMENT, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::ATTACH_FILE, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::DELETE_FILE, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::ATTACH_SUBRECORD, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::DETACH_SUBRECORD, $record));
 
         // fake it's not frozen
         $this->setProperty($record, 'closedAt', time() - 86400);
 
         self::assertTrue($this->security->isGranted(RecordVoter::VIEW, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::EDIT, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::DELETE, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::REASSIGN, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::REOPEN, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::POSTPONE, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::RESUME, $record));
         self::assertTrue($this->security->isGranted(RecordVoter::PUBLIC_COMMENT, $record));
         self::assertTrue($this->security->isGranted(RecordVoter::PRIVATE_COMMENT, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::ATTACH_FILE, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::DELETE_FILE, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::ATTACH_SUBRECORD, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::DETACH_SUBRECORD, $record));
     }
 
     public function testLockedTemplate()
@@ -196,8 +316,18 @@ class RecordVoterTest extends TransactionalTestCase
         $this->loginAs('hermes');
 
         self::assertTrue($this->security->isGranted(RecordVoter::VIEW, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::EDIT, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::DELETE, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::REASSIGN, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::REOPEN, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::POSTPONE, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::RESUME, $record));
         self::assertTrue($this->security->isGranted(RecordVoter::PUBLIC_COMMENT, $record));
         self::assertTrue($this->security->isGranted(RecordVoter::PRIVATE_COMMENT, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::ATTACH_FILE, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::DELETE_FILE, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::ATTACH_SUBRECORD, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::DETACH_SUBRECORD, $record));
 
         $command = new LockTemplateCommand([
             'id' => $record->getTemplate()->getId(),
@@ -206,8 +336,18 @@ class RecordVoterTest extends TransactionalTestCase
         $this->commandbus->handle($command);
 
         self::assertTrue($this->security->isGranted(RecordVoter::VIEW, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::EDIT, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::DELETE, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::REASSIGN, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::REOPEN, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::POSTPONE, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::RESUME, $record));
         self::assertFalse($this->security->isGranted(RecordVoter::PUBLIC_COMMENT, $record));
         self::assertFalse($this->security->isGranted(RecordVoter::PRIVATE_COMMENT, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::ATTACH_FILE, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::DELETE_FILE, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::ATTACH_SUBRECORD, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::DETACH_SUBRECORD, $record));
     }
 
     public function testSuspendedProject()
@@ -220,8 +360,18 @@ class RecordVoterTest extends TransactionalTestCase
         $this->loginAs('hermes');
 
         self::assertTrue($this->security->isGranted(RecordVoter::VIEW, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::EDIT, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::DELETE, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::REASSIGN, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::REOPEN, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::POSTPONE, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::RESUME, $record));
         self::assertTrue($this->security->isGranted(RecordVoter::PUBLIC_COMMENT, $record));
         self::assertTrue($this->security->isGranted(RecordVoter::PRIVATE_COMMENT, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::ATTACH_FILE, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::DELETE_FILE, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::ATTACH_SUBRECORD, $record));
+        self::assertTrue($this->security->isGranted(RecordVoter::DETACH_SUBRECORD, $record));
 
         $command = new UpdateProjectCommand([
             'id'        => $record->getProject()->getId(),
@@ -232,7 +382,17 @@ class RecordVoterTest extends TransactionalTestCase
         $this->commandbus->handle($command);
 
         self::assertTrue($this->security->isGranted(RecordVoter::VIEW, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::EDIT, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::DELETE, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::REASSIGN, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::REOPEN, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::POSTPONE, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::RESUME, $record));
         self::assertFalse($this->security->isGranted(RecordVoter::PUBLIC_COMMENT, $record));
         self::assertFalse($this->security->isGranted(RecordVoter::PRIVATE_COMMENT, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::ATTACH_FILE, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::DELETE_FILE, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::ATTACH_SUBRECORD, $record));
+        self::assertFalse($this->security->isGranted(RecordVoter::DETACH_SUBRECORD, $record));
     }
 }

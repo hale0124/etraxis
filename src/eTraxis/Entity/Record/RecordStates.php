@@ -200,7 +200,7 @@ class RecordStates extends \ArrayIterator
             $roles[] = SystemRole::AUTHOR;
         }
 
-        if ($record->getResponsible() !== null && $record->getResponsible()->getId() === $user->getId()) {
+        if ($record->isAssigned() && $record->getResponsible()->getId() === $user->getId()) {
             $roles[] = SystemRole::RESPONSIBLE;
         }
 

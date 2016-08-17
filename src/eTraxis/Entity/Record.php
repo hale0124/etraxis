@@ -277,6 +277,16 @@ class Record extends Entity
     }
 
     /**
+     * Checks whether the record is assigned.
+     *
+     * @return  bool
+     */
+    public function isAssigned()
+    {
+        return $this->responsible !== null;
+    }
+
+    /**
      * Returns whether the record is overdue (older than critical age of its template).
      *
      * @return  bool
