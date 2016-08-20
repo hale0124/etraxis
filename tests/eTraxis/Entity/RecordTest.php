@@ -133,7 +133,7 @@ class RecordTest extends TransactionalTestCase
         self::assertFalse($this->object->isPostponed());
 
         $this->object = $this->doctrine->getRepository(Record::class)->findOneBy([
-            'subject' => 'PHPDoc Standard',
+            'subject' => 'A soufflé laced with nitroglycerine',
         ]);
 
         self::assertTrue($this->object->isPostponed());
