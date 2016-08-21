@@ -16,6 +16,7 @@
          * @private Constructor.
          */
         _create: function() {
+
             var sections = parseInt($(this.element).data('sections'), 10);
 
             if (!sections || sections < 1) {
@@ -33,12 +34,14 @@
                 .prepend('<span class="ui-icon ui-icon-circle-triangle-n panel-toggle" title="' + eTraxis.i18n['button.collapse'] + '"></span>')
             ;
 
-            $('.panel-heading', this.element).on('click', '> div', function() {
+            $('.panel-heading', this.element).on('click', '> div', function(e) {
+                e.preventDefault();
                 $('.panel-toggle', $(this).parent()).click();
-                return false;
             });
 
-            $('.panel-heading', this.element).on('click', '.panel-toggle', function() {
+            $('.panel-heading', this.element).on('click', '.panel-toggle', function(e) {
+                e.preventDefault();
+
                 if ($(this).hasClass('ui-icon-circle-triangle-n')) {
                     $(this)
                         .removeClass('ui-icon-circle-triangle-n')
@@ -55,12 +58,11 @@
                     ;
                     $('.panel-body', $(this).closest('.panel')).show();
                 }
-                return false;
             });
 
-            $('.panel-body', this.element).on('click', 'a', function() {
+            $('.panel-body', this.element).on('click', 'a', function(e) {
+                e.preventDefault();
                 $(this).trigger('panel.item.click', $(this).data('id'));
-                return false;
             });
         },
 
@@ -68,7 +70,9 @@
          * @private Destructor.
          */
         _destroy: function() {
+
             this.element.removeClass('ui-widget-content ui-corner-all');
+
             $('.panel-heading', this.element).removeClass('ui-state-default ui-corner-top');
             $('.panel-heading .panel-toggle', this.element).remove();
             $('.panel-body', this.element).remove();
@@ -78,11 +82,13 @@
          * Collapses panel items.
          */
         collapse: function() {
+
             $('.panel-heading .panel-toggle', this.element)
                 .removeClass('ui-icon-circle-triangle-n')
                 .addClass('ui-icon-circle-triangle-s')
                 .attr('title', eTraxis.i18n['button.expand'])
             ;
+
             $('.panel-body', this.element).hide();
         },
 
@@ -90,11 +96,13 @@
          * Expands panel items.
          */
         expand: function() {
+
             $('.panel-heading .panel-toggle', this.element)
                 .removeClass('ui-icon-circle-triangle-s')
                 .addClass('ui-icon-circle-triangle-n')
                 .attr('title', eTraxis.i18n['button.collapse'])
             ;
+
             $('.panel-body', this.element).show();
         },
 
@@ -107,10 +115,13 @@
          * @param {int}    [section]
          */
         append: function(id, text, highlighted, section) {
+
             if (!section) {
                 section = 1;
             }
+
             $('.panel-body[data-id="' + section + '"] > p', this.element).remove();
+
             $('.panel-body[data-id="' + section + '"]', this.element).append(
                 '<a data-id="' + id + '" href="#"' + (highlighted ? ' class="highlighted">' : '>') +
                 '<span class="ui-icon ui-icon-none"></span>' +
@@ -125,7 +136,9 @@
          * @param {string} id
          */
         remove: function(id) {
+
             $('.panel-body a[data-id="' + id + '"]', this.element).remove();
+
             if ($('.panel-body > a', this.element).length == 0) {
                 $('.panel-body', this.element).append('<p>—</p>');
             }
@@ -135,6 +148,7 @@
          * Removes all items.
          */
         clear: function() {
+
             $('.panel-body', this.element)
                 .empty()
                 .append('<p>—</p>')
@@ -148,6 +162,7 @@
          * @returns {string} text
          */
         get: function(id) {
+
             return $('.panel-body a[data-id="' + id + '"] .panel-item', this.element).text();
         },
 
@@ -158,6 +173,7 @@
          * @returns {string} id
          */
         find: function(text) {
+
             var result = '';
 
             $('.panel-item', this.element).each(function() {
@@ -176,6 +192,7 @@
          * @param {string} id
          */
         select: function(id) {
+
             $('.panel-body span.ui-icon-check', this.element)
                 .removeClass('ui-icon-check')
                 .addClass('ui-icon-none')
@@ -195,7 +212,9 @@
          * @returns {string} id
          */
         selected: function() {
+
             var $selected = $('.panel-body span.ui-icon-check', this.element);
+
             return $selected.length == 0 ? '' : $selected.parent().data('id');
         }
     });

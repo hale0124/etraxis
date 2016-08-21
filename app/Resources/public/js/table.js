@@ -280,6 +280,8 @@ var datatables_language = window.datatables_language || {};
 
                 // Right click on a row in the table.
                 $table.on('contextmenu', 'tbody tr', function(e) {
+                    e.preventDefault();
+
                     $menu.data('id', $(this).data('id'));
 
                     if (typeof settings.contextMenuCallback === 'function') {
@@ -293,8 +295,6 @@ var datatables_language = window.datatables_language || {};
                     $(document).one('click', function() {
                         $menu.hide();
                     });
-
-                    return false;
                 });
 
                 // Click on an item in the context menu.

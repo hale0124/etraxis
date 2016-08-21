@@ -25,14 +25,14 @@
                 }
             });
 
-            $button.click(function() {
+            $button.click(function(e) {
+                e.preventDefault();
+
                 $menu.toggle();
 
                 $(document).one('click', function() {
                     $menu.hide();
                 });
-
-                return false;
             });
 
             $menu.hide();
