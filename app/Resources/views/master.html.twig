@@ -88,9 +88,9 @@
     {% if app.environment == 'dev' %}
         <script src="{{ asset('js/jquery.js')            }}"></script>
         <script src="{{ asset('js/jquery-ui.js')         }}"></script>
+        <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
         <script src="{{ asset('js/jquery.blockUI.js')    }}"></script>
         <script src="{{ asset('js/jquery.form.js')       }}"></script>
-        <script src="{{ asset('js/jquery.dataTables.js') }}"></script>
         <script src="{{ asset('js/etraxis.js')           }}"></script>
         <script src="{{ asset('js/etraxis-%s.js' | format(app.user ? app.user.locale : locale)) }}"></script>
     {% else %}

@@ -311,9 +311,9 @@ gulp.task('vendor:js', function() {
     var files = [
         'vendor/bower/jquery/dist/jquery.js',
         'vendor/bower/jquery.ui/ui/jquery-ui.js',
+        'vendor/bower/datatables/media/js/jquery.dataTables.js',
         'vendor/bower/blockui/jquery.blockUI.js',
-        'vendor/bower/jquery-form/jquery.form.js',
-        'vendor/bower/datatables/media/js/jquery.dataTables.js'
+        'vendor/bower/jquery-form/jquery.form.js'
     ];
 
     return gulp.src(files)
