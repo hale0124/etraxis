@@ -37,11 +37,11 @@ class RecordsDataTableTest extends TransactionalTestCase
         ];
 
         $request = new Request([
-            'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 0,
-            'length'  => -1,
-            'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [
+            'draw'   => random_int(1, PHP_INT_MAX),
+            'start'  => 0,
+            'length' => -1,
+            'search' => ['value' => null, 'regex' => 'false'],
+            'order'  => [
                 ['column' => 0, 'dir' => 'asc'],
             ],
             'columns' => [
@@ -83,11 +83,11 @@ class RecordsDataTableTest extends TransactionalTestCase
         ];
 
         $request = new Request([
-            'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 0,
-            'length'  => -1,
-            'search'  => ['value' => 'sEc', 'regex' => 'false'],
-            'order'   => [
+            'draw'   => random_int(1, PHP_INT_MAX),
+            'start'  => 0,
+            'length' => -1,
+            'search' => ['value' => 'sEc', 'regex' => 'false'],
+            'order'  => [
                 ['column' => 0, 'dir' => 'asc'],
             ],
             'columns' => [
@@ -129,11 +129,11 @@ class RecordsDataTableTest extends TransactionalTestCase
         $filtered = 15;
 
         $request = new Request([
-            'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 0,
-            'length'  => -1,
-            'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [
+            'draw'   => random_int(1, PHP_INT_MAX),
+            'start'  => 0,
+            'length' => -1,
+            'search' => ['value' => null, 'regex' => 'false'],
+            'order'  => [
                 ['column' => 0, 'dir' => 'asc'],
             ],
             'columns' => [
@@ -162,11 +162,11 @@ class RecordsDataTableTest extends TransactionalTestCase
         $filtered = 128;
 
         $request = new Request([
-            'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 0,
-            'length'  => -1,
-            'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [
+            'draw'   => random_int(1, PHP_INT_MAX),
+            'start'  => 0,
+            'length' => -1,
+            'search' => ['value' => null, 'regex' => 'false'],
+            'order'  => [
                 ['column' => 0, 'dir' => 'asc'],
             ],
             'columns' => [
@@ -204,11 +204,11 @@ class RecordsDataTableTest extends TransactionalTestCase
         ];
 
         $request = new Request([
-            'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 0,
-            'length'  => -1,
-            'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [
+            'draw'   => random_int(1, PHP_INT_MAX),
+            'start'  => 0,
+            'length' => -1,
+            'search' => ['value' => null, 'regex' => 'false'],
+            'order'  => [
                 ['column' => 0, 'dir' => 'asc'],
             ],
             'columns' => [
@@ -256,11 +256,11 @@ class RecordsDataTableTest extends TransactionalTestCase
         ];
 
         $request = new Request([
-            'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 0,
-            'length'  => -1,
-            'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [
+            'draw'   => random_int(1, PHP_INT_MAX),
+            'start'  => 0,
+            'length' => -1,
+            'search' => ['value' => null, 'regex' => 'false'],
+            'order'  => [
                 ['column' => 0, 'dir' => 'asc'],
             ],
             'columns' => [
@@ -308,11 +308,11 @@ class RecordsDataTableTest extends TransactionalTestCase
         ];
 
         $request = new Request([
-            'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 0,
-            'length'  => -1,
-            'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [
+            'draw'   => random_int(1, PHP_INT_MAX),
+            'start'  => 0,
+            'length' => -1,
+            'search' => ['value' => null, 'regex' => 'false'],
+            'order'  => [
                 ['column' => 0, 'dir' => 'asc'],
             ],
             'columns' => [
@@ -360,11 +360,11 @@ class RecordsDataTableTest extends TransactionalTestCase
         ];
 
         $request = new Request([
-            'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 0,
-            'length'  => -1,
-            'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [
+            'draw'   => random_int(1, PHP_INT_MAX),
+            'start'  => 0,
+            'length' => -1,
+            'search' => ['value' => null, 'regex' => 'false'],
+            'order'  => [
                 ['column' => 0, 'dir' => 'asc'],
             ],
             'columns' => [
@@ -410,11 +410,11 @@ class RecordsDataTableTest extends TransactionalTestCase
         ];
 
         $request = new Request([
-            'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 0,
-            'length'  => -1,
-            'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [
+            'draw'   => random_int(1, PHP_INT_MAX),
+            'start'  => 0,
+            'length' => -1,
+            'search' => ['value' => null, 'regex' => 'false'],
+            'order'  => [
                 ['column' => 0, 'dir' => 'asc'],
             ],
             'columns' => [
@@ -461,11 +461,11 @@ class RecordsDataTableTest extends TransactionalTestCase
         ];
 
         $request = new Request([
-            'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 0,
-            'length'  => -1,
-            'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [
+            'draw'   => random_int(1, PHP_INT_MAX),
+            'start'  => 0,
+            'length' => -1,
+            'search' => ['value' => null, 'regex' => 'false'],
+            'order'  => [
                 ['column' => 0, 'dir' => 'asc'],
             ],
             'columns' => [
@@ -505,12 +505,12 @@ class RecordsDataTableTest extends TransactionalTestCase
 
         $expected = [
             // State = 'A'
-            'Basic Coding Standard'      => 'Paul M. Jones',
-            'Coding Style Guide'         => 'Paul M. Jones',
-            'Autoloading Standard'       => 'Paul M. Jones',
-            'HTTP Message Interface'     => 'Matthew Weier O\'Phinney',
-            'Caching Interface'          => 'Larry Garfield',
-            'Logger Interface'           => 'Jordi Boggiano',
+            'Basic Coding Standard'  => 'Paul M. Jones',
+            'Coding Style Guide'     => 'Paul M. Jones',
+            'Autoloading Standard'   => 'Paul M. Jones',
+            'HTTP Message Interface' => 'Matthew Weier O\'Phinney',
+            'Caching Interface'      => 'Larry Garfield',
+            'Logger Interface'       => 'Jordi Boggiano',
             // State = 'D'
             'PHPDoc Standard'            => 'Mike van Riel',
             'Security Advisories'        => 'Lukas Kahwe Smith',
@@ -519,11 +519,11 @@ class RecordsDataTableTest extends TransactionalTestCase
         ];
 
         $request = new Request([
-            'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 0,
-            'length'  => 10,
-            'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [
+            'draw'   => random_int(1, PHP_INT_MAX),
+            'start'  => 0,
+            'length' => 10,
+            'search' => ['value' => null, 'regex' => 'false'],
+            'order'  => [
                 ['column' => 3, 'dir' => 'asc'],    // State
                 ['column' => 5, 'dir' => 'desc'],   // Author
             ],
@@ -565,15 +565,15 @@ class RecordsDataTableTest extends TransactionalTestCase
             'Container Interface'         => 'David Négrier',
             'Event Manager'               => 'Chuck Reeves',
             // State = 'X'
-            'Autoloading Standard'        => 'Matthew Weier O\'Phinney',
+            'Autoloading Standard' => 'Matthew Weier O\'Phinney',
         ];
 
         $request = new Request([
-            'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 10,
-            'length'  => 10,
-            'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [
+            'draw'   => random_int(1, PHP_INT_MAX),
+            'start'  => 10,
+            'length' => 10,
+            'search' => ['value' => null, 'regex' => 'false'],
+            'order'  => [
                 ['column' => 3, 'dir' => 'asc'],    // State
                 ['column' => 5, 'dir' => 'desc'],   // Author
             ],

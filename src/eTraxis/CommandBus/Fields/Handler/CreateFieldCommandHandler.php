@@ -43,10 +43,10 @@ class CreateFieldCommandHandler extends FieldCommandHandler
         $entity = new Field($state, self::TYPES[get_parent_class($command)] ?? null);
 
         $entity
-            ->setEntityManager($this->manager)
             ->setName($command->name)
             ->setDescription($command->description)
             ->setRequired($command->required)
+            ->setEntityManager($this->manager)
         ;
 
         $entity->setOrder(count($state->getFields()) + 1);

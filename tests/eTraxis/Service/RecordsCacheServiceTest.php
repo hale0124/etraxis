@@ -39,11 +39,11 @@ class RecordsCacheServiceTest extends KernelTestCase
         self::bootKernel();
 
         $request = new Request([
-            'draw'    => mt_rand(),
-            'start'   => 20,
-            'length'  => 10,
-            'search'  => ['value' => 'symfony', 'regex' => true],
-            'order'   => [
+            'draw'   => mt_rand(),
+            'start'  => 20,
+            'length' => 10,
+            'search' => ['value' => 'symfony', 'regex' => true],
+            'order'  => [
                 ['column' => 1, 'dir' => 'desc'],
                 ['column' => 0, 'dir' => 'asc'],
             ],

@@ -46,7 +46,7 @@ class CsrfToken
     {
         $request = $event->getRequest();
 
-        if ($request->isXmlHttpRequest() && $request->getMethod() ===  Request::METHOD_POST) {
+        if ($request->isXmlHttpRequest() && $request->getMethod() === Request::METHOD_POST) {
 
             $data = $request->request->all();
 

@@ -30,7 +30,7 @@ class ExportService implements ExportInterface
         $response = new StreamedResponse(function () use ($query, $data) {
 
             $delimiter = CsvDelimiter::get($query->delimiter);
-            $tail      = LineEnding::get($query->tail);
+            $tail = LineEnding::get($query->tail);
 
             $callback = function ($item) use ($delimiter) {
 
@@ -39,8 +39,8 @@ class ExportService implements ExportInterface
                 }
 
                 $count = 0;
-                $item  = str_replace('"', '""', $item, $count);
-                $pos   = mb_strpos($item, $delimiter);
+                $item = str_replace('"', '""', $item, $count);
+                $pos = mb_strpos($item, $delimiter);
 
                 return ($count !== 0 || $pos !== false) ? '"' . $item . '"' : $item;
             };

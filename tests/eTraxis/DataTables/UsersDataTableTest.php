@@ -80,11 +80,11 @@ class UsersDataTableTest extends TransactionalTestCase
         ];
 
         $request = new Request([
-            'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 0,
-            'length'  => -1,
-            'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [
+            'draw'   => random_int(1, PHP_INT_MAX),
+            'start'  => 0,
+            'length' => -1,
+            'search' => ['value' => null, 'regex' => 'false'],
+            'order'  => [
                 ['column' => UsersDataTable::COLUMN_USERNAME, 'dir' => 'asc'],
             ],
             'columns' => [
@@ -112,11 +112,11 @@ class UsersDataTableTest extends TransactionalTestCase
         ];
 
         $request = new Request([
-            'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 0,
-            'length'  => -1,
-            'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [
+            'draw'   => random_int(1, PHP_INT_MAX),
+            'start'  => 0,
+            'length' => -1,
+            'search' => ['value' => null, 'regex' => 'false'],
+            'order'  => [
                 ['column' => UsersDataTable::COLUMN_USERNAME, 'dir' => 'asc'],
             ],
             'columns' => [
@@ -145,11 +145,11 @@ class UsersDataTableTest extends TransactionalTestCase
         ];
 
         $request = new Request([
-            'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 0,
-            'length'  => -1,
-            'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [
+            'draw'   => random_int(1, PHP_INT_MAX),
+            'start'  => 0,
+            'length' => -1,
+            'search' => ['value' => null, 'regex' => 'false'],
+            'order'  => [
                 ['column' => UsersDataTable::COLUMN_USERNAME, 'dir' => 'asc'],
             ],
             'columns' => [
@@ -176,11 +176,11 @@ class UsersDataTableTest extends TransactionalTestCase
         ];
 
         $request = new Request([
-            'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 0,
-            'length'  => -1,
-            'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [
+            'draw'   => random_int(1, PHP_INT_MAX),
+            'start'  => 0,
+            'length' => -1,
+            'search' => ['value' => null, 'regex' => 'false'],
+            'order'  => [
                 ['column' => UsersDataTable::COLUMN_USERNAME, 'dir' => 'asc'],
             ],
             'columns' => [
@@ -204,11 +204,11 @@ class UsersDataTableTest extends TransactionalTestCase
         $expected = 21;
 
         $request = new Request([
-            'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 0,
-            'length'  => -1,
-            'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [
+            'draw'   => random_int(1, PHP_INT_MAX),
+            'start'  => 0,
+            'length' => -1,
+            'search' => ['value' => null, 'regex' => 'false'],
+            'order'  => [
                 ['column' => UsersDataTable::COLUMN_USERNAME, 'dir' => 'asc'],
             ],
             'columns' => [
@@ -228,11 +228,11 @@ class UsersDataTableTest extends TransactionalTestCase
         ];
 
         $request = new Request([
-            'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 0,
-            'length'  => -1,
-            'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [
+            'draw'   => random_int(1, PHP_INT_MAX),
+            'start'  => 0,
+            'length' => -1,
+            'search' => ['value' => null, 'regex' => 'false'],
+            'order'  => [
                 ['column' => UsersDataTable::COLUMN_USERNAME, 'dir' => 'asc'],
             ],
             'columns' => [
@@ -256,11 +256,11 @@ class UsersDataTableTest extends TransactionalTestCase
         $expected = 22;
 
         $request = new Request([
-            'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 0,
-            'length'  => -1,
-            'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [
+            'draw'   => random_int(1, PHP_INT_MAX),
+            'start'  => 0,
+            'length' => -1,
+            'search' => ['value' => null, 'regex' => 'false'],
+            'order'  => [
                 ['column' => UsersDataTable::COLUMN_USERNAME, 'dir' => 'asc'],
             ],
             'columns' => [
@@ -283,11 +283,11 @@ class UsersDataTableTest extends TransactionalTestCase
         ];
 
         $request = new Request([
-            'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 0,
-            'length'  => -1,
-            'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [
+            'draw'   => random_int(1, PHP_INT_MAX),
+            'start'  => 0,
+            'length' => -1,
+            'search' => ['value' => null, 'regex' => 'false'],
+            'order'  => [
                 ['column' => UsersDataTable::COLUMN_USERNAME, 'dir' => 'asc'],
             ],
             'columns' => [
@@ -316,11 +316,11 @@ class UsersDataTableTest extends TransactionalTestCase
         ];
 
         $request = new Request([
-            'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 0,
-            'length'  => -1,
-            'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [
+            'draw'   => random_int(1, PHP_INT_MAX),
+            'start'  => 0,
+            'length' => -1,
+            'search' => ['value' => null, 'regex' => 'false'],
+            'order'  => [
                 ['column' => UsersDataTable::COLUMN_USERNAME, 'dir' => 'asc'],
             ],
             'columns' => [
@@ -344,29 +344,29 @@ class UsersDataTableTest extends TransactionalTestCase
     public function testOrder()
     {
         $expected = [
-            'David Négrier'             => null,
-            'Chuck Reeves'              => null,
-            'Artem Rodygin'             => null,
-            'Albert Einstein'           => null,
-            'Paul M. Jones'             => 'Aura Project and Solar Framework',
-            'Zapp Brannigan'            => 'Captain',
-            'Jordi Boggiano'            => 'Composer',
-            'Korvin Szanto'             => 'concrete5',
-            'Turanga Leela'             => 'Delivery Crew',
-            'Philip J. Fry'             => 'Delivery Crew',
-            'Dr. Amy Wong'              => 'Delivery Crew',
-            'Bender Bending Rodriguez'  => 'Delivery Crew',
-            'Dr. Veins McGee'           => 'Doctor',
-            'Larry Garfield'            => 'Drupal',
-            'Hubert J. Farnsworth'      => 'Founder / Owner',
+            'David Négrier'            => null,
+            'Chuck Reeves'             => null,
+            'Artem Rodygin'            => null,
+            'Albert Einstein'          => null,
+            'Paul M. Jones'            => 'Aura Project and Solar Framework',
+            'Zapp Brannigan'           => 'Captain',
+            'Jordi Boggiano'           => 'Composer',
+            'Korvin Szanto'            => 'concrete5',
+            'Turanga Leela'            => 'Delivery Crew',
+            'Philip J. Fry'            => 'Delivery Crew',
+            'Dr. Amy Wong'             => 'Delivery Crew',
+            'Bender Bending Rodriguez' => 'Delivery Crew',
+            'Dr. Veins McGee'          => 'Doctor',
+            'Larry Garfield'           => 'Drupal',
+            'Hubert J. Farnsworth'     => 'Founder / Owner',
         ];
 
         $request = new Request([
-            'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 0,
-            'length'  => 15,
-            'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [
+            'draw'   => random_int(1, PHP_INT_MAX),
+            'start'  => 0,
+            'length' => 15,
+            'search' => ['value' => null, 'regex' => 'false'],
+            'order'  => [
                 ['column' => UsersDataTable::COLUMN_DESCRIPTION, 'dir' => 'asc'],
                 ['column' => UsersDataTable::COLUMN_FULLNAME,    'dir' => 'desc'],
             ],
@@ -397,11 +397,11 @@ class UsersDataTableTest extends TransactionalTestCase
         ];
 
         $request = new Request([
-            'draw'    => random_int(1, PHP_INT_MAX),
-            'start'   => 20,
-            'length'  => 10,
-            'search'  => ['value' => null, 'regex' => 'false'],
-            'order'   => [
+            'draw'   => random_int(1, PHP_INT_MAX),
+            'start'  => 20,
+            'length' => 10,
+            'search' => ['value' => null, 'regex' => 'false'],
+            'order'  => [
                 ['column' => UsersDataTable::COLUMN_DESCRIPTION, 'dir' => 'desc'],
                 ['column' => UsersDataTable::COLUMN_FULLNAME,    'dir' => 'asc'],
             ],
