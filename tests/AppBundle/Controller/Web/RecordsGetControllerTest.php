@@ -11,7 +11,6 @@
 
 namespace AppBundle\Controller\Web;
 
-use eTraxis\Entity\Attachment;
 use eTraxis\Entity\Record;
 use eTraxis\Tests\ControllerTestCase;
 use Symfony\Component\HttpFoundation\Request;
@@ -165,52 +164,5 @@ class RecordsGetControllerTest extends ControllerTestCase
 
         $this->makeRequest(Request::METHOD_GET, $uri, true);
         $this->assertStatusCode(Response::HTTP_OK);
-    }
-
-    public function testDownloadAction()
-    {
-        /** @var \Symfony\Bridge\Doctrine\RegistryInterface $doctrine */
-        $doctrine = $this->client->getContainer()->get('doctrine');
-
-        /** @var Attachment $existing */
-        $existing = $doctrine->getRepository(Attachment::class)->findOneBy([
-            'name' => 'example.php',
-        ]);
-
-        /** @var Attachment $deleted */
-        $deleted = $doctrine->getRepository(Attachment::class)->findOneBy([
-            'name' => 'Meta Document.pdf',
-        ]);
-
-        file_put_contents(getcwd() . '/var/' . $existing->getId(), null);
-
-        $uri = $this->router->generate('web_download_attachment', [
-            'id' => $existing->getId(),
-        ]);
-
-        $this->makeRequest(Request::METHOD_GET, $uri);
-        $this->assertLoginPage();
-
-        $this->makeRequest(Request::METHOD_POST, $uri);
-        $this->assertStatusCode(Response::HTTP_METHOD_NOT_ALLOWED);
-
-        $this->loginAs('hubert');
-
-        $this->makeRequest(Request::METHOD_GET, $uri);
-        $this->assertStatusCode(Response::HTTP_FORBIDDEN);
-
-        $this->loginAs('mwop');
-
-        $this->makeRequest(Request::METHOD_GET, $uri);
-        $this->assertStatusCode(Response::HTTP_OK);
-
-        $uri = $this->router->generate('web_download_attachment', [
-            'id' => $deleted->getId(),
-        ]);
-
-        $this->makeRequest(Request::METHOD_GET, $uri);
-        $this->assertStatusCode(Response::HTTP_NOT_FOUND);
-
-        unlink(getcwd() . '/var/' . $existing->getId());
     }
 }
