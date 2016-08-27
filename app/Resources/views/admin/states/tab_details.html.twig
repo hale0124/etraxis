@@ -2,10 +2,10 @@
 
 <div class="grid-100 grid-row">
     <button type="button" onclick="StatesApp.edit({{ state.id }})">{{ 'button.edit'|trans }}</button>
-    {% if can.delete %}
+    {% if is_granted(constant('eTraxis\\Voter\\StateVoter::DELETE'), state) %}
         <button type="button" onclick="StatesApp.delete({{ state.id }})">{{ 'button.delete'|trans }}</button>
     {% endif %}
-    {% if can.initial %}
+    {% if is_granted(constant('eTraxis\\Voter\\StateVoter::INITIAL'), state) %}
         <button type="button" onclick="StatesApp.initial({{ state.id }})">{{ 'state.make_initial'|trans }}</button>
     {% endif %}
 </div>

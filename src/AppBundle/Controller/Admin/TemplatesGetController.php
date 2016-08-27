@@ -18,7 +18,6 @@ use eTraxis\Entity\Project;
 use eTraxis\Entity\Template;
 use eTraxis\Form\TemplateForm;
 use eTraxis\Traits\ContainerTrait;
-use eTraxis\Voter\TemplateVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -80,11 +79,6 @@ class TemplatesGetController extends Controller
     {
         return $this->render('admin/templates/tab_details.html.twig', [
             'template' => $template,
-            'can'      => [
-                'delete' => $this->isGranted(TemplateVoter::DELETE, $template),
-                'lock'   => $this->isGranted(TemplateVoter::LOCK, $template),
-                'unlock' => $this->isGranted(TemplateVoter::UNLOCK, $template),
-            ],
         ]);
     }
 

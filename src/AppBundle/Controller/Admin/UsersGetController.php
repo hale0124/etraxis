@@ -17,7 +17,6 @@ use eTraxis\Entity\User;
 use eTraxis\Form\UserForm;
 use eTraxis\Service\Export\ExportCsvQuery;
 use eTraxis\Traits\ContainerTrait;
-use eTraxis\Voter\UserVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -147,12 +146,6 @@ class UsersGetController extends Controller
         return $this->render('admin/users/tab_details.html.twig', [
             'user'      => $user,
             'providers' => AuthenticationProvider::all(),
-            'can'       => [
-                'delete'  => $this->isGranted(UserVoter::DELETE, $user),
-                'disable' => $this->isGranted(UserVoter::DISABLE, $user),
-                'enable'  => $this->isGranted(UserVoter::ENABLE, $user),
-                'unlock'  => $this->isGranted(UserVoter::UNLOCK, $user),
-            ],
         ]);
     }
 

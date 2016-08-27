@@ -14,7 +14,6 @@ namespace AppBundle\Controller\Admin;
 use eTraxis\Entity\Project;
 use eTraxis\Form\ProjectForm;
 use eTraxis\Traits\ContainerTrait;
-use eTraxis\Voter\ProjectVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -89,9 +88,6 @@ class ProjectsGetController extends Controller
     {
         return $this->render('admin/projects/tab_details.html.twig', [
             'project' => $project,
-            'can'     => [
-                'delete' => $this->isGranted(ProjectVoter::DELETE, $project),
-            ],
         ]);
     }
 

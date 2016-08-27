@@ -2,7 +2,7 @@
 
 <div class="grid-100 grid-row">
     <button type="button" onclick="FieldsApp.edit({{ field.id }})">{{ 'button.edit'|trans }}</button>
-    {% if can.delete %}
+    {% if is_granted(constant('eTraxis\\Voter\\FieldVoter::DELETE'), field) %}
         <button type="button" onclick="FieldsApp.delete({{ field.id }})">{{ 'button.delete'|trans }}</button>
     {% endif %}
 </div>

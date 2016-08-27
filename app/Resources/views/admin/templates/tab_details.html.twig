@@ -2,15 +2,15 @@
 
 <div class="grid-100 grid-row">
     <button type="button" onclick="TemplatesApp.edit({{ template.id }})">{{ 'button.edit'|trans }}</button>
-    {% if can.lock %}
+    {% if is_granted(constant('eTraxis\\Voter\\TemplateVoter::LOCK'), template) %}
         <button type="button" onclick="TemplatesApp.lock({{ template.id }})">{{ 'button.lock'|trans }}</button>
     {% endif %}
-    {% if can.unlock %}
+    {% if is_granted(constant('eTraxis\\Voter\\TemplateVoter::UNLOCK'), template) %}
         <button type="button" onclick="TemplatesApp.unlock({{ template.id }})">{{ 'button.unlock'|trans }}</button>
     {% elseif template.locked %}
         <button type="button" disabled>{{ 'button.unlock'|trans }}</button>
     {% endif %}
-    {% if can.delete %}
+    {% if is_granted(constant('eTraxis\\Voter\\TemplateVoter::DELETE'), template) %}
         <button type="button" onclick="TemplatesApp.delete({{ template.id }})">{{ 'button.delete'|trans }}</button>
     {% endif %}
 </div>

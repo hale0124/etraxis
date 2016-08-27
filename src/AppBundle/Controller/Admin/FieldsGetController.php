@@ -20,7 +20,6 @@ use eTraxis\Entity\State;
 use eTraxis\Form\FieldForm;
 use eTraxis\Form\PCREForm;
 use eTraxis\Traits\ContainerTrait;
-use eTraxis\Voter\FieldVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -83,9 +82,6 @@ class FieldsGetController extends Controller
         return $this->render(sprintf('admin/fields/tab_details_%s.html.twig', $field->getType()), [
             'field' => $field,
             'types' => FieldType::all(),
-            'can'   => [
-                'delete' => $this->isGranted(FieldVoter::DELETE, $field),
-            ],
         ]);
     }
 

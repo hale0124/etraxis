@@ -3,17 +3,17 @@
 <div class="grid-100 grid-row">
     <button type="button" onclick="UserApp.back()">{{ 'button.back'|trans }}</button>
     <button type="button" onclick="UserApp.edit({{ user.id }})">{{ 'button.edit'|trans }}</button>
-    {% if can.delete %}
+    {% if is_granted(constant('eTraxis\\Voter\\UserVoter::DELETE'), user) %}
         <button type="button" onclick="UserApp.delete({{ user.id }})">{{ 'button.delete'|trans }}</button>
     {% endif %}
     <span class="buttonset">
-        {% if can.disable %}
+        {% if is_granted(constant('eTraxis\\Voter\\UserVoter::DISABLE'), user) %}
             <button type="button" onclick="UserApp.disable({{ user.id }})">{{ 'button.disable'|trans }}</button>
         {% endif %}
-        {% if can.enable %}
+        {% if is_granted(constant('eTraxis\\Voter\\UserVoter::ENABLE'), user) %}
             <button type="button" onclick="UserApp.enable({{ user.id }})">{{ 'button.enable'|trans }}</button>
         {% endif %}
-        {% if can.unlock %}
+        {% if is_granted(constant('eTraxis\\Voter\\UserVoter::UNLOCK'), user) %}
             <button type="button" onclick="UserApp.unlock({{ user.id }})">{{ 'button.unlock'|trans }}</button>
         {% endif %}
     </span>
