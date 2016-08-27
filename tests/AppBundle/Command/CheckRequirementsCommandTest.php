@@ -22,12 +22,14 @@ class CheckRequirementsCommandTest extends TransactionalTestCase
     {
         $extensions = [
             'bcmath     OK',
-            'ctype      OK',
+            'curl       OK',
+            'dom        OK',
             'iconv      OK',
             'json       OK',
             'mbstring   OK',
             'pcre       OK',
-            'SimpleXML  OK',
+            'xsl        OK',
+            'zlib       OK',
         ];
 
         if ($this->client->getContainer()->getParameter('ldap_host')) {

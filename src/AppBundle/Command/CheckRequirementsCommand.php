@@ -93,13 +93,17 @@ class CheckRequirementsCommand extends ContainerAwareCommand
     protected function checkExtensions(OutputInterface $output)
     {
         $extensions = [
-            'ctype',        // also required by Symfony
-            'json',         // also required by Symfony
-            'SimpleXML',    // also required by Symfony
-            'pcre',         // also required by Symfony
+            // bundled
             'bcmath',
             'iconv',
+            'json',
             'mbstring',
+            'pcre',
+            'zlib',
+            // external
+            'curl',
+            'dom',
+            'xsl',
         ];
 
         $database_driver = $this->getContainer()->getParameter('database_driver');
