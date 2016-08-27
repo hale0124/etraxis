@@ -3,6 +3,10 @@
         <div class="fieldset">
             <div class="legend">{{ state.name }}</div>
 
+            {% if state.responsibles|length != 0 %}
+                {{ macro.row('role.responsible'|trans, state.responsibles|join("\n")) }}
+            {% endif %}
+
             {% if state.fields|length == 0 %}
                 <div class="grid-100 grid-row">
                     <p>{{ 'record.no_fields'|trans }}</p>

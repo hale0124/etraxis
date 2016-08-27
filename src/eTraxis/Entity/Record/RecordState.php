@@ -27,15 +27,22 @@ class RecordState
     protected $fields;
 
     /**
+     * @var string[] Responsibles of the state.
+     */
+    protected $responsibles;
+
+    /**
      * Constructor.
      *
      * @param   string        $name
      * @param   RecordField[] $fields
+     * @param   string[]      $responsibles
      */
-    public function __construct(string $name, array $fields = [])
+    public function __construct(string $name, array $fields = [], array $responsibles = [])
     {
-        $this->name   = $name;
-        $this->fields = $fields;
+        $this->name         = $name;
+        $this->fields       = $fields;
+        $this->responsibles = $responsibles;
     }
 
     /**
@@ -60,5 +67,15 @@ class RecordState
     public function getFields()
     {
         return $this->fields;
+    }
+
+    /**
+     * Returns all users (full names) who were assigned to the record.
+     *
+     * @return  string[]
+     */
+    public function getResponsibles()
+    {
+        return array_unique($this->responsibles);
     }
 }

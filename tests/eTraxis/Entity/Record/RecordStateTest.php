@@ -40,4 +40,27 @@ class RecordStateTest extends \PHPUnit_Framework_TestCase
 
         self::assertCount(2, $state->getFields());
     }
+
+    public function testEmptyResponsibles()
+    {
+        $state = new RecordState('New', [
+            new RecordField('Version', FieldType::STRING),
+            new RecordField('Description', FieldType::TEXT),
+        ]);
+
+        self::assertCount(0, $state->getResponsibles());
+    }
+
+    public function testNonEmptyResponsibles()
+    {
+        $state = new RecordState('New', [
+            new RecordField('Version', FieldType::STRING),
+            new RecordField('Description', FieldType::TEXT),
+        ], [
+            'Artem Rodygin',
+            'John Smith',
+        ]);
+
+        self::assertCount(2, $state->getResponsibles());
+    }
 }

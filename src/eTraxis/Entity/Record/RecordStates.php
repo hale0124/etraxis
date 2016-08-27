@@ -36,6 +36,12 @@ use eTraxis\Security\CurrentUser;
 class RecordStates extends \ArrayIterator
 {
     /**
+     * @var array[] List of all users who were assigned to the record.
+     *              Key is a state ID. Value is an array of "User" objects.
+     */
+    private $responsibles = [];
+
+    /**
      * @var FieldValue[] Current values of all fields.
      *                   Contains only fields which the current user is allowed to read.
      */
@@ -82,6 +88,7 @@ class RecordStates extends \ArrayIterator
     {
         parent::__construct();
 
+        $this->initResponsibles($record);
         $this->initFieldValues($record, $user, $manager);
 
         $query = $manager->createQueryBuilder()
@@ -153,14 +160,52 @@ class RecordStates extends \ArrayIterator
                 $recordFields[] = new RecordField($field->getName(), $field->getType(), $value);
             }
 
-            $recordState = new RecordState($state->getName(), $recordFields);
+            $recordState = new RecordState($state->getName(), $recordFields, $this->responsibles[$state->getName()] ?? []);
 
             $this->append($recordState);
         }
     }
 
     /**
-     * If field values cache is not set, initializes the cache.
+     * Initializes the responsibles cache.
+     *
+     * @param   Record $record
+     */
+    private function initResponsibles(Record $record)
+    {
+        $events = $record->getHistory();
+
+        $state = null;
+
+        foreach ($events as $event) {
+
+            switch ($event->getType()) {
+
+                case EventType::RECORD_CREATED:
+                case EventType::RECORD_REOPENED:
+                case EventType::STATE_CHANGED:
+
+                    $state = $event->getParameter();
+
+                    break;
+
+                case EventType::RECORD_ASSIGNED:
+
+                    if (!array_key_exists($state, $this->responsibles)) {
+                        $this->responsibles[$state] = [];
+                    }
+
+                    if (!in_array($event->getUser(), $this->responsibles[$state])) {
+                        $this->responsibles[$state][] = $event->getParameter();
+                    }
+
+                    break;
+            }
+        }
+    }
+
+    /**
+     * Initializes the field values cache.
      *
      * @param   Record                 $record
      * @param   CurrentUser            $user
