@@ -14,15 +14,18 @@ namespace AppBundle\Controller\Web;
 use eTraxis\CommandBus\Middleware\ValidationException;
 use eTraxis\CommandBus\Records\MarkRecordsAsReadCommand;
 use eTraxis\Dictionary\EventType;
+use eTraxis\Entity\Attachment;
 use eTraxis\Entity\Record;
 use eTraxis\Service\Export\ExportCsvQuery;
 use eTraxis\Traits\ContainerTrait;
 use eTraxis\Voter\RecordVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 
 /**
@@ -186,5 +189,33 @@ class RecordsGetController extends Controller
             'record' => $record,
             'types'  => EventType::all(),
         ]);
+    }
+
+    /**
+     * Downloads specified attachment.
+     *
+     * @Action\Route("/download/{id}", name="web_download_attachment", condition="", requirements={"id"="\d+"})
+     *
+     * @param   Attachment $attachment
+     *
+     * @return  BinaryFileResponse
+     */
+    public function downloadAction(Attachment $attachment): BinaryFileResponse
+    {
+        $this->denyAccessUnlessGranted(RecordVoter::VIEW, $attachment->getEvent()->getRecord());
+
+        if ($attachment->isDeleted()) {
+            throw $this->createNotFoundException();
+        }
+
+        /** @var \eTraxis\Service\FileStorageInterface $storage */
+        $storage = $this->get('etraxis.file_storage');
+
+        $response = new BinaryFileResponse($storage->getAbsolutePath($attachment->getId()));
+
+        $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_INLINE, $attachment->getName());
+        $response->setPrivate();
+
+        return $response;
     }
 }

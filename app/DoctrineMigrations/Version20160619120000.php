@@ -17,12 +17,25 @@ use eTraxis\Dictionary\FieldPermission;
 use eTraxis\Dictionary\Legacy;
 use eTraxis\Dictionary\SystemRole;
 use eTraxis\Migrations\BaseMigration;
+use Symfony\Component\DependencyInjection\ContainerAwareInterface;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * 3.9.x => 4.0.0
  */
-class Version20160619120000 extends BaseMigration
+class Version20160619120000 extends BaseMigration implements ContainerAwareInterface
 {
+    /** @var ContainerInterface */
+    protected $container;
+
+    /**
+     * {@inheritdoc}
+     */
+    public function setContainer(ContainerInterface $container = null)
+    {
+        $this->container = $container;
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -68,6 +81,9 @@ class Version20160619120000 extends BaseMigration
         $this->migrateChanges();
         $this->migrateComments();
         $this->migrateAttachments();
+
+        // Process existing attachments.
+        $this->processAttachments();
 
         // Drop all legacy tables.
         // ...
@@ -504,5 +520,36 @@ class Version20160619120000 extends BaseMigration
              . 'FROM tbl_attachments;';
 
         $this->addSql($sql);
+    }
+
+    /**
+     * Process existing attachments.
+     */
+    protected function processAttachments()
+    {
+        $path = realpath(getcwd() . '/web/' . $this->container->getParameter('files_path'));
+
+        foreach (scandir($path) as $entry) {
+
+            if (!is_numeric($entry)) {
+                continue;
+            }
+
+            $filename = $path . '/' . $entry;
+
+            rename($filename, $filename . '.gz');
+
+            $source = gzopen($filename . '.gz', 'rb');
+            $dest   = fopen($filename, 'w');
+
+            while (!gzeof($source)) {
+                fwrite($dest, gzread($source, 1048576));
+            }
+
+            fclose($dest);
+            gzclose($source);
+
+            unlink($filename . '.gz');
+        }
     }
 }

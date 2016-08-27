@@ -19,7 +19,7 @@ parameters:
     mailfrom_address:       noreply@example.com
     mailfrom_name:          "eTraxis"
 
-    files_path:             ~
+    files_path:             "../var/files"
     files_max_size:         ~
 
     ldap_host:              ~
