@@ -42,7 +42,7 @@ class DisableUsersCommandHandler
      */
     public function handle(DisableUsersCommand $command)
     {
-        /** @var \eTraxis\Entity\User $user */
+        /** @var \eTraxis\Security\CurrentUser $user */
         $user = $this->token_storage->getToken()->getUser();
 
         // Don't disable yourself.

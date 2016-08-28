@@ -18,7 +18,7 @@ var eTraxis = (function() {
                 if (typeof originalOptions.data === 'undefined') {
                     originalOptions.data = {};
                 }
-                if (typeof originalOptions.data === 'object' && typeof originalOptions.data._token === 'undefined') {
+                if (typeof originalOptions.data === 'object' && originalOptions.data !== null && typeof originalOptions.data._token === 'undefined') {
                     originalOptions.data._token = $token.val();
                     options.data = $.param(originalOptions.data);
                 }
