@@ -156,6 +156,20 @@ class Attachment
     }
 
     /**
+     * Property setter.
+     *
+     * @param   bool $isDeleted
+     *
+     * @return  self
+     */
+    public function setDeleted(bool $isDeleted)
+    {
+        $this->isDeleted = $isDeleted;
+
+        return $this;
+    }
+
+    /**
      * Property getter.
      *
      * @return  bool

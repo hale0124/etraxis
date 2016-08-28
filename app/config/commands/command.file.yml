@@ -1,0 +1,6 @@
+services:
+
+    command.file.delete:
+        class: eTraxis\CommandBus\Attachments\Handler\DeleteFileCommandHandler
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Attachments\DeleteFileCommand }]
+        arguments: [ "@doctrine.orm.entity_manager", "@security.authorization_checker", "@security.token_storage", "%files_path%" ]

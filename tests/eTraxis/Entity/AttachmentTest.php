@@ -96,6 +96,10 @@ class AttachmentTest extends TransactionalTestCase
 
     public function testIsDeleted()
     {
+        $this->object->setDeleted(true);
+        self::assertTrue($this->object->isDeleted());
+
+        $this->object->setDeleted(false);
         self::assertFalse($this->object->isDeleted());
     }
 
