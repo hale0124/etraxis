@@ -14,6 +14,7 @@ namespace eTraxis\Entity;
 use Doctrine\ORM\Mapping as ORM;
 use eTraxis\Dictionary\EventType;
 use eTraxis\Dictionary\MimeType;
+use Ramsey\Uuid\Uuid;
 
 /**
  * Attachment.
@@ -69,6 +70,13 @@ class Attachment
     private $type;
 
     /**
+     * @var string Attachment UUID.
+     *
+     * @ORM\Column(name="uuid", type="string", length=32)
+     */
+    private $uuid;
+
+    /**
      * @var bool Whether attachment was deleted.
      *
      * @ORM\Column(name="is_deleted", type="boolean")
@@ -91,6 +99,7 @@ class Attachment
         $this->name = $name;
         $this->size = $size;
         $this->type = $type;
+        $this->uuid = Uuid::uuid4()->getHex();
 
         $this->isDeleted = false;
     }
@@ -146,6 +155,16 @@ class Attachment
     }
 
     /**
+     * Property getter.
+     *
+     * @return  string
+     */
+    public function getUuid()
+    {
+        return $this->uuid;
+    }
+
+    /**
      * Returns name of image file which corresponds to attachment's MIME type.
      *
      * @return  string
@@ -188,6 +207,6 @@ class Attachment
      */
     public function getAbsolutePath(string $directory): string
     {
-        return realpath($directory . '/' . $this->id);
+        return realpath($directory . '/' . $this->uuid);
     }
 }

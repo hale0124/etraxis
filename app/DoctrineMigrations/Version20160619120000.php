@@ -17,6 +17,7 @@ use eTraxis\Dictionary\FieldPermission;
 use eTraxis\Dictionary\Legacy;
 use eTraxis\Dictionary\SystemRole;
 use eTraxis\Migrations\BaseMigration;
+use Ramsey\Uuid\Uuid;
 use Symfony\Component\DependencyInjection\ContainerAwareInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -82,11 +83,7 @@ class Version20160619120000 extends BaseMigration implements ContainerAwareInter
         $this->migrateComments();
         $this->migrateAttachments();
 
-        // Process existing attachments.
-        $this->processAttachments();
-
-        // Drop all legacy tables.
-        // ...
+        // @todo Drop all legacy tables.
     }
 
     /**
@@ -512,44 +509,49 @@ class Version20160619120000 extends BaseMigration implements ContainerAwareInter
 
     /**
      * Migrates data from "tbl_attachments".
+     *
+     * eTraxis 3.x and below names an attachment's file by attachment's autoincremental integer ID.
+     * eTraxis 4.x and above names an attachment's file by generated UUID.
      */
     protected function migrateAttachments()
     {
-        $sql = 'INSERT INTO attachments (id, event_id, file_name, file_size, mime_type, is_deleted) '
-             . 'SELECT attachment_id, event_id, attachment_name, attachment_size, attachment_type, is_removed '
-             . 'FROM tbl_attachments;';
-
-        $this->addSql($sql);
-    }
-
-    /**
-     * Process existing attachments.
-     */
-    protected function processAttachments()
-    {
         $path = realpath(getcwd() . '/web/' . $this->container->getParameter('files_path'));
 
-        foreach (scandir($path) as $entry) {
+        $sql = 'INSERT INTO attachments (id, event_id, file_name, file_size, mime_type, uuid, is_deleted) '
+             . 'VALUES (:id, :event_id, :file_name, :file_size, :mime_type, :uuid, :is_deleted);';
 
-            if (!is_numeric($entry)) {
-                continue;
+        $rows = $this->connection->fetchAll('SELECT * FROM tbl_attachments ORDER BY attachment_id');
+
+        foreach ($rows as $row) {
+
+            $uuid = Uuid::uuid4()->getHex();
+
+            $this->addSql($sql, [
+                'id'         => $row['attachment_id'],
+                'event_id'   => $row['event_id'],
+                'file_name'  => $row['attachment_name'],
+                'file_size'  => $row['attachment_size'],
+                'mime_type'  => $row['attachment_type'],
+                'uuid'       => $uuid,
+                'is_deleted' => $row['is_removed'],
+            ]);
+
+            $filename = "{$path}/{$row['attachment_id']}";
+
+            if (file_exists($filename)) {
+
+                $source = gzopen($filename, 'rb');
+                $dest = fopen("{$path}/{$uuid}", 'w');
+
+                while (!gzeof($source)) {
+                    fwrite($dest, gzread($source, 1048576));
+                }
+
+                fclose($dest);
+                gzclose($source);
+
+                unlink($filename);
             }
-
-            $filename = $path . '/' . $entry;
-
-            rename($filename, $filename . '.gz');
-
-            $source = gzopen($filename . '.gz', 'rb');
-            $dest   = fopen($filename, 'w');
-
-            while (!gzeof($source)) {
-                fwrite($dest, gzread($source, 1048576));
-            }
-
-            fclose($dest);
-            gzclose($source);
-
-            unlink($filename . '.gz');
         }
     }
 }

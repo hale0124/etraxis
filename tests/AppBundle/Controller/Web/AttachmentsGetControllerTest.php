@@ -33,7 +33,7 @@ class AttachmentsGetControllerTest extends ControllerTestCase
             'name' => 'Meta Document.pdf',
         ]);
 
-        file_put_contents(getcwd() . '/var/' . $existing->getId(), null);
+        file_put_contents(getcwd() . '/var/' . $existing->getUuid(), null);
 
         $uri = $this->router->generate('web_download_file', [
             'id' => $existing->getId(),
@@ -62,6 +62,6 @@ class AttachmentsGetControllerTest extends ControllerTestCase
         $this->makeRequest(Request::METHOD_GET, $uri);
         $this->assertStatusCode(Response::HTTP_NOT_FOUND);
 
-        unlink(getcwd() . '/var/' . $existing->getId());
+        unlink(getcwd() . '/var/' . $existing->getUuid());
     }
 }

@@ -26,7 +26,7 @@ class DeleteFileCommandTest extends TransactionalTestCase
             'name' => 'example.php',
         ]);
 
-        $filename = getcwd() . '/var/' . $attachment->getId();
+        $filename = getcwd() . '/var/' . $attachment->getUuid();
 
         file_put_contents($filename, null);
 

@@ -54,6 +54,7 @@ class AttachmentTest extends TransactionalTestCase
         self::assertEquals($name, $attachment->getName());
         self::assertEquals($size, $attachment->getSize());
         self::assertEquals($type, $attachment->getType());
+        self::assertRegExp('/^([[:xdigit:]]{32})$/is', $this->object->getUuid());
         self::assertFalse($attachment->isDeleted());
     }
 
@@ -94,6 +95,12 @@ class AttachmentTest extends TransactionalTestCase
         self::assertEquals($expected, $this->object->getMimeImage());
     }
 
+    public function testUuid()
+    {
+        $expected = '/^([[:xdigit:]]{32})$/is';
+        self::assertRegExp($expected, $this->object->getUuid());
+    }
+
     public function testIsDeleted()
     {
         $this->object->setDeleted(true);
@@ -105,7 +112,7 @@ class AttachmentTest extends TransactionalTestCase
 
     public function testGetAbsolutePath()
     {
-        $expected = getcwd() . '/var/' . $this->object->getId();
+        $expected = getcwd() . '/var/' . $this->object->getUuid();
 
         file_put_contents($expected, null);
         self::assertEquals($expected, $this->object->getAbsolutePath('./var/'));
