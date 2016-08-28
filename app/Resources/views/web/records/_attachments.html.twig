@@ -5,11 +5,11 @@
         <div class="legend">{{ 'files'|trans }} ({{ attachments|length }})</div>
         {% for attachment in attachments %}
             <div class="grid-100 grid-row">
-                <a href="{{ path('web_download_attachment', { 'id': attachment.id }) }}" target="_blank">
+                <a href="{{ path('web_download_file', { 'id': attachment.id }) }}" target="_blank">
                     <img class="left" width="48" height="48" src="{{ asset('images/mimetypes/' ~ attachment.mimeImage) }}">
                 </a>
                 <p class="attachment-name">
-                    <a href="{{ path('web_download_attachment', { 'id': attachment.id }) }}" target="_blank">{{ attachment.name }}</a>
+                    <a href="{{ path('web_download_file', { 'id': attachment.id }) }}" target="_blank">{{ attachment.name }}</a>
                     {{ ' (%.02f %s)'|format(attachment.size / 1024, 'kb'|trans) }}
                 </p>
                 <p class="attachment-time">

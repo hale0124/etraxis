@@ -29,7 +29,7 @@ class AttachmentsGetController extends Controller
     /**
      * Downloads specified attachment.
      *
-     * @Action\Route("/{id}", name="web_download_attachment", requirements={"id"="\d+"})
+     * @Action\Route("/{id}", name="web_download_file", requirements={"id"="\d+"})
      *
      * @param   Attachment $attachment
      *

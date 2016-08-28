@@ -35,7 +35,7 @@ class AttachmentsGetControllerTest extends ControllerTestCase
 
         file_put_contents(getcwd() . '/var/' . $existing->getId(), null);
 
-        $uri = $this->router->generate('web_download_attachment', [
+        $uri = $this->router->generate('web_download_file', [
             'id' => $existing->getId(),
         ]);
 
@@ -55,7 +55,7 @@ class AttachmentsGetControllerTest extends ControllerTestCase
         $this->makeRequest(Request::METHOD_GET, $uri);
         $this->assertStatusCode(Response::HTTP_OK);
 
-        $uri = $this->router->generate('web_download_attachment', [
+        $uri = $this->router->generate('web_download_file', [
             'id' => $deleted->getId(),
         ]);
 
