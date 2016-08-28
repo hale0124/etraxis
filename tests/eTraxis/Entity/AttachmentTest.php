@@ -98,4 +98,13 @@ class AttachmentTest extends TransactionalTestCase
     {
         self::assertFalse($this->object->isDeleted());
     }
+
+    public function testGetAbsolutePath()
+    {
+        $expected = getcwd() . '/var/' . $this->object->getId();
+
+        file_put_contents($expected, null);
+        self::assertEquals($expected, $this->object->getAbsolutePath('./var/'));
+        unlink($expected);
+    }
 }

@@ -43,10 +43,8 @@ class AttachmentsGetController extends Controller
             throw $this->createNotFoundException();
         }
 
-        /** @var \eTraxis\Service\FileStorageInterface $storage */
-        $storage = $this->get('etraxis.file_storage');
-
-        $response = new BinaryFileResponse($storage->getAbsolutePath($attachment->getId()));
+        $filename = $attachment->getAbsolutePath($this->getParameter('files_path'));
+        $response = new BinaryFileResponse($filename);
 
         $response->setContentDisposition(ResponseHeaderBag::DISPOSITION_INLINE, $attachment->getName());
         $response->setPrivate();

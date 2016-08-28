@@ -164,4 +164,16 @@ class Attachment
     {
         return $this->isDeleted;
     }
+
+    /**
+     * Returns absolute path to the file.
+     *
+     * @param   string $directory The containing folder.
+     *
+     * @return  string
+     */
+    public function getAbsolutePath(string $directory): string
+    {
+        return realpath($directory . '/' . $this->id);
+    }
 }

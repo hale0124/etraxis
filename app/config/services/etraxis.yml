@@ -7,11 +7,6 @@ services:
     etraxis.export:
         class: eTraxis\Service\Export\ExportService
 
-    etraxis.file_storage:
-        class: eTraxis\Service\FileStorage\FileStorageService
-        arguments:
-            - "%files_path%"
-
     etraxis.mailer:
         class: eTraxis\Service\Mailer\MailerService
         arguments:
