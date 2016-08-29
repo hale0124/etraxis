@@ -70,7 +70,6 @@ class AttachFileCommandHandler
      *
      * @throws  AccessDeniedHttpException
      * @throws  BadRequestHttpException
-     * @throws  FileException
      * @throws  NotFoundHttpException
      */
     public function handle(AttachFileCommand $command)

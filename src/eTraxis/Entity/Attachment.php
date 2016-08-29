@@ -127,6 +127,16 @@ class Attachment
     /**
      * Property getter.
      *
+     * @return  Record
+     */
+    public function getRecord()
+    {
+        return $this->event->getRecord();
+    }
+
+    /**
+     * Property getter.
+     *
      * @return  string
      */
     public function getName()

@@ -71,6 +71,12 @@ class AttachmentTest extends TransactionalTestCase
         self::assertEquals($expected, $this->object->getEvent()->getType());
     }
 
+    public function testRecord()
+    {
+        $expected = 'Autoloading Standard';
+        self::assertEquals($expected, $this->object->getRecord()->getSubject());
+    }
+
     public function testName()
     {
         $expected = 'example.php';

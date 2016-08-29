@@ -1,22 +1,48 @@
 {% set attachments = record.attachments %}
 
-{% if attachments|length != 0 %}
-    <div class="fieldset">
-        <div class="legend">{{ 'files'|trans }} ({{ attachments|length }})</div>
-        {% for attachment in attachments %}
-            <div class="grid-100 grid-row">
-                <a href="{{ path('web_download_file', { 'id': attachment.id }) }}" target="_blank">
-                    <img class="left" width="48" height="48" src="{{ asset('images/mimetypes/' ~ attachment.mimeImage) }}">
-                </a>
-                <p class="attachment-name">
-                    <a href="{{ path('web_download_file', { 'id': attachment.id }) }}" target="_blank">{{ attachment.name }}</a>
-                    {{ ' (%.02f %s)'|format(attachment.size / 1024, 'kb'|trans) }}
-                </p>
-                <p class="attachment-time">
-                    {% set timestamp = attachment.event.createdAt|localizeddate('medium', 'short', app.user.locale, app.user.timezone) %}
-                    {{ timestamp ~ ', ' ~ attachment.event.user.fullname }}
-                </p>
-            </div>
-        {% endfor %}
-    </div>
-{% endif %}
+{% set is_attach_granted = is_granted(constant('eTraxis\\Voter\\RecordVoter::ATTACH_FILE'), record) %}
+{% set is_delete_granted = is_granted(constant('eTraxis\\Voter\\RecordVoter::DELETE_FILE'), record) %}
+
+<div id="attachments">
+    {% if attachments|length != 0 or is_attach_granted %}
+        <div class="fieldset">
+            <div class="legend">{{ 'files'|trans }} ({{ attachments|length }})</div>
+
+            {% for attachment in attachments %}
+                <div class="grid-100 grid-row">
+                    <a href="{{ path('web_download_file', { 'id': attachment.id }) }}" target="_blank">
+                        <img class="left" width="48" height="48" src="{{ asset('images/mimetypes/' ~ attachment.mimeImage) }}">
+                    </a>
+                    {% if is_delete_granted %}
+                        <a href="#" class="button button-file-delete" title="{{ 'button.delete'|trans }}" data-id="{{ attachment.id }}">
+                            <span class="fa fa-trash"></span>
+                        </a>
+                    {% endif %}
+                    <p class="attachment-name">
+                        <a href="{{ path('web_download_file', { 'id': attachment.id }) }}" target="_blank">{{ attachment.name }}</a>
+                        {{ ' (%.02f %s)'|format(attachment.size / 1024, 'kb'|trans) }}
+                    </p>
+                    <p class="attachment-time">
+                        {% set timestamp = attachment.event.createdAt|localizeddate('medium', 'short', app.user.locale, app.user.timezone) %}
+                        {{ timestamp ~ ', ' ~ attachment.event.user.fullname }}
+                    </p>
+                </div>
+            {% endfor %}
+
+            {% if is_attach_granted %}
+                <div class="grid-100 grid-row">
+                    <div>
+                        <div class="ui-progressbar-label" id="progressbar"></div>
+                    </div>
+                    {{ form_start(fileForm, { 'attr': { 'class': 'attachment-form', 'id': 'attachment-form' } }) }}
+                    {{ form_widget(fileForm.file) }}
+                    <a href="#" id="button-file-attach" class="button">
+                        <span class="fa fa-upload"></span>
+                    </a>
+                    {{ form_end(fileForm) }}
+                </div>
+            {% endif %}
+
+        </div>
+    {% endif %}
+</div>

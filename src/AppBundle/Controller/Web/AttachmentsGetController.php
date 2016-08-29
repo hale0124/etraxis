@@ -12,10 +12,13 @@
 namespace AppBundle\Controller\Web;
 
 use eTraxis\Entity\Attachment;
+use eTraxis\Entity\Record;
+use eTraxis\Form\AttachFileForm;
 use eTraxis\Voter\RecordVoter;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration as Action;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\ResponseHeaderBag;
 
 /**
@@ -37,7 +40,7 @@ class AttachmentsGetController extends Controller
      */
     public function downloadAction(Attachment $attachment): BinaryFileResponse
     {
-        $this->denyAccessUnlessGranted(RecordVoter::VIEW, $attachment->getEvent()->getRecord());
+        $this->denyAccessUnlessGranted(RecordVoter::VIEW, $attachment->getRecord());
 
         if ($attachment->isDeleted()) {
             throw $this->createNotFoundException();
@@ -50,5 +53,28 @@ class AttachmentsGetController extends Controller
         $response->setPrivate();
 
         return $response;
+    }
+
+    /**
+     * Partial with record's attachments.
+     *
+     * @Action\Route("/partial/{id}", name="web_partial_attachments", requirements={"id"="\d+"})
+     *
+     * @param   Record $record
+     *
+     * @return  Response
+     */
+    public function partialAction(Record $record): Response
+    {
+        $this->denyAccessUnlessGranted(RecordVoter::VIEW, $record);
+
+        $fileForm = $this->createForm(AttachFileForm::class, null, [
+            'action' => $this->generateUrl('web_attach_file', ['id' => $record->getId()]),
+        ]);
+
+        return $this->render('web/records/_attachments.html.twig', [
+            'record'   => $record,
+            'fileForm' => $fileForm->createView(),
+        ]);
     }
 }

@@ -15,6 +15,7 @@ use eTraxis\CommandBus\Middleware\ValidationException;
 use eTraxis\CommandBus\Records\MarkRecordsAsReadCommand;
 use eTraxis\Dictionary\EventType;
 use eTraxis\Entity\Record;
+use eTraxis\Form\AttachFileForm;
 use eTraxis\Service\Export\ExportCsvQuery;
 use eTraxis\Traits\ContainerTrait;
 use eTraxis\Voter\RecordVoter;
@@ -162,10 +163,15 @@ class RecordsGetController extends Controller
         /** @var \eTraxis\Service\RecordsCache\RecordsCacheService $cache */
         $cache = $this->container->get('etraxis.records_cache');
 
+        $fileForm = $this->createForm(AttachFileForm::class, null, [
+            'action' => $this->generateUrl('web_attach_file', ['id' => $record->getId()]),
+        ]);
+
         return $this->render('web/records/tab_details.html.twig', [
             'record'   => $record,
             'previous' => $cache->getPrevious($user->getId(), $record->getId()),
             'next'     => $cache->getNext($user->getId(), $record->getId()),
+            'fileForm' => $fileForm->createView(),
         ]);
     }
 

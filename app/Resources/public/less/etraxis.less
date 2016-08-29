@@ -6,3 +6,48 @@
 @import "etraxis-jquery-ui.less";
 @import "etraxis-panel.less";
 @import "etraxis-unsemantic.less";
+
+p.attachment-name {
+    padding: 6px 50px 0 60px;
+}
+
+p.attachment-time {
+    padding: 0 50px 6px 60px;
+}
+
+form.attachment-form {
+    display: flex;
+    flex-direction: row;
+    margin-left: -10px;
+    margin-right: -10px;
+    padding: 10px;
+
+    input[type=file] {
+        flex-grow: 2;
+    }
+
+    a.button {
+        width: 38px;
+    }
+}
+
+a.button-file-delete {
+    float: right;
+    margin: 10px 2px;
+    width: 38px;
+}
+
+.ui-progressbar {
+    height: 30px;
+
+    .ui-progressbar-label {
+        float: left;
+        margin: 5px 0;
+        text-align: center;
+        width: 100%;
+    }
+
+    .ui-progressbar-value {
+        height: 30px;
+    }
+}

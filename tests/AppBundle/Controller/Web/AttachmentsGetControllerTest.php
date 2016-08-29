@@ -64,4 +64,35 @@ class AttachmentsGetControllerTest extends ControllerTestCase
 
         unlink(getcwd() . '/var/' . $existing->getUuid());
     }
+
+    public function testPartialAction()
+    {
+        /** @var \Symfony\Bridge\Doctrine\RegistryInterface $doctrine */
+        $doctrine = $this->client->getContainer()->get('doctrine');
+
+        /** @var Attachment $attachment */
+        $attachment = $doctrine->getRepository(Attachment::class)->findOneBy([
+            'name' => 'example.php',
+        ]);
+
+        $uri = $this->router->generate('web_partial_attachments', [
+            'id' => $attachment->getRecord()->getId(),
+        ]);
+
+        $this->makeRequest(Request::METHOD_GET, $uri, true);
+        $this->assertStatusCode(Response::HTTP_UNAUTHORIZED);
+
+        $this->makeRequest(Request::METHOD_POST, $uri, true);
+        $this->assertStatusCode(Response::HTTP_METHOD_NOT_ALLOWED);
+
+        $this->loginAs('hubert');
+
+        $this->makeRequest(Request::METHOD_GET, $uri, true);
+        $this->assertStatusCode(Response::HTTP_FORBIDDEN);
+
+        $this->loginAs('mwop');
+
+        $this->makeRequest(Request::METHOD_GET, $uri, true);
+        $this->assertStatusCode(Response::HTTP_OK);
+    }
 }

@@ -79,13 +79,13 @@ class DeleteFileCommandHandler
             throw new NotFoundHttpException('Unknown file.');
         }
 
-        $record = $entity->getEvent()->getRecord();
+        $record = $entity->getRecord();
 
         if (!$this->security->isGranted(RecordVoter::DELETE_FILE, $record)) {
             throw new AccessDeniedHttpException();
         }
 
-        $event = new Event($record, $user, EventType::FILE_DELETED);
+        $event = new Event($record, $user, EventType::FILE_DELETED, $entity->getId());
 
         $filename = $entity->getAbsolutePath($this->files_path);
 

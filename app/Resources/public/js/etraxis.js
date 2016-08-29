@@ -15,10 +15,10 @@ var eTraxis = (function() {
         if (options.type && options.type.toUpperCase() == 'POST') {
             var $token = $('#__etraxis_token');
             if ($token.length != 0) {
-                if (typeof originalOptions.data === 'undefined') {
+                if (typeof originalOptions.data === 'undefined' || originalOptions.data === null) {
                     originalOptions.data = {};
                 }
-                if (typeof originalOptions.data === 'object' && originalOptions.data !== null && typeof originalOptions.data._token === 'undefined') {
+                if (typeof originalOptions.data === 'object' && typeof originalOptions.data._token === 'undefined') {
                     originalOptions.data._token = $token.val();
                     options.data = $.param(originalOptions.data);
                 }
