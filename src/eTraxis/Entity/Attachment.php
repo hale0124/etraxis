@@ -43,7 +43,7 @@ class Attachment
     /**
      * @var Event Event.
      *
-     * @ORM\ManyToOne(targetEntity="Event")
+     * @ORM\ManyToOne(targetEntity="Event", cascade="persist")
      * @ORM\JoinColumn(name="event_id", nullable=false, referencedColumnName="id", onDelete="CASCADE")
      */
     private $event;
@@ -207,6 +207,6 @@ class Attachment
      */
     public function getAbsolutePath(string $directory): string
     {
-        return realpath($directory . '/' . $this->uuid);
+        return realpath($directory) . DIRECTORY_SEPARATOR . $this->uuid;
     }
 }

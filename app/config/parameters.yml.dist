@@ -20,7 +20,7 @@ parameters:
     mailfrom_name:          "eTraxis"
 
     files_path:             "../var/files"
-    files_max_size:         ~
+    files_max_size:         2048
 
     ldap_host:              ~
     ldap_port:              ~

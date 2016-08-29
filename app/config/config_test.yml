@@ -4,6 +4,7 @@ imports:
 parameters:
     database_name:          etraxis_test
     files_path:             "var"
+    files_max_size:         1
     locale:                 en_US
     security_auth_attempts: 2
     security_lock_time:     30

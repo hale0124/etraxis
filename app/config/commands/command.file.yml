@@ -1,5 +1,10 @@
 services:
 
+    command.file.attach:
+        class: eTraxis\CommandBus\Attachments\Handler\AttachFileCommandHandler
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Attachments\AttachFileCommand }]
+        arguments: [ "@translator", "@doctrine.orm.entity_manager", "@security.authorization_checker", "@security.token_storage", "%files_path%", "%files_max_size%" ]
+
     command.file.delete:
         class: eTraxis\CommandBus\Attachments\Handler\DeleteFileCommandHandler
         tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Attachments\DeleteFileCommand }]
