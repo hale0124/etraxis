@@ -18,6 +18,8 @@ button.export: Exporteer
 button.import: Importeer
 button.expand: Uitbreiden
 button.collapse: Ineenstorting
+button.preview: Voorbeeldweergave
+button.send: Verzenden
 button.select_all: 'Selecteer alles'
 button.mark_as_read: 'Als gelezen markeren'
 button.mark_as_unread: 'Als ongelezen markeren'
@@ -204,5 +206,7 @@ event.file_attached: 'Bestand "%value%" is bijgevoegd.'
 event.file_deleted: 'Bestand "%value%" is verwijderd.'
 event.subrecord_attached: 'Subrecord "%value%" is toegevoegd.'
 event.subrecord_detached: 'Subrecord "%value%" is verwijderd.'
+comment: Commentaar
+comment.private: Privé
 error.file_max_size: 'Dit bestand kan niet worden geupload omdat het de maximaal toegestane grootte overschrijd (%max_size% KB).'
 file.confirm.delete: 'Are you sure you want delete this file?'

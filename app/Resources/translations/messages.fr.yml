@@ -18,6 +18,8 @@ button.export: Exporter
 button.import: Importer
 button.expand: Développez
 button.collapse: 'L''effondrement'
+button.preview: Prévisualisation
+button.send: Envoyer
 button.select_all: 'Tout sélectionner'
 button.mark_as_read: 'Marquer comme lu'
 button.mark_as_unread: 'Marquer Non-lu'
@@ -204,5 +206,7 @@ event.file_attached: 'Fichier "%value%" attaché.'
 event.file_deleted: 'Fichier "%value%" enlevé.'
 event.subrecord_attached: 'Subrecord "%value%" ajoute.'
 event.subrecord_detached: 'Subrecord "%value%" enleve.'
+comment: Commentaire
+comment.private: Privée
 error.file_max_size: 'Ce fichier ne peut pas être attaché car il excède la taille maximale autorisée (%max_size% ko).'
 file.confirm.delete: 'Are you sure you want delete this file?'

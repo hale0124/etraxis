@@ -18,6 +18,8 @@ button.export: エクスポート
 button.import: インポート
 button.expand: 拡大
 button.collapse: 崩壊
+button.preview: プレビュー
+button.send: 送信
 button.select_all: 全て選択
 button.mark_as_read: 全て既読にする
 button.mark_as_unread: 既読にマーク
@@ -204,5 +206,7 @@ event.file_attached: 'ファイル "%value%" が添付されました。'
 event.file_deleted: 'ファイル "%value%" が削除されました。'
 event.subrecord_attached: 'サブレコード "%value%" が追加されました。'
 event.subrecord_detached: 'サブレコード "%value%" が削除されました。'
+comment: コメント
+comment.private: プライベート
 error.file_max_size: 'このファイルはアップロードできません。添付ファイルサイズの上限(%max_size% KB)を超えています。'
 file.confirm.delete: 'Are you sure you want delete this file?'

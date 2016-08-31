@@ -18,6 +18,8 @@ button.export: 'Dışa aktar'
 button.import: 'İçe Aktar'
 button.expand: Genişletin
 button.collapse: Çöküş
+button.preview: Önizleme
+button.send: Gönder
 button.select_all: 'Tümünü seç'
 button.mark_as_read: 'Okundu olarak işaretle'
 button.mark_as_unread: 'Okunmadı olarak işaretle'
@@ -204,5 +206,7 @@ event.file_attached: '"%value%" dosyası eklendi.'
 event.file_deleted: '"%value%" dosyası kaldırıldı.'
 event.subrecord_attached: '"%value%" alt kaydı eklendi.'
 event.subrecord_detached: '"%value%" alt kaydı kaldırıldı.'
+comment: Yorum
+comment.private: Özel
 error.file_max_size: 'İzin verilen maksimum dosya boyutunu (%max_size% KB) aştığı için dosya yüklenemedi.'
 file.confirm.delete: 'Are you sure you want delete this file?'

@@ -130,6 +130,59 @@ var RecordApp = (function() {
          */
         back: function() {
             window.location.assign(eTraxis.route('web_records'));
+        },
+
+        /**
+         * Preview new comment.
+         */
+        preview: function() {
+            $('#comment-form')
+                .prop('action', eTraxis.route('web_preview_comment'))
+                .ajaxSubmit({
+                    beforeSend: function() {
+                        $('#preview').html(null);
+                    },
+                    success: function(data) {
+                        $('#preview').html(data).initUI();
+                    },
+                    error: function(xhr) {
+                        eTraxis.alert(eTraxis.i18n['error'], xhr.responseText);
+                    }
+                });
+        },
+
+        /**
+         * Post new comment.
+         *
+         * @param {number} id Record ID.
+         */
+        post: function(id) {
+            $('#comment-form')
+                .prop('action', eTraxis.route('web_new_comment', { id: id }))
+                .ajaxSubmit({
+                    beforeSend: function() {
+                        eTraxis.block();
+                    },
+                    complete: function() {
+                        eTraxis.unblock();
+                    },
+                    success: function() {
+                        changeTabNumber(TAB_HISTORY, 1);
+                        reloadTab();
+                    },
+                    error: function(xhr) {
+                        var response = xhr.responseJSON ? xhr.responseJSON : xhr.responseText;
+                        if (typeof response === 'object') {
+                            $.each(response, function(id, message) {
+                                eTraxis.alert(eTraxis.i18n['error'], message);
+                                return false;
+                            });
+                        }
+                        else {
+                            eTraxis.alert(eTraxis.i18n['error'], response);
+                        }
+                    }
+                });
         }
     };
 })();

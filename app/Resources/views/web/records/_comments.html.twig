@@ -1,3 +1,4 @@
+{% set addComments = is_granted(constant('eTraxis\\Voter\\RecordVoter::PUBLIC_COMMENT'),  record) %}
 {% set showPrivate = is_granted(constant('eTraxis\\Voter\\RecordVoter::PRIVATE_COMMENT'), record) %}
 
 {% for comment in record.comments(showPrivate) %}
@@ -11,3 +12,28 @@
         </div>
     </div>
 {% endfor %}
+
+{% if addComments %}
+    <div id="preview"></div>
+    {{ form_start(commentForm, { 'attr': { 'class': 'comment-form', 'id': 'comment-form' } }) }}
+    <fieldset>
+        <legend>{{ 'comment'|trans }}</legend>
+        <div class="grid-parent grid-row clearfix">
+            <div class="grid-100 mobile-grid-100">
+                {{ form_widget(commentForm.text) }}
+            </div>
+        </div>
+        <div class="grid-parent grid-row clearfix">
+            <div class="grid-50 mobile-grid-100">
+                <button type="button" onclick="RecordApp.preview()">{{ 'button.preview'|trans }}</button>
+                <button type="button" onclick="RecordApp.post({{ record.id }})">{{ 'button.send'|trans }}</button>
+            </div>
+            <div class="grid-50 mobile-grid-100 text-right {{ showPrivate ? null : 'hidden' }}">
+                <input type="hidden" name="{{ commentForm.private.vars.full_name }}" value="0">
+                {{ form_widget(commentForm.private) }}
+                {{ form_label(commentForm.private) }}
+            </div>
+        </div>
+    </fieldset>
+    {{ form_end(commentForm) }}
+{% endif %}

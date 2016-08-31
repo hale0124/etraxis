@@ -18,6 +18,8 @@ button.export: Eksportēšana
 button.import: Imports
 button.expand: Izvērsiet
 button.collapse: Sabrukums
+button.preview: Priekšskatījums
+button.send: Nosūtīt
 button.select_all: 'Atlasīt visu'
 button.mark_as_read: 'Atzīmēt kā izlasītos'
 button.mark_as_unread: 'Atzīmēt kā neizlasītu'
@@ -204,5 +206,7 @@ event.file_attached: 'Fails "%value%" tika pievienots'
 event.file_deleted: 'Fails "%value%" tika dzēsts'
 event.subrecord_attached: 'Pievienots "%value%" pēctecis.'
 event.subrecord_detached: 'Novākts „%value%” pēctecis.'
+comment: Komentārs
+comment.private: Private
 error.file_max_size: 'This file cannot be uploaded because it exceeds the maximum allowed file size (%max_size% KB).'
 file.confirm.delete: 'Are you sure you want delete this file?'

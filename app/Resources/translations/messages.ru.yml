@@ -18,6 +18,8 @@ button.export: Экспорт
 button.import: Импорт
 button.expand: Развернуть
 button.collapse: Свернуть
+button.preview: Предпросмотр
+button.send: Отправить
 button.select_all: 'Выбрать все'
 button.mark_as_read: 'Отметить как прочитанные'
 button.mark_as_unread: 'Отметить как непрочитанные'
@@ -204,5 +206,7 @@ event.file_attached: 'Файл "%value%" прикреплен.'
 event.file_deleted: 'Файл "%value%" удален.'
 event.subrecord_attached: 'Добавлена подзапись "%value%".'
 event.subrecord_detached: 'Удалена подзапись "%value%".'
+comment: Комментарий
+comment.private: Приватный
 error.file_max_size: 'Этот файл нельзя загрузить из-за превышения максимального размера файла (%max_size% КБ).'
 file.confirm.delete: 'Are you sure you want delete this file?'

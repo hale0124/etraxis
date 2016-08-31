@@ -18,6 +18,8 @@ button.export: Eksportuj
 button.import: Import
 button.expand: Rozwiń
 button.collapse: Zwiń
+button.preview: Podgląd
+button.send: Wyślij
 button.select_all: 'Zaznacz wszystko'
 button.mark_as_read: 'Oznacz jako przeczytane'
 button.mark_as_unread: 'Oznacz jako nieprzeczytane'
@@ -204,5 +206,7 @@ event.file_attached: 'Plik "%value%" został dołączony.'
 event.file_deleted: 'Plik "%value%" został usunięty.'
 event.subrecord_attached: 'Subrekord "%value%" został dodany.'
 event.subrecord_detached: 'Subrekord "%value%" został usunięty.'
+comment: Komentarz
+comment.private: Prywatne
 error.file_max_size: 'Plik nie może być przesłany, ponieważ przekracza maksymalny dopuszczalny rozmial (%max_size% KB).'
 file.confirm.delete: 'Are you sure you want delete this file?'
