@@ -17,7 +17,6 @@ use eTraxis\Entity\Attachment;
 use eTraxis\Entity\Record;
 use eTraxis\Entity\User;
 use eTraxis\Voter\RecordVoter;
-use Symfony\Component\HttpFoundation\File\Exception\FileException;
 use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
