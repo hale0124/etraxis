@@ -1482,6 +1482,7 @@ class LoadFuturamaRecordsData extends AbstractFixture implements ContainerAwareI
             $this->setProperty($record, 'createdAt', strtotime($info['date'] . ' 09:00:00'));
             $this->setProperty($record, 'changedAt', strtotime($info['date'] . ' 09:00:01'));
             $this->setProperty($record, 'closedAt', strtotime($info['date'] . ' 09:00:01'));
+            $this->setProperty($record, 'isPostponed', false);
 
             $event = new Event(
                 $record,

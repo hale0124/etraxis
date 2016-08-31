@@ -40,7 +40,7 @@ class RecordEvent
      *      RECORD_EDITED      - NULL (not used)
      *      RECORD_ASSIGNED    - Full name of the user, the record has been assigned to
      *      STATE_CHANGED      - Name of the state, the record has been changed to
-     *      RECORD_POSTPONED   - Unix Epoch timestamp, when the record should be automatically resumed
+     *      RECORD_POSTPONED   - NULL (not used)
      *      RECORD_RESUMED     - NULL (not used)
      *      RECORD_CLONED      - ID of the original record
      *      RECORD_REOPENED    - Name of new state of the reopened record

@@ -239,6 +239,7 @@ class LoadPhpPsrRecordsData extends AbstractFixture implements ContainerAwareInt
             $this->setProperty($record, 'author', $this->getReference($info['author']));
             $this->setProperty($record, 'createdAt', strtotime($info['draft']));
             $this->setProperty($record, 'changedAt', strtotime($info['draft']));
+            $this->setProperty($record, 'isPostponed', false);
 
             $event = new Event(
                 $record,
@@ -336,7 +337,7 @@ class LoadPhpPsrRecordsData extends AbstractFixture implements ContainerAwareInt
                 $manager->persist($event);
 
                 $this->setProperty($record, 'changedAt', $this->getProperty($event, 'createdAt'));
-                $this->setProperty($record, 'resumedAt', $this->getProperty($event, 'parameter'));
+                $this->setProperty($record, 'isPostponed', true);
 
                 $manager->persist($record);
             }

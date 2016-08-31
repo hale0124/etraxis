@@ -147,7 +147,7 @@ class RecordsDataTable implements DataTableHandlerInterface
             'record.createdAt',
             'record.changedAt',
             'record.closedAt',
-            'record.resumedAt',
+            'record.isPostponed',
             'COALESCE(record.closedAt - record.createdAt, :today - record.createdAt) AS age',
             'lastRead.readAt',
         ];
@@ -368,7 +368,7 @@ class RecordsDataTable implements DataTableHandlerInterface
         if ($data['closedAt'] !== null) {
             $row_class[] = 'gray';
         }
-        elseif ($data['resumedAt'] > $this->today) {
+        elseif ($data['isPostponed']) {
             $row_class[] = 'blue';
         }
         elseif ($age > $data['criticalAge']) {

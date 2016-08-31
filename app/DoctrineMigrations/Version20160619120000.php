@@ -374,7 +374,7 @@ class Version20160619120000 extends BaseMigration implements ContainerAwareInter
     {
         $sql = 'INSERT INTO decimal_values (id, value) '
              . 'SELECT value_id, float_value '
-             . 'FROM tbl_float_values;';
+             . 'FROM tbl_float_values ORDER BY value_id;';
 
         $this->addSql($sql);
     }
@@ -386,7 +386,7 @@ class Version20160619120000 extends BaseMigration implements ContainerAwareInter
     {
         $sql = 'INSERT INTO string_values (id, token, value) '
              . 'SELECT value_id, value_token, string_value '
-             . 'FROM tbl_string_values;';
+             . 'FROM tbl_string_values ORDER BY value_id;';
 
         $this->addSql($sql);
     }
@@ -398,7 +398,7 @@ class Version20160619120000 extends BaseMigration implements ContainerAwareInter
     {
         $sql = 'INSERT INTO text_values (id, token, value) '
              . 'SELECT value_id, value_token, text_value '
-             . 'FROM tbl_text_values;';
+             . 'FROM tbl_text_values ORDER BY value_id;';
 
         $this->addSql($sql);
     }
@@ -410,7 +410,7 @@ class Version20160619120000 extends BaseMigration implements ContainerAwareInter
     {
         $sql = 'INSERT INTO list_items (field_id, item_value, item_text) '
              . 'SELECT field_id, int_value, str_value '
-             . 'FROM tbl_list_values;';
+             . 'FROM tbl_list_values ORDER BY field_id, int_value;';
 
         $this->addSql($sql);
     }
@@ -420,11 +420,27 @@ class Version20160619120000 extends BaseMigration implements ContainerAwareInter
      */
     protected function migrateRecords()
     {
-        $sql = 'INSERT INTO records (id, state_id, author_id, responsible_id, subject, created_at, changed_at, closed_at, resumed_at) '
-             . 'SELECT record_id, state_id, creator_id, responsible_id, subject, creation_time, change_time, closure_time, postpone_time '
-             . 'FROM tbl_records;';
+        $time = time();
 
-        $this->addSql($sql);
+        $sql = 'INSERT INTO records (id, state_id, author_id, responsible_id, subject, created_at, changed_at, closed_at, is_postponed) '
+             . 'SELECT record_id, state_id, creator_id, responsible_id, subject, creation_time, change_time, closure_time, 0 '
+             . 'FROM tbl_records '
+             . 'WHERE postpone_time <= :time '
+             . 'ORDER BY record_id;';
+
+        $this->addSql($sql, [
+            'time' => $time,
+        ]);
+
+        $sql = 'INSERT INTO records (id, state_id, author_id, responsible_id, subject, created_at, changed_at, closed_at, is_postponed) '
+             . 'SELECT record_id, state_id, creator_id, responsible_id, subject, creation_time, change_time, closure_time, 1 '
+             . 'FROM tbl_records '
+             . 'WHERE postpone_time > :time '
+             . 'ORDER BY record_id;';
+
+        $this->addSql($sql, [
+            'time' => $time,
+        ]);
     }
 
     /**
@@ -459,7 +475,8 @@ class Version20160619120000 extends BaseMigration implements ContainerAwareInter
         $sql = 'INSERT INTO events (id, record_id, user_id, type, created_at, parameter) '
              . 'SELECT event_id, record_id, originator_id, event_type, event_time, event_param '
              . 'FROM tbl_events '
-             . 'WHERE event_type < 100;';
+             . 'WHERE event_type < 100 '
+             . 'ORDER BY event_id;';
 
         $this->addSql($sql);
 
@@ -490,7 +507,7 @@ class Version20160619120000 extends BaseMigration implements ContainerAwareInter
     {
         $sql = 'INSERT INTO changes (id, event_id, field_id, old_value, new_value) '
              . 'SELECT change_id, event_id, field_id, old_value_id, new_value_id '
-             . 'FROM tbl_changes;';
+             . 'FROM tbl_changes ORDER BY change_id;';
 
         $this->addSql($sql);
     }
@@ -502,7 +519,7 @@ class Version20160619120000 extends BaseMigration implements ContainerAwareInter
     {
         $sql = 'INSERT INTO comments (id, event_id, comment_text, is_private) '
              . 'SELECT comment_id, event_id, comment_body, is_confidential '
-             . 'FROM tbl_comments;';
+             . 'FROM tbl_comments ORDER BY comment_id;';
 
         $this->addSql($sql);
     }

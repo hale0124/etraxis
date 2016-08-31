@@ -10,6 +10,16 @@ services:
         tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Records\MarkRecordsAsUnreadCommand }]
         arguments: [ "@doctrine.orm.entity_manager", "@security.token_storage", "@etraxis.records_cache" ]
 
+    command.records.postpone:
+        class: eTraxis\CommandBus\Records\Handler\PostponeCommandHandler
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Records\PostponeCommand }]
+        arguments: [ "@doctrine.orm.entity_manager", "@security.authorization_checker", "@security.token_storage" ]
+
+    command.records.resume:
+        class: eTraxis\CommandBus\Records\Handler\ResumeCommandHandler
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Records\ResumeCommand }]
+        arguments: [ "@doctrine.orm.entity_manager", "@security.authorization_checker", "@security.token_storage" ]
+
     command.records.add_comment:
         class: eTraxis\CommandBus\Records\Handler\AddCommentCommandHandler
         tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Records\AddCommentCommand }]

@@ -98,11 +98,11 @@ class Record extends Entity
     private $closedAt;
 
     /**
-     * @var int Unix Epoch timestamp when the postponed record will be resumed back.
+     * @var bool Whether the record is postponed.
      *
-     * @ORM\Column(name="resumed_at", type="integer", nullable=true)
+     * @ORM\Column(name="is_postponed", type="boolean")
      */
-    private $resumedAt;
+    private $isPostponed;
 
     /**
      * @var ArrayCollection List of record events.
@@ -129,6 +129,8 @@ class Record extends Entity
     {
         $this->state  = $template->getInitialState();
         $this->author = $author;
+
+        $this->isPostponed = false;
 
         $this->events   = new ArrayCollection();
         $this->watchers = new ArrayCollection();
@@ -309,13 +311,53 @@ class Record extends Entity
     }
 
     /**
-     * Checks whether the record is postponed.
+     * Postpones the record.
+     *
+     * @param   User $user User who is postponing the record.
+     *
+     * @return  self
+     */
+    public function postpone(User $user)
+    {
+        if (!$this->isPostponed) {
+
+            $this->isPostponed = true;
+
+            $event = new Event($this, $user, Dictionary\EventType::RECORD_POSTPONED);
+            $this->events->add($event);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Resumes the record.
+     *
+     * @param   User $user User who is resuming the record.
+     *
+     * @return  self
+     */
+    public function resume(User $user)
+    {
+        if ($this->isPostponed) {
+
+            $this->isPostponed = false;
+
+            $event = new Event($this, $user, Dictionary\EventType::RECORD_RESUMED);
+            $this->events->add($event);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Property getter.
      *
      * @return  bool
      */
     public function isPostponed()
     {
-        return $this->resumedAt > time();
+        return $this->isPostponed;
     }
 
     /**

@@ -128,6 +128,24 @@ class RecordTest extends TransactionalTestCase
         self::assertFalse($this->object->isClosed());
     }
 
+    public function testPostpone()
+    {
+        self::assertFalse($this->object->isPostponed());
+        $this->object->postpone($this->object->getAuthor());
+        self::assertTrue($this->object->isPostponed());
+    }
+
+    public function testResume()
+    {
+        $this->object = $this->doctrine->getRepository(Record::class)->findOneBy([
+            'subject' => 'A soufflé laced with nitroglycerine',
+        ]);
+
+        self::assertTrue($this->object->isPostponed());
+        $this->object->resume($this->object->getAuthor());
+        self::assertFalse($this->object->isPostponed());
+    }
+
     public function testIsPostponed()
     {
         self::assertFalse($this->object->isPostponed());
