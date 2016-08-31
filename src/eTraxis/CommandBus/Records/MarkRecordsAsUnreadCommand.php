@@ -17,18 +17,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * Marks specified records as unread.
  *
- * @property    int   $user    User ID.
  * @property    int[] $records Record IDs.
  */
 class MarkRecordsAsUnreadCommand
 {
     use CommandTrait;
-
-    /**
-     * @Assert\NotBlank()
-     * @Assert\Regex("/^\d+$/")
-     */
-    public $user;
 
     /**
      * @Assert\NotBlank()

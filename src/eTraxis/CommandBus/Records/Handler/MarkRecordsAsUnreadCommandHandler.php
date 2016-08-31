@@ -16,6 +16,7 @@ use eTraxis\CommandBus\Records\MarkRecordsAsUnreadCommand;
 use eTraxis\Entity\User;
 use eTraxis\Service\RecordsCacheInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
 /**
  * Command handler.
@@ -23,18 +24,24 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class MarkRecordsAsUnreadCommandHandler
 {
     protected $manager;
+    protected $token_storage;
     protected $cache;
 
     /**
      * Dependency Injection constructor.
      *
      * @param   EntityManagerInterface $manager
+     * @param   TokenStorageInterface  $token_storage
      * @param   RecordsCacheInterface  $cache
      */
-    public function __construct(EntityManagerInterface $manager, RecordsCacheInterface $cache)
+    public function __construct(
+        EntityManagerInterface $manager,
+        TokenStorageInterface  $token_storage,
+        RecordsCacheInterface  $cache)
     {
-        $this->manager = $manager;
-        $this->cache   = $cache;
+        $this->manager       = $manager;
+        $this->token_storage = $token_storage;
+        $this->cache         = $cache;
     }
 
     /**
@@ -46,12 +53,14 @@ class MarkRecordsAsUnreadCommandHandler
      */
     public function handle(MarkRecordsAsUnreadCommand $command)
     {
-        /** @var User $user */
-        $user = $this->manager->find(User::class, $command->user);
+        $token = $this->token_storage->getToken();
 
-        if (!$user) {
+        if ($token === null) {
             throw new NotFoundHttpException('Unknown user.');
         }
+
+        /** @var User $user */
+        $user = $this->manager->find(User::class, $token->getUser()->getId());
 
         $query = $this->manager->createQuery('
             DELETE eTraxis:LastRead lastRead
@@ -60,10 +69,10 @@ class MarkRecordsAsUnreadCommandHandler
         ');
 
         $query->execute([
-            'user'    => $command->user,
+            'user'    => $user->getId(),
             'records' => $command->records,
         ]);
 
-        $this->cache->markRecordsAsUnread($command->user, $command->records);
+        $this->cache->markRecordsAsUnread($user->getId(), $command->records);
     }
 }

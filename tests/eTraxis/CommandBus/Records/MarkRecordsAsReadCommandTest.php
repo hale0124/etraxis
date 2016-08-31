@@ -19,6 +19,8 @@ class MarkRecordsAsReadCommandTest extends TransactionalTestCase
 {
     public function testSuccess()
     {
+        $this->loginAs('bender');
+
         $user = $this->findUser('bender');
 
         /** @var Record $record */
@@ -32,7 +34,6 @@ class MarkRecordsAsReadCommandTest extends TransactionalTestCase
         self::assertCount(0, $result);
 
         $command = new MarkRecordsAsReadCommand([
-            'user'    => $user->getId(),
             'records' => [$record->getId()],
         ]);
 
@@ -56,7 +57,6 @@ class MarkRecordsAsReadCommandTest extends TransactionalTestCase
         $record = $this->doctrine->getRepository(Record::class)->findOneBy(['subject' => 'Prizes for the claw crane']);
 
         $command = new MarkRecordsAsReadCommand([
-            'user'    => self::UNKNOWN_ENTITY_ID,
             'records' => [$record->getId()],
         ]);
 

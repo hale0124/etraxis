@@ -41,10 +41,7 @@ class RecordsPostController extends Controller
     {
         $data = $request->request->all();
 
-        $command = new Records\MarkRecordsAsReadCommand($data, [
-            'user' => $this->getUser()->getId(),
-        ]);
-
+        $command = new Records\MarkRecordsAsReadCommand($data);
         $this->getCommandBus()->handle($command);
 
         return new JsonResponse();
@@ -63,10 +60,7 @@ class RecordsPostController extends Controller
     {
         $data = $request->request->all();
 
-        $command = new Records\MarkRecordsAsUnreadCommand($data, [
-            'user' => $this->getUser()->getId(),
-        ]);
-
+        $command = new Records\MarkRecordsAsUnreadCommand($data);
         $this->getCommandBus()->handle($command);
 
         return new JsonResponse();
