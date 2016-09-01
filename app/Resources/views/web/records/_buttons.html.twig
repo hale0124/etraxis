@@ -21,3 +21,11 @@
         </button>
     {% endif %}
 </span>
+
+{% if is_granted(constant('eTraxis\\Voter\\RecordVoter::POSTPONE'), record) %}
+    <button type="button" onclick="RecordApp.postpone({{ record.id }})">{{ 'record.postpone'|trans }}</button>
+{% endif %}
+
+{% if is_granted(constant('eTraxis\\Voter\\RecordVoter::RESUME'), record) %}
+    <button type="button" onclick="RecordApp.resume({{ record.id }})">{{ 'record.resume'|trans }}</button>
+{% endif %}

@@ -206,8 +206,8 @@ event.record_created: 'レコードは "%value%" のステータスで作成さ�
 event.record_edited: レコードが変更されました。
 event.record_assigned: 'レコードは %value% にアサインされました。'
 event.state_changed: 'スタータスは "%value%" に変更されました。'
-event.record_postponed: 'レコードは %value% まで中断されます。'
-event.record_resumed: レコードが再開されました。
+event.record_postponed: 'Record is postponed.'
+event.record_resumed:   レコードが再開されました。
 event.record_cloned: 'レコードは "%value%" からコピーされました。'
 event.record_reopened: 'レコードは "%value%" の状態で再オープンされました。'
 event.comment_added: コメントが追加されました。

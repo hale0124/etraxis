@@ -6,10 +6,14 @@
 
 <div class="grid-50 mobile-grid-100">
     <div class="grid-100 grid-parent grid-row">
-        <div class="fieldset">
+        <div class="fieldset {{ record.postponed ? 'postponed' : '' }}">
             <div class="legend">{{ record.recordId }}</div>
             {{ macro.row('record.subject'|trans, record.subject, 'inline') }}
-            {{ macro.row('state'|trans, record.state.name) }}
+            {% if record.postponed %}
+                {{ macro.row('state'|trans, record.state.name ~ ' (postponed)') }}
+            {% else %}
+                {{ macro.row('state'|trans, record.state.name) }}
+            {% endif %}
             {{ macro.row('role.responsible'|trans, record.responsible ? record.responsible.fullname : null) }}
             {{ macro.row('role.author'|trans, record.author.fullname) }}
             {{ macro.row('record.age'|trans, record.age) }}

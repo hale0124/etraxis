@@ -206,7 +206,7 @@ event.record_created: 'Record is aangemaakt in "%value%" status.'
 event.record_edited: 'Record is bewerkt.'
 event.record_assigned: 'Record is toegewezen aan %value%.'
 event.state_changed: 'Status is gewijzigd naar "%value%".'
-event.record_postponed: 'Record is uitgesteld tot %value%.'
+event.record_postponed: 'Record is uitgesteld.'
 event.record_resumed: 'Record is hervat.'
 event.record_cloned: 'Record is gekopieerd van "%value%".'
 event.record_reopened: UL

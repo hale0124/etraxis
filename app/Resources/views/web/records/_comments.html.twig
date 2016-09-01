@@ -3,7 +3,7 @@
 
 {% for comment in record.comments(showPrivate) %}
     <div class="grid-100 grid-parent grid-row">
-        <div class="fieldset {{ comment.isPrivate ? 'private' : '' }}">
+        <div class="fieldset {{ comment.private ? 'private' : '' }}">
             {% set timestamp = comment.event.createdAt|localizeddate('medium', 'short', app.user.locale, app.user.timezone) %}
             <div class="legend">{{ timestamp ~ ', ' ~ comment.event.user.fullname }}</div>
             <div class="grid-100 grid-row value">

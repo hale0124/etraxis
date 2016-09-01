@@ -206,7 +206,7 @@ event.record_created: 'Записът е създаден по условие "%
 event.record_edited: 'Записът е променен.'
 event.record_assigned: 'Записът е определен на %value%.'
 event.state_changed: 'Условието е променено на "%value%".'
-event.record_postponed: 'Записът е отложен до %value%.'
+event.record_postponed: 'Записът е отложен.'
 event.record_resumed: 'Записът е въстанове.'
 event.record_cloned: 'Записът е клониран от "%value%".'
 event.record_reopened: 'Записът е възобновен в състояние "%value%".'

@@ -133,6 +133,54 @@ var RecordApp = (function() {
         },
 
         /**
+         * Postpones specified record.
+         *
+         * @param {number} id Record ID.
+         */
+        postpone: function(id) {
+            eTraxis.confirm(eTraxis.i18n['record.postpone'], eTraxis.i18n['record.confirm.postpone'], function() {
+                eTraxis.block();
+                $.post({
+                    url: eTraxis.route('web_postpone_record', { id: id }),
+                    complete: function() {
+                        eTraxis.unblock();
+                    },
+                    success: function() {
+                        changeTabNumber(TAB_HISTORY, 1);
+                        reloadTab();
+                    },
+                    error: function(xhr) {
+                        eTraxis.alert(eTraxis.i18n['error'], xhr.responseText);
+                    }
+                });
+            });
+        },
+
+        /**
+         * Resumes specified record.
+         *
+         * @param {number} id Record ID.
+         */
+        resume: function(id) {
+            eTraxis.confirm(eTraxis.i18n['record.resume'], eTraxis.i18n['record.confirm.resume'], function() {
+                eTraxis.block();
+                $.post({
+                    url: eTraxis.route('web_resume_record', { id: id }),
+                    complete: function() {
+                        eTraxis.unblock();
+                    },
+                    success: function() {
+                        changeTabNumber(TAB_HISTORY, 1);
+                        reloadTab();
+                    },
+                    error: function(xhr) {
+                        eTraxis.alert(eTraxis.i18n['error'], xhr.responseText);
+                    }
+                });
+            });
+        },
+
+        /**
          * Preview new comment.
          */
         preview: function() {

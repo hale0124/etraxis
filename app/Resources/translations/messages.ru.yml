@@ -206,7 +206,7 @@ event.record_created: 'Запись создана в состоянии "%value
 event.record_edited: 'Запись отредактирована.'
 event.record_assigned: 'Запись назначена на %value%.'
 event.state_changed: 'Состояние изменено на "%value%".'
-event.record_postponed: 'Запись отложена до %value%.'
+event.record_postponed: 'Запись отложена.'
 event.record_resumed: 'Запись возобновлена.'
 event.record_cloned: 'Запись склонирована из "%value%".'
 event.record_reopened: 'Запись повторно открыта в состоянии "%value%".'

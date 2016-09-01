@@ -65,4 +65,38 @@ class RecordsPostController extends Controller
 
         return new JsonResponse();
     }
+
+    /**
+     * Postpones specified record.
+     *
+     * @Action\Route("/postpone/{id}", name="web_postpone_record", requirements={"id"="\d+"})
+     *
+     * @param   int $id Record ID.
+     *
+     * @return  JsonResponse
+     */
+    public function postponeAction(int $id): JsonResponse
+    {
+        $command = new Records\PostponeCommand(['record' => $id]);
+        $this->getCommandBus()->handle($command);
+
+        return new JsonResponse();
+    }
+
+    /**
+     * Resumes specified record.
+     *
+     * @Action\Route("/resume/{id}", name="web_resume_record", requirements={"id"="\d+"})
+     *
+     * @param   int $id Record ID.
+     *
+     * @return  JsonResponse
+     */
+    public function resumeAction(int $id): JsonResponse
+    {
+        $command = new Records\ResumeCommand(['record' => $id]);
+        $this->getCommandBus()->handle($command);
+
+        return new JsonResponse();
+    }
 }
