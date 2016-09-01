@@ -190,9 +190,18 @@ listitem.confirm.delete: 'Вы уверены, что хотите удалит�
 records: Записи
 record.id: ID
 record.subject: Тема
+record.postponed: Отложена
 record.age: Возраст
 record.no_fields: 'Нет атрибутов.'
+record.change_state: 'Сменить состояние'
+record.assign: Назначить
+record.postpone: Отложить
+record.resume: Возобновить
+record.reopen: 'Открыть повторно'
+record.clone: Клонировать
 record.history: История
+record.confirm.postpone: 'Вы уверены, что хотите отложить эту запись?'
+record.confirm.resume: 'Вы уверены, что хотите возобновить эту запись?'
 event.record_created: 'Запись создана в состоянии "%value%".'
 event.record_edited: 'Запись отредактирована.'
 event.record_assigned: 'Запись назначена на %value%.'

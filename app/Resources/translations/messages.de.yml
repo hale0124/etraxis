@@ -190,9 +190,18 @@ listitem.confirm.delete: 'Are you sure you want delete this item?'
 records: Anfragen
 record.id: ID
 record.subject: Betreff
+record.postponed: Hinausgezögert
 record.age: Alter
 record.no_fields: 'Keine Zusätze.'
+record.change_state: 'Status wechseln'
+record.assign: Zuweisen
+record.postpone: Verzögern
+record.resume: Wiederaufnehmen
+record.reopen: Wiedereröffnen
+record.clone: Klonen
 record.history: Historie
+record.confirm.postpone: 'Are you sure you want postpone this record?'
+record.confirm.resume: 'Möchten Sie diese Anfrage wirklich wiederaufnehmen?'
 event.record_created: 'Die Anfrage wird im Status "%value%" erstellt.'
 event.record_edited: 'Die Anfrage wird geändert.'
 event.record_assigned: 'Die Anfrage wird %value% zugewiesen.'

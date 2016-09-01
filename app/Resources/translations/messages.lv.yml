@@ -190,9 +190,18 @@ listitem.confirm.delete: 'Are you sure you want delete this item?'
 records: Ieraksti
 record.id: ID
 record.subject: Temats
+record.postponed: Atlikts
 record.age: Vecums
 record.no_fields: 'Nav atribūtu.'
+record.change_state: 'Mainīt stāvokli'
+record.assign: Adresēt
+record.postpone: Atlikt
+record.resume: Atsākt
+record.reopen: 'Atvērt no jauna'
+record.clone: Klonēt
 record.history: Vēsture
+record.confirm.postpone: 'Are you sure you want postpone this record?'
+record.confirm.resume: 'Vai tiešām vēlaties atsākt šo ierakstu?'
 event.record_created: 'Ieraksts ir izveidots "%value%" stāvoklī'
 event.record_edited: 'Ieraksts ir mainīts'
 event.record_assigned: 'Ieraksts adresēts uz %value%.'

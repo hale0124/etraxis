@@ -190,9 +190,18 @@ listitem.confirm.delete: 'Are you sure you want delete this item?'
 records: Poster
 record.id: ID
 record.subject: Ämne
+record.postponed: Senarelagd
 record.age: Ålder
 record.no_fields: 'Inga fält.'
+record.change_state: 'Ändra status'
+record.assign: Tilldela
+record.postpone: Senarelägga
+record.resume: Återuppta
+record.reopen: Öppna
+record.clone: Klon
 record.history: Historia
+record.confirm.postpone: 'Are you sure you want postpone this record?'
+record.confirm.resume: 'Är du säker på att du vill återuppta denna post?'
 event.record_created: 'Posten är skapad med status "%value%".'
 event.record_edited: 'Posten är ändrad.'
 event.record_assigned: 'Posten är tilldelad till %value%.'

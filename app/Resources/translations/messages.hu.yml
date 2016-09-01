@@ -190,9 +190,18 @@ listitem.confirm.delete: 'Are you sure you want delete this item?'
 records: Rekordok
 record.id: ID
 record.subject: Tárgy
+record.postponed: Elhalasztva
 record.age: Kor
 record.no_fields: 'Nincsenek mezők.'
+record.change_state: 'Állapot megváltoztatása'
+record.assign: 'Felelős kiválasztása'
+record.postpone: Elhalasztás
+record.resume: Folytatás
+record.reopen: 'Újbóli megnyitás'
+record.clone: Másolat
 record.history: Eseménynapló
+record.confirm.postpone: 'Are you sure you want postpone this record?'
+record.confirm.resume: 'Biztos folytatni szeretné a rekordot?'
 event.record_created: 'Rekord létrehozva a következő állapottal: "%value%".'
 event.record_edited: 'Rekord módosítva.'
 event.record_assigned: 'A rekord új felelőse: %value%.'

@@ -190,9 +190,18 @@ listitem.confirm.delete: 'Are you sure you want delete this item?'
 records: Rekordy
 record.id: ID
 record.subject: Temat
+record.postponed: Przesunięty
 record.age: Wiek
 record.no_fields: 'Brak pól.'
+record.change_state: 'Zmień status'
+record.assign: Przydziel
+record.postpone: Opóźnij
+record.resume: Wznów
+record.reopen: Wznów
+record.clone: Kopiuj
 record.history: Historia
+record.confirm.postpone: 'Are you sure you want postpone this record?'
+record.confirm.resume: 'Czy jesteś pewien, że chesz wznowić wybrany rekord?'
 event.record_created: 'Rekord został utworzony ze statusem: "%value%".'
 event.record_edited: 'Rekord został zmodyfikowany.'
 event.record_assigned: 'Rekord został przypisany do %value%.'

@@ -190,9 +190,18 @@ listitem.confirm.delete: 'Are you sure you want delete this item?'
 records: Kayıtlar
 record.id: ID
 record.subject: Konu
+record.postponed: Ertelendi
 record.age: Dönem
 record.no_fields: 'Alan yok.'
+record.change_state: 'Durum değiştir'
+record.assign: Ata
+record.postpone: Ertele
+record.resume: 'Devam Ettir'
+record.reopen: 'Yeniden aç'
+record.clone: Klonla
 record.history: Geçmiş
+record.confirm.postpone: 'Are you sure you want postpone this record?'
+record.confirm.resume: 'Bu kaydı devam ettirmek istediğinizden emin misiniz?'
 event.record_created: 'Kayıt, "%value%" durumunda oluşturuldu.'
 event.record_edited: 'Kayıt değiştirildi.'
 event.record_assigned: 'Kayıt, atandı: %value%.'

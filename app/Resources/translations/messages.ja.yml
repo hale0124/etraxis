@@ -190,9 +190,18 @@ listitem.confirm.delete: 'Are you sure you want delete this item?'
 records: レコード
 record.id: ID
 record.subject: タイトル
+record.postponed: 対応中断
 record.age: 必須対応日数
 record.no_fields: フィールド無し
+record.change_state: 状態変更
+record.assign: アサイン
+record.postpone: 対応延期
+record.resume: 対応再開
+record.reopen: 再オープン
+record.clone: コピー(転送)
 record.history: 履歴
+record.confirm.postpone: 'Are you sure you want postpone this record?'
+record.confirm.resume: このレコードを再開してよろしいですか？
 event.record_created: 'レコードは "%value%" のステータスで作成されました。'
 event.record_edited: レコードが変更されました。
 event.record_assigned: 'レコードは %value% にアサインされました。'

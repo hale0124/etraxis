@@ -190,9 +190,18 @@ listitem.confirm.delete: 'Are you sure you want delete this item?'
 records: Records
 record.id: ID
 record.subject: Onderwerp
+record.postponed: Uitgesteld
 record.age: Leeftijd
 record.no_fields: 'Geen velden.'
+record.change_state: 'Wijzig status'
+record.assign: Toewijzen
+record.postpone: Uitstellen
+record.resume: Hervatten
+record.reopen: UL
+record.clone: Kopie
 record.history: Geschiedenis
+record.confirm.postpone: 'Are you sure you want postpone this record?'
+record.confirm.resume: 'Ben je zeker dat je dit record wilt hervatten?'
 event.record_created: 'Record is aangemaakt in "%value%" status.'
 event.record_edited: 'Record is bewerkt.'
 event.record_assigned: 'Record is toegewezen aan %value%.'

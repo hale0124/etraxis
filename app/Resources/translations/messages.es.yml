@@ -190,9 +190,18 @@ listitem.confirm.delete: 'Are you sure you want delete this item?'
 records: Registros
 record.id: ID
 record.subject: Asunto
+record.postponed: Aplazado
 record.age: Edad
 record.no_fields: 'Sin campos.'
+record.change_state: 'Cambiar estado'
+record.assign: Asignar
+record.postpone: Aplazar
+record.resume: Reanudar
+record.reopen: Reabrir
+record.clone: Clonar
 record.history: Historial
+record.confirm.postpone: 'Are you sure you want postpone this record?'
+record.confirm.resume: '¿Está seguro de reanudar este registro?'
 event.record_created: 'Registro creado con el estado "%value%".'
 event.record_edited: 'Se modificó el registro.'
 event.record_assigned: 'Se asignó el registro a %value%.'
