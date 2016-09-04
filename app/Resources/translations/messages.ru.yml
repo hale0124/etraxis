@@ -202,6 +202,7 @@ record.clone: Клонировать
 record.history: История
 record.confirm.postpone: 'Вы уверены, что хотите отложить эту запись?'
 record.confirm.resume: 'Вы уверены, что хотите возобновить эту запись?'
+record.confirm.delete: 'Вы уверены, что хотите удалить эту запись?'
 event.record_created: 'Запись создана в состоянии "%value%".'
 event.record_edited: 'Запись отредактирована.'
 event.record_assigned: 'Запись назначена на %value%.'

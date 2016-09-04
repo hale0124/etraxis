@@ -99,4 +99,25 @@ class RecordsPostController extends Controller
 
         return new JsonResponse();
     }
+
+    /**
+     * Deletes specified record.
+     *
+     * @Action\Route("/delete/{id}", name="web_delete_record", requirements={"id"="\d+"})
+     *
+     * @param   int $id Record ID.
+     *
+     * @return  JsonResponse
+     */
+    public function deleteAction(int $id): JsonResponse
+    {
+        $command = new Records\DeleteCommand(['record' => $id]);
+        $this->getCommandBus()->handle($command);
+
+        /** @var \eTraxis\Service\RecordsCacheInterface $cache */
+        $cache = $this->get('etraxis.records_cache');
+        $cache->deleteRecords($this->getUser()->getId());
+
+        return new JsonResponse();
+    }
 }

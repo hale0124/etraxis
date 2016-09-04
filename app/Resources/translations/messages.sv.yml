@@ -202,6 +202,7 @@ record.clone: Klon
 record.history: Historia
 record.confirm.postpone: 'Are you sure you want postpone this record?'
 record.confirm.resume: 'Är du säker på att du vill återuppta denna post?'
+record.confirm.delete: 'Är du säker på att du vill ta bort den här posten?'
 event.record_created: 'Posten är skapad med status "%value%".'
 event.record_edited: 'Posten är ändrad.'
 event.record_assigned: 'Posten är tilldelad till %value%.'

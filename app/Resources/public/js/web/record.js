@@ -181,6 +181,27 @@ var RecordApp = (function() {
         },
 
         /**
+         * Deletes specified record.
+         *
+         * @param {number} id Record ID.
+         */
+        delete: function(id) {
+            eTraxis.confirm(eTraxis.i18n['button.delete'], eTraxis.i18n['record.confirm.delete'], function() {
+                eTraxis.block();
+                $.post({
+                    url: eTraxis.route('web_delete_record', { id: id }),
+                    success: function() {
+                        window.location.assign(eTraxis.route('web_records'));
+                    },
+                    error: function(xhr) {
+                        eTraxis.unblock();
+                        eTraxis.alert(eTraxis.i18n['error'], xhr.responseText);
+                    }
+                });
+            });
+        },
+
+        /**
          * Preview new comment.
          */
         preview: function() {

@@ -29,3 +29,7 @@
 {% if is_granted(constant('eTraxis\\Voter\\RecordVoter::RESUME'), record) %}
     <button type="button" onclick="RecordApp.resume({{ record.id }})">{{ 'record.resume'|trans }}</button>
 {% endif %}
+
+{% if is_granted(constant('eTraxis\\Voter\\RecordVoter::DELETE'), record) %}
+    <button type="button" onclick="RecordApp.delete({{ record.id }})">{{ 'button.delete'|trans }}</button>
+{% endif %}

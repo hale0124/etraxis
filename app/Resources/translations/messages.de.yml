@@ -202,6 +202,7 @@ record.clone: Klonen
 record.history: Historie
 record.confirm.postpone: 'Are you sure you want postpone this record?'
 record.confirm.resume: 'Möchten Sie diese Anfrage wirklich wiederaufnehmen?'
+record.confirm.delete: 'Möchten Sie diese Anfrage wirklich löschen?'
 event.record_created: 'Die Anfrage wird im Status "%value%" erstellt.'
 event.record_edited: 'Die Anfrage wird geändert.'
 event.record_assigned: 'Die Anfrage wird %value% zugewiesen.'

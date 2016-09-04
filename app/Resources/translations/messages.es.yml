@@ -202,6 +202,7 @@ record.clone: Clonar
 record.history: Historial
 record.confirm.postpone: 'Are you sure you want postpone this record?'
 record.confirm.resume: '¿Está seguro de reanudar este registro?'
+record.confirm.delete: '¿Está seguro de eliminar este registro?'
 event.record_created: 'Registro creado con el estado "%value%".'
 event.record_edited: 'Se modificó el registro.'
 event.record_assigned: 'Se asignó el registro a %value%.'

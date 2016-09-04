@@ -202,6 +202,7 @@ record.clone: Kopiuj
 record.history: Historia
 record.confirm.postpone: 'Are you sure you want postpone this record?'
 record.confirm.resume: 'Czy jesteś pewien, że chesz wznowić wybrany rekord?'
+record.confirm.delete: 'Czy jesteś pewien, że chesz usnąć wybrany rekord?'
 event.record_created: 'Rekord został utworzony ze statusem: "%value%".'
 event.record_edited: 'Rekord został zmodyfikowany.'
 event.record_assigned: 'Rekord został przypisany do %value%.'

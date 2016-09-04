@@ -20,6 +20,11 @@ services:
         tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Records\ResumeCommand }]
         arguments: [ "@doctrine.orm.entity_manager", "@security.authorization_checker", "@security.token_storage" ]
 
+    command.records.delete:
+        class: eTraxis\CommandBus\Records\Handler\DeleteCommandHandler
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Records\DeleteCommand }]
+        arguments: [ "@doctrine.orm.entity_manager", "@security.authorization_checker" ]
+
     command.records.add_comment:
         class: eTraxis\CommandBus\Records\Handler\AddCommentCommandHandler
         tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Records\AddCommentCommand }]

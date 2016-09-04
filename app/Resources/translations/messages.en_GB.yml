@@ -202,6 +202,7 @@ record.clone: Clone
 record.history: History
 record.confirm.postpone: 'Are you sure you want postpone this record?'
 record.confirm.resume: 'Are you sure you want resume this record?'
+record.confirm.delete: 'Are you sure you want delete this record?'
 event.record_created: 'Record is created in state "%value%".'
 event.record_edited: 'Record is edited.'
 event.record_assigned: 'Record is assigned to %value%.'

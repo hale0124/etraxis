@@ -202,6 +202,7 @@ record.clone: Klonla
 record.history: Geçmiş
 record.confirm.postpone: 'Are you sure you want postpone this record?'
 record.confirm.resume: 'Bu kaydı devam ettirmek istediğinizden emin misiniz?'
+record.confirm.delete: 'Bu kaydı silmek istediğinizden emin misiniz?'
 event.record_created: 'Kayıt, "%value%" durumunda oluşturuldu.'
 event.record_edited: 'Kayıt değiştirildi.'
 event.record_assigned: 'Kayıt, atandı: %value%.'
