@@ -44,6 +44,10 @@ class RecordsPostController extends Controller
         $command = new Records\MarkRecordsAsReadCommand($data);
         $this->getCommandBus()->handle($command);
 
+        /** @var \eTraxis\Service\RecordsCacheInterface $cache */
+        $cache = $this->get('etraxis.records_cache');
+        $cache->markRecordsAsRead($this->getUser()->getId(), $command->records);
+
         return new JsonResponse();
     }
 
@@ -63,6 +67,10 @@ class RecordsPostController extends Controller
         $command = new Records\MarkRecordsAsUnreadCommand($data);
         $this->getCommandBus()->handle($command);
 
+        /** @var \eTraxis\Service\RecordsCacheInterface $cache */
+        $cache = $this->get('etraxis.records_cache');
+        $cache->markRecordsAsUnread($this->getUser()->getId(), $command->records);
+
         return new JsonResponse();
     }
 
@@ -80,6 +88,10 @@ class RecordsPostController extends Controller
         $command = new Records\PostponeCommand(['record' => $id]);
         $this->getCommandBus()->handle($command);
 
+        /** @var \eTraxis\Service\RecordsCacheInterface $cache */
+        $cache = $this->get('etraxis.records_cache');
+        $cache->markRecordsAsPostponed($this->getUser()->getId(), [$id]);
+
         return new JsonResponse();
     }
 
@@ -96,6 +108,10 @@ class RecordsPostController extends Controller
     {
         $command = new Records\ResumeCommand(['record' => $id]);
         $this->getCommandBus()->handle($command);
+
+        /** @var \eTraxis\Service\RecordsCacheInterface $cache */
+        $cache = $this->get('etraxis.records_cache');
+        $cache->markRecordsAsNotPostponed($this->getUser()->getId(), [$id]);
 
         return new JsonResponse();
     }

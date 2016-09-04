@@ -139,6 +139,10 @@ class RecordsGetController extends Controller
 
         $this->getCommandBus()->handle($command);
 
+        /** @var \eTraxis\Service\RecordsCacheInterface $cache */
+        $cache = $this->get('etraxis.records_cache');
+        $cache->markRecordsAsRead($this->getUser()->getId(), $command->records);
+
         return $this->render('web/records/view.html.twig', [
             'record' => $record,
             'tab'    => $request->get('tab', 0),

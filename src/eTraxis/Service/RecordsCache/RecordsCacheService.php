@@ -207,6 +207,70 @@ class RecordsCacheService implements RecordsCacheInterface
     }
 
     /**
+     * {@inheritdoc}
+     */
+    public function markRecordsAsPostponed(int $user, array $ids)
+    {
+        $key  = $this->getKey($user, self::SUFFIX_RESULTS);
+        $item = $this->cache->getItem($key);
+
+        if ($item->isHit()) {
+
+            /** @var DataTableCachedResults $records */
+            $records = $item->get();
+
+            array_walk($records->data, function (array &$record) use ($ids) {
+
+                if (in_array($record[RecordsDataTable::COLUMN_ID] ?? null, $ids)) {
+                    $row_class = $record[DataTableResults::DT_ROW_CLASS];
+
+                    if (strpos($row_class, 'blue') === false) {
+                        $row_class .= ' blue';
+                    }
+
+                    $record[DataTableResults::DT_ROW_CLASS] = trim($row_class);
+                }
+            });
+
+            $item->set($records);
+            $item->expiresAfter(Seconds::FIVE_MINUTES);
+
+            $this->cache->save($item);
+        }
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    public function markRecordsAsNotPostponed(int $user, array $ids)
+    {
+        $key  = $this->getKey($user, self::SUFFIX_RESULTS);
+        $item = $this->cache->getItem($key);
+
+        if ($item->isHit()) {
+
+            /** @var DataTableCachedResults $records */
+            $records = $item->get();
+
+            array_walk($records->data, function (array &$record) use ($ids) {
+
+                if (in_array($record[RecordsDataTable::COLUMN_ID] ?? null, $ids)) {
+                    $row_class = $record[DataTableResults::DT_ROW_CLASS];
+                    $row_class = str_replace('blue', null, $row_class);
+                    $row_class = preg_replace('/\s+/', ' ', $row_class);
+
+                    $record[DataTableResults::DT_ROW_CLASS] = trim($row_class);
+                }
+            });
+
+            $item->set($records);
+            $item->expiresAfter(Seconds::FIVE_MINUTES);
+
+            $this->cache->save($item);
+        }
+    }
+
+    /**
      * Returns cache item key for specified user.
      *
      * @param   int    $user

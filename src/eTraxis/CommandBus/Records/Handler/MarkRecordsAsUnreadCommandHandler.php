@@ -14,7 +14,6 @@ namespace eTraxis\CommandBus\Records\Handler;
 use Doctrine\ORM\EntityManagerInterface;
 use eTraxis\CommandBus\Records\MarkRecordsAsUnreadCommand;
 use eTraxis\Entity\User;
-use eTraxis\Service\RecordsCacheInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -25,23 +24,17 @@ class MarkRecordsAsUnreadCommandHandler
 {
     protected $manager;
     protected $token_storage;
-    protected $cache;
 
     /**
      * Dependency Injection constructor.
      *
      * @param   EntityManagerInterface $manager
      * @param   TokenStorageInterface  $token_storage
-     * @param   RecordsCacheInterface  $cache
      */
-    public function __construct(
-        EntityManagerInterface $manager,
-        TokenStorageInterface  $token_storage,
-        RecordsCacheInterface  $cache)
+    public function __construct(EntityManagerInterface $manager, TokenStorageInterface $token_storage)
     {
         $this->manager       = $manager;
         $this->token_storage = $token_storage;
-        $this->cache         = $cache;
     }
 
     /**
@@ -72,7 +65,5 @@ class MarkRecordsAsUnreadCommandHandler
             'user'    => $user->getId(),
             'records' => $command->records,
         ]);
-
-        $this->cache->markRecordsAsUnread($user->getId(), $command->records);
     }
 }

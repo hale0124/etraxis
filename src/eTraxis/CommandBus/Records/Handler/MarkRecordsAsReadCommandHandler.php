@@ -16,7 +16,6 @@ use eTraxis\CommandBus\Records\MarkRecordsAsReadCommand;
 use eTraxis\Entity\LastRead;
 use eTraxis\Entity\Record;
 use eTraxis\Entity\User;
-use eTraxis\Service\RecordsCacheInterface;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 
@@ -27,23 +26,17 @@ class MarkRecordsAsReadCommandHandler
 {
     protected $manager;
     protected $token_storage;
-    protected $cache;
 
     /**
      * Dependency Injection constructor.
      *
      * @param   EntityManagerInterface $manager
      * @param   TokenStorageInterface  $token_storage
-     * @param   RecordsCacheInterface  $cache
      */
-    public function __construct(
-        EntityManagerInterface $manager,
-        TokenStorageInterface  $token_storage,
-        RecordsCacheInterface  $cache)
+    public function __construct(EntityManagerInterface $manager, TokenStorageInterface $token_storage)
     {
         $this->manager       = $manager;
         $this->token_storage = $token_storage;
-        $this->cache         = $cache;
     }
 
     /**
@@ -91,7 +84,5 @@ class MarkRecordsAsReadCommandHandler
             $lastRead = new LastRead($record, $user);
             $this->manager->persist($lastRead);
         }
-
-        $this->cache->markRecordsAsRead($user->getId(), $command->records);
     }
 }

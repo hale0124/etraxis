@@ -3,12 +3,12 @@ services:
     command.records.mark_as_read:
         class: eTraxis\CommandBus\Records\Handler\MarkRecordsAsReadCommandHandler
         tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Records\MarkRecordsAsReadCommand }]
-        arguments: [ "@doctrine.orm.entity_manager", "@security.token_storage", "@etraxis.records_cache" ]
+        arguments: [ "@doctrine.orm.entity_manager", "@security.token_storage" ]
 
     command.records.mark_as_unread:
         class: eTraxis\CommandBus\Records\Handler\MarkRecordsAsUnreadCommandHandler
         tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Records\MarkRecordsAsUnreadCommand }]
-        arguments: [ "@doctrine.orm.entity_manager", "@security.token_storage", "@etraxis.records_cache" ]
+        arguments: [ "@doctrine.orm.entity_manager", "@security.token_storage" ]
 
     command.records.postpone:
         class: eTraxis\CommandBus\Records\Handler\PostponeCommandHandler

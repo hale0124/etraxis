@@ -80,4 +80,20 @@ interface RecordsCacheInterface
      * @param   int[] $ids
      */
     public function markRecordsAsUnread(int $user, array $ids);
+
+    /**
+     * Marks specified cached records as postponed.
+     *
+     * @param   int   $user
+     * @param   int[] $ids
+     */
+    public function markRecordsAsPostponed(int $user, array $ids);
+
+    /**
+     * Marks specified cached records as not postponed.
+     *
+     * @param   int   $user
+     * @param   int[] $ids
+     */
+    public function markRecordsAsNotPostponed(int $user, array $ids);
 }

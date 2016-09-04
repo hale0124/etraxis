@@ -250,4 +250,95 @@ class RecordsCacheServiceTest extends KernelTestCase
         self::assertEquals('gray unread', $records->data[2][DataTableResults::DT_ROW_CLASS]);
         self::assertEquals('unread',      $records->data[3][DataTableResults::DT_ROW_CLASS]);
     }
+
+    public function testMarkRecordsAsPostponed()
+    {
+        $data = [
+            [
+                RecordsDataTable::COLUMN_ID    => 1,
+                DataTableResults::DT_ROW_CLASS => implode(' ', []),
+            ],
+            [
+                RecordsDataTable::COLUMN_ID    => 2,
+                DataTableResults::DT_ROW_CLASS => implode(' ', ['blue', 'unread']),
+            ],
+            [
+                RecordsDataTable::COLUMN_ID    => 3,
+                DataTableResults::DT_ROW_CLASS => implode(' ', ['gray']),
+            ],
+            [
+                RecordsDataTable::COLUMN_ID    => 4,
+                DataTableResults::DT_ROW_CLASS => implode(' ', ['blue']),
+            ],
+        ];
+
+        $this->cache->saveRecords($this->user, new DataTableCachedResults($this->query, count($data), $data));
+        $this->cache->markRecordsAsPostponed($this->user, []);
+
+        $records = $this->cache->getRecords($this->user, $this->query);
+        self::assertEquals('',            $records->data[0][DataTableResults::DT_ROW_CLASS]);
+        self::assertEquals('blue unread', $records->data[1][DataTableResults::DT_ROW_CLASS]);
+        self::assertEquals('gray',        $records->data[2][DataTableResults::DT_ROW_CLASS]);
+        self::assertEquals('blue',        $records->data[3][DataTableResults::DT_ROW_CLASS]);
+
+        $this->cache->saveRecords($this->user, new DataTableCachedResults($this->query, count($data), $data));
+        $this->cache->markRecordsAsPostponed($this->user, [2, 3]);
+
+        $records = $this->cache->getRecords($this->user, $this->query);
+        self::assertEquals('',            $records->data[0][DataTableResults::DT_ROW_CLASS]);
+        self::assertEquals('blue unread', $records->data[1][DataTableResults::DT_ROW_CLASS]);
+        self::assertEquals('gray blue',   $records->data[2][DataTableResults::DT_ROW_CLASS]);
+        self::assertEquals('blue',        $records->data[3][DataTableResults::DT_ROW_CLASS]);
+
+        $this->cache->saveRecords($this->user, new DataTableCachedResults($this->query, count($data), $data));
+        $this->cache->markRecordsAsPostponed($this->user, [1, 2, 3, 4]);
+
+        $records = $this->cache->getRecords($this->user, $this->query);
+        self::assertEquals('blue',        $records->data[0][DataTableResults::DT_ROW_CLASS]);
+        self::assertEquals('blue unread', $records->data[1][DataTableResults::DT_ROW_CLASS]);
+        self::assertEquals('gray blue',   $records->data[2][DataTableResults::DT_ROW_CLASS]);
+        self::assertEquals('blue',        $records->data[3][DataTableResults::DT_ROW_CLASS]);
+    }
+
+    public function testMarkRecordsAsNotPostponed()
+    {
+        $data = [
+            [
+                RecordsDataTable::COLUMN_ID    => 1,
+                DataTableResults::DT_ROW_CLASS => implode(' ', []),
+            ],
+            [
+                RecordsDataTable::COLUMN_ID    => 2,
+                DataTableResults::DT_ROW_CLASS => implode(' ', ['blue', 'unread']),
+            ],
+            [
+                RecordsDataTable::COLUMN_ID    => 3,
+                DataTableResults::DT_ROW_CLASS => implode(' ', ['blue']),
+            ],
+        ];
+
+        $this->cache->saveRecords($this->user, new DataTableCachedResults($this->query, count($data), $data));
+        $this->cache->markRecordsAsNotPostponed($this->user, []);
+
+        $records = $this->cache->getRecords($this->user, $this->query);
+        self::assertEquals('',            $records->data[0][DataTableResults::DT_ROW_CLASS]);
+        self::assertEquals('blue unread', $records->data[1][DataTableResults::DT_ROW_CLASS]);
+        self::assertEquals('blue',        $records->data[2][DataTableResults::DT_ROW_CLASS]);
+
+        $this->cache->saveRecords($this->user, new DataTableCachedResults($this->query, count($data), $data));
+        $this->cache->markRecordsAsNotPostponed($this->user, [1, 3]);
+
+        $records = $this->cache->getRecords($this->user, $this->query);
+        self::assertEquals('',            $records->data[0][DataTableResults::DT_ROW_CLASS]);
+        self::assertEquals('blue unread', $records->data[1][DataTableResults::DT_ROW_CLASS]);
+        self::assertEquals('',            $records->data[2][DataTableResults::DT_ROW_CLASS]);
+
+        $this->cache->saveRecords($this->user, new DataTableCachedResults($this->query, count($data), $data));
+        $this->cache->markRecordsAsNotPostponed($this->user, [1, 2, 3]);
+
+        $records = $this->cache->getRecords($this->user, $this->query);
+        self::assertEquals('',       $records->data[0][DataTableResults::DT_ROW_CLASS]);
+        self::assertEquals('unread', $records->data[1][DataTableResults::DT_ROW_CLASS]);
+        self::assertEquals('',       $records->data[2][DataTableResults::DT_ROW_CLASS]);
+    }
 }
