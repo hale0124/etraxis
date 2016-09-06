@@ -200,6 +200,7 @@ record.resume: Wiederaufnehmen
 record.reopen: Wiedereröffnen
 record.clone: Klonen
 record.history: Historie
+record.confirm.assign: 'Möchten Sie diese Anfrage wirklich jemandem zuordnen?'
 record.confirm.postpone: 'Are you sure you want postpone this record?'
 record.confirm.resume: 'Möchten Sie diese Anfrage wirklich wiederaufnehmen?'
 record.confirm.delete: 'Möchten Sie diese Anfrage wirklich löschen?'

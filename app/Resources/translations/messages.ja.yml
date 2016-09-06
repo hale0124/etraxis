@@ -200,6 +200,7 @@ record.resume: 対応再開
 record.reopen: 再オープン
 record.clone: コピー(転送)
 record.history: 履歴
+record.confirm.assign: このレコードにアサインしてよろしですか？
 record.confirm.postpone: 'Are you sure you want postpone this record?'
 record.confirm.resume: このレコードを再開してよろしいですか？
 record.confirm.delete: レコードを削除してよろしいですか？

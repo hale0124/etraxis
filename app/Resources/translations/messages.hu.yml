@@ -200,6 +200,7 @@ record.resume: Folytatás
 record.reopen: 'Újbóli megnyitás'
 record.clone: Másolat
 record.history: Eseménynapló
+record.confirm.assign: 'Biztos ki szeretné választani a felelőst?'
 record.confirm.postpone: 'Are you sure you want postpone this record?'
 record.confirm.resume: 'Biztos folytatni szeretné a rekordot?'
 record.confirm.delete: 'Biztos törölni szeretné a rekordot?'

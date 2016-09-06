@@ -200,6 +200,7 @@ record.resume: Pokračovat
 record.reopen: Znovu otevřít
 record.clone: Kopírovat
 record.history: Historie
+record.confirm.assign: 'Jste si jisti, že chcete přiřadit tento záznam?'
 record.confirm.postpone: 'Are you sure you want postpone this record?'
 record.confirm.resume: 'Jste si jisti, že chcete obnovit tento záznam?'
 record.confirm.delete: 'Jste si jisti, že chcete smazat tento záznam?'

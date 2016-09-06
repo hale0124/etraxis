@@ -200,6 +200,7 @@ record.resume: Въстанови
 record.reopen: Възобновен
 record.clone: Клониране
 record.history: История
+record.confirm.assign: 'Сигурен ли сте че искате да зададете този запис?'
 record.confirm.postpone: 'Are you sure you want postpone this record?'
 record.confirm.resume: 'Сигурен ли сте че искате да въстановите този запис?'
 record.confirm.delete: 'Сигурен ли сте че искате да изтриете този запис?'

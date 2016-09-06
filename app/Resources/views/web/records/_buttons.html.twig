@@ -22,6 +22,20 @@
     {% endif %}
 </span>
 
+{% if is_granted(constant('eTraxis\\Voter\\RecordVoter::REASSIGN'), record) %}
+    {% set responsibles = record.allowedResponsibles %}
+    {% if responsibles|length != 0 %}
+        <span class="dropdown">
+            <button type="button">{{ 'record.assign'|trans }}</button>
+            <ul>
+                {% for responsible in responsibles %}
+                    <li><a onclick="RecordApp.assign({{ record.id }}, {{ responsible.id }})">{{ responsible.fullname }}</a></li>
+                {% endfor %}
+            </ul>
+        </span>
+    {% endif %}
+{% endif %}
+
 {% if is_granted(constant('eTraxis\\Voter\\RecordVoter::POSTPONE'), record) %}
     <button type="button" onclick="RecordApp.postpone({{ record.id }})">{{ 'record.postpone'|trans }}</button>
 {% endif %}

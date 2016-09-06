@@ -200,6 +200,7 @@ record.resume: Возобновить
 record.reopen: 'Открыть повторно'
 record.clone: Клонировать
 record.history: История
+record.confirm.assign: 'Вы уверены, что хотите назначить эту запись?'
 record.confirm.postpone: 'Вы уверены, что хотите отложить эту запись?'
 record.confirm.resume: 'Вы уверены, что хотите возобновить эту запись?'
 record.confirm.delete: 'Вы уверены, что хотите удалить эту запись?'

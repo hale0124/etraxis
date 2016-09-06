@@ -200,6 +200,7 @@ record.resume: Reprendre
 record.reopen: Rouvrir
 record.clone: Dupliquer
 record.history: Historique
+record.confirm.assign: 'Etes-vous sur de vouloir affecter cet enregistrement?'
 record.confirm.postpone: 'Are you sure you want postpone this record?'
 record.confirm.resume: 'Etes-vous sur de vouloir reprendre cet enregistrement?'
 record.confirm.delete: 'Etes-vous sur de vouloir effacer cet enregistrement?'

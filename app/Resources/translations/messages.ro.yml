@@ -200,6 +200,7 @@ record.resume: Restarteaza
 record.reopen: Redeschis
 record.clone: Clonare
 record.history: Istoric
+record.confirm.assign: 'Sunteti sigur ca vreti sa asignati aceasta inregistrare?'
 record.confirm.postpone: 'Are you sure you want postpone this record?'
 record.confirm.resume: 'Sunteti sigur ca vreti sa reluati aceasta inregistrare?'
 record.confirm.delete: 'Sunteti sigur ca doriti sa stergeti aceasta inregistrare?'

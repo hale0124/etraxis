@@ -75,6 +75,32 @@ class RecordsPostController extends Controller
     }
 
     /**
+     * Assigns specified record.
+     *
+     * @Action\Route("/assign/{id}/{user}", name="web_assign_record", requirements={"id"="\d+", "user"="\d+"})
+     *
+     * @param   int $id   Record ID.
+     * @param   int $user User ID.
+     *
+     * @return  JsonResponse
+     */
+    public function assignAction(int $id, int $user): JsonResponse
+    {
+        $command = new Records\AssignCommand([
+            'record'      => $id,
+            'responsible' => $user,
+        ]);
+
+        $this->getCommandBus()->handle($command);
+
+        /** @var \eTraxis\Service\RecordsCacheInterface $cache */
+        $cache = $this->get('etraxis.records_cache');
+        $cache->deleteRecords($this->getUser()->getId());
+
+        return new JsonResponse();
+    }
+
+    /**
      * Postpones specified record.
      *
      * @Action\Route("/postpone/{id}", name="web_postpone_record", requirements={"id"="\d+"})

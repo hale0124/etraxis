@@ -200,6 +200,7 @@ record.resume: Wznów
 record.reopen: Wznów
 record.clone: Kopiuj
 record.history: Historia
+record.confirm.assign: 'Czy jesteś pewien, że chesz przydzielić wybrany rekord?'
 record.confirm.postpone: 'Are you sure you want postpone this record?'
 record.confirm.resume: 'Czy jesteś pewien, że chesz wznowić wybrany rekord?'
 record.confirm.delete: 'Czy jesteś pewien, że chesz usnąć wybrany rekord?'

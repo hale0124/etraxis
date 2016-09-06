@@ -200,6 +200,7 @@ record.resume: Reanudar
 record.reopen: Reabrir
 record.clone: Clonar
 record.history: Historial
+record.confirm.assign: '¿Está seguro de asignar este registro?'
 record.confirm.postpone: 'Are you sure you want postpone this record?'
 record.confirm.resume: '¿Está seguro de reanudar este registro?'
 record.confirm.delete: '¿Está seguro de eliminar este registro?'

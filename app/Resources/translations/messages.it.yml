@@ -200,6 +200,7 @@ record.resume: Riprendi
 record.reopen: Riapri
 record.clone: Clona
 record.history: Storia
+record.confirm.assign: 'Assegnare questo record?'
 record.confirm.postpone: 'Are you sure you want postpone this record?'
 record.confirm.resume: 'Riprendere questo record?'
 record.confirm.delete: 'Eliminare questo record?'

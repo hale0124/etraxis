@@ -200,6 +200,7 @@ record.resume: Hervatten
 record.reopen: UL
 record.clone: Kopie
 record.history: Geschiedenis
+record.confirm.assign: 'Ben je zeker dat je dit record wilt toewijzen?'
 record.confirm.postpone: 'Are you sure you want postpone this record?'
 record.confirm.resume: 'Ben je zeker dat je dit record wilt hervatten?'
 record.confirm.delete: 'Ben je zeker dat je dit record wilt verwijderen?'

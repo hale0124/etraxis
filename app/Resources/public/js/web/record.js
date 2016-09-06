@@ -133,6 +133,31 @@ var RecordApp = (function() {
         },
 
         /**
+         * Assigns specified record.
+         *
+         * @param {number} id   Record ID.
+         * @param {number} user User ID.
+         */
+        assign: function(id, user) {
+            eTraxis.confirm(eTraxis.i18n['record.assign'], eTraxis.i18n['record.confirm.assign'], function() {
+                eTraxis.block();
+                $.post({
+                    url: eTraxis.route('web_assign_record', { id: id, user: user }),
+                    complete: function() {
+                        eTraxis.unblock();
+                    },
+                    success: function() {
+                        changeTabNumber(TAB_HISTORY, 1);
+                        reloadTab();
+                    },
+                    error: function(xhr) {
+                        eTraxis.alert(eTraxis.i18n['error'], xhr.responseText);
+                    }
+                });
+            });
+        },
+
+        /**
          * Postpones specified record.
          *
          * @param {number} id Record ID.

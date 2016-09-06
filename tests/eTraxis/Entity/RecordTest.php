@@ -73,6 +73,26 @@ class RecordTest extends TransactionalTestCase
         self::assertNull($this->object->getResponsible());
     }
 
+    public function testGetAllowedResponsibles()
+    {
+        $expected = [
+            'Bender Bending Rodriguez',
+            'Dr. Amy Wong',
+            'Hubert J. Farnsworth',
+            'Philip J. Fry',
+        ];
+
+        $this->object = $this->doctrine->getRepository(Record::class)->findOneBy([
+            'subject' => 'e-Waste',
+        ]);
+
+        $users = array_map(function(User $user) {
+            return $user->getFullname();
+        }, $this->object->getAllowedResponsibles());
+
+        self::assertEquals($expected, $users);
+    }
+
     public function testCreatedAt()
     {
         self::assertEquals('1999-04-04', date('Y-m-d', $this->object->getCreatedAt()));
@@ -91,6 +111,13 @@ class RecordTest extends TransactionalTestCase
     public function testAge()
     {
         self::assertEquals(1, $this->object->getAge());
+    }
+
+    public function testAssign()
+    {
+        self::assertFalse($this->object->isAssigned());
+        $this->object->assign($this->findUser('hubert'), $this->findUser('fry'));
+        self::assertTrue($this->object->isAssigned());
     }
 
     public function testIsAssigned()
@@ -112,7 +139,6 @@ class RecordTest extends TransactionalTestCase
         ]);
 
         self::assertFalse($opened->isOverdue());
-
         $opened->getTemplate()->setCriticalAge(1);
         self::assertTrue($opened->isOverdue());
     }

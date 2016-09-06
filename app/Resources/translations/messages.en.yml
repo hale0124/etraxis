@@ -199,6 +199,7 @@ record.resume: Resume
 record.reopen: Reopen
 record.clone: Clone
 record.history: History
+record.confirm.assign: 'Are you sure you want assign this record?'
 record.confirm.postpone: 'Are you sure you want postpone this record?'
 record.confirm.resume: 'Are you sure you want resume this record?'
 record.confirm.delete: 'Are you sure you want delete this record?'

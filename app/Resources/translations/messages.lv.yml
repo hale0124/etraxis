@@ -200,6 +200,7 @@ record.resume: Atsākt
 record.reopen: 'Atvērt no jauna'
 record.clone: Klonēt
 record.history: Vēsture
+record.confirm.assign: 'Vai tiešām vēlaties atzīmēt šo ierakstu?'
 record.confirm.postpone: 'Are you sure you want postpone this record?'
 record.confirm.resume: 'Vai tiešām vēlaties atsākt šo ierakstu?'
 record.confirm.delete: 'Tiešām vēlaties dzēst šo ierakstu?'

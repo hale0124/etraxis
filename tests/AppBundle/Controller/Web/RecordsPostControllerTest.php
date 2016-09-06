@@ -60,6 +60,38 @@ class RecordsPostControllerTest extends ControllerTestCase
         $this->assertStatusCode(Response::HTTP_BAD_REQUEST);
     }
 
+    public function testAssignAction()
+    {
+        /** @var \Symfony\Bridge\Doctrine\RegistryInterface $doctrine */
+        $doctrine = $this->client->getContainer()->get('doctrine');
+
+        /** @var Record $record */
+        $record = $doctrine->getRepository(Record::class)->findOneBy([
+            'subject' => 'e-Waste',
+        ]);
+
+        $uri = $this->router->generate('web_assign_record', [
+            'id'   => $record->getId(),
+            'user' => $record->getAuthor()->getId(),
+        ]);
+
+        $this->makeRequest(Request::METHOD_GET, $uri, true);
+        $this->assertStatusCode(Response::HTTP_METHOD_NOT_ALLOWED);
+
+        $this->makeRequest(Request::METHOD_POST, $uri, true);
+        $this->assertStatusCode(Response::HTTP_UNAUTHORIZED);
+
+        $this->loginAs('fry');
+
+        $this->makeRequest(Request::METHOD_POST, $uri, true);
+        $this->assertStatusCode(Response::HTTP_BAD_REQUEST);
+
+        $this->loginAs('hubert');
+
+        $this->makeRequest(Request::METHOD_POST, $uri, true);
+        $this->assertStatusCode(Response::HTTP_BAD_REQUEST);
+    }
+
     public function testPostponeAction()
     {
         /** @var \Symfony\Bridge\Doctrine\RegistryInterface $doctrine */

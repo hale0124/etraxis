@@ -237,6 +237,60 @@ class Record extends Entity
     }
 
     /**
+     * Returns list of users allowed to be assigned as record's responsible.
+     *
+     * @return  User[]
+     */
+    public function getAllowedResponsibles()
+    {
+        $query = $this->manager->createQueryBuilder()
+            ->select('state')
+            ->from(State::class, 'state')
+            ->from(Event::class, 'event')
+            ->where('state.responsible = :responsible')
+            ->andWhere('event.record = :record')
+            ->andWhere('event.type IN (:types)')
+            ->andWhere('event.parameter = state.id')
+            ->orderBy('event.createdAt', 'DESC')
+            ->setMaxResults(1)
+        ;
+
+        $query->setParameters([
+            'record'      => $this->id,
+            'responsible' => Dictionary\StateResponsible::ASSIGN,
+            'types'       => [
+                Dictionary\EventType::RECORD_CREATED,
+                Dictionary\EventType::RECORD_REOPENED,
+                Dictionary\EventType::STATE_CHANGED,
+            ],
+        ]);
+
+        /** @var State $state */
+        $state = $query->getQuery()->getOneOrNullResult();
+
+        $users = [];
+
+        if ($state !== null) {
+            foreach ($state->getResponsibleGroups() as $group) {
+                /** @noinspection SlowArrayOperationsInLoopInspection */
+                $users = array_merge($users, $group->getMembers());
+            }
+        }
+
+        $users = array_unique($users);
+
+        usort($users, function(User $user1, User $user2) {
+            return $user1->getFullname() <=> $user2->getFullname();
+        });
+
+        $responsible = $this->responsible;
+
+        return array_filter($users, function(User $user) use ($responsible) {
+            return $user !== $responsible;
+        });
+    }
+
+    /**
      * Property getter.
      *
      * @return  int
@@ -276,6 +330,24 @@ class Record extends Entity
         $age = ($this->closedAt ?: time()) - $this->createdAt;
 
         return intdiv($age, Seconds::ONE_DAY) + 1;
+    }
+
+    /**
+     * Assigns the record to specified user.
+     *
+     * @param   User $user        User who is assigning the record.
+     * @param   User $responsible User who is being assigned to the record.
+     *
+     * @return  self
+     */
+    public function assign(User $user, User $responsible)
+    {
+        $this->responsible = $responsible;
+
+        $event = new Event($this, $user, Dictionary\EventType::RECORD_ASSIGNED, $responsible->getId());
+        $this->events->add($event);
+
+        return $this;
     }
 
     /**

@@ -33,6 +33,8 @@
                 $(document).one('click', function() {
                     $menu.hide();
                 });
+
+                return false;
             });
 
             $menu.hide();

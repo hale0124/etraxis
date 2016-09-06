@@ -10,22 +10,27 @@ services:
         tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Records\MarkRecordsAsUnreadCommand }]
         arguments: [ "@doctrine.orm.entity_manager", "@security.token_storage" ]
 
-    command.records.postpone:
+    command.record.assign:
+        class: eTraxis\CommandBus\Records\Handler\AssignCommandHandler
+        tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Records\AssignCommand }]
+        arguments: [ "@doctrine.orm.entity_manager", "@security.authorization_checker", "@security.token_storage" ]
+
+    command.record.postpone:
         class: eTraxis\CommandBus\Records\Handler\PostponeCommandHandler
         tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Records\PostponeCommand }]
         arguments: [ "@doctrine.orm.entity_manager", "@security.authorization_checker", "@security.token_storage" ]
 
-    command.records.resume:
+    command.record.resume:
         class: eTraxis\CommandBus\Records\Handler\ResumeCommandHandler
         tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Records\ResumeCommand }]
         arguments: [ "@doctrine.orm.entity_manager", "@security.authorization_checker", "@security.token_storage" ]
 
-    command.records.delete:
+    command.record.delete:
         class: eTraxis\CommandBus\Records\Handler\DeleteCommandHandler
         tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Records\DeleteCommand }]
         arguments: [ "@doctrine.orm.entity_manager", "@security.authorization_checker" ]
 
-    command.records.add_comment:
+    command.record.add_comment:
         class: eTraxis\CommandBus\Records\Handler\AddCommentCommandHandler
         tags: [{ name: tactician.handler, command: eTraxis\CommandBus\Records\AddCommentCommand }]
         arguments: [ "@doctrine.orm.entity_manager", "@security.authorization_checker", "@security.token_storage" ]

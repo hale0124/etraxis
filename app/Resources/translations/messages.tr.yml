@@ -200,6 +200,7 @@ record.resume: 'Devam Ettir'
 record.reopen: 'Yeniden aç'
 record.clone: Klonla
 record.history: Geçmiş
+record.confirm.assign: 'Bu kaydı atamak istediğinizden emin misiniz?'
 record.confirm.postpone: 'Are you sure you want postpone this record?'
 record.confirm.resume: 'Bu kaydı devam ettirmek istediğinizden emin misiniz?'
 record.confirm.delete: 'Bu kaydı silmek istediğinizden emin misiniz?'

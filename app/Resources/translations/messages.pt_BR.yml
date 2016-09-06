@@ -200,6 +200,7 @@ record.resume: Resumo
 record.reopen: Reabrir
 record.clone: Clonar
 record.history: Histórico
+record.confirm.assign: 'Tem certeza que quer delegar este registro?'
 record.confirm.postpone: 'Are you sure you want postpone this record?'
 record.confirm.resume: 'Tem certeza que quer retomar este registro?'
 record.confirm.delete: 'Tem certeza que quer apagar este registro?'

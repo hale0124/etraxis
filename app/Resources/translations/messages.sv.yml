@@ -200,6 +200,7 @@ record.resume: Återuppta
 record.reopen: Öppna
 record.clone: Klon
 record.history: Historia
+record.confirm.assign: 'Är du säker på att du vill återuppta denna post?'
 record.confirm.postpone: 'Are you sure you want postpone this record?'
 record.confirm.resume: 'Är du säker på att du vill återuppta denna post?'
 record.confirm.delete: 'Är du säker på att du vill ta bort den här posten?'
